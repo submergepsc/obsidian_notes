@@ -24,18 +24,9 @@
   "word-count": true,
   "slides": false,
   "audio-recorder": false,
-<<<<<<< HEAD
   "workspaces": false,
   "file-recovery": true,
   "publish": false,
   "sync": true,
   "bases": true
-=======
-  "workspaces": true,
-  "file-recovery": true,
-  "publish": false,
-  "sync": true,
-  "bases": true,
-  "webviewer": false
->>>>>>> a9c734ef301e8771b58547fa2a31a5731323a48c
 }
