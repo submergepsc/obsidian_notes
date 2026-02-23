@@ -11,14 +11,13 @@
             "id": "4b6cd110338420c6",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "bases",
               "state": {
-                "file": "tools/way to explore.md",
-                "mode": "source",
-                "source": false
+                "file": "未命名 11.base",
+                "viewName": "表格"
               },
-              "icon": "lucide-file",
-              "title": "way to explore"
+              "icon": "lucide-table",
+              "title": "未命名 11"
             }
           },
           {
@@ -83,16 +82,15 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "tools.md",
+                "file": "我的第四篇笔记.md",
                 "mode": "source",
                 "source": true
               },
               "icon": "lucide-file",
-              "title": "tools"
+              "title": "我的第四篇笔记"
             }
           }
-        ],
-        "currentTab": 5
+        ]
       }
     ],
     "direction": "vertical"
@@ -184,7 +182,7 @@
         "state": {
           "type": "backlink",
           "state": {
-            "file": "tools.md",
+            "file": "未命名 11.base",
             "collapseAll": false,
             "extraContext": false,
             "sortOrder": "alphabetical",
@@ -227,8 +225,7 @@
         }
       }
     ],
-    "currentTab": 0,
-    "pinned": true
+    "currentTab": 0
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -242,15 +239,19 @@
       "bases:新建数据库": false
     }
   },
-  "active": "f6a5e66df8225ce9",
+  "active": "4b6cd110338420c6",
   "lastOpenFiles": [
+    "我的第四篇笔记.md",
+    "未命名 11.base",
+    "未命名 9.base",
+    "tools/way to explore.md",
+    "我的第三篇笔记.md",
+    "tools.md",
     "notes.md",
     "learn_obsidian.md",
     "fjdksa.md",
     "tools/pixpin详细介绍.md",
-    "tools/way to explore.md",
     "2026-02-22.md",
-    "tools.md",
     "Untitled.md",
     "Untitled.canvas",
     "Untitled.base",
