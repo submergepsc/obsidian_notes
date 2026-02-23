@@ -4,10 +4,7 @@ pixpin：
 
 
 it社区：
-v2ex：[[way to explore]] 
-<<<<<<< HEAD
-：“
-=======
+v2ex：[[way to explore]]  
+：“ 
 
- 经不戳半成品。
->>>>>>> d8161aac02af6105f591e0de07ad347954c66a5a
+  经不戳半成品 。 
