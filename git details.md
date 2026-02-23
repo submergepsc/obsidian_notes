@@ -8,3 +8,12 @@ git commit -m "stop tracking workspace-mobile.json" //提交这个更改
 
 //cat .git ignore 查看里面确实有这个文件
 ```
+
+
+
+
+
+tips2: termux 类别
+1. 切换镜像网站`termux-change-repo`
+2. `pkg update && pkg upgrade -y`
+3. 
