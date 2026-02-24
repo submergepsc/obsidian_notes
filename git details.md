@@ -22,7 +22,7 @@ git config --global credential.helper store
 
 
 
-tips2: termux 类别
+tips3: termux 类别
 1. 切换镜像网站`termux-change-repo`
 2. `pkg update && pkg upgrade -y`
 3.  
