@@ -26,7 +26,7 @@ ctrl +o:
 [[创建链接]]
 
 ![使用external link](https://pingip.cn)
-![链接](https://pingip.cn)
+![链接|48](https://pingip.cn)
 
 
 #it #fjds #jfds 
