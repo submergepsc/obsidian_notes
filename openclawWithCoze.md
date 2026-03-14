@@ -24,3 +24,37 @@ date: 2026-03-14
 
 
 
+
+# coze沙盘结构
+根目录 **/** 对应的是localhost,*/workspace/projects* 对应5000端口；
+**/workspace/projects/workspace/skills/一堆skills目录/(skills.md / *.py)**
+
+
+
+
+
+# linux简单命令
+**命令+【参数】+对象**
+### 命令
+#### 基本目录与文件
+- pwd: print working directory.
+- cd : change directory
+- ls : list 
+	- -l : 详细信息 ，long
+	- -a: 显示 .log 等隐藏文件
+	- -h: humman readable , 大小显示乘kb,mb
+- mkdir : make dir 
+	-  mkdir -p a/b/c :多层
+- rm : rm file.txt :删除文件
+	- rm -rf dir 删除目录
+- cp: copy
+	- cp a.txt b.txt (a->b)
+	- cp -r a b (目录a->b )
+- mv : move 
+	- mv old.name new.name(==rename)
+	- mv file.txt /tmp/dir
+
+#### 文件查看与文本处理
+- cat 
+
+
