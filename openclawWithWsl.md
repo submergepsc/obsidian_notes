@@ -8,3 +8,7 @@ UI: openclaw gateway
 
 
 chinese: *chcp 65001*   -- to use utf-8
+
+openclaw onboard: 加载配置
+
+openclaw config : 
