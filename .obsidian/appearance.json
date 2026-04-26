@@ -1,0 +1,8 @@
+{
+  "theme": "moonstone",
+  "cssTheme": "Blue Topaz",
+  "accentColor": "#5c75f5",
+  "enabledCssSnippets": [
+    "global-bg"
+  ]
+}

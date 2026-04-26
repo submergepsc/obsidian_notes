@@ -1,0 +1,53 @@
+{
+  "mpAccounts": [
+    {
+      "accountName": "新建账号",
+      "appId": "",
+      "appSecret": ""
+    },
+    {
+      "accountName": "怡然晓月",
+      "appId": "wx4a7aebcacb403ddb",
+      "appSecret": "",
+      "access_token": "",
+      "lastRefreshTime": 1775695492759,
+      "expires_in": 7200
+    }
+  ],
+  "ipAddress": "104.234.0.177",
+  "css_styles_folder": "wewrite-css-styles",
+  "codeLineNumber": true,
+  "accountDataPath": "wewrite-accounts",
+  "useCenterToken": false,
+  "chatAccounts": [
+    {
+      "accountName": "聊天LLM账号",
+      "baseUrl": "",
+      "apiKey": "",
+      "model": ""
+    }
+  ],
+  "drawAccounts": [
+    {
+      "accountName": "Draw-LLM账号",
+      "baseUrl": "",
+      "apiKey": "",
+      "taskUrl": "",
+      "model": ""
+    }
+  ],
+  "realTimeRender": true,
+  "chatSetting": {
+    "temperature": 0.7,
+    "max_tokens": 2048,
+    "top_p": 1,
+    "frequency_penalty": 0,
+    "presence_penalty": 0
+  },
+  "selectedMPAccount": "怡然晓月",
+  "selectedChatAccount": "聊天LLM账号",
+  "selectedDrawAccount": "Draw-LLM账号",
+  "previewer_wxname": "obsidian_submergepsc",
+  "_id": "wewrite-settings",
+  "_rev": "16-dbd1bc5524c03ee4b31d13942fd5c408"
+}

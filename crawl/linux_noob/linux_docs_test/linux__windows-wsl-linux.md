@@ -1,0 +1,133 @@
+# Windows WSL 安装 Linux
+
+**WSL（Windows Subsystem for Linux）** 是微软为 Windows 用户提供的一个子系统，它允许你在 Windows 上原生运行 Linux（不是虚拟机，不是双系统），直接使用 Bash、apt、gcc、Python、Node.js 等 Linux 工具。
+
+![](./images/1728405989image-1024x576-1.webp)
+
+### WSL 的版本区别
+
+特性 | WSL1 | WSL2  
+---|---|---  
+内核架构 | 翻译系统调用（兼容层） | 真正的 Linux 内核（轻量虚拟机）  
+性能（文件访问） | Windows ↔ Linux 访问更快 | Linux ↔ Linux 内部访问更快  
+启动速度 | 更快 | 略慢  
+Docker 支持 | 不支持 | ✅ 完全支持  
+系统资源占用 | 较少 | 稍高  
+  
+推荐使用 **WSL2** ，兼容性更强，功能更完整。
+
+* * *
+
+## 安装步骤（以 WSL2 为例）
+
+### 前提条件
+
+  * Windows 10 2004（或更高版本） / Windows 11
+  * 启用虚拟化（BIOS 中 VT-x 或 AMD-V 开启）
+
+
+
+### 方法一：一键安装（推荐）
+
+```bash
+wsl --install
+```
+
+
+该命令会自动：
+
+  * 启用 WSL 功能
+  * 安装 WSL2 内核
+  * 安装默认的 Ubuntu
+  * 设置为 WSL2
+
+
+
+安装完后，重启一次系统即可。
+
+### 方法二：手动安装（适合定制需求）
+
+**1、启用 WSL 功能和虚拟机平台**
+
+```bash
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+
+**2、下载并安装 Linux 内核更新包**
+
+👉 下载地址：<https://aka.ms/wsl2kernel>
+
+**3、设置默认 WSL 版本为 WSL2**
+
+```bash
+wsl --set-default-version 2
+```
+
+
+**4、从 Microsoft Store 安装 Linux 发行版（如 Ubuntu）**
+
+![](./images/Instalar-Ubuntu-18.04-desde-la-Microsoft-Store.png.webp)
+
+也可命令行方式安装：
+
+```bash
+wsl --install -d Ubuntu
+```
+
+
+* * *
+
+## 常用命令速查表
+
+命令 | 说明  
+---|---  
+`wsl` | 启动默认 Linux  
+`wsl --list --verbose` | 查看已安装的发行版和版本  
+`wsl --set-version Ubuntu 2` | 设置 Ubuntu 使用 WSL2  
+`wsl --install -d Debian` | 安装指定发行版  
+`wsl --shutdown` | 关闭所有 WSL 实例  
+`wsl -e bash` | 以 Bash 启动 Linux Shell  
+  
+* * *
+
+## 日常使用指南
+
+**如何访问 Windows 文件？**
+
+在 WSL 中，Windows 文件挂载在 /mnt/c、/mnt/d 等目录：
+
+```bash
+cd /mnt/c/Users/你的用户名/Desktop
+```
+
+
+**如何访问 WSL 文件？**
+
+在 Windows 中访问：
+
+```bash
+\\\wsl$\Ubuntu\home\your_username
+```
+
+
+或者在资源管理器地址栏输入：`\\wsl$`
+
+* * *
+
+## 配套推荐工具
+
+工具 | 说明  
+---|---  
+Windows Terminal | 多标签终端，支持彩色和自定义配置  
+VS Code + Remote WSL | 在 VS Code 中直接编辑 Linux 文件  
+oh-my-zsh / fish | 美化终端，提升操作体验  
+tmux / screen | 多终端管理工具  
+  
+* * *
+
+## 如何卸载或重置？
+
+```bash
+# 卸载某个 Linux 发行版 wsl --unregister Ubuntu # 重置 WSL 所有数据（危险操作） wsl --unregister <发行版名>
+```

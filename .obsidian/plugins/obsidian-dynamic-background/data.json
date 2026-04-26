@@ -1,0 +1,8 @@
+{
+  "dynamicEffect": 3,
+  "digitalRainBrightness": 0.7,
+  "enableDynamicEffect": false,
+  "backgroundImageFile": "figures/bg2.png",
+  "blur": 0,
+  "brightness": 37
+}

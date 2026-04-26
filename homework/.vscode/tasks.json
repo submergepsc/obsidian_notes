@@ -1,0 +1,19 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "export-md-to-pdf",
+      "type": "shell",
+      "command": "pandoc",
+      "args": [
+        "${file}",
+        "-o",
+        "${fileDirname}/${fileBasenameNoExtension}.pdf",
+        "--pdf-engine=xelatex",
+        "-V",
+        "CJKmainfont=Noto Serif CJK SC"
+      ],
+      "problemMatcher": []
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "pluginList": [
+    "PKM-er/obsidian-floating-toc-plugin",
+    "hipstersmoothie/obsidian-plugin-toc"
+  ],
+  "pluginSubListFrozenVersion": [
+    {
+      "repo": "PKM-er/obsidian-floating-toc-plugin",
+      "version": "latest"
+    },
+    {
+      "repo": "hipstersmoothie/obsidian-plugin-toc",
+      "version": "latest"
+    }
+  ],
+  "themesList": [],
+  "updateAtStartup": true,
+  "updateThemesAtStartup": true,
+  "enableAfterInstall": true,
+  "loggingEnabled": false,
+  "loggingPath": "BRAT-log",
+  "loggingVerboseEnabled": false,
+  "debuggingMode": false,
+  "notificationsEnabled": true,
+  "globalTokenName": "",
+  "personalAccessToken": "",
+  "selectLatestPluginVersionByDefault": false,
+  "allowIncompatiblePlugins": false
+}

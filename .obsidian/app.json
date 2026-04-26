@@ -1,0 +1,12 @@
+{
+  "promptDelete": false,
+  "attachmentFolderPath": "./assets",
+  "newFileLocation": "current",
+  "trashOption": "local",
+  "newLinkFormat": "relative",
+  "useMarkdownLinks": true,
+  "deleteUnlinkedAttachments": "ask",
+  "alwaysUpdateLinks": true,
+  "showUnsupportedFiles": true,
+  "autoConvertHtml": true
+}

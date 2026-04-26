@@ -1,0 +1,77 @@
+<p dir="auto">使用<code>TikTokDownloader</code>仓库和<strong>shell脚本</strong>配置了在powershell中输入抖音链接自动下载视频到指定目录</p>
+<h3 data-heading="首先下载该仓库的exe文件" dir="auto">首先下载该仓库的exe文件</h3>
+<p dir="auto">链接：<code>https://github.com/JoeanAmier/TikTokDownloader.git</code><br>
+<span src="attachment/1df09e24377745ed7b8c10e8d4f0918e.png" class="internal-embed"></span><br>
+下载好文件打开后，双击main.exe运行依次输入5,2,1<br>
+<span src="attachment/9f7ca269e7c97f93320dea2405011286.png" class="internal-embed"></span><br>
+、</p>
+<h3 data-heading="打开抖音，复制地址" dir="auto">打开抖音，复制地址</h3>
+<p dir="auto">可以看到这个抖音视频是不能从官方下载的，此时我们复制链接，<br>
+<span src="attachment/75cbc229da4adb4b8b5538cae463dc8c.png" class="internal-embed"></span></p>
+<h3 data-heading="输入链接回车" dir="auto">输入链接回车</h3>
+<p dir="auto"><span src="attachment/51ae9f947af99fcf504d4c4dbafeec99.png" class="internal-embed"></span></p>
+<h5 data-heading="在`DouK-Downloader_V5.7_Windows_X64\_internal\Volume\Download`相对目录下可以看到视频已经下载了" dir="auto">在<code>DouK-Downloader_V5.7_Windows_X64\_internal\Volume\Download</code>相对目录下可以看到视频已经下载了</h5>
+<p dir="auto"><span src="attachment/a5846a5c2c4cf781d92519c7b94bca08.png" class="internal-embed"></span></p>
+<h4 data-heading="tips1:更改默认下载路径" dir="auto">tips1:更改默认下载路径</h4>
+<p dir="auto">进入<code>_internal\Volume</code>,打开里面的<code>settings.json</code>文件<br>
+查找root键，修改目标路径，注意需要使用<code>/</code>或者<code>\\\\</code>进行转义<br>
+<span src="attachment/33bb894ce6e51985401ff13a9567d19b.png" class="internal-embed"></span></p>
+<h4 data-heading="tips2: 配置脚本自动打开main.exe并输入选项" dir="auto">tips2: 配置脚本自动打开main.exe并输入选项</h4>
+<p dir="auto">随便打开一个powershell页面，cv以下内容，enter<br>
+哈基米给的这段代码的意思是在$profile 的位置创建了一个.psl文件，然后输入函数名就可以执行这个文件，而这个脚本文件可以完成打开main.exe和输入5,2,1这几个重复繁琐的动作。</p>
+<h5 data-heading="注意函数名以后会作为命令运行整个脚本，可以更改为顺手的命令" dir="auto">注意函数名以后会作为命令运行整个脚本，可以更改为顺手的命令</h5>
+<pre class="language-powershell"><code class="language-powershell is-loaded"><span class="token comment"># 1. 检查并创建 PowerShell 配置文件 (如果不存在)</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span><span class="token operator">!</span><span class="token punctuation">(</span><span class="token function">Test-Path</span> <span class="token operator">-</span>Path <span class="token variable">$PROFILE</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token function">New-Item</span> <span class="token operator">-</span>ItemType File <span class="token operator">-</span>Path <span class="token variable">$PROFILE</span> <span class="token operator">-</span>Force <span class="token punctuation">|</span> <span class="token function">Out-Null</span>
+    <span class="token function">Write-Host</span> <span class="token string">"已为你创建 PowerShell 配置文件。"</span> <span class="token operator">-</span>ForegroundColor Yellow
+<span class="token punctuation">}</span>
+
+<span class="token comment"># 2. 定义要注入的自定义函数代码 (前台阻塞 + 后台按键版)</span>
+<span class="token variable">$AliasCode</span> = @<span class="token string">"
+
+# ==========================================
+# 自定义快捷命令: DouK-Downloader 自动化启动 (防闪退完美版)
+# ==========================================
+function douk {
+    `<span class="token variable">$exePath</span> = "</span>H:\apps\DouK-Downloader_V5<span class="token punctuation">.</span>7_Windows_X64\main<span class="token punctuation">.</span>exe<span class="token string">"
+    `<span class="token variable">$workDir</span> = "</span>H:\apps\DouK-Downloader_V5<span class="token punctuation">.</span>7_Windows_X64<span class="token string">"
+    
+    # 1. 动态生成一个 VBS 按键脚本到系统临时文件夹
+    `<span class="token variable">$vbsPath</span> = "</span>`<span class="token variable">$env</span>:TEMP\auto_keys<span class="token punctuation">.</span>vbs<span class="token string">"
+    `<span class="token variable">$vbsCode</span> = @'
+Set WshShell = WScript.CreateObject("</span>WScript<span class="token punctuation">.</span>Shell<span class="token string">")
+WScript.Sleep 2000
+WshShell.SendKeys "</span>5<span class="token punctuation">{</span>ENTER<span class="token punctuation">}</span><span class="token string">"
+WScript.Sleep 500
+WshShell.SendKeys "</span>2<span class="token punctuation">{</span>ENTER<span class="token punctuation">}</span><span class="token string">"
+WScript.Sleep 500
+WshShell.SendKeys "</span>1<span class="token punctuation">{</span>ENTER<span class="token punctuation">}</span><span class="token string">"
+'@
+    Set-Content -Path `<span class="token variable">$vbsPath</span> -Value `<span class="token variable">$vbsCode</span> -Encoding Ascii
+    
+    Write-Host "</span>🚀 正在全局唤醒 DouK-Downloader <span class="token punctuation">(</span>前台阻塞模式<span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token string">" -ForegroundColor Green
+    
+    # 2. 调用 wscript 在系统后台静默执行按键脚本
+    Start-Process -FilePath "</span>wscript<span class="token punctuation">.</span>exe<span class="token string">" -ArgumentList `<span class="token variable">$vbsPath</span>
+    
+    # 3. 强制切换到工作目录，并使用 &amp; 符号在前台霸占运行
+    # 这样可以确保 stdin (输入流) 永远连接着你的键盘，直到你手动退出程序
+    Push-Location `<span class="token variable">$workDir</span>
+    &amp; `<span class="token variable">$exePath</span>
+    
+    # 4. 当你退出 main.exe 后，自动弹回原来的路径
+    Pop-Location
+}
+"</span>@
+
+<span class="token comment"># 3. 将代码追加写入到配置文件中</span>
+<span class="token function">Add-Content</span> <span class="token operator">-</span>Path <span class="token variable">$PROFILE</span> <span class="token operator">-</span>Value <span class="token variable">$AliasCode</span> <span class="token operator">-</span>Encoding UTF8
+<span class="token function">Write-Host</span> <span class="token string">"✅ 完美版配置已成功写入！"</span> <span class="token operator">-</span>ForegroundColor Green
+<span class="token function">Write-Host</span> <span class="token string">"👉 请重启当前 PowerShell 窗口，或者直接运行 '. `<span class="token variable">$PROFILE</span>' 重新加载配置。"</span> <span class="token operator">-</span>ForegroundColor Cyan
+<span class="token function">Write-Host</span> <span class="token string">"🎉 之后在任何路径下输入 'douk' 即可实现无缝自动化下载！"</span> <span class="token operator">-</span>ForegroundColor Yellow 
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+<p dir="auto">比如我输入<strong>douk</strong>就能运行该程序并且自动输入5,2,1选项。<br>
+<span src="attachment/c4ccdb823ca19863259860b7271d5ecb.png" class="internal-embed"></span></p>
+<h4 data-heading="完结撒花" dir="auto">完结撒花</h4>
+<p dir="auto">最近看到一些图形化动画讲述各种技术原理，一口气视频等感觉非常有意思，就想下载下来自己试着制作。<br>
+<span src="attachment/f2c54077a14775528190f2f57e9690fe.png" class="internal-embed"></span></p>

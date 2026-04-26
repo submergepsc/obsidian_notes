@@ -1,0 +1,148 @@
+<p dir="auto">直接上干货。掌握 Obsidian 的原生增强语法比装一堆花哨的插件更靠谱。这些原生语法在你的笔记库跨多端设备同步时绝对稳定，不会出现渲染兼容问题。</p>
+<p dir="auto">以下是最全面、最常用的 Obsidian 专属与进阶 Markdown 语法速查表：</p>
+<h3 data-heading="1. Obsidian 核心：双向链接与块引用 (WikiLinks)" dir="auto">1. Obsidian 核心：双向链接与块引用 (WikiLinks)</h3>
+<p dir="auto">这是 Obsidian 的灵魂所在，用于建立知识网络。</p>
+<table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>语法</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>基础双链</strong></td>
+<td><code>[[页面名称]]</code></td>
+<td>链接到库中的另一个文件。</td>
+</tr>
+<tr>
+<td><strong>别名显示</strong></td>
+<td><code>[[页面名称\|显示的文本]]</code></td>
+<td>链接到指定页面，但在当前文中显示为“显示的文本”。</td>
+</tr>
+<tr>
+<td><strong>锚点：链接到标题</strong></td>
+<td><code>[[页面名称#某个小标题]]</code></td>
+<td>精准跳转到目标文档的具体标题位置。</td>
+</tr>
+<tr>
+<td><strong>锚点：链接到区块</strong></td>
+<td><code>[[页面名称^区块ID]]</code></td>
+<td>链接到目标文档的某一段落或列表项（输入 <code>^</code> 后 Obsidian 会自动弹出区块列表供你搜索选择）。</td>
+</tr>
+<tr>
+<td><strong>嵌入/透视 (Transclusion)</strong></td>
+<td><code>![[页面、图片或PDF]]</code></td>
+<td>在当前光标处直接<strong>渲染并显示</strong>目标文件的内容。如果是笔记，会嵌入全文；如果是 <code>![[页面#标题]]</code>，则只嵌入该标题下的内容。</td>
+</tr>
+</tbody>
+</table>
+<h3 data-heading="2. 进阶排版与高亮" dir="auto">2. 进阶排版与高亮</h3>
+<p dir="auto">标准 Markdown 之外的扩展标记，非常适合做读书笔记和知识提取。</p>
+<table>
+<thead>
+<tr>
+<th><strong>功能</strong></th>
+<th><strong>语法</strong></th>
+<th><strong>说明</strong></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>文字高亮</strong></td>
+<td><code>==这段文字会被高亮==</code></td>
+<td>原生高亮语法，通常渲染为带背景色的文本。</td>
+</tr>
+<tr>
+<td><strong>删除线</strong></td>
+<td><code>~~这段文字被划掉~~</code></td>
+<td>表示废弃或修改的内容。</td>
+</tr>
+<tr>
+<td><strong>嵌套标签</strong></td>
+<td><code>#编程/Rust/工具链</code></td>
+<td>Obsidian 支持层级标签，方便在右侧标签面板中折叠管理。</td>
+</tr>
+<tr>
+<td><strong>内部注释</strong></td>
+<td><code>%%这是一段注释%%</code></td>
+<td>只有在编辑模式下可见，<strong>阅读模式下完全隐藏</strong>。</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p dir="auto"></p>
+<h3 data-heading="3. 标注框 (Callouts)" dir="auto">3. 标注框 (Callouts)</h3>
+<p dir="auto">用于醒目地展示警告、提示或引用内容。官方原生支持，极其强大。</p>
+<p dir="auto"><strong>基础语法：</strong></p>
+<p dir="auto">Markdown</p>
+<pre><code>&gt; [!info] 这是一个提示框标题
+&gt; 这里是提示框的正文内容。
+&gt; 可以包含多行。
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+<p dir="auto"><strong>可折叠的 Callout：</strong></p>
+<p dir="auto">Markdown</p>
+<pre><code>&gt; [!faq]- 这是一个默认折叠的问答框（注意后面的减号）
+&gt; 点开后才能看到这段答案。如果是 `+` 号则是默认展开。
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+<p dir="auto"><em>常用类型（替换方括号内的单词即可改变颜色和图标）：</em></p>
+<p dir="auto"><code>note</code> (笔记), <code>info</code> (信息), <code>todo</code> (待办), <code>warning</code> (警告), <code>danger</code> (危险), <code>bug</code> (Bug), <code>example</code> (示例), <code>quote</code> (引用)。</p>
+<h3 data-heading="4. 程序员专属：代码、公式与图表" dir="auto">4. 程序员专属：代码、公式与图表</h3>
+<p dir="auto">原生支持所有主流开发语言的高亮、LaTeX 公式以及 Mermaid 图表。</p>
+<p dir="auto"><strong>代码块与行内代码：</strong></p>
+<p dir="auto">行内代码使用反引号 <code>`代码`</code>。多行代码块指定语言：</p>
+<p dir="auto">Python</p>
+<pre><code>def hello_world():
+    print("Keep it simple and DRY.")
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+<p dir="auto"><strong>数学公式 (MathJax/LaTeX)：</strong></p>
+<p dir="auto">行内公式使用单美元符号包围，例如质能方程 <span class="math math-inline is-loaded"><mjx-container class="MathJax" jax="CHTML"><mjx-math class="MJX-TEX"><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D438 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D45A TEX-I"></mjx-c></mjx-mi><mjx-msup><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D450 TEX-I"></mjx-c></mjx-mi><mjx-script style="vertical-align: 0.363em;"><mjx-mn class="mjx-n" size="s"><mjx-c class="mjx-c32"></mjx-c></mjx-mn></mjx-script></mjx-msup></mjx-math></mjx-container></span>。</p>
+<p dir="auto">独立成行的公式块使用双美元符号：</p>
+<p dir="auto"><span class="math math-block is-loaded"><mjx-container class="MathJax" jax="CHTML" display="true"><mjx-math display="true" class="MJX-TEX" style="margin-left: 0px; margin-right: 0px;"><mjx-msubsup><mjx-mo class="mjx-lop"><mjx-c class="mjx-c222B TEX-S2"></mjx-c></mjx-mo><mjx-script style="vertical-align: -0.896em; margin-left: -0.388em;"><mjx-mi class="mjx-i" size="s" style="margin-left: 0.647em;"><mjx-c class="mjx-c1D44F TEX-I"></mjx-c></mjx-mi><mjx-spacer style="margin-top: 1.665em;"></mjx-spacer><mjx-mi class="mjx-i" size="s"><mjx-c class="mjx-c1D44E TEX-I"></mjx-c></mjx-mi></mjx-script></mjx-msubsup><mjx-mi class="mjx-i" space="2"><mjx-c class="mjx-c1D453 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mstyle><mjx-mspace style="width: 0.167em;"></mjx-mspace></mjx-mstyle><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D451 TEX-I"></mjx-c></mjx-mi><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D465 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n" space="4"><mjx-c class="mjx-c3D"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="4"><mjx-c class="mjx-c1D439 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44F TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo><mjx-mo class="mjx-n" space="3"><mjx-c class="mjx-c2212"></mjx-c></mjx-mo><mjx-mi class="mjx-i" space="3"><mjx-c class="mjx-c1D439 TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c28"></mjx-c></mjx-mo><mjx-mi class="mjx-i"><mjx-c class="mjx-c1D44E TEX-I"></mjx-c></mjx-mi><mjx-mo class="mjx-n"><mjx-c class="mjx-c29"></mjx-c></mjx-mo></mjx-math></mjx-container></span></p>
+<p dir="auto"><strong>Mermaid 图表：</strong></p>
+<p dir="auto">直接在代码块语言处写 <code>mermaid</code>，即可渲染流程图、时序图等。</p>
+<p dir="auto">Code snippet</p>
+<pre><code>graph TD;
+    A[本地修改] --&gt; B{Git 提交};
+    B --&gt;|Yes| C[同步到远程库];
+    B --&gt;|No| D[继续编辑];
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+<h3 data-heading="5. 页面元数据 (Properties / YAML)" dir="auto">5. 页面元数据 (Properties / YAML)</h3>
+<p dir="auto">必须放在整个 Markdown 文件的<strong>最顶端</strong>（第一行不能有空行），用于定义文档的属性，非常适合配合 Dataview 插件进行自动化数据库查询。</p>
+<p dir="auto">YAML</p>
+<pre><code>---
+title: "我的第一篇架构笔记"
+date: 2026-03-19
+tags:
+  - 后端
+  - 架构
+aliases:
+  - 架构学习笔记
+status: in-progress
+---
+</code><button class="copy-code-button"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="svg-icon lucide-copy"><rect x="8" y="8" width="14" height="14" rx="2" ry="2"></rect><path d="M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2"></path></svg></button></pre>
+<p dir="auto"><em>(在较新版本的 Obsidian 中，这部分会被自动渲染为一个非常直观的 UI 表格进行可视化编辑。)</em></p>
+<hr>
+<h3 data-heading="附录：极简标准 Markdown 备忘（防遗忘）" dir="auto">附录：极简标准 Markdown 备忘（防遗忘）</h3>
+<ul>
+<li dir="auto"><strong>各级标题：</strong> <code># H1</code>, <code>## H2</code>, <code>### H3</code><br>
+</li>
+<li dir="auto"><strong>粗体与斜体：</strong> <code>**粗体**</code>, <code>*斜体*</code><br>
+</li>
+<li dir="auto"><strong>无序列表：</strong> <code>- 列表项</code><br>
+</li>
+<li dir="auto"><strong>有序列表：</strong> <code>1. 列表项</code><br>
+</li>
+<li dir="auto"><strong>任务列表：</strong> <code>- [ ] 未完成</code>, <code>- [x] 已完成</code><br>
+</li>
+<li dir="auto"><strong>引用：</strong> <code>&gt; 引用文本</code><br>
+</li>
+<li dir="auto"><strong>超链接：</strong> <code>[显示文本](https://...)</code><br>
+</li>
+</ul>
+<p dir="auto">这份语法表覆盖了 Obsidian 99% 的核心使用场景。建议你直接将这篇回答复制，在你的库里新建一个命名为 <code>Obsidian Syntax CheatSheet</code> 的笔记保存起来。需要了解如何用纯 CSS 代码片段无痕修改 Callout 的默认颜色吗？</p>

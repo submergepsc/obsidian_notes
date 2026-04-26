@@ -1,0 +1,22 @@
+﻿{
+  "start_url": "https://oi-wiki.org/",
+  "visited_count": 3,
+  "queued_count": 450,
+  "saved_count": 3,
+  "skipped_count": 0,
+  "saved_files": [
+    {
+      "url": "https://oi-wiki.org/",
+      "file": "docs_test\\index.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/",
+      "file": "docs_test\\basic.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/amortized-analysis/",
+      "file": "docs_test\\basic__amortized-analysis.md"
+    }
+  ],
+  "skipped_urls": []
+}

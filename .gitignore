@@ -1,0 +1,29 @@
+# Obsidian 缓存和临时文件
+.obsidian/cache/
+.obsidian/workspace
+.obsidian/workspace.json
+.obsidian/workspace-*.json
+.obsidian/plugins/obsidian-git/data/
+.obsidian/plugins/obsidian-git/.git/
+
+# 系统生成的垃圾文件
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+tmp_*
+
+# 临时文件和备份文件
+*.tmp
+*.bak
+*.log
+*.gz
+*.zip
+*.tar
+
+# 大附件/图片（可选，如果你不想同步附件文件夹）
+# attachments/
+# assets/
+25_1/
+

@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git -C \"H:/obsidian_notes\" ls-files)",
+      "Bash(git:*)",
+      "Skill(update-config)"
+    ]
+  }
+}
