@@ -1,0 +1,87 @@
+URL: https://www.runoob.com/xslfo/obj-list-item-label.html
+Title: XSL-FO list-item-label 对象 | 菜鸟教程
+
+XSL-FO list-item-label 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO list-item-body 对象 
+
+XSL-FO marker 对象 
+
+XSL-FO list-item-label 对象 
+
+定义和用法 
+
+<fo:list-item-label> 对象包含了 list-item 标签 - 通常情况下，<fo:block> 包含数字、字符等。 
+
+下面列举了四个用于创建列表的 XSL-FO 对象： 
+
+fo:list-block（包含了整个列表） 
+
+fo:list-item（包含了列表中的每个项） 
+
+fo:list-item-label（包含了 list-item 标签 - 通常情况下，<fo:block> 包含数字、字符等） 
+
+fo:list-item-body（包含了 list-item 的内容/主体 - 通常是一个或多个 <fo:block> 对象） 
+
+语法 
+
+<fo:list-item-label> 
+<!-- 
+Contents:(block|block-container| 
+table-and-caption|table|list-block| 
+list-item)+ 
+--> 
+</fo:list-item-label> 
+
+属性 
+
+属性 
+
+id 
+
+keep-together 
+
+role 
+
+source-document 
+
+实例 1 
+
+一个 XSL-FO 列表实例： 
+
+<fo:list-block> 
+
+<fo:list-item> 
+<fo:list-item-label> 
+<fo:block>*</fo:block> 
+</fo:list-item-label> 
+<fo:list-item-body> 
+<fo:block>Volvo</fo:block> 
+</fo:list-item-body> 
+</fo:list-item> 
+
+<fo:list-item> 
+<fo:list-item-label> 
+<fo:block>*</fo:block> 
+</fo:list-item-label> 
+<fo:list-item-body> 
+<fo:block>Saab</fo:block> 
+</fo:list-item-body> 
+</fo:list-item> 
+
+</fo:list-block> 
+
+上面代码将输出： 
+
+* Volvo 
+* Saab 
+
+AI 思考中... 
+
+XSL-FO list-item-body 对象 
+
+XSL-FO marker 对象

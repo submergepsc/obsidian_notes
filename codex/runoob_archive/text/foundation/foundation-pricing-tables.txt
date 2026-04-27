@@ -1,0 +1,83 @@
+URL: https://www.runoob.com/foundation/foundation-pricing-tables.html
+Title: Foundation 价格表 | 菜鸟教程
+
+Foundation 价格表 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 分页 
+
+Foundation 顶部导航栏 
+
+Foundation 价格表 
+
+价格表可用于展示企业产品: 
+
+实例 
+
+< ul class= "pricing-table" > 
+< li class= "title" > Basic < /li > 
+< li class= "price" > $19.99 < /li > 
+< li class= "description" > Great 
+ for small business < /li > 
+< li class= "bullet-item" > 24/7 
+ Support < /li > 
+< li class= "bullet-item" > 15GB Storage < /li > 
+< li class= "bullet-item" > 1GB Bandwidth < /li > 
+< li class= "cta-button" > < a class= "button" href= "#" > Buy < /a > < /li > 
+< /ul > 
+
+尝试一下 » 
+
+实例解析 
+
+ul.pricing-table - 定义价格表 
+
+li.title - 定义产品标题 (黑色背景) 
+
+li.price - 定义价格 (灰色背景字体大个项) 
+
+li.description - 定义产品描述 (如果需要) 
+
+li.bullet-item - 定义产品特点 
+
+li.ca-button - 按钮文本 (如 "Buy", "Join", "Sign Up", 等) 
+
+注意: 表格会 100% 填充容器的宽度，所有的项都有边框且是居中的。 
+
+价格表网格 
+
+以下实例显示了三个企业产品的价格（三项是均等划分宽度的）： 
+
+实例 
+
+< div class= "row" > 
+< div class= "medium-4 columns" > 
+< ul class= "pricing-table" > 
+< li class= "title" > Basic < /li > 
+... 
+< /ul > 
+< /div > 
+< div class= "medium-4 columns" > 
+< ul class= "pricing-table" > 
+< li class= "title" > Pro < /li > 
+... 
+< /ul > 
+< /div > 
+< div class= "medium-4 columns" > 
+< ul class= "pricing-table" > 
+< li class= "title" > Premium < /li > 
+... 
+< /ul > 
+< /div > 
+< /div > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Foundation 分页 
+
+Foundation 顶部导航栏

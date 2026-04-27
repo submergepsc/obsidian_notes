@@ -1,0 +1,82 @@
+URL: https://www.runoob.com/schema/el-union.html
+Title: XML Schema union 元素 | 菜鸟教程
+
+XML Schema union 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema simpleType 元素 
+
+XML Schema unique 元素 
+
+XML Schema union 元素 
+
+定义和用法 
+
+union 元素定义多个 simpleType 定义的集合。 
+
+元素信息 
+
+父元素： simpleType 
+
+语法 
+
+<union 
+id=ID 
+memberTypes="list of QNames" 
+any attributes 
+> 
+
+(annotation?,(simpleType*)) 
+
+</union> 
+
+（? 符号声明在 union 元素中该元素可出现零次或一次。） 
+
+属性 
+
+描述 
+
+id 
+
+可选。规定该元素的唯一的 ID。 
+
+memberTypes 
+
+可选。规定在 schema 中定义的内置数据类型或 simpleType 元素的名称列表。 
+
+any attributes 
+
+可选。规定带有 non-schema 命名空间的任何其他属性。 
+
+实例 1 
+
+本例是一个合并了两个简单类型的简单类型： 
+
+<xs:element name="jeans_size"> 
+<xs:simpleType> 
+<xs:union memberTypes="sizebyno sizebystring" /> 
+</xs:simpleType> 
+</xs:element> 
+
+<xs:simpleType name="sizebyno"> 
+<xs:restriction base="xs:positiveInteger"> 
+<xs:maxInclusive value="42"/> 
+</xs:restriction> 
+</xs:simpleType> 
+
+<xs:simpleType name="sizebystring"> 
+<xs:restriction base="xs:string"> 
+<xs:enumeration value="small"/> 
+<xs:enumeration value="medium"/> 
+<xs:enumeration value="large"/> 
+</xs:restriction> 
+</xs:simpleType> 
+
+AI 思考中... 
+
+XML Schema simpleType 元素 
+
+XML Schema unique 元素

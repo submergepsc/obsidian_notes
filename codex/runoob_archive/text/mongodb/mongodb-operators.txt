@@ -1,0 +1,410 @@
+URL: https://www.runoob.com/mongodb/mongodb-operators.html
+Title: MongoDB 条件操作符 | 菜鸟教程
+
+MongoDB 条件操作符 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+MongoDB 教程 
+
+MongoDB 查询文档 
+
+MongoDB $type 操作符 
+
+MongoDB 条件操作符 
+
+在本章节中，我们将讨论如何在 MongoDB 中使用条件操作符。 
+
+在 MongoDB 中，条件操作符用于在查询文档时进行过滤、比较和逻辑操作。 
+
+这些操作符可以分为以下几类：比较操作符、逻辑操作符、元素操作符、数组操作符、以及其他常用操作符。 
+
+比较操作符 
+
+比较操作符有： 
+
+操作符 
+
+描述 
+
+示例 
+
+$eq 
+
+等于 
+
+{ age: { $eq: 25 } } 
+
+$ne 
+
+不等于 
+
+{ age: { $ne: 25 } } 
+
+$gt 
+
+大于 
+
+{ age: { $gt: 25 } } 
+
+$gte 
+
+大于等于 
+
+{ age: { $gte: 25 } } 
+
+$lt 
+
+小于 
+
+{ age: { $lt: 25 } } 
+
+$lte 
+
+小于等于 
+
+{ age: { $lte: 25 } } 
+
+$in 
+
+在指定的数组中 
+
+{ age: { $in: [25, 30, 35] } } 
+
+$nin 
+
+不在指定的数组中 
+
+{ age: { $nin: [25, 30, 35] } } 
+
+$eq (等于) 
+
+语法格式： 
+
+{ field: { $eq: value } } 
+
+查找年龄等于 25 的人： 
+
+db.collection.find({ age: { $eq: 25 } }) 
+
+$ne (不等于) 
+
+语法格式： 
+
+{ field: { $ne: value } } 
+
+查找年龄不等于 25 的人： 
+
+db.collection.find({ age: { $ne: 25 } }) 
+
+$gt (大于) 
+
+语法格式： 
+
+{ field: { $gt: value } } 
+
+查找年龄大于 25 的人： 
+
+db.collection.find({ age: { $gt: 25 } }) 
+
+$gte (大于等于) 
+
+语法格式： 
+
+{ field: { $gte: value } } 
+
+查找年龄大于或等于 25 的人： 
+
+db.collection.find({ age: { $gte: 25 } }) 
+
+$lt (小于) 
+
+语法格式：{ field: { $lt: value } } 
+
+查找年龄小于 25 的人： 
+
+db.collection.find({ age: { $lt: 25 } }) 
+
+$lte (小于等于) 
+
+语法格式： 
+
+{ field: { $lte: value } } 
+
+查找年龄小于或等于25的人： 
+
+db.collection.find({ age: { $lte: 25 } }) 
+
+$in (值在数组中) 
+
+语法格式： 
+
+{ field: { $in: [value1, value2, ...] } } 
+
+查找年龄在 20、25 和 30 岁之间的人： 
+
+db.collection.find({ age: { $in: [20, 25, 30] } }) 
+
+$nin (值不在数组中) 
+
+语法格式： 
+
+{ field: { $nin: [value1, value2, ...] } } 
+
+查找年龄不在 20、25 和 30 岁之间的人： 
+
+db.collection.find({ age: { $nin: [20, 25, 30] } }) 
+
+逻辑操作符 
+
+逻辑操作符有： 
+
+操作符 
+
+描述 
+
+示例 
+
+$and 
+
+逻辑与，符合所有条件 
+
+{ $and: [ { age: { $gt: 25 } }, { city: "New York" } ] } 
+
+$or 
+
+逻辑或，符合任意条件 
+
+{ $or: [ { age: { $lt: 25 } }, { city: "New York" } ] } 
+
+$not 
+
+取反，不符合条件 
+
+{ age: { $not: { $gt: 25 } } } 
+
+$nor 
+
+逻辑或非，均不符合条件 
+
+{ $nor: [ { age: { $gt: 25 } }, { city: "New York" } ] } 
+
+$and (多个条件都成立) 
+
+语法格式： 
+
+{ $and: [ { condition1 }, { condition2 } ] } 
+
+查找年龄大于 25 且小于 35 的人: 
+
+db.collection.find({ $and: [{ age: { $gt: 25 } }, { age: { $lt: 35 } }] }) 
+
+$or (至少一个条件成立) 
+
+语法格式： 
+
+{ $or: [ { condition1 }, { condition2 } ] } 
+
+查找年龄大于 25 或小于 18 的人: 
+
+db.collection.find({ $or: [{ age: { $gt: 25 } }, { age: { $lt: 18 } }] }) 
+
+$not (取反条件) 
+
+语法格式： 
+
+{ field: { $not: { condition } } } 
+
+查找年龄不大于 25 的人: 
+
+db.collection.find({ age: { $not: { $gt: 25 } } }) 
+
+$nor (没有任何条件成立) 
+
+语法格式： 
+
+{ $nor: [ { condition1 }, { condition2 } ] } 
+
+查找年龄不大于 25 且不小于 18 的人: 
+
+db.collection.find({ $nor: [{ age: { $gt: 25 } }, { age: { $lt: 18 } }] }) 
+
+元素操作符 
+
+元素操作符有： 
+
+操作符 
+
+描述 
+
+示例 
+
+$exists 
+
+字段是否存在 
+
+{ age: { $exists: true } } 
+
+$type 
+
+字段的 BSON 类型 
+
+{ age: { $type: "int" } } 
+
+$exists (字段是否存在) 
+
+语法格式： 
+
+{ field: { $exists: boolean } } 
+
+查找包含 age 字段的文档: 
+
+db.collection.find({ age: { $exists: true } }) 
+
+$type (字段类型) 
+
+语法格式： 
+
+{ field: { $type: "type" } } 
+
+查找 age 字段为整数类型的文档: 
+
+db.collection.find({ age: { $type: "int" } }) 
+
+数组操作符 
+
+数组操作符有： 
+
+操作符 
+
+描述 
+
+示例 
+
+$all 
+
+数组包含所有指定的元素 
+
+{ tags: { $all: ["red", "blue"] } } 
+
+$elemMatch 
+
+数组中的元素匹配指定条件 
+
+{ results: { $elemMatch: { score: { $gt: 80, $lt: 85 } } } } 
+
+$size 
+
+数组的长度等于指定值 
+
+{ tags: { $size: 3 } } 
+
+查找数组 tags 中包含 "red" 和 "blue" 的文档： 
+
+db.myCollection.find({ tags: { $all: ["red", "blue"] } }); 
+
+$all (数组包含指定的所有元素) 
+
+语法格式： 
+
+{ field: { $all: [value1, value2, ...] } } 
+
+查找 tags 数组中包含 "mongodb" 和 "database" 的文档: 
+
+db.collection.find({ tags: { $all: ["mongodb", "database"] } }) 
+
+$elemMatch (数组中至少有一个元素符合条件) 
+
+语法格式： 
+
+{ field: { $elemMatch: { condition } } } 
+
+查找 items 数组中 quantity 大于 10 的元素: 
+
+db.collection.find({ items: { $elemMatch: { quantity: { $gt: 10 } } } }) 
+
+$size (数组的大小) 
+
+语法格式： 
+
+{ field: { $size: value } } 
+
+查找 tags 数组大小为 3 的文档: 
+
+db.collection.find({ tags: { $size: 3 } }) 
+
+其他操作符 
+
+还有一些其他操作符如下： 
+
+操作符 
+
+描述 
+
+示例 
+
+$regex 
+
+匹配正则表达式 
+
+{ name: { $regex: /^A/ } } 
+
+$text 
+
+进行文本搜索 
+
+{ $text: { $search: "coffee" } } 
+
+$where 
+
+使用 JavaScript 表达式进行条件过滤 
+
+{ $where: "this.age > 25" } 
+
+$near 
+
+查找接近指定点的文档 
+
+db.collection.find({ location: { $near: [10, 20], $maxDistance: 1000 } }) 
+
+$geoWithin 
+
+查找在指定地理区域内的文档 
+
+db.collection.find({ location: { $geoWithin: { $centerSphere: [[10, 20], 1] } } }) 
+
+$regex (正则表达式匹配) 
+
+语法格式： 
+
+{ field: { $regex: "pattern" } } 
+
+查找 name 以 "John" 开头的文档: 
+
+db.collection.find({ name: { $regex: /^John/ } }) 
+
+$near (接近指定点的文档) 
+
+语法格式： 
+
+{ field: { $near: [longitude, latitude], $maxDistance: distance } } 
+
+查找距离某个位置近的文档: 
+
+db.collection.find({ location: { $near: [10, 20], $maxDistance: 1000 } }) 
+
+$geoWithin (查找指定区域内的文档) 
+
+语法格式： 
+
+{ field: { $geoWithin: { $centerSphere: [[longitude, latitude], radius] } } } 
+
+查找在指定地理区域内的文档: 
+
+db.collection.find({ location: { $geoWithin: { $centerSphere: [[10, 20], 1] } } }) 
+
+AI 思考中... 
+
+MongoDB 查询文档 
+
+MongoDB $type 操作符

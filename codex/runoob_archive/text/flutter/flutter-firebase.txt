@@ -1,0 +1,313 @@
+URL: https://www.runoob.com/flutter/flutter-firebase.html
+Title: Firebase 集成 | 菜鸟教程
+
+Firebase 集成 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Flutter 教程 
+
+Flutter 最佳实践 
+
+Flutter 进阶 
+
+Firebase 集成 
+
+Firebase 是 Google 提供的移动和 Web 应用开发平台，本节将介绍如何在 Flutter 中集成 Firebase。 
+
+Firebase 概述 
+
+Firebase 提供多种后端服务，包括认证、数据库、存储、分析等。 
+
+服务 
+
+说明 
+
+Firebase Auth 
+
+用户身份验证 
+
+Cloud Firestore 
+
+云端 NoSQL 数据库 
+
+Realtime Database 
+
+实时数据库 
+
+Cloud Storage 
+
+云端文件存储 
+
+Firebase Analytics 
+
+应用数据分析 
+
+Cloud Functions 
+
+云端无服务器函数 
+
+安装与配置 
+
+添加依赖 
+
+dependencies:
+ firebase_core: ^2.0.0
+ firebase_auth: ^4.0.0
+ cloud_firestore: ^4.0.0 
+
+Firebase 初始化 
+
+实例：初始化 Firebase 
+
+import 'package:firebase_core/firebase_core.dart' ; 
+
+import 'package:flutter/material.dart' ; 
+
+void main ( ) async { 
+
+WidgetsFlutterBinding. ensureInitialized ( ) ; 
+
+// 初始化 Firebase 
+
+await Firebase. initializeApp ( ) ; 
+
+runApp ( const MyApp ( ) ) ; 
+
+} 
+
+Firebase Auth - 用户认证 
+
+实例：邮箱密码登录 
+
+import 'package:firebase_auth/firebase_auth.dart' ; 
+
+class AuthService { 
+
+final FirebaseAuth _auth = FirebaseAuth. instance ; 
+
+// 注册 
+
+Future < User ? > registerWithEmail ( String email , String password ) async { 
+
+try { 
+
+final credential = await _auth. createUserWithEmailAndPassword ( 
+
+email : email , 
+
+password : password , 
+
+) ; 
+
+return credential. user ; 
+
+} on FirebaseAuthException catch ( e ) { 
+
+print ( '注册失败: ${e.message}' ) ; 
+
+return null ; 
+
+} 
+
+} 
+
+// 登录 
+
+Future < User ? > signInWithEmail ( String email , String password ) async { 
+
+try { 
+
+final credential = await _auth. signInWithEmailAndPassword ( 
+
+email : email , 
+
+password : password , 
+
+) ; 
+
+return credential. user ; 
+
+} on FirebaseAuthException catch ( e ) { 
+
+print ( '登录失败: ${e.message}' ) ; 
+
+return null ; 
+
+} 
+
+} 
+
+// 退出登录 
+
+Future < void > signOut ( ) async { 
+
+await _auth. signOut ( ) ; 
+
+} 
+
+// 监听登录状态 
+
+Stream < User ? > get authStateChanges { 
+
+return _auth. authStateChanges ( ) ; 
+
+} 
+
+} 
+
+Cloud Firestore - 数据库 
+
+实例：Firestore 基本操作 
+
+import 'package:cloud_firestore/cloud_firestore.dart' ; 
+
+class FirestoreService { 
+
+final FirebaseFirestore _db = FirebaseFirestore. instance ; 
+
+// 添加文档 
+
+Future < void > addUser ( Map < String , dynamic > user ) async { 
+
+await _db. collection ( 'users' ) . add ( user ) ; 
+
+// 或指定 ID 
+
+// await _db.collection('users').doc('user_id').set(user); 
+
+} 
+
+// 获取单个文档 
+
+Future < Map < String , dynamic > ? > getUser ( String id ) async { 
+
+final doc = await _db. collection ( 'users' ) . doc ( id ) . get ( ) ; 
+
+return doc. data ( ) ; 
+
+} 
+
+// 获取集合所有文档 
+
+Future < List < Map < String , dynamic >>> getUsers ( ) async { 
+
+final snapshot = await _db. collection ( 'users' ) . get ( ) ; 
+
+return snapshot. docs . map ( ( doc ) => doc. data ( ) ) . toList ( ) ; 
+
+} 
+
+// 条件查询 
+
+Future < List < Map < String , dynamic >>> getUsersByAge ( int age ) async { 
+
+final snapshot = await _db 
+
+. collection ( 'users' ) 
+
+. where ( 'age' , isGreaterThanOrEqualTo : age ) 
+
+. get ( ) ; 
+
+return snapshot. docs . map ( ( doc ) => doc. data ( ) ) . toList ( ) ; 
+
+} 
+
+// 更新文档 
+
+Future < void > updateUser ( String id , Map < String , dynamic > data ) async { 
+
+await _db. collection ( 'users' ) . doc ( id ) . update ( data ) ; 
+
+} 
+
+// 删除文档 
+
+Future < void > deleteUser ( String id ) async { 
+
+await _db. collection ( 'users' ) . doc ( id ) . delete ( ) ; 
+
+} 
+
+// 实时监听 
+
+Stream < QuerySnapshot > watchUsers ( ) { 
+
+return _db. collection ( 'users' ) . snapshots ( ) ; 
+
+} 
+
+} 
+
+Firebase Storage - 文件存储 
+
+实例：文件上传 
+
+import 'package:firebase_storage/firebase_storage.dart' ; 
+
+import 'dart:io' ; 
+
+class StorageService { 
+
+final FirebaseStorage _storage = FirebaseStorage. instance ; 
+
+// 上传文件 
+
+Future < String ? > uploadFile ( File file , String path ) async { 
+
+try { 
+
+final ref = _storage. ref ( ) . child ( path ) ; 
+
+final result = await ref. putFile ( file ) ; 
+
+return await result. ref . getDownloadURL ( ) ; 
+
+} on FirebaseException catch ( e ) { 
+
+print ( '上传失败: ${e.message}' ) ; 
+
+return null ; 
+
+} 
+
+} 
+
+// 下载文件 URL 
+
+Future < String ? > getDownloadURL ( String path ) async { 
+
+try { 
+
+final ref = _storage. ref ( ) . child ( path ) ; 
+
+return await ref. getDownloadURL ( ) ; 
+
+} on FirebaseException catch ( e ) { 
+
+print ( '获取 URL 失败: ${e.message}' ) ; 
+
+return null ; 
+
+} 
+
+} 
+
+// 删除文件 
+
+Future < void > deleteFile ( String path ) async { 
+
+await _storage. ref ( ) . child ( path ) . delete ( ) ; 
+
+} 
+
+} 
+
+Firebase 提供了强大的后端服务，是 Flutter 应用快速构建后端的最佳选择。 
+
+AI 思考中... 
+
+Flutter 最佳实践 
+
+Flutter 进阶

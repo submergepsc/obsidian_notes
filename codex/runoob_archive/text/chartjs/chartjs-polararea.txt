@@ -1,0 +1,98 @@
+URL: https://www.runoob.com/chartjs/chartjs-polararea.html
+Title: Chart.js 极地图 | 菜鸟教程
+
+Chart.js 极地图 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Chart.js 教程 
+
+Chart.js 混合图 
+
+Chart.js 雷达图 
+
+Chart.js 极地图 
+
+极区图类似于饼图，但每个数据集具有相同的角度，线段的半径根据提供的值有所不同。 
+
+混合图 type 属性为 polarArea 。 
+
+const config = {
+ type: 'polarArea',
+ data: data,
+ options: {}
+}; 
+
+接下来我们创建一个简单的极地图： 
+
+实例 
+
+const ctx = document. getElementById ( 'myChart' ) ; 
+
+const data = { 
+
+labels : [ 
+
+'Red' , 
+
+'Green' , 
+
+'Yellow' , 
+
+'Grey' , 
+
+'Blue' 
+
+] , 
+
+datasets : [ { 
+
+label : '极地图实例' , 
+
+data : [ 11 , 16 , 7 , 3 , 14 ] , 
+
+backgroundColor : [ 
+
+'rgb(255, 99, 132)' , 
+
+'rgb(75, 192, 192)' , 
+
+'rgb(255, 205, 86)' , 
+
+'rgb(201, 203, 207)' , 
+
+'rgb(54, 162, 235)' 
+
+] 
+
+} ] 
+
+} ; 
+
+const config = { 
+
+type : 'polarArea' , 
+
+data : data , 
+
+options : { 
+
+responsive : true , // 设置图表为响应式，根据屏幕窗口变化而变化 
+
+maintainAspectRatio : false , // 保持图表原有比例 
+
+} 
+
+} ; 
+
+const myChart = new Chart ( ctx , config ) ; 
+
+尝试一下 » 
+
+以上实例输出结果为： 
+
+AI 思考中... 
+
+Chart.js 混合图 
+
+Chart.js 雷达图

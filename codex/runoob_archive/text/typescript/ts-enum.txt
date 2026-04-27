@@ -1,0 +1,210 @@
+URL: https://www.runoob.com/typescript/ts-enum.html
+Title: TypeScript 枚举（Enum） | 菜鸟教程
+
+TypeScript 枚举（Enum） | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+TypeScript 教程 
+
+TypeScript 编译选项 
+
+TypeScript 类型推断 
+
+TypeScript 枚举（Enum） 
+
+枚举（Enum）是 TypeScript 中非常有用的特性，它允许我们定义一组命名常量。枚举可以使得代码更易读、更易维护，可以用有意义的名称替代"魔术数字"。 
+
+数字枚举 
+
+默认情况下，枚举从 0 开始编号。 
+
+实例 
+
+enum Direction { 
+
+Up , // 0 
+
+Down , // 1 
+
+Left , // 2 
+
+Right // 3 
+
+} 
+
+var dir : Direction = Direction. Up ; 
+
+console. log ( "方向: " + dir ) ; 
+
+console. log ( "方向名称: " + Direction [ 0 ] ) ; 
+
+运行结果： 
+
+方向: 0
+方向名称: Up 
+
+手动赋值 
+
+可以手动为枚举成员指定值。 
+
+实例 
+
+enum Status { 
+
+Success = 1 , 
+
+Error = 2 , 
+
+Pending = 3 
+
+} 
+
+console. log ( "状态: " + Status. Success ) ; 
+
+console. log ( "状态名称: " + Status [ 1 ] ) ; 
+
+运行结果： 运 
+
+状态: 1
+状态名称: Success 
+
+字符串枚举 
+
+字符串枚举每个成员都必须有字符串字面量值。 
+
+实例 
+
+enum Message { 
+
+Success = "SUCCESS" , 
+
+Error = "ERROR" , 
+
+Warning = "WARNING" 
+
+} 
+
+console. log ( "消息: " + Message. Success ) ; 
+
+运行结果： 
+
+消息: SUCCESS 
+
+常量枚举 
+
+使用 const 修饰的枚举会在编译时内联，生成更优化的代码。 
+
+实例 
+
+const enum Color { 
+
+Red = "RED" , 
+
+Green = "GREEN" , 
+
+Blue = "BLUE" 
+
+} 
+
+var favoriteColor : Color = Color. Red ; 
+
+console. log ( "喜欢的颜色: " + favoriteColor ) ; 
+
+异构枚举 
+
+枚举可以混合数字和字符串值，但不推荐使用。 
+
+实例 
+
+enum BooleanLikeHeterogeneousEnum { 
+
+No = 0 , 
+
+Yes = "YES" 
+
+} 
+
+console. log ( "值: " + BooleanLikeHeterogeneousEnum. No ) ; 
+
+console. log ( "字符串值: " + BooleanLikeHeterogeneousEnum. Yes ) ; 
+
+枚举成员类型 
+
+当枚举成员都是字面量值时，成员类型可以作为类型使用。 
+
+实例 
+
+enum ShapeKind { 
+
+Circle = "circle" , 
+
+Square = "square" 
+
+} 
+
+interface Circle { 
+
+kind : ShapeKind. Circle ; 
+
+radius : number ; 
+
+} 
+
+interface Square { 
+
+kind : ShapeKind. Square ; 
+
+sideLength : number ; 
+
+} 
+
+var c : Circle = { 
+
+kind : ShapeKind. Circle , 
+
+radius : 10 
+
+} ; 
+
+console. log ( "圆形: " + JSON. stringify ( c ) ) ; 
+
+运行时常量枚举 
+
+普通枚举在运行时保留为真实对象。 
+
+实例 
+
+enum FileAccess { 
+
+Read = 1 << 1 , 
+
+Write = 1 << 2 , 
+
+ReadWrite = Read | Write 
+
+} 
+
+console. log ( "文件访问: " + FileAccess. ReadWrite ) ; 
+
+运行结果： 
+
+文件访问: 6 
+
+总结 
+
+数字枚举： 默认从 0 开始，可手动赋值 
+
+字符串枚举： 每个成员必须是字符串字面量 
+
+常量枚举： 使用 const，编译时内联 
+
+异构枚举： 混合数字和字符串，不推荐 
+
+成员类型： 字面量枚举成员可用作类型 
+
+AI 思考中... 
+
+TypeScript 编译选项 
+
+TypeScript 类型推断

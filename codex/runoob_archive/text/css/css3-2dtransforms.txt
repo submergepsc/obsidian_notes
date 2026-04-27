@@ -1,0 +1,256 @@
+URL: https://www.runoob.com/css/css3-2dtransforms.html
+Title: CSS3 2D 转换 | 菜鸟教程
+
+CSS3 2D 转换 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS3 教程 
+
+CSS3 字体 
+
+CSS3 3D 转换 
+
+CSS3 2D 转换 
+
+CSS3 转换 
+
+CSS3 转换可以对元素进行移动、缩放、转动、拉长或拉伸。 
+
+它是如何工作？ 
+
+转换的效果是让某个元素改变形状，大小和位置。 
+
+您可以使用 2D 或 3D 转换来转换您的元素。 
+
+鼠标移动到以下元素上，查看 2D 和 3D 的转换效果： 
+
+2D 转换 
+
+3D 转换 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+紧跟在 -webkit-, -ms- 或 -moz- 前的数字为支持该前缀属性的第一个浏览器版本号。 
+
+属性 
+
+transform 
+
+36.0 
+4.0 -webkit- 
+
+10.0 
+9.0 -ms- 
+
+16.0 
+3.5 -moz- 
+
+3.2 -webkit- 
+
+23.0 
+15.0 -webkit- 
+12.1 
+10.5 -o- 
+
+transform-origin 
+(two-value syntax) 
+
+36.0 
+4.0 -webkit- 
+
+10.0 
+9.0 -ms- 
+
+16.0 
+3.5 -moz- 
+
+3.2 -webkit- 
+
+23.0 
+15.0 -webkit- 
+12.1 
+10.5 -o- 
+
+Internet Explorer 10, Firefox, 和 Opera支持transform 属性. 
+
+Chrome 和 Safari 要求前缀 -webkit- 版本. 
+
+注意： Internet Explorer 9 要求前缀 -ms- 版本. 
+
+2D 转换 
+
+在本章您将了解2D变换方法： 
+
+translate() 
+
+rotate() 
+
+scale() 
+
+skew() 
+
+matrix() 
+
+在下一章中您将了解3D转换。 
+
+实例 
+
+div { transform: rotate ( 30 deg ) ;
+- ms-transform: rotate ( 30 deg ) ; - webkit-transform: rotate ( 30 deg ) ; } 
+
+尝试一下 » 
+
+translate() 方法 
+
+translate()方法，根据左(X轴)和顶部(Y轴)位置给定的参数，从当前元素位置移动。 
+
+实例 
+
+div { transform: translate ( 50 px , 100 px ) ;
+- ms-transform: translate ( 50 px , 100 px ) ; - webkit-transform: translate ( 50 px , 100 px ) ; } 
+
+尝试一下 » 
+
+translate值（50px，100px）是从左边元素移动50个像素，并从顶部移动100像素。 
+
+rotate() 方法 
+
+rotate()方法，在一个给定度数顺时针旋转的元素。负值是允许的，这样是元素逆时针旋转。 
+
+实例 
+
+div { transform: rotate ( 30 deg ) ;
+- ms-transform: rotate ( 30 deg ) ; - webkit-transform: rotate ( 30 deg ) ; } 
+
+尝试一下 » 
+
+rotate值（30deg）元素顺时针旋转30度。 
+
+scale() 方法 
+
+scale()方法，该元素增加或减少的大小，取决于宽度（X轴）和高度（Y轴）的参数： 
+
+实例 
+
+-ms-transform: scale (2,3); -webkit-transform: scale (2,3); transform: scale (2,3); 
+
+尝试一下 » 
+
+scale（2,3）转变宽度为原来的大小的2倍，和其原始大小3倍的高度。 
+
+skew() 方法 
+
+语法 
+
+transform:skew(<angle> [,<angle>]); 
+
+包含两个参数值，分别表示X轴和Y轴倾斜的角度，如果第二个参数为空，则默认为0，参数为负表示向相反方向倾斜。 
+
+skewX(<angle>);表示只在X轴(水平方向)倾斜。 
+
+skewY(<angle>);表示只在Y轴(垂直方向)倾斜。 
+
+实例 
+
+div { transform: skew ( 30 deg , 20 deg ) ;
+- ms-transform: skew ( 30 deg , 20 deg ) ; - webkit-transform: skew ( 30 deg , 20 deg ) ; } 
+
+尝试一下 » 
+
+skew(30deg,20deg) 元素在 X 轴和 Y 轴上倾斜 20 度 30 度。 
+
+matrix() 方法 
+
+matrix()方法和2D变换方法合并成一个。 
+
+matrix 方法有六个参数，包含旋转，缩放，移动（平移）和倾斜功能。 
+
+实例 
+
+利用matrix()方法旋转div元素30° 
+
+div { transform: matrix ( 0.866 , 0.5 ,- 0.5 , 0.866 , 0 , 0 ) ;
+- ms-transform: matrix ( 0.866 , 0.5 ,- 0.5 , 0.866 , 0 , 0 ) ; - webkit-transform: matrix ( 0.866 , 0.5 ,- 0.5 , 0.866 , 0 , 0 ) ; } 
+
+尝试一下 » 
+
+新转换属性 
+
+以下列出了所有的转换属性: 
+
+Property 
+
+描述 
+
+CSS 
+
+transform 
+
+适用于2D或3D转换的元素 
+
+3 
+
+transform-origin 
+
+允许您更改转化元素位置 
+
+3 
+
+2D 转换方法 
+
+函数 
+
+描述 
+
+matrix( n , n , n , n , n , n ) 
+
+定义 2D 转换，使用六个值的矩阵。 
+
+translate( x , y ) 
+
+定义 2D 转换，沿着 X 和 Y 轴移动元素。 
+
+translateX( n ) 
+
+定义 2D 转换，沿着 X 轴移动元素。 
+
+translateY( n ) 
+
+定义 2D 转换，沿着 Y 轴移动元素。 
+
+scale( x , y ) 
+
+定义 2D 缩放转换，改变元素的宽度和高度。 
+
+scaleX( n ) 
+
+定义 2D 缩放转换，改变元素的宽度。 
+
+scaleY( n ) 
+
+定义 2D 缩放转换，改变元素的高度。 
+
+rotate( angle ) 
+
+定义 2D 旋转，在参数中规定角度。 
+
+skew( x-angle , y-angle ) 
+
+定义 2D 倾斜转换，沿着 X 和 Y 轴。 
+
+skewX( angle ) 
+
+定义 2D 倾斜转换，沿着 X 轴。 
+
+skewY( angle ) 
+
+定义 2D 倾斜转换，沿着 Y 轴。 
+
+AI 思考中... 
+
+CSS3 字体 
+
+CSS3 3D 转换

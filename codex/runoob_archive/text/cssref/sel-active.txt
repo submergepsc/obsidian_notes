@@ -1,0 +1,89 @@
+URL: https://www.runoob.com/cssref/sel-active.html
+Title: CSS :active 选择器 | 菜鸟教程
+
+CSS :active 选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS :visited 选择器 
+
+CSS :hover 选择器 
+
+CSS :active 选择器 
+
+实例 
+
+选择激活的链接样式： 
+
+a:active 
+{ 
+background-color:yellow; 
+} 
+
+尝试一下 » 
+
+定义和用法 
+
+:active向活动的链接添加特殊的样式。 
+
+当你点击一个链接时它变成活动链接。 
+
+提示: :link 选择器设置了未访问过的页面链接样式, :visited 选择器设置访问过的页面链接的样式, :hover 选择器当有鼠标悬停在其上的链接样式。 
+
+注意: 为了产生预期的效果，在CSS定义中，:active必须位于:hover之后！！ 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+:active 
+
+4.0 
+
+7.0 
+
+2.0 
+
+3.1 
+
+9.6 
+
+注意： 对所有元素IE8以及新版本浏览器均支持:active选择器。:active选择器对于IE7只支持链接。 
+
+相关文章 
+
+CSS 教程: CSS Links 
+
+CSS tutorial: CSS 伪类 
+
+更多实例 
+
+实例 
+
+激活的、已访问的、未访问的或者当有鼠标悬停在其上的链接： 
+
+a:link {color:green;} 
+a:visited {color:green;} 
+a:hover {color:red;} 
+a:active {color:yellow;} 
+
+尝试一下 » 
+
+实例 
+
+不同样式的链接样式： 
+
+a.ex1:hover,a.ex1:active {color:red;} 
+a.ex2:hover,a.ex2:active {font-size:150%;} 
+
+尝试一下 » 
+
+AI 思考中... 
+
+CSS :visited 选择器 
+
+CSS :hover 选择器

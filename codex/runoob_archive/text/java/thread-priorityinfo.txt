@@ -1,0 +1,37 @@
+URL: https://www.runoob.com/java/thread-priorityinfo.html
+Title: Java 实例 – 查看线程优先级 | 菜鸟教程
+
+Java 实例 – 查看线程优先级 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 获取线程id 
+
+Java 实例 – 获取所有线程 
+
+Java 实例 - 查看线程优先级 
+
+以下实例演示了如何使用 getThreadId() 方法获取线程id： 
+
+Main.java 文件 
+
+public class Main extends Object { private static Runnable makeRunnable ( ) { Runnable r = new Runnable ( ) { public void run ( ) { for ( int i = 0 ; i < 5 ; i ++ ) { Thread t = Thread . currentThread ( ) ; System . out . println ( " in run() - priority= " + t . getPriority ( ) + " , name= " + t . getName ( ) ) ; try { Thread . sleep ( 2000 ) ; } catch ( InterruptedException x ) { } } } } ; return r ; } public static void main ( String [ ] args ) { System . out . println ( " in main() - Thread.currentThread().getPriority()= " + Thread . currentThread ( ) . getPriority ( ) ) ; System . out . println ( " in main() - Thread.currentThread().getName()= " + Thread . currentThread ( ) . getName ( ) ) ; Thread threadA = new Thread ( makeRunnable ( ) , " threadA " ) ; threadA . start ( ) ; try { Thread . sleep ( 3000 ) ; } catch ( InterruptedException x ) { } System . out . println ( " in main() - threadA.getPriority()= " + threadA . getPriority ( ) ) ; } } 
+
+以上代码运行输出结果为： 
+
+in main() - Thread.currentThread().getPriority()=5
+in main() - Thread.currentThread().getName()=main
+in run() - priority=5, name=threadA
+in run() - priority=5, name=threadA
+in main() - threadA.getPriority()=5
+in run() - priority=5, name=threadA
+in run() - priority=5, name=threadA
+in run() - priority=5, name=threadA 
+
+AI 思考中... 
+
+Java 实例 – 获取线程id 
+
+Java 实例 – 获取所有线程

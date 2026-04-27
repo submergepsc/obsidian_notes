@@ -1,0 +1,126 @@
+URL: https://www.runoob.com/tags/html-emoji.html
+Title: HTML Emoji | 菜鸟教程
+
+HTML Emoji | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML img loading 属性 
+
+HTML source srcset 属性 
+
+HTML Emoji 
+
+Emoji 是来自 UTF-8 字符集的字符: 😄 😍 💗。 
+
+表情符号（英语：emoji，日语：絵文字／えもじ emoji），是使用在网页和聊天中的形意符号，最初是日本在无线通信中所使用的视觉情感符号（图画文字）。表情意指面部表情，图标则是图形标志的意思，可用来代表多种表情，如笑脸表示笑、蛋糕表示食物等。
+Emoji 看起来像一张图片或图标，其实不是。 
+
+Emoji 实际上是 UTF-8 (Unicode) 字符集上的字符。 
+
+UTF-8 几乎涵盖了世界上所有的字符和符号。 
+
+HTML charset 属性 
+
+想要正常显示一个 HTML 页面，浏览器就需要知道网页使用的字符集。
+网页中的字符集使用 <meta> 标签来指定： 
+
+<meta charset="UTF-8"> 
+
+注： 如果我们没有刻意指定 meta 属性，默认的字符集编码也是 UTF-8。 
+
+更多 UTF-8 编码可以参考： HTML Unicode（UTF-8） 参考手册 
+
+UTF-8 字符 
+
+很多 UTF-8 字符无法在键盘上输入，但我们可以使用数字（称为实体编号）来表示： 
+
+A 为 65 
+
+B 为 66 
+
+C 为 67 
+
+实例 
+
+< ! DOCTYPE html > < html > < head > < meta charset = " UTF-8 " > </ head > < body > < p > 显示结果： A B C </ p > < p > 显示结果： A B C </ p > </ body > </ html > 
+
+尝试一下 » 
+
+实例解析： 
+
+<meta charset="UTF-8"> 定义来字符集。 
+
+A, B, 和 C 也可以使用 65, 66, 和 67 来表示。 
+
+实体编号需要以 &# 开头并以分号 ; 结尾，这样才能正确显示一个字符。 
+
+同样 Emoji 也是字符，可以在 HTML 页面中跟其他字符一样使用它： 
+
+实例 
+
+< ! DOCTYPE html > < html > < head > < meta charset = " UTF-8 " > </ head > < body > < h1 > Emoji 标签符号 </ h1 > < p > 可以通过 font-size 属性，像设置字体大小一样，设置表情的大小。 </ p > < p style = " font-size:48px " > 😀 😄 😍 💗 </ p > </ body > </ html > 
+
+尝试一下 » 
+
+Emoji 表情符号 
+
+下表列出来一些 Emoji 表情符号： 
+
+Emoji 
+
+值 
+
+🗻 
+
+🗻 
+
+🗼 
+
+🗼 
+
+🗽 
+
+🗽 
+
+🗾 
+
+🗾 
+
+🗿 
+
+🗿 
+
+😀 
+
+😀 
+
+😁 
+
+😁 
+
+😂 
+
+😂 
+
+😃 
+
+😃 
+
+😄 
+
+😄 
+
+😅 
+
+😅 
+
+更多 Emoji 内容参考： Emoji 参考手册 
+
+AI 思考中... 
+
+HTML img loading 属性 
+
+HTML source srcset 属性

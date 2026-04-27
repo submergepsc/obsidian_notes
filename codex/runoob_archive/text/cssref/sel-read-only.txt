@@ -1,0 +1,68 @@
+URL: https://www.runoob.com/cssref/sel-read-only.html
+Title: CSS :read-only选择器 | 菜鸟教程
+
+CSS :read-only选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS :read-write选择器 
+
+CSS :optional选择器 
+
+CSS :read-only 选择器 
+
+实例 
+
+如果 input 元素设置了 "readonly" 属性，设置输入框样式为黄色: 
+
+input:read-only 
+{ 
+background-color: yellow; 
+} 
+
+尝试一下 » 
+
+定义和使用 
+
+:read-only 选择器用于选取设置了 "readonly" 属性的元素。 
+
+表单元素可以设置 "readonly" 属性来定义元素只读。 
+
+注意： 目前，大多数浏览器, :read-only 选择器适用于 input 和 textarea 元素，但是它也适用于设置了 "readonly" 属性的元素。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+:read-only 
+
+支持 
+
+不支持 
+
+-moz- 
+
+Yes 
+
+Yes 
+
+CSS 语法 
+
+:read-only 
+{ 
+css 声明 ; 
+} 
+
+相关页面 
+
+CSS 选择器 :read-write 
+
+AI 思考中... 
+
+CSS :read-write选择器 
+
+CSS :optional选择器

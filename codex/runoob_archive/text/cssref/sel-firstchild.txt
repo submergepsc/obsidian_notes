@@ -1,0 +1,82 @@
+URL: https://www.runoob.com/cssref/sel-firstchild.html
+Title: CSS :first-child 伪元素 | 菜鸟教程
+
+CSS :first-child 伪元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS :first-line 伪元素 
+
+CSS :lang() 选择器 
+
+CSS :first-child 选择器 
+
+实例 
+
+匹配 <p> 的父元素的第一个<p>元素 
+
+p :first-child { background-color: yellow ; } 
+
+尝试一下 » 
+
+定义和用法 
+
+:first-child 选择器匹配其父元素中的第一个子元素。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+:first-child 
+
+4.0 
+
+7.0 
+
+3.0 
+
+3.1 
+
+9.6 
+
+注意: :first-child在IE8和更早版本IE版本中必须声明 <!DOCTYPE> 
+
+相关文章 
+
+CSS 教程: CSS 伪类 
+
+更多实例 
+
+实例 
+
+选择每个 <p> 中的每个 <i> 元素并设置其样式，其中的 <p> 元素是其父元素的第一个子元素： 
+
+p :first-child i { background: yellow ; } 
+
+尝试一下 » 
+
+实例 
+
+列表中的第一个 <li>元素选择的样式： 
+
+li :first-child { background: yellow ; } 
+
+尝试一下 » 
+
+实例 
+
+每一个<ul>元素的第一个子元素选择的样式：: 
+
+ul > :first-child { background: yellow ; } 
+
+尝试一下 » 
+
+AI 思考中... 
+
+CSS :first-line 伪元素 
+
+CSS :lang() 选择器

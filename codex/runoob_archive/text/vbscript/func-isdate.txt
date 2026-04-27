@@ -1,0 +1,77 @@
+URL: https://www.runoob.com/vbscript/func-isdate.html
+Title: VBScript IsDate 函数 | 菜鸟教程
+
+VBScript IsDate 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Hour 函数 
+
+VBScript Minute 函数 
+
+VBScript IsDate 函数 
+
+IsDate 函数返回指示计算表达式能否转换为日期的布尔值。如果表达式是日期，或可被转换为日期，则返回 True 。否则，返回 False 。 
+
+注意： IsDate 函数使用本地设置来检测字符串是否可以转换为日期（在所有的语言中，"January" 不是一个月份）。 
+
+语法 
+
+IsDate(expression) 
+
+参数 
+
+描述 
+
+expression 
+
+必需。要计算的表达式。 
+
+实例 1 
+
+合法日期： 
+
+<script type="text/vbscript"> 
+
+document.write(IsDate("April 22, 1947")) 
+document.write("<br />") 
+document.write(IsDate(#01/31/10#)) 
+
+</script> 
+
+以上实例输出结果： 
+
+True 
+True 
+
+尝试一下 » 
+
+实例 2 
+
+非法日期： 
+
+<script type="text/vbscript"> 
+
+document.write(IsDate("#01/31/10#")) 
+document.write("<br />") 
+document.write(IsDate("52/17/2010")) 
+document.write("<br />") 
+document.write(IsDate("Hello World!")) 
+
+</script> 
+
+以上实例输出结果： 
+
+False 
+False 
+False 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Hour 函数 
+
+VBScript Minute 函数

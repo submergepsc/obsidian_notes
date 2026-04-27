@@ -1,0 +1,38 @@
+URL: https://www.runoob.com/xslfo/obj-declarations.html
+Title: XSL-FO declarations 对象 | 菜鸟教程
+
+XSL-FO declarations 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO conditional-page-master-reference 对象 
+
+XSL-FO external-graphic 对象 
+
+XSL-FO declarations 对象 
+
+定义和用法 
+
+<fo:declarations> 对象用于组合样式表的全局声明。 
+
+<fo:declarations> 对象是一个对象的包装，其内容是用于格式化程序的一种资源。 
+
+语法 
+
+<fo:declarations> 
+<!-- 
+Contents:(color-profile)+ 
+--> 
+</fo:declarations> 
+
+属性 
+
+无 
+
+AI 思考中... 
+
+XSL-FO conditional-page-master-reference 对象 
+
+XSL-FO external-graphic 对象

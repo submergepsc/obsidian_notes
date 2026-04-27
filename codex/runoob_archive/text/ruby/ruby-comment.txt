@@ -1,0 +1,48 @@
+URL: https://www.runoob.com/ruby/ruby-comment.html
+Title: Ruby 注释 | 菜鸟教程
+
+Ruby 注释 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Ruby 教程 
+
+Ruby 运算符 
+
+Ruby 条件判断 
+
+Ruby 注释 
+
+注释是在运行时会被忽略的 Ruby 代码内的注释行。单行注释以 # 字符开始，直到该行结束，如下所示： 
+
+实例 
+
+puts " Hello, Ruby! " 
+
+运行实例 » 
+
+当执行时，上面的程序会产生以下结果： 
+
+Hello, Ruby! 
+
+您可以使用 =begin 和 =end 语法注释多行，如下所示： 
+
+实例 
+
+puts " Hello, Ruby! " 
+
+当执行时，上面的程序会产生以下结果： 
+
+Hello, Ruby! 
+
+请确保尾部的注释离代码有足够的距离，以便容易区分注释和代码。如果尾部超过一条注释，请将它们对齐。例如： 
+
+实例 
+
+@counter @siteCounter 
+
+AI 思考中... 
+
+Ruby 运算符 
+
+Ruby 条件判断

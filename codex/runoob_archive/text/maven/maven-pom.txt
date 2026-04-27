@@ -1,0 +1,780 @@
+URL: https://www.runoob.com/maven/maven-pom.html
+Title: Maven POM | 菜鸟教程
+
+Maven POM | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Maven 教程 
+
+Maven 环境配置 
+
+Maven 构建生命周期 
+
+Maven POM 
+
+POM ( Project Object Model，项目对象模型 ) 是 Maven 的核心配置文件，采用 XML 格式，默认命名为 pom.xml 。 
+
+POM 是 Maven 工程的基本工作单元，是一个 XML 文件，包含了项目的基本信息，用于描述项目如何构建，声明项目依赖，等等。 
+
+执行任务或目标时，Maven 会在当前目录中查找 POM，获取所需的配置信息，然后执行目标。 
+
+POM 中可以指定以下配置： 
+
+项目依赖 
+
+插件 
+
+执行目标 
+
+项目构建 profile 
+
+项目版本 
+
+项目开发者列表 
+
+相关邮件列表信息 
+
+在创建 POM 之前，我们首先需要描述项目组 (groupId), 项目的唯一ID。 
+
+< project > < modelVersion > 4.0.0 </ modelVersion > < groupId > com.companyname.project-group </ groupId > < artifactId > project </ artifactId > < version > 1.0 </ version > </ project > 
+
+所有 POM 文件都需要 project 元素和三个必需字段：groupId，artifactId，version。 
+
+节点 
+
+描述 
+
+project 
+
+工程的根标签。 
+
+modelVersion 
+
+模型版本需要设置为 4.0。 
+
+groupId 
+
+这是工程组的标识。它在一个组织或者项目中通常是唯一的。例如，一个银行组织 com.companyname.project-group 拥有所有的和银行相关的项目。 
+
+artifactId 
+
+这是工程的标识。它通常是工程的名称。例如，消费者银行。groupId 和 artifactId 一起定义了 artifact 在仓库中的位置。 
+
+version 
+
+这是工程的版本号。在 artifact 的仓库中，它用来区分不同的版本。例如： 
+
+com.company.bank:consumer-banking:1.0
+com.company.bank:consumer-banking:1.1 
+
+POM 文件基本结构： 
+
+实例 
+
+< project > 
+
+<!-- 1 . 基础信息 --> 
+
+< modelVersion > 4.0.0 </ modelVersion > 
+
+< groupId > com. example </ groupId > 
+
+< artifactId > my - app </ artifactId > 
+
+< version > 1.0.0 </ version > 
+
+< packaging > jar </ packaging > 
+
+<!-- 2 . 元信息 --> 
+
+< name > My Application </ name > 
+
+< description > A demo project </ description > 
+
+< url > https : //example.com</url> 
+
+<!-- 3 . 依赖管理 --> 
+
+< dependencies > ... </ dependencies > 
+
+<!-- 4 . 构建配置 --> 
+
+< build > ... </ build > 
+
+<!-- 5 . 环境配置 --> 
+
+< properties > ... </ properties > 
+
+< repositories > ... </ repositories > 
+
+</ project > 
+
+项目坐标（必须）： 
+
+元素 
+
+说明 
+
+示例 
+
+modelVersion 
+
+POM 模型版本（固定 4.0.0 ） 
+
+<modelVersion>4.0.0</modelVersion> 
+
+groupId 
+
+组织/公司标识（反向域名） 
+
+<groupId>com.example</groupId> 
+
+artifactId 
+
+项目名称 
+
+<artifactId>my-app</artifactId> 
+
+version 
+
+项目版本 
+
+<version>1.0.0</version> 
+
+packaging 
+
+打包类型（ jar / war / pom ） 
+
+<packaging>jar</packaging> 
+
+元信息（可选）： 
+
+元素 
+
+说明 
+
+name 
+
+项目名称（显示用） 
+
+description 
+
+项目描述 
+
+url 
+
+项目主页 
+
+licenses 
+
+许可证信息 
+
+organization 
+
+组织信息 
+
+实例 
+
+< name > My Awesome App </ name > 
+
+< description > A demo project for learning Maven </ description > 
+
+< url > https : //github.com/example/my-app</url> 
+
+依赖管理 
+
+POM文件中可以定义项目的依赖： 
+
+<dependencies>
+ <dependency>
+ <groupId>junit</groupId>
+ <artifactId>junit</artifactId>
+ <version>4.12</version>
+ <scope>test</scope>
+ </dependency>
+</dependencies> 
+
+元素 
+
+说明 
+
+groupId 
+
+依赖的组织标识 
+
+artifactId 
+
+依赖的项目名 
+
+version 
+
+依赖的版本 
+
+scope 
+
+依赖作用域（ compile / test / provided / runtime ） 
+
+optional 
+
+是否可选依赖（默认 false ） 
+
+插件管理 
+
+POM 文件中也可以定义构建过程中的插件： 
+
+<build>
+ <plugins>
+ <plugin>
+ <groupId>org.apache.maven.plugins</groupId>
+ <artifactId>maven-compiler-plugin</artifactId>
+ <version>3.8.1</version>
+ <configuration>
+ <source>1.8</source>
+ <target>1.8</target>
+ </configuration>
+ </plugin>
+ </plugins>
+</build> 
+
+常用插件： 
+
+maven-compiler-plugin ：指定 Java 版本 
+
+maven-surefire-plugin ：控制测试执行 
+
+maven-jar-plugin ：定制 JAR 包 
+
+其他常用元素 
+
+properties : 定义项目中的一些属性变量。 
+
+用于定义变量，避免重复： 
+
+<properties>
+ <java.version>11</java.version>
+ <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+</properties> 
+
+在依赖中引用： 
+
+<version>${java.version}</version> 
+
+repositories : 仓库配置。 
+
+指定远程仓库： 
+
+<repositories>
+ <repository>
+ <id>aliyun</id>
+ <url>https://maven.aliyun.com/repository/public</url>
+ </repository>
+</repositories> 
+
+dependencyManagement : 用于管理依赖的版本，特别是在多模块项目中。 
+
+<dependencyManagement>
+ <dependencies>
+ <dependency>
+ <groupId>org.springframework</groupId>
+ <artifactId>spring-core</artifactId>
+ <version>5.3.9</version>
+ </dependency>
+ </dependencies>
+</dependencyManagement> 
+
+profiles : 用于定义不同的构建配置，可以根据不同的环境进行构建。 
+
+<profiles>
+ <profile>
+ <id>development</id>
+ <properties>
+ <environment>dev</environment>
+ </properties>
+ </profile>
+ <profile>
+ <id>production</id>
+ <properties>
+ <environment>prod</environment>
+ </properties>
+ </profile>
+</profiles> 
+
+继承和聚合 
+
+继承: 通过 parent 元素，一个POM文件可以继承另一个POM文件的配置： 
+
+<parent>
+ <groupId>com.example</groupId>
+ <artifactId>parent-project</artifactId>
+ <version>1.0-SNAPSHOT</version>
+</parent> 
+
+聚合: 通过 modules 元素，一个 POM 文件可以管理多个子模块： 
+
+<modules>
+ <module>module1</module>
+ <module>module2</module>
+</modules> 
+
+完整示例 
+
+完整 POM 简单实例： 
+
+实例 
+
+<project > 
+
+<modelVersion > 4.0.0 </modelVersion > 
+
+<groupId > com.example </groupId > 
+
+<artifactId > my-app </artifactId > 
+
+<version > 1.0.0 </version > 
+
+<packaging > jar </packaging > 
+
+<name > My Application </name > 
+
+<description > A demo project </description > 
+
+<properties > 
+
+<java.version > 11 </java.version > 
+
+</properties > 
+
+<dependencies > 
+
+<dependency > 
+
+<groupId > junit </groupId > 
+
+<artifactId > junit </artifactId > 
+
+<version > 4.12 </version > 
+
+<scope > test </scope > 
+
+</dependency > 
+
+</dependencies > 
+
+<build > 
+
+<plugins > 
+
+<plugin > 
+
+<groupId > org.apache.maven.plugins </groupId > 
+
+<artifactId > maven-compiler-plugin </artifactId > 
+
+<version > 3.8.1 </version > 
+
+<configuration > 
+
+<source > ${java.version} </source > 
+
+<target > ${java.version} </target > 
+
+</configuration > 
+
+</plugin > 
+
+</plugins > 
+
+</build > 
+
+</project > 
+
+父（Super）POM 
+
+父（Super）POM是 Maven 默认的 POM。所有的 POM 都继承自一个父 POM（无论是否显式定义了这个父 POM）。父 POM 包含了一些可以被继承的默认设置。因此，当 Maven 发现需要下载 POM 中的 依赖时，它会到 Super POM 中配置的默认仓库 http://repo1.maven.org/maven2 去下载。 
+
+Maven 使用 effective pom（Super pom 加上工程自己的配置）来执行相关的目标，它帮助开发者在 pom.xml 中做尽可能少的配置，当然这些配置可以被重写。 
+
+使用以下命令来查看 Super POM 默认配置： 
+
+mvn help:effective-pom 
+
+接下来我们创建目录 MVN/project，在该目录下创建 pom.xml，内容如下： 
+
+< project xmlns = " http://maven.apache.org/POM/4.0.0 " xmlns:xsi = " http://www.w3.org/2001/XMLSchema-instance " xsi:schemaLocation = " http://maven.apache.org/POM/4.0.0
+ http://maven.apache.org/xsd/maven-4.0.0.xsd " > < modelVersion > 4.0.0 </ modelVersion > < groupId > com.companyname.project-group </ groupId > < artifactId > project </ artifactId > < version > 1.0 </ version > </ project > 
+
+在命令控制台，进入 MVN/project 目录，执行以下命令： 
+
+C:\MVN\project>mvn help:effective-pom 
+
+Maven 将会开始处理并显示 effective-pom。 
+
+[INFO] Scanning for projects...
+Downloading: https://repo.maven.apache.org/maven2/org/apache/maven/plugins/maven-clean-plugin/2.5/maven-clean-plugin-2.5.pom
+...
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 01:36 min
+[INFO] Finished at: 2018-09-05T11:31:28+08:00
+[INFO] Final Memory: 15M/149M
+[INFO] ------------------------------------------------------------------------ 
+
+Effective POM 的结果就像在控制台中显示的一样，经过继承、插值之后，使配置生效。 
+
+<? xml version = " 1.0 " encoding = " UTF-8 " ?> < project xmlns = " http://maven.apache.org/POM/4.0.0 " xmlns:xsi = " http://www.w3.org/
+2001/XMLSchema-instance " xsi:schemaLocation = " http://maven.apache.org/POM/4.0.0 h
+ttp://maven.apache.org/xsd/maven-4.0.0.xsd " > < modelVersion > 4.0.0 </ modelVersion > < groupId > com.companyname.project-group </ groupId > < artifactId > project </ artifactId > < version > 1.0 </ version > < build > < sourceDirectory > C:\MVN\project\src\main\java </ sourceDirectory > < scriptSourceDirectory > src/main/scripts </ scriptSourceDirectory > < testSourceDirectory > C:\MVN\project\src\test\java </ testSourceDirectory > < outputDirectory > C:\MVN\project\target\classes </ outputDirectory > < testOutputDirectory > C:\MVN\project\target\test-classes </ testOutputDirectory > < resources > < resource > < mergeId > resource-0 </ mergeId > < directory > C:\MVN\project\src\main\resources </ directory > </ resource > </ resources > < testResources > < testResource > < mergeId > resource-1 </ mergeId > < directory > C:\MVN\project\src\test\resources </ directory > </ testResource > </ testResources > < directory > C:\MVN\project\target </ directory > < finalName > project-1.0 </ finalName > < pluginManagement > < plugins > < plugin > < artifactId > maven-antrun-plugin </ artifactId > < version > 1.3 </ version > </ plugin > < plugin > < artifactId > maven-assembly-plugin </ artifactId > < version > 2.2-beta-2 </ version > </ plugin > < plugin > < artifactId > maven-clean-plugin </ artifactId > < version > 2.2 </ version > </ plugin > < plugin > < artifactId > maven-compiler-plugin </ artifactId > < version > 2.0.2 </ version > </ plugin > < plugin > < artifactId > maven-dependency-plugin </ artifactId > < version > 2.0 </ version > </ plugin > < plugin > < artifactId > maven-deploy-plugin </ artifactId > < version > 2.4 </ version > </ plugin > < plugin > < artifactId > maven-ear-plugin </ artifactId > < version > 2.3.1 </ version > </ plugin > < plugin > < artifactId > maven-ejb-plugin </ artifactId > < version > 2.1 </ version > </ plugin > < plugin > < artifactId > maven-install-plugin </ artifactId > < version > 2.2 </ version > </ plugin > < plugin > < artifactId > maven-jar-plugin </ artifactId > < version > 2.2 </ version > </ plugin > < plugin > < artifactId > maven-javadoc-plugin </ artifactId > < version > 2.5 </ version > </ plugin > < plugin > < artifactId > maven-plugin-plugin </ artifactId > < version > 2.4.3 </ version > </ plugin > < plugin > < artifactId > maven-rar-plugin </ artifactId > < version > 2.2 </ version > </ plugin > < plugin > < artifactId > maven-release-plugin </ artifactId > < version > 2.0-beta-8 </ version > </ plugin > < plugin > < artifactId > maven-resources-plugin </ artifactId > < version > 2.3 </ version > </ plugin > < plugin > < artifactId > maven-site-plugin </ artifactId > < version > 2.0-beta-7 </ version > </ plugin > < plugin > < artifactId > maven-source-plugin </ artifactId > < version > 2.0.4 </ version > </ plugin > < plugin > < artifactId > maven-surefire-plugin </ artifactId > < version > 2.4.3 </ version > </ plugin > < plugin > < artifactId > maven-war-plugin </ artifactId > < version > 2.1-alpha-2 </ version > </ plugin > </ plugins > </ pluginManagement > < plugins > < plugin > < artifactId > maven-help-plugin </ artifactId > < version > 2.1.1 </ version > </ plugin > </ plugins > </ build > < repositories > < repository > < snapshots > < enabled > false </ enabled > </ snapshots > < id > central </ id > < name > Maven Repository Switchboard </ name > < url > http://repo1.maven.org/maven2 </ url > </ repository > </ repositories > < pluginRepositories > < pluginRepository > < releases > < updatePolicy > never </ updatePolicy > </ releases > < snapshots > < enabled > false </ enabled > </ snapshots > < id > central </ id > < name > Maven Plugin Repository </ name > < url > http://repo1.maven.org/maven2 </ url > </ pluginRepository > </ pluginRepositories > < reporting > < outputDirectory > C:\MVN\project\target/site </ outputDirectory > </ reporting > </ project > 
+
+在上面的 pom.xml 中，你可以看到 Maven 在执行目标时需要用到的默认工程源码目录结构、输出目录、需要的插件、仓库和报表目录。 
+
+Maven 的 pom.xml 文件也不需要手工编写。 
+
+Maven 提供了大量的原型插件来创建工程，包括工程结构和 pom.xml。 
+
+POM 标签大全详解 
+
+以下是对 pom.xml 中所有重要标签的分类说明，涵盖 项目信息、依赖管理、构建配置、环境设置 等核心内容。 
+
+所有 POM 文件必须包含的标签： modelVersion、groupId、artifactId 和 version 。 
+
+标签 
+
+类别 
+
+说明 
+
+示例/可选值 
+
+是否必需 
+
+基础信息 
+
+<modelVersion> 
+
+项目结构 
+
+POM模型版本 
+
+4.0.0 
+
+是 
+
+<groupId> 
+
+坐标 
+
+组织标识（反向域名） 
+
+com.example 
+
+是 
+
+<artifactId> 
+
+坐标 
+
+项目名称 
+
+my-project 
+
+是 
+
+<version> 
+
+坐标 
+
+项目版本 
+
+1.0.0-SNAPSHOT 
+
+是 
+
+<packaging> 
+
+项目类型 
+
+打包格式 
+
+jar / war / pom 
+
+否（默认jar） 
+
+<name> 
+
+元信息 
+
+项目显示名称 
+
+My Application 
+
+否 
+
+<description> 
+
+元信息 
+
+项目描述 
+
+A demo project 
+
+否 
+
+<url> 
+
+元信息 
+
+项目主页URL 
+
+https://example.com 
+
+否 
+
+依赖管理 
+
+<dependencies> 
+
+依赖 
+
+依赖列表容器 
+
+包含多个 <dependency> 
+
+否 
+
+<dependency> 
+
+依赖 
+
+单个依赖定义 
+
+包含 groupId 等子标签 
+
+可选 
+
+<scope> 
+
+依赖 
+
+依赖作用域 
+
+compile / test / provided / runtime 
+
+否（默认compile） 
+
+<optional> 
+
+依赖 
+
+是否可选依赖 
+
+true / false 
+
+否（默认false） 
+
+<exclusions> 
+
+依赖 
+
+排除传递性依赖 
+
+包含 <exclusion> 列表 
+
+否 
+
+构建配置 
+
+<build> 
+
+构建 
+
+构建配置容器 
+
+包含插件/资源等配置 
+
+否 
+
+<plugins> 
+
+构建 
+
+插件列表容器 
+
+包含多个 <plugin> 
+
+否 
+
+<plugin> 
+
+构建 
+
+单个插件定义 
+
+需指定 groupId 和 artifactId 
+
+可选 
+
+<resources> 
+
+构建 
+
+资源文件配置 
+
+定义 <resource> 路径 
+
+否 
+
+<testResources> 
+
+构建 
+
+测试资源文件配置 
+
+类似 <resources> 
+
+否 
+
+<finalName> 
+
+构建 
+
+最终打包文件名 
+
+my-app 
+
+否 
+
+环境配置 
+
+<properties> 
+
+配置 
+
+自定义变量容器 
+
+定义键值对 
+
+否 
+
+<java.version> 
+
+属性 
+
+Java版本变量 
+
+11 / 17 等 
+
+否 
+
+<repositories> 
+
+仓库 
+
+自定义远程仓库列表 
+
+包含 <repository> 
+
+否 
+
+<pluginRepositories> 
+
+仓库 
+
+自定义插件仓库 
+
+类似 <repositories> 
+
+否 
+
+多模块管理 
+
+<modules> 
+
+模块 
+
+子模块列表 
+
+包含多个 <module> 
+
+聚合项目需要 
+
+<parent> 
+
+继承 
+
+父POM引用 
+
+需指定父项目坐标 
+
+继承项目需要 
+
+<dependencyManagement> 
+
+依赖 
+
+统一管理依赖版本 
+
+定义版本但不引入 
+
+否 
+
+<profiles> 
+
+配置 
+
+环境profile容器 
+
+定义不同环境配置 
+
+否 
+
+其他信息 
+
+<licenses> 
+
+法律 
+
+许可证信息 
+
+包含 <license> 
+
+否 
+
+<developers> 
+
+人员 
+
+开发者列表 
+
+包含 <developer> 
+
+否 
+
+<contributors> 
+
+人员 
+
+贡献者列表 
+
+类似 <developers> 
+
+否 
+
+<issueManagement> 
+
+管理 
+
+问题跟踪系统 
+
+定义issue系统URL 
+
+否 
+
+< project xmlns = " http://maven.apache.org/POM/4.0.0 " xmlns:xsi = " http://www.w3.org/2001/XMLSchema-instance " xsi:schemaLocation = " http://maven.apache.org/POM/4.0.0http://maven.apache.org/maven-v4_0_0.xsd " > < parent > < artifactId /> < groupId /> < version /> < relativePath /> </ parent > < modelVersion > 4.0.0 </ modelVersion > < groupId > asia.banseon </ groupId > < artifactId > banseon-maven2 </ artifactId > < packaging > jar </ packaging > < version > 1.0-SNAPSHOT </ version > < name > banseon-maven </ name > < url > http://www.baidu.com/banseon </ url > < description > A maven project to study maven. </ description > < prerequisites > < maven /> </ prerequisites > < issueManagement > < system > jira </ system > < url > http://jira.baidu.com/banseon </ url > </ issueManagement > < ciManagement > < system /> < url /> < notifiers > < notifier > < type /> < sendOnError /> < sendOnFailure /> < sendOnSuccess /> < sendOnWarning /> < address /> < configuration /> </ notifier > </ notifiers > </ ciManagement > < inceptionYear /> < mailingLists > < mailingList > < name > Demo </ name > < post > [email protected] </ post > < subscribe > [email protected] </ subscribe > < unsubscribe > [email protected] </ unsubscribe > < archive > http:/hi.baidu.com/banseon/demo/dev/ </ archive > </ mailingList > </ mailingLists > < developers > < developer > < id > HELLO WORLD </ id > < name > banseon </ name > < email > [email protected] </ email > < url /> < roles > < role > Project Manager </ role > < role > Architect </ role > </ roles > < organization > demo </ organization > < organizationUrl > http://hi.baidu.com/banseon </ organizationUrl > < properties > < dept > No </ dept > </ properties > < timezone > -5 </ timezone > </ developer > </ developers > < contributors > < contributor > < name /> < email /> < url /> < organization /> < organizationUrl /> < roles /> < timezone /> < properties /> </ contributor > </ contributors > < licenses > < license > < name > Apache 2 </ name > < url > http://www.baidu.com/banseon/LICENSE-2.0.txt </ url > < distribution > repo </ distribution > < comments > A business-friendly OSS license </ comments > </ license > </ licenses > < scm > < connection > scm:svn:http://svn.baidu.com/banseon/maven/banseon/banseon-maven2-trunk(dao-trunk) </ connection > < developerConnection > scm:svn:http://svn.baidu.com/banseon/maven/banseon/dao-trunk </ developerConnection > < tag /> < url > http://svn.baidu.com/banseon </ url > </ scm > < organization > < name > demo </ name > < url > http://www.baidu.com/banseon </ url > </ organization > < build > < sourceDirectory /> < scriptSourceDirectory /> < testSourceDirectory /> < outputDirectory /> < testOutputDirectory /> < extensions > < extension > < groupId /> < artifactId /> < version /> </ extension > </ extensions > < defaultGoal /> < resources > < resource > < targetPath /> < filtering /> < directory /> < includes /> < excludes /> </ resource > </ resources > < testResources > < testResource > < targetPath /> < filtering /> < directory /> < includes /> < excludes /> </ testResource > </ testResources > < directory /> < finalName /> < filters /> < pluginManagement > < plugins > < plugin > < groupId /> < artifactId /> < version /> < extensions /> < executions > < execution > < id /> < phase /> < goals /> < inherited /> < configuration /> </ execution > </ executions > < dependencies > < dependency > ...... </ dependency > </ dependencies > < inherited /> < configuration /> </ plugin > </ plugins > </ pluginManagement > < plugins > < plugin > < groupId /> < artifactId /> < version /> < extensions /> < executions > < execution > < id /> < phase /> < goals /> < inherited /> < configuration /> </ execution > </ executions > < dependencies > < dependency > ...... </ dependency > </ dependencies > < goals /> < inherited /> < configuration /> </ plugin > </ plugins > </ build > < profiles > < profile > < id /> < activation > < activeByDefault /> < jdk /> < os > < name > Windows XP </ name > < family > Windows </ family > < arch > x86 </ arch > < version > 5.1.2600 </ version > </ os > < property > < name > mavenVersion </ name > < value > 2.0.3 </ value > </ property > < file > < exists > /usr/local/hudson/hudson-home/jobs/maven-guide-zh-to-production/workspace/ </ exists > < missing > /usr/local/hudson/hudson-home/jobs/maven-guide-zh-to-production/workspace/ </ missing > </ file > </ activation > < build > < defaultGoal /> < resources > < resource > < targetPath /> < filtering /> < directory /> < includes /> < excludes /> </ resource > </ resources > < testResources > < testResource > < targetPath /> < filtering /> < directory /> < includes /> < excludes /> </ testResource > </ testResources > < directory /> < finalName /> < filters /> < pluginManagement > < plugins > < plugin > < groupId /> < artifactId /> < version /> < extensions /> < executions > < execution > < id /> < phase /> < goals /> < inherited /> < configuration /> </ execution > </ executions > < dependencies > < dependency > ...... </ dependency > </ dependencies > < goals /> < inherited /> < configuration /> </ plugin > </ plugins > </ pluginManagement > < plugins > < plugin > < groupId /> < artifactId /> < version /> < extensions /> < executions > < execution > < id /> < phase /> < goals /> < inherited /> < configuration /> </ execution > </ executions > < dependencies > < dependency > ...... </ dependency > </ dependencies > < goals /> < inherited /> < configuration /> </ plugin > </ plugins > </ build > < modules /> < repositories > < repository > < releases > < enabled /> < updatePolicy /> < checksumPolicy /> </ releases > < snapshots > < enabled /> < updatePolicy /> < checksumPolicy /> </ snapshots > < id /> < name /> < url /> < layout /> </ repository > </ repositories > < pluginRepositories > < pluginRepository > < releases > < enabled /> < updatePolicy /> < checksumPolicy /> </ releases > < snapshots > < enabled /> < updatePolicy /> < checksumPolicy /> </ snapshots > < id /> < name /> < url /> < layout /> </ pluginRepository > </ pluginRepositories > < dependencies > < dependency > ...... </ dependency > </ dependencies > < reports /> < reporting > ...... </ reporting > < dependencyManagement > < dependencies > < dependency > ...... </ dependency > </ dependencies > </ dependencyManagement > < distributionManagement > ...... </ distributionManagement > < properties /> </ profile > </ profiles > < modules /> < repositories > < repository > < releases > < enabled /> < updatePolicy /> < checksumPolicy /> </ releases > < snapshots > < enabled /> < updatePolicy /> < checksumPolicy /> </ snapshots > < id > banseon-repository-proxy </ id > < name > banseon-repository-proxy </ name > < url > http://192.168.1.169:9999/repository/ </ url > < layout > default </ layout > </ repository > </ repositories > < pluginRepositories > < pluginRepository > ...... </ pluginRepository > </ pluginRepositories > < dependencies > < dependency > < groupId > org.apache.maven </ groupId > < artifactId > maven-artifact </ artifactId > < version > 3.8.1 </ version > < type > jar </ type > < classifier > </ classifier > < scope > test </ scope > < systemPath > </ systemPath > < exclusions > < exclusion > < artifactId > spring-core </ artifactId > < groupId > org.springframework </ groupId > </ exclusion > </ exclusions > < optional > true </ optional > </ dependency > </ dependencies > < reports > </ reports > < reporting > < excludeDefaults /> < outputDirectory /> < plugins > < plugin > < groupId /> < artifactId /> < version /> < inherited /> < configuration /> < reportSets > < reportSet > < id /> < configuration /> < inherited /> < reports /> </ reportSet > </ reportSets > </ plugin > </ plugins > </ reporting > < dependencyManagement > < dependencies > < dependency > ...... </ dependency > </ dependencies > </ dependencyManagement > < distributionManagement > < repository > < uniqueVersion /> < id > banseon-maven2 </ id > < name > banseon maven2 </ name > < url > file://${basedir}/target/deploy </ url > < layout /> </ repository > < snapshotRepository > < uniqueVersion /> < id > banseon-maven2 </ id > < name > Banseon-maven2 Snapshot Repository </ name > < url > scp://svn.baidu.com/banseon:/usr/local/maven-snapshot </ url > < layout /> </ snapshotRepository > < site > < id > banseon-site </ id > < name > business api website </ name > < url > scp://svn.baidu.com/banseon:/var/www/localhost/banseon-web </ url > </ site > < downloadUrl /> < relocation > < groupId /> < artifactId /> < version /> < message /> </ relocation > < status /> </ distributionManagement > < properties /> </ project > 
+
+AI 思考中... 
+
+Maven 环境配置 
+
+Maven 构建生命周期

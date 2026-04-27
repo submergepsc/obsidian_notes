@@ -1,0 +1,32 @@
+URL: https://www.runoob.com/firebug/firebug-execute-javascript.html
+Title: Firebug动态执行JavaScript | 菜鸟教程
+
+Firebug动态执行JavaScript | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Firebug 教程 
+
+Firebug页面概况查看 
+
+Firebug记录Javascript日志 
+
+Firebug动态执行JavaScript 
+
+Firebug 官网宣布已停止继续开发、更新维护 Firebug 的通知，邀请大家使用 Firefox 内置工具 DevTools 。 
+
+您可以使用Firebug来编写并实时执行一个JavaScript。 
+
+这是为了测试，并确保该脚本工作正常，这是将JavaScript代码部署在生产环境前的好方法。 
+
+打开Firebug > Script(脚本) > 显示命令行，代码如下所示： 
+
+alert("w3cschool.cc") 
+
+按Enter键后，马上你就能看到代码的输出。如图所示： 
+
+AI 思考中... 
+
+Firebug页面概况查看 
+
+Firebug记录Javascript日志

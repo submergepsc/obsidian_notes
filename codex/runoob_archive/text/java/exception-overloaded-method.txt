@@ -1,0 +1,33 @@
+URL: https://www.runoob.com/java/exception-overloaded-method.html
+Title: Java 实例 – 重载方法异常处理 | 菜鸟教程
+
+Java 实例 – 重载方法异常处理 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 链试异常 
+
+Java 实例 – 获取异常的堆栈信息 
+
+Java 实例 - 重载方法异常处理 
+
+以下实例演示了重载方法的异常处理： 
+
+Main.java 文件 
+
+public class Main { double method ( int i ) throws Exception { return i / 0 ; } boolean method ( boolean b ) { return ! b ; } static double method ( int x , double y ) throws Exception { return x + y ; } static double method ( double x , double y ) { return x + y - 3 ; } public static void main ( String [ ] args ) { Main mn = new Main ( ) ; try { System . out . println ( method ( 10 , 20 .0 ) ) ; System . out . println ( method ( 10 .0 , 20 ) ) ; System . out . println ( method ( 10 .0 , 20 .0 ) ) ; System . out . println ( mn . method ( 10 ) ) ; } catch ( Exception ex ) { System . out . println ( " exception occoure: " + ex ) ; } } } 
+
+以上代码运行输出结果为： 
+
+30.0
+27.0
+27.0
+exception occoure: java.lang.ArithmeticException: / by zero 
+
+AI 思考中... 
+
+Java 实例 – 链试异常 
+
+Java 实例 – 获取异常的堆栈信息

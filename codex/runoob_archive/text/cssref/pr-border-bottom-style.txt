@@ -1,0 +1,122 @@
+URL: https://www.runoob.com/cssref/pr-border-bottom-style.html
+Title: CSS border-bottom-style 属性 | 菜鸟教程
+
+CSS border-bottom-style 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS border-bottom-color 属性 
+
+CSS border-bottom-width 属性 
+
+CSS border-bottom-style 属性 
+
+实例 
+
+设置底部边框样式： 
+
+p { border-style: solid ; border-bottom-style: dotted ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+border-bottom-style属性设置元素底部边框样式。 
+
+默认值: 
+
+not specified 
+
+继承: 
+
+no 
+
+版本: 
+
+CSS1 
+
+JavaScript 语法: 
+
+object object.style.borderBottomStyle="dotted" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+border-bottom-style 
+
+1.0 
+
+5.5 
+
+1.0 
+
+1.0 
+
+9.2 
+
+属性值 
+
+值 
+
+说明 
+
+none 
+
+指定无边框 
+
+hidden 
+
+与"none" 相同。不过应用于表时除外，对于表，hidden 用于解决边框冲突。 
+
+dotted 
+
+指定点状边框 
+
+dashed 
+
+指定虚线边框 
+
+solid 
+
+指定实线边框 
+
+double 
+
+指定一个双边框 
+
+groove 
+
+定义双线。双线的宽度等于 border-width 的值 
+
+ridge 
+
+定义三维菱形边框。其效果取决于 border-color 的值 
+
+inset 
+
+定义三维凹边框。其效果取决于 border-color 的值 
+
+outset 
+
+定义三维凸边框。其效果取决于 border-color 的值 
+
+inherit 
+
+指定应该从父元素继承边框样式 
+
+相关文章 
+
+CSS 教程: CSS Border 
+
+CSS 参考手册: border-bottom 属性 
+
+AI 思考中... 
+
+CSS border-bottom-color 属性 
+
+CSS border-bottom-width 属性

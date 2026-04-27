@@ -1,0 +1,40 @@
+URL: https://www.runoob.com/xslfo/obj-single-page-master-reference.html
+Title: XSL-FO single-page-master-reference 对象 | 菜鸟教程
+
+XSL-FO single-page-master-reference 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO simple-page-master 对象 
+
+XSL-FO static-content 对象 
+
+XSL-FO single-page-master-reference 对象 
+
+定义和用法 
+
+<fo:single-page-master-reference> 对象为用在页面序列的给定点中的具体的 page-master 保留一个参数。 
+
+注意： <fo:page-sequence-master> 对象是 <fo:single-page-master-reference> 对象的父类。 
+
+语法 
+
+<fo:single-page-master-reference> 
+<!-- 
+Contents:EMPTY 
+--> 
+</fo:single-page-master-reference> 
+
+属性 
+
+属性 
+
+master-reference 
+
+AI 思考中... 
+
+XSL-FO simple-page-master 对象 
+
+XSL-FO static-content 对象

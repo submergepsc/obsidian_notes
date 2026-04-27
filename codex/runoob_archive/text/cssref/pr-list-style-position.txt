@@ -1,0 +1,92 @@
+URL: https://www.runoob.com/cssref/pr-list-style-position.html
+Title: CSS list-style-position 属性 | 菜鸟教程
+
+CSS list-style-position 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS list-style-image 属性 
+
+CSS list-style-type 属性 
+
+CSS list-style-position 属性 
+
+实例 
+
+规定列表中列表项目标记的位置： 
+
+ul { list-style-position: inside ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+list-style-position属性指示如何相对于对象的内容绘制列表项标记。 
+
+在线实例 » 
+
+默认值： 
+
+outside 
+
+继承： 
+
+yes 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.listStylePosition="inside" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+list-style-position 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+inside 
+
+列表项目标记放置在文本以内，且环绕文本根据标记对齐。 
+
+outside 
+
+默认值。保持标记位于文本的左侧。列表项目标记放置在文本以外，且环绕文本不根据标记对齐。 
+
+inherit 
+
+规定应该从父元素继承 list-style-position 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS 列表 
+
+CSS 参考手册: list-style 属性 
+
+AI 思考中... 
+
+CSS list-style-image 属性 
+
+CSS list-style-type 属性

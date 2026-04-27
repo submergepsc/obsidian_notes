@@ -1,0 +1,102 @@
+URL: https://www.runoob.com/tags/tag-command.html
+Title: HTML <command> 标签 | 菜鸟教程
+
+HTML <command> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <colgroup> 标签 
+
+HTML <datalist> 标签 
+
+HTML <command> 标签 
+
+实例 
+
+<command> 可以进行如下标记： 
+
+<menu> 
+<command type="command" label="Save" onclick="save()">Save</command> 
+</menu> 
+
+尝试一下 » 
+
+浏览器支持 
+
+目前，主流浏览器都不支持 <command> 标签。 
+
+注释： 只有 IE 9 支持 <command> 标签，其他之前版本或者之后版本的 IE 浏览器不支持 <command> 标签。 
+
+标签定义及使用说明 
+
+<command> 标签可以定义用户可能调用的命令（比如单选按钮、复选框或按钮）。 
+
+当使用 <menu> 元素时，command 元素将作为菜单或者工具栏的一部分显示出来。但是，用 command 规定键盘快捷键时，command元素能被放置在页面的任何位置，但元素不可见。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+<command> 标签是 HTML 5 中的新标签。 
+
+属性 
+
+New ：HTML5 中的新属性。 
+
+属性 
+
+值 
+
+描述 
+
+checked New 
+
+checked 
+
+规定当页面加载时，command 是否被选中。仅用于 radio 或 checkbox 类型。 
+
+disabled New 
+
+disabled 
+
+规定 command 是否可用。 
+
+icon New 
+
+URL 
+
+规定作为 command 来显示的图像的 URL。 
+
+label New 
+
+text 
+
+必需。规定 command 的名字，对用户可见。 
+
+radiogroup New 
+
+groupname 
+
+规定可进行切换且将被切换的 command 所属的组名。仅在类型为 radio 时使用。 
+
+type New 
+
+checkbox 
+command 
+radio 
+
+定义 command 的类型。默认是 "command"。 
+
+全局属性 
+
+<command> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<command> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <colgroup> 标签 
+
+HTML <datalist> 标签

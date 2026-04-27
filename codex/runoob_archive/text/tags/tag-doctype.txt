@@ -1,0 +1,120 @@
+URL: https://www.runoob.com/tags/tag-doctype.html
+Title: HTML <!DOCTYPE> 声明 | 菜鸟教程
+
+HTML <!DOCTYPE> 声明 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <button> 标签 
+
+HTML <a> 标签 
+
+HTML <!DOCTYPE> 声明 
+
+<!DOCTYPE> 声明的目的是让浏览器能够正确地渲染页面，声明的形式如下： 
+
+<!DOCTYPE html> 
+
+以上代码是 HTML5 的文档类型声明，它告诉浏览器当前页面是使用 HTML5 规范编写的，HTML5 是最新的 HTML 版本，拥有更多的功能和优化，因此推荐在新的 Web 页面中使用它。 
+
+在 HTML 文档中， <!DOCTYPE> 声明通常是文档的第一行，位于 <html> 标签之前。 
+
+实例 
+
+< ! DOCTYPE html > < html > < head > < meta charset = " utf-8 " > < title > 文档标题 </ title > </ head > < body > 文档内容...... </ body > </ html > 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <!DOCTYPE> 声明。 
+
+标签定义及使用说明 
+
+在 HTML 中， <!DOCTYPE> 声明是文档类型声明（Document Type Declaration）的缩写，用于指示浏览器当前页面使用的HTML版本。 
+
+<!DOCTYPE> 声明位于文档中的最前面的位置，处于 <html> 标签之前。 
+
+<!DOCTYPE> 声明不是一个 HTML 标签，因此不需要关闭标签。。 
+
+在 HTML 4.01 及之前版本中，<!DOCTYPE> 声明可能会指向 DTD（文档类型定义）文件，它定义了文档的结构和元素规则。因为 HTML 4.01 是基于 SGML （Standard Generalized Markup Language 标准通用标记语言）。DTD 指定了标记语言的规则，确保了浏览器能够正确的渲染内容。 
+
+HTML5 不是基于 SGML，因此不再依赖 DTD 文件，而是使用更简单的声明。 
+
+提示： 总是给您的 HTML 文档添加 <!DOCTYPE> 声明，确保浏览器能够预先知道文档类型。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+HTML 4.01 规定了三种不同的 <!DOCTYPE> 声明，分别是：Strict、Transitional 和 Frameset。 
+
+HTML5 中仅规定了一种： 
+
+<!DOCTYPE html> 
+
+HTML 元素和 Doctypes 
+
+参阅 HTML 元素与合法的 Doctype ，看看每一个 HTML 元素都出现在哪一种 Doctype 中。 
+
+提示和注释 
+
+注释： <!DOCTYPE> 标签没有结束标签。 
+
+提示： <!DOCTYPE> 声明不区分大小写。 
+
+提示： 使用 W3C 的验证 检查您是否编写了一个带有正确 DTD 的合法的 HTML / XHTML 文档！ 
+
+常见的 DOCTYPE 声明 
+
+HTML 5 
+
+<!DOCTYPE html> 
+
+HTML 4.01 Strict 
+
+这个 DTD 包含所有 HTML 元素和属性，但不包括表象或过时的元素（如 font ）。框架集是不允许的。 
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd"> 
+
+HTML 4.01 Transitional 
+
+这个 DTD 包含所有 HTML 元素和属性，包括表象或过时的元素（如 font ）。框架集是不允许的。 
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd"> 
+
+HTML 4.01 Frameset 
+
+这个 DTD 与 HTML 4.01 Transitional 相同，但是允许使用框架集内容。 
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Frameset//EN" "http://www.w3.org/TR/html4/frameset.dtd"> 
+
+XHTML 1.0 Strict 
+
+这个 DTD 包含所有 HTML 元素和属性，但不包括表象或过时的元素（如 font ）。框架集是不允许的。结构必须按标准格式的 XML 进行书写。 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"> 
+
+XHTML 1.0 Transitional 
+
+这个 DTD 包含所有 HTML 元素和属性，包括表象或过时的元素（如 font ）。框架集是不允许的。结构必须按标准格式的 XML 进行书写。 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd"> 
+
+XHTML 1.0 Frameset 
+
+这个 DTD 与 XHTML 1.0 Transitional 相同，但是允许使用框架集内容。 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Frameset//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-frameset.dtd"> 
+
+XHTML 1.1 
+
+这个 DTD 与 XHTML 1.0 Strict 相同，但是允许您添加模块（例如为东亚语言提供 ruby 支持）。 
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd"> 
+
+AI 思考中... 
+
+HTML <button> 标签 
+
+HTML <a> 标签

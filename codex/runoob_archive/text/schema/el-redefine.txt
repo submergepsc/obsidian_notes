@@ -1,0 +1,97 @@
+URL: https://www.runoob.com/schema/el-redefine.html
+Title: XML Schema redefine 元素 | 菜鸟教程
+
+XML Schema redefine 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema notation 元素 
+
+XML Schema restriction 元素 
+
+XML Schema redefine 元素 
+
+定义和用法 
+
+redefine 元素允许在当前 Schema 中重新定义从外部架构文件中获取的简单和复杂类型、组和属性组。 
+
+元素信息 
+
+父元素： schema 
+
+语法 
+
+<redefine 
+id=ID 
+schemaLocation=anyURI 
+any attributes 
+> 
+
+(annotation|(simpleType|complexType|group|attributeGroup))* 
+
+</redefine> 
+
+属性 
+
+描述 
+
+id 
+
+可选。规定该元素的唯一的 ID。 
+
+schemaLocation 
+
+必需。对 schema 文档位置的 URI 引用。 
+
+any attributes 
+
+可选。规定带有 non-schema 命名空间的任何其他属性。 
+
+实例 1 
+
+下面的例子展示了一个 schema，Myschama2.xsd，其中存在由 Myschama1.xsd 规定的元素。pname 类型被重新定义。根据此 schema，被 pname 约束的元素必须以 "country" 元素结束： 
+
+Myschema1.xsd: 
+
+<?xml version="1.0"?> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+
+<xs:complexType name="pname"> 
+<xs:sequence> 
+<xs:element name="firstname"/> 
+<xs:element name="lastname"/> 
+</xs:sequence> 
+</xs:complexType> 
+
+<xs:element name="customer" type="pname"/> 
+
+</xs:schema> 
+
+Myschema2.xsd: 
+
+<?xml version="1.0"?> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+
+<xs:redefine schemaLocation="Myschema1.xsd"> 
+<xs:complexType name="pname"> 
+<xs:complexContent> 
+<xs:extension base="pname"> 
+<xs:sequence> 
+<xs:element name="country"/> 
+</xs:sequence> 
+</xs:extension> 
+</xs:complexContent> 
+</xs:complexType> 
+</xs:redefine> 
+
+<xs:element name="author" type="pname"/> 
+
+</xs:schema> 
+
+AI 思考中... 
+
+XML Schema notation 元素 
+
+XML Schema restriction 元素

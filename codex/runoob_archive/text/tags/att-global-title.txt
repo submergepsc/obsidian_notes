@@ -1,0 +1,61 @@
+URL: https://www.runoob.com/tags/att-global-title.html
+Title: HTML title 属性 | 菜鸟教程
+
+HTML title 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML tabindex 属性 
+
+HTML translate 属性 
+
+HTML title 属性 
+
+实例 
+
+在 HTML 文档中使用 title 属性： 
+
+<p><abbr title="世界卫生组织">WHO</abbr> 成立于 1948。</p> 
+
+<p title="菜鸟教程">菜鸟教程</p> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 title 属性 
+
+定义和用法 
+
+title 属性规定关于元素的额外信息。 
+
+这些信息通常会在鼠标移到元素上时显示一段工具提示文本（tooltip text）。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+在 HTML5 中, title 属性可用于任何的 HTML 元素 (它会验证任何HTML元素。但不一定是有用)。 
+
+在 HTML 4.01中, title 属性不能用于:
+<base>, <head>, <html>, <meta>, <param>, <script>, <style>, 和 <title>。 
+
+语法 
+
+< element title=" text "> 
+
+属性值 
+
+值 
+
+描述 
+
+text 
+
+规定元素的工具提示文本（tooltip text）。 
+
+AI 思考中... 
+
+HTML tabindex 属性 
+
+HTML translate 属性

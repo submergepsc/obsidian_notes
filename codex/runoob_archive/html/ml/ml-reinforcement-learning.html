@@ -1,0 +1,1633 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>机器学习 &#8211; 强化学习示例 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="ml-reinforcement-learning.html" />
+<meta name="keywords" content="机器学习 – 强化学习示例">
+<meta name="description" content="机器学习 - 强化学习示例     $(function() {    $(&#x27;.math&#x27;).each(function() {         renderMathInElement(this, {             // 自定义选项，如果需要的话             delimiters: [                 { left: &#x27;\\(&#x27;, right: &#x27;\..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<style>
+/* 主题切换按钮 */
+/* ===== 主题变量（核心）===== */
+:root {
+  --theme-bg: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-icon: #333;
+  --theme-hover: #f3f4f6;
+}
+
+.dark {
+  --theme-bg: #1f2937;
+  --theme-border: #374151;
+  --theme-icon: #e5e7eb;
+  --theme-hover: #374151;
+}
+
+/* ===== 按钮容器 ===== */
+.nav-theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== 按钮本体 ===== */
+.nav-theme-toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+
+  background: var(--theme-bg);
+  color: var(--theme-icon);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ===== 图标大小 ===== */
+.nav-theme-toggle i {
+  font-size: 14px;
+}
+
+/* ===== hover 效果 ===== */
+.nav-theme-toggle button:hover {
+  background: var(--theme-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== 点击反馈 ===== */
+.nav-theme-toggle button:active {
+  transform: scale(0.95);
+}
+
+/* ===== 当前激活态（可选）===== */
+.nav-theme-toggle button.active {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+</style>
+<!-- 导航栏 -->
+<nav class="container navigation" aria-label="主导航">
+  <div class="row">
+    <div class="col nav">
+
+      <!-- PC 导航 -->
+      <ul class="pc-nav" id="runoob-detail-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../js/js-tutorial.html">JavaScript</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="javascript:void(0);" data-id="vue">Vue</a></li>
+        <li><a href="../react/react-tutorial.html">React</a></li>
+        <li><a href="../python3/python3-tutorial.html">Python3</a></li>
+        <li><a href="../java/java-tutorial.html">Java</a></li>
+        <li><a href="../cprogramming/c-tutorial.html">C</a></li>
+        <li><a href="../cplusplus/cpp-tutorial.html">C++</a></li>
+        <li><a href="../csharp/csharp-tutorial.html">C#</a></li>
+        <li><a href="javascript:void(0);" data-id="aiNav">AI</a></li>
+        <li><a href="../go/go-tutorial.html">Go</a></li>
+        <li><a href="../sql/sql-tutorial.html">SQL</a></li>
+        <li><a href="../linux/linux-tutorial.html">Linux</a></li>
+        <li><a href="../vscode/vscode-tutorial.html">VS Code</a></li>
+        <li><a href="javascript:void(0);" data-id="bootstrap">Bootstrap</a></li>
+        <li><a href="../git/git-tutorial.html">Git</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+
+        <!-- 主题切换按钮，固定在最右侧 -->
+        <li class="nav-theme-toggle">
+          <button id="moon" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 移动端导航 -->
+      <ul class="mobile-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="../js/js-tutorial.html">JS</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+        <li><a href="javascript:void(0)" class="search-reveal">搜索</a></li>
+
+        <!-- 移动端主题切换 -->
+        <li class="nav-theme-toggle">
+          <button id="moon-mobile" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun-mobile" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- 二级导航 -->
+<div class="container sub-navigation sub-navigation-articles" style="display:none">
+  <div class="row">
+    <div class="col nav-sub">
+
+      <ul id="vue">
+        <li class="cat-item"><a href="../vue3/vue3-tutorial.html">Vue3 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../vue/vue-tutorial.html">Vue2 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="bootstrap">
+        <li class="cat-item"><a href="../bootstrap/bootstrap-tutorial.html">Bootstrap3 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="aiNav">
+        <li class="cat-item"><a href="ml-tutorial.html">机器学习 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../pytorch/pytorch-tutorial.html">PyTorch <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../tensorflow/tensorflow-tutorial.html">TensorFlow <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../sklearn/sklearn-tutorial.html">Sklearn <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../nlp/nlp-tutorial.html">NLP <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ai-agent/ai-agent-tutorial.html">AI Agent <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ollama/ollama-tutorial.html">Ollama <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+  </div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="runoob-col-md2">
+<div class="left-column">
+	<div class="tab" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+	<i class="fa fa-list" aria-hidden="true"></i> 
+	<span>机器学习</span>
+
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" data-p="par" title="机器学习教程" href="ml-tutorial.html">
+			机器学习教程			</a>
+						<a target="_top" data-p="par" title="机器学习简介" href="ml-intro.html">
+			机器学习简介			</a>
+			<a target="_top" href="ml-how-to-learn.html">机器学习学习路线</a>
+<a target="_top" href="ml-project-lifecycle.html">机器学习生命周期</a>
+			<a target="_top" data-p="par" title="机器学习如何工作" href="ml-hw.html">
+			机器学习如何工作			</a>
+						<a target="_top" data-p="par" title="机器学习基础术语" href="ml-basics.html">
+			机器学习基础术语			</a>
+						<a target="_top" data-p="par" title="Python 入门机器学习" href="ml-python.html">
+			Python 入门机器学习			</a>
+			<a target="_top" href="ml-python-libs.html">Python 机器学习库</a>
+<a target="_top" href="ml-datatype.html">常用数据类型</a>
+<a target="_top" href="ml-applications.html">机器学习应用</a>
+<br>
+<h2 class="left"><span class="left_h2">数据处理与统计</span></h2>
+
+<a target="_top" href="ml-data-understanding.html">数据理解</a>
+<a target="_top" href="ml-data-cleaning.html">数据清洗</a>
+<a target="_top" href="ml-feature-engineering.html">特征工程</a>
+<a target="_top" href="ml-data-visualizations.html">数据可视化</a>
+<a target="_top" href="ml-training-and-test-set-splitting.html">训练集测试集划分</a>
+
+
+<a target="_top" href="ml-foundations-of-statistics.html"> 统计学基础</a>
+<a target="_top" href="ml-probabilistic-thinking.html"> 概率思维</a>
+<a target="_top" href="ml-loss-function-and-gradient.html">损失函数与梯度</a>
+<a target="_top" href="ml-overfitting-underfitting-bias-and-variance.html">过拟合、欠拟合、偏差与方差</a>
+<br>
+<h2 class="left"><span class="left_h2">监督学习</span></h2>
+			<a target="_top" data-p="par" title="机器学习算法" href="ml-algorithms.html">
+			机器学习算法			</a>
+						<a target="_top" data-p="par" title="线性回归 (Linear Regression)" href="ml-linear-regression.html">
+			线性回归			</a>
+			<a target="_top" href="ml-multiple-linear-regression.html">多元线性回归</a>
+<a target="_top" href="ml-multinomial-regression.html">多项式回归</a>			<a target="_top" data-p="par" title="逻辑回归（Logistic Regression）" href="ml-logistic-regression.html">
+			逻辑回归			</a>
+			<a target="_top" href="ml-regression-model-evaluation.html">回归模型评估</a>			<a target="_top" data-p="par" title="决策树（Decision Tree）" href="ml-decision-tree.html">
+			决策树			</a>
+						<a target="_top" data-p="par" title="支持向量机" href="ml-svm.html">
+			支持向量机			</a>
+						<a target="_top" data-p="par" title="K 近邻算法" href="ml-knn.html">
+			K 近邻算法			</a>
+						<a target="_top" data-p="par" title="集成学习" href="ml-ensemble-learning.html">
+			集成学习			</a>
+						<a target="_top" data-p="par" title="朴素贝叶斯" href="ml-naive-bayes.html">
+			朴素贝叶斯			</a>
+						<a target="_top" data-p="par" title="随机森林" href="ml-random-forest.html">
+			随机森林			</a>
+						<a target="_top" data-p="par" title="分类指标" href="ml-classification-metrics.html">
+			分类指标			</a>
+			<br><h2 class="left"><span class="left_h2">无监督学习</span></h2>			<a target="_top" data-p="par" title="无监督学习 – 聚类" href="ml-cluster-analysis.html">
+			聚类			</a>
+						<a target="_top" data-p="par" title="无监督学习 – 降维" href="ml-dimensionality-reduction.html">
+			降维			</a>
+			<br><h2 class="left"><span class="left_h2">强化学习</span></h2>			<a target="_top" data-p="par" title="强化学习基本框架" href="ml-basic-framework-of-reinforcement-learning.html">
+			强化学习基本框架			</a>
+						<a target="_top" data-p="par" title="强化学习探索vs开采" href="ml-exploration-exploitation.html">
+			强化学习探索vs开采			</a>
+						<a target="_top" data-p="par" title="强化学习 Q-learning 与 SARSA" href="ml-qlearning-sarsa.html">
+			强化学习 Q-learning 与 SARSA			</a>
+						<a target="_top" data-p="par" title="深度强化学习" href="ml-deep-reinforcement-learning.html">
+			深度强化学习			</a>
+			<br><h2 class="left"><span class="left_h2">深度学习</span></h2>			<a target="_top" data-p="par" title="神经网络的基本结构" href="ml-structure-of-neural-networks.html">
+			神经网络的基本结构			</a>
+						<a target="_top" data-p="par" title="前向传播与反向传播" href="ml-forward-and-backward-propagation.html">
+			前向传播与反向传播			</a>
+						<a target="_top" data-p="par" title="深度学习vs传统机器学习" href="ml-deep-learning-traditional-machine-learning.html">
+			深度学习vs传统机器学习			</a>
+						<a target="_top" data-p="par" title="常见网络类型" href="ml-common-network-types.html">
+			常见网络类型			</a>
+			<br><h2 class="left"><span class="left_h2">模型优化与工程</span></h2>			<a target="_top" data-p="par" title="交叉验证" href="ml-cross-validation.html">
+			交叉验证			</a>
+						<a target="_top" data-p="par" title="正则化" href="ml-model-optimization-regularization.html">
+			正则化			</a>
+						<a target="_top" data-p="par" title="数据泄漏" href="ml-model-optimization-data-leakage.html">
+			数据泄漏			</a>
+						<a target="_top" data-p="par" title="集成方法" href="ml-model-optimization-integrated-approaches.html">
+			集成方法			</a>
+						<a target="_top" data-p="par" title="超参搜索" href="ml-hyperparameter-search.html">
+			超参搜索			</a>
+						<a target="_top" data-p="par" title="MLOps 概念" href="ml-model-optimization-mlops.html">
+			MLOps 概念			</a>
+						<a target="_top" data-p="par" title="常见问题排查" href="ml-model-optimization-common-problems.html">
+			常见问题排查			</a>
+			<br><h2 class="left"><span class="left_h2">机器学习的限制与边界</span></h2>			<a target="_top" data-p="par" title="可解释性问题" href="ml-interpretability-problem.html">
+			可解释性问题			</a>
+						<a target="_top" data-p="par" title="假设限制" href="ml-hypothesis-limitations.html">
+			假设限制			</a>
+						<a target="_top" data-p="par" title="数据偏差" href="ml-data-bias.html">
+			数据偏差			</a>
+						<a target="_top" data-p="par" title="模型的现实成本" href="ml-cost-of-models.html">
+			模型的现实成本			</a>
+			<br><h2 class="left"><span class="left_h2">实战案例</span></h2>			<a target="_top" data-p="par" title="泰坦尼克号生存预测" href="ml-titanic-survival-prediction.html">
+			泰坦尼克号生存预测			</a>
+						<a target="_top" data-p="par" title="机器学习 – 房价预测" href="ml-house-price-prediction.html">
+			房价预测			</a>
+						<a target="_top" data-p="par" title="机器学习 – 客户分群" href="ml-customer-segmentation.html">
+			机器学习 - 客户分群			</a>
+						<a target="_top" data-p="par" title="机器学习 – PCA 可视化案例" href="ml-pca-visualization-case.html">
+			PCA 可视化			</a>
+						<a target="_top" data-p="par" title="机器学习 – 强化学习示例" href="ml-reinforcement-learning.html">
+			强化学习示例			</a>
+				
+		</div>
+	</div>	
+</div>
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="ml-pca-visualization-case.html" rel="prev"> 机器学习 &#8211; PCA 可视化案例</a> </div>
+			<div class="next-design-link"><a href="ml-how-to-learn.html" rel="next"> 机器学习-学习路线</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+<div class="article-heading-ad" style="display: block;">
+
+<style>
+  /* 隐藏移动端广告 */
+  @media (max-width: 768px) {
+    .adsbygoogle {
+      display: none !important;
+    }
+  }
+  
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 728*90 固定 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="2147566827"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<h1>机器学习 - 强化学习示例</h1>
+<link rel="stylesheet" href="https://static.jyshare.com/assets/libs/katex-0.15.2/dist/katex.min.css">
+<script src="https://static.jyshare.com/assets/libs/katex-0.15.2/dist/katex.min.js"></script>
+<script src="https://static.jyshare.com/assets/libs/katex-0.15.2/dist/contrib/auto-render.min.js"></script>
+<script>
+$(function() {
+   $('.math').each(function() {
+        renderMathInElement(this, {
+            // 自定义选项，如果需要的话
+            delimiters: [
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });
+
+    });
+});
+</script>
+<p>想象一下，你在教一只小狗学习坐下这个指令。你不会直接告诉它坐下这个单词是什么意思，而是通过奖励和惩罚来引导它。</p>
+	<ul>
+<li>当小狗偶然做出坐下的动作时，你立刻给它一块零食（<strong>奖励</strong>）。</li>
+	<li>
+当它做错时，你就不给零食（<strong>惩罚</strong>）。</li></ul>
+
+
+
+
+<p>经过多次尝试，小狗最终会明白坐下这个指令与获得零食之间的关联，从而学会这个技能。</p>
+<p><strong>强化学习</strong> 就是让计算机（或智能体）通过类似试错的方式，在与环境的互动中学习如何做出最优决策，以获得最大累积奖励的一种机器学习方法。</p>
+<p><strong>强化学习</strong>与我们之前学过的监督学习（有标准答案）和无监督学习（寻找数据内在结构）有本质区别。强化学习的核心是 <strong>智能体</strong> 与 <strong>环境</strong> 的持续交互。</p>
+<hr>
+<h2>核心概念解析</h2>
+<p>在深入代码之前，我们先来理解几个关键概念，它们就像游戏规则，定义了强化学习世界如何运转。</p>
+<ul>
+  <li>
+    <p><strong>智能体：</strong>智能体就是我们的学习者或决策者。在上面的比喻中，它就是那只小狗。在程序中，它是一个算法，负责观察环境、做出动作并从结果中学习。</p>
+  </li>
+  <li>
+    <p><strong>环境：</strong>环境是智能体所处的外部世界。它接收智能体的动作，并给出两个反馈：新的环境状态和本次动作带来的即时奖励。</p>
+  </li>
+  <li>
+    <p><strong>状态：</strong>状态是环境在某一时刻的具体情况描述。例如，在一个走迷宫的游戏里，状态就是智能体当前所在的位置坐标。</p>
+  </li>
+  <li>
+    <p><strong>动作：</strong>动作是智能体在某个状态下可以做出的选择。比如，在迷宫中，动作可以是向上、向下、向左、向右。</p>
+  </li>
+  <li>
+    <p><strong>奖励：</strong>奖励是环境对智能体动作的直接评价信号，通常是一个数值。<strong>正奖励</strong> 表示鼓励，<strong>负奖励</strong> 表示惩罚。智能体的终极目标就是最大化从开始到结束所获得的 <strong>总奖励（累积奖励）</strong>。</p>
+  </li>
+  <li>
+    <p><strong>策略：</strong>策略是智能体的行为准则，它定义了在每一个可能的状态下，应该选择哪个动作。学习的过程，本质上就是优化这个策略的过程。</p>
+  </li>
+</ul>
+<p>为了更直观地理解这些概念如何协同工作，我们来看一下强化学习的基本交互流程：</p>
+
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/42443f92-f7cc-42c3-949e-155572a81941.png"></p>
+
+<p>这个循环会一直持续，直到达到终止状态（如游戏通关或失败）。</p>
+<hr>
+<h2>经典问题：悬崖寻路</h2>
+<p>为了将理论付诸实践，我们将使用一个经典的强化学习示例环境：<strong>CliffWalking-v0</strong>（悬崖寻路）。它来自 <code>gymnasium</code> 库（原 OpenAI Gym 的维护分支）。</p>
+<h3>环境描述</h3>
+<ul>
+<li><strong>场景</strong>：一个 4x12 的网格世界。</li>
+<li><strong>起点</strong>：左下角（坐标 [3, 0]）。</li>
+<li><strong>终点</strong>：右下角（坐标 [3, 11]）。</li>
+<li><strong>悬崖</strong>：最底部一排除了起点和终点的所有位置（[3, 1] 到 [3, 10]），掉入悬崖会获得巨大惩罚并回到起点。</li>
+<li><strong>目标</strong>：智能体要从起点安全地走到终点，并避免掉下悬崖。</li>
+<li><strong>动作</strong>：上（0）、右（1）、下（2）、左（3）。</li>
+<li><strong>奖励</strong>：<ul>
+<li>每走一步普通网格：-1（鼓励用更少步数到达）</li>
+<li>掉下悬崖：-100，并被送回起点</li>
+<li>到达终点：0，并结束本次尝试</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2>算法简介：Q-Learning</h2>
+<p>我们将使用 <strong>Q-Learning</strong> 算法来解决这个问题。它是一种 <strong>无模型</strong> 的强化学习算法，意味着智能体不需要预先知道环境的运作规则（如状态转移概率），它通过不断尝试来学习。</p>
+<p>它的核心是一个名为 <strong>Q表</strong> 的表格。</p>
+<ul>
+<li><strong>行</strong> 代表所有可能的状态。</li>
+<li><strong>列</strong> 代表所有可能的动作。</li>
+<li><strong>单元格的值（Q值）</strong> 代表在某个状态下，采取某个动作的长期期望收益。</li>
+</ul>
+<p>Q-Learning 的学习过程可以概括为以下几步，它展示了智能体如何通过一次经验来更新自己的知识（Q表）：</p>
+
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/ml-reinforcement-learning-runoob-1.png" style="max-width:360px"></p>
+
+<h3>核心公式：贝尔曼方程</h3>
+<p>Q表更新的数学基础是贝尔曼方程，其更新公式如下：</p>
+<p class="math">\[
+Q(S, A) \leftarrow Q(S, A) + \alpha [R + \gamma \max_{a} Q(S', a) - Q(S, A)]
+\]</p>
+<p>让我们拆解这个公式中的每个部分：</p>
+<table class="reference math">
+<thead>
+<tr>
+<th align="left">符号</th>
+<th align="left">含义</th>
+<th align="left">类比解释</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">\( Q(S, A) \)</td>
+<td align="left">状态S下动作A原有的Q值</td>
+<td align="left">你之前对在十字路口直行这个决策的旧评分</td>
+</tr>
+<tr>
+<td align="left">\(\alpha \)</td>
+<td align="left"><strong>学习率</strong> (0 &lt; α ≤ 1)</td>
+<td align="left">你有多相信这次的新经验。α=1表示完全用新经验覆盖旧认知；α=0.1表示新经验只轻微修正旧认知</td>
+</tr>
+<tr>
+<td align="left">\(R \)</td>
+<td align="left">执行动作A后获得的<strong>即时奖励</strong></td>
+<td align="left">你直行后，发现道路通畅，获得了一个小的正反馈（+1）</td>
+</tr>
+<tr>
+<td align="left">\(\gamma \)</td>
+<td align="left"><strong>折扣因子</strong> (0 ≤ γ &lt; 1)</td>
+<td align="left">你对未来奖励的重视程度。γ=0表示只在乎眼前奖励；γ=0.9表示非常重视长远收益</td>
+</tr>
+<tr>
+<td align="left">\(\max_{a} Q(S', a) \)</td>
+<td align="left">在新状态S'下，所有可能动作中最大的Q值</td>
+<td align="left">到达新路口后，你评估左转、右转、直行哪个未来收益最高</td>
+</tr>
+<tr>
+<td align="left">\(R + \gamma \max_{a} Q(S', a)\)</td>
+<td align="left"><strong>目标Q值</strong>，代表对当前决策的新的、更优的估计</td>
+<td align="left">结合即时奖励和未来最佳收益，得出对在旧路口直行这个决策的新评分</td>
+</tr>
+<tr>
+<td align="left">\(R + \gamma \max_{a} Q(S', a) - Q(S, A)\)</td>
+<td align="left"><strong>时序差分误差</strong>，新老认知的差距</td>
+<td align="left">新评分与旧评分的差距，这个差距驱动学习</td>
+</tr>
+</tbody></table>
+<p>简单来说，这个公式让智能体用 <strong>即时奖励 + 对未来最优估计的折扣</strong> 来不断修正自己对当前决策价值的判断。</p>
+<hr>
+<h2>实战：编写Q-Learning智能体</h2>
+<p>现在，让我们用代码实现一个解决悬崖寻路问题的Q-Learning智能体。</p>
+<h3>步骤1：安装与导入库</h3>
+<p>首先，确保你已安装必要的库。在终端或命令行中运行：</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+pip <span style="color: #c20cb9; font-weight: bold;">install</span> gymnasium numpy<br />
+</div>
+</div>
+
+<p>然后，在Python文件中导入它们：</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> gymnasium <span style="color: Green;font-weight:bold;">as</span> gym<br />
+<span style="color: Green;font-weight:bold;">import</span> numpy <span style="color: Green;font-weight:bold;">as</span> np<br />
+<span style="color: Green;font-weight:bold;">import</span> <span style="color: #05a;">random</span><br />
+</div>
+</div>
+
+<h3>步骤2：初始化环境和Q表</h3>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 1. 创建环境</span><br />
+env <span style="color: Gray;">=</span> gym.<span style="color: #05a;">make</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;CliffWalking-v0&quot;</span><span style="color: Gray;">,</span> render_mode<span style="color: Gray;">=</span><span style="color: #a11;">&quot;human&quot;</span><span style="color: Olive;">&#41;</span> <span style="color: #a50"># render_mode=&quot;human&quot; 用于可视化</span><br />
+<br />
+<span style="color: #a50"># 2. 获取环境信息</span><br />
+n_states <span style="color: Gray;">=</span> env.<span style="color: #05a;">observation_space</span>.<span style="color: #05a;">n</span> &nbsp;<span style="color: #a50"># 状态总数 (4*12=48)</span><br />
+n_actions <span style="color: Gray;">=</span> env.<span style="color: #05a;">action_space</span>.<span style="color: #05a;">n</span> &nbsp; &nbsp; &nbsp;<span style="color: #a50"># 动作总数 (4个方向)</span><br />
+<br />
+<span style="color: #a50"># 3. 初始化Q表， 形状为 [状态数, 动作数]， 初始值全为0</span><br />
+Q_table <span style="color: Gray;">=</span> np.<span style="color: #05a;">zeros</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#40;</span>n_states<span style="color: Gray;">,</span> n_actions<span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;环境状态数: {n_states}, 动作数: {n_actions}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;Q表形状: {Q_table.shape}&quot;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>步骤3：设置超参数</h3>
+<p>超参数是控制算法行为的旋钮，需要根据问题调整。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 定义超参数</span><br />
+alpha <span style="color: Gray;">=</span> <span style="color: Maroon;">0.1</span> &nbsp; <span style="color: #a50"># 学习率：新信息的影响程度</span><br />
+gamma <span style="color: Gray;">=</span> <span style="color: Maroon;">0.99</span> &nbsp;<span style="color: #a50"># 折扣因子：未来奖励的重要性</span><br />
+epsilon <span style="color: Gray;">=</span> <span style="color: Maroon;">0.1</span> <span style="color: #a50"># 探索率：以多大概率进行随机探索（而非选择已知最优）</span><br />
+num_episodes <span style="color: Gray;">=</span> <span style="color: Maroon;">500</span> &nbsp;<span style="color: #a50"># 训练轮数（智能体玩游戏的次数）</span><br />
+</div>
+</div>
+
+<h3>步骤4：实现ε-greedy策略</h3>
+<p>这是智能体做决策的核心策略，它平衡了 <strong>探索</strong> 和 <strong>利用</strong>。</p>
+<ul>
+<li><strong>探索</strong>：随机选择动作，以发现可能更好的策略。</li>
+<li><strong>利用</strong>：选择当前Q表认为最优的动作，以获取最大收益。</li>
+</ul>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">def</span> choose_action<span style="color: Olive;">&#40;</span>state<span style="color: Gray;">,</span> Q_table<span style="color: Gray;">,</span> epsilon<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;<br />
+&nbsp; &nbsp; 根据ε-greedy策略选择动作。<br />
+<br />
+&nbsp; &nbsp; 参数:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; state: 当前状态<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Q_table: Q值表<br />
+&nbsp; &nbsp; &nbsp; &nbsp; epsilon: 探索概率<br />
+<br />
+&nbsp; &nbsp; 返回:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; action: 选择的动作 (0, 1, 2, 3)<br />
+&nbsp; &nbsp; &quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; <span style="color: #a50"># 生成一个0-1之间的随机数</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> <span style="color: #05a;">random</span>.<span style="color: #05a;">uniform</span><span style="color: Olive;">&#40;</span><span style="color: Maroon;">0</span><span style="color: Gray;">,</span> <span style="color: Maroon;">1</span><span style="color: Olive;">&#41;</span> <span style="color: Gray;">&lt;</span> epsilon:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 探索：随机选择一个动作</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; action <span style="color: Gray;">=</span> env.<span style="color: #05a;">action_space</span>.<span style="color: #05a;">sample</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">else</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 利用：选择当前状态下Q值最大的动作</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># np.argmax 返回最大值的索引，即最优动作</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; action <span style="color: Gray;">=</span> np.<span style="color: #05a;">argmax</span><span style="color: Olive;">&#40;</span>Q_table<span style="color: Olive;">&#91;</span>state<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> action<br />
+</div>
+</div>
+
+<h3>步骤5：核心训练循环</h3>
+<p>这是算法学习的主要过程。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 用于记录每轮的总奖励，以便观察学习进展</span><br />
+reward_history <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span><span style="color: Olive;">&#93;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">for</span> episode <span style="color: Green;font-weight:bold;">in</span> <span style="color: Teal;">range</span><span style="color: Olive;">&#40;</span>num_episodes<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; <span style="color: #a50"># 重置环境，获取初始状态</span><br />
+&nbsp; &nbsp; state<span style="color: Gray;">,</span> _ <span style="color: Gray;">=</span> env.<span style="color: #05a;">reset</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; total_reward <span style="color: Gray;">=</span> <span style="color: Maroon;">0</span> &nbsp;<span style="color: #a50"># 本轮累积奖励</span><br />
+&nbsp; &nbsp; terminated <span style="color: Gray;">=</span> <span style="color: Teal;">False</span> &nbsp;<span style="color: #a50"># 是否到达终止状态（终点/悬崖）</span><br />
+&nbsp; &nbsp; truncated <span style="color: Gray;">=</span> <span style="color: Teal;">False</span> &nbsp; <span style="color: #a50"># 是否因步数超限而终止（本环境一般不会）</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #a50"># 本轮交互循环，直到游戏结束</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">while</span> <span style="color: Green;font-weight:bold;">not</span> <span style="color: Olive;">&#40;</span>terminated <span style="color: Green;font-weight:bold;">or</span> truncated<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 1. 选择动作</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; action <span style="color: Gray;">=</span> choose_action<span style="color: Olive;">&#40;</span>state<span style="color: Gray;">,</span> Q_table<span style="color: Gray;">,</span> epsilon<span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 2. 执行动作，获取环境反馈</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; next_state<span style="color: Gray;">,</span> reward<span style="color: Gray;">,</span> terminated<span style="color: Gray;">,</span> truncated<span style="color: Gray;">,</span> _ <span style="color: Gray;">=</span> env.<span style="color: #05a;">step</span><span style="color: Olive;">&#40;</span>action<span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 3. 更新Q表 (Q-Learning 核心更新公式)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 获取当前Q值</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; current_q <span style="color: Gray;">=</span> Q_table<span style="color: Olive;">&#91;</span>state<span style="color: Gray;">,</span> action<span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 计算目标Q值：即时奖励 + 未来最大Q值的折扣</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 注意：如果下一状态是终止状态，则没有未来Q值</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> terminated:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; target_q <span style="color: Gray;">=</span> reward<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">else</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; target_q <span style="color: Gray;">=</span> reward + gamma * np.<span style="color: Teal;">max</span><span style="color: Olive;">&#40;</span>Q_table<span style="color: Olive;">&#91;</span>next_state<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 应用贝尔曼方程更新Q值</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; Q_table<span style="color: Olive;">&#91;</span>state<span style="color: Gray;">,</span> action<span style="color: Olive;">&#93;</span> <span style="color: Gray;">=</span> current_q + alpha * <span style="color: Olive;">&#40;</span>target_q - current_q<span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 4. 转移到下一个状态，并累积奖励</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; state <span style="color: Gray;">=</span> next_state<br />
+&nbsp; &nbsp; &nbsp; &nbsp; total_reward +<span style="color: Gray;">=</span> reward<br />
+<br />
+&nbsp; &nbsp; <span style="color: #a50"># 记录本轮总奖励</span><br />
+&nbsp; &nbsp; reward_history.<span style="color: #05a;">append</span><span style="color: Olive;">&#40;</span>total_reward<span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #a50"># 每100轮打印一次进度</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> <span style="color: Olive;">&#40;</span>episode + <span style="color: Maroon;">1</span><span style="color: Olive;">&#41;</span> % <span style="color: Maroon;">100</span> <span style="color: Gray;">==</span> <span style="color: Maroon;">0</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; avg_reward <span style="color: Gray;">=</span> np.<span style="color: #05a;">mean</span><span style="color: Olive;">&#40;</span>reward_history<span style="color: Olive;">&#91;</span>-<span style="color: Maroon;">100</span>:<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span> &nbsp;<span style="color: #a50"># 最近100轮的平均奖励</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;轮次 {episode + 1}, 最近100轮平均奖励: {avg_reward:.2f}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 训练结束，关闭环境</span><br />
+env.<span style="color: #05a;">close</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>步骤6：测试训练好的智能体</h3>
+<p>训练完成后，我们关闭探索，让智能体纯粹利用学到的知识（Q表）来走一遍，看看它的表现。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>=== 开始测试 ===&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: #a50"># 创建新的测试环境（可以不加render_mode，或改为&quot;human&quot;观看）</span><br />
+test_env <span style="color: Gray;">=</span> gym.<span style="color: #05a;">make</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;CliffWalking-v0&quot;</span><span style="color: Gray;">,</span> render_mode<span style="color: Gray;">=</span><span style="color: #a11;">&quot;human&quot;</span><span style="color: Olive;">&#41;</span><br />
+state<span style="color: Gray;">,</span> _ <span style="color: Gray;">=</span> test_env.<span style="color: #05a;">reset</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+test_terminated <span style="color: Gray;">=</span> <span style="color: Teal;">False</span><br />
+test_truncated <span style="color: Gray;">=</span> <span style="color: Teal;">False</span><br />
+step_count <span style="color: Gray;">=</span> <span style="color: Maroon;">0</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">while</span> <span style="color: Green;font-weight:bold;">not</span> <span style="color: Olive;">&#40;</span>test_terminated <span style="color: Green;font-weight:bold;">or</span> test_truncated<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; <span style="color: #a50"># 测试时，我们设置 epsilon=0， 即完全利用，不探索</span><br />
+&nbsp; &nbsp; action <span style="color: Gray;">=</span> choose_action<span style="color: Olive;">&#40;</span>state<span style="color: Gray;">,</span> Q_table<span style="color: Gray;">,</span> epsilon<span style="color: Gray;">=</span><span style="color: Maroon;">0</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; state<span style="color: Gray;">,</span> reward<span style="color: Gray;">,</span> test_terminated<span style="color: Gray;">,</span> test_truncated<span style="color: Gray;">,</span> _ <span style="color: Gray;">=</span> test_env.<span style="color: #05a;">step</span><span style="color: Olive;">&#40;</span>action<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; step_count +<span style="color: Gray;">=</span> <span style="color: Maroon;">1</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;步骤 {step_count}: 状态 {state}, 动作 {action}, 奖励 {reward}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;测试完成！总步数: {step_count}, 总奖励: {reward} (到达终点奖励为0)&quot;</span><span style="color: Olive;">&#41;</span><br />
+test_env.<span style="color: #05a;">close</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<hr>
+
+<h2>运行结果与分析</h2><p>
+完整代码：</p>
+<div class="example"><h2 class="example">实例</h2> <div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> gymnasium <span style="color: Green;font-weight:bold;">as</span> gym<br />
+<span style="color: Green;font-weight:bold;">import</span> numpy <span style="color: Green;font-weight:bold;">as</span> np<br />
+<span style="color: Green;font-weight:bold;">import</span> <span style="color: #05a;">random</span><br />
+<br />
+<span style="color: #a50"># =========================</span><br />
+<span style="color: #a50"># 1. 创建环境</span><br />
+<span style="color: #a50"># =========================</span><br />
+env <span style="color: Gray;">=</span> gym.<span style="color: #05a;">make</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;CliffWalking-v0&quot;</span><span style="color: Gray;">,</span> render_mode<span style="color: Gray;">=</span><span style="color: #a11;">&quot;human&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># =========================</span><br />
+<span style="color: #a50"># 2. 获取环境信息</span><br />
+<span style="color: #a50"># =========================</span><br />
+n_states <span style="color: Gray;">=</span> env.<span style="color: #05a;">observation_space</span>.<span style="color: #05a;">n</span><br />
+n_actions <span style="color: Gray;">=</span> env.<span style="color: #05a;">action_space</span>.<span style="color: #05a;">n</span><br />
+<br />
+<span style="color: #a50"># =========================</span><br />
+<span style="color: #a50"># 3. 初始化 Q 表</span><br />
+<span style="color: #a50"># =========================</span><br />
+Q_table <span style="color: Gray;">=</span> np.<span style="color: #05a;">zeros</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#40;</span>n_states<span style="color: Gray;">,</span> n_actions<span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;环境状态数: {n_states}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;动作数: {n_actions}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;Q表形状: {Q_table.shape}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># =========================</span><br />
+<span style="color: #a50"># 4. 设置超参数</span><br />
+<span style="color: #a50"># =========================</span><br />
+alpha <span style="color: Gray;">=</span> <span style="color: Maroon;">0.1</span><br />
+gamma <span style="color: Gray;">=</span> <span style="color: Maroon;">0.99</span><br />
+epsilon <span style="color: Gray;">=</span> <span style="color: Maroon;">0.1</span><br />
+num_episodes <span style="color: Gray;">=</span> <span style="color: Maroon;">500</span><br />
+<br />
+<span style="color: #a50"># =========================</span><br />
+<span style="color: #a50"># 5. ε-greedy 策略</span><br />
+<span style="color: #a50"># =========================</span><br />
+<span style="color: Green;font-weight:bold;">def</span> choose_action<span style="color: Olive;">&#40;</span>state<span style="color: Gray;">,</span> Q_table<span style="color: Gray;">,</span> epsilon<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> <span style="color: #05a;">random</span>.<span style="color: #05a;">uniform</span><span style="color: Olive;">&#40;</span><span style="color: Maroon;">0</span><span style="color: Gray;">,</span> <span style="color: Maroon;">1</span><span style="color: Olive;">&#41;</span> <span style="color: Gray;">&lt;</span> epsilon:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> env.<span style="color: #05a;">action_space</span>.<span style="color: #05a;">sample</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> np.<span style="color: #05a;">argmax</span><span style="color: Olive;">&#40;</span>Q_table<span style="color: Olive;">&#91;</span>state<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># =========================</span><br />
+<span style="color: #a50"># 6. 训练循环</span><br />
+<span style="color: #a50"># =========================</span><br />
+reward_history <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span><span style="color: Olive;">&#93;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">for</span> episode <span style="color: Green;font-weight:bold;">in</span> <span style="color: Teal;">range</span><span style="color: Olive;">&#40;</span>num_episodes<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; state<span style="color: Gray;">,</span> _ <span style="color: Gray;">=</span> env.<span style="color: #05a;">reset</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; total_reward <span style="color: Gray;">=</span> <span style="color: Maroon;">0</span><br />
+&nbsp; &nbsp; terminated <span style="color: Gray;">=</span> <span style="color: Teal;">False</span><br />
+&nbsp; &nbsp; truncated <span style="color: Gray;">=</span> <span style="color: Teal;">False</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">while</span> <span style="color: Green;font-weight:bold;">not</span> <span style="color: Olive;">&#40;</span>terminated <span style="color: Green;font-weight:bold;">or</span> truncated<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; action <span style="color: Gray;">=</span> choose_action<span style="color: Olive;">&#40;</span>state<span style="color: Gray;">,</span> Q_table<span style="color: Gray;">,</span> epsilon<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; next_state<span style="color: Gray;">,</span> reward<span style="color: Gray;">,</span> terminated<span style="color: Gray;">,</span> truncated<span style="color: Gray;">,</span> _ <span style="color: Gray;">=</span> env.<span style="color: #05a;">step</span><span style="color: Olive;">&#40;</span>action<span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; current_q <span style="color: Gray;">=</span> Q_table<span style="color: Olive;">&#91;</span>state<span style="color: Gray;">,</span> action<span style="color: Olive;">&#93;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> terminated:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; target_q <span style="color: Gray;">=</span> reward<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">else</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; target_q <span style="color: Gray;">=</span> reward + gamma * np.<span style="color: Teal;">max</span><span style="color: Olive;">&#40;</span>Q_table<span style="color: Olive;">&#91;</span>next_state<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; Q_table<span style="color: Olive;">&#91;</span>state<span style="color: Gray;">,</span> action<span style="color: Olive;">&#93;</span> <span style="color: Gray;">=</span> current_q + alpha * <span style="color: Olive;">&#40;</span>target_q - current_q<span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; state <span style="color: Gray;">=</span> next_state<br />
+&nbsp; &nbsp; &nbsp; &nbsp; total_reward +<span style="color: Gray;">=</span> reward<br />
+<br />
+&nbsp; &nbsp; reward_history.<span style="color: #05a;">append</span><span style="color: Olive;">&#40;</span>total_reward<span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> <span style="color: Olive;">&#40;</span>episode + <span style="color: Maroon;">1</span><span style="color: Olive;">&#41;</span> % <span style="color: Maroon;">100</span> <span style="color: Gray;">==</span> <span style="color: Maroon;">0</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; avg_reward <span style="color: Gray;">=</span> np.<span style="color: #05a;">mean</span><span style="color: Olive;">&#40;</span>reward_history<span style="color: Olive;">&#91;</span>-<span style="color: Maroon;">100</span>:<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;轮次 {episode + 1}，最近100轮平均奖励: {avg_reward:.2f}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+env.<span style="color: #05a;">close</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># =========================</span><br />
+<span style="color: #a50"># 7. 测试训练结果</span><br />
+<span style="color: #a50"># =========================</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>=== 开始测试 ===&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+test_env <span style="color: Gray;">=</span> gym.<span style="color: #05a;">make</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;CliffWalking-v0&quot;</span><span style="color: Gray;">,</span> render_mode<span style="color: Gray;">=</span><span style="color: #a11;">&quot;human&quot;</span><span style="color: Olive;">&#41;</span><br />
+state<span style="color: Gray;">,</span> _ <span style="color: Gray;">=</span> test_env.<span style="color: #05a;">reset</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+terminated <span style="color: Gray;">=</span> <span style="color: Teal;">False</span><br />
+truncated <span style="color: Gray;">=</span> <span style="color: Teal;">False</span><br />
+step_count <span style="color: Gray;">=</span> <span style="color: Maroon;">0</span><br />
+total_reward <span style="color: Gray;">=</span> <span style="color: Maroon;">0</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">while</span> <span style="color: Green;font-weight:bold;">not</span> <span style="color: Olive;">&#40;</span>terminated <span style="color: Green;font-weight:bold;">or</span> truncated<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; action <span style="color: Gray;">=</span> choose_action<span style="color: Olive;">&#40;</span>state<span style="color: Gray;">,</span> Q_table<span style="color: Gray;">,</span> epsilon<span style="color: Gray;">=</span><span style="color: Maroon;">0</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; state<span style="color: Gray;">,</span> reward<span style="color: Gray;">,</span> terminated<span style="color: Gray;">,</span> truncated<span style="color: Gray;">,</span> _ <span style="color: Gray;">=</span> test_env.<span style="color: #05a;">step</span><span style="color: Olive;">&#40;</span>action<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; step_count +<span style="color: Gray;">=</span> <span style="color: Maroon;">1</span><br />
+&nbsp; &nbsp; total_reward +<span style="color: Gray;">=</span> reward<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;步骤 {step_count}: 状态 {state}, 动作 {action}, 奖励 {reward}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;测试完成，总步数: {step_count}，总奖励: {total_reward}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+test_env.<span style="color: #05a;">close</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+</div></div>
+
+<p>运行上述完整代码后，你将看到两个非常直观的现象：训练阶段的奖励变化，以及测试阶段智能体的实际行动路径。</p>
+
+<h3>1. 训练阶段：奖励逐步提升</h3>
+<p>在训练过程中，控制台会每 100 轮输出一次最近 100 轮的平均奖励。例如：</p>
+
+<pre>
+轮次 100, 最近100轮平均奖励: -120.45
+轮次 200, 最近100轮平均奖励: -65.32
+轮次 300, 最近100轮平均奖励: -32.18
+轮次 400, 最近100轮平均奖励: -18.06
+轮次 500, 最近100轮平均奖励: -13.94
+</pre>
+
+<p>你会发现一个明显趋势：<strong>平均奖励在不断上升（负值绝对值变小）</strong>。</p>
+
+<p>这说明什么？</p>
+<ul>
+  <li>在训练初期，智能体频繁掉入悬崖，受到大量 <code>-100</code> 的惩罚。</li>
+  <li>随着训练进行，Q 表逐渐学习到"哪些路径危险、哪些路径安全"。</li>
+  <li>智能体开始主动绕开悬崖，选择一条虽然更长、但惩罚更小的安全路线。</li>
+</ul>
+
+<p>奖励的提升，本质上反映了策略质量的提升。</p>
+
+<h3>2. 测试阶段：智能体的行为表现</h3>
+<p>在测试阶段，我们将 <code>epsilon</code> 设置为 0，意味着：</p>
+
+<ul>
+  <li>不再进行任何随机探索</li>
+  <li>完全按照 Q 表中学到的最优策略行动</li>
+</ul>
+
+<p>如果你开启了 <code>render_mode="human"</code>，会看到一个非常典型的行为：</p>
+
+<ul>
+  <li>智能体从起点出发</li>
+  <li>沿着悬崖上方一格的位置水平移动</li>
+  <li>在接近终点时再向下移动，安全抵达终点</li>
+</ul>
+
+<p>这正是 CliffWalking 环境中被认为的<strong>最优策略</strong>：</p>
+
+<ul>
+  <li>不是最短路径（贴着悬崖）</li>
+  <li>而是<strong>期望惩罚最小</strong>的路径</li>
+</ul>
+
+<p>这体现了强化学习的一个核心特征：<strong>它追求的是长期累计回报，而不是短期最优</strong>。</p>
+
+<h3>3. 为什么学到的是绕路，而不是冒险直走？</h3>
+<p>这是一个非常重要、也非常经典的问题。</p>
+
+<p>从人类直觉来看，贴着悬崖走是最短路径，但对智能体来说：</p>
+
+<ul>
+  <li>一旦走错一步，立刻获得 <code>-100</code> 的巨大惩罚</li>
+  <li>相比之下，多走几步只会多几个 <code>-1</code></li>
+</ul>
+
+<p>在贝尔曼方程的累计效应下：</p>
+
+<p><strong>稳定的小损失 &lt; 偶发的大灾难</strong></p>
+
+<p>因此，Q-Learning 会自然收敛到一条更保守、但整体期望回报更高的策略。</p>
+
+<hr>
+
+<h2>常见问题与参数影响</h2>
+
+<h3>1. 学习率 α 过大或过小会发生什么？</h3>
+<ul>
+  <li><strong>α 过大</strong>：学习过程震荡，策略不稳定，容易反复推翻已有经验</li>
+  <li><strong>α 过小</strong>：学习非常慢，需要大量轮次才能收敛</li>
+</ul>
+
+<p>在这个示例中，<code>0.1</code> 是一个相对稳妥的选择。</p>
+
+<h3>2. 折扣因子 γ 的直观含义</h3>
+<ul>
+  <li><code>γ → 0</code>：智能体只关心眼前奖励，容易变得短视</li>
+  <li><code>γ → 1</code>：智能体非常重视长期后果，更像有远见的规划者</li>
+</ul>
+
+<p>在悬崖寻路问题中，较大的 γ 能帮助智能体意识到现在多走一步，是为了未来避免更大损失。</p>
+
+<h3>3. ε 的作用本质</h3>
+<p><code>ε</code> 决定了智能体的性格：</p>
+<ul>
+  <li>ε 大 → 爱冒险，探索多</li>
+  <li>ε 小 → 保守，更多利用已有经验</li>
+</ul>
+
+<p>在真实项目中，通常会使用 <strong>ε 衰减策略</strong>：</p>
+<ul>
+  <li>前期多探索</li>
+  <li>后期逐渐收敛到稳定策略</li>
+</ul>
+
+<hr>
+
+<h2>本示例的局限与扩展方向</h2>
+<p>虽然 Q-Learning 非常经典，但它也有明显限制：</p>
+
+<ul>
+  <li>Q 表大小随状态空间线性增长</li>
+  <li>无法直接处理连续状态（如真实物理世界）</li>
+  <li>在复杂环境中收敛速度慢</li>
+</ul>
+
+<p>这也是为什么在更复杂问题中，我们会引入：</p>
+<ul>
+  <li><strong>Deep Q-Network（DQN）</strong></li>
+  <li><strong>Policy Gradient</strong></li>
+  <li><strong>Actor-Critic</strong></li>
+</ul>
+
+<p>它们用神经网络替代 Q 表，使强化学习能够应用到游戏、机器人控制、自动驾驶等真实场景。</p>
+
+<hr>
+
+<h2>总结</h2>
+<p>通过这个完整的强化学习示例，你已经：</p>
+
+<ol>
+  <li>理解了强化学习与监督 / 无监督学习的根本区别</li>
+  <li>掌握了智能体、环境、状态、动作、奖励、策略的完整闭环</li>
+  <li>亲手实现了一个可运行、可观察、可收敛的 Q-Learning 智能体</li>
+  <li>理解了最大化长期回报这一强化学习的核心思想</li>
+</ol>
+			<!-- 其他扩展 -->
+						
+			</div>
+			
+		</div>
+
+
+<div class="archive-list" style="display:none;font-size: 14px;line-height: 1.8;margin-top: 20px;padding: 10px;">
+<div class="archive-list-item">
+    <div class="post-intro" style="width: 100%;" id="ai-info">
+	  AI 思考中...
+    </div>
+</div>
+</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="ml-pca-visualization-case.html" rel="prev"> 机器学习 &#8211; PCA 可视化案例</a> </div>
+			<div class="next-design-link"><a href="ml-how-to-learn.html" rel="next"> 机器学习-学习路线</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+
+
+		
+		<div class="sidebar-box ">
+				
+
+<style>	
+.responsive_ad1 { display:none; }
+@media(min-width: 800px) { .responsive_ad1 {  display:block;margin:0 auto;} }
+</style>
+<div id="ad-336280" class="responsive_ad1">
+<!-- 336*280 固定 -->		
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 移动版 自动调整 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+				</div>
+		<!-- 笔记列表 -->
+		<style>
+.wrapper {
+  /*text-transform: uppercase; */
+  background: #ececec;
+  color: #555;
+  cursor: pointer;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.wrapper .tooltip {
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: left;
+  background: #96b97d;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 14px;
+  pointer-events: none;
+  position: absolute;
+  
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+.tooltip a {
+	color:#fff;
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}  
+
+/* CSS Triangles - see Trevor's post */
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #96b97d 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 20%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+.wrapper .tooltip1 {
+	margin-left: 50px;
+	padding-top: 0px;
+}
+/*
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+*/
+/* IE can just show/hide with no transition */
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.css">
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style=" padding: 20px 20px;"> 
+	<h3 class="text-muted" id="share_code" style="color: #799961;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<!--
+	<p style="font-size:14px;">笔记需要是本篇文章的内容扩展！</p><br>
+	<p style="font-size:12px;"><a href="//www.runoob.com/tougao" target="_blank">文章投稿，可点击这里</a></p>
+	<p style="font-size:14px;"><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>
+		<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display:none;">
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div id="mded"></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input type="hidden" name="comment_post_ID" value="29054" id="comment_post_ID" />
+<input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="引用地址"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script type="text/javascript">
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload:false,
+	 // upload: {url:'/api/comment_upload_file.php',params: null,fileKey: 'upload_file',connectionCount: 1,leaveConfirm: '文件正在上传，您确定离开?'},
+	  defaultImage: 'https://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  autosave: 'editor-content',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+	$("#user_add_note").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		$('html, body').animate({
+       	    scrollTop: $("#respond").offset().top
+    	}, 200);
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" style="display:none;" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  29054;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>').show();
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>').show();
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>').show();
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>').show();
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>').show();
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>').show();
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	$(".comt-author").click(function() {
+		href = $(this).children("a").attr("href");
+		if(href.indexOf("/note/")!=-1) {
+			var win = window.open(href, '_blank');
+  			win.focus();
+		}
+	});
+	$(".comt-meta span").hover(function(){
+		$(this).children(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).children(".tooltip").removeAttr("style");
+	});
+	/*
+	$(".wrapper i").hover(function(){
+		$(this).siblings(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).siblings(".tooltip").css({ "opacity": 0, "pointer-events": "auto"});
+	});
+	*/
+	//Upvote.create('runoobvote-id', {callback: vote_callback});
+	var ajaxurl = 'https://www.runoob.com/wp-admin/admin-ajax.php';
+	var callback = function(data) {
+		//console.log($('#runoobvote-id').upvote('upvoted'));
+		//console.log($('#runoobvote-id').upvote('downvoted'));
+		//console.log(data);
+		_vote_action = data.action;
+		id_arr = data.id.split('-');
+		um_id= id_arr[2];
+		//console.log(um_id);
+		
+		var re = /^[1-9]+/;
+		if (re.test(um_id)) { 
+			var ajax_data = {
+				_vote_action: _vote_action,
+				action: "pinglun_zan",
+				um_id: um_id,
+				um_action: "ding"
+			};
+			//console.log(ajax_data);
+			$.post(ajaxurl,ajax_data,function(status){
+				//if(status.vote_num>999) {
+				//	_voteHtml = '<span style="display: block; text-align: center;font-size: 20px; color: #6a737c; margin: 8px 0;">'+kFormatter(status.vote_num) +'</span>';
+				//	$("#runoobvote-id-" + um_id + " .count").hide().after(_voteHtml);
+				//}
+				
+			});
+		}
+	};
+	if($('#comments').length && $('.upvotejs').length){
+		$('.upvotejs').upvote({id: 29054, callback: callback});
+	
+		$.post(ajaxurl,{"action":"pinglun_zan","postid":29054},function(data){  
+			$(data).each(function(key,value) {
+				$("#runoobvote-id-" + value.commid + " .upvote").addClass(value.upvotejs_class);
+				$("#runoobvote-id-" + value.commid + " .downvote").addClass(value.downvote_class);
+				$("#runoobvote-id-" + value.commid + " .count").text(value.upvote_count);
+			})
+		},'json');
+		
+	}
+	
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+function kFormatter(num) {
+	// return num;
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
+</script>
+
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/css/qa.css?1.45">
+<link rel="stylesheet" type="text/css" href="https://static.char123.com/assets/simditor/2.3.6/styles/simditor.min.css" />
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor.min.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor-autosave.js"></script>
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+
+<style>
+.sidebar-tree .double-li {
+    width:300px;
+}
+.sidebar-tree .double-li li {
+    width: 44%;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    display: inline;
+}
+</style>
+
+    
+        <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here" style="margin: 0 auto;">
+            <a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;"> <i class="fa fa-list" aria-hidden="true"></i> 分类导航</a>
+        </div>
+    <div class="sidebar-box sidebar-cate">
+        
+        <div class="sidebar-tree">
+            <ul><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="../html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="../html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="../css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="../css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Tailwind CSS 教程" href="../tailwindcss/tailwindcss-tutorial.html">Tailwind CSS 教程</a></li><li><a title="Bootstrap4 教程" href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Bootstrap5 教程" href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 教程</a></li><li><a title="Font Awesome 教程" href="../font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="../foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="../js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="../htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="../jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="../angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="../angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="../vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="Vue3 教程" href="../vue3/vue3-tutorial.html">Vue3 教程</a></li><li><a title="React 教程" href="../react/react-tutorial.html">React 教程</a></li><li><a title="Next.js 教程" href="../nextjs/nextjs-tutorial.html">Next.js 教程</a></li><li><a title="TypeScript 教程" href="../typescript/ts-tutorial.html">TypeScript 教程</a></li><li><a title="jQuery UI 教程" href="../jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="../jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="../nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="Electron 教程" href="../electron/electron-tutorial.html">Electron 教程</a></li><li><a title="Playwright 教程" href="../playwright/playwright-tutorial.html">Playwright 教程</a></li><li><a title="AJAX 教程" href="../ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="../json/json-tutorial.html">JSON 教程</a></li><li><a title="Echarts 教程" href="../echarts/echarts-tutorial.html">Echarts 教程</a></li><li><a title="Chart.js 教程" href="../chartjs/chartjs-tutorial.html">Chart.js 教程</a></li><li><a title="Highcharts 教程" href="../highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="../googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="Python2.x 教程" href="../python/python-tutorial.html">Python2.x 教程</a></li><li><a title="Linux 教程" href="../linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="../docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="../ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="../java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="../c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="../cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="../perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="../servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="../jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="../lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Rust 教程" href="../rust/rust-tutorial.html">Rust 教程</a></li><li><a title="Zig 教程" href="../zig/zig-tutorial.html">Zig 教程</a></li><li><a title="Scala 教程" href="../scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="../go/go-tutorial.html">Go 教程</a></li><li><a title="PHP 教程" href="../php/php-tutorial.html">PHP 教程</a></li><li><a title="数据结构与算法" href="../data-structures/data-structures-tutorial.html">数据结构与算法</a></li><li><a title="Django 教程" href="../django/django-tutorial.html">Django 教程</a></li><li><a title="FastAPI 教程" href="../fastapi/fastapi-tutorial.html">FastAPI 教程</a></li><li><a title="Flask 教程" href="../flask/flask-tutorial.html">Flask 教程</a></li><li><a title="Pillow 教程" href="../pillow/pillow-tutorial.html">Pillow 教程</a></li><li><a title="Zookeeper 教程" href="//www.runoob.com/w3cnote/zookeeper-tutorial.html">Zookeeper 教程</a></li><li><a title="设计模式" href="../design-pattern/design-pattern-tutorial.html">设计模式</a></li><li><a title="Python 设计模式" href="../python-design-pattern/python-design-pattern-tutorial.html">Python 设计模式</a></li><li><a title="正则表达式" href="../regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="Maven 教程" href="../maven/maven-tutorial.html">Maven 教程</a></li><li><a title="CMake 教程" href="../cmake/cmake-tutorial.html">CMake 教程</a></li><li><a title="Verilog 教程" href="//www.runoob.com/w3cnote/verilog-tutorial.html">Verilog 教程</a></li><li><a title="ASP 教程" href="../asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="../appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="../vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="../sql/sql-tutorial.html">SQL 教程</a></li><li><a title="MySQL 教程" href="../mysql/mysql-tutorial.html">MySQL 教程</a></li><li><a title="PostgreSQL 教程" href="../postgresql/postgresql-tutorial.html">PostgreSQL 教程</a></li><li><a title="SQLite 教程" href="../sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="../mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="../redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="../Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit">  AI & 数据分析</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="NumPy 教程" href="../numpy/numpy-tutorial.html">NumPy 教程</a></li><li><a title="Pandas 教程" href="../pandas/pandas-tutorial.html">Pandas 教程</a></li><li><a title="Matplotlib 教程" href="../matplotlib/matplotlib-tutorial.html">Matplotlib 教程</a></li><li><a title="Scipy 教程" href="../scipy/scipy-tutorial.html">Scipy 教程</a></li><li><a title="Pytorch 教程" href="../pytorch/pytorch-tutorial.html">Pytorch 教程</a></li><li><a title="TensorFlow 教程" href="../tensorflow/tensorflow-tutorial.html">TensorFlow 教程</a></li><li><a title="Ollama 教程" href="../ollama/ollama-tutorial.html">Ollama 教程</a></li><li><a title="机器 教程" href="ml-tutorial.html">机器 教程</a></li><li><a title="Jupyter Notebook 教程" href="../jupyter-notebook/jupyter-notebook-tutorial.html">Jupyter Notebook 教程</a></li><li><a title="AI Agent(智能体)" href="../ai-agent/ai-agent-tutorial.html">AI Agent(智能体)</a></li><li><a title="Skills(技能)" href="../skills/skills-tutorial.html">Skills(技能)</a></li><li><a title="Claude Code" href="../claude-code/claude-code-tutorial.html">Claude Code</a></li><li><a title="OpenCode" href="../opencode/opencode-tutorial.html">OpenCode</a></li><li><a title="Codex 教程" href="../codex/codex-tutorial.html">Codex 教程</a></li><li><a title="scikit-learn 教程" href="../sklearn/sklearn-tutorial.html">scikit-learn 教程</a></li><li><a title="R 教程" href="../r/r-tutorial.html">R 教程</a></li><li><a title="OpenCV 教程" href="../opencv/opencv-tutorial.html">OpenCV 教程</a></li><li><a title="NLP 教程" href="../nlp/nlp-tutorial.html">NLP 教程</a></li><li><a title="Selenium 教程" href="../selenium/selenium-tutorial.html">Selenium 教程</a></li><li><a title="Julia 教程" href="../julia/julia-tutorial.html">Julia 教程</a></li><li><a title="量化交易" href="../qt/qt-tutorial.html">量化交易</a></li><li><a title="Dash 教程" href="../dash/dash-tutorial.html">Dash 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="//www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="../swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="../jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="../ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Flutter 教程" href="../flutter/flutter-tutorial.html">Flutter 教程</a></li><li><a title="Kotlin 教程" href="../kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="VS Code 教程" href="../vscode/vscode-tutorial.html">VS Code 教程</a></li><li><a title="PyCharm 教程" href="../pycharm/pycharm-tutorial.html">PyCharm 教程</a></li><li><a title="Swagger 教程" href="../swagger/swagger-tutorial.html">Swagger 教程</a></li><li><a title="RESTful API 教程" href="../restfulapi/restful-api-tutorial.html">RESTful API 教程</a></li><li><a title="Eclipse 教程" href="../eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="../git/git-tutorial.html">Git 教程</a></li><li><a title="Svn 教程" href="../svn/svn-tutorial.html">Svn 教程</a></li><li><a title="Markdown 教程" href="../markdown/md-tutorial.html">Markdown 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="../xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="../dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="../dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="../xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="../xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="../xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="../xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="../xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="../schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="../xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="../svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="../aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="../csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="PowerShell 教程" href="../powershell/powershell-tutorial.html">PowerShell 教程</a></li><li><a title="Web Pages 教程" href="../aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="../aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="../aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="../aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="../webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="../wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="../soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="../rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="../rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="../http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="../web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="../browsers/browser-information.html">浏览器信息</a></li><li><a title="网络协议" href="../np/np-tutorial.html">网络协议</a></li><li><a title="网站主机教程" href="../hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="../tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="../w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="../quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>            </div>
+    
+    </div>
+    </div>
+    <br>
+    
+    <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here">
+            <a href="javascript:void(0);">Advertisement</a>
+        </div>
+        <div class="re-600160" id="sidebar-right-re">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧栏1 -->
+        <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+                </div>
+    </div>
+</div></div>
+
+</div>
+
+<script>
+var aid = 29054;
+function coll() {
+	$.post( '/wp-content/themes/runoob/option/user/userinfo.php', {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+		if(data.error==0) {
+			$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+			$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+		}
+		alert(data.msg);
+	},'json');
+}
+
+(function () {
+    // 1. 仅 HTML 页面
+    if (!document.contentType || !document.contentType.includes('text/html')) return;
+
+    // 2. 容器判断
+    var container = document.querySelector('.article-intro');
+    if (!container) return;
+
+    var h1 = container.querySelector('h1');
+    if (!h1) return;
+
+    // 3. URL 判断
+    var url = window.location.href.toLowerCase();
+    var version = null;
+
+    if (url.includes('/python3/')) {
+        version = 'Python3.x';
+    } else if (url.includes('/python/')) {
+        version = 'Python2.x';
+    }
+
+    if (!version) return;
+
+    // 4. 防重复
+    if (h1.querySelector('.py-version-badge')) return;
+
+    // 5. 创建标签
+    var badge = document.createElement('span');
+    badge.className = 'py-version-badge';
+    badge.innerText = version;
+
+    // 6. 样式（核心：float 实现右上角）
+    badge.style.float = 'right';
+    badge.style.fontSize = '12px';
+    badge.style.padding = '2px 8px';
+    badge.style.borderRadius = '999px';
+
+   // 自适应亮/暗色 + 渐变背景（增强版）
+	badge.style.color = 'inherit';
+
+	// 渐变背景（低透明度，不影响暗黑模式）
+	if (version.includes('3')) {
+		badge.style.background = 'linear-gradient(90deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15))';
+	} else {
+		badge.style.background = 'linear-gradient(90deg, rgba(161,140,209,0.15), rgba(251,194,235,0.15))';
+	}
+
+	// 边框弱化（更精致）
+	badge.style.border = '1px solid rgba(127,127,127,0.3)';
+
+	// 提升可读性
+	badge.style.opacity = '0.95';
+
+    // 微调位置（更贴近“右上角”）
+    badge.style.marginTop = '4px';
+    badge.style.marginLeft = '10px';
+
+    // 7. 插入到 h1 最前面（让 float 生效更稳定）
+    h1.insertBefore(badge, h1.firstChild);
+
+})();
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.js?1.0"></script>
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.css?1.0" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // 获取窗口宽度
+    var windowWidth = $(window).width();
+
+    // 设置一个阈值，例如 768px，根据实际需要调整
+    var mobileThreshold = 768;
+
+    // 判断是否为移动端
+    if (windowWidth < mobileThreshold) {
+        // 在移动端执行的代码
+        $(".article-heading-ad").show();
+    } else {
+        // 在非移动端执行的代码
+		$(".article-heading-ad").show();
+    }
+	
+});
+</script>
+<script src="/wp-content/themes/runoob/assets/js/runoob-article-dir.min.js"></script>
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

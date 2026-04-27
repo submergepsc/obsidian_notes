@@ -1,0 +1,75 @@
+URL: https://www.runoob.com/tags/av-prop-preload.html
+Title: HTML 音频/视频 DOM preload 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM preload 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM played 属性 
+
+HTML 音频/视频 DOM readyState 属性 
+
+HTML 音频/视频 DOM preload 属性 
+
+实例 
+
+页面一旦加载，就开始加载视频： 
+
+myVid=document.getElementById("video1"); 
+myVid.preload="auto"; 
+
+尝试一下 » 
+
+定义和用法 
+
+preload 属性设置或返回是否在页面加载后立即加载音频/视频。 
+
+preload 属性允许作者向浏览器提供有关他/她认为会带来最佳用户体验的暗示。该属性在某些情况下被忽略。 
+
+浏览器支持 
+
+所有主流浏览器都支持 preload 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持该属性。 
+
+语法 
+
+设置 preload 属性： 
+
+audio|video .preload="auto|metadata|none" 
+
+返回 preload 属性： 
+
+audio|video .preload 
+
+属性值 
+
+值 
+
+描述 
+
+auto 
+
+指示一旦页面加载，则开始加载音频/视频。 
+
+metadata 
+
+指示当页面加载后仅加载音频/视频的元数据。 
+
+none 
+
+指示页面加载后不应加载音频/视频。 
+
+技术细节 
+
+返回值： 
+
+字符串值，auto|metadata|none 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM played 属性 
+
+HTML 音频/视频 DOM readyState 属性

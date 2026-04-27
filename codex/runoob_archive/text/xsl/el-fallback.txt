@@ -1,0 +1,56 @@
+URL: https://www.runoob.com/xsl/el-fallback.html
+Title: XSLT <xsl:fallback> 元素 | 菜鸟教程
+
+XSLT <xsl:fallback> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:element> 元素 
+
+XSLT <xsl:for-each> 元素 
+
+XSLT <xsl:fallback> 元素 
+
+定义和用法 
+
+The <xsl:fallback> 元素规定了在 XSL 处理器不支持 XSL 元素时，所运行的替代代码。 
+
+语法 
+
+<xsl:fallback> 
+
+<!-- Content: template --> 
+
+</xsl:fallback> 
+
+属性 
+
+无 
+
+实例 1 
+
+本例本来是要使用一个虚构的 <xsl:loop> 元素来循环遍历每个 "title" 元素。如果 XSL 处理器不支持该元素（它确实不支持），则会使用 <:xsl:for-each> 元素取而代之： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="catalog/cd"> 
+<xsl:loop select="title"> 
+<xsl:fallback> 
+<xsl:for-each select="title"> 
+<xsl:value-of select="."/> 
+</xsl:for-each> 
+</xsl:fallback> 
+</xsl:loop> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+AI 思考中... 
+
+XSLT <xsl:element> 元素 
+
+XSLT <xsl:for-each> 元素

@@ -1,0 +1,60 @@
+URL: https://www.runoob.com/tags/tag-address.html
+Title: HTML <address> 标签 | 菜鸟教程
+
+HTML <address> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <acronym> 标签 
+
+HTML <applet> 标签 
+
+HTML <address> 标签 
+
+实例 
+
+Example.com 的联系信息： 
+
+< address > Written by < a href = " mailto: [email protected] " > Jon Doe </ a > . < br > Visit us at: < br > Example.com < br > Box 564, Disneyland < br > USA </ address > 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <address> 标签。 
+
+标签定义及使用说明 
+
+<address> 标签定义文档作者/所有者的联系信息。 
+
+如果 <address> 元素位于 <body> 元素内部，则它表示该文档作者/所有者的联系信息。 
+
+如果 <address> 元素位于 <article> 元素内部，则它表示该文章作者/所有者的联系信息。 
+
+<address> 元素的文本通常呈现为 斜体 。大多数浏览器会在该元素的前后添加换行。 
+
+提示和注释 
+
+提示： 不应该使用 <address> 标签来描述邮政地址，除非这些信息是联系信息的组成部分。 
+
+提示： <address> 元素通常被包含在 <footer> 元素的其他信息中。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+HTML 4.01 不支持 <article> 标签，因此在 HTML 4.01 中 <address> 标签总是定义 文档 的作者/所有者的联系信息。 
+
+全局属性 
+
+<address> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<address> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <acronym> 标签 
+
+HTML <applet> 标签

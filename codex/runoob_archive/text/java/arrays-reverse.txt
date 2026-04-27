@@ -1,0 +1,166 @@
+URL: https://www.runoob.com/java/arrays-reverse.html
+Title: Java 实例 – 数组反转 | 菜鸟教程
+
+Java 实例 – 数组反转 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 获取数组长度 
+
+Java 实例 – 数组输出 
+
+Java 实例 - 数组反转 
+
+以下实例中我们使用自定义的 reverse 方法将数组进行反转： 
+
+实例 1 
+
+public class RunoobTest { 
+
+/* 反转数组*/ 
+
+static void reverse ( int a [ ] , int n ) 
+
+{ 
+
+int [ ] b = new int [ n ] ; 
+
+int j = n ; 
+
+for ( int i = 0 ; i < n ; i ++ ) { 
+
+b [ j - 1 ] = a [ i ] ; 
+
+j = j - 1 ; 
+
+} 
+
+/*输入反转数组*/ 
+
+System . out . println ( "反转后数组是: \n " ) ; 
+
+for ( int k = 0 ; k < n ; k ++ ) { 
+
+System . out . println ( b [ k ] ) ; 
+
+} 
+
+} 
+
+public static void main ( String [ ] args ) 
+
+{ 
+
+int [ ] arr = { 10 , 20 , 30 , 40 , 50 } ; 
+
+reverse ( arr, arr. length ) ; 
+
+} 
+
+} 
+
+以上代码运行输出结果为： 
+
+反转后数组是: 
+
+50
+40
+30
+20
+10 
+
+实例 2 
+
+public class RunoobTest { 
+
+/* 创建方法，第一个与最后一个交互，第二个与倒数第二个交换，以此类推*/ 
+
+static void reverse ( int a [ ] , int n ) 
+
+{ 
+
+int i, k, t ; 
+
+for ( i = 0 ; i < n / 2 ; i ++ ) { 
+
+t = a [ i ] ; 
+
+a [ i ] = a [ n - i - 1 ] ; 
+
+a [ n - i - 1 ] = t ; 
+
+} 
+
+System . out . println ( "反转后的数组是: \n " ) ; 
+
+for ( k = 0 ; k < n ; k ++ ) { 
+
+System . out . println ( a [ k ] ) ; 
+
+} 
+
+} 
+
+public static void main ( String [ ] args ) 
+
+{ 
+
+int [ ] arr = { 10 , 20 , 30 , 40 , 50 } ; 
+
+reverse ( arr, arr. length ) ; 
+
+} 
+
+} 
+
+以上代码运行输出结果为： 
+
+反转后数组是: 
+
+50
+40
+30
+20
+10 
+
+实例 
+
+import java.util.* ; 
+
+public class RunoobTest { 
+
+/* 使用 java.util.Arrays.asList(array) 方法*/ 
+
+static void reverse ( Integer a [ ] ) 
+
+{ 
+
+Collections . reverse ( Arrays . asList ( a ) ) ; 
+
+System . out . println ( Arrays . asList ( a ) ) ; 
+
+} 
+
+public static void main ( String [ ] args ) 
+
+{ 
+
+Integer [ ] arr = { 10 , 20 , 30 , 40 , 50 } ; 
+
+reverse ( arr ) ; 
+
+} 
+
+} 
+
+以上代码运行输出结果为： 
+
+[50, 40, 30, 20, 10] 
+
+AI 思考中... 
+
+Java 实例 – 获取数组长度 
+
+Java 实例 – 数组输出

@@ -1,0 +1,74 @@
+URL: https://www.runoob.com/w3c/w3c-other.html
+Title: 其他 W3C 活动 | 菜鸟教程
+
+其他 W3C 活动 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+W3C 教程 
+
+W3C RDF 活动 
+
+其他 W3C 活动 
+
+本节概况了其他一些重要和有趣的 W3C 活动。 
+
+The Web Accessibility Initiative (WAI) 
+
+WAI 定义了如何使残障人士更易使用 Web 内容的指导方针。 
+
+WAI 通过技术、指导方针、工具、教育、研究以及开发项目，为 "Web accessibility for all" 这个目标而努力。 
+
+W3C WAI 推荐标准 
+
+数学标记语言 - Mathematical Markup Language (MathML) 
+
+MathML 是一项用于描述数学符号的 XML 标准。 
+
+MathML 的目标的使数学能够在 Web 上被提供、接受和处理，就像 HTML 可以令文本实现的功能一样。 
+
+W3C MathML 推荐标准 
+
+可缩放的矢量图形 - Scalable Vector Graphics (SVG) 
+
+SVG 是一门用于在 XML 中描述二位图形的语言。 
+
+SVG 运行三种类型的图形对象：矢量图形形状、图像和文本。 
+
+特性设置包括了变换、裁剪路径、alpha 遮罩、滤镜效果、模版对象以及可扩展性。 
+
+W3C SVG 1.1 推荐标准 
+
+W3C SVG 1.2 工作草案 
+
+墨水标记语言 - Ink Markup Language (InkML) 
+
+InkML 是用于表达数字墨水数据的 XML 数据格式，这类数据的输入是通过作为多通路系统组成部分的电子笔或输入笔。 
+
+W3C InkML 工作草案 
+
+国际化 - Internationalization 
+
+W3C 国际化活动的目标是，在 W3C 内部以及与其他组织一起，建议并调整任何技术、协定、指导方针和活动，使得在不同的语言、脚本和文化范畴内更易在全球范围内使用 W3C 技术。 
+
+W3C 国际化活动 
+
+语音浏览器活动 
+
+W3C 的语音浏览器活动的工作是使人们可以通过口语指令和语音合成进行交互，以扩展 Web（的使用范畴）。 
+
+语音可扩展标记语言 （VoiceXML） 
+
+语音合成标记语言 （VoiceXML） 
+
+语音识别语法规范 
+
+语音浏览器呼叫控制 （CCXML） 
+
+W3C 参考手册: 
+
+W3C 首页 
+
+AI 思考中... 
+
+W3C RDF 活动

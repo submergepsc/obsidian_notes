@@ -1,0 +1,41 @@
+URL: https://www.runoob.com/xlink/xlink-tutorial.html
+Title: XLink 和 XPointer 教程 | 菜鸟教程
+
+XLink 和 XPointer 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XLink 教程 
+
+XLink 和 XPointer 简介 
+
+XLink 和 XPointer 教程 
+
+XLink 定义在 XML 文档中创建超级链接的标准方法。 
+
+XPointer 允许这些超级链接指向 XML 文档中的更多具体部分（片断）。 
+
+现在开始学习 XLink 和 XPointer! 
+
+XLink 和 XPointer 简介 
+
+本章阐述 XLink 和 XPointer 的概念。 
+
+XLink 和 XPointer 语法 
+XLink 和 XPointer 的语法。 
+
+XLink 实例 
+一个在 XML 文档中使用 XLink 的实例。 
+
+XPointer 实例 
+一个在 XML 文档中使用 XLink 和 XPointer 的实例。 
+
+XLink 总结 
+本文包括在本教程所学内容的一个总结，以及我们向你推荐的下一步应该学习的内容。 
+
+XLink 参考手册 
+XLink 属性参考手册. 
+
+AI 思考中... 
+
+XLink 和 XPointer 简介

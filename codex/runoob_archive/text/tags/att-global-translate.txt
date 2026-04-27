@@ -1,0 +1,65 @@
+URL: https://www.runoob.com/tags/att-global-translate.html
+Title: HTML translate 属性 | 菜鸟教程
+
+HTML translate 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML title 属性 
+
+HTML onshow 事件属性 
+
+HTML translate 属性 
+
+实例 
+
+规定一些元素不被翻译: 
+
+<p translate="no">这个段落不能翻译。</p> 
+<p>这个段落可以被翻译</p> 
+
+浏览器支持 
+
+目前没有主流浏览器支持 translate 属性。 
+
+定义和用法 
+
+translate 属性规定元素内容是否要翻译。 
+
+测试：使用 Google 翻译工具，查看以下单词 "ice cream" 会变成什么： 
+
+这边我们使用 translate="no": ice cream . 
+
+这边我们使用 class="notranslate": ice cream . 
+
+提示： 使用 class="notranslate" 替代。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+translate 属性是 HTML5 新增属性。 
+
+语法 
+
+< element translate="yes|no"> 
+
+属性值 
+
+值 
+
+描述 
+
+yes 
+
+规定元素内容需要翻译 
+
+no 
+
+规定元素内容不需要翻译 
+
+AI 思考中... 
+
+HTML title 属性 
+
+HTML onshow 事件属性

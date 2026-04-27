@@ -1,0 +1,96 @@
+URL: https://www.runoob.com/font-awesome/fontawesome-icons-filetype.html
+Title: Font Awesome 文件类型图标 | 菜鸟教程
+
+Font Awesome 文件类型图标 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Font Awesome 图标 
+
+Font Awesome 方向图标 
+
+Font Awesome 表单图标 
+
+Font Awesome 文件类型图标 
+
+下表显示了所有的 Font Awesome 文件类型图标： 
+
+图标 
+
+描述 
+
+实例 
+
+fa fa-file 
+
+尝试一下 
+
+fa fa-file-archive-o 
+
+尝试一下 
+
+fa fa-file-audio-o 
+
+尝试一下 
+
+fa fa-file-code-o 
+
+尝试一下 
+
+fa fa-file-excel-o 
+
+尝试一下 
+
+fa fa-file-image-o 
+
+尝试一下 
+
+fa fa-file-movie-o 
+
+尝试一下 
+
+fa fa-file-o 
+
+尝试一下 
+
+fa fa-file-pdf-o 
+
+尝试一下 
+
+fa fa-file-photo-o 
+
+尝试一下 
+
+fa fa-file-picture-o 
+
+尝试一下 
+
+fa fa-file-powerpoint-o 
+
+尝试一下 
+
+fa fa-file-text 
+
+尝试一下 
+
+fa fa-file-text-o 
+
+尝试一下 
+
+fa fa-file-video-o 
+
+尝试一下 
+
+fa fa-file-word-o 
+
+尝试一下 
+
+fa fa-file-zip-o 
+
+尝试一下 
+
+AI 思考中... 
+
+Font Awesome 方向图标 
+
+Font Awesome 表单图标

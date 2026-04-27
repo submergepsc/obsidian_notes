@@ -1,0 +1,554 @@
+URL: https://www.runoob.com/nodejs/nodejs-util-module.html
+Title: Node.js util 模块 | 菜鸟教程
+
+Node.js util 模块 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Node.js 教程 
+
+Node.js Stream(流) 
+
+Node.js Web 模块 
+
+Node.js util 模块 
+
+Node.js 中的 util 模块是一个核心模块，提供了一系列实用工具函数。这些函数主要用于帮助开发者完成常见的编程任务，如类型检查、继承实现、调试输出等。 util 模块的设计初衷是弥补 JavaScript 原生功能的不足，为开发者提供更多便利。 
+
+要使用 util 模块，你只需要在代码中引入它： 
+
+const util = require('util'); 
+
+util 模块的主要功能 
+
+1. 类型检查工具 
+
+util 模块提供了一些用于类型检查的函数，这些函数比 JavaScript 的原生 typeof 操作符更加精确和有用。 
+
+util.types.isArrayBuffer(value) 
+
+检查给定的值是否是 ArrayBuffer 实例。 
+
+实例 
+
+const arrBuffer = new ArrayBuffer ( 8 ) ; 
+
+console. log ( util. types . isArrayBuffer ( arrBuffer ) ) ; // true 
+
+console. log ( util. types . isArrayBuffer ( [ ] ) ) ; // false 
+
+util.types.isDate(value) 
+
+检查给定的值是否是 Date 实例。 
+
+实例 
+
+console. log ( util. types . isDate ( new Date ( ) ) ) ; // true 
+
+console. log ( util. types . isDate ( '2023-01-01' ) ) ; // false 
+
+2. 实用工具函数 
+
+util.format(format[, ...args]) 
+
+类似于 C 语言中的 printf 函数，用于格式化字符串。 
+
+实例 
+
+const name = 'John' ; 
+
+const age = 30 ; 
+
+console. log ( util. format ( 'My name is %s and I am %d years old' , name , age ) ) ; 
+
+// 输出: My name is John and I am 30 years old 
+
+util.inspect(object[, options]) 
+
+返回对象的字符串表示，主要用于调试。可以配置深度、颜色等选项。 
+
+实例 
+
+const obj = { 
+
+name : 'Alice' , 
+
+details : { 
+
+age : 25 , 
+
+hobbies : [ 'reading' , 'coding' ] 
+
+} 
+
+} ; 
+
+console. log ( util. inspect ( obj , { depth : 2 , colors : true } ) ) ; 
+
+3. 回调风格转换 
+
+util.promisify(original) 
+
+将遵循 Node.js 回调风格的函数转换为返回 Promise 的函数。 
+
+实例 
+
+const fs = require ( 'fs' ) ; 
+
+const readFile = util. promisify ( fs. readFile ) ; 
+
+async function readConfig ( ) { 
+
+try { 
+
+const data = await readFile ( 'config.json' , 'utf8' ) ; 
+
+console. log ( data ) ; 
+
+} catch ( err ) { 
+
+console. error ( 'Error reading file:' , err ) ; 
+
+} 
+
+} 
+
+readConfig ( ) ; 
+
+util.callbackify(original) 
+
+与 promisify 相反，将返回 Promise 的函数转换为回调风格的函数。 
+
+实例 
+
+async function asyncFunc ( ) { 
+
+return 'Hello World' ; 
+
+} 
+
+const callbackFunc = util. callbackify ( asyncFunc ) ; 
+
+callbackFunc ( ( err , result ) => { 
+
+if ( err ) throw err ; 
+
+console. log ( result ) ; // Hello World 
+
+} ) ; 
+
+4. 继承工具 
+
+util.inherits(constructor, superConstructor) 
+
+实现原型继承（ES5 风格）。注意：在 ES6 中，建议使用 class 和 extends 关键字。 
+
+实例 
+
+function Animal ( name ) { 
+
+this . name = name ; 
+
+} 
+
+Animal. prototype . speak = function ( ) { 
+
+console. log ( this . name + ' makes a noise.' ) ; 
+
+} ; 
+
+function Dog ( name ) { 
+
+Animal. call ( this , name ) ; 
+
+} 
+
+util. inherits ( Dog , Animal ) ; 
+
+Dog. prototype . speak = function ( ) { 
+
+console. log ( this . name + ' barks.' ) ; 
+
+} ; 
+
+const d = new Dog ( 'Rex' ) ; 
+
+d. speak ( ) ; // Rex barks. 
+
+util 模块的实际应用场景 
+
+1. 调试复杂对象 
+
+当需要打印复杂对象的结构时， util.inspect 比简单的 console.log 更加强大： 
+
+实例 
+
+const complexObj = { 
+
+date : new Date ( ) , 
+
+regex : /test/g , 
+
+nested : { 
+
+array : [ 1 , 2 , 3 ] , 
+
+fn : function ( ) { } 
+
+} 
+
+} ; 
+
+console. log ( util. inspect ( complexObj , { 
+
+showHidden : true , 
+
+depth : null , 
+
+colors : true 
+
+} ) ) ; 
+
+2. 现代化旧代码 
+
+将回调风格的旧代码转换为 Promise 风格： 
+
+实例 
+
+// 旧的回调风格代码 
+
+function oldStyleFunc ( param , callback ) { 
+
+// 一些异步操作 
+
+setTimeout ( ( ) => { 
+
+callback ( null , `Result for $ { param } ` ) ; 
+
+} , 100 ) ; 
+
+} 
+
+// 转换为 Promise 风格 
+
+const newStyleFunc = util. promisify ( oldStyleFunc ) ; 
+
+async function useNewStyle ( ) { 
+
+const result = await newStyleFunc ( 'test' ) ; 
+
+console. log ( result ) ; // Result for test 
+
+} 
+
+useNewStyle ( ) ; 
+
+3. 自定义对象检查 
+
+可以自定义对象的 inspect 方法，改变 util.inspect 的输出： 
+
+实例 
+
+class CustomObject { 
+
+constructor ( value ) { 
+
+this . value = value ; 
+
+} 
+
+[ util. inspect . custom ] ( depth , options ) { 
+
+return `CustomObject : $ { this . value } ` ; 
+
+} 
+
+} 
+
+const obj = new CustomObject ( 'test' ) ; 
+
+console. log ( util. inspect ( obj ) ) ; // CustomObject: test 
+
+注意事项 
+
+性能考虑 ： util.inspect 对于大型对象可能会有性能影响，生产环境中应谨慎使用。 
+
+API 稳定性 ：虽然 util 模块是核心模块，但某些 API 可能仍会被标记为实验性功能。 
+
+现代替代方案 ：一些功能（如 util.inherits ）在现代 JavaScript 中有更好的替代方案（如 class 语法）。 
+
+错误处理 ：使用 promisify 时，确保正确处理错误，避免未捕获的 Promise 拒绝。 
+
+方法与属性 
+
+方法/属性 
+
+描述 
+
+版本引入 
+
+util.callbackify(original) 
+
+将返回 Promise 的 async 函数转换为回调风格的函数 
+
+8.2.0 
+
+util.debuglog(section) 
+
+创建一个只当 NODE_DEBUG 环境变量包含指定 section 时才记录消息的函数 
+
+0.11.3 
+
+util.deprecate(fn, msg[, code]) 
+
+包装函数，使其被调用时发出弃用警告 
+
+0.8.0 
+
+util.format(format[, ...args]) 
+
+使用第一个参数作为类似 printf 的格式字符串来格式化字符串 
+
+0.5.3 
+
+util.formatWithOptions(inspectOptions, format[, ...args]) 
+
+类似 util.format()，但接受 inspect 选项 
+
+10.0.0 
+
+util.getSystemErrorName(err) 
+
+返回由错误码 err 表示的系统错误名称 
+
+9.7.0 
+
+util.inherits(constructor, superConstructor) 
+
+将一个构造函数的原型方法继承到另一个构造函数（已弃用，建议使用 ES6 class 和 extends） 
+
+0.3.0 
+
+util.inspect(object[, options]) 
+
+返回 object 的字符串表示，用于调试 
+
+0.3.0 
+
+util.isDeepStrictEqual(val1, val2) 
+
+测试两个值是否深度严格相等 
+
+9.0.0 
+
+util.promisify(original) 
+
+将回调风格的函数转换为返回 Promise 的函数 
+
+8.0.0 
+
+util.stripVTControlCharacters(str) 
+
+从字符串中剥离 ANSI 转义码 
+
+16.11.0 
+
+util.TextDecoder 
+
+WHATWG 标准 TextDecoder 实现的别名 
+
+8.3.0 
+
+util.TextEncoder 
+
+WHATWG 标准 TextEncoder 实现的别名 
+
+8.3.0 
+
+util.types 
+
+提供各种 Node.js 类型检查的工具对象 
+
+10.0.0 
+
+util.aborted(err, signal) 
+
+检查错误是否由中止信号引起 
+
+18.18.0 
+
+util.parseArgs([config]) 
+
+解析命令行参数的工具函数 
+
+18.3.0 
+
+util.types 提供的方法 
+
+方法 
+
+描述 
+
+util.types.isAnyArrayBuffer(value) 
+
+检查是否为 AnyArrayBuffer 实例 
+
+util.types.isArrayBuffer(value) 
+
+检查是否为 ArrayBuffer 实例 
+
+util.types.isAsyncFunction(value) 
+
+检查是否为异步函数 
+
+util.types.isBigInt64Array(value) 
+
+检查是否为 BigInt64Array 实例 
+
+util.types.isBigUint64Array(value) 
+
+检查是否为 BigUint64Array 实例 
+
+util.types.isBooleanObject(value) 
+
+检查是否为 Boolean 对象 
+
+util.types.isBoxedPrimitive(value) 
+
+检查是否为装箱的基本类型 
+
+util.types.isCryptoKey(value) 
+
+检查是否为 CryptoKey 实例 
+
+util.types.isDataView(value) 
+
+检查是否为 DataView 实例 
+
+util.types.isDate(value) 
+
+检查是否为 Date 实例 
+
+util.types.isExternal(value) 
+
+检查是否为外部原生值 
+
+util.types.isFloat32Array(value) 
+
+检查是否为 Float32Array 实例 
+
+util.types.isFloat64Array(value) 
+
+检查是否为 Float64Array 实例 
+
+util.types.isGeneratorFunction(value) 
+
+检查是否为生成器函数 
+
+util.types.isGeneratorObject(value) 
+
+检查是否为生成器对象 
+
+util.types.isInt8Array(value) 
+
+检查是否为 Int8Array 实例 
+
+util.types.isInt16Array(value) 
+
+检查是否为 Int16Array 实例 
+
+util.types.isInt32Array(value) 
+
+检查是否为 Int32Array 实例 
+
+util.types.isMap(value) 
+
+检查是否为 Map 实例 
+
+util.types.isMapIterator(value) 
+
+检查是否为 Map 迭代器 
+
+util.types.isModuleNamespaceObject(value) 
+
+检查是否为模块命名空间对象 
+
+util.types.isNativeError(value) 
+
+检查是否为原生错误对象 
+
+util.types.isNumberObject(value) 
+
+检查是否为 Number 对象 
+
+util.types.isPromise(value) 
+
+检查是否为 Promise 
+
+util.types.isProxy(value) 
+
+检查是否为 Proxy 对象 
+
+util.types.isRegExp(value) 
+
+检查是否为 RegExp 对象 
+
+util.types.isSet(value) 
+
+检查是否为 Set 实例 
+
+util.types.isSetIterator(value) 
+
+检查是否为 Set 迭代器 
+
+util.types.isSharedArrayBuffer(value) 
+
+检查是否为 SharedArrayBuffer 实例 
+
+util.types.isStringObject(value) 
+
+检查是否为 String 对象 
+
+util.types.isSymbolObject(value) 
+
+检查是否为 Symbol 对象 
+
+util.types.isTypedArray(value) 
+
+检查是否为 TypedArray 实例 
+
+util.types.isUint8Array(value) 
+
+检查是否为 Uint8Array 实例 
+
+util.types.isUint8ClampedArray(value) 
+
+检查是否为 Uint8ClampedArray 实例 
+
+util.types.isUint16Array(value) 
+
+检查是否为 Uint16Array 实例 
+
+util.types.isUint32Array(value) 
+
+检查是否为 Uint32Array 实例 
+
+util.types.isWeakMap(value) 
+
+检查是否为 WeakMap 实例 
+
+util.types.isWeakSet(value) 
+
+检查是否为 WeakSet 实例 
+
+总结 
+
+Node.js 的 util 模块提供了许多实用的工具函数，可以帮助开发者更高效地编写代码。从类型检查到异步流程控制，再到调试输出， util 模块涵盖了开发中的多个常见需求。虽然现代 JavaScript 已经提供了许多原生解决方案，但 util 模块仍然在许多场景下非常有用，特别是在处理遗留代码或需要特定工具函数时。 
+
+掌握 util 模块的使用，可以让你的 Node.js 开发更加得心应手，特别是在调试和代码转换方面。 
+
+AI 思考中... 
+
+Node.js Stream(流) 
+
+Node.js Web 模块

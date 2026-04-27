@@ -1,0 +1,63 @@
+URL: https://www.runoob.com/tags/canvas-measuretext.html
+Title: HTML canvas measureText() 方法 | 菜鸟教程
+
+HTML canvas measureText() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas strokeText() 方法 
+
+HTML canvas drawImage() 方法 
+
+HTML canvas measureText() 方法 
+
+实例 
+
+在画布上输出文本之前，检查字体的宽度： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var 
+ ctx=c.getContext("2d"); 
+ctx.font="30px Arial"; 
+var txt="Hello World" 
+ctx.fillText("width:" + ctx.measureText(txt).width,10,50) 
+ctx.fillText(txt,10,100); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 measureText() 
+方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+measureText()方法返回一个对象，该对象包含以像素计的指定字体宽度。 
+
+提示： 如果您需要在文本向画布输出之前，就了解文本的宽度，那么请使用该方法。 
+
+JavaScript 语法： 
+
+context .measureText( text ).width; 
+
+参数值 
+
+参数 
+
+描述 
+
+text 
+
+要测量的文本。 
+
+AI 思考中... 
+
+HTML canvas strokeText() 方法 
+
+HTML canvas drawImage() 方法

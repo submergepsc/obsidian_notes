@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>JAVA 打印三角形 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="http://www.runoob.com/w3cnote/java-print-the-triangle.html" />
+<meta name="keywords" content="JAVA 打印三角形">
+<meta name="description" content="首先，确定我们的输出结果是：  那么我们怎么才能做到这样呢？ 1、首先分析图形的结构 我们可以看到，图形共5行，那么，我们是否可以建立一个for循环语句，使其控制在5行？答案是肯定的。  for(int i = 1 ;i   我们可以把图形拆分为这样三个三角形。 3、建立1号空白三角形 可以看，第一行是输出4个空格，第二行输出3个空格，第三行输出2个，第四行输出1个，第五行没有 从这个规律可以看出，是依次递减的规律，那么如何实现呢？ 我..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<div class="container navigation">
+    <div class="row">
+        <div class="col nav">
+            
+
+                        <ul class="pc-nav" id="note-nav">
+                <li><a href="../index/index.html">首页</a></li>
+                <li><a href="../w3cnote/index.html">笔记首页</a></li>
+                <li><a href="/w3cnote/android-tutorial-intro.html" title="Android 基础入门教程">Android</a></li>
+                <li><a href="/w3cnote/es6-tutorial.html" title="ES6 教程">ES6 教程</a></li>
+                <li><a href="/w3cnote/ten-sorting-algorithm.html" title="排序算法">排序算法</a></li>
+                <li><a href="/w3cnote/hadoop-tutorial.html" title="Hadoop 教程">Hadoop</a></li>
+                <li><a href="/w3cnote/zookeeper-tutorial.html" title="Zookeeper 教程">Zookeeper</a></li>
+                <li><a href="/w3cnote/verilog-tutorial.html" title="Verilog 教程">Verilog</a></li>
+                <li><a href="../w3cnote_genre/code/index.html" title="编程技术">编程技术</a></li> 
+                <li><a href="../w3cnote_genre/coderlife/index.html" title="程序员人生">程序员人生</a></li>
+                
+                <!--<li><a href="javascript:;" class="runoob-pop">登录</a></li>
+                
+                
+                        <li>
+                <a style="font-weight:bold;" href="https://www.runoob.com/linux/linux-tutorial.html#yunserver" target="_blank" onclick="_hmt.push(['_trackEvent', 'aliyun', 'click', 'aliyun'])" title="kkb">云服务器</a>
+                </li>
+                <li><a href="http://gk.link/a/104mQ" target="_blank" style="font-weight: bold;"onclick="_hmt.push(['_trackEvent', '极客时间', 'click', 'jike'])" title="我的圈子">极客时间</a></li>
+            
+                
+                <li><a target="_blank" href="/shoppinglist" rel="nofollow">知识店铺</a></li> 
+        -->
+            </ul>
+                        
+              
+            <ul class="mobile-nav">
+                <li><a href="../w3cnote/index.html">首页</a></li>
+                <li><a href="../w3cnote_genre/android/index.html" target="_blank" title="Android 基础入门教程">Android</a></li>
+                <li><a href="/w3cnote/es6-tutorial.html" target="_blank" title="ES6 教程">ES6</a></li>
+                <li><a href="../w3cnote_genre/joke/index.html" target="_blank" title="程序员笑话">逗乐</a></li>
+                
+                <a href="javascript:void(0)" class="search-reveal">Search</a> 
+            </ul>
+            
+        </div>
+    </div>
+</div>
+
+
+<!--  内容  -->
+<div class="container main">
+	<div class="row">
+
+		<div class="col middle-column big-middle-column">
+	 			<div class="article">
+			<div class="article-heading">
+				<h2>JAVA 打印三角形</h2>				<h3><em>分类</em> <a href="../w3cnote_genre/code/index.html" title="编程技术">编程技术</a> </h3>
+			</div>
+			<div class="article-body note-body">
+				<div class="article-intro">
+					<!-- ad start-->
+			            <!-- ad end-->
+					<p>首先，确定我们的输出结果是：</p>
+<p><img decoding="async" src="//www.runoob.com/wp-content/uploads/2017/04/f44a8db53ea3d09955d3aa5f013b5e7a.jpg"></p>
+<p><strong>那么我们怎么才能做到这样呢？</strong></p>
+<p>1、首先分析图形的结构</p>
+<p>我们可以看到，图形共5行，那么，我们是否可以建立一个for循环语句，使其控制在5行？答案是肯定的。</p>
+<pre>
+for(int i = 1 ;i &lt;= 5 ;i++ ){
+
+}
+</pre><p>这样，我们就建立了一个循环5次的for循环代码块,为最外圈的循环。</p>
+<p>2、然后，分析图形是怎样构成的，我们可以把图形拆分为以下几部分：/p>
+<p><img decoding="async" src="//www.runoob.com/wp-content/uploads/2017/04/e66ee03bb2a9b62f47a262ecbdd117c2.jpg"></p>
+<p>我们可以把图形拆分为这样三个三角形。</p>
+<p>3、建立1号空白三角形</p>
+<p>可以看，第一行是输出4个空格，第二行输出3个空格，第三行输出2个，第四行输出1个，第五行没有
+</p><p>从这个规律可以看出，是依次递减的规律，那么如何实现呢？
+</p><p>我们可以想象从1到5，中间有四个数字；从2到5中间有3个数字，从3到5……
+</p><p> 是不是可以利用这个原理呢？答案是当然的。那么如何实现？请看代码：</p>
+<pre>
+for(int i = 1;i&lt;=5 ;i++) {
+    for(int j = 5; j &gt;= i ; j--)//建立1号图形
+        System.out.print(" ");
+    System.out.println();
+}
+</pre>
+<p>第一个for语句就是刚才定义的五次循环语句
+</p><p>第二个for循环，我们来进行解析:</p>
+<p>首先 定义一个int类型的j变量，给j赋值为5
+</p><p>然后我们想，既然要缩短距离，那么每次循环j就-1，那么刚好符合我们的要求：
+</p><p>第一次大循环 i=1，j=5, 所以符合j>=i的条件然后输出一个空格，然后j-1，现在j的值为4符合j>=i,再输出
+</p><p>……
+</p><p>一直到j=0,j>=i不符合，跳出内循环
+</p><p>现在到System.out.println(); 换行
+</p><p>现在回到外循环 i++ ,i变成2，符合i<=5,进入内循环
+</p><p>定义j=5 , j>=i,符合，输出一个空格，j-1
+</p><p>j现在为4 ，j>=i，符合，输出一个空额，j-1
+</p><p>……
+</p><p>一直到j=1,j>=i，不成立，跳出内训还，然后换行
+</p><p> 然后i+1 然后再进入内循环……
+</p><p>如此循环下去 形成了一个四行的倒三角，1号图案形成。</p>
+<p>4、建立2号图形，和1号图形原理完全相同，不过正好相反
+</p><pre>
+for(int i = 1 ;i&lt;=5 ;i++){
+    for(int j = 5; j &gt;= i ; j--)//建立1号图形
+        System.out.print(" ");
+    for(int j = 1; j &lt;= i; j++)//建立2号图形
+        System.out.print("*");
+    System.out.println();
+}</pre>
+<p>如建立1号图形相同,大家可以自己理解，如此2号建立</p>
+<p>5、建立3号图形</p>
+<pre>
+for(int i = 1; i &lt;= 5; i++){
+    for(int j = 5 ;i &lt;= j; j--)//建立1号图形
+        System.out.print(" ");
+    for(int j = 1; j &lt;= i; j++)//建立2号图形
+        System.out.print("*");
+    for(int j = 1; j &lt; i; j ++)//建立3号图形
+        System.out.print("*");
+
+}</pre><p>
+同样，如同1号二号相同，建立3号图形原理相同
+</p><p>但是大家注意一点，3号图形没有在第一行输出，所以要在第一次大循环中掐断它，让它在第二次大循环中输出
+</p><p>所以 这次的判断条件为 j &lt; i 去掉了等于。</p>
+<div class="example"> 
+<h2 class="example">完整源码：</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">Demo</span><span class="hl-brackets">{</span><span class="hl-code">
+    </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">main</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-code"> </span><span class="hl-identifier">args</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+        </span><span class="hl-reserved">for</span><span class="hl-brackets">(</span><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">i</span><span class="hl-code">=</span><span class="hl-number">1</span><span class="hl-code">;</span><span class="hl-identifier">i</span><span class="hl-code">&lt;=</span><span class="hl-number">5</span><span class="hl-code">;</span><span class="hl-identifier">i</span><span class="hl-code">++</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+            </span><span class="hl-reserved">for</span><span class="hl-brackets">(</span><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">j</span><span class="hl-code">=</span><span class="hl-number">5</span><span class="hl-code">; </span><span class="hl-identifier">i</span><span class="hl-code">&lt;=</span><span class="hl-identifier">j</span><span class="hl-code">; </span><span class="hl-identifier">j</span><span class="hl-code">--</span><span class="hl-brackets">)</span><span class="hl-code">
+                </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">print</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string"> </span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;
+            </span><span class="hl-reserved">for</span><span class="hl-brackets">(</span><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">j</span><span class="hl-code">=</span><span class="hl-number">1</span><span class="hl-code">; </span><span class="hl-identifier">j</span><span class="hl-code">&lt;=</span><span class="hl-identifier">i</span><span class="hl-code">; </span><span class="hl-identifier">j</span><span class="hl-code">++</span><span class="hl-brackets">)</span><span class="hl-code">
+                </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">print</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">*</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;
+            </span><span class="hl-reserved">for</span><span class="hl-brackets">(</span><span class="hl-types">int</span><span class="hl-code"> </span><span class="hl-identifier">j</span><span class="hl-code">=</span><span class="hl-number">1</span><span class="hl-code">; </span><span class="hl-identifier">j</span><span class="hl-code">&lt;</span><span class="hl-identifier">i</span><span class="hl-code">; </span><span class="hl-identifier">j</span><span class="hl-code">++</span><span class="hl-brackets">)</span><span class="hl-code">
+                </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">print</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">*</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;
+            </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+        </span><span class="hl-brackets">}</span><span class="hl-code">
+    </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div>
+</div>
+
+<blockquote>
+<p>投稿作者邮箱：<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="4c7d7c7f7c7a757d797f7c0c3d3d622f2321">[email&#160;protected]</a></p>
+</blockquote>
+
+
+				</div>
+			</div>
+			<div class="previous-next-links">
+			<div class="previous-design-link">← <a href="http://www.runoob.com/w3cnote/node-multi-version.html" rel="prev"> 手把手告诉你如何安装多个版本的node</a> </div>
+			<div class="next-design-link"><a href="http://www.runoob.com/w3cnote/java-printf-formate-demo.html" rel="next"> Java 格式化输出 printf 用法</a> →</div>
+			</div>
+						<style>
+@media screen and (max-width: 768px) {
+	#w3cnote-ad728 {
+		display: none;
+	}
+}
+p.note-author {
+    border-bottom: 1px solid #ddd;
+    font-size: 18px;
+    font-weight: bold;
+    color: #78a15a;
+    padding-bottom: 2px;
+    margin-bottom: 4px;
+}
+</style>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+var aid = 18679;
+</script>
+	</div>
+		
+	</div>
+	<div class="listcol last right-column">
+
+
+
+
+<!--
+	<div class="tab tab-light-blue"> 订阅</div>
+	<div class="sidebar-box">
+		<div class="socialicons">
+			<a href="//www.runoob.com/feed" class="rss">RSS 订阅</a>
+		
+			<form action="//list.qq.com/cgi-bin/qf_compose_send" method="post">
+			<input type="hidden" value="qf_booked_feedback" name="t">
+			<input type="hidden" value="4b67b6b6c1f5e792559940cab4aebb8f1126fba880bff1a8" name="id">
+			<input class="placeholder" id="feed_email" name="to" value="输入邮箱 订阅笔记" autocomplete="off">
+			<input type="submit" value="订阅" class="btn btn-primary">
+			</form>
+		
+		</div>
+ 
+	</div>
+-->	
+
+
+
+<!--
+	<div class="sidebar-box cate-list">
+	<div class="sidebar-box recommend-here list-link">
+			<a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;">笔记列表</a>
+		</div>
+
+ 
+
+</div>
+-->
+<div class="sidebar-box cate-list" style="display:none;">
+	<div class="sidebar-box recommend-here list-link">
+	<a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;">热门文章</a>
+	</div>
+	<div class="membership"> 
+		<ul class="membership">
+						<li><a target="_blank" href="https://mp.weixin.qq.com/s/ZaP6YNgKTCHYy3r2WPBBaw" title="2024 年 04 月 JavaScript 框架排行榜">2024 年 04 月 JavaScript 框架排行榜</a></li>
+						<li><a target="_blank" href="https://mp.weixin.qq.com/s/JBR2twC0t6krjjuxqvhsEQ" title="免费、开源、好用的 SQL 客户端合集">免费、开源、好用的 SQL 客户端合集</a></li>
+						<li><a target="_blank" href="https://mp.weixin.qq.com/s/TwV3YQjA1glyaW7TiHvhlA" title="优雅的代码规范，提升代码质量">优雅的代码规范，提升代码质量</a></li>
+						<li><a target="_blank" href="https://mp.weixin.qq.com/s/CnUJ-2OHPbBKlnVpjDzavA" title="命令行中的趣味世界，牛也能说话，有趣又好玩">命令行中的趣味世界，牛也能说话，有趣又好玩</a></li>
+						<li><a target="_blank" href="https://mp.weixin.qq.com/s/7NKl-mD7N8CeSNQlbKDEWA" title="2024 年 05 月编程语言排行榜，Fortran 进入前 10 名，发生了什么？">2024 年 05 月编程语言排行榜，Fortran 进入前 10 名，发生了什么？</a></li>
+						<li><a target="_blank" href="https://mp.weixin.qq.com/s/yWlSVDKobtDhThnhirVRpw" title="免费开源的 IDE、数据库管理工具、SSH客户端和FTP客户端">免费开源的 IDE、数据库管理工具、SSH客户端和FTP客户端</a></li>
+					</ul>
+	</div>
+</div>
+
+	 <div class="sidebar-box cate-list">
+		 		
+		
+	 	<div class="sidebar-box recommend-here list-link">
+			<a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;">教程列表</a>
+		</div>
+		
+		<div class="cate-items"> 
+				<a href="../ado/index.html">ADO 教程</a>
+	<a href="../ai-agent/index.html">AI Agent 教程</a>
+	<a href="../ajax/index.html">Ajax 教程</a>
+	<a href="../android/index.html">Android 教程</a>
+	<a href="../angularjs2/index.html">Angular2 教程</a>
+	<a href="../angularjs/index.html">AngularJS 教程</a>
+	<a href="../appml/index.html">AppML 教程</a>
+	<a href="../asp/index.html">ASP 教程</a>
+	<a href="../aspnet/index.html">ASP.NET 教程</a>
+	<a href="../bootstrap/index.html">Bootstrap 教程</a>
+	<a href="../bootstrap4/index.html">Bootstrap4 教程</a>
+	<a href="../bootstrap5/index.html">Bootstrap5 教程</a>
+	<a href="../cprogramming/index.html">C 教程</a>
+	<a href="../csharp/index.html">C# 教程</a>
+	<a href="../cplusplus/index.html">C++ 教程</a>
+	<a href="../chartjs/index.html">Chart.js 教程</a>
+	<a href="../claude-code/index.html">Claude Code 教程</a>
+	<a href="../cmake/index.html">CMake 教程</a>
+	<a href="../codex/index.html">Codex 教程</a>
+	<a href="../cssref/index.html">CSS 参考手册</a>
+	<a href="../css/index.html">CSS 教程</a>
+	<a href="../css3/index.html">CSS3 教程</a>
+	<a href="../cursor/index.html">Cursor 教程</a>
+	<a href="../dash/index.html">Dash 教程</a>
+	<a href="../django/index.html">Django 教程</a>
+	<a href="../docker/index.html">Docker 教程</a>
+	<a href="../dtd/index.html">DTD 教程</a>
+	<a href="../echarts/index.html">ECharts 教程</a>
+	<a href="../eclipse/index.html">Eclipse 教程</a>
+	<a href="../electron/index.html">Electron 教程</a>
+	<a href="../fastapi/index.html">FastAPI 教程</a>
+	<a href="../firebug/index.html">Firebug 教程</a>
+	<a href="../flask/index.html">Flask 教程</a>
+	<a href="../flutter/index.html">Flutter 教程</a>
+	<a href="../font-awesome/index.html">Font Awesome 图标</a>
+	<a href="../foundation/index.html">Foundation 教程</a>
+	<a href="../git/index.html">Git 教程</a>
+	<a href="../go/index.html">Go 语言教程</a>
+	<a href="../googleapi/index.html">Google 地图 API 教程</a>
+	<a href="../highcharts/index.html">Highcharts 教程</a>
+	<a href="../htmldom/index.html">HTML DOM 教程</a>
+	<a href="../tags/index.html">HTML 参考手册</a>
+	<a href="../charsets/index.html">HTML 字符集</a>
+	<a href="../html/index.html">HTML 教程</a>
+	<a href="../http/index.html">HTTP 教程</a>
+	<a href="../ionic/index.html">ionic 教程</a>
+	<a href="../ios/index.html">iOS 教程</a>
+	<a href="index.html">Java 教程</a>
+	<a href="../jsref/index.html">JavaScript 参考手册</a>
+	<a href="../js/index.html">Javascript 教程</a>
+	<a href="../jeasyui/index.html">jQuery EasyUI 教程</a>
+	<a href="../jquerymobile/index.html">jQuery Mobile 教程</a>
+	<a href="../jqueryui/index.html">jQuery UI 教程</a>
+	<a href="../jquery/index.html">jQuery 教程</a>
+	<a href="../json/index.html">JSON 教程</a>
+	<a href="../jsp/index.html">JSP 教程</a>
+	<a href="../julia/index.html">Julia 教程</a>
+	<a href="../jupyter-notebook/index.html">Jupyter Notebook 教程</a>
+	<a href="../kotlin/index.html">Kotlin 教程</a>
+	<a href="../latex/index.html">LaTeX 教程</a>
+	<a href="../linux/index.html">Linux 教程</a>
+	<a href="../lua/index.html">Lua 教程</a>
+	<a href="../markdown/index.html">Markdown 教程</a>
+	<a href="../matplotlib/index.html">Matplotlib 教程</a>
+	<a href="../maven/index.html">Maven 教程</a>
+	<a href="../memcached/index.html">Memcached 教程</a>
+	<a href="../mongodb/index.html">MongoDB 教程</a>
+	<a href="../mysql/index.html">MySQL 教程</a>
+	<a href="../nextjs/index.html">Next.js 教程</a>
+	<a href="../nlp/index.html">NLP 教程</a>
+	<a href="../nodejs/index.html">Node.js 教程</a>
+	<a href="../numpy/index.html">NumPy 教程</a>
+	<a href="../ollama/index.html">Ollama 教程</a>
+	<a href="../opencode/index.html">OpenCode 教程</a>
+	<a href="../opencv/index.html">OpenCV 教程</a>
+	<a href="../pandas/index.html">Pandas 教程</a>
+	<a href="../perl/index.html">Perl 教程</a>
+	<a href="../php/index.html">PHP 教程</a>
+	<a href="../pillow/index.html">Pillow 教程</a>
+	<a href="../playwright/index.html">Playwright 教程</a>
+	<a href="../postgresql/index.html">PostgreSQL 教程</a>
+	<a href="../powershell/index.html">PowerShell</a>
+	<a href="../pycharm/index.html">Pycharm 教程</a>
+	<a href="../python3/index.html">Python 3 教程</a>
+	<a href="../python/index.html">Python 基础教程</a>
+	<a href="../python-design-pattern/index.html">Python 设计模式</a>
+	<a href="../python-qt/index.html">Python 量化交易</a>
+	<a href="../pytorch/index.html">PyTorch 教程</a>
+	<a href="../r/index.html">R 教程</a>
+	<a href="../rdf/index.html">RDF 教程</a>
+	<a href="../react/index.html">React 教程</a>
+	<a href="../redis/index.html">Redis 教程</a>
+	<a href="../restfulapi/index.html">RESTful API</a>
+	<a href="../rss/index.html">RSS 教程</a>
+	<a href="../ruby/index.html">Ruby 教程</a>
+	<a href="../rust/index.html">Rust 教程</a>
+	<a href="../sass/index.html">Sass 教程</a>
+	<a href="../scala/index.html">Scala 教程</a>
+	<a href="../scipy/index.html">SciPy 教程</a>
+	<a href="../selenium/index.html">Selenium 教程</a>
+	<a href="../servlet/index.html">Servlet 教程</a>
+	<a href="../skills/index.html">Skills 教程</a>
+	<a href="../sklearn/index.html">Sklearn 教程</a>
+	<a href="../soap/index.html">SOAP 教程</a>
+	<a href="../sql/index.html">SQL 教程</a>
+	<a href="../sqlite/index.html">SQLite 教程</a>
+	<a href="../svg/index.html">SVG 教程</a>
+	<a href="../svn/index.html">SVN 教程</a>
+	<a href="../swagger/index.html">Swagger 教程</a>
+	<a href="../swift/index.html">Swift 教程</a>
+	<a href="../tailwindcss/index.html">Tailwind CSS 教程</a>
+	<a href="../tcpip/index.html">TCP/IP 教程</a>
+	<a href="../tensorflow/index.html">TensorFlow 教程</a>
+	<a href="../typescript/index.html">TypeScript 教程</a>
+	<a href="../uniapp/index.html">uni-app 教程</a>
+	<a href="../vbscript/index.html">VBScript 教程</a>
+	<a href="../vscode/index.html">VSCode 教程</a>
+	<a href="../vue2/index.html">Vue.js 教程</a>
+	<a href="../vue3/index.html">Vue3 教程</a>
+	<a href="../w3c/index.html">W3C 教程</a>
+	<a href="../webservices/index.html">Web Service 教程</a>
+	<a href="../wsdl/index.html">WSDL 教程</a>
+	<a href="../xlink/index.html">XLink 教程</a>
+	<a href="../dom/index.html">XML DOM 教程</a>
+	<a href="../schema/index.html">XML Schema 教程</a>
+	<a href="../xml/index.html">XML 教程</a>
+	<a href="../xpath/index.html">XPath 教程</a>
+	<a href="../xquery/index.html">XQuery 教程</a>
+	<a href="../xslfo/index.html">XSLFO 教程</a>
+	<a href="../xsl/index.html">XSLT 教程</a>
+	<a href="../zig/index.html">Zig 教程</a>
+	<a href="../data-structures/index.html">数据结构</a>
+	<a href="../ml/index.html">机器学习</a>
+	<a href="../regexp/index.html">正则表达式</a>
+	<a href="../quiz/index.html">测验</a>
+	<a href="../browsers/index.html">浏览器</a>
+	<a href="../quality/index.html">网站品质</a>
+	<a href="../web/index.html">网站建设指南</a>
+	<a href="../hosting/index.html">网站服务器教程</a>
+	<a href="../np/index.html">网络协议</a>
+	<a href="../design-pattern/index.html">设计模式</a>
+			
+		</div> 
+		 	 </div>
+</div>
+	</div>
+</div>
+
+
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

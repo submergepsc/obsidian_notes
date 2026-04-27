@@ -1,0 +1,89 @@
+URL: https://www.runoob.com/python3/python3-att-list-pop.html
+Title: Python3 List pop()方法 | 菜鸟教程
+
+Python3 List pop()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 List insert()方法 
+
+Python3 List remove()方法 
+
+Python3 List pop()方法 
+
+描述 
+
+pop() 函数用于移除列表中的一个元素（默认最后一个元素），并且返回该元素的值。 
+
+语法 
+
+pop()方法语法： 
+
+list.pop([index=-1]) 
+
+参数 
+
+index -- 可选参数，要移除列表元素的索引值，不能超过列表总长度，默认为 index=-1，删除最后一个列表值。 
+
+返回值 
+
+该方法返回从列表中移除的元素对象。 
+
+实例 
+
+以下实例展示了 pop()函数的使用方法： 
+
+实例 
+
+#!/usr/bin/python3 
+
+list1 = [ 'Google' , 'Runoob' , 'Taobao' ] 
+
+list1. pop ( ) 
+
+print ( "列表现在为 : " , list1 ) 
+
+list1. pop ( 1 ) 
+
+print ( "列表现在为 : " , list1 ) 
+
+以上实例输出结果如下： 
+
+列表现在为 : ['Google', 'Runoob']
+列表现在为 : ['Google'] 
+
+队列是一种先进先出（FIFO）的数据结构，我们可以使用列表来实现队列的基本功能。 
+
+append() 方法向队列的末尾添加一个元素。 
+
+pop() 方法从队列的开头删除一个元素并返回它。 
+
+实例 
+
+queue = [ ] 
+
+# 添加元素到队列的末尾 
+
+queue. append ( 'A' ) 
+
+queue. append ( 'B' ) 
+
+queue. append ( 'C' ) 
+
+# 从队列的开头删除元素并返回 
+
+print ( queue. pop ( 0 ) ) # A 
+
+print ( queue. pop ( 0 ) ) # B 
+
+print ( queue. pop ( 0 ) ) # C 
+
+以上实例中，我们创建了一个空的列表作为队列，然后使用 append() 方法向队列的末尾添加了三个元素。接下来，我们使用 pop() 方法从队列的开头删除元素并返回它们。由于队列是一个先进先出的数据结构，所以我们得到的输出结果是 'A'、'B' 和 'C'。 
+
+AI 思考中... 
+
+Python3 List insert()方法 
+
+Python3 List remove()方法

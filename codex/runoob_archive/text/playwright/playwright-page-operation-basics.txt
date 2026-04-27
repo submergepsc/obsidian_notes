@@ -1,0 +1,354 @@
+URL: https://www.runoob.com/playwright/playwright-page-operation-basics.html
+Title: Playwright 页面操作基础 | 菜鸟教程
+
+Playwright 页面操作基础 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Playwright 教程 
+
+Playwright 第一个脚本 
+
+Playwright 高级页面操作 
+
+Playwright 页面操作基础 
+
+本章节我们来了解下 Playwright 如何与网页进行实际交互及最常用的页面操作 API。 
+
+页面导航 
+
+页面导航是最常见的操作，Playwright 提供了多个 API 来打开、刷新和控制页面的跳转。 
+
+1. 打开网页（ page.goto ） 
+
+await page.goto('https://example.com'); 
+
+常用参数： 
+
+url ：要访问的地址 
+
+timeout ：超时时间，默认 30 秒 
+
+waitUntil ：等待页面加载的条件 
+
+'load' ：等待 load 事件（页面和资源全部加载完） 
+
+'domcontentloaded' ：等待 DOM 内容加载完 
+
+'networkidle' ：等待网络空闲 
+
+实例 
+
+await page. goto ( 'https://example.com' , { waitUntil : 'domcontentloaded' } ) ; 
+
+2. 页面刷新（ page.reload ） 
+
+刷新当前页面。 
+
+await page.reload({ waitUntil: 'networkidle' }); 
+
+3. 前进 / 后退（ page.goBack / page.goForward ） 
+
+模拟浏览器的前进、后退按钮。 
+
+await page.goto('https://example.com');
+await page.goto('https://playwright.dev');
+
+await page.goBack(); // 返回 example.com
+await page.goForward(); // 前进到 playwright.dev 
+
+4. 等待页面加载 
+
+有时需要显式等待页面加载某个元素，Playwright 提供了智能等待机制。 
+
+await page.waitForLoadState('networkidle'); // 等待网络空闲
+await page.waitForSelector('#main-content'); // 等待元素出现 
+
+元素定位 
+
+要与页面交互，首先要定位到目标元素。Playwright 提供了多种选择器。 
+
+1. CSS 选择器 
+
+最常用的定位方式，和前端开发一致。 
+
+await page.click('#login-button'); // 通过 id
+await page.click('.btn-primary'); // 通过 class
+await page.click('form > button'); // 通过层级关系 
+
+2. XPath 选择器 
+
+通过 XPath 表达式定位元素。 
+
+await page.click('//button[text()="登录"]');
+await page.click('//input[@name="username"]'); 
+
+XPath 更灵活，但可读性较差，不推荐作为首选。 
+
+3. 文本内容定位 
+
+通过元素的可见文本进行定位。 
+
+await page.click('text=登录');
+await page.click('button:has-text("提交")'); 
+
+4. 属性定位 
+
+直接使用属性来选择。 
+
+await page.fill('input[name="email"]', ' [email protected] ');
+await page.click('[data-test="submit-button"]'); 
+
+5. 定位策略最佳实践 
+
+优先使用唯一且稳定的选择器 （如 data-testid 、 data-test 属性） 
+
+避免依赖动态的 id 或 class 名 
+
+使用 page.getByRole 、 page.getByText 等可读性更好的方法（Playwright 5.x 推荐） 
+
+实例 
+
+await page. getByRole ( 'button' , { name : '提交' } ) . click ( ) ; 
+
+await page. getByPlaceholder ( '请输入用户名' ) . fill ( 'admin' ) ; 
+
+基础交互 
+
+Playwright 支持多种与元素交互的方式，涵盖点击、输入、键盘和鼠标操作。 
+
+1. 点击操作（ page.click ） 
+
+await page.click('#submit'); 
+
+可选参数： 
+
+button ： 'left' | 'right' | 'middle' （默认左键） 
+
+clickCount ：点击次数（双击时设为 2） 
+
+modifiers ：键盘组合键（如 ['Control'] ） 
+
+实例 
+
+await page. click ( '#submit' , { button : 'right' } ) ; // 右键点击 
+
+await page. dblclick ( '#submit' ) ; // 双击 
+
+2. 输入文本（ fill vs type ） 
+
+fill(selector, value) ：清空输入框并输入新值（推荐，大多数情况使用） 
+
+type(selector, text) ：模拟逐字输入（带延迟，更贴近真实用户） 
+
+实例 
+
+await page. fill ( 'input[name="username"]' , 'test_user' ) ; 
+
+await page. type ( 'input[name="search"]' , 'playwright' , { delay : 200 } ) ; 
+
+3. 键盘操作 
+
+press ：模拟按键 
+
+keyboard.type ：连续输入文本 
+
+keyboard.press ：按下某个键（可带组合键） 
+
+实例 
+
+await page. press ( 'input[name="username"]' , 'Enter' ) ; 
+
+await page. keyboard . type ( 'Hello World!' ) ; 
+
+await page. keyboard . press ( 'Control+A' ) ; // 全选 
+
+await page. keyboard . press ( 'Backspace' ) ; // 删除 
+
+4. 鼠标操作 
+
+Playwright 提供了完整的鼠标控制： 
+
+hover ：鼠标悬停 
+
+mouse.move(x, y) ：移动到坐标 
+
+mouse.click(x, y) ：点击坐标 
+
+mouse.down / mouse.up ：按下/释放鼠标键 
+
+dragAndDrop ：拖拽元素（Playwright 1.18+） 
+
+实例 
+
+await page. hover ( '#menu' ) ; // 悬停 
+
+await page. mouse . move ( 100 , 200 ) ; // 移动到坐标 
+
+await page. mouse . click ( 120 , 220 ) ; // 点击坐标 
+
+await page. dragAndDrop ( '#item1' , '#dropzone' ) ; // 拖拽到目标区域 
+
+完整实例：模拟登录并截图 
+
+下面是一个完整的 Playwright 脚本，演示了导航、定位、输入、点击等基本操作。 
+
+实例 
+
+const { chromium } = require ( 'playwright' ) ; 
+
+( async ( ) => { 
+
+// 1. 启动浏览器，并创建一个新页面 
+
+const browser = await chromium. launch ( { headless : false } ) ; 
+
+const page = await browser. newPage ( ) ; 
+
+// 2. 导航到登录页面 
+
+await page. goto ( 'https://github.com/login' ) ; 
+
+console. log ( `当前页面标题：$ { await page. title ( ) } ` ) ; 
+
+// 3. 元素定位和输入 
+
+// 定位用户名输入框，并输入用户名 
+
+await page. locator ( '#login_field' ) . fill ( 'your_username' ) ; 
+
+// 定位密码输入框，并输入密码 
+
+await page. locator ( '#password' ) . fill ( 'your_password' ) ; 
+
+// 4. 点击登录按钮 
+
+// 使用 .getByRole() 是一种更健壮的定位方式 
+
+await page. getByRole ( 'button' , { name : 'Sign in' } ) . click ( ) ; 
+
+// 5. 等待页面导航完成，确保登录成功 
+
+await page. waitForURL ( 'https://github.com/' ) ; 
+
+// 6. 截图保存，确认登录状态 
+
+await page. screenshot ( { path : 'github_homepage.png' } ) ; 
+
+console. log ( '登录成功，并已截图' ) ; 
+
+// 7. 关闭浏览器 
+
+await browser. close ( ) ; 
+
+} ) ( ) ; 
+
+运行方式： 
+
+在项目目录下保存代码为 github_login.js 。 
+
+在终端中执行 node github_login.js 。 
+
+常用 API 汇总表 
+
+分类 
+
+方法 / 属性 
+
+说明 
+
+页面导航 
+
+page.goto(url[, options]) 
+
+打开页面 
+
+page.reload([options]) 
+
+刷新页面 
+
+page.goBack([options]) 
+
+后退 
+
+page.goForward([options]) 
+
+前进 
+
+page.waitForLoadState([state]) 
+
+等待页面加载状态 
+
+元素定位 
+
+page.locator(selector) 
+
+通用定位器 
+
+page.getByRole(role, options) 
+
+根据角色定位 
+
+page.getByText(text) 
+
+根据文本定位 
+
+page.getByPlaceholder(text) 
+
+根据 placeholder 定位 
+
+page.getByLabel(text) 
+
+根据 label 定位 
+
+基础交互 
+
+page.click(selector[, options]) 
+
+点击元素 
+
+page.dblclick(selector) 
+
+双击 
+
+page.fill(selector, value) 
+
+输入文本（清空后填入） 
+
+page.type(selector, text[, options]) 
+
+模拟逐字输入 
+
+page.press(selector, key) 
+
+在元素上按键 
+
+page.keyboard.type(text) 
+
+键盘输入 
+
+page.keyboard.press(key) 
+
+键盘按键（含组合键） 
+
+page.hover(selector) 
+
+悬停 
+
+page.mouse.move(x, y) 
+
+移动鼠标 
+
+page.mouse.click(x, y[, options]) 
+
+坐标点击 
+
+page.dragAndDrop(src, dest) 
+
+拖拽元素 
+
+AI 思考中... 
+
+Playwright 第一个脚本 
+
+Playwright 高级页面操作

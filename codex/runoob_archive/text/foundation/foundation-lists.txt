@@ -1,0 +1,101 @@
+URL: https://www.runoob.com/foundation/foundation-lists.html
+Title: Foundation 列表 | 菜鸟教程
+
+Foundation 列表 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 折叠列表 
+
+Foundation 选项卡 
+
+Foundation 列表 
+
+在 HTML 中，无序列表 ( <ul> ) 实例如下: 
+
+< ul > 
+< li > List item < /li > 
+< li > List item < /li > 
+< li > List item < /li > 
+< li > List item < /li > 
+< /ul > 
+
+结果: 
+
+List item 
+
+List item 
+
+List item 
+
+List item 
+
+圆圈标识符 
+
+在 Foundation 中，无序列表 ( <ul> ) 的前缀符号为圆圈，使用 .circle 类，实例如下: 
+
+< ul class= "circle" > 
+< li > List item < /li > 
+... 
+< /ul > 
+
+尝试一下 » 
+
+方块标识符 
+
+方块标识符前缀使用 .square 类: 
+
+< ul class= "square" > 
+< li > List item < /li > 
+... 
+< /ul > 
+
+尝试一下 » 
+
+无标识符 
+
+如果你不需要标识符，你可以使用 .no-bullet 类： 
+
+< ul class= "no-bullet" > 
+< li > List item < /li > 
+... 
+< /ul > 
+
+尝试一下 » 
+
+如果你需要添加一个水平的列表，可以在 <ul> 上添加 .inline-list 类: 
+
+< ul class= "inline-list" > 
+
+尝试一下 » 
+
+列表菜单 
+
+一些 Web 页面可能需要列表菜单。 
+
+在 HTML 中，列表菜单同无序列表 <ul> 来定义，例如: 
+
+< ul > 
+< li > < a href= "#" > Home < /a > < /li > 
+< li > < a href= "#" > Menu 1 < /a > < /li > 
+< li > < a href= "#" > Menu 2 < /a > < /li > 
+< li > < a href= "#" > Menu 3 < /a > < /li > 
+< /ul > 
+
+结果: 
+
+Home 
+
+Menu 1 
+
+Menu 2 
+
+Menu 3 
+
+AI 思考中... 
+
+Foundation 折叠列表 
+
+Foundation 选项卡

@@ -1,0 +1,78 @@
+URL: https://www.runoob.com/xslfo/xslfo-documents.html
+Title: XSL-FO 文档 | 菜鸟教程
+
+XSL-FO 文档 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO 简介 
+
+XSL-FO 区域属性 
+
+XSL-FO 文档 
+
+XSL-FO 文档 
+
+XSL-FO 文档是带有输出信息的 XML 文件。 
+
+XSL-FO 文档存储在以 .fo 或 .fob 为文件扩展名的文件中。您也可以把 XSL-FO 文档存储为以 .xml 为扩展名的文件，这样做的话可以使 XSL-FO 文档更易被 XML 编辑器存取。 
+
+XSL-FO 文档结构 
+
+XSL-FO 的文档结构如下所示： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"> 
+
+<fo:layout-master-set> 
+<fo:simple-page-master master-name="A4"> 
+<!-- Page template goes here --> 
+</fo:simple-page-master> 
+</fo:layout-master-set> 
+
+<fo:page-sequence master-reference="A4"> 
+<!-- Page content goes here --> 
+</fo:page-sequence> 
+
+</fo:root> 
+
+结构解释 
+
+XSL-FO 文档属于 XML 文档，因此也需要以 XML 声明来起始： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<fo:root> 元素是 XSL-FO 文档的根元素。这个根元素也要声明 XSL-FO 的命名空间： 
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"> 
+<!-- The full XSL-FO document goes here --> 
+</fo:root> 
+
+<fo:layout-master-set> 元素包含一个或多个页面模板： 
+
+<fo:layout-master-set> 
+<!-- All page templates go here --> 
+</fo:layout-master-set> 
+
+每个 <fo:simple-page-master> 元素包含一个单一的页面模板。每个模板必须有一个唯一的名称（master-name）： 
+
+<fo:simple-page-master master-name="A4"> 
+<!-- One page template goes here --> 
+</fo:simple-page-master> 
+
+一个或多个 <fo:page-sequence> 元素可描述页面内容。master-reference 属性使用相同的名称来引用 simple-page-master 模板： 
+
+<fo:page-sequence master-reference="A4"> 
+<!-- Page content goes here --> 
+</fo:page-sequence> 
+
+注释： master-reference 的值 "A4" 实际上并没有描述某个预定义的页面格式。它仅仅是一个名称。您可以使用任何名称，比如 "MyPage"、"MyTemplate" 等等。 
+
+AI 思考中... 
+
+XSL-FO 简介 
+
+XSL-FO 区域属性

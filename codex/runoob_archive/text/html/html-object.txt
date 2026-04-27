@@ -1,0 +1,107 @@
+URL: https://www.runoob.com/html/html-object.html
+Title: HTML 插件 | 菜鸟教程
+
+HTML 插件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 教程 
+
+HTML 媒体(Media) 
+
+HTML 音频(Audio) 
+
+HTML 插件 
+
+插件的功能是扩展 HTML 浏览器的功能。 
+
+HTML 助手（插件） 
+
+辅助应用程序（helper application）是可由浏览器启动的程序。辅助应用程序也称为插件。 
+
+辅助程序可用于播放音频和视频（以及其他）。辅助程序是使用 <object> 标签来加载的。 
+
+使用辅助程序播放视频和音频的一个优势是，您能够允许用户来控制部分或全部播放设置。 
+
+插件可以通过 <object> 标签或者 <embed> 标签添加在页面中。 
+
+大多数辅助应用程序允许对音量设置和播放功能（比如后退、暂停、停止和播放）的手工（或程序的）控制。 
+
+注意： 
+
+大多数浏览器不再支持 Java 小程序和插件。 
+
+大多数现代浏览器关闭了对 Flash 的支持。 
+
+以下 swf 文件的实例在现代浏览器中无法正常运行。 
+
+我们可以使用 <video> 和 <audio> 标签来显示视频和音频 
+
+<object> 元素 
+
+所有主流浏览器都支持 <object> 标签。 
+
+<object> 元素定义了在 HTML 文档中嵌入的对象。 
+
+该标签用于插入对象 (例如在网页中嵌入 Java 小程序, PDF 阅读器, 
+Flash 播放器) 。 
+
+实例 
+
+< object width= "400" height= "50" data= "bookmark.swf" > < /object > 
+
+尝试一下 » 
+
+<object> 元素同样可用于包含HTML文件： 
+
+实例 
+
+< object width= "100%" height= "500px" data= "snippet.html" > < /object > 
+
+尝试一下 » 
+
+或者插入一张图片: 
+
+实例 
+
+< object data= "audi.jpeg" > < /object > 
+
+尝试一下 » 
+
+<embed> 元素 
+
+所有主流浏览器都支持 <embed> 元素。 
+
+<embed> 元素表示一个 HTML Embed 对象 。 
+
+<embed> 元素已经出现很长一段时间了，但是在 HTML5 前并未被详细说明，该元素在 HTML 5 页面上会被验证，在 HTML 4 上不会。 
+
+实例 
+
+< embed width= "400" height= "50" src= "bookmark.swf" > 
+
+尝试一下 » 
+
+注意 <embed> 元素没有关闭标签。 不能使用替代文本。 
+
+<embed> 元素同样可用于包含 HTML 文件： 
+
+实例 
+
+< embed width= "100%" height= "500px" src= "snippet.html" > 
+
+尝试一下 » 
+
+或者插入一张图片: 
+
+实例 
+
+< embed src= "audi.jpeg" > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+HTML 媒体(Media) 
+
+HTML 音频(Audio)

@@ -1,0 +1,60 @@
+URL: https://www.runoob.com/tags/att-global-dropzone.html
+Title: HTML dropzone 属性 | 菜鸟教程
+
+HTML dropzone 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML draggable 属性 
+
+HTML hidden 属性 
+
+HTML dropzone 属性 
+
+实例 
+
+拖动数据会导致被拖数据产生副本： 
+
+<div dropzone="copy"></div> 
+
+浏览器支持 
+
+没有主流浏览器支持 dropzone 属性。 
+
+定义和用法 
+
+dropzone 属性规定当被拖动的数据在拖放到元素上时，是否被复制、移动或链接。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+dropzone 属性是 HTML5 中的新属性。 
+
+语法 
+
+< element dropzone="copy|move|link"> 
+
+属性值 
+
+值 
+
+描述 
+
+copy 
+
+拖动数据会导致被拖数据产生副本。 
+
+move 
+
+拖动数据会导致被拖数据移动到新位置。 
+
+link 
+
+拖动数据会生成指向原始数据的链接。 
+
+AI 思考中... 
+
+HTML draggable 属性 
+
+HTML hidden 属性

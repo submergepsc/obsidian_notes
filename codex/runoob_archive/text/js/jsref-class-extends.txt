@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/js/jsref-class-extends.html
+Title: JavaScript 类(class) extends 关键字 | 菜鸟教程
+
+JavaScript 类(class) extends 关键字 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Javascript 教程

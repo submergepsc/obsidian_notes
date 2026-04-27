@@ -1,0 +1,104 @@
+URL: https://www.runoob.com/cssref/pr-font-font-family.html
+Title: CSS font-family 属性 | 菜鸟教程
+
+CSS font-family 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS font 属性 
+
+CSS font-size 属性 
+
+CSS font-family 属性 
+
+实例 
+
+指定段落的字体： 
+
+p { font-family: " Times New Roman ", Georgia , Serif ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+font - family属性指定一个元素的字体。 
+
+font-family 可以把多个字体名称作为一个"回退"系统来保存。如果浏览器不支持第一个字体，则会尝试下一个。 
+
+有两种类型的字体系列名称： 
+
+family-name - 指定的系列名称：具体字体的名称，比如："times"、"courier"、"arial"。 
+
+generic-family - 通常字体系列名称：比如："serif"、"sans-serif"、"cursive"、"fantasy"、"monospace"。 
+
+使用某种特定的字体系列（Geneva）完全取决于用户机器上该字体系列是否可用；这个属性没有指示任何字体下载。因此，强烈推荐使用一个通用字体系列名作为后路。 
+
+注意： 每个值用逗号分开。 
+
+注意: 如果字体名称包含空格，它必须加上引号。在HTML中使用"style"属性时，必须使用单引号。 
+
+默认值： 
+
+not specified 
+
+继承： 
+
+yes 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.fontFamily="arial,sans-serif" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+font-family 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+family-name 
+
+generic-family 
+
+用于某个元素的字体族名称或/及类族名称的一个优先表。 
+
+默认值：取决于浏览器。 
+
+inherit 
+
+规定应该从父元素继承字体系列。 
+
+相关文章 
+
+CSS 教程: CSS Font 
+
+CSS 参考手册: font 属性 
+
+AI 思考中... 
+
+CSS font 属性 
+
+CSS font-size 属性

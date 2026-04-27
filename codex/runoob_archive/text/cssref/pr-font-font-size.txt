@@ -1,0 +1,128 @@
+URL: https://www.runoob.com/cssref/pr-font-font-size.html
+Title: CSS font-size 属性 | 菜鸟教程
+
+CSS font-size 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS font-family 属性 
+
+CSS font-style 属性 
+
+CSS font-size 属性 
+
+实例 
+
+设置不同的HTML元素的字体大小： 
+
+h1 { font-size: 250 % } h2 { font-size: 200 % } p { font-size: 100 % } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+font-size 属性用于设置字体大小。 
+
+默认值： 
+
+medium 
+
+继承： 
+
+yes 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.fontSize="larger" 
+
+font-size: xx-small ;
+font-size: x-small ;
+font-size: small ;
+font-size: medium ;
+font-size: large ;
+font-size: x-large ;
+font-size: xx-large ; font-size: larger ;
+font-size: smaller ; font-size: 12 px ;
+font-size: 0.8 em ; font-size: 80%;
+ 
+font-size: inherit ; 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+font-size 
+
+1.0 
+
+5.5 
+
+1.0 
+
+1.0 
+
+7.0 
+
+属性值 
+
+值 
+
+描述 
+
+xx-small 
+
+x-small 
+
+small 
+
+medium 
+
+large 
+
+x-large 
+
+xx-large 
+
+把字体的尺寸设置为不同的尺寸，从 xx-small 到 xx-large。 
+
+默认值：medium。 
+
+smaller 
+
+把 font-size 设置为比父元素更小的尺寸。 
+
+larger 
+
+把 font-size 设置为比父元素更大的尺寸。 
+
+length 
+
+把 font-size 设置为一个固定的值。 
+
+% 
+
+把 font-size 设置为基于父元素的一个百分比值。 
+
+inherit 
+
+规定应该从父元素继承字体尺寸。 
+
+相关文章 
+
+CSS 教程: CSS Font 
+
+CSS 参考手册: font 属性 
+
+AI 思考中... 
+
+CSS font-family 属性 
+
+CSS font-style 属性

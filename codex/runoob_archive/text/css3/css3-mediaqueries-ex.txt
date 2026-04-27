@@ -1,0 +1,135 @@
+URL: https://www.runoob.com/css3/css3-mediaqueries-ex.html
+Title: CSS3 多媒体查询实例 | 菜鸟教程
+
+CSS3 多媒体查询实例 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS3 教程 
+
+CSS3 多媒体查询 
+
+CSS3 rotation-point 
+
+CSS3 多媒体查询实例 
+
+本章节我们将为大家演示一些多媒体查询实例。 
+
+开始之前我们先制作一个电子邮箱的链接列表。HTML 代码如下： 
+
+实例 1 
+
+< !DOCTYPE html > 
+< html > 
+< head > 
+< style > 
+ul { 
+list-style-type: none; 
+} 
+
+ul li a { 
+color: 
+ green; 
+text-decoration: none; 
+padding: 3px; 
+display: block; 
+} 
+< /style > 
+< /head > 
+< body > 
+
+< ul > 
+< li > < a data-email= " [email protected] " href= "mailto: [email protected] " > John Doe < /a > < /li > 
+< li > < a data-email= " [email protected] " href= "mailto: [email protected] " > Mary 
+ Moe < /a > < /li > 
+< li > < a data-email= " [email protected] " href= "mailto: [email protected] " > Amanda 
+ Panda < /a > < /li > 
+< /ul > 
+
+< /body > 
+< /html > 
+
+尝试一下 » 
+
+注意 data-email 属性。在 HTML 中我们可以使用带 data- 前缀的属性来存储信息。 
+
+520 到 699px 宽度 - 添加邮箱图标 
+
+当浏览器的宽度在 520 到 699px, 邮箱链接前添加邮件图标： 
+
+实例 2 
+
+@media screen and (max-width: 699px) and (min-width: 520px) { 
+ul li a { 
+padding-left: 30px; 
+background: url(email-icon.png) left center no-repeat; 
+} 
+} 
+
+尝试一下 » 
+
+700 到 1000px - 添加文本前缀信息 
+
+当浏览器的宽度在 700 到 1000px, 会在邮箱链接前添加 "Email: ": 
+
+实例 3 
+
+@media screen and (max-width: 1000px) and (min-width: 700px) { 
+ul li a:before { 
+content: "Email: "; 
+font-style: italic; 
+color: #666666; 
+} 
+} 
+
+尝试一下 » 
+
+大于 1001px 宽度 - 添加邮件地址 
+
+当浏览器的宽度大于 1001px 时，会在链接后添加邮件地址接。 
+
+我们会使用 data- 属性来为每个人名后添加邮件地址： 
+
+实例 4 
+
+@media screen and (min-width: 1001px) { 
+ul li 
+ a:after { 
+content: " (" attr(data-email) 
+ ")"; 
+font-size: 12px; 
+font-style: italic; 
+color: #666666; 
+} 
+} 
+
+尝试一下 » 
+
+大于 1151px 宽度 - 添加图标 
+
+当浏览器的宽度大于 1001px 时，会在人名前添加图标。 
+
+实例中，我们没有编写额外的查询块，我们可以在已有的查询媒体后使用逗号分隔来添加其他媒体查询 (类似 OR 操作符): 
+
+实例 5 
+
+@media screen and (max-width: 699px) and (min-width: 520px), (min-width: 
+ 1151px) { 
+ul li a { 
+padding-left: 30px; 
+background: url(email-icon.png) left center no-repeat; 
+} 
+} 
+
+尝试一下 » 
+
+更多实例 
+
+在一个网页的侧栏上使用邮件列表链接 
+该实例在网页的左侧栏添加了邮件链接列表。 
+
+AI 思考中... 
+
+CSS3 多媒体查询 
+
+CSS3 rotation-point

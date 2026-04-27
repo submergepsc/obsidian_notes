@@ -1,0 +1,135 @@
+URL: https://www.runoob.com/cssref/css3-pr-box-sizing.html
+Title: CSS3 box-sizing 属性 | 菜鸟教程
+
+CSS3 box-sizing 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 box-pack 属性 
+
+CSS3 box-shadow 属性 
+
+CSS3 box-sizing 属性 
+
+实例 
+
+元素的总高度和宽度包含内边距和边框(padding 与 border) : 
+
+#example1 { box-sizing: border-box ; } 
+
+尝试一下 » 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+紧跟在 -webkit-, -ms- 或 -moz- 前的数字为支持该前缀属性的第一个浏览器版本号。 
+
+属性 
+
+box-sizing 
+
+10.0 
+4.0 -webkit- 
+
+8.0 
+
+29.0 
+2.0 -moz- 
+
+5.1 
+3.2 -webkit- 
+
+9.5 
+
+属性定义及使用说明 
+
+box-sizing 属性定义如何计算一个元素的总宽度和总高度，主要设置是否需要加上内边距(padding)和边框等。 
+
+例如，假如您需要并排放置两个带边框的框，可通过将 box-sizing 设置为 "border-box"。这样就可以让浏览器呈现出带有指定宽度和高度的框，并把边框和内边距放入框中。 
+
+默认情况下，元素的宽度(width) 和高度(height)计算方式如下： 
+
+width(宽度) + padding(内边距) + border(边框) = 元素实际宽度
+height(高度) + padding(内边距) + border(边框) = 元素实际高度 
+
+默认值: 
+
+content-box 
+
+继承: 
+
+no 
+
+版本: 
+
+CSS3 
+
+JavaScript 语法: 
+
+object .style.boxSizing="border-box" 
+
+语法 
+
+box-sizing: content-box|border-box|inherit: 
+
+值 
+
+说明 
+
+content-box 
+
+默认值。如果你设置一个元素的宽为 100px，那么这个元素的内容区会有 100px 宽，并且任何边框和内边距的宽度都会被增加到最后绘制出来的元素宽度中。 
+
+border-box 
+
+告诉浏览器：你想要设置的边框和内边距的值是包含在 width 内的。也就是说，如果你将一个元素的 width 设为 100px，那么这 100px 会包含它的 border 和 padding，内容区的实际宽度是 width 减 去(border + padding) 的值。大多数情况下，这使得我们更容易地设定一个元素的宽高。 
+注： border-box 不包含 margin。 
+
+inherit 
+
+指定 box-sizing 属性的值，应该从父元素继承 
+
+更多实例 
+
+实例 
+
+设置两个边框并列排着 : 
+
+div { 
+
+box-sizing : border-box ; 
+
+width : 50% ; 
+
+border : 5px solid red ; 
+
+float : left ; 
+
+} 
+
+尝试一下 » 
+
+实例 
+
+设置通用的 box-sizing: 
+
+* { 
+
+box-sizing : border-box ; 
+
+} 
+
+尝试一下 » 
+
+相关文章 
+
+CSS3 教程: CSS3 用户界面 
+
+AI 思考中... 
+
+CSS3 box-pack 属性 
+
+CSS3 box-shadow 属性

@@ -1,0 +1,78 @@
+URL: https://www.runoob.com/wsdl/wsdl-ports.html
+Title: WSDL 端口 | 菜鸟教程
+
+WSDL 端口 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+WSDL 教程 
+
+WSDL 文档 
+
+WSDL 绑定 
+
+WSDL 端口 
+
+<portType> 元素是最重要的 WSDL 元素。 
+
+WSDL 端口 
+
+<portType> 元素是最重要的 WSDL 元素。 
+
+它可描述一个 web service、可被执行的操作，以及相关的消息。 
+
+可以把 <portType> 元素比作传统编程语言中的一个函数库（或一个模块、或一个类）。 
+
+操作类型 
+
+请求-响应是最普通的操作类型，不过 WSDL 定义了四种类型： 
+
+类型 
+
+定义 
+
+One-way 
+
+此操作可接受消息，但不会返回响应。 
+
+Request-response 
+
+此操作可接受一个请求并会返回一个响应 
+
+Solicit-response 
+
+此操作可发送一个请求，并会等待一个响应。 
+
+Notification 
+
+此操作可发送一条消息，但不会等待响应。 
+
+One-Way 操作 
+
+一个 one-way 操作的例子： 
+
+实例 
+
+< message name = " newTermValues " > < part name = " term " type = " xs:string " /> < part name = " value " type = " xs:string " /> </ message > < portType name = " glossaryTerms " > < operation name = " setTerm " > < input name = " newTerm " message = " newTermValues " /> </ operation > </ portType > 
+
+在这个例子中，端口 "glossaryTerms" 定义了一个名为 "setTerm" 的 one-way 操作。 
+
+这个 "setTerm" 操作可接受新术语表项目消息的输入，这些消息使用一条名为 "newTermValues" 的消息，此消息带有输入参数 "term" 和 "value"。不过，没有为这个操作定义任何输出。 
+
+Request-Response 操作 
+
+一个 request-response 操作的例子： 
+
+实例 
+
+< message name = " getTermRequest " > < part name = " term " type = " xs:string " /> </ message > < message name = " getTermResponse " > < part name = " value " type = " xs:string " /> </ message > < portType name = " glossaryTerms " > < operation name = " getTerm " > < input message = " getTermRequest " /> < output message = " getTermResponse " /> </ operation > </ portType > 
+
+在这个例子中，端口 "glossaryTerms" 定义了一个名为 "getTerm" 的 request-response 操作。 
+
+"getTerm" 操作会请求一个名为 "getTermRequest" 的输入消息，此消息带有一个名为 "term" 的参数，并将返回一个名为 "getTermResponse" 的输出消息，此消息带有一个名为 "value" 的参数。 
+
+AI 思考中... 
+
+WSDL 文档 
+
+WSDL 绑定

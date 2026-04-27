@@ -1,0 +1,446 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="LESS æ¯å¨æçæ ·å¼è¡¨è¯­è¨ï¼æ©åäº CSS è¯­è¨ï¼å¢å äºè¯¸å¦åéãæ··åï¼mixinï¼ãå½æ°ç­åè½ã Less æ¢å¯ä»¥è¿è¡å¨æå¡å¨ç«¯ï¼Node.js å Rhino å¹³å°ï¼ä¹å¯ä»¥è¿è¡å¨å®¢æ·ç«¯ï¼æµè§å¨ï¼ã
+">
+<meta name="author" content="w3cschoolèé¸æç¨">
+
+<title>
+   Less å¥é¨ææ¡£
+</title>
+<meta name="keywords" content="Less,Lessæç¨,Lessææ¡£,Less.js">
+<!-- Main styles -->
+<link href="public/css/index.css" rel="stylesheet">
+
+<!-- Webfonts -->
+<script type="text/javascript">
+  WebFontConfig = {google: {families: ['PT+Sans:400,700,400italic,700italic', 'PT+Mono&subset=latin,cyrillic'] }};
+  (function() {
+    var wf = document.createElement('script');
+    wf.src = ('https:' == document.location.protocol ? 'https' : 'http') +
+      '://apps.bdimg.com/libs/webfont/1.3.0/webfont.js';
+    wf.type = 'text/javascript';
+    wf.async = 'true';
+    var s = document.getElementsByTagName('script')[0];
+    s.parentNode.insertBefore(wf, s);
+  })();
+</script>
+
+<!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+  <script src="http://apps.bdimg.com/libs/html5shiv/3.7/html5shiv.min.js"></script>
+  <script src="http://apps.bdimg.com/libs/respond.js/1.4.2/respond.js"></script>
+<![endif]-->
+
+<!-- Favicons -->
+<link rel="shortcut icon" href="public/ico/favicon.ico">
+
+  </head>
+  <body class="index">
+    
+    <header class="navbar navbar-inverse navbar-fixed-top docs-nav" role="banner">
+  <div class="container">
+    <div class="navbar-header">
+      <button class="navbar-toggle" type="button" data-toggle="collapse" data-target=".bs-navbar-collapse">
+        <span class="sr-only">åæ¢å¯¼èª</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a href="index.html" class="navbar-brand" alt="Less">
+        <img src="public/img/logo.png">
+      </a>
+    </div>
+    <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+      <ul class="nav navbar-nav">
+        <li>
+          <a href="features/index.html">è¯­è¨ç¹æ§</a>
+        </li>
+        
+        <li>
+          <a href="functions/index.html">å½æ°æå</a>
+        </li>
+        <li>
+          <a href="usage/index.html">ç¨æ³</a>
+        </li>
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+        <li>
+          <a href="about/index.html">å³äº</a>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown">GitHub <b class="caret"></b></a>
+          <ul class="dropdown-menu">
+            <li> <a href="https://github.com/less/less-docs">ææ¡£èµæº</a> </li>
+            <li> <a href="https://github.com/less/less-docs/issues?&amp;state=open">ææ¡£é®ç­</a> </li>
+            <li class="divider"></li>
+            <li> <a href="https://github.com/less/less.js.git">Less.js èµæº</a> </li>
+            <li> <a href="https://github.com/less/less.js/issues">Less.js é®ç­</a> </li>
+          </ul>
+        </li>
+      </ul>
+    </nav>
+  </div>
+</header>
+
+
+    
+<div class="docs-header" id="content">
+  <div class="container">
+    <h1>å¿«éå¥é¨</h1>
+    <p> Less ç®ä»ï¼å¦ä½ä¸è½½ä½¿ç¨ï¼åºç¨å®ä¾ç­ç­ã</p>
+    
+  </div>
+</div>
+
+
+<div class="banner">
+  <div class="container">
+    less v1.7.3 çæ¬å·²åå¸
+    <strong>
+      <a href="https://github.com/less/less.js/blob/master/CHANGELOG.md">æ¥çæ°çè¯´æ</a>
+    </strong>
+  </div>
+</div>
+
+
+    
+    <div class="container docs-container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="sidebar hidden-print" role="complementary">
+            <div id="navigation">
+  
+<ul class="nav sidenav"><li><a href="#getting-started">å¿«éå¥é¨</a></li>
+<li><a href="#using-less">ä½¿ç¨ Less</a><ul class="nav"><li><a href="#using-less-installation">å®è£</a></li>
+<li><a href="#using-less-command-line-usage">å½ä»¤è¡ç¨æ³</a></li>
+<li><a href="#using-less-usage-in-code">ä»£ç ä¸­ä½¿ç¨</a></li>
+<li><a href="#using-less-configuration">éç½®</a></li>
+<li><a href="#using-less-third-party-tools">ç¬¬ä¸æ¹å·¥å·</a></li></ul></li>
+<li><a href="#command-line-with-rhino">Rhino å½ä»¤è¡</a></li>
+<li><a href="#client-side-usage">å®¢æ·ç«¯ç¨æ³</a><ul class="nav"><li><a href="#client-side-usage-tips">æç¤º</a></li>
+<li><a href="#client-side-usage-browser-options">æµè§å¨éé¡¹</a></li></ul></li>
+<li><a href="#download-options">è·å Less.js</a><ul class="nav"><li><a href="#download-options-browser-downloads">æµè§å¨ä¸è½½</a></li>
+<li><a href="#download-options--less-cdn-cdnjs-cloudflare-com-ajax-libs-less-js-1-7-3-less-min-js-">Less CDN</a></li></ul></li>
+<li><a href="#license-faqs">License FAQs</a></li></ul></div>
+          </div>
+        </div>
+        <div class="col-md-9" role="main">
+          
+<div class="panel docs-content">
+  
+
+
+<div class="docs-section">
+  <div class="page-header">
+    <h1 class="docs-heading">å¿«éå¥é¨<span class="anchor-target" id="getting-started"></span>
+<a href="#getting-started" name="getting-started" class="anchor glyphicon glyphicon-link"></a></h1>
+  </div>
+  <p>Less æ¯ä¸é¨ CSS é¢å¤çè¯­è¨ï¼å®æ©åäº CSS è¯­è¨ï¼å¢å äºè¯¸å¦åéãæ··åï¼mixinï¼ãå½æ°ç­åè½ï¼è®© CSS æ´æç»´æ¤ãæ¹ä¾¿å¶ä½ä¸»é¢ãæ©åã</p>
+<p>Less å¯ä»¥è¿è¡å¨ Nodeãæµè§å¨å Rhino å¹³å°ä¸ãç½ä¸æå¾å¤ç¬¬ä¸æ¹å·¥å·å¸®å©ä½ ç¼è¯ Less æºç ã</p>
+<p>å®ä¾:</p>
+<pre><code class="lang-less"><span class="hljs-at_rule">@base: <span class="hljs-hexcolor">#f938ab</span>;</span>
+
+<span class="hljs-class">.box-shadow</span>(<span class="hljs-at_rule">@style, @c)<span class="hljs-preprocessor"> when</span> (<span class="hljs-function">iscolor(@c)</span>) {</span>
+  -webkit-<span class="hljs-attribute">box-shadow</span><span class="hljs-value">: @style @c;</span>
+  <span class="hljs-attribute">box-shadow</span><span class="hljs-value">:         @style @c;</span>
+}
+<span class="hljs-class">.box-shadow</span>(<span class="hljs-at_rule">@style, @alpha:<span class="hljs-preprocessor"> 50</span>%)<span class="hljs-preprocessor"> when</span> (<span class="hljs-function">isnumber(@alpha)</span>) {</span>
+  <span class="hljs-class">.box-shadow</span>(<span class="hljs-at_rule">@style,<span class="hljs-preprocessor"> rgba</span>(<span class="hljs-number">0</span>,<span class="hljs-preprocessor"> 0</span>,<span class="hljs-preprocessor"> 0</span>, @alpha));</span>
+}
+<span class="hljs-class">.box</span> {
+  <span class="hljs-attribute">color</span><span class="hljs-value">: saturate(@base, <span class="hljs-number">5</span>%);</span>
+  <span class="hljs-attribute">border-color</span><span class="hljs-value">: lighten(@base, <span class="hljs-number">30</span>%);</span>
+  <span class="hljs-tag">div</span> { <span class="hljs-class">.box-shadow</span>(0 0 5px, 30%) }
+}
+</code></pre>
+<p>ç¼è¯ç»æ</p>
+<pre><code class="lang-css"><span class="hljs-class">.box</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#fe33ac</span></span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">border-color</span>:<span class="hljs-value"> <span class="hljs-hexcolor">#fdcdea</span></span></span>;
+<span class="hljs-rule">}</span></span>
+<span class="hljs-class">.box</span> <span class="hljs-tag">div</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">-webkit-box-shadow</span>:<span class="hljs-value"> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">5px</span> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.3</span>)</span></span>;
+  <span class="hljs-rule"><span class="hljs-attribute">box-shadow</span>:<span class="hljs-value"> <span class="hljs-number">0</span> <span class="hljs-number">0</span> <span class="hljs-number">5px</span> <span class="hljs-function">rgba</span>(<span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0</span>, <span class="hljs-number">0.3</span>)</span></span>;
+<span class="hljs-rule">}</span></span>
+</code></pre>
+
+</div>
+
+
+
+
+<div class="docs-section">
+  <div class="page-header">
+    <h1 class="docs-heading">ä½¿ç¨ Less<span class="anchor-target" id="using-less"></span>
+<a href="#using-less" name="using-less" class="anchor glyphicon glyphicon-link"></a></h1>
+  </div>
+  <blockquote>
+<p>Less å¯ä»¥éè¿ npm å¨å½ä»¤è¡ä¸è¿è¡ï¼å¨æµè§å¨ä¸ä½ä¸ºèæ¬æä»¶ä¸è½½ï¼æèéæå¨å¹¿å¤§çç¬¬ä¸æ¹å·¥å·åãè¯·åè <a href="usage/index.html">ç¨æ³</a> 
+ã</p>
+</blockquote>
+<h2 class="docs-heading">å®è£<span class="anchor-target" id="using-less-installation"></span>
+<a href="#using-less-installation" name="using-less-installation" class="anchor glyphicon glyphicon-link"></a></h2>
+<p>å¨æå¡å¨ç«¯æå®¹æçå®è£æ¹å¼å°±æ¯éè¿ npm ï¼<a href="http://nodejs.org/">node.js</a> çåç®¡çå¨ï¼ï¼æ¹æ³å¦ä¸ï¼
+</p>
+<pre><code class="lang-bash">$ npm install -g less
+</code></pre>
+<h2 class="docs-heading">å½ä»¤è¡ç¨æ³ï¼<span class="anchor-target" id="using-less-command-line-usage"></span>
+<a href="#using-less-command-line-usage" name="using-less-command-line-usage" class="anchor glyphicon glyphicon-link"></a></h2>
+<p>å®è£ Less åï¼å°±å¯ä»¥å¨å½ä»¤è¡ä¸è°ç¨ Less ç¼è¯å¨äºï¼å¦ä¸ï¼</p>
+<pre><code class="lang-bash">$ lessc styles.less
+</code></pre>
+<p>è¿å°è¾åºç¼è¯ä¹åç CSS ä»£ç å° <code>stdout</code>ï¼ä½ å¯ä»¥å°è¾åºéå®åå°ä¸ä¸ªæä»¶ï¼</p>
+<pre><code class="lang-bash">$ lessc styles.less &gt; styles.css
+</code></pre>
+<p>è¥è¦è¾åºåç¼©è¿ç CSSï¼åªéæ·»å  <code>-x</code> éé¡¹ãå¦æå¸æè·å¾æ´å¥½çåç¼©ææï¼è¿å¯ä»¥éè¿ <code>--clean-css</code> éé¡¹å¯ç¨ <a href="https://github.com/GoalSmashers/clean-css">Clean CSS</a> è¿è¡åç¼©ã
+ </p>
+<p>æ§è¡ lessc ä¸ä¸å¸¦ä»»ä½åæ°ï¼å°±ä¼å¨å½ä»¤è¡ä¸è¾åºææå¯ç¨éé¡¹çåè¡¨ã</p>
+<h2 class="docs-heading">ä»£ç ä¸­ä½¿ç¨<span class="anchor-target" id="using-less-usage-in-code"></span>
+<a href="#using-less-usage-in-code" name="using-less-usage-in-code" class="anchor glyphicon glyphicon-link"></a></h2>
+<p>å¯ä»¥åä¸é¢è¿æ ·å¨ä»£ç ä¸­è°ç¨ Less ç¼è¯å¨ï¼Node å¹³å°ï¼ã</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> less = <span class="hljs-built_in">require</span>(<span class="hljs-string">'less'</span>);
+
+less.render(<span class="hljs-string">'.class { width: (1 + 1) }'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(e, css)</span> </span>{
+  <span class="hljs-built_in">console</span>.log(css);
+});
+</code></pre>
+<p>è¾åºç»æä¸ºï¼</p>
+<pre><code class="lang-css"><span class="hljs-class">.class</span> <span class="hljs-rules">{
+  <span class="hljs-rule"><span class="hljs-attribute">width</span>:<span class="hljs-value"> <span class="hljs-number">2</span></span></span>;
+<span class="hljs-rule">}</span></span>
+</code></pre>
+<p>ä½ è¿å¯ä»¥æå¨è°ç¨åæå¨ï¼paserï¼åç¼è¯å¨ï¼</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> parser = <span class="hljs-keyword">new</span>(less.Parser);
+
+parser.parse(<span class="hljs-string">'.class { width: (1 + 1) }'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(err, tree)</span> </span>{
+  <span class="hljs-keyword">if</span> (err) {
+    <span class="hljs-keyword">return</span> <span class="hljs-built_in">console</span>.error(err)
+  }
+  <span class="hljs-built_in">console</span>.log(tree.toCSS());
+});
+</code></pre>
+<h2 class="docs-heading">éç½®<span class="anchor-target" id="using-less-configuration"></span>
+<a href="#using-less-configuration" name="using-less-configuration" class="anchor glyphicon glyphicon-link"></a></h2>
+<p>å¯ä»¥ç»ç¼è¯å¨ä¼ éå¤ä¸ªåæ°ï¼</p>
+<pre><code class="lang-js"><span class="hljs-keyword">var</span> parser = <span class="hljs-keyword">new</span>(less.Parser)({
+  paths: [<span class="hljs-string">'.'</span>, <span class="hljs-string">'./lib'</span>], <span class="hljs-comment">// Specify search paths for @import directives</span>
+  filename: <span class="hljs-string">'style.less'</span> <span class="hljs-comment">// Specify a filename, for better error messages</span>
+});
+
+parser.parse(<span class="hljs-string">'.class { width: (1 + 1) }'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">(e, tree)</span> </span>{
+  tree.toCSS({
+    <span class="hljs-comment">// Minify CSS output</span>
+    compress: <span class="hljs-literal">true</span>
+  });
+});
+</code></pre>
+<h2 class="docs-heading">ç¬¬ä¸æ¹å·¥å·<span class="anchor-target" id="using-less-third-party-tools"></span>
+<a href="#using-less-third-party-tools" name="using-less-third-party-tools" class="anchor glyphicon glyphicon-link"></a></h2>
+<p>æ¥ç <a href="usage/index.html">ç¨æ³</a> é¨åäºè§£ç¬¬ä¸æ¹å·¥å·çè¯¦ç»ä¿¡æ¯ã</p>
+<h1 class="docs-heading">Rhino å½ä»¤è¡<span class="anchor-target" id="command-line-with-rhino"></span>
+<a href="#command-line-with-rhino" name="command-line-with-rhino" class="anchor glyphicon glyphicon-link"></a></h1>
+<blockquote>
+<p>æ¯ä¸ª less.js åå¸çæ¬åæ ·åå«äº rhino-compatible çæ¬ã</p>
+</blockquote>
+<p>å½ä»¤è¡ rhino çæ¬éè¦åå«ä»¥ä¸ä¸¤ä¸ªæä»¶ï¼</p>
+<ul>
+<li>less-rhino-<version>.js - ç¼è¯æ§è¡,</version></li>
+<li>lessc-rhino-<version>.js - å½ä»¤è¡æ¯æ</version></li>
+</ul>
+<p>å½ä»¤è¡æ§è¡ç¼è¯ï¼</p>
+<pre><code>java -jar js.jar -f less-rhino-&lt;version&gt;.js lessc-rhino-&lt;version&gt;.js styles.less styles.css
+</code></pre><p>ä»¥ä¸å°ç¼è¯ styles.less æä»¶å¹¶ä¿å­ä¸º styles.css æä»¶ã
+ è¾åºæä»¶çåæ°æ¯å¯éçï¼å¦ææ²¡ææå®è¯¥åæ°ï¼lesså°é»è®¤è¾åºå°æ åè¾åºä¸­ï¼<code>stdout</code>ï¼ã</p>
+<h1 class="docs-heading">å®¢æ·ç«¯ç¨æ³<span class="anchor-target" id="client-side-usage"></span>
+<a href="#client-side-usage" name="client-side-usage" class="anchor glyphicon glyphicon-link"></a></h1>
+<blockquote>
+<p>å¨æµè§å¨ä¸è· less.js éå¸¸æ¹ä¾¿å¼åï¼ä½æ¯ä¸æ¨èç¨äºçäº§ç¯å¢ã </p>
+</blockquote>
+<p>å¨å®¢æ·ç«¯ä½¿ç¨ Less.js æ¯æå®¹æçæ¹å¼ï¼å¹¶ä¸å¨å¼åé¶æ®µå¾æ¹ä¾¿ï¼ä½æ¯ï¼å¨çäº§ç¯å¢ä¸­ï¼æ§è½åå¯é æ§éå¸¸éè¦ï¼
+ <em>æä»¬å»ºè®®æå¥½ä½¿ç¨ node.js æå¶å®ç¬¬ä¸æ¹å·¥å·è¿è¡é¢ç¼è¯</em>ã</p>
+<p>é£å°±å¼å§å§ï¼å¨é¡µé¢ä¸­å å¥ <code>.less</code> æ ·å¼è¡¨çé¾æ¥ï¼å¹¶å° <code>rel</code> å±æ§è®¾ç½®ä¸º "<code>stylesheet/less</code>"ï¼</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">link</span> <span class="hljs-attribute">rel</span>=<span class="hljs-value">"stylesheet/less"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/css"</span> <span class="hljs-attribute">href</span>=<span class="hljs-value">"styles.less"</span> /&gt;</span>
+</code></pre>
+<p>æ¥ä¸æ¥ï¼ä¸è½½ <a href="https://github.com/less/less.js/archive/master.zip">less.js</a>  å¹¶éè¿  <code>&lt;script&gt;&lt;/script&gt;</code> æ ç­¾å°å¶å¼å¥ï¼æ¾ç½®äºé¡µé¢ç<code>&lt;head&gt;</code> åç´ åï¼</p>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"less.js"</span> <span class="hljs-attribute">type</span>=<span class="hljs-value">"text/javascript"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre>
+<h3 class="docs-heading">æç¤º<span class="anchor-target" id="client-side-usage-tips"></span>
+<a href="#client-side-usage-tips" name="client-side-usage-tips" class="anchor glyphicon glyphicon-link"></a></h3>
+<ul>
+<li>å¡å¿ç¡®ä¿å¨ less.js ä¹åå è½½ä½ çæ ·å¼è¡¨ã</li>
+<li>å¦æå è½½å¤ä¸ª <code>.less</code> æ ·å¼è¡¨æä»¶ï¼æ¯ä¸ªæä»¶é½ä¼è¢«åç¬ç¼è¯ãå æ­¤ï¼ä¸ä¸ªæä»¶ä¸­æå®ä¹çä»»ä½åéãmixin æå½åç©ºé´é½æ æ³å¨å¶å®æä»¶ä¸­è®¿é®
+ ã</li>
+</ul>
+<h2 class="docs-heading">æµè§å¨éé¡¹<span class="anchor-target" id="client-side-usage-browser-options"></span>
+<a href="#client-side-usage-browser-options" name="client-side-usage-browser-options" class="anchor glyphicon glyphicon-link"></a></h2>
+<p>
+å¨ <code>&lt;script src=&quot;less.js&quot;&gt;&lt;/script&gt;</code> ä¹å å®ä¹å¨å±ç <code>less</code> å¯¹è±¡å°±å¯ä»¥ä¸º <code>Less.js</code> è®¾ç½®åæ°ï¼</p>
+<pre><code class="lang-html"><span class="hljs-comment">&lt;!-- set options before less.js script --&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span>&gt;</span><span class="javascript">
+  less = {
+    env: <span class="hljs-string">"development"</span>,
+    async: <span class="hljs-literal">false</span>,
+    fileAsync: <span class="hljs-literal">false</span>,
+    poll: <span class="hljs-number">1000</span>,
+    functions: {},
+    dumpLineNumbers: <span class="hljs-string">"comments"</span>,
+    relativeUrls: <span class="hljs-literal">false</span>,
+    rootpath: <span class="hljs-string">":/a.com/"</span>
+  };
+</span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+<span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"less.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre>
+<p>äºè§£æ´å¤  <a href="usage/index.html">æµè§å¨éé¡¹</a></p>
+
+</div>
+
+
+
+
+
+<div class="docs-section">
+  <div class="page-header">
+    <h1 class="docs-heading">è·å Less.js<span class="anchor-target" id="download-options"></span>
+<a href="#download-options" name="download-options" class="anchor glyphicon glyphicon-link"></a></h1>
+  </div>
+
+  <h2 class="docs-heading">æµè§å¨ä¸è½½<span class="anchor-target" id="download-options-browser-downloads"></span>
+<a href="#download-options-browser-downloads" name="download-options-browser-downloads" class="anchor glyphicon glyphicon-link"></a></h2>
+  <a class="btn btn-default" href="https://raw.github.com/less/less.js/master/dist/less-1.7.3.min.js">ä¸è½½ Less.js v1.7.3</a>
+
+  <div class="docs-dl-options">
+    <h4 id="-download-source-code-https-github-com-less-less-js-archive-v1-7-3-zip-"><a href="https://github.com/less/less.js/archive/v1.7.3.zip">Download source code</a></h4>
+<p>ç´æ¥ä» GitHub ä¸ä¸è½½ææ°ç Less.js æºç ã</p>
+<h4 id="-clone-or-fork-via-github-https-github-com-less-less-js-git-"><a href="https://github.com/less/less.js.git">Clone or fork via GitHub</a></h4>
+<p>éè¿ GitHub åéæ fork æ¬é¡¹ç®ï¼</p>
+<h4 id="-install-with-bower-http-bower-io-"><a href="http://bower.io">éè¿ Bower å®è£</a></h4>
+<p>éè¿ Bower å®è£ Less.js é¡¹ç®ï¼å¯ä»¥ä½¿ç¨ä»¥ä¸å½ä»¤ï¼</p>
+<pre><code class="lang-bash">bower install less
+</code></pre>
+
+  </div>
+
+  <div class="cdn-options">
+<h3 class="docs-heading"><a href="//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js">Less CDN</a><span class="anchor-target" id="download-options--less-cdn-cdnjs-cloudflare-com-ajax-libs-less-js-1-7-3-less-min-js-"></span>
+<a href="#download-options--less-cdn-cdnjs-cloudflare-com-ajax-libs-less-js-1-7-3-less-min-js-" name="download-options--less-cdn-cdnjs-cloudflare-com-ajax-libs-less-js-1-7-3-less-min-js-" class="anchor glyphicon glyphicon-link"></a></h3>
+<pre><code class="lang-html"><span class="hljs-tag">&lt;<span class="hljs-title">script</span> <span class="hljs-attribute">src</span>=<span class="hljs-value">"//cdnjs.cloudflare.com/ajax/libs/less.js/1.7.3/less.min.js"</span>&gt;</span><span class="javascript"></span><span class="hljs-tag">&lt;/<span class="hljs-title">script</span>&gt;</span>
+</code></pre>
+
+  </div>
+</div>
+
+
+
+
+<div class="docs-section">
+  <div class="page-header">
+    <h1 class="docs-heading">License FAQs<span class="anchor-target" id="license-faqs"></span>
+<a href="#license-faqs" name="license-faqs" class="anchor glyphicon glyphicon-link"></a></h1>
+  </div>
+<p class="lead">Less.js åºäº Apache 2 è®¸å¯è¯åå¸ï¼<a href="https://github.com/less/less.js/issues/1029">æä»¬æç®å°æ¥éç¨åè®¸å¯è¯æ¹å¼</a>ï¼ãçæææ 2009-2014ï¼Alexis Sellier å Less æ ¸å¿å°ç»ï¼è§ä¸é¢ï¼ãæ»ç»å¦ä¸ï¼</p>
+  
+<div class="row">
+    <div class="col-12 col-lg-6">
+      <h4>èµäºä½ çæåï¼</h4>
+      <ul>
+        <li>ä»»æä¸è½½å¹¶ä½¿ç¨ Less.js çå¨é¨æé¨åä»£ç ï¼å¯ä»¥ç¨äºä¸ªäººãå¬å¸åé¨æåä¸ç®ç</li>
+        <li>å° Less.js åå«å°ä½ çäº§åä¸­</li>
+      </ul>
+    </div>
+    <div class="col-12 col-lg-6">
+      <h4>ä¸¥ç¦ï¼</h4>
+      <ul>
+        <li>å¨æ²¡æå£°æçæå½å±çæåµä¸ä½¿ç¨ Less.js ä¸­çä»»ä½ä»£ç çæ®µ</li>
+      </ul>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 col-lg-6">
+      <h4>ä½ çä¹å¡ï¼</h4>
+      <ul>
+        <li>å¦æä½ çäº§åä¸­åå« Less.jsï¼å¿é¡»åå«ä¸ä»½ Less.js ççæåè®®</li>
+        <li>å¨ä½ åå«äº Less.js çäº§åä¸­æç¡®å£°æ Less.js ççæå½ Less æ ¸å¿å°ç»</li>
+      </ul>
+    </div>
+    <div class="col-12 col-lg-6">
+      <h4>ä¸éè¦ï¼</h4>
+      <ul>
+        <li>å¨ä½ çäº§åä¸­åå« Lessãjs èªèº«æä½ æä¿®æ¹çæºç </li>
+        <li>æäº¤ä½ å¯¹ Less.js æåçä¿®æ¹å° Less.js é¡¹ç®ï¼æä»¬è¿æ¯é¼å±æäº¤å¯¹ Less.js çæ¹è¿ï¼</li>
+      </ul>
+    </div>
+  </div>
+  <p>å®æ´ç Less.js çæä¿¡æ¯ä½äº <a href="https://github.com/less/less.js/blob/master/LICENSE">é¡¹ç®ä»åºå</a>ï¼è¯·åèã</p>
+  </div>
+
+</div>
+        </div>
+      </div>
+    </div>
+
+    
+    <footer class="footer" role="contentinfo">
+  <div class="container">
+    <div class="bs-social">
+  <ul class="bs-social-buttons">
+    <li>
+      <iframe class="github-btn" src="https://ghbtns.com/github-btn.html?user=less&amp;repo=less.js&amp;type=watch&amp;count=true" width="100" height="20" title="Star on GitHub"></iframe>
+    </li>
+    <li>
+      <iframe class="github-btn" src="https://ghbtns.com/github-btn.html?user=less&amp;repo=less.js&amp;type=fork&amp;count=true" width="102" height="20" title="Fork on GitHub"></iframe>
+    </li>
+  </ul>
+</div>
+	
+    <p>Less.js åå¶ææ¡£ç± <a href="about/index.html">Less æ ¸å¿å¼åå°ç»</a> å¼åç»´æ¤ã</p>
+    <p>ææ¡£æºä»£ç åå¸å¨ <a href="https://github.com/less/less-docs/blob/master/LICENSE-MIT" target="_blank">MIT License</a>, ææ¡£åºäº <a href="http://creativecommons.org/licenses/by/3.0/">CC BY 3.0</a> åè®®ã</p>
+    <ul class="footer-links">
+      <li>ç®åçæ¬  v1.7.3</li>
+      
+      <li class="muted">&middot;</li>
+      <li><a href="https://github.com/less/less.js/issues">Less.js é®ç­</a></li>
+      <li class="muted">&middot;</li>
+      <li><a href="https://github.com/less/less-docs/issues?&amp;state=open">Less ææ¡£é®ç­</a></li>
+      <li class="muted">&middot;</li>
+      <li><a href="https://github.com/less/less.js/blob/master/CHANGELOG.md">ä¿®æ¹è®°å½</a></li>
+      
+    </ul>
+  </div>
+</footer>
+
+
+    
+    <!-- Core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="//apps.bdimg.com/libs/jquery/1.10.2/jquery.min.js"></script>
+<script src="//apps.bdimg.com/libs/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+
+<script src="//apps.bdimg.com/libs/holder/2.2.0/holder.js"></script>
+<script src="public/js/application.js"></script>
+<div style="display:none;">
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+
+
+
+</div>
+
+
+
+  </body>
+</html>

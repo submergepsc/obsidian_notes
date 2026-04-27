@@ -1,0 +1,135 @@
+URL: https://www.runoob.com/tags/tag-textarea.html
+Title: HTML <textarea> 标签 | 菜鸟教程
+
+HTML <textarea> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <tfoot> 标签 
+
+HTML <time> 标签 
+
+HTML <textarea> 标签 
+
+实例 
+
+一个 HTML 文本区域： 
+
+<textarea rows="10" cols="30"> 
+我是一个文本框。 
+</textarea> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <textarea> 标签。 
+
+标签定义及使用说明 
+
+<textarea> 标签定义一个多行的文本输入控件。 
+
+文本区域中可容纳无限数量的文本，其中的文本的默认字体是等宽字体（通常是 Courier）。 
+
+可以通过 cols 和 rows 属性来规定 textarea 的尺寸大小，不过更好的办法是使用 CSS 的 height 和 width 属性。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+HTML5 增加了一些新的属性。 
+
+属性 
+
+New ：HTML5 中的新属性。 
+
+属性 
+
+值 
+
+描述 
+
+autofocus New 
+
+autofocus 
+
+规定当页面加载时，文本区域自动获得焦点。 
+
+cols 
+
+number 
+
+规定文本区域内可见的宽度。 
+
+disabled 
+
+disabled 
+
+规定禁用文本区域。 
+
+form New 
+
+form_id 
+
+定义文本区域所属的一个或多个表单。 
+
+maxlength New 
+
+number 
+
+规定文本区域允许的最大字符数。 
+
+name 
+
+text 
+
+规定文本区域的名称。 
+
+placeholder New 
+
+text 
+
+规定一个简短的提示，描述文本区域期望的输入值。 
+
+readonly 
+
+readonly 
+
+规定文本区域为只读。 
+
+required New 
+
+required 
+
+规定文本区域是必需的/必填的。 
+
+rows 
+
+number 
+
+规定文本区域内可见的行数。 
+
+wrap New 
+
+hard 
+soft 
+
+规定当提交表单时，文本区域中的文本应该怎样换行。 
+
+全局属性 
+
+<textarea> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<textarea> 标签支持 HTML 的事件属性 。 
+
+相关文章 
+
+HTML DOM 参考手册： Textarea 对象 
+
+AI 思考中... 
+
+HTML <tfoot> 标签 
+
+HTML <time> 标签

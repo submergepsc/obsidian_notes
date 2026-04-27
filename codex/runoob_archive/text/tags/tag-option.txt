@@ -1,0 +1,91 @@
+URL: https://www.runoob.com/tags/tag-option.html
+Title: HTML <option> 标签 | 菜鸟教程
+
+HTML <option> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <output> 标签 
+
+HTML <optgroup> 标签 
+
+HTML <option> 标签 
+
+实例 
+
+创建带有 4 个选项的选择列表： 
+
+<select> 
+<option value="volvo">Volvo</option> 
+<option value="saab">Saab</option> 
+<option value="opel">Opel</option> 
+<option value="audi">Audi</option> 
+</select> 
+
+尝试一下 » 
+
+浏览器支持 
+
+大多数主流浏览器支持 <option> 标签。 
+
+标签定义及使用说明 
+
+The <option> 标签定义下拉列表中的一个选项（一个条目）。 
+
+<option> 标签中的内容作为 <select> 或者 <datalist> 一个元素使用。 
+
+提示和注释 
+
+注释： <option> 标签可以在不带有任何属性的情况下使用，但是您通常需要使用 value 属性，此属性会指示出被送往服务器的内容。 
+
+注释： 请与 select 元素配合使用此标签，否则这个标签是没有意义的。 
+
+提示： 如果列表选项很多，可以使用 <optgroup> 标签对相关选项进行组合。 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+disabled 
+
+disabled 
+
+规定此选项应在首次加载时被禁用。 
+
+label 
+
+text 
+
+定义当使用 <optgroup> 时所使用的标注。 
+
+selected 
+
+selected 
+
+规定选项（在首次显示在列表中时）表现为选中状态。 
+
+value 
+
+text 
+
+定义送往服务器的选项值。 
+
+全局属性 
+
+<option> 标签支持全局属性，查看完整属性表 HTML全局属性 。 
+
+事件属性 
+
+<option> 标签支持所有 HTML事件属性 。 
+
+AI 思考中... 
+
+HTML <output> 标签 
+
+HTML <optgroup> 标签

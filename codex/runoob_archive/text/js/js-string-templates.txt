@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/js/js-string-templates.html
+Title: JavaScript 模板字符串 | 菜鸟教程
+
+JavaScript 模板字符串 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Javascript 教程

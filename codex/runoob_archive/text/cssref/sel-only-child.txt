@@ -1,0 +1,50 @@
+URL: https://www.runoob.com/cssref/sel-only-child.html
+Title: CSS3 :only-child 选择器 | 菜鸟教程
+
+CSS3 :only-child 选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 :only-of-type 选择器 
+
+CSS3 :nth-child() 选择器 
+
+CSS3 :only-child 选择器 
+
+实例 
+
+匹配属于父元素中唯一子元素的 p 元素: 
+
+p :only-child { background: #ff0000 ; } 
+
+尝试一下 » 
+
+定义和用法 
+
+:only-child 选择器匹配属于父元素中唯一子元素的元素。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+:only-child 
+
+4.0 
+
+9.0 
+
+3.5 
+
+3.2 
+
+9.6 
+
+AI 思考中... 
+
+CSS3 :only-of-type 选择器 
+
+CSS3 :nth-child() 选择器

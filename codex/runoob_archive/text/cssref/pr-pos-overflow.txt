@@ -1,0 +1,98 @@
+URL: https://www.runoob.com/cssref/pr-pos-overflow.html
+Title: CSS overflow 属性 | 菜鸟教程
+
+CSS overflow 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS Outline-width 属性 
+
+CSS3 overflow-x 属性 
+
+CSS overflow 属性 
+
+实例 
+
+设置不同 overflow 属性值： 
+
+div .ex1 { overflow: scroll ; } div .ex2 { overflow: hidden ; } div .ex3 { overflow: auto ; } div .ex4 { overflow: visible ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+overflow属性指定如果内容溢出一个元素的框，会发生什么。 
+
+默认值： 
+
+visible 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS2 
+
+JavaScript 语法： 
+
+object .style.overflow="scroll" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+overflow 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+7.0 
+
+注意： 在X Lion(Mac OS),滚动条显示默认是隐藏的,只有当被使用(即使"overflow:scroll"已设置)。 
+
+属性值 
+
+值 
+
+描述 
+
+visible 
+
+默认值。内容不会被修剪，会呈现在元素框之外。 
+
+hidden 
+
+内容会被修剪，并且其余内容是不可见的。 
+
+scroll 
+
+内容会被修剪，但是浏览器会显示滚动条以便查看其余的内容。 
+
+auto 
+
+如果内容被修剪，则浏览器会显示滚动条以便查看其余的内容。 
+
+inherit 
+
+规定应该从父元素继承 overflow 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS Positioning 
+
+AI 思考中... 
+
+CSS Outline-width 属性 
+
+CSS3 overflow-x 属性

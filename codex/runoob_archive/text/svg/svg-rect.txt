@@ -1,0 +1,148 @@
+URL: https://www.runoob.com/svg/svg-rect.html
+Title: SVG 矩形 | 菜鸟教程
+
+SVG 矩形 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SVG 教程 
+
+SVG 在 HTML 中 
+
+SVG 圆形 
+
+SVG <rect> 
+
+SVG（可缩放矢量图形）的 <rect> 元素用于绘制矩形，是 SVG 中常用的基本形状之一，它允许你绘制矩形，并可以通过设置属性来控制矩形的位置、大小、圆角等样式。 
+
+基本语法 
+
+<rect
+ x="x-coordinate" <!-- 矩形左上角的 x 坐标 -->
+ y="y-coordinate" <!-- 矩形左上角的 y 坐标 -->
+ width="width-value" <!-- 矩形的宽度 -->
+ height="height-value" <!-- 矩形的高度 -->
+ rx="rx-value" <!-- 矩形的圆角半径（水平方向） -->
+ ry="ry-value" <!-- 矩形的圆角半径（垂直方向） -->
+ fill="fill-color" <!-- 矩形的填充颜色 -->
+ stroke="stroke-color" <!-- 矩形的描边颜色 -->
+ stroke-width="width-value" <!-- 矩形的描边宽度 -->
+/> 
+
+属性解析： 
+
+x 和 y 属性指定了矩形左上角的坐标，即矩形的起始点。 
+
+width 和 height 属性定义了矩形的宽度和高度。 
+
+rx 和 ry 属性用于指定矩形的圆角半径。如果只设置 rx ，则所有角的圆角半径都相同；如果同时设置 rx 和 ry ，则可以分别指定水平和垂直方向的圆角半径。 
+
+fill 属性定义了矩形的填充颜色。 
+
+stroke 属性定义了矩形的描边颜色。 
+
+stroke-width 属性定义了矩形的描边宽度。 
+
+下面的代码绘制了一个蓝色填充、黑色描边、宽度为 2 像素的矩形，左上角坐标为 (50, 50)，宽度为 100，高度为 80。 
+
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+ <rect x="50" y="50" width="100" height="80" fill="blue" stroke="black" stroke-width="2" />
+</svg> 
+
+实例 1 
+
+下面是 SVG 代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<rect width="300" height="100" 
+style="fill:rgb(0,0,255);stroke-width:1;stroke:rgb(0,0,0)"/> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+代码解析: 
+
+rect 元素的 width 和 height 属性可定义矩形的高度和宽度 
+
+style 属性用来定义 CSS 属性 
+
+CSS 的 fill 属性定义矩形的填充颜色（rgb 值、颜色名或者十六进制值） 
+
+CSS 的 stroke-width 属性定义矩形边框的宽度 
+
+CSS 的 stroke 属性定义矩形边框的颜色 
+
+实例 2 
+
+让我们看看另一个例子，它包含一些新的属性： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<rect x="50" y="20" width="150" height="150" 
+style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1; 
+stroke-opacity:0.9"/> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看SVG文件 。 
+
+代码解析： 
+
+x 属性定义矩形的左侧位置（例如，x="0" 定义矩形到浏览器窗口左侧的距离是 0px） 
+
+y 属性定义矩形的顶端位置（例如，y="0" 定义矩形到浏览器窗口顶端的距离是 0px） 
+
+CSS 的 fill-opacity 属性定义填充颜色透明度（合法的范围是：0 - 1） 
+
+CSS 的 stroke-opacity 属性定义轮廓颜色的透明度（合法的范围是：0 - 1） 
+
+实例 3 
+
+定义整个元素的不透明度： 
+
+下面是SVG代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<rect x="50" y="20" width="150" height="150" 
+style="fill:blue;stroke:pink;stroke-width:5;opacity:0.5"/> 
+</svg> 
+
+尝试一下 » 
+
+对于Opera用户： 查看SVG文件 。 
+
+CSS opacity 属性用于定义了元素的透明值 (范围: 0 到 1)。 
+
+实例 4 
+
+最后一个例子，创建一个圆角矩形： 
+
+下面是SVG代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<rect x="50" y="20" rx="20" ry="20" width="150"
+height="150" 
+style="fill:red;stroke:black;stroke-width:5;opacity:0.5"/> 
+</svg> 
+
+尝试一下 » 
+
+对于Opera用户： 查看SVG文件 。 
+
+rx 和 ry 属性可使矩形产生圆角。 
+
+AI 思考中... 
+
+SVG 在 HTML 中 
+
+SVG 圆形

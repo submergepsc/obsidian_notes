@@ -1,0 +1,203 @@
+URL: https://www.runoob.com/python3/python3-built-in-functions.html
+Title: Python3 内置函数 | 菜鸟教程
+
+Python3 内置函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 字典 popitem() 方法 
+
+Python3 ascii() 函数 
+
+Python3 内置函数 
+
+Python 提供了大量 内置函数（Built-in Functions） ，无需导入任何库即可直接使用。
+这些函数覆盖了 数据类型转换、数学计算、迭代操作、反射机制 等常见场景，是每个 Python 初学者必须掌握的基础工具。 
+
+为什么要掌握内置函数？ 
+
+减少代码量：一行顶多行（例如 sum() 、 max() ） 
+
+提升可读性：语义明确，比手写逻辑更清晰 
+
+性能更优：底层 C 实现，通常比 Python 循环更快 
+
+常见分类 
+
+数值计算： abs() 、 round() 、 min() 、 max() 、 sum() 
+
+类型转换： int() 、 float() 、 str() 、 list() 、 tuple() 
+
+迭代与函数式： code>map() 、 filter() 、 zip() 、 enumerate() 
+
+反射与对象： type() 、 isinstance() 、 getattr() 、 setattr() 
+
+输入输出： print() 、 input() 、 open() 
+
+常用函数示例 
+
+# 求和
+sum([1, 2, 3]) # 6
+
+# 最大值
+max([3, 6, 2]) # 6
+
+# 类型转换
+int("123") # 123
+
+# 枚举
+for i, v in enumerate(['a', 'b']):
+ print(i, v)
+
+# map
+list(map(lambda x: x * 2, [1,2,3])) # [2,4,6] 
+
+函数速查表 
+
+内置函数 
+
+abs() 
+
+dict() 
+
+help() 
+
+min() 
+
+setattr() 
+
+all() 
+
+dir() 
+
+hex() 
+
+next() 
+
+slice() 
+
+any() 
+
+divmod() 
+
+id() 
+
+object() 
+
+sorted() 
+
+ascii() 
+
+enumerate() 
+
+input() 
+
+oct() 
+
+staticmethod() 
+
+bin() 
+
+eval() 
+
+int() 
+
+open() 
+
+str() 
+
+bool() 
+
+exec() 
+
+isinstance() 
+
+ord() 
+
+sum() 
+
+bytearray() 
+
+filter() 
+
+issubclass() 
+
+pow() 
+
+super() 
+
+bytes() 
+
+float() 
+
+iter() 
+
+print() 
+
+tuple() 
+
+callable() 
+
+format() 
+
+len() 
+
+property() 
+
+type() 
+
+chr() 
+
+frozenset() 
+
+list() 
+
+range() 
+
+vars() 
+
+classmethod() 
+
+getattr() 
+
+locals() 
+
+repr() 
+
+zip() 
+
+compile() 
+
+globals() 
+
+map() 
+
+reversed() 
+
+__import__() 
+
+complex() 
+
+hasattr() 
+
+max() 
+
+round() 
+
+reload() 
+
+delattr() 
+
+hash() 
+
+memoryview() 
+
+set() 
+
+AI 思考中... 
+
+Python3 字典 popitem() 方法 
+
+Python3 ascii() 函数

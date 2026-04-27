@@ -1,0 +1,31 @@
+URL: https://www.runoob.com/java/string-format.html
+Title: Java 实例 – 字符串格式化 | 菜鸟教程
+
+Java 实例 – 字符串格式化 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 字符串优化 
+
+Java 实例 – 连接字符串 
+
+Java 实例 - 字符串格式化 
+
+以下实例演示了通过 format() 方法来格式化字符串，还可以指定地区来格式化： 
+
+StringFormat.java 文件 
+
+import java . util .*; public class StringFormat { public static void main ( String [ ] args ) { double e = Math . E ; System . out . format ( " %f%n " , e ) ; System . out . format ( Locale . CHINA , " %-10.4f%n%n " , e ) ; } } 
+
+以上代码实例输出结果为： 
+
+2.718282
+2.7183 
+
+AI 思考中... 
+
+Java 实例 – 字符串优化 
+
+Java 实例 – 连接字符串

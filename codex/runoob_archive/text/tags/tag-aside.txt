@@ -1,0 +1,54 @@
+URL: https://www.runoob.com/tags/tag-aside.html
+Title: HTML <aside> 标签 | 菜鸟教程
+
+HTML <aside> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <article> 标签 
+
+HTML <audio> 标签 
+
+HTML <aside> 标签 
+
+实例 
+
+< p > My family and I visited The Epcot center this summer. </ p > < aside > < h4 > Epcot Center </ h4 > < p > The Epcot Center is a theme park in Disney World, Florida. </ p > </ aside > 
+
+尝试一下 » 
+
+浏览器支持 
+
+IE 9+、Firefox、Opera、Chrome 和 Safari 都支持 <aside> 标签。 
+
+注释： IE 8 或更早版本的 IE 浏览器不支持 <aside> 标签。 
+
+标签定义及使用说明 
+
+<aside> 标签定义 <article> 标签外的内容。 
+
+aside 的内容应该与附近的内容相关。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+<aside> 标签是 HTML5 的新标签。 
+
+提示和注释 
+
+提示： <aside> 的内容可用作文章的侧栏。 
+
+全局属性 
+
+<aside> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<aside> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <article> 标签 
+
+HTML <audio> 标签

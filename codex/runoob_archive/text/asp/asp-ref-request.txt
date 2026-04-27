@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/asp/asp-ref-request.html
+Title: ASP Request 对象 | 菜鸟教程
+
+ASP Request 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+ASP 教程

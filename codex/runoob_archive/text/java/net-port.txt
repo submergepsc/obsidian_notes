@@ -1,0 +1,70 @@
+URL: https://www.runoob.com/java/net-port.html
+Title: Java 实例 – 查看端口是否已使用 | 菜鸟教程
+
+Java 实例 – 查看端口是否已使用 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 获取本机ip地址及主机名 
+
+Java 实例 – 查看线程是否存活 
+
+Java 实例 - 查看端口是否已使用 
+
+以下实例演示了如何检测端口是否已经使用： 
+
+实例 
+
+import java . net .*; import java . io .*; public class Main { public static void main ( String [ ] args ) { Socket Skt ; String host = " localhost " ; if ( args . length > 0 ) { host = args [ 0 ] ; } for ( int i = 0 ; i < 1024 ; i ++ ) { try { System . out . println ( " 查看 " + i ) ; Skt = new Socket ( host , i ) ; System . out . println ( " 端口 " + i + " 已被使用 " ) ; } catch ( UnknownHostException e ) { System . out . println ( " Exception occured " + e ) ; break ; } catch ( IOException e ) { } } } } 
+
+以上代码运行输出结果为： 
+
+……
+查看 17
+查看 18
+查看 19
+查看 20
+查看 21
+端口 21 已被使用
+查看 22
+查看 23
+查看 24
+…… 
+
+也可以指定主机的端口： 
+
+Main.java 文件 
+
+import java . io . IOException ; import java . net . InetSocketAddress ; import java . net . Socket ; import java . net . SocketAddress ; import java . net . SocketTimeoutException ; public class Main { public static void main ( String [ ] args ) { log ( isSocketAliveUitlitybyCrunchify ( " localhost " , 80 ) ) ; log ( isSocketAliveUitlitybyCrunchify ( " localhost " , 8080 ) ) ; log ( isSocketAliveUitlitybyCrunchify ( " localhost " , 8081 ) ) ; log ( isSocketAliveUitlitybyCrunchify ( " runoob.com " , 80 ) ) ; log ( isSocketAliveUitlitybyCrunchify ( " runoob.com " , 443 ) ) ; log ( isSocketAliveUitlitybyCrunchify ( " runoob.com " , 81 ) ) ; } @param @param @return public static boolean isSocketAliveUitlitybyCrunchify ( String hostName , int port ) { boolean isAlive = false ; SocketAddress socketAddress = new InetSocketAddress ( hostName , port ) ; Socket socket = new Socket ( ) ; int timeout = 2000 ; log ( " hostName: " + hostName + " , port: " + port ) ; try { socket . connect ( socketAddress , timeout ) ; socket . close ( ) ; isAlive = true ; } catch ( SocketTimeoutException exception ) { System . out . println ( " SocketTimeoutException " + hostName + " : " + port + " . " + exception . getMessage ( ) ) ; } catch ( IOException exception ) { System . out . println ( " IOException - Unable to connect to " + hostName + " : " + port + " . " + exception . getMessage ( ) ) ; } return isAlive ; } private static void log ( String string ) { System . out . println ( string ) ; } private static void log ( boolean isAlive ) { System . out . println ( " 是否真正在使用: " + isAlive + " \n " ) ; } } 
+
+以上代码运行输出结果为： 
+
+hostName: localhost, port: 80
+IOException - Unable to connect to localhost:80. Connection refused
+是否真正在使用: true
+
+hostName: localhost, port: 8080
+IOException - Unable to connect to localhost:8080. Connection refused
+是否真正在使用: false
+
+hostName: localhost, port: 8081
+IOException - Unable to connect to localhost:8081. Connection refused
+是否真正在使用: false
+
+hostName: runoob.com, port: 80
+是否真正在使用: true
+
+hostName: runoob.com, port: 443
+是否真正在使用: true
+
+hostName: runoob.com, port: 81
+SocketTimeoutException runoob.com:81. connect timed out
+是否真正在使用: false 
+
+AI 思考中... 
+
+Java 实例 – 获取本机ip地址及主机名 
+
+Java 实例 – 查看线程是否存活

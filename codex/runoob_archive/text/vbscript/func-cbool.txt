@@ -1,0 +1,56 @@
+URL: https://www.runoob.com/vbscript/func-cbool.html
+Title: VBScript CBool 函数 | 菜鸟教程
+
+VBScript CBool 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Asc 函数 
+
+VBScript CByte 函数 
+
+VBScript CBool 函数 
+
+CBool 函数把表达式转换为布尔（Boolean）类型。 
+
+表达式必须是一个数值。 
+
+语法 
+
+CBool(expression) 
+
+参数 
+
+描述 
+
+expression 
+
+必需。任何有效的表达式。非零的值返回 True，零返回 False。如果表达式不能解释为数值，则发生 run-time 错误。 
+
+实例 
+
+实例 
+
+<script type="text/vbscript"> 
+
+document.write(CBool(5) & "<br />") 
+document.write(CBool(0) & "<br />") 
+document.write(CBool(-5) & "<br />") 
+
+</script> 
+
+以上实例输出结果： 
+
+True 
+False 
+True 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Asc 函数 
+
+VBScript CByte 函数

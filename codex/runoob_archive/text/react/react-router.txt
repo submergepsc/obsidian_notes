@@ -1,0 +1,610 @@
+URL: https://www.runoob.com/react/react-router.html
+Title: React 路由 | 菜鸟教程
+
+React 路由 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+React 教程 
+
+React 条件判断 
+
+React Memo 
+
+React 路由 
+
+React 路由通常使用 react-router 库来实现，它是一个功能强大的库，用于在 React 应用程序中实现客户端路由。以下是关于如何在 React 中使用 React Router 的详细说明： 
+
+安装 React Router 
+
+首先，你需要安装 react-router-dom 包，这是用于在浏览器环境中实现路由的包。 
+
+npm install react-router-dom 
+
+基本用法 
+
+以下是使用 React Router 设置基本路由的步骤和示例代码。 
+
+1. 创建基础路由组件 
+
+首先，创建一些简单的组件，它们将被路由渲染。 
+
+实例 
+
+import React from 'react' ; 
+
+const Home = ( ) => { 
+
+return < h2 > Home </ h2 >; 
+
+} ; 
+
+export default Home ; 
+
+// About.js 
+
+import React from 'react' ; 
+
+const About = ( ) => { 
+
+return < h2 > About </ h2 >; 
+
+} ; 
+
+export default About ; 
+
+// Contact.js 
+
+import React from 'react' ; 
+
+const Contact = ( ) => { 
+
+return < h2 > Contact </ h2 >; 
+
+} ; 
+
+export default Contact ; 
+
+2. 设置路由 
+
+在你的主应用组件中，使用 react-router-dom 的组件来设置路由。 
+
+实例 
+
+import React from 'react' ; 
+
+import ReactDOM from 'react-dom/client' ; 
+
+import { 
+
+BrowserRouter as Router , 
+
+Routes , 
+
+Route , 
+
+Link 
+
+} from 'react-router-dom' ; 
+
+import Home from './Home' ; 
+
+import About from './About' ; 
+
+import Contact from './Contact' ; 
+
+const App = ( ) => { 
+
+return ( 
+
+< Router > 
+
+< div > 
+
+< nav > 
+
+< ul > 
+
+< li > 
+
+< Link to = "/" > Home </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/about" > About </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/contact" > Contact </ Link > 
+
+</ li > 
+
+</ ul > 
+
+</ nav > 
+
+< Routes > 
+
+< Route path = "/" element = { < Home /> } /> 
+
+< Route path = "/about" element = { < About /> } /> 
+
+< Route path = "/contact" element = { < Contact /> } /> 
+
+</ Routes > 
+
+</ div > 
+
+</ Router > 
+
+) ; 
+
+} ; 
+
+const root = ReactDOM. createRoot ( document. getElementById ( 'root' ) ) ; 
+
+root. render ( < App /> ) ; 
+
+嵌套路由 
+
+React Router 允许你创建嵌套路由，这样可以在一个组件内渲染更多的路由。 
+
+实例 
+
+// Dashboard.js 
+
+import React from 'react' ; 
+
+import { Link , Outlet } from 'react-router-dom' ; 
+
+const Dashboard = ( ) => { 
+
+return ( 
+
+< div > 
+
+< h2 > Dashboard </ h2 > 
+
+< nav > 
+
+< ul > 
+
+< li > 
+
+< Link to = "profile" > Profile </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "settings" > Settings </ Link > 
+
+</ li > 
+
+</ ul > 
+
+</ nav > 
+
+< Outlet /> 
+
+</ div > 
+
+) ; 
+
+} ; 
+
+export default Dashboard ; 
+
+实例 
+
+// Profile.js 
+
+import React from 'react' ; 
+
+const Profile = ( ) => { 
+
+return < h2 > Profile </ h2 >; 
+
+} ; 
+
+export default Profile ; 
+
+实例 
+
+// Settings.js 
+
+import React from 'react' ; 
+
+const Settings = ( ) => { 
+
+return < h2 > Settings </ h2 >; 
+
+} ; 
+
+export default Settings ; 
+
+在主应用组件中设置嵌套路由： 
+
+实例 
+
+import React from 'react' ; 
+
+import ReactDOM from 'react-dom/client' ; 
+
+import { 
+
+BrowserRouter as Router , 
+
+Routes , 
+
+Route , 
+
+Link 
+
+} from 'react-router-dom' ; 
+
+import Home from './Home' ; 
+
+import About from './About' ; 
+
+import Contact from './Contact' ; 
+
+import Dashboard from './Dashboard' ; 
+
+import Profile from './Profile' ; 
+
+import Settings from './Settings' ; 
+
+const App = ( ) => { 
+
+return ( 
+
+< Router > 
+
+< div > 
+
+< nav > 
+
+< ul > 
+
+< li > 
+
+< Link to = "/" > Home </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/about" > About </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/contact" > Contact </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/dashboard" > Dashboard </ Link > 
+
+</ li > 
+
+</ ul > 
+
+</ nav > 
+
+< Routes > 
+
+< Route path = "/" element = { < Home /> } /> 
+
+< Route path = "/about" element = { < About /> } /> 
+
+< Route path = "/contact" element = { < Contact /> } /> 
+
+< Route path = "/dashboard" element = { < Dashboard /> } > 
+
+< Route path = "profile" element = { < Profile /> } /> 
+
+< Route path = "settings" element = { < Settings /> } /> 
+
+</ Route > 
+
+</ Routes > 
+
+</ div > 
+
+</ Router > 
+
+) ; 
+
+} ; 
+
+const root = ReactDOM. createRoot ( document. getElementById ( 'root' ) ) ; 
+
+root. render ( < App /> ) ; 
+
+动态路由 
+
+可以在路径中包含动态参数。 
+
+实例 
+
+// User.js 
+
+import React from 'react' ; 
+
+import { useParams } from 'react-router-dom' ; 
+
+const User = ( ) => { 
+
+const { userId } = useParams ( ) ; 
+
+return < h2 > User ID : { userId } </ h2 >; 
+
+} ; 
+
+export default User ; 
+
+在主应用组件中设置动态路由： 
+
+实例 
+
+import React from 'react' ; 
+
+import ReactDOM from 'react-dom/client' ; 
+
+import { 
+
+BrowserRouter as Router , 
+
+Routes , 
+
+Route , 
+
+Link 
+
+} from 'react-router-dom' ; 
+
+import Home from './Home' ; 
+
+import About from './About' ; 
+
+import Contact from './Contact' ; 
+
+import Dashboard from './Dashboard' ; 
+
+import Profile from './Profile' ; 
+
+import Settings from './Settings' ; 
+
+import User from './User' ; 
+
+const App = ( ) => { 
+
+return ( 
+
+< Router > 
+
+< div > 
+
+< nav > 
+
+< ul > 
+
+< li > 
+
+< Link to = "/" > Home </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/about" > About </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/contact" > Contact </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/dashboard" > Dashboard </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/user/1" > User 1 </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/user/2" > User 2 </ Link > 
+
+</ li > 
+
+</ ul > 
+
+</ nav > 
+
+< Routes > 
+
+< Route path = "/" element = { < Home /> } /> 
+
+< Route path = "/about" element = { < About /> } /> 
+
+< Route path = "/contact" element = { < Contact /> } /> 
+
+< Route path = "/dashboard" element = { < Dashboard /> } > 
+
+< Route path = "profile" element = { < Profile /> } /> 
+
+< Route path = "settings" element = { < Settings /> } /> 
+
+</ Route > 
+
+< Route path = "/user/:userId" element = { < User /> } /> 
+
+</ Routes > 
+
+</ div > 
+
+</ Router > 
+
+) ; 
+
+} ; 
+
+const root = ReactDOM. createRoot ( document. getElementById ( 'root' ) ) ; 
+
+root. render ( < App /> ) ; 
+
+404 页面 
+
+可以使用 React Router 提供的 Navigate 组件来实现 404 页面重定向。 
+
+实例 
+
+import React from 'react' ; 
+
+import ReactDOM from 'react-dom/client' ; 
+
+import { 
+
+BrowserRouter as Router , 
+
+Routes , 
+
+Route , 
+
+Link , 
+
+Navigate 
+
+} from 'react-router-dom' ; 
+
+import Home from './Home' ; 
+
+import About from './About' ; 
+
+import Contact from './Contact' ; 
+
+import Dashboard from './Dashboard' ; 
+
+import Profile from './Profile' ; 
+
+import Settings from './Settings' ; 
+
+import User from './User' ; 
+
+const NotFound = ( ) => { 
+
+return < h2 > 404 Page Not Found </ h2 >; 
+
+} ; 
+
+const App = ( ) => { 
+
+return ( 
+
+< Router > 
+
+< div > 
+
+< nav > 
+
+< ul > 
+
+< li > 
+
+< Link to = "/" > Home </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/about" > About </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/contact" > Contact </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/dashboard" > Dashboard </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/user/1" > User 1 </ Link > 
+
+</ li > 
+
+< li > 
+
+< Link to = "/user/2" > User 2 </ Link > 
+
+</ li > 
+
+</ ul > 
+
+</ nav > 
+
+< Routes > 
+
+< Route path = "/" element = { < Home /> } /> 
+
+< Route path = "/about" element = { < About /> } /> 
+
+< Route path = "/contact" element = { < Contact /> } /> 
+
+< Route path = "/dashboard" element = { < Dashboard /> } > 
+
+< Route path = "profile" element = { < Profile /> } /> 
+
+< Route path = "settings" element = { < Settings /> } /> 
+
+</ Route > 
+
+< Route path = "/user/:userId" element = { < User /> } /> 
+
+< Route path = "*" element = { < Navigate to = "/" replace /> } /> 
+
+</ Routes > 
+
+</ div > 
+
+</ Router > 
+
+) ; 
+
+} ; 
+
+const root = ReactDOM. createRoot ( document. getElementById ( 'root' ) ) ; 
+
+root. render ( < App /> ) ; 
+
+小结 
+
+通过使用 React Router，你可以轻松地在 React 应用中实现路由功能，包括基本路由、嵌套路由、动态路由以及 404 页面等。通过这种方式，你可以创建一个功能强大且用户友好的单页应用程序 (SPA)。 
+
+AI 思考中... 
+
+React 条件判断 
+
+React Memo

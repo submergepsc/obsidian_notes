@@ -1,0 +1,320 @@
+URL: https://www.runoob.com/mysql/mysql-php-syntax.html
+Title: MySQL PHP 连接与使用 | 菜鸟教程
+
+MySQL PHP 连接与使用 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+MySQL 教程 
+
+MySQL 管理 
+
+MySQL 连接 
+
+MySQL PHP 连接与使用 
+
+MySQL 是一个开源的关系型数据库管理系统(RDBMS)，它使用结构化查询语言(SQL)来管理和操作数据。 
+
+PHP 是一种流行的服务器端脚本语言，特别适合 Web 开发。 
+
+当 MySQL 和 PHP 结合使用时，可以创建动态的、数据驱动的网站。 
+
+PHP 提供了多种方式来连接和操作 MySQL 数据库，可以使用 mysqli 扩展（MySQL Improved）或者 PDO （PHP Data Objects）。 
+
+如果你想了解 MySQL 在 PHP 中的应用，可以访问我们的 PHP 中使用 MySQL 介绍 。 
+
+连接 MySQL 数据库 
+
+使用 mysqli 扩展 
+
+mysqli("改进的 MySQL")是 PHP 中推荐的 MySQL 连接方式。以下是基本连接示例： 
+
+实例 
+
+<?php 
+
+$servername = "localhost" ; // 数据库服务器地址 
+
+$username = "username" ; // 数据库用户名 
+
+$password = "password" ; // 数据库密码 
+
+$dbname = "database_name" ; // 数据库名称 
+
+// 创建连接 
+
+$conn = new mysqli ( $servername , $username , $password , $dbname ) ; 
+
+// 检查连接 
+
+if ( $conn -> connect_error ) { 
+
+die ( "连接失败: " . $conn -> connect_error ) ; 
+
+} 
+
+echo "连接成功" ; 
+
+?> 
+
+使用 PDO (PHP 数据对象) 
+
+PDO 提供了一个数据访问抽象层，可以工作在不同的数据库系统上： 
+
+实例 
+
+<?php 
+
+try { 
+
+$conn = new PDO ( "mysql:host= $servername ;dbname= $dbname " , $username , $password ) ; 
+
+// 设置 PDO 错误模式为异常 
+
+$conn -> setAttribute ( PDO :: ATTR_ERRMODE , PDO :: ERRMODE_EXCEPTION ) ; 
+
+echo "连接成功" ; 
+
+} 
+
+catch ( PDOException $e ) { 
+
+echo "连接失败: " . $e -> getMessage ( ) ; 
+
+} 
+
+?> 
+
+执行 SQL 查询 
+
+查询数据 
+
+使用 mysqli 查询数据： 
+
+实例 
+
+$sql = "SELECT id, name, email FROM users" ; 
+
+$result = $conn -> query ( $sql ) ; 
+
+if ( $result -> num_rows > 0 ) { 
+
+// 输出每行数据 
+
+while ( $row = $result -> fetch_assoc ( ) ) { 
+
+echo "id: " . $row [ "id" ] . " - Name: " . $row [ "name" ] . " - Email: " . $row [ "email" ] . "<br>" ; 
+
+} 
+
+} else { 
+
+echo "0 结果" ; 
+
+} 
+
+使用 PDO 查询数据： 
+
+实例 
+
+$stmt = $conn -> prepare ( "SELECT id, name, email FROM users" ) ; 
+
+$stmt -> execute ( ) ; 
+
+// 设置结果集为关联数组 
+
+$result = $stmt -> setFetchMode ( PDO :: FETCH_ASSOC ) ; 
+
+foreach ( $stmt -> fetchAll ( ) as $row ) { 
+
+echo "id: " . $row [ "id" ] . " - Name: " . $row [ "name" ] . " - Email: " . $row [ "email" ] . "<br>" ; 
+
+} 
+
+插入数据 
+
+mysqli 插入数据示例： 
+
+实例 
+
+$sql = "INSERT INTO users (name, email) VALUES ('John Doe', ' [email protected] ')" ; 
+
+if ( $conn -> query ( $sql ) === TRUE ) { 
+
+echo "新记录插入成功" ; 
+
+} else { 
+
+echo "错误: " . $sql . "<br>" . $conn -> error ; 
+
+} 
+
+PDO 插入数据示例（更安全的方式）： 
+
+实例 
+
+$stmt = $conn -> prepare ( "INSERT INTO users (name, email) VALUES (:name, :email)" ) ; 
+
+$stmt -> bindParam ( ':name' , $name ) ; 
+
+$stmt -> bindParam ( ':email' , $email ) ; 
+
+// 插入一行 
+
+$name = "John Doe" ; 
+
+$email = " [email protected] " ; 
+
+$stmt -> execute ( ) ; 
+
+安全注意事项 
+
+防止 SQL 注入 
+
+SQL 注入是一种常见的安全威胁。为了防止 SQL 注入，应该： 
+
+使用预处理语句（如上文的 PDO 示例） 
+
+对用户输入进行验证和过滤 
+
+不要直接将用户输入拼接到 SQL 查询中 
+
+其他安全实践 
+
+使用最小权限原则：数据库用户只应拥有必要的权限 
+
+加密敏感数据 
+
+定期备份数据库 
+
+在生产环境中关闭错误显示 
+
+关闭数据库连接 
+
+完成数据库操作后，应该关闭连接以释放资源： 
+
+mysqli 关闭连接： 
+
+实例 
+
+$conn -> close ( ) ; 
+
+PDO 关闭连接： 
+
+实例 
+
+$conn = null ; 
+
+实际应用示例 
+
+用户注册系统 
+
+实例 
+
+// 连接数据库 
+
+$conn = new mysqli ( "localhost" , "username" , "password" , "user_db" ) ; 
+
+// 检查连接 
+
+if ( $conn -> connect_error ) { 
+
+die ( "连接失败: " . $conn -> connect_error ) ; 
+
+} 
+
+// 处理表单提交 
+
+if ( $_SERVER [ "REQUEST_METHOD" ] == "POST" ) { 
+
+$username = $_POST [ 'username' ] ; 
+
+$email = $_POST [ 'email' ] ; 
+
+$password = password_hash ( $_POST [ 'password' ] , PASSWORD_DEFAULT ) ; // 哈希密码 
+
+// 预处理语句防止SQL注入 
+
+$stmt = $conn -> prepare ( "INSERT INTO users (username, email, password) VALUES (?, ?, ?)" ) ; 
+
+$stmt -> bind_param ( "sss" , $username , $email , $password ) ; 
+
+if ( $stmt -> execute ( ) ) { 
+
+echo "注册成功!" ; 
+
+} else { 
+
+echo "错误: " . $stmt -> error ; 
+
+} 
+
+$stmt -> close ( ) ; 
+
+} 
+
+$conn -> close ( ) ; 
+
+用户登录系统 
+
+实例 
+
+session_start ( ) ; 
+
+$conn = new mysqli ( "localhost" , "username" , "password" , "user_db" ) ; 
+
+if ( $conn -> connect_error ) { 
+
+die ( "连接失败: " . $conn -> connect_error ) ; 
+
+} 
+
+if ( $_SERVER [ "REQUEST_METHOD" ] == "POST" ) { 
+
+$username = $_POST [ 'username' ] ; 
+
+$password = $_POST [ 'password' ] ; 
+
+$stmt = $conn -> prepare ( "SELECT id, username, password FROM users WHERE username = ?" ) ; 
+
+$stmt -> bind_param ( "s" , $username ) ; 
+
+$stmt -> execute ( ) ; 
+
+$result = $stmt -> get_result ( ) ; 
+
+if ( $result -> num_rows == 1 ) { 
+
+$user = $result -> fetch_assoc ( ) ; 
+
+if ( password_verify ( $password , $user [ 'password' ] ) ) { 
+
+$_SESSION [ 'user_id' ] = $user [ 'id' ] ; 
+
+$_SESSION [ 'username' ] = $user [ 'username' ] ; 
+
+header ( "Location: dashboard.php" ) ; 
+
+} else { 
+
+echo "无效的密码" ; 
+
+} 
+
+} else { 
+
+echo "用户不存在" ; 
+
+} 
+
+$stmt -> close ( ) ; 
+
+} 
+
+$conn -> close ( ) ; 
+
+AI 思考中... 
+
+MySQL 管理 
+
+MySQL 连接

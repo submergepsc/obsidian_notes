@@ -1,0 +1,78 @@
+URL: https://www.runoob.com/xslfo/xslfo-areas.html
+Title: XSL-FO 区域属性 | 菜鸟教程
+
+XSL-FO 区域属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO 文档 
+
+XSL-FO 输出 
+
+XSL-FO 区域 
+
+XSL-FO 使用矩形框（区域）来显示输出。 
+
+XSL-FO 区域 
+
+XSL 格式化模型定义了一系列的矩形区域（框）来显示输出。 
+
+所有的输出（文本、图片，等等）都会被格式化到这些框中，然后会被显示或打印到某个目标媒介。 
+
+让我们研究一下下面这些区域： 
+
+Pages（页面） 
+
+Regions（区） 
+
+Block areas（块区域） 
+
+Line areas（行区域） 
+
+Inline areas（行内区域） 
+
+XSL-FO Pages（页面） 
+
+XSL-FO 输出会被格式化到页面中。打印输出通常会分为许多分割的页面。浏览器输出经常会成为一个长的页面。 
+
+XSL-FO Pages（页面）包含区（Region）。 
+
+XSL-FO Regions（区） 
+
+每个 XSL-FO 页面均包含一系列的 Regions（区）： 
+
+region-body（页面的主体） 
+
+region-before（页面的页眉） 
+
+region-after（页面的页脚） 
+
+region-start（左侧栏） 
+
+region-end（右侧栏） 
+
+XSL-FO Regions（区）包含块区域（Block Area）。 
+
+XSL-FO Block Areas（块区域） 
+
+XSL-FO Block Areas（块区域）定义了小的块元素（通常由一个新行开始），比如段落、表格以及列表。 
+
+XSL-FO Block Areas（块区域）包含其他的块区域，不过大多数时候它们包含的是行区域（Line Area）。 
+
+XSL-FO Line Areas（行区域） 
+
+XSL-FO Line Areas（行区域）定义了块区域内部的文本行。 
+
+XSL-FO Line Areas（行区域）包含行内区域（Inline Area）。 
+
+XSL-FO Inline Areas（行内区域） 
+
+XSL-FO Inline Areas（行内区域）定义了行内部的文本（着重号、单字符、图像，等等）。 
+
+AI 思考中... 
+
+XSL-FO 文档 
+
+XSL-FO 输出

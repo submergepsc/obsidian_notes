@@ -1,0 +1,135 @@
+URL: https://www.runoob.com/python3/python3-func-hex.html
+Title: Python3 hex() 函数 | 菜鸟教程
+
+Python3 hex() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 chr() 函数 
+
+Python 约瑟夫生者死者小游戏 
+
+Python hex() 函数 
+
+hex() 是 Python 中用于将整数转换为十六进制字符串的内置函数。 
+
+十六进制（Hexadecimal）是计算机中常用的进制表示方法，数字 0-9 和字母 a-f 表示 10-15。 hex() 函数常用于调试、颜色代码、内存地址等场景。 
+
+单词释义 ： hex 是 hexadecimal（十六进制）的缩写。 
+
+基本语法与参数 
+
+语法格式 
+
+hex(x) 
+
+参数说明 
+
+参数 x ： 
+
+类型： 整数 
+
+描述： 要转换为十六进制的整数。 
+
+函数说明 
+
+返回值 ： 返回一个以 "0x" 开头的十六进制字符串。 
+
+实例 
+
+示例 1：基础用法 
+
+实例 
+
+# 基本转换 
+
+print ( hex ( 10 ) ) # 输出: 0xa 
+
+print ( hex ( 255 ) ) # 输出: 0xff 
+
+print ( hex ( 256 ) ) # 输出: 0x100 
+
+# 负数（会显示负号） 
+
+print ( hex ( - 10 ) ) # 输出: -0xa 
+
+print ( hex ( - 255 ) ) # 输出: -0xff 
+
+# 零 
+
+print ( hex ( 0 ) ) # 输出: 0x0 
+
+# 大数 
+
+print ( hex ( 16 ) ) # 输出: 0x10 
+
+print ( hex ( 255 ) ) # 输出: 0xff 
+
+print ( hex ( 4096 ) ) # 输出: 0x1000 
+
+运行结果预期: 
+
+0xa
+0xff
+0x100
+-0xa
+-0xff
+0x0
+0x10
+0xff
+0x1000 
+
+代码解析: 
+
+返回的字符串以 "0x" 开头，表示十六进制。 
+
+字母默认使用小写（a-f）。 
+
+负数会显示负号。 
+
+示例 2：实际应用 
+
+实例 
+
+# 颜色代码转换 
+
+r , g , b = 255 , 128 , 0 
+
+color = f "#{hex(r)[2:]:0>2}{hex(g)[2:]:0>2}{hex(b)[2:]:0>2}" 
+
+print ( color ) # 输出: #ff8000 
+
+# 使用格式化 
+
+print ( f "{10:#x}" ) # 输出: 0xa 
+
+print ( f "{255:#x}" ) # 输出: 0xff 
+
+print ( f "{255:x}" ) # 输出: ff 
+
+# 去除 0x 前缀 
+
+s = hex ( 255 ) 
+
+print ( s [ 2 : ] ) # 输出: ff 
+
+print ( s. replace ( "0x" , "" ) ) # 输出: ff 
+
+运行结果预期: 
+
+#ff8000
+0xa
+0xff
+ff
+ff
+ff 
+
+十六进制常用于颜色代码、调试输出等场景。 
+
+AI 思考中... 
+
+Python3 chr() 函数 
+
+Python 约瑟夫生者死者小游戏

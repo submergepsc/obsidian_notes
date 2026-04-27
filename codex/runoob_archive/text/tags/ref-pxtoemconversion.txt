@@ -1,0 +1,52 @@
+URL: https://www.runoob.com/tags/ref-pxtoemconversion.html
+Title: Px、Em 换算工具 | 菜鸟教程
+
+Px、Em 换算工具 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML Audio/Video DOM volumechange 事件 
+
+HTML 颜色混搭 
+
+Px、Em 换算工具 
+
+以下工具提供了em和px的换算工具。 
+
+第一个输入框：设置了网页默认的字体像素 (通常 16px) 
+
+第二个输入框：输入像素值，可以将 px 换算为 em。 
+
+第三个输入框：输入em（相对长度单位）值，可以将 em 换算为 px。 
+
+设置默认的像素大小: 
+
+px 
+
+PX 换算为 EM: 
+px 
+
+EM 换算为 PX: 
+em 
+
+转换 
+
+换算结果: 
+
+文本字体大小 
+
+下表列出了在网页字体默认值为 16px 时， px 和 em 及网页字体百分比的换算数据。 
+
+相关文章 
+
+px,pt,em换算表 
+
+px、em、rem区别介绍 
+
+AI 思考中... 
+
+HTML Audio/Video DOM volumechange 事件 
+
+HTML 颜色混搭

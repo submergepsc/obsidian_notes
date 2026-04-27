@@ -1,0 +1,106 @@
+URL: https://www.runoob.com/dash/dash-tutorial.html
+Title: Dash 教程 | 菜鸟教程
+
+Dash 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Dash 教程 
+
+Dash 简介 
+
+Dash 教程 
+
+Dash 是一个基于 Python 的开源框架，用于快速构建数据驱动的 Web 应用程序。 
+
+Dash 的核心优势在于它的易用性和灵活性，使得即使是没有前端开发经验的开发人员也能轻松上手。 
+
+Dash 允许用户通过简单的 Python 代码创建交互式的数据可视化应用，而无需掌握复杂的前端技术（如 JavaScript、HTML、CSS）。 
+
+谁适合阅读本教程？ 
+
+Dash 是一个强大的工具，适合那些希望快速构建数据驱动型 Web 应用的开发者。 
+
+Dash 特别适合数据科学家、分析师和工程师,可以用几行代码创建一个功能强大的 Web 应用，展示数据分析结果、机器学习模型预测或其他数据驱动的功能。 
+
+Dash 的核心目标是让用户能够专注于数据和逻辑，而不是前端开发。 
+
+通过 Dash，你可以用几行代码创建一个功能强大的 Web 应用，展示数据分析结果、机器学习模型预测或其他数据驱动的功能。 
+
+Dash 可以将复杂的数据分析和可视化任务转化为交互式的 Web 应用，从而更有效地展示和分享工作成果。 
+
+学习本教程前你需要了解 
+
+本教程适合有 Python 基础的开发者学习，如果不了解 Python 可以查阅 Python 3.x 基础教程 。 
+
+一个简单的 Dash 程序 
+
+以下是一个基本 Dash 示例： 
+
+实例 
+
+# 导入 Dash 相关库 
+
+from dash import Dash , dcc , html , Input , Output 
+
+# 创建 Dash 应用实例 
+
+app = Dash ( __name__ ) 
+
+# 定义应用的布局 
+
+app. layout = html. Div ( [ 
+
+# 创建一个文本输入框 
+
+dcc. Input ( 
+
+id = 'input' , # 输入框的 ID，用于回调函数 
+
+value = '初始值' , # 输入框的默认值 
+
+type = 'text' # 输入框类型为文本 
+
+) , 
+
+# 创建一个用于显示输出的 Div 
+
+html. Div ( id = 'output' ) 
+
+] ) 
+
+# 定义回调函数 
+
+@ app. callback ( 
+
+Output ( 'output' , 'children' ) , # 输出到 id 为 'output' 的 Div 的 children 属性 
+
+Input ( 'input' , 'value' ) # 输入来自 id 为 'input' 的输入框的 value 属性 
+
+) 
+
+def update_output_div ( input_value ) : 
+
+# 返回格式化后的字符串，显示用户输入的内容 
+
+return f '你输入了: {input_value}' 
+
+# 运行应用 
+
+if __name__ == '__main__' : 
+
+app. run_server ( debug = True ) # 启动应用，debug=True 表示开启调试模式 
+
+这个简单的应用包含一个输入框和一个显示区域。当用户在输入框中输入内容时，显示区域会实时更新显示用户输入的内容。 
+
+相关链接 
+
+官方地址： https://plotly.com/dash/ 
+
+Github 开源地址： https://github.com/plotly/dash 
+
+Dash 官方文档： https://dash.plotly.com/ 
+
+AI 思考中... 
+
+Dash 简介

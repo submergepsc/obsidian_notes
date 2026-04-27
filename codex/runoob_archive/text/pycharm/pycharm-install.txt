@@ -1,0 +1,82 @@
+URL: https://www.runoob.com/pycharm/pycharm-install.html
+Title: PyCharm 安装 | 菜鸟教程
+
+PyCharm 安装 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Pycharm 教程 
+
+PyCharm 简介 
+
+PyCharm 创建第一个 Python 项目 
+
+PyCharm 安装 
+
+1. 下载 PyCharm 
+
+首先，你需要从 JetBrains 的官方网站下载 PyCharm。 
+
+PyCharm 有两个版本： Community 版（免费） 和 Professional 版（付费） 。 
+
+对于初学者来说，社区免费版本 Community 已经足够使用。 
+
+不过现在社区版本 PyCharm Community 统一到 PyCharm 了。 
+
+Pro 版本新用户可以免费体验一个月。 
+
+下载地址 ： PyCharm 官方下载页面 
+
+2. 安装 PyCharm 
+
+Windows 系统 
+
+双击下载的安装文件（ .exe ）。 
+
+在安装向导中，选择安装路径，建议使用默认路径。 
+
+勾选"创建桌面快捷方式"以便快速启动 PyCharm。 
+
+点击 "Install" 开始安装。 
+
+安装完成后，点击 "Finish" 退出安装向导。 
+
+macOS 系统 
+
+打开下载的 .dmg 文件。 
+
+将 PyCharm 图标拖拽到 "Applications" 文件夹中。 
+
+在 "Applications" 文件夹中找到 PyCharm，双击启动。 
+
+Linux 系统 
+
+解压下载的 .tar.gz 文件。 
+
+tar -xzf pycharm-*.tar.gz 
+
+进入解压后的目录，找到 bin 文件夹。 
+
+cd pycharm-*/bin 
+
+运行 pycharm.sh 启动 PyCharm。 
+
+./pycharm.sh 
+
+3. 配置 PyCharm 
+
+首次启动 PyCharm 时，会提示你进行一些初始配置，我们可以设置语言并同意协议： 
+
+启动后，可以进行个人喜好的配置： 
+
+选择主题 ：你可以选择 "Darcula"（深色）或 "Light"（浅色）主题。 
+
+配置 Python 解释器 ：如果你已经安装了 Python，PyCharm 会自动检测并配置解释器。如果没有安装，你可以手动添加。 
+
+安装插件 ：PyCharm 会推荐一些常用插件，你可以根据需要选择安装。 
+
+AI 思考中... 
+
+PyCharm 简介 
+
+PyCharm 创建第一个 Python 项目

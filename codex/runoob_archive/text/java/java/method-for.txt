@@ -1,0 +1,90 @@
+URL: https://www.runoob.com/java/java/method-for.html
+Title: Java 实例 – for 和 foreach循环使用 | 菜鸟教程
+
+Java 实例 – for 和 foreach循环使用 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – Enum（枚举）构造函数及方法的使用 
+
+Java 实例 – Varargs 可变参数使用 
+
+Java 实例 - for 和 foreach循环使用 
+
+for 语句比较简单，用于循环数据。 
+
+for循环执行的次数是在执行前就确定的。语法格式如下： 
+
+for(初始化; 布尔表达式; 更新) {
+ //代码语句
+} 
+
+foreach语句是java5的新特征之一，在遍历数组、集合方面，foreach为开发人员提供了极大的方便。 
+
+foreach 语法格式如下： 
+
+for(元素类型t 元素变量x : 遍历对象obj){ 
+ 引用了x的java语句; 
+} 
+
+以下实例演示了 for 和 foreach循环使用： 
+
+Main.java 文件 
+
+public class Main { public static void main ( String [ ] args ) { int [ ] intary = { 1 , 2 , 3 , 4 } ; forDisplay ( intary ) ; foreachDisplay ( intary ) ; } public static void forDisplay ( int [ ] a ) { System . out . println ( " 使用 for 循环数组 " ) ; for ( int i = 0 ; i < a . length ; i ++ ) { System . out . print ( a [ i ] + " " ) ; } System . out . println ( ) ; } public static void foreachDisplay ( int [ ] data ) { System . out . println ( " 使用 foreach 循环数组 " ) ; for ( int a : data ) { System . out . print ( a + " " ) ; } } } 
+
+以上代码运行输出结果为： 
+
+使用 for 循环数组
+1 2 3 4 
+使用 foreach 循环数组
+1 2 3 4 
+
+Main.java 文件 
+
+import java . util . ArrayList ; import java . util . Iterator ; import java . util . List ; public class Main { public static void main ( String [ ] args ) { int [ ] arr = { 1 , 2 , 3 , 4 , 5 } ; System . out . println ( " ----------使用 for 循环------------ " ) ; for ( int i = 0 ; i < arr . length ; i ++ ) { System . out . println ( arr [ i ] ) ; } System . out . println ( " ---------使用 For-Each 循环------------- " ) ; for ( int element : arr ) { System . out . println ( element ) ; } System . out . println ( " ---------For-Each 循环二维数组------------- " ) ; int [ ] [ ] arr2 = { { 1 , 2 , 3 } , { 4 , 5 , 6 } , { 7 , 8 , 9 } } ; for ( int [ ] row : arr2 ) { for ( int element : row ) { System . out . println ( element ) ; } } List < String > list = new ArrayList < String > ( ) ; list . add ( " Google " ) ; list . add ( " Runoob " ) ; list . add ( " Taobao " ) ; System . out . println ( " ----------方式1：普通for循环----------- " ) ; for ( int i = 0 ; i < list . size ( ) ; i ++ ) { System . out . println ( list . get ( i ) ) ; } System . out . println ( " ----------方式2：使用迭代器----------- " ) ; for ( Iterator < String > iter = list . iterator ( ) ; iter . hasNext ( ) ; ) { System . out . println ( iter . next ( ) ) ; } System . out . println ( " ----------方式3：For-Each 循环----------- " ) ; for ( String str : list ) { System . out . println ( str ) ; } } } 
+
+以上代码运行输出结果为： 
+
+----------使用 for 循环------------
+1
+2
+3
+4
+5
+---------使用 For-Each 循环-------------
+1
+2
+3
+4
+5
+---------For-Each 循环二维数组-------------
+1
+2
+3
+4
+5
+6
+7
+8
+9
+----------方式1：普通for循环-----------
+Google
+Runoob
+Taobao
+----------方式2：使用迭代器-----------
+Google
+Runoob
+Taobao
+----------方式3：For-Each 循环-----------
+Google
+Runoob
+Taobao 
+
+AI 思考中... 
+
+Java 实例 – Enum（枚举）构造函数及方法的使用 
+
+Java 实例 – Varargs 可变参数使用

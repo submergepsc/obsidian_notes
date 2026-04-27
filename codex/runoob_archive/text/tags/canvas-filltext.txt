@@ -1,0 +1,85 @@
+URL: https://www.runoob.com/tags/canvas-filltext.html
+Title: HTML canvas fillText() 方法 | 菜鸟教程
+
+HTML canvas fillText() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas textBaseline 属性 
+
+HTML canvas strokeText() 方法 
+
+HTML canvas fillText() 方法 
+
+实例 
+
+使用 fillText()，在画布上写文本 "Hello world!" 和 "Big smile!"： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+
+ctx.font="20px Georgia"; 
+ctx.fillText("Hello World!",10,50); 
+
+ctx.font="30px Verdana"; 
+// Create gradient 
+var gradient=ctx.createLinearGradient(0,0,c.width,0); 
+gradient.addColorStop("0","magenta"); 
+gradient.addColorStop("0.5","blue"); 
+gradient.addColorStop("1.0","red"); 
+// Fill with gradient 
+ctx.fillStyle=gradient; 
+ctx.fillText("Big smile!",10,90); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 fillText() 
+方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+注意： Safari 不支持 maxWidth 参数。 
+
+定义和用法 
+
+fillText() 方法在画布上绘制填色的文本。文本的默认颜色是黑色。 
+
+提示： 请使用 font 属性来定义字体和字号，并使用 fillStyle 属性以另一种颜色/渐变来渲染文本。 
+
+JavaScript 语法： 
+
+context .fillText( text,x,y,maxWidth ); 
+
+参数值 
+
+参数 
+
+描述 
+
+text 
+
+规定在画布上输出的文本。 
+
+x 
+
+开始绘制文本的 x 坐标位置（相对于画布）。 
+
+y 
+
+开始绘制文本的 y 坐标位置（相对于画布）。 
+
+maxWidth 
+
+可选。允许的最大文本宽度，以像素计。 
+
+AI 思考中... 
+
+HTML canvas textBaseline 属性 
+
+HTML canvas strokeText() 方法

@@ -1,0 +1,1758 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Python Scrapy 库 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="python-scrapy.html" />
+<meta name="keywords" content="Python Scrapy 库">
+<meta name="description" content="Python Scrapy 库 Scrapy 是一个功能强大的 Python 爬虫框架，专门用于抓取网页数据并提取信息。 Scrapy常被用于数据挖掘、信息处理或存储历史数据等应用。  Scrapy 内置了许多有用的功能，如处理请求、跟踪状态、处理错误、处理请求频率限制等，非常适合进行高效、分布式的网页爬取。 与简单的爬虫库（如 requests 和 BeautifulSoup）不同，Scrapy 是一个全功能的爬虫框架，具有高度的可扩..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<style>
+/* 主题切换按钮 */
+/* ===== 主题变量（核心）===== */
+:root {
+  --theme-bg: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-icon: #333;
+  --theme-hover: #f3f4f6;
+}
+
+.dark {
+  --theme-bg: #1f2937;
+  --theme-border: #374151;
+  --theme-icon: #e5e7eb;
+  --theme-hover: #374151;
+}
+
+/* ===== 按钮容器 ===== */
+.nav-theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== 按钮本体 ===== */
+.nav-theme-toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+
+  background: var(--theme-bg);
+  color: var(--theme-icon);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ===== 图标大小 ===== */
+.nav-theme-toggle i {
+  font-size: 14px;
+}
+
+/* ===== hover 效果 ===== */
+.nav-theme-toggle button:hover {
+  background: var(--theme-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== 点击反馈 ===== */
+.nav-theme-toggle button:active {
+  transform: scale(0.95);
+}
+
+/* ===== 当前激活态（可选）===== */
+.nav-theme-toggle button.active {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+</style>
+<!-- 导航栏 -->
+<nav class="container navigation" aria-label="主导航">
+  <div class="row">
+    <div class="col nav">
+
+      <!-- PC 导航 -->
+      <ul class="pc-nav" id="runoob-detail-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../js/js-tutorial.html">JavaScript</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="javascript:void(0);" data-id="vue">Vue</a></li>
+        <li><a href="../react/react-tutorial.html">React</a></li>
+        <li><a href="python3-tutorial.html">Python3</a></li>
+        <li><a href="../java/java-tutorial.html">Java</a></li>
+        <li><a href="../cprogramming/c-tutorial.html">C</a></li>
+        <li><a href="../cplusplus/cpp-tutorial.html">C++</a></li>
+        <li><a href="../csharp/csharp-tutorial.html">C#</a></li>
+        <li><a href="javascript:void(0);" data-id="aiNav">AI</a></li>
+        <li><a href="../go/go-tutorial.html">Go</a></li>
+        <li><a href="../sql/sql-tutorial.html">SQL</a></li>
+        <li><a href="../linux/linux-tutorial.html">Linux</a></li>
+        <li><a href="../vscode/vscode-tutorial.html">VS Code</a></li>
+        <li><a href="javascript:void(0);" data-id="bootstrap">Bootstrap</a></li>
+        <li><a href="../git/git-tutorial.html">Git</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+
+        <!-- 主题切换按钮，固定在最右侧 -->
+        <li class="nav-theme-toggle">
+          <button id="moon" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 移动端导航 -->
+      <ul class="mobile-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="../js/js-tutorial.html">JS</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+        <li><a href="javascript:void(0)" class="search-reveal">搜索</a></li>
+
+        <!-- 移动端主题切换 -->
+        <li class="nav-theme-toggle">
+          <button id="moon-mobile" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun-mobile" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- 二级导航 -->
+<div class="container sub-navigation sub-navigation-articles" style="display:none">
+  <div class="row">
+    <div class="col nav-sub">
+
+      <ul id="vue">
+        <li class="cat-item"><a href="../vue3/vue3-tutorial.html">Vue3 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../vue/vue-tutorial.html">Vue2 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="bootstrap">
+        <li class="cat-item"><a href="../bootstrap/bootstrap-tutorial.html">Bootstrap3 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="aiNav">
+        <li class="cat-item"><a href="../ml/ml-tutorial.html">机器学习 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../pytorch/pytorch-tutorial.html">PyTorch <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../tensorflow/tensorflow-tutorial.html">TensorFlow <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../sklearn/sklearn-tutorial.html">Sklearn <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../nlp/nlp-tutorial.html">NLP <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ai-agent/ai-agent-tutorial.html">AI Agent <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ollama/ollama-tutorial.html">Ollama <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+  </div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="runoob-col-md2">
+<div class="left-column">
+	<div class="tab" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+	<i class="fa fa-list" aria-hidden="true"></i> 
+	<span>Python 3 教程</span>
+
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" data-p="par" title="Python3 教程" href="python3-tutorial.html">
+			Python3 教程			</a>
+			<a target="_top" title="Python3 简介" href="python3-intro.html"> Python3 简介 </a>
+<a target="_top" title="Python3 环境搭建" href="python3-install.html"> Python3 环境搭建</a>
+<a target="_top" title="Python3 VScode" href="python-vscode-setup.html"> Python3 VScode </a>
+<a target="_top" title="Python AI 编程助手" href="fitten-code.html"> Python AI 编程助手</a>
+
+<a target="_top" title="Python3 基础语法" href="python3-basic-syntax.html"> Python3 基础语法 </a>
+<a target="_top" title="Python3 基本数据类型" href="python3-data-type.html"> Python3 基本数据类型 </a>
+<a target="_top" title="Python3  数据类型转换" href="python3-type-conversion.html"> Python3 数据类型转换 </a>
+			<a target="_top" data-p="par" title="Python3 解释器" href="python3-interpreter.html">
+			Python3 解释器			</a>
+						<a target="_top" data-p="par" title="Python3 注释" href="python3-comment.html">
+			Python3 注释			</a>
+			<a target="_top" title="Python3 运算符" href="python3-basic-operators.html"> Python3 运算符 </a>			<a target="_top" data-p="par" title="Python3 数字(Number)" href="python3-number.html">
+			Python3 数字(Number)			</a>
+						<a target="_top" data-p="par" title="Python3 字符串" href="python3-string.html">
+			Python3 字符串			</a>
+						<a target="_top" data-p="par" title="Python3 列表" href="python3-list.html">
+			Python3 列表			</a>
+			<a target="_top" title="Python3 元组" href="python3-tuple.html"> Python3 元组 </a>
+<a target="_top" title="Python3 字典" href="python3-dictionary.html"> Python3 字典</a>
+<a target="_top" title="Python3 集合" href="python3-set.html"> Python3 集合</a>			<a target="_top" data-p="par" title="Python3 条件控制" href="python3-conditional-statements.html">
+			Python3 条件控制			</a>
+						<a target="_top" data-p="par" title="Python3 循环语句" href="python3-loop.html">
+			Python3 循环语句			</a>
+			<a target="_top" title="Python3 编程第一步" href="python3-step1.html"> Python3 编程第一步</a>
+<a target="_top" title="Python3 推导式" href="python-comprehensions.html"> Python3 推导式 </a>
+<a target="_top" title="Python3 迭代器与生成器" href="python3-iterator-generator.html"> Python3 迭代器与生成器</a>
+<a target="_top" title="Python3 with" href="python3-with-keyword.html"> Python3 with</a>			<a target="_top" data-p="par" title="Python3 函数" href="python3-function.html">
+			Python3 函数			</a>
+			<a target="_top" title="Python3 lambda（匿名函数）" href="python-lambda.html"> Python3 lambda </a>
+<a target="_top" title="Python 装饰器" href="python-decorators.html"> Python3 装饰器 </a>			<a target="_top" data-p="par" title="Python3 数据结构" href="python3-data-structure.html">
+			Python3 数据结构			</a>
+						<a target="_top" data-p="par" title="Python3 模块" href="python3-module.html">
+			Python3 模块			</a>
+			<a target="_top" title="Python  __name__ " href="python3-name-main.html">Python  __name__ </a>			<a target="_top" data-p="par" title="Python3 输入和输出" href="python3-inputoutput.html">
+			Python3 输入和输出			</a>
+			<a target="_top" title="Python3 File" href="python3-file-methods.html"> Python3 File </a>
+<a target="_top" title="Python3 OS" href="python3-os-file-methods.html"> Python3 OS </a>			<a target="_top" data-p="par" title="Python3 错误和异常" href="python3-errors-execptions.html">
+			Python3 错误和异常			</a>
+						<a target="_top" data-p="par" title="Python3 面向对象" href="python3-class.html">
+			Python3 面向对象			</a>
+			<a target="_top" title="Python3 命名空间/作用域" href="python3-namespace-scope.html"> Python3 命名空间/作用域</a>
+<a target="_top" title="Python 虚拟环境的创建" href="python-venv.html">Python 虚拟环境的创建 </a>
+<a target="_top" title="Python 类型注解" href="python-type-hints.html">Python 类型注解</a>			<a target="_top" data-p="par" title="Python3 标准库概览" href="python3-stdlib.html">
+			Python3 标准库概览			</a>
+						<a target="_top" data-p="par" title="Python3 实例" href="python3-examples.html">
+			Python3 实例			</a>
+			<a target="_blank" title="Python 测验" href="../quiz/python-quiz.html"> Python 测验 </a>
+<br><h2 class="left"><span class="left_h2">Python3</span> 高级教程</h2>			<a target="_top" data-p="par" title="Python3 正则表达式" href="python3-reg-expressions.html">
+			Python3 正则表达式			</a>
+						<a target="_top" data-p="par" title="Python3 CGI编程" href="python3-cgi-programming.html">
+			Python3 CGI编程			</a>
+			<a target="_top" title="Python MySQL - mysql-connector 驱动" href="python-mysql-connector.html">Python3 MySQL(mysql-connector)</a>			<a target="_top" data-p="par" title="Python3 MySQL 数据库连接 – PyMySQL 驱动" href="python3-mysql.html">
+			Python3 MySQL(PyMySQL)			</a>
+						<a target="_top" data-p="par" title="Python3 网络编程" href="python3-socket.html">
+			Python3 网络编程			</a>
+						<a target="_top" data-p="par" title="Python3 SMTP发送邮件" href="python3-smtp.html">
+			Python3 SMTP发送邮件			</a>
+						<a target="_top" data-p="par" title="Python3 多线程" href="python3-multithreading.html">
+			Python3 多线程			</a>
+						<a target="_top" data-p="par" title="Python3 XML 解析" href="python3-xml-processing.html">
+			Python3 XML 解析			</a>
+						<a target="_top" data-p="par" title="Python3 JSON 数据解析" href="python3-json.html">
+			Python3 JSON			</a>
+						<a target="_top" data-p="par" title="Python3 日期和时间" href="python3-date-time.html">
+			Python3 日期和时间			</a>
+						<a target="_top" data-p="par" title="Python3 内置函数" href="python3-built-in-functions.html">
+			Python3 内置函数			</a>
+						<a target="_top" data-p="par" title="Python MongoDB" href="python-mongodb.html">
+			Python3 MongoDB			</a>
+			<a target="_top" title="Python3 urllib" href="python-urllib.html"> Python3 urllib</a>			<a target="_top" data-p="par" title="Python uWSGI  安装配置" href="python-uwsgi.html">
+			Python uWSGI  安装配置			</a>
+						<a target="_top" data-p="par" title="Python3 pip" href="python3-pip.html">
+			Python3 pip			</a>
+						<a target="_top" data-p="par" title="Python3 operator 模块" href="python-operator.html">
+			Python3 operator			</a>
+						<a target="_top" data-p="par" title="Python math 模块" href="python-math.html">
+			Python math			</a>
+						<a target="_top" data-p="par" title="Python requests 模块" href="python-requests.html">
+			Python requests			</a>
+						<a target="_top" data-p="par" title="Python random 模块" href="python-random.html">
+			Python random			</a>
+			<a target="_top" title="Python OpenAI" href="python-openai.html">Python OpenAI</a>			<a target="_top" data-p="par" title="Python 有用的资源" href="python3-resources.html">
+			Python 有用的资源			</a>
+						<a target="_top" data-p="par" title="Python AI 绘画" href="python-ai-draw.html">
+			Python AI 绘画			</a>
+						<a target="_top" data-p="par" title="Python statistics 模块" href="python-statistics.html">
+			Python statistics			</a>
+						<a target="_top" data-p="par" title="Python hashlib 模块" href="python-hashlib.html">
+			Python hashlib			</a>
+						<a target="_top" data-p="par" title="Python 量化" href="python-qt.html">
+			Python 量化			</a>
+						<a target="_top" data-p="par" title="Python pyecharts 模块" href="python-pyecharts.html">
+			Python pyecharts			</a>
+						<a target="_top" data-p="par" title="Python selenium 库" href="python-selenium.html">
+			Python selenium 库			</a>
+						<a target="_top" data-p="par" title="Python 爬虫 – BeautifulSoup" href="python-spider-beautifulsoup.html">
+			Python 爬虫			</a>
+						<a target="_top" data-p="par" title="Python Scrapy 库" href="python-scrapy.html">
+			Python Scrapy 库			</a>
+						<a target="_top" data-p="par" title="Python Markdown 生成 HTML" href="python-markdown2html.html">
+			Python Markdown			</a>
+						<a target="_top" data-p="par" title="Python sys 模块" href="python-sys.html">
+			Python sys 模块			</a>
+						<a target="_top" data-p="par" title="Python Pickle 模块" href="python-pickle.html">
+			Python Pickle 模块			</a>
+						<a target="_top" data-p="par" title="Python subprocess 模块" href="python-subprocess.html">
+			Python subprocess 模块			</a>
+						<a target="_top" data-p="par" title="Python queue 模块" href="python-queue.html">
+			Python queue 模块			</a>
+						<a target="_top" data-p="par" title="Python StringIO 模块" href="python-stringio.html">
+			Python StringIO 模块			</a>
+						<a target="_top" data-p="par" title="Python logging 模块" href="python-logging.html">
+			Python logging 模块			</a>
+						<a target="_top" data-p="par" title="Python datetime 模块" href="python-datetime.html">
+			Python datetime 模块			</a>
+						<a target="_top" data-p="par" title="Python re 模块" href="python-re.html">
+			Python re 模块			</a>
+						<a target="_top" data-p="par" title="Python csv 模块" href="python-csv.html">
+			Python csv 模块			</a>
+						<a target="_top" data-p="par" title="Python threading 模块" href="python-treading.html">
+			Python threading 模块			</a>
+						<a target="_top" data-p="par" title="Python asyncio 模块" href="python-asyncio.html">
+			Python asyncio 模块			</a>
+						<a target="_top" data-p="par" title="Python PyQt" href="python-pyqt.html">
+			Python PyQt			</a>
+						<a target="_top" data-p="par" title="Python for 循环" href="python3-for.html">
+			Python for 循环			</a>
+						<a target="_top" data-p="par" title="Python while 循环" href="python3-while.html">
+			Python while 循环			</a>
+				
+		</div>
+	</div>	
+</div>
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="python-spider-beautifulsoup.html" rel="prev"> Python 爬虫 &#8211; BeautifulSoup</a> </div>
+			<div class="next-design-link"><a href="python-library-system.html" rel="next"> 实现一个 Python 类来模拟图书管理系统</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+<div class="article-heading-ad" style="display: block;">
+
+<style>
+  /* 隐藏移动端广告 */
+  @media (max-width: 768px) {
+    .adsbygoogle {
+      display: none !important;
+    }
+  }
+  
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 728*90 固定 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="2147566827"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<h1>
+Python Scrapy 库</h1>
+<p>Scrapy 是一个功能强大的 Python 爬虫框架，专门用于抓取网页数据并提取信息。</p>
+<p>Scrapy常被用于数据挖掘、信息处理或存储历史数据等应用。</p>
+
+<p>Scrapy 内置了许多有用的功能，如处理请求、跟踪状态、处理错误、处理请求频率限制等，非常适合进行高效、分布式的网页爬取。</p>
+<p>与简单的爬虫库（如 <a href="python-requests.html" target="_blank">requests</a> 和 <a href="python-spider-beautifulsoup.html" target="_blank">BeautifulSoup</a>）不同，Scrapy 是一个全功能的爬虫框架，具有高度的可扩展性和灵活性，适用于复杂和大规模的网页抓取任务。</p>
+<p>
+Scrapy 官网：<a href="https://scrapy.org/" target="_blank">https://scrapy.org/</a>。</p>
+
+<p>Scrapy 特点与介绍：<a href="https://www.runoob.com/w3cnote/scrapy-detail.html" target="_blank">https://www.runoob.com/w3cnote/scrapy-detail.html</a>。</p>
+<p>
+Scrapy 架构图(绿线是数据流向):</p>
+
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2018/10/8c591d54457bb033812a2b0364011e9c_articlex.png"></p><p>Scrapy 的工作基于以下几个核心组件：</p>
+<ul><li><strong>Spider</strong>：爬虫类，用于定义如何从网页中提取数据以及如何跟踪网页的链接。</li><li><strong>Item</strong>：用来定义和存储抓取的数据。相当于数据模型。</li><li><strong>Pipeline</strong>：用于处理抓取到的数据，常用于清洗、存储数据等操作。</li><li><strong>Middleware</strong>：用来处理请求和响应，可以用于设置代理、处理 cookies、用户代理等。</li><li><strong>Settings</strong>：用来配置 Scrapy 项目的各项设置，如请求延迟、并发请求数等。</li></ul>
+
+<h3>
+安装 Scrapy</h3><p>
+在使用 Scrapy 之前，你需要先安装它，我们使用 pip 安装：</p>
+<pre>
+pip install scrapy</pre>
+
+<h3>Scrapy 项目结构</h3><p>
+Scrapy 项目是一个结构化的目录，其中包含多个文件夹和模块，旨在帮助你组织爬虫的代码。</p>
+<p>Scrapy 使用命令行工具来创建和管理爬虫项目。你可以使用以下命令创建一个新的 Scrapy 项目：</p>
+<pre>
+scrapy startproject myproject</pre>
+<p>这将创建一个名为 myproject 的项目，项目结构大致如下：</p>
+
+<pre>myproject/
+    scrapy.cfg            # 项目的配置文件
+    myproject/            # 项目源代码文件夹
+        __init__.py
+        items.py          # 定义抓取的数据结构
+        middlewares.py    # 定义中间件
+        pipelines.py      # 定义数据处理管道
+        settings.py       # 项目的设置文件
+        spiders/           # 存放爬虫代码的文件夹
+            __init__.py
+            myspider.py   # 自定义的爬虫代码</pre>
+
+<hr>
+<h2>编写一个简单的 Scrapy 爬虫</h2><p>
+以下是一个基本的 Scrapy 爬虫示例，展示了如何从网页中抓取数据。</p>
+<p>我们创建一个爬虫项目：</p>
+<pre>
+scrapy startproject runoob_test_spiders</pre>
+<p>执行以上命令，如果成功会输出：</p>
+<pre>templates/project', created in:/Users/Runoob/runoob-test/runoob_test_spiders
+
+You can start your first spider with:
+    cd runoob_test_spiders
+    scrapy genspider example example.com</pre>
+<p>
+生成的项目结构如下：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2024/12/scrapy-runoob-1.png"></p>
+<p>然后进入该目录：</p>
+<pre>cd runoob_test_spiders</pre>
+<p>接下来通过 <span class="marked">scrapy genspider</span> 命令来创建一个爬虫：</p>
+<pre>
+scrapy genspider douban_spider movie.douban.com</pre>
+<p>
+目录结构如下：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/01/6d0f6def-dbb4-4d88-b448-0db919d7379dss.png"></p>
+<p>runoob_test_spiders 目录下生成一个名为 douban_spider.py 的文件，代码如下：</p>
+
+<div class="example"><h2 class="example">实例</h2> <div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> scrapy<br />
+<br />
+<br />
+<span style="color: Green;font-weight:bold;">class</span> DoubanSpiderSpider<span style="color: Olive;">&#40;</span>scrapy.<span style="color: #05a;">Spider</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; name <span style="color: Gray;">=</span> <span style="color: #a11;">&quot;douban_spider&quot;</span><br />
+&nbsp; &nbsp; allowed_domains <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;movie.douban.com&quot;</span><span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; start_urls <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;https://movie.douban.com&quot;</span><span style="color: Olive;">&#93;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">def</span> parse<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">pass</span><br />
+</div></div>
+
+<p><strong>代码说明：</strong></p>
+<ul><li><strong><code>name</code></strong>：定义爬虫的名称，必须是唯一的。</li><li><strong><code>allowed_domains</code></strong>：限制爬虫的访问域名，防止爬虫爬取其他域名的网页。</li><li><strong><code>start_urls</code></strong>：定义爬虫的起始页面，爬虫将从这些页面开始抓取。</li><li><strong><code>parse</code></strong>：<code>parse</code> 方法是每个爬虫的核心部分，用于处理响应并提取数据。它接收一个 <code>response</code> 对象，表示服务器返回的页面内容。</li></ul>
+
+
+<h3>
+编写爬虫代码</h3><p>
+编写爬虫代码前我们需要注意几个点：</p>	<ul>
+<li>
+豆瓣等网站可能会检测爬虫行为，建议设置 USER_AGENT 和 DOWNLOAD_DELAY 来模拟正常用户行为。</li>
+	<li>
+在爬取数据时，请遵守目标网站的 robots.txt 文件规定，避免对服务器造成过大压力。</li>
+
+
+	<li>
+如果频繁爬取，可能会触发 IP 封禁。</li></ul>
+<h3>修改 settings.py 配置</h3><p>
+在 settings.py 中添加以下配置，以模拟浏览器请求并绕过反爬虫机制：</p>
+
+
+<pre># 设置 User-Agent
+USER_AGENT = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+
+# 不遵守 robots.txt 规则
+ROBOTSTXT_OBEY = False
+
+# 设置下载延迟，避免过快请求
+DOWNLOAD_DELAY = 2
+
+# 启用自动限速扩展
+AUTOTHROTTLE_ENABLED = True
+AUTOTHROTTLE_START_DELAY = 2
+AUTOTHROTTLE_MAX_DELAY = 5</pre>
+<p>
+在爬虫代码中，添加自定义请求头（如 User-Agent 和 Referer），以进一步模拟浏览器行为。</p>
+<p>
+打开 douban_spider.py 文件，并修改其内容如下：</p>
+
+<div class="example"><h2 class="example">实例</h2> <div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> scrapy<br />
+<br />
+<span style="color: Green;font-weight:bold;">class</span> DoubanSpider<span style="color: Olive;">&#40;</span>scrapy.<span style="color: #05a;">Spider</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; name <span style="color: Gray;">=</span> <span style="color: #a11;">&quot;douban_spider&quot;</span><br />
+&nbsp; &nbsp; start_urls <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'https://movie.douban.com/top250'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#93;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">def</span> start_requests<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; headers <span style="color: Gray;">=</span> <span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'User-Agent'</span>: <span style="color: #a11;">'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'Referer'</span>: <span style="color: #a11;">'https://movie.douban.com/'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Olive;">&#125;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">for</span> url <span style="color: Green;font-weight:bold;">in</span> <span style="color: Teal;">self</span>.<span style="color: #05a;">start_urls</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> scrapy.<span style="color: #05a;">Request</span><span style="color: Olive;">&#40;</span>url<span style="color: Gray;">,</span> headers<span style="color: Gray;">=</span>headers<span style="color: Gray;">,</span> callback<span style="color: Gray;">=</span><span style="color: Teal;">self</span>.<span style="color: #05a;">parse</span><span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">def</span> parse<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">for</span> movie <span style="color: Green;font-weight:bold;">in</span> response.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'div.item'</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> <span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'title'</span>: movie.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'span.title::text'</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">get</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'rating'</span>: movie.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'span.rating_num::text'</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">get</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'quote'</span>: movie.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'span.inq::text'</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">get</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Olive;">&#125;</span><br />
+<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 处理分页</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; next_page <span style="color: Gray;">=</span> response.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'span.next a::attr(href)'</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">get</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> next_page <span style="color: Green;font-weight:bold;">is</span> <span style="color: Green;font-weight:bold;">not</span> <span style="color: Teal;">None</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> response.<span style="color: #05a;">follow</span><span style="color: Olive;">&#40;</span>next_page<span style="color: Gray;">,</span> callback<span style="color: Gray;">=</span><span style="color: Teal;">self</span>.<span style="color: #05a;">parse</span><span style="color: Olive;">&#41;</span><br />
+</div></div><p>
+代码解析：</p>
+
+<ol><li><p><strong><code>name = "douban_spider"</code></strong>: 定义爬虫的名称。</p></li><li><p><strong><code>start_urls</code></strong>: 定义爬虫开始爬取的初始 URL（豆瓣电影 Top 250 页面）。</p></li><li><p><strong><code>parse</code> 方法</strong>:</p><ul><li><p>使用 CSS 选择器提取每部电影的标题、评分和简介。</p></li><li><p><code>span.title::text</code>：提取电影标题。</p></li><li><p><code>span.rating_num::text</code>：提取电影评分。</p></li><li><p><code>span.inq::text</code>：提取电影简介。</p></li></ul></li><li><p><strong>分页处理</strong>:</p><ul><li><p>使用 <code>span.next a::attr(href)</code> 提取下一页的链接。</p></li><li><p>如果存在下一页，使用 <code>response.follow</code> 继续爬取。</p></li></ul></li></ol>
+
+<p>
+在命令行中运行以下命令来启动爬虫：</p>
+<pre>
+scrapy crawl douban_spider -o douban_movies.csv</pre><p>
+这将启动爬虫并将提取的数据保存到 douban_movies.csv 文件中。</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/01/d8e064c3-8068-42de-a1fd-63207c8bd5eb.png"></p>
+<p class="important">注意：以上内容仅供学习，在爬取数据时，请遵守目标网站的 robots.txt 文件规定。</p>
+<hr>
+<h2>常用方法</h2>
+
+<h3>1. <strong>爬虫方法</strong></h3>
+<table class="reference">
+<thead>
+    <tr>
+        <th>方法名</th>
+        <th>作用描述</th>
+        <th>示例</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td><code>start_requests()</code></td>
+        <td>生成初始请求，可以自定义请求头、请求方法等。</td>
+        <td><code>yield scrapy.Request(url, callback=self.parse)</code></td>
+    </tr>
+    <tr>
+        <td><code>parse(response)</code></td>
+        <td>处理响应并提取数据，是爬虫的核心方法。</td>
+        <td><code>yield {'title': response.css('h1::text').get()}</code></td>
+    </tr>
+    <tr>
+        <td><code>follow(url, callback)</code></td>
+        <td>自动处理相对 URL 并生成新的请求，用于分页或链接跳转。</td>
+        <td><code>yield response.follow(next_page, callback=self.parse)</code></td>
+    </tr>
+    <tr>
+        <td><code>closed(reason)</code></td>
+        <td>爬虫关闭时调用，用于清理资源或记录日志。</td>
+        <td><code>def closed(self, reason): print('Spider closed:', reason)</code></td>
+    </tr>
+    <tr>
+        <td><code>log(message)</code></td>
+        <td>记录日志信息。</td>
+        <td><code>self.log('This is a log message')</code></td>
+    </tr>
+</tbody>
+</table>
+<hr>
+<h3>2. <strong>数据提取方法</strong></h3>
+<table class="reference">
+<thead>
+    <tr>
+        <th>方法名</th>
+        <th>作用描述</th>
+        <th>示例</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td><code>response.css(selector)</code></td>
+        <td>使用 CSS 选择器提取数据。</td>
+        <td><code>title = response.css('h1::text').get()</code></td>
+    </tr>
+    <tr>
+        <td><code>response.xpath(selector)</code></td>
+        <td>使用 XPath 选择器提取数据。</td>
+        <td><code>title = response.xpath('//h1/text()').get()</code></td>
+    </tr>
+    <tr>
+        <td><code>get()</code></td>
+        <td>从 <code>SelectorList</code> 中提取第一个匹配的结果（字符串）。</td>
+        <td><code>title = response.css('h1::text').get()</code></td>
+    </tr>
+    <tr>
+        <td><code>getall()</code></td>
+        <td>从 <code>SelectorList</code> 中提取所有匹配的结果（列表）。</td>
+        <td><code>titles = response.css('h1::text').getall()</code></td>
+    </tr>
+    <tr>
+        <td><code>attrib</code></td>
+        <td>提取当前节点的属性。</td>
+        <td><code>link = response.css('a::attr(href)').get()</code></td>
+    </tr>
+</tbody>
+</table>
+<hr>
+<h3>3. <strong>请求与响应方法</strong></h3>
+<table class="reference">
+<thead>
+    <tr>
+        <th>方法名</th>
+        <th>作用描述</th>
+        <th>示例</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td><code>scrapy.Request(url, callback, method, headers, meta)</code></td>
+        <td>创建一个新的请求。</td>
+        <td><code>yield scrapy.Request(url, callback=self.parse, headers=headers)</code></td>
+    </tr>
+    <tr>
+        <td><code>response.url</code></td>
+        <td>获取当前响应的 URL。</td>
+        <td><code>current_url = response.url</code></td>
+    </tr>
+    <tr>
+        <td><code>response.status</code></td>
+        <td>获取响应的状态码。</td>
+        <td><code>if response.status == 200: print('Success')</code></td>
+    </tr>
+    <tr>
+        <td><code>response.meta</code></td>
+        <td>获取请求中传递的额外数据。</td>
+        <td><code>value = response.meta.get('key')</code></td>
+    </tr>
+    <tr>
+        <td><code>response.headers</code></td>
+        <td>获取响应的头信息。</td>
+        <td><code>content_type = response.headers.get('Content-Type')</code></td>
+    </tr>
+</tbody>
+</table>
+<hr>
+<h3>4. <strong>中间件与管道方法</strong></h3>
+<table class="reference">
+<thead>
+    <tr>
+        <th>方法名</th>
+        <th>作用描述</th>
+        <th>示例</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td><code>process_request(request, spider)</code></td>
+        <td>在请求发送前处理请求（下载器中间件）。</td>
+        <td><code>request.headers['User-Agent'] = 'Mozilla/5.0'</code></td>
+    </tr>
+    <tr>
+        <td><code>process_response(request, response, spider)</code></td>
+        <td>在响应返回后处理响应（下载器中间件）。</td>
+        <td><code>if response.status == 403: return request.replace(dont_filter=True)</code></td>
+    </tr>
+    <tr>
+        <td><code>process_item(item, spider)</code></td>
+        <td>处理提取的数据（管道）。</td>
+        <td><code>if item['price'] &lt; 0: raise DropItem('Invalid price')</code></td>
+    </tr>
+    <tr>
+        <td><code>open_spider(spider)</code></td>
+        <td>爬虫启动时调用（管道）。</td>
+        <td><code>def open_spider(self, spider): self.file = open('items.json', 'w')</code></td>
+    </tr>
+    <tr>
+        <td><code>close_spider(spider)</code></td>
+        <td>爬虫关闭时调用（管道）。</td>
+        <td><code>def close_spider(self, spider): self.file.close()</code></td>
+    </tr>
+</tbody>
+</table>
+<hr>
+<h3>5. <strong>工具与扩展方法</strong></h3>
+<table class="reference">
+<thead>
+    <tr>
+        <th>方法名</th>
+        <th>作用描述</th>
+        <th>示例</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td><code>scrapy shell</code></td>
+        <td>启动交互式 Shell，用于调试和测试选择器。</td>
+        <td><code>scrapy shell 'http://example.com'</code></td>
+    </tr>
+    <tr>
+        <td><code>scrapy crawl &lt;spider_name&gt;</code></td>
+        <td>运行指定的爬虫。</td>
+        <td><code>scrapy crawl myspider -o output.json</code></td>
+    </tr>
+    <tr>
+        <td><code>scrapy check</code></td>
+        <td>检查爬虫代码的正确性。</td>
+        <td><code>scrapy check</code></td>
+    </tr>
+    <tr>
+        <td><code>scrapy fetch</code></td>
+        <td>下载指定 URL 的内容。</td>
+        <td><code>scrapy fetch 'http://example.com'</code></td>
+    </tr>
+    <tr>
+        <td><code>scrapy view</code></td>
+        <td>在浏览器中查看 Scrapy 下载的页面。</td>
+        <td><code>scrapy view 'http://example.com'</code></td>
+    </tr>
+</tbody>
+</table>
+<hr>
+<h3>6. <strong>常用设置（<code>settings.py</code>）</strong></h3>
+<table class="reference">
+<thead>
+    <tr>
+        <th>设置项</th>
+        <th>作用描述</th>
+        <th>示例</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td><code>USER_AGENT</code></td>
+        <td>设置请求头中的 User-Agent。</td>
+        <td><code>USER_AGENT = 'Mozilla/5.0'</code></td>
+    </tr>
+    <tr>
+        <td><code>ROBOTSTXT_OBEY</code></td>
+        <td>是否遵守 <code>robots.txt</code> 规则。</td>
+        <td><code>ROBOTSTXT_OBEY = False</code></td>
+    </tr>
+    <tr>
+        <td><code>DOWNLOAD_DELAY</code></td>
+        <td>设置下载延迟，避免过快请求。</td>
+        <td><code>DOWNLOAD_DELAY = 2</code></td>
+    </tr>
+    <tr>
+        <td><code>CONCURRENT_REQUESTS</code></td>
+        <td>设置并发请求数。</td>
+        <td><code>CONCURRENT_REQUESTS = 16</code></td>
+    </tr>
+    <tr>
+        <td><code>ITEM_PIPELINES</code></td>
+        <td>启用管道。</td>
+        <td><code>ITEM_PIPELINES = {'myproject.pipelines.MyPipeline': 300}</code></td>
+    </tr>
+    <tr>
+        <td><code>AUTOTHROTTLE_ENABLED</code></td>
+        <td>启用自动限速扩展。</td>
+        <td><code>AUTOTHROTTLE_ENABLED = True</code></td>
+    </tr>
+</tbody>
+</table>
+<hr>
+<h3>7. <strong>其他常用方法</strong></h3>
+<table class="reference">
+<thead>
+    <tr>
+        <th>方法名</th>
+        <th>作用描述</th>
+        <th>示例</th>
+    </tr>
+</thead>
+<tbody>
+    <tr>
+        <td><code>response.follow_all(links, callback)</code></td>
+        <td>批量处理链接并生成请求。</td>
+        <td><code>yield from response.follow_all(links, callback=self.parse)</code></td>
+    </tr>
+    <tr>
+        <td><code>response.json()</code></td>
+        <td>将响应内容解析为 JSON 格式。</td>
+        <td><code>data = response.json()</code></td>
+    </tr>
+    <tr>
+        <td><code>response.text</code></td>
+        <td>获取响应的文本内容。</td>
+        <td><code>html = response.text</code></td>
+    </tr>
+    <tr>
+        <td><code>response.selector</code></td>
+        <td>获取响应内容的 <code>Selector</code> 对象。</td>
+        <td><code>title = response.selector.css('h1::text').get()</code></td>
+    </tr>
+</tbody>
+</table>
+<p>以上表格列出了 Scrapy 中常用的方法及其作用。这些方法涵盖了爬虫开发的各个方面，包括请求生成、数据提取、中间件处理、管道操作等。通过掌握这些方法，你可以高效地编写和管理 Scrapy 爬虫。如果需要更详细的功能，可以参考 <a href="https://docs.scrapy.org/" target="_blank" rel="noreferrer">Scrapy 官方文档</a>。</p>
+<hr>
+<h2>方法使用举例</h2>
+<h3>1. <code>start_requests()</code></h3>
+<p><code>start_requests()</code> 方法是 Scrapy 爬虫的入口点，用于生成初始请求。通常在这个方法中定义爬虫的起始 URL。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> scrapy<br />
+<br />
+<span style="color: Green;font-weight:bold;">class</span> MySpider<span style="color: Olive;">&#40;</span>scrapy.<span style="color: #05a;">Spider</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; name <span style="color: Gray;">=</span> <span style="color: #a11;">'myspider'</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">def</span> start_requests<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; urls <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'http://example.com/page1'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'http://example.com/page2'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">for</span> url <span style="color: Green;font-weight:bold;">in</span> urls:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> scrapy.<span style="color: #05a;">Request</span><span style="color: Olive;">&#40;</span>url<span style="color: Gray;">=</span>url<span style="color: Gray;">,</span> callback<span style="color: Gray;">=</span><span style="color: Teal;">self</span>.<span style="color: #05a;">parse</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>2. <code>parse()</code></h3>
+<p><code>parse()</code> 方法是默认的响应处理方法，用于解析响应并提取数据或生成新的请求。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">def</span> parse<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; <span style="color: #a50"># 提取页面标题</span><br />
+&nbsp; &nbsp; title <span style="color: Gray;">=</span> response.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'title::text'</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">get</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> <span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'title'</span>: title<br />
+&nbsp; &nbsp; <span style="color: Olive;">&#125;</span><br />
+</div>
+</div>
+
+<h3>3. <code>parse_item()</code></h3>
+<p><code>parse_item()</code> 方法用于解析单个项目（Item）的响应，通常用于提取结构化数据。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">def</span> parse_item<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; item <span style="color: Gray;">=</span> <span style="color: Olive;">&#123;</span><span style="color: Olive;">&#125;</span><br />
+&nbsp; &nbsp; item<span style="color: Olive;">&#91;</span><span style="color: #a11;">'name'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">=</span> response.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'div.name::text'</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">get</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; item<span style="color: Olive;">&#91;</span><span style="color: #a11;">'price'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">=</span> response.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'div.price::text'</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">get</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> item<br />
+</div>
+</div>
+
+<h3>4. <code>follow()</code></h3>
+<p><code>follow()</code> 方法用于生成新的请求并自动处理响应，通常用于跟踪链接。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">def</span> parse<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">for</span> link <span style="color: Green;font-weight:bold;">in</span> response.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'a::attr(href)'</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> response.<span style="color: #05a;">follow</span><span style="color: Olive;">&#40;</span>link<span style="color: Gray;">,</span> <span style="color: Teal;">self</span>.<span style="color: #05a;">parse_item</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>5. <code>yield</code></h3>
+<p><code>yield</code> 关键字用于生成请求或项目（Item），并将其传递给 Scrapy 引擎进行处理。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">def</span> parse<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> <span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'title'</span>: response.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'title::text'</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">get</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#125;</span><br />
+</div>
+</div>
+
+<h3>6. <code>Item</code></h3>
+<p><code>Item</code> 类用于定义数据结构，通常用于存储从网页中提取的数据。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> scrapy<br />
+<br />
+<span style="color: Green;font-weight:bold;">class</span> MyItem<span style="color: Olive;">&#40;</span>scrapy.<span style="color: #05a;">Item</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; name <span style="color: Gray;">=</span> scrapy.<span style="color: #05a;">Field</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; price <span style="color: Gray;">=</span> scrapy.<span style="color: #05a;">Field</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>7. <code>ItemLoader</code></h3>
+<p><code>ItemLoader</code> 类用于加载和填充 Item 对象，简化数据提取和处理的流程。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">from</span> scrapy.<span style="color: #05a;">loader</span> <span style="color: Green;font-weight:bold;">import</span> ItemLoader<br />
+<span style="color: Green;font-weight:bold;">from</span> myproject.<span style="color: #05a;">items</span> <span style="color: Green;font-weight:bold;">import</span> MyItem<br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> parse<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; loader <span style="color: Gray;">=</span> ItemLoader<span style="color: Olive;">&#40;</span>item<span style="color: Gray;">=</span>MyItem<span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span> response<span style="color: Gray;">=</span>response<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; loader.<span style="color: #05a;">add_css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'name'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'div.name::text'</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; loader.<span style="color: #05a;">add_css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'price'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'div.price::text'</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> loader.<span style="color: #05a;">load_item</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>8. <code>Request</code></h3>
+<p><code>Request</code> 类用于生成 HTTP 请求对象，通常用于定义请求的 URL、回调方法等。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> scrapy<br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> parse<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> scrapy.<span style="color: #05a;">Request</span><span style="color: Olive;">&#40;</span>url<span style="color: Gray;">=</span><span style="color: #a11;">'http://example.com/page3'</span><span style="color: Gray;">,</span> callback<span style="color: Gray;">=</span><span style="color: Teal;">self</span>.<span style="color: #05a;">parse_item</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>9. <code>Response</code></h3>
+<p><code>Response</code> 类表示 HTTP 响应对象，包含从服务器返回的 HTML 内容、状态码等信息。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">def</span> parse<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>response.<span style="color: #05a;">status</span><span style="color: Olive;">&#41;</span> &nbsp;<span style="color: #a50"># 打印响应状态码</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>response.<span style="color: #05a;">body</span><span style="color: Olive;">&#41;</span> &nbsp; &nbsp;<span style="color: #a50"># 打印响应内容</span><br />
+</div>
+</div>
+
+<h3>10. <code>Selector</code></h3>
+<p><code>Selector</code> 类用于从 HTML 或 XML 文档中提取数据，支持 XPath 和 CSS 选择器。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">def</span> parse<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; title <span style="color: Gray;">=</span> response.<span style="color: #05a;">xpath</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'//title/text()'</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">get</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> <span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'title'</span>: title<br />
+&nbsp; &nbsp; <span style="color: Olive;">&#125;</span><br />
+</div>
+</div>
+
+<h3>11. <code>CrawlSpider</code></h3>
+<p><code>CrawlSpider</code> 是一种特殊的 Spider 类，用于处理复杂的爬取规则和链接跟踪。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">from</span> scrapy.<span style="color: #05a;">spiders</span> <span style="color: Green;font-weight:bold;">import</span> CrawlSpider<span style="color: Gray;">,</span> Rule<br />
+<span style="color: Green;font-weight:bold;">from</span> scrapy.<span style="color: #05a;">linkextractors</span> <span style="color: Green;font-weight:bold;">import</span> LinkExtractor<br />
+<br />
+<span style="color: Green;font-weight:bold;">class</span> MyCrawlSpider<span style="color: Olive;">&#40;</span>CrawlSpider<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; name <span style="color: Gray;">=</span> <span style="color: #a11;">'mycrawlspider'</span><br />
+&nbsp; &nbsp; allowed_domains <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span><span style="color: #a11;">'example.com'</span><span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; start_urls <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span><span style="color: #a11;">'http://example.com'</span><span style="color: Olive;">&#93;</span><br />
+<br />
+&nbsp; &nbsp; rules <span style="color: Gray;">=</span> <span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; Rule<span style="color: Olive;">&#40;</span>LinkExtractor<span style="color: Olive;">&#40;</span>allow<span style="color: Gray;">=</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'page/<span style="color: #000099; font-weight: bold;">\d</span>+'</span><span style="color: Gray;">,</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span> callback<span style="color: Gray;">=</span><span style="color: #a11;">'parse_item'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">def</span> parse_item<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> <span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">'title'</span>: response.<span style="color: #05a;">css</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'title::text'</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">get</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Olive;">&#125;</span><br />
+</div>
+</div>
+
+<h3>12. <code>LinkExtractor</code></h3>
+<p><code>LinkExtractor</code> 类用于从响应中提取链接，通常用于自动跟踪页面中的链接。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">from</span> scrapy.<span style="color: #05a;">linkextractors</span> <span style="color: Green;font-weight:bold;">import</span> LinkExtractor<br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> parse<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> response<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; extractor <span style="color: Gray;">=</span> LinkExtractor<span style="color: Olive;">&#40;</span>allow<span style="color: Gray;">=</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'page/<span style="color: #000099; font-weight: bold;">\d</span>+'</span><span style="color: Gray;">,</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; links <span style="color: Gray;">=</span> extractor.<span style="color: #05a;">extract_links</span><span style="color: Olive;">&#40;</span>response<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">for</span> link <span style="color: Green;font-weight:bold;">in</span> links:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">yield</span> scrapy.<span style="color: #05a;">Request</span><span style="color: Olive;">&#40;</span>link.<span style="color: #05a;">url</span><span style="color: Gray;">,</span> callback<span style="color: Gray;">=</span><span style="color: Teal;">self</span>.<span style="color: #05a;">parse_item</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>13. <code>Pipeline</code></h3>
+<p><code>Pipeline</code> 类用于处理爬取到的数据，通常用于数据清洗、存储等操作。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">class</span> MyPipeline:<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">def</span> process_item<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> item<span style="color: Gray;">,</span> spider<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 处理 item 数据</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> item<br />
+</div>
+</div>
+
+<h3>14. <code>Middleware</code></h3>
+<p><code>Middleware</code> 类用于处理请求和响应的中间件，通常用于修改请求头、处理异常等操作。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">class</span> MyMiddleware:<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">def</span> process_request<span style="color: Olive;">&#40;</span><span style="color: Teal;">self</span><span style="color: Gray;">,</span> request<span style="color: Gray;">,</span> spider<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a50"># 修改请求头</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; request.<span style="color: #05a;">headers</span><span style="color: Olive;">&#91;</span><span style="color: #a11;">'User-Agent'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">=</span> <span style="color: #a11;">'MyCustomUserAgent'</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Teal;">None</span><br />
+</div>
+</div>
+			<!-- 其他扩展 -->
+						
+			</div>
+			
+		</div>
+
+
+<div class="archive-list" style="display:none;font-size: 14px;line-height: 1.8;margin-top: 20px;padding: 10px;">
+<div class="archive-list-item">
+    <div class="post-intro" style="width: 100%;" id="ai-info">
+	  AI 思考中...
+    </div>
+</div>
+</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="python-spider-beautifulsoup.html" rel="prev"> Python 爬虫 &#8211; BeautifulSoup</a> </div>
+			<div class="next-design-link"><a href="python-library-system.html" rel="next"> 实现一个 Python 类来模拟图书管理系统</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+
+
+		
+		<div class="sidebar-box ">
+				
+
+<style>	
+.responsive_ad1 { display:none; }
+@media(min-width: 800px) { .responsive_ad1 {  display:block;margin:0 auto;} }
+</style>
+<div id="ad-336280" class="responsive_ad1">
+<!-- 336*280 固定 -->		
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 移动版 自动调整 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+				</div>
+		<!-- 笔记列表 -->
+		<style>
+.wrapper {
+  /*text-transform: uppercase; */
+  background: #ececec;
+  color: #555;
+  cursor: pointer;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.wrapper .tooltip {
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: left;
+  background: #96b97d;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 14px;
+  pointer-events: none;
+  position: absolute;
+  
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+.tooltip a {
+	color:#fff;
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}  
+
+/* CSS Triangles - see Trevor's post */
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #96b97d 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 20%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+.wrapper .tooltip1 {
+	margin-left: 50px;
+	padding-top: 0px;
+}
+/*
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+*/
+/* IE can just show/hide with no transition */
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.css">
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style=" padding: 20px 20px;"> 
+	<h3 class="text-muted" id="share_code" style="color: #799961;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<!--
+	<p style="font-size:14px;">笔记需要是本篇文章的内容扩展！</p><br>
+	<p style="font-size:12px;"><a href="//www.runoob.com/tougao" target="_blank">文章投稿，可点击这里</a></p>
+	<p style="font-size:14px;"><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>
+		<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display:none;">
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div id="mded"></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input type="hidden" name="comment_post_ID" value="26868" id="comment_post_ID" />
+<input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="引用地址"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script type="text/javascript">
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload:false,
+	 // upload: {url:'/api/comment_upload_file.php',params: null,fileKey: 'upload_file',connectionCount: 1,leaveConfirm: '文件正在上传，您确定离开?'},
+	  defaultImage: 'https://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  autosave: 'editor-content',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+	$("#user_add_note").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		$('html, body').animate({
+       	    scrollTop: $("#respond").offset().top
+    	}, 200);
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" style="display:none;" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  26868;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>').show();
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>').show();
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>').show();
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>').show();
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>').show();
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>').show();
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	$(".comt-author").click(function() {
+		href = $(this).children("a").attr("href");
+		if(href.indexOf("/note/")!=-1) {
+			var win = window.open(href, '_blank');
+  			win.focus();
+		}
+	});
+	$(".comt-meta span").hover(function(){
+		$(this).children(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).children(".tooltip").removeAttr("style");
+	});
+	/*
+	$(".wrapper i").hover(function(){
+		$(this).siblings(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).siblings(".tooltip").css({ "opacity": 0, "pointer-events": "auto"});
+	});
+	*/
+	//Upvote.create('runoobvote-id', {callback: vote_callback});
+	var ajaxurl = 'https://www.runoob.com/wp-admin/admin-ajax.php';
+	var callback = function(data) {
+		//console.log($('#runoobvote-id').upvote('upvoted'));
+		//console.log($('#runoobvote-id').upvote('downvoted'));
+		//console.log(data);
+		_vote_action = data.action;
+		id_arr = data.id.split('-');
+		um_id= id_arr[2];
+		//console.log(um_id);
+		
+		var re = /^[1-9]+/;
+		if (re.test(um_id)) { 
+			var ajax_data = {
+				_vote_action: _vote_action,
+				action: "pinglun_zan",
+				um_id: um_id,
+				um_action: "ding"
+			};
+			//console.log(ajax_data);
+			$.post(ajaxurl,ajax_data,function(status){
+				//if(status.vote_num>999) {
+				//	_voteHtml = '<span style="display: block; text-align: center;font-size: 20px; color: #6a737c; margin: 8px 0;">'+kFormatter(status.vote_num) +'</span>';
+				//	$("#runoobvote-id-" + um_id + " .count").hide().after(_voteHtml);
+				//}
+				
+			});
+		}
+	};
+	if($('#comments').length && $('.upvotejs').length){
+		$('.upvotejs').upvote({id: 26868, callback: callback});
+	
+		$.post(ajaxurl,{"action":"pinglun_zan","postid":26868},function(data){  
+			$(data).each(function(key,value) {
+				$("#runoobvote-id-" + value.commid + " .upvote").addClass(value.upvotejs_class);
+				$("#runoobvote-id-" + value.commid + " .downvote").addClass(value.downvote_class);
+				$("#runoobvote-id-" + value.commid + " .count").text(value.upvote_count);
+			})
+		},'json');
+		
+	}
+	
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+function kFormatter(num) {
+	// return num;
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
+</script>
+
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/css/qa.css?1.45">
+<link rel="stylesheet" type="text/css" href="https://static.char123.com/assets/simditor/2.3.6/styles/simditor.min.css" />
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor.min.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor-autosave.js"></script>
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+
+<style>
+.sidebar-tree .double-li {
+    width:300px;
+}
+.sidebar-tree .double-li li {
+    width: 44%;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    display: inline;
+}
+</style>
+
+    
+        <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here" style="margin: 0 auto;">
+            <a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;"> <i class="fa fa-list" aria-hidden="true"></i> 分类导航</a>
+        </div>
+    <div class="sidebar-box sidebar-cate">
+        
+        <div class="sidebar-tree">
+            <ul><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="../html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="../html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="../css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="../css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Tailwind CSS 教程" href="../tailwindcss/tailwindcss-tutorial.html">Tailwind CSS 教程</a></li><li><a title="Bootstrap4 教程" href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Bootstrap5 教程" href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 教程</a></li><li><a title="Font Awesome 教程" href="../font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="../foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="../js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="../htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="../jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="../angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="../angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="../vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="Vue3 教程" href="../vue3/vue3-tutorial.html">Vue3 教程</a></li><li><a title="React 教程" href="../react/react-tutorial.html">React 教程</a></li><li><a title="Next.js 教程" href="../nextjs/nextjs-tutorial.html">Next.js 教程</a></li><li><a title="TypeScript 教程" href="../typescript/ts-tutorial.html">TypeScript 教程</a></li><li><a title="jQuery UI 教程" href="../jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="../jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="../nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="Electron 教程" href="../electron/electron-tutorial.html">Electron 教程</a></li><li><a title="Playwright 教程" href="../playwright/playwright-tutorial.html">Playwright 教程</a></li><li><a title="AJAX 教程" href="../ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="../json/json-tutorial.html">JSON 教程</a></li><li><a title="Echarts 教程" href="../echarts/echarts-tutorial.html">Echarts 教程</a></li><li><a title="Chart.js 教程" href="../chartjs/chartjs-tutorial.html">Chart.js 教程</a></li><li><a title="Highcharts 教程" href="../highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="../googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="Python 教程" href="python3-tutorial.html">Python 教程</a></li><li><a title="Python2.x 教程" href="../python/python-tutorial.html">Python2.x 教程</a></li><li><a title="Linux 教程" href="../linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="../docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="../ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="../java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="../c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="../cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="../perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="../servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="../jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="../lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Rust 教程" href="../rust/rust-tutorial.html">Rust 教程</a></li><li><a title="Zig 教程" href="../zig/zig-tutorial.html">Zig 教程</a></li><li><a title="Scala 教程" href="../scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="../go/go-tutorial.html">Go 教程</a></li><li><a title="PHP 教程" href="../php/php-tutorial.html">PHP 教程</a></li><li><a title="数据结构与算法" href="../data-structures/data-structures-tutorial.html">数据结构与算法</a></li><li><a title="Django 教程" href="../django/django-tutorial.html">Django 教程</a></li><li><a title="FastAPI 教程" href="../fastapi/fastapi-tutorial.html">FastAPI 教程</a></li><li><a title="Flask 教程" href="../flask/flask-tutorial.html">Flask 教程</a></li><li><a title="Pillow 教程" href="../pillow/pillow-tutorial.html">Pillow 教程</a></li><li><a title="Zookeeper 教程" href="//www.runoob.com/w3cnote/zookeeper-tutorial.html">Zookeeper 教程</a></li><li><a title="设计模式" href="../design-pattern/design-pattern-tutorial.html">设计模式</a></li><li><a title="Python 设计模式" href="../python-design-pattern/python-design-pattern-tutorial.html">Python 设计模式</a></li><li><a title="正则表达式" href="../regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="Maven 教程" href="../maven/maven-tutorial.html">Maven 教程</a></li><li><a title="CMake 教程" href="../cmake/cmake-tutorial.html">CMake 教程</a></li><li><a title="Verilog 教程" href="//www.runoob.com/w3cnote/verilog-tutorial.html">Verilog 教程</a></li><li><a title="ASP 教程" href="../asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="../appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="../vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="../sql/sql-tutorial.html">SQL 教程</a></li><li><a title="MySQL 教程" href="../mysql/mysql-tutorial.html">MySQL 教程</a></li><li><a title="PostgreSQL 教程" href="../postgresql/postgresql-tutorial.html">PostgreSQL 教程</a></li><li><a title="SQLite 教程" href="../sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="../mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="../redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="../Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit">  AI & 数据分析</a><ul class="double-li"><li><a title="Python 教程" href="python3-tutorial.html">Python 教程</a></li><li><a title="NumPy 教程" href="../numpy/numpy-tutorial.html">NumPy 教程</a></li><li><a title="Pandas 教程" href="../pandas/pandas-tutorial.html">Pandas 教程</a></li><li><a title="Matplotlib 教程" href="../matplotlib/matplotlib-tutorial.html">Matplotlib 教程</a></li><li><a title="Scipy 教程" href="../scipy/scipy-tutorial.html">Scipy 教程</a></li><li><a title="Pytorch 教程" href="../pytorch/pytorch-tutorial.html">Pytorch 教程</a></li><li><a title="TensorFlow 教程" href="../tensorflow/tensorflow-tutorial.html">TensorFlow 教程</a></li><li><a title="Ollama 教程" href="../ollama/ollama-tutorial.html">Ollama 教程</a></li><li><a title="机器 教程" href="../ml/ml-tutorial.html">机器 教程</a></li><li><a title="Jupyter Notebook 教程" href="../jupyter-notebook/jupyter-notebook-tutorial.html">Jupyter Notebook 教程</a></li><li><a title="AI Agent(智能体)" href="../ai-agent/ai-agent-tutorial.html">AI Agent(智能体)</a></li><li><a title="Skills(技能)" href="../skills/skills-tutorial.html">Skills(技能)</a></li><li><a title="Claude Code" href="../claude-code/claude-code-tutorial.html">Claude Code</a></li><li><a title="OpenCode" href="../opencode/opencode-tutorial.html">OpenCode</a></li><li><a title="Codex 教程" href="../codex/codex-tutorial.html">Codex 教程</a></li><li><a title="scikit-learn 教程" href="../sklearn/sklearn-tutorial.html">scikit-learn 教程</a></li><li><a title="R 教程" href="../r/r-tutorial.html">R 教程</a></li><li><a title="OpenCV 教程" href="../opencv/opencv-tutorial.html">OpenCV 教程</a></li><li><a title="NLP 教程" href="../nlp/nlp-tutorial.html">NLP 教程</a></li><li><a title="Selenium 教程" href="../selenium/selenium-tutorial.html">Selenium 教程</a></li><li><a title="Julia 教程" href="../julia/julia-tutorial.html">Julia 教程</a></li><li><a title="量化交易" href="../qt/qt-tutorial.html">量化交易</a></li><li><a title="Dash 教程" href="../dash/dash-tutorial.html">Dash 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="//www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="../swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="../jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="../ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Flutter 教程" href="../flutter/flutter-tutorial.html">Flutter 教程</a></li><li><a title="Kotlin 教程" href="../kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="VS Code 教程" href="../vscode/vscode-tutorial.html">VS Code 教程</a></li><li><a title="PyCharm 教程" href="../pycharm/pycharm-tutorial.html">PyCharm 教程</a></li><li><a title="Swagger 教程" href="../swagger/swagger-tutorial.html">Swagger 教程</a></li><li><a title="RESTful API 教程" href="../restfulapi/restful-api-tutorial.html">RESTful API 教程</a></li><li><a title="Eclipse 教程" href="../eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="../git/git-tutorial.html">Git 教程</a></li><li><a title="Svn 教程" href="../svn/svn-tutorial.html">Svn 教程</a></li><li><a title="Markdown 教程" href="../markdown/md-tutorial.html">Markdown 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="../xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="../dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="../dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="../xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="../xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="../xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="../xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="../xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="../schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="../xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="../svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="../aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="../csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="PowerShell 教程" href="../powershell/powershell-tutorial.html">PowerShell 教程</a></li><li><a title="Web Pages 教程" href="../aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="../aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="../aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="../aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="../webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="../wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="../soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="../rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="../rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="../http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="../web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="../browsers/browser-information.html">浏览器信息</a></li><li><a title="网络协议" href="../np/np-tutorial.html">网络协议</a></li><li><a title="网站主机教程" href="../hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="../tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="../w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="../quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>            </div>
+    
+    </div>
+    </div>
+    <br>
+    
+    <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here">
+            <a href="javascript:void(0);">Advertisement</a>
+        </div>
+        <div class="re-600160" id="sidebar-right-re">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧栏1 -->
+        <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+                </div>
+    </div>
+</div></div>
+
+</div>
+
+<script>
+var aid = 26868;
+function coll() {
+	$.post( '/wp-content/themes/runoob/option/user/userinfo.php', {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+		if(data.error==0) {
+			$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+			$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+		}
+		alert(data.msg);
+	},'json');
+}
+
+(function () {
+    // 1. 仅 HTML 页面
+    if (!document.contentType || !document.contentType.includes('text/html')) return;
+
+    // 2. 容器判断
+    var container = document.querySelector('.article-intro');
+    if (!container) return;
+
+    var h1 = container.querySelector('h1');
+    if (!h1) return;
+
+    // 3. URL 判断
+    var url = window.location.href.toLowerCase();
+    var version = null;
+
+    if (url.includes('/python3/')) {
+        version = 'Python3.x';
+    } else if (url.includes('/python/')) {
+        version = 'Python2.x';
+    }
+
+    if (!version) return;
+
+    // 4. 防重复
+    if (h1.querySelector('.py-version-badge')) return;
+
+    // 5. 创建标签
+    var badge = document.createElement('span');
+    badge.className = 'py-version-badge';
+    badge.innerText = version;
+
+    // 6. 样式（核心：float 实现右上角）
+    badge.style.float = 'right';
+    badge.style.fontSize = '12px';
+    badge.style.padding = '2px 8px';
+    badge.style.borderRadius = '999px';
+
+   // 自适应亮/暗色 + 渐变背景（增强版）
+	badge.style.color = 'inherit';
+
+	// 渐变背景（低透明度，不影响暗黑模式）
+	if (version.includes('3')) {
+		badge.style.background = 'linear-gradient(90deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15))';
+	} else {
+		badge.style.background = 'linear-gradient(90deg, rgba(161,140,209,0.15), rgba(251,194,235,0.15))';
+	}
+
+	// 边框弱化（更精致）
+	badge.style.border = '1px solid rgba(127,127,127,0.3)';
+
+	// 提升可读性
+	badge.style.opacity = '0.95';
+
+    // 微调位置（更贴近“右上角”）
+    badge.style.marginTop = '4px';
+    badge.style.marginLeft = '10px';
+
+    // 7. 插入到 h1 最前面（让 float 生效更稳定）
+    h1.insertBefore(badge, h1.firstChild);
+
+})();
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.js?1.0"></script>
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.css?1.0" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // 获取窗口宽度
+    var windowWidth = $(window).width();
+
+    // 设置一个阈值，例如 768px，根据实际需要调整
+    var mobileThreshold = 768;
+
+    // 判断是否为移动端
+    if (windowWidth < mobileThreshold) {
+        // 在移动端执行的代码
+        $(".article-heading-ad").show();
+    } else {
+        // 在非移动端执行的代码
+		$(".article-heading-ad").show();
+    }
+	
+});
+</script>
+<script src="/wp-content/themes/runoob/assets/js/runoob-article-dir.min.js"></script>
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

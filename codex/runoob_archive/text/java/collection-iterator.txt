@@ -1,0 +1,145 @@
+URL: https://www.runoob.com/java/collection-iterator.html
+Title: Java 实例 – 集合遍历 | 菜鸟教程
+
+Java 实例 – 集合遍历 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 集合反转 
+
+Java 实例 – 集合打乱顺序 
+
+Java 实例 - 集合遍历 
+
+以下实例演示了如何遍历从Collection接口延伸出的List、Set和以键值对形式作存储的Map类型的集合，以下我们分别使用了普通for，增强型的 for ，iterator 等方式来遍历集合： 
+
+List与Set类型集合的遍历 
+
+Main.java 文件 
+
+import java . util . ArrayList ; import java . util . HashSet ; import java . util . Iterator ; import java . util . List ; import java . util . Set ; public class Main { public static void main ( String [ ] args ) { listTest ( ) ; setTest ( ) ; } private static void setTest ( ) { Set < String > set = new HashSet < String > ( ) ; set . add ( " JAVA " ) ; set . add ( " C " ) ; set . add ( " C++ " ) ; set . add ( " JAVA " ) ; set . add ( " JAVASCRIPT " ) ; Iterator < String > it = set . iterator ( ) ; while ( it . hasNext ( ) ) { String value = it . next ( ) ; System . out . println ( value ) ; } for ( String s : set ) { System . out . println ( s ) ; } } private static void listTest ( ) { List < String > list = new ArrayList < String > ( ) ; list . add ( " 菜 " ) ; list . add ( " 鸟 " ) ; list . add ( " 教 " ) ; list . add ( " 程 " ) ; list . add ( " www.runoob.com " ) ; Iterator < String > it = list . iterator ( ) ; while ( it . hasNext ( ) ) { String value = it . next ( ) ; System . out . println ( value ) ; } for ( int i = 0 , size = list . size ( ) ; i < size ; i ++ ) { String value = list . get ( i ) ; System . out . println ( value ) ; } for ( String value : list ) { System . out . println ( value ) ; } } } 
+
+以上代码运行输出结果为： 
+
+菜
+鸟
+教
+程
+www.runoob.com
+菜
+鸟
+教
+程
+www.runoob.com
+菜
+鸟
+教
+程
+www.runoob.com
+JAVA
+JAVASCRIPT
+C++
+C
+JAVA
+JAVASCRIPT
+C++
+C 
+
+关于Map类型集合的遍历 
+
+以下实例我们使用了 HashMap 的 keySet()与entrySet()方法来遍历集合： 
+
+/*
+ author by runoob.com
+ Main.java
+ */
+
+import java.util.Map;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Set;
+import java.util.Map.Entry;
+
+//增强For循环
+public class Main {
+
+ public static void main(String[] args) {
+ // 创建一个HashMap对象,并加入了一些键值对。
+ Map<String, String> maps = new HashMap<String, String>();
+ maps.put("1", "PHP");
+ maps.put("2", "Java");
+ maps.put("3", "C");
+ maps.put("4", "C++");
+ maps.put("5", "HTML");
+ 
+ // 传统的遍历map集合的方法1; keySet()
+ //traditionalMethod1(maps);
+ // 传统的遍历map集合的方法2; entrySet()
+ //traditionalMethod2(maps);
+ // 使用增强For循环来遍历map集合方法1; keySet()
+ //strongForMethod1(maps);
+ // 使用增强For循环来遍历map集合方法2; entrySet()
+ strongForMethod2(maps);
+ }
+
+ private static void strongForMethod2(Map<String, String> maps) {
+ Set<Entry<String, String>> set = maps.entrySet();
+ for (Entry<String, String> entry : set) {
+ String key = entry.getKey();
+ String value = entry.getValue();
+ System.out.println(key + " : " + value);
+ }
+ }
+
+ private static void strongForMethod1(Map<String, String> maps) {
+ Set<String> set = maps.keySet();
+ for (String s : set) {
+ String key = s;
+ String value = maps.get(s);
+ System.out.println(key + " : " + value);
+ }
+ }
+
+ // 使用entrySet()方法，获取maps集合中的每一个键值对，
+ private static void traditionalMethod2(Map<String, String> maps) {
+ Set<Map.Entry<String, String>> sets = maps.entrySet();
+ // 取得迭代器遍历出对应的值。
+ Iterator<Entry<String, String>> it = sets.iterator();
+ while (it.hasNext()) {
+ Map.Entry<String, String> entry = (Entry<String, String>) it.next();
+ String key = entry.getKey();
+ String value = entry.getValue();
+ System.out.println(key + " : " + value);
+ }
+ }
+
+ // 使用keySet()方法，获取maps集合中的所有键，遍历键取得所对应的值。
+ private static void traditionalMethod1(Map<String, String> maps) {
+ Set<String> sets = maps.keySet();
+ // 取得迭代器遍历出对应的值
+ Iterator<String> it = sets.iterator();
+ while (it.hasNext()) {
+ String key = it.next();
+ String value = maps.get(key);
+ System.out.println(key + " : " + value);
+ }
+ }
+} 
+
+以上代码运行输出结果为： 
+
+1 : PHP
+2 : Java
+3 : C
+4 : C++
+5 : HTML 
+
+AI 思考中... 
+
+Java 实例 – 集合反转 
+
+Java 实例 – 集合打乱顺序

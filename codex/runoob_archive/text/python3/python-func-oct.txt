@@ -1,0 +1,74 @@
+URL: https://www.runoob.com/python3/python-func-oct.html
+Title: Python oct() 函数 | 菜鸟教程
+
+Python oct() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 基础教程 
+
+Python id() 函数 
+
+Python sorted() 函数 
+
+Python oct() 函数 
+
+描述 
+
+oct() 函数将一个整数转换成 8 进制字符串。 
+
+Python2.x 版本的 8 进制以 0 作为前缀表示。 
+
+Python3.x 版本的 8 进制以 0o 作为前缀表示。 
+
+语法 
+
+oct 语法： 
+
+oct(x) 
+
+参数说明： 
+
+x -- 整数。 
+
+返回值 
+
+返回 8 进制字符串。 
+
+实例 
+
+以下实例展示了 oct 的使用方法： 
+
+实例(Python 2.0+) 
+
+>>> oct ( 10 ) 
+
+'012' 
+
+>>> oct ( 20 ) 
+
+'024' 
+
+>>> oct ( 15 ) 
+
+'017' 
+
+实例(Python 3.0+) 
+
+>>> oct ( 10 ) 
+
+'0o12' 
+
+>>> oct ( 20 ) 
+
+'0o24' 
+
+>>> oct ( 15 ) 
+
+'0o17' 
+
+AI 思考中... 
+
+Python id() 函数 
+
+Python sorted() 函数

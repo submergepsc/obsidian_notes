@@ -1,0 +1,121 @@
+URL: https://www.runoob.com/foundation/foundation-forms.html
+Title: Foundation 表单 | 菜鸟教程
+
+Foundation 表单 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 麦哲伦（Magellan）导航 
+
+Foundation 输入框尺寸 
+
+Foundation 表单 
+
+Foundation 表单控制会自动设置为全局样式: 
+
+所有 <textarea> , <select> 及 <input> 元素宽度都为 100%，且带有外边距、内边距、阴影和鼠标移动效果。 
+
+实例 
+
+< form > 
+Input: 
+< input type= "text" placeholder= "Name" > 
+
+Textarea: 
+< textarea rows= "4" placeholder= "Address" > < /textarea > 
+
+Select: 
+< select > 
+< option > 1 < /option > 
+< option > 2 < /option > 
+< option > 3 < /option > 
+< option > 4 < /option > 
+< /select > 
+< /form > 
+
+尝试一下 » 
+
+标签 
+
+在表单中使用 <label> 元素来设置标签，标签可以添加 for 属性和 id 属性。用户在点击标签或输入域时获取输入框焦点： 
+
+实例 
+
+< form > 
+< label for= "name" > Input 
+< input type= "text" placeholder= "Name" id= "name" > 
+< /label > 
+
+< label for= "adr" > Label 
+< textarea rows= "4" placeholder= "Address" id= "adr" > < /textarea > 
+< /label > 
+
+< label for= "num" > Select 
+< select id= "num" > 
+< option > 1 < /option > 
+< option > 2 < /option > 
+< option > 3 < /option > 
+< option > 4 < /option > 
+< /select > 
+< /label > 
+< /form > 
+
+尝试一下 » 
+
+如果需要设置标签右对齐，可以使用 .right 类: 
+
+实例 
+
+< label class= "right" > 
+
+尝试一下 » 
+
+Fieldset 
+
+Foundation 渲染 <fieldset> 元素的样式如下： 
+
+实例 
+
+< form > 
+< fieldset > 
+< legend > Fieldset Legend < /legend > 
+< label > Name 
+< input type= "text" placeholder= "First Name.." > 
+< /label > 
+< label > Email 
+< input type= "text" placeholder= "Enter 
+ email.." > 
+< /label > 
+< /fieldset > 
+< /form > 
+
+尝试一下 » 
+
+错误状态 
+
+使用 .error 类来设置错误的标签、输入框、文本框样式: 
+
+实例 
+
+< form > 
+< label class= "error" > Error 
+< input type= "text" placeholder= "Name.." > 
+< /label > 
+< small class= "error" > Wrong 
+ input < /small > 
+
+< textarea rows= "4" placeholder= "Address" > < /textarea > 
+< small class= "error" > Wrong input < /small > 
+< /form > 
+
+尝试一下 » 
+
+你需要使用 JavaScript 来更新用户输入的错误状态。 
+
+AI 思考中... 
+
+Foundation 麦哲伦（Magellan）导航 
+
+Foundation 输入框尺寸

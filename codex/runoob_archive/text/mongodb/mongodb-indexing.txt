@@ -1,0 +1,172 @@
+URL: https://www.runoob.com/mongodb/mongodb-indexing.html
+Title: MongoDB 索引 | 菜鸟教程
+
+MongoDB 索引 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+MongoDB 教程 
+
+MongoDB 排序 
+
+MongoDB 聚合 
+
+MongoDB 索引 
+
+索引通常能够极大的提高查询的效率，如果没有索引，MongoDB在读取数据时必须扫描集合中的每个文件并选取那些符合查询条件的记录。 
+
+这种扫描全集合的查询效率是非常低的，特别在处理大量的数据时，查询可能要花费几十秒甚至几分钟，这对网站的性能是非常致命的。 
+
+索引是特殊的数据结构，索引存储在一个易于遍历读取的数据集合中，索引是对数据库表中一列或多列的值进行排序的一种结构 
+
+在 MongoDB 中，常见的索引类型包括： 
+
+单字段索引 ：基于单个字段的索引。 
+
+复合索引 ：基于多个字段组合的索引。 
+
+文本索引 ：用于支持全文搜索。 
+
+地理空间索引 ：用于地理空间数据的查询。 
+
+哈希索引 ：用于对字段值进行哈希处理的索引。 
+
+创建索引 
+
+MongoDB 使用 createIndex() 方法来创建索引。 
+
+注意在 3.0.0 版本前创建索引方法为 db.collection.ensureIndex()，之后的版本使用了 db.collection.createIndex() 方法，ensureIndex() 还能用，但只是 createIndex() 的别名。 
+
+语法 
+
+createIndex() 方法基本语法格式如下所示： 
+
+db.collection.createIndex( keys, options ) 
+
+db ：数据库的引用。 
+
+collection ：集合的名称。 
+
+keys ：一个对象，指定了字段名和索引的排序方向（1 表示升序，-1 表示降序）。 
+
+options ：一个可选参数，可以包含索引的额外选项。 
+
+options 参数是一个对象，可以包含多种配置选项，以下是一些常用的选项： 
+
+unique ：如果设置为 true ，则创建唯一索引，确保索引字段的值在集合中是唯一的。 
+
+background ：如果设置为 true ，则索引创建过程在后台运行，不影响其他数据库操作。 
+
+name ：指定索引的名称，如果不指定，MongoDB 会根据索引的字段自动生成一个名称。 
+
+sparse ：如果设置为 true ，创建稀疏索引，只索引那些包含索引字段的文档。 
+
+expireAfterSeconds ：设置索引字段的过期时间，MongoDB 将自动删除过期的文档。 
+
+v ：索引版本，通常不需要手动设置。 
+
+weights ：为文本索引指定权重。 
+
+实例 
+
+// 创建 age 字段的升序索引 
+
+db. myCollection . createIndex ( { age : 1 } ) ; 
+
+// 创建 name 字段的文本索引 
+
+db. myCollection . createIndex ( { name : "text" } ) ; 
+
+实例 
+
+索引创建： 
+
+实例 
+
+// 创建唯一索引 
+
+db. collection . createIndex ( { field : 1 } , { unique : true } ) 
+
+// 创建后台运行的索引 
+
+db. collection . createIndex ( { field : 1 } , { background : true } ) 
+
+// 创建稀疏索引 
+
+db. collection . createIndex ( { field : 1 } , { sparse : true } ) 
+
+// 创建文本索引并指定权重 
+
+db. collection . createIndex ( { field : "text" } , { weights : { field : 10 } } ) 
+
+创建地理空间索引 
+
+对于存储地理位置数据的字段，可以使用 2dsphere 或 2d 索引类型来创建地理空间索引。 
+
+// 2dsphere 索引，适用于球形地理数据 
+
+db. collection . createIndex ( { location : "2dsphere" } ) 
+
+// 2d 索引，适用于平面地理数据 
+
+db. collection . createIndex ( { location : "2d" } ) 
+
+创建哈希索引 
+
+从 MongoDB 3.2 版本开始，可以使用哈希索引对字段进行哈希，以支持大范围的数值查找。 
+
+db.collection.createIndex( { field: "hashed" } ) 
+
+查看索引 
+
+使用 getIndexes() 方法可以查看集合中的所有索引： 
+
+db.collection.getIndexes() 
+
+删除索引 
+
+使用 dropIndex() 或 dropIndexes() 方法可以删除索引： 
+
+实例 
+
+// 删除指定的索引 
+
+db. collection . dropIndex ( "indexName" ) 
+
+// 删除所有索引 
+
+db. collection . dropIndexes ( ) 
+
+索引策略 
+
+在创建索引时，需要考虑以下因素： 
+
+查询频率 ：优先考虑那些经常用于查询的字段。 
+
+字段基数 ：字段值的基数越高（即唯一值越多），索引的效果越好。 
+
+索引大小 ：索引的大小会影响数据库的内存占用和查询性能。 
+
+索引优化 
+
+在对索引进行优化时，可以考虑以下方法： 
+
+选择合适的索引类型 ：根据查询需求选择合适的索引类型。 
+
+创建复合索引 ：对于经常一起使用的字段，考虑创建复合索引以提高查询效率。 
+
+监控索引性能 ：定期监控索引的使用情况，根据实际需求调整索引。 
+
+注意事项 
+
+索引虽然可以提高查询性能，但也会增加写操作的开销。因此，在创建索引时需要权衡查询性能和写入性能。 
+
+索引会占用额外的存储空间，特别是对于大型数据集，需要考虑索引的存储成本。 
+
+通过合理地设计和使用索引，可以大大提高 MongoDB 数据库的查询性能和响应速度，从而更好地支持应用程序的需求。 
+
+AI 思考中... 
+
+MongoDB 排序 
+
+MongoDB 聚合

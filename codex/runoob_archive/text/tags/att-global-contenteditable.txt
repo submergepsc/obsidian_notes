@@ -1,0 +1,60 @@
+URL: https://www.runoob.com/tags/att-global-contenteditable.html
+Title: HTML contenteditable 属性 | 菜鸟教程
+
+HTML contenteditable 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML class 属性 
+
+HTML contextmenu 属性 
+
+HTML contenteditable 属性 
+
+实例 
+
+可编辑段落: 
+
+<p contenteditable="true">这是一个可编辑段落。</p> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 contenteditable 属性 
+
+定义和用法 
+
+contenteditable 属性指定元素内容是否可编辑。 
+
+注意： 当元素中没有设置 contenteditable 属性时，元素将从父元素继承。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+contenteditable 属性是 HTML 新增的。 
+
+语法 
+
+< element contenteditable="true|false"> 
+
+属性值 
+
+值 
+
+描述 
+
+true 
+
+指定元素是可编辑的 
+
+false 
+
+指定元素是不可编辑的 
+
+AI 思考中... 
+
+HTML class 属性 
+
+HTML contextmenu 属性

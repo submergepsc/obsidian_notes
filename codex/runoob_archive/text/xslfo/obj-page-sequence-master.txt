@@ -1,0 +1,40 @@
+URL: https://www.runoob.com/xslfo/obj-page-sequence-master.html
+Title: XSL-FO page-sequence-master 对象 | 菜鸟教程
+
+XSL-FO page-sequence-master 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO page-sequence 对象 
+
+XSL-FO region-after 对象 
+
+XSL-FO page-sequence-master 对象 
+
+定义和用法 
+
+<fo:page-sequence-master> 对象规定要使用的 simple-page-masters 以及使用顺序。 
+
+语法 
+
+<fo:page-sequence-master> 
+<!-- 
+Contents:(single-page-master-reference| 
+repeatable-page-master-reference| 
+repeatable-page-master-alternatives)+ 
+--> 
+</fo:page-sequence-master> 
+
+属性 
+
+属性 
+
+master-name 
+
+AI 思考中... 
+
+XSL-FO page-sequence 对象 
+
+XSL-FO region-after 对象

@@ -1,0 +1,91 @@
+URL: https://www.runoob.com/tags/canvas-createradialgradient.html
+Title: HTML canvas createRadialGradient() 方法 | 菜鸟教程
+
+HTML canvas createRadialGradient() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas createPattern() 方法 
+
+HTML canvas addColorStop() 方法 
+
+HTML canvas createRadialGradient() 方法 
+
+实例 
+
+绘制一个矩形，并用放射状/圆形渐变进行填充： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var 
+ ctx=c.getContext("2d"); 
+
+var grd=ctx.createRadialGradient(75,50,5,90,60,100); 
+grd.addColorStop(0,"red"); 
+grd.addColorStop(1,"white"); 
+
+// Fill with gradient 
+ctx.fillStyle=grd; 
+ctx.fillRect(10,10,150,100); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 createRadialGradient() 
+方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+createRadialGradient() 方法创建放射状/圆形渐变对象。 
+
+渐变可用于填充矩形、圆形、线条、文本等等。 
+
+提示： 请使用该对象作为 strokeStyle 或 fillStyle 属性的值。 
+
+提示： 请使用 addColorStop() 方法规定不同的颜色，以及在 gradient 对象中的何处定位颜色。 
+
+JavaScript 语法： 
+
+context .createRadialGradient( x0,y0,r0,x1,y1,r1 ); 
+
+参数值 
+
+参数 
+
+描述 
+
+x0 
+
+渐变的开始圆的 x 坐标 
+
+y0 
+
+渐变的开始圆的 y 坐标 
+
+r0 
+
+开始圆的半径 
+
+x1 
+
+渐变的结束圆的 x 坐标 
+
+y1 
+
+渐变的结束圆的 y 坐标 
+
+r1 
+
+结束圆的半径 
+
+AI 思考中... 
+
+HTML canvas createPattern() 方法 
+
+HTML canvas addColorStop() 方法

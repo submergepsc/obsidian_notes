@@ -1,0 +1,57 @@
+URL: https://www.runoob.com/cssref/sel-lang.html
+Title: CSS :lang() 选择器 | 菜鸟教程
+
+CSS :lang() 选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS :first-child 伪元素 
+
+CSS3 element1~element2 选择器 
+
+CSS :lang 选择器 
+
+实例 
+
+每个<p>元素lang属性值等于"it(Italian)" 的选择的样式： 
+
+p:lang(it) 
+{ 
+background:yellow; 
+} 
+
+尝试一下 » 
+
+定义和用法 
+
+:lang 向带有指定 lang 属性开始的元素添加样式。 
+
+注意: 值是整个单词，单独像lang="en"，或者使用连字符(-)如lang ="en-us"。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+:lang() 
+
+4.0 
+
+8.0 
+
+2.0 
+
+3.1 
+
+9.6 
+
+注意: :lang在IE8中运行，必须声明 <!DOCTYPE> 。 
+
+AI 思考中... 
+
+CSS :first-child 伪元素 
+
+CSS3 element1~element2 选择器

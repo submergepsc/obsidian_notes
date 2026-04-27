@@ -1,0 +1,76 @@
+URL: https://www.runoob.com/vbscript/func-dateserial.html
+Title: VBScript DateSerial 函数 | 菜鸟教程
+
+VBScript DateSerial 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript DatePart 函数 
+
+VBScript DateValue 函数 
+
+VBScript DateSerial 函数 
+
+DateSerial 函数返回指定的年、月、日的子类型 Date 的 Variant 。 
+
+语法 
+
+DateSerial(year,month,day) 
+
+参数 
+
+描述 
+
+year 
+
+必需。介于 100 到 9999 的数字，或数值表达式。介于 0 到 99 的值被视为 1900–1999。对于所有其他的 year 参数，请使用完整的 4 位年份。 
+
+month 
+
+必需的。任何数值表达式。 
+
+day 
+
+必需的。任何数值表达式。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+document.write(DateSerial(2010,2,3)) 
+
+</script> 
+
+以上实例输出结果： 
+
+2/3/2010 
+
+尝试一下 » 
+
+实例 2 
+
+减去 10 天： 
+
+<script type="text/vbscript"> 
+
+document.write(DateSerial(2010,2,3-10)) 
+
+</script> 
+
+以上实例输出结果： 
+
+1/24/2010 
+
+尝试一下 » 
+
+完整的 VBScript 参考手册 
+
+AI 思考中... 
+
+VBScript DatePart 函数 
+
+VBScript DateValue 函数

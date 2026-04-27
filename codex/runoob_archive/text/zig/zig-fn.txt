@@ -1,0 +1,211 @@
+URL: https://www.runoob.com/zig/zig-fn.html
+Title: Zig 函数 | 菜鸟教程
+
+Zig 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Zig 教程 
+
+Zig 运算符 
+
+Zig 数组和切片 
+
+Zig 函数 
+
+函数是编程语言中用于组织代码和实现逻辑的重要工具。 
+
+函数是组织代码的重要工具，合理使用函数可以提高代码的可读性和复用性。 
+
+在实际编程中，可以根据需要定义各种函数来实现特定的功能。 
+
+Zig 函数通过 fn 关键字定义。 
+
+基本语法 
+
+在 Zig 中，函数定义的基本语法如下： 
+
+fn 函数名(参数列表) 返回类型 {
+ // 函数体
+} 
+
+例如，定义一个简单的函数 printHello 打印 "Hello, World!"： 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+printHello ( ) ; 
+
+} 
+
+fn printHello ( ) void { 
+
+std. debug . print ( "Hello, World! \n " , . { } ) ; 
+
+} 
+
+编译后输出内容为： 
+
+Hello, World! 
+
+参数传递 
+
+函数可以接受参数，这些参数可以是各种类型的值。 
+
+参数在函数定义时列出，并在调用时传递给函数，例如： 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+greet ( "Alice" ) ; 
+
+} 
+
+fn greet ( name : [ ] const u8 ) void { 
+
+std. debug . print ( "Hello, {s}! \n " , . { name } ) ; // 使用 {s} 格式符来打印字符串切片 
+
+} 
+
+编译后输出内容为： 
+
+Hello, Alice! 
+
+返回值 
+
+函数可以返回值，返回类型在函数定义中指定，使用 return 关键字。 
+
+例如，定义一个计算两个整数和的函数： 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const result = add ( 3 , 5 ) ; 
+
+std. debug . print ( "3 + 5 = {} \n " , . { result } ) ; 
+
+} 
+
+fn add ( a : i32, b : i32 ) i32 { 
+
+return a + b ; 
+
+} 
+
+编译后输出内容为： 
+
+3 + 5 = 8 
+
+递归 
+
+函数可以调用自身，即递归调用。 
+
+例如，定义一个计算阶乘的递归函数： 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const result = factorial ( 5 ) ; 
+
+std. debug . print ( "5! = {} \n " , . { result } ) ; 
+
+} 
+
+fn factorial ( n : i32 ) i32 { 
+
+if ( n == 0 ) { 
+
+return 1 ; 
+
+} else { 
+
+return n * factorial ( n - 1 ) ; 
+
+} 
+
+} 
+
+编译后输出内容为： 
+
+5! = 120 
+
+函数重载 
+
+Zig 不支持传统意义上的函数重载（即同名但参数不同的多个函数）。 
+
+Zig 提供了泛型函数的功能，通过使用编译时常量参数，可以实现类似于函数重载的效果，例如： 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+printValue ( i32, 5 ) ; // 显式指定类型为 i32 
+
+printValue ( [ ] const u8, "Hello" ) ; // 显式指定类型为 []const u8 
+
+} 
+
+fn printValue ( comptime T : type, value : T ) void { 
+
+std. debug . print ( "{any} \n " , . { value } ) ; // 使用 {any} 来处理不同类型的值 
+
+} 
+
+在这个例子中，printValue 函数可以接受任何类型的参数，并根据参数类型进行打印。 
+
+编译后输出内容为： 
+
+5
+{ 72, 101, 108, 108, 111 } 
+
+内联函数 
+
+内联函数是指在编译时将函数的代码直接插入到调用点，从而避免函数调用的开销。 
+
+在 Zig 中，可以使用 inline 关键字定义内联函数，例如： 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+// 定义一个内联函数 
+
+inline fn square ( x : i32 ) i32 { 
+
+return x * x ; 
+
+} 
+
+pub fn main ( ) void { 
+
+const result = square ( 5 ) ; // 在调用点插入内联函数代码 
+
+std. debug . print ( "Square of 5 is {} \n " , . { result } ) ; 
+
+} 
+
+在这个例子中，square 函数被定义为内联函数，编译器会将其代码直接插入到调用点。 
+
+编译后输出内容为： 
+
+Square of 5 is 25 
+
+AI 思考中... 
+
+Zig 运算符 
+
+Zig 数组和切片

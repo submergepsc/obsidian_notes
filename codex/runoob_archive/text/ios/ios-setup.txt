@@ -1,0 +1,58 @@
+URL: https://www.runoob.com/ios/ios-setup.html
+Title: iOS环境搭建 | 菜鸟教程
+
+iOS环境搭建 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+iOS 教程 
+
+iOS 简介 
+
+Objective C 基础知识 
+
+iOS Xcode 安装 
+
+1、从 https://developer.apple.com/downloads/ 下载Xcode的最新版本。 
+
+2、双击Xcode dmg文件 
+
+3、将找到的设备安装和打开 
+
+4、在这里会有两个项目在显示的窗口中即Xcode应用程序和应用程序文件夹的快捷方式 
+
+5、将Xcode拖拽并复制到应用程序 
+
+6、在应用里选择和运行程序，Xcode也将成为运行程序中的一部分 
+
+还可以从Mac App store里下载Xcode，并按照屏幕上的安装步 
+
+界面生成器（Interface Builder） 
+
+利用界面生成器这一工具，能很容易的创建UI界面。 
+
+可利用一系列的UI元素，拖拽进入UI可视界面。 
+
+我们将在接下来的页面了解添加用户界面元素，创建零售商和UI元素的操作。 
+
+在对象库的下方包含有全部必要的UI元素。用户界面通常称为xibs，这是他们的文件扩展名。 
+
+每个xibs都链接到相应的视图控制器。 
+
+iOS模拟器 
+
+iOS模拟器实际上包含两种类型的设备即iPhone和iPad及其不同的版本。 
+
+iPhone版本包括iPhone（常规版）、iPhone Retina，iPhone5,iPhone53。 
+
+Ipad有iPad和iPad Retina。iPhone模拟器显示如下: 
+
+你可以在经度和纬度影响应用程序的位置的情况下运行iOS模拟器，也可以模拟内存警告和呼叫在模拟器中的状态。 
+
+能够多数目的使用模拟器，但不能测试像加速度计这样的设备的功能。因此你可能需要iOS设备来测试一个应用程序的所有方面。 
+
+AI 思考中... 
+
+iOS 简介 
+
+Objective C 基础知识

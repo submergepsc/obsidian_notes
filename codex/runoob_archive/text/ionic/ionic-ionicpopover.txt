@@ -1,0 +1,76 @@
+URL: https://www.runoob.com/ionic/ionic-ionicpopover.html
+Title: ionic 浮动框 | 菜鸟教程
+
+ionic 浮动框 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+ionic 教程 
+
+ionic 平台 
+
+ionic 对话框 
+
+ionic 浮动框 
+
+$ionicPopover 
+
+$ionicPopover 是一个可以浮在app内容上的一个视图框。 
+
+可以实现以下功能点： 
+
+在当前页面显示更多信息。 
+
+选择一些工具或配置。 
+
+在页面提供一个操作列表。 
+
+方法 
+
+fromTemplate(templateString, options)
+或
+fromTemplateUrl(templateUrl, options) 
+
+参数说明： 
+
+templateString: 模板字符串。 
+
+templateUrl: 载入的模板 URL。 
+
+options: 初始化选项。 
+
+实例 
+
+HTML 代码部分 
+
+< p > < button ng-click = " openPopover($event) " > 打开浮动框 </ button > </ p > < script id = " my-popover.html " type = " text/ng-template " > < ion-popover-view > < ion-header-bar > < h1 class = " title " > 我的浮动框标题 </ h1 > </ ion-header-bar > < ion-content > Hello! </ ion-content > </ ion-popover-view > </ script > 
+
+fromTemplateUrl 方法 
+
+angular . module ( ' ionicApp ' , [ ' ionic ' ] ) . controller ( ' AppCtrl ' , [ ' $scope ' , ' $ionicPopover ' , ' $timeout ' , function ( $ scope ,$ ionicPopover ,$ timeout ) { $ scope . popover = $ ionicPopover . fromTemplateUrl ( ' my-popover.html ' , { scope : $ scope } ) ; $ ionicPopover . fromTemplateUrl ( ' my-popover.html ' , { scope : $ scope } ) . then ( function ( popover ) { $ scope . popover = popover ; } ) ;
+ 
+ 
+ $ scope . openPopover = function ( $ event ) { $ scope . popover . show ( $ event ) ; } ;
+ $ scope . closePopover = function ( ) { $ scope . popover . hide ( ) ; } ; $ scope .$ on ( ' $destroy ' , function ( ) { $ scope . popover . remove ( ) ; } ) ; $ scope .$ on ( ' popover.hidden ' , function ( ) { } ) ; $ scope .$ on ( ' popover.removed ' , function ( ) { } ) ; } ] ) 
+
+尝试一下 » 
+
+我们也可以把模板当作一个字符串，使用 .fromTemplate() 方法来实现弹框: 
+
+fromTemplate 方法 
+
+angular . module ( ' ionicApp ' , [ ' ionic ' ] ) . controller ( ' AppCtrl ' , [ ' $scope ' , ' $ionicPopover ' , ' $timeout ' , function ( $ scope ,$ ionicPopover ,$ timeout ) { $ scope . popover = $ ionicPopover . fromTemplateUrl ( ' my-popover.html ' , { scope : $ scope } ) ; var template = ' <ion-popover-view><ion-header-bar> <h1 class="title">我的浮动框标题</h1> </ion-header-bar> <ion-content> Hello! </ion-content></ion-popover-view> ' ;
+ $ scope . popover = $ ionicPopover . fromTemplate ( template , { scope : $ scope } ) ;
+ 
+ 
+ 
+ $ scope . openPopover = function ( $ event ) { $ scope . popover . show ( $ event ) ; } ;
+ $ scope . closePopover = function ( ) { $ scope . popover . hide ( ) ; } ; $ scope .$ on ( ' $destroy ' , function ( ) { $ scope . popover . remove ( ) ; } ) ; $ scope .$ on ( ' popover.hidden ' , function ( ) { } ) ; $ scope .$ on ( ' popover.removed ' , function ( ) { } ) ; } ] ) 
+
+尝试一下 » 
+
+AI 思考中... 
+
+ionic 平台 
+
+ionic 对话框

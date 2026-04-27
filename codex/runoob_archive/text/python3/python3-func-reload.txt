@@ -1,0 +1,108 @@
+URL: https://www.runoob.com/python3/python3-func-reload.html
+Title: Python3 reload() 函数 | 菜鸟教程
+
+Python3 reload() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python 推导式 
+
+Python 简单的银行系统 
+
+Python3 reload() 函数 
+
+描述 
+
+reload() 用于重新载入之前载入的模块。 
+
+在 Python2.x 版本中 reload() 是内置函数，可以直接使用，参见 Python2.x reload() 函数 。在 Python2.x ~ Python3.3 版本移到 imp 包中(Python2.x 也可以导入 imp 包使用)，Python3.4 之后到版本移到了 importlib 包中。 
+
+语法 
+
+Python2.x ~ Python3.3 之前版本： 
+
+import imp
+imp.reload(module) 
+
+或 
+
+from imp import reload
+reload(module) 
+
+Python3.4 之后到版本 ： 
+
+import importlib
+importlib.reload(module) 
+
+或 
+
+from importlib import reload
+reload(module) 
+
+参数 
+
+module -- 模块对象。 
+
+返回值 
+
+返回模块对象。 
+
+实例 
+
+以下实例展示了 reload() 的使用方法。 
+
+实例 1 
+
+重新载入 sys 模块 
+
+>>> import sys , importlib 
+
+>>> importlib. reload ( sys ) 
+
+< module 'sys' ( built- in ) > 
+
+实例 2 
+
+首先我们在当前目录下创建一个 runoob.py : 
+
+runoob.py 文件 
+
+site = " RUNOOB " 
+
+在当前目录下启动 Python 交互式命令窗口： 
+
+实例 
+
+>>> import runoob >>> runoob . site ' RUNOOB ' 
+
+然后在另外一个窗口编辑 runoob.py 文件（不要关闭以上的 Python 交互式命令窗口），修改为以下代码： 
+
+修改后的 runoob.py 文件 
+
+site = " GOOGLE " 
+
+然后回到 Python 交互式命令窗口： 
+
+实例 
+
+>>> runoob. site # 输出结果没有变化 
+
+'RUNOOB' 
+
+>>> from importlib import reload # Python 3.4+ 
+
+>>> reload ( runoob ) # 重新载入修改后的 runoob.py 文件 
+
+< module 'runoob' from '/Users/RUNOOB/runoob-test/runoob.py' > 
+
+>>> runoob. site # 输出结果正常了 
+
+'GOOGLE' 
+
+AI 思考中... 
+
+Python 推导式 
+
+Python 简单的银行系统

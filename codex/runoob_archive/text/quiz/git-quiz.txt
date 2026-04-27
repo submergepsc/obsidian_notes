@@ -1,0 +1,32 @@
+URL: https://www.runoob.com/quiz/git-quiz.html
+Title: Git 测验 | 菜鸟教程
+
+Git 测验 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Git 教程 
+
+git push 命令 
+
+C 语言测验 
+
+Git 测验 
+
+测验完成！ 
+
+0/0 
+
+重新开始 
+
+上一题 下一题 
+
+其他相关测试 
+
+1. Git 测验一 2. Git 测验二 3. Git 测验三 
+
+AI 思考中... 
+
+git push 命令 
+
+C 语言测验

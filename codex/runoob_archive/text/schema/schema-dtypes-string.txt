@@ -1,0 +1,146 @@
+URL: https://www.runoob.com/schema/schema-dtypes-string.html
+Title: XML Schema 字符串数据类型 | 菜鸟教程
+
+XML Schema 字符串数据类型 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema 实例 
+
+XML Schema 日期/时间 数据类型 
+
+XSD 字符串 数据类型 
+
+字符串数据类型用于可包含字符串的值。 
+
+字符串数据类型（String Data Type） 
+
+字符串数据类型可包含字符、换行、回车以及制表符。 
+
+下面是一个关于某个 scheme 中字符串声明的例子： 
+
+<xs:element name="customer" type="xs:string"/> 
+
+文档中的元素看上去应该类似这样： 
+
+<customer>John Smith</customer> 
+
+或者类似这样： 
+
+<customer> John Smith </customer> 
+
+注意： 如果您使用字符串数据类型，XML 处理器就不会更改其中的值。 
+
+规格化字符串数据类型（NormalizedString Data Type） 
+
+规格化字符串数据类型源自于字符串数据类型。 
+
+规格化字符串数据类型同样可包含字符，但是 XML 处理器会移除折行，回车以及制表符。 
+
+下面是一个关于在某个 schema 中规格化字符串数据类型的例子： 
+
+<xs:element name="customer" type="xs:normalizedString"/> 
+
+文档中的元素看上去应该类似这样： 
+
+<customer>John Smith</customer> 
+
+或者类似这样： 
+
+<customer> John Smith </customer> 
+
+注意： 在上面的例子中，XML 处理器会使用空格替换所有的制表符。 
+
+Token 数据类型（Token Data Type） 
+
+Token 数据类型同样源自于字符串数据类型。 
+
+Token 数据类型同样可包含字符，但是 XML 处理器会移除换行符、回车、制表符、开头和结尾的空格以及（连续的）空格。 
+
+下面是在 schema 中一个有关 token 声明的例子： 
+
+<xs:element name="customer" type="xs:token"/> 
+
+文档中的元素看上去应该类似这样： 
+
+<customer>John Smith</customer> 
+
+或者类似这样： 
+
+<customer> John Smith </customer> 
+
+注意： >在上面这个例子中，XML 解析器会移除制表符。 
+
+字符串数据类型 
+
+请注意，所有以下的数据类型均衍生于字符串数据类型（除了字符串数据类型本身）！ 
+
+名称 
+
+描述 
+
+ENTITIES 
+
+ENTITY 
+
+ID 
+
+在 XML 中提交 ID 属性的字符串 (仅与 schema 属性一同使用) 
+
+IDREF 
+
+在 XML 中提交 IDREF 属性的字符串(仅与 schema 属性一同使用) 
+
+IDREFS language 
+
+包含合法的语言 id 的字符串 
+
+Name 
+
+包含合法 XML 名称的字符串 
+
+NCName 
+
+NMTOKEN 
+
+在 XML 中提交 NMTOKEN 属性的字符串 (仅与 schema 属性一同使用) 
+
+NMTOKENS 
+
+normalizedString 
+
+不包含换行符、回车或制表符的字符串 
+
+QName 
+
+string 
+
+字符串 
+
+token 
+
+不包含换行符、回车或制表符、开头或结尾空格或者多个连续空格的字符串 
+
+对字符串数据类型的限定（Restriction） 
+
+可与字符串数据类型一同使用的限定： 
+
+enumeration 
+
+length 
+
+maxLength 
+
+minLength 
+
+pattern (NMTOKENS、IDREFS 以及 ENTITIES 无法使用此约束) 
+
+whiteSpace 
+
+AI 思考中... 
+
+XML Schema 实例 
+
+XML Schema 日期/时间 数据类型

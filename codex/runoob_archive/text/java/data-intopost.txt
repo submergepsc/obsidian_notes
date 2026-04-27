@@ -1,0 +1,31 @@
+URL: https://www.runoob.com/java/data-intopost.html
+Title: Java 实例 – 利用堆栈将中缀表达式转换成后缀表达式 | 菜鸟教程
+
+Java 实例 – 利用堆栈将中缀表达式转换成后缀表达式 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 在链表（LinkedList）的开头和结尾添加元素 
+
+Java 实例 – 队列（Queue）用法 
+
+Java 实例 - 利用堆栈将中缀表达式转换成后缀表达式 
+
+以下实例演示了如何使用堆栈进行表达式的堆栈将中缀（Infix）表达式转换成后缀（postfix）表达式： 
+
+InToPost.java 文件 
+
+import java . io . IOException ; public class InToPost { private Stack theStack ; private String input ; private String output = " " ; public InToPost ( String in ) { input = in ; int stackSize = input . length ( ) ; theStack = new Stack ( stackSize ) ; } public String doTrans ( ) { for ( int j = 0 ; j < input . length ( ) ; j ++ ) { char ch = input . charAt ( j ) ; switch ( ch ) { case ' + ' : case ' - ' : gotOper ( ch , 1 ) ; break ; case ' * ' : case ' / ' : gotOper ( ch , 2 ) ; break ; case ' ( ' : theStack . push ( ch ) ; break ; case ' ) ' : gotParen ( ch ) ; break ; default : output = output + ch ; break ; } } while ( ! theStack . isEmpty ( ) ) { output = output + theStack . pop ( ) ; } System . out . println ( output ) ; return output ; } public void gotOper ( char opThis , int prec1 ) { while ( ! theStack . isEmpty ( ) ) { char opTop = theStack . pop ( ) ; if ( opTop == ' ( ' ) { theStack . push ( opTop ) ; break ; } else { int prec2 ; if ( opTop == ' + ' || opTop == ' - ' ) prec2 = 1 ; else prec2 = 2 ; if ( prec2 < prec1 ) { theStack . push ( opTop ) ; break ; } else output = output + opTop ; } } theStack . push ( opThis ) ; } public void gotParen ( char ch ) { while ( ! theStack . isEmpty ( ) ) { char chx = theStack . pop ( ) ; if ( chx == ' ( ' ) break ; else output = output + chx ; } } public static void main ( String [ ] args ) throws IOException { String input = " 1+2*4/5-7+3/6 " ; String output ; InToPost theTrans = new InToPost ( input ) ; output = theTrans . doTrans ( ) ; System . out . println ( " Postfix is " + output + ' \n ' ) ; } class Stack { private int maxSize ; private char [ ] stackArray ; private int top ; public Stack ( int max ) { maxSize = max ; stackArray = new char [ maxSize ] ; top = - 1 ; } public void push ( char j ) { stackArray [ ++ top ] = j ; } public char pop ( ) { return stackArray [ top -- ] ; } public char peek ( ) { return stackArray [ top ] ; } public boolean isEmpty ( ) { return ( top == - 1 ) ; } } } 
+
+以上代码运行输出结果为： 
+
+124*5/+7-36/+
+Postfix is 124*5/+7-36/+ 
+
+AI 思考中... 
+
+Java 实例 – 在链表（LinkedList）的开头和结尾添加元素 
+
+Java 实例 – 队列（Queue）用法

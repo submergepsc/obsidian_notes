@@ -1,0 +1,50 @@
+URL: https://www.runoob.com/react/react-ref-shouldcomponentupdate.html
+Title: React shouldComponentUpdate() 方法 | 菜鸟教程
+
+React shouldComponentUpdate() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+React 教程 
+
+React componentDidMount() 方法 
+
+React getSnapshotBeforeUpdate() 方法 
+
+React shouldComponentUpdate() 方法 
+
+shouldComponentUpdate() 方法格式如下： 
+
+shouldComponentUpdate(nextProps, nextState) 
+
+shouldComponentUpdate() 方法会返回一个布尔值，指定 React 是否应该继续渲染，默认值是 true ， 即 state 每次发生变化组件都会重新渲染。 
+
+shouldComponentUpdate() 的返回值用于判断 React 组件的输出是否受当前 state 或 props 更改的影响，当 props 或 state 发生变化时，shouldComponentUpdate() 会在渲染执行之前被调用。 
+
+以下实例演示了 shouldComponentUpdate() 方法返回 false 时执行的操作（点击按钮无法修改）： 
+
+实例 
+
+class Header extends React . Component { constructor ( props ) { super ( props ) ; this . state = { favoritesite : " runoob " } ; } shouldComponentUpdate ( ) { return false ; } changeSite = ( ) => { this . setState ( { favoritesite : " google " } ) ; } render ( ) { return ( < div >
+ < h1 >我喜欢的网站是 { this . state . favoritesite } </ h1 >
+ < button type = " button " onClick = { this . changeSite } >修改</ button >
+ </ div > ) ; } } 
+
+尝试一下 » 
+
+以下实例演示了 shouldComponentUpdate() 方法返回 true 时执行的操作（点击按钮可以修改）： 
+
+实例 
+
+class Header extends React . Component { constructor ( props ) { super ( props ) ; this . state = { favoritesite : " runoob " } ; } shouldComponentUpdate ( ) { return true ; } changeSite = ( ) => { this . setState ( { favoritesite : " google " } ) ; } render ( ) { return ( < div >
+ < h1 >我喜欢的网站是 { this . state . favoritesite } </ h1 >
+ < button type = " button " onClick = { this . changeSite } >修改</ button >
+ </ div > ) ; } } 
+
+尝试一下 » 
+
+AI 思考中... 
+
+React componentDidMount() 方法 
+
+React getSnapshotBeforeUpdate() 方法

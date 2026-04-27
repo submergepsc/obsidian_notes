@@ -1,0 +1,262 @@
+URL: https://www.runoob.com/django/django-middleware.html
+Title: Django 中间件 | 菜鸟教程
+
+Django 中间件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Django 教程 
+
+Django cookie 与 session 
+
+Django 视图 – FBV 与 CBV 
+
+Django 中间件 
+
+Django 中间件是修改 Django request 或者 response 对象的钩子，可以理解为是介于 HttpRequest 与 HttpResponse 处理之间的一道处理过程。 
+
+浏览器从请求到响应的过程中，Django 需要通过很多中间件来处理，可以看如下图所示： 
+
+Django 中间件作用： 
+
+修改请求，即传送到 view 中的 HttpRequest 对象。 
+
+修改响应，即 view 返回的 HttpResponse 对象。 
+
+中间件组件配置在 settings.py 文件的 MIDDLEWARE 选项列表中。 
+
+配置中的每个字符串选项都是一个类，也就是一个中间件。 
+
+Django 默认的中间件配置： 
+
+MIDDLEWARE = [ 
+
+'django.middleware.security.SecurityMiddleware' , 
+
+'django.contrib.sessions.middleware.SessionMiddleware' , 
+
+'django.middleware.common.CommonMiddleware' , 
+
+'django.middleware.csrf.CsrfViewMiddleware' , 
+
+'django.contrib.auth.middleware.AuthenticationMiddleware' , 
+
+'django.contrib.messages.middleware.MessageMiddleware' , 
+
+'django.middleware.clickjacking.XFrameOptionsMiddleware' , 
+
+] 
+
+自定义中间件 
+
+中间件可以定义四个方法，分别是： 
+
+process_request ( self , request ) 
+
+process_view ( self , request , view_func , view_args , view_kwargs ) 
+
+process_exception ( self , request , exception ) 
+
+process_response ( self , request , response ) 
+
+自定义中间件的步骤： 
+
+在 app 目录下新建一个 py 文件，名字自定义，并在该 py 文件中导入 MiddlewareMixin： 
+
+from django.utils.deprecation import MiddlewareMixin 
+
+自定义的中间件类，要继承父类 MiddlewareMixin: 
+
+class MD1(MiddlewareMixin): 
+ pass 
+
+在 settings.py 中的 MIDDLEWARE 里注册自定义的中间件类: 
+
+MIDDLEWARE = [ 
+
+'django.middleware.security.SecurityMiddleware' , 
+
+'django.contrib.sessions.middleware.SessionMiddleware' , 
+
+'django.middleware.common.CommonMiddleware' , 
+
+'django.middleware.csrf.CsrfViewMiddleware' , 
+
+'django.contrib.auth.middleware.AuthenticationMiddleware' , 
+
+'django.contrib.messages.middleware.MessageMiddleware' , 
+
+'django.middleware.clickjacking.XFrameOptionsMiddleware' , 
+
+'app01.middlewares.MD1' , 
+
+] 
+
+自定义中间件类的方法 
+
+自定义中间件类的方法有：process_request 和 process_response。 
+
+process_request 方法 
+
+process_request 方法有一个参数 request，这个 request 和视图函数中的 request 是一样的。 
+
+process_request 方法的返回值可以是 None 也可以是 HttpResponse 对象。 
+
+返回值是 None 的话，按正常流程继续走，交给下一个中间件处理。 
+
+返回值是 HttpResponse 对象，Django 将不执行后续视图函数之前执行的方法以及视图函数，直接以该中间件为起点，倒序执行中间件，且执行的是视图函数之后执行的方法。 
+
+process_request 方法是在视图函数之前执行的。 
+
+当配置多个中间件时，会按照 MIDDLEWARE中 的注册顺序，也就是列表的索引值，顺序执行。 
+
+不同中间件之间传递的 request 参数都是同一个请求对象。 
+
+实例 
+
+from django. utils . deprecation import MiddlewareMixin 
+
+from django. shortcuts import render , HttpResponse 
+
+class MD1 ( MiddlewareMixin ) : 
+
+def process_request ( self , request ) : 
+
+print ( "md1 process_request 方法。" , id ( request ) ) #在视图之前执行 
+
+process_response 
+
+process_response 方法有两个参数，一个是 request，一个是 response，request 是请求对象，response 是视图函数返回的 HttpResponse 对象，该方法必须要有返回值，且必须是response。 
+
+process_response 方法是在视图函数之后执行的。 
+
+当配置多个中间件时，会按照 MIDDLEWARE 中的注册顺序，也就是列表的索引值，倒序执行。 
+
+实例 
+
+class MD1 ( MiddlewareMixin ) : 
+
+def process_request ( self , request ) : 
+
+print ( "md1 process_request 方法。" , id ( request ) ) #在视图之前执行 
+
+def process_response ( self , request , response ) : : #基于请求响应 
+
+print ( "md1 process_response 方法！" , id ( request ) ) #在视图之后 
+
+return response 
+
+从下图看，正常的情况下按照绿色的路线进行执行,假设 中间件1 有返回值，则按照红色的路线走，直接执行该类下的 process_response 方法返回，后面的其他中间件就不会执行。 
+
+process_view 
+
+process_view 方法格式如下： 
+
+process_view(request, view_func, view_args, view_kwargs) 
+
+process_view 方法有四个参数： 
+
+request 是 HttpRequest 对象。 
+
+view_func 是 Django 即将使用的视图函数。 
+
+view_args 是将传递给视图的位置参数的列表。 
+
+view_kwargs 是将传递给视图的关键字参数的字典。 
+
+view_args 和 view_kwargs 都不包含第一个视图参数（request）。 
+
+process_view 方法是在视图函数之前，process_request 方法之后执行的。 
+
+返回值可以是 None、view_func(request) 或 HttpResponse 对象。 
+
+返回值是 None 的话，按正常流程继续走，交给下一个中间件处理。 
+
+返回值是 HttpResponse 对象，Django 将不执行后续视图函数之前执行的方法以及视图函数，直接以该中间件为起点，倒序执行中间件，且执行的是视图函数之后执行的方法。 
+
+c.返回值是 view_func(request)，Django 将不执行后续视图函数之前执行的方法，提前执行视图函数，然后再倒序执行视图函数之后执行的方法。 
+
+当最后一个中间件的 process_request 到达路由关系映射之后，返回到第一个中间件 process_view，然后依次往下，到达视图函数。 
+
+实例 
+
+class MD1 ( MiddlewareMixin ) : 
+
+def process_request ( self , request ) : 
+
+print ( "md1 process_request 方法。" , id ( request ) ) #在视图之前执行 
+
+def process_response ( self , request , response ) : : #基于请求响应 
+
+print ( "md1 process_response 方法！" , id ( request ) ) #在视图之后 
+
+return response 
+
+def process_view ( self , request , view_func , view_args , view_kwargs ) : 
+
+print ( "md1 process_view 方法！" ) #在视图之前执行 顺序执行 
+
+#return view_func(request) 
+
+process_exception 
+
+process_exception 方法如下： 
+
+process_exception(request, exception) 
+
+参数说明： 
+
+request 是 HttpRequest 对象。 
+
+exception 是视图函数异常产生的 Exception 对象。 
+
+process_exception 方法只有在视图函数中出现异常了才执行，按照 settings 的注册倒序执行。 
+
+在视图函数之后，在 process_response 方法之前执行。 
+
+process_exception 方法的返回值可以是一个 None 也可以是一个 HttpResponse 对象。 
+
+返回值是 None，页面会报 500 状态码错误，视图函数不会执行。 
+
+process_exception 方法倒序执行，然后再倒序执行 process_response 方法。 
+
+返回值是 HttpResponse 对象，页面不会报错，返回状态码为 200。 
+
+视图函数不执行，该中间件后续的 process_exception 方法也不执行，直接从最后一个中间件的 process_response 方法倒序开始执行。 
+
+若是 process_view 方法返回视图函数，提前执行了视图函数，且视图函数报错，则无论 process_exception 方法的返回值是什么，页面都会报错，
+且视图函数和 process_exception 方法都不执行。 
+
+直接从最后一个中间件的 process_response 方法开始倒序执行： 
+
+实例 
+
+class MD1 ( MiddlewareMixin ) : 
+
+def process_request ( self , request ) : 
+
+print ( "md1 process_request 方法。" , id ( request ) ) #在视图之前执行 
+
+def process_response ( self , request , response ) : : #基于请求响应 
+
+print ( "md1 process_response 方法！" , id ( request ) ) #在视图之后 
+
+return response 
+
+def process_view ( self , request , view_func , view_args , view_kwargs ) : 
+
+print ( "md1 process_view 方法！" ) #在视图之前执行 顺序执行 
+
+#return view_func(request) 
+
+def process_exception ( self , request , exception ) : #引发错误 才会触发这个方法 
+
+print ( "md1 process_exception 方法！" ) 
+
+# return HttpResponse(exception) #返回错误信息 
+
+AI 思考中... 
+
+Django cookie 与 session 
+
+Django 视图 – FBV 与 CBV

@@ -1,0 +1,164 @@
+URL: https://www.runoob.com/nextjs/nextjs-getdata.html
+Title: Next.js 数据获取 | 菜鸟教程
+
+Next.js 数据获取 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Next.js 教程 
+
+Next.js 页面和路由 
+
+Next.js CSS 样式 
+
+Next.js 数据获取 
+
+Next.js 提供了多种数据获取方式，允许你在不同的渲染阶段（例如，服务器端渲染、静态生成和客户端渲染）获取和展示数据。 
+
+客户端数据获取 
+
+有时你希望在页面加载后从客户端获取数据，而不是在构建时或服务器端获取，你可以使用 React 的 useEffect 钩子来处理客户端数据获取。 
+
+使用 useEffect 和 fetch 
+
+在 React 组件中使用 useEffect 钩子和 fetch API 获取数据。 
+
+useEffect 会在组件挂载后执行，可以在其中发起 API 请求并更新状态。 
+
+app/posts/page.tsx 文件代码： 
+
+// app/posts/page.tsx 
+
+'use client' ; 
+
+import { useEffect , useState } from 'react' ; 
+
+export default function PostsPage ( ) { 
+
+const [ posts , setPosts ] = useState ( [ ] ) ; 
+
+useEffect ( ( ) => { 
+
+const fetchPosts = async ( ) => { 
+
+const res = await fetch ( 'https://jsonplaceholder.typicode.com/posts' ) ; 
+
+const data = await res. json ( ) ; 
+
+setPosts ( data ) ; 
+
+} ; 
+
+fetchPosts ( ) ; 
+
+} , [ ] ) ; 
+
+return ( 
+
+< div > 
+
+< h1 > RUNOOB 测试 </ h1 > 
+
+< ul > 
+
+{ posts. map ( post => ( 
+
+< li key = { post. id } > { post. title } </ li > 
+
+) ) } 
+
+</ ul > 
+
+</ div > 
+
+) ; 
+
+} 
+
+访问 http://localhost:3000/posts，显示结构如下： 
+
+useEffect 会在客户端渲染后执行，适用于客户端渲染的数据。 
+
+在客户端获取数据，适合不需要在服务端渲染的内容。 
+
+可以根据用户交互或时间等因素动态获取数据。 
+
+使用场景： 
+
+动态加载的数据，比如无限滚动或分页。 
+
+用户操作后才获取的数据，比如点击按钮后获取数据。 
+
+服务端数据获取 
+
+服务端数据可以使用以下方式获取数据： 
+
+fetch API 
+
+ORM 或数据库 
+
+使用 fetch API 
+
+要使用 fetch API 获取数据，需要将你的组件转换为异步函数，并使用 await 来等待 fetch 调用。示例如下： 
+
+app/posts/page.tsx 文件代码： 
+
+// app/posts/page.tsx 
+
+export default async function Page ( ) { 
+
+const data = await fetch ( 'https://jsonplaceholder.typicode.com/posts' ) 
+
+const posts = await data. json ( ) 
+
+return ( 
+
+< ul > 
+
+{ posts. map ( ( post ) => ( 
+
+< li key = { post. id } > { post. title } </ li > 
+
+) ) } 
+
+</ ul > 
+
+) 
+
+} 
+
+使用 ORM 或数据库 
+
+你也可以通过 ORM 或数据库来获取数据，只需将组件转换为异步函数，并等待数据库调用： 
+
+app/posts/page.tsx 文件代码： 
+
+// app/posts/page.tsx 
+
+import { db , posts } from '@/lib/db' 
+
+export default async function Page ( ) { 
+
+const allPosts = await db. select ( ) . from ( posts ) 
+
+return ( 
+
+< ul > 
+
+{ allPosts. map ( ( post ) => ( 
+
+< li key = { post. id } > { post. title } </ li > 
+
+) ) } 
+
+</ ul > 
+
+) 
+
+} 
+
+AI 思考中... 
+
+Next.js 页面和路由 
+
+Next.js CSS 样式

@@ -1,0 +1,110 @@
+URL: https://www.runoob.com/vbscript/func-weekdayname.html
+Title: VBScript WeekdayName 函数 | 菜鸟教程
+
+VBScript WeekdayName 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Weekday 函数 
+
+VBScript Year 函数 
+
+VBScript WeekdayName 函数 
+
+WeekdayName 函数返回一周中指定的一天的星期名。 
+
+语法 
+
+WeekdayName(weekday[,abbreviate[,firstdayofweek]]) 
+
+参数 
+
+描述 
+
+weekday 
+
+必需。一周的第几天的数字。 
+
+abbreviate 
+
+可选。布尔值，指示是否缩写星期名。 
+
+firstdayofweek 
+
+可选。规定一周的第一天。 
+
+可采用下面的值： 
+
+0 = vbUseSystemDayOfWeek - 使用区域语言支持（NLS）API 设置 
+
+1 = vbSunday - 星期日（默认） 
+
+2 = vbMonday - 星期一 
+
+3 = vbTuesday - 星期二 
+
+4 = vbWednesday - 星期三 
+
+5 = vbThursday - 星期四 
+
+6 = vbFriday - 星期五 
+
+7 = vbSaturday - 星期六 
+
+实例 
+
+实例 1 
+
+获取一周的第 3 天的名称： 
+
+<script type="text/vbscript"> 
+
+document.write(WeekdayName(3)) 
+
+</script> 
+
+以上实例输出结果： 
+
+Tuesday 
+
+尝试一下 » 
+
+实例 2 
+
+获取一周的第 3 天的简称： 
+
+<script type="text/vbscript"> 
+
+document.write(WeekdayName(3,True)) 
+
+</script> 
+
+以上实例输出结果： 
+
+Tue 
+
+尝试一下 » 
+
+实例 3 
+
+获取一周的第 3 天的名称，一周的第一天是星期一： 
+
+<script type="text/vbscript"> 
+
+document.write(WeekdayName(3,False,2)) 
+
+</script> 
+
+以上实例输出结果： 
+
+Wednesday 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Weekday 函数 
+
+VBScript Year 函数

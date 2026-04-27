@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/ado/ado-tutorial.html
+Title: ADO 教程 | 菜鸟教程
+
+ADO 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+ADO 教程 
+
+ADO 简介 
+
+ADO 教程 
+
+ADO 是一项微软的技术, ADO 指 ActiveX 数据对象（ActiveX Data Objects）。 
+
+在我们的 ADO 教程中，您将学到有关 ADO 的知识，以及如何使用 ADO 从您的网站访问数据库。 
+
+现在开始学习 ADO! 
+
+在菜鸟教程，我们为您提供完整的 ADO 参考手册，其中包括内建对象，以及它们的属性和方法。 
+
+ADO 对象参考手册 
+
+通过实例来学习！因为 ASP 脚本只能在服务器端执行，所以你无法在浏览器中查看 ASP 代码，你能看到的仅仅是由 ASP 输出的纯粹的 HTML 代码。 
+
+ADO 实例! 
+
+AI 思考中... 
+
+ADO 简介

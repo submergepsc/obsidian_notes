@@ -1,0 +1,82 @@
+URL: https://www.runoob.com/ios/ios-accelerometer.html
+Title: iOS加速度传感器(accelerometer) | 菜鸟教程
+
+iOS加速度传感器(accelerometer) | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+iOS 教程 
+
+iOS图标(Icons) 
+
+iOS通用应用程序 
+
+IOS加速度传感器(accelerometer) 
+
+简介 
+
+加速度传感器是根据x、y和z三个方向来检测在设备位置的改变。 
+
+通过加速度传感器可以知道当前设备相对于地面的位置。 
+
+以下实例代码需要在真实设备上运行，在模拟器上是无法工作的。 
+
+实例步骤 
+
+1、创建一个简单的视图应用程序 
+
+2、在ViewController.xib中添加三个标签，并创建一个ibOutlets分别为：xlable、ylabel和zlabel 
+
+3、如下所示，更新ViewController.h 
+
+#import <UIKit/UIKit.h>
+
+@interface ViewController : UIViewController<UIAccelerometerDelegate>
+{
+ IBOutlet UILabel *xlabel;
+ IBOutlet UILabel *ylabel;
+ IBOutlet UILabel *zlabel;
+
+}
+@end 
+
+4、如下所示，更新ViewController.m 
+
+#import "ViewController.h"
+
+@interface ViewController ()
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad
+{
+ [super viewDidLoad];
+ [[UIAccelerometer sharedAccelerometer]setDelegate:self];
+ //Do any additional setup after loading the view,typically from a nib
+}
+
+- (void)didReceiveMemoryWarning
+{
+ [super didReceiveMemoryWarning];
+ // Dispose of any resources that can be recreated.
+}
+- (void)accelerometer:(UIAccelerometer *)accelerometer didAccelerate:
+ (UIAcceleration *)acceleration{
+ [xlabel setText:[NSString stringWithFormat:@"%f",acceleration.x]];
+ [ylabel setText:[NSString stringWithFormat:@"%f",acceleration.y]];
+ [zlabel setText:[NSString stringWithFormat:@"%f",acceleration.z]];
+}
+
+@end 
+
+输出 
+
+当我们在iPhone设备中运行该应用程序，得到的输出结果如下所示。 
+
+AI 思考中... 
+
+iOS图标(Icons) 
+
+iOS通用应用程序

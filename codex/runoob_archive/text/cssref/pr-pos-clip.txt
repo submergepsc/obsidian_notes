@@ -1,0 +1,90 @@
+URL: https://www.runoob.com/cssref/pr-pos-clip.html
+Title: CSS clip 属性 | 菜鸟教程
+
+CSS clip 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS clear 属性 
+
+CSS color 属性 
+
+CSS clip 属性 
+
+实例 
+
+裁剪一张图像： 
+
+img { position: absolute ; clip: rect ( 0 px , 60 px , 200 px , 0 px ) ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+如果图像大于包含它的元素，会发生什么？-clip属性，让你指定一个绝对定位的元素，该尺寸应该是可见的，该元素被剪裁成这种形状并显示。 
+
+注意：: 如果先有"overflow：visible"，clip属性不起作用。 
+
+默认值: 
+
+auto 
+
+继承: 
+
+no 
+
+版本: 
+
+CSS2 
+
+JavaScript 语法: 
+
+object .style.clip="rect(0px,50px,50px,0px)" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+clip 
+
+1.0 
+
+8.0 
+
+1.0 
+
+1.0 
+
+7.0 
+
+属性值 
+
+值 
+
+描述 
+
+shape 
+
+设置元素的形状。唯一合法的形状值是：rect ( top , right , bottom , left ) 
+
+auto 
+
+默认值。不应用任何剪裁。 
+
+inherit 
+
+规定应该从父元素继承 clip 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS 定位 
+
+AI 思考中... 
+
+CSS clear 属性 
+
+CSS color 属性

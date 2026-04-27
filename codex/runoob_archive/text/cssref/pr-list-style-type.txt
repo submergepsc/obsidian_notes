@@ -1,0 +1,172 @@
+URL: https://www.runoob.com/cssref/pr-list-style-type.html
+Title: CSS list-style-type 属性 | 菜鸟教程
+
+CSS list-style-type 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS list-style-position 属性 
+
+CSS margin 属性 
+
+CSS list-style-type 属性 
+
+实例 
+
+设置一些不同的列表样式： 
+
+ul.circle {list-style-type:circle} 
+ul.square {list-style-type:square} 
+ol.upper-roman {list-style-type:upper-roman} 
+ol.lower-alpha {list-style-type:lower-alpha} 
+
+尝试一下 » 
+
+在此页底部有更多的例子。 
+
+属性定义及使用说明 
+
+list-style-type 属性设置列表项标记的类型。 
+
+默认值： 
+
+"disc" for <ul> and "decimal" for <ol> 
+
+继承： 
+
+yes 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.listStyleType="square" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+list-style-type 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+none 
+
+无标记。 
+
+disc 
+
+默认。标记是实心圆。 
+
+circle 
+
+标记是空心圆。 
+
+square 
+
+标记是实心方块。 
+
+decimal 
+
+标记是数字。 
+
+decimal-leading-zero 
+
+0开头的数字标记。(01, 02, 03, 等。) 
+
+lower-roman 
+
+小写罗马数字(i, ii, iii, iv, v, 等。) 
+
+upper-roman 
+
+大写罗马数字(I, II, III, IV, V, 等。) 
+
+lower-alpha 
+
+小写英文字母The marker is lower-alpha (a, b, c, d, e, 等。) 
+
+upper-alpha 
+
+大写英文字母The marker is upper-alpha (A, B, C, D, E, 等。) 
+
+lower-greek 
+
+小写希腊字母(alpha, beta, gamma, 等。) 
+
+lower-latin 
+
+小写拉丁字母(a, b, c, d, e, 等。) 
+
+upper-latin 
+
+大写拉丁字母(A, B, C, D, E, 等。) 
+
+hebrew 
+
+传统的希伯来编号方式 
+
+armenian 
+
+传统的亚美尼亚编号方式 
+
+georgian 
+
+传统的乔治亚编号方式(an, ban, gan, 等。) 
+
+cjk-ideographic 
+
+简单的表意数字 
+
+hiragana 
+
+标记是：a, i, u, e, o, ka, ki, 等。（日文平假名字符） 
+
+katakana 
+
+标记是：A, I, U, E, O, KA, KI, 等。（日文片假名字符） 
+
+hiragana-iroha 
+
+标记是：i, ro, ha, ni, ho, he, to, 等。（日文平假名序号） 
+
+katakana-iroha 
+
+标记是：I, RO, HA, NI, HO, HE, TO, 等。（日文片假名序号） 
+
+更多实例 
+
+所有不同的列表项标记列表 
+这个例子演示了所有不同的列表项标记。 
+
+相关文章 
+
+CSS 教程: CSS 列表 
+
+CSS 参考手册: list-style 属性 
+
+AI 思考中... 
+
+CSS list-style-position 属性 
+
+CSS margin 属性

@@ -1,0 +1,169 @@
+URL: https://www.runoob.com/scipy/scipy-optimize.html
+Title: SciPy 优化器 | 菜鸟教程
+
+SciPy 优化器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SciPy 教程 
+
+SciPy 常量模块 
+
+SciPy 稀疏矩阵 
+
+SciPy 优化器 
+
+SciPy 的 optimize 模块提供了常用的数值优化与方程求解算法实现。
+我们可以直接调用这些函数来解决实际问题，例如查找函数的最小值、最大值，或者求解方程的根等。 
+
+NumPy 本身主要关注数组计算和线性代数运算，它提供了用于 多项式求根 的工具（如 numpy.roots ），
+但并未提供通用的 非线性方程数值求根接口 。
+当我们需要求解一般形式的非线性方程时，就需要使用 SciPy 的优化模块。 
+
+例如下面的非线性方程： 
+
+x + cos(x) 
+
+对于这类问题，可以使用 scipy.optimize.root 函数来求解。
+该函数常用的两个核心参数如下： 
+
+fun - 表示方程的函数（返回值为 0 时即表示找到方程的根） 
+
+x0 - 根的初始猜测值 
+
+root 函数返回一个结果对象（ OptimizeResult ），
+其中包含求解状态、是否成功、函数值以及最终解等信息。 
+
+实际求得的解保存在返回对象的 x 属性中，示例如下： 
+
+实例 
+
+查找 x + cos(x) = 0 方程的根： 
+
+from scipy. optimize import root 
+
+from math import cos 
+
+def eqn ( x ) : 
+
+return x + cos ( x ) 
+
+myroot = root ( eqn , 0 ) 
+
+print ( myroot. x ) 
+
+# 查看更多信息 
+
+# print(myroot) 
+
+执行以上代码，输出结果如下： 
+
+[-0.73908513] 
+
+如果直接打印返回对象，可以查看更完整的求解信息： 
+
+实例 
+
+from scipy. optimize import root 
+
+from math import cos 
+
+def eqn ( x ) : 
+
+return x + cos ( x ) 
+
+myroot = root ( eqn , 0 ) 
+
+print ( myroot ) 
+
+执行以上代码，输出结果如下： 
+
+fjac: array([[-1.]])
+ fun: array([0.])
+ message: 'The solution converged.'
+ nfev: 9
+ qtf: array([-2.66786593e-13])
+ r: array([-1.67361202])
+ status: 1
+ success: True
+ x: array([-0.73908513]) 
+
+其中： 
+
+success 表示算法是否成功收敛 
+
+message 描述求解过程的结果说明 
+
+x 为最终求得的方程根 
+
+最小化函数 
+
+在数学和工程问题中，函数通常可以表示为一条曲线，
+而曲线往往存在高点和低点。 
+
+曲线的高点称为 最大值 。 
+
+曲线的低点称为 最小值 。 
+
+整条曲线中的最高点称为 全局最大值 ，
+其余较高但不是最高的点称为 局部最大值 。 
+
+同理，整条曲线中的最低点称为 全局最小值 ，
+其余较低但不是最低的点称为 局部最小值 。 
+
+在 SciPy 中，可以使用 scipy.optimize.minimize() 函数来寻找函数的最小值。 
+
+minimize() 函数常用参数说明如下： 
+
+fun - 需要最小化的目标函数 
+
+x0 - 自变量的初始猜测值 
+
+method - 使用的优化算法名称，
+ 常见可选值包括： 'CG' 、 'BFGS' 、 'Newton-CG' 、 'L-BFGS-B' 、 'TNC' 、 'COBYLA' 、 'SLSQP' 
+
+callback - 每次迭代结束后调用的回调函数 
+
+options - 其他控制参数的字典，例如： 
+
+{
+ "disp": boolean, # 是否打印详细的优化过程信息
+ "gtol": number # 梯度收敛容差（部分算法适用）
+} 
+
+实例 
+
+使用 BFGS 方法最小化函数 x² + x + 2 ： 
+
+from scipy. optimize import minimize 
+
+def eqn ( x ) : 
+
+return x** 2 + x + 2 
+
+mymin = minimize ( eqn , 0 , method = 'BFGS' ) 
+
+print ( mymin ) 
+
+执行以上代码，输出结果如下： 
+
+fun: 1.75
+ hess_inv: array([[0.50000001]])
+ jac: array([0.])
+ message: 'Optimization terminated successfully.'
+ nfev: 8
+ nit: 2
+ njev: 4
+ status: 0
+ success: True
+ x: array([-0.50000001]) 
+
+从结果可以看到，函数在 x ≈ -0.5 处取得最小值，
+对应的最小函数值为 1.75 ，
+这与解析计算的结果一致。 
+
+AI 思考中... 
+
+SciPy 常量模块 
+
+SciPy 稀疏矩阵

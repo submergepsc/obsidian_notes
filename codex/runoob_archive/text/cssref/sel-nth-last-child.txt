@@ -1,0 +1,86 @@
+URL: https://www.runoob.com/cssref/sel-nth-last-child.html
+Title: CSS3 :nth-last-child() 选择器 | 菜鸟教程
+
+CSS3 :nth-last-child() 选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 :nth-child() 选择器 
+
+CSS3 :nth-of-type() 选择器 
+
+CSS3 :nth-last-child() 选择器 
+
+实例 
+
+指定每个 p 元素匹配同类型中的倒数第 2 个同级兄弟元素背景色： 
+
+p :nth-last-child (2) { background: #ff0000 ; } 
+
+尝试一下 » 
+
+定义和用法 
+
+:nth-last-child(n) 选择器匹配属于其元素的第 N 个子元素的每个元素，不论元素的类型，从最后一个子元素开始计数。 
+
+n 可以是一个数字，一个关键字，或者一个公式。 
+
+提示: 请参阅 :nth-last-of-type() 选择器。该选择器匹配父元素中的倒数第n个结构子元素。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+:nth-last-child() 
+
+4.0 
+
+9.0 
+
+3.5 
+
+3.2 
+
+9.6 
+
+更多实例 
+
+实例 1 
+
+奇数和偶数是可以作为关键字使用用于相匹配的子元素，其索引是奇数或偶数。 
+
+在这里，我们为奇数和偶数的倒数p元素指定两个不同的背景颜色： 
+
+p:nth-last-child(odd) 
+{ 
+background:#ff0000; 
+} 
+p:nth-last-child(even) 
+{ 
+background:#0000ff; 
+} 
+
+尝试一下 » 
+
+实例 2 
+
+使用公式（an+ b）.描述：a代表一个循环的大小，N是一个计数器（从0开始），以及b是偏移量。 
+
+在这里，我们对所有索引是3的倍数的倒数顺序的p元素指定了背景颜色： 
+
+p:nth-last-child(3n+0) 
+{ 
+background:#ff0000; 
+} 
+
+尝试一下 » 
+
+AI 思考中... 
+
+CSS3 :nth-child() 选择器 
+
+CSS3 :nth-of-type() 选择器

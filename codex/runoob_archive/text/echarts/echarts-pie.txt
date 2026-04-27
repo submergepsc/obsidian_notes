@@ -1,0 +1,48 @@
+URL: https://www.runoob.com/echarts/echarts-pie.html
+Title: ECharts 饼图 | 菜鸟教程
+
+ECharts 饼图 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+ECharts 教程 
+
+ECharts 配置语法 
+
+ECharts 样式设置 
+
+ECharts 饼图 
+
+前面的章节我们已经学会了使用 ECharts 绘制一个简单的柱状图，本章节我们将绘制饼图。 
+
+饼图主要是通过扇形的弧度表现不同类目的数据在总和中的占比，它的数据格式比柱状图更简单，只有一维的数值，不需要给类目。因为不在直角坐标系上，所以也不需要 xAxis，yAxis。 
+
+实例 
+
+myChart . setOption ( { series : [ { name : ' 访问来源 ' , type : ' pie ' , radius : ' 55% ' , data : [ { value : 235 , name : ' 视频广告 ' } , { value : 274 , name : ' 联盟广告 ' } , { value : 310 , name : ' 邮件营销 ' } , { value : 335 , name : ' 直接访问 ' } , { value : 400 , name : ' 搜索引擎 ' } ] } ] } ) 
+
+尝试一下 » 
+
+我们也可以通过设置参数 roseType: 'angle' 把饼图显示成南丁格尔图。 
+
+实例 
+
+option = { series : [ { name : ' 访问来源 ' , type : ' pie ' , radius : ' 55% ' , roseType : ' angle ' , data : [ { value : 235 , name : ' 视频广告 ' } , { value : 274 , name : ' 联盟广告 ' } , { value : 310 , name : ' 邮件营销 ' } , { value : 335 , name : ' 直接访问 ' } , { value : 400 , name : ' 搜索引擎 ' } ] } ] } ; 
+
+尝试一下 » 
+
+阴影的配置 
+
+itemStyle 参数可以设置诸如阴影、透明度、颜色、边框颜色、边框宽度等： 
+
+实例 
+
+option = { series : [ { name : ' 访问来源 ' , type : ' pie ' , radius : ' 55% ' , data : [ { value : 235 , name : ' 视频广告 ' } , { value : 274 , name : ' 联盟广告 ' } , { value : 310 , name : ' 邮件营销 ' } , { value : 335 , name : ' 直接访问 ' } , { value : 400 , name : ' 搜索引擎 ' } ] , roseType : ' angle ' , itemStyle : { normal : { shadowBlur : 200 , shadowColor : ' rgba(0, 0, 0, 0.5) ' } } } ] } ; 
+
+尝试一下 » 
+
+AI 思考中... 
+
+ECharts 配置语法 
+
+ECharts 样式设置

@@ -1,0 +1,61 @@
+URL: https://www.runoob.com/python3/python3-func-number-log10.html
+Title: Python3 log10() 函数 | 菜鸟教程
+
+Python3 log10() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 log() 函数 
+
+Python3 max() 函数 
+
+Python3 log10() 函数 
+
+描述 
+
+log10() 方法返回以10为基数的x对数，x>0。 
+
+语法 
+
+以下是 log10() 方法的语法: 
+
+import math
+
+math.log10( x ) 
+
+注意： log10()是不能直接访问的，需要导入 math 模块，通过静态对象调用该方法。 
+
+参数 
+
+x -- 数值表达式。 
+
+返回值 
+
+返回以10为基数的x对数，x>0。 
+
+实例 
+
+以下展示了使用 log10() 方法的实例： 
+
+#!/usr/bin/python3
+import math # 导入 math 模块
+
+print ("math.log10(100.12) : ", math.log10(100.12))
+print ("math.log10(100.72) : ", math.log10(100.72))
+print ("math.log10(119) : ", math.log10(119))
+print ("math.log10(math.pi) : ", math.log10(math.pi)) 
+
+以上实例运行后输出结果为： 
+
+math.log10(100.12) : 2.0005208409361854
+math.log10(100.72) : 2.003115717099806
+math.log10(119) : 2.075546961392531
+math.log10(math.pi) : 0.4971498726941338 
+
+AI 思考中... 
+
+Python3 log() 函数 
+
+Python3 max() 函数

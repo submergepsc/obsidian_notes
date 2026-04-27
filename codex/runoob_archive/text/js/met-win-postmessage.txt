@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/js/met-win-postmessage.html
+Title: Window postMessage() 方法 | 菜鸟教程
+
+Window postMessage() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Javascript 教程

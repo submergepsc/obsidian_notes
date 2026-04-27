@@ -1,0 +1,62 @@
+URL: https://www.runoob.com/postgresql/postgresql-truncate-table.html
+Title: PostgreSQL TRUNCATE TABLE | 菜鸟教程
+
+PostgreSQL TRUNCATE TABLE | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+PostgreSQL 教程 
+
+PostgreSQL ALTER TABLE 命令 
+
+PostgreSQL View（视图） 
+
+PostgreSQL TRUNCATE TABLE 
+
+PostgreSQL 中 TRUNCATE TABLE 用于删除表的数据，但不删除表结构。 
+
+也可以用 DROP TABLE 删除表，但是这个命令会连表的结构一起删除，如果想插入数据，需要重新建立这张表。 
+
+TRUNCATE TABLE 与 DELETE 具有相同的效果，但是由于它实际上并不扫描表，所以速度更快。
+此外，TRUNCATE TABLE 可以立即释放表空间，而不需要后续 VACUUM 操作，这在大型表上非常有用。 
+
+PostgreSQL VACUUM 操作用于释放、再利用更新/删除行所占据的磁盘空间。 
+
+语法 
+
+TRUNCATE TABLE 基础语法如下： 
+
+TRUNCATE TABLE table_name; 
+
+实例 
+
+创建 COMPANY 表（ 下载 COMPANY SQL 文件 ），数据内容如下： 
+
+runoobdb# select * from COMPANY;
+ id | name | age | address | salary
+----+-------+-----+-----------+--------
+ 1 | Paul | 32 | California| 20000
+ 2 | Allen | 25 | Texas | 15000
+ 3 | Teddy | 23 | Norway | 20000
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 5 | David | 27 | Texas | 85000
+ 6 | Kim | 22 | South-Hall| 45000
+ 7 | James | 24 | Houston | 10000
+(7 rows) 
+
+下面实例使用了 TRUNCATE TABLE 来清除 COMPANY 表： 
+
+runoobdb=# TRUNCATE TABLE COMPANY; 
+
+得到结果如下： 
+
+runoobdb=# SELECT * FROM CUSTOMERS;
+ id | name | age | address | salary
+----+------+-----+---------+--------
+(0 rows) 
+
+AI 思考中... 
+
+PostgreSQL ALTER TABLE 命令 
+
+PostgreSQL View（视图）

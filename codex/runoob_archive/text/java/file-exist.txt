@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/file-exist.html
+Title: Java 实例 – 检测文件是否存在 | 菜鸟教程
+
+Java 实例 – 检测文件是否存在 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 在指定目录中创建文件 
+
+Java 实例 – 设置文件只读 
+
+Java 实例 - 检测文件是否存在 
+
+以下实例演示了使用 File 类的 file.exists() 方法来检测文件是否存在： 
+
+Main.java 文件 
+
+import java . io . File ; public class Main { public static void main ( String [ ] args ) { File file = new File ( " C:/java.txt " ) ; System . out . println ( file . exists ( ) ) ; } } 
+
+以上代码运行输出结果为（如果你的 C 盘中存在文件 java.txt）： 
+
+true 
+
+AI 思考中... 
+
+Java 实例 – 在指定目录中创建文件 
+
+Java 实例 – 设置文件只读

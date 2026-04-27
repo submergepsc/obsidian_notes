@@ -1,0 +1,86 @@
+URL: https://www.runoob.com/tags/tag-template.html
+Title: HTML <template> 标签 | 菜鸟教程
+
+HTML <template> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML source srcset 属性 
+
+HTML 国家/地区参考手册 
+
+HTML <template> 标签 
+
+实例 
+
+使用 <template> 标签在页面加载时该标签中的内容不会显示，加载后可以使用 JavaScript 来显示它： 
+
+< button onclick = " showContent() " > 显示隐藏内容 </ button > < template > < h2 > logo </ h2 > < img src = " https://static.jyshare.com/images/runoob-logo.png " > </ template > < script > function showContent() {
+ var temp = document.getElementsByTagName("template")[0];
+ var clon = temp.content.cloneNode(true);
+ document.body.appendChild(clon);
+} </ script > 
+
+尝试一下 » 
+
+浏览器支持 
+
+表格中的数字表示支持该元素的第一个浏览器的版本号。 
+
+元素 
+
+<template> 
+
+26.0 
+
+13.0 
+
+22.0 
+
+8.0 
+
+15.0 
+
+标签定义及使用说明 
+
+<template> 标签定义在页面加载时隐藏的一些内容，该标签中的内容可以稍后使用 JavaScript 呈现。 
+
+如果您有一些需要重复使用的 HTML 代码，则可以使用 <template> 设置为公用的模板。 
+
+更多实例 
+
+实例 
+
+实例中的每个数组元素都使用一个新的 div 元素来填充网页。每个 div 元素的 HTML 代码都在 template 元素内：： 
+
+< template > < div class = " myClass " > 我喜欢: </ div > </ template > < script > var myArr = ["Google", "Runoob", "Taobao", "Wiki", "Zhihu", "Baidu"];
+function showContent() {
+ var temp, item, a, i;
+ temp = document.getElementsByTagName("template")[0];
+ item = temp.content.querySelector("div");
+ for (i = 0; i < myArr . length ; i ++) { a = document . importNode ( item , true ); a . textContent += myArr [ i ]; document . body . appendChild ( a );
+ }
+}
+</ script > 
+
+尝试一下 » 
+
+实例 
+
+查看浏览器是否支持 template 标签： 
+
+if ( document . createElement ( " template " ) . content ) { document . write ( " 您的浏览器支持 template 标签！ " ) ; } else { document . write ( " 您的浏览器不支持 template 标签！ " ) ; } 
+
+尝试一下 » 
+
+全局属性 
+
+<time> 标签支持 HTML 的全局属性 。 
+
+AI 思考中... 
+
+HTML source srcset 属性 
+
+HTML 国家/地区参考手册

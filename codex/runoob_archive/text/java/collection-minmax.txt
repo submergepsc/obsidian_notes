@@ -1,0 +1,32 @@
+URL: https://www.runoob.com/java/collection-minmax.html
+Title: Java 实例 – 查找 List 中的最大最小值 | 菜鸟教程
+
+Java 实例 – 查找 List 中的最大最小值 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 遍历 HashTable 的键值 
+
+Java 实例 – List 截取 
+
+Java 实例 - 查找 List 中的最大最小值 
+
+以下实例演示了如何使用 Collections 类的 max() 和 min() 方法来获取List中最大最小值： 
+
+Main.java 文件 
+
+import java . util .*; public class Main { public static void main ( String [ ] args ) { List list = Arrays . asList ( " one Two three Four five six one three Four " . split ( " " ) ) ; System . out . println ( list ) ; System . out . println ( " 最大值: " + Collections . max ( list ) ) ; System . out . println ( " 最小值: " + Collections . min ( list ) ) ; } } 
+
+以上代码运行输出结果为： 
+
+[one, Two, three, Four, five, six, one, three, Four]
+最大值: three
+最小值: Four 
+
+AI 思考中... 
+
+Java 实例 – 遍历 HashTable 的键值 
+
+Java 实例 – List 截取

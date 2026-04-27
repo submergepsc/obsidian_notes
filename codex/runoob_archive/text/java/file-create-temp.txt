@@ -1,0 +1,32 @@
+URL: https://www.runoob.com/java/file-create-temp.html
+Title: Java 实例 – 创建临时文件 | 菜鸟教程
+
+Java 实例 – 创建临时文件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 修改文件最后的修改日期 
+
+Java 实例 – 向文件中追加数据 
+
+Java 实例 - 创建临时文件 
+
+以下实例演示了使用 File 类的 createTempFile(String prefix, String suffix); 方法在默认临时目录来创建临时文件，参数 prefix 为前缀，suffix 为后缀： 
+
+Main.java 文件 
+
+import java . io .*; public class Main { public static void main ( String [ ] args ) throws Exception { File temp = File . createTempFile ( " testrunoobtmp " , " .txt " ) ; System . out . println ( " 文件路径: " + temp . getAbsolutePath ( ) ) ; temp . deleteOnExit ( ) ; BufferedWriter out = new BufferedWriter ( new FileWriter ( temp ) ) ; out . write ( " aString " ) ; System . out . println ( " 临时文件已创建: " ) ; out . close ( ) ; } } 
+
+也可以使用 createTempFile(String prefix, String suffix, File directory) 中的 directory 参数来指定临时文件的目录： 
+
+Main.java 文件 
+
+import java . io . File ; public class Main { public static void main ( String [ ] args ) { File f = null ; try { f = File . createTempFile ( " tmp " , " .txt " , new File ( " C:/ " ) ) ; System . out . println ( " File path: " + f . getAbsolutePath ( ) ) ; f . deleteOnExit ( ) ; f = File . createTempFile ( " tmp " , null , new File ( " D:/ " ) ) ; System . out . print ( " File path: " + f . getAbsolutePath ( ) ) ; f . deleteOnExit ( ) ; } catch ( Exception e ) { e . printStackTrace ( ) ; } } } 
+
+AI 思考中... 
+
+Java 实例 – 修改文件最后的修改日期 
+
+Java 实例 – 向文件中追加数据

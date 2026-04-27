@@ -1,0 +1,36 @@
+URL: https://www.runoob.com/java/date-year-month.html
+Title: Java 实例 – 获取年份、月份等 | 菜鸟教程
+
+Java 实例 – 获取年份、月份等 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 获取当前时间 
+
+Java 实例 – 时间戳转换成时间 
+
+Java 实例 - 获取年份、月份等 
+
+以下实例演示了如何使用 Calendar 类来输出年份、月份等： 
+
+Main.java 文件 
+
+import java . util . Calendar ; public class Main { public static void main ( String [ ] args ) { Calendar cal = Calendar . getInstance ( ) ; int day = cal . get ( Calendar . DATE ) ; int month = cal . get ( Calendar . MONTH ) + 1 ; int year = cal . get ( Calendar . YEAR ) ; int dow = cal . get ( Calendar . DAY_OF_WEEK ) ; int dom = cal . get ( Calendar . DAY_OF_MONTH ) ; int doy = cal . get ( Calendar . DAY_OF_YEAR ) ; System . out . println ( " 当期时间: " + cal . getTime ( ) ) ; System . out . println ( " 日期: " + day ) ; System . out . println ( " 月份: " + month ) ; System . out . println ( " 年份: " + year ) ; System . out . println ( " 一周的第几天: " + dow ) ; System . out . println ( " 一月中的第几天: " + dom ) ; System . out . println ( " 一年的第几天: " + doy ) ; } } 
+
+以上代码运行输出结果为： 
+
+当期时间: Fri Mar 27 21:44:15 CST 2015
+日期: 27
+月份: 3
+年份: 2015
+一周的第几天: 6
+一月中的第几天: 27
+一年的第几天: 86 
+
+AI 思考中... 
+
+Java 实例 – 获取当前时间 
+
+Java 实例 – 时间戳转换成时间

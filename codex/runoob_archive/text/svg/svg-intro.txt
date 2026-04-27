@@ -1,0 +1,124 @@
+URL: https://www.runoob.com/svg/svg-intro.html
+Title: SVG 简介 | 菜鸟教程
+
+SVG 简介 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SVG 教程 
+
+SVG 教程 
+
+SVG 基本语法 
+
+SVG 简介 
+
+SVG，可缩放矢量图形（Scalable Vector Graphics），是一种用于描述二维图形的 XML 标记语言。 
+
+与位图图像不同，SVG 图像以文本形式存储，并且可以缩放到任意大小而不会失真，因为它们基于数学描述而不是像素。 
+
+学习之前应具备的基础知识： 
+
+继续学习之前，你应该对以下内容有基本的了解： 
+
+HTML 
+
+XML 基础 
+
+如果希望首先学习这些内容，请在本站的 首页 选择相应的教程。 
+
+什么是SVG？ 
+
+SVG 指可伸缩矢量图形 (Scalable Vector Graphics) 
+
+SVG 用来定义用于网络的基于矢量的图形 
+
+SVG 使用 XML 格式定义图形 
+
+SVG 图像在放大或改变尺寸的情况下其图形质量不会有所损失 
+
+SVG 是万维网联盟的标准 
+
+SVG 与诸如 DOM 和 XSL 之类的 W3C 标准是一个整体 
+
+SVG 是 W3C 推荐标准 
+
+SVG 于 2003 年 1 月 14 日成为 W3C 推荐标准。 
+
+如需阅读更多有关 W3C 的 SVG 活动的信息，请访问我们的 W3C 教程 。 
+
+SVG 的历史和优势 
+
+SVG 历史： 
+
+SVG 由 1998 年成立的 W3C SVG 工作组启动开发，随着当年提交给 W3C 的六份标准提案应运而生： 
+
+2001年9月4日，发布SVG 1.0。 
+
+2003年1月4日，发布 SVG 1.1。 
+
+2003年1月14日，推出SVG移动子版本：SVG Tiny和SVG Basic。 
+
+2008年12月22日，发布SVG Tiny 1.2。 
+
+2011年8月16日，发布SVG 1.1（第2版），成为W3C目前推荐的标准。 
+
+W3C目前仍正在研究制定SVG 2，目前最新的草稿发布见 点击这里查看 。 
+
+SVG 优势： 
+
+可缩放性 ：SVG 图像可以无损地缩放到任意大小而不失真。这是因为 SVG 是基于矢量描述的，而不是像素图像，因此在不同分辨率和尺寸的屏幕上都能保持清晰。 
+
+文本性质 ：SVG 文件是基于XML的文本文件，易于编辑和维护。你可以直接编辑 SVG 文件来调整图形，也可以使用文本编辑器或代码编辑器来创建和修改 SVG 图像。 
+
+交互性 ：SVG 允许添加交互式元素，如链接、动画和事件处理器。这使得 SVG 图像可以与用户进行交互，从而创建更丰富的用户体验。 
+
+动画支持 ：SVG 支持使用 CSS 和 JavaScript 创建动画，使图形更生动。你可以通过 CSS 动画或 JavaScript 脚本来实现 SVG 图形的动态效果，如过渡、旋转、缩放等。 
+
+可嵌入性 ：SVG 图像可以直接嵌入到 HTML 文档中，也可以作为外部文件链接到 HTML 文档中。这使得 SVG 图像可以与其他Web技术无缝集成，如 CSS、JavaScript 等。 
+
+查看 SVG 文件 
+
+SVG 在现代 Web 浏览器中得到广泛支持，包括 Chrome、Firefox、Safari等 。 
+
+可以通过内联 SVG 代码或外部 SVG 文件将 SVG 图像嵌入到HTML文档中。 
+
+Google Chrome ：Google Chrome 是一个流行的现代 Web 浏览器，对 SVG 格式有很好的支持，并且提供了丰富的开发者工具。 
+
+Mozilla Firefox ：Mozilla Firefox 也是一个广泛使用的 Web 浏览器，支持 SVG 图像的显示和渲染，并且支持大多数 SVG 特性。 
+
+Apple Safari ：Safari 是苹果公司开发的 Web 浏览器，对 SVG 有很好的支持，适用于 Mac、iOS 等设备。 
+
+Microsoft Edge ：Microsoft Edge 是微软公司推出的 Web 浏览器，支持 SVG 格式，并在不断改进 SVG 的支持。 
+
+Opera ：Opera 是一款快速、安全的 Web 浏览器，对 SVG 有很好的支持，并且支持许多现代 Web 技术。 
+
+Brave ：Brave 是一款注重隐私保护的 Web 浏览器，基于 Chromium 开发，因此也支持 SVG 图像。 
+
+Vivaldi ：Vivaldi 是一款高度可定制的Web浏览器，也基于 Chromium 开发，并支持 SVG 格式。 
+
+创建SVG文件 
+
+以下是创建 SVG 文件的基本步骤： 
+
+打开文本编辑器 ：使用你喜欢的文本编辑器，如 Visual Studio Code 等，查看 VScode 教程 。 
+
+编写 SVG 代码 ：在文本编辑器中编写 SVG 代码。SVG 代码由 XML 标记组成，描述了图形元素、属性和样式。 
+
+保存文件 ：将编写好的 SVG 代码保存为以 .svg 扩展名结尾的文件，如 example.svg 。 
+
+预览 SVG 文件 ：用 Web 浏览器打开 SVG 文件，或者将 SVG 文件嵌入到 HTML 文档中，在浏览器中预览 SVG 图像。 
+
+以下是一个简单的 SVG 文件示例，创建一个包含一个圆形的 SVG 图像： 
+
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+ <circle cx="100" cy="100" r="80" fill="blue" />
+</svg> 
+
+这段代码描述了一个 SVG 画布，宽度为 200 个单位，高度也为 200 个单位。在画布上绘制了一个圆形，圆心坐标为(100, 100)，半径为80个单位，填充颜色为蓝色。 
+
+AI 思考中... 
+
+SVG 教程 
+
+SVG 基本语法

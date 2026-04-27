@@ -1,0 +1,64 @@
+URL: https://www.runoob.com/vbscript/func-minute.html
+Title: VBScript Minute 函数 | 菜鸟教程
+
+VBScript Minute 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript IsDate 函数 
+
+VBScript Month 函数 
+
+VBScript Minute 函数 
+
+Minute 函数返回表示小时的分钟数的数字，介于 0 到 59 之间。 
+
+语法 
+
+Minute(time) 
+
+参数 
+
+描述 
+
+time 
+
+必需。表示时间的表达式。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+document.write(Minute("13:45")) 
+
+</script> 
+
+以上实例输出结果： 
+
+45 
+
+尝试一下 » 
+
+实例 2 
+
+<script type="text/vbscript"> 
+
+document.write(Minute(Now())) 
+
+</script> 
+
+以上实例输出结果： 
+
+document.write(Minute(Now())) 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript IsDate 函数 
+
+VBScript Month 函数

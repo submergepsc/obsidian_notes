@@ -1,0 +1,82 @@
+URL: https://www.runoob.com/tags/av-event-waiting.html
+Title: HTML Audio/Video DOM waiting 事件 | 菜鸟教程
+
+HTML Audio/Video DOM waiting 事件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML Audio/Video DOM suspend 事件 
+
+HTML Audio/Video DOM timeupdate 事件 
+
+HTML Audio/Video DOM waiting 事件 
+
+实例 
+
+当视频开始播放前需要缓冲下一帧时弹出提示信息： 
+
+var vid = document.getElementById("myVideo"); 
+vid.onwaiting = function() 
+ { 
+alert("Wait! I need to buffer the next frame"); 
+}; 
+
+尝试一下 » 
+
+定义和用法 
+
+waiting 事件在视频由于需要缓冲下一帧而停止时触发。 
+
+该事件可用于 <audio> 元素，但通常都用在视频中。 
+
+浏览器支持 
+
+表格中的数字表示支持该事件的第一个浏览器的版本号。 
+
+事件 
+
+waiting 
+
+Yes 
+
+9.0 
+
+Yes 
+
+Yes 
+
+Yes 
+
+语法 
+
+HTML 中： 
+
+< audio|video onwaiting=" myScript "> 尝试一下 
+
+JavaScript 中： 
+
+audio|video .onwaiting=function(){ myScript }; 尝试一下 
+
+JavaScript 中, 使用 addEventListener() 方法: 
+
+audio|video .addEventListener("waiting", myScript ); 尝试一下 
+
+注意： Internet Explorer 8 及更早 IE 版本不支持 addEventListener() 方法。 
+
+技术细节 
+
+支持的 HTML 标签: 
+
+<audio> 和 <video> 
+
+支持的 JavaScript 对象: 
+
+Audio, Video 
+
+AI 思考中... 
+
+HTML Audio/Video DOM suspend 事件 
+
+HTML Audio/Video DOM timeupdate 事件

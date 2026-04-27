@@ -1,0 +1,103 @@
+URL: https://www.runoob.com/cssref/pr-pos-bottom.html
+Title: CSS bottom 属性 | 菜鸟教程
+
+CSS bottom 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 border-image-width 属性 
+
+CSS3 box-align 属性 
+
+CSS bottom 属性 
+
+实例 
+
+设置图像的底部边缘，在元素的底边上面5px： 
+
+img 
+{ 
+position:absolute; 
+bottom:5px; 
+} 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+对于绝对定位元素，bottom属性设置单位高于/低于包含它的元素的底边。 
+
+对于相对定位元素，bottom属性设置单位高于/低于其正常位置的元素的底边。 
+
+注意： 如果"position：static"，底部的属性没有任何效果。 
+
+说明： 对于 static 元素，为 auto；对于长度值，则为相应的绝对长度；对于百分比数值，为指定值；否则为 auto。
+对于相对定义元素，如果 bottom 和 top 都是 auto，其计算值则都是 0；如果其中之一为 auto，则取另一个值的相反数；如果二者都不是 auto，bottom 将取 top 值的相反数。 
+
+默认值： 
+
+auto 
+
+继承性： 
+
+no 
+
+版本： 
+
+CSS2 
+
+JavaScript 语法： 
+
+object .style.bottom="50px" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+bottom 
+
+1.0 
+
+5.0 
+
+1.0 
+
+1.0 
+
+6.0 
+
+属性值 
+
+值 
+
+描述 
+
+auto 
+
+默认值。通过浏览器计算底部的位置。 
+
+% 
+
+设置以包含元素的百分比计的底边位置。可使用负值。 
+
+length 
+
+使用 px、cm 等单位设置元素的底边位置。可使用负值。 
+
+inherit 
+
+规定应该从父元素继承 bottom 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS Positioning 
+
+AI 思考中... 
+
+CSS3 border-image-width 属性 
+
+CSS3 box-align 属性

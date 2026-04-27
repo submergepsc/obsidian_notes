@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/php/php-ajax-database.html
+Title: PHP 实例 AJAX 与 MySQL | 菜鸟教程
+
+PHP 实例 AJAX 与 MySQL | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+PHP 教程

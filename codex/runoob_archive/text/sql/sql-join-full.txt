@@ -1,0 +1,215 @@
+URL: https://www.runoob.com/sql/sql-join-full.html
+Title: SQL FULL OUTER JOIN 关键字 | 菜鸟教程
+
+SQL FULL OUTER JOIN 关键字 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SQL 教程 
+
+SQL RIGHT JOIN 关键字 
+
+SQL UNION 操作符 
+
+SQL FULL OUTER JOIN 关键字 
+
+FULL OUTER JOIN 是 SQL 中的一种连接方式，用于同时保留两个表中所有的记录，即使其中一方没有匹配项。 
+
+FULL OUTER JOIN 结果包括两个表中满足条件的记录（交集部分）以及不满足条件的记录（并集中的非交集部分）。
+如果某条记录在一张表中存在，而在另一张表中没有匹配项，则该记录的缺失列会以 NULL 填充。 
+
+FULL OUTER JOIN 关键字只要左表（table1）和右表（table2）其中一个表中存在匹配，则返回行。 
+
+FULL OUTER JOIN 关键字结合了 LEFT JOIN 和 RIGHT JOIN 的结果。 
+
+SQL FULL OUTER JOIN 语法 
+
+SELECT column_name(s)
+FROM table1
+FULL OUTER JOIN table2
+ON table1.column_name=table2.column_name; 
+
+table1、table2 ：需要进行连接的两个表。 
+
+ON table1.column_name=table2.column_name ：指定连接条件，通常是两个表的共同字段。 
+
+column_name(s) ：从两个表中选择需要的字段。 
+
+特点 
+
+返回两个表的并集 ：包含所有匹配和未匹配的记录。 
+
+未匹配的记录填充 NULL ：如果某条记录在一张表中没有匹配项，则其对应的字段以 NULL 表示。 
+
+对等性 ： FULL OUTER JOIN 包含了 LEFT JOIN 和 RIGHT JOIN 的结果。 
+
+假设有两个表： Students 和 Courses 。 
+
+Students 表 ： 
+
+StudentID 
+
+Name 
+
+1 
+
+Alice 
+
+2 
+
+Bob 
+
+3 
+
+Charlie 
+
+Courses 表 ： 
+
+CourseID 
+
+StudentID 
+
+CourseName 
+
+101 
+
+1 
+
+Math 
+
+102 
+
+2 
+
+Science 
+
+103 
+
+4 
+
+History 
+
+使用 FULL OUTER JOIN 查询 
+
+SELECT Students.StudentID, Students.Name, Courses.CourseName
+FROM Students
+FULL OUTER JOIN Courses
+ON Students.StudentID = Courses.StudentID; 
+
+查询输出结果 ： 
+
+StudentID 
+
+Name 
+
+CourseName 
+
+1 
+
+Alice 
+
+Math 
+
+2 
+
+Bob 
+
+Science 
+
+3 
+
+Charlie 
+
+NULL 
+
+4 
+
+NULL 
+
+History 
+
+解释 ： 
+
+StudentID = 1 和 2 是交集部分，两表中都有数据。 
+
+StudentID = 3 存在于 Students 表，但在 Courses 表中没有匹配， CourseName 列为 NULL 。 
+
+StudentID = 4 存在于 Courses 表，但在 Students 表中没有匹配， Name 列为 NULL 。 
+
+总结 
+
+JOIN 类型 
+
+返回内容 
+
+INNER JOIN 
+
+两个表的交集部分，匹配的记录 
+
+LEFT JOIN 
+
+左表的所有记录，以及匹配的右表记录 
+
+RIGHT JOIN 
+
+右表的所有记录，以及匹配的左表记录 
+
+FULL OUTER JOIN 
+
+两个表的并集部分，包含匹配和未匹配记录 
+
+演示数据库 
+
+在本教程中，我们将使用 RUNOOB 样本数据库。 
+
+下面是选自 "Websites" 表的数据： 
+
++----+--------------+---------------------------+-------+---------+
+| id | name | url | alexa | country |
++----+--------------+---------------------------+-------+---------+
+| 1 | Google | https://www.google.cm/ | 1 | USA |
+| 2 | 淘宝 | https://www.taobao.com/ | 13 | CN |
+| 3 | 菜鸟教程 | http://www.runoob.com/ | 4689 | CN |
+| 4 | 微博 | http://weibo.com/ | 20 | CN |
+| 5 | Facebook | https://www.facebook.com/ | 3 | USA |
+| 7 | stackoverflow | http://stackoverflow.com/ | 0 | IND |
++----+---------------+---------------------------+-------+---------+ 
+
+下面是 "access_log" 网站访问记录表的数据： 
+
++-----+---------+-------+------------+
+| aid | site_id | count | date |
++-----+---------+-------+------------+
+| 1 | 1 | 45 | 2016-05-10 |
+| 2 | 3 | 100 | 2016-05-13 |
+| 3 | 1 | 230 | 2016-05-14 |
+| 4 | 2 | 10 | 2016-05-14 |
+| 5 | 5 | 205 | 2016-05-14 |
+| 6 | 4 | 13 | 2016-05-15 |
+| 7 | 3 | 220 | 2016-05-15 |
+| 8 | 5 | 545 | 2016-05-16 |
+| 9 | 3 | 201 | 2016-05-17 |
++-----+---------+-------+------------+
+9 rows in set (0.00 sec) 
+
+SQL FULL OUTER JOIN 实例 
+
+下面的 SQL 语句选取所有网站访问记录。 
+
+MySQL中不支持 FULL OUTER JOIN，你可以在 SQL Server 测试以下实例。 
+
+实例 
+
+SELECT Websites.name, access_log.count, access_log.date 
+FROM Websites 
+FULL OUTER JOIN access_log 
+ON Websites.id=access_log.site_id 
+ORDER BY access_log.count DESC; 
+
+注释： FULL OUTER JOIN 关键字返回左表（Websites）和右表（access_log）中所有的行。如果 "Websites" 表中的行在 "access_log" 中没有匹配或者 "access_log" 表中的行在 "Websites" 表中没有匹配，也会列出这些行。 
+
+AI 思考中... 
+
+SQL RIGHT JOIN 关键字 
+
+SQL UNION 操作符

@@ -1,0 +1,60 @@
+URL: https://www.runoob.com/ajax/ajax-xmlhttprequest-response.html
+Title: AJAX XMLHttpRequest 服务器响应 | 菜鸟教程
+
+AJAX XMLHttpRequest 服务器响应 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Ajax 教程 
+
+AJAX – onreadystatechange 事件 
+
+AJAX – 向服务器发送 
+
+AJAX - 服务器 响应 
+
+服务器响应 
+
+如需获得来自服务器的响应，请使用 XMLHttpRequest 对象的 responseText 或 responseXML 属性。 
+
+属性 
+
+描述 
+
+responseText 
+
+获得字符串形式的响应数据。 
+
+responseXML 
+
+获得 XML 形式的响应数据。 
+
+responseText 属性 
+
+如果来自服务器的响应并非 XML，请使用 responseText 属性。 
+
+responseText 属性返回字符串形式的响应，因此您可以这样使用： 
+
+实例 
+
+document.getElementById("myDiv").innerHTML=xmlhttp.responseText; 
+
+尝试一下 » 
+
+responseXML 属性 
+
+如果来自服务器的响应是 XML，而且需要作为 XML 对象进行解析，请使用 responseXML 属性： 
+
+实例 
+
+请求 cd_catalog.xml 文件，并解析响应： 
+
+xmlDoc = xmlhttp . responseXML ; txt = " " ; x = xmlDoc . getElementsByTagName ( " ARTIST " ) ; for ( i = 0 ; i < x . length ; i ++ ) { txt = txt + x [ i ] . childNodes [ 0 ] . nodeValue + " <br> " ; } document . getElementById ( " myDiv " ) . innerHTML = txt ; 
+
+尝试一下 » 
+
+AI 思考中... 
+
+AJAX – onreadystatechange 事件 
+
+AJAX – 向服务器发送

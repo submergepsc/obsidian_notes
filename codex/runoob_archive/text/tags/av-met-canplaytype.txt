@@ -1,0 +1,105 @@
+URL: https://www.runoob.com/tags/av-met-canplaytype.html
+Title: HTML 音频/视频 DOM canPlayType() 方法 | 菜鸟教程
+
+HTML 音频/视频 DOM canPlayType() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM addTextTrack() 方法 
+
+HTML 音频/视频 DOM load() 方法 
+
+HTML 音频/视频 DOM canPlayType() 方法 
+
+实例 
+
+检测您的浏览器是否能播放不同类型的视频： 
+
+myVid=document.createElement('video'); 
+isSupp=myVid.canPlayType(vidType+';codecs="'+codType+'"'); 
+
+尝试一下 » 
+
+定义和用法 
+
+canPlayType() 方法检测浏览器是否能播放指定的音频/视频类型。 
+
+canPlayType() 方法可返回下列值之一： 
+
+"probably" - 浏览器最可能支持该音频/视频类型 
+
+"maybe" - 浏览器也许支持该音频/视频类型 
+
+"" - （空字符串）浏览器不支持该音频/视频类型 
+
+浏览器支持 
+
+所有主流浏览器都支持 canPlayType() 方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持该方法。 
+
+语法 
+
+audio|video .canPlayType( type )) 
+
+参数 
+
+值 
+
+描述 
+
+type 
+
+规定要检测的音频/视频类型（和可选的编解码器）。 
+
+常用值： 
+
+video/ogg 
+
+video/mp4 
+
+video/webm 
+
+audio/mpeg 
+
+audio/ogg 
+
+audio/mp4 
+
+常用值，包括编解码器： 
+
+video/ogg; codecs="theora, vorbis" 
+
+video/mp4; codecs="avc1.4D401E, mp4a.40.2" 
+
+video/webm; codecs="vp8.0, vorbis" 
+
+audio/ogg; codecs="vorbis" 
+
+audio/mp4; codecs="mp4a.40.5" 
+
+注意： 如果包含编解码器，则该方法只能返回 "probably"。 
+
+返回值 
+
+类型 
+
+描述 
+
+String 
+
+表示支持的级别。可能的返回值： 
+
+"probably" - 最有可能支持 
+
+"maybe" - 可能支持 
+
+"" - （空字符串）不支持 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM addTextTrack() 方法 
+
+HTML 音频/视频 DOM load() 方法

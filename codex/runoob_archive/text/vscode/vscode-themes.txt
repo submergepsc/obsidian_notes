@@ -1,0 +1,65 @@
+URL: https://www.runoob.com/vscode/vscode-themes.html
+Title: VSCode 主题设置 | 菜鸟教程
+
+VSCode 主题设置 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VSCode 教程 
+
+VSCode 快捷键大全 
+
+VSCode AI 扩展 
+
+VSCode 主题设置 
+
+VSCode 主题设置允许我们根据个人偏好和工作环境自定义 Visual Studio Code 的用户界面配色。 
+
+一个主题不仅会影响 VS Code 的用户界面元素，还会影响代码编辑器的高亮配色。 
+
+从命令面板预览主题 
+
+从菜单栏选择 Code > 设置(首选项) > 主题 > 颜色主题 菜单项：或使用命令 Preferences: Color Theme (⌘K ⌘T) 打开主题选择器。 
+
+使用快捷键打开： 
+
+Windows/Linux: Ctrl + K Ctrl + T 打开主题选择器。 
+
+macOS: ⌘K ⌘T 打开主题选择器 
+
+打开后，命令框如下所示： 
+
+使用 上下箭头键 在主题列表中浏览，并实时预览主题配色，选中您喜欢的主题后，按 Enter 确认。 
+
+当前激活的主题会存储在用户设置中，关于设置菜单打开参考 VS Code 设置 : 
+
+// 定义工作界面使用的颜色主题
+"workbench.colorTheme": "Solarized Dark" 
+
+提示： 默认情况下，主题存储在用户设置中，并会全局应用于所有工作区。 
+
+如果希望为某个特定工作区配置主题，可以在工作区设置中指定。 
+
+从市场中获取主题 
+
+从主题选择器浏览市场主题 
+
+在颜色主题选择器中点击 流量其他颜色主题（Browse Additional Color Themes...） 选项，跳转到市场主题浏览页面： 
+
+点击后会列出主题列表，使用 上下箭头键 在主题列表中浏览，并实时预览主题配色： 
+
+在颜色主题选择器中点击 流量其他颜色主题（Browse Additional Color Themes...） 选项，跳转到市场主题浏览页面： 
+
+从扩展视图中搜索主题 
+
+VS Code 除了自带了一些主题外，扩展市场也提供了非常多的主题： 
+
+比如搜索 One Dark Pro 这个主题： 
+
+也可以在搜索框中使用 @category:"themes" 过滤器，查找相关主题: 
+
+AI 思考中... 
+
+VSCode 快捷键大全 
+
+VSCode AI 扩展

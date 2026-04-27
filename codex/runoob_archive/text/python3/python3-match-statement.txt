@@ -1,0 +1,299 @@
+URL: https://www.runoob.com/python3/python3-match-statement.html
+Title: Python match 语句 | 菜鸟教程
+
+Python match 语句 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python pass 语句 
+
+Python for 循环 
+
+Python match 语句 
+
+match 是 Python 3.10 引入的结构化模式匹配语句，类似于其他语言中的 switch-case ，但功能更强大。 
+
+match 语句可以匹配数据结构的模式，不仅可以是常量值，还可以是类型、序列、字典等复杂模式。 
+
+单词释义 ： match 意为"匹配"，用于模式匹配。 
+
+基本语法与参数 
+
+match 语句是 Python 3.10+ 的新特性，用于替代复杂的多分支 if-elif 结构。 
+
+语法格式 
+
+match 变量:
+ case 模式1:
+ 代码块1
+ case 模式2:
+ 代码块2
+ case _:
+ 默认代码块 
+
+模式类型 
+
+常量模式 ： 匹配具体的值。 
+
+通配符模式 ： case _ 匹配任何值，相当于 default。 
+
+类型模式 ： 匹配数据类型。 
+
+序列模式 ： 匹配列表、元组等序列。 
+
+字典模式 ： 匹配字典。 
+
+带条件的模式 ： 使用 if 添加额外条件。 
+
+实例 
+
+示例 1：基础用法（类似 switch） 
+
+实例 
+
+# Python 版本要求 3.10+ 
+
+def http_status ( status ) : 
+
+match status: 
+
+case 200 : 
+
+return "OK" 
+
+case 404 : 
+
+return "Not Found" 
+
+case 500 : 
+
+return "Server Error" 
+
+case _: 
+
+return "Unknown" 
+
+print ( http_status ( 200 ) ) # 输出: OK 
+
+print ( http_status ( 404 ) ) # 输出: Not Found 
+
+print ( http_status ( 999 ) ) # 输出: Unknown 
+
+运行结果预期: 
+
+OK
+Not Found
+Unknown 
+
+代码解析: 
+
+case _ 是通配符，匹配所有未匹配的情况。 
+
+类似于 switch-case 中的 default。 
+
+示例 2：多值匹配 
+
+实例 
+
+# 多个值匹配同一结果 
+
+def color_name ( code ) : 
+
+match code : 
+
+case "r" | "R" : 
+
+return "红色" 
+
+case "g" | "G" : 
+
+return "绿色" 
+
+case "b" | "B" : 
+
+return "蓝色" 
+
+case _: 
+
+return "未知" 
+
+print ( color_name ( "r" ) ) # 输出: 红色 
+
+print ( color_name ( "G" ) ) # 输出: 绿色 
+
+print ( color_name ( "x" ) ) # 输出: 未知 
+
+[ /mycode ] < /div > 
+
+< /div > 
+
+< p >< strong > 运行结果预期: < /strong >< /p > 
+
+< pre > 红色 
+
+绿色 
+
+未知 
+
+< /pre > 
+
+< p > 使用 < code > | < /code > 可以将多个值组合到同一个 case。 < /p > 
+
+< h3 > 示例 3 ：序列模式匹配 < /h3 > 
+
+< div class = "example" > 
+
+< h2 class = "example" > 实例 < /h2 > 
+
+< div class = "example_code" > [ mycode4 type = "python" ] 
+
+# 序列模式匹配 
+
+def describe_point ( point ) : 
+
+match point: 
+
+case ( 0 , 0 ) : 
+
+return "原点" 
+
+case ( x , 0 ) : 
+
+return f "X轴上的点 ({x}, 0)" 
+
+case ( 0 , y ) : 
+
+return f "Y轴上的点 (0, {y})" 
+
+case ( x , y ) : 
+
+return f "平面上的点 ({x}, {y})" 
+
+case _: 
+
+return "无效坐标" 
+
+print ( describe_point ( ( 0 , 0 ) ) ) # 输出: 原点 
+
+print ( describe_point ( ( 5 , 0 ) ) ) # 输出: X轴上的点 (5, 0) 
+
+print ( describe_point ( ( 3 , 4 ) ) ) # 输出: 平面上的点 (3, 4) 
+
+运行结果预期: 
+
+原点
+X轴上的点 (5, 0)
+平面上的点 (3, 4) 
+
+match 可以解构元组/列表，提取其中的值。 
+
+示例 4：字典模式匹配 
+
+实例 
+
+# 字典模式匹配 
+
+def process_user ( user ) : 
+
+match user : 
+
+case { "name" : name , "age" : age } : 
+
+return f "用户: {name}, 年龄: {age}" 
+
+case { "name" : name } : 
+
+return f "用户: {name}" 
+
+case _: 
+
+return "无效用户" 
+
+print ( process_user ( { "name" : "Tom" , "age" : 20 } ) ) 
+
+print ( process_user ( { "name" : "Jerry" } ) ) 
+
+print ( process_user ( { "role" : "admin" } ) ) 
+
+运行结果预期: 
+
+用户: Tom, 年龄: 20
+用户: Jerry
+无效用户 
+
+字典模式可以提取特定键的值。 
+
+示例 5：带条件的模式 
+
+实例 
+
+# 带条件的模式匹配 
+
+def classify_number ( n ) : 
+
+match n: 
+
+case n if n > 0 : 
+
+return f "正数 ({n})" 
+
+case n if n < 0 : 
+
+return f "负数 ({n})" 
+
+case 0 : 
+
+return "零" 
+
+print ( classify_number ( 10 ) ) # 输出: 正数 (10) 
+
+print ( classify_number ( - 5 ) ) # 输出: 负数 (-5) 
+
+print ( classify_number ( 0 ) ) # 输出: 零 
+
+# 复杂条件 
+
+def describe_list ( lst ) : 
+
+match lst: 
+
+case [ ] : 
+
+return "空列表" 
+
+case [ x ] : 
+
+return f "单个元素: {x}" 
+
+case [ x , y ] : 
+
+return f "两个元素: {x}, {y}" 
+
+case [ x , *rest ] : 
+
+return f "第一个: {x}, 其余: {rest}" 
+
+print ( describe_list ( [ ] ) ) 
+
+print ( describe_list ( [ 1 ] ) ) 
+
+print ( describe_list ( [ 1 , 2 , 3 , 4 ] ) ) 
+
+运行结果预期: 
+
+正数 (10)
+负数 (-5)
+零
+空列表
+单个元素: 1
+第一个: 1, 其余: [2, 3, 4] 
+
+使用 case 变量 if 条件 可以添加额外的匹配条件。 
+
+AI 思考中... 
+
+Python pass 语句 
+
+Python for 循环

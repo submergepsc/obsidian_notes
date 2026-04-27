@@ -1,0 +1,80 @@
+URL: https://www.runoob.com/foundation/foundation-grid-large.html
+Title: Foundation 网格 – 大型设备 | 菜鸟教程
+
+Foundation 网格 – 大型设备 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 网格 – 中型设备 
+
+Foundation 块状网格 
+
+Foundation 网格 - 大型设备 
+
+上一章节我们介绍了中型设备和小型设备的网格布局，小型设备上使用的比例为 25%/75% (.small-3 和 .small-9)，但在中型设备上使用的比例为 50%/50% (.medium-6 和 .medium-6)： 
+
+<div class="small-3 medium-6 columns">....</div>
+<div class="small-9 medium-6 columns">....</div> 
+
+在大型设备上我们推荐的比例为 33%/66%。 
+
+提示: 大型设备的屏幕尺寸定义大于 64.0625em。 
+
+大型设备上使用 .large-* 类。 
+
+现在我们在大型设备上添加两列： 
+
+<div class="small-3 medium-6 large-4 columns">....</div>
+<div class="small-9 medium-6 large-8 columns">....</div> 
+
+解析 
+
+小型设备两个列的比例为 25%/75% ( .small-3 和 .small-9 ) 
+
+中型设备两个列的比例为 50%/50% ( .medium-6 和 .medium-6 ) 
+
+大型设备两个列的比例为 33%/66% ( .large-4 和 .large-8 ) 
+
+实例 
+
+< div class= "row" > 
+< div class= "small-3
+ medium-6 large-4 columns" style= "background-color:yellow;" > 
+< p > 菜鸟教程 < /p > 
+< /div > 
+< div class= "small-9
+ medium-6 large-8 columns" style= "background-color:pink;" > 
+< p > 菜鸟教程 < /p > 
+< /div > 
+< /div > 
+
+尝试一下 » 
+
+注意: 要保证数列加起来是 12 列! 
+
+仅在大型设备上使用 
+
+以下实例中我们指定了 .large-6 类 (不是 .medium-* 和 .small-* )。这表明在大型设备上比例为 50%/50%。但在中型或小型设备上会水平堆叠 (100% 宽度): 
+
+实例 
+
+< div class= "row" > 
+< div class= "large-6
+ columns" style= "background-color:yellow;" > 
+< p > 菜鸟教程 < /p > 
+< /div > 
+< div class= "large-6
+ columns" style= "background-color:pink;" > 
+< p > 菜鸟教程 < /p > 
+< /div > 
+< /div > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Foundation 网格 – 中型设备 
+
+Foundation 块状网格

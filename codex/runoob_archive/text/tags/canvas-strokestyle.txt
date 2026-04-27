@@ -1,0 +1,113 @@
+URL: https://www.runoob.com/tags/canvas-strokestyle.html
+Title: HTML canvas strokeStyle 属性 | 菜鸟教程
+
+HTML canvas strokeStyle 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas fillStyle 属性 
+
+HTML canvas shadowColor 属性 
+
+HTML canvas strokeStyle 属性 
+
+实例 
+
+绘制一个矩形。请用红色的笔触颜色： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+ctx.strokeStyle="#FF0000"; 
+ctx.strokeRect(20,20,150,100); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 strokeStyle 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+strokeStyle 属性设置或返回用于笔触的颜色、渐变或模式。 
+
+默认值： 
+
+#000000 
+
+JavaScript 语法： 
+
+context .strokeStyle= color | gradient | pattern ; 
+
+属性值 
+
+值 
+
+描述 
+
+color 
+
+指示绘图笔触颜色的 CSS 颜色值 。默认值是 #000000。 
+
+gradient 
+
+用于填充绘图的渐变对象（ 线性 或 放射性 ）。 
+
+pattern 
+
+用于创建 pattern 笔触的 pattern 对象。 
+
+更多实例 
+
+实例 
+
+绘制一个矩形。使用渐变笔触： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+
+var gradient=ctx.createLinearGradient(0,0,170,0); 
+gradient.addColorStop("0","magenta"); 
+gradient.addColorStop("0.5","blue"); 
+gradient.addColorStop("1.0","red"); 
+
+// Fill with gradient 
+ctx.strokeStyle=gradient; 
+ctx.lineWidth=5; 
+ctx.strokeRect(20,20,150,100); 
+
+尝试一下 » 
+
+实例 
+
+用一个渐变笔触来写文本 "Big smile!"： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+
+ctx.font="30px Verdana"; 
+// Create gradient 
+var gradient=ctx.createLinearGradient(0,0,c.width,0); 
+gradient.addColorStop("0","magenta"); 
+gradient.addColorStop("0.5","blue"); 
+gradient.addColorStop("1.0","red"); 
+// Fill with gradient 
+ctx.strokeStyle=gradient; 
+ctx.strokeText("Big smile!",10,50); 
+
+尝试一下 » 
+
+AI 思考中... 
+
+HTML canvas fillStyle 属性 
+
+HTML canvas shadowColor 属性

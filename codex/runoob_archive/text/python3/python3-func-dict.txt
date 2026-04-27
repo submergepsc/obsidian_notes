@@ -1,0 +1,164 @@
+URL: https://www.runoob.com/python3/python3-func-dict.html
+Title: Python dict() 函数 | 菜鸟教程
+
+Python dict() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python bytearray() 函数 
+
+Python eval() 函数 
+
+Python dict() 函数 
+
+dict() 是 Python 中用于创建字典（dictionary）的内置函数。 
+
+字典是 Python 中的键值对（key-value）数据结构，每个键对应一个值。 dict() 函数可以以多种方式创建字典。 
+
+单词释义 ： dict 是 dictionary （字典）的缩写。 
+
+基本语法与参数 
+
+语法格式 
+
+dict()
+dict(mapping)
+dict(**kwargs)
+dict(iterable, **kwargs) 
+
+参数说明 
+
+参数 mapping ： 
+
+类型： 映射对象（如字典） 
+
+描述： 从映射对象创建新字典。 
+
+参数 kwargs ： 
+
+类型： 关键字参数 
+
+描述： 使用关键字参数创建字典。 
+
+参数 iterable ： 
+
+类型： 可迭代对象 
+
+描述： 元素为键值对的可迭代对象。 
+
+函数说明 
+
+返回值 ： 返回一个字典对象。 
+
+特点 ： 字典的键必须是不可变类型（如字符串、数字、元组）。 
+
+实例 
+
+示例 1：创建字典 
+
+实例 
+
+# 空字典 
+
+d = dict ( ) 
+
+print ( d ) # 输出: {} 
+
+# 关键字参数（最常用） 
+
+d = dict ( name = "Tom" , age = 20 ) 
+
+print ( d ) # 输出: {'name': 'Tom', 'age': 20} 
+
+# 从映射对象创建 
+
+d1 = { "name" : "Tom" } 
+
+d2 = dict ( d1 ) 
+
+print ( d2 ) # 输出: {'name': 'Tom'} 
+
+# 从可迭代对象创建（元素为键值对） 
+
+pairs = [ ( "name" , "Tom" ) , ( "age" , 20 ) ] 
+
+d = dict ( pairs ) 
+
+print ( d ) # 输出: {'name': 'Tom', 'age': 20} 
+
+# 从zip创建 
+
+keys = [ "name" , "age" , "city" ] 
+
+values = [ "Tom" , 20 , "Beijing" ] 
+
+d = dict ( zip ( keys , values ) ) 
+
+print ( d ) # 输出: {'name': 'Tom', 'age': 20, 'city': 'Beijing'} 
+
+运行结果预期: 
+
+{}
+{'name': 'Tom', 'age': 20}
+{'name': 'Tom'}
+{'name': 'Tom', 'age': 20}
+{'name': 'Tom', 'age': 20, 'city': 'Beijing'} 
+
+代码解析: 
+
+关键字参数是最常用的创建方式。 
+
+可迭代对象的元素必须是键值对（tuple 或 list）。 
+
+dict(zip()) 是合并两个列表为字典的常用技巧。 
+
+示例 2：字典操作 
+
+实例 
+
+# 访问值 
+
+d = { "name" : "Tom" , "age" : 20 } 
+
+print ( d [ "name" ] ) # 输出: Tom 
+
+print ( d. get ( "age" ) ) # 输出: 20 
+
+# 添加/修改 
+
+d [ "city" ] = "Beijing" 
+
+d [ "age" ] = 21 
+
+print ( d ) # 输出: {'name': 'Tom', 'age': 21, 'city': 'Beijing'} 
+
+# 删除 
+
+del d [ "age" ] 
+
+print ( d ) # 输出: {'name': 'Tom', 'city': 'Beijing'} 
+
+# 遍历 
+
+for key , value in d. items ( ) : 
+
+print ( f "{key}: {value}" ) 
+
+运行结果预期: 
+
+Tom
+20
+{'name': 'Tom', 'age': 21, 'city': 'Beijing'}
+{'name': 'Tom', 'city': 'Beijing'}
+name: Tom
+city: Beijing 
+
+字典支持丰富的操作：访问、添加、修改、删除、遍历等。 
+
+AI 思考中... 
+
+Python bytearray() 函数 
+
+Python eval() 函数

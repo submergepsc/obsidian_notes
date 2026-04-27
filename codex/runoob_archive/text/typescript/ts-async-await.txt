@@ -1,0 +1,254 @@
+URL: https://www.runoob.com/typescript/ts-async-await.html
+Title: TypeScript async/await 异步编程 | 菜鸟教程
+
+TypeScript async/await 异步编程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+TypeScript 教程 
+
+TypeScript 迭代器与生成器 
+
+TypeScript Promise 详解 
+
+TypeScript async/await 异步编程 
+
+async/await 是 ES2017 引入的异步编程语法糖，让异步代码看起来像同步代码。 
+
+上图展示了 async/await 相比传统 Promise 的优势：代码更简洁，执行流程更清晰。 
+
+Promise 基础 
+
+Promise 代表一个异步操作的最终结果。 
+
+实例 
+
+// 创建 Promise 
+
+var promise = new Promise ( function ( resolve , reject ) { 
+
+var success = true ; 
+
+if ( success ) { 
+
+resolve ( "操作成功" ) ; 
+
+} else { 
+
+reject ( "操作失败" ) ; 
+
+} 
+
+} ) ; 
+
+promise. then ( function ( result ) { 
+
+console. log ( "成功: " + result ) ; 
+
+} ) [ "catch" ] ( function ( error ) { 
+
+console. log ( "失败: " + error ) ; 
+
+} ) ; 
+
+运行结果： 
+
+成功: 操作成功 
+
+async 函数 
+
+使用 async 关键字声明异步函数。 
+
+实例 
+
+// async 函数自动返回 Promise 
+
+async function greet ( ) : Promise < string > { 
+
+return "Hello, World!" ; 
+
+} 
+
+greet ( ) . then ( function ( result ) { 
+
+console. log ( "结果: " + result ) ; 
+
+} ) ; 
+
+// 异步函数返回 Promise 
+
+async function getData ( ) { 
+
+return { name : "Alice" , age : 25 } ; 
+
+} 
+
+getData ( ) . then ( function ( data ) { 
+
+console. log ( "数据: " + JSON. stringify ( data ) ) ; 
+
+} ) ; 
+
+运行结果： 
+
+结果: Hello, World!
+数据: {"name":"Alice","age":25} 
+
+await 关键字 
+
+await 等待 Promise 完成并获取结果。 
+
+实例 
+
+// 模拟异步操作 
+
+function delay ( ms : number ) : Promise < string > { 
+
+return new Promise ( function ( resolve ) { 
+
+setTimeout ( function ( ) { 
+
+resolve ( "完成!" ) ; 
+
+} , ms ) ; 
+
+} ) ; 
+
+} 
+
+async function main ( ) { 
+
+console. log ( "开始..." ) ; 
+
+var result = await delay ( 100 ) ; 
+
+console. log ( "结果: " + result ) ; 
+
+console. log ( "结束" ) ; 
+
+} 
+
+main ( ) ; 
+
+运行结果： 
+
+开始...
+结果: 完成!
+结束 
+
+错误处理 
+
+使用 try/catch 处理异步错误。 
+
+实例 
+
+function mayFail ( shouldFail : boolean ) : Promise < string > { 
+
+return new Promise ( function ( resolve , reject ) { 
+
+if ( shouldFail ) { 
+
+reject ( new Error ( "操作失败" ) ) ; 
+
+} else { 
+
+resolve ( "操作成功" ) ; 
+
+} 
+
+} ) ; 
+
+} 
+
+async function handleError ( ) { 
+
+try { 
+
+var result = await mayFail ( true ) ; 
+
+console. log ( "结果: " + result ) ; 
+
+} catch ( error ) { 
+
+console. log ( "捕获错误: " + error. message ) ; 
+
+} 
+
+} 
+
+handleError ( ) ; 
+
+运行结果： 
+
+捕获错误: 操作失败 
+
+并行执行 
+
+使用 Promise.all 并行执行多个异步操作。 
+
+实例 
+
+function fetchUser ( id : number ) : Promise < { id : number ; name : string } > { 
+
+return Promise. resolve ( { id : id , name : "User" + id } ) ; 
+
+} 
+
+async function main ( ) { 
+
+// 串行执行 
+
+console. time ( "串行" ) ; 
+
+var user1 = await fetchUser ( 1 ) ; 
+
+var user2 = await fetchUser ( 2 ) ; 
+
+console. log ( "串行完成: " + user1. name + ", " + user2. name ) ; 
+
+console. timeEnd ( "串行" ) ; 
+
+// 并行执行 
+
+console. time ( "并行" ) ; 
+
+var results = await Promise. all ( [ fetchUser ( 1 ) , fetchUser ( 2 ) ] ) ; 
+
+console. log ( "并行完成: " + results [ 0 ] . name + ", " + results [ 1 ] . name ) ; 
+
+console. timeEnd ( "并行" ) ; 
+
+} 
+
+main ( ) ; 
+
+运行结果： 
+
+串行完成: User1, User2
+并行完成: User1, User2 
+
+async/await 相比 Promise 的优势 
+
+代码更简洁、更易读 
+
+同步代码风格 
+
+更好的错误堆栈 
+
+易于调试 
+
+总结 
+
+async： 声明异步函数 
+
+await： 等待 Promise 
+
+错误处理： try/catch 
+
+并行： Promise.all 
+
+AI 思考中... 
+
+TypeScript 迭代器与生成器 
+
+TypeScript Promise 详解

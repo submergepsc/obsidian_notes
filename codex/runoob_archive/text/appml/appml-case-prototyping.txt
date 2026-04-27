@@ -1,0 +1,138 @@
+URL: https://www.runoob.com/appml/appml-case-prototyping.html
+Title: AppML 案例原型 | 菜鸟教程
+
+AppML 案例原型 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+AppML 教程 
+
+AppML 案例简介 
+
+AppML 案例模型 
+
+<AppML> 案例研究 - 原型 
+
+此案例研究演示了如何构建一个完整的 <AppML> 互联网应用程序，具有针对数据库中的若干表进行信息列举、编辑和搜索的功能。 
+
+原型 
+
+在本章中，我们将为数据库中的每个表建立一个原型模型。 
+
+原型是非常便于使用的开发应用程序的起点。 
+
+原型模型 
+
+首先，为原型创建一个文件夹。该文件夹命名为 Prototypes。 
+
+然后，为数据库中的每个表创建一个原型模型。 
+
+使用 SELECT * from 每个表，并保存模型为 XML 文件： 
+
+模型：Proto_Customers.xml 
+
+<appml> 
+<datasource> 
+<database> 
+<connection>Demo</connection> 
+<sql>SELECT * FROM Customers</sql> 
+</database> 
+</datasource> 
+</appml> 
+
+模型：Proto_Suppliers.xml 
+
+<appml> 
+<datasource> 
+<database> 
+<connection>Demo</connection> 
+<sql>SELECT * FROM Suppliers</sql> 
+</database> 
+</datasource> 
+</appml> 
+
+模型：Proto_Products.xml 
+
+<appml> 
+<datasource> 
+<database> 
+<connection>Demo</connection> 
+<sql>SELECT * FROM Products</sql> 
+</database> 
+</datasource> 
+</appml> 
+
+原型视图 
+
+创建一个原型视图，把它保存为 Demo_Prototype.html，并尝试一下： 
+
+视图：Demo_Prototype.htm 
+
+<h1>Customers</h1> 
+<div id="List01"></div> 
+
+<script src="appml.js"></script> 
+<script> 
+customers=new 
+ AppML("appml.php","Prototypes/Customers"); 
+customers.run("List01"); 
+</script> 
+
+尝试一下 » 
+
+现在把所有的合并在一起 
+
+最后，通过少量 JavaScript 编码，为所有原型模型创建一个简单的原型页面： 
+
+Demo_Prototype_Views.htm 
+
+<!DOCTYPE html> 
+<html> 
+<head> 
+<link rel="stylesheet" 
+ href="appml.css" /> 
+</head> 
+
+<body> 
+<h1>Demo Applications</h1> 
+
+<button onclick='myOpen("Customers")'>Customers</button> 
+<button 
+ onclick='myOpen("Products")'>Products</button> 
+<button 
+ onclick='myOpen("Suppliers")'>Suppliers</button> 
+<button 
+ onclick='myOpen("Shippers")'>Shippers</button> 
+<button 
+ onclick='myOpen("Categories")'>Categories</button> 
+<button 
+ onclick='myOpen("Employees")'>Employees</button> 
+<button 
+ onclick='myOpen("Orders")'>Orders</button> 
+<button 
+ onclick='myOpen("OrderDetails")'>OrderDetails</button> 
+<br><br> 
+
+<div id="Place01"></div> 
+
+<script src="appml.js"></script> 
+<script> 
+function myOpen(pname) 
+{ 
+var app_obj 
+app_obj=new 
+ AppML("appml.php","Prototypes/" + pname); 
+app_obj.run("Place01"); 
+} 
+</script> 
+
+</body> 
+</html> 
+
+显示结果 » 
+
+AI 思考中... 
+
+AppML 案例简介 
+
+AppML 案例模型

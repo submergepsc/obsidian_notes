@@ -1,0 +1,319 @@
+URL: https://www.runoob.com/go/go-constants.html
+Title: Go 语言常量 | 菜鸟教程
+
+Go 语言常量 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Go 语言教程 
+
+Go 语言变量 
+
+Go 语言运算符 
+
+Go 语言常量 
+
+常量是一个简单值的标识符，在程序运行时，不会被修改的量。常量中的数据类型只可以是布尔型、数字型（整数型、浮点型和复数）和字符串型。 
+
+单词释义 ： const 是 constant （常量）的缩写，表示程序中不可变的值。 
+
+基本语法与参数 
+
+常量的定义格式： 
+
+const identifier [type] = value 
+
+语法说明 
+
+identifier ：常量名称，遵循 Go 标识符命名规则（字母、数字、下划线，且不能以数字开头）。 
+
+type （可选）：类型名，如果省略则由编译器自动推断。 
+
+value ：常量的值。 
+
+定义方式 
+
+显式类型定义 ： const b string = "abc" 
+
+隐式类型定义 ： const b = "abc" 
+
+批量定义 ： const c_name1, c_name2 = value1, value2 
+
+实例 
+
+示例 1：基础常量定义 
+
+实例 
+
+package main 
+
+import "fmt" 
+
+func main () { 
+
+const LENGTH int = 10 
+
+const WIDTH int = 5 
+
+var area int 
+
+const a , b , c = 1 , false , "str" // 多重赋值 
+
+area = LENGTH * WIDTH 
+
+fmt . Printf ( "面积为 : %d" , area ) 
+
+println () 
+
+println ( a , b , c ) 
+
+} 
+
+运行结果预期: 
+
+面积为 : 50
+1 false str 
+
+代码解析: 
+
+const LENGTH int = 10 定义了一个整型常量 LENGTH，值为 10。 
+
+const WIDTH int = 5 定义了一个整型常量 WIDTH，值为 5。 
+
+const a, b, c = 1, false, "str" 使用多重赋值同时定义多个不同类型的常量。 
+
+area = LENGTH * WIDTH 计算面积并赋值给变量 area。 
+
+常量组与枚举 
+
+Go 语言没有枚举（enum）关键字，通常使用常量组来实现枚举效果： 
+
+实例 
+
+package main 
+
+import "fmt" 
+
+// 定义性别枚举 
+
+const ( 
+
+Unknown = 0 
+
+Female = 1 
+
+Male = 2 
+
+) 
+
+func main () { 
+
+fmt . Printf ( "未知=%d, 女性=%d, 男性=%d \n " , Unknown , Female , Male ) 
+
+} 
+
+运行结果预期: 
+
+未知=0, 女性=1, 男性=2 
+
+代码解析: 
+
+使用常量组可以定义一组相关的常量值。 
+
+数字 0、1、2 分别代表未知性别、女性和男性。 
+
+内置函数在常量中的应用 
+
+常量表达式中可以使用 len() 、 cap() 、 unsafe.Sizeof() 等内置函数计算表达式的值。 
+
+注意： 常量表达式中函数必须是内置函数。 
+
+实例 
+
+package main 
+
+import ( 
+
+"fmt" 
+
+"unsafe" 
+
+) 
+
+const ( 
+
+a = "abc" 
+
+b = len ( a ) 
+
+c = unsafe . Sizeof ( a ) 
+
+) 
+
+func main () { 
+
+fmt . Printf ( "a=%s, b=%d, c=%d \n " , a , b , c ) 
+
+} 
+
+运行结果预期: 
+
+a=abc, b=3, c=16 
+
+代码解析: 
+
+a = "abc" ：字符串常量。 
+
+b = len(a) ：使用 len() 获取字符串长度，结果为 3。 
+
+c = unsafe.Sizeof(a) ：使用 unsafe.Sizeof() 获取变量内存占用，结果为 16 字节（字符串结构体在 64 位系统上占 16 字节）。 
+
+iota 常量计数器 
+
+iota 是 Go 语言的特殊常量，也称为常量计数器。它可以在 const 声明块中自动生成递增的序列值。 
+
+重要特性 ： 
+
+iota 在 const 关键字出现时将被重置为 0。 
+
+const 中每新增一行常量声明，iota 自动计数加 1。 
+
+可以理解为 const 语句块中的行索引（从 0 开始）。 
+
+示例 1：基础 iota 用法 
+
+实例 
+
+package main 
+
+import "fmt" 
+
+// iota 从 0 开始，每行加 1 
+
+const ( 
+
+a = iota // 0 
+
+b // 1（省略值，默认使用上一行的 iota） 
+
+c // 2 
+
+) 
+
+func main () { 
+
+fmt . Printf ( "a=%d, b=%d, c=%d \n " , a , b , c ) 
+
+} 
+
+运行结果预期: 
+
+a=0, b=1, c=2 
+
+代码解析: 
+
+当常量值省略时，默认使用上一行的 iota 值。 
+
+因此 b=1, c=2。 
+
+示例 2：iota 详细用法 
+
+实例 
+
+package main 
+
+import "fmt" 
+
+func main () { 
+
+const ( 
+
+a = iota // 0 
+
+b // 1 
+
+c // 2 
+
+d = "ha" // 独立值，iota += 1 
+
+e // "ha"，iota += 1 
+
+f = 100 // 独立值，iota += 1 
+
+g // 100，iota += 1 
+
+h = iota // 7，恢复使用 iota 值 
+
+i // 8 
+
+) 
+
+fmt . Printf ( "a=%d, b=%d, c=%d, d=%s, e=%s, f=%d, g=%d, h=%d, i=%d \n " , a , b , c , d , e , f , g , h , i ) 
+
+} 
+
+运行结果预期: 
+
+a=0, b=1, c=2, d=ha, e=ha, f=100, g=100, h=7, i=8 
+
+代码解析: 
+
+当显式赋值时，使用该值，但 iota 仍然递增。 
+
+当省略赋值时，使用上一行的值。 
+
+在 h = iota 时恢复使用 iota 的当前值（7）。 
+
+示例 3：iota 与位移运算 
+
+实例 
+
+package main 
+
+import "fmt" 
+
+const ( 
+
+i = 1 << iota // 1 << 0 = 1 
+
+j = 3 << iota // 3 << 1 = 6 
+
+k // 3 << 2 = 12 
+
+l // 3 << 3 = 24 
+
+) 
+
+func main () { 
+
+fmt . Printf ( "i=%d, j=%d, k=%d, l=%d \n " , i , j , k , l ) 
+
+} 
+
+运行结果预期: 
+
+i=1, j=6, k=12, l=24 
+
+代码解析: 
+
+<< 是左移运算符， x << n 等价于 x * 2^n 。 
+
+i = 1 << 0 = 1 ：1 左移 0 位，结果为 1。 
+
+j = 3 << 1 = 6 ：3 左移 1 位，二进制 11 变为 110，即 6。 
+
+k = 3 << 2 = 12 ：3 左移 2 位，二进制 11 变为 1100，即 12。 
+
+l = 3 << 3 = 24 ：3 左移 3 位，二进制 11 变为 11000，即 24。 
+
+补充说明 
+
+1 << n = 1 * 2^n 
+
+3 << n = 3 * 2^n 
+
+AI 思考中... 
+
+Go 语言变量 
+
+Go 语言运算符

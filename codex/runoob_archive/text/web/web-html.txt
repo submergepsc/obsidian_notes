@@ -1,0 +1,79 @@
+URL: https://www.runoob.com/web/web-html.html
+Title: HTML 指南 | 菜鸟教程
+
+HTML 指南 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+网站建设指南 
+
+WWW 指南- 万维网(World Wide Web) 
+
+CSS 指南 
+
+HTML 指南 
+
+HTML - 超文本标记语言 (Hyper Text Markup Language) 
+
+HTML 是建设网站/网页制作主要语言。 
+
+HTML 是一种易于学习的标记语言。 
+
+HTML 使用像 <p> 尖括号内标记标签来定义网页的内容： 
+
+HTML 实例 
+
+<!DOCTYPE html> 
+
+< html > 
+
+< head > 
+
+< meta charset = "utf-8" > 
+
+< title > 菜鸟教程(runoob.com) < / title > 
+
+< / head > 
+
+< body > 
+
+< h1 > 我的第一个标题 < / h1 > 
+
+< p > 我的第一个段落。 < / p > 
+
+< / body > 
+
+< / html > 
+
+尝试一下 » 
+点击 "尝试一下" 按钮查看实例。 
+
+HTML 使用开始标记和结束标记来标记一个网页元素，在上面的例子： 
+
+<h1> 标签标志着一个标题开始， </h1> 标志着该标题末尾。 
+
+<p> 标签标志着一个段落开始， </p> 标志着该段末尾。 
+
+通过使用简单的 HTML 标签，网页设计师可以为一个网页（HTML文档）添加标题，段落，文字，表格，图片，列表，编程代码等。 
+
+Web 浏览器（Edge，火狐，Chrome等）读取 HTML 文档，解释 HTML 标记，并显示正确用户可读的内容（不显示 HTML 标签）： 
+
+根据 HTML 标准，HTML 可用于定义网页的内容。 
+
+要定义视觉样式（颜色，大小，外观，布局等），应使用 CSS（层叠样式表）（见下一章）。 
+
+如何学习 HTML? 
+
+菜鸟教程提供了完整的 HTML 教程，你可以学到所有关于 HTML 的知识。 
+
+HTML 学习简单 - 你会喜欢上它的。 
+
+学习我们的 完整的 HTML 教程 
+
+学习我们的 完整的 HTML 参考手册 
+
+AI 思考中... 
+
+WWW 指南- 万维网(World Wide Web) 
+
+CSS 指南

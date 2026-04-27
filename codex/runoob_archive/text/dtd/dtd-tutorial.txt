@@ -1,0 +1,41 @@
+URL: https://www.runoob.com/dtd/dtd-tutorial.html
+Title: DTD 教程 | 菜鸟教程
+
+DTD 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+DTD 教程 
+
+DTD 实例 
+
+DTD 教程 
+
+DTD（文档类型定义）的作用是定义 XML 文档的合法构建模块。 
+
+DTD 可被成行地声明于 XML 文档中，也可作为一个外部引用。 
+
+现在开始学习DTD! 
+
+DTD 新闻实例 
+
+<!DOCTYPE NEWSPAPER [ 
+
+<!ELEMENT NEWSPAPER (ARTICLE+)> 
+<!ELEMENT ARTICLE (HEADLINE,BYLINE,LEAD,BODY,NOTES)> 
+<!ELEMENT HEADLINE (#PCDATA)> 
+<!ELEMENT BYLINE (#PCDATA)> 
+<!ELEMENT LEAD (#PCDATA)> 
+<!ELEMENT BODY (#PCDATA)> 
+<!ELEMENT NOTES (#PCDATA)> 
+
+<!ATTLIST ARTICLE AUTHOR CDATA #REQUIRED> 
+<!ATTLIST ARTICLE EDITOR CDATA #IMPLIED> 
+<!ATTLIST ARTICLE DATE CDATA #IMPLIED> 
+<!ATTLIST ARTICLE EDITION CDATA #IMPLIED> 
+
+]> 
+
+AI 思考中... 
+
+DTD 实例

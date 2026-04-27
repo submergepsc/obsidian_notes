@@ -1,0 +1,91 @@
+URL: https://www.runoob.com/xsl/el-copy-of.html
+Title: XSLT <xsl:copy-of> 元素 | 菜鸟教程
+
+XSLT <xsl:copy-of> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:copy> 元素 
+
+XSLT <xsl:decimal-format> 元素 
+
+XSLT <xsl:copy-of> 元素 
+
+定义和用法 
+
+<xsl:copy-of> 元素可创建当前节点的一个副本。 
+
+注意： 当前节点的 Namespace 节点、子节点以及属性都会被自动复制！ 
+
+提示： 该元素可用于把相同节点的多个副本插入到输出的不同位置。 
+
+语法 
+
+<xsl:copy-of select="expression"/> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+select 
+
+expression 
+
+必需。规定要拷贝的内容。 
+
+实例 1 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:variable name="header"> 
+<tr> 
+<th>Element</th> 
+<th>描述</th> 
+</tr> 
+</xsl:variable> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<table> 
+<xsl:copy-of select="$header" /> 
+<xsl:for-each select="reference/record"> 
+<tr> 
+<xsl:if test="category='XML'"> 
+<td><xsl:value-of select="element"/></td> 
+<td><xsl:value-of select="description"/></td> 
+</xsl:if> 
+</tr> 
+</xsl:for-each> 
+</table> 
+<br /> 
+<table> 
+<xsl:copy-of select="$header" /> 
+<xsl:for-each select="table/record"> 
+<tr> 
+<xsl:if test="category='XSL'"> 
+<td><xsl:value-of select="element"/></td> 
+<td><xsl:value-of select="description"/></td> 
+</xsl:if> 
+</tr> 
+</xsl:for-each> 
+</table> 
+</body> 
+</html> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+AI 思考中... 
+
+XSLT <xsl:copy> 元素 
+
+XSLT <xsl:decimal-format> 元素

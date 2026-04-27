@@ -1,0 +1,115 @@
+URL: https://www.runoob.com/rdf/rdf-containers.html
+Title: RDF 容器 | 菜鸟教程
+
+RDF 容器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+RDF 教程 
+
+RDF 主要元素 
+
+RDF 集合 
+
+RDF 容器 元素 
+
+RDF 容器用于描述一组事物。举个例子，把某本书的作者列在一起。 
+
+下面的 RDF 元素用于描述这些的组：<Bag>、<Seq> 以及 <Alt>。 
+
+<rdf:Bag> 元素 
+
+<rdf:Bag> 元素用于描述一个规定为无序的值的列表。 
+
+<rdf:Bag> 元素可包含重复的值。 
+
+实例 
+
+<?xml version="1.0"?> 
+
+<rdf:RDF 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+xmlns:cd="http://www.recshop.fake/cd#"> 
+
+<rdf:Description 
+rdf:about="http://www.recshop.fake/cd/Beatles"> 
+<cd:artist> 
+<rdf:Bag> 
+<rdf:li>John</rdf:li> 
+<rdf:li>Paul</rdf:li> 
+<rdf:li>George</rdf:li> 
+<rdf:li>Ringo</rdf:li> 
+</rdf:Bag> 
+</cd:artist> 
+</rdf:Description> 
+
+</rdf:RDF> 
+
+<rdf:Seq> 元素 
+
+<rdf:Seq> 元素用于描述一个规定为有序的值的列表（比如一个字母顺序的排序）。 
+
+<rdf:Bag> 元素可包含重复的值。 
+
+实例 
+
+<?xml version="1.0"?> 
+
+<rdf:RDF 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+xmlns:cd="http://www.recshop.fake/cd#"> 
+
+<rdf:Description 
+rdf:about="http://www.recshop.fake/cd/Beatles"> 
+<cd:artist> 
+<rdf:Seq> 
+<rdf:li>George</rdf:li> 
+<rdf:li>John</rdf:li> 
+<rdf:li>Paul</rdf:li> 
+<rdf:li>Ringo</rdf:li> 
+</rdf:Seq> 
+</cd:artist> 
+</rdf:Description> 
+
+</rdf:RDF> 
+
+<rdf:Alt> 元素 
+
+<rdf:Alt> 元素用于一个可替换的值的列表（用户仅可选择这些值的其中之一）。 
+
+实例 
+
+<?xml version="1.0"?> 
+
+<rdf:RDF 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+xmlns:cd="http://www.recshop.fake/cd#"> 
+
+<rdf:Descriptio 
+rdf:about="http://www.recshop.fake/cd/Beatles"> 
+<cd:format> 
+<rdf:Alt> 
+<rdf:li>CD</rdf:li> 
+<rdf:li>Record</rdf:li> 
+<rdf:li>Tape</rdf:li> 
+</rdf:Alt> 
+</cd:format> 
+</rdf:Descriptio> 
+
+</rdf:RDF> 
+
+RDF 术语 
+
+在上面的例子中，我们在描述容器元素时已经讨论了"值的列表"。在 RDF 中，这些"值的列表"被称为成员（members）。 
+
+因此，我们可以这么说： 
+
+一个容器是一个包含事物的资源 
+
+被包含的事物被称为成员（不能称为"值的列表"）。 
+
+AI 思考中... 
+
+RDF 主要元素 
+
+RDF 集合

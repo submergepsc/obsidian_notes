@@ -1,0 +1,164 @@
+URL: https://www.runoob.com/scala/scala-escape-char.html
+Title: Scala 转义字符 | 菜鸟教程
+
+Scala 转义字符 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Scala 教程 
+
+Scala 字面量 
+
+Scala 转义字符 
+
+在 Scala 中，转义字符用于表示无法直接在字符串字面量中书写的特殊字符。 
+
+转义字符以反斜杠 \ 开头，紧跟一个特定的字符，表示某种特殊含义或效果。 
+
+下表列出了常见的转义字符： 
+
+转义字符 
+
+描述 
+
+\b 
+
+退格符 
+
+\t 
+
+制表符 (Tab) 
+
+\n 
+
+换行符 (Line Feed) 
+
+\f 
+
+换页符 (Form Feed) 
+
+\r 
+
+回车符 (Carriage Return) 
+
+\" 
+
+双引号 
+
+\' 
+
+单引号 
+
+\\ 
+
+反斜杠 
+
+在字符或字符串中，0 到 255 间的 Unicode 字符可以用一个八进制转义序列来表示，即反斜杠 \ 后跟最多三位八进制数字。 
+
+如果反斜杠 \ 后面的字符序列不能构成一个合法的转义序列，将会导致编译错误。 
+
+以下实例演示了一些转义字符的使用： 
+
+实例 
+
+object Test { 
+
+def main ( args : Array [ String ] ) { 
+
+println ( "Hello \t World \n \n " ) ; 
+
+} 
+
+} 
+
+运行实例 » 
+
+执行以上代码输出结果如下所示： 
+
+$ scalac Test.scala
+$ scala Test
+Hello World 
+
+以下是一个展示各种转义字符使用的 Scala 程序示例： 
+
+实例 
+
+object EscapeCharacterExamples { 
+
+def main ( args : Array [ String ] ) : Unit = { 
+
+val backspace = "Hello \b World" // "HelloWorld" 
+
+val tab = "Hello \t World" // "Hello World" 
+
+val newline = "Hello \n World" // "Hello 
+
+// World" 
+
+val formFeed = "Hello \f World" // "HelloWorld" 
+
+val carriageReturn = "Hello \r World" // "World" 
+
+val doubleQuote = "He said, \" Hello, World! \" " // "He said, "Hello, World!"" 
+
+val singleQuote = ' \" ' // '"' 
+
+val backslash = "This is a backslash: \\ " // "This is a backslash: \" 
+
+// 输出示例 
+
+println ( s "Backspace: $backspace" ) 
+
+println ( s "Tab: $tab" ) 
+
+println ( s "Newline: $newline" ) 
+
+println ( s "FormFeed: $formFeed" ) 
+
+println ( s "CarriageReturn: $carriageReturn" ) 
+
+println ( s "DoubleQuote: $doubleQuote" ) 
+
+println ( s "SingleQuote: $singleQuote" ) 
+
+println ( s "Backslash: $backslash" ) 
+
+} 
+
+} 
+
+执行上述代码，输出结果如下： 
+
+、 
+
+Backspace: HelloWorld
+Tab: Hello World
+Newline: Hello
+World
+FormFeed: HelloWorld
+CarriageReturn: World
+DoubleQuote: He said, "Hello, World!"
+SingleQuote: "
+Backslash: This is a backslash: \ 
+
+实例说明： 
+
+\b (退格符) : 使光标回退一个位置，但不会删除字符。例如， "Hello\bWorld" 结果为 HelloWorld ，这里的并不删除 "o"，所以实际显示效果取决于终端或输出设备。 
+
+\t (制表符) : 插入一个水平制表符，相当于一定数量的空格。 "Hello\tWorld" 会在 "Hello" 和 "World" 之间插入一个制表符，通常是四个或八个空格。 
+
+\n (换行符) : 移动到下一行开始新的输出。 "Hello\nWorld" 会把 "Hello" 和 "World" 分成两行显示。 
+
+\f (换页符) : 插入一个换页符，通常用来控制打印机换页，但在控制台输出中一般没有明显效果。 
+
+\r (回车符) : 回到当前行的开头。 "Hello\rWorld" 会覆盖掉当前行的内容，显示 "World"。 
+
+\" (双引号) : 插入一个双引号。 "He said, \"Hello, World!\"" 显示 He said, "Hello, World!" 。 
+
+\' (单引号) : 插入一个单引号。通常用在字符字面量中，如 '\'\'' 表示一个单引号字符。 
+
+\\ (反斜杠) : 插入一个反斜杠。 "This is a backslash: \\" 显示 This is a backslash: \ 。 
+
+AI 思考中... 
+
+Scala 字面量

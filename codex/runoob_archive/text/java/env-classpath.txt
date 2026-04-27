@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/env-classpath.html
+Title: Java 实例 – 如何执行指定class文件目录（classpath） | 菜鸟教程
+
+Java 实例 – 如何执行指定class文件目录（classpath） | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 如何执行编译过 Java 文件 
+
+Java 实例 – 如何查看当前 Java 运行的版本? 
+
+Java 实例 - 如何执行指定class文件目录（classpath） 
+
+如果我们 Java 编译后的class文件不在当前目录，我们可以使用 -classpath 来指定class文件目录： 
+
+C:> java -classpath C:\java\DemoClasses HelloWorld 
+
+以上命令中我们使用了 -classpath 参数指定了 HelloWorld 的 class 文件所在目录。 
+
+如果class文件在jar文件中，则命令如下： 
+
+c:> java -classpath C:\java\myclasses.jar 
+
+AI 思考中... 
+
+Java 实例 – 如何执行编译过 Java 文件 
+
+Java 实例 – 如何查看当前 Java 运行的版本?

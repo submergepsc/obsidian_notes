@@ -1,0 +1,403 @@
+URL: https://www.runoob.com/r/r-array.html
+Title: R 数组 | 菜鸟教程
+
+R 数组 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+R 教程 
+
+R 矩阵 
+
+R 因子 
+
+R 数组 
+
+数组也是 R 语言的对象，R 语言可以创建一维或多维数组。 
+
+R 语言数组是一个同一类型的集合，前面我们学的矩阵 matrix 其实就是一个二维数组。 
+
+向量、矩阵、数组关系可以看下图： 
+
+R 语言数组创建使用 array() 函数，该函数使用向量作为输入参数，可以使用 dim 设置数组维度。 
+
+array() 函数语法格式如下： 
+
+array(data = NA, dim = length(data), dimnames = NULL) 
+
+参数说明： 
+
+data - 指定数组的数据源，可以是一个向量、矩阵或列表。 
+
+dim - 指定数组的维度，可以是一个整数向量或一个表示维度的元组，默认是一维数组。例如， dim = c(2, 3, 4) 表示创建一个 2x3x4 的三维数组。 
+
+dimnames - 可选参数，用于指定数组每个维度的名称，可以是一个包含维度名称的列表。 
+
+在 R 中，数组索引是从 1 开始的，与其他编程语言的习惯有所不同。 
+
+此外，R 还提供了丰富的函数和操作符用于处理数组数据，如索引、切片、重塑、聚合等。 
+
+在 R 中，可以使用 矩阵（Matrix） 或 列表（List） 来表示多维数组。 
+
+矩阵（Matrix）： 矩阵是 R 中最常用的表示数组的形式，它是一个二维的结构，具有固定的行数和列数。 
+
+可以使用 matrix() 函数创建矩阵，指定数据元素和维度。 
+
+实例 
+
+# 创建一个3x3的矩阵 
+
+my_matrix <- matrix ( c ( 1 , 2 , 3 , 4 , 5 , 6 , 7 , 8 , 9 ) , nrow = 3 , ncol = 3 ) 
+
+print ( my_matrix ) 
+
+列表（List） ：列表是 R 中更通用的多维数组形式，它可以包含不同类型的元素，并且每个元素可以是一个矩阵、向量或其他数据结构。 
+
+实例 
+
+# 创建一个包含矩阵和向量的列表 
+
+my_list <- list ( matrix ( c ( 1 , 2 , 3 , 4 ) , nrow = 2 ) , c ( 5 , 6 , 7 ) ) 
+
+print ( my_list ) 
+
+实例 
+
+# 创建一个包含矩阵和向量的列表 
+
+my_list <- list ( matrix ( c ( 1 , 2 , 3 , 4 ) , nrow = 2 ) , c ( 5 , 6 , 7 ) ) 
+
+print ( my_list ) 
+
+除了矩阵和列表，R 还提供了其他数据结构来表示多维数组，如数组（Array）和数据帧（Data Frame）。 
+
+实例 
+
+下面是一些示例来演示 array() 函数的使用： 
+
+使用向量创建一维数组： 
+
+实例 
+
+my_vector <- c ( 1 , 2 , 3 , 4 ) 
+
+my_array <- array ( my_vector, dim = c ( 4 ) ) 
+
+print ( my_array ) 
+
+以下实例我们创建一个 3 行 3 列的的二维数组： 
+
+实例 
+
+# 创建两个不同长度的向量 
+
+vector1 <- c ( 5 , 9 , 3 ) 
+
+vector2 <- c ( 10 , 11 , 12 , 13 , 14 , 15 ) 
+
+# 创建数组 
+
+result <- array ( c ( vector1,vector2 ) , dim = c ( 3 , 3 , 2 ) ) 
+
+print ( result ) 
+
+执行以上代码输出结果为： 
+
+, , 1
+
+ [,1] [,2] [,3]
+[1,] 5 10 13
+[2,] 9 11 14
+[3,] 3 12 15
+
+, , 2
+
+ [,1] [,2] [,3]
+[1,] 5 10 13
+[2,] 9 11 14
+[3,] 3 12 15 
+
+使用 dimnames 参数来设置各个维度的名称：： 
+
+实例 
+
+# 创建两个不同长度的向量 
+
+vector1 <- c ( 5 , 9 , 3 ) 
+
+vector2 <- c ( 10 , 11 , 12 , 13 , 14 , 15 ) 
+
+column. names <- c ( "COL1" , "COL2" , "COL3" ) 
+
+row. names <- c ( "ROW1" , "ROW2" , "ROW3" ) 
+
+matrix. names <- c ( "Matrix1" , "Matrix2" ) 
+
+# 创建数组，并设置各个维度的名称 
+
+result <- array ( c ( vector1,vector2 ) , dim = c ( 3 , 3 , 2 ) , dimnames = list ( row. names ,column. names ,matrix. names ) ) 
+
+print ( result ) 
+
+执行以上代码输出结果为： 
+
+, , Matrix1
+
+ COL1 COL2 COL3
+ROW1 5 10 13
+ROW2 9 11 14
+ROW3 3 12 15
+
+, , Matrix2
+
+ COL1 COL2 COL3
+ROW1 5 10 13
+ROW2 9 11 14
+ROW3 3 12 15 
+
+访问数组元素 
+
+在 R 语言中，可以使用索引操作符 [ ] 来访问多维数组的元素。 
+
+索引操作符允许您按照指定的索引位置获取数组中的特定元素。 
+
+如果想获取数组元素，可以通过使用元素的列索引和行索引，类似坐标形式。 
+
+访问单个元素： 
+
+实例 
+
+my_array <- array ( 1 : 12 , dim = c ( 2 , 3 , 2 ) ) # 创建一个3维数组 
+
+element <- my_array [ 1 , 2 , 1 ] # 访问第一个维度为1，第二个维度为2，第三个维度为1的元素 
+
+print ( element ) 
+
+访问多个元素： 
+
+实例 
+
+my_array <- array ( 1 : 12 , dim = c ( 2 , 3 , 2 ) ) # 创建一个3维数组 
+
+elements <- my_array [ c ( 1 , 2 ) , c ( 2 , 3 ) , c ( 1 , 2 ) ] # 访问多个元素，其中每个维度的索引分别为1和2 
+
+print ( elements ) 
+
+访问二维数组的元素： 
+
+实例 
+
+# 创建两个不同长度的向量 
+
+vector1 <- c ( 5 , 9 , 3 ) 
+
+vector2 <- c ( 10 , 11 , 12 , 13 , 14 , 15 ) 
+
+column. names <- c ( "COL1" , "COL2" , "COL3" ) 
+
+row. names <- c ( "ROW1" , "ROW2" , "ROW3" ) 
+
+matrix. names <- c ( "Matrix1" , "Matrix2" ) 
+
+# 创建数组 
+
+result <- array ( c ( vector1,vector2 ) , dim = c ( 3 , 3 , 2 ) , dimnames = list ( row. names , column. names , matrix. names ) ) 
+
+# 显示数组第二个矩阵中第三行的元素 
+
+print ( result [ 3 ,, 2 ] ) 
+
+# 显示数组第一个矩阵中第一行第三列的元素 
+
+print ( result [ 1 , 3 , 1 ] ) 
+
+# 输出第二个矩阵 
+
+print ( result [ ,, 2 ] ) 
+
+执行以上代码输出结果为： 
+
+COL1 COL2 COL3 
+ 3 12 15 
+[1] 13
+ COL1 COL2 COL3
+ROW1 5 10 13
+ROW2 9 11 14
+ROW3 3 12 15 
+
+使用逻辑条件进行筛选： 
+
+实例 
+
+my_array <- array ( 1 : 12 , dim = c ( 2 , 3 , 2 ) ) # 创建一个3维数组 
+
+filtered_elements <- my_array [ my_array > 5 ] # 选择大于5的元素 
+
+print ( filtered_elements ) # 输出：6 7 8 9 10 11 12 
+
+操作数组元素 
+
+由于数组是由多个维度的矩阵组成，所以我们可以通过访问矩阵的元素来访问数组元素。 
+
+实例 
+
+# 创建两个不同长度的向量 
+
+vector1 <- c ( 5 , 9 , 3 ) 
+
+vector2 <- c ( 10 , 11 , 12 , 13 , 14 , 15 ) 
+
+# 创建数组 
+
+array1 <- array ( c ( vector1,vector2 ) , dim = c ( 3 , 3 , 2 ) ) 
+
+# 创建两个不同长度的向量 
+
+vector3 <- c ( 9 , 1 , 0 ) 
+
+vector4 <- c ( 6 , 0 , 11 , 3 , 14 , 1 , 2 , 6 , 9 ) 
+
+array2 <- array ( c ( vector3,vector4 ) , dim = c ( 3 , 3 , 2 ) ) 
+
+# 从数组中创建矩阵 
+
+matrix1 <- array1 [ ,, 2 ] 
+
+matrix2 <- array2 [ ,, 2 ] 
+
+# 矩阵相加 
+
+result <- matrix1 + matrix2 
+
+print ( result ) 
+
+执行以上代码输出结果为： 
+
+[,1] [,2] [,3]
+[1,] 7 19 19
+[2,] 15 12 14
+[3,] 12 12 26 
+
+另外我们可以使用 apply() 元素对数组元素进行跨维度计算，语法格式如下： 
+
+apply(X, MARGIN, FUN, ...) 
+
+参数说明： 
+
+X ：要应用函数的数组或矩阵。 
+
+MARGIN ：指定应用函数的维度，可以是1表示行，2表示列，或者c(1, 2)表示同时应用于行和列。 
+
+FUN ：要应用的函数，可以是内置函数（如 mean 、 sum 等）或自定义函数。 
+
+... ：可选参数，用于传递给函数的其他参数。 
+
+以下我们使用 apply() 函数来计算数组两个矩阵中每一行对数字之和。 
+
+实例 
+
+# 创建两个不同长度的向量 
+
+vector1 <- c ( 5 , 9 , 3 ) 
+
+vector2 <- c ( 10 , 11 , 12 , 13 , 14 , 15 ) 
+
+# 创建数组 
+
+new. array <- array ( c ( vector1,vector2 ) , dim = c ( 3 , 3 , 2 ) ) 
+
+print ( new. array ) 
+
+# 计算数组中所有矩阵第一行的数字之和 
+
+result <- apply ( new. array , c ( 1 ) , sum ) 
+
+print ( result ) 
+
+执行以上代码输出结果为： 
+
+, , 1
+
+ [,1] [,2] [,3]
+[1,] 5 10 13
+[2,] 9 11 14
+[3,] 3 12 15
+
+, , 2
+
+ [,1] [,2] [,3]
+[1,] 5 10 13
+[2,] 9 11 14
+[3,] 3 12 15
+
+[1] 56 68 60 
+
+对矩阵的行或列应用内置函数： 
+
+实例 
+
+# 创建一个3x3的矩阵 
+
+my_matrix <- matrix ( 1 : 9 , nrow = 3 ) 
+
+# 对每列应用sum函数 
+
+col_sums <- apply ( my_matrix, 2 , sum ) 
+
+print ( col_sums ) 
+
+执行以上代码输出结果为： 
+
+[1] 6 15 24 
+
+对矩阵的行或列应用自定义函数： 
+
+实例 
+
+# 创建一个3x3的矩阵 
+
+my_matrix <- matrix ( 1 : 9 , nrow = 3 ) 
+
+# 自定义函数：计算每行的平均值 
+
+row_mean <- function ( x ) { 
+
+return ( mean ( x ) ) 
+
+} 
+
+# 对每行应用row_mean函数 
+
+row_means <- apply ( my_matrix, 1 , row_mean ) 
+
+print ( row_means ) 
+
+执行以上代码输出结果为： 
+
+[1] 4 5 6 
+
+对数组的多个维度同时应用函数： 
+
+实例 
+
+# 创建一个3维数组 
+
+my_array <- array ( 1 : 12 , dim = c ( 2 , 3 , 2 ) ) 
+
+# 对第一个和第三个维度同时应用mean函数 
+
+result <- apply ( my_array, c ( 1 , 3 ) , mean ) 
+
+print ( result ) 
+
+执行以上代码输出结果为： 
+
+[,1] [,2]
+[1,] 3 9
+[2,] 4 10 
+
+AI 思考中... 
+
+R 矩阵 
+
+R 因子

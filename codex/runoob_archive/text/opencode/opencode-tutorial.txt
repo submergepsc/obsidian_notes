@@ -1,0 +1,130 @@
+URL: https://www.runoob.com/opencode/opencode-tutorial.html
+Title: OpenCode 教程 | 菜鸟教程
+
+OpenCode 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+OpenCode 教程 
+
+OpenCode 简介 
+
+OpenCode 教程 
+
+OpenCode 是一个基于命令行（CLI）的 AI 编程 Agent，能够理解项目上下文，并自动执行开发任务。 
+
+OpenCode 并不是一个简单的代码生成器，而是一个具备 理解 + 执行 能力的智能体工具。 
+
+OpenCode 运行在终端中，而不是 IDE。 
+
+OpenCode 是 Agent（智能体工具），不是 Chat（聊天工具）。 
+
+AI 编程新时代 
+
+过去的软件开发模式是：开发者编写代码，工具提供辅助。 
+
+而在 AI Agent 模式下，开发方式正在发生变化： 
+
+开发者描述需求 
+
+AI 负责实现代码 
+
+开发者负责审查与决策 
+
+这类工具的出现，标志着开发模式从手写代码转向指挥 AI 写代码。 
+
+相比 GitHub Copilot 这类代码补全工具，OpenCode 更进一步，它不仅能生成代码，还能真正执行任务。 
+
+谁适合阅读本教程？ 
+
+已学习过至少一门编程语言（如 JavaScript / Python / Java / Go） 
+
+能看懂基础语法、函数、条件判断和循环 
+
+写过简单项目或练习代码 
+
+希望借助 AI 提升开发效率与工程能力 
+
+独立开发者或需要长期维护项目的工程师 
+
+技术负责人或团队核心成员 
+
+需要具备的基础能力 
+
+基础编程能力（能读懂并编写简单代码） 
+
+基本的代码阅读与理解能力 
+
+会使用常见开发工具（编辑器、命令行） 
+
+具备基本的项目结构认知（目录、模块划分） 
+
+愿意理解代码，而不是完全依赖 AI 
+
+OpenCode vs. 传统 AI 工具 
+
+特性 
+
+聊天式 AI（如 Claude / ChatGPT） 
+
+AI 编程工具（Copilot） 
+
+OpenCode（Agent） 
+
+交互方式 
+
+对话窗口 
+
+IDE 插件 
+
+终端 CLI 
+
+文件访问 
+
+手动上传 
+
+当前文件为主 
+
+自动读取整个项目 
+
+执行能力 
+
+仅生成文本 
+
+仅生成代码 
+
+执行命令 / 修改文件 
+
+上下文理解 
+
+有限对话上下文 
+
+局部代码理解 
+
+项目级上下文理解 
+
+任务完成能力 
+
+辅助 
+
+增强 
+
+自动执行任务 
+
+相关资源 
+
+OpenCode 官网： https://opencode.ai 
+
+OpenCode 官方文档： https://opencode.ai/docs/zh-cn 
+
+OpenCode Github： https://github.com/anomalyco/opencode 
+
+除了 CLI 类工具，目前也有基于 IDE 的 AI 编程环境，例如： 
+
+阿里 Qoder： https://qoder.com/ 
+
+字节 Trae： https://www.trae.com.cn/ 
+
+AI 思考中... 
+
+OpenCode 简介

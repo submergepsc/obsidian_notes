@@ -1,0 +1,101 @@
+URL: https://www.runoob.com/cssref/pr-pos-right.html
+Title: CSS right 属性 | 菜鸟教程
+
+CSS right 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 resize 属性 
+
+CSS3 rotation 属性 
+
+CSS right 属性 
+
+实例 
+
+把图像的右边缘设置在其包含元素右边缘向左 5 像素的位置： 
+
+img 
+{ 
+position:absolute; 
+right:5px; 
+} 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+对于 static 元素，为 auto；对于长度值，则为相应的绝对长度；对于百分比数值，为指定值；否则为 auto。
+对于相对定义元素，left 的计算值始终等于 right。 
+
+right 属性规定元素的右边缘。该属性定义了定位元素右外边距边界与其包含块右边界之间的偏移。 
+
+注意： 如果 "position" 属性的值为 "static"，那么设置 "right" 属性不会产生任何效果。 
+
+默认值： 
+
+auto 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS2 
+
+JavaScript 语法： 
+
+object .style.right="50px" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+right 
+
+1.0 
+
+5.5 
+
+1.0 
+
+1.0 
+
+5.0 
+
+属性值 
+
+值 
+
+描述 
+
+auto 
+
+默认值。通过浏览器计算右边缘的位置。 
+
+% 
+
+设置以包含元素的百分比计的右边位置。可使用负值。 
+
+length 
+
+使用 px、cm 等单位设置元素的右边位置。可使用负值。 
+
+inherit 
+
+规定应该从父元素继承 right 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS Positioning 
+
+AI 思考中... 
+
+CSS3 resize 属性 
+
+CSS3 rotation 属性

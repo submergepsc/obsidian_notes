@@ -1,0 +1,204 @@
+URL: https://www.runoob.com/schema/schema-el-element.html
+Title: XML Schema element 元素 | 菜鸟教程
+
+XML Schema element 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema documentation 元素 
+
+XML Schema extension 元素 
+
+XML Schema element 元素 
+
+定义和用法 
+
+element 元素定义一个元素。 
+
+元素信息 
+
+父元素： schema, choice, all, sequence, group 
+
+语法 
+
+<element 
+id=ID 
+name=NCName 
+ref=QName 
+type=QName 
+substitutionGroup=QName 
+default=string 
+fixed=string 
+form=qualified|unqualified 
+maxOccurs=nonNegativeInteger|unbounded 
+minOccurs=nonNegativeInteger 
+nillable=true|false 
+abstract=true|false 
+block=(#all|list of (extension|restriction)) 
+final=(#all|list of (extension|restriction)) 
+any attributes 
+> 
+
+annotation?,(simpleType|complexType)?,(unique|key|keyref)* 
+
+</element> 
+
+（? 符号声明在 element 元素中，该元素可出现零次或一次，* 符号声明元素可出现零次或多次。） 
+
+属性 
+
+描述 
+
+id 
+
+可选。规定该元素的唯一的 ID。 
+
+name 
+
+可选。规定元素的名称。如果父元素是 schema 元素，则此属性是必需的。 
+
+ref 
+
+可选。对另一个元素的引用。ref 属性可包含一个命名空间前缀。如果父元素是 schema 元素，则不是使用该属性。 
+
+type 
+
+可选。规定内建数据类型的名称，或者规定 simpleType 或 complexType 元素的名称。 
+
+substitutionGroup 
+
+可选。规定可用来替代该元素的元素的名称。 该元素必须具有相同的类型或从指定元素类型派生的类型。
+如果父元素不是 schema 元素，则不可以使用该属性。 
+
+default 
+
+可选。为元素规定默认值（仅当元素内容是简单类型或 textOnly 时使用）。 
+
+fixed 
+
+可选。为元素规定固定值（仅当元素内容是简单类型或 textOnly 时使用）。 
+
+form 
+
+可选。该元素的形式。 默认值是包含该属性的 schema 元素的 elementFormDefault 属性的值。 该值必须是下列字符串之一： "qualified" 或 "unqualified"。 
+
+如果父元素是 schema 元素，则不能使用该属性。 
+
+如果该值是 "unqualified"，则无须通过命名空间前缀限定该元素。 
+
+如果该值是 "qualified"，则必须通过命名空间前缀限定该元素。 
+
+maxOccurs 
+
+可选。规定 element 元素在父元素中可出现的最大次数。该值可以是大于或等于零的整数。若不想对最大次数设置任何限制，请使用字符串 "unbounded"。 默认值为 1。 
+
+如果父元素是 schema 元素，则不能使用该属性。 
+
+minOccurs 
+
+可选。规定 element 元素在父元素中可出现的最小次数。该值可以是大于或等于零的整数。默认值为 1。 
+
+如果父元素是 schema 元素，则不能使用该属性。 
+
+nillable 
+
+可选。指示是否可以将显式的零值分配给该元素。此项应用于元素内容并且不是该元素的属性。 默认值为 false。 
+
+如果 nillable 为 true，将使该元素的实例可以将 nil 属性设置为 true。 nil 属性被定义为实例的 XML 架构命名空间的一部分。 
+
+abstract 
+
+可选。指示元素是否可以在实例文档中使用。如果该值为 true，则元素不能出现在实例文档中。 相反，substitutionGroup 属性包含该元素的限定名 (QName) 的其他元素必须出现在该元素的位置。多个元素可以在其 substitutionGroup 属性中引用该元素。默认值是 false。 
+
+block 
+
+可选。派生的类型。 block 属性防止具有指定派生类型的元素被用于替代该元素。该值可以包含 #all 或者一个列表，该列表是 extension、restriction 或 substitution 的子集： 
+
+extension - 防止通过扩展派生的元素被用来替代该元素。 
+
+restriction - 防止通过限制派生的元素被用来替代该元素。 
+
+substitution - 防止通过替换派生的元素被用来替代该元素。 
+
+#all - 防止所有派生的元素被用来替代该元素。 
+
+final 
+
+可选。设置 element 元素上 final 属性的默认值。如果父元素不是 schema 元素，则不能使用该属性。该值可以包含 #all 或者一个列表，该列表是 extension 或 restriction 的子集： 
+
+extension - 防止通过扩展派生的元素被用来替代该元素 
+
+restriction - 防止通过限制派生的元素被用来替代该元素 
+
+#all - 防止所有派生的元素被用来替代该元素 
+
+any attributes 
+
+可选。规定带有 non-schema 命名空间的任何其他属性。 
+
+实例 1 
+
+下面的例子是一个schema，其中带有四个简单元素："fname", "lname", "age" 以及 "dateborn"，类型是 string、nonNegativeInteger 以及 date： 
+
+<?xml version="1.0"?> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+
+<xs:element name="fname" type="xs:string"/> 
+<xs:element name="lname" type="xs:string"/> 
+<xs:element name="age" type="xs:nonNegativeInteger"/> 
+<xs:element name="dateborn" type="xs:date"/> 
+
+</xs:schema> 
+
+实例 2 
+
+下面的例子是一个带有复杂类型 "note" 元素的 schema。"note" 元素包含四个简单元素："to", "from", "heading" 以及 "body": 
+
+<?xml version="1.0"?> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+
+<xs:element name="note"> 
+<xs:complexType> 
+<xs:sequence> 
+<xs:element name="to" type="xs:string"/> 
+<xs:element name="from" type="xs:string"/> 
+<xs:element name="heading" type="xs:string"/> 
+<xs:element name="body" type="xs:string"/> 
+</xs:sequence> 
+</xs:complexType> 
+</xs:element> 
+
+</xs:schema> 
+
+实例 3 
+
+本例与例子 2 相同，但是在此例中，我们选择使用 ref 属性来引用元素名称： 
+
+<?xml version="1.0"?> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+
+<xs:element name="note"> 
+<xs:complexType> 
+<xs:sequence> 
+<xs:element ref="to"/> 
+<xs:element ref="from"/> 
+<xs:element ref="heading"/> 
+<xs:element ref="body"/> 
+</xs:sequence> 
+</xs:complexType> 
+</xs:element> 
+
+<xs:element name="to" type="xs:string"/> 
+<xs:element name="from" type="xs:string"/> 
+<xs:element name="heading" type="xs:string"/> 
+<xs:element name="body" type="xs:string"/> 
+
+</xs:schema> 
+
+AI 思考中... 
+
+XML Schema documentation 元素 
+
+XML Schema extension 元素

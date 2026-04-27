@@ -1,0 +1,60 @@
+URL: https://www.runoob.com/java/java/method-label.html
+Title: Java 实例 – 标签(Label) | 菜鸟教程
+
+Java 实例 – 标签(Label) | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – continue 关键字用法 
+
+Java 实例 – enum 和 switch 语句使用 
+
+Java 实例 - 标签(Label) 
+
+Java 中，标签（Label）是一种用于标识代码块的标识符，通常与循环语句（如for、while、do-while）和分支语句（如if-else、switch）一起使用。 
+
+标签的语法形式为在代码块之前加上标识符并以冒号结尾，例如： 
+
+labelName: 
+
+跳出标签所标识的代码块，可以使用 break 或 continue 语句加上标签的方式。 
+
+以下实例演示了如何使用标签结合 break 语句来跳出外部循环： 
+
+Main.java 文件 
+
+public class Main { public static void main ( String [ ] args ) { outerLoop : for ( int i = 0 ; i < 3 ; i ++ ) { innerLoop : for ( int j = 0 ; j < 3 ; j ++ ) { if ( i == 1 && j == 1 ) { break outerLoop ; } System . out . println ( " i: " + i + " , j: " + j ) ; } } } } 
+
+以上代码中外部循环迭代变量 i 的取值范围是 0 到 2，内部循环迭代变量 j 的取值范围也是 0 到 2。当 i 等于 1 且 j 等于 1 时，执行 break outerLoop; 语句，跳出了外部循环。否则，会输出当前迭代的i和j的值。 
+
+以上代码运行输出结果为： 
+
+i: 0, j: 0
+i: 0, j: 1
+i: 0, j: 2 
+
+以下实例演示了如何使用标签结合 continue 语句来控制循环： 
+
+实例 
+
+public class Main { public static void main ( String [ ] args ) { outerLoop : for ( int i = 0 ; i < 3 ; i ++ ) { innerLoop : for ( int j = 0 ; j < 3 ; j ++ ) { if ( i == 1 && j == 1 ) { continue outerLoop ; } System . out . println ( " i: " + i + " , j: " + j ) ; } } } } 
+
+以上代码中，外部循环迭代变量 i 的取值范围是 0 到 2，内部循环迭代变量 j 的取值范围也是 0 到 2。当 i 等于 1 且 j 等于 1 时，执行 continue outerLoop; 语句，跳过了外部循环的当前迭代。否则，会输出当前迭代的i和j的值。 
+
+以上代码运行输出结果为： 
+
+i: 0, j: 0
+i: 0, j: 1
+i: 0, j: 2
+i: 1, j: 0
+i: 2, j: 0
+i: 2, j: 1
+i: 2, j: 2 
+
+AI 思考中... 
+
+Java 实例 – continue 关键字用法 
+
+Java 实例 – enum 和 switch 语句使用

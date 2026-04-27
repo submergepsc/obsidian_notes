@@ -1,0 +1,90 @@
+URL: https://www.runoob.com/vbscript/vb-func-array.html
+Title: VBScript Array 函数 | 菜鸟教程
+
+VBScript Array 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Tan 函数 
+
+VBScript Filter 函数 
+
+VBScript Array 函数 
+
+Array 函数返回一个包含数组的变量。 
+
+注意： 数组中的第一个元素是零。 
+
+语法 
+
+Array(arglist) 
+
+参数 
+
+描述 
+
+arglist 
+
+必需。数组中元素值的列表（由逗号分割）。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+a=Array(5,10,15,20) 
+document.write(a(3)) 
+
+</script> 
+
+以上实例输出结果： 
+
+20 
+
+尝试一下 » 
+
+实例 2 
+
+<script type="text/vbscript"> 
+
+a=Array(5,10,15,20) 
+document.write(a(0)) 
+
+</script> 
+
+以上实例输出结果： 
+
+5 
+
+尝试一下 » 
+
+实例 3 
+
+遍历数组中的所有项： 
+
+<script type="text/vbscript"> 
+
+a=Array(5,10,15,20) 
+for each x in a 
+document.write(x & "<br />") 
+next 
+
+</script> 
+
+以上实例输出结果： 
+
+5 
+10 
+15 
+20 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Tan 函数 
+
+VBScript Filter 函数

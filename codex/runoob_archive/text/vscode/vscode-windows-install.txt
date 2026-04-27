@@ -1,0 +1,94 @@
+URL: https://www.runoob.com/vscode/vscode-windows-install.html
+Title: VSCode Windows 安装 | 菜鸟教程
+
+VSCode Windows 安装 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VSCode 教程 
+
+VSCode 简介 
+
+VSCode macOS 安装 
+
+VSCode Windows 安装 
+
+VSCode 是微软开发的跨平台免费源代码编辑器，支持 Windows、macOS 和 Linux。 
+
+在安装 VS Code 之前，请确保您的设备满足以下最低要求： 
+
+操作系统 
+
+最低要求 
+
+Windows 
+
+Windows 7 64 位或更高版本 
+
+macOS 
+
+macOS 10.11 El Capitan 或更高版本 
+
+Linux 
+
+Ubuntu 16.04+, Debian 9+, Fedora 30+, CentOS 7+ 
+
+VS Code 官方网站下载页面： https://code.visualstudio.com/Download 。 
+
+Windows 系统注意下载正确的版本，如果系统账户是 Administrator，需要下载 System Installer 版本，如果系统账户是其它自定义账户，需要下载 User Installer 版本。 
+
+默认情况下访问 VS Code 官网 https://code.visualstudio.com/ ，页面会根据你的系统自动匹配安装包，比如我是 macOS，就会出现 Download for macOS 按钮： 
+
+在 Windows 上安装 
+
+访问 VS Code 官网 https://code.visualstudio.com/ ，点击 "Download for Windows"下载适配的安装包，默认会下载稳定版（Stable）。 
+
+下载的是一个类似 VSCodeUserSetup-{version}.exe 安装程序，双击下载的 .exe 文件。 
+
+安装程序打开后，会要求你接受 Visual Studio Code 的条款和条件，点击"I accept the agreement(我接受协议)"，然后点击" Next(下一步) "。 
+
+选择安装位置，默认情况下 VS Code 会安装在以下目录 C:\Users\{Username}\AppData\Local\Programs\Microsoft VS Code ，Username 为你的用户名，没特别要求按默认的来，点击" Next(下一步) "。 
+
+接下来是设置一些开始菜单的目录，按默认就好了，点击 " Next(下一步) "。 
+
+接下来，可以勾选以下选项（推荐）： 
+
+在桌面创建快捷方式。 
+
+将 VS Code 添加到右键菜单中（方便直接用 VS Code 打开文件）。 
+
+将 VS Code 添加到 PATH 环境变量（方便在终端中运行 code 命令）。 
+
+点击"Install(安装)"按钮，等待完成后启动 VS Code。 
+
+点击 "Finish(完成)" 按钮完成安装： 
+
+启动 VS Code ，界面如下所示： 
+
+安装汉化包 
+
+VScode 安装汉化包很简单，打开 VScode，点击左侧安装扩展图标，在搜索框输入 Chinese ： 
+
+然后点击第一个搜索出来选项【Chinese (Simplified) (简体中文)】的 Install 按钮就可以： 
+
+安装完成后，重启 VSCode，界面显示的就是中文了。 
+
+VSCode 的 code 命令 
+
+启用 VSCode 的 code 命令 非常简单，先打开命令面板： 
+
+macOS 系统快捷键： ⇧⌘P 
+
+Windows/Linux 快捷键: Ctrl + Shift + P 
+
+搜索安装 >shell command : 
+
+然后选择 Shell Command: Install 'code' command in PATH 即可为系统 PATH 路径添加了 code 命令的引用。 
+
+Vscode Code 命令详细参考： VSCode code 命令 
+
+AI 思考中... 
+
+VSCode 简介 
+
+VSCode macOS 安装

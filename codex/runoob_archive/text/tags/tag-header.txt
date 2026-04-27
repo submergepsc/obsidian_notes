@@ -1,0 +1,68 @@
+URL: https://www.runoob.com/tags/tag-header.html
+Title: HTML <header> 标签 | 菜鸟教程
+
+HTML <header> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <head> 标签 
+
+HTML <hgroup> 标签 
+
+HTML <header> 标签 
+
+实例 
+
+<article> 的页眉： 
+
+<article> 
+
+<header> 
+
+<h1>Internet Explorer 9</h1> 
+
+<p><time pubdate datetime="2011-03-15"></time></p> 
+
+</header> 
+
+<p> Windows Internet Explorer 9(缩写为 IE9 )是在2011年3月14日21:00发布的</p> 
+
+</article> 
+
+尝试一下 » 
+
+浏览器支持 
+
+IE 9、Firefox、Opera、Chrome 和 Safari 支持 <header> 标签。 
+
+注释： IE 8 或更早版本的 IE 浏览器不支持 <header> 标签。 
+
+标签定义及使用说明 
+
+<header> 标签定义文档或者文档的一部分区域的页眉。 
+
+<header> 元素应该作为介绍内容或者导航链接栏的容器。 
+
+在一个文档中，您可以定义多个 <header> 元素。 
+
+注释： <header> 标签不能被放在 <footer>、<address> 或者另一个 <header> 元素内部。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+<header> 标签是 HTML 5 中的新标签。 
+
+全局属性 
+
+<header> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<header> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <head> 标签 
+
+HTML <hgroup> 标签

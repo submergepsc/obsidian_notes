@@ -1,0 +1,37 @@
+URL: https://www.runoob.com/java/exception-hierarchy.html
+Title: Java 实例 – 多个异常处理（多个catch） | 菜鸟教程
+
+Java 实例 – 多个异常处理（多个catch） | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – Finally的用法 
+
+Java 实例 – 异常处理方法 
+
+Java 实例 - 多个异常处理（多个catch） 
+
+对异常的处理： 
+
+1，声明异常时，建议声明更为具体的异常，这样可以处理的更具体 
+
+2,对方声明几个异常，就对应几个catch块， 如果多个catch块中的异常出现继承关系，父类异常catch块放在最下面 
+
+以下实例演示了如何处理多异常： 
+
+ExceptionDemo.java 文件 
+
+class Demo { int div ( int a , int b ) throws ArithmeticException , ArrayIndexOutOfBoundsException { int [ ] arr = new int [ a ] ; System . out . println ( arr [ 4 ] ) ; return a / b ; } } class ExceptionDemo { public static void main ( String [ ] args ) { Demo d = new Demo ( ) ; try { int x = d . div ( 4 , 0 ) ; System . out . println ( " x= " + x ) ; } catch ( ArithmeticException e ) { System . out . println ( e . toString ( ) ) ; } catch ( ArrayIndexOutOfBoundsException e ) { System . out . println ( e . toString ( ) ) ; } catch ( Exception e ) { System . out . println ( e . toString ( ) ) ; } System . out . println ( " Over " ) ; } } 
+
+以上代码运行输出结果为： 
+
+java.lang.ArrayIndexOutOfBoundsException: 4
+Over 
+
+AI 思考中... 
+
+Java 实例 – Finally的用法 
+
+Java 实例 – 异常处理方法

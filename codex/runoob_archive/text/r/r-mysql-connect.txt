@@ -1,0 +1,73 @@
+URL: https://www.runoob.com/r/r-mysql-connect.html
+Title: R MySQL 连接 | 菜鸟教程
+
+R MySQL 连接 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+R 教程 
+
+R JSON 文件 
+
+R 绘图 – 饼图 
+
+R MySQL 连接 
+
+MySQL 是最流行的关系型数据库管理系统，在 WEB 应用方面 MySQL 是最好的 RDBMS(Relational Database Management System：关系数据库管理系统)应用软件之一。 
+
+如果你对 MySQL 还不了解，可以先查阅： MySQL 教程 
+
+R 语言读写 MySQL 文件需要安装扩展包，我们可以在 R 到控制台输入以下命令来安装： 
+
+install.packages("RMySQL", repos = "https://mirrors.ustc.edu.cn/CRAN/") 
+
+查看是否安装成功： 
+
+> any(grepl("RMySQL",installed.packages()))
+[1] TRUE 
+
+MySQL 目前被甲骨文收购，所以很多人使用来它的复制版本 MariaDB，MariaDB 在 GNU GPL下开源，MariaDB 的开发是由 MySQL 的一些原始开发者领导的，所以语法操作都差不多： 
+
+install.packages("RMariaDB", repos = "https://mirrors.ustc.edu.cn/CRAN/") 
+
+在 test 数据库中创建数据表 runoob，表结构及数据代码如下： 
+
+实例 
+
+CREATE TABLE ` runoob ` ( ` id ` int ( 11 ) NOT NULL , ` name ` char ( 20 ) NOT NULL , ` url ` varchar ( 255 ) NOT NULL , ` likes ` int ( 11 ) NOT NULL ) ENGINE = InnoDB DEFAULT CHARSET = utf8mb4 ; INSERT INTO ` runoob ` ( ` id ` , ` name ` , ` url ` , ` likes ` ) VALUES ( 1 , ' Google ' , ' www.google.com ' , 111 ) , ( 2 , ' Runoob ' , ' www.runoob.com ' , 222 ) , ( 3 , ' Taobao ' , ' www.taobao.com ' , 333 ) ; 
+
+接下来我们可以使用 RMySQL 包来读取数据： 
+
+实例 
+
+library ( RMySQL ) 
+
+# dbname 为数据库名，这边的参数请根据自己实际情况填写 
+
+mysqlconnection = dbConnect ( MySQL ( ) , user = 'root' , password = '' , dbname = 'test' ,host = 'localhost' ) 
+
+# 查看数据 
+
+dbListTables ( mysqlconnection ) 
+
+接下来我们可以使用 dbSendQuery 来读取数据库的表，结果集通过 fetch() 函数来获取： 
+
+实例 
+
+library ( RMySQL ) 
+
+# 查询 sites 表，增删改查操作可以通过第二个参数的 SQL 语句来实现 
+
+result = dbSendQuery ( mysqlconnection, "select * from sites" ) 
+
+# 获取前面两行数据 
+
+data. frame = fetch ( result, n = 2 ) 
+
+print ( data. frame ) 
+
+AI 思考中... 
+
+R JSON 文件 
+
+R 绘图 – 饼图

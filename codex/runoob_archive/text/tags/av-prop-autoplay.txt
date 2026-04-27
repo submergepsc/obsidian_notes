@@ -1,0 +1,74 @@
+URL: https://www.runoob.com/tags/av-prop-autoplay.html
+Title: HTML 音频/视频 DOM autoplay 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM autoplay 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM audioTracks 属性 
+
+HTML 音频/视频 DOM buffered 属性 
+
+HTML 音频/视频 DOM autoplay 属性 
+
+实例 
+
+启用自动播放，并重载视频： 
+
+myVid=document.getElementById("video1"); 
+myVid.autoplay=true; 
+myVid.load(); 
+
+尝试一下 » 
+
+定义和用法 
+
+autoplay 属性设置或返回音频/视频是否在加载后立即开始播放。 
+
+浏览器支持 
+
+所有主流浏览器都支持 autoplay 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持该属性。 
+
+语法 
+
+设置 autoplay 属性： 
+
+audio|video .autoplay=true|false 
+
+返回 autoplay 属性： 
+
+audio|video .autoplay 
+
+属性值 
+
+值 
+
+描述 
+
+true 
+
+指示音频/视频应在加载后立即开始播放。 
+
+false 
+
+默认。指示音频/视频不应在加载后立即开始播放。 
+
+技术细节 
+
+返回值： 
+
+布尔值，true|false 
+
+默认值： 
+
+false 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM audioTracks 属性 
+
+HTML 音频/视频 DOM buffered 属性

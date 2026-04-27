@@ -1,0 +1,141 @@
+URL: https://www.runoob.com/xsl/el-decimal-format.html
+Title: XSLT <xsl:decimal-format> 元素 | 菜鸟教程
+
+XSLT <xsl:decimal-format> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:copy-of> 元素 
+
+XSLT <xsl:element> 元素 
+
+XSLT <xsl:decimal-format> 元素 
+
+定义和用法 
+
+<xsl:decimal-format> 元素定义了当通过 format-number() 函数把数字转换为字符串时，所要使用的字符和符号。 
+
+不是所有国家都使用相同的字符来分隔小数部分与整数部分，或者对数字进行分组。通过 <xsl:decimal-format> 元素，您可以把具体的字符更改为其他的符号。 
+
+该元素是顶层元素（top level element）。 
+
+format-number() 函数可通过名称（name）来引用 <xsl:decimal-format> 元素。 
+
+语法 
+
+<xsl:decimal-format 
+name="name" 
+decimal-separator="char" 
+grouping-separator="char" 
+infinity="string" 
+minus-sign="char" 
+NaN="string" 
+percent="char" 
+per-mille="char" 
+zero-digit="char" 
+digit="char" 
+pattern-separator="char"/> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+name 
+
+name 
+
+可选。为此格式规定名称。 
+
+decimal-separator 
+
+char 
+
+可选。规定小数点字符。默认是 "."。 
+
+grouping-separator 
+
+char 
+
+可选。规定千的分隔字符。默认是 ","。 
+
+infinity 
+
+string 
+
+可选。规定用来表示无穷大的字符串。默认是 "Infinity"。 
+
+minus-sign 
+
+char 
+
+可选。规定表示负数的字符。默认是 "-"。 
+
+NaN 
+
+string 
+
+可选。规定当值不是数字时使用的字符串。默认是 "NaN"。 
+
+percent 
+
+char 
+
+可选。规定百分比符号的字符。默认是 "%"。 
+
+per-mille 
+
+char 
+
+可选。规定千分号的字符。默认是 "‰"。 
+
+zero-digit 
+
+char 
+
+可选。规定数字 0 的字符。默认是 "0"。 
+
+digit 
+
+char 
+
+可选。规定字符，该字符用于指示需要使用数字的地方。默认是 #。 
+
+pattern-separator 
+
+char 
+
+可选。规定字符，该字符用于分隔格式模式中的正负子模式。默认是 ";"。 
+
+实例 1 
+
+下面的实例展示了如何格式化为欧洲货币（请注意，format-number() 函数中的第三个参数引用了 <xsl:decimal-format> 元素的名称）： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:decimal-format name="euro" 
+decimal-separator="," grouping-separator="."/> 
+
+<xsl:template match="/"> 
+<xsl:value-of 
+select="format-number(26825.8, '#.###,00', 'euro')"/> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+Output: 
+
+26,825.80 
+
+AI 思考中... 
+
+XSLT <xsl:copy-of> 元素 
+
+XSLT <xsl:element> 元素

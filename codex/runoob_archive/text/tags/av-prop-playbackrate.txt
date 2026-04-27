@@ -1,0 +1,80 @@
+URL: https://www.runoob.com/tags/av-prop-playbackrate.html
+Title: HTML 音频/视频 DOM playbackRate 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM playbackRate 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM paused 属性 
+
+HTML 音频/视频 DOM played 属性 
+
+HTML 音频/视频 DOM playbackRate 属性 
+
+实例 
+
+将视频设置为慢速播放： 
+
+myVid=document.getElementById("video1"); 
+myVid.playbackRate=0.5; 
+
+尝试一下 » 
+
+定义和用法 
+
+playbackRate 属性设置或返回音频/视频的当前播放速度。 
+
+浏览器支持 
+
+所有主流浏览器都支持 playbackRate 属性。 
+
+注意： Internet Explorer 9 及之前的版本不支持 playbackRate 属性。 
+
+语法 
+
+设置 playbackRate 属性： 
+
+audio|video .playbackRate= playbackspeed 
+
+返回 playbackRate 属性： 
+
+audio|video .playbackRate 
+
+属性值 
+
+值 
+
+描述 
+
+playbackspeed 
+
+指示音频/视频的当前播放速度。 
+例值： 
+
+1.0 正常速度 
+
+0.5 半速（更慢） 
+
+2.0 倍速（更快） 
+
+-1.0 向后，正常速度 
+
+-0.5 向后，半速 
+
+技术细节 
+
+返回值： 
+
+数字值，当前播放速度 
+
+默认值： 
+
+1.0 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM paused 属性 
+
+HTML 音频/视频 DOM played 属性

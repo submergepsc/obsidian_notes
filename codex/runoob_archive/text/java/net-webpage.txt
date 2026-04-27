@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/net-webpage.html
+Title: Java 实例 – 网页抓取 | 菜鸟教程
+
+Java 实例 – 网页抓取 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 获取 URL响应头的日期信息 
+
+Java 实例 – 获取本机ip地址及主机名 
+
+Java 实例 - 网页抓取 
+
+以下实例演示了如何使用 net.URL 类的 URL() 构造函数来抓取网页： 
+
+Main.java 文件 
+
+import java . io . BufferedReader ; import java . io . BufferedWriter ; import java . io . FileWriter ; import java . io . InputStreamReader ; import java . net . URL ; public class Main { public static void main ( String [ ] args ) throws Exception { URL url = new URL ( " http://www.runoob.com " ) ; BufferedReader reader = new BufferedReader ( new InputStreamReader ( url . openStream ( ) ) ) ; BufferedWriter writer = new BufferedWriter ( new FileWriter ( " data.html " ) ) ; String line ; while ( ( line = reader . readLine ( ) ) != null ) { System . out . println ( line ) ; writer . write ( line ) ; writer . newLine ( ) ; } reader . close ( ) ; writer . close ( ) ; } } 
+
+以上代码运行输出结果为（网页的源代码，存储在当前目录下的 data.html 文件中）： 
+
+<!DOCTYPE html> <html> <head> <meta charset="UTF-8"/> <meta http-equiv="X-UA-Compatible" content="IE=11,IE=10,IE=9,IE=8"/>…… 
+
+AI 思考中... 
+
+Java 实例 – 获取 URL响应头的日期信息 
+
+Java 实例 – 获取本机ip地址及主机名

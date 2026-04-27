@@ -1,0 +1,128 @@
+URL: https://www.runoob.com/opencode/opencode-vscode.html
+Title: VS Code 安装 OpenCode | 菜鸟教程
+
+VS Code 安装 OpenCode | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+OpenCode 教程 
+
+OpenCode 第一次使用 
+
+OpenCode 终端界面 
+
+VS Code 安装 Claude Code 
+
+如果不喜欢使用 OpenCode 的命令行模型，我们可以在 VS Code 编辑器中安装 Claude Code。 
+
+打开 VS Code，进入扩展市场，搜索 OpenCode 安装： 
+
+安装完成后，点击右上角 OpenCode 图标，即可进入 OpenCode 页面： 
+
+整个界面如下所示： 
+
+其他说明 
+
+OpenCode 不仅可以在终端中独立运行，还可以与常见开发工具集成使用，例如 VS Code、Cursor、Windsurf、VSCodium 等。 
+
+只要你的 IDE 支持终端，就可以使用 OpenCode。 
+
+最简单的方式就是：在 IDE 内置终端中运行 opencode 。 
+
+一、快速开始 
+
+1、启动 OpenCode 
+
+在 VS Code 中打开项目后： 
+
+打开终端（快捷键： Ctrl + ` ） 
+
+输入以下命令： 
+
+opencode 
+
+即可进入 OpenCode 界面。 
+
+2、快捷启动方式（推荐） 
+
+功能 
+
+Mac 
+
+Windows / Linux 
+
+快速打开 OpenCode 
+
+Cmd + Esc 
+
+Ctrl + Esc 
+
+新建 OpenCode 会话 
+
+Cmd + Shift + Esc 
+
+Ctrl + Shift + Esc 
+
+说明： 
+
+如果已有会话，快捷键会自动聚焦 
+
+也可以点击 IDE 中的 OpenCode 按钮 
+
+二、核心功能 
+
+1、上下文感知（非常重要） 
+
+OpenCode 会自动获取你当前的开发上下文，例如： 
+
+当前打开的文件 
+
+选中的代码 
+
+当前标签页 
+
+这意味着： 
+
+无需手动复制代码 
+
+AI 可以直接理解你正在编辑的内容 
+
+2、文件引用快捷键 
+
+你可以通过快捷键快速插入文件引用： 
+
+系统 
+
+快捷键 
+
+Mac 
+
+Cmd + Option + K 
+
+Windows / Linux 
+
+Ctrl + Alt + K 
+
+插入效果类似： 
+
+@File#L37-42 
+
+表示引用某个文件的指定行范围。 
+
+三、配置默认编辑器 
+
+如果你希望在 OpenCode 中执行 /editor 或 /export 时使用 VS Code，需要设置环境变量： 
+
+export EDITOR="code --wait" 
+
+说明： 
+
+--wait 表示等待编辑完成后再返回 
+
+适用于 macOS / Linux 
+
+AI 思考中... 
+
+OpenCode 第一次使用 
+
+OpenCode 终端界面

@@ -1,0 +1,90 @@
+URL: https://www.runoob.com/cssref/pr-padding-top.html
+Title: CSS padding-top 属性 | 菜鸟教程
+
+CSS padding-top 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS padding-right 属性 
+
+CSS Page-break-after 属性 
+
+CSS padding-top 属性 
+
+实例 
+
+设置一个P元素的顶部填充： 
+
+p { padding-top: 2 cm ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+padding-top属性设置一个元素的顶部填充（空格）。 
+
+注意： 负值是不允许的。 
+
+默认值： 
+
+0 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.paddingTop="2cm" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+padding-bottom 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+length 
+
+规定以具体单位计的固定的上内边距值，比如像素、厘米等。默认值是 0px。 
+
+% 
+
+定义基于父元素宽度的百分比上内边距。此值不会如预期的那样工作于所有的浏览器中。 
+
+inherit 
+
+规定应该从父元素继承上内边距。 
+
+相关文章 
+
+CSS 教程: CSS Padding 
+
+AI 思考中... 
+
+CSS padding-right 属性 
+
+CSS Page-break-after 属性

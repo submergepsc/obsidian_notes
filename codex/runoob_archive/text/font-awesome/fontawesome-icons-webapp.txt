@@ -1,0 +1,1780 @@
+URL: https://www.runoob.com/font-awesome/fontawesome-icons-webapp.html
+Title: Font Awesome Web 应用图标 | 菜鸟教程
+
+Font Awesome Web 应用图标 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Font Awesome 图标 
+
+Font Awesome 音/视频图标 
+
+Font Awesome 参考手册 
+
+Font Awesome Web 应用图标 
+
+下表显示了所有的 Font Awesome Web 应用图标： 
+
+图标 
+
+描述 
+
+实例 
+
+fa fa-address-book 
+
+尝试一下 
+
+fa fa-address-book-o 
+
+尝试一下 
+
+fa fa-address-card 
+
+尝试一下 
+
+fa fa-address-card-o 
+
+尝试一下 
+
+fa fa-adjust 
+
+尝试一下 
+
+fa fa-american-sign-language-interpreting 
+
+尝试一下 
+
+fa fa-anchor 
+
+尝试一下 
+
+fa fa-archive 
+
+尝试一下 
+
+fa fa-area-chart 
+
+尝试一下 
+
+fa fa-arrows 
+
+尝试一下 
+
+fa fa-arrows-h 
+
+尝试一下 
+
+fa fa-arrows-v 
+
+尝试一下 
+
+fa fa-asl-interpreting 
+
+尝试一下 
+
+fa fa-assistive-listening-systems 
+
+尝试一下 
+
+fa fa-asterisk 
+
+尝试一下 
+
+fa fa-at 
+
+尝试一下 
+
+fa fa-automobile 
+
+尝试一下 
+
+fa fa-audio-description 
+
+尝试一下 
+
+fa fa-balance-scale 
+
+尝试一下 
+
+fa fa-ban 
+
+尝试一下 
+
+fa fa-bank 
+
+尝试一下 
+
+fa fa-bar-chart 
+
+尝试一下 
+
+fa fa-bar-chart-o 
+
+尝试一下 
+
+fa fa-barcode 
+
+尝试一下 
+
+fa fa-bars 
+
+尝试一下 
+
+fa fa-bath 
+
+尝试一下 
+
+fa fa-bathtub 
+
+尝试一下 
+
+fa fa-battery-0 
+
+尝试一下 
+
+fa fa-battery-1 
+
+尝试一下 
+
+fa fa-battery-2 
+
+尝试一下 
+
+fa fa-battery-3 
+
+尝试一下 
+
+fa fa-battery-4 
+
+尝试一下 
+
+fa fa-battery-empty 
+
+尝试一下 
+
+fa fa-battery-full 
+
+尝试一下 
+
+fa fa-battery-half 
+
+尝试一下 
+
+fa fa-battery-quarter 
+
+尝试一下 
+
+fa fa-battery-three-quarters 
+
+尝试一下 
+
+fa fa-bed 
+
+尝试一下 
+
+fa fa-beer 
+
+尝试一下 
+
+fa fa-bell 
+
+尝试一下 
+
+fa fa-bell-o 
+
+尝试一下 
+
+fa fa-bell-slash 
+
+尝试一下 
+
+fa fa-bell-slash-o 
+
+尝试一下 
+
+fa fa-bicycle 
+
+尝试一下 
+
+fa fa-binoculars 
+
+尝试一下 
+
+fa fa-birthday-cake 
+
+尝试一下 
+
+fa fa-blind 
+
+尝试一下 
+
+fa fa-bolt 
+
+尝试一下 
+
+fa fa-bomb 
+
+尝试一下 
+
+fa fa-book 
+
+尝试一下 
+
+fa fa-bookmark 
+
+尝试一下 
+
+fa fa-bookmark-o 
+
+尝试一下 
+
+fa fa-braille 
+
+尝试一下 
+
+fa fa-briefcase 
+
+尝试一下 
+
+fa fa-bug 
+
+尝试一下 
+
+fa fa-building 
+
+尝试一下 
+
+fa fa-building-o 
+
+尝试一下 
+
+fa fa-bullhorn 
+
+尝试一下 
+
+fa fa-bullseye 
+
+尝试一下 
+
+fa fa-bus 
+
+尝试一下 
+
+fa fa-cab 
+
+尝试一下 
+
+fa fa-calculator 
+
+尝试一下 
+
+fa fa-calendar 
+
+尝试一下 
+
+fa fa-calendar-o 
+
+尝试一下 
+
+fa fa-calendar-check-o 
+
+尝试一下 
+
+fa fa-calendar-minus-o 
+
+尝试一下 
+
+fa fa-calendar-plus-o 
+
+尝试一下 
+
+fa fa-calendar-times-o 
+
+尝试一下 
+
+fa fa-camera 
+
+尝试一下 
+
+fa fa-camera-retro 
+
+尝试一下 
+
+fa fa-car 
+
+尝试一下 
+
+fa fa-caret-square-o-down 
+
+尝试一下 
+
+fa fa-caret-square-o-left 
+
+尝试一下 
+
+fa fa-caret-square-o-right 
+
+尝试一下 
+
+fa fa-caret-square-o-up 
+
+尝试一下 
+
+fa fa-cart-arrow-down 
+
+尝试一下 
+
+fa fa-cart-plus 
+
+尝试一下 
+
+fa fa-cc 
+
+尝试一下 
+
+fa fa-certificate 
+
+尝试一下 
+
+fa fa-check 
+
+尝试一下 
+
+fa fa-check-circle 
+
+尝试一下 
+
+fa fa-check-circle-o 
+
+尝试一下 
+
+fa fa-check-square 
+
+尝试一下 
+
+fa fa-check-square-o 
+
+尝试一下 
+
+fa fa-child 
+
+尝试一下 
+
+fa fa-circle 
+
+尝试一下 
+
+fa fa-circle-o 
+
+尝试一下 
+
+fa fa-circle-o-notch 
+
+尝试一下 
+
+fa fa-circle-thin 
+
+尝试一下 
+
+fa fa-clock-o 
+
+尝试一下 
+
+fa fa-clone 
+
+尝试一下 
+
+fa fa-close 
+
+尝试一下 
+
+fa fa-cloud 
+
+尝试一下 
+
+fa fa-cloud-download 
+
+尝试一下 
+
+fa fa-cloud-upload 
+
+尝试一下 
+
+fa fa-code 
+
+尝试一下 
+
+fa fa-code-fork 
+
+尝试一下 
+
+fa fa-coffee 
+
+尝试一下 
+
+fa fa-cog 
+
+尝试一下 
+
+fa fa-cogs 
+
+尝试一下 
+
+fa fa-comment 
+
+尝试一下 
+
+fa fa-comment-o 
+
+尝试一下 
+
+fa fa-comments 
+
+尝试一下 
+
+fa fa-comments-o 
+
+尝试一下 
+
+fa fa-commenting 
+
+尝试一下 
+
+fa fa-commenting-o 
+
+尝试一下 
+
+fa fa-compass 
+
+尝试一下 
+
+fa fa-copyright 
+
+尝试一下 
+
+fa fa-credit-card 
+
+尝试一下 
+
+fa fa-credit-card-alt 
+
+尝试一下 
+
+fa fa-creative-commons 
+
+尝试一下 
+
+fa fa-crop 
+
+尝试一下 
+
+fa fa-crosshairs 
+
+尝试一下 
+
+fa fa-cube 
+
+尝试一下 
+
+fa fa-cubes 
+
+尝试一下 
+
+fa fa-cutlery 
+
+尝试一下 
+
+fa fa-dashboard 
+
+尝试一下 
+
+fa fa-database 
+
+尝试一下 
+
+fa fa-deaf 
+
+尝试一下 
+
+fa fa-deafness 
+
+尝试一下 
+
+fa fa-desktop 
+
+尝试一下 
+
+fa fa-diamond 
+
+尝试一下 
+
+fa fa-dot-circle-o 
+
+尝试一下 
+
+fa fa-download 
+
+尝试一下 
+
+fa fa-drivers-license 
+
+尝试一下 
+
+fa fa-drivers-license-o 
+
+尝试一下 
+
+fa fa-edit 
+
+尝试一下 
+
+fa fa-ellipsis-h 
+
+尝试一下 
+
+fa fa-ellipsis-v 
+
+尝试一下 
+
+fa fa-envelope 
+
+尝试一下 
+
+fa fa-envelope-o 
+
+尝试一下 
+
+fa fa-envelope-open 
+
+尝试一下 
+
+fa fa-envelope-open-o 
+
+尝试一下 
+
+fa fa-envelope-square 
+
+尝试一下 
+
+fa fa-eraser 
+
+尝试一下 
+
+fa fa-exchange 
+
+尝试一下 
+
+fa fa-exclamation 
+
+尝试一下 
+
+fa fa-exclamation-circle 
+
+尝试一下 
+
+fa fa-exclamation-triangle 
+
+尝试一下 
+
+fa fa-external-link 
+
+尝试一下 
+
+fa fa-external-link-square 
+
+尝试一下 
+
+fa fa-eye 
+
+尝试一下 
+
+fa fa-eye-slash 
+
+尝试一下 
+
+fa fa-eyedropper 
+
+尝试一下 
+
+fa fa-fax 
+
+尝试一下 
+
+fa fa-female 
+
+尝试一下 
+
+fa fa-fighter-jet 
+
+尝试一下 
+
+fa fa-file-archive-o 
+
+尝试一下 
+
+fa fa-file-audio-o 
+
+尝试一下 
+
+fa fa-file-code-o 
+
+尝试一下 
+
+fa fa-file-excel-o 
+
+尝试一下 
+
+fa fa-file-image-o 
+
+尝试一下 
+
+fa fa-file-movie-o 
+
+尝试一下 
+
+fa fa-file-pdf-o 
+
+尝试一下 
+
+fa fa-file-photo-o 
+
+尝试一下 
+
+fa fa-file-picture-o 
+
+尝试一下 
+
+fa fa-file-powerpoint-o 
+
+尝试一下 
+
+fa fa-file-sound-o 
+
+尝试一下 
+
+fa fa-file-video-o 
+
+尝试一下 
+
+fa fa-file-word-o 
+
+尝试一下 
+
+fa fa-file-zip-o 
+
+尝试一下 
+
+fa fa-film 
+
+尝试一下 
+
+fa fa-filter 
+
+尝试一下 
+
+fa fa-fire 
+
+尝试一下 
+
+fa fa-fire-extinguisher 
+
+尝试一下 
+
+fa fa-flag 
+
+尝试一下 
+
+fa fa-flag-checkered 
+
+尝试一下 
+
+fa fa-flag-o 
+
+尝试一下 
+
+fa fa-flash 
+
+尝试一下 
+
+fa fa-flask 
+
+尝试一下 
+
+fa fa-folder 
+
+尝试一下 
+
+fa fa-folder-o 
+
+尝试一下 
+
+fa fa-folder-open 
+
+尝试一下 
+
+fa fa-folder-open-o 
+
+尝试一下 
+
+fa fa-frown-o 
+
+尝试一下 
+
+fa fa-futbol-o 
+
+尝试一下 
+
+fa fa-gamepad 
+
+尝试一下 
+
+fa fa-gavel 
+
+尝试一下 
+
+fa fa-gear 
+
+尝试一下 
+
+fa fa-gears 
+
+尝试一下 
+
+fa fa-genderless 
+
+尝试一下 
+
+fa fa-gift 
+
+尝试一下 
+
+fa fa-glass 
+
+尝试一下 
+
+fa fa-globe 
+
+尝试一下 
+
+fa fa-graduation-cap 
+
+尝试一下 
+
+fa fa-group 
+
+尝试一下 
+
+fa fa-hard-of-hearing 
+
+尝试一下 
+
+fa fa-hdd-o 
+
+尝试一下 
+
+fa fa-handshake-o 
+
+尝试一下 
+
+fa fa-hashtag 
+
+尝试一下 
+
+fa fa-headphones 
+
+尝试一下 
+
+fa fa-heart 
+
+尝试一下 
+
+fa fa-heart-o 
+
+尝试一下 
+
+fa fa-heartbeat 
+
+尝试一下 
+
+fa fa-history 
+
+尝试一下 
+
+fa fa-home 
+
+尝试一下 
+
+fa fa-hotel 
+
+尝试一下 
+
+fa fa-hourglass 
+
+尝试一下 
+
+fa fa-hourglass-1 
+
+尝试一下 
+
+fa fa-hourglass-2 
+
+尝试一下 
+
+fa fa-hourglass-3 
+
+尝试一下 
+
+fa fa-hourglass-end 
+
+尝试一下 
+
+fa fa-hourglass-half 
+
+尝试一下 
+
+fa fa-hourglass-o 
+
+尝试一下 
+
+fa fa-hourglass-start 
+
+尝试一下 
+
+fa fa-i-cursor 
+
+尝试一下 
+
+fa fa-id-badge 
+
+尝试一下 
+
+fa fa-id-card 
+
+尝试一下 
+
+fa fa-id-card-o 
+
+尝试一下 
+
+fa fa-image 
+
+尝试一下 
+
+fa fa-inbox 
+
+尝试一下 
+
+fa fa-industry 
+
+尝试一下 
+
+fa fa-info 
+
+尝试一下 
+
+fa fa-info-circle 
+
+尝试一下 
+
+fa fa-institution 
+
+尝试一下 
+
+fa fa-key 
+
+尝试一下 
+
+fa fa-keyboard-o 
+
+尝试一下 
+
+fa fa-language 
+
+尝试一下 
+
+fa fa-laptop 
+
+尝试一下 
+
+fa fa-leaf 
+
+尝试一下 
+
+fa fa-legal 
+
+尝试一下 
+
+fa fa-lemon-o 
+
+尝试一下 
+
+fa fa-level-down 
+
+尝试一下 
+
+fa fa-level-up 
+
+尝试一下 
+
+fa fa-life-bouy 
+
+尝试一下 
+
+fa fa-life-buoy 
+
+尝试一下 
+
+fa fa-life-ring 
+
+尝试一下 
+
+fa fa-life-saver 
+
+尝试一下 
+
+fa fa-lightbulb-o 
+
+尝试一下 
+
+fa fa-line-chart 
+
+尝试一下 
+
+fa fa-location-arrow 
+
+尝试一下 
+
+fa fa-lock 
+
+尝试一下 
+
+fa fa-low-vision 
+
+尝试一下 
+
+fa fa-magic 
+
+尝试一下 
+
+fa fa-magnet 
+
+尝试一下 
+
+fa fa-mail-forward 
+
+尝试一下 
+
+fa fa-mail-reply 
+
+尝试一下 
+
+fa fa-mail-reply-all 
+
+尝试一下 
+
+fa fa-male 
+
+尝试一下 
+
+fa fa-map 
+
+尝试一下 
+
+fa fa-map-o 
+
+尝试一下 
+
+fa fa-map-pin 
+
+尝试一下 
+
+fa fa-map-signs 
+
+尝试一下 
+
+fa fa-map-marker 
+
+尝试一下 
+
+fa fa-meh-o 
+
+尝试一下 
+
+fa fa-microchip 
+
+尝试一下 
+
+fa fa-microphone 
+
+尝试一下 
+
+fa fa-microphone-slash 
+
+尝试一下 
+
+fa fa-minus 
+
+尝试一下 
+
+fa fa-minus-circle 
+
+尝试一下 
+
+fa fa-minus-square 
+
+尝试一下 
+
+fa fa-minus-square-o 
+
+尝试一下 
+
+fa fa-mobile 
+
+尝试一下 
+
+fa fa-mobile-phone 
+
+尝试一下 
+
+fa fa-money 
+
+尝试一下 
+
+fa fa-moon-o 
+
+尝试一下 
+
+fa fa-mortar-board 
+
+尝试一下 
+
+fa fa-motorcycle 
+
+尝试一下 
+
+fa fa-mouse-pointer 
+
+尝试一下 
+
+fa fa-music 
+
+尝试一下 
+
+fa fa-navicon 
+
+尝试一下 
+
+fa fa-newspaper-o 
+
+尝试一下 
+
+fa fa-object-group 
+
+尝试一下 
+
+fa fa-object-ungroup 
+
+尝试一下 
+
+fa fa-paint-brush 
+
+尝试一下 
+
+fa fa-paper-plane 
+
+尝试一下 
+
+fa fa-paper-plane-o 
+
+尝试一下 
+
+fa fa-paw 
+
+尝试一下 
+
+fa fa-pencil 
+
+尝试一下 
+
+fa fa-pencil-square 
+
+尝试一下 
+
+fa fa-pencil-square-o 
+
+尝试一下 
+
+fa fa-percent 
+
+尝试一下 
+
+fa fa-phone 
+
+尝试一下 
+
+fa fa-phone-square 
+
+尝试一下 
+
+fa fa-photo 
+
+尝试一下 
+
+fa fa-picture-o 
+
+尝试一下 
+
+fa fa-pie-chart 
+
+尝试一下 
+
+fa fa-plane 
+
+尝试一下 
+
+fa fa-plug 
+
+尝试一下 
+
+fa fa-plus 
+
+尝试一下 
+
+fa fa-plus-circle 
+
+尝试一下 
+
+fa fa-plus-square 
+
+尝试一下 
+
+fa fa-plus-square-o 
+
+尝试一下 
+
+fa fa-podcast 
+
+尝试一下 
+
+fa fa-power-off 
+
+尝试一下 
+
+fa fa-print 
+
+尝试一下 
+
+fa fa-puzzle-piece 
+
+尝试一下 
+
+fa fa-qrcode 
+
+尝试一下 
+
+fa fa-question 
+
+尝试一下 
+
+fa fa-question-circle 
+
+尝试一下 
+
+fa fa-question-circle-o 
+
+尝试一下 
+
+fa fa-quote-left 
+
+尝试一下 
+
+fa fa-quote-right 
+
+尝试一下 
+
+fa fa-random 
+
+尝试一下 
+
+fa fa-recycle 
+
+尝试一下 
+
+fa fa-refresh 
+
+尝试一下 
+
+fa fa-registered 
+
+尝试一下 
+
+fa fa-remove 
+
+尝试一下 
+
+fa fa-reorder 
+
+尝试一下 
+
+fa fa-reply 
+
+尝试一下 
+
+fa fa-reply-all 
+
+尝试一下 
+
+fa fa-retweet 
+
+尝试一下 
+
+fa fa-road 
+
+尝试一下 
+
+fa fa-rocket 
+
+尝试一下 
+
+fa fa-rss 
+
+尝试一下 
+
+fa fa-rss-square 
+
+尝试一下 
+
+fa fa-s15 
+
+尝试一下 
+
+fa fa-search 
+
+尝试一下 
+
+fa fa-search-minus 
+
+尝试一下 
+
+fa fa-search-plus 
+
+尝试一下 
+
+fa fa-send 
+
+尝试一下 
+
+fa fa-send-o 
+
+尝试一下 
+
+fa fa-server 
+
+尝试一下 
+
+fa fa-share 
+
+尝试一下 
+
+fa fa-share-alt 
+
+尝试一下 
+
+fa fa-share-alt-square 
+
+尝试一下 
+
+fa fa-share-square 
+
+尝试一下 
+
+fa fa-share-square-o 
+
+尝试一下 
+
+fa fa-shield 
+
+尝试一下 
+
+fa fa-ship 
+
+尝试一下 
+
+fa fa-shopping-bag 
+
+尝试一下 
+
+fa fa-shopping-basket 
+
+尝试一下 
+
+fa fa-shopping-cart 
+
+尝试一下 
+
+fa fa-shower 
+
+尝试一下 
+
+fa fa-sign-in 
+
+尝试一下 
+
+fa fa-sign-out 
+
+尝试一下 
+
+fa fa-sign-language 
+
+尝试一下 
+
+fa fa-signal 
+
+尝试一下 
+
+fa fa-signing 
+
+尝试一下 
+
+fa fa-sitemap 
+
+尝试一下 
+
+fa fa-sliders 
+
+尝试一下 
+
+fa fa-smile-o 
+
+尝试一下 
+
+fa fa-snowflake-o 
+
+尝试一下 
+
+fa fa-soccer-ball-o 
+
+尝试一下 
+
+fa fa-sort 
+
+尝试一下 
+
+fa fa-sort-alpha-asc 
+
+尝试一下 
+
+fa fa-sort-alpha-desc 
+
+尝试一下 
+
+fa fa-sort-amount-asc 
+
+尝试一下 
+
+fa fa-sort-amount-desc 
+
+尝试一下 
+
+fa fa-sort-asc 
+
+尝试一下 
+
+fa fa-sort-desc 
+
+尝试一下 
+
+fa fa-sort-down 
+
+尝试一下 
+
+fa fa-sort-numeric-asc 
+
+尝试一下 
+
+fa fa-sort-numeric-desc 
+
+尝试一下 
+
+fa fa-sort-up 
+
+尝试一下 
+
+fa fa-space-shuttle 
+
+尝试一下 
+
+fa fa-spinner 
+
+尝试一下 
+
+fa fa-spoon 
+
+尝试一下 
+
+fa fa-square 
+
+尝试一下 
+
+fa fa-square-o 
+
+尝试一下 
+
+fa fa-star 
+
+尝试一下 
+
+fa fa-star-half 
+
+尝试一下 
+
+fa fa-star-half-empty 
+
+尝试一下 
+
+fa fa-star-half-full 
+
+尝试一下 
+
+fa fa-star-half-o 
+
+尝试一下 
+
+fa fa-star-o 
+
+尝试一下 
+
+fa fa-sticky-note 
+
+尝试一下 
+
+fa fa-sticky-note-o 
+
+尝试一下 
+
+fa fa-street-view 
+
+尝试一下 
+
+fa fa-suitcase 
+
+尝试一下 
+
+fa fa-sun-o 
+
+尝试一下 
+
+fa fa-support 
+
+尝试一下 
+
+fa fa-tablet 
+
+尝试一下 
+
+fa fa-tachometer 
+
+尝试一下 
+
+fa fa-tag 
+
+尝试一下 
+
+fa fa-tags 
+
+尝试一下 
+
+fa fa-tasks 
+
+尝试一下 
+
+fa fa-taxi 
+
+尝试一下 
+
+fa fa-television 
+
+尝试一下 
+
+fa fa-terminal 
+
+尝试一下 
+
+fa fa-thermometer 
+
+尝试一下 
+
+fa fa-thermometer-0 
+
+尝试一下 
+
+fa fa-thermometer-1 
+
+尝试一下 
+
+fa fa-thermometer-2 
+
+尝试一下 
+
+fa fa-thermometer-3 
+
+尝试一下 
+
+fa fa-thermometer-4 
+
+尝试一下 
+
+fa fa-thermometer-empty 
+
+尝试一下 
+
+fa fa-thermometer-full 
+
+尝试一下 
+
+fa fa-thermometer-half 
+
+尝试一下 
+
+fa fa-thermometer-quarter 
+
+尝试一下 
+
+fa fa-thermometer-three-quarters 
+
+尝试一下 
+
+fa fa-thumb-tack 
+
+尝试一下 
+
+fa fa-thumbs-down 
+
+尝试一下 
+
+fa fa-thumbs-o-up 
+
+尝试一下 
+
+fa fa-thumbs-up 
+
+尝试一下 
+
+fa fa-ticket 
+
+尝试一下 
+
+fa fa-times 
+
+尝试一下 
+
+fa fa-times-circle 
+
+尝试一下 
+
+fa fa-times-circle-o 
+
+尝试一下 
+
+fa fa-times-rectangle 
+
+尝试一下 
+
+fa fa-times-rectangle-o 
+
+尝试一下 
+
+fa fa-tint 
+
+尝试一下 
+
+fa fa-toggle-down 
+
+尝试一下 
+
+fa fa-toggle-left 
+
+尝试一下 
+
+fa fa-toggle-right 
+
+尝试一下 
+
+fa fa-toggle-up 
+
+尝试一下 
+
+fa fa-toggle-off 
+
+尝试一下 
+
+fa fa-toggle-on 
+
+尝试一下 
+
+fa fa-trademark 
+
+尝试一下 
+
+fa fa-trash 
+
+尝试一下 
+
+fa fa-trash-o 
+
+尝试一下 
+
+fa fa-tree 
+
+尝试一下 
+
+fa fa-trophy 
+
+尝试一下 
+
+fa fa-truck 
+
+尝试一下 
+
+fa fa-tty 
+
+尝试一下 
+
+fa fa-tv 
+
+尝试一下 
+
+fa fa-umbrella 
+
+尝试一下 
+
+fa fa-universal-access 
+
+尝试一下 
+
+fa fa-university 
+
+尝试一下 
+
+fa fa-unlock 
+
+尝试一下 
+
+fa fa-unlock-alt 
+
+尝试一下 
+
+fa fa-unsorted 
+
+尝试一下 
+
+fa fa-upload 
+
+尝试一下 
+
+fa fa-user 
+
+尝试一下 
+
+fa fa-user-circle 
+
+尝试一下 
+
+fa fa-user-circle-o 
+
+尝试一下 
+
+fa fa-user-o 
+
+尝试一下 
+
+fa fa-user-plus 
+
+尝试一下 
+
+fa fa-user-secret 
+
+尝试一下 
+
+fa fa-user-times 
+
+尝试一下 
+
+fa fa-users 
+
+尝试一下 
+
+fa fa-vcard 
+
+尝试一下 
+
+fa fa-vcard-o 
+
+尝试一下 
+
+fa fa-video-camera 
+
+尝试一下 
+
+fa fa-volume-control-phone 
+
+尝试一下 
+
+fa fa-volume-down 
+
+尝试一下 
+
+fa fa-volume-off 
+
+尝试一下 
+
+fa fa-volume-up 
+
+尝试一下 
+
+fa fa-warning 
+
+尝试一下 
+
+fa fa-wheelchair 
+
+尝试一下 
+
+fa fa-wheelchair-alt 
+
+尝试一下 
+
+fa fa-window-close 
+
+尝试一下 
+
+fa fa-window-close-o 
+
+尝试一下 
+
+fa fa-window-maximize 
+
+尝试一下 
+
+fa fa-window-minimize 
+
+尝试一下 
+
+fa fa-window-restore 
+
+尝试一下 
+
+fa fa-wifi 
+
+尝试一下 
+
+fa fa-wrench 
+
+尝试一下 
+
+AI 思考中... 
+
+Font Awesome 音/视频图标 
+
+Font Awesome 参考手册

@@ -1,0 +1,737 @@
+URL: https://www.runoob.com/typescript/ts-design-patterns.html
+Title: TypeScript 设计模式 | 菜鸟教程
+
+TypeScript 设计模式 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+TypeScript 教程 
+
+TypeScript Monorepo 配置 
+
+TypeScript 性能优化 
+
+TypeScript 设计模式 
+
+设计模式是软件开发中经过验证的解决方案，可以帮助我们编写可维护、可扩展的代码。 
+
+TypeScript 的类型系统让许多经典设计模式得以用类型安全的方式实现。 
+
+为什么需要设计模式 
+
+设计模式是前人总结的代码组织经验，可以解决常见的软件设计问题。 
+
+使用设计模式让代码更易理解、更易维护，同时也便于团队协作。 
+
+TypeScript 的类型系统让这些模式更加健壮，错误可以在编译期被发现。 
+
+概念： 设计模式是软件设计中常见问题的可重用解决方案，是代码设计经验的总结。 
+
+单例模式 (Singleton) 
+
+确保一个类只有一个实例，并提供全局访问点。 
+
+实例 
+
+// 单例模式：确保只有一个实例 
+
+class Singleton { 
+
+// 存储单例实例 
+
+private static instance : Singleton ; 
+
+private static _data : string = "" ; 
+
+// 私有构造函数，防止外部实例化 
+
+private constructor ( ) { } 
+
+// 获取单例实例的静态方法 
+
+public static getInstance ( ) : Singleton { 
+
+if ( ! Singleton. instance ) { 
+
+Singleton. instance = new Singleton ( ) ; 
+
+} 
+
+return Singleton. instance ; 
+
+} 
+
+// 设置数据 
+
+public setData ( data : string ) : void { 
+
+Singleton._data = data ; 
+
+} 
+
+// 获取数据 
+
+public getData ( ) : string { 
+
+return Singleton._data ; 
+
+} 
+
+} 
+
+// 测试单例模式 
+
+const instance1 = Singleton. getInstance ( ) ; 
+
+const instance2 = Singleton. getInstance ( ) ; 
+
+// 验证是同一个实例 
+
+console. log ( "是同一实例: " + ( instance1 === instance2 ) ) ; 
+
+instance1. setData ( "Hello Singleton" ) ; 
+
+console. log ( "数据: " + instance2. getData ( ) ) ; 
+
+运行结果： 
+
+是同一实例: true
+数据: Hello Singleton 
+
+私有构造函数： 通过将构造函数设为 private，防止外部使用 new 创建实例。 
+
+工厂模式 (Factory) 
+
+使用泛型工厂创建类型安全的对象实例。 
+
+实例 
+
+// 定义产品接口 
+
+interface Product { 
+
+name : string ; 
+
+price : number ; 
+
+getDescription ( ) : string ; 
+
+} 
+
+// 具体产品：电子产品 
+
+class ElectronicProduct implements Product { 
+
+constructor ( 
+
+public name : string , 
+
+public price : number , 
+
+public warranty : number 
+
+) { } 
+
+getDescription ( ) : string { 
+
+return `$ { this . name } - ¥$ { this . price } ( 保修$ { this . warranty } 年 ) ` ; 
+
+} 
+
+} 
+
+// 具体产品：服装 
+
+class ClothingProduct implements Product { 
+
+constructor ( 
+
+public name : string , 
+
+public price : number , 
+
+public size : string 
+
+) { } 
+
+getDescription ( ) : string { 
+
+return `$ { this . name } - ¥$ { this . price } ( 尺码 : $ { this . size } ) ` ; 
+
+} 
+
+} 
+
+// 工厂类 
+
+class ProductFactory { 
+
+// 泛型工厂方法 
+
+static create < T extends Product > ( 
+
+type : new ( ... args : any [ ] ) => T , 
+
+... args : any [ ] 
+
+) : T { 
+
+return new type ( ... args ) ; 
+
+} 
+
+} 
+
+// 使用工厂创建产品 
+
+const laptop = ProductFactory. create ( ElectronicProduct , "笔记本电脑" , 5999 , 2 ) ; 
+
+const shirt = ProductFactory. create ( ClothingProduct , "T恤" , 199 , "L" ) ; 
+
+console. log ( laptop. getDescription ( ) ) ; 
+
+console. log ( shirt. getDescription ( ) ) ; 
+
+泛型工厂： 使用泛型约束确保返回具体的产品类型。 
+
+装饰器模式 (Decorator) 
+
+使用装饰器为对象动态添加功能。 
+
+实例 
+
+// 基础咖啡接口 
+
+interface Coffee { 
+
+getCost ( ) : number ; 
+
+getDescription ( ) : string ; 
+
+} 
+
+// 基础咖啡实现 
+
+class SimpleCoffee implements Coffee { 
+
+getCost ( ) : number { 
+
+return 10 ; 
+
+} 
+
+getDescription ( ) : string { 
+
+return "咖啡" ; 
+
+} 
+
+} 
+
+// 装饰器基类 
+
+abstract class CoffeeDecorator implements Coffee { 
+
+constructor ( protected coffee : Coffee ) { } 
+
+getCost ( ) : number { 
+
+return this . coffee . getCost ( ) ; 
+
+} 
+
+getDescription ( ) : string { 
+
+return this . coffee . getDescription ( ) ; 
+
+} 
+
+} 
+
+// 牛奶装饰器 
+
+class MilkDecorator extends CoffeeDecorator { 
+
+getCost ( ) : number { 
+
+return this . coffee . getCost ( ) + 2 ; 
+
+} 
+
+getDescription ( ) : string { 
+
+return this . coffee . getDescription ( ) + ", 牛奶" ; 
+
+} 
+
+} 
+
+// 糖装饰器 
+
+class SugarDecorator extends CoffeeDecorator { 
+
+getCost ( ) : number { 
+
+return this . coffee . getCost ( ) + 1 ; 
+
+} 
+
+getDescription ( ) : string { 
+
+return this . coffee . getDescription ( ) + ", 糖" ; 
+
+} 
+
+} 
+
+// 使用装饰器 
+
+let coffee : Coffee = new SimpleCoffee ( ) ; 
+
+console. log ( coffee. getDescription ( ) + " - ¥" + coffee. getCost ( ) ) ; 
+
+coffee = new MilkDecorator ( coffee ) ; 
+
+console. log ( coffee. getDescription ( ) + " - ¥" + coffee. getCost ( ) ) ; 
+
+coffee = new SugarDecorator ( coffee ) ; 
+
+console. log ( coffee. getDescription ( ) + " - ¥" + coffee. getCost ( ) ) ; 
+
+装饰器： 可以在不修改原类的情况下，动态添加新功能，是 TypeScript 实验性功能。 
+
+观察者模式 (Observer) 
+
+定义对象间的一对多依赖关系，当对象状态改变时，所有依赖者都会收到通知。 
+
+实例 
+
+// 观察者接口 
+
+interface Observer { 
+
+update ( message : string ) : void ; 
+
+} 
+
+// 主题接口 
+
+interface Subject { 
+
+attach ( observer : Observer ) : void ; 
+
+detach ( observer : Observer ) : void ; 
+
+notify ( ) : void ; 
+
+} 
+
+// 具体主题：消息中心 
+
+class MessageCenter implements Subject { 
+
+private observers : Observer [ ] = [ ] ; 
+
+private message : string = "" ; 
+
+// 添加观察者 
+
+attach ( observer : Observer ) : void { 
+
+this . observers . push ( observer ) ; 
+
+} 
+
+// 移除观察者 
+
+detach ( observer : Observer ) : void { 
+
+const index = this . observers . indexOf ( observer ) ; 
+
+if ( index > - 1 ) { 
+
+this . observers . splice ( index , 1 ) ; 
+
+} 
+
+} 
+
+// 通知所有观察者 
+
+notify ( ) : void { 
+
+for ( const observer of this . observers ) { 
+
+observer. update ( this . message ) ; 
+
+} 
+
+} 
+
+// 发布消息 
+
+publish ( message : string ) : void { 
+
+this . message = message ; 
+
+console. log ( "发布消息: " + message ) ; 
+
+this . notify ( ) ; 
+
+} 
+
+} 
+
+// 具体观察者：用户 
+
+class UserObserver implements Observer { 
+
+constructor ( public name : string ) { } 
+
+update ( message : string ) : void { 
+
+console. log ( ` [ $ { this . name } ] 收到消息 : $ { message } ` ) ; 
+
+} 
+
+} 
+
+// 使用观察者模式 
+
+const center = new MessageCenter ( ) ; 
+
+const user1 = new UserObserver ( "用户A" ) ; 
+
+const user2 = new UserObserver ( "用户B" ) ; 
+
+center. attach ( user1 ) ; 
+
+center. attach ( user2 ) ; 
+
+center. publish ( "新功能上线了！" ) ; 
+
+解耦： 观察者模式实现了主题和观察者之间的松耦合。 
+
+策略模式 (Strategy) 
+
+定义一系列算法，把它们一个个封装起来，使它们可以相互替换。 
+
+实例 
+
+// 支付策略接口 
+
+interface PaymentStrategy { 
+
+pay ( amount : number ) : void ; 
+
+} 
+
+// 微信支付策略 
+
+class WechatPayStrategy implements PaymentStrategy { 
+
+pay ( amount : number ) : void { 
+
+console. log ( `使用微信支付 ¥$ { amount } ` ) ; 
+
+} 
+
+} 
+
+// 支付宝策略 
+
+class AlipayStrategy implements PaymentStrategy { 
+
+pay ( amount : number ) : void { 
+
+console. log ( `使用支付宝支付 ¥$ { amount } ` ) ; 
+
+} 
+
+} 
+
+// 银行卡策略 
+
+class CardPayStrategy implements PaymentStrategy { 
+
+pay ( amount : number ) : void { 
+
+console. log ( `使用银行卡支付 ¥$ { amount } ` ) ; 
+
+} 
+
+} 
+
+// 支付上下文 
+
+class PaymentContext { 
+
+private strategy : PaymentStrategy ; 
+
+constructor ( strategy : PaymentStrategy ) { 
+
+this . strategy = strategy ; 
+
+} 
+
+// 设置支付策略 
+
+setStrategy ( strategy : PaymentStrategy ) : void { 
+
+this . strategy = strategy ; 
+
+} 
+
+// 执行支付 
+
+pay ( amount : number ) : void { 
+
+this . strategy . pay ( amount ) ; 
+
+} 
+
+} 
+
+// 使用策略模式 
+
+const context = new PaymentContext ( new WechatPayStrategy ( ) ) ; 
+
+context. pay ( 100 ) ; 
+
+context. setStrategy ( new AlipayStrategy ( ) ) ; 
+
+context. pay ( 200 ) ; 
+
+context. setStrategy ( new CardPayStrategy ( ) ) ; 
+
+context. pay ( 300 ) ; 
+
+算法切换： 策略模式可以在运行时切换算法，提供了很大的灵活性。 
+
+依赖注入 (Dependency Injection) 
+
+通过构造函数注入依赖，是 TypeScript 中最常用的模式之一。 
+
+实例 
+
+// 定义服务接口 
+
+interface Logger { 
+
+log ( message : string ) : void ; 
+
+} 
+
+interface Storage { 
+
+save ( key : string , data : any ) : void ; 
+
+} 
+
+// 具体服务实现 
+
+class ConsoleLogger implements Logger { 
+
+log ( message : string ) : void { 
+
+console. log ( "[日志]: " + message ) ; 
+
+} 
+
+} 
+
+class LocalStorage implements Storage { 
+
+save ( key : string , data : any ) : void { 
+
+console. log ( `保存 $ { key } : $ { JSON. stringify ( data ) } ` ) ; 
+
+localStorage. setItem ( key , JSON. stringify ( data ) ) ; 
+
+} 
+
+} 
+
+// 使用依赖注入的服务 
+
+class UserService { 
+
+constructor ( 
+
+private logger : Logger , 
+
+private storage : Storage 
+
+) { } 
+
+createUser ( name : string ) : void { 
+
+const user = { name , createdAt : new Date ( ) } ; 
+
+this . logger . log ( "创建用户: " + name ) ; 
+
+this . storage . save ( "user" , user ) ; 
+
+} 
+
+} 
+
+// 注入依赖 
+
+const logger = new ConsoleLogger ( ) ; 
+
+const storage = new LocalStorage ( ) ; 
+
+const userService = new UserService ( logger , storage ) ; 
+
+userService. createUser ( "Alice" ) ; 
+
+依赖倒置： 依赖注入实现了高层模块不依赖低层模块，而是依赖抽象接口。 
+
+建造者模式 (Builder) 
+
+将一个复杂对象的构建与它的表示分离，使得同样的构建过程可以创建不同的表示。 
+
+实例 
+
+// 建造者接口 
+
+interface Builder < T > { 
+
+build ( ) : T ; 
+
+} 
+
+// 复杂对象：用户配置 
+
+interface UserConfig { 
+
+name : string ; 
+
+email : string ; 
+
+age ?: number ; 
+
+role ?: string ; 
+
+theme ?: string ; 
+
+} 
+
+// 用户配置建造者 
+
+class UserConfigBuilder implements Builder < UserConfig > { 
+
+private config : Partial < UserConfig > = { } ; 
+
+setName ( name : string ) : this { 
+
+this . config . name = name ; 
+
+return this ; 
+
+} 
+
+setEmail ( email : string ) : this { 
+
+this . config . email = email ; 
+
+return this ; 
+
+} 
+
+setAge ( age : number ) : this { 
+
+this . config . age = age ; 
+
+return this ; 
+
+} 
+
+setRole ( role : string ) : this { 
+
+this . config . role = role ; 
+
+return this ; 
+
+} 
+
+setTheme ( theme : string ) : this { 
+
+this . config . theme = theme ; 
+
+return this ; 
+
+} 
+
+build ( ) : UserConfig { 
+
+if ( ! this . config . name || ! this . config . email ) { 
+
+throw new Error ( "Name and email are required" ) ; 
+
+} 
+
+return this . config as UserConfig ; 
+
+} 
+
+} 
+
+// 使用建造者 
+
+const builder = new UserConfigBuilder ( ) ; 
+
+const config = builder 
+
+. setName ( "Alice" ) 
+
+. setEmail ( " [email protected] " ) 
+
+. setAge ( 25 ) 
+
+. setRole ( "admin" ) 
+
+. setTheme ( "dark" ) 
+
+. build ( ) ; 
+
+console. log ( "用户配置:" , JSON. stringify ( config , null , 2 ) ) ; 
+
+链式调用： 建造者模式支持链式调用，使代码更简洁易读。 
+
+注意事项 
+
+类型安全： 利用 TypeScript 的类型系统确保模式实现的安全 
+
+不要过度： 只在真正需要时才使用设计模式 
+
+保持简单： 优先使用简单的解决方案 
+
+团队共识： 在团队内部统一设计模式的使用 
+
+最佳实践： 设计模式是工具，不是教条。选择适合项目实际情况的模式。 
+
+总结 
+
+设计模式是代码组织的重要经验。 
+
+单例模式： 确保类只有一个实例 
+
+工厂模式： 封装对象创建过程 
+
+装饰器模式： 动态添加功能 
+
+观察者模式： 一对多依赖关系 
+
+策略模式： 算法可替换 
+
+依赖注入： 解耦依赖关系 
+
+建议： 理解并在实践中应用设计模式，可以写出更优雅、更易维护的代码。 
+
+AI 思考中... 
+
+TypeScript Monorepo 配置 
+
+TypeScript 性能优化

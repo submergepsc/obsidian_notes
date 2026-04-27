@@ -1,0 +1,230 @@
+URL: https://www.runoob.com/svg/svg-feoffset.html
+Title: SVG 阴影 | 菜鸟教程
+
+SVG 阴影 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SVG 教程 
+
+SVG 模糊效果 – 高斯模糊 
+
+SVG 渐变 – 线性 
+
+SVG 阴影 
+
+<feOffset> 
+
+<feOffset> 是 SVG 滤镜中的一个元素，用于在图像上创建一个偏移效果，可以用来创建阴影、轮廓和其他视觉效果。它的作用是将输入图像的每个像素沿着指定的水平和垂直方向移动一定的距离，然后将结果图像作为滤镜效果的输出。 
+
+基本语法 
+
+<feOffset dx="x-offset" dy="y-offset" /> 
+
+dx 属性定义了阴影在水平方向上的偏移量。 
+
+dy 属性定义了阴影在垂直方向上的偏移量。 
+
+以下代码定义了一个偏移滤镜，然后将其应用于一个红色填充的矩形，使矩形呈现出带有偏移效果的阴影，阴影在水平方向和垂直方向上分别偏移了 5 个像素。 
+
+实例 
+
+<svg width = "200" height = "200" xmlns = "http://www.w3.org/2000/svg" > 
+
+<!-- 定义偏移滤镜 --> 
+
+<filter id = "offset_filter" > 
+
+<feOffset dx = "5" dy = "5" / > 
+
+< / filter> 
+
+<!-- 应用偏移滤镜的矩形 --> 
+
+<rect x = "50" y = "50" width = "100" height = "80" fill = "red" filter = "url(#offset_filter)" / > 
+
+< / svg> 
+
+<feDropShadow> 
+
+SVG 阴影效果可以通过 <feDropShadow> 元素实现，它可以为 SVG 图形元素添加阴影效果，使其看起来更加立体和真实。 
+
+基本语法 
+
+<feDropShadow dx="offset-x" dy="offset-y" stdDeviation="blur-radius" flood-color="color" flood-opacity="opacity" /> 
+
+dx 属性定义了阴影在水平方向上的偏移量。 
+
+dy 属性定义了阴影在垂直方向上的偏移量。 
+
+stdDeviation 属性定义了阴影的模糊半径，通常用于控制阴影的模糊程度。 
+
+flood-color 属性定义了阴影的颜色，默认为黑色。 
+
+flood-opacity 属性定义了阴影的不透明度，默认为1（完全不透明）。 
+
+以下代码定义了一个阴影滤镜，然后将其应用于一个红色填充的矩形，使矩形呈现出带有灰色阴影的效果，阴影在水平方向和垂直方向上分别偏移了 5 个像素，模糊半径为 5 个像素，阴影的颜色为灰色，不透明度为 0.5。 
+
+实例 
+
+<svg width = "200" height = "200" xmlns = "http://www.w3.org/2000/svg" > 
+
+<!-- 定义阴影滤镜 --> 
+
+<filter id = "shadow_filter" > 
+
+<feDropShadow dx = "5" dy = "5" stdDeviation = "5" flood- color = "gray" flood-opacity = "0.5" / > 
+
+< / filter> 
+
+<!-- 应用阴影滤镜的矩形 --> 
+
+<rect x = "50" y = "50" width = "100" height = "80" fill = "red" filter = "url(#shadow_filter)" / > 
+
+< / svg> 
+
+实例 1 
+
+<feOffset> 元素是用于创建阴影效果。我们的想法是采取一个SVG图形（图像或元素）并移动它在 xy 平面上一点儿。 
+
+第一个例子偏移一个矩形（带 <feOffset>），然后混合偏移图像顶部（含 <feBlend>）： 
+
+下面是 SVG 代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<defs> 
+<filter id="f1" x="0" y="0" width="200%" height="200%"> 
+<feOffset result="offOut" in="SourceGraphic" dx="20" 
+dy="20" /> 
+<feBlend in="SourceGraphic" in2="offOut" 
+mode="normal" /> 
+</filter> 
+</defs> 
+<rect width="90" height="90" stroke="green" stroke-width="3" 
+fill="yellow" filter="url(#f1)" /> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+代码解析： 
+
+<filter>元素id属性定义一个滤镜的唯一名称 
+
+<rect>元素的滤镜属性用来把元素链接到"f1"滤镜 
+
+实例 2 
+
+现在，偏移图像可以变的模糊（含 <feGaussianBlur>）: 
+
+下面是SVG代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<defs> 
+<filter id="f1" x="0" y="0" width="200%" height="200%"> 
+<feOffset result="offOut" in="SourceGraphic" dx="20" 
+dy="20" /> 
+<feGaussianBlur result="blurOut" in="offOut" 
+stdDeviation="10" /> 
+<feBlend in="SourceGraphic" in2="blurOut" 
+mode="normal" /> 
+</filter> 
+</defs> 
+<rect width="90" height="90" stroke="green" stroke-width="3" 
+fill="yellow" filter="url(#f1)" /> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+代码解析： 
+
+<feGaussianBlur> 元素的 stdDeviation 属性定义了模糊量 
+
+实例 3 
+
+现在，制作一个黑色的阴影： 
+
+下面是 SVG 代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<defs> 
+<filter id="f1" x="0" y="0" width="200%" height="200%"> 
+<feOffset result="offOut" in="SourceAlpha" dx="20" 
+dy="20" /> 
+<feGaussianBlur result="blurOut" in="offOut" 
+stdDeviation="10" /> 
+<feBlend in="SourceGraphic" in2="blurOut" 
+mode="normal" /> 
+</filter> 
+</defs> 
+<rect width="90" height="90" stroke="green" stroke-width="3" 
+fill="yellow" filter="url(#f1)" /> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+代码解析： 
+
+<feOffset> 元素的属性改为 "SourceAlpha" 在 Alpha 通道使用残影，而不是整个 RGBA 像素。 
+
+实例 4 
+
+现在为阴影涂上一层颜色： 
+
+下面是 SVG 代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<defs> 
+<filter id="f1" x="0" y="0" width="200%" height="200%"> 
+<feOffset result="offOut" in="SourceGraphic" dx="20" 
+dy="20" /> 
+<feColorMatrix result="matrixOut" in="offOut" 
+type="matrix" 
+values="0.2 0 0 0 0 0 0.2 0 0 0 0 0 0.2 0 0 0 0 0 
+1 0" /> 
+<feGaussianBlur result="blurOut" in="matrixOut" 
+stdDeviation="10" /> 
+<feBlend in="SourceGraphic" in2="blurOut" 
+mode="normal" /> 
+</filter> 
+</defs> 
+<rect width="90" height="90" stroke="green" stroke-width="3" 
+fill="yellow" filter="url(#f1)" /> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+代码解析： 
+
+<feColorMatrix> 过滤器是用来转换偏移的图像使之更接近黑色的颜色。 '0.2' 矩阵的三个值都获取乘以红色，绿色和蓝色通道。降低其值带来的颜色至黑色（黑色为0） 
+
+注意事项 
+
+<feOffset> 元素可以与其他滤镜效果组合使用，例如模糊、颜色矩阵等。 
+
+偏移效果的偏移量 dx 和 dy 可以为正值（表示向右或向下偏移）或负值（表示向左或向上偏移）。 
+
+<feOffset> 元素通常用于创建阴影效果，结合其他滤镜效果可以实现更加复杂的视觉效果。 
+
+通过使用 <feOffset> 元素，你可以为SVG图形元素创建偏移效果，使其呈现出更加生动和立体的外观。 
+
+AI 思考中... 
+
+SVG 模糊效果 – 高斯模糊 
+
+SVG 渐变 – 线性

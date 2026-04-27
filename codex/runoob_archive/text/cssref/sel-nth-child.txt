@@ -1,0 +1,88 @@
+URL: https://www.runoob.com/cssref/sel-nth-child.html
+Title: CSS3 :nth-child() 选择器 | 菜鸟教程
+
+CSS3 :nth-child() 选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 :only-child 选择器 
+
+CSS3 :nth-last-child() 选择器 
+
+CSS3 :nth-child() 选择器 
+
+实例 
+
+指定每个 p 元素匹配的父元素中第 2 个子元素的背景色： 
+
+p :nth-child (2) { background: #ff0000 ; } 
+
+尝试一下 » 
+
+定义和用法 
+
+:nth-child(n) 选择器匹配父元素中的第 n 个子元素，元素类型没有限制。 
+
+n 可以是一个数字，一个关键字，或者一个公式。 
+
+提示: 请参阅 选择器 。该选择器匹配同类型中的第 n 个同级兄弟元素。 
+
+语法 
+
+element:nth-child(n) 
+
+element 是你想要选择的 HTML 元素。 
+
+n 是一个参数，可以是关键字（如 odd 或 even ），或者一个表达式（如 2n+1 ）。 
+
+关键字 odd 和 even 
+
+odd 选择奇数位置的子元素。 
+
+even 选择偶数位置的子元素。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+:nth-child() 
+
+4.0 
+
+9.0 
+
+3.5 
+
+3.2 
+
+9.6 
+
+更多实例 
+
+实例 1 
+
+奇数和偶数是可以作为关键字使用用于相匹配的子元素，其索引是奇数或偶数（该索引的第一个子节点是1）。
+在这里，我们为奇数和偶数p元素指定两个不同的背景颜色： 
+
+p :nth-child ( odd ) { background: #ff0000 ; } p :nth-child ( even ) { background: #0000ff ; } 
+
+尝试一下 » 
+
+实例 2 
+
+使用公式（an+ b）.描述：a代表一个循环的大小，N是一个计数器（从0开始），以及b是偏移量。
+在这里，我们对所有索引是3的倍数的p元素指定了背景颜色： 
+
+p :nth-child (3 n +0) { background: #ff0000 ; } 
+
+尝试一下 » 
+
+AI 思考中... 
+
+CSS3 :only-child 选择器 
+
+CSS3 :nth-last-child() 选择器

@@ -1,0 +1,89 @@
+URL: https://www.runoob.com/xsl/el-otherwise.html
+Title: XSLT <xsl:otherwise> 元素 | 菜鸟教程
+
+XSLT <xsl:otherwise> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:number> 元素 
+
+XSLT <xsl:output> 元素 
+
+XSLT <xsl:otherwise> 元素 
+
+定义和用法 
+
+<xsl:otherwise> 元素规定了 <xsl:choose> 元素的默认行为。在没有 <xsl:when> 的条件应用时，将发生该行为。 
+
+语法 
+
+<xsl:otherwise> 
+
+<!-- Content:template --> 
+
+</xsl:otherwise> 
+
+属性 
+
+无 
+
+实例 1 
+
+下面的代码将在 cd 的价格高于 10 时，向 artist 列添加粉色的背景色，否则仅仅会输出 artist 的名称： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<h2>My CD Collection</h2> 
+<table border="1"> 
+<tr bgcolor="#9acd32"> 
+<th>Title</th> 
+<th>Artist</th> 
+</tr> 
+<xsl:for-each select="catalog/cd"> 
+<tr> 
+<td><xsl:value-of select="title"/></td> 
+<xsl:choose> 
+<xsl:when test="price>'10'"> 
+<td bgcolor="#ff00ff"> 
+<xsl:value-of select="artist"/></td> 
+</xsl:when> 
+<xsl:otherwise> 
+<td><xsl:value-of select="artist"/></td> 
+</xsl:otherwise> 
+</xsl:choose> 
+</tr> 
+</xsl:for-each> 
+</table> 
+</body> 
+</html> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+查看 XML 文件 、 查看 XSL 文件 、 查看结果 。 
+
+实例 2 
+
+声明一个名为 "color" 变量。把它的值赋给当前元素的 color 属性。如果当前元素没有 color 属性，"color" 的值将是 "green"： 
+
+<xsl:variable name="color"> 
+<xsl:choose> 
+<xsl:when test="@color"> 
+<xsl:value-of select="@color"/> 
+</xsl:when> 
+<xsl:otherwise>green</xsl:otherwise> 
+</xsl:choose> 
+</xsl:variable> 
+
+AI 思考中... 
+
+XSLT <xsl:number> 元素 
+
+XSLT <xsl:output> 元素

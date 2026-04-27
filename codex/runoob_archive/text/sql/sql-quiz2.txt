@@ -1,0 +1,38 @@
+URL: https://www.runoob.com/sql/sql-quiz2.html
+Title: SQL 测验 | 菜鸟教程
+
+SQL 测验 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SQL 教程 
+
+SQL 注入 
+
+开始 
+
+更多测验题 
+
+SQL 测验 1 
+
+SQL 测验 2 
+
+SQL 测验 3 
+
+SQL 测验 4 
+
+SQL 测验 5 
+
+SQL 测验 6 
+
+SQL 测验 7 
+
+SQL 测验 8 
+
+SQL 测验 9 
+
+SQL 测验 10 
+
+AI 思考中... 
+
+SQL 注入

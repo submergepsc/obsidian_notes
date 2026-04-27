@@ -1,0 +1,72 @@
+URL: https://www.runoob.com/vbscript/func-int.html
+Title: VBScript Int 函数 | 菜鸟教程
+
+VBScript Int 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Exp 函数 
+
+VBScript Fix 函数 
+
+VBScript Int 函数 
+
+Int 函数返回指定数字的整数部分。 
+
+注意： 如果 number 参数包含 Null，则返回 Null。 
+
+提示： 请参阅 Fix 函数。 
+
+语法 
+
+Int(number) 
+
+参数 
+
+描述 
+
+number 
+
+必需。有效的数值表达式。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+document.write(Int(6.83227) & "<br />") 
+document.write(Int(6.23443)) 
+
+</script> 
+
+以上实例输出结果： 
+
+6 
+6 
+
+尝试一下 » 
+
+实例 2 
+
+<script type="text/vbscript"> 
+
+document.write(Int(-6.13443) & "<br />") 
+document.write(Int(-6.93443)) 
+
+</script> 
+
+以上实例输出结果： 
+
+-7 
+-7 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Exp 函数 
+
+VBScript Fix 函数

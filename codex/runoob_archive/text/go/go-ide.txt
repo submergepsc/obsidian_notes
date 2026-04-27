@@ -1,0 +1,102 @@
+URL: https://www.runoob.com/go/go-ide.html
+Title: Go 语言开发工具 | 菜鸟教程
+
+Go 语言开发工具 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Go 语言教程 
+
+Go 错误处理 
+
+Go 并发 
+
+Go 语言开发工具 
+
+VSCode 
+
+VScode 安装教程参见： https://www.runoob.com/w3cnote/vscode-tutorial.html 
+
+然后我们打开 VSCode 的扩展（ Ctrl+Shift+P ）： 
+
+搜索 go ： 
+
+点击安装，安装完成后我们就可以使用代码提示、测试、调试等功能了。 
+
+GoLand 
+
+GoLand 是 Jetbrains 家族的 Go 语言 IDE，有 30 天的免费试用期。 
+
+安装也很简单访问 Goland 的下载页面 ，根据你当期的系统环境三大平台（Mac、Linux、Windows）下载对应的软件。 
+
+LiteIDE 
+
+LiteIDE 是一款开源、跨平台的轻量级 Go 语言集成开发环境（IDE）。 
+
+支持的 操作系统 
+
+Windows x86 (32-bit or 64-bit) 
+
+Linux x86 (32-bit or 64-bit) 
+
+下载地址 ： http://sourceforge.net/projects/liteide/files/ 
+
+源码地址 ： https://github.com/visualfc/liteide 
+
+Eclipse 
+
+Eclipse 也是非常常用的开发利器，以下介绍如何使用 Eclipse 来编写 Go 程序。 
+
+Eclipse 编辑 Go 的主界面 
+
+首先下载并安装好 Eclipse 
+
+下载 goclipse 插件 https://github.com/GoClipse/goclipse/blob/latest/documentation/Installation.md#installation 
+
+下载 gocode，用于 go 的代码补全提示 
+
+gocode 的 github 地址： 
+
+https://github.com/nsf/gocode 
+
+在 Windows下要安装 git，通常用 msysgit 。 
+
+再在 cmd 下安装： 
+
+go get -u github.com/nsf/gocode 
+
+也可以下载代码，直接用 go build 来编译，会生成 gocode.exe 
+
+下载 MinGW 并按要求装好 
+
+配置插件 
+
+Windows->Reference->Go 
+
+(1)、配置 Go 的编译器 
+
+设置 Go 的一些基础信息 
+
+(2)、配置 Gocode（可选，代码补全），设置 Gocode 路径为之前生成的 gocode.exe 文件 
+
+设置 gocode 信息 
+
+(3)、配置 GDB（可选，做调试用），设置 GDB 路径为 MingW 安装目录下的 gdb.exe 文件 
+
+设置 GDB 信息 
+
+测试是否成功 
+
+新建一个 go 工程，再建立一个 hello.go。如下图： 
+
+新建项目编辑文件 
+
+调试如下（要在 console 中用输入命令来调试）： 
+
+图 1.16 调试 Go 程序 
+
+AI 思考中... 
+
+Go 错误处理 
+
+Go 并发

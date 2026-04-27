@@ -1,0 +1,433 @@
+URL: https://www.runoob.com/nodejs/nodejs-pnpm.html
+Title: pnpm 使用介绍 | 菜鸟教程
+
+pnpm 使用介绍 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Node.js 教程 
+
+Node.js 模块导入 
+
+npx 入门教程 
+
+pnpm 使用介绍 
+
+作为 Node.js 开发者，你一定听说过 npm 和 yarn ，它们是管理项目依赖的利器。但你是否遇到过 node_modules 文件夹巨大无比、安装速度缓慢、或者磁盘空间被迅速占满的烦恼？这就是 pnpm 能解决的问题。 
+
+pnpm 是一个快速、节省磁盘空间的 Node.js 包管理器，它通过内容寻址的方式存储包，所有版本的依赖会集中存储在系统的一个位置，然后通过硬链接的方式链接到项目中，避免了重复安装。 
+
+pnpm 的 slogan 是 Fast, disk space efficient package manager （快速、节省磁盘空间的包管理器），它不仅速度飞快，更通过其独特的链接机制，为你节省大量的磁盘空间和带宽。 
+
+安装 pnpm 
+
+安装 pnpm 有多种方式，你可以根据喜好和系统环境选择。 
+
+方法一：使用 npm 安装（推荐给所有用户） 
+
+这是最通用、最简单的方法。打开你的终端（Windows 用户可使用 PowerShell 或 CMD），运行以下命令： 
+
+npm install -g pnpm 
+
+这条命令会通过 npm 将 pnpm 安装到你的全局环境。 
+
+验证安装是否成功 ：
+安装完成后，运行以下命令检查版本。如果能正常显示版本号，说明安装成功。 
+
+pnpm --version 
+
+输出类似：8.15.0 
+
+方法二：使用独立脚本安装 
+
+对于 macOS 或 Linux 用户，可以使用以下脚本安装： 
+
+# macOS/Linux
+curl -fsSL https://get.pnpm.io/install.sh | sh -
+
+# Windows (PowerShell)
+iwr https://get.pnpm.io/install.ps1 -useb | iex 
+
+pnpm 使用 
+
+学会了安装，现在让我们开始实际使用 pnpm。它的命令设计非常直观，如果你熟悉 npm，几乎可以无缝切换。 
+
+初始化一个新项目 
+
+类似于 npm init ，pnpm 可以用来初始化项目并创建 package.json 文件。 
+
+# 交互式地回答问题，创建 package.json
+pnpm init
+
+# 快速创建一个带有默认值的 package.json
+pnpm init -y 
+
+运行 pnpm init -y 后，你会得到一个最基本的 package.json 文件： 
+
+实例 
+
+{ 
+
+"name" : "your-project-name" , 
+
+"version" : "1.0.0" , 
+
+"description" : "" , 
+
+"main" : "index.js" , 
+
+"scripts" : { 
+
+"test" : "echo \" Error: no test specified \" && exit 1" 
+
+} , 
+
+"keywords" : [ ] , 
+
+"author" : "" , 
+
+"license" : "ISC" 
+
+} 
+
+安装依赖包 
+
+pnpm 的安装命令是 pnpm add <package-name> ，相当于 npm install <package-name> 。 
+
+# 安装所有依赖
+pnpm install
+
+# 添加依赖包
+pnpm add <package-name>
+
+# 添加开发依赖
+pnpm add -D <package-name>
+
+# 添加全局包
+pnpm add -g <package-name>
+
+# 安装指定版本
+pnpm add <package-name>@<version> 
+
+更新依赖 
+
+# 更新所有依赖
+pnpm update
+
+# 更新指定包
+pnpm update <package-name>
+
+# 更新到最新版本(忽略 package.json 中的版本范围)
+pnpm update --latest 
+
+删除依赖 
+
+pnpm remove <package-name> 
+
+运行脚本 
+
+# 运行 package.json 中定义的脚本
+pnpm run <script-name>
+# 一些常见的简写
+pnpm start
+pnpm test
+pnpm build 
+
+npm 到 pnpm 命令对照表 
+
+npm 命令 
+
+pnpm 命令 
+
+npm install 
+
+pnpm install 
+
+npm install <pkg> 
+
+pnpm add <pkg> 
+
+npm install <pkg> --save-dev 
+
+pnpm add -D <pkg> 
+
+npm install <pkg> --global 
+
+pnpm add -g <pkg> 
+
+npm update 
+
+pnpm update 
+
+npm uninstall <pkg> 
+
+pnpm remove <pkg> 
+
+npm run <script> 
+
+pnpm run <script> 
+
+npx <command> 
+
+pnpm dlx <command> 
+
+npm list 
+
+pnpm list 
+
+npm outdated 
+
+pnpm outdated 
+
+npm audit 
+
+pnpm audit 
+
+配置文件 
+
+pnpm 支持通过 .npmrc 文件进行配置。 
+
+在项目根目录创建此文件可以自定义 pnpm 的行为。 
+
+常用配置示例 
+
+# 设置国内镜像源(淘宝)
+registry=https://registry.npmmirror.com
+
+# 自动安装 peer dependencies
+auto-install-peers=true
+
+# 严格模式
+strict-peer-dependencies=true
+
+# shamefully-hoist(提升依赖,兼容某些工具)
+shamefully-hoist=true
+
+# 指定 node_modules 目录结构
+node-linker=hoisted
+
+# 设置存储目录
+store-dir=~/.pnpm-store 
+
+查看当前配置 
+
+pnpm config list 
+
+设置配置项: 
+
+pnpm config set <key> <value> 
+
+Workspace 工作区 
+
+pnpm 内置了强大的 monorepo 支持。 
+
+通过在项目根目录创建 pnpm-workspace.yaml 文件来定义工作区。 
+
+配置示例: 
+
+packages:
+ - 'packages/*'
+ - 'apps/*'
+<p> - '!**/test/**' 
+
+项目结构示例: 
+
+my-monorepo/
+├── pnpm-workspace.yaml
+├── package.json
+├── packages/
+│ ├── package-a/
+│ │ └── package.json
+│ └── package-b/
+│ └── package.json
+└── apps/
+ └── web-app/
+ └── package.json 
+
+工作区命令 
+
+# 在所有工作区包中安装依赖
+pnpm install
+
+# 在指定工作区执行命令
+pnpm --filter <package-name> <command>
+
+# 在所有工作区执行命令
+pnpm -r <command>
+
+# 递归运行脚本
+pnpm -r run build
+
+# 为工作区添加依赖
+pnpm --filter <package-name> add <dependency>
+
+# 添加工作区内部依赖
+pnpm --filter package-a add package-b@workspace:* 
+
+工作区协议 
+
+在工作区内引用其他包时, 使用 workspace: 协议: 
+
+json{
+ "dependencies": {
+ "package-a": "workspace:*",
+ "package-b": "workspace:^1.0.0"
+ }
+} 
+
+高级特性 
+
+pnpm exec 与 pnpm dlx 
+
+# 执行本地安装的包
+pnpm exec <command>
+
+# 执行远程包(类似 npx)
+pnpm dlx create-react-app my-app
+
+# 使用特定版本
+pnpm dlx create-react-app@latest my-app 
+
+查看依赖树 
+
+# 查看依赖树
+pnpm list
+
+# 指定深度
+pnpm list --depth 2
+
+# 只显示生产依赖
+pnpm list --prod
+
+# 查看全局包
+pnpm list -g 
+
+查看过期依赖 
+
+pnpm outdated 
+
+审计依赖安全性 
+
+pnpm audit
+
+# 自动修复安全问题
+pnpm audit --fix 
+
+清理缓存 
+
+# 清理未使用的包
+pnpm store prune
+
+# 查看存储位置
+pnpm store path
+
+# 查看存储状态
+pnpm store status 
+
+导入 lockfile 
+
+从其他包管理器迁移时: 
+
+# 从 package-lock.json 导入
+pnpm import
+
+# 从 yarn.lock 导入
+pnpm import 
+
+Patch 包 
+
+当需要临时修改某个依赖包时: 
+
+# 创建补丁
+pnpm patch <package-name>@<version>
+
+# 应用补丁后提交
+pnpm patch-commit <path> 
+
+pnpm 是什么？核心优势何在？ 
+
+在深入使用之前，我们首先要理解 pnpm 的核心理念和它带来的变革。 
+
+pnpm (Performant npm) 是一个 Node.js 包管理器，它向后兼容 npm，这意味着绝大多数 npm 命令在 pnpm 中可以直接使用。 
+
+pnpm 的设计目标是解决传统包管理器（如 npm、yarn）在磁盘空间和安装速度上的瓶颈。 
+
+传统包管理器的问题 
+
+想象一下，你参与了公司 10 个不同的前端项目，每个项目都依赖了 [email protected] 。使用 npm 或 yarn，这个 lodash 包会被完整地下载和存储 10 次，在你电脑的 10 个不同的 node_modules 文件夹里。这造成了巨大的磁盘空间浪费。 
+
+pnpm 的革命性方案：内容可寻址存储与硬链接 
+
+pnpm 采用了一种聪明的方案： 
+
+全局存储 ：当你安装一个包时，pnpm 会将其内容存储在 一个全局的、单一版本的仓库 中（通常位于 ~/.pnpm-store ）。 
+
+硬链接 ：在你项目的 node_modules 中，pnpm 不会复制包的完整文件，而是创建指向全局存储中那些文件的 硬链接 。你可以把硬链接理解为一个"高级的快捷方式"，它和原文件共享同一份磁盘数据。 
+
+符号链接组织 ：为了保持 node_modules 的扁平化结构（便于 require 语句工作），pnpm 会创建一套精密的 符号链接 （软链接）来组织依赖树。 
+
+通过这个机制， 无论你有多少项目依赖同一个包，这个包在物理磁盘上都只保存一份 。这带来了立竿见影的好处： 
+
+节省大量磁盘空间 ：对于拥有多个项目的开发者，节省效果极其显著。 
+
+极快的安装速度 ：后续安装时，如果包已存在于全局存储中，pnpm 只需创建链接，速度比下载和解压快几个数量级。 
+
+提升安全性 ： node_modules 中的包文件是只读的（因为是硬链接），这避免了项目脚本意外修改依赖包内容的风险，确保了依赖的确定性。 
+
+上图清晰地展示了 pnpm 的核心工作流：所有项目都通过硬链接共享全局存储中的同一个包文件，然后在各自的 node_modules 中通过符号链接构建出依赖结构。 
+
+特性对比 
+
+npm (v7+) / yarn 
+
+pnpm 
+
+磁盘空间使用 
+
+每个项目的依赖独立存储，占用空间大。 
+
+所有项目共享依赖的 单一副本 ，空间占用极低。 
+
+安装速度 
+
+较慢，需要下载、解压、构建依赖树。 
+
+极快 ，特别是后续安装，主要是创建链接。 
+
+node_modules 结构 
+
+扁平化或半扁平化，可能导致依赖提升和幻影依赖问题。 
+
+严格 的非扁平化结构，精准模拟依赖关系，消除幻影依赖。 
+
+Monorepo 支持 
+
+通过 Workspaces 支持，但性能有瓶颈。 
+
+原生、高效 的 Workspaces 支持，性能是其强项。 
+
+包管理模型 
+
+安装时拷贝文件到项目。 
+
+链接模型（硬链接 + 符号链接）。 
+
+安全性 
+
+依赖可被项目脚本修改。 
+
+依赖文件为只读硬链接，安全性更高。 
+
+官方资源 ： 
+
+pnpm 官方网站 
+
+pnpm 中文文档 
+
+pnpm GitHub 仓库 
+
+AI 思考中... 
+
+Node.js 模块导入 
+
+npx 入门教程

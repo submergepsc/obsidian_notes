@@ -1,0 +1,259 @@
+URL: https://www.runoob.com/regexp/regexp-positional-matching.html
+Title: 正则表达式 – 位置匹配 | 菜鸟教程
+
+正则表达式 – 位置匹配 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+正则表达式 
+
+正则表达式 – 测验 
+
+正则表达式 – 分组和引用 
+
+正则表达式 - 位置匹配 
+
+位置匹配（也称为锚定或边界匹配）是指匹配字符串中的特定位置，而不是实际的字符。与普通字符匹配不同，位置匹配不消耗任何字符，它只是指定匹配必须发生的位置。 
+
+为什么需要位置匹配 
+
+精准定位 ：可以精确指定匹配发生的位置 
+
+效率提升 ：避免不必要的全文搜索 
+
+模式验证 ：检查字符串是否符合特定格式要求 
+
+常用位置匹配元字符 
+
+1、行首与行尾匹配 
+
+^ - 匹配行首 
+
+实例 
+
+// 匹配以"Hello"开头的行 
+
+const pattern = /^Hello/ ; 
+
+console. log ( pattern. test ( "Hello World" ) ) ; // true 
+
+console. log ( pattern. test ( "Say Hello" ) ) ; // false 
+
+$ - 匹配行尾 
+
+实例 
+
+// 匹配以"World"结尾的行 
+
+const pattern = /World$/ ; 
+
+console. log ( pattern. test ( "Hello World" ) ) ; // true 
+
+console. log ( pattern. test ( "World Peace" ) ) ; // false 
+
+2、单词边界匹配 
+
+\b - 匹配单词边界 
+
+单词边界是指 \w （[a-zA-Z0-9_]）和 \W 之间的位置，或字符串的开始/结束位置。 
+
+实例 
+
+// 匹配独立的"cat"单词 
+
+const pattern = /\bcat\b/ ; 
+
+console. log ( pattern. test ( "cat" ) ) ; // true 
+
+console. log ( pattern. test ( "concatenate" ) ) ; // false 
+
+console. log ( pattern. test ( "a cat" ) ) ; // true 
+
+\B - 匹配非单词边界 
+
+实例 
+
+// 匹配不在单词边界的"cat" 
+
+const pattern = /\Bcat\B/ ; 
+
+console. log ( pattern. test ( "concatenate" ) ) ; // true 
+
+console. log ( pattern. test ( "cat" ) ) ; // false 
+
+3、其他位置匹配 
+
+\A 和 \Z （某些语言支持） 
+
+\A ：匹配字符串开头（不同于 ^ ，不受多行模式影响） 
+
+\Z ：匹配字符串结尾或结尾的换行符之前 
+
+位置匹配的实际应用 
+
+1. 验证输入格式 
+
+实例 
+
+// 验证手机号码（以1开头，共11位数字） 
+
+const phonePattern = /^1\d{10}$/ ; 
+
+console. log ( phonePattern. test ( "13800138000" ) ) ; // true 
+
+console. log ( phonePattern. test ( "a13800138000" ) ) ; // false 
+
+2. 提取特定位置的单词 
+
+实例 
+
+// 提取每行第一个单词 
+
+const text = "Apple Banana \n Cherry Date" ; 
+
+const firstWords = text. match ( /^\w+/gm ) ; 
+
+console. log ( firstWords ) ; // ["Apple", "Cherry"] 
+
+3. 替换特定位置的文本 
+
+实例 
+
+// 在每个段落开头添加"> " 
+
+const text = "First line \n Second line" ; 
+
+const result = text. replace ( /^/gm , "> " ) ; 
+
+console. log ( result ) ; 
+
+// > First line 
+
+// > Second line 
+
+高级位置匹配技巧 
+
+1. 多行模式下的位置匹配 
+
+使用 m 标志（多行模式）改变 ^ 和 $ 的行为： 
+
+实例 
+
+const text = "Line 1 \n Line 2 \n Line 3" ; 
+
+// 普通模式 
+
+console. log ( text. match ( /^Line \d/g ) ) ; // ["Line 1"] 
+
+// 多行模式 
+
+console. log ( text. match ( /^Line \d/gm ) ) ; // ["Line 1", "Line 2", "Line 3"] 
+
+2. 前后断言（Lookaround） 
+
+虽然不是严格的位置匹配，但前后断言可以帮助实现更复杂的位置条件： 
+
+正向先行断言（?=） 
+
+实例 
+
+// 匹配后面跟着"px"的数字 
+
+const pattern = /\d+(?=px)/ ; 
+
+console. log ( pattern. exec ( "12px" ) ) ; // ["12"] 
+
+负向先行断言（?!） 
+
+实例 
+
+// 匹配后面不跟着"px"的数字 
+
+const pattern = /\d+(?!px)/ ; 
+
+console. log ( pattern. exec ( "12em" ) ) ; // ["12"] 
+
+常见错误与注意事项 
+
+混淆 ^ 在字符组中的用法 ： 
+
+[^abc] 表示"非a、b、c的字符" 
+
+^abc 表示"以abc开头的字符串" 
+
+忽略多行模式的影响 ： 
+
+默认情况下 ^ 和 $ 匹配整个字符串的开头和结尾 
+
+多行模式下它们匹配每行的开头和结尾 
+
+边界匹配不消耗字符 ： 
+
+// 这个模式不会匹配任何内容，因为\b不消耗字符
+const pattern = /\b\b/; 
+
+练习挑战 
+
+编写一个正则表达式，匹配所有以"Chapter"开头，后跟1-2位数字的字符串 
+
+创建一个模式，匹配字符串中所有独立的"the"单词（不匹配"there"中的"the"） 
+
+写一个正则表达式，验证字符串是否是一个合法的URL（以http://或https://开头） 
+
+总结要点 
+
+元字符 
+
+描述 
+
+示例 
+
+^ 
+
+匹配行/字符串开头 
+
+^Start 
+
+$ 
+
+匹配行/字符串结尾 
+
+end$ 
+
+\b 
+
+匹配单词边界 
+
+\bword\b 
+
+\B 
+
+匹配非单词边界 
+
+\Bword\B 
+
+\A 
+
+匹配字符串开头（某些语言） 
+
+\AStart 
+
+\Z 
+
+匹配字符串结尾（某些语言） 
+
+end\Z 
+
+掌握位置匹配可以显著提升正则表达式的精确度和效率。记住： 
+
+位置匹配不消耗字符，只指定匹配发生的位置 
+
+合理使用边界匹配可以避免不必要的全文搜索 
+
+多行模式会改变 ^ 和 $ 的行为 
+
+AI 思考中... 
+
+正则表达式 – 测验 
+
+正则表达式 – 分组和引用

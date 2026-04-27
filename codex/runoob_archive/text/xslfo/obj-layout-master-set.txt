@@ -1,0 +1,60 @@
+URL: https://www.runoob.com/xslfo/obj-layout-master-set.html
+Title: XSL-FO layout-master-set 对象 | 菜鸟教程
+
+XSL-FO layout-master-set 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO instream-foreign-object 对象 
+
+XSL-FO leader 对象 
+
+XSL-FO layout-master-set 对象 
+
+定义和用法 
+
+<fo:layout-master-set> 对象保存所有在文档中使用的宿主（master）。 
+
+注意： <fo:root> 是 <fo:layout-master-set> 的父类。 
+
+注意： <fo:layout-master-set> 的每个子类的宿主名（master-name）在文档中必须是独一无二的。 
+
+语法 
+
+<fo:layout-master-set> 
+<!-- 
+Contents:(simple-page-master|page-sequence-master)+ 
+--> 
+</fo:layout-master-set> 
+
+属性 
+
+无 
+
+实例 1 
+
+XSL-FO 文档结构如下所示： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"> 
+
+<fo:layout-master-set> 
+<fo:simple-page-master master-name="A4"> 
+<!-- Page template goes here --> 
+</fo:simple-page-master> 
+</fo:layout-master-set> 
+
+<fo:page-sequence master-reference="A4"> 
+<!-- Page content goes here --> 
+</fo:page-sequence> 
+
+</fo:root> 
+
+AI 思考中... 
+
+XSL-FO instream-foreign-object 对象 
+
+XSL-FO leader 对象

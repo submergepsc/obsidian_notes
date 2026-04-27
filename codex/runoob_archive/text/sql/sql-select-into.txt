@@ -1,0 +1,118 @@
+URL: https://www.runoob.com/sql/sql-select-into.html
+Title: SQL SELECT INTO 语句 | 菜鸟教程
+
+SQL SELECT INTO 语句 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SQL 教程 
+
+SQL UNION 操作符 
+
+SQL INSERT INTO SELECT 语句 
+
+SQL SELECT INTO 语句 
+
+通过 SQL，您可以从一个表复制信息到另一个表。 
+
+SELECT INTO 语句从一个表复制数据，然后把数据插入到另一个新表中。 
+
+SQL SELECT INTO 语句 
+
+SELECT INTO 语句从一个表复制数据，然后把数据插入到另一个新表中。 
+
+注意： 
+
+MySQL 数据库不支持 SELECT ... INTO 语句，但支持 INSERT INTO ... SELECT 。 
+
+当然你可以使用以下语句来拷贝表结构及数据： 
+
+CREATE TABLE 新表
+AS
+SELECT * FROM 旧表 
+
+SQL SELECT INTO 语法 
+
+假设有一个名为 employees 的表，包含以下数据： 
+
+EmployeeID 
+
+FirstName 
+
+LastName 
+
+Age 
+
+Department 
+
+1 
+
+John 
+
+Doe 
+
+30 
+
+Sales 
+
+2 
+
+Jane 
+
+Smith 
+
+25 
+
+HR 
+
+3 
+
+Sam 
+
+Brown 
+
+28 
+
+IT 
+
+要创建一个名为 employees_backup 的新表，并将 employees 表中的所有数据插入到新表中，可以使用以下 SQL 语句： 
+
+SELECT *
+INTO employees_backup
+FROM employees; 
+
+执行此语句后，新的 employees_backup 表将仅包含年龄大于 25 岁的员工的数据。 
+
+SELECT EmployeeID, FirstName, LastName, Age, Department
+INTO employees_backup
+FROM employees
+WHERE Age > 25; 
+
+使用注意事项 
+
+表结构 ： 
+
+SELECT INTO 会创建一个新表，并且新表的结构将基于选择的列和数据类型。 
+
+如果新表已经存在， SELECT INTO 语句将失败。在这种情况下，可以使用 INSERT INTO ... SELECT 语句。 
+
+数据库支持 ： 
+
+SELECT INTO 语句在 SQL Server 中非常常用，但在 MySQL 和 PostgreSQL 中通常使用 CREATE TABLE ... AS SELECT 语句。 
+
+在其他数据库中的替代方案 
+
+MySQL 和 PostgreSQL 
+
+在 MySQL 和 PostgreSQL 中，可以使用 CREATE TABLE ... AS SELECT 来实现类似的功能： 
+
+CREATE TABLE employees_backup AS
+SELECT EmployeeID, FirstName, LastName, Age, Department
+FROM employees
+WHERE Age > 25; 
+
+AI 思考中... 
+
+SQL UNION 操作符 
+
+SQL INSERT INTO SELECT 语句

@@ -1,0 +1,170 @@
+URL: https://www.runoob.com/mysql/mysql-regexp.html
+Title: MySQL 正则表达式 | 菜鸟教程
+
+MySQL 正则表达式 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+MySQL 教程 
+
+MySQL NULL 值处理 
+
+MySQL 事务 
+
+MySQL 正则表达式 
+
+在前面的章节我们已经了解到 MySQL 可以通过 LIKE ...% 来进行模糊匹配。 
+
+MySQL 同样也支持其他正则表达式的匹配， MySQL 中使用 REGEXP 和 RLIKE 操作符来进行正则表达式匹配。 
+
+如果您了解 PHP 或 Perl，那么操作起来就非常简单，因为 MySQL 的正则表达式匹配与这些脚本的类似。 
+
+下表中的正则模式可应用于 REGEXP 操作符中。 
+
+模式 
+
+描述 
+
+^ 
+
+匹配输入字符串的开始位置。如果设置了 RegExp 对象的 Multiline 属性，^ 也匹配 '\n' 或 '\r' 之后的位置。 
+
+$ 
+
+匹配输入字符串的结束位置。如果设置了RegExp 对象的 Multiline 属性，$ 也匹配 '\n' 或 '\r' 之前的位置。 
+
+. 
+
+匹配除 "\n" 之外的任何单个字符。要匹配包括 '\n' 在内的任何字符，请使用像 '[.\n]' 的模式。 
+
+[...] 
+
+字符集合。匹配所包含的任意一个字符。例如， '[abc]' 可以匹配 "plain" 中的 'a'。 
+
+[^...] 
+
+负值字符集合。匹配未包含的任意字符。例如， '[^abc]' 可以匹配 "plain" 中的'p'。 
+
+p1|p2|p3 
+
+匹配 p1 或 p2 或 p3。例如，'z|food' 能匹配 "z" 或 "food"。'(z|f)ood' 则匹配 "zood" 或 "food"。 
+
+* 
+
+匹配前面的子表达式零次或多次。例如，zo* 能匹配 "z" 以及 "zoo"。* 等价于{0,}。 
+
++ 
+
+匹配前面的子表达式一次或多次。例如，'zo+' 能匹配 "zo" 以及 "zoo"，但不能匹配 "z"。+ 等价于 {1,}。 
+
+{n} 
+
+n 是一个非负整数。匹配确定的 n 次。例如，'o{2}' 不能匹配 "Bob" 中的 'o'，但是能匹配 "food" 中的两个 o。 
+
+{n,m} 
+
+m 和 n 均为非负整数，其中n < = m。最少匹配 n 次且最多匹配 m 次。 
+
+正则表达式匹配的字符类 
+
+. ：匹配任意单个字符。 
+
+^ ：匹配字符串的开始。 
+
+$ ：匹配字符串的结束。 
+
+* ：匹配零个或多个前面的元素。 
+
++ ：匹配一个或多个前面的元素。 
+
+? ：匹配零个或一个前面的元素。 
+
+[abc] ：匹配字符集中的任意一个字符。 
+
+[^abc] ：匹配除了字符集中的任意一个字符以外的字符。 
+
+[a-z] ：匹配范围内的任意一个小写字母。 
+
+[0-9] ：匹配一个数字字符。 
+
+\w ：匹配一个字母数字字符（包括下划线）。 
+
+\s ：匹配一个空白字符。 
+
+使用 REGEXP 进行模式匹配 
+
+REGEXP 是用于进行正则表达式匹配的运算符。 
+
+REGEXP 用于检查一个字符串是否匹配指定的正则表达式模式，以下是 REGEXP 运算符的基本语法： 
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE column_name REGEXP 'pattern'; 
+
+参数说明： 
+
+column1 , column2 , ... 是你要选择的列的名称，如果使用 * 表示选择所有列。 
+
+table_name 是你要从中查询数据的表的名称。 
+
+column_name 是你要进行正则表达式匹配的列的名称。 
+
+'pattern' 是一个正则表达式模式。 
+
+查找 name 字段中以 'st' 为开头的所有数据： 
+
+mysql> SELECT name FROM person_tbl WHERE name REGEXP '^st'; 
+
+查找 name 字段中以 'ok' 为结尾的所有数据： 
+
+mysql> SELECT name FROM person_tbl WHERE name REGEXP 'ok$'; 
+
+查找 name 字段中包含 'mar' 字符串的所有数据： 
+
+mysql> SELECT name FROM person_tbl WHERE name REGEXP 'mar'; 
+
+查找 name 字段中以元音字符开头或以 'ok' 字符串结尾的所有数据： 
+
+mysql> SELECT name FROM person_tbl WHERE name REGEXP '^[aeiou]|ok$'; 
+
+选择订单表中描述中包含 "item" 后跟一个或多个数字的记录。 
+
+SELECT * FROM orders WHERE order_description REGEXP 'item[0-9]+'; 
+
+使用 BINARY 关键字，使得匹配区分大小写： 
+
+SELECT * FROM products WHERE product_name REGEXP BINARY 'apple'; 
+
+使用 OR 进行多个匹配条件，以下将选择姓氏为 "Smith" 或 "Johnson" 的员工记录： 
+
+SELECT * FROM employees WHERE last_name REGEXP 'Smith|Johnson'; 
+
+使用 RLIKE 进行模式匹配 
+
+RLIKE 是 MySQL 中用于进行正则表达式匹配的运算符，与 REGEXP 是一样的，RLIKE 和 REGEXP 可以互换使用，没有区别。 
+
+以下是使用 RLIKE 进行正则表达式匹配的基本语法： 
+
+SELECT column1, column2, ...
+FROM table_name
+WHERE column_name RLIKE 'pattern'; 
+
+参数说明： 
+
+column1 , column2 , ... 是你要选择的列的名称，如果使用 * 表示选择所有列。 
+
+table_name 是你要从中查询数据的表的名称。 
+
+column_name 是你要进行正则表达式匹配的列的名称。 
+
+'pattern' 是一个正则表达式模式。 
+
+SELECT * FROM products WHERE product_name RLIKE '^[0-9]'; 
+
+以上 SQL 语句选择产品名称以数字开头的所有产品。 
+
+AI 思考中... 
+
+MySQL NULL 值处理 
+
+MySQL 事务

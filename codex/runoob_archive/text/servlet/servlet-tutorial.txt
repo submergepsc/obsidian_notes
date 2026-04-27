@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/servlet/servlet-tutorial.html
+Title: Servlet 教程 | 菜鸟教程
+
+Servlet 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Servlet 教程 
+
+Servlet 简介 
+
+Servlet 教程 
+
+Servlet 为创建基于 web 的应用程序提供了基于组件、独立于平台的方法，可以不受 CGI 程序的性能限制。Servlet 有权限访问所有的 Java API，包括访问企业级数据库的 JDBC API。 
+
+本教程将讲解如何使用 Java Servlet 来开发基于 web 的应用程序。 
+
+现在开始学习 Servlet！ 
+
+本教程是专为 Java 程序员设计的。在阅读本教程之前，需要先了解 Java Servlet 框架和它的 API。学习完本教程后，您会发现自己已经达到使用 Java Servlet 的中等水平，后续您可以自行通过更深入的学习和实践完成进阶。 
+
+在您开始阅读本教程之前，最好对 Java 编程语言有一个很好的理解。如果您对 web 应用程序和互联网如何工作的有基本的认识，将有助于您理解本教程。 
+
+Java 教程 
+
+Jsp 教程 
+
+AI 思考中... 
+
+Servlet 简介

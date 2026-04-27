@@ -1,0 +1,82 @@
+URL: https://www.runoob.com/vbscript/func-strcomp.html
+Title: VBScript StrComp 函数 | 菜鸟教程
+
+VBScript StrComp 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Space 函数 
+
+VBScript String 函数 
+
+VBScript StrComp 函数 
+
+StrComp 函数比较两个字符串，并返回代表比较结果的一个值。 
+
+StrComp 函数可返回下面的值： 
+
+-1 (如果 string1 < string2) 
+
+0 (如果 string1 = string2) 
+
+1 (如果 string1 > string2) 
+
+Null (如果 string1 或 string2 为 Null) 
+
+语法 
+
+StrComp(string1,string2[,compare]) 
+
+参数 
+
+描述 
+
+string1 
+
+必需。字符串表达式。 
+
+string2 
+
+必需。字符串表达式。 
+
+compare 
+
+可选。规定要使用的字符串比较类型。默认是 0。 
+
+可采用下列的值： 
+
+0 = vbBinaryCompare - 执行二进制比较 
+
+1 = vbTextCompare - 执行文本比较 
+
+实例 1 
+
+document.write(StrComp("VBScript","VBScript")) 
+
+Output: 
+
+0 
+
+实例 2 
+
+document.write(StrComp("VBScript","vbscript")) 
+
+Output: 
+
+-1 
+
+实例 3 
+
+document.write(StrComp("VBScript","vbscript",1)) 
+
+Output: 
+
+0 
+
+AI 思考中... 
+
+VBScript Space 函数 
+
+VBScript String 函数

@@ -1,0 +1,330 @@
+URL: https://www.runoob.com/flutter/flutter-platform-channels.html
+Title: Flutter 平台特定代码 | 菜鸟教程
+
+Flutter 平台特定代码 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Flutter 教程 
+
+Flutter 调试与 DevTools 
+
+Flutter 测试 
+
+Flutter 平台特定代码 
+
+本节将介绍如何使用平台通道（Platform Channels）在 Flutter 中调用原生平台代码。 
+
+平台通道概述 
+
+平台通道允许 Dart 代码与原生平台（iOS/Android）进行通信。 
+
+类型 
+
+说明 
+
+MethodChannel 
+
+方法通道，用于调用平台方法 
+
+EventChannel 
+
+事件通道，用于流式数据 
+
+Dart 端调用 
+
+实例：MethodChannel 用法 
+
+import 'package:flutter/services.dart' ; 
+
+// 定义通道 
+
+class PlatformChannel { 
+
+static const MethodChannel _channel = MethodChannel ( 'my_app/channel' ) ; 
+
+// 调用原生方法 - 获取电池电量 
+
+static Future < int > getBatteryLevel ( ) async { 
+
+try { 
+
+final int batteryLevel = await _channel. invokeMethod ( 'getBatteryLevel' ) ; 
+
+return batteryLevel ; 
+
+} on PlatformException catch ( e ) { 
+
+print ( '获取电池电量失败: ${e.message}' ) ; 
+
+return - 1 ; 
+
+} 
+
+} 
+
+// 调用原生方法 - 显示Toast 
+
+static Future < void > showToast ( String message ) async { 
+
+try { 
+
+await _channel. invokeMethod ( 'showToast' , { 'message' : message } ) ; 
+
+} on PlatformException catch ( e ) { 
+
+print ( '显示Toast失败: ${e.message}' ) ; 
+
+} 
+
+} 
+
+// 调用原生方法 - 获取设备信息 
+
+static Future < Map < String , dynamic >> getDeviceInfo ( ) async { 
+
+try { 
+
+final result = await _channel. invokeMapMethod ( 'getDeviceInfo' ) ; 
+
+return result ?? { } ; 
+
+} on PlatformException catch ( e ) { 
+
+print ( '获取设备信息失败: ${e.message}' ) ; 
+
+return { } ; 
+
+} 
+
+} 
+
+} 
+
+// 使用示例 
+
+class MyWidget extends StatelessWidget { 
+
+const MyWidget ( { super . key } ) ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return ElevatedButton ( 
+
+onPressed : ( ) async { 
+
+final battery = await PlatformChannel. getBatteryLevel ( ) ; 
+
+print ( '电池电量: $battery%' ) ; 
+
+} , 
+
+child : const Text ( '获取电池电量' ) , 
+
+) ; 
+
+} 
+
+} 
+
+Android 端实现（Kotlin） 
+
+实例：Android 端代码 
+
+// MainActivity.kt 
+
+package com.example.my_app 
+
+import android.os.Bundle 
+
+import io.flutter.embedding.android.FlutterActivity 
+
+import io.flutter.embedding.engine.FlutterEngine 
+
+import io.flutter.plugin.common.MethodChannel 
+
+class MainActivity : FlutterActivity() { 
+
+private val CHANNEL = "my_app/channel" 
+
+override fun configureFlutterEngine(flutterEngine: FlutterEngine) { 
+
+super.configureFlutterEngine(flutterEngine) 
+
+MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL) 
+
+.setMethodCallHandler { call, result -> 
+
+when (call.method) { 
+
+"getBatteryLevel" -> { 
+
+val batteryLevel = getBatteryLevel() 
+
+if (batteryLevel != -1) { 
+
+result.success(batteryLevel) 
+
+} else { 
+
+result.error("UNAVAILABLE", "无法获取电池电量", null) 
+
+} 
+
+} 
+
+"showToast" -> { 
+
+val message = call.argument<String>("message") 
+
+showToast(message!!) 
+
+result.success(null) 
+
+} 
+
+else -> { 
+
+result.notImplemented() 
+
+} 
+
+} 
+
+} 
+
+} 
+
+private fun getBatteryLevel(): Int { 
+
+return try { 
+
+val batteryManager = getSystemService(BATTERY_SERVICE) as BatteryManager 
+
+batteryManager.getIntProperty(BatteryManager.BATTERY_PROPERTY_CAPACITY) 
+
+} catch (e: Exception) { 
+
+-1 
+
+} 
+
+} 
+
+private fun showToast(message: String) { 
+
+android.widget.Toast.makeText(this, message, android.widget.Toast.LENGTH_SHORT).show() 
+
+} 
+
+} 
+
+iOS 端实现（Swift） 
+
+实例：iOS 端代码 
+
+// AppDelegate.swift 
+
+import Flutter 
+
+import UIKit 
+
+@UIApplicationMain 
+
+@objc class AppDelegate: FlutterAppDelegate { 
+
+private let CHANNEL = "my_app/channel" 
+
+override func application( 
+
+_ application: UIApplication, 
+
+didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]? 
+
+) -> Bool { 
+
+let controller = window?.rootViewController as! FlutterViewController 
+
+let channel = FlutterMethodChannel( 
+
+name: CHANNEL, 
+
+binaryMessenger: controller.binaryMessenger 
+
+) 
+
+channel.setMethodCallHandler { (call: FlutterMethodCall, result: @escaping FlutterResult) in 
+
+switch call.method { 
+
+case "getBatteryLevel": 
+
+self.getBatteryLevel(result: result) 
+
+case "showToast": 
+
+if let args = call.arguments as? [String: Any], 
+
+let message = args["message"] as? String { 
+
+self.showToast(message: message) 
+
+result(nil) 
+
+} 
+
+default: 
+
+result(FlutterMethodNotImplemented) 
+
+} 
+
+} 
+
+return super.application(application, didFinishLaunchingWithOptions: launchOptions) 
+
+} 
+
+private func getBatteryLevel(result: @escaping FlutterResult) { 
+
+UIDevice.current.isBatteryMonitoringEnabled = true 
+
+let batteryLevel = UIDevice.current.batteryLevel 
+
+if batteryLevel < 0 { 
+
+result(FlutterError(code: "UNAVAILABLE", message: "无法获取电池电量", details: nil)) 
+
+} else { 
+
+result(Int(batteryLevel * 100)) 
+
+} 
+
+} 
+
+private func showToast(message: String) { 
+
+let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert) 
+
+present(alert, animated: true) 
+
+DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) { 
+
+alert.dismiss(animated: true) 
+
+} 
+
+} 
+
+} 
+
+平台通道是 Flutter 与原生代码通信的主要方式，常用于调用系统 API、硬件功能或使用第三方原生 SDK。 
+
+AI 思考中... 
+
+Flutter 调试与 DevTools 
+
+Flutter 测试

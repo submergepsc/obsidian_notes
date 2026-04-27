@@ -1,0 +1,74 @@
+URL: https://www.runoob.com/xsl/xsl-functions.html
+Title: XSLT 函数 | 菜鸟教程
+
+XSLT 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT unparsed-entity-uri() 函数 
+
+XSLT 函数 
+
+XQuery 1.0、XPath 2.0 以及 XSLT 2.0 共享相同的函数库。 
+
+XSLT 函数 
+
+XSLT 含有超过 100 个内建的函数。这些函数用于字符串值、数值、日期和时间比较、节点和 QName 操作、序列操作、布尔值，等等。 
+
+函数命名空间的默认前缀是 fn。 
+
+函数命名空间的 URI 是：
+http://www.w3.org/2005/xpath-functions 
+
+提示： 函数在被调用时常带有 fn: 前缀，比如 fn:string()。
+不过，既然 fn: 是命名空间的默认前缀，那么在被调用时，函数的名称不必使用前缀。 
+
+您可以在我们的 XPath 教程中访问所有内建的 XSLT 2.0 函数的参考手册。 
+
+此外，下面列出了内建的 XSLT 函数： 
+
+名称 
+
+描述 
+
+current() 
+
+返回当前节点。 
+
+document() 
+
+用于访问外部 XML 文档中的节点。 
+
+element-available() 
+
+检测 XSLT 处理器是否支持指定的元素。 
+
+format-number() 
+
+把数字转换为字符串。 
+
+function-available() 
+
+检测 XSLT 处理器是否支持指定的函数。 
+
+generate-id() 
+
+返回唯一标识指定节点的字符串值。 
+
+key() 
+
+通过使用由 <xsl:key> 元素规定的索引号返回节点集。 
+
+system-property() 
+
+返回系统属性的值。 
+
+unparsed-entity-uri() 
+
+返回未解析实体的 URI。 
+
+AI 思考中... 
+
+XSLT unparsed-entity-uri() 函数

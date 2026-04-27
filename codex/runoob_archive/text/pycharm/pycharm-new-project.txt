@@ -1,0 +1,164 @@
+URL: https://www.runoob.com/pycharm/pycharm-new-project.html
+Title: PyCharm 创建与管理项目 | 菜鸟教程
+
+PyCharm 创建与管理项目 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Pycharm 教程 
+
+PyCharm 界面说明 
+
+Pycharm 文件与文件夹操作 
+
+PyCharm 创建与管理项目 
+
+在 PyCharm 中，项目（Project） 是最基本的工作单元，它包含源代码、配置、依赖和环境设置。 
+
+本节详细介绍如何在 PyCharm 中创建和管理 Python 项目。 
+
+1. 创建新项目 
+
+1.1 从欢迎界面创建 
+
+PyCharm 启动的时候其实已经提供了很多快捷方式： 
+
+第一次启动的界面如下： 
+
+点击 "新建项目"（New Project）。 
+
+也可以在菜单栏上的文件，点击 "新建项目(New Project)"。 
+
+配置项目设置： 
+
+位置（Location）： 选择并设置项目存储路径及名词。 
+
+解释器（Interpreter）： 项目 venv（推荐）。 
+
+‌venv‌ 是 Python 中的一个模块，用于创建和管理虚拟环境。虚拟环境是一个隔离的空间，允许你在其中安装和管理 Python 包，而不会影响到系统中的其他Python环境。 
+
+venv 是 Python 3.3 及以上版本的标准库，因此不需要额外安装其他工具即可使用‌。 
+
+项目 venv：虚拟环境默认存储在项目目录下的 venv 文件夹。 
+
+基础 Conda（如果已安装 Anaconda/Miniconda） 
+
+自定义环境 
+
+项目模板： 
+
+选择项目类型，如"纯 Python"或"Flask"（适用于 Web 开发）。 
+
+默认创建 main.py 文件，包含简单的 Python 代码模板（如 print("Hello, World!")）。 
+
+1.2 从现有代码创建项目 
+
+如果已有 Python 代码，可以通过以下方式导入： 
+
+欢迎界面 → "打开"（Open） ，选择项目目录或 文件 → 打开（File → Open） ，选择项目文件夹。 
+
+PyCharm 会自动检测 Python 环境，如果没有，可以手动配置解释器。 
+
+2. 项目管理 
+
+2.1 项目结构（Project Structure） 
+
+PyCharm 默认的项目结构如下： 
+
+my_project/ 
+├── .idea/ # PyCharm 配置文件（如运行配置、版本控制设置） 
+├── venv/ # 虚拟环境（如果使用 Virtualenv） 
+├── main.py # 示例代码（如果勾选了 "创建 main.py"） 
+└── 其他文件/目录 # 用户创建的代码文件 
+
+⚠️ 注意：.idea/ 和 venv/ 通常不需要手动修改，PyCharm 会自动管理。 
+
+2.2 配置 Python 解释器 
+
+如果项目需要更换 Python 环境（如从 Python 3.8 切换到 3.10）： 
+
+文件 → 设置 → 项目 → Python 解释器（Windows/Linux：Ctrl+Alt+S，macOS：⌘,）。 
+
+点击 ⚙️ → 添加解释器（Add Interpreter），选择： 
+
+虚拟环境（Virtualenv） （推荐） 
+
+系统 Python （直接使用全局 Python） 
+
+Conda 环境 （如果使用 Anaconda） 
+
+选择 Python 版本，点击 "确定"。 
+
+2.3 运行/调试配置（Run/Debug Configurations） 
+
+PyCharm 允许为不同脚本设置不同的运行方式： 
+
+顶部工具栏 → 运行配置（Run Configurations） → "编辑配置"（Edit Configurations） 。 
+
+点击 + ，选择 Python ，配置： 
+
+脚本路径（Script path） ：选择要运行的 .py 文件。 
+
+Python 解释器（Python interpreter） ：确保选择正确的环境。 
+
+参数（Parameters） ：可输入命令行参数（如 --port 8000 ）。 
+
+点击 "应用"（Apply） ，然后可以点击 ▶️ 运行 或 🐞 调试 。 
+
+3. 项目常用操作 
+
+3.1 打开多个项目 
+
+PyCharm 默认单项目模式（一次只能打开一个项目），但可以通过以下方式管理多个项目： 
+
+文件 → 新建 → 项目（File → New → Project） ，创建新项目（PyCharm 会提示是否在新窗口打开）。 
+
+或 文件 → 打开（File → Open） ，选择另一个项目目录。 
+
+3.2 关闭/重新打开项目 
+
+关闭当前项目 ： 文件 → 关闭项目（File → Close Project） ，返回欢迎界面。 
+
+重新打开最近项目 ：欢迎界面会显示 "最近项目"（Recent Projects） ，点击即可重新打开。 
+
+3.3 项目依赖管理（requirements.txt / pyproject.toml） 
+
+PyCharm 可以自动识别 requirements.txt 或 pyproject.toml 并安装依赖： 
+
+右键 requirements.txt → "同步 Python 依赖"（Sync Python Requirements）。 
+
+或终端（Terminal） 运行： 
+
+pip install -r requirements.txt 
+
+如果要导出当前环境的依赖： 
+
+pip freeze > requirements.txt 
+
+4. 常见问题 
+
+Q1：PyCharm 无法识别 Python 文件？ 
+
+检查文件扩展名 ：确保是 .py 文件。 
+
+检查解释器配置 ： 文件 → 设置 → Python 解释器 ，确保已正确设置。 
+
+Q2：如何删除项目？ 
+
+PyCharm 不会自动删除项目文件，需要手动： 
+
+关闭项目 （ 文件 → 关闭项目 ）。 
+
+在文件管理器（如 Windows 资源管理器）中删除项目文件夹 。 
+
+Q3：如何备份/分享项目？ 
+
+推荐方式 ：使用 Git（PyCharm 内置 Git 支持）。 
+
+手动方式 ：复制项目文件夹（但建议排除 .idea/ 和 venv/ ）。 
+
+AI 思考中... 
+
+PyCharm 界面说明 
+
+Pycharm 文件与文件夹操作

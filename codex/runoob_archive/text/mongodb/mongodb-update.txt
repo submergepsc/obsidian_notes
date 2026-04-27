@@ -1,0 +1,225 @@
+URL: https://www.runoob.com/mongodb/mongodb-update.html
+Title: MongoDB 更新文档 | 菜鸟教程
+
+MongoDB 更新文档 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+MongoDB 教程 
+
+MongoDB 插入文档 
+
+MongoDB 删除文档 
+
+MongoDB 更新文档 
+
+在 MongoDB 中，更新文档的操作可以使用多种方法实现，常用的方法包括 updateOne()、updateMany()、replaceOne() 和 findOneAndUpdate() 。 
+
+1、updateOne() 
+
+updateOne() 方法用于更新匹配过滤器的单个文档。 
+
+语法： 
+
+db.collection.updateOne(filter, update, options) 
+
+filter ：用于查找文档的查询条件。 
+
+update ：指定更新操作的文档或更新操作符。 
+
+options ：可选参数对象，如 upsert 、 arrayFilters 等。 
+
+实例 
+
+db. myCollection . updateOne ( 
+
+{ name : "Alice" } , // 过滤条件 
+
+{ $set : { age : 26 } } , // 更新操作 
+
+{ upsert : false } // 可选参数 
+
+) ; 
+
+2、updateMany() 
+
+updateMany() 方法用于更新所有匹配过滤器的文档。 
+
+语法： 
+
+db.collection.updateMany(filter, update, options) 
+
+filter ：用于查找文档的查询条件。 
+
+update ：指定更新操作的文档或更新操作符。 
+
+options ：可选参数对象，如 upsert 、 arrayFilters 等。 
+
+实例 
+
+db. myCollection . updateMany ( 
+
+{ age : { $lt : 30 } } , // 过滤条件 
+
+{ $set : { status : "active" } } , // 更新操作 
+
+{ upsert : false } // 可选参数 
+
+) ; 
+
+3、replaceOne() 
+
+replaceOne() 方法用于替换匹配过滤器的单个文档，新的文档将完全替换旧的文档。 
+
+语法： 
+
+db.collection.replaceOne(filter, replacement, options) 
+
+filter ：用于查找文档的查询条件。 
+
+replacement ：新的文档，将替换旧的文档。 
+
+options ：可选参数对象，如 upsert 等。 
+
+实例 
+
+db.myCollection.replaceOne( 
+
+{ name: "Bob" }, // 过滤条件 
+
+{ name: "Bob", age: 31 } // 新文档 
+
+); 
+
+4、findOneAndUpdate() 
+
+findOneAndUpdate() 方法用于查找并更新单个文档，可以选择返回更新前或更新后的文档。 
+
+语法： 
+
+db.collection.findOneAndUpdate(filter, update, options) 
+
+filter ：用于查找文档的查询条件。 
+
+update ：指定更新操作的文档或更新操作符。 
+
+options ：可选参数对象，如 projection 、 sort 、 upsert 、 returnDocument 等。 
+
+实例 
+
+db. myCollection . findOneAndUpdate ( 
+
+{ name : "Charlie" } , // 过滤条件 
+
+{ $set : { age : 36 } } , // 更新操作 
+
+{ returnDocument : "after" } // 可选参数，返回更新后的文档 
+
+) ; 
+
+选项参数 
+
+这些更新方法的 options 参数通常可以包含以下选项： 
+
+upsert ：如果没有匹配的文档，是否插入一个新文档。 
+
+arrayFilters ：当更新嵌套数组时，指定应更新的数组元素的条件。 
+
+collation ：指定比较字符串时使用的排序规则。 
+
+returnDocument ：在 findOneAndUpdate 中使用，指定返回更新前 ("before") 或更新后 ("after") 的文档。 
+
+简单实例 
+
+更新单个文档： 
+
+db.myCollection.updateOne(
+ { name: "Alice" },
+ { $set: { age: 26 } }
+); 
+
+更新多个文档： 
+
+db.myCollection.updateMany(
+ { age: { $lt: 30 } },
+ { $set: { status: "active" } }
+); 
+
+替换单个文档： 
+
+db.myCollection.replaceOne(
+ { name: "Bob" },
+ { name: "Bob", age: 31 }
+); 
+
+查找并更新单个文档： 
+
+db.myCollection.findOneAndUpdate(
+ { name: "Charlie" },
+ { $set: { age: 36 } },
+ { returnDocument: "after" }
+); 
+
+以下实例中我们替换了 _id 为 56064f89ade2f21f36b03136 的文档数据： 
+
+>db.col.save({
+ "_id" : ObjectId("56064f89ade2f21f36b03136"),
+ "title" : "MongoDB",
+ "description" : "MongoDB 是一个 Nosql 数据库",
+ "by" : "Runoob",
+ "url" : "http://www.runoob.com",
+ "tags" : [
+ "mongodb",
+ "NoSQL"
+ ],
+ "likes" : 110
+}) 
+
+替换成功后，我们可以通过 find() 命令来查看替换后的数据 
+
+>db.col.find().pretty()
+{
+ "_id" : ObjectId("56064f89ade2f21f36b03136"),
+ "title" : "MongoDB",
+ "description" : "MongoDB 是一个 Nosql 数据库",
+ "by" : "Runoob",
+ "url" : "http://www.runoob.com",
+ "tags" : [
+ "mongodb",
+ "NoSQL"
+ ],
+ "likes" : 110
+}
+> 
+
+更多实例 
+
+只更新第一条记录： 
+
+db.col.update( { "count" : { $gt : 1 } } , { $set : { "test2" : "OK"} } ); 
+
+全部更新： 
+
+db.col.update( { "count" : { $gt : 3 } } , { $set : { "test2" : "OK"} },false,true ); 
+
+只添加第一条： 
+
+db.col.update( { "count" : { $gt : 4 } } , { $set : { "test5" : "OK"} },true,false ); 
+
+全部添加进去: 
+
+db.col.update( { "count" : { $gt : 5 } } , { $set : { "test5" : "OK"} },true,true ); 
+
+全部更新： 
+
+db.col.update( { "count" : { $gt : 15 } } , { $inc : { "count" : 1} },false,true ); 
+
+只更新第一条记录： 
+
+db.col.update( { "count" : { $gt : 10 } } , { $inc : { "count" : 1} },false,false ); 
+
+AI 思考中... 
+
+MongoDB 插入文档 
+
+MongoDB 删除文档

@@ -1,0 +1,391 @@
+URL: https://www.runoob.com/django/django-project-intro.html
+Title: Django 项目结构解析 | 菜鸟教程
+
+Django 项目结构解析 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Django 教程 
+
+Django django-admin 命令 
+
+Django 项目结构解析 
+
+通过理解 Django 的项目结构，我们可以更高效地组织代码，遵循 Django 的最佳实践，构建可维护的 Web 应用程序。 
+
+上一章节我们已经学会使用 django-admin startproject 命令创建一个新项目时，Django 会自动生成以下基础结构： 
+
+myproject/
+│
+├── manage.py
+└── myproject/
+ ├── __init__.py
+ ├── settings.py
+ ├── urls.py
+ └── wsgi.py 
+
+使用 django-admin 来创建 HelloWorld 项目： 
+
+django-admin startproject HelloWorld 
+
+创建完成后我们可以查看下项目的目录结构： 
+
+文件/目录 
+
+详细说明 
+
+manage.py 
+
+Django 项目的命令行管理工具，封装了 django-admin 的功能，并自动设置 DJANGO_SETTINGS_MODULE 环境变量指向当前项目的配置。所有项目管理命令都通过它执行，如： 
+- runserver ：启动开发服务器 
+- makemigrations ：生成数据库迁移文件 
+- shell ：启动带 ORM 的 Python shell 
+
+db.sqlite3 
+
+Django 默认使用的 SQLite 数据库文件，在首次执行 migrate 命令后自动生成。开发环境适用，生产环境建议换用 PostgreSQL/MySQL。文件位置由 settings.py 中的 DATABASES['default']['NAME'] 定义。 
+
+__pycache__/ 
+
+Python 解释器生成的字节码缓存目录，包含 .pyc 文件，用于加速模块加载。无需提交到版本控制（应在 .gitignore 中忽略）。 
+
+核心文件解析 
+
+manage.py 
+
+manage.py 是 Django 项目的命令行工具入口，它提供了许多有用的命令： 
+
+实例 
+
+#!/usr/bin/env python 
+
+import os 
+
+import sys 
+
+if __name__ == "__main__" : 
+
+os . environ . setdefault ( "DJANGO_SETTINGS_MODULE" , "myproject.settings" ) 
+
+try : 
+
+from django. core . management import execute_from_command_line 
+
+except ImportError : 
+
+# 处理导入错误 
+
+pass 
+
+execute_from_command_line ( sys . argv ) 
+
+常用命令示例： 
+
+python manage.py runserver - 启动开发服务器 
+
+python manage.py migrate - 应用数据库迁移 
+
+python manage.py createsuperuser - 创建管理员账户 
+
+settings.py 
+
+settings.py 是 Django 项目的配置文件，包含所有重要的设置： 
+
+实例 
+
+# 关键配置项详解： 
+
+DEBUG = True # 开发时设为True，显示详细错误；生产环境必须改为False 
+
+ALLOWED_HOSTS = [ ] # DEBUG=False时需指定允许访问的域名（如['example.com']） 
+
+INSTALLED_APPS = [ 
+
+'django.contrib.admin' , # 后台管理 
+
+'django.contrib.auth' , # 认证系统 
+
+'django.contrib.contenttypes' , # 内容类型框架 
+
+'django.contrib.sessions' , # 会话管理 
+
+'django.contrib.messages' , # 消息框架 
+
+'django.contrib.staticfiles' , # 静态文件管理 
+
+# 可添加自定义应用：'myapp.apps.MyAppConfig' 
+
+] 
+
+DATABASES = { # 数据库配置 
+
+'default' : { 
+
+'ENGINE' : 'django.db.backends.sqlite3' , 
+
+'NAME' : BASE_DIR / 'db.sqlite3' , # 使用 pathlib 语法 
+
+# MySQL示例： 
+
+# 'ENGINE': 'django.db.backends.mysql', 
+
+# 'NAME': 'mydb', 
+
+# 'USER': 'root', 
+
+# 'PASSWORD': 'password', 
+
+} 
+
+} 
+
+STATIC_URL = '/static/' # 静态文件URL前缀 
+
+STATICFILES_DIRS = [ BASE_DIR / 'static' ] # 开发时静态文件搜索目录 
+
+MEDIA_URL = '/media/' # 用户上传文件URL前缀 
+
+MEDIA_ROOT = BASE_DIR / 'media' # 上传文件存储路径 
+
+urls.py（URL 调度中心） 
+
+实例 
+
+from django. contrib import admin 
+
+from django. urls import path , include 
+
+urlpatterns = [ 
+
+path ( 'admin/' , admin. site . urls ) , # 后台路由 
+
+path ( 'blog/' , include ( 'blog.urls' ) ) , # 子应用路由分发 
+
+# path('api/', include('api.urls', namespace='api')), 
+
+] 
+
+include() ：实现路由模块化，将不同应用的路由分离到各自的 urls.py。 
+
+namespace ：用于反向解析 URL 时避免命名冲突。 
+
+wsgi.py & asgi.py 
+
+文件 
+
+用途 
+
+wsgi.py 
+
+WSGI（Web Server Gateway Interface）配置，用于传统同步服务器（如 Gunicorn、uWSGI）。生产环境通过此文件启动项目。 
+
+asgi.py 
+
+ASGI（Asynchronous Server Gateway Interface）配置，支持异步服务器（如 Daphne、Uvicorn）。用于 WebSocket 或异步视图。 
+
+扩展目录（非自动生成，但常用） 
+
+HelloWorld/
+├── apps/ # 推荐：存放所有自定义应用
+│ └── blog/ # 示例应用
+├── static/ # 静态文件（CSS/JS/图片）
+├── media/ # 用户上传文件
+├── templates/ # 全局模板目录
+└── requirements.txt # 项目依赖列表 
+
+1. apps/ 目录（推荐结构） 
+
+将应用集中管理，避免散落在项目根目录。 
+
+需在 settings.py 中配置 Python 路径： 
+
+import sys
+sys.path.insert(0, os.path.join(BASE_DIR, 'apps')) 
+
+2. 静态文件与媒体文件 
+
+static/ ：存放 CSS、JavaScript、图片等，通过 STATIC_URL 访问。 
+
+media/ ：用户上传的文件（如头像），通过 MEDIA_URL 访问。需配置服务器在开发时提供访问： 
+
+# urls.py（仅开发环境）
+from django.conf import settings
+from django.conf.urls.static import static
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) 
+
+Django 应用结构 
+
+在 Django 中，一个项目可以包含多个应用。使用 python manage.py startapp myapp 创建一个新应用后，会生成以下结构： 
+
+myapp/
+│
+├── migrations/
+│ └── __init__.py
+├── __init__.py
+├── admin.py
+├── apps.py
+├── models.py
+├── tests.py
+└── views.py 
+
+主要应用文件 
+
+models.py 
+
+定义数据模型，与数据库表对应： 
+
+实例 
+
+from django. db import models 
+
+class Product ( models. Model ) : 
+
+name = models. CharField ( max_length = 100 ) 
+
+price = models. DecimalField ( max_digits = 10 , decimal_places = 2 ) 
+
+description = models. TextField ( ) 
+
+def __str__ ( self ) : 
+
+return self . name 
+
+views.py 
+
+处理业务逻辑，返回响应： 
+
+实例 
+
+from django. shortcuts import render 
+
+from . models import Product 
+
+def product_list ( request ) : 
+
+products = Product. objects . all ( ) 
+
+return render ( request , 'myapp/product_list.html' , { 'products' : products } ) 
+
+admin.py 
+
+配置 Django 管理后台： 
+
+实例 
+
+from django. contrib import admin 
+
+from . models import Product 
+
+@ admin. register ( Product ) 
+
+class ProductAdmin ( admin. ModelAdmin ) : 
+
+list_display = ( 'name' , 'price' ) 
+
+完整项目结构示例 
+
+一个典型的 Django 项目完整结构如下： 
+
+myproject/
+│
+├── manage.py
+├── requirements.txt
+├── static/
+│ ├── css/
+│ ├── js/
+│ └── images/
+├── media/
+├── templates/
+│ └── base.html
+└── myproject/
+ ├── __init__.py
+ ├── settings.py
+ ├── urls.py
+ ├── wsgi.py
+ └── asgi.py
+└── myapp1/
+ ├── migrations/
+ ├── templates/
+ │ └── myapp1/
+ ├── __init__.py
+ ├── admin.py
+ ├── apps.py
+ ├── models.py
+ ├── tests.py
+ ├── urls.py
+ └── views.py
+└── myapp2/
+ └── ... (类似结构) 
+
+重要目录说明 
+
+migrations 目录 
+
+存储数据库迁移文件，Django 使用这些文件来跟踪模型变更并同步到数据库。 
+
+static 目录 
+
+存放静态文件（CSS, JavaScript, 图片等），在部署时会收集到指定位置。 
+
+templates 目录 
+
+存放 HTML 模板文件，Django 使用模板语言动态生成页面。 
+
+media 目录 
+
+存储用户上传的文件，需要在 settings.py 中配置： 
+
+实例 
+
+MEDIA_URL = '/media/' 
+
+MEDIA_ROOT = os . path . join ( BASE_DIR , 'media' ) 
+
+实践建议 
+
+项目与应用分离 ：保持每个应用的独立性，便于复用 
+
+环境配置 ：使用不同的 settings 文件区分开发和生产环境 
+
+静态文件管理 ：开发时使用 STATICFILES_DIRS ，生产时使用 collectstatic 
+
+URL 设计 ：在应用级别定义 URL，然后在项目级别包含 
+
+模板组织 ：为每个应用创建子目录存放模板 
+
+生产环境 vs 开发环境差异 
+
+文件/配置 
+
+开发环境 
+
+生产环境 
+
+DEBUG 
+
+True （显示错误详情） 
+
+False （隐藏错误，记录到日志） 
+
+数据库 
+
+SQLite（默认） 
+
+PostgreSQL/MySQL（性能优化） 
+
+静态文件 
+
+runserver 自动服务 
+
+使用 collectstatic 收集到 CDN 
+
+ALLOWED_HOSTS 
+
+空列表或 ['localhost'] 
+
+必须配置域名（如 ['example.com'] ） 
+
+AI 思考中... 
+
+Django django-admin 命令

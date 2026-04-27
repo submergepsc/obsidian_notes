@@ -1,0 +1,54 @@
+URL: https://www.runoob.com/python3/python3-string-capitalize.html
+Title: Python3 capitalize()方法 | 菜鸟教程
+
+Python3 capitalize()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 radians() 函数 
+
+Python3 center()方法 
+
+Python3 capitalize()方法 
+
+描述 
+
+Python capitalize() 将字符串的第一个字母变成大写，其他字母变小写。 
+
+语法 
+
+capitalize() 方法语法： 
+
+str.capitalize() 
+
+参数 
+
+无。 
+
+返回值 
+
+该方法返回一个首字母大写的字符串。 
+
+实例 
+
+以下实例展示了 capitalize() 方法的实例： 
+
+实例 
+
+#!/usr/bin/python3 
+
+str = "this is string Example From Runoob....wow!!!" 
+
+print ( "str.capitalize() : " , str . capitalize ( ) ) 
+
+以上实例输出结果如下： 
+
+str.capitalize() : This is string example from runoob....wow!!! 
+
+AI 思考中... 
+
+Python3 radians() 函数 
+
+Python3 center()方法

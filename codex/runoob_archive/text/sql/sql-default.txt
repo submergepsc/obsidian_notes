@@ -1,0 +1,109 @@
+URL: https://www.runoob.com/sql/sql-default.html
+Title: SQL DEFAULT 约束 | 菜鸟教程
+
+SQL DEFAULT 约束 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SQL 教程 
+
+SQL CHECK 约束 
+
+SQL CREATE INDEX 语句 
+
+SQL DEFAULT 约束 
+
+DEFAULT 约束用于向列中插入默认值。 
+
+如果没有规定其他的值，那么会将默认值添加到所有的新记录。 
+
+语法 
+
+1、在创建表时定义 DEFAULT 约束： 
+
+CREATE TABLE 表名 (
+ 列名 数据类型 DEFAULT 默认值
+); 
+
+2、在现有表中添加 DEFAULT 约束： 
+
+ALTER TABLE 表名
+ALTER COLUMN 列名 SET DEFAULT 默认值; 
+
+实例 
+
+1、创建表时定义 DEFAULT 约束 
+
+实例 
+
+CREATE TABLE Employees ( 
+
+EmployeeID INT PRIMARY KEY , 
+
+FirstName VARCHAR ( 50 ) , 
+
+LastName VARCHAR ( 50 ) , 
+
+HireDate DATE DEFAULT GETDATE ( ) , -- 默认值为当前日期 
+
+Salary DECIMAL ( 10 , 2 ) DEFAULT 0.00 -- 默认值为 0.00 
+
+) ; 
+
+2、在现有表中添加 DEFAULT 约束 
+
+ALTER TABLE Employees
+ALTER COLUMN Salary SET DEFAULT 0.00; 
+
+3、插入数据时使用默认值 
+
+INSERT INTO Employees (EmployeeID, FirstName, LastName)
+VALUES (1, 'John', 'Doe'); 
+
+如果未提供 HireDate 和 Salary 的值，数据库会自动使用默认值。 
+
+删除 DEFAULT 约束 
+
+不同数据库的删除方式有所不同： 
+
+1、SQL Server 
+
+ALTER TABLE 表名
+DROP CONSTRAINT 约束名; 
+
+2、MySQL 
+
+ALTER TABLE 表名
+ALTER COLUMN 列名 DROP DEFAULT; 
+
+3、Oracle 
+
+ALTER TABLE 表名
+MODIFY 列名 DEFAULT NULL; 
+
+4、MS Access 
+
+ALTER TABLE 表名
+ALTER COLUMN 列名 DROP DEFAULT; 
+
+注意事项 
+
+DEFAULT 约束的值必须与列的数据类型兼容。 
+
+如果列定义为 NOT NULL 且未提供默认值，插入数据时必须显式提供值，否则会报错。 
+
+默认值可以是常量值、表达式或函数（如 GETDATE() ）。 
+
+适用场景 
+
+为日期列设置当前日期为默认值。 
+
+为数值列设置初始值（如 0 ）。 
+
+为状态列设置默认状态（如 'Active' ）。 
+
+AI 思考中... 
+
+SQL CHECK 约束 
+
+SQL CREATE INDEX 语句

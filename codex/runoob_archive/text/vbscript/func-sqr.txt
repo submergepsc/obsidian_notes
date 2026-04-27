@@ -1,0 +1,56 @@
+URL: https://www.runoob.com/vbscript/func-sqr.html
+Title: VBScript Sqr 函数 | 菜鸟教程
+
+VBScript Sqr 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Sin 函数 
+
+VBScript Tan 函数 
+
+VBScript Sqr 函数 
+
+Sqr 函数返回一个数的平方根。 
+
+注意： number 参数不能是负值。 
+
+语法 
+
+Sqr(number) 
+
+参数 
+
+描述 
+
+number 
+
+必需。大于 0 的有效的数值表达式。 
+
+实例 
+
+实例 
+
+<script type="text/vbscript"> 
+
+document.write(Sqr(9) & "<br />") 
+document.write(Sqr(0) & "<br />") 
+document.write(Sqr(47)) 
+
+</script> 
+
+以上实例输出结果： 
+
+3 
+0 
+6.85565460040104 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Sin 函数 
+
+VBScript Tan 函数

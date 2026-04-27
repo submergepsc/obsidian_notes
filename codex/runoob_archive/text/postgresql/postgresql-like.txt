@@ -1,0 +1,131 @@
+URL: https://www.runoob.com/postgresql/postgresql-like.html
+Title: PostgreSQL LIKE 子句 | 菜鸟教程
+
+PostgreSQL LIKE 子句 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+PostgreSQL 教程 
+
+PostgreSQL DELETE 语句 
+
+PostgreSQL LIMIT 子句 
+
+PostgreSQL LIKE 子句 
+
+在 PostgreSQL 数据库中，我们如果要获取包含某些字符的数据，可以使用 LIKE 子句。 
+
+在 LIKE 子句中，通常与通配符结合使用，通配符表示任意字符，在 PostgreSQL 中，主要有以下两种通配符： 
+
+百分号 % 
+
+下划线 _ 
+
+如果没有使用以上两种通配符，LIKE 子句和等号 = 得到的结果是一样的。 
+
+语法 
+
+以下是使用 LIKE 子句搭配百分号 % 和下划线 _ 从数据库中获取数据的通用语法： 
+
+SELECT FROM table_name WHERE column LIKE 'XXXX%';
+或者
+SELECT FROM table_name WHERE column LIKE '%XXXX%';
+或者
+SELECT FROM table_name WHERE column LIKE 'XXXX_';
+或者
+SELECT FROM table_name WHERE column LIKE '_XXXX';
+或者
+SELECT FROM table_name WHERE column LIKE '_XXXX_'; 
+
+你可以在 WHERE 子句中指定任何条件。 
+
+你可以使用 AND 或者 OR 指定一个或多个条件。 
+
+XXXX 可以是任何数字或者字符。 
+
+实例 
+
+下面是 LIKE 语句中演示了 % 和 _ 的一些差别: 
+
+实例 
+
+描述 
+
+WHERE SALARY::text LIKE '200%' 
+
+找出 SALARY 字段中以 200 开头的数据。 
+
+WHERE SALARY::text LIKE '%200%' 
+
+找出 SALARY 字段中含有 200 字符的数据。 
+
+WHERE SALARY::text LIKE '_00%' 
+
+找出 SALARY 字段中在第二和第三个位置上有 00 的数据。 
+
+WHERE SALARY::text LIKE '2_%_%' 
+
+找出 SALARY 字段中以 2 开头的字符长度大于 3 的数据。 
+
+WHERE SALARY::text LIKE '%2' 
+
+找出 SALARY 字段中以 2 结尾的数据 
+
+WHERE SALARY::text LIKE '_2%3' 
+
+找出 SALARY 字段中 2 在第二个位置上并且以 3 结尾的数据 
+
+WHERE SALARY::text LIKE '2___3' 
+
+找出 SALARY 字段中以 2 开头，3 结尾并且是 5 位数的数据 
+
+在 PostgreSQL 中，LIKE 子句是只能用于对字符进行比较，因此在上面例子中，我们要将整型数据类型转化为字符串数据类型。 
+
+创建 COMPANY 表（ 下载 COMPANY SQL 文件 ），数据内容如下： 
+
+runoobdb# select * from COMPANY;
+ id | name | age | address | salary
+----+-------+-----+-----------+--------
+ 1 | Paul | 32 | California| 20000
+ 2 | Allen | 25 | Texas | 15000
+ 3 | Teddy | 23 | Norway | 20000
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 5 | David | 27 | Texas | 85000
+ 6 | Kim | 22 | South-Hall| 45000
+ 7 | James | 24 | Houston | 10000
+(7 rows) 
+
+下面实例将找出 AGE 以 2 开头的数据： 
+
+runoobdb=# SELECT * FROM COMPANY WHERE AGE::text LIKE '2%'; 
+
+得到以下结果： 
+
+id | name | age | address | salary
+----+-------+-----+-------------+--------
+ 2 | Allen | 25 | Texas | 15000
+ 3 | Teddy | 23 | Norway | 20000
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 5 | David | 27 | Texas | 85000
+ 6 | Kim | 22 | South-Hall | 45000
+ 7 | James | 24 | Houston | 10000
+ 8 | Paul | 24 | Houston | 20000
+(7 rows) 
+
+下面实例将找出 address 字段中含有 - 字符的数据： 
+
+runoobdb=# SELECT * FROM COMPANY WHERE ADDRESS LIKE '%-%'; 
+
+得到结果如下： 
+
+id | name | age | address | salary
+----+------+-----+-------------------------------------------+--------
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 6 | Kim | 22 | South-Hall | 45000
+(2 rows) 
+
+AI 思考中... 
+
+PostgreSQL DELETE 语句 
+
+PostgreSQL LIMIT 子句

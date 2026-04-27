@@ -1,0 +1,61 @@
+URL: https://www.runoob.com/python3/python3-string-isdecimal.html
+Title: Python3 isdecimal()方法 | 菜鸟教程
+
+Python3 isdecimal()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 zfill()方法 
+
+Python3 List len()方法 
+
+Python3 isdecimal()方法 
+
+描述 
+
+isdecimal() 方法检查字符串是否只包含十进制字符。 
+
+语法 
+
+isdecimal() 方法语法： 
+
+str.isdecimal() 
+
+参数 
+
+无 
+
+返回值 
+
+True - 如果字符串中的所有字符都是十进制字符。 
+
+False - 至少一个字符不是十进制字符。 
+
+实例 
+
+以下实例展示了 isdecimal() 函数的使用方法： 
+
+实例 
+
+#!/usr/bin/python3 
+
+str = "runoob2016" 
+
+print ( str . isdecimal ( ) ) 
+
+str = "23443434" 
+
+print ( str . isdecimal ( ) ) 
+
+以上实例输出结果如下： 
+
+False
+True 
+
+AI 思考中... 
+
+Python3 zfill()方法 
+
+Python3 List len()方法

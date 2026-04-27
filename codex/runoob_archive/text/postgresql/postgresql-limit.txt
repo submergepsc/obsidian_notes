@@ -1,0 +1,81 @@
+URL: https://www.runoob.com/postgresql/postgresql-limit.html
+Title: PostgreSQL LIMIT 子句 | 菜鸟教程
+
+PostgreSQL LIMIT 子句 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+PostgreSQL 教程 
+
+PostgreSQL LIKE 子句 
+
+PostgreSQL ORDER BY 语句 
+
+PostgreSQL LIMIT 子句 
+
+PostgreSQL 中的 limit 子句用于限制 SELECT 语句中查询的数据的数量。 
+
+语法 
+
+带有 LIMIT 子句的 SELECT 语句的基本语法如下： 
+
+SELECT column1, column2, columnN
+FROM table_name
+LIMIT [no of rows] 
+
+下面是 LIMIT 子句与 OFFSET 子句一起使用时的语法： 
+
+SELECT column1, column2, columnN 
+FROM table_name
+LIMIT [no of rows] OFFSET [row num] 
+
+实例 
+
+创建 COMPANY 表（ 下载 COMPANY SQL 文件 ），数据内容如下： 
+
+runoobdb# select * from COMPANY;
+ id | name | age | address | salary
+----+-------+-----+-----------+--------
+ 1 | Paul | 32 | California| 20000
+ 2 | Allen | 25 | Texas | 15000
+ 3 | Teddy | 23 | Norway | 20000
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 5 | David | 27 | Texas | 85000
+ 6 | Kim | 22 | South-Hall| 45000
+ 7 | James | 24 | Houston | 10000
+(7 rows) 
+
+下面实例将找出限定的数量的数据，即读取 4 条数据： 
+
+runoobdb=# SELECT * FROM COMPANY LIMIT 4; 
+
+得到以下结果： 
+
+id | name | age | address | salary
+----+-------+-----+-------------+--------
+ 1 | Paul | 32 | California | 20000
+ 2 | Allen | 25 | Texas | 15000
+ 3 | Teddy | 23 | Norway | 20000
+ 4 | Mark | 25 | Rich-Mond | 65000
+(4 rows) 
+
+但是，在某些情况下，可能需要从一个特定的偏移开始提取记录。 
+
+下面是一个实例，从第三位开始提取 3 个记录： 
+
+runoobdb=# SELECT * FROM COMPANY LIMIT 3 OFFSET 2; 
+
+得到以下结果： 
+
+id | name | age | address | salary
+----+-------+-----+-----------+--------
+ 3 | Teddy | 23 | Norway | 20000
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 5 | David | 27 | Texas | 85000
+(3 rows) 
+
+AI 思考中... 
+
+PostgreSQL LIKE 子句 
+
+PostgreSQL ORDER BY 语句

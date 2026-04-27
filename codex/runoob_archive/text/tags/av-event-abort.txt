@@ -1,0 +1,92 @@
+URL: https://www.runoob.com/tags/av-event-abort.html
+Title: HTML Audio/Video DOM abort 事件 | 菜鸟教程
+
+HTML Audio/Video DOM abort 事件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML ontoggle 事件属性 
+
+HTML Audio/Video DOM ended 事件 
+
+HTML Audio/Video DOM abort 事件 
+
+实例 
+
+视频终止加载时弹出提示信息： 
+
+var vid = document.getElementById("myVideo"); 
+vid.onabort = 
+ function() { 
+alert("视频终止加载"); 
+}; 
+
+定义和用法 
+
+abort 事件在音频/视频(audio/video)终止加载时触发。 
+
+该事件是在多媒体数据终止下载时触发，而不是发生错误时触发。 
+
+提示： 影响多媒体数据加载的事件有： 
+
+emptied 
+
+error 
+
+stalled 
+
+suspend 
+
+浏览器支持 
+
+表格中的数字表示支持该事件的第一个浏览器的版本号。 
+
+事件 
+
+abort 
+
+Yes 
+
+9.0 
+
+Yes 
+
+Yes 
+
+Yes 
+
+注意： Windows 7 中的 Internet Explorer 11 不支持 abort 事件。 
+
+语法 
+
+HTML 中： 
+
+< element onabort=" myScript "> 
+
+JavaScript 中： 
+
+object .onabort=function(){ myScript }; 
+
+JavaScript 中, 使用 addEventListener() 方法: 
+
+object .addEventListener("abort", myScript ); 
+
+注意： Internet Explorer 8 及更早 IE 版本不支持 addEventListener() 方法。 
+
+技术细节 
+
+支持的 HTML 标签: 
+
+<audio> 和 <video> 
+
+支持的 JavaScript 对象: 
+
+Audio, Video 
+
+AI 思考中... 
+
+HTML ontoggle 事件属性 
+
+HTML Audio/Video DOM ended 事件

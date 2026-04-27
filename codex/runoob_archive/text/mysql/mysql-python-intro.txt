@@ -1,0 +1,310 @@
+URL: https://www.runoob.com/mysql/mysql-python-intro.html
+Title: MySQL Python 连接与使用 | 菜鸟教程
+
+MySQL Python 连接与使用 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+MySQL 教程 
+
+MySQL Node.js 连接与使用 
+
+MySQL Java 连接与使用 
+
+MySQL Python 连接与使用 
+
+MySQL 是最流行的开源关系型数据库之一，而 Python 是当今最受欢迎的编程语言之一。将 Python 与 MySQL 结合使用，可以让我们轻松地开发数据库驱动的应用程序。 
+
+本文将详细介绍如何使用 Python 连接和操作 MySQL 数据库，内容包含如下： 
+
+如何安装 MySQL Python 驱动 
+
+建立和关闭数据库连接 
+
+执行各种 SQL 查询 
+
+事务管理和错误处理 
+
+数据库操作的最佳实践 
+
+准备工作 
+
+安装必要的软件 
+
+在开始之前，请确保你已经安装了以下软件： 
+
+Python (推荐 3.6 或更高版本) 
+
+MySQL Server (社区版即可) 
+
+MySQL Connector/Python (Python 的 MySQL 驱动) 
+
+安装 MySQL Connector/Python 
+
+可以通过 pip 安装 MySQL 官方提供的 Python 驱动： 
+
+pip install mysql-connector-python 
+
+或者安装 PyMySQL (另一个流行的 MySQL Python 驱动): 
+
+pip install pymysql 
+
+连接 MySQL 数据库 
+
+建立基本连接 
+
+以下是使用 mysql-connector-python 建立数据库连接的基本代码： 
+
+实例 
+
+import mysql. connector 
+
+# 创建数据库连接 
+
+db = mysql. connector . connect ( 
+
+host = "localhost" , 
+
+user = "yourusername" , 
+
+password = "yourpassword" , 
+
+database = "yourdatabase" 
+
+) 
+
+print ( "数据库连接成功!" ) 
+
+连接参数说明 
+
+host : MySQL 服务器地址 (本地为 "localhost") 
+
+user : 数据库用户名 
+
+password : 用户密码 
+
+database : 要连接的数据库名称 (可选) 
+
+使用 PyMySQL 连接 
+
+如果你选择使用 PyMySQL，连接方式略有不同： 
+
+实例 
+
+import pymysql 
+
+# 创建数据库连接 
+
+db = pymysql. connect ( 
+
+host = "localhost" , 
+
+user = "yourusername" , 
+
+password = "yourpassword" , 
+
+database = "yourdatabase" 
+
+) 
+
+print ( "数据库连接成功!" ) 
+
+执行 SQL 查询 
+
+创建游标对象 
+
+在执行 SQL 语句前，我们需要创建一个游标(cursor)对象： 
+
+实例 
+
+cursor = db. cursor ( ) 
+
+执行 SELECT 查询 
+
+实例 
+
+cursor. execute ( "SELECT * FROM your_table" ) 
+
+# 获取所有结果 
+
+results = cursor. fetchall ( ) 
+
+for row in results: 
+
+print ( row ) 
+
+执行 INSERT, UPDATE, DELETE 操作 
+
+实例 
+
+# 插入数据 
+
+sql = "INSERT INTO users (name, age) VALUES (%s, %s)" 
+
+values = ( "张三" , 25 ) 
+
+cursor. execute ( sql , values ) 
+
+# 提交事务 
+
+db. commit ( ) 
+
+print ( cursor. rowcount , "条记录插入成功" ) 
+
+使用参数化查询 
+
+为了防止 SQL 注入，应该始终使用参数化查询： 
+
+实例 
+
+sql = "SELECT * FROM users WHERE name = %s" 
+
+name = ( "张三" , ) 
+
+cursor. execute ( sql , name ) 
+
+事务管理 
+
+事务的基本概念 
+
+MySQL 事务是一组原子性的 SQL 查询，要么全部执行成功，要么全部不执行。 
+
+使用事务 
+
+实例 
+
+try : 
+
+# 开始事务 
+
+cursor. execute ( "START TRANSACTION" ) 
+
+# 执行多个SQL语句 
+
+cursor. execute ( "UPDATE accounts SET balance = balance - 100 WHERE id = 1" ) 
+
+cursor. execute ( "UPDATE accounts SET balance = balance + 100 WHERE id = 2" ) 
+
+# 提交事务 
+
+db. commit ( ) 
+
+print ( "事务执行成功" ) 
+
+except Exception as e: 
+
+# 发生错误，回滚事务 
+
+db. rollback ( ) 
+
+print ( "事务执行失败:" , e ) 
+
+错误处理 
+
+捕获数据库错误 
+
+实例 
+
+try : 
+
+cursor. execute ( "SELECT * FROM non_existent_table" ) 
+
+except mysql. connector . Error as err: 
+
+print ( "数据库错误:" , err ) 
+
+常见错误代码 
+
+1045 : 访问被拒绝 (错误的用户名或密码) 
+
+1049 : 未知数据库 
+
+1146 : 表不存在 
+
+1062 : 重复键值 
+
+关闭连接 
+
+正确关闭连接 
+
+完成数据库操作后，应该关闭游标和连接： 
+
+实例 
+
+cursor. close ( ) 
+
+db. close ( ) 
+
+print ( "数据库连接已关闭" ) 
+
+使用 with 语句 
+
+Python 的 with 语句可以自动管理资源： 
+
+实例 
+
+with mysql. connector . connect ( 
+
+host = "localhost" , 
+
+user = "yourusername" , 
+
+password = "yourpassword" , 
+
+database = "yourdatabase" 
+
+) as db: 
+
+with db. cursor ( ) as cursor: 
+
+cursor. execute ( "SELECT * FROM users" ) 
+
+results = cursor. fetchall ( ) 
+
+for row in results: 
+
+print ( row ) 
+
+# 离开with块后连接会自动关闭 
+
+最佳实践 
+
+连接池 
+
+对于频繁连接数据库的应用，建议使用连接池： 
+
+实例 
+
+from mysql. connector import pooling 
+
+# 创建连接池 
+
+db_pool = pooling. MySQLConnectionPool ( 
+
+pool_name = "mypool" , 
+
+pool_size = 5 , 
+
+host = "localhost" , 
+
+user = "yourusername" , 
+
+password = "yourpassword" , 
+
+database = "yourdatabase" 
+
+) 
+
+# 从连接池获取连接 
+
+db = db_pool. get_connection ( ) 
+
+ORM 框架 
+
+对于复杂应用，可以考虑使用 ORM (对象关系映射) 框架，如 SQLAlchemy 或 Django ORM。 
+
+AI 思考中... 
+
+MySQL Node.js 连接与使用 
+
+MySQL Java 连接与使用

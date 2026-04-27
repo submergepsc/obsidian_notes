@@ -1,0 +1,48 @@
+URL: https://www.runoob.com/python3/python3-string-splitlines.html
+Title: Python3 splitlines()方法 | 菜鸟教程
+
+Python3 splitlines()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 split() 方法 
+
+Python3 startswith()方法 
+
+Python3 splitlines()方法 
+
+描述 
+
+Python splitlines() 按照行('\r', '\r\n', \n')分隔，返回一个包含各行作为元素的列表，如果参数 keepends 为 False，不包含换行符，如果为 True，则保留换行符。 
+
+语法 
+
+splitlines()方法语法： 
+
+str.splitlines([keepends]) 
+
+参数 
+
+keepends -- 在输出结果里是否去掉换行符('\r', '\r\n', \n')，默认为 False，不包含换行符，如果为 True，则保留换行符。 
+
+返回值 
+
+返回一个包含各行作为元素的列表。 
+
+实例 
+
+以下实例展示了splitlines()函数的使用方法： 
+
+>>> 'ab c\n\nde fg\rkl\r\n'.splitlines()
+['ab c', '', 'de fg', 'kl']
+>>> 'ab c\n\nde fg\rkl\r\n'.splitlines(True)
+['ab c\n', '\n', 'de fg\r', 'kl\r\n']
+>>> 
+
+AI 思考中... 
+
+Python3 split() 方法 
+
+Python3 startswith()方法

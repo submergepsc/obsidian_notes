@@ -1,0 +1,137 @@
+URL: https://www.runoob.com/vbscript/func-inputbox.html
+Title: VBScript InputBox 函数 | 菜鸟教程
+
+VBScript InputBox 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript GetRef 函数 
+
+VBScript IsEmpty 函数 
+
+VBScript InputBox 函数 
+
+InputBox 函数显示一个对话框，用户可在其中输入文本并/或点击一个按钮。如果用户点击点击 OK 按钮或按键盘上的 ENTER 键， 则 InputBox 函数返回文本框中的文本。如果用户点击 Cancel 按钮，函数返回一个空字符串("")。 
+
+注意： 如果同时规定 helpfile 和 context 参数，则会向对话框添加一个 Help 按钮。 
+
+提示： 请参阅 MsgBox 函数。 
+
+语法 
+
+InputBox(prompt[,title][,default][,xpos][,ypos][,helpfile,context]) 
+
+参数 
+
+描述 
+
+prompt 
+
+必需。显示在对话框中的消息。prompt 的最大长度大约是 1024 个字符，这取决于所使用的字符的宽度。如果 prompt 中包含多个行，则可在各行之间用回车符（Chr(13)）、换行符（Chr(10)）或回车换行符的组合（Chr(13) & Chr(10)）来分隔各行。 
+
+title 
+
+可选。对话框的标题。默认是应用程序的名称。 
+
+default 
+
+可选。一个在文本框中的默认文本。 
+
+xpos 
+
+可选。数值表达式，用于指定对话框的左边缘与屏幕左边缘的水平距离（单位为 twips*）。如果省略 xpos，则对话框会在水平方向居中。 
+
+ypos 
+
+可选。数值表达式，用于指定对话框的上边缘与屏幕上边缘的垂直距离（单位为 twips*）。如果省略 ypos，则对话框显示在屏幕垂直方向距下边缘大约三分之一处。 
+
+helpfile 
+
+可选。字符串表达式，用于标识为对话框提供上下文相关帮助的帮助文件。必须与 context 参数一起使用。 
+
+context 
+
+可选。数值表达式，用于标识由帮助文件的作者指定给某个帮助主题的上下文编号。必须与 helpfile 参数一起使用。 
+
+* twip 是度量单位，在视觉上与系统显示的相同。 
+1 twip 为 1/1440 英寸。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+Function myFunction() 
+fname=InputBox("Enter your name") 
+End Function 
+
+</script> 
+
+尝试一下 » 
+
+实例 2 
+
+带有标题的提示框： 
+
+<script type="text/vbscript"> 
+
+Function myFunction() 
+fname=InputBox("Enter your name","Userinput") 
+End Function 
+
+</script> 
+
+尝试一下 » 
+
+实例 3 
+
+带有输入框默认文本的提示框： 
+
+<script type="text/vbscript"> 
+
+Function myFunction() 
+fname=InputBox("Enter your name",,"Donald Duck") 
+End Function 
+
+</script> 
+
+尝试一下 » 
+
+实例 4 
+
+一个显示在距屏幕左边缘 700 twips* 位置的提示框。 
+
+<script type="text/vbscript"> 
+
+Function myFunction() 
+fname=InputBox("Enter your name",,,700) 
+End Function 
+
+</script> 
+
+尝试一下 » 
+
+实例 5 
+
+一个显示在距屏幕上边缘 500 twips* 位置的提示框。 
+
+<script type="text/vbscript"> 
+
+Function myFunction() 
+fname=InputBox("Enter your name",,,,500) 
+End Function 
+
+</script> 
+
+尝试一下 » 
+
+完整的 VBScript 参考手册 
+
+AI 思考中... 
+
+VBScript GetRef 函数 
+
+VBScript IsEmpty 函数

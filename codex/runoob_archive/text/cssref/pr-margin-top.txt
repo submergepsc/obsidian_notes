@@ -1,0 +1,94 @@
+URL: https://www.runoob.com/cssref/pr-margin-top.html
+Title: CSS margin-top 属性 | 菜鸟教程
+
+CSS margin-top 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS margin-right 属性 
+
+CSS max-height 属性 
+
+CSS margin-top 属性 
+
+实例 
+
+设置一个p元素的上部边距： 
+
+p { margin-top: 2 cm ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+margin-top属性设置元素的上部边距。 
+
+注意： 负值是允许的。 
+
+默认值： 
+
+0 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.marginTop="10px" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+margin-top 
+
+1.0 
+
+6.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+auto 
+
+浏览器设置的上外边距。 
+
+length 
+
+定义固定的上外边距。默认值是 0。 
+
+% 
+
+定义基于父对象总宽度的百分比上外边距。 
+
+inherit 
+
+规定应该从父元素继承上外边距。 
+
+相关文章 
+
+CSS 教程: CSS Margin 
+
+AI 思考中... 
+
+CSS margin-right 属性 
+
+CSS max-height 属性

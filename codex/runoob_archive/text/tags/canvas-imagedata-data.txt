@@ -1,0 +1,90 @@
+URL: https://www.runoob.com/tags/canvas-imagedata-data.html
+Title: HTML canvas ImageData data 属性 | 菜鸟教程
+
+HTML canvas ImageData data 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas ImageData height 属性 
+
+HTML canvas createImageData() 方法 
+
+HTML canvas ImageData data 属性 
+
+实例 
+
+创建 100*100 像素的 ImageData 对象，其中每个像素均被设置为红色： 
+
+画布 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+var imgData=ctx.createImageData(100,100); 
+for (var i=0;i<imgData.data.length;i+=4) 
+{ 
+imgData.data[i+0]=255; 
+imgData.data[i+1]=0; 
+imgData.data[i+2]=0; 
+imgData.data[i+3]=255; 
+} 
+ctx.putImageData(imgData,10,10); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 ImageData 
+data 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+data 属性返回一个对象，该对象包含指定的 ImageData 对象的图像数据。 
+
+对于 ImageData 对象中的每个像素，都存在着四方面的信息，即 RGBA 值： 
+
+R - 红色（0-255） 
+G - 绿色（0-255） 
+B - 蓝色（0-255） 
+A - alpha 通道（0-255; 0 是透明的，255 是完全可见的） 
+
+color/alpha 信息以数组形式存在，并存储于 ImageData 对象的 data 属性中。 
+
+实例： 
+
+把 ImageData 对象中的第一个像素变为红色的语法： 
+
+imgData=ctx.createImageData(100,100); 
+
+imgData.data[0]=255; 
+imgData.data[1]=0; 
+imgData.data[2]=0; 
+imgData.data[3]=255; 
+
+把 ImageData 对象中的第二个像素变为绿色的语法： 
+
+imgData=ctx.createImageData(100,100); 
+
+imgData.data[4]=0; 
+imgData.data[5]=255; 
+imgData.data[6]=0; 
+imgData.data[7]=255; 
+
+提示： 请参阅 createImageData() 、 getImageData() 和 putImageData() 方法，以获得更多关于 ImageData 对象的知识。 
+
+JavaScript 语法 
+
+JavaScript 语法： 
+
+imageData .data; 
+
+AI 思考中... 
+
+HTML canvas ImageData height 属性 
+
+HTML canvas createImageData() 方法

@@ -1,0 +1,46 @@
+URL: https://www.runoob.com/java/dir-traverse.html
+Title: Java 实例 – 遍历目录 | 菜鸟教程
+
+Java 实例 – 遍历目录 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 获取目录大小 
+
+Java 实例 – 查看当前工作目录 
+
+Java 实例 - 遍历目录 
+
+以下实例演示了使用 File 类的 dir.isDirectory() 和 dir.list() 方法来遍历目录： 
+
+Main.java 文件 
+
+import java . io . File ; public class Main { public static void main ( String [ ] argv ) throws Exception { System . out . println ( " 遍历目录 " ) ; File dir = new File ( " /www/java " ) ; visitAllDirsAndFiles ( dir ) ; } public static void visitAllDirsAndFiles ( File dir ) { System . out . println ( dir ) ; if ( dir . isDirectory ( ) ) { String [ ] children = dir . list ( ) ; for ( int i = 0 ; i < children . length ; i ++ ) { visitAllDirsAndFiles ( new File ( dir , children [ i ] ) ) ; } } } } 
+
+以上代码运行输出结果为： 
+
+遍历目录
+/www/java
+/www/java/Car.class
+/www/java/FileUtil.class
+/www/java/FileUtil.java
+/www/java/HelloWorld.class
+/www/java/HelloWorld.java
+/www/java/HelloWorldDebug.class
+/www/java/HelloWorldDebug.java
+/www/java/Main$1.class
+/www/java/Main.class
+/www/java/Main.java
+/www/java/MainClass.class
+/www/java/MainClass.java
+/www/java/MyClass.class
+/www/java/outfilename
+/www/java/test.log 
+
+AI 思考中... 
+
+Java 实例 – 获取目录大小 
+
+Java 实例 – 查看当前工作目录

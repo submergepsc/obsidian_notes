@@ -1,0 +1,38 @@
+URL: https://www.runoob.com/xquery/xquery-reference.html
+Title: XQuery 参考手册 | 菜鸟教程
+
+XQuery 参考手册 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XQuery 教程 
+
+XQuery 总结 
+
+XQuery 参考手册 
+
+XQuery 1.0 和 XPath 2.0 分享相同的数据模型，并支持相同的函数和运算符。 
+
+XQuery 函数 
+
+XQuery 构建在 XPath 表达式之上。XQuery 1.0 和 XPath 2.0 分享相同的数据模型，并支持相同的函数和运算符。 
+
+XPath Operators 
+
+XPath Functions 
+
+XQuery 数据类型 
+
+XQuery 分享与 XML Schema 1.0 (XSD) 相同的数据类型。 
+
+XSD String 
+
+XSD Date 
+
+XSD Numeric 
+
+XSD Misc 
+
+AI 思考中... 
+
+XQuery 总结

@@ -1,0 +1,64 @@
+URL: https://www.runoob.com/tags/canvas-shadowblur.html
+Title: HTML canvas shadowBlur 属性 | 菜鸟教程
+
+HTML canvas shadowBlur 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas shadowColor 属性 
+
+HTML canvas shadowOffsetX 属性 
+
+HTML canvas shadowBlur 属性 
+
+实例 
+
+绘制一个带有黑色阴影的红色矩形，模糊级数是 20： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var 
+ ctx=c.getContext("2d"); 
+ctx.shadowBlur=20; 
+ctx.shadowColor="black"; 
+ctx.fillStyle="red"; 
+ctx.fillRect(20,20,100,80); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 shadowBlur 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+shadowBlur 属性设置或返回阴影的模糊级数。 
+
+默认值： 
+
+0 
+
+JavaScript 语法： 
+
+context .shadowBlur= number ; 
+
+属性值 
+
+值 
+
+描述 
+
+number 
+
+阴影的模糊级数 
+
+AI 思考中... 
+
+HTML canvas shadowColor 属性 
+
+HTML canvas shadowOffsetX 属性

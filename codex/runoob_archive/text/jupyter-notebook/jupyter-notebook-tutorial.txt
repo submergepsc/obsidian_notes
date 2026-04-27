@@ -1,0 +1,64 @@
+URL: https://www.runoob.com/jupyter-notebook/jupyter-notebook-tutorial.html
+Title: Jupyter Notebook 教程 | 菜鸟教程
+
+Jupyter Notebook 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Jupyter Notebook 教程 
+
+Jupyter Notebook 简介 
+
+Jupyter Notebook 教程 
+
+Jupyter Notebook（前身为 IPython Notebook） 是一款开源的交互式计算工具。 
+
+Jupyter Notebook 将代码、说明文字和运行结果组织在同一个 Notebook 文档中，该文档以 JSON 格式保存，由多个有序的单元格组成，每个单元格既可以运行代码，也可以编写 Markdown 文本、展示数学公式、图表或其他富媒体内容。 
+
+Jupyter Notebook 文件扩展名为 .ipynb 。 
+
+本教程面向希望系统入门 Jupyter Notebook 的读者，不要求具备数据科学或科研背景。 
+
+如果你具备基础的 Python 语法认知，并希望在学习、实验或分析过程中更高效地记录思路、运行代码和展示结果，那么本教程将非常适合你。 
+
+刚开始学习 Python，希望边写边跑、即时看到结果的初学者 
+
+从脚本或 IDE 转向数据分析、探索性计算的开发者 
+
+需要进行数据分析、实验验证或算法推导的工程师与研究人员 
+
+希望将代码、说明和结果整合为一份可复现文档的技术写作者 
+
+学习路径 
+
+本教程按照由浅入深的方式组织内容，既适合从未接触过 Jupyter Notebook 的读者，
+也适合希望系统梳理知识结构的使用者。建议按顺序学习，以避免因执行顺序和运行环境
+理解不足而产生困惑。 
+
+认识 Jupyter Notebook 
+了解 Jupyter Notebook 是什么、能解决什么问题，以及它与传统代码编辑器的区别。 
+
+安装与启动环境 
+学习如何在本地安装 Jupyter Notebook，并正确启动和管理工作目录。 
+
+Notebook 基础操作 
+掌握 Cell 的类型、执行方式、运行顺序以及常见快捷键。 
+
+Markdown 与文档组织 
+学会在 Notebook 中编写说明文档，使代码和思路结构清晰、可读性更强。 
+
+实际应用场景 
+通过简单的数据分析和可视化示例，理解 Notebook 在真实场景中的价值。 
+
+进阶使用与最佳实践 
+了解 JupyterLab、Kernel 管理以及 Notebook 的使用规范，避免常见误区。 
+
+相关链接 
+
+官网： https://jupyter.org/ 
+
+文档： https://docs.jupyter.org/ 
+
+AI 思考中... 
+
+Jupyter Notebook 简介

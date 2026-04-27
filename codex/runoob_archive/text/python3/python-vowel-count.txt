@@ -1,0 +1,66 @@
+URL: https://www.runoob.com/python3/python-vowel-count.html
+Title: Python 统计一个字符串中的元音字母数量 | 菜鸟教程
+
+Python 统计一个字符串中的元音字母数量 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python 判断一个年份是否是闰年 
+
+Python __name__ 与 __main__ 
+
+Python 统计一个字符串中的元音字母数量 
+
+在 Python 中，我们可以通过遍历字符串中的每个字符，并检查它是否是元音字母（a, e, i, o, u）来统计字符串中元音字母的数量。以下是一个简单的示例代码。 
+
+实例 
+
+def count_vowels ( s ) : 
+
+vowels = "aeiouAEIOU" 
+
+count = 0 
+
+for char in s: 
+
+if char in vowels: 
+
+count + = 1 
+
+return count 
+
+# 示例字符串 
+
+text = "Hello, World!" 
+
+print ( f "元音字母的数量是: {count_vowels(text)}" ) 
+
+代码解析： 
+
+vowels = "aeiouAEIOU" ：定义了一个包含所有元音字母的字符串，包括大小写。 
+
+count = 0 ：初始化一个计数器，用于记录元音字母的数量。 
+
+for char in s: ：遍历字符串 s 中的每个字符。 
+
+if char in vowels: ：检查当前字符是否是元音字母。 
+
+count += 1 ：如果是元音字母，计数器加1。 
+
+return count ：返回最终的元音字母数量。 
+
+text = "Hello, World!" ：定义一个示例字符串。 
+
+print(f"元音字母的数量是: {count_vowels(text)}") ：调用 count_vowels 函数并打印结果。 
+
+输出结果： 
+
+元音字母的数量是: 3 
+
+AI 思考中... 
+
+Python 判断一个年份是否是闰年 
+
+Python __name__ 与 __main__

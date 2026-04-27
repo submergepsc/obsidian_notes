@@ -1,0 +1,40 @@
+URL: https://www.runoob.com/xsl/el-comment.html
+Title: XSLT <xsl:comment> 元素 | 菜鸟教程
+
+XSLT <xsl:comment> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:choose> 元素 
+
+XSLT <xsl:copy> 元素 
+
+XSLT <xsl:comment> 元素 
+
+定义和用法 
+
+<xsl:comment> 元素用于在结果树中创建注释节点。 
+
+语法 
+
+<xsl:comment> 
+
+<!-- Content:template --> 
+
+</xsl:comment> 
+
+属性 
+
+无 
+
+实例 1 
+
+<xsl:comment>This is a comment!</xsl:comment> 
+
+AI 思考中... 
+
+XSLT <xsl:choose> 元素 
+
+XSLT <xsl:copy> 元素

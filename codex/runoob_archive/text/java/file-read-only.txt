@@ -1,0 +1,31 @@
+URL: https://www.runoob.com/java/file-read-only.html
+Title: Java 实例 – 设置文件只读 | 菜鸟教程
+
+Java 实例 – 设置文件只读 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 检测文件是否存在 
+
+Java 实例 – 文件重命名 
+
+Java 实例 - 设置文件只读 
+
+以下实例演示了使用 File 类的 file.setReadOnly() 和 file.canWrite() 方法来设置文件只读： 
+
+Main.java 文件 
+
+import java . io . File ; public class Main { public static void main ( String [ ] args ) { File file = new File ( " C:/java.txt " ) ; System . out . println ( file . setReadOnly ( ) ) ; System . out . println ( file . canWrite ( ) ) ; } } 
+
+以上代码运行输出结果为： 
+
+true
+false 
+
+AI 思考中... 
+
+Java 实例 – 检测文件是否存在 
+
+Java 实例 – 文件重命名

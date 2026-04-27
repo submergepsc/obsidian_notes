@@ -1,0 +1,122 @@
+URL: https://www.runoob.com/tags/tag-colgroup.html
+Title: HTML <colgroup> 标签 | 菜鸟教程
+
+HTML <colgroup> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <col> 标签 
+
+HTML <command> 标签 
+
+HTML <colgroup> 标签 
+
+实例 
+
+<colgroup> 和 <col> 标签为表格中的三个列设置了背景色： 
+
+<table border="1"> 
+<colgroup> 
+<col span="2" style="background-color:red"> 
+<col style="background-color:yellow"> 
+</colgroup> 
+<tr> 
+<th>ISBN</th> 
+<th>Title</th> 
+<th>Price</th> 
+</tr> 
+<tr> 
+<td>3476896</td> 
+<td>My first HTML</td> 
+<td>$53</td> 
+</tr> 
+</table> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <colgroup> 标签。 
+
+标签定义及使用说明 
+
+<colgroup> 标签用于对表格中的列进行组合，以便对其进行格式化。 
+
+通过使用 <colgroup> 标签，可以向整个列应用样式，而不需要重复为每个单元格或每一行设置样式。 
+
+注释： 只能在 <table> 元素之内，在任何一个 <caption> 元素之后，在任何一个 <thead>、<tbody>、<tfoot>、<tr> 元素之前使用 <colgroup> 标签。 
+
+提示： 如果想对 <colgroup> 中的某列定义不同的属性，请在 <colgroup> 标签内使用 <col> 标签。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+HTML5 中不再支持 HTML 4.01 中的大部分属性。 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+align 
+
+left 
+right 
+center 
+justify 
+char 
+
+HTML5 不支持。 规定在列组合中内容的水平对齐方式。 
+
+char 
+
+character 
+
+HTML5 不支持。 规定根据哪个字符来对齐列组中的内容。 
+
+charoff 
+
+number 
+
+HTML5 不支持。 规定第一个对齐字符的偏移量。 
+
+span 
+
+number 
+
+规定列组应该横跨的列数。 
+
+valign 
+
+top 
+middle 
+bottom 
+baseline 
+
+HTML5 不支持。 定义在列组合中内容的垂直对齐方式。 
+
+width 
+
+pixels 
+% 
+relative_length 
+
+HTML5 不支持。 规定列组合的宽度。 
+
+全局属性 
+
+<colgroup> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<colgroup> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <col> 标签 
+
+HTML <command> 标签

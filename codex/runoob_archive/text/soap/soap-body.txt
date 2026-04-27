@@ -1,0 +1,60 @@
+URL: https://www.runoob.com/soap/soap-body.html
+Title: SOAP Body 元素 | 菜鸟教程
+
+SOAP Body 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SOAP 教程 
+
+SOAP Header 元素 
+
+SOAP Fault 元素 
+
+SOAP Body 元素 
+
+强制使用的 SOAP Body 元素包含实际的 SOAP 消息。 
+
+SOAP Body 元素 
+
+必需的 SOAP Body 元素可包含打算传送到消息最终端点的实际 SOAP 消息。 
+
+SOAP Body 元素的直接子元素可以是合格的命名空间。 
+
+实例 
+
+<?xml version="1.0"?> 
+<soap:Envelope 
+xmlns:soap="http://www.w3.org/2001/12/soap-envelope" 
+soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding"> 
+
+<soap:Body> 
+<m:GetPrice xmlns:m="http://www.w3schools.com/prices"> 
+<m:Item>Apples</m:Item> 
+</m:GetPrice> 
+</soap:Body> 
+
+</soap:Envelope> 
+
+上面的例子请求苹果的价格。请注意，上面的 m:GetPrice 和 Item 元素是应用程序专用的元素。它们并不是 SOAP 标准的一部分。 
+
+而一个 SOAP 响应应该类似这样： 
+
+<?xml version="1.0"?> 
+<soap:Envelope 
+xmlns:soap="http://www.w3.org/2001/12/soap-envelope" 
+soap:encodingStyle="http://www.w3.org/2001/12/soap-encoding"> 
+
+<soap:Body> 
+<m:GetPriceResponse xmlns:m="http://www.w3schools.com/prices"> 
+<m:Price>1.90</m:Price> 
+</m:GetPriceResponse> 
+</soap:Body> 
+
+</soap:Envelope> 
+
+AI 思考中... 
+
+SOAP Header 元素 
+
+SOAP Fault 元素

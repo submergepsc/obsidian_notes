@@ -1,0 +1,52 @@
+URL: https://www.runoob.com/python3/python3-string-swapcase.html
+Title: Python3 swapcase()方法 | 菜鸟教程
+
+Python3 swapcase()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 strip()方法 
+
+Python3 title()方法 
+
+Python3 swapcase()方法 
+
+描述 
+
+Python swapcase() 方法用于对字符串的大小写字母进行转换， 即将大写字母转换为小写字母，小写字母会转换为大写字母 。 
+
+语法 
+
+swapcase() 方法语法： 
+
+str.swapcase(); 
+
+参数 
+
+NA。 
+
+返回值 
+
+返回大小写字母转换后生成的新字符串。 
+
+实例 
+
+以下实例展示了 swapcase() 函数的使用方法： 
+
+实例 
+
+str = " RUNOOB!!! " ; print ( str . swapcase ( ) ) ; str = " runoob!!! " ; print ( str . swapcase ( ) ) ; str = " abCDE--RuNOob!!! " ; print ( str . swapcase ( ) ) ; 
+
+以上实例输出结果如下： 
+
+runoob!!!
+RUNOOB!!!
+ABcde--rUnoOB!!! 
+
+AI 思考中... 
+
+Python3 strip()方法 
+
+Python3 title()方法

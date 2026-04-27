@@ -1,0 +1,316 @@
+URL: https://www.runoob.com/zig/zig-datatype.html
+Title: Zig 数据类型 | 菜鸟教程
+
+Zig 数据类型 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Zig 教程 
+
+Zig 注释 
+
+Zig 变量和常量 
+
+Zig 数据类型 
+
+Zig 支持多种数据类型，涵盖了整数、浮点数、布尔值、字符、数组、切片、结构体、枚举、联合体和指针等。 
+
+下表是 Zig 中各种数据类型的说明： 
+
+数据类型类别 
+
+数据类型示例 
+
+描述 
+
+整数类型 
+
+i8 , i16 , i32 , i64 , isize 
+
+有符号整数类型， isize 是平台相关的大小。 
+
+无符号整数 
+
+u8 , u16 , u32 , u64 , usize 
+
+无符号整数类型， usize 是平台相关的大小。 
+
+浮点数 
+
+f16 , f32 , f64 , f128 
+
+IEEE 浮点数类型。 
+
+布尔类型 
+
+bool 
+
+布尔类型，值为 true 或 false 。 
+
+字符类型 
+
+char 
+
+Unicode 标量值。 
+
+复合类型 
+
+array , vector 
+
+固定大小数组和可变大小数组。 
+
+指针类型 
+
+*T , *const T , *mut T 
+
+指向 T 类型值的指针， *const 为只读， *mut 为可变。 
+
+引用类型 
+
+&T , &const T , &mut T 
+
+对 T 类型值的引用， &const 为只读， &mut 为可变。 
+
+元组类型 
+
+(T1, T2, ...) 
+
+包含固定数量和类型的值的有序集合。 
+
+可选类型 
+
+?T 
+
+可以是 null 或者 T 类型值。 
+
+错误集合类型 
+
+error{...} 
+
+包含错误值的枚举类型。 
+
+函数类型 
+
+fn(T1, T2, ...) -> R 
+
+接受参数并返回结果的函数类型。 
+
+结构体类型 
+
+struct { ... } 
+
+包含多个字段的复合数据类型。 
+
+枚举类型 
+
+enum { ... } 
+
+固定数量的命名值的集合。 
+
+联合体类型 
+
+union { ... } 
+
+可以存储多种不同类型值的类型，但一次只能存储一个。 
+
+别名类型 
+
+alias T = U 
+
+T 是 U 的别名。 
+
+1、整数类型 
+
+Zig 提供了多种整数类型，包括有符号和无符号整数，大小从 8 位到 64 位不等。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const a : i8 = - 128 ; // 8-bit signed integer 
+
+const b : u8 = 255 ; // 8-bit unsigned integer 
+
+const c : i32 = - 2147483648 ; // 32-bit signed integer 
+
+const d : u64 = 18446744073709551615 ; // 64-bit unsigned integer 
+
+std. debug . print ( "a: {}, b: {}, c: {}, d: {} \n " , . { a, b, c, d } ) ; 
+
+} 
+
+2、浮点数类型 
+
+Zig 支持 f32 和 f64 两种浮点数类型。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const pi : f32 = 3.14 ; // 32-bit floating point 
+
+const e : f64 = 2.71828 ; // 64-bit floating point 
+
+std. debug . print ( "pi: {}, e: {} \n " , . { pi, e } ) ; 
+
+} 
+
+3、布尔类型 
+
+布尔类型使用 bool 表示，取值可以是 true 或 false。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const is_true : bool = true ; 
+
+const is_false : bool = false ; 
+
+std. debug . print ( "is_true: {}, is_false: {} \n " , . { is_true, is_false } ) ; 
+
+} 
+
+4、字符类型 
+
+字符类型使用 u8 来表示单个字符。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const letter : u8 = 'A' ; 
+
+std. debug . print ( "letter: {} \n " , . { letter } ) ; 
+
+} 
+
+5、数组和切片 
+
+数组是固定大小的，切片则是动态大小的数组。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const array : [ 5 ] i32 = [ 5 ] i32 { 1 , 2 , 3 , 4 , 5 } ; // 固定大小数组 
+
+const slice : [ ] const i32 = array [ 1 .. 4 ] ; // 切片 
+
+std. debug . print ( "array: {}, slice: {} \n " , . { array, slice } ) ; 
+
+} 
+
+6、结构体 
+
+结构体用 struct 定义，允许你创建复杂的数据类型。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+const Point = struct { 
+
+x : i32, 
+
+y : i32, 
+
+} ; 
+
+pub fn main ( ) void { 
+
+const p = Point { . x = 10 , . y = 20 } ; 
+
+std. debug . print ( "Point: ({}, {}) \n " , . { p. x , p. y } ) ; 
+
+} 
+
+7、枚举 
+
+枚举用 enum 定义，允许你创建有命名值的类型。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+const Color = enum { 
+
+Red, 
+
+Green, 
+
+Blue, 
+
+} ; 
+
+pub fn main ( ) void { 
+
+const color : Color = Color. Green ; 
+
+std. debug . print ( "Color: {} \n " , . { color } ) ; 
+
+} 
+
+8、联合体 
+
+联合体用 union 定义，允许你创建一个可以存储不同类型值的变量。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+const Number = union ( enum ) { 
+
+Int : i32, 
+
+Float : f32, 
+
+} ; 
+
+pub fn main ( ) void { 
+
+const num : Number = Number { . Int = 10 } ; 
+
+switch ( num ) { 
+
+Number. Int => std. debug . print ( "Integer: {} \n " , . { num. Int } ) , 
+
+Number. Float => std. debug . print ( "Float: {} \n " , . { num. Float } ) , 
+
+} 
+
+} 
+
+9、指针 
+
+指针用 * 定义，可以指向特定类型的变量。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+var a : i32 = 10 ; 
+
+const p : * i32 = & a ; // 指向 a 的指针 
+
+std. debug . print ( "Value: {}, Pointer: {} \n " , . { a, p. * } ) ; 
+
+} 
+
+AI 思考中... 
+
+Zig 注释 
+
+Zig 变量和常量

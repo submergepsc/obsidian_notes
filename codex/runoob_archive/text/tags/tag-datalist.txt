@@ -1,0 +1,66 @@
+URL: https://www.runoob.com/tags/tag-datalist.html
+Title: HTML <datalist> 标签 | 菜鸟教程
+
+HTML <datalist> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <command> 标签 
+
+HTML <dd> 标签 
+
+HTML <datalist> 标签 
+
+实例 
+
+下面是一个 <input> 元素，<datalist> 中描述了其可能的值： 
+
+< input list = " browsers " > < datalist id = " browsers " > < option value = " Internet Explorer " > < option value = " Firefox " > < option value = " Chrome " > < option value = " Opera " > < option value = " Safari " > </ datalist > 
+
+尝试一下 » 
+
+浏览器支持 
+
+表格中的数字表示支持该元素的第一个浏览器版本号。 
+
+元素 
+
+<datalist> 
+
+20.0 
+
+10.0 
+
+4.0 
+
+12.1 
+
+9.0 
+
+标签定义及使用说明 
+
+<datalist> 标签规定了 <input> 元素可能的选项列表。 
+
+<datalist> 标签被用来在为 <input> 元素提供"自动完成"的特性。用户能看到一个下拉列表，里边的选项是预先定义好的，将作为用户的输入数据。 
+
+请使用 <input> 元素的 list 属性来绑定 <datalist> 元素。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+<datalist> 标签是 HTML5 中的新标签。 
+
+全局属性 
+
+<datalist> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<datalist> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <command> 标签 
+
+HTML <dd> 标签

@@ -1,0 +1,372 @@
+URL: https://www.runoob.com/vue3/vue3-ref-lifecycle-hooks.html
+Title: Vue3 生命周期钩子 | 菜鸟教程
+
+Vue3 生命周期钩子 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Vue3 教程 
+
+Vue 实例选项 
+
+Vue3 AI 编程助手 
+
+Vue3 生命周期钩子 
+
+Vue.js 中的生命周期钩子函数是指在组件实例的创建、更新、销毁等过程中，Vue 自动调用的一系列方法。在这些步骤中，组件会触发一系列称为"生命周期钩子"的函数，允许开发者在特定时机执行自定义代码。 
+
+生命周期钩子的注册与使用 
+
+mounted 钩子：此钩子在组件完成初始渲染并生成 DOM 节点后触发。例如： 
+
+export default {
+ mounted() {
+ console.log(`组件已挂载。`);
+ }
+} 
+
+其他常用钩子：除了 mounted，还有 updated 和 unmounted 等钩子，它们在实例的不同生命周期阶段被调用。 
+
+生命周期钩子的注意事项 
+
+this 上下文： 所有生命周期钩子函数中的 this 自动指向调用它的组件实例。 
+
+避免使用箭头函数： 定义生命周期钩子时，不要使用箭头函数，因为这会导致无法通过 this 获取组件实例。 
+
+通过合理使用生命周期钩子，开发者可以在组件的不同阶段执行特定的逻辑，增强组件的灵活性和功能。 
+
+下面是实例生命周期的图表: 
+
+以下是 Vue.js 生命周期钩子函数 
+
+钩子名称 
+
+触发时机 
+
+beforeCreate 
+
+实例初始化之后，数据观测和事件配置之前调用。 
+
+created 
+
+实例创建完成后立即调用，此时实例已经完成数据观测、属性和方法的运算、watch/event 事件回调。 
+
+beforeMount 
+
+在挂载开始之前被调用：相关的 render 函数首次被调用。 
+
+mounted 
+
+el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子。 
+
+beforeUpdate 
+
+数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 
+
+updated 
+
+由于数据更改导致的虚拟 DOM 重新渲染和打补丁之后调用。 
+
+beforeUnmount 
+
+实例卸载之前调用。 
+
+unmounted 
+
+实例被卸载之后调用。 
+
+以下是详细介绍 Vue 组件的生命周期钩子： 
+
+Vue.js 中的生命周期钩子函数是指在组件实例的创建、更新、销毁等过程中，Vue 自动调用的一系列方法。通过这些钩子函数，可以在组件的不同生命周期阶段执行特定的操作。以下是详细介绍 Vue 组件的生命周期钩子： 
+
+1. beforeCreate 
+
+说明 : 实例初始化之后，数据观测和事件配置之前调用。 
+
+用法 : 可以在这个阶段初始化一些未被 Vue 代理的数据。 
+
+实例 : 
+
+实例 
+
+beforeCreate ( ) { 
+
+console.log ( 'beforeCreate : 实例刚刚被创建' ) ; 
+
+} 
+
+2. created 
+
+说明 : 实例创建完成后立即调用，此时实例已经完成以下配置：数据观测、属性和方法的运算、watch/event事件回调，挂载阶段还没开始。 
+
+用法 : 可以在这个阶段访问并修改数据，但还没有挂载 DOM。 
+
+实例 : 
+
+实例 
+
+created ( ) { 
+
+console.log ( 'created : 实例创建完成' ) ; 
+
+} 
+
+3. beforeMount 
+
+说明 : 在挂载开始之前被调用：相关的 render 函数首次被调用。 
+
+用法 : 在挂载之前执行一些操作，例如修改 DOM 结构等。 
+
+实例 : 
+
+实例 
+
+beforeMount ( ) { 
+
+console.log ( 'beforeMount : 挂载开始之前' ) ; 
+
+} 
+
+4. mounted 
+
+说明 : el 被新创建的 vm.$el 替换，并挂载到实例上去之后调用该钩子。 
+
+用法 : 可以在这个阶段操作 DOM，执行与 DOM 相关的逻辑。 
+
+实例 : 
+
+实例 
+
+mounted ( ) { 
+
+console.log ( 'mounted : 实例已挂载' ) ; 
+
+} 
+
+5. beforeUpdate 
+
+说明 : 数据更新时调用，发生在虚拟 DOM 重新渲染和打补丁之前。 
+
+用法 : 可以在这个阶段对更新之前的状态进行访问。 
+
+实例 : 
+
+实例 
+
+beforeUpdate ( ) { 
+
+console.log ( 'beforeUpdate : 数据更新之前' ) ; 
+
+} 
+
+6. updated 
+
+说明 : 由于数据更改导致的虚拟 DOM 重新渲染和打补丁之后调用。 
+
+用法 : 可以在这个阶段操作 DOM，但避免在此期间更改数据，因为可能导致无限循环更新。 
+
+实例 : 
+
+实例 
+
+updated ( ) { 
+
+console.log ( 'updated : 数据更新完成' ) ; 
+
+} 
+
+7. beforeUnmount （Vue 3） 
+
+说明 : 实例卸载之前调用。 
+
+用法 : 在实例被卸载之前进行一些清理操作，例如取消事件监听等。 
+
+实例 : 
+
+实例 
+
+beforeUnmount ( ) { 
+
+console.log ( 'beforeUnmount : 实例卸载之前' ) ; 
+
+} 
+
+8. unmounted （Vue 3） 
+
+说明 : 实例被卸载之后调用。 
+
+用法 : 在实例被卸载之后进行一些清理操作，例如销毁定时器等。 
+
+实例 : 
+
+实例 
+
+unmounted ( ) { 
+
+console.log ( 'unmounted : 实例已卸载' ) ; 
+
+} 
+
+生命周期钩子执行顺序 
+
+beforeCreate 
+
+created 
+
+beforeMount 
+
+mounted 
+
+beforeUpdate（当数据变化时触发） 
+
+updated（当数据变化时触发） 
+
+beforeUnmount 
+
+unmounted 
+
+实例 
+
+以下是一个完整的 Vue 组件示例，展示了所有生命周期钩子函数的使用： 
+
+实例 
+
+const LifecycleDemo = { 
+
+template : ` < div > { { message } } </ div > ` , 
+
+data ( ) { 
+
+return { 
+
+message : 'Hello , Vue ! ' 
+
+} ; 
+
+} , 
+
+beforeCreate ( ) { 
+
+console.log ( 'beforeCreate : 实例刚刚被创建' ) ; 
+
+} , 
+
+created ( ) { 
+
+console.log ( 'created : 实例创建完成' ) ; 
+
+} , 
+
+beforeMount ( ) { 
+
+console.log ( 'beforeMount : 挂载开始之前' ) ; 
+
+} , 
+
+mounted ( ) { 
+
+console.log ( 'mounted : 实例已挂载' ) ; 
+
+} , 
+
+beforeUpdate ( ) { 
+
+console.log ( 'beforeUpdate : 数据更新之前' ) ; 
+
+} , 
+
+updated ( ) { 
+
+console.log ( 'updated : 数据更新完成' ) ; 
+
+} , 
+
+beforeUnmount ( ) { 
+
+console.log ( 'beforeUnmount : 实例卸载之前' ) ; 
+
+} , 
+
+unmounted ( ) { 
+
+console.log ( 'unmounted : 实例已卸载' ) ; 
+
+} 
+
+} ; 
+
+const app = Vue.createApp ( { 
+
+components : { 
+
+LifecycleDemo 
+
+} 
+
+} ) ; 
+
+app.mount ( ' # app' ) ; 
+
+尝试一下 » 
+
+这个实例会在控制台打印出每个生命周期钩子函数的日志，帮助理解各个生命周期阶段的顺序和用途。 
+
+组合式 API 钩子 
+
+Vue 3 引入了组合式 API（ Composition API ），通过 setup 函数可以在逻辑上更清晰地组织生命周期钩子。使用组合式 API 时，这些钩子是通过 onXxx 函数定义的： 
+
+onMounted ：等同于 mounted 。 
+
+onBeforeUnmount ：等同于 beforeUnmount 。 
+
+onUnmounted ：等同于 unmounted 。 
+
+onBeforeMount ：等同于 beforeMount 。 
+
+onBeforeUpdate ：等同于 beforeUpdate 。 
+
+onUpdated ：等同于 updated 。 
+
+onCreated 和 onBeforeCreate 在组合式 API 中通常不常用，因为 setup 中的代码会在创建阶段运行。 
+
+使用组合式 API 的生命周期钩子: 
+
+实例 
+
+import { onMounted , onBeforeUnmount } from 'vue' ; 
+
+export default { 
+
+setup ( ) { 
+
+onMounted ( ( ) => { 
+
+console. log ( '组件已挂载！' ) ; 
+
+// 在此处进行初始化操作 
+
+} ) ; 
+
+onBeforeUnmount ( ( ) => { 
+
+console. log ( '组件即将卸载！' ) ; 
+
+// 在此处进行清理操作 
+
+} ) ; 
+
+} 
+
+} ; 
+
+组合式 API 优点： 
+
+可复用性强 ：可以将生命周期钩子与其他逻辑组合在一起，便于封装和复用。 
+
+逻辑更清晰 ：与 setup 内的其他逻辑在一个函数中实现，减少代码分散和复杂度。 
+
+AI 思考中... 
+
+Vue 实例选项 
+
+Vue3 AI 编程助手

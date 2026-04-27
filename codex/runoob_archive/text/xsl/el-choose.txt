@@ -1,0 +1,95 @@
+URL: https://www.runoob.com/xsl/el-choose.html
+Title: XSLT <xsl:choose> 元素 | 菜鸟教程
+
+XSLT <xsl:choose> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:call-template> 元素 
+
+XSLT <xsl:comment> 元素 
+
+XSLT <xsl:choose> 元素 
+
+定义和用法 
+
+<xsl:choose> 元素与 <xsl:when> 以及 <xsl:otherwise> 协同使用，来表达多重条件测试。 
+
+如果没有 <xsl:when> 是 true，则处理 <xsl:otherwise> 的内容。 
+
+如果没有 <xsl:when> 是 true，且不存在 <xsl:otherwise> 元素，则不创建任何内容。 
+
+提示： 对于简单的条件测试，请使用 <xsl:if> 元素取而代之。 
+
+语法 
+
+<xsl:choose> 
+
+<!-- Content:(xsl:when+,xsl:otherwise?) --> 
+
+</xsl:choose> 
+
+属性 
+
+无 
+
+实例 
+
+下面的代码会在 CD 的价格高于 10 时，向 artist 列添加粉色的背景色。 
+
+实例 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<h2>My CD Collection</h2> 
+<table border="1"> 
+<tr bgcolor="#9acd32"> 
+<th>Title</th> 
+<th>Artist</th> 
+</tr> 
+<xsl:for-each select="catalog/cd"> 
+<tr> 
+<td><xsl:value-of select="title"/></td> 
+<xsl:choose> 
+<xsl:when test="price > 10"> 
+<td bgcolor="#ff00ff"> 
+<xsl:value-of select="artist"/></td> 
+</xsl:when> 
+<xsl:otherwise> 
+<td><xsl:value-of select="artist"/></td> 
+</xsl:otherwise> 
+</xsl:choose> 
+</tr> 
+</xsl:for-each> 
+</table> 
+</body> 
+</html> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+尝试一下 » 
+
+声明名为 "color" 的变量。把这个变量的值赋值到当前元素的 color 属性。如果当前元素没有 color 属性，则 "color" 的值是 "green"： 
+
+<xsl:variable name="color"> 
+<xsl:choose> 
+<xsl:when test="@color"> 
+<xsl:value-of select="@color"/> 
+</xsl:when> 
+<xsl:otherwise>green</xsl:otherwise> 
+</xsl:choose> 
+</xsl:variable> 
+
+AI 思考中... 
+
+XSLT <xsl:call-template> 元素 
+
+XSLT <xsl:comment> 元素

@@ -1,0 +1,96 @@
+URL: https://www.runoob.com/tags/tag-style.html
+Title: HTML <style> 标签 | 菜鸟教程
+
+HTML <style> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <strike> 标签 
+
+HTML <sub> 标签 
+
+HTML <style> 标签 
+
+实例 
+
+在 HTML 文档中使用 <style> 元素： 
+
+< ! DOCTYPE html > < html > < head > < meta charset = " utf-8 " > < title > 菜鸟教程(runoob.com) </ title > < style type = " text/css " > h1 {color:red;}
+p {color:blue;} </ style > </ head > < body > < h1 > 这是一个标题 </ h1 > < p > 这是一个段落。 </ p > </ body > </ html > 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <style> 标签。 
+
+标签定义及使用说明 
+
+<style> 标签定义 HTML 文档的样式信息。 
+
+在 <style> 元素中，您可以规定在浏览器中如何呈现 HTML 文档。 
+
+每个 HTML 文档能包含多个 <style> 标签。 
+
+提示和注释 
+
+提示： 如需链接外部样式表，请使用 <link> 标签。 
+
+提示： 如需学习更多有关样式表的知识，请阅读我们的 CSS 教程 。 
+
+注释： 如果没有使用 "scoped" 属性，则每一个 <style> 标签必须位于 head 头部区域。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+"scoped" 属性是 HTML 5 中的新属性，它允许我们为文档的指定部分定义样式，而不是整个文档。 
+如果使用 "scoped" 属性，那么所规定的样式只能应用到 style 元素的父元素及其子元素。 
+
+属性 
+
+New ：HTML5 中的新属性。 
+
+属性 
+
+值 
+
+描述 
+
+media 
+
+media_query 
+
+为样式表规定不同的媒体类型。 
+
+scoped New 
+
+scoped 
+
+如果使用该属性，则样式仅仅应用到 style 元素的父元素及其子元素。 
+
+type 
+
+text/css 
+
+规定样式表的 MIME 类型。 
+
+全局属性 
+
+<style> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<style> 标签支持 HTML 的事件属性 。 
+
+相关文章 
+
+HTML 教程： HTML CSS 
+
+HTML DOM 参考手册： Style 对象 
+
+AI 思考中... 
+
+HTML <strike> 标签 
+
+HTML <sub> 标签

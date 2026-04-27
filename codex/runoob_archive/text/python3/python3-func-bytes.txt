@@ -1,0 +1,151 @@
+URL: https://www.runoob.com/python3/python3-func-bytes.html
+Title: Python3 bytes 函数 | 菜鸟教程
+
+Python3 bytes 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 exec 函数 
+
+Python3 tuple 函数 
+
+Python bytes() 函数 
+
+bytes() 是 Python 中用于创建不可变字节序列的内置函数。 
+
+字节序列（bytes）是 Python 中用于处理二进制数据的基本类型，常用于文件读写、网络传输、图像处理等场景。bytes 是不可变的，创建后不能修改。 
+
+单词释义 ： bytes 意为"字节"，是 Python 中的二进制数据类型。 
+
+基本语法与参数 
+
+语法格式 
+
+bytes(source)
+bytes(source, encoding)
+bytes(source, encoding, errors) 
+
+参数说明 
+
+参数 source ： 
+
+类型： 整数、可迭代对象、字符串 
+
+描述： 用于初始化字节序列的源数据。 
+
+参数 encoding （可选）： 
+
+类型： 字符串 
+
+描述： 字符串的编码格式（如 'utf-8'）。 
+
+参数 errors （可选）： 
+
+类型： 字符串 
+
+描述： 编码错误处理方式。 
+
+函数说明 
+
+返回值 ： 返回一个不可变的 bytes 对象。 
+
+特点 ： bytes 中的每个元素是 0-255 的整数。 
+
+实例 
+
+示例 1：创建 bytes 
+
+实例 
+
+# 创建指定长度的 bytes 
+
+b = bytes ( 5 ) 
+
+print ( b ) # 输出: b'\x00\x00\x00\x00\x00' 
+
+# 从可迭代对象创建 
+
+b = bytes ( [ 72 , 101 , 108 , 108 , 111 ] ) 
+
+print ( b ) # 输出: b'Hello' 
+
+# 从字符串创建（需要编码） 
+
+b = bytes ( "你好" , encoding = 'utf-8' ) 
+
+print ( b ) # 输出: b'\xe4\xbd\xa0\xe5\xa5\xbd' 
+
+# 使用字面量 
+
+b = b "Hello" 
+
+print ( b ) # 输出: b'Hello' 
+
+运行结果预期: 
+
+b'\x00\x00\x00\x00\x00'
+b'Hello'
+b'\xe4\xbd\xa0\xe5\xa5\xbd'
+b'Hello' 
+
+代码解析: 
+
+bytes(5) 创建 5 个零字节。 
+
+可迭代对象的元素必须是 0-255 的整数。 
+
+字符串转换需要指定编码格式。 
+
+示例 2：bytes 操作 
+
+实例 
+
+# 访问字节 
+
+b = b "Hello" 
+
+print ( b [ 0 ] ) # 输出: 72 
+
+print ( b [ 1 ] ) # 输出: 101 
+
+# 切片 
+
+print ( b [ 1 : 4 ] ) # b'ell' 
+
+# 遍历 
+
+for byte in b "ABC" : 
+
+print ( byte , end = " " ) 
+
+print ( ) # 输出: 65 66 67 
+
+# 转换回字符串 
+
+b = b "Hello" 
+
+s = b. decode ( 'utf-8' ) 
+
+print ( s ) # 输出: Hello 
+
+# bytes 是不可变的 
+
+# b[0] = 65 # 这会抛出 TypeError 
+
+运行结果预期: 
+
+72
+101
+b'ell'
+65 66 67
+Hello 
+
+bytes 支持索引、切片、遍历等操作，但不能修改元素。 
+
+AI 思考中... 
+
+Python3 exec 函数 
+
+Python3 tuple 函数

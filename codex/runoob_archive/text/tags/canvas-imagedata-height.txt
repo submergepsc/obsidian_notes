@@ -1,0 +1,46 @@
+URL: https://www.runoob.com/tags/canvas-imagedata-height.html
+Title: HTML canvas ImageData height 属性 | 菜鸟教程
+
+HTML canvas ImageData height 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas ImageData width 属性 
+
+HTML canvas ImageData data 属性 
+
+HTML canvas ImageData height 属性 
+
+实例 
+
+输出 ImageData 对象的高度： 
+
+alert("Height of imgData is: " + imgData.height); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 ImageData height 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+height 属性返回 ImageData 对象的高度，以像素计。 
+
+提示： 请参阅 createImageData() 、 getImageData() 和 putImageData() 方法，以获得更多关于 ImageData 对象的知识。 
+
+JavaScript 语法 
+
+JavaScript 语法： 
+
+imgData .height; 
+
+AI 思考中... 
+
+HTML canvas ImageData width 属性 
+
+HTML canvas ImageData data 属性

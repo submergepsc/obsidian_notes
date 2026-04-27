@@ -1,0 +1,33 @@
+URL: https://www.runoob.com/java/exception-thread.html
+Title: Java 实例 – 多线程异常处理 | 菜鸟教程
+
+Java 实例 – 多线程异常处理 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 获取异常的堆栈信息 
+
+Java 实例 – 自定义异常 
+
+Java 实例 - 多线程异常处理 
+
+以下实例演示了多线程异常处理方法： 
+
+Main.java 文件 
+
+class MyThread extends Thread { public void run ( ) { System . out . println ( " Throwing in " + " MyThread " ) ; throw new RuntimeException ( ) ; } } class Main { public static void main ( String [ ] args ) { MyThread t = new MyThread ( ) ; t . start ( ) ; try { Thread . sleep ( 1000 ) ; } catch ( Exception x ) { System . out . println ( " Caught it " + x ) ; } System . out . println ( " Exiting main " ) ; } } 
+
+以上代码运行输出结果为： 
+
+Throwing in MyThread
+Exception in thread "Thread-0" java.lang.RuntimeException
+ at testapp.MyThread.run(Main.java:19)
+Exiting main 
+
+AI 思考中... 
+
+Java 实例 – 获取异常的堆栈信息 
+
+Java 实例 – 自定义异常

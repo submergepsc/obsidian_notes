@@ -1,0 +1,65 @@
+URL: https://www.runoob.com/tags/att-global-dir.html
+Title: HTML dir 属性 | 菜鸟教程
+
+HTML dir 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML data-* 属性 
+
+HTML draggable 属性 
+
+HTML dir 属性 
+
+实例 
+
+文本方向为从右向左的段落： 
+
+< bdo dir = " rtl " > 文本方向从右到左! </ bdo > 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 dir 属性 
+
+定义和用法 
+
+dir 属性规定元素内容的文本方向。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+在 HTML5 中, dir 属性可用于任何的 HTML 元素 (它会验证任何HTML元素。但不一定是有用)。 
+
+在 HTML 4.01 中, dir 元素不能用于: 
+<base>, <br>, <frame>, <frameset>, <hr>, <iframe>, <param>, 和 <script>。 
+
+语法 
+
+< element dir="ltr|rtl|auto"> 
+
+属性值 
+
+值 
+
+描述 
+
+ltr 
+
+默认。从左向右的文本方向。 
+
+rtl 
+
+从右向左的文本方向。 
+
+auto 
+
+让浏览器根据内容来判断文本方向。仅在文本方向未知时推荐使用。 
+
+AI 思考中... 
+
+HTML data-* 属性 
+
+HTML draggable 属性

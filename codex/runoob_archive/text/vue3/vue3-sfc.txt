@@ -1,0 +1,180 @@
+URL: https://www.runoob.com/vue3/vue3-sfc.html
+Title: Vue3 创建单文件组件(SFC) | 菜鸟教程
+
+Vue3 创建单文件组件(SFC) | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Vue3 教程 
+
+Vue3 指令 
+
+Vue3 基础语法 
+
+Vue3 创建单文件组件(SFC) 
+
+Vue 的单文件组件 (即 *.vue 文件，英文 Single-File Component，简称 SFC) 是一种特殊的文件格式，使我们能够将一个 Vue 组件的模板、逻辑与样式封装在单个文件中。 
+
+在 Vue3 中，你可以使用 .vue 文件来创建单文件组件(Single File Components, SFCs)，这个文件包含了组件的模板、JavaScript 代码以及 CSS 样式。 
+
+现在我们将删除通过 npm init vue@latest 命令创建的实例项目中的所有内容（参考 Vue3 安装 ），以便在 Vue 中创建自己的简单网页。 
+
+在我们开始编写代码之前，删除 <template>、<script> 和 <style> 标签内的所有内容，以及任何像 setup 或 scoped 这样的属性。 
+
+您的 App.vue 文件现在应该如下所示： 
+
+App.vue 文件： 
+
+< script >< / script > 
+
+<template>< / template> 
+
+< style >< / style > 
+
+同时我们可以先清空 src 目录中的文件夹 assets 和 components ，里面的文件我们可以后期自己添加补充 。 
+
+main.js 文件代码修改为如下代码： 
+
+main.js 文件代码： 
+
+import { createApp } from 'vue' 
+
+import App from './App.vue' 
+
+createApp ( App ) . mount ( '#app' ) 
+
+现在我们就创建了一个简单的项目，在 App.vue 文件写入以下代码： 
+
+App.vue 文件代码： 
+
+<template> 
+
+< div > 
+
+< h1 > {{ message }} < / h1 > 
+
+< / div > 
+
+< / template> 
+
+< script > 
+
+export default { 
+
+data() { 
+
+return { 
+
+message: 'Hello, RUNOOB!' 
+
+} 
+
+} 
+
+} 
+
+< / script > 
+
+< style > 
+
+h1 { 
+
+color: blue; 
+
+} 
+
+< / style > 
+
+以上实例中我们定义了一个包含一个标题的简单组件。组件的模板包含一个 <h1> 元素，使用了 Vue3 的模板语法将 message 属性绑定到了这个元素的文本内容中。 
+
+JavaScript 部分包含了一个 data 函数，返回了一个包含了 message 属性的对象，我们将这个属性绑定到了模板中。 
+
+最后，CSS 样式定义了标题的颜色为蓝色。 
+
+在组件的 JavaScript 部分，我们使用了新的 export default 语法，这个语法可以让我们将组件定义导出为一个默认的对象。在 Vue3 中，我们可以使用这个语法来定义组件，而不必像 Vue2 那样使用 Vue.component 函数。 
+
+访问 http://localhost:5173/ ，以上代码执行结果为： 
+
+使用组件 
+
+当我们定义好了一个组件之后，我们可以在其他组件中使用这个组件。 
+
+使用组件，我们需要先创建组件，比如以下实例在 ./src/components/ 目录下创建 HelloRunoob.vue 组件文件，代码如下： 
+
+./src/components/HelloRunoob.vue 文件代码： 
+
+<template> 
+
+< div > 
+
+< h1 > {{ message }} < / h1 > 
+
+< / div > 
+
+< / template> 
+
+< script > 
+
+export default { 
+
+data() { 
+
+return { 
+
+message: 'Hello, Runoob!' 
+
+} 
+
+} 
+
+} 
+
+< / script > 
+
+< style > 
+
+h1 { 
+
+color: red; 
+
+} 
+
+< / style > 
+
+然后我们在 ./src/main.js 文件中引入并定义该组件： 
+
+./src/main.js 文件代码： 
+
+import { createApp } from 'vue' 
+
+import App from './App.vue' 
+
+import HelloRunoob from './components/HelloRunoob.vue' 
+
+const app = createApp ( App ) 
+
+app. component ( 'hello-runoob' , HelloRunoob ) // 自定义标签 
+
+app. mount ( '#app' ) 
+
+在父组件的模板中，我们可以使用自定义标签的方式来引入子组件，就像以下 App.vue 文件代码： 
+
+App.vue 文件代码 
+
+<template> 
+
+< div > 
+
+<hello-runoob>< / hello-runoob> 
+
+< / div > 
+
+< / template> 
+
+访问 http://localhost:5173/ ，以上代码执行结果为： 
+
+AI 思考中... 
+
+Vue3 指令 
+
+Vue3 基础语法

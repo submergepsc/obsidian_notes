@@ -1,0 +1,132 @@
+URL: https://www.runoob.com/python3/python3-func-frozenset.html
+Title: Python frozenset() 函数 | 菜鸟教程
+
+Python frozenset() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python eval() 函数 
+
+Python memoryview() 函数 
+
+Python frozenset() 函数 
+
+frozenset() 是 Python 中用于创建不可变集合（frozenset）的内置函数。 
+
+frozenset 与 set 的区别在于：frozenset 是不可变的，创建后不能添加、删除或修改元素。由于其不可变性，frozenset 可以用作字典的键或集合的元素。 
+
+单词释义 ： frozenset 是"冻结集合"的缩写，表示不可变的集合。 
+
+基本语法与参数 
+
+语法格式 
+
+frozenset(iterable) 
+
+参数说明 
+
+参数 iterable ： 
+
+类型： 可迭代对象 
+
+描述： 要转换为不可变集合的可迭代对象。 
+
+函数说明 
+
+返回值 ： 返回一个 frozenset 对象。 
+
+特殊值 ： 不带参数返回空 frozenset。 
+
+实例 
+
+示例 1：创建 frozenset 
+
+实例 
+
+# 从列表创建 
+
+lst = [ 1 , 2 , 3 , 2 , 1 ] 
+
+fs = frozenset ( lst ) 
+
+print ( fs ) # 输出: frozenset({1, 2, 3}) 
+
+# 从字符串创建 
+
+s = "hello" 
+
+fs = frozenset ( s ) 
+
+print ( fs ) # 输出: frozenset({'h', 'e', 'l', 'o'}) 
+
+# 从字典创建（取键） 
+
+d = { "a" : 1 , "b" : 2 } 
+
+fs = frozenset ( d ) 
+
+print ( fs ) # 输出: frozenset({'a', 'b'}) 
+
+# 空 frozenset 
+
+fs = frozenset ( ) 
+
+print ( fs ) # 输出: frozenset() 
+
+运行结果预期: 
+
+frozenset({1, 2, 3})
+frozenset({'h', 'e', 'l', 'o'})
+frozenset({'a', 'b'})
+frozenset() 
+
+代码解析: 
+
+frozenset 会自动去重。 
+
+可以和各种可迭代对象一起使用。 
+
+frozenset 是不可变的，没有 add、remove 等方法。 
+
+示例 2：frozenset 的用途 
+
+实例 
+
+# frozenset 可以作为字典的键 
+
+d = { frozenset ( [ 1 , 2 ] ) : "A" , frozenset ( [ 3 , 4 ] ) : "B" } 
+
+print ( d ) # 输出: {frozenset({1, 2}): 'A', frozenset({3, 4}): 'B'} 
+
+# frozenset 可以作为集合的元素 
+
+s = { frozenset ( [ 1 , 2 ] ) , frozenset ( [ 3 , 4 ] ) } 
+
+print ( s ) # 输出: {frozenset({1, 2}), frozenset({3, 4})} 
+
+# frozenset 支持集合运算（但不修改原集合） 
+
+fs1 = frozenset ( [ 1 , 2 , 3 ] ) 
+
+fs2 = frozenset ( [ 2 , 3 , 4 ] ) 
+
+print ( fs1 & fs2 ) # 输出: frozenset({2, 3}) 交集 
+
+print ( fs1 | fs2 ) # 输出: frozenset({1, 2, 3, 4}) 并集 
+
+运行结果预期: 
+
+{frozenset({1, 2}): 'A', frozenset({3, 4}): 'B'}
+{frozenset({1, 2}), frozenset({3, 4})}
+frozenset({2, 3})
+frozenset({1, 2, 3, 4}) 
+
+frozenset 的主要用途是作为字典的键或集合的元素。 
+
+AI 思考中... 
+
+Python eval() 函数 
+
+Python memoryview() 函数

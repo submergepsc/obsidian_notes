@@ -1,0 +1,53 @@
+URL: https://www.runoob.com/ionic/ionic-toggle.html
+Title: ionic toggle(切换开关) | 菜鸟教程
+
+ionic toggle(切换开关) | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+ionic 教程 
+
+ionic 表单和输入框 
+
+ionic checkbox 
+
+ionic Toggle(切换开关) 
+
+切换开关类似与 HTML 的 checkbox 标签，但它更易于在移动设备上使用。 
+
+切换开关可以使用 toggle-assertive 来指定颜色。 
+
+<label class="toggle">
+ <input type="checkbox">
+ <div class="track">
+ <div class="handle"></div>
+ </div>
+</label> 
+
+该实例有是多个切换开关列表。注意，每个选项的 item 类后需要添加 item-toggle 类。 
+
+<ul class="list">
+
+ <li class="item item-toggle">
+ HTML5
+ <label class="toggle toggle-assertive">
+ <input type="checkbox">
+ <div class="track">
+ <div class="handle"></div>
+ </div>
+ </label>
+ </li>
+
+ ...
+
+</ul> 
+
+尝试一下 » 
+
+运行效果如下： 
+
+AI 思考中... 
+
+ionic 表单和输入框 
+
+ionic checkbox

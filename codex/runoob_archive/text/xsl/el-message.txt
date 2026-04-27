@@ -1,0 +1,79 @@
+URL: https://www.runoob.com/xsl/el-message.html
+Title: XSLT <xsl:message> 元素 | 菜鸟教程
+
+XSLT <xsl:message> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:key> 元素 
+
+XSLT <xsl:namespace-alias> 元素 
+
+XSLT <xsl:message> 元素 
+
+定义和用法 
+
+<xsl:message> 元素向输出写一条消息。该元素主要用于报告错误。 
+
+该元素能够包含几乎任何其他的 XSL 元素（<xsl:text> 、<xsl:value-of> 等等）。 
+
+terminate 属性允许您选择在错误发生时，是退出处理还是继续处理。 
+
+语法 
+
+<xsl:message terminate="yes|no"> 
+
+<!-- Content:template --> 
+
+</xsl:message> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+terminate 
+
+yes 
+no 
+
+可选。"yes"：在消息写入输出后，终止处理。"no"：在消息写入输出后，继续进行处理。默认是 "no"。 
+
+实例 1 
+
+检测 artist 是否是空字符串。如果是，则退出 XSL 处理器，并显示一条消息： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<xsl:for-each select="catalog/cd"> 
+<p>Title: <xsl:value-of select="title"/><br /> 
+Artist: 
+<xsl:if test="artist=''"> 
+<xsl:message terminate="yes"> 
+Error: Artist is an empty string! 
+</xsl:message> 
+</xsl:if> 
+<xsl:value-of select="artist"/> 
+</p> 
+</xsl:for-each> 
+</body> 
+</html> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+AI 思考中... 
+
+XSLT <xsl:key> 元素 
+
+XSLT <xsl:namespace-alias> 元素

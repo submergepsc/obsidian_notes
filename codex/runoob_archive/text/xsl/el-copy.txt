@@ -1,0 +1,64 @@
+URL: https://www.runoob.com/xsl/el-copy.html
+Title: XSLT <xsl:copy> 元素 | 菜鸟教程
+
+XSLT <xsl:copy> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:comment> 元素 
+
+XSLT <xsl:copy-of> 元素 
+
+XSLT <xsl:copy> 元素 
+
+定义和用法 
+
+<xsl:copy> 元素可创建当前节点的一个副本。 
+
+注意： 当前节点的 Namespace 节点会被自动复制，但是当前节点的子节点和属性不会被自动复制！ 
+
+语法 
+
+<xsl:copy use-attribute-sets="name-list"> 
+
+<!-- Content:template --> 
+
+</xsl:copy> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+use-attribute-sets 
+
+name-list 
+
+可选。如果该节点是元素，则该属性是应用到输出节点的属性集列表，由空格分隔。 
+
+实例 1 
+
+把 message 节点拷贝到输出文档： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="message"> 
+<xsl:copy> 
+<xsl:apply-templates/> 
+</xsl:copy> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+AI 思考中... 
+
+XSLT <xsl:comment> 元素 
+
+XSLT <xsl:copy-of> 元素

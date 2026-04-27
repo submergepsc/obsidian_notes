@@ -1,0 +1,96 @@
+URL: https://www.runoob.com/xsl/el-key.html
+Title: XSLT <xsl:key> 元素 | 菜鸟教程
+
+XSLT <xsl:key> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:include> 元素 
+
+XSLT <xsl:message> 元素 
+
+XSLT <xsl:key> 元素 
+
+定义和用法 
+
+The <xsl:key> 元素是顶层元素（top-level element），它可声明一个命名的键（即为 XML 文档中指定的元素分配的名称和值对）。该键通过 key() 函数在样式表中使用，帮助您有效地在复杂的 XML 文档中访问分配的元素。 
+
+注意： 键不必是唯一的！ 
+
+语法 
+
+<xsl:key 
+name="name" 
+match="pattern" 
+use="expression"/> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+name 
+
+name 
+
+必需。规定键的名称。 
+
+match 
+
+pattern 
+
+必需。定义该键被应用到哪个节点。 
+
+use 
+
+expression 
+
+必需。指定要作为每个节点的键的值使用的表达式。 
+
+实例 1 
+
+假设您拥有名为 "persons.xml" 的 XML 文件： 
+
+<persons> 
+<person name="Tarzan" id="050676"/> 
+<person name="Donald" id="070754"/> 
+<person name="Dolly" id="231256"/> 
+</persons> 
+
+您可以在 XSL 文件中定义一个键，如下所示： 
+
+<xsl:key name="preg" match="person" use="@id"/> 
+
+如需找到 id="050676" 的 person，请使用这些代码（在 XSL 文件中）： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:key name="preg" match="person" use="@id"/> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<xsl:for-each select="key('preg','050676')"> 
+<p> 
+Id: <xsl:value-of select="@id"/><br /> 
+Name: <xsl:value-of select="@name"/> 
+</p> 
+</xsl:for-each> 
+</body> 
+</html> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+AI 思考中... 
+
+XSLT <xsl:include> 元素 
+
+XSLT <xsl:message> 元素

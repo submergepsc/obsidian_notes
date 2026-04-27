@@ -1,0 +1,63 @@
+URL: https://www.runoob.com/cssref/sel-invalid.html
+Title: CSS :invalid选择器 | 菜鸟教程
+
+CSS :invalid选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS :valid 选择器 
+
+CSS initial 关键字 
+
+CSS :invalid 选择器 
+
+实例 
+
+如果 input 元素中的值是非法的，设置样式为红色： 
+
+input :invalid { border: 2 px solid red ; } 
+
+尝试一下 » 
+
+定义和使用 
+
+:invalid 选择器用于在表单元素中的值是非法时设置指定样式。 
+
+注意： :invalid 选择器只作用于能指定区间值的元素，例如 input 元素中的 min 和 max 属性，及正确的 email 字段, 合法的数字字段等。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+:invalid 
+
+10.0 
+
+10.0 
+
+4.0 
+
+5.0 
+
+10.0 
+
+CSS 语法 
+
+:invalid 
+{ 
+css 声明 ; 
+} 
+
+相关页面 
+
+CSS 选择器 :valid 
+
+AI 思考中... 
+
+CSS :valid 选择器 
+
+CSS initial 关键字

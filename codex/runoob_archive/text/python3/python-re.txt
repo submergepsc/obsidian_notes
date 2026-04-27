@@ -1,0 +1,584 @@
+URL: https://www.runoob.com/python3/python-re.html
+Title: Python re 模块 | 菜鸟教程
+
+Python re 模块 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python datetime 模块 
+
+Python asyncio 模块 
+
+Python re 模块 
+
+Python 的 re 模块是用于处理正则表达式的标准库模块。 
+
+正则表达式（Regular Expression，简称 regex 或 regexp）是一种强大的工具，用于匹配、搜索和操作文本。 
+
+通过 re 模块，你可以在 Python 中使用正则表达式来处理字符串。 
+
+为什么使用 re 模块？ 
+
+在处理文本时，我们经常需要查找特定的模式或替换某些字符。例如，验证电子邮件地址、提取网页中的链接、或者格式化文本。手动编写代码来完成这些任务可能会非常繁琐，而正则表达式提供了一种简洁且高效的方式来解决这些问题。 
+
+re 模块的基本用法 
+
+1. 导入 re 模块 
+
+在使用 re 模块之前，首先需要导入它： 
+
+import re 
+
+2. 常用的 re 模块函数 
+
+2.1 re.match() 
+
+re.match() 函数用于从字符串的起始位置匹配正则表达式。如果匹配成功，返回一个匹配对象；否则返回 None 。 
+
+实例 
+
+import re 
+
+pattern = r "hello" 
+
+text = "hello world" 
+
+match = re . match ( pattern , text ) 
+
+if match: 
+
+print ( "匹配成功:" , match. group ( ) ) 
+
+else : 
+
+print ( "匹配失败" ) 
+
+输出： 
+
+匹配成功: hello 
+
+2.2 re.search() 
+
+re.search() 函数用于在字符串中搜索正则表达式的第一个匹配项。与 re.match() 不同， re.search() 不要求匹配从字符串的起始位置开始。 
+
+实例 
+
+import re 
+
+pattern = r "world" 
+
+text = "hello world" 
+
+match = re . search ( pattern , text ) 
+
+if match: 
+
+print ( "匹配成功:" , match. group ( ) ) 
+
+else : 
+
+print ( "匹配失败" ) 
+
+输出： 
+
+匹配成功: world 
+
+2.3 re.findall() 
+
+re.findall() 函数用于查找字符串中所有与正则表达式匹配的子串，并返回一个列表。 
+
+实例 
+
+import re 
+
+pattern = r " \d +" 
+
+text = "There are 3 apples and 5 oranges." 
+
+matches = re . findall ( pattern , text ) 
+
+print ( "找到的数字:" , matches ) 
+
+输出： 
+
+找到的数字: ['3', '5'] 
+
+2.4 re.sub() 
+
+re.sub() 函数用于替换字符串中与正则表达式匹配的部分。 
+
+实例 
+
+import re 
+
+pattern = r "apple" 
+
+text = "I have an apple." 
+
+new_text = re . sub ( pattern , "banana" , text ) 
+
+print ( "替换后的文本:" , new_text ) 
+
+输出： 
+
+替换后的文本: I have an banana. 
+
+正则表达式的基本语法 
+
+1. 普通字符 
+
+普通字符（如字母、数字）直接匹配它们自身。 
+
+实例 
+
+import re 
+
+pattern = r "cat" 
+
+text = "The cat is on the mat." 
+
+match = re . search ( pattern , text ) 
+
+if match: 
+
+print ( "匹配成功:" , match. group ( ) ) 
+
+输出： 
+
+匹配成功: cat 
+
+2. 特殊字符 
+
+正则表达式中有一些特殊字符，它们具有特殊的含义。例如： 
+
+. ：匹配任意单个字符（除了换行符）。 
+
+* ：匹配前面的字符零次或多次。 
+
++ ：匹配前面的字符一次或多次。 
+
+? ：匹配前面的字符零次或一次。 
+
+\d ：匹配任意数字字符（等价于 [0-9] ）。 
+
+\w ：匹配任意字母、数字或下划线字符（等价于 [a-zA-Z0-9_] ）。 
+
+实例 
+
+import re 
+
+pattern = r " \d +" 
+
+text = "The price is 100 dollars." 
+
+match = re . search ( pattern , text ) 
+
+if match: 
+
+print ( "匹配成功:" , match. group ( ) ) 
+
+输出： 
+
+匹配成功: 100 
+
+3. 字符集 
+
+字符集用于匹配一组字符中的任意一个。例如， [abc] 匹配 a 、 b 或 c 。 
+
+实例 
+
+import re 
+
+pattern = r "[aeiou]" 
+
+text = "Hello World!" 
+
+matches = re . findall ( pattern , text ) 
+
+print ( "找到的元音字母:" , matches ) 
+
+输出： 
+
+找到的元音字母: ['e', 'o', 'o'] 
+
+4. 分组 
+
+分组允许你将多个字符组合在一起，并对它们进行操作。例如， (abc) 匹配 abc 。 
+
+实例 
+
+import re 
+
+pattern = r "(ab)+" 
+
+text = "ababab" 
+
+match = re . search ( pattern , text ) 
+
+if match: 
+
+print ( "匹配成功:" , match. group ( ) ) 
+
+输出： 
+
+匹配成功: ababab 
+
+实践练习 
+
+练习 1：验证电子邮件地址 
+
+编写一个正则表达式，用于验证电子邮件地址的格式。 
+
+实例 
+
+import re 
+
+pattern = r "^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+ \. [a-zA-Z0-9-.]+$" 
+
+email = " [email protected] " 
+
+if re . match ( pattern , email ) : 
+
+print ( "有效的电子邮件地址" ) 
+
+else : 
+
+print ( "无效的电子邮件地址" ) 
+
+练习 2：提取电话号码 
+
+编写一个正则表达式，从文本中提取电话号码。 
+
+实例 
+
+import re 
+
+pattern = r " \d {3}- \d {3}- \d {4}" 
+
+text = "My phone number is 123-456-7890." 
+
+match = re . search ( pattern , text ) 
+
+if match: 
+
+print ( "找到的电话号码:" , match. group ( ) ) 
+
+1. 核心函数 
+
+方法 
+
+说明 
+
+示例 
+
+re.compile(pattern) 
+
+预编译正则表达式（提升复用性能） 
+
+pat = re.compile(r'\d+') 
+
+re.search(pattern, string) 
+
+搜索字符串中第一个匹配项 
+
+re.search(r'\d+', 'a1b2') → 匹配 '1' 
+
+re.match(pattern, string) 
+
+从字符串起始位置匹配 
+
+re.match(r'\d+', '123a') → 匹配 '123' 
+
+re.fullmatch(pattern, string) 
+
+整个字符串完全匹配 
+
+re.fullmatch(r'\d+', '123') → 匹配 '123' 
+
+re.findall(pattern, string) 
+
+返回所有非重叠匹配的列表 
+
+re.findall(r'\d+', 'a1b22c') → ['1', '22'] 
+
+re.finditer(pattern, string) 
+
+返回所有匹配的迭代器（含位置信息） 
+
+for m in re.finditer(r'\d+', 'a1b2'): print(m.group()) 
+
+re.sub(pattern, repl, string) 
+
+替换匹配项 
+
+re.sub(r'\d+', 'X', 'a1b2') → 'aXbX' 
+
+re.split(pattern, string) 
+
+按匹配项分割字符串 
+
+re.split(r'\d+', 'a1b2c') → ['a', 'b', 'c'] 
+
+re.escape() 
+
+转义特殊字符 
+
+re.escape("C:\\Users\\test.txt") 
+
+re.purge() 
+
+清除缓存 
+
+re.purge() 
+
+2. 匹配对象（ Match ）方法/属性 
+
+方法/属性 
+
+说明 
+
+示例 
+
+group() 
+
+返回整个匹配的字符串 
+
+m.group() → 'abc' 
+
+group(n) 
+
+返回第n个捕获组的内容 
+
+m = re.search(r'(\d)(\d)', '12'); m.group(1) → '1' 
+
+groups() 
+
+返回所有捕获组的元组 
+
+m.groups() → ('1', '2') 
+
+start() / end() 
+
+匹配的起始/结束位置 
+
+m.start() → 0 
+
+span() 
+
+返回匹配范围 (start, end) 
+
+m.span() → (0, 2) 
+
+3. 正则表达式元字符（部分） 
+
+元字符 
+
+说明 
+
+示例匹配 
+
+. 
+
+匹配任意字符（除换行符） 
+
+a.c → 'abc' 
+
+\d 
+
+匹配数字 
+
+\d+ → '123' 
+
+\D 
+
+匹配非数字 
+
+\D+ → 'abc' 
+
+\w 
+
+匹配单词字符（字母、数字、下划线） 
+
+\w+ → 'Ab_1' 
+
+\W 
+
+匹配非单词字符 
+
+\W+ → '!@#' 
+
+\s 
+
+匹配空白字符（空格、制表符等） 
+
+\s+ → ' \t' 
+
+\S 
+
+匹配非空白字符 
+
+\S+ → 'abc' 
+
+[] 
+
+字符集合 
+
+[A-Za-z] → 任意字母 
+
+^ 
+
+匹配字符串开头 
+
+^\d+ → 开头的数字 
+
+$ 
+
+匹配字符串结尾 
+
+\d+$ → 结尾的数字 
+
+* 
+
+匹配前一个字符0次或多次 
+
+a* → '' , 'aaa' 
+
++ 
+
+匹配前一个字符1次或多次 
+
+a+ → 'a' , 'aaa' 
+
+? 
+
+匹配前一个字符0次或1次 
+
+a? → '' , 'a' 
+
+{m,n} 
+
+匹配前一个字符m到n次 
+
+a{2,3} → 'aa' , 'aaa' 
+
+| 
+
+或操作 
+
+cat|dog → 'cat' 或 'dog' 
+
+() 
+
+捕获分组 
+
+(\d+) → 提取数字 
+
+4. 编译标志（ flags 参数） 
+
+标志 
+
+说明 
+
+示例 
+
+re.IGNORECASE ( re.I ) 
+
+忽略大小写 
+
+re.search(r'abc', 'ABC', re.I) 
+
+re.MULTILINE ( re.M ) 
+
+多行模式（影响 ^ 和 $ ） 
+
+re.findall(r'^\d+', '1\n2', re.M) → ['1', '2'] 
+
+re.DOTALL ( re.S ) 
+
+让 . 匹配包括换行符的所有字符 
+
+re.search(r'a.*b', 'a\nb', re.S) 
+
+re.ASCII 
+
+让 \w , \W 等仅匹配ASCII字符 
+
+re.search(r'\w+', 'こん', re.ASCII) → 无匹配 
+
+re.VERBOSE ( re.X ) 
+
+允许正则中添加注释和空格 
+
+re.compile(r'''\d+ # 匹配数字''', re.X) 
+
+实例 
+
+1. 提取邮箱地址 
+
+实例 
+
+import re 
+
+text = "Contact: [email protected] , [email protected] " 
+
+emails = re . findall ( r ' \b [A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+ \. [A-Z|a-z]{2,} \b ' , text ) 
+
+print ( emails ) # 输出: [' [email protected] ', ' [email protected] '] 
+
+2. 替换日期格式 
+
+实例 
+
+date_str = "Today is 05-15-2023" 
+
+new_str = re . sub ( r '( \d {2})-( \d {2})-( \d {4})' , r ' \3 年 \1 月 \2 日' , date_str ) 
+
+print ( new_str ) # 输出: "Today is 2023年05月15日" 
+
+3. 多条件匹配 
+
+实例 
+
+pattern = re . compile ( r ''' 
+
+^(?P<username> \w +) # 用户名 
+
+:(?P<password> \S +) # 密码 
+
+@(?P<domain> \w + \. \w +) # 域名 
+
+$''' , re . VERBOSE ) 
+
+m = pattern. match ( "john: [email protected] " ) 
+
+if m: 
+
+print ( m. groupdict ( ) ) # 输出: {'username': 'john', 'password': 'pass123', 'domain': 'example.com'} 
+
+4. 分割复杂字符串 
+
+实例 
+
+text = "Apple1Banana2Cherry3Date" 
+
+parts = re . split ( r ' \d +' , text ) 
+
+print ( parts ) # 输出: ['Apple', 'Banana', 'Cherry', 'Date'] 
+
+注意事项 
+
+原始字符串 ：建议正则表达式使用原始字符串（ r'\d' ），避免转义符冲突。 
+
+贪婪匹配 ：默认贪婪匹配（如 .* 会匹配到最长可能），需用 .*? 实现非贪婪匹配。 
+
+性能优化 ：频繁使用的正则应优先用 re.compile() 预编译。 
+
+回溯问题 ：复杂正则可能导致性能问题（如嵌套量词 (a+)+ ）。 
+
+AI 思考中... 
+
+Python datetime 模块 
+
+Python asyncio 模块

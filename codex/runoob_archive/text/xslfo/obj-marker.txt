@@ -1,0 +1,46 @@
+URL: https://www.runoob.com/xslfo/obj-marker.html
+Title: XSL-FO marker 对象 | 菜鸟教程
+
+XSL-FO marker 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO list-item-label 对象 
+
+XSL-FO multi-case 对象 
+
+XSL-FO marker 对象 
+
+定义和用法 
+
+<fo:marker> 对象与 <fo:retrieve-marker> 一起使用来创建运行的页眉或页脚（举例：让页眉展示页面的章节以及区域标题）。 
+
+注意： <fo:marker> 对象仅被允许用作 <fo:flow> 对象的子类。 
+
+语法 
+
+<fo:marker> 
+<!-- 
+Contents:(#PCDATA|bidi-override| 
+character|external-graphic| 
+instream-foreign-object|inline| 
+inline-container|leader|page-number| 
+page-number-citation|basic-link| 
+multi-toggle|block|block-container| 
+table-and-caption|table|list-block)* 
+--> 
+</fo:marker> 
+
+属性 
+
+属性 
+
+marker-class-name 
+
+AI 思考中... 
+
+XSL-FO list-item-label 对象 
+
+XSL-FO multi-case 对象

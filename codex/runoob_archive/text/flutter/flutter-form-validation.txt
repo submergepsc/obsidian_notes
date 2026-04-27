@@ -1,0 +1,518 @@
+URL: https://www.runoob.com/flutter/flutter-form-validation.html
+Title: Flutter 表单与验证 | 菜鸟教程
+
+Flutter 表单与验证 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Flutter 教程 
+
+Flutter 导航与路由 
+
+Flutter 主题与样式 
+
+Flutter 表单与验证 
+
+本节将介绍 Flutter 中表单的创建、验证和提交处理。 
+
+TextFormField - 表单输入 
+
+TextFormField 是专门用于表单的 TextField，支持内置验证功能。 
+
+实例：基本表单 
+
+class LoginForm extends StatefulWidget { 
+
+const LoginForm ( { super . key } ) ; 
+
+@override 
+
+State < LoginForm > createState ( ) => _LoginFormState ( ) ; 
+
+} 
+
+class _LoginFormState extends State < LoginForm > { 
+
+// 表单键（用于验证） 
+
+final _formKey = GlobalKey < FormState > ( ) ; 
+
+// 输入控制器 
+
+final _usernameController = TextEditingController ( ) ; 
+
+final _passwordController = TextEditingController ( ) ; 
+
+@override 
+
+void dispose ( ) { 
+
+_usernameController. dispose ( ) ; 
+
+_passwordController. dispose ( ) ; 
+
+super . dispose ( ) ; 
+
+} 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Form ( 
+
+key : _formKey , 
+
+child : Column ( 
+
+children : [ 
+
+// 用户名输入 
+
+TextFormField ( 
+
+controller : _usernameController , 
+
+decoration : const InputDecoration ( 
+
+labelText : '用户名' , 
+
+prefixIcon : Icon ( Icons. person ) , 
+
+) , 
+
+// 验证器 
+
+validator : ( value ) { 
+
+if ( value == null || value. isEmpty ) { 
+
+return '请输入用户名' ; 
+
+} 
+
+if ( value. length < 3 ) { 
+
+return '用户名至少3个字符' ; 
+
+} 
+
+return null ; 
+
+} , 
+
+) , 
+
+const SizedBox ( height : 16 ) , 
+
+// 密码输入 
+
+TextFormField ( 
+
+controller : _passwordController , 
+
+obscureText : true , // 隐藏密码 
+
+decoration : const InputDecoration ( 
+
+labelText : '密码' , 
+
+prefixIcon : Icon ( Icons. lock ) , 
+
+) , 
+
+validator : ( value ) { 
+
+if ( value == null || value. isEmpty ) { 
+
+return '请输入密码' ; 
+
+} 
+
+if ( value. length < 6 ) { 
+
+return '密码至少6个字符' ; 
+
+} 
+
+return null ; 
+
+} , 
+
+) , 
+
+const SizedBox ( height : 24 ) , 
+
+// 提交按钮 
+
+ElevatedButton ( 
+
+onPressed : _submit , 
+
+child : const Text ( '登录' ) , 
+
+) , 
+
+] , 
+
+) , 
+
+) ; 
+
+} 
+
+void _submit ( ) { 
+
+// 验证表单 
+
+if ( _formKey. currentState ? . validate ( ) ?? false ) { 
+
+// 验证通过 
+
+print ( '用户名: ${_usernameController.text}' ) ; 
+
+print ( '密码: ${_passwordController.text}' ) ; 
+
+// 提交到服务器... 
+
+} else { 
+
+// 验证失败 
+
+print ( '表单验证失败' ) ; 
+
+} 
+
+} 
+
+} 
+
+常用验证器 
+
+实例：常用验证规则 
+
+// 验证用户名 
+
+String ? validateUsername ( String ? value ) { 
+
+if ( value == null || value. isEmpty ) { 
+
+return '请输入用户名' ; 
+
+} 
+
+if ( ! RegExp ( r '^[a-zA-Z0-9_]+$' ) . hasMatch ( value ) ) { 
+
+return '只能包含字母、数字和下划线' ; 
+
+} 
+
+return null ; 
+
+} 
+
+// 验证邮箱 
+
+String ? validateEmail ( String ? value ) { 
+
+if ( value == null || value. isEmpty ) { 
+
+return '请输入邮箱' ; 
+
+} 
+
+final emailRegex = RegExp ( r '^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$' ) ; 
+
+if ( ! emailRegex. hasMatch ( value ) ) { 
+
+return '请输入有效的邮箱地址' ; 
+
+} 
+
+return null ; 
+
+} 
+
+// 验证密码强度 
+
+String ? validatePassword ( String ? value ) { 
+
+if ( value == null || value. isEmpty ) { 
+
+return '请输入密码' ; 
+
+} 
+
+if ( value. length < 8 ) { 
+
+return '密码至少8个字符' ; 
+
+} 
+
+if ( ! RegExp ( r '[A-Z]' ) . hasMatch ( value ) ) { 
+
+return '密码至少包含一个大写字母' ; 
+
+} 
+
+if ( ! RegExp ( r '[0-9]' ) . hasMatch ( value ) ) { 
+
+return '密码至少包含一个数字' ; 
+
+} 
+
+return null ; 
+
+} 
+
+// 验证手机号 
+
+String ? validatePhone ( String ? value ) { 
+
+if ( value == null || value. isEmpty ) { 
+
+return '请输入手机号' ; 
+
+} 
+
+final phoneRegex = RegExp ( r '^1[3-9]\d{9}$' ) ; 
+
+if ( ! phoneRegex. hasMatch ( value ) ) { 
+
+return '请输入有效的手机号' ; 
+
+} 
+
+return null ; 
+
+} 
+
+// 验证两次密码一致 
+
+String ? validateConfirmPassword ( String ? value , String password ) { 
+
+if ( value == null || value. isEmpty ) { 
+
+return '请确认密码' ; 
+
+} 
+
+if ( value != password ) { 
+
+return '两次密码不一致' ; 
+
+} 
+
+return null ; 
+
+} 
+
+复杂表单示例 
+
+实例：注册表单 
+
+class RegisterForm extends StatefulWidget { 
+
+const RegisterForm ( { super . key } ) ; 
+
+@override 
+
+State < RegisterForm > createState ( ) => _RegisterFormState ( ) ; 
+
+} 
+
+class _RegisterFormState extends State < RegisterForm > { 
+
+final _formKey = GlobalKey < FormState > ( ) ; 
+
+final _usernameController = TextEditingController ( ) ; 
+
+final _emailController = TextEditingController ( ) ; 
+
+final _phoneController = TextEditingController ( ) ; 
+
+final _passwordController = TextEditingController ( ) ; 
+
+final _confirmPasswordController = TextEditingController ( ) ; 
+
+bool _acceptTerms = false ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Form ( 
+
+key : _formKey , 
+
+child : ListView ( 
+
+padding : const EdgeInsets. all ( 16 ) , 
+
+children : [ 
+
+// 用户名 
+
+TextFormField ( 
+
+controller : _usernameController , 
+
+decoration : const InputDecoration ( labelText : '用户名' ) , 
+
+validator : validateUsername , 
+
+) , 
+
+const SizedBox ( height : 16 ) , 
+
+// 邮箱 
+
+TextFormField ( 
+
+controller : _emailController , 
+
+keyboardType : TextInputType. emailAddress , 
+
+decoration : const InputDecoration ( labelText : '邮箱' ) , 
+
+validator : validateEmail , 
+
+) , 
+
+const SizedBox ( height : 16 ) , 
+
+// 手机号 
+
+TextFormField ( 
+
+controller : _phoneController , 
+
+keyboardType : TextInputType. phone , 
+
+decoration : const InputDecoration ( labelText : '手机号' ) , 
+
+validator : validatePhone , 
+
+) , 
+
+const SizedBox ( height : 16 ) , 
+
+// 密码 
+
+TextFormField ( 
+
+controller : _passwordController , 
+
+obscureText : true , 
+
+decoration : const InputDecoration ( labelText : '密码' ) , 
+
+validator : validatePassword , 
+
+) , 
+
+const SizedBox ( height : 16 ) , 
+
+// 确认密码 
+
+TextFormField ( 
+
+controller : _confirmPasswordController , 
+
+obscureText : true , 
+
+decoration : const InputDecoration ( labelText : '确认密码' ) , 
+
+validator : ( value ) => validateConfirmPassword ( 
+
+value , 
+
+_passwordController. text , 
+
+) , 
+
+) , 
+
+const SizedBox ( height : 16 ) , 
+
+// 同意条款 
+
+CheckboxListTile ( 
+
+value : _acceptTerms , 
+
+onChanged : ( value ) { 
+
+setState ( ( ) { 
+
+_acceptTerms = value ?? false ; 
+
+} ) ; 
+
+} , 
+
+title : const Text ( '我同意服务条款' ) , 
+
+controlAffinity : ListTileControlAffinity. leading , 
+
+) , 
+
+const SizedBox ( height : 24 ) , 
+
+// 提交按钮 
+
+ElevatedButton ( 
+
+onPressed : _acceptTerms ? _submit : null , 
+
+child : const Text ( '注册' ) , 
+
+) , 
+
+] , 
+
+) , 
+
+) ; 
+
+} 
+
+void _submit ( ) { 
+
+if ( _formKey. currentState ? . validate ( ) ?? false ) { 
+
+// 提交表单 
+
+print ( '注册成功！' ) ; 
+
+} 
+
+} 
+
+@override 
+
+void dispose ( ) { 
+
+_usernameController. dispose ( ) ; 
+
+_emailController. dispose ( ) ; 
+
+_phoneController. dispose ( ) ; 
+
+_passwordController. dispose ( ) ; 
+
+_confirmPasswordController. dispose ( ) ; 
+
+super . dispose ( ) ; 
+
+} 
+
+} 
+
+表单验证应该同时在客户端（用户体验）和服务器端（安全）进行，不要仅依赖客户端验证。 
+
+AI 思考中... 
+
+Flutter 导航与路由 
+
+Flutter 主题与样式

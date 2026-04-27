@@ -1,0 +1,66 @@
+URL: https://www.runoob.com/vbscript/func-isobject.html
+Title: VBScript IsObject 函数 | 菜鸟教程
+
+VBScript IsObject 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript IsNumeric 函数 
+
+VBScript LoadPicture 函数 
+
+VBScript IsObject 函数 
+
+The IsObject 函数返回一个布尔值，指示指定的表达式是否是 automation 对象。如果表达式是 automation 对象则返回 True，否则返回 False。 
+
+语法 
+
+IsObject(expression) 
+
+参数 
+
+描述 
+
+expression 
+
+必需。一个表达式。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+Set x=document 
+document.write(IsObject(x)) 
+
+</script> 
+
+以上实例输出结果： 
+
+True 
+
+尝试一下 » 
+
+实例 2 
+
+<script type="text/vbscript"> 
+
+x="Peter" 
+document.write(IsObject(x)) 
+
+</script> 
+
+以上实例输出结果： 
+
+False 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript IsNumeric 函数 
+
+VBScript LoadPicture 函数

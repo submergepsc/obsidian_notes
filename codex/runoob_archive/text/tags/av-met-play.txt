@@ -1,0 +1,50 @@
+URL: https://www.runoob.com/tags/av-met-play.html
+Title: HTML 音频/视频 DOM play() 方法 | 菜鸟教程
+
+HTML 音频/视频 DOM play() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM load() 方法 
+
+HTML 音频/视频 DOM pause() 方法 
+
+HTML 音频/视频 DOM play() 方法 
+
+实例 
+
+带有播放和暂停按钮的一段视频： 
+
+var myVideo=document.getElementById("video1"); 
+function playVid() 
+{ 
+myVideo.play(); 
+} 
+function pauseVid() 
+{ 
+myVideo.pause(); 
+} 
+
+尝试一下 » 
+
+定义和用法 
+
+play() 方法开始播放当前的音频或视频。 
+
+浏览器支持 
+
+所有主流浏览器都支持 play() 方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持该方法。 
+
+语法 
+
+audio|video .play() 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM load() 方法 
+
+HTML 音频/视频 DOM pause() 方法

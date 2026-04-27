@@ -1,0 +1,211 @@
+URL: https://www.runoob.com/zig/zig-error.html
+Title: zig  错误处理 | 菜鸟教程
+
+zig 错误处理 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Zig 教程 
+
+Zig 结构体和枚举 
+
+Zig 内存管理 
+
+zig 错误处理 
+
+在 Zig 中处理错误是一种常见的任务，特别是在进行系统级编程时。 
+
+Zig 提供了一种灵活且显式的错误处理机制，使得开发人员能够清晰地管理和处理错误。 
+
+Zig 使用显式的错误处理机制，通过 ! 符号和 try 语句来处理错误。 
+
+错误处理在 Zig 中不像异常那样隐式，而是显式地表示在代码中，使得错误的处理更加透明和可控。 
+
+以下是一些基本的错误处理策略和技巧： 
+
+错误类型： Zig 中的错误通常被定义为 error 类型。你可以定义自己的错误类型来处理特定的错误情况。 
+
+返回错误： 函数可以返回一个 error 类型的值来表示错误。调用者需要检查返回值并相应地处理错误。 
+
+错误检查： 调用者需要检查函数返回的错误，并在发现错误时采取适当的行动。这通常涉及到使用 if 语句或 switch 语句。 
+
+错误传播： 如果一个函数接收到一个错误，它可以决定处理这个错误或将错误传播到调用者。这可以通过返回错误或抛出异常来实现。 
+
+错误处理函数： Zig 允许你定义错误处理函数，这些函数可以在程序中被调用来处理错误。 
+
+使用 try 关键字： 在 Zig 中，try 关键字用于尝试执行一个可能失败的操作，并捕获任何发生的错误。 
+
+错误代码： Zig 允许你定义错误代码来表示不同的错误情况。这可以通过 enum 或 error 类型来实现。 
+
+错误日志： 在处理错误时，记录错误日志是一种常见的做法。这可以帮助开发者了解错误发生的原因和上下文。 
+
+资源清理： 在处理错误时，确保释放或清理所有已分配的资源是很重要的。这可以通过 defer 语句来实现。 
+
+错误恢复： 在某些情况下，你可能希望在发生错误后恢复程序的执行。这可以通过重新尝试操作或回退到安全状态来实现。 
+
+错误类型 
+
+在 Zig 中，错误类型通常用 ! 符号表示，它是一个泛型类型，表示可能发生错误的值。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn mightFail ( ) ! void { 
+
+return error. SomeError ; 
+
+} 
+
+错误处理机制 
+
+1. 使用 try 语句 
+
+try 语句用于在函数调用中自动处理错误。如果函数返回一个错误，try 会使得外层函数立即返回该错误。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+// 定义可能失败的函数 
+
+pub fn mightFail ( ) ! void { 
+
+return error. SomeError ; // 返回一个示例错误 
+
+} 
+
+// 使 main 函数允许返回错误 
+
+pub fn main ( ) ! void { 
+
+// 尝试调用 mightFail 函数，如果失败，main 也会返回该错误 
+
+try mightFail ( ) ; 
+
+// 如果没有错误，继续执行 
+
+std. debug . print ( "Success! \n " , . { } ) ; 
+
+} 
+
+2. 使用 catch 语句 
+
+catch 语句用于捕获错误并提供处理逻辑。如果函数调用失败，catch 语句可以执行特定的错误处理代码。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn mightFail ( ) ! void { 
+
+return error. SomeError ; 
+
+} 
+
+pub fn main ( ) void { 
+
+// 直接处理错误，避免未使用的变量 
+
+_ = mightFail ( ) catch | err | { 
+
+std. debug . print ( "Error occurred: {} \n " , . { err } ) ; 
+
+return ; // 处理错误后退出 
+
+} ; 
+
+std. debug . print ( "Success! \n " , . { } ) ; 
+
+} 
+
+编译执行结果为： 
+
+Error occurred: error.SomeError 
+
+3. 使用 catch 捕获特定错误 
+
+catch 语句可以捕获并处理特定的错误类型，通过 catch 捕获到的错误可以进行更细致的处理。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+const Error = error { 
+
+NotFound, 
+
+PermissionDenied, 
+
+} ; 
+
+pub fn mightFail ( ) ! void { 
+
+return Error. NotFound ; // 返回一个示例错误 
+
+} 
+
+pub fn main ( ) void { 
+
+// 直接处理错误，不需要将结果存储到变量中 
+
+_ = mightFail ( ) catch | err | { 
+
+switch ( err ) { 
+
+Error. NotFound => std. debug . print ( "Not found error occurred \n " , . { } ) , 
+
+Error. PermissionDenied => std. debug . print ( "Permission denied error occurred \n " , . { } ) , 
+
+} 
+
+return ; // 处理错误后退出 
+
+} ; 
+
+std. debug . print ( "Success! \n " , . { } ) ; // 如果没有错误，继续执行 
+
+} 
+
+< h3 > 
+
+编译执行结果为： 
+
+Not found error occurred 
+
+4. 使用 defer 语句 
+
+defer 语句用于在函数退出时执行一些清理操作，无论是正常返回还是因为错误返回。它类似于其他编程语言中的 finally 语句。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn someFunction ( ) void { 
+
+defer std. debug . print ( "Cleanup code executed \n " , . { } ) ; 
+
+// Function logic 
+
+std. debug . print ( "Function logic \n " , . { } ) ; 
+
+// 可以在这里发生错误，defer 代码依然会执行 
+
+} 
+
+pub fn main ( ) void { 
+
+someFunction ( ) ; 
+
+} 
+
+编译执行结果为： 
+
+Function logic
+Cleanup code executed 
+
+AI 思考中... 
+
+Zig 结构体和枚举 
+
+Zig 内存管理

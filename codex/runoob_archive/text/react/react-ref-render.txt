@@ -1,0 +1,122 @@
+URL: https://www.runoob.com/react/react-ref-render.html
+Title: React render() 方法 | 菜鸟教程
+
+React render() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+React 教程 
+
+React getDerivedStateFromProps() 方法 
+
+React componentDidMount() 方法 
+
+React render() 方法 
+
+在 React 18 中， ReactDOM.render 方法被 ReactDOM.createRoot 和 root.render 取代。新 API 提供了更强大的功能和更好的性能。以下是对这些方法的介绍及其使用方法。 
+
+1、ReactDOM.createRoot 
+
+ReactDOM.createRoot 是 React 18 中引入的新方法，用于创建一个可以控制根组件的根对象。这个方法返回一个根对象，你可以使用它来渲染你的 React 组件树。 
+
+2、root.render 
+
+使用从 ReactDOM.createRoot 方法返回的根对象的 render 方法来渲染组件树。这种方式替代了旧的 ReactDOM.render 方法。 
+
+实例 
+
+import React from 'react' ; 
+
+import ReactDOM from 'react-dom/client' ; 
+
+import App from './App' ; // 你的主组件 
+
+// 获取根元素 
+
+const rootElement = document. getElementById ( 'root' ) ; 
+
+// 创建根 
+
+const root = ReactDOM. createRoot ( rootElement ) ; 
+
+// 渲染组件 
+
+root. render ( < App /> ) ; 
+
+假设你有一个简单的 App 组件，可以像这样使用 createRoot 来渲染它： 
+
+实例 
+
+// App.js 
+
+import React from 'react' ; 
+
+function App ( ) { 
+
+return ( 
+
+< div > 
+
+< h1 > Hello , React 18 !</ h1 > 
+
+</ div > 
+
+) ; 
+
+} 
+
+export default App ; 
+
+实例 
+
+// index.js 
+
+import React from 'react' ; 
+
+import ReactDOM from 'react-dom/client' ; 
+
+import App from './App' ; 
+
+// 获取根元素 
+
+const rootElement = document. getElementById ( 'root' ) ; 
+
+// 创建根 
+
+const root = ReactDOM. createRoot ( rootElement ) ; 
+
+// 渲染组件 
+
+root. render ( < App /> ) ; 
+
+在线测试实例 
+
+以下实例在使用 render() 方法在 id="root" 的容器中渲染 React 元素 Header ： 
+
+实例 
+
+class Header extends React . Component { render ( ) { return ( < h1 >菜鸟教程 - 学的不仅是技术，更是梦想！</ h1 > ) ; } } const root = ReactDOM . createRoot ( document . getElementById ( " root " ) ) ; root . render ( < Header />, document . getElementById ( ' root ' ) ) ; 
+
+尝试一下 » 
+
+在 React 17 及以前的版本中，你会使用 ReactDOM.render 方法来渲染组件： 
+
+实例 
+
+import React from 'react' ; 
+
+import ReactDOM from 'react-dom' ; 
+
+import App from './App' ; 
+
+ReactDOM. render ( < App />, document. getElementById ( 'root' ) ) ; 
+
+在 React 18 中，使用 createRoot 可以更好地支持并发渲染和其他新特性。 
+
+React 18 引入了并发特性，使得 React 应用在处理繁重的更新时更加高效。 
+
+AI 思考中... 
+
+React getDerivedStateFromProps() 方法 
+
+React componentDidMount() 方法

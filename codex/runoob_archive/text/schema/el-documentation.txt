@@ -1,0 +1,67 @@
+URL: https://www.runoob.com/schema/el-documentation.html
+Title: XML Schema documentation 元素 | 菜鸟教程
+
+XML Schema documentation 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema complexType 元素 
+
+XML Schema element 元素 
+
+XML Schema documentation 元素 
+
+定义和用法 
+
+documentation 元素在 schema 中输入文本注释。该元素必须位于 annotation 元素内。 
+
+元素信息 
+
+父元素： annotation 
+
+语法 
+
+<documentation 
+source=URI reference 
+xml:lang=language> 
+
+Any well-formed XML content 
+
+</documentation> 
+
+属性 
+
+描述 
+
+source 
+
+可选。规定应用程序信息的来源。 
+
+xml:lang 
+
+可选。规定内容中使用的语言。 
+
+实例 1 
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+
+<xs:annotation> 
+<xs:appinfo>RUNOOB Note</xs:appinfo> 
+<xs:documentation xml:lang="en"> 
+This Schema defines a RUNOOB note! 
+</xs:documentation> 
+</xs:annotation> 
+
+. 
+. 
+. 
+
+</xs:schema> 
+
+AI 思考中... 
+
+XML Schema complexType 元素 
+
+XML Schema element 元素

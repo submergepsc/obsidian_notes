@@ -1,0 +1,252 @@
+URL: https://www.runoob.com/xslfo/xslfo-reference.html
+Title: XSL-FO 参考手册 | 菜鸟教程
+
+XSL-FO 参考手册 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO wrapper 对象 
+
+XSL-FO azimuth 属性 
+
+XSL-FO 参考手册 
+
+XSL 格式化对象参考手册 
+
+将描述转换为呈现的过程被称为格式化（formatting）。 
+
+对象 
+
+描述 
+
+basic-link 
+
+代表一个链接的起始资源。 
+
+bidi-override 
+
+重写默认 Unicode BIDI 的方向。 
+
+block 
+
+定义一个输出块（比如段落和标题）。 
+
+block-container 
+
+定义一个块级的引用区域（reference-area）。 
+
+character 
+
+规定将被映射为供呈现的字形的字符。 
+
+color-profile 
+
+定义样式表的一个颜色配置文件。 
+
+conditional-page-master-reference 
+
+规定一个当所定义的条件成立时使用的 page-master。 
+
+declarations 
+
+组合一个样式表的全局声明。 
+
+external-graphic 
+
+用于图像数据位于 XML 结果树之外的某个图形。 
+
+float 
+
+通常用于在页面起始处的一个单独区域里定位图像，或者通过将内容沿图像的一侧流动来定位图像到一侧。 
+
+flow 
+
+包含要打印到页面的所有元素。 
+
+footnote 
+
+定义在页面的 region-body 内部的一个脚注。 
+
+footnote-body 
+
+定义脚注的内容。 
+
+initial-property-set 
+
+格式化 <fo:block> 的第一行。 
+
+inline 
+
+通过背景属性或将其嵌入一个边框来定义文本的一部分格式。 
+
+inline-container 
+
+定义一个内联参考域（reference-area）。 
+
+instream-foreign-object 
+
+用于内联图形或 "generic" 类对象。在其中，对象的数据以 <fo:instream-foreign-object> 的后代形式存在。 
+
+layout-master-set 
+
+保存所有在文档中使用的宿主（master）。 
+
+leader 
+
+用于生成 "." 符号来分隔内容表格中页面数字的标题，或创建表单中的输入字段，或创建水平规则。 
+
+list-block 
+
+定义列表。 
+
+list-item 
+
+包含列表中的每个项。 
+
+list-item-body 
+
+包含了 list-item 的内容/主体。 
+
+list-item-label 
+
+包含了 list-item 标签（通常是数字、字符等）。 
+
+marker 
+
+与 <fo:retrieve-marker> 一起使用来创建运行的页眉或页脚。 
+
+multi-case 
+
+包含 XSL-FO 对象的每个供选择的子树（在 <fo:multi-switch> 内部）。父元素 <fo:multi-switch> 会选择要显示的那个选项并隐藏其余的选项。 
+
+multi-properties 
+
+用于两个或多个属性集之间切换。 
+
+multi-property-set 
+
+规定一个根据用户代理状态进行应用的可选的属性集。 
+
+multi-switch 
+
+保留一个或多个 <fo:multi-case> 对象，控制它们（由 <fo:multi-toggle> 触发）彼此之间的转换。 
+
+multi-toggle 
+
+用于切换到另一个 <fo:multi-case>。 
+
+page-number 
+
+表示当前页码。 
+
+page-number-citation 
+
+为页面引用页码，此页面包含由被引用对象返回的第一个正常区域。 
+
+page-sequence 
+
+页面输出元素的容器。每个页面布局将有一个 <fo:page-sequence> 对象。 
+
+page-sequence-master 
+
+规定要使用的 simple-page-masters 以及使用顺序。 
+
+region-after 
+
+定义页脚。 
+
+region-before 
+
+定义页眉。 
+
+region-body 
+
+定义页面主题。 
+
+region-end 
+
+定义页面的右侧栏。 
+
+region-start 
+
+定义页面的左侧栏。 
+
+repeatable-page-master-alternatives 
+
+规定一组 simple-page-master 的副本。 
+
+repeatable-page-master-reference 
+
+规定单个 simple-page-master 的副本。 
+
+retrieve-marker 
+
+与 <fo:marker> 一起使用来创建运行的页眉或页脚。 
+
+root 
+
+XSL-FO 文档的根（顶级）节点。 
+
+simple-page-master 
+
+定义一个页面的尺寸和形状。 
+
+single-page-master-reference 
+
+规定用在页面序列的给定点中的 page-master。 
+
+static-content 
+
+对象包含了静态内容（如：页眉和页脚），该静态内容将在多个页面中重复调用。 
+
+table 
+
+格式化表格的表格式材料。 
+
+table-and-caption 
+
+格式化表格及其标题。 
+
+table-body 
+
+包含表格行和表格单元格的容器。 
+
+table-caption 
+
+包含表格的标题。 
+
+table-cell 
+
+定义表格单元格。 
+
+table-column 
+
+格式化表格的列。 
+
+table-footer 
+
+定义表格的页脚。 
+
+table-header 
+
+定义表格的页眉。 
+
+table-row 
+
+定义表格行。 
+
+title 
+
+为一个 page-sequence 定义一个标题。 
+
+wrapper 
+
+为一组 XSL-FO 对象规定 inherited[继承] 属性。 
+
+AI 思考中... 
+
+XSL-FO wrapper 对象 
+
+XSL-FO azimuth 属性

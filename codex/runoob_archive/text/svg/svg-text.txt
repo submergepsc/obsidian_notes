@@ -1,0 +1,149 @@
+URL: https://www.runoob.com/svg/svg-text.html
+Title: SVG 文本 | 菜鸟教程
+
+SVG 文本 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SVG 教程 
+
+SVG 多段线 
+
+SVG Stroke 属性 
+
+SVG 文本 <text> 
+
+SVG 中的 <text> 元素用于在 SVG 图像中添加文本内容，它允许你在指定的位置显示文本，并可以通过设置属性来控制文本的样式、字体、大小等。 
+
+基本语法 
+
+<text
+ x="x-coordinate" <!-- 文本左上角的 x 坐标 -->
+ y="y-coordinate" <!-- 文本左上角的 y 坐标 -->
+ font-family="font" <!-- 字体名称 -->
+ font-size="size" <!-- 字体大小 -->
+ fill="fill-color" <!-- 文本颜色 -->
+ text-anchor="anchor" <!-- 文本锚点 -->
+>
+ Text content <!-- 文本内容 -->
+</text> 
+
+属性解析： 
+
+x 和 y 属性定义了文本左上角的坐标，即文本的起始点位置。 
+
+font-family 属性定义了文本的字体名称，可以是系统字体或自定义字体。 
+
+font-size 属性定义了文本的字体大小，以像素为单位。 
+
+fill 属性定义了文本的颜色。 
+
+text-anchor 属性定义了文本锚点，即文本相对于指定坐标的对齐方式，常用取值有 "start"（默认，左对齐）、"middle"（居中对齐）和 "end"（右对齐）。 
+
+以下代码在 SVG 图像中绘制了一段文本，文本内容为 "Hello, SVG!"，字体为 Arial，大小为 20 像素，颜色为蓝色，居中对齐，并且文本左上角的坐标为 (100, 100)。 
+
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+ <text x="100" y="100" font-family="Arial" font-size="20" fill="blue" text-anchor="middle">Hello, SVG!</text>
+</svg> 
+
+实例 1 
+
+写一个文本： 
+
+下面是 SVG 代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<text x="0" y="15" fill="red">I 
+love SVG</text> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+实例 2 
+
+旋转的文字： 
+
+下面是 SVG 代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<text x="0" y="15" fill="red" 
+transform="rotate(30 20,40)">I 
+love SVG</text> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+实例 3 
+
+路径上的文字： 
+
+下面是 SVG 代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" 
+xmlns:xlink="http://www.w3.org/1999/xlink"> 
+<defs> 
+<path id="path1" d="M75,20 a1,1 0 0,0 100,0" /> 
+</defs> 
+<text x="10" y="100" style="fill:red;"> 
+<textPath xlink:href="#path1">I love SVG I love SVG</textPath> 
+</text> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+实例 4 
+
+元素可以安排任何分小组与<tspan> 元素的数量。每个<tspan> 元素可以包含不同的格式和位置。几行文本(与 <tspan> 元素): 
+
+下面是 SVG 代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1"> 
+<text x="10" y="20" style="fill:red;">Several lines: 
+<tspan x="10" y="45">First line</tspan> 
+<tspan x="10" y="70">Second line</tspan> 
+</text> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+实例 5 
+
+作为链接文本（ <a> 元素）： 
+
+下面是 SVG 代码： 
+
+实例 
+
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1" 
+xmlns:xlink="http://www.w3.org/1999/xlink"> 
+<a xlink:href="http://www.w3schools.com/svg/" 
+target="_blank"> 
+<text x="0" y="15" fill="red">I love SVG</text> 
+</a> 
+</svg> 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+AI 思考中... 
+
+SVG 多段线 
+
+SVG Stroke 属性

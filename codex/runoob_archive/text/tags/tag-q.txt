@@ -1,0 +1,70 @@
+URL: https://www.runoob.com/tags/tag-q.html
+Title: HTML <q> 标签 | 菜鸟教程
+
+HTML <q> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML5 <progress> 标签 
+
+HTML <rp> 标签 
+
+HTML <q> 标签 
+
+实例 
+
+标记一个短的引用： 
+
+<p>WWF's goal is to: 
+<q>Build a future where people live in harmony with nature.</q> 
+We hope they succeed.</p> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <q> 标签。 
+
+标签定义及使用说明 
+
+<q> 标签定义一个短的引用。 
+
+浏览器经常会在这种引用的周围插入引号。 
+
+提示和注释 
+
+提示： 请使用 <blockquote> 来标记摘自另一个源的块引用。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+无。 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+cite 
+
+URL 
+
+规定引用的源 URL。 
+
+全局属性 
+
+<q> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<q> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML5 <progress> 标签 
+
+HTML <rp> 标签

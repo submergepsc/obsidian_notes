@@ -1,0 +1,86 @@
+URL: https://www.runoob.com/bootstrap5/bootstrap5-images.html
+Title: Bootstrap5 图像形状 | 菜鸟教程
+
+Bootstrap5 图像形状 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Bootstrap5 教程 
+
+Bootstrap5 表格 
+
+Bootstrap5 Jumbotron 
+
+Bootstrap5 图像形状 
+
+Bootstrap 5 提供了许多类来帮助你快速调整和优化图像的外观，尤其是控制图像的形状、尺寸和响应式布局。 
+
+圆角图片 
+
+.rounded 类可以让图片显示圆角效果： 
+
+实例 
+
+< img src = " cinqueterre.jpg " class = " rounded " alt = " Cinque Terre " > 
+
+尝试一下 » 
+
+椭圆图片 
+
+.rounded-circle 类可以设置椭圆形图片: 
+
+实例 
+
+< img src = " cinqueterre.jpg " class = " rounded-circle " alt = " Cinque Terre " > 
+
+尝试一下 » 
+
+缩略图 
+
+.img-thumbnail 类用于设置图片缩略图(图片有边框): 
+
+实例 
+
+< img src = " cinqueterre.jpg " class = " img-thumbnail " alt = " Cinque Terre " > 
+
+尝试一下 » 
+
+图片对齐方式 
+
+使用 .float-start 类来设置图片左对齐，使用 .float-end 类设置图片右对齐: 
+
+实例 
+
+< img src = " paris.jpg " class = " float-start " > < img src = " cinqueterre.jpg " class = " float-end " > 
+
+尝试一下 » 
+
+图片居中 
+
+使用 .mx-auto (margin:auto) 和 . d-block (display:block) 类来设置图片居中对齐： 
+
+实例 
+
+< img src = " paris.jpg " class = " mx-auto d-block " > 
+
+尝试一下 » 
+
+响应式图片 
+
+图像有各种各样的尺寸，我们需要根据屏幕的大小自动适应。 
+
+我们可以通过在 <img> 标签中添加 .img-fluid 类来设置响应式图片。 
+
+.img-fluid 类设置了 max-width: 100%; 、 height: auto; : 
+
+实例 
+
+< img class = " img-fluid " src = " img_chania.jpg " alt = " Chania " > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Bootstrap5 表格 
+
+Bootstrap5 Jumbotron

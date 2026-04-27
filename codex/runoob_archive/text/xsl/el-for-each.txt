@@ -1,0 +1,101 @@
+URL: https://www.runoob.com/xsl/el-for-each.html
+Title: XSLT <xsl:for-each> 元素 | 菜鸟教程
+
+XSLT <xsl:for-each> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:fallback> 元素 
+
+XSLT <xsl:if> 元素 
+
+XSLT <xsl:for-each> 元素 
+
+定义和用法 
+
+<xsl:for-each> 元素可循环遍历指定的节点集中的每个节点。 
+
+语法 
+
+<xsl:for-each
+select="expression"> 
+<!-- Content --> 
+</xsl:for-each> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+select 
+
+expression 
+
+必需。一个 XPath 表达式，规定被处理的节点集。 
+
+实例 
+
+下面的实例循环遍历每个 cd 元素，并把每个 cd 写到输出中： 
+
+实例 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="/"> 
+<div> 
+<xsl:for-each select="catalog/cd"> 
+<p><xsl:value-of select="title" /></p> 
+</xsl:for-each> 
+</div> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+尝试一下 » 
+
+下面的实例循环遍历每个 cd 元素，并创建一个表格显示每个 cd 的 title 和 artist： 
+
+实例 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<h1>Music Collection:</h1> 
+<table border="1"> 
+<tr bgcolor="#9acd32"> 
+<th>Title</th> 
+<th>Artist</th> 
+</tr> 
+<xsl:for-each select="catalog/cd"> 
+<tr> 
+<td><xsl:value-of select="title" 
+/></td> 
+<td><xsl:value-of select="artist" 
+/></td> 
+</tr> 
+</xsl:for-each> 
+</table> 
+</body> 
+</html> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+尝试一下 » 
+
+AI 思考中... 
+
+XSLT <xsl:fallback> 元素 
+
+XSLT <xsl:if> 元素
