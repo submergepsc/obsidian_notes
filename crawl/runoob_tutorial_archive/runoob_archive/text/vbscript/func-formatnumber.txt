@@ -1,0 +1,157 @@
+URL: https://www.runoob.com/vbscript/func-formatnumber.html
+Title: VBScript FormatNumber 函数 | 菜鸟教程
+
+VBScript FormatNumber 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript FormatCurrency 函数 
+
+VBScript FormatPercent 函数 
+
+VBScript FormatNumber 函数 
+
+FormatNumber 函数返回作为数字进行格式化的表达式。 
+
+语法 
+
+FormatNumber(Expression[,NumDigAfterDec[, 
+IncLeadingDig[,UseParForNegNum[,GroupDig]]]]) 
+
+参数 
+
+描述 
+
+expression 
+
+必需。需被格式化的表达式。 
+
+NumDigAfterDec 
+
+可选。指示小数点右侧显示位数的数值。默认值为 -1（使用的是计算机的区域设置）。 
+
+IncLeadingDig 
+
+可选。指示是否显示小数值的前导零： 
+
+-2 = TristateUseDefault - 使用计算机的区域设置 
+
+-1 = TristateTrue - True 
+
+0 = TristateFalse - False 
+
+UseParForNegNum 
+
+可选。指示是否将负值置于括号中： 
+
+-2 = TristateUseDefault - 使用计算机的区域设置 
+
+-1 = TristateTrue - True 
+
+0 = TristateFalse - False 
+
+GroupDig 
+
+可选。指示是否使用计算机区域设置中指定的数字分组符号将数字分组： 
+
+-2 = TristateUseDefault - 使用计算机的区域设置 
+
+-1 = TristateTrue - True 
+
+0 = TristateFalse - False 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+document.write(FormatNumber(20000)) 
+
+</script> 
+
+以上实例输出结果： 
+
+20,000.00 
+
+尝试一下 » 
+
+实例 2 
+
+设置小数点后的位数： 
+
+<script type="text/vbscript"> 
+
+document.write(FormatNumber(20000,2) & "<br />") 
+document.write(FormatNumber(20000,5)) 
+
+</script> 
+
+以上实例输出结果： 
+
+20,000.00 
+20,000.00000 
+
+尝试一下 » 
+
+实例 3 
+
+是否显示小数值的前导零： 
+
+<script type="text/vbscript"> 
+
+document.write(FormatNumber(.20,,0) & "<br />") 
+document.write(FormatNumber(.20,,-1)) 
+
+</script> 
+
+以上实例输出结果： 
+
+.20 
+0.20 
+
+尝试一下 » 
+
+实例 4 
+
+是否将负值置于括号中： 
+
+<script type="text/vbscript"> 
+
+document.write(FormatNumber(-50,,,0) & "<br />") 
+document.write(FormatNumber(-50,,,-1)) 
+
+</script> 
+
+以上实例输出结果： 
+
+-50.00 
+(50.00) 
+
+尝试一下 » 
+
+实例 5 
+
+是否将数字分组： 
+
+<script type="text/vbscript"> 
+
+document.write(FormatNumber(1000000,,,,0) & "<br />") 
+document.write(FormatNumber(1000000,,,,-1)) 
+
+</script> 
+
+以上实例输出结果： 
+
+1000000.00 
+1,000,000.00 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript FormatCurrency 函数 
+
+VBScript FormatPercent 函数

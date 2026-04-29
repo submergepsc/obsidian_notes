@@ -1,0 +1,84 @@
+URL: https://www.runoob.com/python3/python3-att-list-append.html
+Title: Python3 List append()方法 | 菜鸟教程
+
+Python3 List append()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 List list()方法 
+
+Python3 List count()方法 
+
+Python3 List append()方法 
+
+描述 
+
+append() 方法用于在列表末尾添加新的对象。 
+
+语法 
+
+append()方法语法： 
+
+list.append(obj) 
+
+参数 
+
+obj -- 添加到列表末尾的对象。 
+
+返回值 
+
+该方法无返回值，但是会修改原来的列表。 
+
+实例 
+
+以下实例展示了 append()函数的使用方法： 
+
+实例 
+
+#!/usr/bin/python3 
+
+list1 = [ 'Google' , 'Runoob' , 'Taobao' ] 
+
+list1. append ( 'Baidu' ) 
+
+print ( "更新后的列表 : " , list1 ) 
+
+以上实例输出结果如下： 
+
+更新后的列表 : ['Google', 'Runoob', 'Taobao', 'Baidu'] 
+
+队列是一种先进先出（FIFO）的数据结构，我们可以使用列表来实现队列的基本功能。 
+
+append() 方法向队列的末尾添加一个元素。 
+
+pop() 方法从队列的开头删除一个元素并返回它。 
+
+实例 
+
+queue = [ ] 
+
+# 添加元素到队列的末尾 
+
+queue. append ( 'A' ) 
+
+queue. append ( 'B' ) 
+
+queue. append ( 'C' ) 
+
+# 从队列的开头删除元素并返回 
+
+print ( queue. pop ( 0 ) ) # A 
+
+print ( queue. pop ( 0 ) ) # B 
+
+print ( queue. pop ( 0 ) ) # C 
+
+以上实例中，我们创建了一个空的列表作为队列，然后使用 append() 方法向队列的末尾添加了三个元素。接下来，我们使用 pop() 方法从队列的开头删除元素并返回它们。由于队列是一个先进先出的数据结构，所以我们得到的输出结果是 'A'、'B' 和 'C'。 
+
+AI 思考中... 
+
+Python3 List list()方法 
+
+Python3 List count()方法

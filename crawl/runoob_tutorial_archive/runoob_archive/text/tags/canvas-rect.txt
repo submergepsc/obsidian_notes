@@ -1,0 +1,106 @@
+URL: https://www.runoob.com/tags/canvas-rect.html
+Title: HTML canvas rect() 方法 | 菜鸟教程
+
+HTML canvas rect() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas miterLimit 属性 
+
+HTML canvas fillRect() 方法 
+
+HTML canvas rect() 方法 
+
+实例 
+
+绘制 150*100 像素的矩形： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+ctx.rect(20,20,150,100); 
+ctx.stroke(); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 rect() 
+方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+rect() 方法创建矩形。 
+
+提示： 请使用 stroke() 或 fill() 方法在画布上实际地绘制矩形。 
+
+JavaScript 语法： 
+
+context .rect( x,y,width,height ); 
+
+参数值 
+
+参数 
+
+描述 
+
+x 
+
+矩形左上角的 x 坐标。 
+
+y 
+
+矩形左上角的 y 坐标。 
+
+width 
+
+矩形的宽度，以像素计。 
+
+height 
+
+矩形的高度，以像素计。 
+
+更多实例 
+
+实例 
+
+通过 rect() 方法来创建三个矩形： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+
+// Red rectangle 
+ctx.beginPath(); 
+ctx.lineWidth="6"; 
+ctx.strokeStyle="red"; 
+ctx.rect(5,5,290,140); 
+ctx.stroke(); 
+
+// Green rectangle 
+ctx.beginPath(); 
+ctx.lineWidth="4"; 
+ctx.strokeStyle="green"; 
+ctx.rect(30,30,50,50); 
+ctx.stroke(); 
+
+// Blue rectangle 
+ctx.beginPath(); 
+ctx.lineWidth="10"; 
+ctx.strokeStyle="blue"; 
+ctx.rect(50,50,150,80); 
+ctx.stroke(); 
+
+尝试一下 » 
+
+AI 思考中... 
+
+HTML canvas miterLimit 属性 
+
+HTML canvas fillRect() 方法

@@ -1,0 +1,105 @@
+URL: https://www.runoob.com/xslfo/obj-page-sequence.html
+Title: XSL-FO page-sequence 对象 | 菜鸟教程
+
+XSL-FO page-sequence 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO page-number-citation 对象 
+
+XSL-FO page-sequence-master 对象 
+
+XSL-FO page-sequence 对象 
+
+定义和用法 
+
+<fo:page-sequence> 对象是作为页面输出元素的容器使用的。 
+
+每个页面布局都包含一个 <fo:page-sequence> 对象。<fo:page-sequence> 的子类对象规定了页面的内容。 
+
+每个 fo:page-sequence 对象都引用了一个 <fo:page-sequence-master> 或是一个 <fo:simple-page-master>。 
+
+语法 
+
+<fo:page-sequence> 
+<!-- 
+Contents:title?,static-content*,flow 
+--> 
+</fo:page-sequence> 
+
+属性 
+
+属性 
+
+country 
+
+force-page-count 
+
+format 
+
+grouping-separator 
+
+grouping-size 
+
+id 
+
+initial-page-number 
+
+language 
+
+letter-value 
+
+master-reference 
+
+实例 1 
+
+XSL-FO 文档结构如下所示： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"> 
+
+<fo:layout-master-set> 
+<fo:simple-page-master master-name="A4"> 
+<!-- Page template goes here --> 
+</fo:simple-page-master> 
+</fo:layout-master-set> 
+
+<fo:page-sequence master-reference="A4"> 
+<!-- Page content goes here --> 
+</fo:page-sequence> 
+
+</fo:root> 
+
+实例 2 
+
+一个"真实的" XSL-FO 实例： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"> 
+
+<fo:layout-master-set> 
+<fo:simple-page-master master-name="A4"> 
+</fo:simple-page-master> 
+</fo:layout-master-set> 
+
+<fo:page-sequence master-reference="A4"> 
+<fo:flow flow-name="xsl-region-body"> 
+<fo:block>Hello RUOOOB</fo:block> 
+</fo:flow> 
+</fo:page-sequence> 
+
+</fo:root> 
+
+上面代码的输出如下所示： 
+
+Hello RUOOOB 
+
+AI 思考中... 
+
+XSL-FO page-number-citation 对象 
+
+XSL-FO page-sequence-master 对象

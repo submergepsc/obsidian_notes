@@ -1,0 +1,62 @@
+URL: https://www.runoob.com/schema/schema-el-key.html
+Title: XML Schema key 元素 | 菜鸟教程
+
+XML Schema key 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema include 元素 
+
+XML Schema keyref 元素 
+
+XML Schema key 元素 
+
+定义和用法 
+
+key 元素指定属性或元素值（或一组值）必须是指定范围内的键。键的范围为实例文档中的包含 element。键意味着数据在指定范围内应是唯一的、不为零的并且始终存在的。 
+
+key 元素必须按顺序包含下列元素： 
+
+selector 元素包含一个 XPath 表达式，该表达式指定一个元素集，在元素集中，field 指定的值必须是唯一的。 
+
+元素信息 
+
+父元素： element 
+
+语法 
+
+<key 
+id=ID 
+name=NCName 
+any attributes 
+> 
+
+(annotation?,(selector,field+)) 
+
+</key> 
+
+（? 符号声明在 key 元素中，元素可出现零次或一次，+ 符号声明元素必须出现一次或多次。） 
+
+属性 
+
+描述 
+
+id 
+
+可选。规定该元素的唯一的 ID。 
+
+name 
+
+必需。规定 key 元素的名称。 
+
+any attributes 
+
+可选。规定带有 non-schema 命名空间的任何其他属性。 
+
+AI 思考中... 
+
+XML Schema include 元素 
+
+XML Schema keyref 元素

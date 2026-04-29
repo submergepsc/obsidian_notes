@@ -1,0 +1,98 @@
+URL: https://www.runoob.com/cssref/pr-text-text-transform.html
+Title: CSS text-transform 属性 | 菜鸟教程
+
+CSS text-transform 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 text-shadow 属性 
+
+CSS3 text-wrap 属性 
+
+CSS text-transform 属性 
+
+实例 
+
+转换不同元素中的文本： 
+
+h1 {text-transform:uppercase;} 
+h2 {text-transform:capitalize;} 
+p {text-transform:lowercase;} 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+text-transform 属性控制文本的大小写。 
+
+默认值： 
+
+none 
+
+继承： 
+
+yes 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.textTransform="uppercase" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+text-transform 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+7.0 
+
+属性值 
+
+值 
+
+描述 
+
+none 
+
+默认。定义带有小写字母和大写字母的标准的文本。 
+
+capitalize 
+
+文本中的每个单词以大写字母开头。 
+
+uppercase 
+
+定义仅有大写字母。 
+
+lowercase 
+
+定义无大写字母，仅有小写字母。 
+
+inherit 
+
+规定应该从父元素继承 text-transform 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS Text 
+
+AI 思考中... 
+
+CSS3 text-shadow 属性 
+
+CSS3 text-wrap 属性

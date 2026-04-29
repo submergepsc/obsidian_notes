@@ -1,0 +1,63 @@
+URL: https://www.runoob.com/schema/el-appinfo.html
+Title: XML Schema appinfo 元素 | 菜鸟教程
+
+XML Schema appinfo 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema anyAttribute 元素 
+
+XML Schema attribute 元素 
+
+XML Schema appinfo 元素 
+
+定义和用法 
+
+appInfo 元素规定 annotation 元素中应用程序要使用的信息。该元素必须位于 annotation 中。 
+
+元素信息 
+
+父元素： annotation 
+
+语法 
+
+<appinfo 
+source=anyURL 
+> 
+
+Any well-formed XML content 
+
+</appinfo> 
+
+属性 
+
+描述 
+
+source 
+
+可选。一个 URI 引用，规定应用程序信息的来源。 
+
+实例 1 
+
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+
+<xs:annotation> 
+<xs:appinfo>RUNOOB Note</xs:appinfo> 
+<xs:documentation xml:lang="en"> 
+This Schema defines a RUNOOB note! 
+</xs:documentation> 
+</xs:annotation> 
+
+. 
+. 
+. 
+
+</xs:schema> 
+
+AI 思考中... 
+
+XML Schema anyAttribute 元素 
+
+XML Schema attribute 元素

@@ -1,0 +1,44 @@
+URL: https://www.runoob.com/xslfo/obj-repeatable-page-master-alternatives.html
+Title: XSL-FO repeatable-page-master-alternatives 对象 | 菜鸟教程
+
+XSL-FO repeatable-page-master-alternatives 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO region-start 对象 
+
+XSL-FO repeatable-page-master-reference 对象 
+
+XSL-FO repeatable-page-master-alternatives 对象 
+
+定义和用法 
+
+<fo:repeatable-page-master-alternatives> 对象规定一组 simple-page-master 的副本。 
+
+该对象的子类是 fo:conditional-page-master-references（称之为"方案"）。 
+
+具体使用哪个方案取决于对条件的评估（该条件允许对第一个页面、奇/偶页面以及空白页面使用不同的 page-masters）。 
+
+条件将按照顺序进行测试，最后的方案将引用到用于不包含指定布局的所有页面的 page-master。 
+
+语法 
+
+<fo:repeatable-page-master-alternatives> 
+<!-- 
+Contents:(conditional-page-master-reference+) 
+--> 
+</fo:repeatable-page-master-alternatives> 
+
+属性 
+
+属性 
+
+maximum-repeats 
+
+AI 思考中... 
+
+XSL-FO region-start 对象 
+
+XSL-FO repeatable-page-master-reference 对象

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cplusplus index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>cplusplus index</h1>
+      <p>Offline pages under cplusplus</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-516595e8">入门</a> <span>4 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>5 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>1 pages</span></li><li><a href="#subgroup-6d4b9a8c">测验</a> <span>1 pages</span></li><li><a href="#subgroup-ai-5de55177">AI / 工具</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>88 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>cplusplus (100)</h2><p>二级分类：6 个</p><ul class="page-list"><li><a href="#subgroup-516595e8">入门</a> <span>4 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>5 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>1 pages</span></li><li><a href="#subgroup-6d4b9a8c">测验</a> <span>1 pages</span></li><li><a href="#subgroup-ai-5de55177">AI / 工具</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>88 pages</span></li></ul></section><section id="subgroup-516595e8"><h2>入门 (4)</h2><ol class="page-list"><li><a href="cpp-stl-tutorial.html">C++ STL 教程</a> <code>https://www.runoob.com/cplusplus/cpp-stl-tutorial.html</code></li><li><a href="cpp-tutorial.html">C++ 教程</a> <code>https://www.runoob.com/cplusplus/cpp-tutorial.html</code></li><li><a href="cpp-environment-setup.html">C++ 环境设置</a> <code>https://www.runoob.com/cplusplus/cpp-environment-setup.html</code></li><li><a href="cpp-intro.html">C++ 简介</a> <code>https://www.runoob.com/cplusplus/cpp-intro.html</code></li></ol></section><section id="subgroup-53c28003"><h2>参考 (5)</h2><ol class="page-list"><li><a href="cpp-functions.html">C++ 函数</a> <code>https://www.runoob.com/cplusplus/cpp-functions.html</code></li><li><a href="cpp-references.html">C++ 引用</a> <code>https://www.runoob.com/cplusplus/cpp-references.html</code></li><li><a href="cpp-libs-functional.html">C++ 标准库 &lt;functional&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-functional.html</code></li><li><a href="cpp-classes-objects.html">C++ 类 &amp; 对象</a> <code>https://www.runoob.com/cplusplus/cpp-classes-objects.html</code></li><li><a href="cpp-operators.html">C++ 运算符</a> <code>https://www.runoob.com/cplusplus/cpp-operators.html</code></li></ol></section><section id="subgroup-5b9e4f8b"><h2>实例 (1)</h2><ol class="page-list"><li><a href="cpp-examples.html">C++ 实例</a> <code>https://www.runoob.com/cplusplus/cpp-examples.html</code></li></ol></section><section id="subgroup-6d4b9a8c"><h2>测验 (1)</h2><ol class="page-list"><li><a href="cpp-quiz.html">C++ 测验</a> <code>https://www.runoob.com/cplusplus/cpp-quiz.html</code></li></ol></section><section id="subgroup-ai-5de55177"><h2>AI / 工具 (1)</h2><ol class="page-list"><li><a href="fitten-code-cpp.html">C++ AI 编程助手</a> <code>https://www.runoob.com/cplusplus/fitten-code-cpp.html</code></li></ol></section><section id="subgroup-4e139898"><h2>专题 (88)</h2><ol class="page-list"><li><a href="cpp-opencv.html">C++ OpenCV</a> <code>https://www.runoob.com/cplusplus/cpp-opencv.html</code></li><li><a href="cpp-vector.html">C++ vector 容器</a> <code>https://www.runoob.com/cplusplus/cpp-vector.html</code></li><li><a href="cpp-web-programming.html">C++ Web 编程</a> <code>https://www.runoob.com/cplusplus/cpp-web-programming.html</code></li><li><a href="cpp-signal-handling.html">C++ 信号处理</a> <code>https://www.runoob.com/cplusplus/cpp-signal-handling.html</code></li><li><a href="cpp-modifier-types.html">C++ 修饰符类型</a> <code>https://www.runoob.com/cplusplus/cpp-modifier-types.html</code></li><li><a href="cpp-libs-memory.html">C++ 内存管理库 &lt;memory&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-memory.html</code></li><li><a href="cpp-libs-new.html">C++ 内存管理库 &lt;new&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-new.html</code></li><li><a href="cpp-decision.html">C++ 判断</a> <code>https://www.runoob.com/cplusplus/cpp-decision.html</code></li><li><a href="cpp-dynamic-memory.html">C++ 动态内存</a> <code>https://www.runoob.com/cplusplus/cpp-dynamic-memory.html</code></li><li><a href="cpp-variable-scope.html">C++ 变量作用域</a> <code>https://www.runoob.com/cplusplus/cpp-variable-scope.html</code></li><li><a href="cpp-variable-types.html">C++ 变量类型</a> <code>https://www.runoob.com/cplusplus/cpp-variable-types.html</code></li><li><a href="cpp-namespaces.html">C++ 命名空间</a> <code>https://www.runoob.com/cplusplus/cpp-namespaces.html</code></li><li><a href="cpp-basic-input-output.html">C++ 基本的输入输出</a> <code>https://www.runoob.com/cplusplus/cpp-basic-input-output.html</code></li><li><a href="cpp-basic-syntax.html">C++ 基本语法</a> <code>https://www.runoob.com/cplusplus/cpp-basic-syntax.html</code></li><li><a href="cpp-polymorphism.html">C++ 多态</a> <code>https://www.runoob.com/cplusplus/cpp-polymorphism.html</code></li><li><a href="cpp-multithreading.html">C++ 多线程</a> <code>https://www.runoob.com/cplusplus/cpp-multithreading.html</code></li><li><a href="cpp-libs-thread.html">C++ 多线程库 &lt;thread&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-thread.html</code></li><li><a href="cpp-strings.html">C++ 字符串</a> <code>https://www.runoob.com/cplusplus/cpp-strings.html</code></li><li><a href="cpp-storage-classes.html">C++ 存储类</a> <code>https://www.runoob.com/cplusplus/cpp-storage-classes.html</code></li><li><a href="cpp-libs-forward_list.html">C++ 容器 &lt;forward_list&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-forward_list.html</code></li><li><a href="cpp-libs-array.html">C++ 容器类  &lt;array&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-array.html</code></li><li><a href="cpp-libs-bitset.html">C++ 容器类 &lt;bitset&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-bitset.html</code></li><li><a href="cpp-libs-deque.html">C++ 容器类 &lt;deque&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-deque.html</code></li><li><a href="cpp-libs-list.html">C++ 容器类 &lt;list&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-list.html</code></li><li><a href="cpp-libs-map.html">C++ 容器类 &lt;map&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-map.html</code></li><li><a href="cpp-libs-priority_queue.html">C++ 容器类 &lt;priority_queue&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-priority_queue.html</code></li><li><a href="cpp-libs-queue.html">C++ 容器类 &lt;queue&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-queue.html</code></li><li><a href="cpp-libs-set.html">C++ 容器类 &lt;set&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-set.html</code></li><li><a href="cpp-libs-stack.html">C++ 容器类 &lt;stack&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-stack.html</code></li><li><a href="cpp-libs-unordered_map.html">C++ 容器类 &lt;unordered_map&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-unordered_map.html</code></li><li><a href="cpp-libs-unordered_set.html">C++ 容器类 &lt;unordered_set&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-unordered_set.html</code></li><li><a href="cpp-libs-vector.html">C++ 容器类 &lt;vector&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-vector.html</code></li><li><a href="cppo-import-header-file.html">C++ 导入标准库</a> <code>https://www.runoob.com/cplusplus/cppo-import-header-file.html</code></li><li><a href="cpp-constants-literals.html">C++ 常量</a> <code>https://www.runoob.com/cplusplus/cpp-constants-literals.html</code></li><li><a href="cpp-exceptions-handling.html">C++ 异常处理</a> <code>https://www.runoob.com/cplusplus/cpp-exceptions-handling.html</code></li><li><a href="cpp-libs-stdexcept.html">C++ 异常处理库  &lt;stdexcept&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-stdexcept.html</code></li><li><a href="cpp-libs-exception.html">C++ 异常处理库 &lt;exception&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-exception.html</code></li><li><a href="cpp-loops.html">C++ 循环</a> <code>https://www.runoob.com/cplusplus/cpp-loops.html</code></li><li><a href="cpp-pointers.html">C++ 指针</a> <code>https://www.runoob.com/cplusplus/cpp-pointers.html</code></li><li><a href="cpp-interfaces.html">C++ 接口（抽象类）</a> <code>https://www.runoob.com/cplusplus/cpp-interfaces.html</code></li><li><a href="cpp-numbers.html">C++ 数字</a> <code>https://www.runoob.com/cplusplus/cpp-numbers.html</code></li><li><a href="cpp-data-encapsulation.html">C++ 数据封装</a> <code>https://www.runoob.com/cplusplus/cpp-data-encapsulation.html</code></li><li><a href="cpp-data-abstraction.html">C++ 数据抽象</a> <code>https://www.runoob.com/cplusplus/cpp-data-abstraction.html</code></li><li><a href="cpp-data-types.html">C++ 数据类型</a> <code>https://www.runoob.com/cplusplus/cpp-data-types.html</code></li><li><a href="cpp-data-structures.html">C++ 数据结构</a> <code>https://www.runoob.com/cplusplus/cpp-data-structures.html</code></li><li><a href="cpp-arrays.html">C++ 数组</a> <code>https://www.runoob.com/cplusplus/cpp-arrays.html</code></li><li><a href="cpp-files-streams.html">C++ 文件和流</a> <code>https://www.runoob.com/cplusplus/cpp-files-streams.html</code></li><li><a href="cpp-libs-fstream.html">C++ 文件输入输出库 – &lt;fstream&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-fstream.html</code></li><li><a href="cpp-date-time.html">C++ 日期 &amp; 时间</a> <code>https://www.runoob.com/cplusplus/cpp-date-time.html</code></li><li><a href="cpp-useful-resources.html">C++ 有用的资源</a> <code>https://www.runoob.com/cplusplus/cpp-useful-resources.html</code></li><li><a href="cpp-standard-library.html">C++ 标准库</a> <code>https://www.runoob.com/cplusplus/cpp-standard-library.html</code></li><li><a href="cpp-libs-atomic.html">C++ 标准库 &lt;atomic&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-atomic.html</code></li><li><a href="cpp-libs-cassert.html">C++ 标准库 &lt;cassert&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-cassert.html</code></li><li><a href="cpp-libs-cfloat.html">C++ 标准库 &lt;cfloat&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-cfloat.html</code></li><li><a href="cpp-libs-chrono.html">C++ 标准库 &lt;chrono&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-chrono.html</code></li><li><a href="cpp-libs-climits.html">C++ 标准库 &lt;climits&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-climits.html</code></li><li><a href="cpp-libs-cmath.html">C++ 标准库 &lt;cmath&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-cmath.html</code></li><li><a href="cpp-libs-codecvt.html">C++ 标准库 &lt;codecvt&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-codecvt.html</code></li><li><a href="cpp-libs-complex.html">C++ 标准库 &lt;complex&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-complex.html</code></li><li><a href="cpp-libs-condition_variable.html">C++ 标准库 &lt;condition_variable&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-condition_variable.html</code></li><li><a href="cpp-libs-cstdint.html">C++ 标准库 &lt;cstdint&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-cstdint.html</code></li><li><a href="cpp-libs-cstdio.html">C++ 标准库 &lt;cstdio&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-cstdio.html</code></li><li><a href="cpp-libs-cstdlib.html">C++ 标准库 &lt;cstdlib&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-cstdlib.html</code></li><li><a href="cpp-libs-ctime.html">C++ 标准库 &lt;ctime&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-ctime.html</code></li><li><a href="cpp-libs-cwchar.html">C++ 标准库 &lt;cwchar&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-cwchar.html</code></li><li><a href="cpp-libs-future.html">C++ 标准库 &lt;future&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-future.html</code></li><li><a href="cpp-libs-iomanip.html">C++ 标准库 &lt;iomanip&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-iomanip.html</code></li><li><a href="cpp-libs-iterator.html">C++ 标准库 &lt;iterator&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-iterator.html</code></li><li><a href="cpp-libs-locale.html">C++ 标准库 &lt;locale&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-locale.html</code></li><li><a href="cpp-libs-mutex.html">C++ 标准库 &lt;mutex&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-mutex.html</code></li><li><a href="cpp-libs-numbers.html">C++ 标准库 &lt;numbers&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-numbers.html</code></li><li><a href="cpp-libs-numeric.html">C++ 标准库 &lt;numeric&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-numeric.html</code></li><li><a href="cpp-libs-random.html">C++ 标准库 &lt;random&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-random.html</code></li><li><a href="cpp-libs-regex.html">C++ 标准库 &lt;regex&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-regex.html</code></li><li><a href="cpp-libs-sstream.html">C++ 标准库 &lt;sstream&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-sstream.html</code></li><li><a href="cpp-libs-string.html">C++ 标准库 &lt;string&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-string.html</code></li><li><a href="cpp-libs-type_traits.html">C++ 标准库 &lt;type_traits&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-type_traits.html</code></li><li><a href="cpp-libs-typeinfo.html">C++ 标准库 &lt;typeinfo&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-typeinfo.html</code></li><li><a href="cpp-libs-utility.html">C++ 标准库 &lt;utility&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-utility.html</code></li><li><a href="cpp-libs-valarray.html">C++ 标准库 &lt;valarray&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-valarray.html</code></li><li><a href="cpp-libs-iostream.html">C++ 标准输入输出 — &lt;iostream&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-iostream.html</code></li><li><a href="cpp-templates.html">C++ 模板</a> <code>https://www.runoob.com/cplusplus/cpp-templates.html</code></li><li><a href="cpp-comments.html">C++ 注释</a> <code>https://www.runoob.com/cplusplus/cpp-comments.html</code></li><li><a href="cpp-libs-algorithm.html">C++ 算法库  &lt;algorithm&gt;</a> <code>https://www.runoob.com/cplusplus/cpp-libs-algorithm.html</code></li><li><a href="cpp-struct.html">C++ 结构体(struct)</a> <code>https://www.runoob.com/cplusplus/cpp-struct.html</code></li><li><a href="cpp-inheritance.html">C++ 继承</a> <code>https://www.runoob.com/cplusplus/cpp-inheritance.html</code></li><li><a href="cpp-overloading.html">C++ 重载运算符和重载函数</a> <code>https://www.runoob.com/cplusplus/cpp-overloading.html</code></li><li><a href="cpp-preprocessor.html">C++ 预处理器</a> <code>https://www.runoob.com/cplusplus/cpp-preprocessor.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "C++ 数组", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-arrays.html", "href": "cpp-arrays.html"}, {"title": "C++ 基本的输入输出", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-basic-input-output.html", "href": "cpp-basic-input-output.html"}, {"title": "C++ 基本语法", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-basic-syntax.html", "href": "cpp-basic-syntax.html"}, {"title": "C++ 类 & 对象", "group": "cplusplus", "subgroup": "参考", "url": "https://www.runoob.com/cplusplus/cpp-classes-objects.html", "href": "cpp-classes-objects.html"}, {"title": "C++ 注释", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-comments.html", "href": "cpp-comments.html"}, {"title": "C++ 常量", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-constants-literals.html", "href": "cpp-constants-literals.html"}, {"title": "C++ 数据抽象", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-data-abstraction.html", "href": "cpp-data-abstraction.html"}, {"title": "C++ 数据封装", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-data-encapsulation.html", "href": "cpp-data-encapsulation.html"}, {"title": "C++ 数据结构", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-data-structures.html", "href": "cpp-data-structures.html"}, {"title": "C++ 数据类型", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-data-types.html", "href": "cpp-data-types.html"}, {"title": "C++ 日期 & 时间", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-date-time.html", "href": "cpp-date-time.html"}, {"title": "C++ 判断", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-decision.html", "href": "cpp-decision.html"}, {"title": "C++ 动态内存", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-dynamic-memory.html", "href": "cpp-dynamic-memory.html"}, {"title": "C++ 环境设置", "group": "cplusplus", "subgroup": "入门", "url": "https://www.runoob.com/cplusplus/cpp-environment-setup.html", "href": "cpp-environment-setup.html"}, {"title": "C++ 实例", "group": "cplusplus", "subgroup": "实例", "url": "https://www.runoob.com/cplusplus/cpp-examples.html", "href": "cpp-examples.html"}, {"title": "C++ 异常处理", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-exceptions-handling.html", "href": "cpp-exceptions-handling.html"}, {"title": "C++ 文件和流", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-files-streams.html", "href": "cpp-files-streams.html"}, {"title": "C++ 函数", "group": "cplusplus", "subgroup": "参考", "url": "https://www.runoob.com/cplusplus/cpp-functions.html", "href": "cpp-functions.html"}, {"title": "C++ 继承", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-inheritance.html", "href": "cpp-inheritance.html"}, {"title": "C++ 接口（抽象类）", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-interfaces.html", "href": "cpp-interfaces.html"}, {"title": "C++ 简介", "group": "cplusplus", "subgroup": "入门", "url": "https://www.runoob.com/cplusplus/cpp-intro.html", "href": "cpp-intro.html"}, {"title": "C++ 算法库  <algorithm>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-algorithm.html", "href": "cpp-libs-algorithm.html"}, {"title": "C++ 容器类  <array>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-array.html", "href": "cpp-libs-array.html"}, {"title": "C++ 标准库 <atomic>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-atomic.html", "href": "cpp-libs-atomic.html"}, {"title": "C++ 容器类 <bitset>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-bitset.html", "href": "cpp-libs-bitset.html"}, {"title": "C++ 标准库 <cassert>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-cassert.html", "href": "cpp-libs-cassert.html"}, {"title": "C++ 标准库 <cfloat>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-cfloat.html", "href": "cpp-libs-cfloat.html"}, {"title": "C++ 标准库 <chrono>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-chrono.html", "href": "cpp-libs-chrono.html"}, {"title": "C++ 标准库 <climits>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-climits.html", "href": "cpp-libs-climits.html"}, {"title": "C++ 标准库 <cmath>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-cmath.html", "href": "cpp-libs-cmath.html"}, {"title": "C++ 标准库 <codecvt>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-codecvt.html", "href": "cpp-libs-codecvt.html"}, {"title": "C++ 标准库 <complex>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-complex.html", "href": "cpp-libs-complex.html"}, {"title": "C++ 标准库 <condition_variable>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-condition_variable.html", "href": "cpp-libs-condition_variable.html"}, {"title": "C++ 标准库 <cstdint>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-cstdint.html", "href": "cpp-libs-cstdint.html"}, {"title": "C++ 标准库 <cstdio>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-cstdio.html", "href": "cpp-libs-cstdio.html"}, {"title": "C++ 标准库 <cstdlib>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-cstdlib.html", "href": "cpp-libs-cstdlib.html"}, {"title": "C++ 标准库 <ctime>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-ctime.html", "href": "cpp-libs-ctime.html"}, {"title": "C++ 标准库 <cwchar>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-cwchar.html", "href": "cpp-libs-cwchar.html"}, {"title": "C++ 容器类 <deque>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-deque.html", "href": "cpp-libs-deque.html"}, {"title": "C++ 异常处理库 <exception>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-exception.html", "href": "cpp-libs-exception.html"}, {"title": "C++ 容器 <forward_list>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-forward_list.html", "href": "cpp-libs-forward_list.html"}, {"title": "C++ 文件输入输出库 – <fstream>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-fstream.html", "href": "cpp-libs-fstream.html"}, {"title": "C++ 标准库 <functional>", "group": "cplusplus", "subgroup": "参考", "url": "https://www.runoob.com/cplusplus/cpp-libs-functional.html", "href": "cpp-libs-functional.html"}, {"title": "C++ 标准库 <future>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-future.html", "href": "cpp-libs-future.html"}, {"title": "C++ 标准库 <iomanip>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-iomanip.html", "href": "cpp-libs-iomanip.html"}, {"title": "C++ 标准输入输出 — <iostream>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-iostream.html", "href": "cpp-libs-iostream.html"}, {"title": "C++ 标准库 <iterator>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-iterator.html", "href": "cpp-libs-iterator.html"}, {"title": "C++ 容器类 <list>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-list.html", "href": "cpp-libs-list.html"}, {"title": "C++ 标准库 <locale>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-locale.html", "href": "cpp-libs-locale.html"}, {"title": "C++ 容器类 <map>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-map.html", "href": "cpp-libs-map.html"}, {"title": "C++ 内存管理库 <memory>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-memory.html", "href": "cpp-libs-memory.html"}, {"title": "C++ 标准库 <mutex>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-mutex.html", "href": "cpp-libs-mutex.html"}, {"title": "C++ 内存管理库 <new>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-new.html", "href": "cpp-libs-new.html"}, {"title": "C++ 标准库 <numbers>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-numbers.html", "href": "cpp-libs-numbers.html"}, {"title": "C++ 标准库 <numeric>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-numeric.html", "href": "cpp-libs-numeric.html"}, {"title": "C++ 容器类 <priority_queue>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-priority_queue.html", "href": "cpp-libs-priority_queue.html"}, {"title": "C++ 容器类 <queue>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-queue.html", "href": "cpp-libs-queue.html"}, {"title": "C++ 标准库 <random>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-random.html", "href": "cpp-libs-random.html"}, {"title": "C++ 标准库 <regex>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-regex.html", "href": "cpp-libs-regex.html"}, {"title": "C++ 容器类 <set>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-set.html", "href": "cpp-libs-set.html"}, {"title": "C++ 标准库 <sstream>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-sstream.html", "href": "cpp-libs-sstream.html"}, {"title": "C++ 容器类 <stack>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-stack.html", "href": "cpp-libs-stack.html"}, {"title": "C++ 异常处理库  <stdexcept>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-stdexcept.html", "href": "cpp-libs-stdexcept.html"}, {"title": "C++ 标准库 <string>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-string.html", "href": "cpp-libs-string.html"}, {"title": "C++ 多线程库 <thread>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-thread.html", "href": "cpp-libs-thread.html"}, {"title": "C++ 标准库 <type_traits>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-type_traits.html", "href": "cpp-libs-type_traits.html"}, {"title": "C++ 标准库 <typeinfo>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-typeinfo.html", "href": "cpp-libs-typeinfo.html"}, {"title": "C++ 容器类 <unordered_map>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-unordered_map.html", "href": "cpp-libs-unordered_map.html"}, {"title": "C++ 容器类 <unordered_set>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-unordered_set.html", "href": "cpp-libs-unordered_set.html"}, {"title": "C++ 标准库 <utility>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-utility.html", "href": "cpp-libs-utility.html"}, {"title": "C++ 标准库 <valarray>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-valarray.html", "href": "cpp-libs-valarray.html"}, {"title": "C++ 容器类 <vector>", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-libs-vector.html", "href": "cpp-libs-vector.html"}, {"title": "C++ 循环", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-loops.html", "href": "cpp-loops.html"}, {"title": "C++ 修饰符类型", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-modifier-types.html", "href": "cpp-modifier-types.html"}, {"title": "C++ 多线程", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-multithreading.html", "href": "cpp-multithreading.html"}, {"title": "C++ 命名空间", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-namespaces.html", "href": "cpp-namespaces.html"}, {"title": "C++ 数字", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-numbers.html", "href": "cpp-numbers.html"}, {"title": "C++ OpenCV", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-opencv.html", "href": "cpp-opencv.html"}, {"title": "C++ 运算符", "group": "cplusplus", "subgroup": "参考", "url": "https://www.runoob.com/cplusplus/cpp-operators.html", "href": "cpp-operators.html"}, {"title": "C++ 重载运算符和重载函数", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-overloading.html", "href": "cpp-overloading.html"}, {"title": "C++ 指针", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-pointers.html", "href": "cpp-pointers.html"}, {"title": "C++ 多态", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-polymorphism.html", "href": "cpp-polymorphism.html"}, {"title": "C++ 预处理器", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-preprocessor.html", "href": "cpp-preprocessor.html"}, {"title": "C++ 测验", "group": "cplusplus", "subgroup": "测验", "url": "https://www.runoob.com/cplusplus/cpp-quiz.html", "href": "cpp-quiz.html"}, {"title": "C++ 引用", "group": "cplusplus", "subgroup": "参考", "url": "https://www.runoob.com/cplusplus/cpp-references.html", "href": "cpp-references.html"}, {"title": "C++ 信号处理", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-signal-handling.html", "href": "cpp-signal-handling.html"}, {"title": "C++ 标准库", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-standard-library.html", "href": "cpp-standard-library.html"}, {"title": "C++ STL 教程", "group": "cplusplus", "subgroup": "入门", "url": "https://www.runoob.com/cplusplus/cpp-stl-tutorial.html", "href": "cpp-stl-tutorial.html"}, {"title": "C++ 存储类", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-storage-classes.html", "href": "cpp-storage-classes.html"}, {"title": "C++ 字符串", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-strings.html", "href": "cpp-strings.html"}, {"title": "C++ 结构体(struct)", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-struct.html", "href": "cpp-struct.html"}, {"title": "C++ 模板", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-templates.html", "href": "cpp-templates.html"}, {"title": "C++ 教程", "group": "cplusplus", "subgroup": "入门", "url": "https://www.runoob.com/cplusplus/cpp-tutorial.html", "href": "cpp-tutorial.html"}, {"title": "C++ 有用的资源", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-useful-resources.html", "href": "cpp-useful-resources.html"}, {"title": "C++ 变量作用域", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-variable-scope.html", "href": "cpp-variable-scope.html"}, {"title": "C++ 变量类型", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-variable-types.html", "href": "cpp-variable-types.html"}, {"title": "C++ vector 容器", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-vector.html", "href": "cpp-vector.html"}, {"title": "C++ Web 编程", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cpp-web-programming.html", "href": "cpp-web-programming.html"}, {"title": "C++ 导入标准库", "group": "cplusplus", "subgroup": "专题", "url": "https://www.runoob.com/cplusplus/cppo-import-header-file.html", "href": "cppo-import-header-file.html"}, {"title": "C++ AI 编程助手", "group": "cplusplus", "subgroup": "AI / 工具", "url": "https://www.runoob.com/cplusplus/fitten-code-cpp.html", "href": "fitten-code-cpp.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

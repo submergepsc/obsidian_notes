@@ -1,0 +1,484 @@
+URL: https://www.runoob.com/flutter/flutter-animation.html
+Title: Flutter 动画基础 | 菜鸟教程
+
+Flutter 动画基础 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Flutter 教程 
+
+Flutter 主题与样式 
+
+Flutter 本地存储 
+
+Flutter 动画基础 
+
+本节将介绍 Flutter 中的动画实现，包括隐式动画和显式动画。 
+
+隐式动画 
+
+隐式动画是由 Flutter 自动处理过渡效果的动画 Widget。 
+
+实例：AnimatedContainer 
+
+class AnimatedContainerExample extends StatefulWidget { 
+
+const AnimatedContainerExample ( { super . key } ) ; 
+
+@override 
+
+State < AnimatedContainerExample > createState ( ) => 
+
+_AnimatedContainerExampleState ( ) ; 
+
+} 
+
+class _AnimatedContainerExampleState 
+
+extends State < AnimatedContainerExample > { 
+
+bool _isLarge = false ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Column ( 
+
+children : [ 
+
+// 点击切换尺寸 
+
+GestureDetector ( 
+
+onTap : ( ) => setState ( ( ) => _isLarge = ! _isLarge ) , 
+
+child : AnimatedContainer ( 
+
+duration : const Duration ( milliseconds : 500 ) , // 动画时长 
+
+curve : Curves. easeInOut , // 动画曲线 
+
+width : _isLarge ? 200 : 100 , 
+
+height : _isLarge ? 200 : 100 , 
+
+color : _isLarge ? Colors. blue : Colors. red , 
+
+child : Center ( 
+
+child : Text ( 
+
+_isLarge ? '大' : '小' , 
+
+style : const TextStyle ( color : Colors. white , fontSize : 24 ) , 
+
+) , 
+
+) , 
+
+) , 
+
+) , 
+
+const SizedBox ( height : 20 ) , 
+
+ElevatedButton ( 
+
+onPressed : ( ) => setState ( ( ) => _isLarge = ! _isLarge ) , 
+
+child : const Text ( '切换' ) , 
+
+) , 
+
+] , 
+
+) ; 
+
+} 
+
+} 
+
+常用隐式动画 Widget 
+
+Widget 
+
+说明 
+
+AnimatedContainer 
+
+容器大小、颜色等属性变化时的动画 
+
+AnimatedOpacity 
+
+透明度变化动画 
+
+AnimatedPadding 
+
+内边距变化动画 
+
+AnimatedAlign 
+
+对齐方式变化动画 
+
+AnimatedSwitcher 
+
+切换子 Widget 时的动画 
+
+AnimatedDefaultTextStyle 
+
+文字样式变化动画 
+
+显式动画 
+
+显式动画使用 AnimationController 完全控制动画。 
+
+实例：旋转动画 
+
+class RotationAnimation extends StatefulWidget { 
+
+const RotationAnimation ( { super . key } ) ; 
+
+@override 
+
+State < RotationAnimation > createState ( ) => _RotationAnimationState ( ) ; 
+
+} 
+
+class _RotationAnimationState extends State < RotationAnimation > 
+
+with SingleTickerProviderStateMixin { 
+
+late AnimationController _controller ; 
+
+late Animation < double > _animation ; 
+
+@override 
+
+void initState ( ) { 
+
+super . initState ( ) ; 
+
+// 创建动画控制器 
+
+_controller = AnimationController ( 
+
+duration : const Duration ( seconds : 2 ) , 
+
+vsync : this , 
+
+) ; 
+
+// 创建旋转动画（0 到 1 映射到 0 到 2π） 
+
+_animation = Tween < double > ( begin : 0 , end : 6.28 ) . animate ( 
+
+CurvedAnimation ( parent : _controller , curve : Curves. linear ) , 
+
+) ; 
+
+// 开始动画 
+
+_controller. repeat ( ) ; 
+
+} 
+
+@override 
+
+void dispose ( ) { 
+
+_controller. dispose ( ) ; 
+
+super . dispose ( ) ; 
+
+} 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Center ( 
+
+child : AnimatedBuilder ( 
+
+animation : _animation , 
+
+builder : ( context , child ) { 
+
+return Transform. rotate ( 
+
+angle : _animation. value , // 旋转角度 
+
+child : const Icon ( Icons. refresh , size : 100 ) , 
+
+) ; 
+
+} , 
+
+) , 
+
+) ; 
+
+} 
+
+} 
+
+交错动画 
+
+实例：交错动画 
+
+class StaggeredAnimation extends StatefulWidget { 
+
+const StaggeredAnimation ( { super . key } ) ; 
+
+@override 
+
+State < StaggeredAnimation > createState ( ) => _StaggeredAnimationState ( ) ; 
+
+} 
+
+class _StaggeredAnimationState extends State < StaggeredAnimation > 
+
+with TickerProviderStateMixin { 
+
+late AnimationController _controller ; 
+
+// 各个动画 
+
+late Animation < double > _fadeAnimation ; 
+
+late Animation < double > _scaleAnimation ; 
+
+late Animation < Offset > _slideAnimation ; 
+
+@override 
+
+void initState ( ) { 
+
+super . initState ( ) ; 
+
+_controller = AnimationController ( 
+
+duration : const Duration ( milliseconds : 1500 ) , 
+
+vsync : this , 
+
+) ; 
+
+// 淡入动画（0-0.5） 
+
+_fadeAnimation = Tween < double > ( begin : 0 , end : 1 ) . animate ( 
+
+CurvedAnimation ( 
+
+parent : _controller , 
+
+curve : const Interval ( 0 , 0.5 , curve : Curves. easeOut ) , 
+
+) , 
+
+) ; 
+
+// 缩放动画（0.3-0.7） 
+
+_scaleAnimation = Tween < double > ( begin : 0.5 , end : 1 ) . animate ( 
+
+CurvedAnimation ( 
+
+parent : _controller , 
+
+curve : const Interval ( 0.3 , 0.7 , curve : Curves. elasticOut ) , 
+
+) , 
+
+) ; 
+
+// 滑入动画（0.5-1.0） 
+
+_slideAnimation = Tween < Offset > ( 
+
+begin : const Offset ( 0 , 0.5 ) , 
+
+end : Offset. zero , 
+
+) . animate ( 
+
+CurvedAnimation ( 
+
+parent : _controller , 
+
+curve : const Interval ( 0.5 , 1 , curve : Curves. easeOutCubic ) , 
+
+) , 
+
+) ; 
+
+_controller. forward ( ) ; 
+
+} 
+
+@override 
+
+void dispose ( ) { 
+
+_controller. dispose ( ) ; 
+
+super . dispose ( ) ; 
+
+} 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return AnimatedBuilder ( 
+
+animation : _controller , 
+
+builder : ( context , child ) { 
+
+return FadeTransition ( 
+
+opacity : _fadeAnimation , 
+
+child : ScaleTransition ( 
+
+scale : _scaleAnimation , 
+
+child : SlideTransition ( 
+
+position : _slideAnimation , 
+
+child : const Card ( 
+
+child : Padding ( 
+
+padding : EdgeInsets. all ( 24 ) , 
+
+child : Text ( '欢迎' ) , 
+
+) , 
+
+) , 
+
+) , 
+
+) , 
+
+) ; 
+
+} , 
+
+) ; 
+
+} 
+
+} 
+
+Hero 动画 
+
+Hero 动画用于在页面切换时创建共享元素的过渡效果。 
+
+实例：Hero 动画 
+
+// 首页 - 带 Hero 的图片 
+
+class HomePage extends StatelessWidget { 
+
+const HomePage ( { super . key } ) ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Scaffold ( 
+
+appBar : AppBar ( title : const Text ( '首页' ) ) , 
+
+body : Center ( 
+
+child : GestureDetector ( 
+
+onTap : ( ) => Navigator. push ( 
+
+context , 
+
+MaterialPageRoute ( builder : ( _ ) => const DetailPage ( ) ) , 
+
+) , 
+
+child : Hero ( 
+
+tag : 'myHero' , // 相同的 tag 
+
+child : Image. network ( 
+
+'https://picsum.photos/200' , 
+
+width : 200 , 
+
+height : 200 , 
+
+) , 
+
+) , 
+
+) , 
+
+) , 
+
+) ; 
+
+} 
+
+} 
+
+// 详情页 - 带 Hero 的图片 
+
+class DetailPage extends StatelessWidget { 
+
+const DetailPage ( { super . key } ) ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Scaffold ( 
+
+appBar : AppBar ( title : const Text ( '详情' ) ) , 
+
+body : Center ( 
+
+child : Hero ( 
+
+tag : 'myHero' , // 相同的 tag 
+
+child : Image. network ( 
+
+'https://picsum.photos/200' , 
+
+width : 300 , 
+
+height : 300 , 
+
+) , 
+
+) , 
+
+) , 
+
+) ; 
+
+} 
+
+} 
+
+隐式动画适合简单场景，显式动画适合复杂控制。 
+
+Hero 动画是页面切换时的最佳选择。 
+
+AI 思考中... 
+
+Flutter 主题与样式 
+
+Flutter 本地存储

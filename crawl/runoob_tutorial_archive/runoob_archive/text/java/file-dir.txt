@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/file-dir.html
+Title: Java 实例 – 在指定目录中创建文件 | 菜鸟教程
+
+Java 实例 – 在指定目录中创建文件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 获取文件修改时间 
+
+Java 实例 – 检测文件是否存在 
+
+Java 实例 - 在指定目录中创建文件 
+
+以下实例演示了使用 File 类的 file.createTempFile() 方法在指定目录中创建文件： 
+
+Main.java 文件 
+
+import java . io . File ; public class Main { public static void main ( String [ ] args ) throws Exception { File file = null ; File dir = new File ( " C:/ " ) ; file = File . createTempFile ( " JavaTemp " , " .javatemp " , dir ) ; System . out . println ( file . getPath ( ) ) ; } } 
+
+以上代码运行输出结果为： 
+
+C:\JavaTemp37056.javatemp 
+
+AI 思考中... 
+
+Java 实例 – 获取文件修改时间 
+
+Java 实例 – 检测文件是否存在

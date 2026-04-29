@@ -1,0 +1,96 @@
+URL: https://www.runoob.com/font-awesome/fontawesome-icons-hand.html
+Title: Font Awesome 手势图标 | 菜鸟教程
+
+Font Awesome 手势图标 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Font Awesome 图标 
+
+Font Awesome 性别图标 
+
+Font Awesome 医疗图标 
+
+Font Awesome 手势图标 
+
+下表显示了所有的 Font Awesome 手势图标： 
+
+图标 
+
+描述 
+
+实例 
+
+fa fa-hand-grab-o 
+
+尝试一下 
+
+fa fa-hand-lizard-o 
+
+尝试一下 
+
+fa fa-hand-o-down 
+
+尝试一下 
+
+fa fa-hand-o-left 
+
+尝试一下 
+
+fa fa-hand-o-right 
+
+尝试一下 
+
+fa fa-hand-o-up 
+
+尝试一下 
+
+fa fa-hand-paper-o 
+
+尝试一下 
+
+fa fa-hand-peace-o 
+
+尝试一下 
+
+fa fa-hand-pointer-o 
+
+尝试一下 
+
+fa fa-rocket 
+
+尝试一下 
+
+fa fa-hand-scissors-o 
+
+尝试一下 
+
+fa fa-hand-spock-o 
+
+尝试一下 
+
+fa fa-hand-stop-o 
+
+尝试一下 
+
+fa fa-thumbs-down 
+
+尝试一下 
+
+fa fa-thumbs-o-down 
+
+尝试一下 
+
+fa fa-thumbs-o-up 
+
+尝试一下 
+
+fa fa-thumbs-up 
+
+尝试一下 
+
+AI 思考中... 
+
+Font Awesome 性别图标 
+
+Font Awesome 医疗图标

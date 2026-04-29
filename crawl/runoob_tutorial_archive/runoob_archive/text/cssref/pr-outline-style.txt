@@ -1,0 +1,136 @@
+URL: https://www.runoob.com/cssref/pr-outline-style.html
+Title: CSS outline-style 属性 | 菜鸟教程
+
+CSS outline-style 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 outline-offset 属性 
+
+CSS Outline-width 属性 
+
+CSS outline-style 属性 
+
+实例 
+
+设置outline的样式： 
+
+p 
+{ 
+outline-style:dotted; 
+} 
+
+尝试一下 » 
+
+在此页底部有更多的例子。 
+
+属性定义及使用说明 
+
+outline（轮廓）是绘制于元素周围的一条线，位于边框边缘的外围。 
+
+outline-style属性指定outline的样式。 
+
+默认值： 
+
+none 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS2 
+
+JavaScript 语法： 
+
+object .style.outlineStyle="dotted" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+outline-style 
+
+1.0 
+
+8.0 
+
+1.5 
+
+1.2 
+
+7.0 
+
+提示和注释 
+
+outline是围绕元素。它是围绕元素的边距。但是，它是来自不同的边框属性。 
+
+outline不是元素尺寸的一部分，因此元素的宽度和高度属性不包含轮廓的宽度。 
+
+属性值 
+
+值 
+
+描述 
+
+none 
+
+默认。定义无轮廓。 
+
+dotted 
+
+定义点状的轮廓。 
+
+dashed 
+
+定义虚线轮廓。 
+
+solid 
+
+定义实线轮廓。 
+
+double 
+
+定义双线轮廓。双线的宽度等同于 outline-width 的值。 
+
+groove 
+
+定义 3D 凹槽轮廓。此效果取决于 outline-color 值。 
+
+ridge 
+
+定义 3D 凸槽轮廓。此效果取决于 outline-color 值。 
+
+inset 
+
+定义 3D 凹边轮廓。此效果取决于 outline-color 值。 
+
+outset 
+
+定义 3D 凸边轮廓。此效果取决于 outline-color 值。 
+
+inherit 
+
+规定应该从父元素继承轮廓样式的设置。 
+
+更多实例 
+
+设置outline的样式 
+这个例子演示了如何设置outline的样式。 
+
+相关文章 
+
+CSS 教程: CSS Outline 
+
+CSS 参考手册: outline 属性 
+
+AI 思考中... 
+
+CSS3 outline-offset 属性 
+
+CSS Outline-width 属性

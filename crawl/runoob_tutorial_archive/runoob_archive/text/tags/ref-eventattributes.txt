@@ -1,0 +1,531 @@
+URL: https://www.runoob.com/tags/ref-eventattributes.html
+Title: HTML 事件 | 菜鸟教程
+
+HTML 事件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 全局属性 
+
+HTML 画布 
+
+HTML 事件属性 
+
+全局事件属性 
+
+HTML 4 的新特性之一是可以使 HTML 事件触发浏览器中的行为，比方说当用户点击某个 HTML 元素时启动一段 JavaScript。 
+
+如果你想学习更多关于事件属性，请访问 JavaScript 教程 
+
+下面的表格提供了标准的事件属性，可以把它们插入 HTML/XHTML 元素中，以定义事件行为。 
+
+New : HTML5新增属性事件。 
+
+窗口事件属性（Window Event Attributes） 
+
+由窗口触发该事件 (适用于 <body> 标签): 
+
+属性 
+
+值 
+
+描述 
+
+onafterprint New 
+
+script 
+
+在打印文档之后运行脚本 
+
+onbeforeprint New 
+
+script 
+
+在文档打印之前运行脚本 
+
+onbeforeonload New 
+
+script 
+
+在文档加载之前运行脚本 
+
+onblur 
+
+script 
+
+当窗口失去焦点时运行脚本 
+
+onerror New 
+
+script 
+
+当错误发生时运行脚本 
+
+onfocus 
+
+script 
+
+当窗口获得焦点时运行脚本 
+
+onhashchange New 
+
+script 
+
+当文档改变时运行脚本 
+
+onload 
+
+script 
+
+当文档加载时运行脚本 
+
+onmessage New 
+
+script 
+
+当触发消息时运行脚本 
+
+onoffline New 
+
+script 
+
+当文档离线时运行脚本 
+
+ononline New 
+
+script 
+
+当文档上线时运行脚本 
+
+onpagehide New 
+
+script 
+
+当窗口隐藏时运行脚本 
+
+onpageshow New 
+
+script 
+
+当窗口可见时运行脚本 
+
+onpopstate New 
+
+script 
+
+当窗口历史记录改变时运行脚本 
+
+onredo New 
+
+script 
+
+当文档执行再执行操作（redo）时运行脚本 
+
+onresize New 
+
+script 
+
+当调整窗口大小时运行脚本 
+
+onstorage New 
+
+script 
+
+当 Web Storage 区域更新时（存储空间中的数据发生变化时）运行脚本 
+
+onundo New 
+
+script 
+
+当文档执行撤销时运行脚本 
+
+onunload New 
+
+script 
+
+当用户离开文档时运行脚本 
+
+表单事件(Form Events) 
+
+表单事件在HTML表单中触发 (适用于所有 HTML 元素, 但该HTML元素需在form表单内): 
+
+属性 
+
+值 
+
+描述 
+
+onblur 
+
+script 
+
+当元素失去焦点时运行脚本 
+
+onchange 
+
+script 
+
+当元素改变时运行脚本 
+
+oncontextmenu New 
+
+script 
+
+当触发上下文菜单时运行脚本 
+
+onfocus 
+
+script 
+
+当元素获得焦点时运行脚本 
+
+onformchange New 
+
+script 
+
+当表单改变时运行脚本 
+
+onforminput New 
+
+script 
+
+当表单获得用户输入时运行脚本 
+
+oninput New 
+
+script 
+
+当元素获得用户输入时运行脚本 
+
+oninvalid New 
+
+script 
+
+当元素无效时运行脚本 
+
+onreset 
+
+script 
+
+当表单重置时运行脚本。 HTML 5 不支持。 
+
+onselect 
+
+script 
+
+当选取元素时运行脚本 
+
+onsubmit 
+
+script 
+
+当提交表单时运行脚本 
+
+键盘事件（Keyboard Events） 
+
+属性 
+
+值 
+
+描述 
+
+onkeydown 
+
+script 
+
+当按下按键时运行脚本 
+
+onkeypress 
+
+script 
+
+当按下并松开按键时运行脚本 
+
+onkeyup 
+
+script 
+
+当松开按键时运行脚本 
+
+鼠标事件（Mouse Events） 
+
+通过鼠标触发事件, 类似用户的行为: 
+
+属性 
+
+值 
+
+描述 
+
+onclick 
+
+script 
+
+当单击鼠标时运行脚本 
+
+ondblclick 
+
+script 
+
+当双击鼠标时运行脚本 
+
+ondrag New 
+
+script 
+
+当拖动元素时运行脚本 
+
+ondragend New 
+
+script 
+
+当拖动操作结束时运行脚本 
+
+ondragenter New 
+
+script 
+
+当元素被拖动至有效的拖放目标时运行脚本 
+
+ondragleave New 
+
+script 
+
+当元素离开有效拖放目标时运行脚本 
+
+ondragover New 
+
+script 
+
+当元素被拖动至有效拖放目标上方时运行脚本 
+
+ondragstart New 
+
+script 
+
+当拖动操作开始时运行脚本 
+
+ondrop New 
+
+script 
+
+当被拖动元素正在被拖放时运行脚本 
+
+onmousedown 
+
+script 
+
+当按下鼠标按钮时运行脚本 
+
+onmousemove 
+
+script 
+
+当鼠标指针移动时运行脚本 
+
+onmouseout 
+
+script 
+
+当鼠标指针移出元素时运行脚本 
+
+onmouseover 
+
+script 
+
+当鼠标指针移至元素之上时运行脚本 
+
+onmouseup 
+
+script 
+
+当松开鼠标按钮时运行脚本 
+
+onmousewheel New 
+
+script 
+
+当转动鼠标滚轮时运行脚本 
+
+onscroll New 
+
+script 
+
+当滚动元素的滚动条时运行脚本 
+
+多媒体事件(Media Events) 
+
+通过视频（videos），图像（images）或者音频（audio） 触发该事件，多应用于 HTML 媒体元素比如 
+ <audio>, <embed>, <img>, <object>, 和<video>: 
+
+属性 
+
+值 
+
+描述 
+
+onabort 
+
+script 
+
+当发生中止事件时运行脚本 
+
+oncanplay New 
+
+script 
+
+当媒介能够开始播放但可能因缓冲而需要停止时运行脚本 
+
+oncanplaythrough New 
+
+script 
+
+当媒介能够无需因缓冲而停止即可播放至结尾时运行脚本 
+
+ondurationchange New 
+
+script 
+
+当媒介长度改变时运行脚本 
+
+onemptied New 
+
+script 
+
+当媒介资源元素突然为空时（网络错误、加载错误等）运行脚本 
+
+onended New 
+
+script 
+
+当媒介已抵达结尾时运行脚本 
+
+onerror New 
+
+script 
+
+当在元素加载期间发生错误时运行脚本 
+
+onloadeddata New 
+
+script 
+
+当加载媒介数据时运行脚本 
+
+onloadedmetadata New 
+
+script 
+
+当媒介元素的持续时间以及其他媒介数据已加载时运行脚本 
+
+onloadstart New 
+
+script 
+
+当浏览器开始加载媒介数据时运行脚本 
+
+onpause New 
+
+script 
+
+当媒介数据暂停时运行脚本 
+
+onplay New 
+
+script 
+
+当媒介数据将要开始播放时运行脚本 
+
+onplaying New 
+
+script 
+
+当媒介数据已开始播放时运行脚本 
+
+onprogress New 
+
+script 
+
+当浏览器正在取媒介数据时运行脚本 
+
+onratechange New 
+
+script 
+
+当媒介数据的播放速率改变时运行脚本 
+
+onreadystatechange New 
+
+script 
+
+当就绪状态（ready-state）改变时运行脚本 
+
+onseeked New 
+
+script 
+
+当媒介元素的定位属性 [1] 不再为真且定位已结束时运行脚本 
+
+onseeking New 
+
+script 
+
+当媒介元素的定位属性为真且定位已开始时运行脚本 
+
+onstalled New 
+
+script 
+
+当取回媒介数据过程中（延迟）存在错误时运行脚本 
+
+onsuspend New 
+
+script 
+
+当浏览器已在取媒介数据但在取回整个媒介文件之前停止时运行脚本 
+
+ontimeupdate New 
+
+script 
+
+当媒介改变其播放位置时运行脚本 
+
+onvolumechange New 
+
+script 
+
+当媒介改变音量亦或当音量被设置为静音时运行脚本 
+
+onwaiting New 
+
+script 
+
+当媒介已停止播放但打算继续播放时运行脚本 
+
+其他事件 
+
+属性 
+
+值 
+
+描述 
+
+onshow New 
+
+script 
+
+当 <menu> 元素在上下文显示时触发 
+
+ontoggle New 
+
+script 
+
+当用户打开或关闭 <details> 元素时触发 
+
+AI 思考中... 
+
+HTML 全局属性 
+
+HTML 画布

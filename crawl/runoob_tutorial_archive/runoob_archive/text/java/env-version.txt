@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/env-version.html
+Title: Java 实例 – 如何查看当前 Java 运行的版本? | 菜鸟教程
+
+Java 实例 – 如何查看当前 Java 运行的版本? | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 如何执行指定class文件目录（classpath） 
+
+Java 实例 – 字符串比较 
+
+Java 实例 - 如何查看当前 Java 运行的版本? 
+
+我们可以使用 -version 参数来查看当前 Java 的运行版本，命令如下： 
+
+java -version 
+
+以上代码实例输出结果为： 
+
+java version "1.6.0_13"
+Java(TM) SE Runtime Environment (build 1.6.0_13-b03)
+Java HotSpot(TM) Client VM (build 11.3-b02, mixed mode, sharing) 
+
+AI 思考中... 
+
+Java 实例 – 如何执行指定class文件目录（classpath） 
+
+Java 实例 – 字符串比较

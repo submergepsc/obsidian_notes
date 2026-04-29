@@ -1,0 +1,102 @@
+URL: https://www.runoob.com/postgresql/postgresql-order-by.html
+Title: PostgreSQL ORDER BY  语句 | 菜鸟教程
+
+PostgreSQL ORDER BY 语句 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+PostgreSQL 教程 
+
+PostgreSQL LIMIT 子句 
+
+PostgreSQL GROUP BY 语句 
+
+PostgreSQL ORDER BY 语句 
+
+在 PostgreSQL 中， ORDER BY 用于对一列或者多列数据进行升序（ASC）或者降序（DESC）排列。 
+
+语法 
+
+ORDER BY 子句的基础语法如下： 
+
+SELECT column-list
+FROM table_name
+[WHERE condition]
+[ORDER BY column1, column2, .. columnN] [ASC | DESC]; 
+
+您可以在 ORDER BY 中使用一列或者多列，但是必须保证要排序的列必须存在。 
+
+ASC 表示升序， DESC 表示降序。 
+
+实例 
+
+创建 COMPANY 表（ 下载 COMPANY SQL 文件 ），数据内容如下： 
+
+runoobdb# select * from COMPANY;
+ id | name | age | address | salary
+----+-------+-----+-----------+--------
+ 1 | Paul | 32 | California| 20000
+ 2 | Allen | 25 | Texas | 15000
+ 3 | Teddy | 23 | Norway | 20000
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 5 | David | 27 | Texas | 85000
+ 6 | Kim | 22 | South-Hall| 45000
+ 7 | James | 24 | Houston | 10000
+(7 rows) 
+
+下面实例将对结果根据 AGE 字段值进行升序排列： 
+
+runoobdb=# SELECT * FROM COMPANY ORDER BY AGE ASC; 
+
+得到以下结果： 
+
+id | name | age | address | salary 
+----+-------+-----+----------------------------------------------------+--------
+ 6 | Kim | 22 | South-Hall | 45000
+ 3 | Teddy | 23 | Norway | 20000
+ 7 | James | 24 | Houston | 10000
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 2 | Allen | 25 | Texas | 15000
+ 5 | David | 27 | Texas | 85000
+ 1 | Paul | 32 | California | 20000
+(7 rows) 
+
+下面实例将对结果根据 NAME 字段值和 SALARY 字段值进行升序排序： 
+
+runoobdb=# SELECT * FROM COMPANY ORDER BY NAME, SALARY ASC; 
+
+得到以下结果： 
+
+id | name | age | address | salary 
+----+-------+-----+----------------------------------------------------+--------
+ 2 | Allen | 25 | Texas | 15000
+ 5 | David | 27 | Texas | 85000
+ 7 | James | 24 | Houston | 10000
+ 6 | Kim | 22 | South-Hall | 45000
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 1 | Paul | 32 | California | 20000
+ 3 | Teddy | 23 | Norway | 20000
+(7 rows) 
+
+下面实例将对结果根据NAME字段值进行降序排列： 
+
+runoobdb=# SELECT * FROM COMPANY ORDER BY NAME DESC; 
+
+得到以下结果： 
+
+id | name | age | address | salary 
+----+-------+-----+----------------------------------------------------+--------
+ 3 | Teddy | 23 | Norway | 20000
+ 1 | Paul | 32 | California | 20000
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 6 | Kim | 22 | South-Hall | 45000
+ 7 | James | 24 | Houston | 10000
+ 5 | David | 27 | Texas | 85000
+ 2 | Allen | 25 | Texas | 15000
+(7 rows) 
+
+AI 思考中... 
+
+PostgreSQL LIMIT 子句 
+
+PostgreSQL GROUP BY 语句

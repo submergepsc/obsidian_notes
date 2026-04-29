@@ -1,0 +1,184 @@
+URL: https://www.runoob.com/python3/python3-elif-statement.html
+Title: Python elif 语句 | 菜鸟教程
+
+Python elif 语句 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python if 语句 
+
+Python else 语句 
+
+Python elif 语句 
+
+elif 是 Python 中用于多条件判断的关键字，它是 "else if" 的缩写。 
+
+当需要处理多个条件时， elif 允许我们串联多个条件判断，形成完整的分支结构。 
+
+单词释义 ： elif 是 "else if" 的缩写，意为"其他的如果"。 
+
+基本语法与参数 
+
+elif 必须与 if 配合使用，不能单独存在。 
+
+语法格式 
+
+if 条件1:
+ 代码块1
+elif 条件2:
+ 代码块2
+elif 条件3:
+ 代码块3
+else:
+ 代码块4 
+
+语法说明 
+
+条件判断顺序 ： 从上到下依次判断，遇到第一个 True 条件时执行对应代码块，然后跳过其余分支。 
+
+数量限制 ： elif 数量没有限制，可以根据需要添加任意多个。 
+
+可选 else ： else 是可选的，当所有条件都不满足时执行。 
+
+实例 
+
+示例 1：基础多条件判断 
+
+实例 
+
+# 成绩分级系统 
+
+score = 85 
+
+if score >= 90 : 
+
+grade = "A" 
+
+elif score >= 80 : 
+
+grade = "B" 
+
+elif score >= 70 : 
+
+grade = "C" 
+
+elif score >= 60 : 
+
+grade = "D" 
+
+else : 
+
+grade = "F" 
+
+print ( f "成绩等级: {grade}" ) # 输出: 成绩等级: B 
+
+运行结果预期: 
+
+成绩等级: B 
+
+代码解析: 
+
+score = 85，首先检查 score >= 90 （False）。 
+
+继续检查 score >= 80 （True），执行对应代码块。 
+
+一旦匹配成功，立即跳出整个 if-elif 链。 
+
+示例 2：字符串匹配 
+
+实例 
+
+# 简单的菜单选择 
+
+choice = "2" 
+
+if choice == "1" : 
+
+print ( "你选择了新建文件" ) 
+
+elif choice == "2" : 
+
+print ( "你选择了打开文件" ) 
+
+elif choice == "3" : 
+
+print ( "你选择了保存文件" ) 
+
+elif choice == "4" : 
+
+print ( "你选择了退出" ) 
+
+else : 
+
+print ( "无效选择" ) 
+
+运行结果预期: 
+
+你选择了打开文件 
+
+代码解析: 
+
+elif 用于多选项的分支判断。 
+
+每个分支互斥，只执行第一个匹配的条件。 
+
+示例 3：复杂的条件组合 
+
+实例 
+
+# 多条件组合判断 
+
+age = 25 
+
+income = 5000 
+
+if age < 18 : 
+
+print ( "未成年人" ) 
+
+elif age >= 18 and income < 3000 : 
+
+print ( "成年人，低收入" ) 
+
+elif age >= 18 and income >= 3000 and income < 10000 : 
+
+print ( "成年人，中等收入" ) 
+
+elif age >= 18 and income >= 10000 : 
+
+print ( "成年人，高收入" ) 
+
+# 使用 elif 实现更清晰的逻辑 
+
+status = "error" 
+
+if status == "success" : 
+
+print ( "操作成功" ) 
+
+elif status == "error" : 
+
+print ( "操作失败" ) 
+
+elif status == "warning" : 
+
+print ( "警告" ) 
+
+elif status == "info" : 
+
+print ( "信息" ) 
+
+运行结果预期: 
+
+成年人，中等收入
+操作失败 
+
+elif 使得多条件分支的代码更加清晰易读。 
+
+AI 思考中... 
+
+Python if 语句 
+
+Python else 语句

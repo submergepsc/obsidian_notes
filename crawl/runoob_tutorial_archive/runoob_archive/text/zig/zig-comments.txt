@@ -1,0 +1,110 @@
+URL: https://www.runoob.com/zig/zig-comments.html
+Title: Zig 注释 | 菜鸟教程
+
+Zig 注释 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Zig 教程 
+
+Zig 基本语法 
+
+Zig 数据类型 
+
+Zig 注释 
+
+注释不会被编译器处理，只用于在代码中添加说明和解释，帮助开发者理解代码逻辑。 
+
+在 Zig 中，注释有两种形式：单行注释和多行注释。 
+
+1、单行注释 
+
+单行注释以 // 开头，注释内容从 // 开始到行末结束。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+// 这是一个单行注释 
+
+pub fn main ( ) void { 
+
+std. debug . print ( "Hello, World! \n " , . { } ) ; 
+
+} 
+
+2、多行注释 
+
+多行注释以 /* 开始，以 */ 结束，注释内容可以跨越多行。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+/* 
+
+这是一个多行注释 
+
+可以跨越多行 
+
+*/ 
+
+pub fn main ( ) void { 
+
+std. debug . print ( "Hello, World! \n " , . { } ) ; 
+
+} 
+
+注释使用 
+
+以下是一个包含单行注释和多行注释的完整示例，演示了如何在代码中添加注释。 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+// 主函数 
+
+pub fn main ( ) void { 
+
+// 调用标准库的 debug.print 函数打印 "Hello, World!" 
+
+std. debug . print ( "Hello, World! \n " , . { } ) ; 
+
+/* 
+
+这段代码用于演示 Zig 的基本语法 
+
+包括函数定义、标准库使用和注释 
+
+*/ 
+
+const a : i32 = 10 ; // 定义一个整数常量 a，值为 10 
+
+const b : i32 = 20 ; // 定义另一个整数常量 b，值为 20 
+
+// 调用 add 函数并打印结果 
+
+const result = add ( a, b ) ; 
+
+std. debug . print ( "Result: {} \n " , . { result } ) ; 
+
+} 
+
+// 一个简单的加法函数 
+
+fn add ( a : i32, b : i32 ) i32 { 
+
+return a + b ; 
+
+} 
+
+单行注释被用来解释代码中的单个行或局部代码段。 
+
+多行注释被用来对较大段的代码进行说明。 
+
+AI 思考中... 
+
+Zig 基本语法 
+
+Zig 数据类型

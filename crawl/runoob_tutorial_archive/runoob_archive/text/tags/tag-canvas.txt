@@ -1,0 +1,83 @@
+URL: https://www.runoob.com/tags/tag-canvas.html
+Title: HTML <canvas> 标签 | 菜鸟教程
+
+HTML <canvas> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <br> 标签 
+
+HTML <caption> 标签 
+
+HTML <canvas> 标签 
+
+实例 
+
+通过 <canvas> 元素来显示一个红色的矩形： 
+
+< canvas id = " myCanvas " > </ canvas > < script type = " text/javascript " > var canvas=document.getElementById('myCanvas');
+var ctx=canvas.getContext('2d');
+ctx.fillStyle='#FF0000';
+ctx.fillRect(0,0,80,100); </ script > 
+
+尝试一下 » 
+
+浏览器支持 
+
+IE 9、Firefox、Opera、Chrome 和 Safari 支持 <canvas> 标签。 
+
+注释： IE 8 或更早版本的 IE 浏览器不支持 <canvas> 标签。 
+
+标签定义及使用说明 
+
+<canvas> 标签通过脚本（通常是 JavaScript）来绘制图形（比如图表和其他图像）。 
+
+<canvas> 标签只是图形容器，您必须使用脚本来绘制图形。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+<canvas> 标签是 HTML5 中的新标签。 
+
+提示和注释 
+
+注释： <canvas> 元素中的任何文本将会被显示在不支持 <canvas> 的浏览器中。 
+
+提示： 如想了解 canvas 对象的所有属性和方法，请参阅 HTML 画布参考手册 。 
+
+属性 
+
+New : HTML5 中的新属性。 
+
+属性 
+
+值 
+
+描述 
+
+height New 
+
+pixels 
+
+规定画布的高度。 
+
+width New 
+
+pixels 
+
+规定画布的宽度。 
+
+全局属性 
+
+<canvas> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<canvas> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <br> 标签 
+
+HTML <caption> 标签

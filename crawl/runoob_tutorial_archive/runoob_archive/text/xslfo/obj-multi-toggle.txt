@@ -1,0 +1,53 @@
+URL: https://www.runoob.com/xslfo/obj-multi-toggle.html
+Title: XSL-FO multi-toggle 对象 | 菜鸟教程
+
+XSL-FO multi-toggle 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO multi-switch 对象 
+
+XSL-FO page-number 对象 
+
+XSL-FO multi-toggle 对象 
+
+定义和用法 
+
+The <fo:multi-toggle> 对象用于当对象被激活时（如：单击），创建一个域，并从一个 <fo:multi-case> 切换到另一个 <fo:multi-case>。 
+
+"switch-to" 属性通常是匹配要切换到的 <fo:multi-case> 的 "case-name" 属性。 
+
+<fo:multi-toggle> 对象必须是 <fo:multi-case> 对象的子类。 
+
+语法 
+
+<fo:multi-toggle> 
+<!-- 
+Contents:(#PCDATA|bidi-override|character| 
+external-graphic|instream-foreign-object| 
+inline|inline-container|leader|page-number| 
+page-number-citation|basic-link|multi-toggle| 
+block|block-container|table-and-caption| 
+table|list-block)* 
+--> 
+</fo:multi-toggle> 
+
+属性 
+
+属性 
+
+id 
+
+role 
+
+source-document 
+
+switch-to 
+
+AI 思考中... 
+
+XSL-FO multi-switch 对象 
+
+XSL-FO page-number 对象

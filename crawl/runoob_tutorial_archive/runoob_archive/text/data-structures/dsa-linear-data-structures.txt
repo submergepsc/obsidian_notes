@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/data-structures/dsa-linear-data-structures.html
+Title: 线性数据结构 | 菜鸟教程
+
+线性数据结构 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+数据结构

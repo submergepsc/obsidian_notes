@@ -1,0 +1,77 @@
+URL: https://www.runoob.com/schema/schema-el-include.html
+Title: XML Schema include 元素 | 菜鸟教程
+
+XML Schema include 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema import 元素 
+
+XML Schema key 元素 
+
+XML Schema include 元素 
+
+定义和用法 
+
+include 元素用于向一个文档添加带有相同目标命名空间的多个 schema。 
+
+元素信息 
+
+父元素： schema 
+
+语法 
+
+<include 
+id=ID 
+schemaLocation=anyURI 
+any attributes 
+> 
+
+(annotation?) 
+
+</include> 
+
+（? 符号声明在 include 元素中，该元素可出现零次或一次。） 
+
+属性 
+
+描述 
+
+id 
+
+可选。规定该元素的唯一的 ID。 
+
+schemaLocation 
+
+必需。规定在包含 schema 的目标命名空间中，要包括的 schema 的 URI。 
+
+any attributes 
+
+可选。规定带有 non-schema 命名空间的任何其他属性。 
+
+实例 1 
+
+通过被包括的 schema，被包括的文件必须全部引用相同的目标命名空间。如果 schema 目标命名空间不匹配，则包括不会有效： 
+
+<?xml version="1.0"?> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+targetNamespace="https://www.runoob.com/schema"> 
+
+<xs:include schemaLocation="https://www.runoob.com/schema/customer.xsd"/> 
+<xs:include schemaLocation="https://www.runoob.com/schema/company.xsd"/> 
+
+.. 
+
+.. 
+
+.. 
+
+</xs:schema> 
+
+AI 思考中... 
+
+XML Schema import 元素 
+
+XML Schema key 元素

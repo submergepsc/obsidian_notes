@@ -1,0 +1,284 @@
+URL: https://www.runoob.com/vue3/vue3-directives.html
+Title: Vue3 指令 | 菜鸟教程
+
+Vue3 指令 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Vue3 教程 
+
+Vue3 组合式 API 
+
+Vue3 创建单文件组件(SFC) 
+
+Vue3 指令 
+
+Vue 指令（Directives）是 Vue.js 的一项核心功能，它们可以在 HTML 模板中以 v- 开头的特殊属性形式使用，用于将响应式数据绑定到 DOM 元素上或在 DOM 元素上进行一些操作。 
+
+Vue 指令是带有前缀 v- 的特殊 HTML 属性，它赋予 HTML 标签额外的功能。 
+
+与传统的 JavaScript 方法相比，使用 Vue 创建响应式页面要容易得多，并且需要的代码更少。 
+
+以下是几个常用的 Vue 指令： 
+
+指令 
+
+描述 
+
+v-bind 
+
+用于将 Vue 实例的数据绑定到 HTML 元素的属性上。 
+
+v-if 
+
+用于根据表达式的值来条件性地渲染元素或组件。 
+
+v-show 
+
+v-show 是 Vue.js 提供的一种指令，用于根据表达式的值来条件性地显示或隐藏元素。 
+
+v-for 
+
+用于根据数组或对象的属性值来循环渲染元素或组件。 
+
+v-on 
+
+用于在 HTML 元素上绑定事件监听器，使其能够触发 Vue 实例中的方法或函数。 
+
+v-model 
+
+用于在表单控件和 Vue 实例的数据之间创建双向数据绑定。 
+
+除了这些常用的指令，Vue 还提供了一些其他的指令，如 v-text、v-html 等，以及自定义指令，让开发者能够更加灵活地操作 DOM 元素。 
+
+实例 
+
+以下是一些使用 Vue 指令的示例： 
+
+使用 v-model 指令实现表单数据双向绑定： 
+
+实例 
+
+< div id = "app" class = "demo" > 
+
+< input type = "text" v-model = "message" > 
+
+< p > {{ message }} < / p > 
+
+< / div > 
+
+< script > 
+
+const HelloVueApp = { 
+
+data() { 
+
+return { 
+
+message: 'Hello Vue!!' 
+
+} 
+
+} 
+
+} 
+
+Vue.createApp(HelloVueApp).mount('#app') 
+
+< / script > 
+
+尝试一下 » 
+
+使用 v-bind 指令将 Vue 实例的数据绑定到 HTML 元素的属性上： 
+
+实例 
+
+< div id = "app" class = "demo" > 
+
+< img v-bind: src = "imageSrc" > 
+
+< / div > 
+
+< script > 
+
+const HelloVueApp = { 
+
+data() { 
+
+return { 
+
+imageSrc: 'https://static.jyshare.com/images/code-icon-script.png' 
+
+} 
+
+} 
+
+} 
+
+Vue.createApp(HelloVueApp).mount('#app') 
+
+< / script > 
+
+尝试一下 » 
+
+使用 v-if 和 v-else 指令根据表达式的值来条件性地渲染元素或组件： 
+
+实例 
+
+< div id = "app" class = "demo" > 
+
+< p v-if = "showMessage" > Hello Vue! < / p > 
+
+< p v-else> Goodbye Vue! < / p > 
+
+< / div > 
+
+< script > 
+
+const HelloVueApp = { 
+
+data() { 
+
+return { 
+
+showMessage: true 
+
+} 
+
+} 
+
+} 
+
+Vue.createApp(HelloVueApp).mount('#app') 
+
+< / script > 
+
+尝试一下 » 
+
+使用 v-for 指令根据数组的属性值循环渲染元素或组件： 
+
+实例 
+
+< div id = "app" class = "demo" > 
+
+< ul > 
+
+< li v- for = "item in items" :key = "item.id" > 
+
+{{ item.text }} 
+
+< / li > 
+
+< / ul > 
+
+< / div > 
+
+< script > 
+
+const HelloVueApp = { 
+
+data() { 
+
+return { 
+
+items: [ 
+
+{ id: 1, text: 'Item 1' }, 
+
+{ id: 2, text: 'Item 2' }, 
+
+{ id: 3, text: 'Item 3' } 
+
+] 
+
+} 
+
+} 
+
+} 
+
+Vue.createApp(HelloVueApp).mount('#app') 
+
+< / script > 
+
+尝试一下 » 
+
+使用 v-on 指令在 HTML 元素上绑定事件监听器： 
+
+实例 
+
+< div id = "app" > 
+
+< div id = "lightDiv" > 
+
+< div v-show = "lightOn" >< / div > 
+
+< img src = "https://static.jyshare.com/images/svg/img_lightBulb.svg" > 
+
+< / div > 
+
+< button v-on:click = " lightOn =! lightOn " > 开/关 < / button > 
+
+< / div > 
+
+< script > 
+
+const app = Vue.createApp({ 
+
+data() { 
+
+return { 
+
+lightOn: false 
+
+} 
+
+} 
+
+}) 
+
+app.mount('#app') 
+
+< / script > 
+
+尝试一下 » 
+
+以下是一个使用 v-show 指令的示例： 
+
+实例 
+
+< div id = "hello-vue" class = "demo" > 
+
+< button v-on:click = "showMessage = !showMessage" > 显示/隐藏 < / button > 
+
+< p v-show = "showMessage" > Hello Vue! < / p > 
+
+< / div > 
+
+< script > 
+
+const HelloVueApp = { 
+
+data() { 
+
+return { 
+
+showMessage: true 
+
+} 
+
+} 
+
+} 
+
+Vue.createApp(HelloVueApp).mount('#hello-vue') 
+
+< / script > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Vue3 组合式 API 
+
+Vue3 创建单文件组件(SFC)

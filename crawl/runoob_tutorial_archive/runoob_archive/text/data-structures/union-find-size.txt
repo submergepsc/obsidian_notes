@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/data-structures/union-find-size.html
+Title: 并查集 size 的优化 | 菜鸟教程
+
+并查集 size 的优化 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+数据结构

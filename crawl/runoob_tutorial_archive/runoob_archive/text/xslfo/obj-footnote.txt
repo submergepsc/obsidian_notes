@@ -1,0 +1,46 @@
+URL: https://www.runoob.com/xslfo/obj-footnote.html
+Title: XSL-FO footnote 对象 | 菜鸟教程
+
+XSL-FO footnote 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO flow 对象 
+
+XSL-FO footnote-body 对象 
+
+XSL-FO footnote 对象 
+
+定义和用法 
+
+<fo:footnote> 对象定义在页面的 region-body 内部的一个脚注。 
+
+如果 <fo:footnote> 是一个没有被分配到 region-body 的流的后代，这是一个错误。 
+
+如果 <fo:footnote> 是一个生成绝对定位区域的 fo:block-container 的后代，这也是一个错误。 
+
+<fo:footnote> 对象不能把 <fo:float>、<fo:footnote> 或 <fo:marker> 作为后代。 
+
+语法 
+
+<fo:footnote> 
+<!-- 
+Contents:(inline|footnote-body) 
+--> 
+</fo:footnote> 
+
+属性 
+
+属性 
+
+role 
+
+source-document 
+
+AI 思考中... 
+
+XSL-FO flow 对象 
+
+XSL-FO footnote-body 对象

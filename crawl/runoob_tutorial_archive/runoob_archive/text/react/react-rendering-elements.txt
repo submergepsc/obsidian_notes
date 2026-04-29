@@ -1,0 +1,115 @@
+URL: https://www.runoob.com/react/react-rendering-elements.html
+Title: React 元素渲染 | 菜鸟教程
+
+React 元素渲染 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+React 教程 
+
+React Refs 
+
+React 事件处理 
+
+React 元素渲染 
+
+在 React 18 中，元素渲染与之前的版本有一些变化，特别是在使用 ReactDOM.createRoot 和新的并发特性方面。下面是一个详细的示例和解释，展示如何在 React 18 中渲染元素。 
+
+实例 
+
+import React from 'react' ; 
+
+import ReactDOM from 'react-dom/client' ; 
+
+// 创建一个简单的 React 组件 
+
+function App ( ) { 
+
+return < h1 > Hello , React 18 !</ h1 >; 
+
+} 
+
+// 获取 id 为 "example" 的 DOM 容器，并创建一个 React 根节点 
+
+const root = ReactDOM. createRoot ( document. getElementById ( "example" ) ) ; 
+
+// 渲染 React 组件到 DOM 中的根节点 
+
+root. render ( < App /> ) ; 
+
+React 元素是构建 React 应用的最小单元，它描述了你希望在屏幕上看到的内容。React 元素是不可变对象，一旦创建就不能更改。 
+
+const element = <h1>Hello, world!</h1>; 
+
+与浏览器的 DOM 元素不同，React 当中的元素事实上是普通的对象，React DOM 可以确保浏览器 DOM 的数据内容与 React 元素保持一致。 
+
+将元素渲染到 DOM 中 
+
+首先我们在一个 HTML 页面中添加一个 id="example" 的 <div> : 
+
+<div id="example"></div> 
+
+在此 div 中的所有内容都将由 React DOM 来管理，所以我们将其称为 "根" DOM 节点。 
+
+我们用 React 开发应用时一般只会定义一个根节点。但如果你是在一个已有的项目当中引入 React 的话，你可能会需要在不同的部分单独定义 React 根节点。 
+
+要将 React 元素渲染到根DOM节点中，我们通过把它们都传递给 root.render() 的方法来将其渲染到页面上： 
+
+实例 
+
+const element =< h1 > Hello , world !</ h1 >; const root = ReactDOM . createRoot ( document . getElementById ( " example " ) ) ; root . render ( element ) ; 
+
+尝试一下 » 
+
+root.render 方法将 element 渲染到之前创建的根节点中，这样 element 就会显示在 id 为 "example" 的 DOM 元素内。 
+
+更新元素渲染 
+
+React 元素都是不可变的。当元素被创建之后，你是无法改变其内容或属性的。 
+
+目前更新界面的唯一办法是创建一个新的元素，然后将它传入 ReactDOM.render() 方法： 
+
+来看一下这个计时器的例子: 
+
+实例 
+
+const root = ReactDOM . createRoot ( document . getElementById ( " example " ) ) ; function tick ( ) { const element = ( < div >
+ < h1 > Hello , world !</ h1 >
+ < h2 >现在是 { new Date ( ) . toLocaleTimeString ( ) } .</ h2 >
+ </ div > ) ; root . render ( element ) ; } setInterval ( tick , 1000 ) ; 
+
+尝试一下 » 
+
+以上实例通过 setInterval() 方法，每秒钟调用一次 ReactDOM.render()。 
+
+我们可以将要展示的部分封装起来，以下实例用一个函数来表示： 
+
+实例 
+
+function Clock ( props ) { return ( < div >
+ < h1 > Hello , world !</ h1 >
+ < h2 >现在是 { props . date . toLocaleTimeString ( ) } .</ h2 >
+ </ div > ) ; } function tick ( ) { const root = ReactDOM . createRoot ( document . getElementById ( " example " ) ) ; root . render ( < Clock date = { new Date ( ) } /> ) ; } setInterval ( tick , 1 ) ; 
+
+尝试一下 » 
+
+除了函数外我们还可以创建一个 React.Component 的 ES6 类，该类封装了要展示的元素，需要注意的是在 render() 方法中，需要使用 this.props 替换 props ： 
+
+实例 
+
+class Clock extends React . Component { render ( ) { return ( < div >
+ < h1 > Hello , world !</ h1 >
+ < h2 >现在是 { this . props . date . toLocaleTimeString ( ) } .</ h2 >
+ </ div > ) ; } } function tick ( ) { const root = ReactDOM . createRoot ( document . getElementById ( " example " ) ) ; root . render ( < Clock date = { new Date ( ) } /> ) ; } setInterval ( tick , 1 ) ; 
+
+尝试一下 » 
+
+React 只会更新必要的部分 
+
+值得注意的是 React DOM 首先会比较元素内容先后的不同，而在渲染过程中只会更新改变了的部分。 
+
+AI 思考中... 
+
+React Refs 
+
+React 事件处理

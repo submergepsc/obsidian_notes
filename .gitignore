@@ -13,6 +13,8 @@ Thumbs.db
 *.swo
 *~
 tmp_*
+__pycache__/
+*.pyc
 
 # 临时文件和备份文件
 *.tmp
@@ -26,4 +28,3 @@ tmp_*
 # attachments/
 # assets/
 25_1/
-

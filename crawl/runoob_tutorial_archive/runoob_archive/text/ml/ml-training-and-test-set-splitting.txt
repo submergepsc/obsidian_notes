@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/ml/ml-training-and-test-set-splitting.html
+Title: 训练集测试集划分 | 菜鸟教程
+
+训练集测试集划分 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+机器学习

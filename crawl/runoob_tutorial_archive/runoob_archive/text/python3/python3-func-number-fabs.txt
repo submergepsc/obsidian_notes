@@ -1,0 +1,96 @@
+URL: https://www.runoob.com/python3/python3-func-number-fabs.html
+Title: Python3 fabs() 函数 | 菜鸟教程
+
+Python3 fabs() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 exp() 函数 
+
+Python3 floor() 函数 
+
+Python3 fabs() 函数 
+
+描述 
+
+fabs() 方法以浮点数形式返回数字的绝对值，如 math.fabs(-10) 返回10.0。 
+
+fabs() 函数类似于 abs() 函数，但是他有两点区别: 
+
+abs() 是内置函数。 fabs() 函数在 math 模块中定义。 
+
+fabs() 函数只对浮点型跟整型数值有效。 abs() 还可以运用在复数中。 
+
+语法 
+
+以下是 fabs() 方法的语法: 
+
+import math
+
+math.fabs( x ) 
+
+注意： fabs()是不能直接访问的，需要导入 math 模块，通过静态对象调用该方法。 
+
+参数 
+
+x -- 数值表达式，可以是整数、浮点数等，函数返回值为 x 的绝对值，即一个非负数。。 
+
+返回值 
+
+返回数字的绝对值。 
+
+实例 
+
+以下展示了使用 fabs() 方法的实例： 
+
+实例 1 
+
+import math 
+
+x = - 1.5 
+
+y = math . fabs ( x ) 
+
+print ( y ) # 输出 1.5 
+
+x = 10 
+
+y = math . fabs ( x ) 
+
+print ( y ) # 输出 10.0 
+
+以上实例中， fabs(-1.5) 返回了 -1.5 的绝对值 1.5， fabs(10) 返回了 10 的绝对值 10.0。注意，返回值总是一个浮点数，即使传入的参数是整数。 
+
+以上实例运行后输出结果为： 
+
+1.5
+10.0 
+
+实例 2 
+
+#!/usr/bin/python3 
+
+import math # 导入 math 模块 
+
+print ( "math.fabs(-45.17) : " , math . fabs ( - 45.17 ) ) 
+
+print ( "math.fabs(100.12) : " , math . fabs ( 100.12 ) ) 
+
+print ( "math.fabs(100.72) : " , math . fabs ( 100.72 ) ) 
+
+print ( "math.fabs(math.pi) : " , math . fabs ( math . pi ) ) 
+
+以上实例运行后输出结果为： 
+
+math.fabs(-45.17) : 45.17
+math.fabs(100.12) : 100.12
+math.fabs(100.72) : 100.72
+math.fabs(math.pi) : 3.141592653589793 
+
+AI 思考中... 
+
+Python3 exp() 函数 
+
+Python3 floor() 函数

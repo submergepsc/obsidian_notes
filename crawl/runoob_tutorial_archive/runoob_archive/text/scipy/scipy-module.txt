@@ -1,0 +1,126 @@
+URL: https://www.runoob.com/scipy/scipy-module.html
+Title: SciPy 模块列表 | 菜鸟教程
+
+SciPy 模块列表 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SciPy 教程 
+
+SciPy 安装 
+
+SciPy 常量模块 
+
+SciPy 模块列表 
+
+以下列出了 SciPy 常用的一些模块及官网 API 地址： 
+
+模块名 
+
+功能 
+
+参考文档 
+
+scipy.cluster 
+
+向量量化 
+
+cluster API 
+
+scipy.constants 
+
+数学常量 
+
+constants API 
+
+scipy.fft 
+
+快速傅里叶变换 
+
+fft API 
+
+scipy.integrate 
+
+积分 
+
+integrate API 
+
+scipy.interpolate 
+
+插值 
+
+interpolate API 
+
+scipy.io 
+
+数据输入输出 
+
+io API 
+
+scipy.linalg 
+
+线性代数 
+
+linalg API 
+
+scipy.misc 
+
+图像处理 
+
+misc API 
+
+scipy.ndimage 
+
+N 维图像 
+
+ndimage API 
+
+scipy.odr 
+
+正交距离回归 
+
+odr API 
+
+scipy.optimize 
+
+优化算法 
+
+optimize API 
+
+scipy.signal 
+
+信号处理 
+
+signal API 
+
+scipy.sparse 
+
+稀疏矩阵 
+
+sparse API 
+
+scipy.spatial 
+
+空间数据结构和算法 
+
+spatial API 
+
+scipy.special 
+
+特殊数学函数 
+
+special API 
+
+scipy.stats 
+
+统计函数 
+
+stats.mstats API 
+
+更多模块内容可以参考官方文档： https://docs.scipy.org/doc/scipy/reference/ 
+
+AI 思考中... 
+
+SciPy 安装 
+
+SciPy 常量模块

@@ -1,0 +1,82 @@
+URL: https://www.runoob.com/vbscript/func-chr.html
+Title: VBScript Chr 函数 | 菜鸟教程
+
+VBScript Chr 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript CDbl 函数 
+
+VBScript CInt 函数 
+
+VBScript Chr 函数 
+
+Chr 函数把指定的 ANSI 字符代码转换为字符。 
+
+注意： 从 0 到 31 之间的数字表示不可打印的 ASCII 代码，例如 Chr(10) 将返回一个换行符。 
+
+语法 
+
+Chr(charcode) 
+
+参数 
+
+描述 
+
+charcode 
+
+必需。标识某个字符的数字。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+document.write(Chr(65) & "<br />") 
+document.write(Chr(66) & "<br />") 
+document.write(Chr(67) & "<br />") 
+document.write(Chr(97) & "<br />") 
+document.write(Chr(98) & "<br />") 
+document.write(Chr(99) & "<br />") 
+
+</script> 
+
+以上实例输出结果： 
+
+A 
+B 
+C 
+a 
+b 
+c 
+
+尝试一下 » 
+
+实例 2 
+
+<script type="text/vbscript"> 
+
+document.write(Chr(34) & "<br />") 
+document.write(Chr(35) & "<br />") 
+document.write(Chr(36) & "<br />") 
+document.write(Chr(37) & "<br />") 
+
+</script> 
+
+以上实例输出结果： 
+
+" 
+# 
+$ 
+% 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript CDbl 函数 
+
+VBScript CInt 函数

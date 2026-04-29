@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/collection-readonly.html
+Title: Java 实例 – 只读集合 | 菜鸟教程
+
+Java 实例 – 只读集合 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 集合输出 
+
+Java 实例 – 删除集合中指定元素 
+
+Java 实例 - 只读集合 
+
+以下实例演示了如何使用 Collection 类的 Collections.unmodifiableList() 方法来设置集合为只读： 
+
+Main.java 文件 
+
+import java . util . ArrayList ; import java . util . Arrays ; import java . util . Collections ; import java . util . HashMap ; import java . util . HashSet ; import java . util . List ; import java . util . Map ; import java . util . Set ; public class Main { public static void main ( String [ ] argv ) throws Exception { List stuff = Arrays . asList ( new String [ ] { " a " , " b " } ) ; List list = new ArrayList ( stuff ) ; list = Collections . unmodifiableList ( list ) ; try { list . set ( 0 , " new value " ) ; } catch ( UnsupportedOperationException e ) { } Set set = new HashSet ( stuff ) ; set = Collections . unmodifiableSet ( set ) ; Map map = new HashMap ( ) ; map = Collections . unmodifiableMap ( map ) ; System . out . println ( " 集合现在是只读 " ) ; } } 
+
+以上代码运行输出结果为： 
+
+集合现在是只读 
+
+AI 思考中... 
+
+Java 实例 – 集合输出 
+
+Java 实例 – 删除集合中指定元素

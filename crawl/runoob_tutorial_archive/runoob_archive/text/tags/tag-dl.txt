@@ -1,0 +1,56 @@
+URL: https://www.runoob.com/tags/tag-dl.html
+Title: HTML <dl> 标签 | 菜鸟教程
+
+HTML <dl> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <div> 标签 
+
+HTML <dt> 标签 
+
+HTML <dl> 标签 
+
+实例 
+
+带有项目和描述的描述列表： 
+
+< dl > < dt > Coffee </ dt > < dd > Black hot drink </ dd > < dt > Milk </ dt > < dd > White cold drink </ dd > </ dl > 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <dl> 标签。 
+
+标签定义及使用说明 
+
+<dl> 标签定义一个描述列表。 
+
+<dl> 标签与 <dt> （定义项目/名字）和 <dd> （描述每一个项目/名字）一起使用。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+在 HTML 4.01 中，<dl> 标签定义一个定义列表。 
+
+在 HTML5 中，<dl> 标签定义一个描述列表。 
+
+全局属性 
+
+<dl> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<dl> 标签支持 HTML 的事件属性 。 
+
+相关文章 
+
+HTML 教程： HTML 列表 
+
+AI 思考中... 
+
+HTML <div> 标签 
+
+HTML <dt> 标签

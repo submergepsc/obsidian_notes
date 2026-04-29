@@ -1,0 +1,40 @@
+URL: https://www.runoob.com/xslfo/obj-multi-property-set.html
+Title: XSL-FO multi-property-set 对象 | 菜鸟教程
+
+XSL-FO multi-property-set 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO multi-properties 对象 
+
+XSL-FO multi-switch 对象 
+
+XSL-FO multi-property-set 对象 
+
+定义和用法 
+
+<fo:multi-property-set> 对象规定一个用于交替出现的格式化属性的可选集合。 
+
+语法 
+
+<fo:multi-property-set> 
+<!-- 
+Contents:EMPTY 
+--> 
+</fo:multi-property-set> 
+
+属性 
+
+属性 
+
+active-state 
+
+id 
+
+AI 思考中... 
+
+XSL-FO multi-properties 对象 
+
+XSL-FO multi-switch 对象

@@ -1,0 +1,54 @@
+URL: https://www.runoob.com/vbscript/func-timevalue.html
+Title: VBScript TimeValue 函数 | 菜鸟教程
+
+VBScript TimeValue 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript TimeSerial 函数 
+
+VBScript Weekday 函数 
+
+VBScript TimeValue 函数 
+
+TimeValue 函数返回包含时间的子类型 Date 的 Variant。 
+
+语法 
+
+TimeValue(time) 
+
+参数 
+
+描述 
+
+time 
+
+必需。介于 0:00:00 (12:00:00 A.M.) - 23:59:59 (11:59:59 P.M.) 的时间，或任何表示此范围内时间的表达式。 
+
+实例 
+
+实例 
+
+<script type="text/vbscript"> 
+
+document.write(TimeValue("5:55:59 PM") & "<br />") 
+document.write(TimeValue(#5:55:59 PM#) & "<br />") 
+document.write(TimeValue("15:34")) 
+
+</script> 
+
+以上实例输出结果： 
+
+5:55:59 PM 
+5:55:59 PM 
+3:34:00 PM 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript TimeSerial 函数 
+
+VBScript Weekday 函数

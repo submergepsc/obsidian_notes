@@ -1,0 +1,87 @@
+URL: https://www.runoob.com/tags/av-prop-texttracks.html
+Title: HTML 音频/视频 DOM textTracks 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM textTracks 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM startDate 属性 
+
+HTML 音频/视频 DOM videoTracks 属性 
+
+HTML 音频/视频 DOM textTracks 属性 
+
+实例 
+
+获得可用文本轨道的数量： 
+
+myVid=document.getElementById("video1"); 
+alert(myVid.textTracks.length); 
+
+尝试一下 » 
+
+定义和用法 
+
+textTracks 属性返回 TextTrackList 对象。 
+
+TextTrackList 对象表示音频/视频的可用文本轨道。 
+
+每个可用的文本轨道是由 TextTrack 对象表示的。 
+
+浏览器支持 
+
+Internet Explorer 10、Opera、Chrome 和 Safari 6 支持 textTracks 属性。 
+
+注意： Internet Explorer 9 及之前的版本不支持 textTracks 属性。 
+
+语法 
+
+audio|video .textTracks 
+
+返回值 
+
+类型 
+
+描述 
+
+TextTrackList 对象 
+
+表示音频/视频的可用文本轨道。 
+
+TextioTrackList 对象： 
+
+length - 获得音频/视频中可用的文本轨道的数量 
+
+[ index ] - 根据下标 index 来获得 TextTrack 对象 
+
+注释： 第一个可用文本轨道的下标 index 是 0。 
+
+TextTrack 对象 
+
+表示一个文本轨道。 
+
+TextTrack 对象的属性： 
+
+kind - 获得文本轨道的类型（可以是 "subtitles"、"caption"、"descriptions"、"chapters" 或者 "metadata"） 
+
+label - 获得文本轨道的标签 
+
+language - 获得文本轨道的语言 
+
+mode - 获得或设置该轨道是否是活动的（"disabled"|"hidden"|"showing"） 
+
+cues - 获得 TextTrackCueList 对象的 cues 列表 
+
+activeCues - 获得 TextTrackCueList 对象形式的当前活动文本轨道 cues 
+
+addCue( cue ) - 向 cues 列表添加一个 cue 
+
+removeCue( cue ) - 从 cues 列表删除一个 cue 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM startDate 属性 
+
+HTML 音频/视频 DOM videoTracks 属性

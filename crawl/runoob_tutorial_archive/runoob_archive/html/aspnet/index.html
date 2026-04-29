@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>aspnet index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>aspnet index</h1>
+      <p>Offline pages under aspnet</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-516595e8">入门</a> <span>5 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>11 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>2 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>64 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>aspnet (82)</h2><p>二级分类：4 个</p><ul class="page-list"><li><a href="#subgroup-516595e8">入门</a> <span>5 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>11 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>2 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>64 pages</span></li></ul></section><section id="subgroup-516595e8"><h2>入门 (5)</h2><ol class="page-list"><li><a href="mvc-intro.html">ASP.NET MVC 简介</a> <code>https://www.runoob.com/aspnet/mvc-intro.html</code></li><li><a href="razor-intro.html">ASP.NET Razor 标记</a> <code>https://www.runoob.com/aspnet/razor-intro.html</code></li><li><a href="aspnet-intro.html">ASP.NET Web Forms 教程</a> <code>https://www.runoob.com/aspnet/aspnet-intro.html</code></li><li><a href="webpages-intro.html">ASP.NET Web Pages 教程</a> <code>https://www.runoob.com/aspnet/webpages-intro.html</code></li><li><a href="aspnet-tutorial.html">ASP.NET 教程</a> <code>https://www.runoob.com/aspnet/aspnet-tutorial.html</code></li></ol></section><section id="subgroup-53c28003"><h2>参考 (11)</h2><ol class="page-list"><li><a href="aspnet-ref-htmlcontrols.html">ASP.NET HTML 服务器控件</a> <code>https://www.runoob.com/aspnet/aspnet-ref-htmlcontrols.html</code></li><li><a href="mvc-reference.html">ASP.NET MVC 参考手册</a> <code>https://www.runoob.com/aspnet/mvc-reference.html</code></li><li><a href="aspnet-ref-validationcontrols.html">ASP.NET Validation 服务器控件</a> <code>https://www.runoob.com/aspnet/aspnet-ref-validationcontrols.html</code></li><li><a href="webpages-ref-database.html">ASP.NET Web Pages Database 参考手册</a> <code>https://www.runoob.com/aspnet/webpages-ref-database.html</code></li><li><a href="webpages-ref-webmail.html">ASP.NET Web Pages WebMail 参考手册</a> <code>https://www.runoob.com/aspnet/webpages-ref-webmail.html</code></li><li><a href="webpages-ref-websecurity.html">ASP.NET Web Pages WebSecurity 参考手册</a> <code>https://www.runoob.com/aspnet/webpages-ref-websecurity.html</code></li><li><a href="webpages-objects.html">ASP.NET Web Pages 对象</a> <code>https://www.runoob.com/aspnet/webpages-objects.html</code></li><li><a href="webpages-ref-classes.html">ASP.NET Web Pages 类参考手册</a> <code>https://www.runoob.com/aspnet/webpages-ref-classes.html</code></li><li><a href="aspnet-ref-webcontrols.html">ASP.NET Web 服务器控件</a> <code>https://www.runoob.com/aspnet/aspnet-ref-webcontrols.html</code></li><li><a href="webpages-ref-helpers.html">ASP.NET WebPages 帮助器参考手册</a> <code>https://www.runoob.com/aspnet/webpages-ref-helpers.html</code></li><li><a href="aspnet-events.html">ASP.NET 事件句柄</a> <code>https://www.runoob.com/aspnet/aspnet-events.html</code></li></ol></section><section id="subgroup-5b9e4f8b"><h2>实例 (2)</h2><ol class="page-list"><li><a href="webpages-examples.html">ASP.NET Web 的 C# 和 VB 实例</a> <code>https://www.runoob.com/aspnet/webpages-examples.html</code></li><li><a href="aspnet-examples.html">ASP.NET 实例</a> <code>https://www.runoob.com/aspnet/aspnet-examples.html</code></li></ol></section><section id="subgroup-4e139898"><h2>专题 (64)</h2><ol class="page-list"><li><a href="aspnet.html">ASP.NET</a> <code>https://www.runoob.com/aspnet/aspnet.html</code></li><li><a href="control-adrotator.html">ASP.NET AdRotator 控件</a> <code>https://www.runoob.com/aspnet/control-adrotator.html</code></li><li><a href="aspnet-arraylist.html">ASP.NET ArrayList</a> <code>https://www.runoob.com/aspnet/aspnet-arraylist.html</code></li><li><a href="aspnet-button.html">ASP.NET Button 控件</a> <code>https://www.runoob.com/aspnet/aspnet-button.html</code></li><li><a href="aspnet-datalist.html">ASP.NET DataList 控件</a> <code>https://www.runoob.com/aspnet/aspnet-datalist.html</code></li><li><a href="aspnet-hashtable.html">ASP.NET Hashtable</a> <code>https://www.runoob.com/aspnet/aspnet-hashtable.html</code></li><li><a href="control-htmlanchor.html">ASP.NET HtmlAnchor 控件</a> <code>https://www.runoob.com/aspnet/control-htmlanchor.html</code></li><li><a href="control-htmlbutton.html">ASP.NET HtmlButton 控件</a> <code>https://www.runoob.com/aspnet/control-htmlbutton.html</code></li><li><a href="control-htmlform.html">ASP.NET HtmlForm 控件</a> <code>https://www.runoob.com/aspnet/control-htmlform.html</code></li><li><a href="control-htmlgeneric.html">ASP.NET HtmlGeneric 控件</a> <code>https://www.runoob.com/aspnet/control-htmlgeneric.html</code></li><li><a href="control-htmlimage.html">ASP.NET HtmlImage 控件</a> <code>https://www.runoob.com/aspnet/control-htmlimage.html</code></li><li><a href="control-htmlinputbutton.html">ASP.NET HtmlInputButton 控件</a> <code>https://www.runoob.com/aspnet/control-htmlinputbutton.html</code></li><li><a href="control-htmlinputcheckbox.html">ASP.NET HtmlInputCheckBox 控件</a> <code>https://www.runoob.com/aspnet/control-htmlinputcheckbox.html</code></li><li><a href="control-htmlinputfile.html">ASP.NET HtmlInputFile 控件</a> <code>https://www.runoob.com/aspnet/control-htmlinputfile.html</code></li><li><a href="control-htmlinputhidden.html">ASP.NET HtmlInputHidden 控件</a> <code>https://www.runoob.com/aspnet/control-htmlinputhidden.html</code></li><li><a href="control-htmlinputimage.html">ASP.NET HtmlInputImage 控件</a> <code>https://www.runoob.com/aspnet/control-htmlinputimage.html</code></li><li><a href="control-htmlinputradiobutton.html">ASP.NET HtmlInputRadioButton 控件</a> <code>https://www.runoob.com/aspnet/control-htmlinputradiobutton.html</code></li><li><a href="control-htmlinputtext.html">ASP.NET HtmlInputText 控件</a> <code>https://www.runoob.com/aspnet/control-htmlinputtext.html</code></li><li><a href="control-htmlselect.html">ASP.NET HtmlSelect 控件</a> <code>https://www.runoob.com/aspnet/control-htmlselect.html</code></li><li><a href="control-htmltable.html">ASP.NET HtmlTable 控件</a> <code>https://www.runoob.com/aspnet/control-htmltable.html</code></li><li><a href="control-htmltablecell.html">ASP.NET HtmlTableCell 控件</a> <code>https://www.runoob.com/aspnet/control-htmltablecell.html</code></li><li><a href="control-htmltablerow.html">ASP.NET HtmlTableRow 控件</a> <code>https://www.runoob.com/aspnet/control-htmltablerow.html</code></li><li><a href="control-htmltextarea.html">ASP.NET HtmlTextArea 控件</a> <code>https://www.runoob.com/aspnet/control-htmltextarea.html</code></li><li><a href="mvc-htmlhelpers.html">ASP.NET MVC HTML 帮助器</a> <code>https://www.runoob.com/aspnet/mvc-htmlhelpers.html</code></li><li><a href="mvc-app.html">ASP.NET MVC Web 应用程序</a> <code>https://www.runoob.com/aspnet/mvc-app.html</code></li><li><a href="mvc-publish.html">ASP.NET MVC – 发布</a> <code>https://www.runoob.com/aspnet/mvc-publish.html</code></li><li><a href="mvc-security.html">ASP.NET MVC 安全</a> <code>https://www.runoob.com/aspnet/mvc-security.html</code></li><li><a href="mvc-controllers.html">ASP.NET MVC 控制器</a> <code>https://www.runoob.com/aspnet/mvc-controllers.html</code></li><li><a href="mvc-database.html">ASP.NET MVC 数据库</a> <code>https://www.runoob.com/aspnet/mvc-database.html</code></li><li><a href="mvc-folders.html">ASP.NET MVC 文件夹</a> <code>https://www.runoob.com/aspnet/mvc-folders.html</code></li><li><a href="mvc-models.html">ASP.NET MVC 模型</a> <code>https://www.runoob.com/aspnet/mvc-models.html</code></li><li><a href="mvc-views.html">ASP.NET MVC 视图</a> <code>https://www.runoob.com/aspnet/mvc-views.html</code></li><li><a href="mvc-layout.html">ASP.NET MVC 页面和布局</a> <code>https://www.runoob.com/aspnet/mvc-layout.html</code></li><li><a href="razor-cs-variables.html">ASP.NET Razor C# 变量</a> <code>https://www.runoob.com/aspnet/razor-cs-variables.html</code></li><li><a href="razor-cs-loops.html">ASP.NET Razor C# 循环和数组</a> <code>https://www.runoob.com/aspnet/razor-cs-loops.html</code></li><li><a href="razor-cs-logic.html">ASP.NET Razor C# 逻辑</a> <code>https://www.runoob.com/aspnet/razor-cs-logic.html</code></li><li><a href="razor-vb-variables.html">ASP.NET Razor VB 变量</a> <code>https://www.runoob.com/aspnet/razor-vb-variables.html</code></li><li><a href="razor-vb-loops.html">ASP.NET Razor VB 循环和数组</a> <code>https://www.runoob.com/aspnet/razor-vb-loops.html</code></li><li><a href="razor-vb-logic.html">ASP.NET Razor VB 逻辑</a> <code>https://www.runoob.com/aspnet/razor-vb-logic.html</code></li><li><a href="razor-syntax.html">ASP.NET Razor 语法</a> <code>https://www.runoob.com/aspnet/razor-syntax.html</code></li><li><a href="aspnet-repeater.html">ASP.NET Repeater 控件</a> <code>https://www.runoob.com/aspnet/aspnet-repeater.html</code></li><li><a href="aspnet-sortedlist.html">ASP.NET SortedList</a> <code>https://www.runoob.com/aspnet/aspnet-sortedlist.html</code></li><li><a href="aspnet-textbox.html">ASP.NET TextBox 控件</a> <code>https://www.runoob.com/aspnet/aspnet-textbox.html</code></li><li><a href="aspnet-viewstate.html">ASP.NET ViewState</a> <code>https://www.runoob.com/aspnet/aspnet-viewstate.html</code></li><li><a href="webpages-email.html">ASP.NET Web Pages Email</a> <code>https://www.runoob.com/aspnet/webpages-email.html</code></li><li><a href="webpages-forms.html">ASP.NET Web Pages HTML 表单</a> <code>https://www.runoob.com/aspnet/webpages-forms.html</code></li><li><a href="webpages-php.html">ASP.NET Web Pages PHP</a> <code>https://www.runoob.com/aspnet/webpages-php.html</code></li><li><a href="webpages-razor.html">ASP.NET Web Pages Razor</a> <code>https://www.runoob.com/aspnet/webpages-razor.html</code></li><li><a href="webpages-webgrid.html">ASP.NET Web Pages WebGrid</a> <code>https://www.runoob.com/aspnet/webpages-webgrid.html</code></li><li><a href="webpages-publish.html">ASP.NET Web Pages – 发布</a> <code>https://www.runoob.com/aspnet/webpages-publish.html</code></li><li><a href="webpages-global.html">ASP.NET Web Pages 全局文件</a> <code>https://www.runoob.com/aspnet/webpages-global.html</code></li><li><a href="webpages-chart.html">ASP.NET Web Pages 图表</a> <code>https://www.runoob.com/aspnet/webpages-chart.html</code></li><li><a href="webpages-layout.html">ASP.NET Web Pages 布局</a> <code>https://www.runoob.com/aspnet/webpages-layout.html</code></li><li><a href="webpages-helpers.html">ASP.NET Web Pages 帮助器</a> <code>https://www.runoob.com/aspnet/webpages-helpers.html</code></li><li><a href="webpages-files.html">ASP.NET Web Pages 文件</a> <code>https://www.runoob.com/aspnet/webpages-files.html</code></li><li><a href="webpages-folders.html">ASP.NET Web Pages 文件夹</a> <code>https://www.runoob.com/aspnet/webpages-folders.html</code></li><li><a href="aspnet-forms.html">ASP.NET Web 表单</a> <code>https://www.runoob.com/aspnet/aspnet-forms.html</code></li><li><a href="aspnet-pages.html">ASP.NET Web 页面</a> <code>https://www.runoob.com/aspnet/aspnet-pages.html</code></li><li><a href="aspnet-xml.html">ASP.NET XML 数据绑定</a> <code>https://www.runoob.com/aspnet/aspnet-xml.html</code></li><li><a href="aspnet-navigation.html">ASP.NET 导航</a> <code>https://www.runoob.com/aspnet/aspnet-navigation.html</code></li><li><a href="aspnet-dbconnection.html">ASP.NET 数据库连接</a> <code>https://www.runoob.com/aspnet/aspnet-dbconnection.html</code></li><li><a href="aspnet-databinding.html">ASP.NET 数据绑定</a> <code>https://www.runoob.com/aspnet/aspnet-databinding.html</code></li><li><a href="aspnet-controls.html">ASP.NET 服务器控件</a> <code>https://www.runoob.com/aspnet/aspnet-controls.html</code></li><li><a href="aspnet-masterpages.html">ASP.NET 母版页</a> <code>https://www.runoob.com/aspnet/aspnet-masterpages.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "ASP.NET ArrayList", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-arraylist.html", "href": "aspnet-arraylist.html"}, {"title": "ASP.NET Button 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-button.html", "href": "aspnet-button.html"}, {"title": "ASP.NET 服务器控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-controls.html", "href": "aspnet-controls.html"}, {"title": "ASP.NET 数据绑定", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-databinding.html", "href": "aspnet-databinding.html"}, {"title": "ASP.NET DataList 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-datalist.html", "href": "aspnet-datalist.html"}, {"title": "ASP.NET 数据库连接", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-dbconnection.html", "href": "aspnet-dbconnection.html"}, {"title": "ASP.NET 事件句柄", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/aspnet-events.html", "href": "aspnet-events.html"}, {"title": "ASP.NET 实例", "group": "aspnet", "subgroup": "实例", "url": "https://www.runoob.com/aspnet/aspnet-examples.html", "href": "aspnet-examples.html"}, {"title": "ASP.NET Web 表单", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-forms.html", "href": "aspnet-forms.html"}, {"title": "ASP.NET Hashtable", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-hashtable.html", "href": "aspnet-hashtable.html"}, {"title": "ASP.NET Web Forms 教程", "group": "aspnet", "subgroup": "入门", "url": "https://www.runoob.com/aspnet/aspnet-intro.html", "href": "aspnet-intro.html"}, {"title": "ASP.NET 母版页", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-masterpages.html", "href": "aspnet-masterpages.html"}, {"title": "ASP.NET 导航", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-navigation.html", "href": "aspnet-navigation.html"}, {"title": "ASP.NET Web 页面", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-pages.html", "href": "aspnet-pages.html"}, {"title": "ASP.NET HTML 服务器控件", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/aspnet-ref-htmlcontrols.html", "href": "aspnet-ref-htmlcontrols.html"}, {"title": "ASP.NET Validation 服务器控件", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/aspnet-ref-validationcontrols.html", "href": "aspnet-ref-validationcontrols.html"}, {"title": "ASP.NET Web 服务器控件", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/aspnet-ref-webcontrols.html", "href": "aspnet-ref-webcontrols.html"}, {"title": "ASP.NET Repeater 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-repeater.html", "href": "aspnet-repeater.html"}, {"title": "ASP.NET SortedList", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-sortedlist.html", "href": "aspnet-sortedlist.html"}, {"title": "ASP.NET TextBox 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-textbox.html", "href": "aspnet-textbox.html"}, {"title": "ASP.NET 教程", "group": "aspnet", "subgroup": "入门", "url": "https://www.runoob.com/aspnet/aspnet-tutorial.html", "href": "aspnet-tutorial.html"}, {"title": "ASP.NET ViewState", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-viewstate.html", "href": "aspnet-viewstate.html"}, {"title": "ASP.NET XML 数据绑定", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet-xml.html", "href": "aspnet-xml.html"}, {"title": "ASP.NET", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/aspnet.html", "href": "aspnet.html"}, {"title": "ASP.NET AdRotator 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-adrotator.html", "href": "control-adrotator.html"}, {"title": "ASP.NET HtmlAnchor 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlanchor.html", "href": "control-htmlanchor.html"}, {"title": "ASP.NET HtmlButton 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlbutton.html", "href": "control-htmlbutton.html"}, {"title": "ASP.NET HtmlForm 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlform.html", "href": "control-htmlform.html"}, {"title": "ASP.NET HtmlGeneric 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlgeneric.html", "href": "control-htmlgeneric.html"}, {"title": "ASP.NET HtmlImage 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlimage.html", "href": "control-htmlimage.html"}, {"title": "ASP.NET HtmlInputButton 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlinputbutton.html", "href": "control-htmlinputbutton.html"}, {"title": "ASP.NET HtmlInputCheckBox 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlinputcheckbox.html", "href": "control-htmlinputcheckbox.html"}, {"title": "ASP.NET HtmlInputFile 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlinputfile.html", "href": "control-htmlinputfile.html"}, {"title": "ASP.NET HtmlInputHidden 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlinputhidden.html", "href": "control-htmlinputhidden.html"}, {"title": "ASP.NET HtmlInputImage 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlinputimage.html", "href": "control-htmlinputimage.html"}, {"title": "ASP.NET HtmlInputRadioButton 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlinputradiobutton.html", "href": "control-htmlinputradiobutton.html"}, {"title": "ASP.NET HtmlInputText 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlinputtext.html", "href": "control-htmlinputtext.html"}, {"title": "ASP.NET HtmlSelect 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmlselect.html", "href": "control-htmlselect.html"}, {"title": "ASP.NET HtmlTable 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmltable.html", "href": "control-htmltable.html"}, {"title": "ASP.NET HtmlTableCell 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmltablecell.html", "href": "control-htmltablecell.html"}, {"title": "ASP.NET HtmlTableRow 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmltablerow.html", "href": "control-htmltablerow.html"}, {"title": "ASP.NET HtmlTextArea 控件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/control-htmltextarea.html", "href": "control-htmltextarea.html"}, {"title": "ASP.NET MVC Web 应用程序", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/mvc-app.html", "href": "mvc-app.html"}, {"title": "ASP.NET MVC 控制器", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/mvc-controllers.html", "href": "mvc-controllers.html"}, {"title": "ASP.NET MVC 数据库", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/mvc-database.html", "href": "mvc-database.html"}, {"title": "ASP.NET MVC 文件夹", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/mvc-folders.html", "href": "mvc-folders.html"}, {"title": "ASP.NET MVC HTML 帮助器", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/mvc-htmlhelpers.html", "href": "mvc-htmlhelpers.html"}, {"title": "ASP.NET MVC 简介", "group": "aspnet", "subgroup": "入门", "url": "https://www.runoob.com/aspnet/mvc-intro.html", "href": "mvc-intro.html"}, {"title": "ASP.NET MVC 页面和布局", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/mvc-layout.html", "href": "mvc-layout.html"}, {"title": "ASP.NET MVC 模型", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/mvc-models.html", "href": "mvc-models.html"}, {"title": "ASP.NET MVC – 发布", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/mvc-publish.html", "href": "mvc-publish.html"}, {"title": "ASP.NET MVC 参考手册", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/mvc-reference.html", "href": "mvc-reference.html"}, {"title": "ASP.NET MVC 安全", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/mvc-security.html", "href": "mvc-security.html"}, {"title": "ASP.NET MVC 视图", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/mvc-views.html", "href": "mvc-views.html"}, {"title": "ASP.NET Razor C# 逻辑", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/razor-cs-logic.html", "href": "razor-cs-logic.html"}, {"title": "ASP.NET Razor C# 循环和数组", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/razor-cs-loops.html", "href": "razor-cs-loops.html"}, {"title": "ASP.NET Razor C# 变量", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/razor-cs-variables.html", "href": "razor-cs-variables.html"}, {"title": "ASP.NET Razor 标记", "group": "aspnet", "subgroup": "入门", "url": "https://www.runoob.com/aspnet/razor-intro.html", "href": "razor-intro.html"}, {"title": "ASP.NET Razor 语法", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/razor-syntax.html", "href": "razor-syntax.html"}, {"title": "ASP.NET Razor VB 逻辑", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/razor-vb-logic.html", "href": "razor-vb-logic.html"}, {"title": "ASP.NET Razor VB 循环和数组", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/razor-vb-loops.html", "href": "razor-vb-loops.html"}, {"title": "ASP.NET Razor VB 变量", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/razor-vb-variables.html", "href": "razor-vb-variables.html"}, {"title": "ASP.NET Web Pages 图表", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-chart.html", "href": "webpages-chart.html"}, {"title": "ASP.NET Web Pages Email", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-email.html", "href": "webpages-email.html"}, {"title": "ASP.NET Web 的 C# 和 VB 实例", "group": "aspnet", "subgroup": "实例", "url": "https://www.runoob.com/aspnet/webpages-examples.html", "href": "webpages-examples.html"}, {"title": "ASP.NET Web Pages 文件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-files.html", "href": "webpages-files.html"}, {"title": "ASP.NET Web Pages 文件夹", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-folders.html", "href": "webpages-folders.html"}, {"title": "ASP.NET Web Pages HTML 表单", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-forms.html", "href": "webpages-forms.html"}, {"title": "ASP.NET Web Pages 全局文件", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-global.html", "href": "webpages-global.html"}, {"title": "ASP.NET Web Pages 帮助器", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-helpers.html", "href": "webpages-helpers.html"}, {"title": "ASP.NET Web Pages 教程", "group": "aspnet", "subgroup": "入门", "url": "https://www.runoob.com/aspnet/webpages-intro.html", "href": "webpages-intro.html"}, {"title": "ASP.NET Web Pages 布局", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-layout.html", "href": "webpages-layout.html"}, {"title": "ASP.NET Web Pages 对象", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/webpages-objects.html", "href": "webpages-objects.html"}, {"title": "ASP.NET Web Pages PHP", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-php.html", "href": "webpages-php.html"}, {"title": "ASP.NET Web Pages – 发布", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-publish.html", "href": "webpages-publish.html"}, {"title": "ASP.NET Web Pages Razor", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-razor.html", "href": "webpages-razor.html"}, {"title": "ASP.NET Web Pages 类参考手册", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/webpages-ref-classes.html", "href": "webpages-ref-classes.html"}, {"title": "ASP.NET Web Pages Database 参考手册", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/webpages-ref-database.html", "href": "webpages-ref-database.html"}, {"title": "ASP.NET WebPages 帮助器参考手册", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/webpages-ref-helpers.html", "href": "webpages-ref-helpers.html"}, {"title": "ASP.NET Web Pages WebMail 参考手册", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/webpages-ref-webmail.html", "href": "webpages-ref-webmail.html"}, {"title": "ASP.NET Web Pages WebSecurity 参考手册", "group": "aspnet", "subgroup": "参考", "url": "https://www.runoob.com/aspnet/webpages-ref-websecurity.html", "href": "webpages-ref-websecurity.html"}, {"title": "ASP.NET Web Pages WebGrid", "group": "aspnet", "subgroup": "专题", "url": "https://www.runoob.com/aspnet/webpages-webgrid.html", "href": "webpages-webgrid.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

@@ -1,0 +1,80 @@
+URL: https://www.runoob.com/tags/av-prop-controller.html
+Title: HTML 音频/视频 DOM controller 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM controller 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM buffered 属性 
+
+HTML 音频/视频 DOM controls 属性 
+
+HTML 音频/视频 DOM controller 属性 
+
+实例 
+
+检测该视频是否有媒体控制器： 
+
+myVid=document.getElementById("video1"); 
+alert("Controller: " + 
+ myVid.controller); 
+
+尝试一下 » 
+
+定义和用法 
+
+controller 属性返回音频/视频的当前媒体控制器。 
+
+默认地，音频/视频（audio/video）元素不会有媒体控制器。如果规定了媒体控制器，controller 属性将以 MediaController 对象的形式返回它。 
+
+浏览器支持 
+
+所有主流浏览器都不支持 controller 属性。 
+
+语法 
+
+audio|video .controller 
+
+返回值 
+
+类型 
+
+描述 
+
+MediaController 对象 
+
+表示音频/视频的媒体控制器。 
+
+MediaController 对象的属性/方法： 
+
+buffered - 获得音频/视频的缓冲范围 
+
+seekable - 获得音频/视频的可寻址范围 
+
+duration - 获得音频/视频的时长 
+
+currentTime - 获得或设置音频/视频的当前播放位置 
+
+paused - 检测音频/视频是否已暂停 
+
+play() - 播放音频/视频 
+
+pause() - 暂停音频/视频 
+
+played - 检测音频/视频是否已播放过 
+
+defaultPlaybackRate - 获得或设置音频/视频的默认播放速率 
+
+playbackRate - 获得或设置音频/视频的当前播放速率 
+
+volume - 获得或设置音频/视频的音量 
+
+muted - 获得或设置音频/视频是否已静音 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM buffered 属性 
+
+HTML 音频/视频 DOM controls 属性

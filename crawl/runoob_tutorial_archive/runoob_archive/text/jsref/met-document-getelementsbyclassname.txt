@@ -1,0 +1,132 @@
+URL: https://www.runoob.com/jsref/met-document-getelementsbyclassname.html
+Title: HTML DOM getElementsByClassName() 方法 | 菜鸟教程
+
+HTML DOM getElementsByClassName() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+JavaScript 参考手册 
+
+HTML DOM hasFocus() 方法 
+
+HTML DOM getElementsByClassName() 方法 
+
+HTML DOM getElementsByClassName() 方法 
+
+实例 
+
+获取所有指定类名的元素： 
+
+var x =
+ document.getElementsByClassName( "example" ); 
+
+尝试一下 » 
+
+定义和使用 
+
+getElementsByClassName() 方法返回文档中所有指定类名的元素集合，作为 NodeList 对象。 
+
+NodeList 对象代表一个有顺序的节点列表。NodeList 对象 我们可通过节点列表中的节点索引号来访问列表中的节点(索引号由0开始)。 
+
+提示： 你可以使用 NodeList 对象的 length 属性来确定指定类名的元素个数，并循环各个元素来获取你需要的那个元素。 
+
+浏览器支持 
+
+表格中的数字表示支持该方法的第一个浏览器的版本号。 
+
+方法 
+
+getElementsByClassName() 
+
+4.0 
+
+9.0 
+
+3.0 
+
+3.1 
+
+9.5 
+
+语法 
+
+document.getElementsByClassName( classname ) 
+
+参数 
+
+参数 
+
+类型 
+
+Description 
+
+classname 
+
+String 
+
+必须。你需要获取的元素类名。 
+
+多个类名使用空格分隔，如 "test demo"。 
+
+技术描述 
+
+DOM 版本: 
+
+Core Level 1 Document Object 
+
+返回值： 
+
+NodeList 对象，表示指定类名的元素集合。元素在集合中的顺序以其在代码中的出现次序排序。 
+
+更多实例 
+
+实例 
+
+获取包含 "example" 和 "color" 类名的所有元素，并修改它的颜色: 
+
+var x =
+ document.getElementsByClassName( "example color" ); 
+
+尝试一下 » 
+
+实例 
+
+查看文档中有多少个样式 class="example" 的元素 (使用 NodeList 对的 length 属性): 
+
+var x =
+ document.getElementsByClassName( "example" ).length; 
+
+尝试一下 » 
+
+实例 
+
+修改所有样式 class="example" 元素的背景颜色： 
+
+var x = document.getElementsByClassName( "example" ); 
+var i; 
+for (i = 0 ; 
+ i < x.length; i++) { 
+x[i].style.backgroundColor = "red" ; 
+} 
+
+尝试一下 » 
+
+相关页面 
+
+CSS 教程: CSS 选择器 
+
+CSS 参考手册: CSS .class 选择器 
+
+HTML DOM 参考手册: element .getElementsByClassName() 
+
+HTML DOM 参考手册: className 属性 
+
+HTML DOM 参考手册: HTML DOM classList 属性 
+
+HTML DOM 参考手册: HTML DOM Style 对象 
+
+AI 思考中... 
+
+HTML DOM hasFocus() 方法 
+
+HTML DOM getElementsByClassName() 方法

@@ -1,0 +1,65 @@
+URL: https://www.runoob.com/tags/ev-onkeydown.html
+Title: HTML onkeydown 事件属性 | 菜鸟教程
+
+HTML onkeydown 事件属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML onsubmit 事件属性 
+
+HTML onkeypress 事件属性 
+
+HTML onkeydown 事件属性 
+
+实例 
+
+当按下按键时运行脚本: 
+
+<input type="text" onkeydown="displayResult()"> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 onkeydown 事件属性 
+
+定义和用法 
+
+onkeydown 属性在用户按下按键(在键盘上)时触发。 
+
+提示： 与 onkeydown 事件相关的事件触发顺序: 
+
+onkeydown 
+
+onkeypress 
+
+onkeyup 
+
+注意： onkeydown 属性不能用于以下元素: <base>, <bdo>, <br>, 
+<head>, <html>, <iframe>, <meta>, <param>, <script>, <style>, 或 <title>。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+无。 
+
+语法 
+
+< element onkeydown=" script "> 
+
+属性值 
+
+值 
+
+描述 
+
+script 
+
+规定该onkeydown事件触发时执行的脚本。 
+
+AI 思考中... 
+
+HTML onsubmit 事件属性 
+
+HTML onkeypress 事件属性

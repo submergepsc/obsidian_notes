@@ -1,0 +1,45 @@
+URL: https://www.runoob.com/java/net-localip.html
+Title: Java 实例 – 获取本机ip地址及主机名 | 菜鸟教程
+
+Java 实例 – 获取本机ip地址及主机名 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 网页抓取 
+
+Java 实例 – 查看端口是否已使用 
+
+Java 实例 - 获取本机ip地址及主机名 
+
+在 Java 中，可以使用标准的网络库来获取本机的 IP 地址和主机名。 
+
+以下实例演示了如何使用 InetAddress 类的 getLocalHost 和 getLocalAddress() 方法获取本机主机名及 ip 地址： 
+
+Main.java 文件 
+
+import java . net . InetAddress ; import java . net . UnknownHostException ; public class NetworkInfo { public static void main ( String [ ] args ) { try { InetAddress localHost = InetAddress . getLocalHost ( ) ; String hostName = localHost . getHostName ( ) ; System . out . println ( " 主机名: " + hostName ) ; String hostAddress = localHost . getHostAddress ( ) ; System . out . println ( " IP地址: " + hostAddress ) ; } catch ( UnknownHostException e ) { System . err . println ( " 无法获取本机IP地址及主机名: " + e . getMessage ( ) ) ; e . printStackTrace ( ) ; } } } 
+
+说明 
+
+InetAddress.getLocalHost() ：获取表示本地主机的 InetAddress 对象。 
+
+getHostName() ：获取本地主机的主机名。 
+
+getHostAddress() ：获取本地主机的IP地址。 
+
+异常处理 
+
+UnknownHostException ：当无法确定本地主机名或IP地址时抛出。 
+
+以上代码运行输出结果为： 
+
+主机名: your-hostname
+IP地址: 192.168.1.2 
+
+AI 思考中... 
+
+Java 实例 – 网页抓取 
+
+Java 实例 – 查看端口是否已使用

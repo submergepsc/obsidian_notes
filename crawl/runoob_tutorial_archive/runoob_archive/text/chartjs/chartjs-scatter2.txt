@@ -1,0 +1,121 @@
+URL: https://www.runoob.com/chartjs/chartjs-scatter2.html
+Title: Chart.js 散点图 | 菜鸟教程
+
+Chart.js 散点图 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Chart.js 教程 
+
+Chart.js 雷达图 
+
+Chart.js 散点图 
+
+散点图是由两组数据构成多个坐标点，考察坐标点的分布，判断两变量之间是否存在某种关联或总结坐标点的分布模式。 
+
+数据结构： 
+
+data: [{
+ x: 10,
+ y: 20
+ }, {
+ x: 15,
+ y: 10
+ }] 
+
+散点图 type 属性为 scatter 。 
+
+const config = {
+ type: 'scatter',
+ data: data,
+ options: {
+ scales: {
+ x: {
+ type: 'linear',
+ position: 'bottom'
+ }
+ }
+ }
+}; 
+
+接下来我们创建一个简单的散点图： 
+
+实例 
+
+const ctx = document. getElementById ( 'myChart' ) ; 
+
+const data = { 
+
+datasets : [ { 
+
+label : '散点图实例' , 
+
+data : [ { 
+
+x : - 10 , 
+
+y : 0 
+
+} , { 
+
+x : 0 , 
+
+y : 10 
+
+} , { 
+
+x : 10 , 
+
+y : 5 
+
+} , { 
+
+x : 0.5 , 
+
+y : 5.5 
+
+} ] , 
+
+backgroundColor : 'rgb(255, 99, 132)' 
+
+} ] , 
+
+} ; 
+
+const config = { 
+
+type : 'scatter' , 
+
+data : data , 
+
+options : { 
+
+responsive : true , // 设置图表为响应式，根据屏幕窗口变化而变化 
+
+maintainAspectRatio : false , // 保持图表原有比例 
+
+scales : { 
+
+x : { 
+
+type : 'linear' , 
+
+position : 'bottom' 
+
+} 
+
+} 
+
+} 
+
+} ; 
+
+const myChart = new Chart ( ctx , config ) ; 
+
+尝试一下 » 
+
+以上实例输出结果为： 
+
+AI 思考中... 
+
+Chart.js 雷达图

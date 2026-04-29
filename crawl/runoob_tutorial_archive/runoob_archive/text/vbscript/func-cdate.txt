@@ -1,0 +1,76 @@
+URL: https://www.runoob.com/vbscript/func-cdate.html
+Title: VBScript CDate 函数 | 菜鸟教程
+
+VBScript CDate 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript 总结 
+
+VBScript Date 函数 
+
+VBScript CDate 函数 
+
+CDate 函数把有效的日期和时间表达式转换为日期（Date）类型，并返回结果。p> 
+
+提示： 请使用 IsDate 函数来判断 date 是否可被转换为日期或时间。 
+
+注意： IsDate 函数使用本地设置来检测字符串是否可被转换为日期（在所有的语言中，"January"不是一个月份）。 
+
+语法 
+
+CDate(date) 
+
+参数 
+
+描述 
+
+date 
+
+必需。任何有效的日期表达式（比如 Date() 或者 Now()）。 
+
+实例 
+
+实例 1 
+
+如何把字符串转换为日期： 
+
+<script type="text/vbscript"> 
+
+d=CDate("April 22, 2010") 
+
+</script> 
+
+尝试一下 » 
+
+实例 2 
+
+如何把带分隔符的数字转换为日期： 
+
+<script type="text/vbscript"> 
+
+d=CDate(#4/22/10#) 
+
+</script> 
+
+尝试一下 » 
+
+实例 3 
+
+如何使用 CDATE 把字符串转换为一个时间对象： 
+
+<script type="text/vbscript"> 
+
+d=CDate("3:18:40 AM") 
+
+</script> 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript 总结 
+
+VBScript Date 函数

@@ -1,0 +1,104 @@
+URL: https://www.runoob.com/schema/schema-dtypes-misc.html
+Title: XML Schema 杂项数据类型 | 菜鸟教程
+
+XML Schema 杂项数据类型 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema 数值数据类型 
+
+XML 编辑器 
+
+XSD 杂项 数据类型 
+
+其他杂项数据类型包括布尔、base64Binary、十六进制、浮点、双精度、anyURI、anyURI 以及 NOTATION。 
+
+布尔数据类型（Boolean Data Type） 
+
+布尔数据性用于规定 true 或 false 值。 
+
+下面是一个关于某个 scheme 中逻辑声明的例子： 
+
+<xs:attribute name="disabled" type="xs:boolean"/> 
+
+文档中的元素看上去应该类似这样： 
+
+<prize disabled="true">999</prize> 
+
+注意： 合法的布尔值是 true、false、1（表示 true） 以及 0（表示 false）。 
+
+二进制数据类型（Binary Data Types） 
+
+二进制数据类型用于表达二进制形式的数据。 
+
+我们可使用两种二进制数据类型： 
+
+base64Binary (Base64 编码的二进制数据) 
+
+hexBinary (十六进制编码的二进制数据) 
+
+下面是一个关于某个 scheme 中 hexBinary 声明的例子： 
+
+<xs:element name="blobsrc" type="xs:hexBinary"/> 
+
+AnyURI 数据类型（AnyURI Data Type） 
+
+anyURI 数据类型用于规定 URI。 
+
+下面是一个关于某个 scheme 中 anyURI 声明的例子： 
+
+<xs:attribute name="src" type="xs:anyURI"/> 
+
+文档中的元素看上去应该类似这样： 
+
+<pic src="http://www.w3schools.com/images/smiley.gif" /> 
+
+注意： 如果某个 URI 含有空格，请用 %20 替换它们。 
+
+杂项数据类型 
+
+名称 
+
+描述 
+
+anyURI 
+
+base64Binary 
+
+boolean 
+
+double 
+
+float 
+
+hexBinary 
+
+NOTATION 
+
+QName 
+
+对杂项数据类型的限定（Restriction） 
+
+可与杂项数据类型一同使用的限定： 
+
+enumeration (布尔数据类型无法使用此约束*) 
+
+length (布尔数据类型无法使用此约束) 
+
+maxLength (布尔数据类型无法使用此约束) 
+
+minLength (布尔数据类型无法使用此约束) 
+
+pattern 
+
+whiteSpace 
+
+*译者注： 约束指 constraint。 
+
+AI 思考中... 
+
+XML Schema 数值数据类型 
+
+XML 编辑器

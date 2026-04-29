@@ -1,0 +1,72 @@
+URL: https://www.runoob.com/font-awesome/ffontawesome-icons-medical.html
+Title: Font Awesome 医疗图标 | 菜鸟教程
+
+Font Awesome 医疗图标 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Font Awesome 图标 
+
+Font Awesome 手势图标 
+
+Font Awesome 付款图标 
+
+Font Awesome 医疗图标 
+
+下表显示了所有的 Font Awesome 医疗图标： 
+
+图标 
+
+描述 
+
+实例 
+
+fa fa-ambulance 
+
+尝试一下 
+
+fa fa-h-square 
+
+尝试一下 
+
+fa fa-heart 
+
+尝试一下 
+
+fa fa-heart-o 
+
+尝试一下 
+
+fa fa-heartbeat 
+
+尝试一下 
+
+fa fa-hospital-o 
+
+尝试一下 
+
+fa fa-medkit 
+
+尝试一下 
+
+fa fa-plus-square 
+
+尝试一下 
+
+fa fa-stethoscope 
+
+尝试一下 
+
+fa fa-user-md 
+
+尝试一下 
+
+fa fa-wheelchair 
+
+尝试一下 
+
+AI 思考中... 
+
+Font Awesome 手势图标 
+
+Font Awesome 付款图标

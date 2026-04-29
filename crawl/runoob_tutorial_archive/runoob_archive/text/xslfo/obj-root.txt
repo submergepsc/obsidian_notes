@@ -1,0 +1,63 @@
+URL: https://www.runoob.com/xslfo/obj-root.html
+Title: XSL-FO root 对象 | 菜鸟教程
+
+XSL-FO root 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO retrieve-marker 对象 
+
+XSL-FO simple-page-master 对象 
+
+XSL-FO root 对象 
+
+定义和用法 
+
+<fo:root> 对象是 XSL-FO 文档的根（顶级）节点。 
+
+<fo:root> 对象的子类是一个单独的 <fo:layout-master-set> 对象（该对象保留了在文档中使用的所有页面主 [master]），一个可选的 <fo:declarations> 对象，以及是一个或多个 <fo:page-sequence> 对象。 
+
+注意： 一个 XSL-FO 文档可以包含多个 <fo:page-sequences> 对象（举例：文档的每个章节都可以作为一个独立的 <fo:page-sequence> 对象 - 它允许使用chapter-specific [具体的章节]内容，如：章节的标题，它可以被放置在页眉或页脚内）。 
+
+语法 
+
+<fo:root> 
+<!-- 
+Children:layout-master-set,declarations?, 
+page-sequence+ 
+--> 
+</fo:root> 
+
+属性 
+
+属性 
+
+media-usage 
+
+实例 1 
+
+XSL-FO 文档结构如下所示： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"> 
+
+<fo:layout-master-set> 
+<fo:simple-page-master master-name="A4"> 
+<!-- Page template goes here --> 
+</fo:simple-page-master> 
+</fo:layout-master-set> 
+
+<fo:page-sequence master-reference="A4"> 
+<!-- Page content goes here --> 
+</fo:page-sequence> 
+
+</fo:root> 
+
+AI 思考中... 
+
+XSL-FO retrieve-marker 对象 
+
+XSL-FO simple-page-master 对象

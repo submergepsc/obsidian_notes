@@ -1,0 +1,193 @@
+URL: https://www.runoob.com/lua/lua-basic-syntax.html
+Title: Lua 基本语法 | 菜鸟教程
+
+Lua 基本语法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Lua 教程 
+
+Lua 环境安装 
+
+Lua 数据类型 
+
+Lua 基本语法 
+
+Lua 学习起来非常简单，我们可以创建第一个 Lua 程序！ 
+
+Lua 代码文件的后缀名为 .lua 。 
+
+第一个 Lua 程序 
+
+交互式编程 
+
+Lua 提供了交互式编程模式。我们可以在命令行中输入程序并立即查看效果。 
+
+Lua 交互式编程模式可以通过命令 lua -i 或 lua 来启用： 
+
+$ lua -i 
+$ Lua 5.3.0 Copyright (C) 1994-2015 Lua.org, PUC-Rio
+> 
+
+在命令行中，输入以下命令: 
+
+> print("Hello World！") 
+
+接着我们按下回车键，输出结果如下： 
+
+> print ( "Hello World！" ) 
+
+Hello World！ 
+
+> 
+
+脚本式编程 
+
+我们可以将 Lua 程序代码保存到一个以 lua 结尾的文件，并执行，该模式称为脚本式编程，如我们将如下代码存储在名为 hello.lua 的脚本文件中： 
+
+print("Hello World！")
+print("www.runoob.com") 
+
+使用 lua 名执行以上脚本，输出结果为： 
+
+$ lua hello.lua
+Hello World！
+www.runoob.com 
+
+我们也可以将代码修改为如下形式来执行脚本（在开头添加：#!/usr/local/bin/lua）： 
+
+实例 
+
+# ! / usr / local / bin / lua 
+
+print ( "Hello World！" ) 
+
+print ( "www.runoob.com" ) 
+
+以上代码中，我们指定了 Lua 的解释器 /usr/local/bin directory。加上 # 号标记解释器会忽略它。接下来我们为脚本添加可执行权限，并执行： 
+
+./hello.lua 
+Hello World！
+www.runoob.com 
+
+注释 
+
+单行注释 
+
+单行注释以两个连字符 -- 开头，后面跟随的内容将被解释器忽略。 
+
+-- 
+
+单行注释通常用于对代码的简短解释或标记。 
+
+多行注释 
+
+多行注释以 --[[ 开始，并以 ]] 结束，适用于需要对大段代码进行说明的情况。 
+
+--[[
+ 多行注释
+ 多行注释
+ --]] 
+
+Lua 不支持嵌套注释，这意味着在一个多行注释内不能再嵌套另一个多行注释。例如，以下代码是不合法的： 
+
+--[[
+这是一个多行注释
+--[[
+嵌套的多行注释（这是非法的）
+]]
+]] 
+
+标识符 
+
+Lua 标识符用于定义一个变量，函数获取其他用户定义的项。标识符以一个字母 A 到 Z 或 a 到 z 或下划线 _ 开头后加上 0 个或多个字母，下划线，数字（0 到 9）。 
+
+最好不要使用下划线加大写字母的标识符，因为Lua的保留字也是这样的。 
+
+Lua 不允许使用特殊字符如 @ , $ , 和 % 来定义标识符。 Lua 是一个区分大小写的编程语言。因此在 Lua 中 Runoob 与 runoob 是两个不同的标识符。 
+
+以下列出了一些正确的标识符： 
+
+mohd zara abc move_name a_123
+myname50 _temp j a23b9 retVal 
+
+关键词 
+
+以下列出了 Lua 的保留关键词。保留关键字不能作为常量或变量或其他用户自定义标示符： 
+
+and 
+
+break 
+
+do 
+
+else 
+
+elseif 
+
+end 
+
+false 
+
+for 
+
+function 
+
+if 
+
+in 
+
+local 
+
+nil 
+
+not 
+
+or 
+
+repeat 
+
+return 
+
+then 
+
+true 
+
+until 
+
+while 
+
+goto 
+
+一般约定，以下划线开头连接一串大写字母的名字（比如 _VERSION）被保留用于 Lua 内部全局变量。 
+
+全局变量 
+
+在默认情况下，变量总是认为是全局的。 
+
+全局变量不需要声明，给一个变量赋值后即创建了这个全局变量，访问一个没有初始化的全局变量也不会出错，只不过得到的结果是：nil。 
+
+> print ( b ) 
+
+nil 
+
+> b = 10 
+
+> print ( b ) 
+
+10 
+
+> 
+
+如果你想删除一个全局变量，只需要将变量赋值为nil。 
+
+b = nil
+print(b) --> nil 
+
+这样变量b就好像从没被使用过一样。换句话说, 当且仅当一个变量不等于nil时，这个变量即存在。 
+
+AI 思考中... 
+
+Lua 环境安装 
+
+Lua 数据类型

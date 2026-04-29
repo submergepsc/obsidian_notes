@@ -1,0 +1,68 @@
+URL: https://www.runoob.com/tags/att-global-hidden.html
+Title: HTML hidden 属性 | 菜鸟教程
+
+HTML hidden 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML dropzone 属性 
+
+HTML id 属性 
+
+HTML hidden 属性 
+
+实例 
+
+隐藏段落: 
+
+<p hidden>这是一段隐藏的段落。</p> 
+
+尝试一下» 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+hidden 
+
+6.0 
+
+11.0 
+
+4.0 
+
+5.1 
+
+11.1 
+
+定义和用法 
+
+hidden 属性规定对元素进行隐藏。 
+
+隐藏的元素不会被显示。 
+
+如果使用该属性，则会隐藏元素。 
+
+可以对 hidden 属性进行设置，使用户在满足某些条件时才能看到某个元素（比如选中复选框，等等）。然后，可使用 JavaScript 来删除 hidden 属性，使该元素变得可见。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+hidden 属性是 HTML5 中的新属性。 
+
+HTML 与 XHTML 之间的差异 
+
+在 XHTML 中, 属性禁止简写，hidden 属性必须定义为 < element hidden="hidden">. 
+
+语法 
+
+< element hidden> 
+
+AI 思考中... 
+
+HTML dropzone 属性 
+
+HTML id 属性

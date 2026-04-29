@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>php index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>php index</h1>
+      <p>Offline pages under php</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-516595e8">入门</a> <span>5 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>103 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>6 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>59 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>php (173)</h2><p>二级分类：4 个</p><ul class="page-list"><li><a href="#subgroup-516595e8">入门</a> <span>5 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>103 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>6 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>59 pages</span></li></ul></section><section id="subgroup-516595e8"><h2>入门 (5)</h2><ol class="page-list"><li><a href="php-ajax-intro.html">AJAX 简介</a> <code>https://www.runoob.com/php/php-ajax-intro.html</code></li><li><a href="php-mysql-intro.html">PHP MySQL 简介</a> <code>https://www.runoob.com/php/php-mysql-intro.html</code></li><li><a href="php-install.html">PHP 安装</a> <code>https://www.runoob.com/php/php-install.html</code></li><li><a href="php-tutorial.html">PHP 教程</a> <code>https://www.runoob.com/php/php-tutorial.html</code></li><li><a href="php-intro.html">PHP 简介</a> <code>https://www.runoob.com/php/php-intro.html</code></li></ol></section><section id="subgroup-53c28003"><h2>参考 (103)</h2><ol class="page-list"><li><a href="php-ref-array.html">PHP 5 Array 函数</a> <code>https://www.runoob.com/php/php-ref-array.html</code></li><li><a href="php-ref-calendar.html">PHP 5 Calendar 函数</a> <code>https://www.runoob.com/php/php-ref-calendar.html</code></li><li><a href="php-ref-date.html">PHP 5 Date/Time 函数</a> <code>https://www.runoob.com/php/php-ref-date.html</code></li><li><a href="php-ref-directory.html">PHP 5 Directory 函数</a> <code>https://www.runoob.com/php/php-ref-directory.html</code></li><li><a href="php-ref-filesystem.html">PHP 5 Filesystem 函数</a> <code>https://www.runoob.com/php/php-ref-filesystem.html</code></li><li><a href="php-ref-math.html">PHP 5 Math 函数</a> <code>https://www.runoob.com/php/php-ref-math.html</code></li><li><a href="php-ref-mysqli.html">PHP 5 MySQLi 函数</a> <code>https://www.runoob.com/php/php-ref-mysqli.html</code></li><li><a href="php-ref-simplexml.html">PHP 5 SimpleXML 函数</a> <code>https://www.runoob.com/php/php-ref-simplexml.html</code></li><li><a href="php-ref-string.html">PHP 5 String 函数</a> <code>https://www.runoob.com/php/php-ref-string.html</code></li><li><a href="php-ref-timezones.html">PHP 5 Timezones</a> <code>https://www.runoob.com/php/php-ref-timezones.html</code></li><li><a href="func-array.html">PHP array() 函数</a> <code>https://www.runoob.com/php/func-array.html</code></li><li><a href="func-array-change-key-case.html">PHP array_change_key_case() 函数</a> <code>https://www.runoob.com/php/func-array-change-key-case.html</code></li><li><a href="func-array-chunk.html">PHP array_chunk() 函数</a> <code>https://www.runoob.com/php/func-array-chunk.html</code></li><li><a href="func-array-column.html">PHP array_column() 函数</a> <code>https://www.runoob.com/php/func-array-column.html</code></li><li><a href="func-array-combine.html">PHP array_combine() 函数</a> <code>https://www.runoob.com/php/func-array-combine.html</code></li><li><a href="func-array-count-values.html">PHP array_count_values() 函数</a> <code>https://www.runoob.com/php/func-array-count-values.html</code></li><li><a href="func-array-diff.html">PHP array_diff() 函数</a> <code>https://www.runoob.com/php/func-array-diff.html</code></li><li><a href="func-array-diff-assoc.html">PHP array_diff_assoc() 函数</a> <code>https://www.runoob.com/php/func-array-diff-assoc.html</code></li><li><a href="func-array-diff-key.html">PHP array_diff_key() 函数</a> <code>https://www.runoob.com/php/func-array-diff-key.html</code></li><li><a href="func-array-diff-uassoc.html">PHP array_diff_uassoc() 函数</a> <code>https://www.runoob.com/php/func-array-diff-uassoc.html</code></li><li><a href="func-array-diff-ukey.html">PHP array_diff_ukey() 函数</a> <code>https://www.runoob.com/php/func-array-diff-ukey.html</code></li><li><a href="func-array-fill.html">PHP array_fill() 函数</a> <code>https://www.runoob.com/php/func-array-fill.html</code></li><li><a href="func-array-fill-keys.html">PHP array_fill_keys() 函数</a> <code>https://www.runoob.com/php/func-array-fill-keys.html</code></li><li><a href="func-array-filter.html">PHP array_filter() 函数</a> <code>https://www.runoob.com/php/func-array-filter.html</code></li><li><a href="func-array-flip.html">PHP array_flip() 函数</a> <code>https://www.runoob.com/php/func-array-flip.html</code></li><li><a href="func-array-intersect.html">PHP array_intersect() 函数</a> <code>https://www.runoob.com/php/func-array-intersect.html</code></li><li><a href="func-array-intersect-assoc.html">PHP array_intersect_assoc() 函数</a> <code>https://www.runoob.com/php/func-array-intersect-assoc.html</code></li><li><a href="func-array-intersect-key.html">PHP array_intersect_key() 函数</a> <code>https://www.runoob.com/php/func-array-intersect-key.html</code></li><li><a href="func-array-intersect-uassoc.html">PHP array_intersect_uassoc() 函数</a> <code>https://www.runoob.com/php/func-array-intersect-uassoc.html</code></li><li><a href="func-array-intersect-ukey.html">PHP array_intersect_ukey() 函数</a> <code>https://www.runoob.com/php/func-array-intersect-ukey.html</code></li><li><a href="func-array-key-exists.html">PHP array_key_exists() 函数</a> <code>https://www.runoob.com/php/func-array-key-exists.html</code></li><li><a href="func-array-key-first.html">PHP array_key_first() 函数</a> <code>https://www.runoob.com/php/func-array-key-first.html</code></li><li><a href="func-array-key-last.html">PHP array_key_last() 函数</a> <code>https://www.runoob.com/php/func-array-key-last.html</code></li><li><a href="func-array-keys.html">PHP array_keys() 函数</a> <code>https://www.runoob.com/php/func-array-keys.html</code></li><li><a href="func-array-map.html">PHP array_map() 函数</a> <code>https://www.runoob.com/php/func-array-map.html</code></li><li><a href="func-array-merge.html">PHP array_merge() 函数</a> <code>https://www.runoob.com/php/func-array-merge.html</code></li><li><a href="func-array-merge-recursive.html">PHP array_merge_recursive() 函数</a> <code>https://www.runoob.com/php/func-array-merge-recursive.html</code></li><li><a href="func-array-multisort.html">PHP array_multisort() 函数</a> <code>https://www.runoob.com/php/func-array-multisort.html</code></li><li><a href="func-array-pad.html">PHP array_pad() 函数</a> <code>https://www.runoob.com/php/func-array-pad.html</code></li><li><a href="func-array-pop.html">PHP array_pop() 函数</a> <code>https://www.runoob.com/php/func-array-pop.html</code></li><li><a href="func-array-product.html">PHP array_product() 函数</a> <code>https://www.runoob.com/php/func-array-product.html</code></li><li><a href="func-array-push.html">PHP array_push() 函数</a> <code>https://www.runoob.com/php/func-array-push.html</code></li><li><a href="func-array-rand.html">PHP array_rand() 函数</a> <code>https://www.runoob.com/php/func-array-rand.html</code></li><li><a href="func-array-reduce.html">PHP array_reduce() 函数</a> <code>https://www.runoob.com/php/func-array-reduce.html</code></li><li><a href="func-array-replace.html">PHP array_replace() 函数</a> <code>https://www.runoob.com/php/func-array-replace.html</code></li><li><a href="func-array-replace-recursive.html">PHP array_replace_recursive() 函数</a> <code>https://www.runoob.com/php/func-array-replace-recursive.html</code></li><li><a href="func-array-reverse.html">PHP array_reverse() 函数</a> <code>https://www.runoob.com/php/func-array-reverse.html</code></li><li><a href="func-array-search.html">PHP array_search() 函数</a> <code>https://www.runoob.com/php/func-array-search.html</code></li><li><a href="func-array-shift.html">PHP array_shift() 函数</a> <code>https://www.runoob.com/php/func-array-shift.html</code></li><li><a href="func-array-slice.html">PHP array_slice() 函数</a> <code>https://www.runoob.com/php/func-array-slice.html</code></li><li><a href="func-array-splice.html">PHP array_splice() 函数</a> <code>https://www.runoob.com/php/func-array-splice.html</code></li><li><a href="func-array-sum.html">PHP array_sum() 函数</a> <code>https://www.runoob.com/php/func-array-sum.html</code></li><li><a href="func-array-udiff.html">PHP array_udiff() 函数</a> <code>https://www.runoob.com/php/func-array-udiff.html</code></li><li><a href="func-array-udiff-assoc.html">PHP array_udiff_assoc() 函数</a> <code>https://www.runoob.com/php/func-array-udiff-assoc.html</code></li><li><a href="func-array-udiff-uassoc.html">PHP array_udiff_uassoc() 函数</a> <code>https://www.runoob.com/php/func-array-udiff-uassoc.html</code></li><li><a href="func-array-uintersect.html">PHP array_uintersect() 函数</a> <code>https://www.runoob.com/php/func-array-uintersect.html</code></li><li><a href="func-array-uintersect-assoc.html">PHP array_uintersect_assoc() 函数</a> <code>https://www.runoob.com/php/func-array-uintersect-assoc.html</code></li><li><a href="func-array-uintersect-uassoc.html">PHP array_uintersect_uassoc() 函数</a> <code>https://www.runoob.com/php/func-array-uintersect-uassoc.html</code></li><li><a href="func-array-unique.html">PHP array_unique() 函数</a> <code>https://www.runoob.com/php/func-array-unique.html</code></li><li><a href="func-array-unshift.html">PHP array_unshift() 函数</a> <code>https://www.runoob.com/php/func-array-unshift.html</code></li><li><a href="func-array-values.html">PHP array_values() 函数</a> <code>https://www.runoob.com/php/func-array-values.html</code></li><li><a href="func-array-walk.html">PHP array_walk() 函数</a> <code>https://www.runoob.com/php/func-array-walk.html</code></li><li><a href="func-array-walk-recursive.html">PHP array_walk_recursive() 函数</a> <code>https://www.runoob.com/php/func-array-walk-recursive.html</code></li><li><a href="func-array-arsort.html">PHP arsort() 函数</a> <code>https://www.runoob.com/php/func-array-arsort.html</code></li><li><a href="func-array-asort.html">PHP asort() 函数</a> <code>https://www.runoob.com/php/func-array-asort.html</code></li><li><a href="func-array-compact.html">PHP compact() 函数</a> <code>https://www.runoob.com/php/func-array-compact.html</code></li><li><a href="func-array-count.html">PHP count() 函数</a> <code>https://www.runoob.com/php/func-array-count.html</code></li><li><a href="php-ref-curl.html">PHP cURL 函数</a> <code>https://www.runoob.com/php/php-ref-curl.html</code></li><li><a href="func-array-current.html">PHP current() 函数</a> <code>https://www.runoob.com/php/func-array-current.html</code></li><li><a href="func-array-each.html">PHP each() 函数</a> <code>https://www.runoob.com/php/func-array-each.html</code></li><li><a href="func-array-end.html">PHP end() 函数</a> <code>https://www.runoob.com/php/func-array-end.html</code></li><li><a href="php-ref-error.html">PHP Error 和 Logging 函数</a> <code>https://www.runoob.com/php/php-ref-error.html</code></li><li><a href="func-array-extract.html">PHP extract() 函数</a> <code>https://www.runoob.com/php/func-array-extract.html</code></li><li><a href="php-ref-filter.html">PHP Filter 函数</a> <code>https://www.runoob.com/php/php-ref-filter.html</code></li><li><a href="php-ref-ftp.html">PHP FTP 函数</a> <code>https://www.runoob.com/php/php-ref-ftp.html</code></li><li><a href="php-ref-http.html">PHP HTTP 函数</a> <code>https://www.runoob.com/php/php-ref-http.html</code></li><li><a href="func-array-in-array.html">PHP in_array() 函数</a> <code>https://www.runoob.com/php/func-array-in-array.html</code></li><li><a href="func-array-key.html">PHP key() 函数</a> <code>https://www.runoob.com/php/func-array-key.html</code></li><li><a href="func-array-krsort.html">PHP krsort() 函数</a> <code>https://www.runoob.com/php/func-array-krsort.html</code></li><li><a href="func-array-ksort.html">PHP ksort() 函数</a> <code>https://www.runoob.com/php/func-array-ksort.html</code></li><li><a href="php-ref-libxml.html">PHP Libxml 函数</a> <code>https://www.runoob.com/php/php-ref-libxml.html</code></li><li><a href="func-array-list.html">PHP list() 函数</a> <code>https://www.runoob.com/php/func-array-list.html</code></li><li><a href="php-ref-mail.html">PHP Mail 函数</a> <code>https://www.runoob.com/php/php-ref-mail.html</code></li><li><a href="php-ref-misc.html">PHP Misc. 函数</a> <code>https://www.runoob.com/php/php-ref-misc.html</code></li><li><a href="func-array-natcasesort.html">PHP natcasesort() 函数</a> <code>https://www.runoob.com/php/func-array-natcasesort.html</code></li><li><a href="func-array-natsort.html">PHP natsort() 函数</a> <code>https://www.runoob.com/php/func-array-natsort.html</code></li><li><a href="func-array-next.html">PHP next() 函数</a> <code>https://www.runoob.com/php/func-array-next.html</code></li><li><a href="func-array-pos.html">PHP pos() 函数</a> <code>https://www.runoob.com/php/func-array-pos.html</code></li><li><a href="func-array-prev.html">PHP prev() 函数</a> <code>https://www.runoob.com/php/func-array-prev.html</code></li><li><a href="func-array-range.html">PHP range() 函数</a> <code>https://www.runoob.com/php/func-array-range.html</code></li><li><a href="func-array-reset.html">PHP reset() 函数</a> <code>https://www.runoob.com/php/func-array-reset.html</code></li><li><a href="func-array-rsort.html">PHP rsort() 函数</a> <code>https://www.runoob.com/php/func-array-rsort.html</code></li><li><a href="func-array-shuffle.html">PHP shuffle() 函数</a> <code>https://www.runoob.com/php/func-array-shuffle.html</code></li><li><a href="func-array-sizeof.html">PHP sizeof() 函数</a> <code>https://www.runoob.com/php/func-array-sizeof.html</code></li><li><a href="func-array-sort.html">PHP sort() 函数</a> <code>https://www.runoob.com/php/func-array-sort.html</code></li><li><a href="func-array-uasort.html">PHP uasort() 函数</a> <code>https://www.runoob.com/php/func-array-uasort.html</code></li><li><a href="func-array-uksort.html">PHP uksort() 函数</a> <code>https://www.runoob.com/php/func-array-uksort.html</code></li><li><a href="func-array-usort.html">PHP usort() 函数</a> <code>https://www.runoob.com/php/func-array-usort.html</code></li><li><a href="php-ref-xml.html">PHP XML 函数</a> <code>https://www.runoob.com/php/php-ref-xml.html</code></li><li><a href="php-ref-zip.html">PHP Zip File 函数</a> <code>https://www.runoob.com/php/php-ref-zip.html</code></li><li><a href="php-functions.html">PHP 函数</a> <code>https://www.runoob.com/php/php-functions.html</code></li><li><a href="php-variable-handling-functions.html">PHP 可用的函数</a> <code>https://www.runoob.com/php/php-variable-handling-functions.html</code></li><li><a href="php-operators.html">PHP 运算符</a> <code>https://www.runoob.com/php/php-operators.html</code></li></ol></section><section id="subgroup-5b9e4f8b"><h2>实例 (6)</h2><ol class="page-list"><li><a href="php-ajax-rss-reader.html">PHP 实例 AJAX RSS 阅读器</a> <code>https://www.runoob.com/php/php-ajax-rss-reader.html</code></li><li><a href="php-ajax-database.html">PHP 实例 AJAX 与 MySQL</a> <code>https://www.runoob.com/php/php-ajax-database.html</code></li><li><a href="php-ajax-xml.html">PHP 实例 AJAX 与 XML</a> <code>https://www.runoob.com/php/php-ajax-xml.html</code></li><li><a href="php-ajax-livesearch.html">PHP 实例 AJAX 实时搜索</a> <code>https://www.runoob.com/php/php-ajax-livesearch.html</code></li><li><a href="php-ajax-poll.html">PHP 实例 AJAX 投票</a> <code>https://www.runoob.com/php/php-ajax-poll.html</code></li><li><a href="php-form-complete.html">PHP完整表单实例</a> <code>https://www.runoob.com/php/php-form-complete.html</code></li></ol></section><section id="subgroup-4e139898"><h2>专题 (59)</h2><ol class="page-list"><li><a href="php-get.html">PHP $_GET 变量</a> <code>https://www.runoob.com/php/php-get.html</code></li><li><a href="php-post.html">PHP $_POST 变量</a> <code>https://www.runoob.com/php/php-post.html</code></li><li><a href="php-echo-print.html">PHP 5 echo/print 语句</a> <code>https://www.runoob.com/php/php-echo-print.html</code></li><li><a href="php7-new-features.html">PHP 7 新特性</a> <code>https://www.runoob.com/php/php7-new-features.html</code></li><li><a href="php-cookies.html">PHP Cookie</a> <code>https://www.runoob.com/php/php-cookies.html</code></li><li><a href="php-date.html">PHP date() 函数</a> <code>https://www.runoob.com/php/php-date.html</code></li><li><a href="php-eof-heredoc.html">PHP EOF(heredoc) 使用说明</a> <code>https://www.runoob.com/php/php-eof-heredoc.html</code></li><li><a href="php-looping-for.html">PHP For 循环</a> <code>https://www.runoob.com/php/php-looping-for.html</code></li><li><a href="php-if-else.html">PHP If…Else 语句</a> <code>https://www.runoob.com/php/php-if-else.html</code></li><li><a href="php-includes.html">PHP include 和 require</a> <code>https://www.runoob.com/php/php-includes.html</code></li><li><a href="php-json.html">PHP JSON</a> <code>https://www.runoob.com/php/php-json.html</code></li><li><a href="php-mysql-delete.html">PHP MySQL Delete</a> <code>https://www.runoob.com/php/php-mysql-delete.html</code></li><li><a href="php-mysql-order-by.html">PHP MySQL Order By 关键词</a> <code>https://www.runoob.com/php/php-mysql-order-by.html</code></li><li><a href="php-mysql-update.html">PHP MySQL Update</a> <code>https://www.runoob.com/php/php-mysql-update.html</code></li><li><a href="php-mysql-where.html">PHP MySQL Where 子句</a> <code>https://www.runoob.com/php/php-mysql-where.html</code></li><li><a href="php-mysql-create.html">PHP MySQL 创建数据库</a> <code>https://www.runoob.com/php/php-mysql-create.html</code></li><li><a href="php-mysql-create-table.html">PHP MySQL 创建表</a> <code>https://www.runoob.com/php/php-mysql-create-table.html</code></li><li><a href="php-mysql-insert-multiple.html">PHP MySQL 插入多条数据</a> <code>https://www.runoob.com/php/php-mysql-insert-multiple.html</code></li><li><a href="php-mysql-insert.html">PHP MySQL 插入数据</a> <code>https://www.runoob.com/php/php-mysql-insert.html</code></li><li><a href="php-mysql-select.html">PHP MySQL 读取数据</a> <code>https://www.runoob.com/php/php-mysql-select.html</code></li><li><a href="php-mysql-prepared-statements.html">PHP MySQL 预处理语句</a> <code>https://www.runoob.com/php/php-mysql-prepared-statements.html</code></li><li><a href="php-pdo.html">PHP PDO</a> <code>https://www.runoob.com/php/php-pdo.html</code></li><li><a href="php-restful.html">PHP RESTful</a> <code>https://www.runoob.com/php/php-restful.html</code></li><li><a href="php-sessions.html">PHP Session</a> <code>https://www.runoob.com/php/php-sessions.html</code></li><li><a href="php-switch.html">PHP Switch 语句</a> <code>https://www.runoob.com/php/php-switch.html</code></li><li><a href="php-looping.html">PHP While 循环</a> <code>https://www.runoob.com/php/php-looping.html</code></li><li><a href="php-xml-dom.html">PHP XML DOM</a> <code>https://www.runoob.com/php/php-xml-dom.html</code></li><li><a href="php-xml-parser-expat.html">PHP XML Expat 解析器</a> <code>https://www.runoob.com/php/php-xml-parser-expat.html</code></li><li><a href="php-xml-simplexml.html">PHP XML SimpleXML</a> <code>https://www.runoob.com/php/php-xml-simplexml.html</code></li><li><a href="php-ajax-php.html">PHP – AJAX 与 PHP</a> <code>https://www.runoob.com/php/php-ajax-php.html</code></li><li><a href="php-variables.html">PHP 变量</a> <code>https://www.runoob.com/php/php-variables.html</code></li><li><a href="php-namespace.html">PHP 命名空间(namespace)</a> <code>https://www.runoob.com/php/php-namespace.html</code></li><li><a href="php-image-gd.html">PHP 图像处理</a> <code>https://www.runoob.com/php/php-image-gd.html</code></li><li><a href="php-arrays-multi.html">PHP 多维数组</a> <code>https://www.runoob.com/php/php-arrays-multi.html</code></li><li><a href="php-string.html">PHP 字符串变量</a> <code>https://www.runoob.com/php/php-string.html</code></li><li><a href="php-secure-mail.html">PHP 安全 E-mail</a> <code>https://www.runoob.com/php/php-secure-mail.html</code></li><li><a href="php-constants.html">PHP 常量</a> <code>https://www.runoob.com/php/php-constants.html</code></li><li><a href="php-exception.html">PHP 异常处理</a> <code>https://www.runoob.com/php/php-exception.html</code></li><li><a href="php-db-odbc.html">PHP 数据库 ODBC</a> <code>https://www.runoob.com/php/php-db-odbc.html</code></li><li><a href="php-datatypes.html">PHP 数据类型</a> <code>https://www.runoob.com/php/php-datatypes.html</code></li><li><a href="php-arrays.html">PHP 数组</a> <code>https://www.runoob.com/php/php-arrays.html</code></li><li><a href="php-arrays-sort.html">PHP 数组排序</a> <code>https://www.runoob.com/php/php-arrays-sort.html</code></li><li><a href="php-file.html">PHP 文件</a> <code>https://www.runoob.com/php/php-file.html</code></li><li><a href="php-file-upload.html">PHP 文件上传</a> <code>https://www.runoob.com/php/php-file-upload.html</code></li><li><a href="php-pcre.html">PHP 正则表达式(PCRE)</a> <code>https://www.runoob.com/php/php-pcre.html</code></li><li><a href="php-types-comparisons.html">PHP 类型比较</a> <code>https://www.runoob.com/php/php-types-comparisons.html</code></li><li><a href="php-forms.html">PHP 表单</a> <code>https://www.runoob.com/php/php-forms.html</code></li><li><a href="php-form-required.html">PHP 表单 – 必需字段</a> <code>https://www.runoob.com/php/php-form-required.html</code></li><li><a href="php-form-url-email.html">PHP 表单 – 验证邮件和URL</a> <code>https://www.runoob.com/php/php-form-url-email.html</code></li><li><a href="php-form-validation.html">PHP 表单验证</a> <code>https://www.runoob.com/php/php-form-validation.html</code></li><li><a href="php-syntax.html">PHP 语法</a> <code>https://www.runoob.com/php/php-syntax.html</code></li><li><a href="php-superglobals.html">PHP 超级全局变量</a> <code>https://www.runoob.com/php/php-superglobals.html</code></li><li><a href="php-filter.html">PHP 过滤器</a> <code>https://www.runoob.com/php/php-filter.html</code></li><li><a href="php-mysql-connect.html">PHP 连接 MySQL</a> <code>https://www.runoob.com/php/php-mysql-connect.html</code></li><li><a href="php-mail.html">PHP 邮件</a> <code>https://www.runoob.com/php/php-mail.html</code></li><li><a href="php-error.html">PHP 错误处理</a> <code>https://www.runoob.com/php/php-error.html</code></li><li><a href="php-oop.html">PHP 面向对象</a> <code>https://www.runoob.com/php/php-oop.html</code></li><li><a href="php-filter-advanced.html">PHP 高级过滤器</a> <code>https://www.runoob.com/php/php-filter-advanced.html</code></li><li><a href="php-magic-constant.html">PHP 魔术常量</a> <code>https://www.runoob.com/php/php-magic-constant.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "PHP arsort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-arsort.html", "href": "func-array-arsort.html"}, {"title": "PHP asort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-asort.html", "href": "func-array-asort.html"}, {"title": "PHP array_change_key_case() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-change-key-case.html", "href": "func-array-change-key-case.html"}, {"title": "PHP array_chunk() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-chunk.html", "href": "func-array-chunk.html"}, {"title": "PHP array_column() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-column.html", "href": "func-array-column.html"}, {"title": "PHP array_combine() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-combine.html", "href": "func-array-combine.html"}, {"title": "PHP compact() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-compact.html", "href": "func-array-compact.html"}, {"title": "PHP array_count_values() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-count-values.html", "href": "func-array-count-values.html"}, {"title": "PHP count() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-count.html", "href": "func-array-count.html"}, {"title": "PHP current() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-current.html", "href": "func-array-current.html"}, {"title": "PHP array_diff_assoc() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-diff-assoc.html", "href": "func-array-diff-assoc.html"}, {"title": "PHP array_diff_key() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-diff-key.html", "href": "func-array-diff-key.html"}, {"title": "PHP array_diff_uassoc() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-diff-uassoc.html", "href": "func-array-diff-uassoc.html"}, {"title": "PHP array_diff_ukey() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-diff-ukey.html", "href": "func-array-diff-ukey.html"}, {"title": "PHP array_diff() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-diff.html", "href": "func-array-diff.html"}, {"title": "PHP each() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-each.html", "href": "func-array-each.html"}, {"title": "PHP end() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-end.html", "href": "func-array-end.html"}, {"title": "PHP extract() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-extract.html", "href": "func-array-extract.html"}, {"title": "PHP array_fill_keys() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-fill-keys.html", "href": "func-array-fill-keys.html"}, {"title": "PHP array_fill() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-fill.html", "href": "func-array-fill.html"}, {"title": "PHP array_filter() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-filter.html", "href": "func-array-filter.html"}, {"title": "PHP array_flip() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-flip.html", "href": "func-array-flip.html"}, {"title": "PHP in_array() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-in-array.html", "href": "func-array-in-array.html"}, {"title": "PHP array_intersect_assoc() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-intersect-assoc.html", "href": "func-array-intersect-assoc.html"}, {"title": "PHP array_intersect_key() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-intersect-key.html", "href": "func-array-intersect-key.html"}, {"title": "PHP array_intersect_uassoc() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-intersect-uassoc.html", "href": "func-array-intersect-uassoc.html"}, {"title": "PHP array_intersect_ukey() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-intersect-ukey.html", "href": "func-array-intersect-ukey.html"}, {"title": "PHP array_intersect() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-intersect.html", "href": "func-array-intersect.html"}, {"title": "PHP array_key_exists() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-key-exists.html", "href": "func-array-key-exists.html"}, {"title": "PHP array_key_first() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-key-first.html", "href": "func-array-key-first.html"}, {"title": "PHP array_key_last() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-key-last.html", "href": "func-array-key-last.html"}, {"title": "PHP key() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-key.html", "href": "func-array-key.html"}, {"title": "PHP array_keys() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-keys.html", "href": "func-array-keys.html"}, {"title": "PHP krsort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-krsort.html", "href": "func-array-krsort.html"}, {"title": "PHP ksort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-ksort.html", "href": "func-array-ksort.html"}, {"title": "PHP list() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-list.html", "href": "func-array-list.html"}, {"title": "PHP array_map() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-map.html", "href": "func-array-map.html"}, {"title": "PHP array_merge_recursive() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-merge-recursive.html", "href": "func-array-merge-recursive.html"}, {"title": "PHP array_merge() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-merge.html", "href": "func-array-merge.html"}, {"title": "PHP array_multisort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-multisort.html", "href": "func-array-multisort.html"}, {"title": "PHP natcasesort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-natcasesort.html", "href": "func-array-natcasesort.html"}, {"title": "PHP natsort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-natsort.html", "href": "func-array-natsort.html"}, {"title": "PHP next() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-next.html", "href": "func-array-next.html"}, {"title": "PHP array_pad() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-pad.html", "href": "func-array-pad.html"}, {"title": "PHP array_pop() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-pop.html", "href": "func-array-pop.html"}, {"title": "PHP pos() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-pos.html", "href": "func-array-pos.html"}, {"title": "PHP prev() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-prev.html", "href": "func-array-prev.html"}, {"title": "PHP array_product() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-product.html", "href": "func-array-product.html"}, {"title": "PHP array_push() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-push.html", "href": "func-array-push.html"}, {"title": "PHP array_rand() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-rand.html", "href": "func-array-rand.html"}, {"title": "PHP range() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-range.html", "href": "func-array-range.html"}, {"title": "PHP array_reduce() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-reduce.html", "href": "func-array-reduce.html"}, {"title": "PHP array_replace_recursive() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-replace-recursive.html", "href": "func-array-replace-recursive.html"}, {"title": "PHP array_replace() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-replace.html", "href": "func-array-replace.html"}, {"title": "PHP reset() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-reset.html", "href": "func-array-reset.html"}, {"title": "PHP array_reverse() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-reverse.html", "href": "func-array-reverse.html"}, {"title": "PHP rsort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-rsort.html", "href": "func-array-rsort.html"}, {"title": "PHP array_search() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-search.html", "href": "func-array-search.html"}, {"title": "PHP array_shift() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-shift.html", "href": "func-array-shift.html"}, {"title": "PHP shuffle() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-shuffle.html", "href": "func-array-shuffle.html"}, {"title": "PHP sizeof() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-sizeof.html", "href": "func-array-sizeof.html"}, {"title": "PHP array_slice() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-slice.html", "href": "func-array-slice.html"}, {"title": "PHP sort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-sort.html", "href": "func-array-sort.html"}, {"title": "PHP array_splice() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-splice.html", "href": "func-array-splice.html"}, {"title": "PHP array_sum() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-sum.html", "href": "func-array-sum.html"}, {"title": "PHP uasort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-uasort.html", "href": "func-array-uasort.html"}, {"title": "PHP array_udiff_assoc() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-udiff-assoc.html", "href": "func-array-udiff-assoc.html"}, {"title": "PHP array_udiff_uassoc() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-udiff-uassoc.html", "href": "func-array-udiff-uassoc.html"}, {"title": "PHP array_udiff() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-udiff.html", "href": "func-array-udiff.html"}, {"title": "PHP array_uintersect_assoc() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-uintersect-assoc.html", "href": "func-array-uintersect-assoc.html"}, {"title": "PHP array_uintersect_uassoc() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-uintersect-uassoc.html", "href": "func-array-uintersect-uassoc.html"}, {"title": "PHP array_uintersect() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-uintersect.html", "href": "func-array-uintersect.html"}, {"title": "PHP uksort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-uksort.html", "href": "func-array-uksort.html"}, {"title": "PHP array_unique() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-unique.html", "href": "func-array-unique.html"}, {"title": "PHP array_unshift() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-unshift.html", "href": "func-array-unshift.html"}, {"title": "PHP usort() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-usort.html", "href": "func-array-usort.html"}, {"title": "PHP array_values() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-values.html", "href": "func-array-values.html"}, {"title": "PHP array_walk_recursive() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-walk-recursive.html", "href": "func-array-walk-recursive.html"}, {"title": "PHP array_walk() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array-walk.html", "href": "func-array-walk.html"}, {"title": "PHP array() 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/func-array.html", "href": "func-array.html"}, {"title": "PHP 实例 AJAX 与 MySQL", "group": "php", "subgroup": "实例", "url": "https://www.runoob.com/php/php-ajax-database.html", "href": "php-ajax-database.html"}, {"title": "AJAX 简介", "group": "php", "subgroup": "入门", "url": "https://www.runoob.com/php/php-ajax-intro.html", "href": "php-ajax-intro.html"}, {"title": "PHP 实例 AJAX 实时搜索", "group": "php", "subgroup": "实例", "url": "https://www.runoob.com/php/php-ajax-livesearch.html", "href": "php-ajax-livesearch.html"}, {"title": "PHP – AJAX 与 PHP", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-ajax-php.html", "href": "php-ajax-php.html"}, {"title": "PHP 实例 AJAX 投票", "group": "php", "subgroup": "实例", "url": "https://www.runoob.com/php/php-ajax-poll.html", "href": "php-ajax-poll.html"}, {"title": "PHP 实例 AJAX RSS 阅读器", "group": "php", "subgroup": "实例", "url": "https://www.runoob.com/php/php-ajax-rss-reader.html", "href": "php-ajax-rss-reader.html"}, {"title": "PHP 实例 AJAX 与 XML", "group": "php", "subgroup": "实例", "url": "https://www.runoob.com/php/php-ajax-xml.html", "href": "php-ajax-xml.html"}, {"title": "PHP 多维数组", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-arrays-multi.html", "href": "php-arrays-multi.html"}, {"title": "PHP 数组排序", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-arrays-sort.html", "href": "php-arrays-sort.html"}, {"title": "PHP 数组", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-arrays.html", "href": "php-arrays.html"}, {"title": "PHP 常量", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-constants.html", "href": "php-constants.html"}, {"title": "PHP Cookie", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-cookies.html", "href": "php-cookies.html"}, {"title": "PHP 数据类型", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-datatypes.html", "href": "php-datatypes.html"}, {"title": "PHP date() 函数", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-date.html", "href": "php-date.html"}, {"title": "PHP 数据库 ODBC", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-db-odbc.html", "href": "php-db-odbc.html"}, {"title": "PHP 5 echo/print 语句", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-echo-print.html", "href": "php-echo-print.html"}, {"title": "PHP EOF(heredoc) 使用说明", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-eof-heredoc.html", "href": "php-eof-heredoc.html"}, {"title": "PHP 错误处理", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-error.html", "href": "php-error.html"}, {"title": "PHP 异常处理", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-exception.html", "href": "php-exception.html"}, {"title": "PHP 文件上传", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-file-upload.html", "href": "php-file-upload.html"}, {"title": "PHP 文件", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-file.html", "href": "php-file.html"}, {"title": "PHP 高级过滤器", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-filter-advanced.html", "href": "php-filter-advanced.html"}, {"title": "PHP 过滤器", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-filter.html", "href": "php-filter.html"}, {"title": "PHP完整表单实例", "group": "php", "subgroup": "实例", "url": "https://www.runoob.com/php/php-form-complete.html", "href": "php-form-complete.html"}, {"title": "PHP 表单 – 必需字段", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-form-required.html", "href": "php-form-required.html"}, {"title": "PHP 表单 – 验证邮件和URL", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-form-url-email.html", "href": "php-form-url-email.html"}, {"title": "PHP 表单验证", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-form-validation.html", "href": "php-form-validation.html"}, {"title": "PHP 表单", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-forms.html", "href": "php-forms.html"}, {"title": "PHP 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-functions.html", "href": "php-functions.html"}, {"title": "PHP $_GET 变量", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-get.html", "href": "php-get.html"}, {"title": "PHP If…Else 语句", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-if-else.html", "href": "php-if-else.html"}, {"title": "PHP 图像处理", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-image-gd.html", "href": "php-image-gd.html"}, {"title": "PHP include 和 require", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-includes.html", "href": "php-includes.html"}, {"title": "PHP 安装", "group": "php", "subgroup": "入门", "url": "https://www.runoob.com/php/php-install.html", "href": "php-install.html"}, {"title": "PHP 简介", "group": "php", "subgroup": "入门", "url": "https://www.runoob.com/php/php-intro.html", "href": "php-intro.html"}, {"title": "PHP JSON", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-json.html", "href": "php-json.html"}, {"title": "PHP For 循环", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-looping-for.html", "href": "php-looping-for.html"}, {"title": "PHP While 循环", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-looping.html", "href": "php-looping.html"}, {"title": "PHP 魔术常量", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-magic-constant.html", "href": "php-magic-constant.html"}, {"title": "PHP 邮件", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mail.html", "href": "php-mail.html"}, {"title": "PHP 连接 MySQL", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-connect.html", "href": "php-mysql-connect.html"}, {"title": "PHP MySQL 创建表", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-create-table.html", "href": "php-mysql-create-table.html"}, {"title": "PHP MySQL 创建数据库", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-create.html", "href": "php-mysql-create.html"}, {"title": "PHP MySQL Delete", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-delete.html", "href": "php-mysql-delete.html"}, {"title": "PHP MySQL 插入多条数据", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-insert-multiple.html", "href": "php-mysql-insert-multiple.html"}, {"title": "PHP MySQL 插入数据", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-insert.html", "href": "php-mysql-insert.html"}, {"title": "PHP MySQL 简介", "group": "php", "subgroup": "入门", "url": "https://www.runoob.com/php/php-mysql-intro.html", "href": "php-mysql-intro.html"}, {"title": "PHP MySQL Order By 关键词", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-order-by.html", "href": "php-mysql-order-by.html"}, {"title": "PHP MySQL 预处理语句", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-prepared-statements.html", "href": "php-mysql-prepared-statements.html"}, {"title": "PHP MySQL 读取数据", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-select.html", "href": "php-mysql-select.html"}, {"title": "PHP MySQL Update", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-update.html", "href": "php-mysql-update.html"}, {"title": "PHP MySQL Where 子句", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-mysql-where.html", "href": "php-mysql-where.html"}, {"title": "PHP 命名空间(namespace)", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-namespace.html", "href": "php-namespace.html"}, {"title": "PHP 面向对象", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-oop.html", "href": "php-oop.html"}, {"title": "PHP 运算符", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-operators.html", "href": "php-operators.html"}, {"title": "PHP 正则表达式(PCRE)", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-pcre.html", "href": "php-pcre.html"}, {"title": "PHP PDO", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-pdo.html", "href": "php-pdo.html"}, {"title": "PHP $_POST 变量", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-post.html", "href": "php-post.html"}, {"title": "PHP 5 Array 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-array.html", "href": "php-ref-array.html"}, {"title": "PHP 5 Calendar 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-calendar.html", "href": "php-ref-calendar.html"}, {"title": "PHP cURL 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-curl.html", "href": "php-ref-curl.html"}, {"title": "PHP 5 Date/Time 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-date.html", "href": "php-ref-date.html"}, {"title": "PHP 5 Directory 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-directory.html", "href": "php-ref-directory.html"}, {"title": "PHP Error 和 Logging 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-error.html", "href": "php-ref-error.html"}, {"title": "PHP 5 Filesystem 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-filesystem.html", "href": "php-ref-filesystem.html"}, {"title": "PHP Filter 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-filter.html", "href": "php-ref-filter.html"}, {"title": "PHP FTP 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-ftp.html", "href": "php-ref-ftp.html"}, {"title": "PHP HTTP 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-http.html", "href": "php-ref-http.html"}, {"title": "PHP Libxml 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-libxml.html", "href": "php-ref-libxml.html"}, {"title": "PHP Mail 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-mail.html", "href": "php-ref-mail.html"}, {"title": "PHP 5 Math 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-math.html", "href": "php-ref-math.html"}, {"title": "PHP Misc. 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-misc.html", "href": "php-ref-misc.html"}, {"title": "PHP 5 MySQLi 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-mysqli.html", "href": "php-ref-mysqli.html"}, {"title": "PHP 5 SimpleXML 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-simplexml.html", "href": "php-ref-simplexml.html"}, {"title": "PHP 5 String 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-string.html", "href": "php-ref-string.html"}, {"title": "PHP 5 Timezones", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-timezones.html", "href": "php-ref-timezones.html"}, {"title": "PHP XML 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-xml.html", "href": "php-ref-xml.html"}, {"title": "PHP Zip File 函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-ref-zip.html", "href": "php-ref-zip.html"}, {"title": "PHP RESTful", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-restful.html", "href": "php-restful.html"}, {"title": "PHP 安全 E-mail", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-secure-mail.html", "href": "php-secure-mail.html"}, {"title": "PHP Session", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-sessions.html", "href": "php-sessions.html"}, {"title": "PHP 字符串变量", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-string.html", "href": "php-string.html"}, {"title": "PHP 超级全局变量", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-superglobals.html", "href": "php-superglobals.html"}, {"title": "PHP Switch 语句", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-switch.html", "href": "php-switch.html"}, {"title": "PHP 语法", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-syntax.html", "href": "php-syntax.html"}, {"title": "PHP 教程", "group": "php", "subgroup": "入门", "url": "https://www.runoob.com/php/php-tutorial.html", "href": "php-tutorial.html"}, {"title": "PHP 类型比较", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-types-comparisons.html", "href": "php-types-comparisons.html"}, {"title": "PHP 可用的函数", "group": "php", "subgroup": "参考", "url": "https://www.runoob.com/php/php-variable-handling-functions.html", "href": "php-variable-handling-functions.html"}, {"title": "PHP 变量", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-variables.html", "href": "php-variables.html"}, {"title": "PHP XML DOM", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-xml-dom.html", "href": "php-xml-dom.html"}, {"title": "PHP XML Expat 解析器", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-xml-parser-expat.html", "href": "php-xml-parser-expat.html"}, {"title": "PHP XML SimpleXML", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php-xml-simplexml.html", "href": "php-xml-simplexml.html"}, {"title": "PHP 7 新特性", "group": "php", "subgroup": "专题", "url": "https://www.runoob.com/php/php7-new-features.html", "href": "php7-new-features.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

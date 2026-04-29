@@ -1,0 +1,89 @@
+URL: https://www.runoob.com/python3/python3-string-isalnum.html
+Title: Python3 isalnum()方法 | 菜鸟教程
+
+Python3 isalnum()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 index()方法 
+
+Python3 isalpha()方法 
+
+Python3 isalnum()方法 
+
+描述 
+
+isalnum() 方法用于检查字符串是否由字母和数字组成，即字符串中的所有字符都是字母或数字。 
+
+空字符串 ：如果字符串为空（长度为0），则返回 False ，因为空字符串不包含任何字母或数字。 
+
+大小写敏感 ： isalnum() 方法区分大小写，即只有字母和数字的字符才会被认为是有效的。 
+
+特殊字符 ：特殊字符（如标点符号、空格、特殊符号等）不被认为是字母或数字。 
+
+语法 
+
+isalnum()方法语法： 
+
+str.isalnum() 
+
+参数 
+
+无。 
+
+返回值 
+
+如果字符串至少有一个字符，并且所有字符都是字母或数字，则返回 True；否则返回 False。 
+
+实例 
+
+以下实例展示了isalnum()方法的实例： 
+
+实例(Python 2.0+) 
+
+str = " runoob2016 " print ( str . isalnum ( ) ) str = " www.runoob.com " print ( str . isalnum ( ) ) 
+
+以上实例输出结果如下： 
+
+True
+False 
+
+更多实例： 
+
+实例 
+
+# 示例 1: 包含字母和数字的字符串 
+
+print ( "abc123" . isalnum ( ) ) # 输出: True 
+
+# 示例 2: 包含空格的字符串 
+
+print ( "abc 123" . isalnum ( ) ) # 输出: False 
+
+# 示例 3: 包含特殊字符的字符串 
+
+print ( "abc#123" . isalnum ( ) ) # 输出: False 
+
+# 示例 4: 空字符串 
+
+print ( "" . isalnum ( ) ) # 输出: False 
+
+# 示例 5: 只包含数字的字符串 
+
+print ( "123456" . isalnum ( ) ) # 输出: True 
+
+# 示例 6: 只包含字母的字符串 
+
+print ( "abcdef" . isalnum ( ) ) # 输出: True 
+
+# 示例 7: 包含下划线但不是字母或数字的字符串 
+
+print ( "abc_def" . isalnum ( ) ) # 输出: False 
+
+AI 思考中... 
+
+Python3 index()方法 
+
+Python3 isalpha()方法

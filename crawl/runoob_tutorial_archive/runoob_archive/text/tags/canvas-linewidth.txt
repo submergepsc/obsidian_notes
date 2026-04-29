@@ -1,0 +1,61 @@
+URL: https://www.runoob.com/tags/canvas-linewidth.html
+Title: HTML canvas lineWidth 属性 | 菜鸟教程
+
+HTML canvas lineWidth 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas lineJoin 属性 
+
+HTML canvas miterLimit 属性 
+
+HTML canvas lineWidth 属性 
+
+实例 
+
+用宽度为 10 像素的线条来绘制矩形： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+ctx.lineWidth=10; 
+ctx.strokeRect(20,20,80,100); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 lineWidth 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+lineWidth 属性设置或返回当前线条的宽度，以像素计。 
+
+默认值： 
+
+1 
+
+JavaScript 语法： 
+
+context .lineWidth= number ; 
+
+属性值 
+
+值 
+
+描述 
+
+number 
+
+当前线条的宽度，以像素计。 
+
+AI 思考中... 
+
+HTML canvas lineJoin 属性 
+
+HTML canvas miterLimit 属性

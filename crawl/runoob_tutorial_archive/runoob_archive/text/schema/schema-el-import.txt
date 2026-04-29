@@ -1,0 +1,80 @@
+URL: https://www.runoob.com/schema/schema-el-import.html
+Title: XML Schema import 元素 | 菜鸟教程
+
+XML Schema import 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema group 元素 
+
+XML Schema include 元素 
+
+XML Schema import 元素 
+
+定义和用法 
+
+import 元素用于向一个文档添加带有不同目标命名空间的多个 schema。 
+
+元素信息 
+
+父元素： schema 
+
+语法 
+
+<import 
+id=ID 
+namespace=anyURI 
+schemaLocation=anyURI 
+any attributes 
+> 
+
+(annotation?) 
+
+</import> 
+
+（? 符号声明在 import 元素中，该元素可出现零次或一次。） 
+
+属性 
+
+描述 
+
+id 
+
+可选。规定该元素的唯一的 ID。 
+
+namespace 
+
+必需。规定要导入的命名空间的 URI。 
+
+schemaLocation 
+
+可选。规定被导入的命名空间的 URI。 
+
+any attributes 
+
+可选。规定带有 non-schema 命名空间的任何其他属性。 
+
+实例 1 
+
+下面的例子展示导入一个命名空间： 
+
+<?xml version="1.0"?> 
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"> 
+
+<xs:import namespace="http://www.w3cschool.cc/schema"/> 
+
+.. 
+
+.. 
+
+.. 
+
+</xs:schema> 
+
+AI 思考中... 
+
+XML Schema group 元素 
+
+XML Schema include 元素

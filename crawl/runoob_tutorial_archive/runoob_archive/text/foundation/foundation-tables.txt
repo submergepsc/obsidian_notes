@@ -1,0 +1,67 @@
+URL: https://www.runoob.com/foundation/foundation-tables.html
+Title: Foundation 表格 | 菜鸟教程
+
+Foundation 表格 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 文本 
+
+Foundation 按钮 
+
+Foundation 表格 
+
+Foundation 的 <table> 元素样式为灰色斑马条纹且包含四个边框： 
+
+实例 
+
+< table > 
+< thead > 
+< tr > 
+< th > Firstname < /th > 
+< th > Lastname < /th > 
+< th > Email < /th > 
+< /tr > 
+< /thead > 
+< tbody > 
+< tr > 
+< td > John < /td > 
+< td > Doe < /td > 
+< td > [email protected] < /td > 
+< /tr > 
+< tr > 
+< td > Mary < /td > 
+< td > Moe < /td > 
+< td > [email protected] < /td > 
+< /tr > 
+< tr > 
+< td > July < /td > 
+< td > Dooley < /td > 
+< td > [email protected] < /td > 
+< /tr > 
+< /tbody > 
+< /table > 
+
+尝试一下 » 
+
+响应式表格 
+
+使用 CSS 让表格支持响应式设计：在表格外添加 <div> 元素，样式为 overflow-x:hidden : 
+
+实例 
+
+< div style= "overflow-x:hidden" > 
+< table > 
+... 
+< /table > 
+< /div > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Foundation 文本 
+
+Foundation 按钮

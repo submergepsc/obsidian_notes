@@ -1,0 +1,48 @@
+URL: https://www.runoob.com/xslfo/obj-multi-switch.html
+Title: XSL-FO multi-switch 对象 | 菜鸟教程
+
+XSL-FO multi-switch 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO multi-property-set 对象 
+
+XSL-FO multi-toggle 对象 
+
+XSL-FO multi-switch 对象 
+
+定义和用法 
+
+<fo:multi-switch> 对象保留一个或多个 <fo:multi-case> 对象，控制它们（由 <fo:multi-toggle> 触发）彼此之间的转换。 
+
+该对象可用于交互式任务，比如：表格内容视图切换以及下一页/上一页视图切换。 
+
+这些对象的子类为一个或多个 <fo:multi-case> 对象。然而，在一个时间内只有一个 <fo:multi-case> 对象是可视的。每个 <fo:multi-case> 对象都可能包含一个或多个 <fo:multi-toggle> 对象，<fo:multi-toggle>对象是用于控制 <fo:multi-switch> 的 <fo:multi-case> 切换的。 
+
+语法 
+
+<fo:multi-switch> 
+<!-- 
+Contents:(multi-case+) 
+--> 
+</fo:multi-switch> 
+
+属性 
+
+属性 
+
+auto-restore 
+
+id 
+
+role 
+
+source-document 
+
+AI 思考中... 
+
+XSL-FO multi-property-set 对象 
+
+XSL-FO multi-toggle 对象

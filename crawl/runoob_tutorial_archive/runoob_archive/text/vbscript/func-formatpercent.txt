@@ -1,0 +1,87 @@
+URL: https://www.runoob.com/vbscript/func-formatpercent.html
+Title: VBScript FormatPercent 函数 | 菜鸟教程
+
+VBScript FormatPercent 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript FormatNumber 函数 
+
+VBScript Abs 函数 
+
+VBScript FormatPercent 函数 
+
+FormatPercent 函数返回作为百分数被格式化的表达式（尾随有 % 符号的百分比（乘以 100 ））。 
+
+语法 
+
+FormatPercent(Expression[,NumDigAfterDec[, 
+IncLeadingDig[,UseParForNegNum[,GroupDig]]]]) 
+
+参数 
+
+描述 
+
+expression 
+
+必需。需被格式化的表达式。 
+
+NumDigAfterDec 
+
+可选。指示小数点右侧显示位数的数值。默认值为 -1（使用的是计算机的区域设置）。 
+
+IncLeadingDig 
+
+可选。指示是否显示小数值的前导零： 
+
+-2 = TristateUseDefault - 使用计算机的区域设置 
+
+-1 = TristateTrue - True 
+
+0 = TristateFalse - False 
+
+UseParForNegNum 
+
+可选。指示是否将负值置于括号中： 
+
+-2 = TristateUseDefault - 使用计算机的区域设置 
+
+-1 = TristateTrue - True 
+
+0 = TristateFalse - False 
+
+GroupDig 
+
+可选。指示是否使用计算机区域设置中指定的数字分组符号将数字分组： 
+
+-2 = TristateUseDefault - 使用计算机的区域设置 
+
+-1 = TristateTrue - True 
+
+0 = TristateFalse - False 
+
+实例 1 
+
+'How many percent is 6 of 345? 
+document.write(FormatPercent(6/345)) 
+
+Output: 
+
+1.74% 
+
+实例 2 
+
+'How many percent is 6 of 345? 
+document.write(FormatPercent(6/345,1)) 
+
+Output: 
+
+1.7% 
+
+AI 思考中... 
+
+VBScript FormatNumber 函数 
+
+VBScript Abs 函数

@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/net-connected.html
+Title: Java 实例 – 使用 Socket 连接到指定主机 | 菜鸟教程
+
+Java 实例 – 使用 Socket 连接到指定主机 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 获取指定主机的IP地址 
+
+Java 实例 – 查看主机指定文件的最后修改时间 
+
+Java 实例 - 使用 Socket 连接到指定主机 
+
+以下实例演示了如何使用 net.Socket 类的 getInetAddress() 方法来连接到指定主机： 
+
+Main.java 文件 
+
+import java . net . InetAddress ; import java . net . Socket ; public class WebPing { public static void main ( String [ ] args ) { try { InetAddress addr ; Socket sock = new Socket ( " www.runoob.com " , 80 ) ; addr = sock . getInetAddress ( ) ; System . out . println ( " 连接到 " + addr ) ; sock . close ( ) ; } catch ( java . io . IOException e ) { System . out . println ( " 无法连接 " + args [ 0 ] ) ; System . out . println ( e ) ; } } } 
+
+以上代码运行输出结果为： 
+
+连接到 http:/www.runoob.com/222.73.134.120 
+
+AI 思考中... 
+
+Java 实例 – 获取指定主机的IP地址 
+
+Java 实例 – 查看主机指定文件的最后修改时间

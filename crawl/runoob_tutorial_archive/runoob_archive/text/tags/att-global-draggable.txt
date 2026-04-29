@@ -1,0 +1,69 @@
+URL: https://www.runoob.com/tags/att-global-draggable.html
+Title: HTML draggable 属性 | 菜鸟教程
+
+HTML draggable 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML dir 属性 
+
+HTML dropzone 属性 
+
+HTML draggable 属性 
+
+实例 
+
+可拖动的段落： 
+
+<p draggable="true">这是一段可移动的段落。请把该段落拖入上面的矩形。</p> 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9+, Firefox, Opera, 
+Chrome, 和 Safari 浏览器支持 draggable 属性。 
+
+注意： Internet Explorer 8 及更早 IE 版本不支持 draggable 属性。 
+
+定义和用法 
+
+draggable 属性规定元素是否可拖动。 
+
+提示： 链接和图像默认是可拖动的。 
+
+提示： draggable 属性经常用于拖放操作。请阅读我们的 HTML5 拖放教程 ，以学习更多知识。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+draggable 属性是 HTML5 新增的。 
+
+语法 
+
+< element draggable="true|false|auto"> 
+
+属性值 
+
+值 
+
+描述 
+
+true 
+
+规定元素是可拖动的。 
+
+false 
+
+规定元素是不可拖动的。 
+
+auto 
+
+使用浏览器的默认特性。 
+
+AI 思考中... 
+
+HTML dir 属性 
+
+HTML dropzone 属性

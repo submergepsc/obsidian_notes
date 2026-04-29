@@ -1,0 +1,127 @@
+URL: https://www.runoob.com/cssref/pr-margin.html
+Title: CSS margin 属性 | 菜鸟教程
+
+CSS margin 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS list-style-type 属性 
+
+CSS margin-bottom 属性 
+
+CSS margin 属性 
+
+实例 
+
+设置一个p元素的所有四个边距： 
+
+p 
+{ 
+margin:2cm 4cm 3cm 4cm; 
+} 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+margin简写属性在一个声明中设置所有外边距属性。该属性可以有1到4个值。 
+
+实例: 
+
+margin:10px 5px 15px 20px; 
+
+上边距是 10px 
+
+右边距是 5px 
+
+下边距是 15px 
+
+左边距是 20px 
+
+margin:10px 5px 15px; 
+
+上边距是 10px 
+
+右边距和左边距是 5px 
+
+下边距是 15px 
+
+margin:10px 5px; 
+
+上边距和下边距是 10px 
+
+右边距和左边距是 5px 
+
+margin:10px; 
+
+所有四个边距都是 10px 
+
+注意： 负值是允许的。 
+
+默认值： 
+
+0 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.margin="10px 5px" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+margin 
+
+1.0 
+
+6.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+auto 
+
+浏览器计算外边距。 
+
+length 
+
+规定以具体单位计的外边距值，比如像素、厘米等。默认值是 0px。 
+
+% 
+
+规定基于父元素的宽度的百分比的外边距。 
+
+inherit 
+
+规定应该从父元素继承外边距。 
+
+相关文章 
+
+CSS 教程: CSS Margin 
+
+AI 思考中... 
+
+CSS list-style-type 属性 
+
+CSS margin-bottom 属性

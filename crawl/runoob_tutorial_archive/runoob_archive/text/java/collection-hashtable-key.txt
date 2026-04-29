@@ -1,0 +1,32 @@
+URL: https://www.runoob.com/java/collection-hashtable-key.html
+Title: Java 实例 – 遍历 HashTable 的键值 | 菜鸟教程
+
+Java 实例 – 遍历 HashTable 的键值 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 使用 Enumeration 遍历 HashTable 
+
+Java 实例 – 查找 List 中的最大最小值 
+
+Java 实例 - 遍历 HashTable 的键值 
+
+以下实例演示了如何使用 Hashtable 类的 keys() 方法来遍历输出键值： 
+
+Main.java 文件 
+
+import java . util . Enumeration ; import java . util . Hashtable ; public class Main { public static void main ( String [ ] args ) { Hashtable ht = new Hashtable ( ) ; ht . put ( " 1 " , " One " ) ; ht . put ( " 2 " , " Two " ) ; ht . put ( " 3 " , " Three " ) ; Enumeration e = ht . keys ( ) ; while ( e . hasMoreElements ( ) ) { System . out . println ( e . nextElement ( ) ) ; } } } 
+
+以上代码运行输出结果为： 
+
+3
+2
+1 
+
+AI 思考中... 
+
+Java 实例 – 使用 Enumeration 遍历 HashTable 
+
+Java 实例 – 查找 List 中的最大最小值

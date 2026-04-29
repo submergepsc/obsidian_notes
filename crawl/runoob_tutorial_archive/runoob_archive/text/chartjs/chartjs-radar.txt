@@ -1,0 +1,142 @@
+URL: https://www.runoob.com/chartjs/chartjs-radar.html
+Title: Chart.js 雷达图 | 菜鸟教程
+
+Chart.js 雷达图 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Chart.js 教程 
+
+Chart.js 极地图 
+
+Chart.js 散点图 
+
+Chart.js 雷达图 
+
+雷达图是一种显示多个数据点及其之间变化的方式。 
+
+雷达图是以从同一点开始的轴上表示的三个或更多个定量变量的二维图表的形式显示多变量数据的图形方法。 
+
+轴的相对位置和角度通常是无信息的。 
+
+混合图 type 属性为 radar 。 
+
+const config = {
+ type: 'radar',
+ data: data,
+ options: {
+ elements: {
+ line: {
+ borderWidth: 3 // 设置线条宽度
+ }
+ }
+ },
+}; 
+
+接下来我们创建一个简单的雷达图： 
+
+实例 
+
+const ctx = document. getElementById ( 'myChart' ) ; 
+
+const data = { 
+
+labels : [ 
+
+'Eating' , 
+
+'Drinking' , 
+
+'Sleeping' , 
+
+'Designing' , 
+
+'Coding' , 
+
+'Cycling' , 
+
+'Running' 
+
+] , 
+
+datasets : [ { 
+
+label : '第一个数据集' , 
+
+data : [ 65 , 59 , 90 , 81 , 56 , 55 , 40 ] , 
+
+fill : true , 
+
+backgroundColor : 'rgba(255, 99, 132, 0.2)' , 
+
+borderColor : 'rgb(255, 99, 132)' , 
+
+pointBackgroundColor : 'rgb(255, 99, 132)' , 
+
+pointBorderColor : '#fff' , 
+
+pointHoverBackgroundColor : '#fff' , 
+
+pointHoverBorderColor : 'rgb(255, 99, 132)' 
+
+} , { 
+
+label : '第二个数据集' , 
+
+data : [ 28 , 48 , 40 , 19 , 96 , 27 , 100 ] , 
+
+fill : true , 
+
+backgroundColor : 'rgba(54, 162, 235, 0.2)' , 
+
+borderColor : 'rgb(54, 162, 235)' , 
+
+pointBackgroundColor : 'rgb(54, 162, 235)' , 
+
+pointBorderColor : '#fff' , 
+
+pointHoverBackgroundColor : '#fff' , 
+
+pointHoverBorderColor : 'rgb(54, 162, 235)' 
+
+} ] 
+
+} ; 
+
+const config = { 
+
+type : 'radar' , 
+
+data : data , 
+
+options : { 
+
+responsive : true , // 设置图表为响应式，根据屏幕窗口变化而变化 
+
+maintainAspectRatio : false , // 保持图表原有比例 
+
+elements : { 
+
+line : { 
+
+borderWidth : 3 // 设置线条宽度 
+
+} 
+
+} 
+
+} 
+
+} ; 
+
+const myChart = new Chart ( ctx , config ) ; 
+
+尝试一下 » 
+
+以上实例输出结果为： 
+
+AI 思考中... 
+
+Chart.js 极地图 
+
+Chart.js 散点图

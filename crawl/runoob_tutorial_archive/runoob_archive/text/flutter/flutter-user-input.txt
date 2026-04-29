@@ -1,0 +1,600 @@
+URL: https://www.runoob.com/flutter/flutter-user-input.html
+Title: Flutter 用户输入 | 菜鸟教程
+
+Flutter 用户输入 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Flutter 教程 
+
+Flutter ListView 与滚动 
+
+Flutter 状态管理 
+
+Flutter 用户输入 
+
+本节将介绍如何在 Flutter 应用中处理用户输入，包括文本输入、按钮点击、表单处理等。 
+
+TextField - 文本输入 
+
+TextField 是 Flutter 中最常用的文本输入 Widget。 
+
+实例：TextField 基本用法 
+
+// 最简单的 TextField 
+
+TextField ( ) 
+
+// 带装饰的 TextField 
+
+TextField ( 
+
+decoration : const InputDecoration ( 
+
+labelText : '用户名' , // 标签 
+
+hintText : '请输入用户名' , // 提示文字 
+
+prefixIcon : Icon ( Icons. person ) , // 前置图标 
+
+) , 
+
+) 
+
+// 带边框的 TextField 
+
+TextField ( 
+
+decoration : InputDecoration ( 
+
+border : OutlineInputBorder ( // 外边框 
+
+borderRadius : BorderRadius. circular ( 8 ) , 
+
+) , 
+
+labelText : '密码' , 
+
+) , 
+
+obscureText : true , // 隐藏输入内容（密码场景） 
+
+) 
+
+// 多行文本输入 
+
+TextField ( 
+
+maxLines : 3 , // 最大行数 
+
+decoration : const InputDecoration ( 
+
+hintText : '请输入多行文本' , 
+
+) , 
+
+) 
+
+TextEditingController - 文本控制器 
+
+使用 TextEditingController 可以读取和控制 TextField 的内容。 
+
+< h2 class="example">实例：TextEditingController 用法 
+
+class TextFieldExample extends StatefulWidget { 
+
+const TextFieldExample ( { super . key } ) ; 
+
+@override 
+
+State < TextFieldExample > createState ( ) => _TextFieldExampleState ( ) ; 
+
+} 
+
+class _TextFieldExampleState extends State < TextFieldExample > { 
+
+// 创建控制器 
+
+final TextEditingController _controller = TextEditingController ( ) ; 
+
+String _displayText = '' ; 
+
+@override 
+
+void dispose ( ) { 
+
+// 销毁控制器 
+
+_controller. dispose ( ) ; 
+
+super . dispose ( ) ; 
+
+} 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Column ( 
+
+children : [ 
+
+TextField ( 
+
+controller : _controller , // 绑定控制器 
+
+decoration : const InputDecoration ( 
+
+labelText : '输入文本' , 
+
+) , 
+
+onChanged : ( text ) { 
+
+// 监听文本变化 
+
+print ( '当前输入: $text' ) ; 
+
+} , 
+
+) , 
+
+const SizedBox ( height : 20 ) , 
+
+// 显示输入的文本 
+
+Text ( '你输入了: $_displayText' ) , 
+
+const SizedBox ( height : 20 ) , 
+
+ElevatedButton ( 
+
+onPressed : ( ) { 
+
+// 读取文本 
+
+setState ( ( ) { 
+
+_displayText = _controller. text ; 
+
+} ) ; 
+
+} , 
+
+child : const Text ( '显示输入' ) , 
+
+) , 
+
+ElevatedButton ( 
+
+onPressed : ( ) { 
+
+// 清空文本 
+
+_controller. clear ( ) ; 
+
+} , 
+
+child : const Text ( '清空' ) , 
+
+) , 
+
+ElevatedButton ( 
+
+onPressed : ( ) { 
+
+// 设置文本 
+
+_controller. text = '预设文本' ; 
+
+} , 
+
+child : const Text ( '设置文本' ) , 
+
+) , 
+
+] , 
+
+) ; 
+
+} 
+
+} 
+
+焦点控制 
+
+使用 FocusNode 可以控制输入框的焦点。 
+
+实例：焦点控制 
+
+class FocusExample extends StatefulWidget { 
+
+const FocusExample ( { super . key } ) ; 
+
+@override 
+
+State < FocusExample > createState ( ) => _FocusExampleState ( ) ; 
+
+} 
+
+class _FocusExampleState extends State < FocusExample > { 
+
+final FocusNode _focusNode1 = FocusNode ( ) ; 
+
+final FocusNode _focusNode2 = FocusNode ( ) ; 
+
+@override 
+
+void dispose ( ) { 
+
+_focusNode1. dispose ( ) ; 
+
+_focusNode2. dispose ( ) ; 
+
+super . dispose ( ) ; 
+
+} 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Column ( 
+
+children : [ 
+
+TextField ( 
+
+focusNode : _focusNode1 , 
+
+decoration : const InputDecoration ( labelText : '输入框 1' ) , 
+
+) , 
+
+const SizedBox ( height : 10 ) , 
+
+TextField ( 
+
+focusNode : _focusNode2 , 
+
+decoration : const InputDecoration ( labelText : '输入框 2' ) , 
+
+) , 
+
+const SizedBox ( height : 20 ) , 
+
+ElevatedButton ( 
+
+onPressed : ( ) { 
+
+// 聚焦到输入框 1 
+
+_focusNode1. requestFocus ( ) ; 
+
+} , 
+
+child : const Text ( '聚焦输入框 1' ) , 
+
+) , 
+
+ElevatedButton ( 
+
+onPressed : ( ) { 
+
+// 聚焦到输入框 2 
+
+_focusNode2. requestFocus ( ) ; 
+
+} , 
+
+child : const Text ( '聚焦输入框 2' ) , 
+
+) , 
+
+ElevatedButton ( 
+
+onPressed : ( ) { 
+
+// 取消焦点 
+
+_focusNode1. unfocus ( ) ; 
+
+_focusNode2. unfocus ( ) ; 
+
+} , 
+
+child : const Text ( '取消焦点' ) , 
+
+) , 
+
+] , 
+
+) ; 
+
+} 
+
+} 
+
+按钮与点击事件 
+
+Flutter 提供了多种按钮组件来处理用户点击。 
+
+实例：各种按钮 
+
+// TextButton - 文字按钮 
+
+TextButton ( 
+
+onPressed : ( ) => print ( '点击了文字按钮' ) , 
+
+child : const Text ( '文字按钮' ) , 
+
+) 
+
+// ElevatedButton - 凸起按钮 
+
+ElevatedButton ( 
+
+onPressed : ( ) => print ( '点击了凸起按钮' ) , 
+
+child : const Text ( '提交' ) , 
+
+) 
+
+// OutlinedButton - 轮廓按钮 
+
+OutlinedButton ( 
+
+onPressed : ( ) => print ( '点击了轮廓按钮' ) , 
+
+child : const Text ( '取消' ) , 
+
+) 
+
+// IconButton - 图标按钮 
+
+IconButton ( 
+
+icon : const Icon ( Icons. favorite ) , 
+
+onPressed : ( ) => print ( '点击了图标按钮' ) , 
+
+) 
+
+// 带图标的按钮 
+
+ElevatedButton. icon ( 
+
+onPressed : ( ) => print ( '点击了带图标按钮' ) , 
+
+icon : const Icon ( Icons. save ) , 
+
+label : const Text ( '保存' ) , 
+
+) 
+
+// CupertinoButton - iOS 风格按钮 
+
+CupertinoButton ( 
+
+child : const Text ( 'iOS 按钮' ) , 
+
+onPressed : ( ) { } , 
+
+) 
+
+Switch、Checkbox、Radio 
+
+实例：开关、复选框、单选按钮 
+
+class SwitchCheckboxExample extends StatefulWidget { 
+
+const SwitchCheckboxExample ( { super . key } ) ; 
+
+@override 
+
+State < SwitchCheckboxExample > createState ( ) => _SwitchCheckboxExampleState ( ) ; 
+
+} 
+
+class _SwitchCheckboxExampleState extends State < SwitchCheckboxExample > { 
+
+bool _switchValue = false ; 
+
+bool _checkboxValue = false ; 
+
+String _radioValue = 'A' ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Column ( 
+
+children : [ 
+
+// Switch 开关 
+
+Switch ( 
+
+value : _switchValue , 
+
+onChanged : ( value ) { 
+
+setState ( ( ) { 
+
+_switchValue = value ; 
+
+} ) ; 
+
+} , 
+
+) , 
+
+Text ( 'Switch 值: $_switchValue' ) , 
+
+// Checkbox 复选框 
+
+Checkbox ( 
+
+value : _checkboxValue , 
+
+onChanged : ( value ) { 
+
+setState ( ( ) { 
+
+_checkboxValue = value ?? false ; 
+
+} ) ; 
+
+} , 
+
+) , 
+
+Text ( 'Checkbox 值: $_checkboxValue' ) , 
+
+// Radio 单选按钮 
+
+Row ( 
+
+children : [ 
+
+Radio < String > ( 
+
+value : 'A' , 
+
+groupValue : _radioValue , 
+
+onChanged : ( value ) { 
+
+setState ( ( ) { 
+
+_radioValue = value ! ; 
+
+} ) ; 
+
+} , 
+
+) , 
+
+const Text ( '选项 A' ) , 
+
+Radio < String > ( 
+
+value : 'B' , 
+
+groupValue : _radioValue , 
+
+onChanged : ( value ) { 
+
+setState ( ( ) { 
+
+_radioValue = value ! ; 
+
+} ) ; 
+
+} , 
+
+) , 
+
+const Text ( '选项 B' ) , 
+
+] , 
+
+) , 
+
+Text ( 'Radio 值: $_radioValue' ) , 
+
+] , 
+
+) ; 
+
+} 
+
+} 
+
+Slider - 滑块 
+
+实例：Slider 用法 
+
+class SliderExample extends StatefulWidget { 
+
+const SliderExample ( { super . key } ) ; 
+
+@override 
+
+State < SliderExample > createState ( ) => _SliderExampleState ( ) ; 
+
+} 
+
+class _SliderExampleState extends State < SliderExample > { 
+
+double _sliderValue = 0.5 ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Column ( 
+
+children : [ 
+
+Slider ( 
+
+value : _sliderValue , // 当前值（0.0-1.0） 
+
+min : 0.0 , 
+
+max : 1.0 , 
+
+divisions : 10 , // 分成 10 个刻度 
+
+label : '${(_sliderValue * 100).round()}%' , 
+
+onChanged : ( value ) { 
+
+setState ( ( ) { 
+
+_sliderValue = value ; 
+
+} ) ; 
+
+} , 
+
+) , 
+
+Text ( '当前值: ${(_sliderValue * 100).round()}%' ) , 
+
+// 范围滑块 
+
+RangeSlider ( 
+
+values : const RangeValues ( 0.3 , 0.7 ) , 
+
+min : 0.0 , 
+
+max : 1.0 , 
+
+onChanged : ( values ) { 
+
+print ( '范围: ${values.start} - ${values.end}' ) ; 
+
+} , 
+
+) , 
+
+] , 
+
+) ; 
+
+} 
+
+} 
+
+处理用户输入时，记得使用 setState 来更新 UI 状态，这样才能让界面响应用户的操作。 
+
+AI 思考中... 
+
+Flutter ListView 与滚动 
+
+Flutter 状态管理

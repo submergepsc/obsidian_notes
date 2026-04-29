@@ -1,0 +1,127 @@
+URL: https://www.runoob.com/tags/att-global-accesskey.html
+Title: HTML Global accesskey 属性 | 菜鸟教程
+
+HTML Global accesskey 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <audio> preload 属性 
+
+HTML class 属性 
+
+HTML accesskey 属性 
+
+实例 
+
+带有指定快捷键的超链接： 
+
+< a href = " //www.runoob.com/html/html-tutorial.html " accesskey = " h " > HTML 教程 </ a > < br > < a href = " //www.runoob.com/css/css-tutorial.html " accesskey = " c " > CSS 教程 </ a > 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 accesskey 属性 
+
+定义和用法 
+
+accesskey 属性规定激活（使元素获得焦点）元素的快捷键。 
+
+注意： 在不同操作系统中不同的浏览器中访问快捷键的方式不同： 
+
+Browser 
+
+Windows 
+
+Linux 
+
+Mac 
+
+Internet Explorer 
+
+[Alt] + accesskey 
+
+N/A 
+
+Chrome 
+
+[Alt] + accesskey 
+
+[Alt] + accesskey 
+
+[Control] [Alt] + accesskey 
+
+Firefox 
+
+[Alt] [Shift] + accesskey 
+
+[Alt] [Shift] + accesskey 
+
+[Control] [Alt] + accesskey 
+
+Safari 
+
+[Alt] + accesskey 
+
+N/A 
+
+[Control] [Alt] + accesskey 
+
+Opera 
+
+Opera 15 or newer: [Alt] + accesskey 
+Opera 12.1 or older: [Shift] [Esc] + accesskey 
+
+但是，在大多浏览器中快捷键可以设置为另外一组组合。 
+
+提示： 各种浏览器下accesskey快捷键的使用方法： 
+
+IE浏览器 
+
+按住Alt键，点击accesskey定义的快捷键(焦点将移动到链接)，再按回车. 
+
+FireFox浏览器 
+
+按住Alt+Shift键，点击accesskey定义的快捷键. 
+
+Chrome浏览器 
+
+按住Alt键，点击accesskey定义的快捷键. 
+
+Opera浏览器 
+
+按住Shift键，点击esc，出现本页定义的accesskey快捷键列表可供选择. 
+
+Safari浏览器 
+
+按住Alt键，点击accesskey定义的快捷键. 
+
+HTML 4.01 与 HTML5之间的差异 
+
+在 HTML5 中, accesskey 属性可用于任何 HTML 元素 (它会 
+验证任何HTML元素。但不一定是有用)。 
+
+在 HTML 4.01 中, accesskey 属性可使用于: <a>, <area>, 
+<button>, <input>, <label>, <legend>, 和 <textarea>。 
+
+语法 
+
+< element accesskey=" character "> 
+
+属性值 
+
+值 
+
+描述 
+
+c haracter 
+
+指定激活元素的快捷键 
+
+AI 思考中... 
+
+HTML <audio> preload 属性 
+
+HTML class 属性

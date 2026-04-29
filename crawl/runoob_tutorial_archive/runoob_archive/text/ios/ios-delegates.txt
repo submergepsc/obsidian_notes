@@ -1,0 +1,128 @@
+URL: https://www.runoob.com/ios/ios-delegates.html
+Title: iOS – 委托（Delegates） | 菜鸟教程
+
+iOS – 委托（Delegates） | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+iOS 教程 
+
+iOS操作（action）和输出口（Outlet） 
+
+iOS UI元素 
+
+委托（Delegates）示例 
+
+假设对象A调用B来执行一项操作，操作一旦完成，对象A就必须知道对象B已完成任务且对象A将执行其他必要操作。 
+
+在上面的示例中的关键概念有 
+
+A是B的委托对象 
+
+B引用一个A 
+
+A将实现B的委托方法 
+
+B通过委托方法通知 
+
+创建一个委托（Delegates）对象 
+
+1. 创建一个单一视图的应用程序 
+
+2. 然后选择文件 File -> New -> File... 
+
+3. 然后选择Objective C单击下一步 
+
+4. 将SampleProtocol的子类命名为NSObject，如下所示 
+
+5. 然后选择创建 
+
+6.向SampleProtocol.h文件夹中添加一种协议，然后更新代码，如下所示： 
+
+#import <Foundation/Foundation.h>
+// 协议定义
+@protocol SampleProtocolDelegate <NSObject>
+@required
+- (void) processCompleted;
+@end
+// 协议定义结束
+@interface SampleProtocol : NSObject
+
+{
+ // Delegate to respond back
+ id <SampleProtocolDelegate> _delegate; 
+
+}
+@property (nonatomic,strong) id delegate;
+
+-(void)startSampleProcess; // Instance method
+
+@end 
+
+7.修改 SampleProtocol.m 文件代码，实现实例方法： 
+
+#import "SampleProtocol.h"
+
+@implementation SampleProtocol
+
+-(void)startSampleProcess{
+ 
+ [NSTimer scheduledTimerWithTimeInterval:3.0 target:self.delegate 
+ selector:@selector(processCompleted) userInfo:nil repeats:NO];
+}
+@end 
+
+8. 将标签从对象库拖到UIView，从而在ViewController.xib中添加UILabel，如下所示: 
+
+9. 创建一个IBOutlet标签并命名为myLabel，然后按如下所示更新代码并在ViewController.h里显示SampleProtocolDelegate 
+
+#import <UIKit/UIKit.h>
+#import "SampleProtocol.h"
+
+@interface ViewController : UIViewController<SampleProtocolDelegate>
+{
+ IBOutlet UILabel *myLabel;
+}
+@end 
+
+10. 完成授权方法，为SampleProtocol创建对象和调用startSampleProcess方法。如下所示，更新ViewController.m文件 
+
+#import "ViewController.h"
+
+@interface ViewController ()
+
+@end
+
+@implementation ViewController
+
+- (void)viewDidLoad
+{
+ [super viewDidLoad];
+ SampleProtocol *sampleProtocol = [[SampleProtocol alloc]init];
+ sampleProtocol.delegate = self;
+ [myLabel setText:@"Processing..."];
+ [sampleProtocol startSampleProcess];
+ // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)didReceiveMemoryWarning
+{
+ [super didReceiveMemoryWarning];
+ // Dispose of any resources that can be recreated.
+}
+
+#pragma mark - Sample protocol delegate
+-(void)processCompleted{ 
+ [myLabel setText:@"Process Completed"];
+}
+
+
+@end 
+
+11. 将看到如下所示的输出结果，最初的标签也会继续运行，一旦授权方法被SampleProtocol对象所调用，标签运行程序的代码也会更新。 
+
+AI 思考中... 
+
+iOS操作（action）和输出口（Outlet） 
+
+iOS UI元素

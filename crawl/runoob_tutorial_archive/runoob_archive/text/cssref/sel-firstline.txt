@@ -1,0 +1,83 @@
+URL: https://www.runoob.com/cssref/sel-firstline.html
+Title: CSS :first-line 伪元素 | 菜鸟教程
+
+CSS :first-line 伪元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS :first-letter 伪元素 
+
+CSS :first-child 伪元素 
+
+CSS :first-line 选择器 
+
+实例 
+
+每个<p>元素的第一行选择的样式： 
+
+p:first-line 
+{ 
+background-color:yellow; 
+} 
+
+尝试一下 » 
+
+定义和用法 
+
+:first-line选择器用来指定选择器第一行的样式。 
+
+注意: :first-line选择器可以使用以下属性： 
+
+font properties 
+
+color properties 
+
+background properties 
+
+word-spacing 
+
+letter-spacing 
+
+text-decoration 
+
+vertical-align 
+
+text-transform 
+
+line-height 
+
+clear 
+
+注意: "first-line" 选择器适用于块级元素中。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+::first-line 
+
+1.0 
+
+9.0 
+部分从5.5 
+
+1.0 
+
+1.0 
+
+7.0 
+部分从3.5 
+
+相关文章 
+
+CSS 教程: CSS 伪类 
+
+AI 思考中... 
+
+CSS :first-letter 伪元素 
+
+CSS :first-child 伪元素

@@ -1,0 +1,76 @@
+URL: https://www.runoob.com/vbscript/func-scriptengine.html
+Title: VBScript ScriptEngine, ScriptEngineBuildVersion, ScriptEngineMajorVersion, ScriptEngineMinorVersion 函数 | 菜鸟教程
+
+VBScript ScriptEngine, ScriptEngineBuildVersion, ScriptEngineMajorVersion, ScriptEngineMinorVersion 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Round 函数 
+
+VBScript SetLocale 函数 
+
+VBScript ScriptEngine、ScriptEngineBuildVersion、ScriptEngineMajorVersion、ScriptEngineMinorVersion 函数 
+
+ScriptEngine 函数 
+
+ScriptEngine 函数返回当前使用的脚本语言。 
+
+该函数可返回下面的字符串： 
+
+VBScript - 指示当前使用的脚本引擎是 Microsoft Visual Basic Scripting Edition 
+
+JScript - 指示当前使用的编写脚本引擎是 Microsoft JScript 
+
+VBA - 指示当前使用的编写脚本引擎是 Microsoft Visual Basic for Applications 
+
+ScriptEngineBuildVersion 函数 
+
+ScriptEngineBuildVersion 函数返回当前使用的脚本引擎的内部版本号。 
+
+ScriptEngineMajorVersion 函数 
+
+ScriptEngineMajorVersion 函数返回当前使用的脚本引擎的主版本号。 
+
+ScriptEngineMinorVersion 函数 
+
+ScriptEngineMinorVersion 函数返回当前使用的脚本引擎的副版本号。 
+
+语法 
+
+ScriptEngine 
+
+ScriptEngineBuildVersion 
+
+ScriptEngineMajorVersion 
+
+ScriptEngineMinorVersion 
+
+实例 
+
+实例 
+
+<script type="text/vbscript"> 
+
+document.write(ScriptEngine & "<br />") 
+document.write(ScriptEngineBuildVersion & "<br />") 
+document.write(ScriptEngineMajorVersion & "<br />") 
+document.write(ScriptEngineMinorVersion) 
+
+</script> 
+
+以上实例输出结果： 
+
+VBScript 
+18702 
+5 
+8 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Round 函数 
+
+VBScript SetLocale 函数

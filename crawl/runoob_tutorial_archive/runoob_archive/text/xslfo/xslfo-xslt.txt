@@ -1,0 +1,81 @@
+URL: https://www.runoob.com/xslfo/xslfo-xslt.html
+Title: XSL-FO 与 XSLT | 菜鸟教程
+
+XSL-FO 与 XSLT | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO 表格 
+
+XSL-FO 软件 
+
+XSL-FO 与 XSLT 
+
+XSL-FO 与 XSLT 可彼此互助。 
+
+还记得这个实例吗？ 
+
+<fo:block
+ font-size="14pt" font-family="verdana" color="red" 
+space-before="5mm" space-after="5mm"> 
+RUNOOB 
+</fo:block> 
+
+<fo:block
+ text-indent="5mm"
+ font-family="verdana" font-size="12pt"> 
+At RUNOOB you will find all the Web-building tutorials you 
+need, from basic HTML and XHTML to advanced XML, XSL, Multimedia and WAP. 
+</fo:block> 
+
+结果： 
+
+RUNOOB 
+
+At RUNOOB you will find all the Web-building 
+ tutorials you need, from basic HTML and XHTML to advanced XML, XSL, Multimedia and WAP. 
+
+上面的实例来自于有关 XSL-FO 块区域的那一章节。 
+
+来自 XSLT 的帮助 
+
+从文档移除 XSL-FO 信息： 
+
+<header>RUNOOB</header> 
+
+<paragraph>At RUNOOB you will find all the Web-building tutorials you 
+need, from basic HTML and XHTML to advanced XML, XSL, Multimedia and WAP. 
+</paragraph> 
+
+添加 XSLT 转换： 
+
+<xsl:template match="header"> 
+<fo:block
+ font-size="14pt" font-family="verdana" color="red" 
+space-before="5mm" space-after="5mm"> 
+<xsl:apply-templates/> 
+</fo:block> 
+</xsl:template> 
+
+<xsl:template match="paragraph"> 
+<fo:block
+ text-indent="5mm"
+ font-family="verdana" font-size="12pt"> 
+<xsl:apply-templates/> 
+</fo:block> 
+</xsl:template> 
+
+产生的结果是相同的： 
+
+RUNOOB 
+
+At RUNOOB you will find all the Web-building 
+ tutorials you need, from basic HTML and XHTML to advanced XML, XSL, Multimedia and WAP. 
+
+AI 思考中... 
+
+XSL-FO 表格 
+
+XSL-FO 软件

@@ -1,0 +1,35 @@
+URL: https://www.runoob.com/java/env-compile.html
+Title: Java 实例 – 如何编译 Java 文件 | 菜鸟教程
+
+Java 实例 – 如何编译 Java 文件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 文档注释 
+
+Java 实例 – 如何执行编译过 Java 文件 
+
+Java 实例 - 如何编译 Java 文件 
+
+本文我们演示如何编译 HelloWorld.java 文件，其中 Java 代码如下： 
+
+HelloWorld.java 文件 
+
+public class HelloWorld { public static void main ( String [ ] args ) { System . out . println ( " Hello World " ) ; } } 
+
+接下来我们使用 javac 命令来编译 Java 文件，并使用 java 命令执行编译的文件: 
+
+c:\jdk\demoapp> javac HelloWorld.java
+c:\jdk\demoapp> java HelloWorld 
+
+以上代码实例输出结果为： 
+
+Hello World 
+
+AI 思考中... 
+
+Java 文档注释 
+
+Java 实例 – 如何执行编译过 Java 文件

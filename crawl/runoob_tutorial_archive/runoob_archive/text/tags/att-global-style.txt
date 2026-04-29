@@ -1,0 +1,62 @@
+URL: https://www.runoob.com/tags/att-global-style.html
+Title: HTML style 属性 | 菜鸟教程
+
+HTML style 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML spellcheck 属性 
+
+HTML tabindex 属性 
+
+HTML style 属性 
+
+实例 
+
+在 HTML 文档中使用style 属性： 
+
+<h1 style="color:blue;text-align:center">这是一个标题</h1> 
+
+<p style="color:green">这是一个段落。</p> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 style 属性 
+
+定义和用法 
+
+style 属性规定元素的行内样式（inline style）。 
+
+style 属性将覆盖任何全局的样式设定，例如在 <style> 标签或在外部样式表中规定的样式。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+在 HTML5 中, style 属性可用于任何的 HTML 元素 (它会验证任何HTML元素。但不一定是有用)。 
+
+在 HTML 4.01中, style 属性不能用于: 
+<base>, <head>, <html>, <meta>, <param>, <script>, <style>, 和 <title>。 
+
+语法 
+
+< element style=" style_definitions "> 
+
+属性值 
+
+值 
+
+描述 
+
+style_definitions 
+
+一个或多个由分号分隔的 CSS 属性和值。 (例如：
+ style="color:blue;text-align:center") 
+
+AI 思考中... 
+
+HTML spellcheck 属性 
+
+HTML tabindex 属性

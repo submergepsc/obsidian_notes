@@ -1,0 +1,101 @@
+URL: https://www.runoob.com/foundation/foundation-buttons.html
+Title: Foundation 按钮 | 菜鸟教程
+
+Foundation 按钮 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 表格 
+
+Foundation 按钮组 
+
+Foundation 按钮 
+
+按钮样式 
+
+Foundation 提供了 6 种按钮样式。 .button 类创建了一个蓝色的按钮并附有内边距。不同颜色按钮类为： .secondary , .success , .info , .warning 或 .alert : 
+
+实例 
+
+< button type= "button" class= "button" > Default < /button > 
+< button type= "button" class= "button secondary" > Secondary < /button > 
+< button type= "button" class= "button success" > Success < /button > 
+< button type= "button" class= "button info" > Info < /button > 
+< button type= "button" class= "button warning" > Warning < /button > 
+< button type= "button" class= "button alert" > Alert < /button > 
+
+尝试一下 » 
+
+按钮类可以使用在 <a> , <button> , 或 <input> 元素: 
+
+实例 
+
+< a href= "#" class= "button info" role= "button" > Link Button < /a > 
+< button type= "button" class= "button info" > Button < /button > 
+< input type= "button" class= "button info" value= "Input Button" > 
+< input type= "submit" class= "button info" value= "Submit Button" > 
+
+尝试一下 » 
+
+为什么将 a 标签的 href 设置为 # ? 
+
+当我们不希望链接点击跳转并得到 "404" 
+页面时，我们可以将 a 标签的 href 设置为 #。 
+
+按钮大小 
+
+我们可以使用 .large , .small 或 .tiny 类来设置按钮大小： 
+
+实例 
+
+< button type= "button" class= "button large" > Large < /button > 
+< button type= "button" class= "button" > Default < /button > 
+< button type= "button" class= "button small" > Small < /button > 
+< button type= "button" class= "button 
+ tiny" > Tiny < /button > 
+
+尝试一下 » 
+
+圆角按钮 
+
+可以使用 .radius 和 .round 类来设置圆角按钮： 
+
+实例 
+
+< button type= "button" class= "button" > Default Button < /button > 
+< button type= "button" class= "button 
+ radius" > Radius Button < /button > 
+< button type= "button" class= "button 
+ round" > Round Button < /button > 
+
+尝试一下 » 
+
+延展按钮 
+
+可以使用 .expand 类来设置按钮的宽度为 100%: 
+
+实例 
+
+< button type= "button" class= "button" > Default Button < /button > 
+< button type= "button" class= "button expand" > Expanded Button < /button > 
+
+尝试一下 » 
+
+禁用按钮 
+
+可以使用 .disabled 类来设置按钮不可点击: 
+
+实例 
+
+< button type= "button" class= "button" > Default Button < /button > 
+< button type= "button" class= "button disabled" > Disabled Button < /button > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Foundation 表格 
+
+Foundation 按钮组

@@ -1,0 +1,46 @@
+URL: https://www.runoob.com/java/method-overloading.html
+Title: Java 实例 – 方法重载 | 菜鸟教程
+
+Java 实例 – 方法重载 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 时间戳转换成时间 
+
+Java 实例 – 输出数组元素 
+
+Java 实例 - 方法重载 
+
+先来看下方法重载（Overloading）的定义：如果有两个方法的方法名相同，但参数不一致，哪么可以说一个方法是另一个方法的重载。
+具体说明如下： 
+
+方法名相同 
+
+方法的参数类型，参数个不一样 
+
+方法的返回类型可以不相同 
+
+方法的修饰符可以不相同 
+
+main 方法也可以被重载 
+
+以下实例演示了如何重载 MyClass 类的 info 方法： 
+
+MainClass.java 文件 
+
+class MyClass { int height ; MyClass ( ) { System . out . println ( " 无参数构造函数 " ) ; height = 4 ; } MyClass ( int i ) { System . out . println ( " 房子高度为 " + i + " 米 " ) ; height = i ; } void info ( ) { System . out . println ( " 房子高度为 " + height + " 米 " ) ; } void info ( String s ) { System . out . println ( s + " : 房子高度为 " + height + " 米 " ) ; } } public class MainClass { public static void main ( String [ ] args ) { MyClass t = new MyClass ( 3 ) ; t . info ( ) ; t . info ( " 重载方法 " ) ; new MyClass ( ) ; } } 
+
+以上代码运行输出结果为： 
+
+房子高度为 3 米
+房子高度为 3 米
+重载方法: 房子高度为 3 米
+无参数构造函数 
+
+AI 思考中... 
+
+Java 实例 – 时间戳转换成时间 
+
+Java 实例 – 输出数组元素

@@ -1,0 +1,1542 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI Agent 简介 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="ai-agent-intro.html" />
+<meta name="keywords" content="AI Agent 简介">
+<meta name="description" content="AI Agent 简介  在当今科技浪潮中，人工智能（AI）深度融入生活与工作的背后，AI Agent（智能体） 是支撑从对话助手到自主任务程序的核心概念——它不是单纯的聊天工具，而是能像数字员工一样接任务、拆步骤、执行动作的自动化实体，只要任务可拆解为操作流程，就能被 AI Agent 接管。  Agent = LLM (大脑) + Planning (规划) + Tool use (执行) + Memory (记忆)。      L..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<style>
+/* 主题切换按钮 */
+/* ===== 主题变量（核心）===== */
+:root {
+  --theme-bg: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-icon: #333;
+  --theme-hover: #f3f4f6;
+}
+
+.dark {
+  --theme-bg: #1f2937;
+  --theme-border: #374151;
+  --theme-icon: #e5e7eb;
+  --theme-hover: #374151;
+}
+
+/* ===== 按钮容器 ===== */
+.nav-theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== 按钮本体 ===== */
+.nav-theme-toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+
+  background: var(--theme-bg);
+  color: var(--theme-icon);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ===== 图标大小 ===== */
+.nav-theme-toggle i {
+  font-size: 14px;
+}
+
+/* ===== hover 效果 ===== */
+.nav-theme-toggle button:hover {
+  background: var(--theme-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== 点击反馈 ===== */
+.nav-theme-toggle button:active {
+  transform: scale(0.95);
+}
+
+/* ===== 当前激活态（可选）===== */
+.nav-theme-toggle button.active {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+</style>
+<!-- 导航栏 -->
+<nav class="container navigation" aria-label="主导航">
+  <div class="row">
+    <div class="col nav">
+
+      <!-- PC 导航 -->
+      <ul class="pc-nav" id="runoob-detail-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../js/js-tutorial.html">JavaScript</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="javascript:void(0);" data-id="vue">Vue</a></li>
+        <li><a href="../react/react-tutorial.html">React</a></li>
+        <li><a href="../python3/python3-tutorial.html">Python3</a></li>
+        <li><a href="../java/java-tutorial.html">Java</a></li>
+        <li><a href="../cprogramming/c-tutorial.html">C</a></li>
+        <li><a href="../cplusplus/cpp-tutorial.html">C++</a></li>
+        <li><a href="../csharp/csharp-tutorial.html">C#</a></li>
+        <li><a href="javascript:void(0);" data-id="aiNav">AI</a></li>
+        <li><a href="../go/go-tutorial.html">Go</a></li>
+        <li><a href="../sql/sql-tutorial.html">SQL</a></li>
+        <li><a href="../linux/linux-tutorial.html">Linux</a></li>
+        <li><a href="../vscode/vscode-tutorial.html">VS Code</a></li>
+        <li><a href="javascript:void(0);" data-id="bootstrap">Bootstrap</a></li>
+        <li><a href="../git/git-tutorial.html">Git</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+
+        <!-- 主题切换按钮，固定在最右侧 -->
+        <li class="nav-theme-toggle">
+          <button id="moon" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 移动端导航 -->
+      <ul class="mobile-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="../js/js-tutorial.html">JS</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+        <li><a href="javascript:void(0)" class="search-reveal">搜索</a></li>
+
+        <!-- 移动端主题切换 -->
+        <li class="nav-theme-toggle">
+          <button id="moon-mobile" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun-mobile" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- 二级导航 -->
+<div class="container sub-navigation sub-navigation-articles" style="display:none">
+  <div class="row">
+    <div class="col nav-sub">
+
+      <ul id="vue">
+        <li class="cat-item"><a href="../vue3/vue3-tutorial.html">Vue3 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../vue/vue-tutorial.html">Vue2 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="bootstrap">
+        <li class="cat-item"><a href="../bootstrap/bootstrap-tutorial.html">Bootstrap3 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="aiNav">
+        <li class="cat-item"><a href="../ml/ml-tutorial.html">机器学习 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../pytorch/pytorch-tutorial.html">PyTorch <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../tensorflow/tensorflow-tutorial.html">TensorFlow <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../sklearn/sklearn-tutorial.html">Sklearn <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../nlp/nlp-tutorial.html">NLP <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="ai-agent-tutorial.html">AI Agent <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ollama/ollama-tutorial.html">Ollama <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+  </div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="runoob-col-md2">
+<div class="left-column">
+	<div class="tab" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+	<i class="fa fa-list" aria-hidden="true"></i> 
+	<span>AI Agent 教程</span>
+
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" data-p="par" title="AI Agent(智能体) 教程" href="ai-agent-tutorial.html">
+			AI Agent(智能体) 教程			</a>
+						<a target="_top" data-p="par" title="AI Agent 简介" href="ai-agent-intro.html">
+			AI Agent 简介			</a>
+						<a target="_top" data-p="par" title="AI Agent  核心组件" href="ai-agent-core.html">
+			AI Agent  核心组件			</a>
+			<a target="_top" title="AI Agent 工作原理" href="ai-agent-working-principle.html">AI Agent 工作原理</a>
+<a target="_top" title="大语言模型基础" href="ai-agent-llm.html">大语言模型基础</a>
+<a target="_top" title="提示词工程" href="prompt-engineering.html">提示词工程</a>
+<a target="_top" title="Token (词元)" href="token-intro.html">Token (词元)</a>
+<a target="_top" title="推理与规划" href="reasoning-planning.html">推理与规划</a>
+<a target="_top" title="RAG 与知识检索" href="retrieval-augmented-generation.html">RAG 与知识检索</a>
+<a target="_top" title="Harness Engineering" href="harness-engineering.html">Harness Engineering</a>
+<a target="_top" title="Hermes Agent" href="hermes-agent.html">Hermes Agent</a>
+<br>
+<h2 class="left"> <span class="left_h2">智能体工具</span></h2>			<a target="_top" data-p="par" title="第一个 AI Agent" href="first-ai-agent.html">
+			第一个 AI Agent			</a>
+			<a target="_top" title="AI 开发平台" href="ai-monkeycode.html"> AI 开发平台</a>
+<a target="_top" title="OpenClaw (Clawdbot) 教程" href="openclaw-clawdbot-tutorial.html"> OpenClaw (Clawdbot) 教程</a>
+<a target="_top" title="OpenClaw 快速上手" href="openclaw-quickstart.html"> OpenClaw 快速上手</a>
+<a target="_top" title="Qoder 教程" href="qoderwork.html"> QoderWork 教程</a>
+<a target="_top" title="OpenClaw 一键部署" href="openclaw-cloud.html"> OpenClaw 一键部署</a>
+<a target="_top" title="OpenClaw 配置目录" href="openclaw-setup.html"> OpenClaw 配置目录</a>
+<a target="_top" title="OpenClaw 工作原理" href="openclaw-how-it-works.html"> OpenClaw 工作原理</a>
+<a target="_top" title="OpenClaw 接入微信" href="openclaw-weixin.html"> OpenClaw 接入微信</a>
+
+<a target="_top" title="OpenClaw 接入飞书" href="openclaw-feishu.html"> OpenClaw 接入飞书</a>
+<a target="_top" title="OpenClaw Skills" href="openclaw-skills.html"> OpenClaw Skills</a>
+<a target="_top" title="OpenClaw 卸载指南" href="openclaw-uninstall.html"> OpenClaw 卸载指南</a>			<a target="_top" data-p="par" title="CrewAI 构建智能体" href="crewai-agent.html">
+			CrewAI 构建智能体			</a>
+						<a target="_top" data-p="par" title="LangChain 制作智能体" href="langchain-agent.html">
+			LangChain 制作智能体			</a>
+			<a target="_top" title="LangGraph 入门教程" href="langgraph-quick-start.html">LangGraph 入门教程</a>
+
+<br><h2 class="left"> <span class="left_h2">Vibe Coding</span></h2>			<a target="_top" data-p="par" title="Claude Code 入门教程" href="claude-code.html">
+			Claude Code 入门教程			</a>
+						<a target="_top" data-p="par" title="OpenCode 入门教程" href="opencode-coding-agent.html">
+			OpenCode 入门教程			</a>
+			<a target="_top" title="OpenCode Coding Plan" href="opencode-coding-plan.html">OpenCode Coding Plan</a>
+<a target="_top" title="CC Switch" href="cc-switch.html">CC Switch</a>
+<a target="_top" title="Skills 教程" href="skills-agent.html">Skills 教程</a>
+<a target="_top" title="OpenCode skills" href="opencode-skills-intro.html">OpenCode skills</a>
+<a target="_top" title="Qoder 教程" href="qoder-quick-start.html">Qoder 教程</a>
+<a target="_top" title="Qoder Quest 模式" href="qoder-quest-mode.html">Qoder Quest 模式</a>			<a target="_top" data-p="par" title="Qoder CLI" href="qoder-cli.html">
+			Qoder CLI			</a>
+			<a target="_top" title="Trae 教程" href="trae-quick-star.html">Trae 教程</a>			<a target="_top" data-p="par" title="Trae Solo" href="trae-solo.html">
+			Trae Solo			</a>
+			<br><h2 class="left"> <span class="left_h2">Python 实现智能体</span></h2>
+<a target="_top" title="Python 实现 AI Agent" href="python-ai-agent.html">Python 实现 AI Agent</a>
+<a target="_top" title="工具调用" href="ai-agent-function-calling.html">工具调用</a>
+<a target="_top" title="记忆系统" href="ai-agent-memory-system-design.html">记忆系统</a>			<a target="_top" data-p="par" title="Python 智能体环境配置" href="ai-agent-python-setup.html">
+			Python 智能体环境配置			</a>
+						<a target="_top" data-p="par" title="AI Agent 问答实例" href="ai-agent-answer-demo.html">
+			AI Agent 问答实例			</a>
+						<a target="_top" data-p="par" title="Python 实现推理与规划" href="python-reasoning-planning.html">
+			推理与规划			</a>
+						<a target="_top" data-p="par" title="Python 实现 RAG 与知识检索" href="python-rag.html">
+			RAG 与知识检索			</a>
+						<a target="_top" data-p="par" title="多智能体系统（Multi-Agent System）" href="multi-agent-system.html">
+			多智能体系统			</a>
+						<a target="_top" data-p="par" title="AI Agent 工具与外部集成" href="tools-integration.html">
+			工具与外部集成			</a>
+						<a target="_top" data-p="par" title="多模态 Agent" href="multimodal-agent.html">
+			多模态 Agent			</a>
+						<a target="_top" data-p="par" title="Agent 评估、安全与对齐" href="evaluation-safety-alignment.html">
+			评估、安全与对齐			</a>
+						<a target="_top" data-p="par" title="AI Agent 生产部署与工程化" href="production-deployment.html">
+			生产部署与工程化			</a>
+						<a target="_top" data-p="par" title="AI Agent 垂直应用场景" href="vertical-applications.html">
+			垂直应用场景			</a>
+				
+		</div>
+	</div>	
+</div>
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="ai-agent-tutorial.html" rel="prev"> AI Agent(智能体) 教程</a> </div>
+			<div class="next-design-link"><a href="ai-agent-core.html" rel="next"> AI Agent  核心组件</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+<div class="article-heading-ad" style="display: block;">
+
+<style>
+  /* 隐藏移动端广告 */
+  @media (max-width: 768px) {
+    .adsbygoogle {
+      display: none !important;
+    }
+  }
+  
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 728*90 固定 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="2147566827"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<h1>AI Agent 简介</h1>
+
+<p>在当今科技浪潮中，人工智能（AI）深度融入生活与工作的背后，<strong>AI Agent（智能体）</strong> 是支撑<span class="marked">从对话助手到自主任务程序</span>的核心概念——它不是单纯的聊天工具，而是能像<strong>数字员工</strong>一样<strong>接任务、拆步骤、执行动作</strong>的自动化实体，只要任务可拆解为操作流程，就能被 AI Agent 接管。</p>
+
+<p class="important">Agent = LLM (大脑) + Planning (规划) + Tool use (执行) + Memory (记忆)。</p>
+<ul>
+    <li><strong>LLM (大脑)：</strong> 作为核心推理机，负责理解意图、生成文本和进行逻辑判断。</li>
+    <li><strong>Planning (规划)：</strong> 能够将复杂的目标（如"帮我策划一场技术沙龙"）拆解成可执行的步骤。</li>
+    <li><strong>Memory (记忆)：</strong> 记录对话历史（短期）和存储专业知识库（长期）。</li>
+    <li><strong>Tool Use (工具使用)：</strong> 能够根据需求去查谷歌搜索、读数据库、甚至跑 Python 代码。</li>
+</ul>
+
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/ai-agent-intro-1.svg"></p>
+
+
+<h3>Agent 与传统 AI 模型的区别</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>维度</th>
+            <th>传统 AI 模型</th>
+            <th>AI Agent</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>交互方式</strong></td>
+            <td>单次输入输出</td>
+            <td>多轮对话、持续交互</td>
+        </tr>
+        <tr>
+            <td><strong>决策能力</strong></td>
+            <td>基于输入直接推理</td>
+            <td>规划、反思、迭代优化</td>
+        </tr>
+        <tr>
+            <td><strong>工具使用</strong></td>
+            <td>无法主动调用外部工具</td>
+            <td>可调用搜索、计算器、API 等</td>
+        </tr>
+        <tr>
+            <td><strong>记忆机制</strong></td>
+            <td>仅限当前上下文</td>
+            <td>短期+长期记忆</td>
+        </tr>
+        <tr>
+            <td><strong>目标导向</strong></td>
+            <td>完成单一预测任务</td>
+            <td>完成复杂目标</td>
+        </tr>
+        <tr>
+            <td><strong>错误处理</strong></td>
+            <td>输出即结束</td>
+            <td>可自我纠错、重试</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>核心模式：从 Prompt 到 Reasoning Loop</h3>
+<p>普通的 LLM 只是 <strong>One-shot（一次性）</strong> 的响应，而 Agent 的核心在于 <strong>Iterative（迭代）</strong>。</p>
+<p><span class="marked">ReAct 模式 (Reason + Act)</span> 是目前最主流的 Agent 推理逻辑：</p>
+<ol>
+    <li><strong>Thought (思考)：</strong> 模型描述当前要做什么，为什么要这么做。</li>
+    <li><strong>Action (行动)：</strong> 模型选择一个工具（如：<code>Google Search</code>）。</li>
+    <li><strong>Observation (观察)：</strong> 模型读取工具返回的结果。</li>
+    <li><strong>Repeat (循环)：</strong> 重复上述步骤，直到得出最终答案。</li>
+</ol>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/ai-agent-intro-2.svg"></p>
+<hr>
+<h2>AI Agent 构成：像人一样思考与行动</h2>
+<p>一个功能完整的 AI Agent 通常模仿人类的认知和行动循环，包含以下几个关键模块：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/ai-agent-tutorial-runoob.svg"></p>
+<h3>1、规划模块：任务的大脑与指挥官</h3>
+<p>这是 Agent 的思考中枢。它负责将用户模糊的、高层的目标（如：分析公司上个季度的销售数据）分解成一系列清晰的、可执行的子任务步骤。</p>
+<ul>
+<li><strong>任务分解</strong>：将大目标拆解为小步骤。例如：1. 连接数据库；2. 提取Q3销售数据；3. 按产品和地区分类；4. 计算环比增长率；5. 生成可视化图表。</li>
+<li><strong>反思与调整</strong>：Agent 会评估每一步行动的结果。如果失败了（比如数据库连不上），它会反思原因，并调整计划（例如尝试另一种连接方式或请求用户提供密码）。</li>
+</ul>
+<h3>2. 记忆模块：经验的笔记本</h3>
+<p>Agent 需要有记忆才能进行连贯的、基于上下文的对话和操作。</p>
+<ul>
+<li><strong>短期记忆</strong>：记住当前对话的上下文，确保回答不跑题。</li>
+<li><strong>长期记忆</strong>：将重要的交互信息、学到的知识存储到数据库或向量数据库中，供未来查询和使用，实现越用越聪明。</li>
+</ul>
+<h3>3. 工具调用模块：灵活的双手</h3>
+<p>这是 Agent 从思考者变为行动者的关键。它可以通过应用程序接口（API）调用外部工具来扩展自身能力。</p>
+<p><strong>常见工具</strong>：</p>
+<ul>
+<li><strong>搜索工具</strong>：联网获取最新信息。</li>
+<li><strong>计算器/代码解释器</strong>：进行数学运算或运行代码处理数据。</li>
+<li><strong>软件操作</strong>：通过 API 发送邮件、操作电子表格、控制智能家居。</li>
+<li><strong>专业工具</strong>：调用专业软件进行图像生成、语音合成、数据分析等。</li>
+</ul>
+<style>
+.tools-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin: 20px 0;
+}
+.tool-item {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 16px;
+    text-align: center;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+.tool-item:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+}
+.tool-icon {
+    width: 48px;
+    height: 48px;
+    margin: 0 auto 12px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.tool-icon svg {
+    width: 24px;
+    height: 24px;
+}
+.tool-name {
+    font-weight: 600;
+    font-size: 14px;
+    color: #374151;
+    margin-bottom: 4px;
+}
+.tool-desc {
+    font-size: 12px;
+    color: #9CA3AF;
+}
+</style>
+<div class="tools-grid">
+    <div class="tool-item">
+        <div class="tool-icon" style="background: #DBEAFE;">
+            <svg viewbox="0 0 24 24" fill="none" stroke="#3B82F6" stroke-width="2">
+                <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
+            </svg>
+        </div>
+        <div class="tool-name">搜索</div>
+        <div class="tool-desc">联网查询</div>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon" style="background: #FEF3C7;">
+            <svg viewbox="0 0 24 24" fill="none" stroke="#F59E0B" stroke-width="2">
+                <polyline points="4 17 10 11 4 5" /><line x1="12" y1="19" x2="20" y2="19" />
+            </svg>
+        </div>
+        <div class="tool-name">代码执行</div>
+        <div class="tool-desc">运行代码</div>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon" style="background: #D4F5E9;">
+            <svg viewbox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2">
+                <rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><line x1="3" y1="9" x2="21" y2="9" /><line x1="9" y1="21" x2="9" y2="9" />
+            </svg>
+        </div>
+        <div class="tool-name">数据库</div>
+        <div class="tool-desc">数据操作</div>
+    </div>
+    <div class="tool-item">
+        <div class="tool-icon" style="background: #F3E8FF;">
+            <svg viewbox="0 0 24 24" fill="none" stroke="#9333EA" stroke-width="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" /><polyline points="22,6 12,13 2,6" />
+            </svg>
+        </div>
+        <div class="tool-name">API 调用</div>
+        <div class="tool-desc">外部服务</div>
+    </div>
+</div>
+<hr>
+
+<h2>核心特征</h2>
+<p>一个合格的 AI Agent 通常具备以下特征：</p>
+<p><strong>1. 自主性（Autonomy）</strong></p>
+<ul>
+    <li>无需人类逐步指导，能够独立运作</li>
+    <li>自己决定下一步该做什么</li>
+    <li>示例：你说"帮我订明天去上海的机票"，Agent 会自动查询航班、比较价格、选择合适选项</li>
+</ul>
+<p><strong>2. 反应性（Reactivity）</strong></p>
+<ul>
+    <li>能够感知环境变化并及时响应</li>
+    <li>根据新信息调整行为</li>
+    <li>示例：订票时发现航班取消，自动寻找替代方案</li>
+</ul>
+<p><strong>3. 主动性（Proactivity）</strong></p>
+<ul>
+    <li>不仅被动响应，还能主动采取行动</li>
+    <li>有目标导向的行为</li>
+    <li>示例：发现机票价格波动，主动提醒用户最佳购买时机</li>
+</ul>
+<p><strong>4. 社交能力（Social Ability）</strong></p>
+<ul>
+    <li>能与人类或其他 Agent 交互</li>
+    <li>理解自然语言，进行多轮对话</li>
+    <li>示例：在订票过程中询问用户偏好（靠窗/靠走廊）</li>
+</ul>
+<p><strong>5. 学习能力（Learning）</strong></p>
+<ul>
+    <li>从历史交互中学习</li>
+    <li>记住用户偏好和上下文</li>
+    <li>示例：记住你喜欢早班飞机和靠窗座位</li>
+</ul><hr>
+<h2>AI Agent 的发展历程</h2>
+<h3>时间线</h3>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/ai-agent-2-runoob-scaled.png"></p>
+<p><strong>阶段一：概念萌芽期（1950s-2010s）</strong></p>
+<ul>
+    <li>1950s：图灵测试提出，Agent 概念初现</li>
+    <li>1990s：多智能体系统研究兴起</li>
+    <li>2000s：规则驱动的聊天机器人（如 ELIZA）</li>
+    <li>特点：基于规则，能力有限</li>
+</ul>
+<p><strong>阶段二：深度学习赋能期（2010s-2020）</strong></p>
+<ul>
+    <li>2012：深度学习在 ImageNet 取得突破</li>
+    <li>2017：Transformer 架构问世</li>
+    <li>2018-2020：BERT、GPT 系列模型发布</li>
+    <li>特点：理解能力提升，但仍是"被动工具"</li>
+</ul>
+<p><strong>阶段三：大模型 Agent 爆发期（2021-至今）</strong></p>
+<ul>
+    <li>2022.11：ChatGPT 发布，展现强大对话能力</li>
+    <li>2023.03：GPT-4 + Plugins，首次实现工具调用</li>
+    <li>2023.03：AutoGPT 开源，自主 Agent 概念验证</li>
+    <li>2023.05：LangChain、LlamaIndex 等框架成熟</li>
+    <li>2024-2025：企业级 Agent 应用大规模落地</li>
+    <li>特点：真正的自主性、工具使用、任务规划</li>
+</ul>
+
+<h3>多 Agent 协作模式</h3><p>
+多个 Agent 可以协同工作，类似一个团队：</p>
+<style>
+.collab-section {
+    margin-top: 24px;
+}
+.collab-title {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1f2937;
+    margin-bottom: 16px;
+}
+.collab-diagram {
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+}
+</style>
+<div class="collab-section">
+    <div class="collab-title">多 Agent 协作模式</div>
+    <div class="collab-diagram">
+        <svg width="650" height="200" viewbox="0 0 650 200" xmlns="http://www.w3.org/2000/svg">
+            <!-- 中心协调 Agent -->
+            <circle cx="325" cy="100" r="45" fill="#6366F1" opacity="0.9" />
+            <text x="325" y="95" text-anchor="middle" font-family="system-ui" font-size="12" font-weight="700" fill="#fff">Coordinator</text>
+            <text x="325" y="112" text-anchor="middle" font-family="system-ui" font-size="10" fill="#fff">协调 Agent</text>
+
+            <!-- 各个专业 Agent -->
+            <circle cx="140" cy="50" r="35" fill="#10B981" opacity="0.8" />
+            <text x="140" y="48" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#fff">Researcher</text>
+            <text x="140" y="62" text-anchor="middle" font-family="system-ui" font-size="9" fill="#fff">研究 Agent</text>
+
+            <circle cx="510" cy="50" r="35" fill="#F59E0B" opacity="0.8" />
+            <text x="510" y="48" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#fff">Coder</text>
+            <text x="510" y="62" text-anchor="middle" font-family="system-ui" font-size="9" fill="#fff">编码 Agent</text>
+
+            <circle cx="140" cy="150" r="35" fill="#EF4444" opacity="0.8" />
+            <text x="140" y="148" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#fff">Writer</text>
+            <text x="140" y="162" text-anchor="middle" font-family="system-ui" font-size="9" fill="#fff">写作 Agent</text>
+
+            <circle cx="510" cy="150" r="35" fill="#8B5CF6" opacity="0.8" />
+            <text x="510" y="148" text-anchor="middle" font-family="system-ui" font-size="11" font-weight="600" fill="#fff">Reviewer</text>
+            <text x="510" y="162" text-anchor="middle" font-family="system-ui" font-size="9" fill="#fff">审核 Agent</text>
+
+            <!-- 连接线 -->
+            <line x1="175" y1="60" x2="280" y2="90" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4" />
+            <line x1="475" y1="60" x2="370" y2="90" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4" />
+            <line x1="175" y1="140" x2="280" y2="110" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4" />
+            <line x1="475" y1="140" x2="370" y2="110" stroke="#94a3b8" stroke-width="2" stroke-dasharray="4" />
+
+            <!-- 任务流转 -->
+            <text x="325" y="180" text-anchor="middle" font-family="system-ui" font-size="11" fill="#6B7280">任务分配 -> 并行执行 -> 结果汇总 -> 最终输出</text>
+        </svg>
+    </div>
+</div>
+<hr>
+<h2>AI Agent 的主要类型与应用场景</h2>
+<p>根据其复杂度和自主性，AI Agent 可以分为不同类型，应用于各种场景：</p>
+<table class="reference">
+<thead>
+<tr>
+<th align="left">类型</th>
+<th align="left">特点</th>
+<th align="left">应用场景举例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>单一任务 Agent</strong></td>
+<td align="left">专注于完成一件特定事情，功能专一。</td>
+<td align="left">智能客服机器人、自动数据录入助手、个人日程提醒助手。</td>
+</tr>
+<tr>
+<td align="left"><strong>多模态 Agent</strong></td>
+<td align="left">能理解和处理文本、图像、语音等多种信息。</td>
+<td align="left">根据草图生成网站代码、分析医学影像并生成报告、视频内容自动摘要。</td>
+</tr>
+<tr>
+<td align="left"><strong>自主 Agent</strong></td>
+<td align="left">拥有较高自主性，可长期运行并主动管理复杂目标。</td>
+<td align="left">自动驾驶汽车、自动化股票交易系统、智能游戏 NPC（非玩家角色）。</td>
+</tr>
+<tr>
+<td align="left"><strong>模拟 Agent</strong></td>
+<td align="left">在虚拟环境中进行模拟、测试和训练。</td>
+<td align="left">训练机器人完成抓取任务、模拟城市交通流量优化、新药研发的分子模拟。</td>
+</tr>
+</tbody></table>
+<p><strong>当前热门的实际应用</strong>：</p>
+<ul>
+<li><strong>AI 编程助手</strong>：如 Devin，能独立完成从需求分析、写代码到测试部署的全流程。</li>
+<li><strong>AI 科研助手</strong>：自动阅读大量文献，提出假设，设计实验方案。</li>
+<li><strong>个人生活助理</strong>：管理你的邮件、行程，自动订餐、购物比价。</li>
+<li><strong>企业流程自动化</strong>：自动处理报销单、生成周报、跟进客户合同。</li>
+</ul>
+
+
+
+<h3>常见挑战与局限性</h3>
+<style>
+.challenge-section {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 2px solid #e5e7eb;
+}
+.challenge-title {
+    font-size: 20px;
+    font-weight: 700;
+    color: #1f2937;
+    margin-bottom: 20px;
+}
+.challenge-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+.challenge-card {
+    background: #fff;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    padding: 16px;
+    border-left: 4px solid #EF4444;
+}
+.challenge-card h4 {
+    margin: 0 0 8px 0;
+    color: #DC2626;
+    font-size: 15px;
+}
+.challenge-card p {
+    margin: 0;
+    font-size: 13px;
+    color: #6B7280;
+    line-height: 1.5;
+}
+.solution-card {
+    border-left-color: #10B981;
+    background: #f0fdf4;
+}
+.solution-card h4 {
+    color: #059669;
+}
+</style>
+<div class="challenge-section">
+    <div class="challenge-title">常见挑战与局限性</div>
+    <div class="challenge-grid">
+        <div class="challenge-card">
+            <h4>幻觉问题 (Hallucination)</h4>
+            <p>Agent 可能生成看似合理但实际错误的信息，需要通过检索增强和验证机制来降低风险。</p>
+        </div>
+        <div class="challenge-card">
+            <h4>边界失控 (Scope Creep)</h4>
+            <p>自主性过高可能导致 Agent 执行超出预期范围的操作，需要设置明确的权限边界。</p>
+        </div>
+        <div class="challenge-card">
+            <h4>成本控制</h4>
+            <p>多轮迭代调用 LLM 和工具会产生较高成本，需要优化调用策略和缓存机制。</p>
+        </div>
+        <div class="challenge-card">
+            <h4>安全与隐私</h4>
+            <p>Agent 可能访问敏感数据，需要实施严格的访问控制和审计机制。</p>
+        </div>
+    </div>
+
+    <div style="margin-top: 20px;">
+        <div class="challenge-title" style="font-size: 16px; color: #059669;">最佳实践建议</div>
+        <div class="challenge-grid">
+            <div class="challenge-card solution-card">
+                <h4>渐进式自主</h4>
+                <p>从简单任务开始，逐步增加 Agent 的自主权限，循序渐进。</p>
+            </div>
+            <div class="challenge-card solution-card">
+                <h4>人工监督</h4>
+                <p>关键决策节点设置人工审核，平衡效率与安全性。</p>
+            </div>
+            <div class="challenge-card solution-card">
+                <h4>持续评估</h4>
+                <p>建立完善的评估指标体系，定期测试和优化 Agent 表现。</p>
+            </div>
+            <div class="challenge-card solution-card">
+                <h4>容错机制</h4>
+                <p>实现重试、降级、告警等机制，确保系统稳定性。</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>未来发展趋势</h3>
+<style>
+.trend-section {
+    margin-top: 32px;
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 100%);
+    border-radius: 12px;
+    padding: 28px;
+    color: #fff;
+}
+.trend-title {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.trend-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+.trend-item {
+    background: rgba(255,255,255,0.1);
+    border-radius: 8px;
+    padding: 14px;
+    backdrop-filter: blur(10px);
+}
+.trend-item h5 {
+    margin: 0 0 8px 0;
+    font-size: 14px;
+    color: #60a5fa;
+}
+.trend-item p {
+    margin: 0;
+    font-size: 12px;
+    color: #cbd5e1;
+    line-height: 1.4;
+}
+</style>
+<div class="trend-section">
+    <div class="trend-title">
+        <svg width="22" height="22" viewbox="0 0 24 24" fill="none" stroke="#60a5fa" stroke-width="2">
+            <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
+        </svg>
+        未来发展趋势
+    </div>
+    <div class="trend-list">
+        <div class="trend-item">
+            <h5>多模态交互深化</h5>
+            <p>Agent 将更好地整合视觉、听觉、触觉等多模态感知能力，实现更自然的人机交互。</p>
+        </div>
+        <div class="trend-item">
+            <h5>多 Agent 协作系统</h5>
+            <p>多个专业 Agent 协同工作，形成类似"AI 团队"的组织架构，处理复杂任务。</p>
+        </div>
+        <div class="trend-item">
+            <h5>边缘计算部署</h5>
+            <p>轻量化 Agent 将在手机、IoT 设备等边缘侧运行，实现本地化智能服务。</p>
+        </div>
+        <div class="trend-item">
+            <h5>垂直领域深耕</h5>
+            <p>医疗、法律、金融等专业领域的 Agent 将具备更强的领域知识和推理能力。</p>
+        </div>
+    </div>
+</div>			<!-- 其他扩展 -->
+						
+			</div>
+			
+		</div>
+
+
+<div class="archive-list" style="display:none;font-size: 14px;line-height: 1.8;margin-top: 20px;padding: 10px;">
+<div class="archive-list-item">
+    <div class="post-intro" style="width: 100%;" id="ai-info">
+	  AI 思考中...
+    </div>
+</div>
+</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="ai-agent-tutorial.html" rel="prev"> AI Agent(智能体) 教程</a> </div>
+			<div class="next-design-link"><a href="ai-agent-core.html" rel="next"> AI Agent  核心组件</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+
+
+		
+		<div class="sidebar-box ">
+				
+
+<style>	
+.responsive_ad1 { display:none; }
+@media(min-width: 800px) { .responsive_ad1 {  display:block;margin:0 auto;} }
+</style>
+<div id="ad-336280" class="responsive_ad1">
+<!-- 336*280 固定 -->		
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 移动版 自动调整 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+				</div>
+		<!-- 笔记列表 -->
+		<style>
+.wrapper {
+  /*text-transform: uppercase; */
+  background: #ececec;
+  color: #555;
+  cursor: pointer;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.wrapper .tooltip {
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: left;
+  background: #96b97d;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 14px;
+  pointer-events: none;
+  position: absolute;
+  
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+.tooltip a {
+	color:#fff;
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}  
+
+/* CSS Triangles - see Trevor's post */
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #96b97d 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 20%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+.wrapper .tooltip1 {
+	margin-left: 50px;
+	padding-top: 0px;
+}
+/*
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+*/
+/* IE can just show/hide with no transition */
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.css">
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style=" padding: 20px 20px;"> 
+	<h3 class="text-muted" id="share_code" style="color: #799961;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<!--
+	<p style="font-size:14px;">笔记需要是本篇文章的内容扩展！</p><br>
+	<p style="font-size:12px;"><a href="//www.runoob.com/tougao" target="_blank">文章投稿，可点击这里</a></p>
+	<p style="font-size:14px;"><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>
+		<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display:none;">
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div id="mded"></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input type="hidden" name="comment_post_ID" value="28877" id="comment_post_ID" />
+<input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="引用地址"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script type="text/javascript">
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload:false,
+	 // upload: {url:'/api/comment_upload_file.php',params: null,fileKey: 'upload_file',connectionCount: 1,leaveConfirm: '文件正在上传，您确定离开?'},
+	  defaultImage: 'https://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  autosave: 'editor-content',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+	$("#user_add_note").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		$('html, body').animate({
+       	    scrollTop: $("#respond").offset().top
+    	}, 200);
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" style="display:none;" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  28877;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>').show();
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>').show();
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>').show();
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>').show();
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>').show();
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>').show();
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	$(".comt-author").click(function() {
+		href = $(this).children("a").attr("href");
+		if(href.indexOf("/note/")!=-1) {
+			var win = window.open(href, '_blank');
+  			win.focus();
+		}
+	});
+	$(".comt-meta span").hover(function(){
+		$(this).children(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).children(".tooltip").removeAttr("style");
+	});
+	/*
+	$(".wrapper i").hover(function(){
+		$(this).siblings(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).siblings(".tooltip").css({ "opacity": 0, "pointer-events": "auto"});
+	});
+	*/
+	//Upvote.create('runoobvote-id', {callback: vote_callback});
+	var ajaxurl = 'https://www.runoob.com/wp-admin/admin-ajax.php';
+	var callback = function(data) {
+		//console.log($('#runoobvote-id').upvote('upvoted'));
+		//console.log($('#runoobvote-id').upvote('downvoted'));
+		//console.log(data);
+		_vote_action = data.action;
+		id_arr = data.id.split('-');
+		um_id= id_arr[2];
+		//console.log(um_id);
+		
+		var re = /^[1-9]+/;
+		if (re.test(um_id)) { 
+			var ajax_data = {
+				_vote_action: _vote_action,
+				action: "pinglun_zan",
+				um_id: um_id,
+				um_action: "ding"
+			};
+			//console.log(ajax_data);
+			$.post(ajaxurl,ajax_data,function(status){
+				//if(status.vote_num>999) {
+				//	_voteHtml = '<span style="display: block; text-align: center;font-size: 20px; color: #6a737c; margin: 8px 0;">'+kFormatter(status.vote_num) +'</span>';
+				//	$("#runoobvote-id-" + um_id + " .count").hide().after(_voteHtml);
+				//}
+				
+			});
+		}
+	};
+	if($('#comments').length && $('.upvotejs').length){
+		$('.upvotejs').upvote({id: 28877, callback: callback});
+	
+		$.post(ajaxurl,{"action":"pinglun_zan","postid":28877},function(data){  
+			$(data).each(function(key,value) {
+				$("#runoobvote-id-" + value.commid + " .upvote").addClass(value.upvotejs_class);
+				$("#runoobvote-id-" + value.commid + " .downvote").addClass(value.downvote_class);
+				$("#runoobvote-id-" + value.commid + " .count").text(value.upvote_count);
+			})
+		},'json');
+		
+	}
+	
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+function kFormatter(num) {
+	// return num;
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
+</script>
+
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/css/qa.css?1.45">
+<link rel="stylesheet" type="text/css" href="https://static.char123.com/assets/simditor/2.3.6/styles/simditor.min.css" />
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor.min.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor-autosave.js"></script>
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+
+<style>
+.sidebar-tree .double-li {
+    width:300px;
+}
+.sidebar-tree .double-li li {
+    width: 44%;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    display: inline;
+}
+</style>
+
+    
+        <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here" style="margin: 0 auto;">
+            <a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;"> <i class="fa fa-list" aria-hidden="true"></i> 分类导航</a>
+        </div>
+    <div class="sidebar-box sidebar-cate">
+        
+        <div class="sidebar-tree">
+            <ul><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="../html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="../html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="../css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="../css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Tailwind CSS 教程" href="../tailwindcss/tailwindcss-tutorial.html">Tailwind CSS 教程</a></li><li><a title="Bootstrap4 教程" href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Bootstrap5 教程" href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 教程</a></li><li><a title="Font Awesome 教程" href="../font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="../foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="../js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="../htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="../jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="../angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="../angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="../vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="Vue3 教程" href="../vue3/vue3-tutorial.html">Vue3 教程</a></li><li><a title="React 教程" href="../react/react-tutorial.html">React 教程</a></li><li><a title="Next.js 教程" href="../nextjs/nextjs-tutorial.html">Next.js 教程</a></li><li><a title="TypeScript 教程" href="../typescript/ts-tutorial.html">TypeScript 教程</a></li><li><a title="jQuery UI 教程" href="../jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="../jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="../nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="Electron 教程" href="../electron/electron-tutorial.html">Electron 教程</a></li><li><a title="Playwright 教程" href="../playwright/playwright-tutorial.html">Playwright 教程</a></li><li><a title="AJAX 教程" href="../ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="../json/json-tutorial.html">JSON 教程</a></li><li><a title="Echarts 教程" href="../echarts/echarts-tutorial.html">Echarts 教程</a></li><li><a title="Chart.js 教程" href="../chartjs/chartjs-tutorial.html">Chart.js 教程</a></li><li><a title="Highcharts 教程" href="../highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="../googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="Python2.x 教程" href="../python/python-tutorial.html">Python2.x 教程</a></li><li><a title="Linux 教程" href="../linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="../docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="../ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="../java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="../c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="../cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="../perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="../servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="../jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="../lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Rust 教程" href="../rust/rust-tutorial.html">Rust 教程</a></li><li><a title="Zig 教程" href="../zig/zig-tutorial.html">Zig 教程</a></li><li><a title="Scala 教程" href="../scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="../go/go-tutorial.html">Go 教程</a></li><li><a title="PHP 教程" href="../php/php-tutorial.html">PHP 教程</a></li><li><a title="数据结构与算法" href="../data-structures/data-structures-tutorial.html">数据结构与算法</a></li><li><a title="Django 教程" href="../django/django-tutorial.html">Django 教程</a></li><li><a title="FastAPI 教程" href="../fastapi/fastapi-tutorial.html">FastAPI 教程</a></li><li><a title="Flask 教程" href="../flask/flask-tutorial.html">Flask 教程</a></li><li><a title="Pillow 教程" href="../pillow/pillow-tutorial.html">Pillow 教程</a></li><li><a title="Zookeeper 教程" href="//www.runoob.com/w3cnote/zookeeper-tutorial.html">Zookeeper 教程</a></li><li><a title="设计模式" href="../design-pattern/design-pattern-tutorial.html">设计模式</a></li><li><a title="Python 设计模式" href="../python-design-pattern/python-design-pattern-tutorial.html">Python 设计模式</a></li><li><a title="正则表达式" href="../regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="Maven 教程" href="../maven/maven-tutorial.html">Maven 教程</a></li><li><a title="CMake 教程" href="../cmake/cmake-tutorial.html">CMake 教程</a></li><li><a title="Verilog 教程" href="//www.runoob.com/w3cnote/verilog-tutorial.html">Verilog 教程</a></li><li><a title="ASP 教程" href="../asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="../appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="../vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="../sql/sql-tutorial.html">SQL 教程</a></li><li><a title="MySQL 教程" href="../mysql/mysql-tutorial.html">MySQL 教程</a></li><li><a title="PostgreSQL 教程" href="../postgresql/postgresql-tutorial.html">PostgreSQL 教程</a></li><li><a title="SQLite 教程" href="../sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="../mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="../redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="../Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit">  AI & 数据分析</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="NumPy 教程" href="../numpy/numpy-tutorial.html">NumPy 教程</a></li><li><a title="Pandas 教程" href="../pandas/pandas-tutorial.html">Pandas 教程</a></li><li><a title="Matplotlib 教程" href="../matplotlib/matplotlib-tutorial.html">Matplotlib 教程</a></li><li><a title="Scipy 教程" href="../scipy/scipy-tutorial.html">Scipy 教程</a></li><li><a title="Pytorch 教程" href="../pytorch/pytorch-tutorial.html">Pytorch 教程</a></li><li><a title="TensorFlow 教程" href="../tensorflow/tensorflow-tutorial.html">TensorFlow 教程</a></li><li><a title="Ollama 教程" href="../ollama/ollama-tutorial.html">Ollama 教程</a></li><li><a title="机器 教程" href="../ml/ml-tutorial.html">机器 教程</a></li><li><a title="Jupyter Notebook 教程" href="../jupyter-notebook/jupyter-notebook-tutorial.html">Jupyter Notebook 教程</a></li><li><a title="AI Agent(智能体)" href="ai-agent-tutorial.html">AI Agent(智能体)</a></li><li><a title="Skills(技能)" href="../skills/skills-tutorial.html">Skills(技能)</a></li><li><a title="Claude Code" href="../claude-code/claude-code-tutorial.html">Claude Code</a></li><li><a title="OpenCode" href="../opencode/opencode-tutorial.html">OpenCode</a></li><li><a title="Codex 教程" href="../codex/codex-tutorial.html">Codex 教程</a></li><li><a title="scikit-learn 教程" href="../sklearn/sklearn-tutorial.html">scikit-learn 教程</a></li><li><a title="R 教程" href="../r/r-tutorial.html">R 教程</a></li><li><a title="OpenCV 教程" href="../opencv/opencv-tutorial.html">OpenCV 教程</a></li><li><a title="NLP 教程" href="../nlp/nlp-tutorial.html">NLP 教程</a></li><li><a title="Selenium 教程" href="../selenium/selenium-tutorial.html">Selenium 教程</a></li><li><a title="Julia 教程" href="../julia/julia-tutorial.html">Julia 教程</a></li><li><a title="量化交易" href="../qt/qt-tutorial.html">量化交易</a></li><li><a title="Dash 教程" href="../dash/dash-tutorial.html">Dash 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="//www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="../swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="../jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="../ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Flutter 教程" href="../flutter/flutter-tutorial.html">Flutter 教程</a></li><li><a title="Kotlin 教程" href="../kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="VS Code 教程" href="../vscode/vscode-tutorial.html">VS Code 教程</a></li><li><a title="PyCharm 教程" href="../pycharm/pycharm-tutorial.html">PyCharm 教程</a></li><li><a title="Swagger 教程" href="../swagger/swagger-tutorial.html">Swagger 教程</a></li><li><a title="RESTful API 教程" href="../restfulapi/restful-api-tutorial.html">RESTful API 教程</a></li><li><a title="Eclipse 教程" href="../eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="../git/git-tutorial.html">Git 教程</a></li><li><a title="Svn 教程" href="../svn/svn-tutorial.html">Svn 教程</a></li><li><a title="Markdown 教程" href="../markdown/md-tutorial.html">Markdown 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="../xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="../dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="../dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="../xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="../xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="../xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="../xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="../xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="../schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="../xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="../svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="../aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="../csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="PowerShell 教程" href="../powershell/powershell-tutorial.html">PowerShell 教程</a></li><li><a title="Web Pages 教程" href="../aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="../aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="../aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="../aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="../webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="../wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="../soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="../rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="../rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="../http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="../web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="../browsers/browser-information.html">浏览器信息</a></li><li><a title="网络协议" href="../np/np-tutorial.html">网络协议</a></li><li><a title="网站主机教程" href="../hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="../tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="../w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="../quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>            </div>
+    
+    </div>
+    </div>
+    <br>
+    
+    <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here">
+            <a href="javascript:void(0);">Advertisement</a>
+        </div>
+        <div class="re-600160" id="sidebar-right-re">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧栏1 -->
+        <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+                </div>
+    </div>
+</div></div>
+
+</div>
+
+<script>
+var aid = 28877;
+function coll() {
+	$.post( '/wp-content/themes/runoob/option/user/userinfo.php', {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+		if(data.error==0) {
+			$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+			$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+		}
+		alert(data.msg);
+	},'json');
+}
+
+(function () {
+    // 1. 仅 HTML 页面
+    if (!document.contentType || !document.contentType.includes('text/html')) return;
+
+    // 2. 容器判断
+    var container = document.querySelector('.article-intro');
+    if (!container) return;
+
+    var h1 = container.querySelector('h1');
+    if (!h1) return;
+
+    // 3. URL 判断
+    var url = window.location.href.toLowerCase();
+    var version = null;
+
+    if (url.includes('/python3/')) {
+        version = 'Python3.x';
+    } else if (url.includes('/python/')) {
+        version = 'Python2.x';
+    }
+
+    if (!version) return;
+
+    // 4. 防重复
+    if (h1.querySelector('.py-version-badge')) return;
+
+    // 5. 创建标签
+    var badge = document.createElement('span');
+    badge.className = 'py-version-badge';
+    badge.innerText = version;
+
+    // 6. 样式（核心：float 实现右上角）
+    badge.style.float = 'right';
+    badge.style.fontSize = '12px';
+    badge.style.padding = '2px 8px';
+    badge.style.borderRadius = '999px';
+
+   // 自适应亮/暗色 + 渐变背景（增强版）
+	badge.style.color = 'inherit';
+
+	// 渐变背景（低透明度，不影响暗黑模式）
+	if (version.includes('3')) {
+		badge.style.background = 'linear-gradient(90deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15))';
+	} else {
+		badge.style.background = 'linear-gradient(90deg, rgba(161,140,209,0.15), rgba(251,194,235,0.15))';
+	}
+
+	// 边框弱化（更精致）
+	badge.style.border = '1px solid rgba(127,127,127,0.3)';
+
+	// 提升可读性
+	badge.style.opacity = '0.95';
+
+    // 微调位置（更贴近“右上角”）
+    badge.style.marginTop = '4px';
+    badge.style.marginLeft = '10px';
+
+    // 7. 插入到 h1 最前面（让 float 生效更稳定）
+    h1.insertBefore(badge, h1.firstChild);
+
+})();
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.js?1.0"></script>
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.css?1.0" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // 获取窗口宽度
+    var windowWidth = $(window).width();
+
+    // 设置一个阈值，例如 768px，根据实际需要调整
+    var mobileThreshold = 768;
+
+    // 判断是否为移动端
+    if (windowWidth < mobileThreshold) {
+        // 在移动端执行的代码
+        $(".article-heading-ad").show();
+    } else {
+        // 在非移动端执行的代码
+		$(".article-heading-ad").show();
+    }
+	
+});
+</script>
+<script src="/wp-content/themes/runoob/assets/js/runoob-article-dir.min.js"></script>
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

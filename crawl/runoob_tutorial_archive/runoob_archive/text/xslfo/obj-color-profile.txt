@@ -1,0 +1,44 @@
+URL: https://www.runoob.com/xslfo/obj-color-profile.html
+Title: XSL-FO color-profile 对象 | 菜鸟教程
+
+XSL-FO color-profile 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO character 对象 
+
+XSL-FO conditional-page-master-reference 对象 
+
+XSL-FO color-profile 对象 
+
+定义和用法 
+
+<fo:color-profile> 对象定义样式表的一个颜色配置文件。 
+
+颜色配置文件是通过 "color-profile-name" 属性中的名称引用，并通过 "src" 属性中的 URI 标识。 
+
+语法 
+
+<fo:color-profile> 
+<!-- 
+Contents:EMPTY 
+--> 
+</fo:color-profile> 
+
+属性 
+
+属性 
+
+color-profile-name 
+
+rendering-intent 
+
+src 
+
+AI 思考中... 
+
+XSL-FO character 对象 
+
+XSL-FO conditional-page-master-reference 对象

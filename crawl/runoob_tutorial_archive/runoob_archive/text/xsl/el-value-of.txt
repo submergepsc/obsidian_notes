@@ -1,0 +1,121 @@
+URL: https://www.runoob.com/xsl/el-value-of.html
+Title: XSLT <xsl:value-of> 元素 | 菜鸟教程
+
+XSLT <xsl:value-of> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:text> 元素 
+
+XSLT <xsl:variable> 元素 
+
+XSLT <xsl:value-of> 元素 
+
+定义和用法 
+
+<xsl:value-of> 元素可提取选定节点的值。 
+
+<xsl:value-of> 元素可用于选取某个 XML 元素的值，并把它输出。 
+
+语法 
+
+<xsl:value-of
+select="expression"
+disable-output-escaping="yes|no" /> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+select 
+
+expression 
+
+必需。一个 XPath 表达式，规定了从哪个节点/属性来提取值。它的工作原理与通过正斜杠（/）选择子目录的导航文件系统类似。 
+
+disable-output-escaping 
+
+yes 
+no 
+
+可选。如果值为 "yes"，通过实例化 <xsl:text> 元素生成的文本节点在输出时将不进行任何转义。比如 "<" 将输出为 "<"。如果值为 "no"，则 "<" 将输出为 "<"。默认是 "no"。 
+
+实例 
+
+下面的实例获取第一个 title 和 artist 元素的值，并放置在表格中： 
+
+实例 1 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<h1>Music Collection:</h1> 
+<table border="1"> 
+<tr bgcolor="#9acd32"> 
+<th>Title</th> 
+<th>Artist</th> 
+</tr> 
+<tr> 
+<td><xsl:value-of select="catalog/cd/title" 
+/></td> 
+<td><xsl:value-of select="catalog/cd/artist" 
+/></td> 
+</tr> 
+</table> 
+</body> 
+</html> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+尝试一下 » 
+
+下面的实例循环遍历每个 cd 元素，并创建带有每个 cd 元素的 title 和 artist 的值的表格行： 
+
+实例 2 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<h1>Music Collection:</h1> 
+<table border="1"> 
+<tr bgcolor="#9acd32"> 
+<th>Title</th> 
+<th>Artist</th> 
+</tr> 
+<xsl:for-each select="catalog/cd"> 
+<tr> 
+<td><xsl:value-of select="title" 
+/></td> 
+<td><xsl:value-of select="artist" 
+/></td> 
+</tr> 
+</xsl:for-each> 
+</table> 
+</body> 
+</html> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+尝试一下 » 
+
+AI 思考中... 
+
+XSLT <xsl:text> 元素 
+
+XSLT <xsl:variable> 元素

@@ -1,0 +1,64 @@
+URL: https://www.runoob.com/vbscript/func-second.html
+Title: VBScript Second 函数 | 菜鸟教程
+
+VBScript Second 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Now 函数 
+
+VBScript Time 函数 
+
+VBScript Second 函数 
+
+Second 函数返回表示分钟的秒数的数字，介于 0 到 59 之间。 
+
+语法 
+
+Second(time) 
+
+参数 
+
+描述 
+
+time 
+
+必需的。任何表示时间的表达式。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+document.write(Second("13:45:21")) 
+
+</script> 
+
+以上实例输出结果： 
+
+21 
+
+尝试一下 » 
+
+实例 2 
+
+<script type="text/vbscript"> 
+
+document.write(Second(Now())) 
+
+</script> 
+
+以上实例输出结果： 
+
+document.write(Second(Now())) 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Now 函数 
+
+VBScript Time 函数

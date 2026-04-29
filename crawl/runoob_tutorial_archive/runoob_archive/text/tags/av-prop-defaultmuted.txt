@@ -1,0 +1,73 @@
+URL: https://www.runoob.com/tags/av-prop-defaultmuted.html
+Title: HTML 音频/视频 DOM defaultMuted 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM defaultMuted 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM currentTime 属性 
+
+HTML 音频/视频 DOM defaultPlaybackRate 属性 
+
+HTML 音频/视频 DOM defaultMuted 属性 
+
+实例 
+
+设置视频默认静音： 
+
+myVid=document.getElementById("video1"); 
+myVid.defaultMuted=true; 
+
+尝试一下 » 
+
+定义和用法 
+
+defaultMuted 属性设置或返回音频/视频是否默认静音。 
+
+设置该属性仅会改变默认的静音状态，而不是当前的。要改变当前的静音状态，请使用 muted 属性。 
+
+浏览器支持 
+
+只有 Chrome 和 Safari 6 支持 defaultMuted 属性。 
+
+语法 
+
+设置 defaultMuted 属性： 
+
+audio|video .defaultMuted=true|false 
+
+返回 defaultMuted 属性： 
+
+audio|video .defaultMuted 
+
+属性值 
+
+值 
+
+描述 
+
+true 
+
+指示音频/视频默认是静音的。 
+
+false 
+
+默认。指示音频/视频默认不是静音的。 
+
+技术细节 
+
+返回值： 
+
+布尔值，true|false 
+
+默认值： 
+
+false 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM currentTime 属性 
+
+HTML 音频/视频 DOM defaultPlaybackRate 属性

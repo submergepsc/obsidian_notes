@@ -1,0 +1,222 @@
+URL: https://www.runoob.com/ios/ios-first-iphone-application.html
+Title: 创建第一款iPhone应用程序 | 菜鸟教程
+
+创建第一款iPhone应用程序 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+iOS 教程 
+
+Objective C 基础知识 
+
+iOS操作（action）和输出口（Outlet） 
+
+创建第一款iPhone应用程序 
+
+现在让我们来创建一个在iOS模拟器上运行的简单视图应用（空白的应用程序）。 
+
+操作步骤如下： 
+
+1、打开Xcode并选择创建一个新的Xcode项目。 
+
+2. 然后选择单一视图应用程序 
+
+3. 接下来输入产品名称即应用程序名称、组织名称和公司标识符。 
+
+4. 确定已经选择自动应用计数，以自动释放超出范围的资源。单击下一步。 
+
+5.选择项目目录并选择创建 
+
+6. 你将看到如下所示的页面 
+
+屏幕上方能够设置方向、生成和释放。有一个部署目标，设备支持4.3及以上版本的部署目标，这些不是必须的，现在只要专注于运行该应用程序。 
+
+7. 在下拉菜单中选择iPhone Simulator并运行。 
+
+8. 成功运行第一个应用程序，将得到的输出，如下所示。 
+
+更改背景颜色使之有开始的界面生成器。选择ViewController.xib。在右侧选择背景选项，更改颜色并运行。 
+
+在上述项目中，默认情况下，部署目标已设置为iOS6.0且自动布局将被启用。 
+
+为确保应用程序能iOS4.3设备上正常运行，我们已经在开始创建应用程序时修改了部署目标，但我们不禁用自动布局，要取消自动布局，我们需要取消选择自动班上复选框在文件查看器的每个nib，也就是xib文件。 
+
+Xcode项目IDE的各部分显示如下（苹果Xcode4用户文档） 
+
+在上面所示的检查器选择器栏中可以找到文件检查器，且可以取消选择自动布局。当你想要的目标只有iOS6.0的设备时，可以使用自动布局。 
+
+当然，也可以使用新功能，如当加注到iOS6时，就可以使用passbook这一功能。现在，以Ios4.3作为部署目标。 
+
+深入了解第一款IOS应用程序代码 
+
+5个不同文件生成应用程序，如下所示 
+
+AppDelegate.h 
+
+AppDelegate.m 
+
+ViewController.h 
+
+ViewController.m 
+
+ViewController.xib 
+
+我们使用单行注释（//）来解释简单代码，重要的项目代码解释在代码下方。 
+
+AppDelegate.h 
+
+// Header File that provides all UI related items. 
+#import <UIKit/UIKit.h> 
+
+ // Forward declaration (Used when class will be defined /imported in future)
+@class ViewController; 
+
+ // Interface for Appdelegate
+@interface AppDelegate : UIResponder <UIApplicationDelegate>
+
+// Property window 
+@property (strong, nonatomic) UIWindow *window; 
+
+ // Property Viewcontroller
+
+ @property (strong, nonatomic) ViewController *viewController;
+//this marks end of interface 
+@end 
+
+代码说明 
+
+AppDelegate调用UIResponder来处理Ios事件。 
+
+完成UIApplication的命令，提供关键应用程序事件，如启动完毕，终止，等等 
+
+在iOS设备的屏幕上用UIWindow对象来管理和协调各种视角，它就像其它加载视图的基本视图一样。通常一个应用程序只有一个窗口。 
+
+UIViewController来处理屏幕流 
+
+AppDelegate.m 
+
+// Imports the class Appdelegate's interface
+import "AppDelegate.h" 
+
+// Imports the viewcontroller to be loaded
+#import "ViewController.h" 
+
+// Class definition starts here
+@implementation AppDelegate 
+
+// Following method intimates us the application launched successfully 
+- (BOOL)application:(UIApplication *)application 
+ didFinishLaunchingWithOptions:(NSDictionary *)launchOptions 
+{
+ self.window = [[UIWindow alloc] initWithFrame:
+ [[UIScreen mainScreen] bounds]]; 
+ // Override point for customization after application launch.
+ self.viewController = [[ViewController alloc] 
+ initWithNibName:@"ViewController" bundle:nil];
+ self.window.rootViewController = self.viewController;
+ [self.window makeKeyAndVisible];
+ return YES;
+}
+
+- (void)applicationWillResignActive:(UIApplication *)application
+{
+ /* Sent when the application is about to move from active to inactive state.
+ This can occur for certain types of temporary interruptions
+ (such as an incoming phone call or SMS message)
+ or when the user quits the application and it begins the transition to the 
+ background state. Use this method to pause ongoing tasks, disable timers, 
+ and throttle down OpenGL ES frame rates. Games should use this method 
+ to pause the game.*/
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application
+{
+ /* Use this method to release shared resources, save user data, invalidate 
+ timers, and store enough application state information to restore your
+ application to its current state in case it is terminated later. If your 
+ application supports background execution, this method is called instead 
+ of applicationWillTerminate: when the user quits.*/
+}
+
+- (void)applicationWillEnterForeground:(UIApplication *)application
+{
+ /* Called as part of the transition from the background to the inactive state;
+ here you can undo many of the changes made on entering the background.*/
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application
+{
+ /* Restart any tasks that were paused (or not yet started) while the
+ application was inactive. If the application was previously in the background, 
+ optionally refresh the user interface.*/
+}
+
+- (void)applicationWillTerminate:(UIApplication *)application
+{
+ /* Called when the application is about to terminate. Save data if appropriate.
+ See also applicationDidEnterBackground:. */
+}
+
+@end 
+
+代码说明 
+
+此处定义UIApplication。上面定义的所有方法都是应用程序UI调动和不包含任何用户定义的方法。 
+
+UIWindow对象被分配用来保存应用程序分配对象。 
+
+UIController作为窗口初始视图控制器 
+
+调用makeKeyAndVisible能使窗口可见 
+
+ViewController.h 
+
+#import 
+
+// Interface for class ViewController
+@interface ViewController : UIViewController 
+
+@end 
+
+代码说明 
+
+ViewController类继承UIViewController，为iOS应用程序提供基本视图管理模型。 
+
+ViewController.m 
+
+#import "ViewController.h"
+
+// Category, an extension of ViewController class
+@interface ViewController ()
+
+@end
+
+@implementation ViewController 
+
+- (void)viewDidLoad
+{
+ [super viewDidLoad];
+ // Do any additional setup after loading the view, typically from a nib.
+}
+
+- (void)didReceiveMemoryWarning
+{
+ [super didReceiveMemoryWarning];
+ // Dispose of any resources that can be recreated.
+}
+
+@end 
+
+代码说明 
+
+在这里两种方法实现UIViewController类的基类中定义 
+
+初始视图加载后调用viewDidLoad中的安装程序 
+
+在内存警告的情况下调用didReceviveMemoryWarning 
+
+AI 思考中... 
+
+Objective C 基础知识 
+
+iOS操作（action）和输出口（Outlet）

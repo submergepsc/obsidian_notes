@@ -1,0 +1,53 @@
+URL: https://www.runoob.com/python3/python3-string-rjust.html
+Title: Python3 rjust()方法 | 菜鸟教程
+
+Python3 rjust()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 rindex()方法 
+
+Python3 rstrip() 方法 
+
+Python3 rjust()方法 
+
+描述 
+
+rjust() 返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串。如果指定的长度小于字符串的长度则返回原字符串。 
+
+语法 
+
+rjust()方法语法： 
+
+str.rjust(width[, fillchar]) 
+
+参数 
+
+width -- 指定填充指定字符后中字符串的总长度. 
+
+fillchar -- 填充的字符，默认为空格。 
+
+返回值 
+
+返回一个原字符串右对齐,并使用空格填充至长度 width 的新字符串。如果指定的长度小于字符串的长度则返回原字符串 
+
+实例 
+
+以下实例展示了rjust()函数的使用方法： 
+
+#!/usr/bin/python3
+
+str = "this is string example....wow!!!"
+print (str.rjust(50, '*')) 
+
+以上实例输出结果如下： 
+
+******************this is string example....wow!!! 
+
+AI 思考中... 
+
+Python3 rindex()方法 
+
+Python3 rstrip() 方法

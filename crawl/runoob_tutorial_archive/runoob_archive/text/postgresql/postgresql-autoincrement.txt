@@ -1,0 +1,126 @@
+URL: https://www.runoob.com/postgresql/postgresql-autoincrement.html
+Title: PostgreSQL AUTO INCREMENT（自动增长） | 菜鸟教程
+
+PostgreSQL AUTO INCREMENT（自动增长） | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+PostgreSQL 教程 
+
+PostgreSQL 子查询 
+
+PostgreSQL PRIVILEGES（权限） 
+
+PostgreSQL AUTO INCREMENT（自动增长） 
+
+AUTO INCREMENT（自动增长） 会在新记录插入表中时生成一个唯一的数字。 
+
+PostgreSQL 使用序列来标识字段的自增长，数据类型有 smallserial、serial 和 bigserial 。这些属性类似于 MySQL 数据库支持的 AUTO_INCREMENT 属性。 
+
+使用 MySQL 设置自动增长的语句如下: 
+
+CREATE TABLE IF NOT EXISTS `runoob_tbl`(
+ `runoob_id` INT UNSIGNED AUTO_INCREMENT,
+ `runoob_title` VARCHAR(100) NOT NULL,
+ `runoob_author` VARCHAR(40) NOT NULL,
+ `submission_date` DATE,
+ PRIMARY KEY ( `runoob_id` )
+)ENGINE=InnoDB DEFAULT CHARSET=utf8; 
+
+MySQL 是用 AUTO_INCREMENT 这个属性来标识字段的自增。 
+
+PostgreSQL 使用序列来标识字段的自增长： 
+
+CREATE TABLE runoob
+(
+ id serial NOT NULL,
+ alttext text,
+ imgurl text
+) 
+
+SMALLSERIAL、SERIAL 和 BIGSERIAL 范围： 
+
+伪类型 
+
+存储大小 
+
+范围 
+
+SMALLSERIAL 
+
+2字节 
+
+1 到 32,767 
+
+SERIAL 
+
+4字节 
+
+1 到 2,147,483,647 
+
+BIGSERIAL 
+
+8字节 
+
+1 到 922,337,2036,854,775,807 
+
+语法 
+
+SERIAL 数据类型基础语法如下： 
+
+CREATE TABLE tablename (
+ colname SERIAL
+); 
+
+实例 
+
+假定我们要创建一张 COMPANY 表，并创建下面几个字段： 
+
+runoobdb=# CREATE TABLE COMPANY(
+ ID SERIAL PRIMARY KEY,
+ NAME TEXT NOT NULL,
+ AGE INT NOT NULL,
+ ADDRESS CHAR(50),
+ SALARY REAL
+); 
+
+现在往表中插入几条记录： 
+
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ( 'Paul', 32, 'California', 20000.00 );
+
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ('Allen', 25, 'Texas', 15000.00 );
+
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ('Teddy', 23, 'Norway', 20000.00 );
+
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ( 'Mark', 25, 'Rich-Mond ', 65000.00 );
+
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ( 'David', 27, 'Texas', 85000.00 );
+
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ( 'Kim', 22, 'South-Hall', 45000.00 );
+
+INSERT INTO COMPANY (NAME,AGE,ADDRESS,SALARY)
+VALUES ( 'James', 24, 'Houston', 10000.00 ); 
+
+查看 COMPANY 表的记录如下： 
+
+id | name | age | address | salary
+----+-------+-----+------------+--------
+ 1 | Paul | 32 | California | 20000
+ 2 | Allen | 25 | Texas | 15000
+ 3 | Teddy | 23 | Norway | 20000
+ 4 | Mark | 25 | Rich-Mond | 65000
+ 5 | David | 27 | Texas | 85000
+ 6 | Kim | 22 | South-Hall | 45000
+ 7 | James | 24 | Houston | 10000 
+
+AI 思考中... 
+
+PostgreSQL 子查询 
+
+PostgreSQL PRIVILEGES（权限）

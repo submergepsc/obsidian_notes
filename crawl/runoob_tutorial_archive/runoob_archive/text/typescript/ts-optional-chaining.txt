@@ -1,0 +1,311 @@
+URL: https://www.runoob.com/typescript/ts-optional-chaining.html
+Title: TypeScript 可选链 | 菜鸟教程
+
+TypeScript 可选链 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+TypeScript 教程 
+
+TypeScript 类型守卫 
+
+TypeScript 工具类型 
+
+TypeScript 可选链 
+
+可选链（Optional Chaining）是 TypeScript 和 JavaScript 中一种安全的属性访问方式。 
+
+它允许开发者以链式调用的方式安全地访问嵌套对象属性。当访问路径中的任意一个属性为 null 或 undefined 时，整个表达式会短路返回 undefined，而不会抛出错误。 
+
+这极大地简化了深层嵌套对象的属性访问代码。 
+
+为什么需要可选链 
+
+在 JavaScript/TypeScript 开发中，经常需要访问深层嵌套的对象属性。 
+
+传统的写法需要逐层检查属性是否存在。这种方式不仅代码冗长，而且容易遗漏检查导致运行时错误。 
+
+概念说明： 可选链的核心是"短路求值"。当链中某个属性的值为 null 或 undefined 时，整个表达式的结果立即返回 undefined，而不会继续访问后续属性。 
+
+基本语法 
+
+使用 ?. 运算符安全访问可能不存在的属性。 
+
+与传统的 && 链式检查相比，可选链语法更加简洁直观。 
+
+实例 
+
+// 定义一个嵌套的用户对象 
+
+// 包含姓名和地址信息，地址中有城市 
+
+var user = { 
+
+name : "RUNOOB" , 
+
+address : { 
+
+city : "Beijing" 
+
+} 
+
+} ; 
+
+// 传统方式：使用 && 逐层检查 
+
+// 这种方式代码冗长，容易遗漏 
+
+var city1 = user && user. address && user. address . city ; 
+
+// 可选链方式：使用 ?. 运算符 
+
+// 如果任意一层为 null 或 undefined，直接返回 undefined 
+
+var city2 = user ? . address ? . city ; 
+
+console. log ( "传统方式: " + city1 ) ; 
+
+console. log ( "可选链: " + city2 ) ; 
+
+运行结果： 
+
+传统方式: Beijing
+可选链: Beijing 
+
+提示： 当对象属性存在时，两种方式的结果相同。但可选链的代码更简洁，更易读。 
+
+处理不存在的属性 
+
+当访问路径中的属性不存在时，可选链会安全地返回 undefined，而不会抛出错误。 
+
+这对于处理来自 API 的数据或用户表单输入特别有用。 
+
+实例 
+
+// 定义一个不完整用户对象 
+
+// 只有 name 属性，没有 address 属性 
+
+var user = { 
+
+name : "RUNOOB" 
+
+// address 属性不存在 
+
+} ; 
+
+// 使用可选链访问深层属性 
+
+// user.address 为 undefined，所以 city 也是 undefined 
+
+var city = user ? . address ? . city ; 
+
+// 访问更深的嵌套属性 
+
+// 即使 country 也不存在，仍然返回 undefined 而不报错 
+
+var country = user ? . address ? . country ? . name ; 
+
+console. log ( "城市: " + city ) ; 
+
+console. log ( "国家: " + country ) ; 
+
+运行结果： 
+
+城市: undefined
+国家: undefined 
+
+注意： 可选链只会在属性访问时返回 undefined，不会创建新的对象或属性。 
+
+可选链与数组结合 
+
+可选链可以与数组下标访问结合使用，安全地访问数组中的元素。 
+
+使用 ?.[index] 语法，可以在数组元素不存在时返回 undefined。 
+
+实例 
+
+// 定义一个用户数组 
+
+var users = [ 
+
+{ name : "Alice" } , 
+
+{ name : "Bob" } 
+
+] ; 
+
+// 安全访问数组第一个元素的名字 
+
+// users?.[0] 存在，返回 "Alice" 
+
+var firstUser = users ? . [ 0 ] ? . name ; 
+
+// 安全访问数组中不存在的元素 
+
+// users?.[9] 不存在（数组只有2个元素），返回 undefined 
+
+var tenthUser = users ? . [ 9 ] ? . name ; 
+
+console. log ( "第一个用户: " + firstUser ) ; 
+
+console. log ( "第十个用户: " + tenthUser ) ; 
+
+运行结果： 
+
+第一个用户: Alice
+第十个用户: undefined 
+
+说明： ?.[index] 与 ?. 的区别在于：前者用于数组，后者用于对象属性。 
+
+可选链与方法调用 
+
+可选链可以用于安全地调用可能不存在的方法。 
+
+使用 ?.() 语法，如果方法不存在则返回 undefined，而不会抛出错误。 
+
+实例 
+
+// 定义一个用户对象，包含姓名和 greet 方法 
+
+var user = { 
+
+name : "Alice" , 
+
+// 定义一个打招呼方法 
+
+greet : function ( ) { 
+
+return "Hello, " + this . name ; 
+
+} 
+
+} ; 
+
+// 安全调用存在的方法 
+
+// user.greet 存在，正常调用并返回结果 
+
+var message1 = user. greet ? . ( ) ; 
+
+// 安全调用不存在的方法 
+
+// user.sayHello 不存在，返回 undefined 而不报错 
+
+var message2 = user. sayHello ? . ( ) ; 
+
+console. log ( "greet: " + message1 ) ; 
+
+console. log ( "sayHello: " + message2 ) ; 
+
+运行结果： 
+
+greet: Hello, Alice
+sayHello: undefined 
+
+应用场景： 这在处理可选的回调函数或事件处理程序时特别有用。 
+
+可选链赋值 
+
+可选链也可以用于赋值操作，但需要注意其行为。 
+
+可选链赋值只会修改已存在的路径，不会自动创建中间对象。 
+
+实例 
+
+// 定义一个简单的用户对象 
+
+var user = { 
+
+name : "Alice" 
+
+} ; 
+
+// 尝试使用可选链赋值 
+
+// user?.address 不存在，所以整个赋值被跳过 
+
+// user 对象保持不变 
+
+user ? . address ? . city = "Beijing" ; 
+
+console. log ( "用户: " + JSON. stringify ( user ) ) ; 
+
+运行结果： 
+
+用户: {"name":"Alice"} 
+
+注意： 可选链赋值不能用于创建新属性。如果需要创建嵌套对象，应该使用传统方式先创建中间对象。 
+
+空值合并与可选链 
+
+可选链经常与空值合并运算符 ?? 结合使用。 
+
+这种组合可以在属性不存在时提供默认值，使代码更加健壮。 
+
+实例 
+
+// 定义一个不完整的用户对象 
+
+var user = { 
+
+name : "Alice" 
+
+// address 不存在 
+
+} ; 
+
+// 可选链 + 空值合并：当 city 为 null 或 undefined 时使用默认值 
+
+var city = user ? . address ? . city ?? "未知城市" ; 
+
+console. log ( "城市: " + city ) ; 
+
+// 对比：传统方式的复杂写法 
+
+var country = user && user. address && user. address . country 
+
+? user. address . country 
+
+: "未知国家" ; 
+
+console. log ( "国家: " + country ) ; 
+
+运行结果： 
+
+城市: 未知城市
+国家: 未知国家 
+
+说明： ?? 只在值为 null 或 undefined 时使用默认值，而 || 会在值为 falsy（0、""、false）时也使用默认值。在处理数字或字符串时，应优先使用 ?? 。 
+
+注意事项 
+
+短路求值： 可选链遇到 null 或 undefined 会立即返回，不会继续访问后续属性 
+
+不能创建属性： 可选链赋值不会自动创建中间对象 
+
+与空值合并配合： 建议始终使用 ?? 提供默认值，而少用 || 
+
+性能考虑： 虽然可选链更安全，但在属性一定存在的情况下，直接访问性能更好 
+
+建议： 在实际开发中，对于来自外部数据（如 API 响应、用户输入）的属性，优先使用可选链进行安全访问。 
+
+总结 
+
+可选链是现代 JavaScript/TypeScript 中处理嵌套对象的重要特性。 
+
+?. ： 安全访问对象属性 
+
+?.[index] ： 安全访问数组元素 
+
+?.() ： 安全调用可能不存在的方法 
+
+?? ： 提供默认值，处理 undefined 情况 
+
+最佳实践： 对于可能不存在的深层属性访问，始终使用可选链。结合空值合并运算符，可以写出既安全又简洁的代码。 
+
+AI 思考中... 
+
+TypeScript 类型守卫 
+
+TypeScript 工具类型

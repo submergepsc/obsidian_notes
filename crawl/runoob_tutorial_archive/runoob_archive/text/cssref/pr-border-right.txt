@@ -1,0 +1,100 @@
+URL: https://www.runoob.com/cssref/pr-border-right.html
+Title: CSS border-right-color 属性 | 菜鸟教程
+
+CSS border-right-color 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS border-right-style 属性 
+
+CSS border-right-width 属性 
+
+CSS border-right-color 属性 
+
+实例 
+
+设定右边框的颜色： 
+
+p { border-style: solid ; border-right-color: #ff0000 } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+border-right-color属性设置一个元素的的右边框的颜色。 
+
+注意 请始终把 border-style 属性声明到 border-color 属性之前。元素必须在您改变其颜色之前获得边框。 
+
+默认值: 
+
+not specified 
+
+继承: 
+
+no 
+
+版本: 
+
+CSS1 
+
+JavaScript 语法: 
+
+object object.style.borderRightColor="blue" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+border-right 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+color_name 
+
+规定颜色值为颜色名称的边框颜色（比如 red）。 
+
+hex_number 
+
+规定颜色值为十六进制值的边框颜色（比如 #ff0000）。 
+
+rgb_number 
+
+规定颜色值为 rgb 代码的边框颜色（比如 rgb(255,0,0)）。 
+
+transparent 
+
+默认值。边框颜色为透明。 
+
+inherit 
+
+规定应该从父元素继承边框颜色。 
+
+相关文章 
+
+CSS 教程: CSS Border 
+
+CSS 参考手册: border-right 属性 
+
+AI 思考中... 
+
+CSS border-right-style 属性 
+
+CSS border-right-width 属性

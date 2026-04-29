@@ -1,0 +1,152 @@
+URL: https://www.runoob.com/vbscript/vb-func-datediff.html
+Title: VBScript DateDiff 函数 | 菜鸟教程
+
+VBScript DateDiff 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript DateAdd 函数 
+
+VBScript DatePart 函数 
+
+VBScript DateDiff 函数 
+
+DateDiff 函数返回两个日期之间的时间间隔数。 
+
+语法 
+
+DateDiff(interval,date1,date2[,firstdayofweek[,firstweekofyear]]) 
+
+参数 
+
+描述 
+
+interval 
+
+必需。计算 date1 和 date2 之间的时间间隔的单位。 
+
+可采用下面的值： 
+
+yyyy - 年 
+
+q - 季度 
+
+m - 月 
+
+y - 当年的第几天 
+
+d - 日 
+
+w - 当周的第几天 
+
+ww - 当年的第几周 
+
+h - 小时 
+
+n - 分 
+
+s - 秒 
+
+date1,date2 
+
+必需。日期表达式。在计算中需要使用的两个日期。 
+
+firstdayofweek 
+
+可选。规定一周的日数，即当周的第几天。 
+
+可采用下面的值： 
+
+0 = vbUseSystemDayOfWeek - 使用区域语言支持（NLS）API 设置 
+
+1 = vbSunday - 星期日（默认） 
+
+2 = vbMonday - 星期一 
+
+3 = vbTuesday - 星期二 
+
+4 = vbWednesday - 星期三 
+
+5 = vbThursday - 星期四 
+
+6 = vbFriday - 星期五 
+
+7 = vbSaturday - 星期六 
+
+firstweekofyear 
+
+可选。规定一年中的第一周。 
+
+可采用下面的值： 
+
+0 = vbUseSystem - 使用区域语言支持（NLS）API 设置 
+
+1 = vbFirstJan1 - 由 1 月 1 日所在的星期开始（默认） 
+
+2 = vbFirstFourDays - 由在新的一年中至少有四天的第一周开始 
+
+3 = vbFirstFullWeek - 由在新的一年中第一个完整的周开始 
+
+实例 
+
+实例 1 
+
+2009 年 1 月 31 日和 2010 年 1 月 31 日之间的区别： 
+
+<script type="text/vbscript"> 
+
+fromDate="31-Jan-09 00:00:00" 
+toDate="31-Jan-10 23:59:00" 
+document.write(DateDiff("yyyy",fromDate,toDate) & "<br />") 
+document.write(DateDiff("q",fromDate,toDate) & "<br />") 
+document.write(DateDiff("m",fromDate,toDate) & "<br />") 
+document.write(DateDiff("y",fromDate,toDate) & "<br />") 
+document.write(DateDiff("d",fromDate,toDate) & "<br />") 
+document.write(DateDiff("w",fromDate,toDate) & "<br />") 
+document.write(DateDiff("ww",fromDate,toDate) & "<br />") 
+document.write(DateDiff("h",fromDate,toDate) & "<br />") 
+document.write(DateDiff("n",fromDate,toDate) & "<br />") 
+document.write(DateDiff("s",fromDate,toDate) & "<br />") 
+
+</script> 
+
+以上实例输出结果： 
+
+1 
+4 
+12 
+365 
+365 
+52 
+53 
+8783 
+527039 
+31622340 
+
+尝试一下 » 
+
+实例 2 
+
+2009 年 12 月 31 日和 2012 年 12 月 31 日之间有多少周（在星期一开始）： 
+
+<script type="text/vbscript"> 
+
+fromDate=CDate("2009/12/31") 
+toDate=CDate("2012/12/31") 
+document.write(DateDiff("w",fromDate,toDate,vbMonday)) 
+
+</script> 
+
+以上实例输出结果： 
+
+156 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript DateAdd 函数 
+
+VBScript DatePart 函数

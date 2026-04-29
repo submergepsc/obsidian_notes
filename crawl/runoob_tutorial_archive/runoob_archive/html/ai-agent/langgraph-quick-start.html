@@ -1,0 +1,2831 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LangGraph 入门教程 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="langgraph-quick-start.html" />
+<meta name="keywords" content="LangGraph 入门教程">
+<meta name="description" content="/* SVG 容器样式 */ .langchain-svg-container {     display: flex;     justify-content: center;     align-items: center;     max-width: 100%;     margin: 24px auto;     overflow-x: auto; } .langchain-svg-container svg {     ma..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<style>
+/* 主题切换按钮 */
+/* ===== 主题变量（核心）===== */
+:root {
+  --theme-bg: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-icon: #333;
+  --theme-hover: #f3f4f6;
+}
+
+.dark {
+  --theme-bg: #1f2937;
+  --theme-border: #374151;
+  --theme-icon: #e5e7eb;
+  --theme-hover: #374151;
+}
+
+/* ===== 按钮容器 ===== */
+.nav-theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== 按钮本体 ===== */
+.nav-theme-toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+
+  background: var(--theme-bg);
+  color: var(--theme-icon);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ===== 图标大小 ===== */
+.nav-theme-toggle i {
+  font-size: 14px;
+}
+
+/* ===== hover 效果 ===== */
+.nav-theme-toggle button:hover {
+  background: var(--theme-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== 点击反馈 ===== */
+.nav-theme-toggle button:active {
+  transform: scale(0.95);
+}
+
+/* ===== 当前激活态（可选）===== */
+.nav-theme-toggle button.active {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+</style>
+<!-- 导航栏 -->
+<nav class="container navigation" aria-label="主导航">
+  <div class="row">
+    <div class="col nav">
+
+      <!-- PC 导航 -->
+      <ul class="pc-nav" id="runoob-detail-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../js/js-tutorial.html">JavaScript</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="javascript:void(0);" data-id="vue">Vue</a></li>
+        <li><a href="../react/react-tutorial.html">React</a></li>
+        <li><a href="../python3/python3-tutorial.html">Python3</a></li>
+        <li><a href="../java/java-tutorial.html">Java</a></li>
+        <li><a href="../cprogramming/c-tutorial.html">C</a></li>
+        <li><a href="../cplusplus/cpp-tutorial.html">C++</a></li>
+        <li><a href="../csharp/csharp-tutorial.html">C#</a></li>
+        <li><a href="javascript:void(0);" data-id="aiNav">AI</a></li>
+        <li><a href="../go/go-tutorial.html">Go</a></li>
+        <li><a href="../sql/sql-tutorial.html">SQL</a></li>
+        <li><a href="../linux/linux-tutorial.html">Linux</a></li>
+        <li><a href="../vscode/vscode-tutorial.html">VS Code</a></li>
+        <li><a href="javascript:void(0);" data-id="bootstrap">Bootstrap</a></li>
+        <li><a href="../git/git-tutorial.html">Git</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+
+        <!-- 主题切换按钮，固定在最右侧 -->
+        <li class="nav-theme-toggle">
+          <button id="moon" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 移动端导航 -->
+      <ul class="mobile-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="../js/js-tutorial.html">JS</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+        <li><a href="javascript:void(0)" class="search-reveal">搜索</a></li>
+
+        <!-- 移动端主题切换 -->
+        <li class="nav-theme-toggle">
+          <button id="moon-mobile" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun-mobile" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- 二级导航 -->
+<div class="container sub-navigation sub-navigation-articles" style="display:none">
+  <div class="row">
+    <div class="col nav-sub">
+
+      <ul id="vue">
+        <li class="cat-item"><a href="../vue3/vue3-tutorial.html">Vue3 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../vue/vue-tutorial.html">Vue2 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="bootstrap">
+        <li class="cat-item"><a href="../bootstrap/bootstrap-tutorial.html">Bootstrap3 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="aiNav">
+        <li class="cat-item"><a href="../ml/ml-tutorial.html">机器学习 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../pytorch/pytorch-tutorial.html">PyTorch <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../tensorflow/tensorflow-tutorial.html">TensorFlow <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../sklearn/sklearn-tutorial.html">Sklearn <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../nlp/nlp-tutorial.html">NLP <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="ai-agent-tutorial.html">AI Agent <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ollama/ollama-tutorial.html">Ollama <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+  </div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="runoob-col-md2">
+<div class="left-column">
+	<div class="tab" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+	<i class="fa fa-list" aria-hidden="true"></i> 
+	<span>AI Agent 教程</span>
+
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" data-p="par" title="AI Agent(智能体) 教程" href="ai-agent-tutorial.html">
+			AI Agent(智能体) 教程			</a>
+						<a target="_top" data-p="par" title="AI Agent 简介" href="ai-agent-intro.html">
+			AI Agent 简介			</a>
+						<a target="_top" data-p="par" title="AI Agent  核心组件" href="ai-agent-core.html">
+			AI Agent  核心组件			</a>
+			<a target="_top" title="AI Agent 工作原理" href="ai-agent-working-principle.html">AI Agent 工作原理</a>
+<a target="_top" title="大语言模型基础" href="ai-agent-llm.html">大语言模型基础</a>
+<a target="_top" title="提示词工程" href="prompt-engineering.html">提示词工程</a>
+<a target="_top" title="Token (词元)" href="token-intro.html">Token (词元)</a>
+<a target="_top" title="推理与规划" href="reasoning-planning.html">推理与规划</a>
+<a target="_top" title="RAG 与知识检索" href="retrieval-augmented-generation.html">RAG 与知识检索</a>
+<a target="_top" title="Harness Engineering" href="harness-engineering.html">Harness Engineering</a>
+<a target="_top" title="Hermes Agent" href="hermes-agent.html">Hermes Agent</a>
+<br>
+<h2 class="left"> <span class="left_h2">智能体工具</span></h2>			<a target="_top" data-p="par" title="第一个 AI Agent" href="first-ai-agent.html">
+			第一个 AI Agent			</a>
+			<a target="_top" title="AI 开发平台" href="ai-monkeycode.html"> AI 开发平台</a>
+<a target="_top" title="OpenClaw (Clawdbot) 教程" href="openclaw-clawdbot-tutorial.html"> OpenClaw (Clawdbot) 教程</a>
+<a target="_top" title="OpenClaw 快速上手" href="openclaw-quickstart.html"> OpenClaw 快速上手</a>
+<a target="_top" title="Qoder 教程" href="qoderwork.html"> QoderWork 教程</a>
+<a target="_top" title="OpenClaw 一键部署" href="openclaw-cloud.html"> OpenClaw 一键部署</a>
+<a target="_top" title="OpenClaw 配置目录" href="openclaw-setup.html"> OpenClaw 配置目录</a>
+<a target="_top" title="OpenClaw 工作原理" href="openclaw-how-it-works.html"> OpenClaw 工作原理</a>
+<a target="_top" title="OpenClaw 接入微信" href="openclaw-weixin.html"> OpenClaw 接入微信</a>
+
+<a target="_top" title="OpenClaw 接入飞书" href="openclaw-feishu.html"> OpenClaw 接入飞书</a>
+<a target="_top" title="OpenClaw Skills" href="openclaw-skills.html"> OpenClaw Skills</a>
+<a target="_top" title="OpenClaw 卸载指南" href="openclaw-uninstall.html"> OpenClaw 卸载指南</a>			<a target="_top" data-p="par" title="CrewAI 构建智能体" href="crewai-agent.html">
+			CrewAI 构建智能体			</a>
+						<a target="_top" data-p="par" title="LangChain 制作智能体" href="langchain-agent.html">
+			LangChain 制作智能体			</a>
+			<a target="_top" title="LangGraph 入门教程" href="langgraph-quick-start.html">LangGraph 入门教程</a>
+
+<br><h2 class="left"> <span class="left_h2">Vibe Coding</span></h2>			<a target="_top" data-p="par" title="Claude Code 入门教程" href="claude-code.html">
+			Claude Code 入门教程			</a>
+						<a target="_top" data-p="par" title="OpenCode 入门教程" href="opencode-coding-agent.html">
+			OpenCode 入门教程			</a>
+			<a target="_top" title="OpenCode Coding Plan" href="opencode-coding-plan.html">OpenCode Coding Plan</a>
+<a target="_top" title="CC Switch" href="cc-switch.html">CC Switch</a>
+<a target="_top" title="Skills 教程" href="skills-agent.html">Skills 教程</a>
+<a target="_top" title="OpenCode skills" href="opencode-skills-intro.html">OpenCode skills</a>
+<a target="_top" title="Qoder 教程" href="qoder-quick-start.html">Qoder 教程</a>
+<a target="_top" title="Qoder Quest 模式" href="qoder-quest-mode.html">Qoder Quest 模式</a>			<a target="_top" data-p="par" title="Qoder CLI" href="qoder-cli.html">
+			Qoder CLI			</a>
+			<a target="_top" title="Trae 教程" href="trae-quick-star.html">Trae 教程</a>			<a target="_top" data-p="par" title="Trae Solo" href="trae-solo.html">
+			Trae Solo			</a>
+			<br><h2 class="left"> <span class="left_h2">Python 实现智能体</span></h2>
+<a target="_top" title="Python 实现 AI Agent" href="python-ai-agent.html">Python 实现 AI Agent</a>
+<a target="_top" title="工具调用" href="ai-agent-function-calling.html">工具调用</a>
+<a target="_top" title="记忆系统" href="ai-agent-memory-system-design.html">记忆系统</a>			<a target="_top" data-p="par" title="Python 智能体环境配置" href="ai-agent-python-setup.html">
+			Python 智能体环境配置			</a>
+						<a target="_top" data-p="par" title="AI Agent 问答实例" href="ai-agent-answer-demo.html">
+			AI Agent 问答实例			</a>
+						<a target="_top" data-p="par" title="Python 实现推理与规划" href="python-reasoning-planning.html">
+			推理与规划			</a>
+						<a target="_top" data-p="par" title="Python 实现 RAG 与知识检索" href="python-rag.html">
+			RAG 与知识检索			</a>
+						<a target="_top" data-p="par" title="多智能体系统（Multi-Agent System）" href="multi-agent-system.html">
+			多智能体系统			</a>
+						<a target="_top" data-p="par" title="AI Agent 工具与外部集成" href="tools-integration.html">
+			工具与外部集成			</a>
+						<a target="_top" data-p="par" title="多模态 Agent" href="multimodal-agent.html">
+			多模态 Agent			</a>
+						<a target="_top" data-p="par" title="Agent 评估、安全与对齐" href="evaluation-safety-alignment.html">
+			评估、安全与对齐			</a>
+						<a target="_top" data-p="par" title="AI Agent 生产部署与工程化" href="production-deployment.html">
+			生产部署与工程化			</a>
+						<a target="_top" data-p="par" title="AI Agent 垂直应用场景" href="vertical-applications.html">
+			垂直应用场景			</a>
+				
+		</div>
+	</div>	
+</div>
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="token-intro.html" rel="prev"> Token (词元)</a> </div>
+			<div class="next-design-link"><a href="harness-engineering.html" rel="next"> Harness Engineering（驾驭工程）</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+<div class="article-heading-ad" style="display: block;">
+
+<style>
+  /* 隐藏移动端广告 */
+  @media (max-width: 768px) {
+    .adsbygoogle {
+      display: none !important;
+    }
+  }
+  
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 728*90 固定 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="2147566827"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<style>
+/* SVG 容器样式 */
+.langchain-svg-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 100%;
+    margin: 24px auto;
+    overflow-x: auto;
+}
+.langchain-svg-container svg {
+    max-width: 100%;
+    height: auto;
+}
+
+/* 信息提示框 */
+.info-box {
+    background-color: #E8F4FD;
+    border-left: 4px solid #4A6FA5;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+    color: #2C4A6B;font-size:14px;
+
+}
+
+/* 提示框 */
+.tip-box {
+    background-color: #E6F7E9;
+    border-left: 4px solid #52A05A;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+    color: #2D5A32;font-size:14px;
+}
+
+/* 警告框 */
+.warning-box {
+    background-color: #FEF9E7;
+    border-left: 4px solid #D4920A;
+    padding: 16px 20px;
+    margin: 16px 0;
+    border-radius: 0 4px 4px 0;
+    color: #7A5D0A;font-size:14px;
+}
+</style>
+
+<h1>LangGraph 入门教程</h1>
+<p>LangGraph 是由 LangChain 团队开发的一个<strong>低层级 Agent 编排框架</strong>，专为构建有状态（Stateful）、长时运行的 AI 工作流而设计。</p>
+<p>与传统的线性 LLM 调用链不同，LangGraph 将工作流建模为<strong>有向图（Directed Graph）</strong>：</p>
+<ul>
+    <li><strong>节点（Node）</strong>：执行具体操作的函数（如调用 LLM、执行工具、处理数据）</li>
+    <li><strong>边（Edge）</strong>：定义节点之间的流转路径，支持条件分支</li>
+    <li><strong>状态（State）</strong>：在整个工作流中共享并传递的数据</li>
+</ul>
+<p>开源地址：<strong><a href="https://github.com/langchain-ai/langgraph" target="_blank">https://github.com/langchain-ai/langgraph</a></strong>。</p>
+
+<blockquote><p>想象你正在指挥一场交响乐演出：传统的 LLM Chain 就像演奏一首从头到尾的曲子，只能顺序播放；而 LangGraph 则像一位指挥家，可以根据现场观众的反应随时调整演奏顺序，让某个乐章重复，或者跳转到特定段落。它让 AI 工作流拥有了"指挥"的智慧——能够循环、分支、回溯，真正实现复杂的自主决策。</p></blockquote>
+
+<h3>为什么选择 LangGraph？</h3>
+<p>下表对比了传统 LLM Chain 与 LangGraph 的主要差异：</p>
+
+<table class="reference">
+<thead>
+<tr>
+<th>特性</th>
+<th>传统 LLM Chain</th>
+<th>LangGraph</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>工作流结构</strong></td>
+<td>线性，单向执行</td>
+<td>图结构，支持循环</td>
+</tr>
+<tr>
+<td><strong>状态管理</strong></td>
+<td>需手动管理</td>
+<td>内置状态持久化</td>
+</tr>
+<tr>
+<td><strong>条件路由</strong></td>
+<td>实现复杂</td>
+<td>原生支持</td>
+</tr>
+<tr>
+<td><strong>人机协作</strong></td>
+<td>需要额外开发</td>
+<td>内置支持 interrupt</td>
+</tr>
+<tr>
+<td><strong>多 Agent 协调</strong></td>
+<td>实现困难</td>
+<td>一流支持</td>
+</tr>
+<tr>
+<td><strong>调试工具</strong></td>
+<td>有限</td>
+<td>LangGraph Studio</td>
+</tr>
+</tbody>
+</table>
+
+<h3>适用场景</h3>
+<ul>
+    <li><strong>对话机器人</strong>：需要记忆多轮对话上下文</li>
+    <li><strong>自主 Agent</strong>：能够规划、使用工具、迭代思考</li>
+    <li><strong>多 Agent 系统</strong>：多个 AI 协同完成复杂任务</li>
+    <li><strong>审批工作流</strong>：需要人工审核的自动化流程</li>
+    <li><strong>研究助手</strong>：需要多步骤推理和信息检索</li>
+</ul>
+
+<div class="langchain-svg-container">
+<svg viewbox="0 0 800 350" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect x="0" y="0" width="800" height="350" fill="#FAFBFC" />
+  
+  <!-- 标题 -->
+  <text x="400" y="30" text-anchor="middle" fill="#4A6FA5" font-size="16" font-weight="bold">LangGraph 核心架构</text>
+  
+  <!-- 外层大框：StateGraph -->
+  <rect x="50" y="50" width="700" height="280" rx="12" fill="#F0F4F8" stroke="#4A6FA5" stroke-width="2" />
+  <text x="400" y="75" text-anchor="middle" fill="#4A6FA5" font-size="14" font-weight="bold">StateGraph（状态图）</text>
+  
+  <!-- State 层 - 顶部贯穿 -->
+  <rect x="80" y="90" width="640" height="45" rx="6" fill="#52A05A" />
+  <text x="400" y="118" text-anchor="middle" fill="#FFFFFF" font-size="13" font-weight="bold">State（共享状态）- 贯穿所有节点</text>
+  
+  <!-- 节点区域 -->
+  <rect x="100" y="155" width="120" height="60" rx="8" fill="#4A6FA5" />
+  <text x="160" y="180" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="bold">START</text>
+  <text x="160" y="198" text-anchor="middle" fill="#E8F0F8" font-size="10">起始节点</text>
+  
+  <rect x="280" y="155" width="120" height="60" rx="8" fill="#6B8FC7" />
+  <text x="340" y="180" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="bold">Node A</text>
+  <text x="340" y="198" text-anchor="middle" fill="#E8F0F8" font-size="10">处理节点</text>
+  
+  <rect x="460" y="155" width="120" height="60" rx="8" fill="#6B8FC7" />
+  <text x="520" y="180" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="bold">Node B</text>
+  <text x="520" y="198" text-anchor="middle" fill="#E8F0F8" font-size="10">决策节点</text>
+  
+  <rect x="580" y="250" width="120" height="60" rx="8" fill="#4A6FA5" />
+  <text x="640" y="275" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="bold">END</text>
+  <text x="640" y="293" text-anchor="middle" fill="#E8F0F8" font-size="10">结束节点</text>
+  
+  <!-- 分支节点 -->
+  <rect x="280" y="250" width="120" height="60" rx="8" fill="#6B8FC7" />
+  <text x="340" y="275" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="bold">Node C</text>
+  <text x="340" y="293" text-anchor="middle" fill="#E8F0F8" font-size="10">备选分支</text>
+  
+  <!-- 边：START -> Node A -->
+  <path d="M220 185 L280 185" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowLG)" />
+  
+  <!-- 边：Node A -> Node B -->
+  <path d="M400 185 L460 185" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowLG)" />
+  
+  <!-- 边：Node B -> END（条件边） -->
+  <path d="M580 185 L620 185 L620 250" stroke="#52A05A" stroke-width="2" fill="none" marker-end="url(#arrowGreenLG)" />
+  <text x="605" y="220" fill="#52A05A" font-size="9">完成</text>
+  
+  <!-- 边：Node B -> Node C（条件边） -->
+  <path d="M520 215 L520 240 L400 240 L400 250" stroke="#D4920A" stroke-width="2" fill="none" marker-end="url(#arrowOrangeLG)" />
+  <text x="450" y="235" fill="#D4920A" font-size="9">需要更多处理</text>
+  
+  <!-- 循环边：Node C -> Node A -->
+  <path d="M280 280 L250 280 L250 185 L280 185" stroke="#8BA4C7" stroke-width="2" stroke-dasharray="5,3" fill="none" marker-end="url(#arrowLG)" />
+  <text x="235" y="235" fill="#8BA4C7" font-size="9" transform="rotate(-90, 235, 235)">循环</text>
+  
+  <!-- 箭头定义 -->
+  <defs>
+    <marker id="arrowLG" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6B8FC7" />
+    </marker>
+    <marker id="arrowGreenLG" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#52A05A" />
+    </marker>
+    <marker id="arrowOrangeLG" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#D4920A" />
+    </marker>
+  </defs>
+</svg>
+</div>
+
+<hr>
+<h2>核心概念</h2>
+<p>在开始编写代码之前，先理解 LangGraph 的三大核心概念。</p>
+
+<h3>Graph（图）</h3>
+<p>Graph 是整个工作流的蓝图，定义了 Agent 的完整逻辑结构。它由节点（Nodes）和边（Edges）组成：</p>
+<pre>
+StateGraph
+   |-- Nodes（节点）
+   |     |-- node_a
+   |     |-- node_b
+   |     +-- node_c
+   +-- Edges（边）
+         |-- START -&gt; node_a
+         |-- node_a -&gt; node_b（条件边）
+         |-- node_a -&gt; node_c（条件边）
+         +-- node_b -&gt; END</pre>
+
+<h3>State（状态）</h3>
+<p>State 是贯穿整个图的<strong>共享数据结构</strong>。每个节点可以读取和更新 State，更新后的 State 会传递给下一个节点。</p>
+
+<pre>
+from typing import TypedDict, Annotated
+from langgraph.graph import add_messages
+
+class MyState(TypedDict):
+    messages: Annotated[list, add_messages]  # 消息列表（自动追加）
+    user_name: str                            # 用户名称
+    step_count: int                           # 步骤计数</pre>
+
+<div class="info-box">
+<strong>重要：</strong><code>Annotated[list, add_messages]</code> 表示该字段使用 <code>add_messages</code> 作为 reducer——新消息会追加到列表而不是覆盖。这是 LangGraph 状态管理的核心机制。
+</div>
+
+<div class="langchain-svg-container">
+<svg viewbox="0 0 800 160" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect x="0" y="0" width="800" height="160" fill="#FAFBFC" />
+  
+  <!-- 标题 -->
+  <text x="400" y="25" text-anchor="middle" fill="#4A6FA5" font-size="14" font-weight="bold">State 数据流转示意</text>
+  
+  <!-- State 初始 -->
+  <rect x="20" y="55" width="100" height="50" rx="6" fill="#52A05A" />
+  <text x="70" y="75" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">State</text>
+  <text x="70" y="92" text-anchor="middle" fill="#E8F0F8" font-size="9">{msg: []}</text>
+  
+  <!-- 箭头 -->
+  <path d="M120 80 L155 80" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowFlow)" />
+  
+  <!-- Node A -->
+  <rect x="160" y="55" width="100" height="50" rx="6" fill="#6B8FC7" />
+  <text x="210" y="75" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">Node A</text>
+  <text x="210" y="92" text-anchor="middle" fill="#E8F0F8" font-size="9">处理输入</text>
+  
+  <!-- 箭头 + 更新State -->
+  <path d="M260 80 L295 80" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowFlow)" />
+  
+  <!-- State 更新1 -->
+  <rect x="300" y="55" width="100" height="50" rx="6" fill="#52A05A" />
+  <text x="350" y="75" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">State</text>
+  <text x="350" y="92" text-anchor="middle" fill="#E8F0F8" font-size="9">{msg: [A]}</text>
+  
+  <!-- 箭头 -->
+  <path d="M400 80 L435 80" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowFlow)" />
+  
+  <!-- Node B -->
+  <rect x="440" y="55" width="100" height="50" rx="6" fill="#6B8FC7" />
+  <text x="490" y="75" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">Node B</text>
+  <text x="490" y="92" text-anchor="middle" fill="#E8F0F8" font-size="9">生成响应</text>
+  
+  <!-- 箭头 -->
+  <path d="M540 80 L575 80" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowFlow)" />
+  
+  <!-- State 更新2 -->
+  <rect x="580" y="55" width="100" height="50" rx="6" fill="#52A05A" />
+  <text x="630" y="75" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">State</text>
+  <text x="630" y="92" text-anchor="middle" fill="#E8F0F8" font-size="9">{msg: [A,B]}</text>
+  
+  <!-- 箭头 -->
+  <path d="M680 80 L715 80" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowFlow)" />
+  
+  <!-- END -->
+  <rect x="720" y="55" width="60" height="50" rx="6" fill="#4A6FA5" />
+  <text x="750" y="85" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">END</text>
+  
+  <!-- 底部说明 -->
+  <text x="400" y="140" text-anchor="middle" fill="#4A6FA5" font-size="11">每个节点读取 State，执行操作，返回更新后的部分字段</text>
+  
+  <!-- 箭头定义 -->
+  <defs>
+    <marker id="arrowFlow" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6B8FC7" />
+    </marker>
+  </defs>
+</svg>
+</div>
+
+<h3>Nodes（节点）</h3>
+<p>节点是普通的 Python 函数，接收当前 State，返回更新后的 State（部分字段）。</p>
+
+<pre>
+def my_node(state: MyState) -&gt; dict:
+    # 读取状态
+    messages = state["messages"]
+    
+    # 执行操作...
+    result = "处理结果"
+    
+    # 返回更新的字段（不需要返回所有字段）
+    return {"messages": [{"role": "ai", "content": result}]}</pre>
+
+<h3>Edges（边）</h3>
+<p>边定义节点之间的流转方式：</p>
+<ul>
+    <li><strong>普通边</strong>：固定路径，<code>node_a -> node_b</code></li>
+    <li><strong>条件边</strong>：根据 State 动态路由，<code>node_a -> node_b 或 node_c</code></li>
+    <li><strong>起始边</strong>：<code>START -> 第一个节点</code></li>
+    <li><strong>结束边</strong>：<code>某节点 -> END</code></li>
+</ul>
+
+<hr>
+<h2>环境搭建</h2>
+
+<h3>安装依赖</h3>
+<p>使用国内镜像安装 LangGraph 和相关依赖：</p>
+<pre>
+# 创建虚拟环境（推荐）
+python -m venv venv
+source venv/bin/activate      # macOS/Linux
+# venv\Scripts\activate       # Windows
+
+# 安装 LangGraph 和 LangChain
+pip install langgraph langchain langchain-openai python-dotenv -i https://mirrors.aliyun.com/pypi/simple/
+
+# 可选：安装开发工具
+pip install langgraph-cli jupyter -i https://mirrors.aliyun.com/pypi/simple/</pre>
+
+<h3>配置 API Key</h3>
+<p>在项目根目录创建 <code>.env</code> 文件，同时配置 OpenAI 和 DeepSeek：</p>
+<pre>
+# .env 文件内容
+
+# OpenAI 配置（国外用户）
+OPENAI_API_KEY=sk-xxx
+OPENAI_BASE_URL=https://api.openai.com/v1
+
+# DeepSeek 配置（国内用户推荐）
+DEEPSEEK_API_KEY=sk-xxx
+DEEPSEEK_BASE_URL=https://api.deepseek.com
+DEEPSEEK_MODEL=deepseek-chat</pre>
+
+<div class="tip-box">
+<strong>提示：</strong>本文示例同时支持 OpenAI 和 DeepSeek。推荐国内用户使用 DeepSeek，API 地址配置为 <code>https://api.deepseek.com</code>（不带 /v1），LangChain 会自动拼接路径。DeepSeek API Key 可在 <a href="https://platform.deepseek.com/api_keys" target="_blank">https://platform.deepseek.com/api_keys</a> 创建。
+</div>
+
+<h3>验证安装</h3>
+<pre>
+import langgraph
+print(f"LangGraph 版本: {langgraph.__version__}")</pre>
+
+<hr>
+<h2>第一个 LangGraph 程序</h2>
+<p>让我们从最简单的例子开始——一个只有两个节点的线性工作流。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">from</span> langgraph.<span style="color: #05a;">graph</span> <span style="color: Green;font-weight:bold;">import</span> StateGraph<span style="color: Gray;">,</span> START<span style="color: Gray;">,</span> END<br />
+<span style="color: Green;font-weight:bold;">from</span> typing <span style="color: Green;font-weight:bold;">import</span> TypedDict<br />
+<br />
+<span style="color: #a50"># Step 1: 定义 State</span><br />
+<span style="color: Green;font-weight:bold;">class</span> SimpleState<span style="color: Olive;">&#40;</span>TypedDict<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; message: <span style="color: Teal;">str</span><br />
+&nbsp; &nbsp; processed: <span style="color: Teal;">bool</span><br />
+<br />
+<span style="color: #a50"># Step 2: 定义节点函数</span><br />
+<span style="color: Green;font-weight:bold;">def</span> greet_node<span style="color: Olive;">&#40;</span>state: SimpleState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;欢迎节点：生成问候语&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;[greet_node] 收到消息: {state['message']}&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;message&quot;</span>: f<span style="color: #a11;">&quot;你好！{state['message']}&quot;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> process_node<span style="color: Olive;">&#40;</span>state: SimpleState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;处理节点：标记为已处理&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;[process_node] 处理消息: {state['message']}&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;processed&quot;</span>: <span style="color: Teal;">True</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: #a50"># Step 3: 构建图</span><br />
+builder <span style="color: Gray;">=</span> StateGraph<span style="color: Olive;">&#40;</span>SimpleState<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 添加节点</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;greet&quot;</span><span style="color: Gray;">,</span> greet_node<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;process&quot;</span><span style="color: Gray;">,</span> process_node<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 添加边</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span>START<span style="color: Gray;">,</span> <span style="color: #a11;">&quot;greet&quot;</span><span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;greet&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;process&quot;</span><span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;process&quot;</span><span style="color: Gray;">,</span> END<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># Step 4: 编译图</span><br />
+graph <span style="color: Gray;">=</span> builder.<span style="color: Teal;">compile</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># Step 5: 运行</span><br />
+result <span style="color: Gray;">=</span> graph.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;message&quot;</span>: <span style="color: #a11;">&quot;世界&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;processed&quot;</span>: <span style="color: Teal;">False</span><br />
+<span style="color: Olive;">&#125;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>最终结果: {result}&quot;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<p>运行结果：</p>
+<pre>
+[greet_node] 收到消息: 世界
+[process_node] 处理消息: 你好！世界
+
+最终结果: {'message': '你好！世界', 'processed': True}</pre>
+
+<h3>可视化图结构</h3>
+<p>在 Jupyter Notebook 中可以直接可视化图结构：</p>
+<pre>
+# 在 Jupyter Notebook 中可视化
+from IPython.display import Image
+Image(graph.get_graph().draw_mermaid_png())
+
+# 或者打印 Mermaid 格式
+print(graph.get_graph().draw_mermaid())</pre>
+
+<hr>
+<h2>State 状态管理</h2>
+
+<h3>使用 TypedDict 定义状态</h3>
+<pre>
+from typing import TypedDict, Annotated, Optional
+from langgraph.graph.message import add_messages
+
+class AgentState(TypedDict):
+    # 消息历史（add_messages reducer 自动追加而非覆盖）
+    messages: Annotated[list, add_messages]
+    
+    # 普通字段（直接覆盖）
+    user_id: str
+    session_id: str
+    
+    # 可选字段
+    error: Optional[str]
+    
+    # 计数器（使用 operator.add 作为 reducer）
+    retry_count: Annotated[int, lambda x, y: x + y]</pre>
+
+<h3>使用 Pydantic 定义状态（推荐用于生产）</h3>
+<pre>
+from pydantic import BaseModel, Field
+from typing import Annotated
+from langgraph.graph.message import add_messages
+
+class ProductionState(BaseModel):
+    messages: Annotated[list, add_messages] = Field(default_factory=list)
+    user_id: str = ""
+    confidence_score: float = 0.0
+    
+    class Config:
+        arbitrary_types_allowed = True</pre>
+
+<h3>MessagesState（内置快捷状态）</h3>
+<p>LangGraph 提供了内置的 <code>MessagesState</code>，专为对话场景设计：</p>
+<pre>
+from langgraph.graph import MessagesState
+
+# MessagesState 等价于:
+# class MessagesState(TypedDict):
+#     messages: Annotated[list[AnyMessage], add_messages]
+
+# 直接使用，无需自定义
+builder = StateGraph(MessagesState)</pre>
+
+<hr>
+<h2>Nodes 节点</h2>
+
+<h3>普通函数节点</h3>
+<pre>
+def simple_node(state: AgentState) -&gt; dict:
+    # 读取状态
+    last_message = state["messages"][-1]
+    
+    # 执行操作
+    response = f"收到: {last_message.content}"
+    
+    # 返回部分状态更新
+    return {
+        "messages": [{"role": "assistant", "content": response}]
+    }</pre>
+
+<h3>LLM 调用节点</h3>
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> <span style="color: #05a;">os</span><br />
+<span style="color: Green;font-weight:bold;">from</span> dotenv <span style="color: Green;font-weight:bold;">import</span> load_dotenv<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_openai <span style="color: Green;font-weight:bold;">import</span> ChatOpenAI<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_core.<span style="color: #05a;">messages</span> <span style="color: Green;font-weight:bold;">import</span> SystemMessage<br />
+<br />
+load_dotenv<span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 使用 DeepSeek 模型</span><br />
+llm <span style="color: Gray;">=</span> ChatOpenAI<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; model<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_MODEL'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'deepseek-chat'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; openai_api_key<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_API_KEY'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; openai_api_base<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_BASE_URL'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'https://api.deepseek.com'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; temperature<span style="color: Gray;">=</span><span style="color: Maroon;">0</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> llm_node<span style="color: Olive;">&#40;</span>state: <span style="color: Teal;">dict</span><span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;调用 LLM 的节点&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; system_prompt <span style="color: Gray;">=</span> SystemMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;你是一个有帮助的助手。&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #a50"># 将系统提示与对话历史合并</span><br />
+&nbsp; &nbsp; messages <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span>system_prompt<span style="color: Olive;">&#93;</span> + state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #a50"># 调用 LLM</span><br />
+&nbsp; &nbsp; response <span style="color: Gray;">=</span> llm.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span>messages<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>response<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+</div>
+</div>
+
+<h3>异步节点</h3>
+<pre>
+import asyncio
+
+async def async_node(state: AgentState) -&gt; dict:
+    """异步节点，适合 I/O 密集型操作"""
+    # 模拟异步操作（如 API 调用、数据库查询）
+    await asyncio.sleep(0.1)
+    
+    result = await some_async_api_call(state["messages"][-1].content)
+    return {"messages": [{"role": "assistant", "content": result}]}
+
+# 使用异步图
+result = await graph.ainvoke({"messages": [...]})</pre>
+
+<h3>使用类作为节点</h3>
+<pre>
+class RouterNode:
+    def __init__(self, llm, system_prompt: str):
+        self.llm = llm
+        self.system_prompt = system_prompt
+    
+    def __call__(self, state: AgentState) -&gt; dict:
+        """类实例可以作为节点使用"""
+        messages = [
+            SystemMessage(content=self.system_prompt),
+            *state["messages"]
+        ]
+        response = self.llm.invoke(messages)
+        return {"messages": [response]}
+
+# 添加类节点
+router = RouterNode(llm, "你是一个专业的路由助手。")
+builder.add_node("router", router)</pre>
+
+<hr>
+<h2>Edges 边与条件路由</h2>
+
+<h3>普通边</h3>
+<pre>
+# 固定路径：node_a 完成后始终执行 node_b
+builder.add_edge("node_a", "node_b")
+
+# 结束：node_a 完成后图结束
+builder.add_edge("node_a", END)</pre>
+
+<h3>条件边</h3>
+<p>条件边是 LangGraph 的核心功能，根据当前 State 动态决定下一步。</p>
+<pre>
+def route_after_llm(state: AgentState) -&gt; str:
+    """
+    路由函数：根据 LLM 的最新输出决定走哪条路径
+    返回值必须是已注册节点名称或 END
+    """
+    last_message = state["messages"][-1]
+    
+    # 如果 LLM 请求使用工具
+    if hasattr(last_message, "tool_calls") and last_message.tool_calls:
+        return "tools"
+    
+    # 否则结束
+    return END
+
+# 添加条件边
+builder.add_conditional_edges(
+    "llm",              # 源节点
+    route_after_llm,    # 路由函数
+    {
+        "tools": "tool_executor",   # 返回 "tools" 时 -&gt; tool_executor 节点
+        END: END                    # 返回 END 时 -&gt; 结束
+    }
+)</pre>
+
+<div class="langchain-svg-container">
+<svg viewbox="0 0 800 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect x="0" y="0" width="800" height="280" fill="#FAFBFC" />
+  
+  <!-- 标题 -->
+  <text x="400" y="25" text-anchor="middle" fill="#4A6FA5" font-size="14" font-weight="bold">条件路由示意图</text>
+  
+  <!-- START -->
+  <rect x="20" y="110" width="80" height="40" rx="6" fill="#4A6FA5" />
+  <text x="60" y="135" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">START</text>
+  
+  <!-- 箭头 -->
+  <path d="M100 130 L150 130" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowRoute)" />
+  
+  <!-- Router 节点 -->
+  <rect x="155" y="100" width="120" height="60" rx="8" fill="#6B8FC7" />
+  <text x="215" y="125" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="bold">Router</text>
+  <text x="215" y="145" text-anchor="middle" fill="#E8F0F8" font-size="10">意图识别</text>
+  
+  <!-- 条件分支 -->
+  <!-- 天气 Agent -->
+  <rect x="380" y="40" width="130" height="50" rx="6" fill="#52A05A" />
+  <text x="445" y="62" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">weather_agent</text>
+  <text x="445" y="78" text-anchor="middle" fill="#E8F0F8" font-size="9">天气查询</text>
+  
+  <!-- 代码 Agent -->
+  <rect x="380" y="105" width="130" height="50" rx="6" fill="#6B8FC7" />
+  <text x="445" y="127" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">code_agent</text>
+  <text x="445" y="143" text-anchor="middle" fill="#E8F0F8" font-size="9">代码帮助</text>
+  
+  <!-- 通用 Agent -->
+  <rect x="380" y="170" width="130" height="50" rx="6" fill="#6B8FC7" />
+  <text x="445" y="192" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">general_agent</text>
+  <text x="445" y="208" text-anchor="middle" fill="#E8F0F8" font-size="9">通用对话</text>
+  
+  <!-- 告别 -->
+  <rect x="380" y="235" width="130" height="35" rx="6" fill="#8BA4C7" />
+  <text x="445" y="258" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">farewell</text>
+  
+  <!-- 条件边 -->
+  <path d="M275 115 L320 65 L380 65" stroke="#52A05A" stroke-width="2" fill="none" marker-end="url(#arrowGreenRoute)" />
+  <text x="310" y="58" fill="#52A05A" font-size="9">"天气"</text>
+  
+  <path d="M275 130 L380 130" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowRoute)" />
+  <text x="325" y="123" fill="#6B8FC7" font-size="9">"代码"</text>
+  
+  <path d="M275 145 L320 195 L380 195" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowRoute)" />
+  <text x="310" y="185" fill="#6B8FC7" font-size="9">"其他"</text>
+  
+  <path d="M275 155 L310 252 L380 252" stroke="#8BA4C7" stroke-width="2" fill="none" marker-end="url(#arrowGrayRoute)" />
+  <text x="295" y="225" fill="#8BA4C7" font-size="9">"再见"</text>
+  
+  <!-- END -->
+  <rect x="620" y="110" width="80" height="40" rx="6" fill="#4A6FA5" />
+  <text x="660" y="135" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">END</text>
+  
+  <!-- 所有分支到 END -->
+  <path d="M510 65 L560 65 L560 130 L620 130" stroke="#6B8FC7" stroke-width="1.5" fill="none" marker-end="url(#arrowRoute)" />
+  <path d="M510 130 L620 130" stroke="#6B8FC7" stroke-width="1.5" fill="none" marker-end="url(#arrowRoute)" />
+  <path d="M510 195 L560 195 L560 130 L620 130" stroke="#6B8FC7" stroke-width="1.5" fill="none" marker-end="url(#arrowRoute)" />
+  <path d="M510 252 L580 252 L580 130 L620 130" stroke="#6B8FC7" stroke-width="1.5" fill="none" marker-end="url(#arrowRoute)" />
+  
+  <!-- 箭头定义 -->
+  <defs>
+    <marker id="arrowRoute" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6B8FC7" />
+    </marker>
+    <marker id="arrowGreenRoute" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#52A05A" />
+    </marker>
+    <marker id="arrowGrayRoute" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8BA4C7" />
+    </marker>
+  </defs>
+</svg>
+</div>
+
+<h3>并行执行（Fan-out）</h3>
+<pre>
+# 从一个节点并行分叉到多个节点
+builder.add_edge("start_node", "branch_a")
+builder.add_edge("start_node", "branch_b")
+builder.add_edge("start_node", "branch_c")
+
+# 多个节点汇聚到一个节点（Fan-in）
+builder.add_edge("branch_a", "merge_node")
+builder.add_edge("branch_b", "merge_node")
+builder.add_edge("branch_c", "merge_node")</pre>
+
+<h3>完整条件路由示例</h3>
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> <span style="color: #05a;">os</span><br />
+<span style="color: Green;font-weight:bold;">from</span> dotenv <span style="color: Green;font-weight:bold;">import</span> load_dotenv<br />
+<span style="color: Green;font-weight:bold;">from</span> langgraph.<span style="color: #05a;">graph</span> <span style="color: Green;font-weight:bold;">import</span> StateGraph<span style="color: Gray;">,</span> START<span style="color: Gray;">,</span> END<span style="color: Gray;">,</span> MessagesState<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_openai <span style="color: Green;font-weight:bold;">import</span> ChatOpenAI<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_core.<span style="color: #05a;">messages</span> <span style="color: Green;font-weight:bold;">import</span> SystemMessage<span style="color: Gray;">,</span> HumanMessage<br />
+<br />
+load_dotenv<span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 初始化 LLM</span><br />
+llm <span style="color: Gray;">=</span> ChatOpenAI<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; model<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_MODEL'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'deepseek-chat'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; openai_api_key<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_API_KEY'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; openai_api_base<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_BASE_URL'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'https://api.deepseek.com'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; temperature<span style="color: Gray;">=</span><span style="color: Maroon;">0.7</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 路由函数</span><br />
+<span style="color: Green;font-weight:bold;">def</span> classify_intent<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">str</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;根据用户意图路由到不同的 Agent&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; last_message <span style="color: Gray;">=</span> state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#91;</span>-<span style="color: Maroon;">1</span><span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; content <span style="color: Gray;">=</span> last_message.<span style="color: #05a;">content</span>.<span style="color: #05a;">lower</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> <span style="color: #a11;">&quot;天气&quot;</span> <span style="color: Green;font-weight:bold;">in</span> content <span style="color: Green;font-weight:bold;">or</span> <span style="color: #a11;">&quot;温度&quot;</span> <span style="color: Green;font-weight:bold;">in</span> content:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: #a11;">&quot;weather_agent&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">elif</span> <span style="color: #a11;">&quot;代码&quot;</span> <span style="color: Green;font-weight:bold;">in</span> content <span style="color: Green;font-weight:bold;">or</span> <span style="color: #a11;">&quot;编程&quot;</span> <span style="color: Green;font-weight:bold;">in</span> content:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: #a11;">&quot;code_agent&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">elif</span> <span style="color: #a11;">&quot;再见&quot;</span> <span style="color: Green;font-weight:bold;">in</span> content <span style="color: Green;font-weight:bold;">or</span> <span style="color: #a11;">&quot;退出&quot;</span> <span style="color: Green;font-weight:bold;">in</span> content:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: #a11;">&quot;farewell&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">else</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: #a11;">&quot;general_agent&quot;</span><br />
+<br />
+<span style="color: #a50"># 定义各个 Agent 节点</span><br />
+<span style="color: Green;font-weight:bold;">def</span> router_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;路由节点：不做处理，只用于触发路由判断&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> weather_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;天气 Agent&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; response <span style="color: Gray;">=</span> llm.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#91;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; SystemMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;你是一个天气助手，友好地回答天气相关问题。如果没有实时数据，可以给出一般性建议。&quot;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; *state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>response<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> code_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;代码 Agent&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; response <span style="color: Gray;">=</span> llm.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#91;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; SystemMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;你是一个编程助手，擅长解答代码问题并给出清晰的代码示例。&quot;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; *state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>response<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> general_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;通用 Agent&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; response <span style="color: Gray;">=</span> llm.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#91;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; SystemMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;你是一个友善的 AI 助手，可以回答各种问题。&quot;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; *state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>response<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> farewell_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;告别节点&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span><span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;role&quot;</span>: <span style="color: #a11;">&quot;assistant&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;content&quot;</span>: <span style="color: #a11;">&quot;再见！期待下次与你交流。&quot;</span><span style="color: Olive;">&#125;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: #a50"># 构建图</span><br />
+builder <span style="color: Gray;">=</span> StateGraph<span style="color: Olive;">&#40;</span>MessagesState<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 添加节点</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;router&quot;</span><span style="color: Gray;">,</span> router_node<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;weather_agent&quot;</span><span style="color: Gray;">,</span> weather_node<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;code_agent&quot;</span><span style="color: Gray;">,</span> code_node<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;general_agent&quot;</span><span style="color: Gray;">,</span> general_node<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;farewell&quot;</span><span style="color: Gray;">,</span> farewell_node<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 添加边</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span>START<span style="color: Gray;">,</span> <span style="color: #a11;">&quot;router&quot;</span><span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_conditional_edges</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;router&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; classify_intent<span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;weather_agent&quot;</span>: <span style="color: #a11;">&quot;weather_agent&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;code_agent&quot;</span>: <span style="color: #a11;">&quot;code_agent&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;general_agent&quot;</span>: <span style="color: #a11;">&quot;general_agent&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;farewell&quot;</span>: <span style="color: #a11;">&quot;farewell&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#125;</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 所有 agent 节点处理完后结束</span><br />
+<span style="color: Green;font-weight:bold;">for</span> node <span style="color: Green;font-weight:bold;">in</span> <span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;weather_agent&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;code_agent&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;general_agent&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;farewell&quot;</span><span style="color: Olive;">&#93;</span>:<br />
+&nbsp; &nbsp; builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span>node<span style="color: Gray;">,</span> END<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 编译图</span><br />
+graph <span style="color: Gray;">=</span> builder.<span style="color: Teal;">compile</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 测试不同意图</span><br />
+test_inputs <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span><br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;北京今天天气怎么样？&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;帮我写一个 Python 快速排序&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;你好，介绍一下你自己&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;再见啦！&quot;</span><br />
+<span style="color: Olive;">&#93;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">for</span> user_input <span style="color: Green;font-weight:bold;">in</span> test_inputs:<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>用户: {user_input}&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; result <span style="color: Gray;">=</span> graph.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>HumanMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span>user_input<span style="color: Olive;">&#41;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;助手: {result['messages'][-1].content[:100]}...&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;-&quot;</span> * <span style="color: Maroon;">50</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<p>运行结果示例：</p>
+<pre>
+用户: 北京今天天气怎么样？
+助手: 很抱歉，我没有实时天气数据。不过北京现在是春季，建议您出门时关注天气预报...
+--------------------------------------------------
+
+用户: 帮我写一个 Python 快速排序
+助手: 好的，下面是一个 Python 实现的快速排序算法：
+
+```python
+def quicksort(arr):
+    if len(arr) &lt;= 1:
+        return arr
+    ...
+--------------------------------------------------
+
+用户: 你好，介绍一下你自己
+助手: 你好！我是一个 AI 助手，很高兴为你服务。我可以帮你回答各种问题...
+--------------------------------------------------
+
+用户: 再见啦！
+助手: 再见！期待下次与你交流。
+--------------------------------------------------</pre>
+
+<div class="warning-box">
+<strong>注意：</strong>条件路由函数的返回值必须是已在图中注册的节点名称或 <code>END</code>。如果返回未注册的名称，图执行时会抛出错误。
+</div>
+
+<hr>
+<h2>构建对话机器人</h2>
+<p>现在用所学知识构建一个支持多轮对话的机器人。这个机器人能够记住对话上下文，实现连续的交互体验。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> <span style="color: #05a;">os</span><br />
+<span style="color: Green;font-weight:bold;">from</span> dotenv <span style="color: Green;font-weight:bold;">import</span> load_dotenv<br />
+<span style="color: Green;font-weight:bold;">from</span> langgraph.<span style="color: #05a;">graph</span> <span style="color: Green;font-weight:bold;">import</span> StateGraph<span style="color: Gray;">,</span> MessagesState<span style="color: Gray;">,</span> START<span style="color: Gray;">,</span> END<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_openai <span style="color: Green;font-weight:bold;">import</span> ChatOpenAI<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_core.<span style="color: #05a;">messages</span> <span style="color: Green;font-weight:bold;">import</span> SystemMessage<span style="color: Gray;">,</span> HumanMessage<br />
+<br />
+load_dotenv<span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 初始化 LLM（使用 DeepSeek）</span><br />
+llm <span style="color: Gray;">=</span> ChatOpenAI<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; model<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_MODEL'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'deepseek-chat'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; openai_api_key<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_API_KEY'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; openai_api_base<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_BASE_URL'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'https://api.deepseek.com'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; temperature<span style="color: Gray;">=</span><span style="color: Maroon;">0.7</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+SYSTEM_PROMPT <span style="color: Gray;">=</span> <span style="color: #a11;">&quot;&quot;&quot;你是一个友善、专业的 AI 助手。<br />
+你的回答应该：<br />
+- 简洁清晰<br />
+- 使用中文回复<br />
+- 在不确定时主动询问用户<br />
+&quot;&quot;&quot;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> chatbot_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;核心对话节点&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; system <span style="color: Gray;">=</span> SystemMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span>SYSTEM_PROMPT<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; messages <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span>system<span style="color: Olive;">&#93;</span> + state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; response <span style="color: Gray;">=</span> llm.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span>messages<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>response<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: #a50"># 构建图</span><br />
+builder <span style="color: Gray;">=</span> StateGraph<span style="color: Olive;">&#40;</span>MessagesState<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;chatbot&quot;</span><span style="color: Gray;">,</span> chatbot_node<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span>START<span style="color: Gray;">,</span> <span style="color: #a11;">&quot;chatbot&quot;</span><span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;chatbot&quot;</span><span style="color: Gray;">,</span> END<span style="color: Olive;">&#41;</span><br />
+<br />
+graph <span style="color: Gray;">=</span> builder.<span style="color: Teal;">compile</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 多轮对话函数</span><br />
+<span style="color: Green;font-weight:bold;">def</span> chat<span style="color: Olive;">&#40;</span>conversation_history: <span style="color: Teal;">list</span><span style="color: Gray;">,</span> user_input: <span style="color: Teal;">str</span><span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">tuple</span><span style="color: Olive;">&#91;</span><span style="color: Teal;">str</span><span style="color: Gray;">,</span> <span style="color: Teal;">list</span><span style="color: Olive;">&#93;</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;处理单轮对话，返回 AI 响应和更新后的历史&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; conversation_history.<span style="color: #05a;">append</span><span style="color: Olive;">&#40;</span>HumanMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span>user_input<span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; result <span style="color: Gray;">=</span> graph.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: conversation_history<span style="color: Olive;">&#125;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; conversation_history <span style="color: Gray;">=</span> result<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; ai_response <span style="color: Gray;">=</span> conversation_history<span style="color: Olive;">&#91;</span>-<span style="color: Maroon;">1</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">content</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> ai_response<span style="color: Gray;">,</span> conversation_history<br />
+<br />
+<span style="color: #a50"># 多轮对话示例</span><br />
+history <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span><span style="color: Olive;">&#93;</span><br />
+<span style="color: Green;font-weight:bold;">while</span> <span style="color: Teal;">True</span>:<br />
+&nbsp; &nbsp; user_input <span style="color: Gray;">=</span> <span style="color: Teal;">input</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;你: &quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> user_input.<span style="color: #05a;">lower</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span> <span style="color: Green;font-weight:bold;">in</span> <span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;退出&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;exit&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;quit&quot;</span><span style="color: Olive;">&#93;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;再见！&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">break</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; response<span style="color: Gray;">,</span> history <span style="color: Gray;">=</span> chat<span style="color: Olive;">&#40;</span>history<span style="color: Gray;">,</span> user_input<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;助手: {response}<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<p>运行结果示例：</p>
+<pre>
+你: 你好，我叫小明
+助手: 你好，小明！很高兴认识你。有什么我可以帮助你的吗？
+
+你: 我想学习 Python 编程
+助手: 太好了！Python 是一门很适合初学者的编程语言。我可以帮你从基础开始：
+1. 首先了解变量和数据类型
+2. 学习条件语句和循环
+3. 掌握函数的定义和使用
+你想从哪个部分开始呢？
+
+你: 你还记得我叫什么吗？
+助手: 当然记得，你叫小明！你刚才说想学习 Python 编程，我们可以继续这个话题。
+
+你: 退出
+再见！</pre>
+
+<hr>
+<h2>工具调用 - ReAct Agent</h2>
+<p>让 Agent 具备使用外部工具的能力是 LangGraph 最强大的特性之一。<strong>ReAct</strong>（Reason + Act）是最常见的 Agent 模式：LLM 思考 -> 选择工具 -> 执行工具 -> 观察结果 -> 继续思考。</p>
+
+<div class="langchain-svg-container">
+<svg viewbox="0 0 750 280" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect x="0" y="0" width="750" height="280" fill="#FAFBFC" />
+  
+  <!-- 标题 -->
+  <text x="375" y="25" text-anchor="middle" fill="#4A6FA5" font-size="14" font-weight="bold">ReAct Agent 工作流程</text>
+  
+  <!-- START 节点 -->
+  <rect x="30" y="110" width="70" height="40" rx="6" fill="#4A6FA5" />
+  <text x="65" y="135" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">START</text>
+  
+  <!-- 箭头 START -> Agent -->
+  <path d="M100 130 L150 130" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowReact)" />
+  
+  <!-- Agent 节点 -->
+  <rect x="155" y="100" width="120" height="60" rx="8" fill="#6B8FC7" />
+  <text x="215" y="125" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="bold">Agent</text>
+  <text x="215" y="145" text-anchor="middle" fill="#E8F0F8" font-size="10">LLM 推理</text>
+  
+  <!-- 条件判断菱形 -->
+  <polygon points="375,100 435,130 375,160 315,130" fill="#F0F4F8" stroke="#4A6FA5" stroke-width="2" />
+  <text x="375" y="127" text-anchor="middle" fill="#4A6FA5" font-size="10">有工具调用?</text>
+  <text x="375" y="140" text-anchor="middle" fill="#4A6FA5" font-size="10"></text>
+  
+  <!-- 箭头 Agent -> 条件判断 -->
+  <path d="M275 130 L315 130" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowReact)" />
+  
+  <!-- Tool 节点 -->
+  <rect x="480" y="100" width="120" height="60" rx="8" fill="#52A05A" />
+  <text x="540" y="125" text-anchor="middle" fill="#FFFFFF" font-size="12" font-weight="bold">Tools</text>
+  <text x="540" y="145" text-anchor="middle" fill="#E8F0F8" font-size="10">执行工具</text>
+  
+  <!-- 箭头 条件判断 -> Tool (是) -->
+  <path d="M435 130 L480 130" stroke="#52A05A" stroke-width="2" fill="none" marker-end="url(#arrowGreenReact)" />
+  <text x="455" y="120" fill="#52A05A" font-size="10">是</text>
+  
+  <!-- 循环箭头 Tool -> Agent -->
+  <path d="M540 160 L540 200 L215 200 L215 160" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowReact)" />
+  <text x="375" y="220" text-anchor="middle" fill="#6B8FC7" font-size="10">返回结果继续推理</text>
+  
+  <!-- END 节点 -->
+  <rect x="640" y="110" width="70" height="40" rx="6" fill="#4A6FA5" />
+  <text x="675" y="135" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">END</text>
+  
+  <!-- 箭头 条件判断 -> END (否) -->
+  <path d="M375 160 L375 250 L675 250 L675 150" stroke="#4A6FA5" stroke-width="2" fill="none" marker-end="url(#arrowReact)" />
+  <text x="390" y="180" fill="#4A6FA5" font-size="10">否</text>
+  
+  <!-- 箭头定义 -->
+  <defs>
+    <marker id="arrowReact" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6B8FC7" />
+    </marker>
+    <marker id="arrowGreenReact" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#52A05A" />
+    </marker>
+  </defs>
+</svg>
+</div>
+
+<h3>定义工具</h3>
+<p>首先定义 Agent 可以使用的工具：</p>
+<pre>
+from langchain_core.tools import tool
+
+@tool
+def search_web(query: str) -&gt; str:
+    """搜索网络获取最新信息。
+    
+    Args:
+        query: 搜索关键词
+    
+    Returns:
+        搜索结果摘要
+    """
+    # 实际项目中替换为真实搜索 API
+    return f"关于 '{query}' 的搜索结果：这是模拟的搜索结果..."
+
+@tool
+def calculate(expression: str) -&gt; str:
+    """计算数学表达式。
+    
+    Args:
+        expression: 数学表达式，如 '2 + 2' 或 '100 * 0.8'
+    
+    Returns:
+        计算结果
+    """
+    import ast
+    import operator
+    
+    # 安全的运算符映射
+    ops = {
+        ast.Add: operator.add,
+        ast.Sub: operator.sub,
+        ast.Mult: operator.mul,
+        ast.Div: operator.truediv,
+        ast.Pow: operator.pow,
+        ast.USub: operator.neg,
+    }
+    
+    def safe_eval(node):
+        if isinstance(node, ast.Expression):
+            return safe_eval(node.body)
+        elif isinstance(node, ast.Constant):
+            return node.value
+        elif isinstance(node, ast.BinOp):
+            left = safe_eval(node.left)
+            right = safe_eval(node.right)
+            return ops[type(node.op)](left, right)
+        elif isinstance(node, ast.UnaryOp):
+            operand = safe_eval(node.operand)
+            return ops[type(node.op)](operand)
+        else:
+            raise ValueError(f"不支持的表达式类型: {type(node)}")
+    
+    try:
+        tree = ast.parse(expression, mode='eval')
+        result = safe_eval(tree)
+        return f"计算结果: {expression} = {result}"
+    except Exception as e:
+        return f"计算错误: {str(e)}"
+
+@tool
+def get_weather(city: str) -&gt; str:
+    """获取指定城市的天气信息。
+    
+    Args:
+        city: 城市名称
+    
+    Returns:
+        天气信息
+    """
+    # 实际项目中替换为真实天气 API
+    return f"{city} 今日天气：晴，温度 22C，湿度 60%"
+
+tools = [search_web, calculate, get_weather]</pre>
+
+<div class="warning-box">
+<strong>安全警告：</strong>calculate 工具使用 AST（抽象语法树）解析替代 <code>eval()</code>。直接使用 <code>eval()</code> 存在严重的安全风险，因为它可以执行任意 Python 代码。在生产环境中，务必使用安全的表达式解析方式。
+</div>
+
+<h3>构建 ReAct Agent</h3>
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> <span style="color: #05a;">os</span><br />
+<span style="color: Green;font-weight:bold;">from</span> dotenv <span style="color: Green;font-weight:bold;">import</span> load_dotenv<br />
+<span style="color: Green;font-weight:bold;">from</span> langgraph.<span style="color: #05a;">graph</span> <span style="color: Green;font-weight:bold;">import</span> StateGraph<span style="color: Gray;">,</span> MessagesState<span style="color: Gray;">,</span> START<span style="color: Gray;">,</span> END<br />
+<span style="color: Green;font-weight:bold;">from</span> langgraph.<span style="color: #05a;">prebuilt</span> <span style="color: Green;font-weight:bold;">import</span> ToolNode<span style="color: Gray;">,</span> tools_condition<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_openai <span style="color: Green;font-weight:bold;">import</span> ChatOpenAI<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_core.<span style="color: #05a;">tools</span> <span style="color: Green;font-weight:bold;">import</span> tool<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_core.<span style="color: #05a;">messages</span> <span style="color: Green;font-weight:bold;">import</span> HumanMessage<br />
+<span style="color: Green;font-weight:bold;">import</span> ast<br />
+<span style="color: Green;font-weight:bold;">import</span> <span style="color: #05a;">operator</span><br />
+<br />
+load_dotenv<span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 定义工具</span><br />
+<span style="color: Gray;">@</span>tool<br />
+<span style="color: Green;font-weight:bold;">def</span> search_web<span style="color: Olive;">&#40;</span>query: <span style="color: Teal;">str</span><span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">str</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;搜索网络获取最新信息。&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> f<span style="color: #a11;">&quot;关于 '{query}' 的搜索结果：这是模拟的搜索结果...&quot;</span><br />
+<br />
+<span style="color: Gray;">@</span>tool<br />
+<span style="color: Green;font-weight:bold;">def</span> calculate<span style="color: Olive;">&#40;</span>expression: <span style="color: Teal;">str</span><span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">str</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;计算数学表达式。&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; ops <span style="color: Gray;">=</span> <span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; ast.<span style="color: #05a;">Add</span>: <span style="color: #05a;">operator</span>.<span style="color: #05a;">add</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; ast.<span style="color: #05a;">Sub</span>: <span style="color: #05a;">operator</span>.<span style="color: #05a;">sub</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; ast.<span style="color: #05a;">Mult</span>: <span style="color: #05a;">operator</span>.<span style="color: #05a;">mul</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; ast.<span style="color: #05a;">Div</span>: <span style="color: #05a;">operator</span>.<span style="color: #05a;">truediv</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; ast.<span style="color: #05a;">Pow</span>: <span style="color: #05a;">operator</span>.<span style="color: Teal;">pow</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; ast.<span style="color: #05a;">USub</span>: <span style="color: #05a;">operator</span>.<span style="color: #05a;">neg</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#125;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">def</span> safe_eval<span style="color: Olive;">&#40;</span>node<span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> <span style="color: Teal;">isinstance</span><span style="color: Olive;">&#40;</span>node<span style="color: Gray;">,</span> ast.<span style="color: #05a;">Expression</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> safe_eval<span style="color: Olive;">&#40;</span>node.<span style="color: #05a;">body</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">elif</span> <span style="color: Teal;">isinstance</span><span style="color: Olive;">&#40;</span>node<span style="color: Gray;">,</span> ast.<span style="color: #05a;">Constant</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> node.<span style="color: #05a;">value</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">elif</span> <span style="color: Teal;">isinstance</span><span style="color: Olive;">&#40;</span>node<span style="color: Gray;">,</span> ast.<span style="color: #05a;">BinOp</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; left <span style="color: Gray;">=</span> safe_eval<span style="color: Olive;">&#40;</span>node.<span style="color: #05a;">left</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; right <span style="color: Gray;">=</span> safe_eval<span style="color: Olive;">&#40;</span>node.<span style="color: #05a;">right</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> ops<span style="color: Olive;">&#91;</span><span style="color: Teal;">type</span><span style="color: Olive;">&#40;</span>node.<span style="color: #05a;">op</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#40;</span>left<span style="color: Gray;">,</span> right<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">elif</span> <span style="color: Teal;">isinstance</span><span style="color: Olive;">&#40;</span>node<span style="color: Gray;">,</span> ast.<span style="color: #05a;">UnaryOp</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; operand <span style="color: Gray;">=</span> safe_eval<span style="color: Olive;">&#40;</span>node.<span style="color: #05a;">operand</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> ops<span style="color: Olive;">&#91;</span><span style="color: Teal;">type</span><span style="color: Olive;">&#40;</span>node.<span style="color: #05a;">op</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#40;</span>operand<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">else</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">raise</span> <span style="color: Teal;">ValueError</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;不支持的表达式类型: {type(node)}&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">try</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; tree <span style="color: Gray;">=</span> ast.<span style="color: #05a;">parse</span><span style="color: Olive;">&#40;</span>expression<span style="color: Gray;">,</span> mode<span style="color: Gray;">=</span><span style="color: #a11;">'eval'</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; result <span style="color: Gray;">=</span> safe_eval<span style="color: Olive;">&#40;</span>tree<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> f<span style="color: #a11;">&quot;计算结果: {expression} = {result}&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">except</span> <span style="color: Teal;">Exception</span> <span style="color: Green;font-weight:bold;">as</span> e:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> f<span style="color: #a11;">&quot;计算错误: {str(e)}&quot;</span><br />
+<br />
+<span style="color: Gray;">@</span>tool<br />
+<span style="color: Green;font-weight:bold;">def</span> get_weather<span style="color: Olive;">&#40;</span>city: <span style="color: Teal;">str</span><span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">str</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;获取指定城市的天气信息。&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> f<span style="color: #a11;">&quot;{city} 今日天气：晴，温度 22C，湿度 60%&quot;</span><br />
+<br />
+tools <span style="color: Gray;">=</span> <span style="color: Olive;">&#91;</span>search_web<span style="color: Gray;">,</span> calculate<span style="color: Gray;">,</span> get_weather<span style="color: Olive;">&#93;</span><br />
+<br />
+<span style="color: #a50"># 初始化 LLM 并绑定工具</span><br />
+llm <span style="color: Gray;">=</span> ChatOpenAI<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; model<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_MODEL'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'deepseek-chat'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; openai_api_key<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_API_KEY'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; openai_api_base<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_BASE_URL'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'https://api.deepseek.com'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; temperature<span style="color: Gray;">=</span><span style="color: Maroon;">0</span><br />
+<span style="color: Olive;">&#41;</span><br />
+llm_with_tools <span style="color: Gray;">=</span> llm.<span style="color: #05a;">bind_tools</span><span style="color: Olive;">&#40;</span>tools<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> agent_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;Agent 推理节点：调用 LLM 决定下一步行动&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; response <span style="color: Gray;">=</span> llm_with_tools.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span>state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>response<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: #a50"># 构建 ReAct 图</span><br />
+builder <span style="color: Gray;">=</span> StateGraph<span style="color: Olive;">&#40;</span>MessagesState<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 添加节点</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;agent&quot;</span><span style="color: Gray;">,</span> agent_node<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;tools&quot;</span><span style="color: Gray;">,</span> ToolNode<span style="color: Olive;">&#40;</span>tools<span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span> &nbsp;<span style="color: #a50"># 内置 ToolNode 自动处理工具调用</span><br />
+<br />
+<span style="color: #a50"># 添加边</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span>START<span style="color: Gray;">,</span> <span style="color: #a11;">&quot;agent&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 条件路由：如果 LLM 请求工具则执行工具，否则结束</span><br />
+builder.<span style="color: #05a;">add_conditional_edges</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;agent&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; tools_condition<span style="color: Gray;">,</span> &nbsp;<span style="color: #a50"># 内置路由函数</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;tools&quot;</span>: <span style="color: #a11;">&quot;tools&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; END: END<br />
+&nbsp; &nbsp; <span style="color: Olive;">&#125;</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 工具执行完后返回 agent 继续推理</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;tools&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;agent&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+graph <span style="color: Gray;">=</span> builder.<span style="color: Teal;">compile</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 测试</span><br />
+result <span style="color: Gray;">=</span> graph.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>HumanMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;北京今天天气如何？另外帮我计算 1234 * 5678&quot;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#93;</span><br />
+<span style="color: Olive;">&#125;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">for</span> message <span style="color: Green;font-weight:bold;">in</span> result<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span>:<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;[{message.type}]: {message.content[:200] if message.content else '(工具调用)'}&quot;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>流式输出工具调用过程</h3>
+<pre>
+# 流式观察 Agent 的每一步
+for chunk in graph.stream(
+    {"messages": [HumanMessage(content="搜索 LangGraph 的最新特性")]},
+    stream_mode="updates"
+):
+    for node_name, updates in chunk.items():
+        print(f"\n=== 节点: {node_name} ===")
+        for msg in updates.get("messages", []):
+            if hasattr(msg, "tool_calls") and msg.tool_calls:
+                for tc in msg.tool_calls:
+                    print(f"  -&gt; 调用工具: {tc['name']}({tc['args']})")
+            else:
+                print(f"  -&gt; 输出: {msg.content[:200] if msg.content else '(无内容)'}")</pre>
+
+<div class="tip-box">
+<strong>提示：</strong><code>ToolNode</code> 和 <code>tools_condition</code> 是 LangGraph 的内置组件。<code>ToolNode</code> 自动解析 LLM 返回的工具调用并执行对应的工具函数；<code>tools_condition</code> 是一个路由函数，检查 LLM 输出是否包含工具调用请求，有则返回 "tools"，否则返回 END。
+</div>
+
+<hr>
+<h2>Human-in-the-Loop 人机协作</h2>
+<p>LangGraph 原生支持在工作流执行过程中暂停，等待人工审核或输入。这对于需要人工确认的敏感操作非常有用。</p>
+
+<h3>使用 interrupt 暂停执行</h3>
+<pre>
+from langgraph.types import interrupt
+from langgraph.checkpoint.memory import MemorySaver
+
+def sensitive_action_node(state: MessagesState) -&gt; dict:
+    """执行敏感操作前请求人工审批"""
+    last_msg = state["messages"][-1].content
+    
+    # 暂停图的执行，等待人工决策
+    human_decision = interrupt({
+        "question": "是否批准执行以下操作？",
+        "action": last_msg,
+        "risk_level": "中等"
+    })
+    
+    if human_decision == "approve":
+        return {"messages": [{"role": "assistant", "content": "操作已批准并执行完毕。"}]}
+    else:
+        return {"messages": [{"role": "assistant", "content": "操作已取消。"}]}
+
+# 必须使用 checkpointer 才能支持 interrupt
+checkpointer = MemorySaver()
+graph = builder.compile(checkpointer=checkpointer)</pre>
+
+<h3>完整的审批工作流</h3>
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> <span style="color: #05a;">os</span><br />
+<span style="color: Green;font-weight:bold;">from</span> dotenv <span style="color: Green;font-weight:bold;">import</span> load_dotenv<br />
+<span style="color: Green;font-weight:bold;">from</span> langgraph.<span style="color: #05a;">graph</span> <span style="color: Green;font-weight:bold;">import</span> StateGraph<span style="color: Gray;">,</span> MessagesState<span style="color: Gray;">,</span> START<span style="color: Gray;">,</span> END<br />
+<span style="color: Green;font-weight:bold;">from</span> langgraph.<span style="color: #05a;">types</span> <span style="color: Green;font-weight:bold;">import</span> Command<span style="color: Gray;">,</span> interrupt<br />
+<span style="color: Green;font-weight:bold;">from</span> langgraph.<span style="color: #05a;">checkpoint</span>.<span style="color: #05a;">memory</span> <span style="color: Green;font-weight:bold;">import</span> MemorySaver<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_core.<span style="color: #05a;">messages</span> <span style="color: Green;font-weight:bold;">import</span> HumanMessage<br />
+<br />
+load_dotenv<span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> request_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;接收用户请求&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> approval_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;审批节点：暂停等待人工审批&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; last_msg <span style="color: Gray;">=</span> state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#91;</span>-<span style="color: Maroon;">1</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">content</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: #a50"># 暂停执行，等待人工决策</span><br />
+&nbsp; &nbsp; human_decision <span style="color: Gray;">=</span> interrupt<span style="color: Olive;">&#40;</span><span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;question&quot;</span>: <span style="color: #a11;">&quot;是否批准执行以下操作？&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;action&quot;</span>: last_msg<br />
+&nbsp; &nbsp; <span style="color: Olive;">&#125;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> human_decision <span style="color: Gray;">==</span> <span style="color: #a11;">&quot;approve&quot;</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span><span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;role&quot;</span>: <span style="color: #a11;">&quot;assistant&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;content&quot;</span>: f<span style="color: #a11;">&quot;操作已批准：{last_msg}&quot;</span><span style="color: Olive;">&#125;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">else</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span><span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;role&quot;</span>: <span style="color: #a11;">&quot;assistant&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;content&quot;</span>: <span style="color: #a11;">&quot;操作已被拒绝。&quot;</span><span style="color: Olive;">&#125;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> execute_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;执行节点&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span><span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;role&quot;</span>: <span style="color: #a11;">&quot;assistant&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;content&quot;</span>: <span style="color: #a11;">&quot;任务执行完成！&quot;</span><span style="color: Olive;">&#125;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: #a50"># 构建图</span><br />
+builder <span style="color: Gray;">=</span> StateGraph<span style="color: Olive;">&#40;</span>MessagesState<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;request&quot;</span><span style="color: Gray;">,</span> request_node<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;approval&quot;</span><span style="color: Gray;">,</span> approval_node<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;execute&quot;</span><span style="color: Gray;">,</span> execute_node<span style="color: Olive;">&#41;</span><br />
+<br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span>START<span style="color: Gray;">,</span> <span style="color: #a11;">&quot;request&quot;</span><span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;request&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;approval&quot;</span><span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;approval&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;execute&quot;</span><span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;execute&quot;</span><span style="color: Gray;">,</span> END<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 使用 checkpointer 编译图</span><br />
+checkpointer <span style="color: Gray;">=</span> MemorySaver<span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+graph <span style="color: Gray;">=</span> builder.<span style="color: Teal;">compile</span><span style="color: Olive;">&#40;</span>checkpointer<span style="color: Gray;">=</span>checkpointer<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 每次对话使用唯一 thread_id</span><br />
+config <span style="color: Gray;">=</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;configurable&quot;</span>: <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;thread_id&quot;</span>: <span style="color: #a11;">&quot;approval-session-001&quot;</span><span style="color: Olive;">&#125;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: #a50"># Step 1: 启动图，会在 interrupt 处暂停</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;=== Step 1: 提交请求 ===&quot;</span><span style="color: Olive;">&#41;</span><br />
+result <span style="color: Gray;">=</span> graph.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>HumanMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;请删除数据库中的所有测试数据&quot;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; config<span style="color: Gray;">=</span>config<br />
+<span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;图已暂停，等待审批...&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># Step 2: 人工审批后，用 Command 恢复执行</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>=== Step 2: 人工审批 ===&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: #a50"># 批准操作</span><br />
+result <span style="color: Gray;">=</span> graph.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; Command<span style="color: Olive;">&#40;</span>resume<span style="color: Gray;">=</span><span style="color: #a11;">&quot;approve&quot;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; config<span style="color: Gray;">=</span>config<br />
+<span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;最终结果: {result['messages'][-1].content}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 如果要拒绝，使用：</span><br />
+<span style="color: #a50"># graph.invoke(Command(resume=&quot;reject&quot;), config=config)</span><br />
+</div>
+</div>
+
+<h3>在边上设置断点</h3>
+<pre>
+# 另一种方式：在编译时指定断点
+graph = builder.compile(
+    checkpointer=checkpointer,
+    interrupt_before=["sensitive_node"],   # 执行该节点前暂停
+    # interrupt_after=["review_node"],     # 执行该节点后暂停
+)</pre>
+
+<div class="info-box">
+<strong>重要：</strong><code>checkpointer</code> 是实现 <code>interrupt</code> 功能的前提条件。没有 checkpointer，图无法保存暂停时的状态，也就无法在恢复时继续执行。MemorySaver 适合开发测试，生产环境建议使用 SqliteSaver 或其他持久化存储。
+</div>
+
+<hr>
+<h2>持久化内存</h2>
+<p>LangGraph 提供了内置的状态持久化机制，让 Agent 能够跨会话记住对话历史。</p>
+
+<h3>内存存储（适合开发测试）</h3>
+<pre>
+from langgraph.checkpoint.memory import MemorySaver
+
+checkpointer = MemorySaver()
+graph = builder.compile(checkpointer=checkpointer)
+
+# 使用 thread_id 区分不同会话
+config_user_a = {"configurable": {"thread_id": "user-alice"}}
+config_user_b = {"configurable": {"thread_id": "user-bob"}}
+
+# Alice 的对话
+graph.invoke({"messages": [HumanMessage(content="我叫 Alice")]}, config=config_user_a)
+graph.invoke({"messages": [HumanMessage(content="我叫什么名字？")]}, config=config_user_a)
+# Agent 能记住：你叫 Alice
+
+# Bob 的对话完全独立
+graph.invoke({"messages": [HumanMessage(content="我叫什么名字？")]}, config=config_user_b)
+# Agent 不知道 Bob 的名字（不同 thread_id）</pre>
+
+<h3>SQLite 持久化存储（适合本地项目）</h3>
+<pre>
+# 安装依赖
+# pip install langgraph-checkpoint-sqlite
+
+from langgraph.checkpoint.sqlite import SqliteSaver
+
+# 数据持久化到文件，程序重启后对话历史仍存在
+with SqliteSaver.from_conn_string("./chat_memory.db") as checkpointer:
+    graph = builder.compile(checkpointer=checkpointer)
+    
+    config = {"configurable": {"thread_id": "persistent-chat"}}
+    
+    # 第一次运行
+    graph.invoke({"messages": [HumanMessage(content="我叫张三")]}, config=config)
+    
+    # 程序重启后再次运行，记忆仍然存在
+    result = graph.invoke(
+        {"messages": [HumanMessage(content="你还记得我叫什么吗？")]},
+        config=config
+    )</pre>
+
+<h3>查看对话历史</h3>
+<pre>
+# 获取某个 thread 的完整状态历史
+history = list(graph.get_state_history(config))
+
+for snapshot in history:
+    print(f"时间: {snapshot.created_at}")
+    print(f"消息数: {len(snapshot.values['messages'])}")
+    print("---")
+
+# 获取当前状态
+current_state = graph.get_state(config)
+print(f"当前消息数: {len(current_state.values['messages'])}")</pre>
+
+<div class="tip-box">
+<strong>提示：</strong><code>thread_id</code> 是会话的唯一标识符，用于隔离不同用户或不同对话的状态。同一个 thread_id 的所有调用会共享对话历史，不同 thread_id 之间完全独立。在多用户场景中，通常使用用户 ID 或会话 ID 作为 thread_id。
+</div>
+
+<hr>
+<h2>多 Agent 系统</h2>
+<p>LangGraph 擅长协调多个专门化的 Agent 协同工作。通过将复杂任务分解给不同的专家 Agent，可以实现更强大的问题解决能力。</p>
+
+<div class="langchain-svg-container">
+<svg viewbox="0 0 750 320" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect x="0" y="0" width="750" height="320" fill="#FAFBFC" />
+  
+  <!-- 标题 -->
+  <text x="375" y="25" text-anchor="middle" fill="#4A6FA5" font-size="14" font-weight="bold">多 Agent 协作架构（Supervisor 模式）</text>
+  
+  <!-- Supervisor 节点 -->
+  <rect x="300" y="60" width="150" height="70" rx="10" fill="#4A6FA5" />
+  <text x="375" y="90" text-anchor="middle" fill="#FFFFFF" font-size="13" font-weight="bold">Supervisor</text>
+  <text x="375" y="110" text-anchor="middle" fill="#E8F0F8" font-size="10">主管 - 任务分配</text>
+  
+  <!-- Research Agent -->
+  <rect x="80" y="200" width="140" height="60" rx="8" fill="#6B8FC7" />
+  <text x="150" y="225" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">Research Agent</text>
+  <text x="150" y="242" text-anchor="middle" fill="#E8F0F8" font-size="9">信息收集</text>
+  
+  <!-- Writing Agent -->
+  <rect x="305" y="200" width="140" height="60" rx="8" fill="#52A05A" />
+  <text x="375" y="225" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">Writing Agent</text>
+  <text x="375" y="242" text-anchor="middle" fill="#E8F0F8" font-size="9">内容创作</text>
+  
+  <!-- Review Agent -->
+  <rect x="530" y="200" width="140" height="60" rx="8" fill="#6B8FC7" />
+  <text x="600" y="225" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">Review Agent</text>
+  <text x="600" y="242" text-anchor="middle" fill="#E8F0F8" font-size="9">质量审核</text>
+  
+  <!-- 从 Supervisor 到各 Agent 的箭头 -->
+  <path d="M325 130 L150 200" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowMulti)" />
+  <path d="M375 130 L375 200" stroke="#52A05A" stroke-width="2" fill="none" marker-end="url(#arrowGreenMulti)" />
+  <path d="M425 130 L600 200" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowMulti)" />
+  
+  <!-- 从各 Agent 返回 Supervisor 的箭头（虚线） -->
+  <path d="M170 200 L340 130" stroke="#8BA4C7" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#arrowGrayMulti)" />
+  <path d="M375 200 L375 130" stroke="#8BA4C7" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#arrowGrayMulti)" />
+  <path d="M580 200 L410 130" stroke="#8BA4C7" stroke-width="1.5" stroke-dasharray="5,3" fill="none" marker-end="url(#arrowGrayMulti)" />
+  
+  <!-- 说明文字 -->
+  <text x="200" y="165" fill="#6B8FC7" font-size="9">分配任务</text>
+  <text x="520" y="165" fill="#6B8FC7" font-size="9">分配任务</text>
+  <text x="260" y="175" fill="#8BA4C7" font-size="9">返回结果</text>
+  <text x="450" y="175" fill="#8BA4C7" font-size="9">返回结果</text>
+  
+  <!-- 底部说明 -->
+  <text x="375" y="295" text-anchor="middle" fill="#4A6FA5" font-size="11">Supervisor 协调各专家 Agent，每个 Agent 完成后返回结果给 Supervisor 决定下一步</text>
+  
+  <!-- 箭头定义 -->
+  <defs>
+    <marker id="arrowMulti" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6B8FC7" />
+    </marker>
+    <marker id="arrowGreenMulti" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#52A05A" />
+    </marker>
+    <marker id="arrowGrayMulti" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#8BA4C7" />
+    </marker>
+  </defs>
+</svg>
+</div>
+
+<h3>主从架构（Supervisor Pattern）</h3>
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">import</span> <span style="color: #05a;">os</span><br />
+<span style="color: Green;font-weight:bold;">from</span> dotenv <span style="color: Green;font-weight:bold;">import</span> load_dotenv<br />
+<span style="color: Green;font-weight:bold;">from</span> langgraph.<span style="color: #05a;">graph</span> <span style="color: Green;font-weight:bold;">import</span> StateGraph<span style="color: Gray;">,</span> MessagesState<span style="color: Gray;">,</span> START<span style="color: Gray;">,</span> END<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_openai <span style="color: Green;font-weight:bold;">import</span> ChatOpenAI<br />
+<span style="color: Green;font-weight:bold;">from</span> langchain_core.<span style="color: #05a;">messages</span> <span style="color: Green;font-weight:bold;">import</span> SystemMessage<span style="color: Gray;">,</span> HumanMessage<br />
+<br />
+load_dotenv<span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 初始化 LLM</span><br />
+llm <span style="color: Gray;">=</span> ChatOpenAI<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; model<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_MODEL'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'deepseek-chat'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; openai_api_key<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_API_KEY'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; openai_api_base<span style="color: Gray;">=</span><span style="color: #05a;">os</span>.<span style="color: #05a;">getenv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'DEEPSEEK_BASE_URL'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'https://api.deepseek.com'</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; temperature<span style="color: Gray;">=</span><span style="color: Maroon;">0</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 定义专家 Agent</span><br />
+<span style="color: Green;font-weight:bold;">def</span> research_agent<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;研究 Agent：负责信息收集&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; system <span style="color: Gray;">=</span> SystemMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;你是一个专业的研究员，负责收集和整理信息。请简洁地总结关键信息。&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; response <span style="color: Gray;">=</span> llm.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#91;</span>system<span style="color: Olive;">&#93;</span> + state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>response<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> writing_agent<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;写作 Agent：负责内容创作&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; system <span style="color: Gray;">=</span> SystemMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;你是一个专业的写作者，负责根据已有信息撰写内容。请保持内容清晰流畅。&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; response <span style="color: Gray;">=</span> llm.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#91;</span>system<span style="color: Olive;">&#93;</span> + state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>response<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> review_agent<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;审校 Agent：负责质量控制&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; system <span style="color: Gray;">=</span> SystemMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;你是一个专业的编辑，负责审核和改进内容质量。请指出问题并给出改进建议。&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; response <span style="color: Gray;">=</span> llm.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#91;</span>system<span style="color: Olive;">&#93;</span> + state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>response<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: #a50"># 主管 Agent 决定流程</span><br />
+<span style="color: Green;font-weight:bold;">def</span> supervisor_node<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">dict</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;主管：协调各专家 Agent 的工作&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; system <span style="color: Gray;">=</span> SystemMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;&quot;&quot;你是一个工作流主管。<br />
+根据任务进度决定下一步应该由哪个 Agent 处理。<br />
+分析对话历史，只返回以下之一：RESEARCH、WRITING、REVIEW、FINISH<br />
+- RESEARCH：需要收集更多信息<br />
+- WRITING：信息充足，可以开始写作<br />
+- REVIEW：写作完成，需要审核<br />
+- FINISH：任务已完成<br />
+&quot;&quot;&quot;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; response <span style="color: Gray;">=</span> llm.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#91;</span>system<span style="color: Olive;">&#93;</span> + state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>response<span style="color: Olive;">&#93;</span><span style="color: Olive;">&#125;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">def</span> route_by_supervisor<span style="color: Olive;">&#40;</span>state: MessagesState<span style="color: Olive;">&#41;</span> -<span style="color: Gray;">&gt;</span> <span style="color: Teal;">str</span>:<br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;&quot;&quot;根据主管决策路由&quot;&quot;&quot;</span><br />
+&nbsp; &nbsp; last_msg <span style="color: Gray;">=</span> state<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#91;</span>-<span style="color: Maroon;">1</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">content</span>.<span style="color: #05a;">strip</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span>.<span style="color: #05a;">upper</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">if</span> <span style="color: #a11;">&quot;RESEARCH&quot;</span> <span style="color: Green;font-weight:bold;">in</span> last_msg:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: #a11;">&quot;research&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">elif</span> <span style="color: #a11;">&quot;WRITING&quot;</span> <span style="color: Green;font-weight:bold;">in</span> last_msg:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: #a11;">&quot;writing&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">elif</span> <span style="color: #a11;">&quot;REVIEW&quot;</span> <span style="color: Green;font-weight:bold;">in</span> last_msg:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> <span style="color: #a11;">&quot;review&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">else</span>:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: Green;font-weight:bold;">return</span> END<br />
+<br />
+<span style="color: #a50"># 构建多 Agent 图</span><br />
+builder <span style="color: Gray;">=</span> StateGraph<span style="color: Olive;">&#40;</span>MessagesState<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;supervisor&quot;</span><span style="color: Gray;">,</span> supervisor_node<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;research&quot;</span><span style="color: Gray;">,</span> research_agent<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;writing&quot;</span><span style="color: Gray;">,</span> writing_agent<span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_node</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;review&quot;</span><span style="color: Gray;">,</span> review_agent<span style="color: Olive;">&#41;</span><br />
+<br />
+builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span>START<span style="color: Gray;">,</span> <span style="color: #a11;">&quot;supervisor&quot;</span><span style="color: Olive;">&#41;</span><br />
+builder.<span style="color: #05a;">add_conditional_edges</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;supervisor&quot;</span><span style="color: Gray;">,</span> route_by_supervisor<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 每个专家完成后返回主管</span><br />
+<span style="color: Green;font-weight:bold;">for</span> agent <span style="color: Green;font-weight:bold;">in</span> <span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;research&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;writing&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;review&quot;</span><span style="color: Olive;">&#93;</span>:<br />
+&nbsp; &nbsp; builder.<span style="color: #05a;">add_edge</span><span style="color: Olive;">&#40;</span>agent<span style="color: Gray;">,</span> <span style="color: #a11;">&quot;supervisor&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+graph <span style="color: Gray;">=</span> builder.<span style="color: Teal;">compile</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 测试多 Agent 协作</span><br />
+result <span style="color: Gray;">=</span> graph.<span style="color: #05a;">invoke</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#123;</span><br />
+&nbsp; &nbsp; <span style="color: #a11;">&quot;messages&quot;</span>: <span style="color: Olive;">&#91;</span>HumanMessage<span style="color: Olive;">&#40;</span>content<span style="color: Gray;">=</span><span style="color: #a11;">&quot;请帮我写一篇关于 Python 装饰器的简短介绍文章&quot;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#93;</span><br />
+<span style="color: Olive;">&#125;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;=== 多 Agent 协作完成 ===&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">for</span> i<span style="color: Gray;">,</span> msg <span style="color: Green;font-weight:bold;">in</span> <span style="color: Teal;">enumerate</span><span style="color: Olive;">&#40;</span>result<span style="color: Olive;">&#91;</span><span style="color: #a11;">&quot;messages&quot;</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span>:<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>[{i+1}] {msg.type}: {msg.content[:150]}...&quot;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>子图（Subgraph）</h3>
+<p>将复杂子流程封装为子图，在主图中复用：</p>
+<pre>
+# 将复杂子流程封装为子图，在主图中复用
+sub_builder = StateGraph(MessagesState)
+sub_builder.add_node("step1", step1_node)
+sub_builder.add_node("step2", step2_node)
+sub_builder.add_edge(START, "step1")
+sub_builder.add_edge("step1", "step2")
+sub_builder.add_edge("step2", END)
+sub_graph = sub_builder.compile()
+
+# 在主图中使用子图
+main_builder = StateGraph(MessagesState)
+main_builder.add_node("preprocessing", preprocess_node)
+main_builder.add_node("sub_workflow", sub_graph)  # 直接使用编译好的子图
+main_builder.add_node("postprocessing", postprocess_node)
+
+main_builder.add_edge(START, "preprocessing")
+main_builder.add_edge("preprocessing", "sub_workflow")
+main_builder.add_edge("sub_workflow", "postprocessing")
+main_builder.add_edge("postprocessing", END)
+
+main_graph = main_builder.compile()</pre>
+
+<hr>
+<h2>LangGraph Studio 可视化调试</h2>
+<p>LangGraph Studio 是官方提供的可视化开发环境，让你实时查看 Agent 的执行过程，大幅提升开发和调试效率。</p>
+
+<h3>安装 LangGraph CLI</h3>
+<pre>
+pip install langgraph-cli -i https://mirrors.aliyun.com/pypi/simple/</pre>
+
+<h3>创建项目配置文件</h3>
+<p>在项目根目录创建 <code>langgraph.json</code> 配置文件：</p>
+<pre>
+{
+  "dependencies": ["."],
+  "graphs": {
+    "my_agent": "./my_agent.py:graph"
+  },
+  "env": ".env"
+}</pre>
+
+<h3>启动开发服务器</h3>
+<pre>
+langgraph dev</pre>
+<p>启动后访问 <code>http://localhost:8123</code> 即可在浏览器中使用 LangGraph Studio。</p>
+
+<h3>Studio 主要功能</h3>
+<ul>
+    <li><strong>实时可视化</strong>：图形化展示节点执行过程，直观了解工作流状态</li>
+    <li><strong>状态检查</strong>：在任意节点暂停查看当前 State，方便排查问题</li>
+    <li><strong>时间旅行</strong>：回放历史执行步骤，追踪每一步的状态变化</li>
+    <li><strong>热重载</strong>：修改代码后自动更新图结构，无需重启服务</li>
+</ul>
+
+<div class="info-box">
+<strong>环境要求：</strong>LangGraph Studio 需要 Docker 环境支持。请确保已安装 Docker Desktop 并正常运行后再启动开发服务器。
+</div>
+
+<hr>
+<h2>最佳实践与常见问题</h2>
+
+<h3>最佳实践</h3>
+
+<p><strong>状态设计要点</strong></p>
+<ul>
+    <li>保持 State 精简，只包含必要字段</li>
+    <li>为复杂字段定义明确的 reducer（如 <code>add_messages</code>）</li>
+    <li>使用 Pydantic 模型在生产环境中验证状态类型</li>
+    <li>避免在 State 中存储过大的对象，考虑使用外部存储</li>
+</ul>
+
+<p><strong>节点设计要点</strong></p>
+<ul>
+    <li>每个节点职责单一，便于测试和复用</li>
+    <li>节点函数应该是幂等的（相同输入产生相同输出）</li>
+    <li>避免在节点中直接修改传入的 state，而是返回新值</li>
+    <li>合理使用异步节点处理 I/O 密集型操作</li>
+</ul>
+
+<p><strong>错误处理</strong></p>
+<pre>
+def robust_node(state: AgentState) -&gt; dict:
+    try:
+        result = risky_operation(state)
+        return {"messages": [result], "error": None}
+    except Exception as e:
+        return {
+            "error": str(e),
+            "messages": [{"role": "assistant", "content": f"操作失败: {e}"}]
+        }</pre>
+
+<p><strong>避免无限循环</strong></p>
+<pre>
+def route_with_limit(state: AgentState) -&gt; str:
+    # 设置最大重试次数，防止无限循环
+    if state.get("retry_count", 0) &gt;= 3:
+        return END
+    
+    if needs_retry(state):
+        return "retry_node"
+    return END</pre>
+
+<h3>常见问题 FAQ</h3>
+
+<p><strong>Q1：节点返回值格式不对怎么办？</strong></p>
+<pre>
+# 错误：直接修改 state 对象
+def bad_node(state):
+    state["messages"].append(...)  # 不要直接修改
+    return state
+
+# 正确：返回需要更新的字段
+def good_node(state):
+    return {"messages": [new_message]}  # 只返回变更字段</pre>
+
+<p><strong>Q2：如何在节点之间传递临时数据？</strong></p>
+<p>将临时数据加入 State 定义，或使用下划线前缀约定为内部字段：</p>
+<pre>
+from typing import TypedDict
+
+class PublicState(TypedDict):
+    messages: list  # 对外暴露
+
+class PrivateState(TypedDict):
+    messages: list
+    _internal_cache: dict  # 以下划线开头约定为内部使用</pre>
+
+<p><strong>Q3：如何调试节点执行过程？</strong></p>
+<pre>
+# 使用 stream 模式观察每个节点的输出
+for event in graph.stream(initial_state, stream_mode="updates"):
+    for node_name, state_update in event.items():
+        print(f"\n[节点: {node_name}]")
+        print(f"更新: {state_update}")</pre>
+
+<p><strong>Q4：StateGraph 和 MessageGraph 的区别？</strong></p>
+<p><code>MessageGraph</code> 是早期版本的 API，功能较为受限。现在推荐统一使用 <code>StateGraph</code>，它更灵活、功能更完善。如需处理消息，使用 <code>StateGraph(MessagesState)</code> 或自定义包含 <code>messages</code> 字段的 State。</p>
+
+<div class="warning-box">
+<strong>注意：</strong><code>MessageGraph</code> 已被废弃，请统一使用 <code>StateGraph</code>。如果你的代码中还在使用 MessageGraph，建议尽早迁移到 StateGraph(MessagesState) 以获得更好的支持和更多功能。
+</div>
+
+<hr>
+<h2>总结</h2>
+<p>本文系统介绍了 LangGraph 框架的核心概念和实战应用。LangGraph 通过图结构的工作流编排，让开发者能够构建具备循环、分支、状态持久化能力的复杂 AI Agent。相比传统的线性 LLM Chain，LangGraph 在处理需要多步推理、人机协作、多 Agent 协同的场景时具有显著优势。</p>
+
+<table class="reference">
+<thead>
+<tr>
+<th>概念</th>
+<th>说明</th>
+<th>关键代码</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>StateGraph</strong></td>
+<td>有向图工作流引擎，LangGraph 的核心</td>
+<td><code>StateGraph(MyState)</code></td>
+</tr>
+<tr>
+<td><strong>State</strong></td>
+<td>节点间共享的状态数据结构</td>
+<td><code>TypedDict</code> + <code>Annotated</code></td>
+</tr>
+<tr>
+<td><strong>Nodes</strong></td>
+<td>执行具体操作的函数节点</td>
+<td><code>builder.add_node()</code></td>
+</tr>
+<tr>
+<td><strong>Edges</strong></td>
+<td>节点间的流转路径，支持条件分支</td>
+<td><code>add_edge()</code> / <code>add_conditional_edges()</code></td>
+</tr>
+<tr>
+<td><strong>ReAct Agent</strong></td>
+<td>推理+行动的循环模式</td>
+<td><code>ToolNode</code> + <code>tools_condition</code></td>
+</tr>
+<tr>
+<td><strong>Human-in-Loop</strong></td>
+<td>人工审批与介入机制</td>
+<td><code>interrupt()</code> + <code>Command(resume=)</code></td>
+</tr>
+<tr>
+<td><strong>持久化</strong></td>
+<td>会话记忆与状态保存</td>
+<td><code>MemorySaver</code> / <code>SqliteSaver</code></td>
+</tr>
+<tr>
+<td><strong>多 Agent</strong></td>
+<td>多专家协作系统</td>
+<td>Supervisor Pattern</td>
+</tr>
+</tbody>
+</table>
+
+<h3>推荐学习路径</h3>
+
+<div class="langchain-svg-container">
+<svg viewbox="0 0 900 100" xmlns="http://www.w3.org/2000/svg">
+  <!-- 背景 -->
+  <rect x="0" y="0" width="900" height="100" fill="#FAFBFC" />
+  
+  <!-- 步骤1 -->
+  <rect x="10" y="30" width="110" height="40" rx="6" fill="#8BA4C7" />
+  <text x="65" y="55" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">基础概念</text>
+  
+  <!-- 箭头1 -->
+  <path d="M120 50 L140 50" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowSummary)" />
+  
+  <!-- 步骤2 -->
+  <rect x="145" y="30" width="110" height="40" rx="6" fill="#6B8FC7" />
+  <text x="200" y="55" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">简单工作流</text>
+  
+  <!-- 箭头2 -->
+  <path d="M255 50 L275 50" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowSummary)" />
+  
+  <!-- 步骤3 -->
+  <rect x="280" y="30" width="110" height="40" rx="6" fill="#6B8FC7" />
+  <text x="335" y="55" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">ReAct Agent</text>
+  
+  <!-- 箭头3 -->
+  <path d="M390 50 L410 50" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowSummary)" />
+  
+  <!-- 步骤4 -->
+  <rect x="415" y="30" width="110" height="40" rx="6" fill="#4A6FA5" />
+  <text x="470" y="55" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">人机协作</text>
+  
+  <!-- 箭头4 -->
+  <path d="M525 50 L545 50" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowSummary)" />
+  
+  <!-- 步骤5 -->
+  <rect x="550" y="30" width="110" height="40" rx="6" fill="#6B8FC7" />
+  <text x="605" y="55" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">多 Agent</text>
+  
+  <!-- 箭头5 -->
+  <path d="M660 50 L680 50" stroke="#6B8FC7" stroke-width="2" fill="none" marker-end="url(#arrowSummary)" />
+  
+  <!-- 步骤6 -->
+  <rect x="685" y="30" width="140" height="40" rx="6" fill="#52A05A" />
+  <text x="755" y="55" text-anchor="middle" fill="#FFFFFF" font-size="11" font-weight="bold">LangGraph Studio</text>
+  
+  <!-- 箭头定义 -->
+  <defs>
+    <marker id="arrowSummary" markerwidth="10" markerheight="7" refx="9" refy="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6B8FC7" />
+    </marker>
+  </defs>
+</svg>
+</div>
+			<!-- 其他扩展 -->
+						
+			</div>
+			
+		</div>
+
+
+<div class="archive-list" style="display:none;font-size: 14px;line-height: 1.8;margin-top: 20px;padding: 10px;">
+<div class="archive-list-item">
+    <div class="post-intro" style="width: 100%;" id="ai-info">
+	  AI 思考中...
+    </div>
+</div>
+</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="token-intro.html" rel="prev"> Token (词元)</a> </div>
+			<div class="next-design-link"><a href="harness-engineering.html" rel="next"> Harness Engineering（驾驭工程）</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+
+
+		
+		<div class="sidebar-box ">
+				
+
+<style>	
+.responsive_ad1 { display:none; }
+@media(min-width: 800px) { .responsive_ad1 {  display:block;margin:0 auto;} }
+</style>
+<div id="ad-336280" class="responsive_ad1">
+<!-- 336*280 固定 -->		
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 移动版 自动调整 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+				</div>
+		<!-- 笔记列表 -->
+		<style>
+.wrapper {
+  /*text-transform: uppercase; */
+  background: #ececec;
+  color: #555;
+  cursor: pointer;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.wrapper .tooltip {
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: left;
+  background: #96b97d;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 14px;
+  pointer-events: none;
+  position: absolute;
+  
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+.tooltip a {
+	color:#fff;
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}  
+
+/* CSS Triangles - see Trevor's post */
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #96b97d 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 20%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+.wrapper .tooltip1 {
+	margin-left: 50px;
+	padding-top: 0px;
+}
+/*
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+*/
+/* IE can just show/hide with no transition */
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.css">
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style=" padding: 20px 20px;"> 
+	<h3 class="text-muted" id="share_code" style="color: #799961;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<!--
+	<p style="font-size:14px;">笔记需要是本篇文章的内容扩展！</p><br>
+	<p style="font-size:12px;"><a href="//www.runoob.com/tougao" target="_blank">文章投稿，可点击这里</a></p>
+	<p style="font-size:14px;"><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>
+		<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display:none;">
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div id="mded"></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input type="hidden" name="comment_post_ID" value="29676" id="comment_post_ID" />
+<input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="引用地址"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script type="text/javascript">
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload:false,
+	 // upload: {url:'/api/comment_upload_file.php',params: null,fileKey: 'upload_file',connectionCount: 1,leaveConfirm: '文件正在上传，您确定离开?'},
+	  defaultImage: 'https://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  autosave: 'editor-content',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+	$("#user_add_note").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		$('html, body').animate({
+       	    scrollTop: $("#respond").offset().top
+    	}, 200);
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" style="display:none;" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  29676;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>').show();
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>').show();
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>').show();
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>').show();
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>').show();
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>').show();
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	$(".comt-author").click(function() {
+		href = $(this).children("a").attr("href");
+		if(href.indexOf("/note/")!=-1) {
+			var win = window.open(href, '_blank');
+  			win.focus();
+		}
+	});
+	$(".comt-meta span").hover(function(){
+		$(this).children(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).children(".tooltip").removeAttr("style");
+	});
+	/*
+	$(".wrapper i").hover(function(){
+		$(this).siblings(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).siblings(".tooltip").css({ "opacity": 0, "pointer-events": "auto"});
+	});
+	*/
+	//Upvote.create('runoobvote-id', {callback: vote_callback});
+	var ajaxurl = 'https://www.runoob.com/wp-admin/admin-ajax.php';
+	var callback = function(data) {
+		//console.log($('#runoobvote-id').upvote('upvoted'));
+		//console.log($('#runoobvote-id').upvote('downvoted'));
+		//console.log(data);
+		_vote_action = data.action;
+		id_arr = data.id.split('-');
+		um_id= id_arr[2];
+		//console.log(um_id);
+		
+		var re = /^[1-9]+/;
+		if (re.test(um_id)) { 
+			var ajax_data = {
+				_vote_action: _vote_action,
+				action: "pinglun_zan",
+				um_id: um_id,
+				um_action: "ding"
+			};
+			//console.log(ajax_data);
+			$.post(ajaxurl,ajax_data,function(status){
+				//if(status.vote_num>999) {
+				//	_voteHtml = '<span style="display: block; text-align: center;font-size: 20px; color: #6a737c; margin: 8px 0;">'+kFormatter(status.vote_num) +'</span>';
+				//	$("#runoobvote-id-" + um_id + " .count").hide().after(_voteHtml);
+				//}
+				
+			});
+		}
+	};
+	if($('#comments').length && $('.upvotejs').length){
+		$('.upvotejs').upvote({id: 29676, callback: callback});
+	
+		$.post(ajaxurl,{"action":"pinglun_zan","postid":29676},function(data){  
+			$(data).each(function(key,value) {
+				$("#runoobvote-id-" + value.commid + " .upvote").addClass(value.upvotejs_class);
+				$("#runoobvote-id-" + value.commid + " .downvote").addClass(value.downvote_class);
+				$("#runoobvote-id-" + value.commid + " .count").text(value.upvote_count);
+			})
+		},'json');
+		
+	}
+	
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+function kFormatter(num) {
+	// return num;
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
+</script>
+
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/css/qa.css?1.45">
+<link rel="stylesheet" type="text/css" href="https://static.char123.com/assets/simditor/2.3.6/styles/simditor.min.css" />
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor.min.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor-autosave.js"></script>
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+
+<style>
+.sidebar-tree .double-li {
+    width:300px;
+}
+.sidebar-tree .double-li li {
+    width: 44%;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    display: inline;
+}
+</style>
+
+    
+        <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here" style="margin: 0 auto;">
+            <a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;"> <i class="fa fa-list" aria-hidden="true"></i> 分类导航</a>
+        </div>
+    <div class="sidebar-box sidebar-cate">
+        
+        <div class="sidebar-tree">
+            <ul><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="../html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="../html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="../css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="../css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Tailwind CSS 教程" href="../tailwindcss/tailwindcss-tutorial.html">Tailwind CSS 教程</a></li><li><a title="Bootstrap4 教程" href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Bootstrap5 教程" href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 教程</a></li><li><a title="Font Awesome 教程" href="../font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="../foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="../js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="../htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="../jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="../angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="../angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="../vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="Vue3 教程" href="../vue3/vue3-tutorial.html">Vue3 教程</a></li><li><a title="React 教程" href="../react/react-tutorial.html">React 教程</a></li><li><a title="Next.js 教程" href="../nextjs/nextjs-tutorial.html">Next.js 教程</a></li><li><a title="TypeScript 教程" href="../typescript/ts-tutorial.html">TypeScript 教程</a></li><li><a title="jQuery UI 教程" href="../jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="../jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="../nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="Electron 教程" href="../electron/electron-tutorial.html">Electron 教程</a></li><li><a title="Playwright 教程" href="../playwright/playwright-tutorial.html">Playwright 教程</a></li><li><a title="AJAX 教程" href="../ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="../json/json-tutorial.html">JSON 教程</a></li><li><a title="Echarts 教程" href="../echarts/echarts-tutorial.html">Echarts 教程</a></li><li><a title="Chart.js 教程" href="../chartjs/chartjs-tutorial.html">Chart.js 教程</a></li><li><a title="Highcharts 教程" href="../highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="../googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="Python2.x 教程" href="../python/python-tutorial.html">Python2.x 教程</a></li><li><a title="Linux 教程" href="../linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="../docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="../ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="../java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="../c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="../cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="../perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="../servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="../jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="../lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Rust 教程" href="../rust/rust-tutorial.html">Rust 教程</a></li><li><a title="Zig 教程" href="../zig/zig-tutorial.html">Zig 教程</a></li><li><a title="Scala 教程" href="../scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="../go/go-tutorial.html">Go 教程</a></li><li><a title="PHP 教程" href="../php/php-tutorial.html">PHP 教程</a></li><li><a title="数据结构与算法" href="../data-structures/data-structures-tutorial.html">数据结构与算法</a></li><li><a title="Django 教程" href="../django/django-tutorial.html">Django 教程</a></li><li><a title="FastAPI 教程" href="../fastapi/fastapi-tutorial.html">FastAPI 教程</a></li><li><a title="Flask 教程" href="../flask/flask-tutorial.html">Flask 教程</a></li><li><a title="Pillow 教程" href="../pillow/pillow-tutorial.html">Pillow 教程</a></li><li><a title="Zookeeper 教程" href="//www.runoob.com/w3cnote/zookeeper-tutorial.html">Zookeeper 教程</a></li><li><a title="设计模式" href="../design-pattern/design-pattern-tutorial.html">设计模式</a></li><li><a title="Python 设计模式" href="../python-design-pattern/python-design-pattern-tutorial.html">Python 设计模式</a></li><li><a title="正则表达式" href="../regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="Maven 教程" href="../maven/maven-tutorial.html">Maven 教程</a></li><li><a title="CMake 教程" href="../cmake/cmake-tutorial.html">CMake 教程</a></li><li><a title="Verilog 教程" href="//www.runoob.com/w3cnote/verilog-tutorial.html">Verilog 教程</a></li><li><a title="ASP 教程" href="../asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="../appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="../vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="../sql/sql-tutorial.html">SQL 教程</a></li><li><a title="MySQL 教程" href="../mysql/mysql-tutorial.html">MySQL 教程</a></li><li><a title="PostgreSQL 教程" href="../postgresql/postgresql-tutorial.html">PostgreSQL 教程</a></li><li><a title="SQLite 教程" href="../sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="../mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="../redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="../Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit">  AI & 数据分析</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="NumPy 教程" href="../numpy/numpy-tutorial.html">NumPy 教程</a></li><li><a title="Pandas 教程" href="../pandas/pandas-tutorial.html">Pandas 教程</a></li><li><a title="Matplotlib 教程" href="../matplotlib/matplotlib-tutorial.html">Matplotlib 教程</a></li><li><a title="Scipy 教程" href="../scipy/scipy-tutorial.html">Scipy 教程</a></li><li><a title="Pytorch 教程" href="../pytorch/pytorch-tutorial.html">Pytorch 教程</a></li><li><a title="TensorFlow 教程" href="../tensorflow/tensorflow-tutorial.html">TensorFlow 教程</a></li><li><a title="Ollama 教程" href="../ollama/ollama-tutorial.html">Ollama 教程</a></li><li><a title="机器 教程" href="../ml/ml-tutorial.html">机器 教程</a></li><li><a title="Jupyter Notebook 教程" href="../jupyter-notebook/jupyter-notebook-tutorial.html">Jupyter Notebook 教程</a></li><li><a title="AI Agent(智能体)" href="ai-agent-tutorial.html">AI Agent(智能体)</a></li><li><a title="Skills(技能)" href="../skills/skills-tutorial.html">Skills(技能)</a></li><li><a title="Claude Code" href="../claude-code/claude-code-tutorial.html">Claude Code</a></li><li><a title="OpenCode" href="../opencode/opencode-tutorial.html">OpenCode</a></li><li><a title="Codex 教程" href="../codex/codex-tutorial.html">Codex 教程</a></li><li><a title="scikit-learn 教程" href="../sklearn/sklearn-tutorial.html">scikit-learn 教程</a></li><li><a title="R 教程" href="../r/r-tutorial.html">R 教程</a></li><li><a title="OpenCV 教程" href="../opencv/opencv-tutorial.html">OpenCV 教程</a></li><li><a title="NLP 教程" href="../nlp/nlp-tutorial.html">NLP 教程</a></li><li><a title="Selenium 教程" href="../selenium/selenium-tutorial.html">Selenium 教程</a></li><li><a title="Julia 教程" href="../julia/julia-tutorial.html">Julia 教程</a></li><li><a title="量化交易" href="../qt/qt-tutorial.html">量化交易</a></li><li><a title="Dash 教程" href="../dash/dash-tutorial.html">Dash 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="//www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="../swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="../jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="../ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Flutter 教程" href="../flutter/flutter-tutorial.html">Flutter 教程</a></li><li><a title="Kotlin 教程" href="../kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="VS Code 教程" href="../vscode/vscode-tutorial.html">VS Code 教程</a></li><li><a title="PyCharm 教程" href="../pycharm/pycharm-tutorial.html">PyCharm 教程</a></li><li><a title="Swagger 教程" href="../swagger/swagger-tutorial.html">Swagger 教程</a></li><li><a title="RESTful API 教程" href="../restfulapi/restful-api-tutorial.html">RESTful API 教程</a></li><li><a title="Eclipse 教程" href="../eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="../git/git-tutorial.html">Git 教程</a></li><li><a title="Svn 教程" href="../svn/svn-tutorial.html">Svn 教程</a></li><li><a title="Markdown 教程" href="../markdown/md-tutorial.html">Markdown 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="../xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="../dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="../dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="../xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="../xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="../xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="../xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="../xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="../schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="../xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="../svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="../aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="../csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="PowerShell 教程" href="../powershell/powershell-tutorial.html">PowerShell 教程</a></li><li><a title="Web Pages 教程" href="../aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="../aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="../aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="../aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="../webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="../wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="../soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="../rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="../rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="../http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="../web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="../browsers/browser-information.html">浏览器信息</a></li><li><a title="网络协议" href="../np/np-tutorial.html">网络协议</a></li><li><a title="网站主机教程" href="../hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="../tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="../w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="../quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>            </div>
+    
+    </div>
+    </div>
+    <br>
+    
+    <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here">
+            <a href="javascript:void(0);">Advertisement</a>
+        </div>
+        <div class="re-600160" id="sidebar-right-re">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧栏1 -->
+        <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+                </div>
+    </div>
+</div></div>
+
+</div>
+
+<script>
+var aid = 29676;
+function coll() {
+	$.post( '/wp-content/themes/runoob/option/user/userinfo.php', {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+		if(data.error==0) {
+			$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+			$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+		}
+		alert(data.msg);
+	},'json');
+}
+
+(function () {
+    // 1. 仅 HTML 页面
+    if (!document.contentType || !document.contentType.includes('text/html')) return;
+
+    // 2. 容器判断
+    var container = document.querySelector('.article-intro');
+    if (!container) return;
+
+    var h1 = container.querySelector('h1');
+    if (!h1) return;
+
+    // 3. URL 判断
+    var url = window.location.href.toLowerCase();
+    var version = null;
+
+    if (url.includes('/python3/')) {
+        version = 'Python3.x';
+    } else if (url.includes('/python/')) {
+        version = 'Python2.x';
+    }
+
+    if (!version) return;
+
+    // 4. 防重复
+    if (h1.querySelector('.py-version-badge')) return;
+
+    // 5. 创建标签
+    var badge = document.createElement('span');
+    badge.className = 'py-version-badge';
+    badge.innerText = version;
+
+    // 6. 样式（核心：float 实现右上角）
+    badge.style.float = 'right';
+    badge.style.fontSize = '12px';
+    badge.style.padding = '2px 8px';
+    badge.style.borderRadius = '999px';
+
+   // 自适应亮/暗色 + 渐变背景（增强版）
+	badge.style.color = 'inherit';
+
+	// 渐变背景（低透明度，不影响暗黑模式）
+	if (version.includes('3')) {
+		badge.style.background = 'linear-gradient(90deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15))';
+	} else {
+		badge.style.background = 'linear-gradient(90deg, rgba(161,140,209,0.15), rgba(251,194,235,0.15))';
+	}
+
+	// 边框弱化（更精致）
+	badge.style.border = '1px solid rgba(127,127,127,0.3)';
+
+	// 提升可读性
+	badge.style.opacity = '0.95';
+
+    // 微调位置（更贴近“右上角”）
+    badge.style.marginTop = '4px';
+    badge.style.marginLeft = '10px';
+
+    // 7. 插入到 h1 最前面（让 float 生效更稳定）
+    h1.insertBefore(badge, h1.firstChild);
+
+})();
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.js?1.0"></script>
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.css?1.0" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // 获取窗口宽度
+    var windowWidth = $(window).width();
+
+    // 设置一个阈值，例如 768px，根据实际需要调整
+    var mobileThreshold = 768;
+
+    // 判断是否为移动端
+    if (windowWidth < mobileThreshold) {
+        // 在移动端执行的代码
+        $(".article-heading-ad").show();
+    } else {
+        // 在非移动端执行的代码
+		$(".article-heading-ad").show();
+    }
+	
+});
+</script>
+<script src="/wp-content/themes/runoob/assets/js/runoob-article-dir.min.js"></script>
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

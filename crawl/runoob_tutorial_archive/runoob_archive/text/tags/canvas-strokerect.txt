@@ -1,0 +1,72 @@
+URL: https://www.runoob.com/tags/canvas-strokerect.html
+Title: HTML canvas strokeRect() 方法 | 菜鸟教程
+
+HTML canvas strokeRect() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas fillRect() 方法 
+
+HTML canvas clearRect() 方法 
+
+HTML canvas strokeRect() 方法 
+
+实例 
+
+绘制 150*100 像素的矩形： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+ctx.strokeRect(20,20,150,100); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 
+strokeRect() 
+方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+strokeRect() 方法绘制矩形（无填充）。笔触的默认颜色是黑色。 
+
+提示： 请使用 strokeStyle 属性来设置笔触的颜色、渐变或模式。 
+
+JavaScript 语法： 
+
+context .strokeRect( x,y,width,height ); 
+
+参数值 
+
+参数 
+
+描述 
+
+x 
+
+矩形左上角的 x 坐标。 
+
+y 
+
+矩形左上角的 y 坐标。 
+
+width 
+
+矩形的宽度，以像素计。 
+
+height 
+
+矩形的高度，以像素计。 
+
+AI 思考中... 
+
+HTML canvas fillRect() 方法 
+
+HTML canvas clearRect() 方法

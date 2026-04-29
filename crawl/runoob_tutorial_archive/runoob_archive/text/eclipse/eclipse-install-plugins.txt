@@ -1,0 +1,39 @@
+URL: https://www.runoob.com/eclipse/eclipse-install-plugins.html
+Title: Eclipse 安装插件 | 菜鸟教程
+
+Eclipse 安装插件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Eclipse 教程 
+
+Eclipse 任务管理 
+
+Eclipse 代码模板 
+
+Eclipse 安装插件 
+
+查找和安装插件 
+
+Eclipse作为一个集成的IDE开发工具，为我们的软件开发提供了便利，eclipse除了自带的强大功能外，还支持功能丰富的插件。 
+
+我们可以通过Eclipse官方市场 ( https://marketplace.eclipse.org/ )找到并下载我们需要的插件。 
+
+例如我们可以查找支持 Python IDE 的插件，如下图所示： 
+
+在 Eclipse IDE 中我们也可以通过点击 Help 菜单中的 Eclipse Marketplace（Eclipse 超市）选项来查找插件： 
+
+上图中我们选择 PyDev 让 Eclipse 支持 Python 开发，我们只需要点击 Install 按钮即可。
+以下对话框为选择安装的插件。 
+
+你也可以通过点击 Help 菜单上的 Install New Software 菜单项来安装插件： 
+
+这种方式我们需要知道插件远程的安装地址，你可以通过点击 Add 按钮来提交 URL。 
+
+安装的对话框中列出了远程可安装的插件列表： 
+
+AI 思考中... 
+
+Eclipse 任务管理 
+
+Eclipse 代码模板

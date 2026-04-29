@@ -1,0 +1,88 @@
+URL: https://www.runoob.com/vbscript/vbscript-examples.html
+Title: VBScript 实例 | 菜鸟教程
+
+VBScript 实例 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript 教程 
+
+VBScript 用法 
+
+VBScript 实例 
+
+使用VBScript写文本 
+
+使用HTML标签格式化文本 
+
+head部分中的函数 
+
+body部分中的脚本 
+
+创建一个变量 
+
+在一段文本中插入变量的值 
+
+创建数组 
+
+子程序 
+
+函数程序 
+
+If...then..else 语句 
+
+If...then..elseif 语句 
+
+Select case 语句 
+
+随机链接 
+
+For..next 循环 
+
+循环输出HTML标题 
+
+For..each 循环 
+
+Do...While 循环 
+
+显示日期和时间 
+
+显示星期 
+
+显示月份 
+
+显示当前的月份和星期 
+
+倒记秒数到3000年 
+
+向日期增加一个时间间隔 
+
+格式化日期和时间 
+
+这是一个日期吗？ 
+
+大写或小写字符？ 
+
+删除字符串端部的空格 
+
+颠倒字符顺序 
+
+对一个数字进行取整数操作 
+
+返回随机数 
+
+返回0-99之间的随机数 
+
+从一段字符串的左侧或右侧返回指定数目的字符 
+
+替换字符串中的某些字符 
+
+从一段字符串返回指定数目的字符 
+
+AI 思考中... 
+
+VBScript 教程 
+
+VBScript 用法

@@ -1,0 +1,266 @@
+URL: https://www.runoob.com/tensorflow/tensorflow-distributed-training.html
+Title: TensorFlow 分布式训练 | 菜鸟教程
+
+TensorFlow 分布式训练 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+TensorFlow 教程 
+
+TensorFlow 自定义组件 
+
+TensorFlow 生态系统 
+
+TensorFlow 分布式训练 
+
+TensorFlow 分布式训练是指利用多台机器或多个计算设备（如 GPU/TPU）协同工作，共同完成模型训练任务的技术。通过分布式训练，我们可以： 
+
+加速模型训练过程 
+
+处理超大规模数据集 
+
+训练参数庞大的复杂模型 
+
+核心概念 
+
+1. 分布式策略 (Distribution Strategy) 
+
+TensorFlow 提供了多种分布式策略： 
+
+实例 
+
+# 常用分布式策略 
+
+strategy = tf. distribute . MirroredStrategy ( ) # 单机多卡 
+
+strategy = tf. distribute . MultiWorkerMirroredStrategy ( ) # 多机多卡 
+
+strategy = tf. distribute . TPUStrategy ( ) # TPU集群 
+
+strategy = tf. distribute . ParameterServerStrategy ( ) # 参数服务器架构 
+
+2. 数据并行 vs 模型并行 
+
+类型 
+
+数据并行 
+
+模型并行 
+
+原理 
+
+每个设备处理不同数据批次 
+
+模型被拆分到不同设备 
+
+优点 
+
+实现简单，适合大多数场景 
+
+适合超大模型 
+
+缺点 
+
+需要同步梯度 
+
+实现复杂 
+
+3. 同步更新 vs 异步更新 
+
+同步更新 ：所有设备完成计算后统一更新模型 
+
+异步更新 ：设备独立计算并更新，无需等待 
+
+实现步骤 
+
+1. 设置分布式环境 
+
+实例 
+
+import tensorflow as tf 
+
+# 初始化分布式策略 
+
+strategy = tf. distribute . MirroredStrategy ( ) 
+
+# 查看可用设备数量 
+
+print ( f "Number of devices: {strategy.num_replicas_in_sync}" ) 
+
+2. 在策略范围内构建模型 
+
+实例 
+
+with strategy. scope ( ) : 
+
+# 在此范围内定义的所有变量将被镜像到所有设备 
+
+model = tf. keras . Sequential ( [ 
+
+tf. keras . layers . Dense ( 128 , activation = 'relu' ) , 
+
+tf. keras . layers . Dense ( 10 ) 
+
+] ) 
+
+model. compile ( 
+
+optimizer = 'adam' , 
+
+loss = tf. keras . losses . SparseCategoricalCrossentropy ( from_logits = True ) , 
+
+metrics = [ 'accuracy' ] 
+
+) 
+
+3. 准备分布式数据集 
+
+实例 
+
+# 加载数据集 
+
+dataset = tf. data . Dataset . from_tensor_slices ( ( x_train , y_train ) ) 
+
+# 批处理并分片 
+
+batch_size = 64 * strategy. num_replicas_in_sync # 根据设备数量调整批次大小 
+
+dataset = dataset. shuffle ( buffer_size = 10000 ) . batch ( batch_size ) 
+
+4. 训练模型 
+
+实例 
+
+# 常规训练方式 
+
+model. fit ( dataset , epochs = 10 ) 
+
+高级配置 
+
+1. 多机配置 
+
+实例 
+
+# 在每个worker节点上设置TF_CONFIG环境变量 
+
+import json 
+
+import os 
+
+os . environ [ 'TF_CONFIG' ] = json. dumps ( { 
+
+'cluster' : { 
+
+'worker' : [ "worker1.example.com:12345" , "worker2.example.com:23456" ] 
+
+} , 
+
+'task' : { 'type' : 'worker' , 'index' : 0 } # 每个worker的index不同 
+
+} ) 
+
+2. 自定义训练循环 
+
+实例 
+
+@ tf. function 
+
+def train_step ( inputs ) : 
+
+x , y = inputs 
+
+with tf. GradientTape ( ) as tape: 
+
+predictions = model ( x , training = True ) 
+
+loss = loss_object ( y , predictions ) 
+
+gradients = tape. gradient ( loss , model. trainable_variables ) 
+
+optimizer. apply_gradients ( zip ( gradients , model. trainable_variables ) ) 
+
+return loss 
+
+# 分布式训练步骤 
+
+@ tf. function 
+
+def distributed_train_step ( dataset_inputs ) : 
+
+per_replica_losses = strategy. run ( train_step , args = ( dataset_inputs , ) ) 
+
+return strategy. reduce ( tf. distribute . ReduceOp . SUM , per_replica_losses , axis = None ) 
+
+性能优化技巧 
+
+批次大小调整 ：总批次大小 = 单设备批次大小 × 设备数量 
+
+数据预处理 ：使用 dataset.prefetch() 和 dataset.cache() 提高数据加载效率 
+
+梯度压缩 ：对于跨设备通信，考虑使用梯度压缩减少带宽需求 
+
+混合精度训练 ：结合 tf.keras.mixed_precision 提高训练速度 
+
+实例 
+
+# 混合精度示例 
+
+policy = tf. keras . mixed_precision . Policy ( 'mixed_float16' ) 
+
+tf. keras . mixed_precision . set_global_policy ( policy ) 
+
+常见问题解决 
+
+1. 内存不足 
+
+减小单设备批次大小 
+
+使用梯度累积技术 
+
+启用内存增长选项 
+
+实例 
+
+gpus = tf. config . experimental . list_physical_devices ( 'GPU' ) 
+
+for gpu in gpus: 
+
+tf. config . experimental . set_memory_growth ( gpu , True ) 
+
+2. 设备间通信瓶颈 
+
+使用 NCCL 作为跨设备通信实现 
+
+考虑减少同步频率（适当增加更新步长） 
+
+实例 
+
+# 配置通信实现 
+
+os . environ [ 'TF_GPU_ALLOCATOR' ] = 'cuda_malloc_async' 
+
+os . environ [ 'TF_FORCE_GPU_ALLOW_GROWTH' ] = 'true' 
+
+实践练习 
+
+练习1：单机多卡训练 
+
+准备一个简单的CNN模型 
+
+使用 MirroredStrategy 在本地多GPU上训练CIFAR-10数据集 
+
+比较单GPU和多GPU的训练速度差异 
+
+练习2：多机配置模拟 
+
+使用 MultiWorkerMirroredStrategy 
+
+在同一台机器上模拟多worker环境（通过不同端口） 
+
+观察日志了解worker间的协调过程 
+
+AI 思考中... 
+
+TensorFlow 自定义组件 
+
+TensorFlow 生态系统

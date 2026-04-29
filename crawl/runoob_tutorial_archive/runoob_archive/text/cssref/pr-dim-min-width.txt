@@ -1,0 +1,92 @@
+URL: https://www.runoob.com/cssref/pr-dim-min-width.html
+Title: CSS min-width 属性 | 菜鸟教程
+
+CSS min-width 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS Min-height 属性 
+
+CSS3 nav-down 属性 
+
+CSS min-width 属性 
+
+实例 
+
+设置段落的最小宽度： 
+
+p { min-width: 1000 px ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+min-width属性设置元素的最小宽度。 
+
+注意： min-width属性不包括填充，边框，或页边距！ 
+
+默认值： 
+
+0 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS2 
+
+JavaScript 语法： 
+
+object .style.minWidth="10px" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+min-width 
+
+1.0 
+
+7.0 
+
+1.0 
+
+2.0.2 
+
+4.0 
+
+属性值 
+
+值 
+
+描述 
+
+length 
+
+定义元素的最小宽度值。默认值：取决于浏览器。 
+
+% 
+
+定义基于包含它的块级对象的百分比最小宽度。 
+
+inherit 
+
+规定应该从父元素继承 min-width 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS Dimension 
+
+CSS 参考手册: max-width 属性 
+
+AI 思考中... 
+
+CSS Min-height 属性 
+
+CSS3 nav-down 属性

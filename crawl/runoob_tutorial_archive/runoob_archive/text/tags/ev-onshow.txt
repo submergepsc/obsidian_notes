@@ -1,0 +1,85 @@
+URL: https://www.runoob.com/tags/ev-onshow.html
+Title: HTML onshow 事件属性 | 菜鸟教程
+
+HTML onshow 事件属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML translate 属性 
+
+HTML ontoggle 事件属性 
+
+HTML onshow 事件属性 
+
+实例 
+
+当 <menu> 元素在上下文菜单显示时执行 JavaScript: 
+
+<div contextmenu="mymenu"> 
+<p>用鼠标右键单击黄色框区域查看上下文菜单！</p> 
+<menu type="context" id="mymenu" 
+ onshow="myFunction()"> 
+<menuitem label="刷新" 
+ onclick="window.location.reload();"></menuitem> 
+</menu> 
+</div> 
+
+尝试一下 » 
+
+定义和用法 
+
+onshow 属性当 <menu> 元素在上下文菜单显示时触发。 
+
+浏览器支持 
+
+表格中的数字表示支持该事件的第一个浏览器的版本号。 
+
+事件属性 
+
+onshow 
+
+不支持 
+
+不支持 
+
+8.0 
+
+不支持 
+
+不支持 
+
+HTML 4.01 与 HTML5 的区别 
+
+onshow 属性是 HTML5 新增的。 
+
+语法 
+
+< element onshow=" script "> 
+
+属性值 
+
+值 
+
+描述 
+
+script 
+
+脚本在 onshow 中执行 
+
+技术细节 
+
+支持的 HTML 标签: 
+
+<menu> 
+
+相关页面 
+
+HTML DOM 参考手册: onshow 事件 
+
+AI 思考中... 
+
+HTML translate 属性 
+
+HTML ontoggle 事件属性

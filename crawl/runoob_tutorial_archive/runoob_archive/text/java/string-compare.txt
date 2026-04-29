@@ -1,0 +1,34 @@
+URL: https://www.runoob.com/java/string-compare.html
+Title: Java 实例 – 字符串比较 | 菜鸟教程
+
+Java 实例 – 字符串比较 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 如何查看当前 Java 运行的版本? 
+
+Java 实例 
+
+Java 实例 - 字符串比较 
+
+以下实例中我们通过字符串函数 compareTo (string) ，compareToIgnoreCase(String) 及 compareTo(object string) 来比较两个字符串，并返回字符串中第一个字母ASCII的差值。 
+
+实例代码如下： 
+
+StringCompareEmp.java 文件 
+
+public class StringCompareEmp { public static void main ( String args [ ] ) { String str = " Hello World " ; String anotherString = " hello world " ; Object objStr = str ; System . out . println ( str . compareTo ( anotherString ) ) ; System . out . println ( str . compareToIgnoreCase ( anotherString ) ) ; System . out . println ( str . compareTo ( objStr . toString ( ) ) ) ; } } 
+
+以上代码实例输出结果为： 
+
+-32
+0
+0 
+
+AI 思考中... 
+
+Java 实例 – 如何查看当前 Java 运行的版本? 
+
+Java 实例

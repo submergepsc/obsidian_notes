@@ -1,0 +1,202 @@
+URL: https://www.runoob.com/go/go-regex.html
+Title: Go 语言正则表达式 | 菜鸟教程
+
+Go 语言正则表达式 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Go 语言教程 
+
+Go 语言文件处理 
+
+Go 类型断言 
+
+Go 语言正则表达式 
+
+正则表达式（Regular Expression，简称 regex 或 regexp）是一种用于匹配字符串的强大工具。 
+
+正则表达式通过定义一种模式（pattern），可以快速搜索、替换或提取符合该模式的字符串，详细可以参见 正则表达式教程 。 
+
+在 Go 语言中，正则表达式通过 regexp 包来实现。 
+
+Go 语言中的 regexp 包 
+
+Go 语言的标准库提供了 regexp 包，用于处理正则表达式。以下是 regexp 包中常用的函数和方法： 
+
+Compile 和 MustCompile 
+用于编译正则表达式。 Compile 返回一个 *Regexp 对象和一个错误，而 MustCompile 在编译失败时会直接 panic。 
+
+MatchString 
+检查字符串是否匹配正则表达式。 
+
+FindString 和 FindAllString 
+用于查找匹配的字符串。 FindString 返回第一个匹配项， FindAllString 返回所有匹配项。 
+
+ReplaceAllString 
+用于替换匹配的字符串。 
+
+Split 
+根据正则表达式分割字符串。 
+
+正则表达式的基本语法 
+
+以下是一些常用的正则表达式语法： 
+
+. ：匹配任意单个字符（除了换行符）。 
+
+* ：匹配前面的字符 0 次或多次。 
+
++ ：匹配前面的字符 1 次或多次。 
+
+? ：匹配前面的字符 0 次或 1 次。 
+
+\d ：匹配数字字符（等价于 [0-9] ）。 
+
+\w ：匹配字母、数字或下划线（等价于 [a-zA-Z0-9_] ）。 
+
+\s ：匹配空白字符（包括空格、制表符、换行符等）。 
+
+[] ：匹配括号内的任意一个字符（例如 [abc] 匹配 a 、 b 或 c ）。 
+
+^ ：匹配字符串的开头。 
+
+$ ：匹配字符串的结尾。 
+
+示例代码 
+
+以下是一些使用 Go 语言正则表达式的示例： 
+
+示例 1：检查字符串是否匹配正则表达式 
+
+实例 
+
+package main 
+
+import ( 
+
+"fmt" 
+
+"regexp" 
+
+) 
+
+func main () { 
+
+pattern := `^[a-zA-Z0-9]+$` 
+
+regex := regexp . MustCompile ( pattern ) 
+
+str := "Hello123" 
+
+if regex . MatchString ( str ) { 
+
+fmt . Println ( "字符串匹配正则表达式" ) 
+
+} else { 
+
+fmt . Println ( "字符串不匹配正则表达式" ) 
+
+} 
+
+} 
+
+示例 2：查找匹配的字符串 
+
+实例 
+
+package main 
+
+import ( 
+
+"fmt" 
+
+"regexp" 
+
+) 
+
+func main () { 
+
+pattern := `\d+` 
+
+regex := regexp . MustCompile ( pattern ) 
+
+str := "我有 3 个苹果和 5 个香蕉" 
+
+matches := regex . FindAllString ( str , - 1 ) 
+
+fmt . Println ( "找到的数字：" , matches ) 
+
+} 
+
+示例 3：替换匹配的字符串 
+
+实例 
+
+package main 
+
+import ( 
+
+"fmt" 
+
+"regexp" 
+
+) 
+
+func main () { 
+
+pattern := `\s+` 
+
+regex := regexp . MustCompile ( pattern ) 
+
+str := "Hello World" 
+
+result := regex . ReplaceAllString ( str , " " ) 
+
+fmt . Println ( "替换后的字符串：" , result ) 
+
+} 
+
+示例 4：分割字符串 
+
+实例 
+
+package main 
+
+import ( 
+
+"fmt" 
+
+"regexp" 
+
+) 
+
+func main () { 
+
+pattern := `,` 
+
+regex := regexp . MustCompile ( pattern ) 
+
+str := "apple,banana,orange" 
+
+parts := regex . Split ( str , - 1 ) 
+
+fmt . Println ( "分割后的字符串：" , parts ) 
+
+} 
+
+注意事项 
+
+性能问题 
+正则表达式的匹配和替换操作可能会消耗较多资源，尤其是在处理大量数据时。建议在性能敏感的场景下谨慎使用。 
+
+转义字符 
+在 Go 语言中，正则表达式中的反斜杠 \ 需要写成 \\ ，因为反斜杠在字符串中也是转义字符。 
+
+错误处理 
+使用 Compile 函数时，务必检查返回的错误，以避免程序崩溃。 
+
+AI 思考中... 
+
+Go 语言文件处理 
+
+Go 类型断言

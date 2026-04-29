@@ -1,0 +1,34 @@
+URL: https://www.runoob.com/java/string-replace.html
+Title: Java 实例 – 字符串替换 | 菜鸟教程
+
+Java 实例 – 字符串替换 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 删除字符串中的一个字符 
+
+Java 实例 – 字符串反转 
+
+Java 实例 - 字符串替换 
+
+如何使用java替换字符串中的字符呢？ 
+
+以下实例中我们使用 java String 类的 replace 方法来替换字符串中的字符： 
+
+StringReplaceEmp.java 文件 
+
+public class StringReplaceEmp { public static void main ( String args [ ] ) { String str = " Hello World " ; System . out . println ( str . replace ( ' H ' , ' W ' ) ) ; System . out . println ( str . replaceFirst ( " He " , " Wa " ) ) ; System . out . println ( str . replaceAll ( " He " , " Ha " ) ) ; } } 
+
+以上代码实例输出结果为： 
+
+Wello World
+Wallo World
+Hallo World 
+
+AI 思考中... 
+
+Java 实例 – 删除字符串中的一个字符 
+
+Java 实例 – 字符串反转

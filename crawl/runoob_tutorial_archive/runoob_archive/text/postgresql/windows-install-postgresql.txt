@@ -1,0 +1,54 @@
+URL: https://www.runoob.com/postgresql/windows-install-postgresql.html
+Title: Windows 上安装 PostgreSQL | 菜鸟教程
+
+Windows 上安装 PostgreSQL | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+PostgreSQL 教程 
+
+Linux 上安装 PostgreSQL 
+
+Mac OS 上安装 PostgreSQL 
+
+Windows 上安装 PostgreSQL 
+
+这里使用 EnterpriseDB 来下载安装，EnterpriseDB 是全球唯一一家提供基于 PostgreSQL 企业级产品与服务的厂商。 
+
+下载地址： https://www.enterprisedb.com/downloads/postgres-postgresql-downloads 。 
+
+双击下载安装包，开始安装 
+
+你可以修改安装路径 
+
+选择安装组件，不懂的选就是全部勾上： 
+
+设置数据库路径 
+
+设置超级用户的密码 
+
+设置端口号，可以直接用默认就行 
+
+直接点 Next 
+
+点 Next 
+
+去掉勾选，直接点 Finish 
+
+打开 pgAdmin 4 
+
+pgAdmin 主页如下 
+
+点击左侧的 Servers > Postgre SQL 10 
+
+输入密码，点击 OK 即可 
+
+控制面板如下 
+
+打开 SQL Shell(psql) 
+
+AI 思考中... 
+
+Linux 上安装 PostgreSQL 
+
+Mac OS 上安装 PostgreSQL

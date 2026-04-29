@@ -1,0 +1,70 @@
+URL: https://www.runoob.com/vbscript/func-string.html
+Title: VBScript String 函数 | 菜鸟教程
+
+VBScript String 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript StrComp 函数 
+
+VBScript StrReverse 函数 
+
+VBScript String 函数 
+
+String 函数返回包含指定长度的重复字符的一个字符串。 
+
+语法 
+
+String(number,character) 
+
+参数 
+
+描述 
+
+number 
+
+必需。被返回字符串的长度。 
+
+character 
+
+必需。被重复的字符。 
+
+实例 1 
+
+document.write(String(10,"#")) 
+
+Output: 
+
+########## 
+
+实例 2 
+
+document.write(String(4,"*")) 
+
+Output: 
+
+**** 
+
+实例 3 
+
+document.write(String(4,42)) 
+
+Output: 
+
+**** 
+
+实例 4 
+
+document.write(String(4,"XYZ")) 
+
+Output: 
+
+XXXX 
+
+AI 思考中... 
+
+VBScript StrComp 函数 
+
+VBScript StrReverse 函数

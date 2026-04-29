@@ -1,0 +1,100 @@
+URL: https://www.runoob.com/cssref/pr-border-top.html
+Title: CSS border-top 属性 | 菜鸟教程
+
+CSS border-top 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS border-style 属性 
+
+CSS border-top-width 属性 
+
+CSS border-top 属性 
+
+实例 
+
+设置上边框的样式： 
+
+p 
+{ 
+border-style:solid; 
+border-top:thick double #ff0000; 
+} 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+border-top 简写属性把上边框的所有属性设置到一个声明中 
+
+可以按顺序设置如下属性： border-top-width, border-top-style, and border-top-color. 
+
+如果不设置其中的某个值，也不会出问题，比如 border-top:solid #ff0000; 也是允许的。 
+
+默认值： 
+
+not specified 
+
+继承性： 
+
+no 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.borderTop="3px solid blue" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+border-top 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+border-top-width 
+
+规定上边框的宽度。参阅： border-top-width 中可能的值。 
+
+border-top-style 
+
+规定上边框的样式。参阅： border-top-style 中可能的值。 
+
+border-top-color 
+
+规定上边框的颜色。参阅： border-top-color 中可能的值。 
+
+inherit 
+
+规定应该从父元素继承 border-top 属性的设置。 
+
+相关文章 
+
+CSS 教程: CSS Border 
+
+AI 思考中... 
+
+CSS border-style 属性 
+
+CSS border-top-width 属性

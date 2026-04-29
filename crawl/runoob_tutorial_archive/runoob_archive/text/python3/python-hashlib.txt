@@ -1,0 +1,328 @@
+URL: https://www.runoob.com/python3/python-hashlib.html
+Title: Python hashlib 模块 | 菜鸟教程
+
+Python hashlib 模块 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python lambda（匿名函数） 
+
+Python 创建一个简单的任务清单（to-do list） 
+
+Python hashlib 模块 
+
+Python hashlib 模块主要用于进行哈希（hash）操作。 
+
+哈希（Hash）是一种将任意长度的输入数据映射为固定长度输出数据的算法。 
+
+哈希通常用于验证数据的完整性、安全存储密码等场景。 
+
+哈希函数的输出通常是一串看似随机的字母和数字。 
+
+hashlib 模块提供了常见的哈希算法的实现，如 MD5、SHA-1、SHA-256 等。 
+
+要使用 hashlib 函数必须先导入： 
+
+import hashlib 
+
+查看 hashlib 模块中的内容: 
+
+实例 
+
+>>> import hashlib 
+
+>>> dir(hashlib) 
+
+['__all__', '__block_openssl_constructor', '__builtin_constructor_cache', '__builtins__', '__cached__', '__doc__', '__file__', '__get_builtin_constructor', '__loader__', '__name__', '__package__', '__spec__', '_hashlib', 'algorithms_available', 'algorithms_guaranteed', 'blake2b', 'blake2s', 'md5', 'new', 'pbkdf2_hmac', 'scrypt', 'sha1', 'sha224', 'sha256', 'sha384', 'sha3_224', 'sha3_256', 'sha3_384', 'sha3_512', 'sha512', 'shake_128', 'shake_256'] 
+
+以下是 hashlib 模块的一些常用方法和哈希算法的简介： 
+
+常用方法 
+
+hashlib.new(name, data=None) : 创建一个哈希对象。 
+
+name 参数是哈希算法的名称，data 参数是要被哈希的数据。 
+
+实例 
+
+import hashlib 
+
+sha256_hash = hashlib. new ( 'sha256' ) 
+
+sha256_hash. update ( b 'RUNOOB' ) 
+
+print ( sha256_hash. hexdigest ( ) ) 
+
+输出结果为： 
+
+673dc967d03201db7fe47b7eabd56c47ca5bc694222de303106a5504e5d0daa8 
+
+hashlib.md5() / hashlib.sha1() / hashlib.sha256() / ... : 直接使用特定的哈希算法创建哈希对象。 
+
+实例 
+
+import hashlib 
+
+md5_hash = hashlib. md5 ( b 'RUNOOB' ) 
+
+print ( md5_hash. hexdigest ( ) ) 
+
+输出结果为： 
+
+18fa661e2a4a7dd6471cc1407290cf6e 
+
+哈希对象方法 
+
+update(data) : 更新哈希对象的消息内容。 
+
+实例 
+
+import hashlib 
+
+sha256_hash = hashlib. sha256 ( ) 
+
+sha256_hash. update ( b 'Hello, ' ) 
+
+sha256_hash. update ( b 'Runoob!' ) 
+
+print ( sha256_hash. hexdigest ( ) ) 
+
+输出结果为： 
+
+1b56561022276e9a5a8e1cda72e1b39fca6f6074326a74d39f6dfd9540c8ecd7 
+
+hexdigest() : 获取十六进制表示的哈希值。 
+
+实例 
+
+import hashlib 
+
+md5_hash = hashlib. md5 ( b 'RUNOOB' ) 
+
+print ( md5_hash. hexdigest ( ) ) 
+
+输出结果为： 
+
+18fa661e2a4a7dd6471cc1407290cf6e 
+
+digest() : 获取二进制表示的哈希值。 
+
+实例 
+
+import hashlib 
+
+sha1_hash = hashlib. sha1 ( b 'RUNOOB' ) 
+
+print ( sha1_hash. digest ( ) ) 
+
+输出结果为： 
+
+b'4\x17\t\xd0\xdb\xc2f3/\x1c\xbc\xd8\xc2_\xd4\xa0T\x12\xb7\xd4' 
+
+常见哈希算法 
+
+MD5 
+
+实例 
+
+import hashlib 
+
+md5_hash = hashlib. md5 ( b 'RUNOOB' ) 
+
+print ( md5_hash. hexdigest ( ) ) 
+
+输出结果为： 
+
+18fa661e2a4a7dd6471cc1407290cf6e 
+
+SHA-1 
+
+实例 
+
+import hashlib 
+
+sha1_hash = hashlib. sha1 ( b 'RUNOOB' ) 
+
+print ( sha1_hash. hexdigest ( ) ) 
+
+输出结果为： 
+
+341709d0dbc266332f1cbcd8c25fd4a05412b7d4 
+
+SHA-256 
+
+实例 
+
+import hashlib 
+
+sha256_hash = hashlib. sha256 ( b 'RUNOOB' ) 
+
+print ( sha256_hash. hexdigest ( ) ) 
+
+输出结果为： 
+
+673dc967d03201db7fe47b7eabd56c47ca5bc694222de303106a5504e5d0daa8 
+
+SHA-512 
+
+实例 
+
+import hashlib 
+
+sha512_hash = hashlib. sha512 ( b 'RUNOOB' ) 
+
+print ( sha512_hash. hexdigest ( ) ) 
+
+输出结果为： 
+
+7cfe50493eebd48ee7330c797459c2d0d5ca943bd1c84ad7a0b6783b11cd49d06b4a1dc84ee9ea5e20d0bfedbdb67e716500a20e5870abecea3f32dc8484a811 
+
+在实际应用中，选择合适的哈希算法取决于具体的需求。需要注意的是，MD5 和 SHA-1 已经被认为不安全，特别是在安全领域，推荐使用更强大的算法，如 SHA-256 或 SHA-512。 
+
+Python hashlib 模块中常见的哈希算法及其含义： 
+
+算法名称 
+
+摘要长度（位） 
+
+输出长度（字节） 
+
+安全性 
+
+用途 
+
+md5 
+
+128 
+
+16 
+
+不安全 
+
+数据完整性验证、密码存储等 
+
+sha1 
+
+160 
+
+20 
+
+不安全 
+
+数据完整性验证、密码存储等 
+
+sha224 
+
+224 
+
+28 
+
+低 
+
+数据完整性验证、数字签名等 
+
+sha256 
+
+256 
+
+32 
+
+中等 
+
+数据完整性验证、数字签名等 
+
+sha384 
+
+384 
+
+48 
+
+高 
+
+数字签名、加密算法等 
+
+sha512 
+
+512 
+
+64 
+
+高 
+
+数字签名、加密算法等 
+
+sha3_224 
+
+224 
+
+28 
+
+高 
+
+未来标准的 SHA-3 家族成员，适用于数字签名等 
+
+sha3_256 
+
+256 
+
+32 
+
+高 
+
+未来标准的 SHA-3 家族成员，适用于数字签名等 
+
+sha3_384 
+
+384 
+
+48 
+
+高 
+
+未来标准的 SHA-3 家族成员，适用于数字签名等 
+
+sha3_512 
+
+512 
+
+64 
+
+高 
+
+未来标准的 SHA-3 家族成员，适用于数字签名等 
+
+shake_128 
+
+可变 
+
+可变 
+
+高 
+
+SHAKE 系列是 SHA-3 家族的可变长度版本，适用于各种应用 
+
+shake_256 
+
+可变 
+
+可变 
+
+高 
+
+SHAKE 系列是 SHA-3 家族的可变长度版本，适用于各种应用 
+
+说明： 
+
+摘要长度（位）： 表示哈希算法输出的摘要长度，以位为单位。 
+
+输出长度（字节）： 表示哈希算法输出的摘要长度，以字节为单位。 
+
+安全性： 表示哈希算法的安全性级别，包括 "不安全"、"低"、"中等"、"高"。这是一个一般性的分类，具体的安全性还要考虑算法的用途和具体的攻击场景。 
+
+AI 思考中... 
+
+Python lambda（匿名函数） 
+
+Python 创建一个简单的任务清单（to-do list）

@@ -1,0 +1,127 @@
+URL: https://www.runoob.com/vbscript/func-filter.html
+Title: VBScript Filter 函数 | 菜鸟教程
+
+VBScript Filter 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Array 函数 
+
+VBScript IsArray 函数 
+
+VBScript Filter 函数 
+
+Filter 函数返回一个基于 0 的数组，此数组包含以特定过滤条件为基础的字符串数组的子集。 
+
+注意： 如果找不到与 value 参数相匹配的值，Filter 函数会返回一个空数组。 
+
+注意： 如果参数 inputstrings 为 Null 或者不是一维数组，则会发生错误。 
+
+语法 
+
+Filter(inputstrings,value[,include[,compare]]) 
+
+参数 
+
+描述 
+
+inputstrings 
+
+必需。要检索的一维字符串数组。 
+
+value 
+
+必需。要搜索的字符串。 
+
+include 
+
+可选。Boolean 值，指定返回的子字符串是否包含 Value。如果 Include 为 True，Filter 将返回包含子字符串 Value 的数组子集。如果 Include 为 False，Filter 将返回不包含子字符串 Value 的数组子集。默认值为 True。 
+
+compare 
+
+可选。规定要使用的字符串比较类型。 
+
+可采用下列的值： 
+
+0 = vbBinaryCompare - 执行二进制比较 
+
+1 = vbTextCompare - 执行文本比较 
+
+实例 
+
+实例 1 
+
+Filter：项目包含的 "S"： 
+
+<script type="text/vbscript"> 
+
+a=Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday") 
+b=Filter(a,"S") 
+for each x in b 
+document.write(x & "<br />") 
+next 
+
+</script> 
+
+以上实例输出结果： 
+
+Sunday 
+Saturday 
+
+尝试一下 » 
+
+实例 2 
+
+Filter：项目不包含的 "S"（include=False）： 
+
+<script type="text/vbscript"> 
+
+a=Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday") 
+b=Filter(a,"S",False) 
+for each x in b 
+document.write(x & "<br />") 
+next 
+
+</script> 
+
+以上实例输出结果： 
+
+Monday 
+Tuesday 
+Wednesday 
+Thursday 
+Friday 
+
+尝试一下 » 
+
+实例 3 
+
+Filter：包含 "S" 的项目，用文本比较（compare=1）： 
+
+<script type="text/vbscript"> 
+
+a=Array("Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday") 
+b=Filter(a,"S",True,1) 
+for each x in b 
+document.write(x & "<br />") 
+next 
+
+</script> 
+
+以上实例输出结果： 
+
+Sunday 
+Tuesday 
+Wednesday 
+Thursday 
+Saturday 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Array 函数 
+
+VBScript IsArray 函数

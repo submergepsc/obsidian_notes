@@ -1,0 +1,53 @@
+URL: https://www.runoob.com/xslfo/obj-multi-case.html
+Title: XSL-FO multi-case 对象 | 菜鸟教程
+
+XSL-FO multi-case 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO marker 对象 
+
+XSL-FO multi-properties 对象 
+
+XSL-FO multi-case 对象 
+
+定义和用法 
+
+<fo:multi-case> 对象包含 XSL-FO 对象的每个供选择的子树（在 <fo:multi-switch> 内部）。父元素 <fo:multi-switch> 会选择要显示的那个选项并隐藏其余的选项。 
+
+语法 
+
+<fo:multi-case> 
+<!-- 
+Contents:(#PCDATA|bidi-override|character| 
+external-graphic|instream-foreign-object| 
+inline|inline-container|leader|page-number| 
+page-number-citation|basic-link|multi-toggle| 
+block|block-container|table-and-caption| 
+table|list-block)* 
+--> 
+</fo:multi-case> 
+
+属性 
+
+属性 
+
+case-name 
+
+case-title 
+
+id 
+
+role 
+
+source-document 
+
+starting-state 
+
+AI 思考中... 
+
+XSL-FO marker 对象 
+
+XSL-FO multi-properties 对象

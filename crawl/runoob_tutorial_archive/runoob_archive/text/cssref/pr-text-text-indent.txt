@@ -1,0 +1,93 @@
+URL: https://www.runoob.com/cssref/pr-text-text-indent.html
+Title: CSS text-indent 属性 | 菜鸟教程
+
+CSS text-indent 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS text-decoration 属性 
+
+CSS3 text-justify 属性 
+
+CSS text-indent 属性 
+
+实例 
+
+缩进段落的第一行50像素： 
+
+p 
+{ 
+text-indent:50px; 
+} 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+text-indent 属性规定文本块中首行文本的缩进。 
+
+注意： 负值是允许的。如果值是负数，将第一行左缩进。 
+
+默认值： 
+
+0 
+
+继承： 
+
+yes 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.textIndent="50px" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+text-indent 
+
+1.0 
+
+3.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+length 
+
+定义固定的缩进。默认值：0。 
+
+% 
+
+定义基于父元素宽度的百分比的缩进。 
+
+inherit 
+
+规定应该从父元素继承 text-indent 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS 文本 
+
+AI 思考中... 
+
+CSS text-decoration 属性 
+
+CSS3 text-justify 属性

@@ -1,0 +1,82 @@
+URL: https://www.runoob.com/xsl/el-attribute.html
+Title: XSLT <xsl:attribute> 元素 | 菜鸟教程
+
+XSLT <xsl:attribute> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:apply-templates> 元素 
+
+XSLT <xsl:attribute-set> 元素 
+
+XSLT <xsl:attribute> 元素 
+
+定义和用法 
+
+<xsl:attribute>元素用于向元素添加属性。 
+
+注释：<xsl:attribute> 元素会替换名称相同的已有属性。 
+
+语法 
+
+<xsl:attribute name="attributename" namespace="uri"> 
+
+<!-- Content:template --> 
+
+</xsl:attribute> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+name 
+
+attributename 
+
+必需。规定属性的名称。 
+
+namespace 
+
+URI 
+
+可选。为属性定义命名空间的 URI。 
+
+实例 1 
+
+向 picture 元素添加 source 属性： 
+
+<picture> 
+<xsl:attribute name="source"/> 
+</picture> 
+
+实例 2 
+
+向 picture 元素添加 source 属性，并使用 "images/name" 中的值为其赋值： 
+
+<picture> 
+<xsl:attribute name="source"> 
+<xsl:value-of select="images/name" /> 
+</xsl:attribute> 
+</picture> 
+
+实例 3 
+
+创建能够应用到任何输出元素的属性集： 
+
+<xsl:attribute-set name="font"> 
+<xsl:attribute name="fname">Arial</xsl:attribute> 
+<xsl:attribute name="size">14px</xsl:attribute> 
+<xsl:attribute name="color">red</xsl:attribute> 
+</xsl:attribute-set> 
+
+AI 思考中... 
+
+XSLT <xsl:apply-templates> 元素 
+
+XSLT <xsl:attribute-set> 元素

@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/net-address.html
+Title: Java 实例 – 获取指定主机的IP地址 | 菜鸟教程
+
+Java 实例 – 获取指定主机的IP地址 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – List 循环移动元素 
+
+Java 实例 – 使用 Socket 连接到指定主机 
+
+Java 实例 - 获取指定主机的IP地址 
+
+以下实例演示了如何使用 InetAddress 类的 InetAddress.getByName() 方法来获取指定主机（网址）的IP地址： 
+
+Main.java 文件 
+
+import java . net . InetAddress ; import java . net . UnknownHostException ; public class GetIP { public static void main ( String [ ] args ) { InetAddress address = null ; try { address = InetAddress . getByName ( " www.runoob.com " ) ; } catch ( UnknownHostException e ) { System . exit ( 2 ) ; } System . out . println ( address . getHostName ( ) + " = " + address . getHostAddress ( ) ) ; System . exit ( 0 ) ; } } 
+
+以上代码运行输出结果为： 
+
+www.runoob.com=222.73.134.120 
+
+AI 思考中... 
+
+Java 实例 – List 循环移动元素 
+
+Java 实例 – 使用 Socket 连接到指定主机

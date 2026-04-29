@@ -1,0 +1,165 @@
+URL: https://www.runoob.com/xml/xml-server.html
+Title: 服务器上的 XML | 菜鸟教程
+
+服务器上的 XML | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML 教程 
+
+XML 编码 
+
+XML DOM 高级 
+
+服务器上的 XML 
+
+XML 文件是类似 HTML 文件的纯文本文件。 
+
+XML 能够通过标准的 Web 服务器轻松地存储和生成。 
+
+在服务器上存储 XML 文件 
+
+XML 文件在 Internet 服务器上进行存储的方式与 HTML 文件完全相同。 
+
+启动 Windows 记事本，并写入以下行： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<note> 
+<from>Jani</from> 
+<to>Tove</to> 
+<message>Remember me this weekend</message> 
+</note> 
+
+然后用适当的文件名，比如 "note.xml"，在 Web 服务器上保存这个文件。 
+
+通过 ASP 生成 XML 
+
+XML 可在不安装任何 XML 软件的情况下在服务器端生成。 
+
+如需从服务器生成 XML 响应 - 只需简单地编写以下代码并在 Web 服务器上把它保存为一个 ASP 文件： 
+
+<% 
+response.ContentType="text/xml" 
+response.Write("<?xml version='1.0' encoding='ISO-8859-1'?>") 
+response.Write("<note>") 
+response.Write("<from>Jani</from>") 
+response.Write("<to>Tove</to>") 
+response.Write("<message>Remember me this weekend</message>") 
+response.Write("</note>") 
+%> 
+
+请注意，此响应的内容类型必须设置为 "text/xml"。 
+
+查看这个 ASP 文件如何从服务器返回 。 
+
+如果您想要学习 ASP，请在我们的 首页 查找 ASP 教程。 
+
+通过 PHP 生成 XML 
+
+如需使用 PHP 从服务器上生成 XML 响应，请使用下面的代码： 
+
+<?php 
+header("Content-type: text/xml"); 
+echo "<?xml version='1.0' encoding='ISO-8859-1'?>"; 
+echo "<note>"; 
+echo "<from>Jani</from>"; 
+echo "<to>Tove</to>"; 
+echo "<message>Remember me this weekend</message>"; 
+echo "</note>"; 
+?> 
+
+请注意，响应头部的内容类型必须设置为 "text/xml"。 
+
+查看这个 PHP 文件如何从服务器返回 。 
+
+如果您想要学习 PHP，请在我们的 首页 查找 PHP 教程。 
+
+从数据库生成 XML 
+
+XML 可在不安装任何 XML 软件的情况下从数据库生成。 
+
+如需从服务器生成 XML 数据库响应，只需简单地编写以下代码，并把它在 Web 服务器上保存为 ASP 文件： 
+
+<% 
+response.ContentType = "text/xml" 
+set conn=Server.CreateObject("ADODB.Connection") 
+conn.provider="Microsoft.Jet.OLEDB.4.0;" 
+conn.open server.mappath("/db/database.mdb") 
+
+sql="select fname,lname from tblGuestBook" 
+set rs=Conn.Execute(sql) 
+
+response.write("<?xml version='1.0' encoding='ISO-8859-1'?>") 
+response.write("<guestbook>") 
+while (not rs.EOF) 
+response.write("<guest>") 
+response.write("<fname>" & rs("fname") & "</fname>") 
+response.write("<lname>" & rs("lname") & "</lname>") 
+response.write("</guest>") 
+rs.MoveNext() 
+wend 
+
+rs.close() 
+conn.close() 
+response.write("</guestbook>") 
+%> 
+
+查看以上 ASP 文件的实际数据库输出 。 
+
+上面的实例使用了带有 ADO 的 ASP。 
+
+如果您想要学习 ASP 和 ADO，请在我们的 首页 查找相关教程。 
+
+在服务器上通过 XSLT 转换 XML 
+
+下面的 ASP 代码在服务器上把 XML 文件转换为 XHTML： 
+
+<% 
+'Load XML 
+set xml = Server.CreateObject("Microsoft.XMLDOM") 
+xml.async = false 
+xml.load(Server.MapPath("simple.xml")) 
+
+'Load XSL 
+set xsl = Server.CreateObject("Microsoft.XMLDOM") 
+xsl.async = false 
+xsl.load(Server.MapPath("simple.xsl")) 
+
+'Transform file 
+Response.Write(xml.transformNode(xsl)) 
+%> 
+
+实例解释 
+
+第一个代码块创建微软 XML 解析器的实例（XMLDOM），并把 XML 文件载入内存。 
+
+第二个代码块创建解析器的另一个实例，并把 XSL 文件载入内存。 
+
+最后一个代码使用 XSL 文档来转换 XML 文档，并把结果以 XHTML 发送到您的浏览器。 
+
+看看上面的代码怎么运行 。 
+
+通过 ASP 把 XML 保存为文件 
+
+这个 ASP 实例会创建一个简单的 XML 文档，并把该文档保存到服务器上： 
+
+<% 
+text="<note>" 
+text=text & "<to>Tove</to>" 
+text=text & "<from>Jani</from>" 
+text=text & "<heading>Reminder</heading>" 
+text=text & "<body>Don't forget me this weekend!</body>" 
+text=text & "</note>" 
+
+set xmlDoc=Server.CreateObject("Microsoft.XMLDOM") 
+xmlDoc.async=false 
+xmlDoc.loadXML(text) 
+
+xmlDoc.Save("test.xml") 
+%> 
+
+AI 思考中... 
+
+XML 编码 
+
+XML DOM 高级

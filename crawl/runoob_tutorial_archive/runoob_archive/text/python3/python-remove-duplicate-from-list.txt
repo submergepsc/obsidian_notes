@@ -1,0 +1,142 @@
+URL: https://www.runoob.com/python3/python-remove-duplicate-from-list.html
+Title: Python 移除列表中重复的元素 | 菜鸟教程
+
+Python 移除列表中重复的元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 数据类型转换 
+
+Python 推导式 
+
+Python 移除列表中重复的元素 
+
+本章节我们将学习如何从列表中删除重复的元素。 
+
+知识点有： 
+
+Python 集合 ：集合（set）是一个无序的不重复元素序列。 
+
+Python 列表 ：列表是一种数据项构成的有限序列，即按照一定的线性顺序排列而成的数据项的集合，在这种数据结构上进行的基本操作包括对元素的的查找、插入和删除。 
+
+实例 
+
+list_1 = [ 1 , 2 , 1 , 4 , 6 ] 
+
+print ( list ( set ( list_1 ) ) ) 
+
+执行以上代码输出结果为： 
+
+[1, 2, 4, 6] 
+
+在以上实例中，我们首先将列表转换为集合，然后再次将其转换为列表。集合中不能有重复元素，因此 set() 会删除重复的元素。 
+
+如果需要保持原始列表中元素的顺序，可以使用一个辅助集合来跟踪已经见过的元素，然后构建一个新的列表。 
+
+实例 
+
+# 使用辅助集合保持顺序地去重 
+
+def remove_duplicates ( lst ) : 
+
+seen = set ( ) 
+
+unique_list = [ ] 
+
+for item in lst: 
+
+if item not in seen: 
+
+seen. add ( item ) 
+
+unique_list. append ( item ) 
+
+return unique_list 
+
+# 示例 
+
+original_list = [ 1 , 2 , 2 , 3 , 4 , 4 , 5 ] 
+
+unique_list = remove_duplicates ( original_list ) 
+
+print ( unique_list ) # 输出: [1, 2, 3, 4, 5] 
+
+使用 dict.fromkeys() 
+
+dict.fromkeys() 方法也可以用于去重并保持顺序，因为字典在 Python 3.7 及以上版本中保持插入顺序。 
+
+实例 
+
+# 使用dict.fromkeys()保持顺序地去重 
+
+def remove_duplicates ( lst ) : 
+
+return list ( dict . fromkeys ( lst ) ) 
+
+# 示例 
+
+original_list = [ 1 , 2 , 2 , 3 , 4 , 4 , 5 ] 
+
+unique_list = remove_duplicates ( original_list ) 
+
+print ( unique_list ) # 输出: [1, 2, 3, 4, 5] 
+
+执行以上代码输出结果为： 
+
+[1, 2, 3, 4, 5] 
+
+使用列表推导式 
+
+列表推导式结合条件判断也可以实现去重功能。 
+
+实例 
+
+# 使用列表推导式去重 
+
+def remove_duplicates ( lst ) : 
+
+unique_list = [ ] 
+
+[ unique_list. append ( item ) for item in lst if item not in unique_list ] 
+
+return unique_list 
+
+# 示例 
+
+original_list = [ 1 , 2 , 2 , 3 , 4 , 4 , 5 ] 
+
+unique_list = remove_duplicates ( original_list ) 
+
+print ( unique_list ) # 输出: [1, 2, 3, 4, 5] 
+
+删除两个列表中重复的元素 
+
+在以下实例中，两个列表中同时存在的元素会被删除。 
+
+实例 
+
+list_1 = [ 1 , 2 , 1 , 4 , 6 ] 
+
+list_2 = [ 7 , 8 , 2 , 1 ] 
+
+print ( list ( set ( list_1 ) ^ set ( list_2 ) ) ) 
+
+首先，使用 set() 将两个列表转换为两个集合，用于删除列表中的重复元素。 
+
+然后，使用 ^ 运算符得到两个列表的对称差。 
+
+执行以上代码输出结果为： 
+
+[4, 6, 7, 8] 
+
+首先，将两个列表转换为两个集合，以从每个列表中删除重复项。 
+
+然后， ^ 得到两个列表的对称差（排除两个集合的重叠元素）。 
+
+AI 思考中... 
+
+Python3 数据类型转换 
+
+Python 推导式

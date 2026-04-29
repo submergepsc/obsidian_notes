@@ -1,0 +1,67 @@
+URL: https://www.runoob.com/tags/tag-summary.html
+Title: HTML <summary> 标签 | 菜鸟教程
+
+HTML <summary> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <sub> 标签 
+
+HTML <sup> 标签 
+
+HTML <summary> 标签 
+
+实例 
+
+使用 <summary> 元素： 
+
+< details > < summary > Epcot Center </ summary > < p > Epcot is a theme park at Walt Disney World Resort featuring exciting attractions, international pavilions, award-winning fireworks and seasonal special events. </ p > </ details > 
+
+尝试一下 » 
+
+浏览器支持 
+
+表格中的数字表示支持该元素的第一个浏览器版本号。 
+
+元素 
+
+<summary> 
+
+12.0 
+
+79.0 
+
+49.0 
+
+6.0 
+
+15.0 
+
+标签定义及使用说明 
+
+<summary> 标签为 <details> 元素定义一个可见的标题。
+当用户点击标题时会显示出详细信息。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+<summary> 标签是 HTML5 中的新标签。 
+
+提示和注释 
+
+注释： <summary> 元素应该是 <details> 元素的第一个子元素。 
+
+全局属性 
+
+<summary> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<summary> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <sub> 标签 
+
+HTML <sup> 标签

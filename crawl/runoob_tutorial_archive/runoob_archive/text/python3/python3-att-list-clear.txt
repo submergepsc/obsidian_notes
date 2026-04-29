@@ -1,0 +1,56 @@
+URL: https://www.runoob.com/python3/python3-att-list-clear.html
+Title: Python3 List clear()方法 | 菜鸟教程
+
+Python3 List clear()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 List sort()方法 
+
+Python3 List copy()方法 
+
+Python3 List clear()方法 
+
+描述 
+
+clear() 函数用于清空列表，类似于 del a[:] 。 
+
+语法 
+
+clear()方法语法： 
+
+list.clear() 
+
+参数 
+
+无。 
+
+返回值 
+
+该方法没有返回值。 
+
+实例 
+
+以下实例展示了 clear()函数的使用方法： 
+
+实例 
+
+#!/usr/bin/python3 
+
+list1 = [ 'Google' , 'Runoob' , 'Taobao' , 'Baidu' ] 
+
+list1. clear ( ) 
+
+print ( "列表清空后 : " , list1 ) 
+
+以上实例输出结果如下： 
+
+列表清空后 : [] 
+
+AI 思考中... 
+
+Python3 List sort()方法 
+
+Python3 List copy()方法

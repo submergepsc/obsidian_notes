@@ -1,0 +1,66 @@
+URL: https://www.runoob.com/vbscript/func-cstr.html
+Title: VBScript CStr 函数 | 菜鸟教程
+
+VBScript CStr 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript CSng 函数 
+
+VBScript Hex 函数 
+
+VBScript CStr 函数 
+
+CStr 函数把表达式转换为字符串（String）类型。 
+
+语法 
+
+CStr(expression) 
+
+参数 
+
+描述 
+
+expression 
+
+必需。任何有效的表达式。 
+
+如果表达式是： 
+
+Boolean - CStr 函数将返回一个字符串，其中包含 true 或 false。 
+
+Date - CStr 函数将返回一个字符串，其中包含短日期格式的日期。 
+
+Null - 将发生 run-time 错误。 
+
+Empty - CStr 函数将返回一个空字符串（""）。 
+
+Error - CStr 函数将返回一个字符串，其中包含单词 "Error" 和错误号码。 
+
+Other numeric - CStr 函数将返回一个字符串，其中包含数字。 
+
+实例 
+
+实例 
+
+<script type="text/vbscript"> 
+
+document.write(CStr("300000") & "<br />") 
+document.write(CStr(#10-05-25#) & "<br />") 
+
+</script> 
+
+以上实例输出结果： 
+
+300000 
+10/5/2025 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript CSng 函数 
+
+VBScript Hex 函数

@@ -1,0 +1,50 @@
+URL: https://www.runoob.com/tags/av-prop-paused.html
+Title: HTML 音频/视频 DOM paused 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM paused 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM networkState 属性 
+
+HTML 音频/视频 DOM playbackRate 属性 
+
+HTML 音频/视频 DOM paused 属性 
+
+实例 
+
+检查视频是否已暂停： 
+
+myVid=document.getElementById("video1"); 
+alert(myVid.paused); 
+
+尝试一下 » 
+
+定义和用法 
+
+paused 属性返回音频/视频是否已暂停。 
+
+浏览器支持 
+
+所有主流浏览器都支持 paused 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持该属性。 
+
+语法 
+
+audio|video .paused 
+
+技术细节 
+
+返回值： 
+
+布尔值，true|false. 
+true 指示音频/视频已暂停，否则为 false。 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM networkState 属性 
+
+HTML 音频/视频 DOM playbackRate 属性

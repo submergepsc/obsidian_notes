@@ -1,0 +1,111 @@
+URL: https://www.runoob.com/cssref/css3-pr-text-shadow.html
+Title: CSS3 text-shadow 属性 | 菜鸟教程
+
+CSS3 text-shadow 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 text-overflow 属性 
+
+CSS text-transform 属性 
+
+CSS3 text-shadow 属性 
+
+实例 
+
+基本文字阴影（text-shadow）： 
+
+h1 
+{ 
+text-shadow: 2px 2px #ff0000; 
+} 
+
+尝试一下 » 
+在此页底部有更多的例子。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+text-shadow 
+
+4.0 
+
+10.0 
+
+3.5 
+
+4.0 
+
+9.6 
+
+属性定义及使用说明 
+
+text-shadow 属性应用于阴影文本。 
+
+默认值： 
+
+none 
+
+继承： 
+
+yes 
+
+版本： 
+
+CSS3 
+
+JavaScript 语法： 
+
+object .style.textShadow="2px 2px #ff0000" 
+
+语法 
+
+text-shadow: h-shadow v-shadow blur color ; 
+
+注意： text-shadow属性连接一个或更多的阴影文本。属性是阴影，指定的每2或3个长度值和一个可选的颜色值用逗号分隔开来。已失时效的长度为0。 
+
+值 
+
+描述 
+
+h-shadow 
+
+必需。水平阴影的位置。允许负值。 
+
+v-shadow 
+
+必需。垂直阴影的位置。允许负值。 
+
+blur 
+
+可选。模糊的距离。 
+
+color 
+
+可选。阴影的颜色。参阅 CSS 颜色值 。 
+
+更多实例 
+
+文字阴影模糊效果 
+这个例子演示了一个文字阴影模糊效果。 
+
+白色文字上的文字阴影 
+这个例子演示了一个白色的文本文字阴影。 
+
+氖辉光文字阴影 
+这个例子演示了用霓虹灯的光芒文字阴影。 
+
+相关文章 
+
+CSS3 教程: 
+
+AI 思考中... 
+
+CSS3 text-overflow 属性 
+
+CSS text-transform 属性

@@ -1,0 +1,54 @@
+URL: https://www.runoob.com/xsl/el-call-template.html
+Title: XSLT <xsl:call-template> 元素 | 菜鸟教程
+
+XSLT <xsl:call-template> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:attribute-set> 元素 
+
+XSLT <xsl:choose> 元素 
+
+XSLT <xsl:call-template> 元素 
+
+定义和用法 
+
+<xsl:call-template> 元素可调用一个指定的模板。 
+
+语法 
+
+<xsl:call-template name="templatename"> 
+
+<!-- Content:xsl:with-param* --> 
+
+</xsl:call-template> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+name 
+
+templatename 
+
+必需。规定被调用的模板名称。 
+
+实例 1 
+
+当处理程序找到一个 car 元素时，调用名为 "description" 的模板： 
+
+<xsl:template match="car"> 
+<xsl:call-template name="description"/> 
+</xsl:template> 
+
+AI 思考中... 
+
+XSLT <xsl:attribute-set> 元素 
+
+XSLT <xsl:choose> 元素

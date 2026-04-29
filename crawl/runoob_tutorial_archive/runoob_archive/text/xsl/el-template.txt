@@ -1,0 +1,114 @@
+URL: https://www.runoob.com/xsl/el-template.html
+Title: XSLT <xsl:template> 元素 | 菜鸟教程
+
+XSLT <xsl:template> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:stylesheet> 和 <xsl:transform> 元素 
+
+XSLT <xsl:text> 元素 
+
+XSLT <xsl:template> 元素 
+
+定义和用法 
+
+<xsl:template> 元素包含了当匹配指定节点时要应用的规则。 
+
+match 属性用于把模板关联到某个 XML 元素。match 属性也能用于为 XML 文档的全部分支定义模板（比如，match="/" 定义了整个文档）。 
+
+注意： <xsl:template> 是顶层元素（top-level element）。 
+
+语法 
+
+<xsl:template 
+name="name" 
+match="pattern" 
+mode="mode" 
+priority="number"> 
+
+<!-- Content:(<xsl:param>*,template) --> 
+
+</xsl:template> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+name 
+
+name 
+
+可选。为模板定义名称。 
+
+注释： 如果省略该属性，则必须设置 match 属性。 
+
+match 
+
+pattern 
+
+可选。模板的匹配模式。 
+
+注释： 如果省略该属性，则必须设置 name 属性。 
+
+mode 
+
+mode 
+
+可选。为模板规定模式。 
+
+priority 
+
+number 
+
+可选。一个表示模板的优先级编号的数字。 
+
+实例 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<h2>My CD Collection</h2> 
+<xsl:apply-templates/> 
+</body> 
+</html> 
+</xsl:template> 
+
+<xsl:template match="cd"> 
+<p> 
+<xsl:apply-templates select="title"/> 
+<xsl:apply-templates select="artist"/> 
+</p> 
+</xsl:template> 
+
+<xsl:template match="title"> 
+Title: <span style="color:#ff0000"> 
+<xsl:value-of select="."/></span> 
+<br /> 
+</xsl:template> 
+
+<xsl:template match="artist"> 
+Artist: <span style="color:#00ff00"> 
+<xsl:value-of select="."/></span> 
+<br /> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+查看 XML 文件 、 查看 XSL 文件 、 查看结果 。 
+
+AI 思考中... 
+
+XSLT <xsl:stylesheet> 和 <xsl:transform> 元素 
+
+XSLT <xsl:text> 元素

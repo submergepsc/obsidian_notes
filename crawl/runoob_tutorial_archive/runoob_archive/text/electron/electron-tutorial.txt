@@ -1,0 +1,128 @@
+URL: https://www.runoob.com/electron/electron-tutorial.html
+Title: Electron 教程 | 菜鸟教程
+
+Electron 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Electron 教程 
+
+Electron 简介 
+
+Electron 教程 
+
+Electron（原名 Atom Shell） 是由 GitHub 开发的一个 开源跨平台桌面应用开发框架。 
+
+Electron 是一个开源的框架，专门用于使用 Web 技术（HTML、CSS 和 JavaScript）来构建跨平台的桌面应用程序。 
+
+Electron 让我们可以像写网页一样写桌面应用，比如 Windows 的 .exe、macOS 的 .app、Linux 的可执行文件。 
+
+Electron = Chromium（浏览器引擎） + Node.js（后端能力） + 桌面应用壳。 
+
+学习 Electron 需要的基础知识？ 
+
+学习 Electron 前，掌握这几样就够了： 
+
+会点 JavaScript 。 
+
+会用 Node.js 和 npm 来运行脚本。 
+
+懂点 HTML 和选择器 （比如 #id 、 .class ）； 
+
+能用终端 跑命令。 
+
+核心概念 
+
+想象一下，你平时用浏览器访问网站时，看到的是由 HTML 构建的页面，用 CSS 美化样式，用 JavaScript 实现交互功能。Electron 就像是把一个浏览器打包"起来，让它能够独立运行，不再需要用户手动打开浏览器。 
+
+技术组成 ： 
+
+Chromium ：提供页面渲染引擎，确保你的应用界面能够正常显示 
+
+Node.js ：提供系统级的 API，让你能够访问文件系统、网络等底层功能 
+
+Native APIs ：允许调用操作系统的原生功能，如菜单、对话框等 
+
+为什么选择 Electron？ 
+
+开发优势 
+
+1. 技术栈统一 
+
+使用熟悉的 Web 技术开发 
+
+前端开发者可以快速上手 
+
+丰富的 Web 生态资源可用 
+
+2. 跨平台支持 
+
+一次开发，多平台运行 
+
+支持 Windows、macOS、Linux 
+
+界面和功能在不同系统上保持一致 
+
+3. 开发效率高 
+
+热重载功能，实时预览修改效果 
+
+调试工具完善，可以使用 Chrome DevTools 
+
+社区活跃，问题解决快速 
+
+实例 
+
+假设我们想做一个记事本应用。 
+
+在 Electron 中，你只需要： 
+
+npm install electron 
+
+创建一个 main.js： 
+
+实例 
+
+const { app , BrowserWindow } = require ( 'electron' ) ; 
+
+app. whenReady ( ) . then ( ( ) => { 
+
+const win = new BrowserWindow ( { 
+
+width : 800 , 
+
+height : 600 
+
+} ) ; 
+
+win. loadFile ( 'index.html' ) ; // 这里就是你的网页界面 
+
+} ) ; 
+
+然后 index.html 就是普通网页： 
+
+实例 
+
+< h1 > 我的桌面记事本 < / h1 > 
+
+< textarea >< / textarea > 
+
+运行： 
+
+npx electron . 
+
+这样我们的网页就变身为桌面应用啦！ 
+
+参考资源 
+
+Electron 官网 
+
+Electron 官方文档 
+
+Electron Fiddle - 实验和分享 Electron 代码片段的工具 
+
+awesome-electron - Electron 资源合集 
+
+AI 思考中... 
+
+Electron 简介

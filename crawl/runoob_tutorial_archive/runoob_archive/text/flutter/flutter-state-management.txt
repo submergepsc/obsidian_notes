@@ -1,0 +1,419 @@
+URL: https://www.runoob.com/flutter/flutter-state-management.html
+Title: Flutter 状态管理 | 菜鸟教程
+
+Flutter 状态管理 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Flutter 教程 
+
+Flutter 用户输入 
+
+Flutter HTTP 请求 
+
+Flutter 状态管理 
+
+状态管理是 Flutter 开发中的核心概念。 
+
+本节将介绍 Flutter 内置的状态管理方式，包括 setState、Provider 和 ChangeNotifier。 
+
+什么是状态管理 
+
+状态管理是指管理应用中数据的变化和 UI 更新的机制。当数据发生变化时，UI 需要相应更新，这就是状态管理要解决的问题。 
+
+状态类型 
+
+说明 
+
+例子 
+
+本地状态 
+
+单个 Widget 内部的状态 
+
+输入框文本、动画进度 
+
+共享状态 
+
+多个 Widget 需要共享的状态 
+
+用户登录信息、主题 
+
+应用状态 
+
+整个应用都需要访问的状态 
+
+购物车内容、用户配置 
+
+本地状态 - setState 
+
+对于简单的本地状态，使用 StatefulWidget 和 setState 就足够了。 
+
+实例：计数器示例 
+
+class CounterWidget extends StatefulWidget { 
+
+const CounterWidget ( { super . key } ) ; 
+
+@override 
+
+State < CounterWidget > createState ( ) => _CounterWidgetState ( ) ; 
+
+} 
+
+class _CounterWidgetState extends State < CounterWidget > { 
+
+// 本地状态 
+
+int _count = 0 ; 
+
+// 增加计数 
+
+void _increment ( ) { 
+
+setState ( ( ) { 
+
+_count ++ ; 
+
+} ) ; 
+
+} 
+
+// 减少计数 
+
+void _decrement ( ) { 
+
+setState ( ( ) { 
+
+_count -- ; 
+
+} ) ; 
+
+} 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Column ( 
+
+mainAxisAlignment : MainAxisAlignment. center , 
+
+children : [ 
+
+Text ( '计数: $_count' , style : const TextStyle ( fontSize : 32 ) ) , 
+
+const SizedBox ( height : 20 ) , 
+
+Row ( 
+
+mainAxisAlignment : MainAxisAlignment. center , 
+
+children : [ 
+
+ElevatedButton ( onPressed : _decrement , child : const Text ( '-' ) ) , 
+
+const SizedBox ( width : 20 ) , 
+
+ElevatedButton ( onPressed : _increment , child : const Text ( '+' ) ) , 
+
+] , 
+
+) , 
+
+] , 
+
+) ; 
+
+} 
+
+} 
+
+Provider 状态管理 
+
+Provider 是 Flutter 官方推荐的状态管理方案之一，适合管理跨组件共享的状态。 
+
+安装 Provider 
+
+在 pubspec.yaml 中添加依赖： 
+
+dependencies:
+ provider: ^6.0.0 
+
+ChangeNotifier 模式 
+
+实例：Provider + ChangeNotifier 
+
+// 1. 定义数据模型（继承 ChangeNotifier） 
+
+class CounterModel extends ChangeNotifier { 
+
+int _count = 0 ; 
+
+int get count => _count ; 
+
+void increment ( ) { 
+
+_count ++ ; 
+
+// 通知监听者状态已更改 
+
+notifyListeners ( ) ; 
+
+} 
+
+void decrement ( ) { 
+
+_count -- ; 
+
+notifyListeners ( ) ; 
+
+} 
+
+} 
+
+// 2. 在应用顶层提供数据 
+
+void main ( ) { 
+
+runApp ( 
+
+// 提供 CounterModel 给子组件 
+
+ChangeNotifierProvider ( 
+
+create : ( context ) => CounterModel ( ) , 
+
+child : const MyApp ( ) , 
+
+) , 
+
+) ; 
+
+} 
+
+// 3. 在组件中使用数据 
+
+class CounterDisplay extends StatelessWidget { 
+
+const CounterDisplay ( { super . key } ) ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+// 读取 CounterModel 
+
+final counter = context. watch < CounterModel > ( ) ; 
+
+return Column ( 
+
+children : [ 
+
+Text ( '计数: ${counter.count}' , style : const TextStyle ( fontSize : 32 ) ) , 
+
+ElevatedButton ( 
+
+onPressed : ( ) => counter. increment ( ) , 
+
+child : const Text ( '增加' ) , 
+
+) , 
+
+] , 
+
+) ; 
+
+} 
+
+} 
+
+多 Provider 组合 
+
+实例：多 Provider 使用 
+
+void main ( ) { 
+
+runApp ( 
+
+MultiProvider ( 
+
+providers : [ 
+
+// 用户信息 Provider 
+
+ChangeNotifierProvider ( create : ( _ ) => UserModel ( ) ) , 
+
+// 主题 Provider 
+
+ChangeNotifierProvider ( create : ( _ ) => ThemeModel ( ) ) , 
+
+// 购物车 Provider 
+
+ChangeNotifierProvider ( create : ( _ ) => CartModel ( ) ) , 
+
+] , 
+
+child : const MyApp ( ) , 
+
+) , 
+
+) ; 
+
+} 
+
+// 使用 context.read 当不需要监听变化时 
+
+class SomeWidget extends StatelessWidget { 
+
+const SomeWidget ( { super . key } ) ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+// 读取但不监听 
+
+final user = context. read < UserModel > ( ) ; 
+
+return ElevatedButton ( 
+
+onPressed : ( ) => user. logout ( ) , 
+
+child : const Text ( '退出登录' ) , 
+
+) ; 
+
+} 
+
+} 
+
+状态提升 - Lifting State Up 
+
+当多个子组件需要共享状态时，可以将状态提升到最近的公共父组件。 
+
+实例：状态提升 
+
+// 父组件管理状态 
+
+class ParentWidget extends StatefulWidget { 
+
+const ParentWidget ( { super . key } ) ; 
+
+@override 
+
+State < ParentWidget > createState ( ) => _ParentWidgetState ( ) ; 
+
+} 
+
+class _ParentWidgetState extends State < ParentWidget > { 
+
+// 共享的状态 
+
+bool _isEnabled = false ; 
+
+// 回调方法 
+
+void _toggleEnabled ( ) { 
+
+setState ( ( ) { 
+
+_isEnabled = ! _isEnabled ; 
+
+} ) ; 
+
+} 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Column ( 
+
+children : [ 
+
+// 子组件 A 
+
+ChildWidgetA ( 
+
+isEnabled : _isEnabled , 
+
+) , 
+
+// 子组件 B 
+
+ChildWidgetB ( 
+
+isEnabled : _isEnabled , 
+
+onToggle : _toggleEnabled , 
+
+) , 
+
+] , 
+
+) ; 
+
+} 
+
+} 
+
+// 子组件 A（只显示状态） 
+
+class ChildWidgetA extends StatelessWidget { 
+
+final bool isEnabled ; 
+
+const ChildWidgetA ( { super . key , required this . isEnabled } ) ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return Text ( '状态: ${isEnabled ? "开启" : "关闭"}' ) ; 
+
+} 
+
+} 
+
+// 子组件 B（控制状态） 
+
+class ChildWidgetB extends StatelessWidget { 
+
+final bool isEnabled ; 
+
+final VoidCallback onToggle ; 
+
+const ChildWidgetB ( { 
+
+super . key , 
+
+required this . isEnabled , 
+
+required this . onToggle , 
+
+} ) ; 
+
+@override 
+
+Widget build ( BuildContext context ) { 
+
+return ElevatedButton ( 
+
+onPressed : onToggle , 
+
+child : Text ( isEnabled ? '关闭' : '开启' ) , 
+
+) ; 
+
+} 
+
+} 
+
+状态管理的选择取决于应用规模：简单应用使用 setState，中型应用使用 Provider，复杂应用可以考虑 Riverpod、BLoC 或 GetX 等方案。 
+
+AI 思考中... 
+
+Flutter 用户输入 
+
+Flutter HTTP 请求

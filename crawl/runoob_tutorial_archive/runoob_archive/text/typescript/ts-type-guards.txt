@@ -1,0 +1,527 @@
+URL: https://www.runoob.com/typescript/ts-type-guards.html
+Title: TypeScript 类型守卫 | 菜鸟教程
+
+TypeScript 类型守卫 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+TypeScript 教程 
+
+TypeScript 装饰器 
+
+TypeScript 可选链 
+
+TypeScript 类型守卫 
+
+类型守卫（Type Guards）是 TypeScript 中非常重要的一种类型缩小机制。 
+
+它允许开发者在运行时通过特定的条件检查，让 TypeScript 编译器能够准确推断出变量的具体类型。 
+
+通过类型守卫，我们可以安全地访问联合类型变量中特定类型的属性和方法。 
+
+为什么需要类型守卫 
+
+在 TypeScript 中，一个变量可能被声明为多种类型的联合。 
+
+当我们需要根据不同类型执行不同操作时，编译器无法自动判断当前的具体类型。 
+
+类型守卫就是解决这个问题的关键机制。 
+
+概念说明： 类型守卫的核心原理是"类型缩窄"（Type Narrowing）。通过条件判断，TypeScript 会自动将联合类型缩小为具体的类型。 
+
+typeof 类型守卫 
+
+typeof 是最常用的类型守卫，用于检查原始类型（string、number、boolean 等）。 
+
+它返回一个字符串，表示值的类型。 
+
+typeof 基本用法 
+
+// 定义一个接收联合类型的函数 
+
+// 参数 value 可能是字符串或数字 
+
+function printValue ( value : string | number ) : void { 
+
+// 使用 typeof 检查类型 
+
+// 在 if 条件为 true 时，TypeScript 会自动将 value 缩小为 string 类型 
+
+if ( typeof value === "string" ) { 
+
+// 此时 TypeScript 知道 value 是 string 
+
+// 可以安全地访问字符串的 length 属性 
+
+console. log ( "字符串长度: " + value. length ) ; 
+
+} else { 
+
+// 进入 else 分支时，TypeScript 知道 value 不是 string 
+
+// 只能是 number 类型 
+
+// 可以安全地进行数学运算 
+
+console. log ( "数字翻倍: " + ( value * 2 ) ) ; 
+
+} 
+
+} 
+
+// 测试调用 
+
+printValue ( "hello" ) ; // 传入字符串 
+
+printValue ( 42 ) ; // 传入数字 
+
+运行结果： 
+
+字符串长度: 5
+数字翻倍: 84 
+
+typeof 支持的类型： 
+
+"string" - 字符串类型 
+
+"number" - 数字类型（包括 NaN 和 Infinity） 
+
+"boolean" - 布尔类型 
+
+"undefined" - 未定义类型 
+
+"object" - 对象类型（注意：数组和 null 也会被识别为 "object"） 
+
+"function" - 函数类型 
+
+注意： typeof 对于数组和 null 都会返回 "object"。如果需要精确区分数组和对象，需要使用其他方式。 
+
+instanceof 类型守卫 
+
+instanceof 用于检查对象是否是某个类的实例。 
+
+它通过检查对象的原型链来判断类型。 
+
+instanceof 基本用法 
+
+// 定义 Dog 类 
+
+class Dog { 
+
+// 狗的叫声方法 
+
+bark ( ) : void { 
+
+console. log ( "汪汪汪!" ) ; 
+
+} 
+
+} 
+
+// 定义 Cat 类 
+
+class Cat { 
+
+// 猫的叫声方法 
+
+meow ( ) : void { 
+
+console. log ( "喵喵喵!" ) ; 
+
+} 
+
+} 
+
+// 接收联合类型的函数 
+
+function makeSound ( animal : Dog | Cat ) : void { 
+
+// 使用 instanceof 检查 animal 是 Dog 还是 Cat 
+
+// 在 if 条件为 true 时，TypeScript 将 animal 缩小为 Dog 类型 
+
+if ( animal instanceof Dog ) { 
+
+// 此时可以调用 Dog 特有的方法 
+
+animal. bark ( ) ; 
+
+} else { 
+
+// else 分支中，TypeScript 将 animal 缩小为 Cat 类型 
+
+animal. meow ( ) ; 
+
+} 
+
+} 
+
+// 测试调用 
+
+makeSound ( new Dog ( ) ) ; // 创建 Dog 实例并调用 
+
+makeSound ( new Cat ( ) ) ; // 创建 Cat 实例并调用 
+
+运行结果： 
+
+汪汪汪!
+喵喵喵! 
+
+说明： 
+
+instanceof 检查的是对象的原型链，因此它只能用于类实例，不能用于接口和类型别名。 
+
+自定义类型守卫 
+
+当内置的 typeof 和 instanceof 无法满足需求时，可以创建自定义类型守卫函数。 
+
+自定义类型守卫使用 value is Type 的返回类型语法。 
+
+自定义守卫函数 
+
+// 定义一个自定义类型守卫函数 
+
+// 返回类型使用 "value is Type" 格式 
+
+// 这告诉 TypeScript：当函数返回 true 时，参数类型就是 string 
+
+function isString ( value : any ) : value is string { 
+
+// 使用 typeof 检查是否为字符串 
+
+return typeof value === "string" ; 
+
+} 
+
+// 另一个自定义守卫：检查是否为数字 
+
+function isNumber ( value : any ) : value is number { 
+
+return typeof value === "number" ; 
+
+} 
+
+// 定义一个数组类型守卫 
+
+function isArray ( value : any ) : value is any [ ] { 
+
+return Array . isArray ( value ) ; 
+
+} 
+
+// 处理值的函数 
+
+function processValue ( value : string | number | any [ ] ) : void { 
+
+// 使用自定义守卫进行类型检查 
+
+if ( isString ( value ) ) { 
+
+// TypeScript 知道 value 是 string 类型 
+
+// 可以调用 toUpperCase() 方法 
+
+console. log ( "字符串转大写: " + value. toUpperCase ( ) ) ; 
+
+} else if ( isNumber ( value ) ) { 
+
+// TypeScript 知道 value 是 number 类型 
+
+// 可以调用 toFixed() 方法 
+
+console. log ( "数字格式化: " + value. toFixed ( 2 ) ) ; 
+
+} else if ( isArray ( value ) ) { 
+
+// TypeScript 知道 value 是数组类型 
+
+console. log ( "数组长度: " + value. length ) ; 
+
+} 
+
+} 
+
+// 测试调用 
+
+processValue ( "hello" ) ; 
+
+processValue ( 3.14159 ) ; 
+
+processValue ( [ 1 , 2 , 3 , 4 , 5 ] ) ; 
+
+运行结果： 
+
+字符串转大写: HELLO
+数字格式化: 3.14
+数组长度: 5 
+
+提示： 自定义类型守卫的关键是返回类型 value is Type ，这是 TypeScript 识别类型守卫的标志。 
+
+in 操作符类型守卫 
+
+in 操作符可以检查对象是否包含某个属性。 
+
+在条件判断中使用 in，TypeScript 会自动缩小对象的类型范围。 
+
+in 操作符用法 
+
+// 定义两个接口，它们有不同的属性 
+
+interface A { 
+
+a : string ; // 只有属性 a 
+
+} 
+
+interface B { 
+
+b : number ; // 只有属性 b 
+
+} 
+
+// 接收联合类型的函数 
+
+function process ( obj : A | B ) : void { 
+
+// 使用 in 检查对象是否包含属性 "a" 
+
+if ( "a" in obj ) { 
+
+// 在 if 分支中，TypeScript 知道 obj 包含属性 a 
+
+// 因此 obj 的类型被缩小为 A 
+
+console. log ( "A 的属性 a: " + obj. a ) ; 
+
+} else { 
+
+// else 分支中，obj 不包含属性 a 
+
+// TypeScript 知道 obj 只能是 B 类型 
+
+// 因此可以安全访问属性 b 
+
+console. log ( "B 的属性 b: " + obj. b ) ; 
+
+} 
+
+} 
+
+// 测试调用 
+
+process ( { a : "hello" } ) ; // 传入包含属性 a 的对象 
+
+process ( { b : 42 } ) ; // 传入包含属性 b 的对象 
+
+运行结果： 
+
+A 的属性 a: hello
+B 的属性 b: 42 
+
+可辨识联合与类型守卫 
+
+可辨识联合是一种强大的模式，它通过一个公共的"标识"属性来区分联合类型成员。 
+
+结合 switch 语句或 if 判断，可以实现完整的类型守卫。 
+
+可辨识联合实现计算器 
+
+// 定义圆形接口，使用 kind 属性作为标识 
+
+interface Circle { 
+
+kind : "circle" ; // 标识字段：值为 "circle" 
+
+radius : number ; // 半径 
+
+} 
+
+// 定义矩形接口 
+
+interface Rectangle { 
+
+kind : "rectangle" ; // 标识字段：值为 "rectangle" 
+
+width : number ; // 宽度 
+
+height : number ; // 高度 
+
+} 
+
+// 定义三角形接口 
+
+interface Triangle { 
+
+kind : "triangle" ; // 标识字段：值为 "triangle" 
+
+base : number ; // 底边 
+
+height : number ; // 高度 
+
+} 
+
+// 定义联合类型 
+
+type Shape = Circle | Rectangle | Triangle ; 
+
+// 计算面积的函数 
+
+function getArea ( shape : Shape ) : number { 
+
+// 使用 switch 语句进行类型守卫 
+
+// 根据 kind 属性的值，TypeScript 会自动缩小类型 
+
+switch ( shape. kind ) { 
+
+case "circle" : 
+
+// shape 被缩小为 Circle 类型 
+
+// 可以访问 radius 属性 
+
+return Math . PI * shape. radius ** 2 ; 
+
+case "rectangle" : 
+
+// shape 被缩小为 Rectangle 类型 
+
+// 可以访问 width 和 height 属性 
+
+return shape. width * shape. height ; 
+
+case "triangle" : 
+
+// shape 被缩小为 Triangle 类型 
+
+return 0.5 * shape. base * shape. height ; 
+
+} 
+
+} 
+
+// 测试调用 
+
+var circle = { kind : "circle" as const , radius : 5 } ; 
+
+var rectangle = { kind : "rectangle" as const , width : 4 , height : 6 } ; 
+
+var triangle = { kind : "triangle" as const , base : 3 , height : 4 } ; 
+
+console. log ( "圆形面积: " + getArea ( circle ) . toFixed ( 2 ) ) ; 
+
+console. log ( "矩形面积: " + getArea ( rectangle ) ) ; 
+
+console. log ( "三角形面积: " + getArea ( triangle ) ) ; 
+
+运行结果： 
+
+圆形面积: 78.54
+矩形面积: 24
+三角形面积: 6 
+
+说明： 可辨识联合是 TypeScript 中最推荐使用的模式之一。它通过一个公共的字面量属性（通常是 kind 或 type）来区分不同的类型成员，使代码既类型安全又易于维护。 
+
+null 和 undefined 检查 
+
+处理可能为 null 或 undefined 的值时，直接的相等性检查也是有效的类型守卫。 
+
+null 检查 
+
+// 定义一个可能为 null 的函数参数 
+
+function getLength ( str : string | null ) : number { 
+
+// 直接检查 str 不等于 null 
+
+// 在条件为 true 时，TypeScript 知道 str 不是 null 
+
+// 此时可以安全地访问 str 的属性 
+
+if ( str !== null ) { 
+
+return str. length ; 
+
+} 
+
+// null 情况的处理 
+
+return 0 ; 
+
+} 
+
+// 调用测试 
+
+console. log ( getLength ( "hello" ) ) ; // 正常字符串 
+
+console. log ( getLength ( null ) ) ; // 传入 null 
+
+运行结果： 
+
+5
+0 
+
+提示： 在启用 strictNullChecks 后，建议始终进行 null 检查。可以使用可选链（?.）和空值合并（??）来简化代码。 
+
+真值缩小 
+
+除了显式的类型检查，TypeScript 还会通过真值断言（Truthiness）来缩小类型范围。 
+
+真值缩小 
+
+// 可能为 undefined 的字符串 
+
+function greet ( name ?: string ) : string { 
+
+// 使用短路运算符：如果 name 为 undefined 或空字符串，使用默认值 
+
+// 在 && 后的代码块中，TypeScript 知道 name 一定有值 
+
+return name && "Hello, " + name ; 
+
+} 
+
+// 测试 
+
+console. log ( greet ( "RUNOOB" ) ) ; 
+
+console. log ( greet ( ) ) ; 
+
+运行结果： 
+
+Hello, RUNOOB
+Hello, undefined 
+
+注意事项 
+
+类型守卫必须在条件分支中使用： 只有在使用类型守卫进行条件判断后，TypeScript 才会进行类型缩小 
+
+返回类型必须是类型谓词： 自定义类型守卫的返回类型必须是 value is Type 格式 
+
+可辨识联合是最佳实践： 对于复杂的联合类型，建议使用可辨识联合模式 
+
+注意类型收窄的完整性： 使用 switch 语句时，建议处理所有可能的分支 
+
+建议： 在处理联合类型时，优先考虑使用可辨识联合模式。它不仅代码更清晰，还能充分利用 TypeScript 的类型推断能力。 
+
+总结 
+
+类型守卫是 TypeScript 类型系统的重要组成部分。 
+
+typeof： 最常用的方式，适用于原始类型的检查 
+
+instanceof： 检查对象是否是特定类的实例 
+
+自定义守卫： 通过 value is Type 语法实现灵活的类检查 
+
+in： 检查对象是否包含特定属性 
+
+可辨识联合： 推荐的最佳实践模式，通过标识字段区分类型 
+
+真值缩小： 利用 JavaScript 的真值判断进行类型收窄 
+
+AI 思考中... 
+
+TypeScript 装饰器 
+
+TypeScript 可选链

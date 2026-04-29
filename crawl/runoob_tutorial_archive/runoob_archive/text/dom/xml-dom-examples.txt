@@ -1,0 +1,212 @@
+URL: https://www.runoob.com/dom/xml-dom-examples.html
+Title: XML DOM 实例 | 菜鸟教程
+
+XML DOM 实例 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML DOM 教程 
+
+XML DOM 总结 
+
+XML DOM – 验证 XML 
+
+XML DOM 实例 
+
+XML DOM 解析 
+
+下面的实例使用 XML 文件 books.xml 。 
+
+加载一个 
+XML 文件 
+加载一个 
+XML 字符串 
+
+实例解释 
+
+XML DOM 属性和方法 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+函数 loadXMLString() ，在外部 JavaScript 中，用于加载 XML 字符串。 
+
+加载并解析 XML 文件 - 外部解析脚本 
+加载并解析 XML 字符串 - 外部解析脚本 
+
+实例解释 
+
+XML DOM 访问节点 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+使用节点列表中的索引号访问节点 
+使用 length 属性循环遍历节点 
+查看元素的节点类型 
+循环遍历元素节点 
+使用节点关系循环遍历元素节点 
+
+实例解释 
+
+XML DOM 节点信息 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+获取元素节点的节点名称 
+从文本节点获取文本 
+更改文本节点的文本 
+获取元素节点的节点名称和类型 
+
+实例解释 
+
+XML DOM 节点列表和属性列表 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+从第一个 <title> 元素获取文本 
+使用 length 属性循环遍历节点 
+获取元素的属性 
+
+实例解释 
+
+XML DOM 遍历节点树 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLString() ，在外部 JavaScript 中，用于加载 XML 字符串。 
+
+遍历节点树 
+
+实例解释 
+
+XML DOM 浏览器差异 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+显示节点列表的长度 - IE 和其他浏览器的不同结果 
+忽略节点之间的空文本 
+
+实例解释 
+
+XML DOM 导航节点 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+获取节点的父节点 
+获取节点的第一个子元素 
+获取节点的最后一个子元素 
+获取节点的下一个同级元素 
+获取节点的上一个同级元素 
+
+实例解释 
+
+XML DOM 获取节点值 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+获取元素的文本值 
+获取属性的文本值 
+
+实例解释 
+
+XML DOM 更改节点值 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+更改元素文本节点 
+使用 setAttribute 更改属性值 
+使用 nodeValue 更改属性值 
+
+实例解释 
+
+XML DOM 删除节点 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+删除元素节点 
+删除当前的元素节点 
+删除文本节点 
+清空文本节点的文本 
+按名称删除属性 
+按对象删除属性 
+
+实例解释 
+
+XML DOM 替换节点 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+替换元素节点 
+替换文本节点中的数据 
+
+实例解释 
+
+XML DOM 创建节点 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+创建元素节点 
+使用 createAttribute 创建属性节点 
+使用 setAttribute 创建属性节点 
+创建文本节点 
+创建 CDATA 区段节点 
+创建注释节点 
+
+实例解释 
+
+XML DOM 添加节点 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+在最后一个子节点后添加一个节点 
+在指定子节点前添加一个节点 
+添加一个新的属性 
+向文本节点添加数据 
+
+实例解释 
+
+XML DOM 克隆节点 
+
+下面的实例使用 XML 文件 books.xml 。 
+函数 loadXMLDoc() ，在外部 JavaScript 中，用于加载 XML 文件。 
+
+复制一个节点，并把它追加到已有的节点 
+
+实例解释 
+
+XML DOM XMLHttpRequest 对象 
+
+一个简单的 XMLHttpRequest 实例 
+创建一个简单的 XMLHttpRequest，并从一个 TXT 文件中检索数据。 
+
+通过 getAllResponseHeaders() 检索头信息 
+检索资源（文件）的头信息。 
+
+通过 getResponseHeader() 检索指定的头信息 
+检索资源（文件）的指定头信息。 
+
+检索 ASP 文件的内容 
+用户在输入字段中键入字符时，网页如何与 Web 服务器进行通信。 
+
+从数据库检索内容 
+网页如何通过 XMLHttpRequest 对象从数据库中提取信息。 
+
+检索 XML 文件的内容 
+创建一个 XMLHttpRequest 从 XML 文件中检索数据并把数据显示在一个 HTML 表格中。 
+
+实例解释 
+
+AI 思考中... 
+
+XML DOM 总结 
+
+XML DOM – 验证 XML

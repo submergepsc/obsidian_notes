@@ -1,0 +1,89 @@
+URL: https://www.runoob.com/cssref/pr-text-letter-spacing.html
+Title: CSS letter-spacing 属性 | 菜鸟教程
+
+CSS letter-spacing 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS left 属性 
+
+CSS line-height 属性 
+
+CSS letter-spacing 属性 
+
+实例 
+
+设置为h1和h2元素的字母间距： 
+
+h1 {letter-spacing:2px} 
+h2 {letter-spacing:-3px} 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+letter-spacing 属性增加或减少字符间的空白（字符间距） 
+
+默认值： 
+
+normal 
+
+继承： 
+
+yes 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.letterSpacing="3px" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+letter-spacing 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+normal 
+
+默认。规定字符间没有额外的空间。 
+
+length 
+
+定义字符间的固定空间（允许使用负值）。 
+
+inherit 
+
+规定应该从父元素继承 letter-spacing 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS Text 
+
+AI 思考中... 
+
+CSS left 属性 
+
+CSS line-height 属性

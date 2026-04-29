@@ -1,0 +1,643 @@
+URL: https://www.runoob.com/zig/zig-operators.html
+Title: Zig 运算符 | 菜鸟教程
+
+Zig 运算符 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Zig 教程 
+
+Zig 流程控制 
+
+Zig 函数 
+
+Zig 运算符 
+
+运算符和表达式是编程语言中用于执行各种操作的基本组成部分。 
+
+在 Zig 中，运算符可以分为几类，包括算术运算符、关系运算符、逻辑运算符、位运算符、赋值运算符以及其他运算符。 
+
+以下是每种运算符的详细说明和示例。 
+
+算术运算符 
+
+运算符 
+
+描述 
+
++ 
+
+加法 
+
+- 
+
+减法 
+
+* 
+
+乘法 
+
+/ 
+
+除法 
+
+% 
+
+取余（模运算） 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const a : i32 = 5 ; 
+
+const b : i32 = 3 ; 
+
+const add : i32 = a + b ; 
+
+const subtract : i32 = a - b ; 
+
+const multiply : i32 = a * b ; 
+
+const divide : i32 = a / b ; 
+
+const remainder : i32 = a % b ; 
+
+std. debug . print ( "a + b = {} \n " , . { add } ) ; 
+
+std. debug . print ( "a - b = {} \n " , . { subtract } ) ; 
+
+std. debug . print ( "a * b = {} \n " , . { multiply } ) ; 
+
+std. debug . print ( "a / b = {} \n " , . { divide } ) ; 
+
+std. debug . print ( "a % b = {} \n " , . { remainder } ) ; 
+
+} 
+
+编译输出结果为： 
+
+a + b = 8
+a - b = 2
+a * b = 15
+a / b = 1
+a % b = 2 
+
+关系运算符 
+
+运算符 
+
+描述 
+
+== 
+
+等于 
+
+!= 
+
+不等于 
+
+> 
+
+大于 
+
+< 
+
+小于 
+
+>= 
+
+大于等于 
+
+<= 
+
+小于等于 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const a : i32 = 5 ; 
+
+const b : i32 = 3 ; 
+
+const equal : bool = a == b ; 
+
+const not_equal : bool = a ! = b ; 
+
+const greater : bool = a > b ; 
+
+const less : bool = a < b ; 
+
+const greater_equal : bool = a >= b ; 
+
+const less_equal : bool = a <= b ; 
+
+std. debug . print ( "a == b: {} \n " , . { equal } ) ; 
+
+std. debug . print ( "a != b: {} \n " , . { not_equal } ) ; 
+
+std. debug . print ( "a > b: {} \n " , . { greater } ) ; 
+
+std. debug . print ( "a < b: {} \n " , . { less } ) ; 
+
+std. debug . print ( "a >= b: {} \n " , . { greater_equal } ) ; 
+
+std. debug . print ( "a <= b: {} \n " , . { less_equal } ) ; 
+
+} 
+
+编译输出结果为： 
+
+a == b: false
+a != b: true
+a > b: true
+a < b: false
+a >= b: true
+a <= b: false 
+
+逻辑运算符 
+
+运算符 
+
+描述 
+
+and 
+
+逻辑与 
+
+or 
+
+逻辑或 
+
+! 
+
+逻辑非 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const a : bool = true ; 
+
+const b : bool = false ; 
+
+const and_result : bool = a and b ; 
+
+const or_result : bool = a or b ; 
+
+const not_result : bool = ! a ; 
+
+std. debug . print ( "a and b: {} \n " , . { and_result } ) ; // false 
+
+std. debug . print ( "a or b: {} \n " , . { or_result } ) ; // true 
+
+std. debug . print ( "!a: {} \n " , . { not_result } ) ; // false 
+
+} 
+
+编译输出结果为： 
+
+a and b: false
+a or b: true
+!a: false 
+
+位运算符 
+
+运算符 
+
+描述 
+
+& 
+
+按位与 
+
+| 
+
+按位或 
+
+^ 
+
+按位异或 
+
+~ 
+
+按位取反 
+
+<< 
+
+左移 
+
+>> 
+
+右移 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const a : i32 = 5 ; // 0101 
+
+const b : i32 = 3 ; // 0011 
+
+const bit_and : i32 = a & b ; // 0001 
+
+const bit_or : i32 = a | b ; // 0111 
+
+const bit_xor : i32 = a ^ b ; // 0110 
+
+const bit_not : i32 = ~a ; // 11111111111111111111111111111010 
+
+const left_shift : i32 = a << 1 ; // 1010 
+
+const right_shift : i32 = a >> 1 ; // 0010 
+
+std. debug . print ( "a & b: {} \n " , . { bit_and } ) ; 
+
+std. debug . print ( "a | b: {} \n " , . { bit_or } ) ; 
+
+std. debug . print ( "a ^ b: {} \n " , . { bit_xor } ) ; 
+
+std. debug . print ( "~a: {} \n " , . { bit_not } ) ; 
+
+std. debug . print ( "a << 1: {} \n " , . { left_shift } ) ; 
+
+std. debug . print ( "a >> 1: {} \n " , . { right_shift } ) ; 
+
+} 
+
+编译输出结果为： 
+
+a & b: 1
+a | b: 7
+a ^ b: 6
+~a: -6
+a << 1: 10
+a >> 1: 2 
+
+赋值运算符 
+
+运算符 
+
+描述 
+
+= 
+
+赋值 
+
++= 
+
+加法赋值 
+
+-= 
+
+减法赋值 
+
+*= 
+
+乘法赋值 
+
+/= 
+
+除法赋值 
+
+%= 
+
+取余赋值 
+
+&= 
+
+按位与赋值 
+
+|= 
+
+按位或赋值 
+
+^= 
+
+按位异或赋值 
+
+<<= 
+
+左移赋值 
+
+>>= 
+
+右移赋值 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+var a : i32 = 5 ; 
+
+const b : i32 = 3 ; 
+
+a + = b ; // 相当于 a = a + b; 
+
+std. debug . print ( "a += b: {} \n " , . { a } ) ; 
+
+a - = b ; // 相当于 a = a - b; 
+
+std. debug . print ( "a -= b: {} \n " , . { a } ) ; 
+
+a * = b ; // 相当于 a = a * b; 
+
+std. debug . print ( "a *= b: {} \n " , . { a } ) ; 
+
+a = @divTrunc ( a, b ) ; // 相当于 a = a / b; 
+
+std. debug . print ( "a /= b: {} \n " , . { a } ) ; 
+
+a = @mod ( a, b ) ; // 相当于 a = a % b; 
+
+std. debug . print ( "a %= b: {} \n " , . { a } ) ; 
+
+a & = b ; // 相当于 a = a & b; 
+
+std. debug . print ( "a &= b: {} \n " , . { a } ) ; 
+
+a | = b ; // 相当于 a = a | b; 
+
+std. debug . print ( "a |= b: {} \n " , . { a } ) ; 
+
+a ^ = b ; // 相当于 a = a ^ b; 
+
+std. debug . print ( "a ^= b: {} \n " , . { a } ) ; 
+
+a <<= 1 ; // 相当于 a = a << 1; 
+
+std. debug . print ( "a <<= 1: {} \n " , . { a } ) ; 
+
+a >>= 1 ; // 相当于 a = a >> 1; 
+
+std. debug . print ( "a >>= 1: {} \n " , . { a } ) ; 
+
+} 
+
+编译输出结果为： 
+
+a += b: 8
+a -= b: 5
+a *= b: 15
+a /= b: 5
+a %= b: 2
+a &= b: 2
+a |= b: 3
+a ^= b: 0
+a <<= 1: 0
+a >>= 1: 0 
+
+其他运算符 
+
+运算符 
+
+描述 
+
+++ 
+
+自增 
+
+-- 
+
+自减 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+var a : i32 = 5 ; 
+
+a + = 1 ; // Zig 中没有 ++ 运算符，可以用 += 1 替代 
+
+std. debug . print ( "a += 1: {} \n " , . { a } ) ; 
+
+a - = 1 ; // Zig 中没有 -- 运算符，可以用 -= 1 替代 
+
+std. debug . print ( "a -= 1: {} \n " , . { a } ) ; 
+
+} 
+
+编译输出结果为： 
+
+a += 1: 6
+a -= 1: 5 
+
+运算符优先级 
+
+以下是 Zig 运算符的优先级列表，从高到低排列： 
+
+优先级 
+
+运算符 
+
+描述 
+
+1 
+
+[] 
+
+下标操作，数组或指针访问 
+
+1 
+
+. 
+
+成员访问 
+
+2 
+
+fn_call() 
+
+函数调用 
+
+2 
+
+@builtin() 
+
+内置函数调用 
+
+3 
+
+! 
+
+错误传播 
+
+3 
+
+? 
+
+可选值解包 
+
+4 
+
+* & 
+
+指针解引用和地址操作 
+
+5 
+
++ - 
+
+一元正号和负号 
+
+6 
+
+~ 
+
+按位取反 
+
+7 
+
+* / % 
+
+乘法、除法、取余 
+
+8 
+
++ - 
+
+加法、减法 
+
+9 
+
+<< >> 
+
+按位左移、右移 
+
+10 
+
+& 
+
+按位与 
+
+11 
+
+^ 
+
+按位异或 
+
+12 
+
+` 
+
+` 
+
+13 
+
+== != 
+
+相等、不相等 
+
+13 
+
+< <= > >= 
+
+小于、小于等于、大于、大于等于 
+
+14 
+
+and 
+
+逻辑与 
+
+15 
+
+or 
+
+逻辑或 
+
+16 
+
+orelse 
+
+或者返回另一个值 
+
+17 
+
+catch 
+
+捕获错误 
+
+18 
+
+= 
+
+赋值 
+
+19 
+
+-> 
+
+闭包函数体或返回值类型指示符 
+
+说明： 
+
+结合性 ：通常 Zig 的运算符是左结合的，但可以根据运算符的具体功能查阅文档。 
+
+注意事项 ：Zig 中的操作符设计简洁明确，避免了许多语言中复杂的隐式行为，例如没有隐式类型转换。 
+
+以下示例展示了运算符优先级如何影响表达式的计算顺序： 
+
+实例 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const a : i32 = 5 ; 
+
+const b : i32 = 3 ; 
+
+const c : i32 = 2 ; 
+
+// 乘法优先于加法 
+
+const result1 : i32 = a + b * c ; // 5 + (3 * 2) = 11 
+
+std. debug . print ( "a + b * c = {} \n " , . { result1 } ) ; 
+
+// 使用圆括号改变优先级 
+
+const result2 : i32 = ( a + b ) * c ; // (5 + 3) * 2 = 16 
+
+std. debug . print ( "(a + b) * c = {} \n " , . { result2 } ) ; 
+
+// 比较运算符优先于逻辑运算符 
+
+const result3 : bool = a > b and b > c ; // (5 > 3) and (3 > 2) = true 
+
+std. debug . print ( "a > b and b > c = {} \n " , . { result3 } ) ; 
+
+// 逻辑非优先于逻辑与 
+
+const result4 : bool = ! ( a > b ) and b > c ; // !(5 > 3) and (3 > 2) = false 
+
+std. debug . print ( "!(a > b) and b > c = {} \n " , . { result4 } ) ; 
+
+} 
+
+编译输出结果为： 
+
+a + b * c = 11
+(a + b) * c = 16
+a > b and b > c = true
+!(a > b) and b > c = false 
+
+AI 思考中... 
+
+Zig 流程控制 
+
+Zig 函数

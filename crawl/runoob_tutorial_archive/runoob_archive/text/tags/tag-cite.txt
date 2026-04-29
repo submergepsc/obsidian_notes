@@ -1,0 +1,52 @@
+URL: https://www.runoob.com/tags/tag-cite.html
+Title: HTML <cite> 标签 | 菜鸟教程
+
+HTML <cite> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <center> 标签 
+
+HTML <code> 标签 
+
+HTML <cite> 标签 
+
+实例 
+
+使用 <cite> 标签来定义作品的标题： 
+
+<p><cite>The Scream</cite> by Edward Munch. Painted in 1893.</p> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <cite> 标签。 
+
+标签定义及使用说明 
+
+<cite> 标签定义作品（比如书籍、歌曲、电影、电视节目、绘画、雕塑等等）的标题。 
+
+注释： 人名不属于作品的标题。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+在 HTML5 中，<cite> 标签定义作品的标题。 
+
+在 HTML 4.01 中，<cite> 标签定义一个引用。 
+
+全局属性 
+
+<cite> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<cite> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <center> 标签 
+
+HTML <code> 标签

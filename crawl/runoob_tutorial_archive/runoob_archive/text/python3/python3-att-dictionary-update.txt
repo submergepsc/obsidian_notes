@@ -1,0 +1,50 @@
+URL: https://www.runoob.com/python3/python3-att-dictionary-update.html
+Title: Python3 字典 update() 方法 | 菜鸟教程
+
+Python3 字典 update() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 字典 setdefault() 方法 
+
+Python3 字典 values() 方法 
+
+Python3 字典 update() 方法 
+
+描述 
+
+Python 字典 update() 函数把字典参数 dict2 的 key/value(键/值) 对更新到字典 dict 里。 
+
+语法 
+
+update() 方法语法： 
+
+dict.update(dict2) 
+
+参数 
+
+dict2 -- 添加到指定字典dict里的字典。 
+
+返回值 
+
+该方法没有任何返回值。 
+
+实例 
+
+以下实例展示了 update()函数的使用方法： 
+
+实例(Python 2.0+) 
+
+tinydict = { ' Name ' : ' Runoob ' , ' Age ' : 7 } tinydict2 = { ' Sex ' : ' female ' } tinydict . update ( tinydict2 ) print ( " 更新字典 tinydict : " , tinydict ) 
+
+以上实例输出结果为： 
+
+更新字典 tinydict : {'Name': 'Runoob', 'Age': 7, 'Sex': 'female'} 
+
+AI 思考中... 
+
+Python3 字典 setdefault() 方法 
+
+Python3 字典 values() 方法

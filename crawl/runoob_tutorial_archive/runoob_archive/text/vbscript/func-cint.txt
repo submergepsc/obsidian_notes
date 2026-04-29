@@ -1,0 +1,56 @@
+URL: https://www.runoob.com/vbscript/func-cint.html
+Title: VBScript CInt 函数 | 菜鸟教程
+
+VBScript CInt 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Chr 函数 
+
+VBScript CLng 函数 
+
+VBScript CInt 函数 
+
+CInt 函数把表达式转换为整数（Integer）类型。 
+
+注意： 值必须是介于 -32768 与 32767 之间的数字。 
+
+语法 
+
+CInt(expression) 
+
+参数 
+
+描述 
+
+expression 
+
+必需。任何有效的表达式。 
+
+实例 
+
+实例 
+
+<script type="text/vbscript"> 
+
+document.write(CInt("300") & "<br />") 
+document.write(CInt(36.75) & "<br />") 
+document.write(CInt(-67) & "<br />") 
+
+</script> 
+
+以上实例输出结果： 
+
+300 
+37 
+-67 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Chr 函数 
+
+VBScript CLng 函数

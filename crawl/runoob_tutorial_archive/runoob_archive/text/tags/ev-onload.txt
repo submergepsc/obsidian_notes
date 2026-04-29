@@ -1,0 +1,56 @@
+URL: https://www.runoob.com/tags/ev-onload.html
+Title: HTML onload 事件属性 | 菜鸟教程
+
+HTML onload 事件属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML5 onbeforeprint 事件属性 
+
+HTML onresize 事件属性 
+
+HTML onload 事件属性 
+
+实例 
+
+当文档加载完成后运行 JavaScript 脚本: 
+
+<body onload="load()"> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 onload 事件属性。 
+
+定义和用法 
+
+onload 属性在文档对象加载完成后触发。 
+
+onload 通常使用于 <body> 元素中，用于在页面完全载入后执行指定的脚本(包括图片，脚本，css文件等)。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+None。 
+
+语法 
+
+< element onload=" script "> 
+
+属性值 
+
+值 
+
+描述 
+
+script 
+
+规定该onload事件触发时执行的脚本。 
+
+AI 思考中... 
+
+HTML5 onbeforeprint 事件属性 
+
+HTML onresize 事件属性

@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/data-stack.html
+Title: Java 实例 – 栈的实现 | 菜鸟教程
+
+Java 实例 – 栈的实现 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 链表元素查找 
+
+Java 实例 – 旋转向量 
+
+Java 实例 - 栈的实现 
+
+以下实例演示了用户如何通过创建用于插入元素的自定义函数 push() 方法和用于弹出元素的 pop() 方法来实现栈： 
+
+MyStack.java 文件 
+
+public class MyStack { private int maxSize ; private long [ ] stackArray ; private int top ; public MyStack ( int s ) { maxSize = s ; stackArray = new long [ maxSize ] ; top = - 1 ; } public void push ( long j ) { stackArray [ ++ top ] = j ; } public long pop ( ) { return stackArray [ top -- ] ; } public long peek ( ) { return stackArray [ top ] ; } public boolean isEmpty ( ) { return ( top == - 1 ) ; } public boolean isFull ( ) { return ( top == maxSize - 1 ) ; } public static void main ( String [ ] args ) { MyStack theStack = new MyStack ( 10 ) ; theStack . push ( 10 ) ; theStack . push ( 20 ) ; theStack . push ( 30 ) ; theStack . push ( 40 ) ; theStack . push ( 50 ) ; while ( ! theStack . isEmpty ( ) ) { long value = theStack . pop ( ) ; System . out . print ( value ) ; System . out . print ( " " ) ; } System . out . println ( " " ) ; } } 
+
+以上代码运行输出结果为： 
+
+50 40 30 20 10 
+
+AI 思考中... 
+
+Java 实例 – 链表元素查找 
+
+Java 实例 – 旋转向量

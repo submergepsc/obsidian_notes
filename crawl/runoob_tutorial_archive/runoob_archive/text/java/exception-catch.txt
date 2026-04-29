@@ -1,0 +1,31 @@
+URL: https://www.runoob.com/java/exception-catch.html
+Title: Java 实例 – 使用 catch 处理异常 | 菜鸟教程
+
+Java 实例 – 使用 catch 处理异常 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 异常处理方法 
+
+Java 实例 – 链试异常 
+
+Java 实例 - 使用 catch 处理异常 
+
+以下实例演示了使用 catch 来处理异常的方法： 
+
+Main.java 文件 
+
+public class Main { public static void main ( String args [ ] ) { int array [ ] = { 20 , 20 , 40 } ; int num1 = 15 , num2 = 10 ; int result = 10 ; try { result = num1 / num2 ; System . out . println ( " 结果为 " + result ) ; for ( int i = 5 ; i >= 0 ; i -- ) { System . out . println ( " 数组的元素值为 " + array [ i ] ) ; } } catch ( Exception e ) { System . out . println ( " 触发异常 : " + e ) ; } } } 
+
+以上代码运行输出结果为： 
+
+结果为 1
+触发异常 : java.lang.ArrayIndexOutOfBoundsException: 5 
+
+AI 思考中... 
+
+Java 实例 – 异常处理方法 
+
+Java 实例 – 链试异常

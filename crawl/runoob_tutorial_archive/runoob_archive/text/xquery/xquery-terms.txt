@@ -1,0 +1,138 @@
+URL: https://www.runoob.com/xquery/xquery-terms.html
+Title: XQuery 术语 | 菜鸟教程
+
+XQuery 术语 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XQuery 教程 
+
+XQuery FLWOR + HTML 
+
+XQuery 语法 
+
+XQuery 术语 
+
+在 XQuery 中，有七种节点：元素、属性、文本、命名空间、处理指令、注释、以及文档节点（或称为根节点）。 
+
+XQuery 术语 
+
+节点 
+
+在 XQuery 中，有七种节点：元素、属性、文本、命名空间、处理指令、注释、以及文档（根）节点。XML 文档是被作为节点树来对待的。树的根被称为文档节点或者根节点。 
+
+请看下面的 XML 文档： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<bookstore> 
+
+<book> 
+<title lang="en">Harry Potter</title> 
+<author>J K. Rowling</author> 
+<year>2005</year> 
+<price>29.99</price> 
+</book> 
+
+</bookstore> 
+
+上面的 XML 文档中的节点例子： 
+
+<bookstore> (文档节点) 
+
+<author>J K. Rowling</author> (元素节点) 
+
+lang="en" (属性节点) 
+
+基本值是无父或无子的节点。 
+
+基本值的例子： 
+
+J K. Rowling 
+
+"en" 
+
+项目 
+
+项目是基本值或者节点。 
+
+节点关系 
+
+父（Parent） 
+
+每个元素以及属性都有一个父。 
+
+在下面的例子中，book 元素是 title、author、year 以及 price 元素的父： 
+
+<book> 
+<title>Harry Potter</title> 
+<author>J K. Rowling</author> 
+<year>2005</year> 
+<price>29.99</price> 
+</book> 
+
+子（Children） 
+
+节点元素可有零个、一个或多个子。 
+
+在下面的例子中，title、author、year 以及 price 元素都是 book 元素的子： 
+
+<book> 
+<title>Harry Potter</title> 
+<author>J K. Rowling</author> 
+<year>2005</year> 
+<price>29.99</price> 
+</book> 
+
+同胞（Sibling） 
+
+拥有相同的父的节点。 
+
+在下面的例子中，title、author、year 以及 price 元素都是同胞： 
+
+<book> 
+<title>Harry Potter</title> 
+<author>J K. Rowling</author> 
+<year>2005</year> 
+<price>29.99</price> 
+</book> 
+
+先辈（Ancestor） 
+
+某节点的父、父的父，等等。 
+
+在下面的例子中，title 元素的先辈是 book 元素和 bookstore元素： 
+
+<bookstore> 
+
+<book> 
+<title>Harry Potter</title> 
+<author>J K. Rowling</author> 
+<year>2005</year> 
+<price>29.99</price> 
+</book> 
+
+</bookstore> 
+
+后代（Descendant） 
+
+某个节点的子，子的子，等等。 
+
+在下面的例子中，bookstore 的后代是 book、title、author、year 以及 price元素： 
+
+<bookstore> 
+
+<book> 
+<title>Harry Potter</title> 
+<author>J K. Rowling</author> 
+<year>2005</year> 
+<price>29.99</price> 
+</book> 
+
+</bookstore> 
+
+AI 思考中... 
+
+XQuery FLWOR + HTML 
+
+XQuery 语法

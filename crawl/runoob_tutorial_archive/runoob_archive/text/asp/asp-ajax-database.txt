@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/asp/asp-ajax-database.html
+Title: AJAX 数据库 | 菜鸟教程
+
+AJAX 数据库 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+ASP 教程

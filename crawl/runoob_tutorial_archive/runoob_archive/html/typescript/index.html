@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>typescript index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>typescript index</h1>
+      <p>Offline pages under typescript</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-516595e8">入门</a> <span>4 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>6 pages</span></li><li><a href="#subgroup-6d4b9a8c">测验</a> <span>2 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>58 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>typescript (70)</h2><p>二级分类：4 个</p><ul class="page-list"><li><a href="#subgroup-516595e8">入门</a> <span>4 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>6 pages</span></li><li><a href="#subgroup-6d4b9a8c">测验</a> <span>2 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>58 pages</span></li></ul></section><section id="subgroup-516595e8"><h2>入门 (4)</h2><ol class="page-list"><li><a href="ts-basic-syntax.html">TypeScript  基础语法</a> <code>https://www.runoob.com/typescript/ts-basic-syntax.html</code></li><li><a href="ts-type.html">TypeScript 基础类型</a> <code>https://www.runoob.com/typescript/ts-type.html</code></li><li><a href="ts-install.html">TypeScript 安装</a> <code>https://www.runoob.com/typescript/ts-install.html</code></li><li><a href="ts-tutorial.html">TypeScript 教程</a> <code>https://www.runoob.com/typescript/ts-tutorial.html</code></li></ol></section><section id="subgroup-53c28003"><h2>参考 (6)</h2><ol class="page-list"><li><a href="ts-function.html">TypeScript 函数</a> <code>https://www.runoob.com/typescript/ts-function.html</code></li><li><a href="ts-function-overload.html">TypeScript 函数重载</a> <code>https://www.runoob.com/typescript/ts-function-overload.html</code></li><li><a href="ts-object.html">TypeScript 对象</a> <code>https://www.runoob.com/typescript/ts-object.html</code></li><li><a href="ts-arrow-function.html">TypeScript 箭头函数与 this</a> <code>https://www.runoob.com/typescript/ts-arrow-function.html</code></li><li><a href="ts-operators.html">TypeScript 运算符</a> <code>https://www.runoob.com/typescript/ts-operators.html</code></li><li><a href="ts-references.html">TypeScript 项目引用 References</a> <code>https://www.runoob.com/typescript/ts-references.html</code></li></ol></section><section id="subgroup-6d4b9a8c"><h2>测验 (2)</h2><ol class="page-list"><li><a href="ts-unit-testing.html">TypeScript 单元测试</a> <code>https://www.runoob.com/typescript/ts-unit-testing.html</code></li><li><a href="ts-quiz.html">TypeScript 测验</a> <code>https://www.runoob.com/typescript/ts-quiz.html</code></li></ol></section><section id="subgroup-4e139898"><h2>专题 (58)</h2><ol class="page-list"><li><a href="ts-nodejs.html">TypeScript + Node.js 实战</a> <code>https://www.runoob.com/typescript/ts-nodejs.html</code></li><li><a href="ts-react.html">TypeScript + React 实战</a> <code>https://www.runoob.com/typescript/ts-react.html</code></li><li><a href="ts-vue3.html">TypeScript + Vue3 实战</a> <code>https://www.runoob.com/typescript/ts-vue3.html</code></li><li><a href="ts-array.html">TypeScript Array(数组)</a> <code>https://www.runoob.com/typescript/ts-array.html</code></li><li><a href="ts-async-await.html">TypeScript async/await 异步编程</a> <code>https://www.runoob.com/typescript/ts-async-await.html</code></li><li><a href="ts-infer.html">TypeScript infer 关键字</a> <code>https://www.runoob.com/typescript/ts-infer.html</code></li><li><a href="ts-map.html">TypeScript Map 对象</a> <code>https://www.runoob.com/typescript/ts-map.html</code></li><li><a href="ts-monorepo.html">TypeScript Monorepo 配置</a> <code>https://www.runoob.com/typescript/ts-monorepo.html</code></li><li><a href="ts-null-undefined.html">TypeScript null 和 undefined</a> <code>https://www.runoob.com/typescript/ts-null-undefined.html</code></li><li><a href="ts-number.html">TypeScript Number</a> <code>https://www.runoob.com/typescript/ts-number.html</code></li><li><a href="ts-promise.html">TypeScript Promise 详解</a> <code>https://www.runoob.com/typescript/ts-promise.html</code></li><li><a href="ts-set-weakmap.html">TypeScript Set 和 WeakMap</a> <code>https://www.runoob.com/typescript/ts-set-weakmap.html</code></li><li><a href="ts-string.html">TypeScript String（字符串）</a> <code>https://www.runoob.com/typescript/ts-string.html</code></li><li><a href="ts-symbol.html">TypeScript Symbol</a> <code>https://www.runoob.com/typescript/ts-symbol.html</code></li><li><a href="ts-tsconfig.html">TypeScript tsconfig.json 配置</a> <code>https://www.runoob.com/typescript/ts-tsconfig.html</code></li><li><a href="ts-type-alias.html">TypeScript type 别名</a> <code>https://www.runoob.com/typescript/ts-type-alias.html</code></li><li><a href="typescript-vs-javascript.html">TypeScript vs JavaScript 对比</a> <code>https://www.runoob.com/typescript/typescript-vs-javascript.html</code></li><li><a href="ts-intersection-types.html">TypeScript 交叉类型</a> <code>https://www.runoob.com/typescript/ts-intersection-types.html</code></li><li><a href="ts-migration.html">TypeScript 从 JavaScript 迁移</a> <code>https://www.runoob.com/typescript/ts-migration.html</code></li><li><a href="ts-tuple.html">TypeScript 元组</a> <code>https://www.runoob.com/typescript/ts-tuple.html</code></li><li><a href="ts-covariance.html">TypeScript 协变与逆变</a> <code>https://www.runoob.com/typescript/ts-covariance.html</code></li><li><a href="ts-variables.html">TypeScript 变量声明</a> <code>https://www.runoob.com/typescript/ts-variables.html</code></li><li><a href="ts-optional-chaining.html">TypeScript 可选链</a> <code>https://www.runoob.com/typescript/ts-optional-chaining.html</code></li><li><a href="ts-namespace.html">TypeScript 命名空间</a> <code>https://www.runoob.com/typescript/ts-namespace.html</code></li><li><a href="typescript-basic-structure.html">TypeScript 基本结构</a> <code>https://www.runoob.com/typescript/typescript-basic-structure.html</code></li><li><a href="ts-ambient.html">TypeScript 声明文件</a> <code>https://www.runoob.com/typescript/ts-ambient.html</code></li><li><a href="ts-literal-types.html">TypeScript 字面量类型</a> <code>https://www.runoob.com/typescript/ts-literal-types.html</code></li><li><a href="ts-utility-types.html">TypeScript 工具类型</a> <code>https://www.runoob.com/typescript/ts-utility-types.html</code></li><li><a href="ts-loop.html">TypeScript 循环</a> <code>https://www.runoob.com/typescript/ts-loop.html</code></li><li><a href="ts-performance.html">TypeScript 性能优化</a> <code>https://www.runoob.com/typescript/ts-performance.html</code></li><li><a href="ts-abstract-class.html">TypeScript 抽象类</a> <code>https://www.runoob.com/typescript/ts-abstract-class.html</code></li><li><a href="ts-interface.html">TypeScript 接口</a> <code>https://www.runoob.com/typescript/ts-interface.html</code></li><li><a href="ts-mapped-types.html">TypeScript 映射类型</a> <code>https://www.runoob.com/typescript/ts-mapped-types.html</code></li><li><a href="ts-conditional-types.html">TypeScript 条件类型</a> <code>https://www.runoob.com/typescript/ts-conditional-types.html</code></li><li><a href="ts-if-statement.html">TypeScript 条件语句</a> <code>https://www.runoob.com/typescript/ts-if-statement.html</code></li><li><a href="ts-enum.html">TypeScript 枚举（Enum）</a> <code>https://www.runoob.com/typescript/ts-enum.html</code></li><li><a href="ts-module.html">TypeScript 模块</a> <code>https://www.runoob.com/typescript/ts-module.html</code></li><li><a href="ts-template-literal.html">TypeScript 模板字面量类型</a> <code>https://www.runoob.com/typescript/ts-template-literal.html</code></li><li><a href="ts-generics.html">TypeScript 泛型</a> <code>https://www.runoob.com/typescript/ts-generics.html</code></li><li><a href="ts-mixin.html">TypeScript 混入（Mixin）</a> <code>https://www.runoob.com/typescript/ts-mixin.html</code></li><li><a href="ts-features.html">TypeScript 特性</a> <code>https://www.runoob.com/typescript/ts-features.html</code></li><li><a href="ts-special-types.html">TypeScript 特殊类型：never、void、unknown、any</a> <code>https://www.runoob.com/typescript/ts-special-types.html</code></li><li><a href="ts-class.html">TypeScript 类</a> <code>https://www.runoob.com/typescript/ts-class.html</code></li><li><a href="ts-type-guards.html">TypeScript 类型守卫</a> <code>https://www.runoob.com/typescript/ts-type-guards.html</code></li><li><a href="ts-inference.html">TypeScript 类型推断</a> <code>https://www.runoob.com/typescript/ts-inference.html</code></li><li><a href="ts-assertion.html">TypeScript 类型断言</a> <code>https://www.runoob.com/typescript/ts-assertion.html</code></li><li><a href="ts-class-inheritance.html">TypeScript 类继承与多态</a> <code>https://www.runoob.com/typescript/ts-class-inheritance.html</code></li><li><a href="ts-indexed-types.html">TypeScript 索引类型与 keyof 关键字</a> <code>https://www.runoob.com/typescript/ts-indexed-types.html</code></li><li><a href="ts-comprehensive-project.html">TypeScript 综合项目实战</a> <code>https://www.runoob.com/typescript/ts-comprehensive-project.html</code></li><li><a href="ts-compiler-options.html">TypeScript 编译选项</a> <code>https://www.runoob.com/typescript/ts-compiler-options.html</code></li><li><a href="ts-union.html">TypeScript 联合类型</a> <code>https://www.runoob.com/typescript/ts-union.html</code></li><li><a href="ts-decorators.html">TypeScript 装饰器</a> <code>https://www.runoob.com/typescript/ts-decorators.html</code></li><li><a href="ts-design-patterns.html">TypeScript 设计模式</a> <code>https://www.runoob.com/typescript/ts-design-patterns.html</code></li><li><a href="ts-access-modifiers.html">TypeScript 访问修饰符</a> <code>https://www.runoob.com/typescript/ts-access-modifiers.html</code></li><li><a href="ts-paths.html">TypeScript 路径映射 paths</a> <code>https://www.runoob.com/typescript/ts-paths.html</code></li><li><a href="ts-iterator-generator.html">TypeScript 迭代器与生成器</a> <code>https://www.runoob.com/typescript/ts-iterator-generator.html</code></li><li><a href="ts-recursive-types.html">TypeScript 递归类型</a> <code>https://www.runoob.com/typescript/ts-recursive-types.html</code></li><li><a href="ts-error-handling.html">TypeScript 错误处理</a> <code>https://www.runoob.com/typescript/ts-error-handling.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "TypeScript 抽象类", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-abstract-class.html", "href": "ts-abstract-class.html"}, {"title": "TypeScript 访问修饰符", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-access-modifiers.html", "href": "ts-access-modifiers.html"}, {"title": "TypeScript 声明文件", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-ambient.html", "href": "ts-ambient.html"}, {"title": "TypeScript Array(数组)", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-array.html", "href": "ts-array.html"}, {"title": "TypeScript 箭头函数与 this", "group": "typescript", "subgroup": "参考", "url": "https://www.runoob.com/typescript/ts-arrow-function.html", "href": "ts-arrow-function.html"}, {"title": "TypeScript 类型断言", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-assertion.html", "href": "ts-assertion.html"}, {"title": "TypeScript async/await 异步编程", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-async-await.html", "href": "ts-async-await.html"}, {"title": "TypeScript  基础语法", "group": "typescript", "subgroup": "入门", "url": "https://www.runoob.com/typescript/ts-basic-syntax.html", "href": "ts-basic-syntax.html"}, {"title": "TypeScript 类继承与多态", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-class-inheritance.html", "href": "ts-class-inheritance.html"}, {"title": "TypeScript 类", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-class.html", "href": "ts-class.html"}, {"title": "TypeScript 编译选项", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-compiler-options.html", "href": "ts-compiler-options.html"}, {"title": "TypeScript 综合项目实战", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-comprehensive-project.html", "href": "ts-comprehensive-project.html"}, {"title": "TypeScript 条件类型", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-conditional-types.html", "href": "ts-conditional-types.html"}, {"title": "TypeScript 协变与逆变", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-covariance.html", "href": "ts-covariance.html"}, {"title": "TypeScript 装饰器", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-decorators.html", "href": "ts-decorators.html"}, {"title": "TypeScript 设计模式", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-design-patterns.html", "href": "ts-design-patterns.html"}, {"title": "TypeScript 枚举（Enum）", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-enum.html", "href": "ts-enum.html"}, {"title": "TypeScript 错误处理", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-error-handling.html", "href": "ts-error-handling.html"}, {"title": "TypeScript 特性", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-features.html", "href": "ts-features.html"}, {"title": "TypeScript 函数重载", "group": "typescript", "subgroup": "参考", "url": "https://www.runoob.com/typescript/ts-function-overload.html", "href": "ts-function-overload.html"}, {"title": "TypeScript 函数", "group": "typescript", "subgroup": "参考", "url": "https://www.runoob.com/typescript/ts-function.html", "href": "ts-function.html"}, {"title": "TypeScript 泛型", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-generics.html", "href": "ts-generics.html"}, {"title": "TypeScript 条件语句", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-if-statement.html", "href": "ts-if-statement.html"}, {"title": "TypeScript 索引类型与 keyof 关键字", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-indexed-types.html", "href": "ts-indexed-types.html"}, {"title": "TypeScript infer 关键字", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-infer.html", "href": "ts-infer.html"}, {"title": "TypeScript 类型推断", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-inference.html", "href": "ts-inference.html"}, {"title": "TypeScript 安装", "group": "typescript", "subgroup": "入门", "url": "https://www.runoob.com/typescript/ts-install.html", "href": "ts-install.html"}, {"title": "TypeScript 接口", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-interface.html", "href": "ts-interface.html"}, {"title": "TypeScript 交叉类型", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-intersection-types.html", "href": "ts-intersection-types.html"}, {"title": "TypeScript 迭代器与生成器", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-iterator-generator.html", "href": "ts-iterator-generator.html"}, {"title": "TypeScript 字面量类型", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-literal-types.html", "href": "ts-literal-types.html"}, {"title": "TypeScript 循环", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-loop.html", "href": "ts-loop.html"}, {"title": "TypeScript Map 对象", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-map.html", "href": "ts-map.html"}, {"title": "TypeScript 映射类型", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-mapped-types.html", "href": "ts-mapped-types.html"}, {"title": "TypeScript 从 JavaScript 迁移", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-migration.html", "href": "ts-migration.html"}, {"title": "TypeScript 混入（Mixin）", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-mixin.html", "href": "ts-mixin.html"}, {"title": "TypeScript 模块", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-module.html", "href": "ts-module.html"}, {"title": "TypeScript Monorepo 配置", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-monorepo.html", "href": "ts-monorepo.html"}, {"title": "TypeScript 命名空间", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-namespace.html", "href": "ts-namespace.html"}, {"title": "TypeScript + Node.js 实战", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-nodejs.html", "href": "ts-nodejs.html"}, {"title": "TypeScript null 和 undefined", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-null-undefined.html", "href": "ts-null-undefined.html"}, {"title": "TypeScript Number", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-number.html", "href": "ts-number.html"}, {"title": "TypeScript 对象", "group": "typescript", "subgroup": "参考", "url": "https://www.runoob.com/typescript/ts-object.html", "href": "ts-object.html"}, {"title": "TypeScript 运算符", "group": "typescript", "subgroup": "参考", "url": "https://www.runoob.com/typescript/ts-operators.html", "href": "ts-operators.html"}, {"title": "TypeScript 可选链", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-optional-chaining.html", "href": "ts-optional-chaining.html"}, {"title": "TypeScript 路径映射 paths", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-paths.html", "href": "ts-paths.html"}, {"title": "TypeScript 性能优化", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-performance.html", "href": "ts-performance.html"}, {"title": "TypeScript Promise 详解", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-promise.html", "href": "ts-promise.html"}, {"title": "TypeScript 测验", "group": "typescript", "subgroup": "测验", "url": "https://www.runoob.com/typescript/ts-quiz.html", "href": "ts-quiz.html"}, {"title": "TypeScript + React 实战", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-react.html", "href": "ts-react.html"}, {"title": "TypeScript 递归类型", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-recursive-types.html", "href": "ts-recursive-types.html"}, {"title": "TypeScript 项目引用 References", "group": "typescript", "subgroup": "参考", "url": "https://www.runoob.com/typescript/ts-references.html", "href": "ts-references.html"}, {"title": "TypeScript Set 和 WeakMap", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-set-weakmap.html", "href": "ts-set-weakmap.html"}, {"title": "TypeScript 特殊类型：never、void、unknown、any", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-special-types.html", "href": "ts-special-types.html"}, {"title": "TypeScript String（字符串）", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-string.html", "href": "ts-string.html"}, {"title": "TypeScript Symbol", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-symbol.html", "href": "ts-symbol.html"}, {"title": "TypeScript 模板字面量类型", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-template-literal.html", "href": "ts-template-literal.html"}, {"title": "TypeScript tsconfig.json 配置", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-tsconfig.html", "href": "ts-tsconfig.html"}, {"title": "TypeScript 元组", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-tuple.html", "href": "ts-tuple.html"}, {"title": "TypeScript 教程", "group": "typescript", "subgroup": "入门", "url": "https://www.runoob.com/typescript/ts-tutorial.html", "href": "ts-tutorial.html"}, {"title": "TypeScript type 别名", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-type-alias.html", "href": "ts-type-alias.html"}, {"title": "TypeScript 类型守卫", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-type-guards.html", "href": "ts-type-guards.html"}, {"title": "TypeScript 基础类型", "group": "typescript", "subgroup": "入门", "url": "https://www.runoob.com/typescript/ts-type.html", "href": "ts-type.html"}, {"title": "TypeScript 联合类型", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-union.html", "href": "ts-union.html"}, {"title": "TypeScript 单元测试", "group": "typescript", "subgroup": "测验", "url": "https://www.runoob.com/typescript/ts-unit-testing.html", "href": "ts-unit-testing.html"}, {"title": "TypeScript 工具类型", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-utility-types.html", "href": "ts-utility-types.html"}, {"title": "TypeScript 变量声明", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-variables.html", "href": "ts-variables.html"}, {"title": "TypeScript + Vue3 实战", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/ts-vue3.html", "href": "ts-vue3.html"}, {"title": "TypeScript 基本结构", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/typescript-basic-structure.html", "href": "typescript-basic-structure.html"}, {"title": "TypeScript vs JavaScript 对比", "group": "typescript", "subgroup": "专题", "url": "https://www.runoob.com/typescript/typescript-vs-javascript.html", "href": "typescript-vs-javascript.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

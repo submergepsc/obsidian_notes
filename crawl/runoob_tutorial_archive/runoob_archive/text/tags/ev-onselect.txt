@@ -1,0 +1,57 @@
+URL: https://www.runoob.com/tags/ev-onselect.html
+Title: HTML onselect 事件属性 | 菜鸟教程
+
+HTML onselect 事件属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML onchange 事件属性 
+
+HTML onsubmit 事件属性 
+
+HTML onselect 事件属性 
+
+实例 
+
+当选取<input>元素中的文本后执行 JavaScript: 
+
+<input type="text" onselect="showMsg() value="Hello world!"> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 onselect 事件属性 
+
+定义和用法 
+
+onselect 属性在选取元素文本后触发。 
+
+onselect 属性可使用于以下元素: <input type="file">, <input type="password">, <input type="text">, <keygen>, 
+和 <textarea>。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+无。 
+
+语法 
+
+< element onselect=" script "> 
+
+属性值 
+
+值 
+
+描述 
+
+script 
+
+规定该onselect事件触发时执行的脚本。 
+
+AI 思考中... 
+
+HTML onchange 事件属性 
+
+HTML onsubmit 事件属性

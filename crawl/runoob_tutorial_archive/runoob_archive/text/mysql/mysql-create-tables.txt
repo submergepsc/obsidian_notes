@@ -1,0 +1,203 @@
+URL: https://www.runoob.com/mysql/mysql-create-tables.html
+Title: MySQL 创建数据表 | 菜鸟教程
+
+MySQL 创建数据表 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+MySQL 教程 
+
+MySQL 数据类型 
+
+MySQL 删除数据表 
+
+MySQL 创建数据表 
+
+创建 MySQL 数据表需要以下信息： 
+
+表名 
+
+表字段名 
+
+定义每个表字段的数据类型 
+
+语法 
+
+以下为创建 MySQL 数据表的 SQL 通用语法： 
+
+CREATE TABLE table_name (
+ column1 datatype,
+ column2 datatype,
+ ...
+); 
+
+参数说明： 
+
+table_name 是你要创建的表的名称。 
+
+column1 , column2 , ... 是表中的列名。 
+
+datatype 是每个列的数据类型。 
+
+以下是一个具体的实例，创建一个用户表 users ： 
+
+实例 
+
+CREATE TABLE users ( 
+
+id INT AUTO_INCREMENT PRIMARY KEY , 
+
+username VARCHAR ( 50 ) NOT NULL , 
+
+email VARCHAR ( 100 ) NOT NULL , 
+
+birthdate DATE , 
+
+is_active BOOLEAN DEFAULT TRUE 
+
+) ; 
+
+实例解析： 
+
+id : 用户 id，整数类型，自增长，作为主键。 
+
+username : 用户名，变长字符串，不允许为空。 
+
+email : 用户邮箱，变长字符串，不允许为空。 
+
+birthdate : 用户的生日，日期类型。 
+
+is_active : 用户是否已经激活，布尔类型，默认值为 true。 
+
+以上只是一个简单的实例，用到了一些常见的数据类型包括 INT, VARCHAR, DATE, BOOLEAN，你可以根据实际需要选择不同的数据类型。AUTO_INCREMENT 关键字用于创建一个自增长的列，PRIMARY KEY 用于定义主键。 
+
+如果你希望在创建表时指定数据引擎，字符集和排序规则等，可以使用 CHARACTER SET 和 COLLATE 子句： 
+
+实例 
+
+CREATE TABLE mytable ( 
+
+id INT PRIMARY KEY , 
+
+name VARCHAR ( 50 ) 
+
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci; 
+
+以上代码创建一个使用 utf8mb4 字符集和 utf8mb4_general_ci 排序规则的表。 
+
+以下例子中我们将在 RUNOOB 数据库中创建数据表 runoob_tbl： 
+
+实例 
+
+CREATE TABLE IF NOT EXISTS `runoob_tbl` ( 
+
+`runoob_id` INT UNSIGNED AUTO_INCREMENT , 
+
+`runoob_title` VARCHAR ( 100 ) NOT NULL , 
+
+`runoob_author` VARCHAR ( 40 ) NOT NULL , 
+
+`submission_date` DATE , 
+
+PRIMARY KEY ( `runoob_id` ) 
+
+) ENGINE = InnoDB DEFAULT CHARSET = utf8; 
+
+实例解析： 
+
+如果你不想字段为 空 可以设置字段的属性为 NOT NULL ，如上实例中的 runoob_title 与 runoob_author 字段，
+在操作数据库时如果输入该字段的数据为空，就会报错。 
+
+AUTO_INCREMENT 定义列为自增的属性，一般用于主键，数值会自动加 1。 
+
+PRIMARY KEY 关键字用于定义列为主键。 您可以使用多列来定义主键，列间以逗号 , 分隔。 
+
+ENGINE 设置存储引擎， CHARSET 设置编码。 
+
+通过命令提示符创建表 
+
+通过 mysql> 命令窗口可以很简单的创建 MySQL 数据表。 
+
+你可以使用 SQL 语句 CREATE TABLE 来创建数据表。 
+
+实例 
+
+以下为创建数据表 runoob_tbl 实例: 
+
+实例 
+
+root@host# mysql - u root - p 
+
+Enter password: ******* 
+
+mysql > USE RUNOOB; 
+
+DATABASE changed 
+
+mysql > CREATE TABLE runoob_tbl ( 
+
+-> runoob_id INT NOT NULL AUTO_INCREMENT , 
+
+-> runoob_title VARCHAR ( 100 ) NOT NULL , 
+
+-> runoob_author VARCHAR ( 40 ) NOT NULL , 
+
+-> submission_date DATE , 
+
+-> PRIMARY KEY ( runoob_id ) 
+
+-> ) ENGINE = InnoDB DEFAULT CHARSET = utf8; 
+
+Query OK , 0 ROWS affected ( 0.16 sec ) 
+
+mysql > 
+
+注意： MySQL 命令终止符为分号 ; 。 
+
+注意： -> 是换行符标识，不要复制。 
+
+使用 PHP 脚本创建数据表 
+
+你可以使用 PHP 的 mysqli_query() 函数来创建已存在数据库的数据表。 
+
+该函数有两个参数，在执行成功时返回 TRUE，否则返回 FALSE。 
+
+语法 
+
+mysqli_query(connection,query,resultmode); 
+
+参数 
+
+描述 
+
+connection 
+
+必需。规定要使用的 MySQL 连接。 
+
+query 
+
+必需，规定查询字符串。 
+
+resultmode 
+
+可选。一个常量。可以是下列值中的任意一个： 
+
+MYSQLI_USE_RESULT（如果需要检索大量数据，请使用这个） 
+
+MYSQLI_STORE_RESULT（默认） 
+
+实例 
+
+以下实例使用了PHP脚本来创建数据表： 
+
+创建数据表 
+
+<?php $dbhost = ' localhost ' ; $dbuser = ' root ' ; $dbpass = ' 123456 ' ; $conn = mysqli_connect ( $dbhost , $dbuser , $dbpass ) ; if ( ! $conn ) { die ( ' 连接失败: ' . mysqli_error ( $conn ) ) ; } echo ' 连接成功<br /> ' ; $sql = " CREATE TABLE runoob_tbl( " . " runoob_id INT NOT NULL AUTO_INCREMENT, " . " runoob_title VARCHAR(100) NOT NULL, " . " runoob_author VARCHAR(40) NOT NULL, " . " submission_date DATE, " . " PRIMARY KEY ( runoob_id ))ENGINE=InnoDB DEFAULT CHARSET=utf8; " ; mysqli_select_db ( $conn , ' RUNOOB ' ) ; $retval = mysqli_query ( $conn , $sql ) ; if ( ! $retval ) { die ( ' 数据表创建失败: ' . mysqli_error ( $conn ) ) ; } echo " 数据表创建成功 \n " ; mysqli_close ( $conn ) ; ?> 
+
+执行成功后，就可以通过命令行查看表结构： 
+
+AI 思考中... 
+
+MySQL 数据类型 
+
+MySQL 删除数据表

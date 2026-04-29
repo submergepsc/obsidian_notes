@@ -1,0 +1,346 @@
+URL: https://www.runoob.com/nodejs/nodejs-commonjs-esm.html
+Title: Node.js 模块导入 | 菜鸟教程
+
+Node.js 模块导入 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Node.js 教程 
+
+Node.js 工作机制 
+
+pnpm 使用介绍 
+
+Node.js 模块导入 
+
+当你开始写 Node.js 项目时，最先遇到的问题之一就是——如何导入模块（module）。 
+
+在 Node.js 里，模块就是可以重复使用的 JavaScript 文件，它们之间通过导入（import）和导出（export）互相通信。 
+
+Node.js 生态系统主要支持两种模块系统： CommonJS 和 ES Modules (ESM) 。 
+
+模块系统 
+
+规范 
+
+文件扩展名 
+
+导入方式 
+
+导出方式 
+
+CommonJS 
+
+Node.js 早期使用 
+
+.js 
+
+require() 
+
+module.exports / exports 
+
+ES Module (ESM) 
+
+ECMAScript 标准 
+
+.mjs 或 "type": "module" 
+
+import 
+
+export / export default 
+
+CommonJS 模块系统 
+
+CommonJS 是 Node.js 最早也是最广泛使用的模块系统，它采用同步加载的方式，这意味着模块在加载时会阻塞程序的执行，直到加载完成。 
+
+导入和导出 
+
+在 CommonJS 中，你使用 require() 函数来导入模块，使用 module.exports 或 exports 对象来导出模块。 
+
+导出方式 ： 
+
+math.js 文件代码： 
+
+// math.js 
+
+function add ( a , b ) { 
+
+return a + b ; 
+
+} 
+
+module. exports = { add } ; 
+
+// 或者：exports.add = add; 
+
+导入方式： 
+
+实例 
+
+// app.js 
+
+const math = require ( './math.js' ) ; 
+
+console. log ( math. add ( 2 , 3 ) ) ; // 5 
+
+模块要想让外部访问自己的内容，就需要使用 module.exports 或 exports 来导出： 
+
+实例 
+
+// user.js 
+
+const name = 'Alice' ; 
+
+const age = 30 ; 
+
+// 方式一：使用 module.exports 导出单个对象或值 
+
+module. exports = { 
+
+name : name , 
+
+age : age , 
+
+sayHello : ( ) => { 
+
+console. log ( `Hello , my name is $ { name } .` ) ; 
+
+} 
+
+} ; 
+
+// 方式二：使用 exports 导出多个具名变量 
+
+// exports 是 module.exports 的一个引用 
+
+exports. name = name ; 
+
+exports. age = age ; 
+
+exports. sayHello = ( ) => { 
+
+console. log ( `Hello , my name is $ { name } .` ) ; 
+
+} ; 
+
+导入方式： 
+
+实例 
+
+// main.js 
+
+const user = require ( './user.js' ) ; 
+
+console. log ( user. name ) ; // 输出: Alice 
+
+user. sayHello ( ) ; // 输出: Hello, my name is Alice. 
+
+// 也可以直接解构 
+
+const { name , age } = require ( './user.js' ) ; 
+
+console. log ( name ) ; // 输出: Alice 
+
+CommonJS 特点： 
+
+同步加载 ：适合服务器端环境，因为模块通常都在本地文件系统中，加载速度快。 
+
+运行时加载 ： require() 可以在代码的任何位置调用，这使得你可以根据条件来动态加载模块。 
+
+缓存机制 ： require() 加载的模块会被缓存，第二次导入时会直接从缓存中读取，避免重复加载。 
+
+ES Module（ESM）规范 
+
+ESM 是 JavaScript 官方的模块标准，它采用异步加载，并且是浏览器和现代 Node.js 应用的首选。 
+
+在 ESM 中，你使用 import 语句来导入模块，使用 export 语句来导出模块。 
+
+启用 ESM： 要在 Node.js 中使用 ESM，你需要在 package.json 文件中添加 "type": "module" ，或者将文件扩展名更改为 .mjs 。 
+
+// package.json
+{
+ "type": "module"
+} 
+
+导出模块: 
+
+实例 
+
+// math.mjs 
+
+export function add ( a , b ) { 
+
+return a + b ; 
+
+} 
+
+export default function multiply ( a , b ) { 
+
+return a * b ; 
+
+} 
+
+导入模块: 
+
+实例 
+
+// app.mjs 
+
+import multiply , { add } from './math.mjs' ; 
+
+console. log ( add ( 2 , 3 ) ) ; // 5 
+
+console. log ( multiply ( 2 , 3 ) ) ; // 6 
+
+启用方式： 
+
+文件扩展名用 .mjs 
+
+或在 package.json 中添加： 
+
+{
+ "type": "module"
+} 
+
+ESM 支持两种导出方式：具名导出 (Named Exports) 和 默认导出 (Default Export)。 
+
+实例 
+
+// user.mjs 
+
+// 具名导出 
+
+export const name = 'Bob' ; 
+
+export const age = 25 ; 
+
+// 默认导出 
+
+const sayHello = ( ) => { 
+
+console. log ( `Hello , my name is $ { name } .` ) ; 
+
+} ; 
+
+export default sayHello ; 
+
+导入方式： 
+
+实例 
+
+// main.mjs 
+
+// 导入具名导出 
+
+import { name , age } from './user.mjs' ; 
+
+console. log ( name ) ; // 输出: Bob 
+
+// 导入默认导出 
+
+import sayHello from './user.mjs' ; 
+
+sayHello ( ) ; // 输出: Hello, my name is Bob. 
+
+// 同时导入具名和默认导出 
+
+import sayHello , { name } from './user.mjs' ; 
+
+console. log ( name ) ; 
+
+sayHello ( ) ; 
+
+// 导入所有具名导出，并将其作为对象的属性 
+
+import * as user from './user.mjs' ; 
+
+console. log ( user. name ) ; 
+
+user. default ( ) ; // 默认导出会作为 default 属性 
+
+ESM 特点： 
+
+异步加载 ：默认是异步加载，不会阻塞主线程，更适合浏览器环境，但在 Node.js 中通常表现为同步加载。 
+
+静态分析 ： import 和 export 语句在代码执行前就可以确定模块的依赖关系，这使得工具（如 Webpack、Vite）可以进行更好的优化（如 Tree Shaking ）。 
+
+严格模式 ：ESM 模块默认在严格模式下运行。 
+
+CommonJS 和 ESM 的区别 
+
+项目 
+
+CommonJS 
+
+ESM 
+
+语法 
+
+require / module.exports 
+
+import / export 
+
+加载机制 
+
+运行时同步加载 
+
+编译时静态加载 
+
+默认支持 
+
+Node.js 默认支持 
+
+需 .mjs 或 "type": "module" 
+
+适合场景 
+
+后端脚本、老项目 
+
+前后端现代项目、Tree-shaking 
+
+是否可混用 
+
+不能直接混用（需额外配置） 
+
+不能直接混用（需额外配置） 
+
+混合使用 
+
+Node.js 在较新版本中支持两种模块系统共存。你可以在同一个项目中同时使用 CommonJS 和 ESM，但需要注意以下几点： 
+
+ESM 中不能直接使用 require() 和 module.exports 。 
+
+CommonJS 中不能直接使用 import 和 export 。 
+
+如果想在 ESM 中导入 CommonJS 模块，可以直接使用 import 语句，ESM 会将其视为默认导出。 
+
+// commonjs_module.js
+module.exports = { data: 'hello' };
+
+// esm_module.mjs
+import commonModule from './commonjs_module.js';
+console.log(commonModule.data); // 输出: hello 
+
+如果想在 CommonJS 中导入 ESM 模块，你需要使用动态 import() 函数。 
+
+// esm_module.mjs
+export const name = 'Bob';
+
+// commonjs_module.js
+async function loadESM() {
+ const { name } = await import('./esm_module.mjs');
+ console.log(name);
+}
+loadESM(); 
+
+最佳实践建议 
+
+对于新的项目， 强烈推荐使用 ES Modules (ESM) 。它不仅是 JavaScript 的官方标准，而且与现代前端工具链（如 Vite、Next.js）兼容性更好，能够充分利用 Tree Shaking 等优化技术，减少打包后的代码体积。 
+
+如果你正在维护一个老旧的 CommonJS 项目，并且不需要 ESM 的特性，可以继续使用 CommonJS。但如果需要引入新的依赖或利用 ESM 的新特性，可以考虑逐步迁移，或者使用混合模式来过渡。 
+
+AI 思考中... 
+
+Node.js 工作机制 
+
+pnpm 使用介绍

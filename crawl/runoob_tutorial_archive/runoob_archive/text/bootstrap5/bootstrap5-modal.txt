@@ -1,0 +1,142 @@
+URL: https://www.runoob.com/bootstrap5/bootstrap5-modal.html
+Title: Bootstrap5 模态框 | 菜鸟教程
+
+Bootstrap5 模态框 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Bootstrap5 教程 
+
+Bootstrap5 轮播 
+
+Bootstrap5 提示框 
+
+Bootstrap5 模态框 
+
+模态框（Modal）是覆盖在父窗体上的子窗体。通常，目的是显示来自一个单独的源的内容，可以在不离开父窗体的情况下有一些互动。子窗体可提供信息交互等。 
+
+如何创建模态框 
+
+以下实例创建了一个简单的模态框效果 ： 
+
+实例 
+
+< button type = " button " class = " btn btn-primary " data-bs-toggle = " modal " data-bs-target = " #myModal " > 打开模态框 </ button > < div class = " modal " id = " myModal " > < div class = " modal-dialog " > < div class = " modal-content " > < div class = " modal-header " > < h4 class = " modal-title " > 模态框标题 </ h4 > < button type = " button " class = " btn-close " data-bs-dismiss = " modal " > </ button > </ div > < div class = " modal-body " > 模态框内容.. </ div > < div class = " modal-footer " > < button type = " button " class = " btn btn-danger " data-bs-dismiss = " modal " > 关闭 </ button > </ div > </ div > </ div > </ div > 
+
+尝试一下 » 
+
+添加动画 
+
+使用 .fade 类可以设置模态框弹出或关闭的效果: 
+
+实例 
+
+< div class = " modal fade " > </ div > < div class = " modal " > </ div > 
+
+尝试一下 » 
+
+模态框尺寸 
+
+我们可以通过添加 .modal-sm 类来创建一个小模态框， .modal-lg 类可以创建一个大模态框。 
+
+尺寸类放在 <div> 元素的 .modal-dialog 类后 : 
+
+实例 - 小模态框 
+
+< div class = " modal-dialog modal-sm " > 
+
+尝试一下 » 
+
+实例 - 大模态框 
+
+< div class = " modal-dialog modal-lg " > 
+
+尝试一下 » 
+
+实例 - 超大模态框 
+
+< div class = " modal-dialog modal-xl " > 
+
+尝试一下 » 
+
+全屏幕显示 
+
+使用 .modal-fullscreen 类可以让模态框全屏幕显示: 
+
+实例 - 全屏幕显示 
+
+< div class = " modal-dialog modal-fullscreen " > 
+
+尝试一下 » 
+
+使用 .modal-fullscreen-*-* 类可以控制在什么尺寸下全屏幕显示: 
+
+类 
+
+描述 
+
+实例 
+
+.modal-fullscreen-sm-down 
+
+576px 以下尺寸全屏幕显示 
+
+尝试一下 
+
+.modal-fullscreen-md-down 
+
+768px 以下尺寸全屏幕显示 
+
+尝试一下 
+
+.modal-fullscreen-lg-down 
+
+992px 以下尺寸全屏幕显示 
+
+尝试一下 
+
+.modal-fullscreen-xl-down 
+
+1200px 以下尺寸全屏幕显示 
+
+尝试一下 
+
+.modal-fullscreen-xxl-down 
+
+1400px 以下尺寸全屏幕显示 
+
+尝试一下 
+
+模态框居中显示 
+
+使用 .modal-dialog-centered 类可以设置模态框水平和垂直方向都居中显示: 
+
+实例 
+
+< div class = " modal-dialog modal-dialog-centered " > 
+
+尝试一下 » 
+
+模态框滚动条 
+
+默认情况下模态框如果包含很多内容，页面会自动生成一个滚动，模态框随着页面的滚动而滚动: 
+
+实例 
+
+< div class = " modal-dialog " > 
+
+尝试一下 » 
+
+如果我们只想在模态框里头设置一个滚动条，可以使用 .modal-dialog-scrollable 类： 
+
+实例 
+
+< div class = " modal-dialog modal-dialog-scrollable " > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Bootstrap5 轮播 
+
+Bootstrap5 提示框

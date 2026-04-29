@@ -1,0 +1,38 @@
+URL: https://www.runoob.com/dtd/dtd-summary.html
+Title: DTD 总结 | 菜鸟教程
+
+DTD 总结 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+DTD 教程 
+
+DTD 验证 
+
+您已经学习了 DTD， 下一步呢？ 
+
+DTD 总结 
+
+本教程已经向您讲解了如何描述 XML 文档的结构。 
+
+您学习到了如何使用 DTD 来定义一个 XML 文档的合法元素，以及如何在您的 XML 内部或者作为一个外部引用来声明 DTD。 
+
+您已经学习了如何为 XML 文档声明合法的元素、属性、实体以及 CDATA 部分。 
+
+您也看到了如何根据某个 DTD 来验证一个 XML 文档。 
+
+您已经学习了 DTD，下一步学习什么内容呢？ 
+
+下一步应当学习 XML Schema。 
+
+XML Schema 用于定义 XML 文档的合法元素，类似 DTD。我们认为 XML Schema 很快会将 DTD 取而代之，被用在大部分的网络应用程序中。 
+
+XML Schema 是基于 XML 的 DTD 替代物。 
+
+与 DTD 不同，XML Schema 支持数据类型和命名空间。 
+
+如果您希望学习更多有关 XML Schema 的知识，请访问我们的《 XML Schema 教程 》。 
+
+AI 思考中... 
+
+DTD 验证

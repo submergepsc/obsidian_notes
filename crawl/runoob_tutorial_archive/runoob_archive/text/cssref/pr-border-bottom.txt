@@ -1,0 +1,96 @@
+URL: https://www.runoob.com/cssref/pr-border-bottom.html
+Title: CSS border-bottom 属性 | 菜鸟教程
+
+CSS border-bottom 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS border 属性 
+
+CSS border-bottom-color 属性 
+
+CSS border-bottom 属性 
+
+实例 
+
+设置底部边框样式： 
+
+p { border-style: solid ; border-bottom: thick dotted #ff0000 ; } 
+
+尝试一下 » 
+
+标签定义及使用说明 
+
+border-bottom缩写属性设置一个声明中所有底部边框属性。 
+
+可以设置的属性分别（按顺序）：border-bottom-width, border-bottom-style,和border-bottom-color. 
+
+如果上述值缺少一个没有关系，例如border-bottom：＃FF0000;是允许的 
+
+默认值: 
+
+not specified 
+
+继承: 
+
+no 
+
+版本: 
+
+CSS1 
+
+JavaScript 语法: 
+
+object object.style.borderBottom="3px solid blue" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+border-bottom 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+border-bottom-width 
+
+指定底部边框宽度 
+
+border-bottom-style 
+
+指定底部边框样式 
+
+border-bottom-color 
+
+指定底部边框颜色 
+
+inherit 
+
+指定border-bottom 属性值，应该从父元素继承 
+
+相关文章 
+
+CSS 教程: CSS 边框 
+
+AI 思考中... 
+
+CSS border 属性 
+
+CSS border-bottom-color 属性

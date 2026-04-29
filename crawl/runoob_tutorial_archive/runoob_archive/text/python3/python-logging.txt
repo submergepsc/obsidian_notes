@@ -1,0 +1,514 @@
+URL: https://www.runoob.com/python3/python-logging.html
+Title: Python logging 模块 | 菜鸟教程
+
+Python logging 模块 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python csv 模块 
+
+Python threading 模块 
+
+Python logging 模块 
+
+在编程中，日志记录（logging）是一种非常重要的工具，它可以帮助我们跟踪程序的运行状态、调试错误以及记录重要信息。 
+
+Python 提供了一个内置的 logging 模块，专门用于处理日志记录任务。与简单的 print 语句相比， logging 模块更加灵活和强大，能够满足不同场景下的日志需求。 
+
+为什么使用 logging 模块？ 
+
+灵活性 ： logging 模块允许你根据需要设置日志的级别、格式和输出位置。 
+
+可扩展性 ：你可以轻松地将日志输出到文件、控制台、网络等不同的目标。 
+
+结构化日志 ： logging 模块支持结构化日志记录，便于后续的分析和处理。 
+
+性能优化 ：与 print 相比， logging 模块在性能上进行了优化，适合在生产环境中使用。 
+
+logging 模块的基本用法 
+
+1. 导入 logging 模块 
+
+首先，我们需要导入 logging 模块： 
+
+实例 
+
+import logging 
+
+2. 配置日志级别 
+
+日志级别用于控制日志的详细程度。 logging 模块提供了以下几种日志级别： 
+
+DEBUG ：详细的调试信息，通常用于开发阶段。 
+
+INFO ：程序正常运行时的信息。 
+
+WARNING ：表示潜在的问题，但程序仍能正常运行。 
+
+ERROR ：表示程序中的错误，导致某些功能无法正常工作。 
+
+CRITICAL ：表示严重的错误，可能导致程序崩溃。 
+
+你可以通过以下代码设置日志级别： 
+
+实例 
+
+logging . basicConfig ( level = logging . DEBUG ) 
+
+3. 记录日志 
+
+设置好日志级别后，你可以使用以下方法记录日志： 
+
+实例 
+
+logging . debug ( "这是一条调试信息" ) 
+
+logging . info ( "这是一条普通信息" ) 
+
+logging . warning ( "这是一条警告信息" ) 
+
+logging . error ( "这是一条错误信息" ) 
+
+logging . critical ( "这是一条严重错误信息" ) 
+
+4. 日志输出格式 
+
+你可以通过 basicConfig 方法自定义日志的输出格式。例如： 
+
+实例 
+
+logging . basicConfig ( 
+
+level = logging . DEBUG , 
+
+format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s" , 
+
+datefmt = "%Y-%m-%d %H:%M:%S" 
+
+) 
+
+5. 将日志输出到文件 
+
+默认情况下，日志会输出到控制台。如果你希望将日志保存到文件中，可以这样配置： 
+
+实例 
+
+logging . basicConfig ( 
+
+level = logging . DEBUG , 
+
+format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s" , 
+
+filename = "app.log" 
+
+) 
+
+logging 模块的高级用法 
+
+1. 使用多个日志记录器 
+
+在大型项目中，你可能需要为不同的模块或组件创建独立的日志记录器。可以通过以下方式实现： 
+
+实例 
+
+logger = logging . getLogger ( "my_logger" ) 
+
+logger. setLevel ( logging . DEBUG ) 
+
+# 创建文件处理器 
+
+file_handler = logging . FileHandler ( "my_logger.log" ) 
+
+file_handler. setLevel ( logging . DEBUG ) 
+
+# 创建控制台处理器 
+
+console_handler = logging . StreamHandler ( ) 
+
+console_handler. setLevel ( logging . INFO ) 
+
+# 设置日志格式 
+
+formatter = logging . Formatter ( "%(asctime)s - %(name)s - %(levelname)s - %(message)s" ) 
+
+file_handler. setFormatter ( formatter ) 
+
+console_handler. setFormatter ( formatter ) 
+
+# 将处理器添加到日志记录器 
+
+logger. addHandler ( file_handler ) 
+
+logger. addHandler ( console_handler ) 
+
+# 记录日志 
+
+logger. debug ( "这是一条调试信息" ) 
+
+logger. info ( "这是一条普通信息" ) 
+
+2. 日志过滤器 
+
+你可以通过过滤器来控制哪些日志需要被记录。例如： 
+
+实例 
+
+class MyFilter ( logging . Filter ) : 
+
+def filter ( self , record ) : 
+
+return record. levelno == logging . ERROR 
+
+logger. addFilter ( MyFilter ( ) ) 
+
+3. 日志轮转 
+
+当日志文件过大时，可以使用 RotatingFileHandler 或 TimedRotatingFileHandler 实现日志轮转： 
+
+实例 
+
+from logging . handlers import RotatingFileHandler 
+
+handler = RotatingFileHandler ( "app.log" , maxBytes = 1024 , backupCount = 3 ) 
+
+logger. addHandler ( handler ) 
+
+logging 模块常用的属性和方法 
+
+1. 核心类 
+
+类 
+
+说明 
+
+示例 
+
+logging.Logger 
+
+记录器，用于发出日志消息（通过 logging.getLogger(name) 获取） 
+
+logger = logging.getLogger("my_logger") 
+
+logging.Handler 
+
+处理器，决定日志输出位置（如文件、控制台等） 
+
+handler = logging.FileHandler("app.log") 
+
+logging.Formatter 
+
+格式化器，控制日志输出的格式 
+
+formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s') 
+
+logging.Filter 
+
+过滤器，用于更精细地控制日志记录 
+
+filter = logging.Filter("module.name") 
+
+2. Logger 对象常用方法 
+
+方法 
+
+说明 
+
+示例 
+
+logger.setLevel(level) 
+
+设置日志级别（如 logging.DEBUG 、 logging.INFO ） 
+
+logger.setLevel(logging.DEBUG) 
+
+logger.debug(msg) 
+
+记录 DEBUG 级别日志 
+
+logger.debug("调试信息") 
+
+logger.info(msg) 
+
+记录 INFO 级别日志 
+
+logger.info("程序启动") 
+
+logger.warning(msg) 
+
+记录 WARNING 级别日志 
+
+logger.warning("磁盘空间不足") 
+
+logger.error(msg) 
+
+记录 ERROR 级别日志 
+
+logger.error("操作失败") 
+
+logger.critical(msg) 
+
+记录 CRITICAL 级别日志 
+
+logger.critical("系统崩溃") 
+
+logger.addHandler(handler) 
+
+添加处理器 
+
+logger.addHandler(handler) 
+
+logger.addFilter(filter) 
+
+添加过滤器 
+
+logger.addFilter(filter) 
+
+3. Handler 常用类型 
+
+Handler 类型 
+
+说明 
+
+示例 
+
+StreamHandler 
+
+输出到流（如控制台） 
+
+handler = logging.StreamHandler() 
+
+FileHandler 
+
+输出到文件 
+
+handler = logging.FileHandler("app.log") 
+
+RotatingFileHandler 
+
+按文件大小分割日志 
+
+handler = logging.RotatingFileHandler("app.log", maxBytes=1e6, backupCount=3) 
+
+TimedRotatingFileHandler 
+
+按时间分割日志 
+
+handler = logging.TimedRotatingFileHandler("app.log", when="midnight") 
+
+SMTPHandler 
+
+通过邮件发送日志 
+
+handler = logging.SMTPHandler("mail.example.com", " [email protected] ", " [email protected] ", "Error Log") 
+
+4. 日志级别（常量） 
+
+级别 
+
+数值 
+
+说明 
+
+CRITICAL 
+
+50 
+
+严重错误，程序可能无法继续运行 
+
+ERROR 
+
+40 
+
+错误，但程序仍可运行 
+
+WARNING 
+
+30 
+
+警告信息（默认级别） 
+
+INFO 
+
+20 
+
+程序运行信息 
+
+DEBUG 
+
+10 
+
+调试信息 
+
+NOTSET 
+
+0 
+
+继承父记录器的级别 
+
+5. Formatter 常用格式字段 
+
+字段 
+
+说明 
+
+示例输出 
+
+%(asctime)s 
+
+日志创建时间 
+
+2023-01-01 12:00:00,123 
+
+%(levelname)s 
+
+日志级别名称 
+
+INFO 
+
+%(message)s 
+
+日志消息内容 
+
+程序启动成功 
+
+%(name)s 
+
+记录器名称 
+
+my_logger 
+
+%(filename)s 
+
+生成日志的文件名 
+
+app.py 
+
+%(lineno)d 
+
+生成日志的行号 
+
+42 
+
+%(funcName)s 
+
+生成日志的函数名 
+
+main 
+
+6. 快速配置方法 
+
+方法 
+
+说明 
+
+示例 
+
+logging.basicConfig() 
+
+一键配置日志级别、处理器和格式（通常在程序入口调用） 
+
+logging.basicConfig(level=logging.INFO, format='%(levelname)s - %(message)s') 
+
+常用参数 ： 
+
+level ：设置根记录器级别 
+
+filename ：输出到文件 
+
+filemode ：文件模式（如 'w' 覆盖） 
+
+format ：格式字符串 
+
+datefmt ：日期格式（如 "%Y-%m-%d %H:%M:%S" ） 
+
+实例 
+
+1. 基础配置 
+
+实例 
+
+import logging 
+
+# 配置日志 
+
+logging . basicConfig ( 
+
+level = logging . DEBUG , 
+
+format = '%(asctime)s - %(name)s - %(levelname)s - %(message)s' , 
+
+filename = 'app.log' 
+
+) 
+
+# 使用 
+
+logger = logging . getLogger ( "my_app" ) 
+
+logger. info ( "程序启动" ) 
+
+2. 多处理器复杂配置 
+
+实例 
+
+import logging 
+
+# 创建记录器 
+
+logger = logging . getLogger ( "my_module" ) 
+
+logger. setLevel ( logging . DEBUG ) 
+
+# 控制台处理器 
+
+console_handler = logging . StreamHandler ( ) 
+
+console_handler. setLevel ( logging . WARNING ) 
+
+# 文件处理器 
+
+file_handler = logging . FileHandler ( "debug.log" ) 
+
+file_handler. setLevel ( logging . DEBUG ) 
+
+# 格式化 
+
+formatter = logging . Formatter ( '%(asctime)s - %(name)s - %(levelname)s - %(message)s' ) 
+
+console_handler. setFormatter ( formatter ) 
+
+file_handler. setFormatter ( formatter ) 
+
+# 添加处理器 
+
+logger. addHandler ( console_handler ) 
+
+logger. addHandler ( file_handler ) 
+
+# 使用 
+
+logger. debug ( "调试信息" ) # 仅写入文件 
+
+logger. warning ( "警告！" ) # 同时输出到控制台和文件 
+
+3. 日志分割 
+
+实例 
+
+from logging . handlers import RotatingFileHandler 
+
+handler = RotatingFileHandler ( 
+
+"app.log" , maxBytes = 1e6 , backupCount = 3 # 每个文件1MB，保留3个备份 
+
+) 
+
+logger. addHandler ( handler ) 
+
+AI 思考中... 
+
+Python csv 模块 
+
+Python threading 模块

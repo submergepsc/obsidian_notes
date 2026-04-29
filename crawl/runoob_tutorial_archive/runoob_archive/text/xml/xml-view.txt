@@ -1,0 +1,75 @@
+URL: https://www.runoob.com/xml/xml-view.html
+Title: 查看 XML 文件 | 菜鸟教程
+
+查看 XML 文件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML 教程 
+
+XML 验证器 
+
+XML 和 CSS 
+
+查看 XML 文件 
+
+在所有主流的浏览器中，均能够查看原始的 XML 文件。 
+
+不要指望 XML 文件会直接显示为 HTML 页面。 
+
+查看 XML 文件 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+- < note > 
+
+< to > Tove </ to > 
+
+< from > Jani </ from > 
+
+< heading > Reminder </ heading > 
+
+< body > Don't forget me this weekend! </ body > 
+
+</ note > 
+
+查看这个 XML 文件： note.xml 
+
+XML 文档将显示为代码颜色化的根以及子元素。通过点击元素左侧的加号（+）或减号（ - ），可以展开或收起元素的结构。要查看原始的 XML 源（不包括 + 和 - 符号），选择"查看页面源代码"或从浏览器菜单"查看源文件"。 
+
+注释： 在 Safari 中，只有元素的文本将被显示。要查看原始的 XML，您必须右键单击页面，选择"查看源文件"。 
+
+查看无效的 XML 文件 
+
+如果一个错误的XML文件被打开，浏览器会报告错误。 
+
+请查看这个 XML 文件： note_error.xml 
+
+其他 XML 实例 
+
+请查看这些 XML 文档，这会有助于您建立对 XML 的感性认识。 
+
+一个 XML 的 CD 目录 
+这是一个 CD 集，存储为 XML 数据。 
+
+一个 XML 的植物目录 
+这是一个来自植物店的植物目录，存储为 XML 数据。 
+
+一个简单的食物菜单 
+这是一个来自餐馆的早餐菜单，存储为 XML 数据。 
+
+为什么 XML 显示这个样子？ 
+
+XML 文档不会携带有关如何显示数据的信息。 
+
+由于 XML 标签由 XML 文档的作者"发明"，浏览器无法确定像 <table> 这样一个标签究竟描述一个 HTML 表格还是一个餐桌。 
+
+在没有任何有关如何显示数据的信息的情况下，大多数的浏览器都会仅仅把 XML 文档显示为源代码。 
+
+在下面的章节，我们会了解几个有关这个显示问题的解决方案，其中会使用 CSS、XSLT 和 JavaScript。 
+
+AI 思考中... 
+
+XML 验证器 
+
+XML 和 CSS

@@ -1,0 +1,85 @@
+URL: https://www.runoob.com/schema/el-complexcontent.html
+Title: XML Schema complexContent 元素 | 菜鸟教程
+
+XML Schema complexContent 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema choice 元素 
+
+XML Schema complexType 元素 
+
+XML Schema complexContent 元素 
+
+定义和用法 
+
+complexContent 元素定义对复杂类型（包含混合内容或仅包含元素）的扩展或限制。 
+
+元素信息 
+
+父元素： complexType 
+
+语法 
+
+<complexContent 
+id=ID 
+mixed=true|false 
+any attributes 
+> 
+
+(annotation?,(restriction|extension)) 
+
+</complexContent> 
+
+（? 符号声明元素可在 complexContent 元素内出现零次或一次。） 
+
+属性 
+
+描述 
+
+id 
+
+可选。规定该元素的唯一的 ID。 
+
+mixed 
+
+可选。规定是否允许字符数据出现在该 complexType 元素的子元素之间。 默认值为 false。 
+
+any attributes 
+
+可选。规定带有 non-schema 命名空间的任何其他属性。 
+
+实例 1 
+
+下面的例子中有一个复杂类型 "fullpersoninfo"，这个复杂类型是通过用三个补充的元素扩展继承的类型，从另一个复杂类型 "personinfo" 衍生而来的： 
+
+<xs:element name="employee" type="fullpersoninfo"/> 
+
+<xs:complexType name="personinfo"> 
+<xs:sequence> 
+<xs:element name="firstname" type="xs:string"/> 
+<xs:element name="lastname" type="xs:string"/> 
+</xs:sequence> 
+</xs:complexType> 
+
+<xs:complexType name="fullpersoninfo"> 
+<xs:complexContent> 
+<xs:extension base="personinfo"> 
+<xs:sequence> 
+<xs:element name="address" type="xs:string"/> 
+<xs:element name="city" type="xs:string"/> 
+<xs:element name="country" type="xs:string"/> 
+</xs:sequence> 
+</xs:extension> 
+</xs:complexContent> 
+</xs:complexType> 
+
+在上例中，"employee" 元素必须按顺序包含下面的元素："firstname"、"lastname"、"address"、"city" 以及 "country"。 
+
+AI 思考中... 
+
+XML Schema choice 元素 
+
+XML Schema complexType 元素

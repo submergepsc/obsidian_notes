@@ -1,0 +1,239 @@
+URL: https://www.runoob.com/selenium/selenium-headless.html
+Title: Selenium 无头浏览器模式 | 菜鸟教程
+
+Selenium 无头浏览器模式 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Selenium 教程 
+
+Selenium 高级功能 
+
+Selenium 实战项目 
+
+Selenium 无头浏览器模式 
+
+无头浏览器模式（Headless Mode）是指在没有图形用户界面（GUI）的情况下运行浏览器，换句话说，浏览器在后台运行，不会弹出可见的窗口。 
+
+无头浏览器模式通常用于自动化测试、网页抓取、性能测试等场景，因为它可以节省系统资源，并且在没有显示器的服务器上也能正常运行。 
+
+启用无头模式 ：通过 ChromeOptions 或 FirefoxOptions 添加 --headless 参数。 
+
+优化设置 ：禁用 GPU 加速、设置窗口大小等。 
+
+验证无头模式 ：通过打印页面标题或截图验证脚本运行结果。 
+
+为什么使用无头浏览器模式？ 
+
+节省资源 ：无头模式不需要渲染图形界面，因此可以节省 CPU 和内存资源。 
+
+提高速度 ：由于不需要加载和渲染图形界面，无头模式通常比普通模式更快。 
+
+适合自动化 ：在自动化测试和网页抓取中，无头模式可以避免干扰，并且可以在没有显示器的服务器上运行。 
+
+便于调试 ：在某些情况下，无头模式可以帮助开发者更快地调试和定位问题。 
+
+Selenium 中的无头浏览器模式 
+
+设置 Chrome 无头模式 
+
+在 Selenium 中，你可以通过 ChromeOptions 类来设置 Chrome 浏览器的无头模式。以下是一个简单的示例： 
+
+实例 
+
+from selenium import webdriver 
+
+from selenium. webdriver . chrome . service import Service 
+
+from selenium. webdriver . common . by import By 
+
+from selenium. webdriver . chrome . options import Options 
+
+# 设置 Chrome 无头模式 
+
+chrome_options = Options ( ) 
+
+chrome_options. add_argument ( "--headless" ) # 启用无头模式 
+
+chrome_options. add_argument ( "--disable-gpu" ) # 禁用 GPU 加速 
+
+# 创建 WebDriver 实例 
+
+driver = webdriver. Chrome ( service = Service ( '/path/to/chromedriver' ) , options = chrome_options ) 
+
+# 打开网页 
+
+driver. get ( "https://www.baidu.com" ) 
+
+# 打印网页标题 
+
+print ( driver. title ) 
+
+# 关闭浏览器 
+
+driver. quit ( ) 
+
+设置 Firefox 无头模式 
+
+对于 Firefox 浏览器，你可以使用 FirefoxOptions 类来设置无头模式。以下是一个示例： 
+
+实例 
+
+from selenium import webdriver 
+
+from selenium. webdriver . firefox . service import Service 
+
+from selenium. webdriver . firefox . options import Options 
+
+# 设置 Firefox 无头模式 
+
+firefox_options = Options ( ) 
+
+firefox_options. add_argument ( "--headless" ) # 启用无头模式 
+
+# 创建 WebDriver 实例 
+
+driver = webdriver. Firefox ( service = Service ( '/path/to/geckodriver' ) , options = firefox_options ) 
+
+# 打开网页 
+
+driver. get ( "https://www.example.com" ) 
+
+# 打印网页标题 
+
+print ( driver. title ) 
+
+# 关闭浏览器 
+
+driver. quit ( ) 
+
+设置 Edge 无头模式 
+
+对于 Edge 浏览器，你可以使用 EdgeOptions 类来设置无头模式。以下是一个示例： 
+
+实例 
+
+from selenium import webdriver 
+
+from selenium. webdriver . edge . service import Service 
+
+from selenium. webdriver . edge . options import Options 
+
+# 设置 Edge 无头模式 
+
+edge_options = Options ( ) 
+
+edge_options. add_argument ( "--headless" ) # 启用无头模式 
+
+# 创建 WebDriver 实例 
+
+driver = webdriver. Edge ( service = Service ( '/path/to/msedgedriver' ) , options = edge_options ) 
+
+# 打开网页 
+
+driver. get ( "https://www.example.com" ) 
+
+# 打印网页标题 
+
+print ( driver. title ) 
+
+# 关闭浏览器 
+
+driver. quit ( ) 
+
+无头模式下的常见问题及解决方案 
+
+页面加载不完全 
+
+在无头模式下，有时页面可能加载不完全，导致元素无法找到。可以通过以下方式解决： 
+
+增加等待时间 ：使用 WebDriverWait 显式等待元素加载完成。 
+
+调整窗口大小 ：有时页面元素的位置和大小会根据窗口大小变化，可以通过 driver.set_window_size(width, height) 设置窗口大小。 
+
+截图和日志 
+
+在无头模式下，你可能需要截图或记录日志来调试问题。可以使用以下方法： 
+
+截图 ：使用 driver.save_screenshot('screenshot.png') 保存当前页面的截图。 
+
+日志 ：通过 driver.get_log('browser') 获取浏览器日志。 
+
+无头浏览器模式是 Selenium 自动化测试和网页抓取中的一个强大工具。通过简单的设置，你可以在没有图形界面的情况下运行浏览器，节省资源并提高效率。无论是 Chrome、Firefox 还是 Edge，Selenium4 都提供了简单的方法来启用无头模式。 
+
+以下是如何在无头模式下使用 Selenium 截取百度首页（www.baidu.com）的完整代码示例。 
+
+代码中启用了 Chrome 浏览器的无头模式，并截取页面截图保存为文件。 
+
+实例 
+
+import time 
+
+from selenium import webdriver 
+
+from selenium. webdriver . chrome . service import Service as ChromeService 
+
+from selenium. webdriver . chrome . options import Options 
+
+from selenium. webdriver . common . by import By 
+
+# 配置 Chrome 选项 
+
+chrome_options = Options ( ) 
+
+chrome_options. add_argument ( "--headless" ) # 启用无头模式 
+
+chrome_options. add_argument ( "--disable-gpu" ) # 禁用 GPU 加速 
+
+chrome_options. add_argument ( "--window-size=1920,1080" ) # 设置窗口大小 
+
+# 设置正确的驱动路径 
+
+service = ChromeService ( executable_path = "./chromedriver-mac-arm64/chromedriver" ) 
+
+driver = webdriver. Chrome ( service = service , options = chrome_options ) 
+
+try : 
+
+# 打开百度首页 
+
+driver. get ( "https://www.baidu.com" ) 
+
+# 等待页面加载完成 
+
+time . sleep ( 2 ) # 可以根据需要调整等待时间 
+
+# 强制停止页面加载 
+
+driver. execute_script ( "window.stop();" ) 
+
+# 打印页面标题 
+
+print ( "页面标题:" , driver. title ) 
+
+# 截取页面截图并保存 
+
+screenshot_path = "baidu_screenshot.png" 
+
+driver. save_screenshot ( screenshot_path ) 
+
+print ( f "截图已保存到: {screenshot_path}" ) 
+
+finally : 
+
+# 关闭浏览器 
+
+driver. quit ( ) 
+
+执行成功后，会输出： 
+
+页面标题: 百度一下，你就知道
+截图已保存到: baidu_screenshot.png 
+
+打开当前目录会看到 baidu_screenshot.png 文件，打开如下所示： 
+
+AI 思考中... 
+
+Selenium 高级功能 
+
+Selenium 实战项目

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>cssref index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>cssref index</h1>
+      <p>Offline pages under cssref</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-516595e8">入门</a> <span>1 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>133 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>cssref (134)</h2><p>二级分类：2 个</p><ul class="page-list"><li><a href="#subgroup-516595e8">入门</a> <span>1 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>133 pages</span></li></ul></section><section id="subgroup-516595e8"><h2>入门 (1)</h2><ol class="page-list"><li><a href="css3-pr-border-radius.html">CSS3 border-radius 属性 | 菜鸟教程菜鸟教程(runoob.com)</a> <code>https://www.runoob.com/cssref/css3-pr-border-radius.html</code></li></ol></section><section id="subgroup-53c28003"><h2>参考 (133)</h2><ol class="page-list"><li><a href="sel-in-range.html">CSS  :in-range选择器</a> <code>https://www.runoob.com/cssref/sel-in-range.html</code></li><li><a href="sel-out-of-range.html">CSS  :out-of-range选择器</a> <code>https://www.runoob.com/cssref/sel-out-of-range.html</code></li><li><a href="sel-active.html">CSS :active 选择器</a> <code>https://www.runoob.com/cssref/sel-active.html</code></li><li><a href="sel-after.html">CSS :after 选择器</a> <code>https://www.runoob.com/cssref/sel-after.html</code></li><li><a href="sel-before.html">CSS :before 选择器</a> <code>https://www.runoob.com/cssref/sel-before.html</code></li><li><a href="sel-firstchild.html">CSS :first-child 伪元素</a> <code>https://www.runoob.com/cssref/sel-firstchild.html</code></li><li><a href="sel-firstletter.html">CSS :first-letter 伪元素</a> <code>https://www.runoob.com/cssref/sel-firstletter.html</code></li><li><a href="sel-firstline.html">CSS :first-line 伪元素</a> <code>https://www.runoob.com/cssref/sel-firstline.html</code></li><li><a href="sel-focus.html">CSS :focus 选择器</a> <code>https://www.runoob.com/cssref/sel-focus.html</code></li><li><a href="sel-hover.html">CSS :hover 选择器</a> <code>https://www.runoob.com/cssref/sel-hover.html</code></li><li><a href="sel-invalid.html">CSS :invalid选择器</a> <code>https://www.runoob.com/cssref/sel-invalid.html</code></li><li><a href="sel-lang.html">CSS :lang() 选择器</a> <code>https://www.runoob.com/cssref/sel-lang.html</code></li><li><a href="sel-link.html">CSS :link 选择器</a> <code>https://www.runoob.com/cssref/sel-link.html</code></li><li><a href="sel-optional.html">CSS :optional选择器</a> <code>https://www.runoob.com/cssref/sel-optional.html</code></li><li><a href="sel-read-only.html">CSS :read-only选择器</a> <code>https://www.runoob.com/cssref/sel-read-only.html</code></li><li><a href="sel-read-write.html">CSS :read-write选择器</a> <code>https://www.runoob.com/cssref/sel-read-write.html</code></li><li><a href="sel-required.html">CSS :required选择器</a> <code>https://www.runoob.com/cssref/sel-required.html</code></li><li><a href="sel-valid.html">CSS :valid 选择器</a> <code>https://www.runoob.com/cssref/sel-valid.html</code></li><li><a href="sel-visited.html">CSS :visited 选择器</a> <code>https://www.runoob.com/cssref/sel-visited.html</code></li><li><a href="css3-pr-background.html">CSS background 属性</a> <code>https://www.runoob.com/cssref/css3-pr-background.html</code></li><li><a href="pr-background-attachment.html">CSS background-attachment 属性</a> <code>https://www.runoob.com/cssref/pr-background-attachment.html</code></li><li><a href="pr-background-color.html">CSS background-color 属性</a> <code>https://www.runoob.com/cssref/pr-background-color.html</code></li><li><a href="pr-background-image.html">CSS background-image 属性</a> <code>https://www.runoob.com/cssref/pr-background-image.html</code></li><li><a href="pr-background-position.html">CSS background-position 属性</a> <code>https://www.runoob.com/cssref/pr-background-position.html</code></li><li><a href="pr-background-repeat.html">CSS background-repeat 属性</a> <code>https://www.runoob.com/cssref/pr-background-repeat.html</code></li><li><a href="pr-border.html">CSS border 属性</a> <code>https://www.runoob.com/cssref/pr-border.html</code></li><li><a href="pr-border-bottom.html">CSS border-bottom 属性</a> <code>https://www.runoob.com/cssref/pr-border-bottom.html</code></li><li><a href="pr-border-bottom-color.html">CSS border-bottom-color 属性</a> <code>https://www.runoob.com/cssref/pr-border-bottom-color.html</code></li><li><a href="pr-border-bottom-style.html">CSS border-bottom-style 属性</a> <code>https://www.runoob.com/cssref/pr-border-bottom-style.html</code></li><li><a href="pr-border-bottom-width.html">CSS border-bottom-width 属性</a> <code>https://www.runoob.com/cssref/pr-border-bottom-width.html</code></li><li><a href="pr-border-color.html">CSS border-color 属性</a> <code>https://www.runoob.com/cssref/pr-border-color.html</code></li><li><a href="pr-border-left.html">CSS Border-left 属性</a> <code>https://www.runoob.com/cssref/pr-border-left.html</code></li><li><a href="pr-border-left-color.html">CSS border-left-color 属性</a> <code>https://www.runoob.com/cssref/pr-border-left-color.html</code></li><li><a href="pr-border-left-style.html">CSS border-left-style 属性</a> <code>https://www.runoob.com/cssref/pr-border-left-style.html</code></li><li><a href="pr-border-left-width.html">CSS border-left-width 属性</a> <code>https://www.runoob.com/cssref/pr-border-left-width.html</code></li><li><a href="pr-border-right-color.html">CSS border-right-color 属性</a> <code>https://www.runoob.com/cssref/pr-border-right-color.html</code></li><li><a href="pr-border-right.html">CSS border-right-color 属性</a> <code>https://www.runoob.com/cssref/pr-border-right.html</code></li><li><a href="pr-border-right-style.html">CSS border-right-style 属性</a> <code>https://www.runoob.com/cssref/pr-border-right-style.html</code></li><li><a href="pr-border-right-width.html">CSS border-right-width 属性</a> <code>https://www.runoob.com/cssref/pr-border-right-width.html</code></li><li><a href="pr-border-style.html">CSS border-style 属性</a> <code>https://www.runoob.com/cssref/pr-border-style.html</code></li><li><a href="pr-border-top.html">CSS border-top 属性</a> <code>https://www.runoob.com/cssref/pr-border-top.html</code></li><li><a href="pr-border-top-color.html">CSS border-top-color 属性</a> <code>https://www.runoob.com/cssref/pr-border-top-color.html</code></li><li><a href="pr-border-top-style.html">CSS border-top-style 属性</a> <code>https://www.runoob.com/cssref/pr-border-top-style.html</code></li><li><a href="pr-border-top-width.html">CSS border-top-width 属性</a> <code>https://www.runoob.com/cssref/pr-border-top-width.html</code></li><li><a href="pr-border-width.html">CSS border-width 属性</a> <code>https://www.runoob.com/cssref/pr-border-width.html</code></li><li><a href="pr-pos-bottom.html">CSS bottom 属性</a> <code>https://www.runoob.com/cssref/pr-pos-bottom.html</code></li><li><a href="pr-class-clear.html">CSS clear 属性</a> <code>https://www.runoob.com/cssref/pr-class-clear.html</code></li><li><a href="pr-pos-clip.html">CSS clip 属性</a> <code>https://www.runoob.com/cssref/pr-pos-clip.html</code></li><li><a href="pr-text-color.html">CSS color 属性</a> <code>https://www.runoob.com/cssref/pr-text-color.html</code></li><li><a href="pr-gen-content.html">CSS content 属性</a> <code>https://www.runoob.com/cssref/pr-gen-content.html</code></li><li><a href="pr-gen-counter-increment.html">CSS counter-increment 属性</a> <code>https://www.runoob.com/cssref/pr-gen-counter-increment.html</code></li><li><a href="pr-gen-counter-reset.html">CSS counter-reset 属性</a> <code>https://www.runoob.com/cssref/pr-gen-counter-reset.html</code></li><li><a href="pr-class-cursor.html">CSS cursor 属性</a> <code>https://www.runoob.com/cssref/pr-class-cursor.html</code></li><li><a href="pr-text-direction.html">CSS direction 属性</a> <code>https://www.runoob.com/cssref/pr-text-direction.html</code></li><li><a href="pr-class-float.html">CSS float 属性</a> <code>https://www.runoob.com/cssref/pr-class-float.html</code></li><li><a href="pr-font-font.html">CSS font 属性</a> <code>https://www.runoob.com/cssref/pr-font-font.html</code></li><li><a href="pr-font-font-family.html">CSS font-family 属性</a> <code>https://www.runoob.com/cssref/pr-font-font-family.html</code></li><li><a href="pr-font-font-size.html">CSS font-size 属性</a> <code>https://www.runoob.com/cssref/pr-font-font-size.html</code></li><li><a href="pr-font-font-style.html">CSS font-style 属性</a> <code>https://www.runoob.com/cssref/pr-font-font-style.html</code></li><li><a href="pr-font-font-variant.html">CSS font-variant 属性</a> <code>https://www.runoob.com/cssref/pr-font-font-variant.html</code></li><li><a href="pr-font-weight.html">CSS font-weight 属性</a> <code>https://www.runoob.com/cssref/pr-font-weight.html</code></li><li><a href="pr-dim-height.html">CSS height 属性</a> <code>https://www.runoob.com/cssref/pr-dim-height.html</code></li><li><a href="pr-pos-left.html">CSS left 属性</a> <code>https://www.runoob.com/cssref/pr-pos-left.html</code></li><li><a href="pr-text-letter-spacing.html">CSS letter-spacing 属性</a> <code>https://www.runoob.com/cssref/pr-text-letter-spacing.html</code></li><li><a href="pr-dim-line-height.html">CSS line-height 属性</a> <code>https://www.runoob.com/cssref/pr-dim-line-height.html</code></li><li><a href="pr-list-style.html">CSS list-style 属性</a> <code>https://www.runoob.com/cssref/pr-list-style.html</code></li><li><a href="pr-list-style-image.html">CSS list-style-image 属性</a> <code>https://www.runoob.com/cssref/pr-list-style-image.html</code></li><li><a href="pr-list-style-position.html">CSS list-style-position 属性</a> <code>https://www.runoob.com/cssref/pr-list-style-position.html</code></li><li><a href="pr-list-style-type.html">CSS list-style-type 属性</a> <code>https://www.runoob.com/cssref/pr-list-style-type.html</code></li><li><a href="pr-margin.html">CSS margin 属性</a> <code>https://www.runoob.com/cssref/pr-margin.html</code></li><li><a href="pr-margin-bottom.html">CSS margin-bottom 属性</a> <code>https://www.runoob.com/cssref/pr-margin-bottom.html</code></li><li><a href="pr-margin-left.html">CSS margin-left 属性</a> <code>https://www.runoob.com/cssref/pr-margin-left.html</code></li><li><a href="pr-margin-right.html">CSS margin-right 属性</a> <code>https://www.runoob.com/cssref/pr-margin-right.html</code></li><li><a href="pr-margin-top.html">CSS margin-top 属性</a> <code>https://www.runoob.com/cssref/pr-margin-top.html</code></li><li><a href="pr-dim-max-height.html">CSS max-height 属性</a> <code>https://www.runoob.com/cssref/pr-dim-max-height.html</code></li><li><a href="pr-dim-max-width.html">CSS max-width 属性</a> <code>https://www.runoob.com/cssref/pr-dim-max-width.html</code></li><li><a href="pr-dim-min-height.html">CSS Min-height 属性</a> <code>https://www.runoob.com/cssref/pr-dim-min-height.html</code></li><li><a href="pr-dim-min-width.html">CSS min-width 属性</a> <code>https://www.runoob.com/cssref/pr-dim-min-width.html</code></li><li><a href="pr-outline.html">CSS outline 属性</a> <code>https://www.runoob.com/cssref/pr-outline.html</code></li><li><a href="pr-outline-color.html">CSS outline-color 属性</a> <code>https://www.runoob.com/cssref/pr-outline-color.html</code></li><li><a href="pr-outline-style.html">CSS outline-style 属性</a> <code>https://www.runoob.com/cssref/pr-outline-style.html</code></li><li><a href="pr-outline-width.html">CSS Outline-width 属性</a> <code>https://www.runoob.com/cssref/pr-outline-width.html</code></li><li><a href="pr-pos-overflow.html">CSS overflow 属性</a> <code>https://www.runoob.com/cssref/pr-pos-overflow.html</code></li><li><a href="pr-padding.html">CSS padding 属性</a> <code>https://www.runoob.com/cssref/pr-padding.html</code></li><li><a href="pr-padding-bottom.html">CSS Padding-bottom 属性</a> <code>https://www.runoob.com/cssref/pr-padding-bottom.html</code></li><li><a href="pr-padding-left.html">CSS padding-left 属性</a> <code>https://www.runoob.com/cssref/pr-padding-left.html</code></li><li><a href="pr-padding-right.html">CSS padding-right 属性</a> <code>https://www.runoob.com/cssref/pr-padding-right.html</code></li><li><a href="pr-padding-top.html">CSS padding-top 属性</a> <code>https://www.runoob.com/cssref/pr-padding-top.html</code></li><li><a href="pr-class-position.html">CSS position 属性</a> <code>https://www.runoob.com/cssref/pr-class-position.html</code></li><li><a href="pr-pos-right.html">CSS right 属性</a> <code>https://www.runoob.com/cssref/pr-pos-right.html</code></li><li><a href="pr-text-text-align.html">CSS text-align 属性</a> <code>https://www.runoob.com/cssref/pr-text-text-align.html</code></li><li><a href="pr-text-text-decoration.html">CSS text-decoration 属性</a> <code>https://www.runoob.com/cssref/pr-text-text-decoration.html</code></li><li><a href="pr-text-text-indent.html">CSS text-indent 属性</a> <code>https://www.runoob.com/cssref/pr-text-text-indent.html</code></li><li><a href="pr-text-text-transform.html">CSS text-transform 属性</a> <code>https://www.runoob.com/cssref/pr-text-text-transform.html</code></li><li><a href="pr-pos-top.html">CSS top 属性</a> <code>https://www.runoob.com/cssref/pr-pos-top.html</code></li><li><a href="pr-text-unicode-bidi.html">CSS unicode-bidi 属性</a> <code>https://www.runoob.com/cssref/pr-text-unicode-bidi.html</code></li><li><a href="pr-pos-vertical-align.html">CSS vertical-align 属性</a> <code>https://www.runoob.com/cssref/pr-pos-vertical-align.html</code></li><li><a href="css-websafe-fonts.html">CSS Web安全字体</a> <code>https://www.runoob.com/cssref/css-websafe-fonts.html</code></li><li><a href="pr-text-white-space.html">CSS white-space 属性</a> <code>https://www.runoob.com/cssref/pr-text-white-space.html</code></li><li><a href="pr-dim-width.html">CSS width 属性</a> <code>https://www.runoob.com/cssref/pr-dim-width.html</code></li><li><a href="pr-text-word-spacing.html">CSS word-spacing 属性</a> <code>https://www.runoob.com/cssref/pr-text-word-spacing.html</code></li><li><a href="pr-pos-z-index.html">CSS z-index 属性</a> <code>https://www.runoob.com/cssref/pr-pos-z-index.html</code></li><li><a href="css-animatable.html">CSS 动画</a> <code>https://www.runoob.com/cssref/css-animatable.html</code></li><li><a href="css-units.html">CSS 单位</a> <code>https://www.runoob.com/cssref/css-units.html</code></li><li><a href="css-reference.html">CSS 参考手册</a> <code>https://www.runoob.com/cssref/css-reference.html</code></li><li><a href="css-colors-legal.html">CSS 合法颜色值</a> <code>https://www.runoob.com/cssref/css-colors-legal.html</code></li><li><a href="css-ref-aural.html">CSS 听觉参考手册</a> <code>https://www.runoob.com/cssref/css-ref-aural.html</code></li><li><a href="css-selectors.html">CSS 选择器</a> <code>https://www.runoob.com/cssref/css-selectors.html</code></li><li><a href="css-colors.html">CSS 颜色</a> <code>https://www.runoob.com/cssref/css-colors.html</code></li><li><a href="css-colorsfull.html">CSS 颜色十六进制值</a> <code>https://www.runoob.com/cssref/css-colorsfull.html</code></li><li><a href="css-colornames.html">CSS 颜色名称</a> <code>https://www.runoob.com/cssref/css-colornames.html</code></li><li><a href="sel-checked.html">CSS3 :checked 选择器</a> <code>https://www.runoob.com/cssref/sel-checked.html</code></li><li><a href="sel-empty.html">CSS3 :empty 选择器</a> <code>https://www.runoob.com/cssref/sel-empty.html</code></li><li><a href="sel-enable.html">CSS3 :enabled 选择器</a> <code>https://www.runoob.com/cssref/sel-enable.html</code></li><li><a href="sel-first-of-type.html">CSS3 :first-of-type 选择器</a> <code>https://www.runoob.com/cssref/sel-first-of-type.html</code></li><li><a href="sel-last-child.html">CSS3 :last-child 选择器</a> <code>https://www.runoob.com/cssref/sel-last-child.html</code></li><li><a href="sel-last-of-type.html">CSS3 :last-of-type 选择器</a> <code>https://www.runoob.com/cssref/sel-last-of-type.html</code></li><li><a href="sel-not.html">CSS3 :not 选择器</a> <code>https://www.runoob.com/cssref/sel-not.html</code></li><li><a href="sel-nth-child.html">CSS3 :nth-child() 选择器</a> <code>https://www.runoob.com/cssref/sel-nth-child.html</code></li><li><a href="sel-nth-last-child.html">CSS3 :nth-last-child() 选择器</a> <code>https://www.runoob.com/cssref/sel-nth-last-child.html</code></li><li><a href="sel-nth-last-of-type.html">CSS3 :nth-last-of-type() 选择器</a> <code>https://www.runoob.com/cssref/sel-nth-last-of-type.html</code></li><li><a href="sel-nth-of-type.html">CSS3 :nth-of-type() 选择器</a> <code>https://www.runoob.com/cssref/sel-nth-of-type.html</code></li><li><a href="sel-only-child.html">CSS3 :only-child 选择器</a> <code>https://www.runoob.com/cssref/sel-only-child.html</code></li><li><a href="sel-only-of-type.html">CSS3 :only-of-type 选择器</a> <code>https://www.runoob.com/cssref/sel-only-of-type.html</code></li><li><a href="sel-root.html">CSS3 :root 选择器</a> <code>https://www.runoob.com/cssref/sel-root.html</code></li><li><a href="sel-target.html">CSS3 :target 选择器</a> <code>https://www.runoob.com/cssref/sel-target.html</code></li><li><a href="css3-pr-mediaquery.html">CSS3 @media查询</a> <code>https://www.runoob.com/cssref/css3-pr-mediaquery.html</code></li><li><a href="css3-pr-border-bottom-left-radius.html">CSS3 border-bottom-left-radius 属性</a> <code>https://www.runoob.com/cssref/css3-pr-border-bottom-left-radius.html</code></li><li><a href="css3-pr-border-bottom-right-radius.html">CSS3 border-bottom-right-radius 属性</a> <code>https://www.runoob.com/cssref/css3-pr-border-bottom-right-radius.html</code></li><li><a href="css3-pr-border-top-left-radius.html">CSS3 border-top-left-radius 属性</a> <code>https://www.runoob.com/cssref/css3-pr-border-top-left-radius.html</code></li><li><a href="css3-pr-border-top-right-radius.html">CSS3 border-top-right-radius 属性</a> <code>https://www.runoob.com/cssref/css3-pr-border-top-right-radius.html</code></li><li><a href="css3-pr-box-sizing.html">CSS3 box-sizing 属性</a> <code>https://www.runoob.com/cssref/css3-pr-box-sizing.html</code></li><li><a href="css3-pr-text-shadow.html">CSS3 text-shadow 属性</a> <code>https://www.runoob.com/cssref/css3-pr-text-shadow.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "CSS 动画", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css-animatable.html", "href": "css-animatable.html"}, {"title": "CSS 颜色名称", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css-colornames.html", "href": "css-colornames.html"}, {"title": "CSS 合法颜色值", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css-colors-legal.html", "href": "css-colors-legal.html"}, {"title": "CSS 颜色", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css-colors.html", "href": "css-colors.html"}, {"title": "CSS 颜色十六进制值", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css-colorsfull.html", "href": "css-colorsfull.html"}, {"title": "CSS 听觉参考手册", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css-ref-aural.html", "href": "css-ref-aural.html"}, {"title": "CSS 参考手册", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css-reference.html", "href": "css-reference.html"}, {"title": "CSS 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css-selectors.html", "href": "css-selectors.html"}, {"title": "CSS 单位", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css-units.html", "href": "css-units.html"}, {"title": "CSS Web安全字体", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css-websafe-fonts.html", "href": "css-websafe-fonts.html"}, {"title": "CSS background 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css3-pr-background.html", "href": "css3-pr-background.html"}, {"title": "CSS3 border-bottom-left-radius 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css3-pr-border-bottom-left-radius.html", "href": "css3-pr-border-bottom-left-radius.html"}, {"title": "CSS3 border-bottom-right-radius 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css3-pr-border-bottom-right-radius.html", "href": "css3-pr-border-bottom-right-radius.html"}, {"title": "CSS3 border-radius 属性 | 菜鸟教程菜鸟教程(runoob.com)", "group": "cssref", "subgroup": "入门", "url": "https://www.runoob.com/cssref/css3-pr-border-radius.html", "href": "css3-pr-border-radius.html"}, {"title": "CSS3 border-top-left-radius 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css3-pr-border-top-left-radius.html", "href": "css3-pr-border-top-left-radius.html"}, {"title": "CSS3 border-top-right-radius 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css3-pr-border-top-right-radius.html", "href": "css3-pr-border-top-right-radius.html"}, {"title": "CSS3 box-sizing 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css3-pr-box-sizing.html", "href": "css3-pr-box-sizing.html"}, {"title": "CSS3 @media查询", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css3-pr-mediaquery.html", "href": "css3-pr-mediaquery.html"}, {"title": "CSS3 text-shadow 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/css3-pr-text-shadow.html", "href": "css3-pr-text-shadow.html"}, {"title": "CSS background-attachment 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-background-attachment.html", "href": "pr-background-attachment.html"}, {"title": "CSS background-color 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-background-color.html", "href": "pr-background-color.html"}, {"title": "CSS background-image 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-background-image.html", "href": "pr-background-image.html"}, {"title": "CSS background-position 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-background-position.html", "href": "pr-background-position.html"}, {"title": "CSS background-repeat 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-background-repeat.html", "href": "pr-background-repeat.html"}, {"title": "CSS border-bottom-color 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-bottom-color.html", "href": "pr-border-bottom-color.html"}, {"title": "CSS border-bottom-style 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-bottom-style.html", "href": "pr-border-bottom-style.html"}, {"title": "CSS border-bottom-width 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-bottom-width.html", "href": "pr-border-bottom-width.html"}, {"title": "CSS border-bottom 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-bottom.html", "href": "pr-border-bottom.html"}, {"title": "CSS border-color 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-color.html", "href": "pr-border-color.html"}, {"title": "CSS border-left-color 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-left-color.html", "href": "pr-border-left-color.html"}, {"title": "CSS border-left-style 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-left-style.html", "href": "pr-border-left-style.html"}, {"title": "CSS border-left-width 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-left-width.html", "href": "pr-border-left-width.html"}, {"title": "CSS Border-left 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-left.html", "href": "pr-border-left.html"}, {"title": "CSS border-right-color 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-right-color.html", "href": "pr-border-right-color.html"}, {"title": "CSS border-right-style 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-right-style.html", "href": "pr-border-right-style.html"}, {"title": "CSS border-right-width 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-right-width.html", "href": "pr-border-right-width.html"}, {"title": "CSS border-right-color 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-right.html", "href": "pr-border-right.html"}, {"title": "CSS border-style 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-style.html", "href": "pr-border-style.html"}, {"title": "CSS border-top-color 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-top-color.html", "href": "pr-border-top-color.html"}, {"title": "CSS border-top-style 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-top-style.html", "href": "pr-border-top-style.html"}, {"title": "CSS border-top-width 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-top-width.html", "href": "pr-border-top-width.html"}, {"title": "CSS border-top 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-top.html", "href": "pr-border-top.html"}, {"title": "CSS border-width 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border-width.html", "href": "pr-border-width.html"}, {"title": "CSS border 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-border.html", "href": "pr-border.html"}, {"title": "CSS clear 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-class-clear.html", "href": "pr-class-clear.html"}, {"title": "CSS cursor 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-class-cursor.html", "href": "pr-class-cursor.html"}, {"title": "CSS float 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-class-float.html", "href": "pr-class-float.html"}, {"title": "CSS position 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-class-position.html", "href": "pr-class-position.html"}, {"title": "CSS height 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-dim-height.html", "href": "pr-dim-height.html"}, {"title": "CSS line-height 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-dim-line-height.html", "href": "pr-dim-line-height.html"}, {"title": "CSS max-height 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-dim-max-height.html", "href": "pr-dim-max-height.html"}, {"title": "CSS max-width 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-dim-max-width.html", "href": "pr-dim-max-width.html"}, {"title": "CSS Min-height 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-dim-min-height.html", "href": "pr-dim-min-height.html"}, {"title": "CSS min-width 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-dim-min-width.html", "href": "pr-dim-min-width.html"}, {"title": "CSS width 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-dim-width.html", "href": "pr-dim-width.html"}, {"title": "CSS font-family 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-font-font-family.html", "href": "pr-font-font-family.html"}, {"title": "CSS font-size 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-font-font-size.html", "href": "pr-font-font-size.html"}, {"title": "CSS font-style 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-font-font-style.html", "href": "pr-font-font-style.html"}, {"title": "CSS font-variant 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-font-font-variant.html", "href": "pr-font-font-variant.html"}, {"title": "CSS font 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-font-font.html", "href": "pr-font-font.html"}, {"title": "CSS font-weight 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-font-weight.html", "href": "pr-font-weight.html"}, {"title": "CSS content 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-gen-content.html", "href": "pr-gen-content.html"}, {"title": "CSS counter-increment 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-gen-counter-increment.html", "href": "pr-gen-counter-increment.html"}, {"title": "CSS counter-reset 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-gen-counter-reset.html", "href": "pr-gen-counter-reset.html"}, {"title": "CSS list-style-image 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-list-style-image.html", "href": "pr-list-style-image.html"}, {"title": "CSS list-style-position 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-list-style-position.html", "href": "pr-list-style-position.html"}, {"title": "CSS list-style-type 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-list-style-type.html", "href": "pr-list-style-type.html"}, {"title": "CSS list-style 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-list-style.html", "href": "pr-list-style.html"}, {"title": "CSS margin-bottom 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-margin-bottom.html", "href": "pr-margin-bottom.html"}, {"title": "CSS margin-left 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-margin-left.html", "href": "pr-margin-left.html"}, {"title": "CSS margin-right 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-margin-right.html", "href": "pr-margin-right.html"}, {"title": "CSS margin-top 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-margin-top.html", "href": "pr-margin-top.html"}, {"title": "CSS margin 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-margin.html", "href": "pr-margin.html"}, {"title": "CSS outline-color 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-outline-color.html", "href": "pr-outline-color.html"}, {"title": "CSS outline-style 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-outline-style.html", "href": "pr-outline-style.html"}, {"title": "CSS Outline-width 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-outline-width.html", "href": "pr-outline-width.html"}, {"title": "CSS outline 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-outline.html", "href": "pr-outline.html"}, {"title": "CSS Padding-bottom 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-padding-bottom.html", "href": "pr-padding-bottom.html"}, {"title": "CSS padding-left 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-padding-left.html", "href": "pr-padding-left.html"}, {"title": "CSS padding-right 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-padding-right.html", "href": "pr-padding-right.html"}, {"title": "CSS padding-top 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-padding-top.html", "href": "pr-padding-top.html"}, {"title": "CSS padding 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-padding.html", "href": "pr-padding.html"}, {"title": "CSS bottom 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-pos-bottom.html", "href": "pr-pos-bottom.html"}, {"title": "CSS clip 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-pos-clip.html", "href": "pr-pos-clip.html"}, {"title": "CSS left 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-pos-left.html", "href": "pr-pos-left.html"}, {"title": "CSS overflow 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-pos-overflow.html", "href": "pr-pos-overflow.html"}, {"title": "CSS right 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-pos-right.html", "href": "pr-pos-right.html"}, {"title": "CSS top 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-pos-top.html", "href": "pr-pos-top.html"}, {"title": "CSS vertical-align 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-pos-vertical-align.html", "href": "pr-pos-vertical-align.html"}, {"title": "CSS z-index 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-pos-z-index.html", "href": "pr-pos-z-index.html"}, {"title": "CSS color 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-text-color.html", "href": "pr-text-color.html"}, {"title": "CSS direction 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-text-direction.html", "href": "pr-text-direction.html"}, {"title": "CSS letter-spacing 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-text-letter-spacing.html", "href": "pr-text-letter-spacing.html"}, {"title": "CSS text-align 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-text-text-align.html", "href": "pr-text-text-align.html"}, {"title": "CSS text-decoration 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-text-text-decoration.html", "href": "pr-text-text-decoration.html"}, {"title": "CSS text-indent 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-text-text-indent.html", "href": "pr-text-text-indent.html"}, {"title": "CSS text-transform 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-text-text-transform.html", "href": "pr-text-text-transform.html"}, {"title": "CSS unicode-bidi 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-text-unicode-bidi.html", "href": "pr-text-unicode-bidi.html"}, {"title": "CSS white-space 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-text-white-space.html", "href": "pr-text-white-space.html"}, {"title": "CSS word-spacing 属性", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/pr-text-word-spacing.html", "href": "pr-text-word-spacing.html"}, {"title": "CSS :active 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-active.html", "href": "sel-active.html"}, {"title": "CSS :after 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-after.html", "href": "sel-after.html"}, {"title": "CSS :before 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-before.html", "href": "sel-before.html"}, {"title": "CSS3 :checked 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-checked.html", "href": "sel-checked.html"}, {"title": "CSS3 :empty 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-empty.html", "href": "sel-empty.html"}, {"title": "CSS3 :enabled 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-enable.html", "href": "sel-enable.html"}, {"title": "CSS3 :first-of-type 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-first-of-type.html", "href": "sel-first-of-type.html"}, {"title": "CSS :first-child 伪元素", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-firstchild.html", "href": "sel-firstchild.html"}, {"title": "CSS :first-letter 伪元素", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-firstletter.html", "href": "sel-firstletter.html"}, {"title": "CSS :first-line 伪元素", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-firstline.html", "href": "sel-firstline.html"}, {"title": "CSS :focus 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-focus.html", "href": "sel-focus.html"}, {"title": "CSS :hover 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-hover.html", "href": "sel-hover.html"}, {"title": "CSS  :in-range选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-in-range.html", "href": "sel-in-range.html"}, {"title": "CSS :invalid选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-invalid.html", "href": "sel-invalid.html"}, {"title": "CSS :lang() 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-lang.html", "href": "sel-lang.html"}, {"title": "CSS3 :last-child 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-last-child.html", "href": "sel-last-child.html"}, {"title": "CSS3 :last-of-type 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-last-of-type.html", "href": "sel-last-of-type.html"}, {"title": "CSS :link 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-link.html", "href": "sel-link.html"}, {"title": "CSS3 :not 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-not.html", "href": "sel-not.html"}, {"title": "CSS3 :nth-child() 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-nth-child.html", "href": "sel-nth-child.html"}, {"title": "CSS3 :nth-last-child() 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-nth-last-child.html", "href": "sel-nth-last-child.html"}, {"title": "CSS3 :nth-last-of-type() 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-nth-last-of-type.html", "href": "sel-nth-last-of-type.html"}, {"title": "CSS3 :nth-of-type() 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-nth-of-type.html", "href": "sel-nth-of-type.html"}, {"title": "CSS3 :only-child 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-only-child.html", "href": "sel-only-child.html"}, {"title": "CSS3 :only-of-type 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-only-of-type.html", "href": "sel-only-of-type.html"}, {"title": "CSS :optional选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-optional.html", "href": "sel-optional.html"}, {"title": "CSS  :out-of-range选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-out-of-range.html", "href": "sel-out-of-range.html"}, {"title": "CSS :read-only选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-read-only.html", "href": "sel-read-only.html"}, {"title": "CSS :read-write选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-read-write.html", "href": "sel-read-write.html"}, {"title": "CSS :required选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-required.html", "href": "sel-required.html"}, {"title": "CSS3 :root 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-root.html", "href": "sel-root.html"}, {"title": "CSS3 :target 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-target.html", "href": "sel-target.html"}, {"title": "CSS :valid 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-valid.html", "href": "sel-valid.html"}, {"title": "CSS :visited 选择器", "group": "cssref", "subgroup": "参考", "url": "https://www.runoob.com/cssref/sel-visited.html", "href": "sel-visited.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

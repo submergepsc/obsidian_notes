@@ -1,0 +1,152 @@
+URL: https://www.runoob.com/vbscript/func-replace.html
+Title: VBScript Replace 函数 | 菜鸟教程
+
+VBScript Replace 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Mid 函数 
+
+VBScript Right 函数 
+
+VBScript Replace 函数 
+
+Replace 函数使用另一个字符串替换字符串的指定部分指定的次数。 
+
+语法 
+
+Replace(string,find,replacewith[,start[,count[,compare]]]) 
+
+参数 
+
+描述 
+
+string 
+
+必需。被搜索的字符串。 
+
+find 
+
+必需。将被替换的字符串部分。 
+
+replacewith 
+
+必需。用于替换的子字符串。 
+
+start 
+
+可选。指定的开始位置。默认值是 1。起始位置之前的所有字符将被删除。 
+
+count 
+
+可选。规定要执行的替换的次数。 
+默认值是 -1，表示进行所有可能的替换。 
+
+compare 
+
+可选。规定要使用的字符串比较类型。默认是 0。 
+
+可采用下列的值： 
+
+0 = vbBinaryCompare - 执行二进制比较 
+
+1 = vbTextCompare - 执行文本比较 
+
+实例 
+
+实例 1 
+
+把单词 "beautiful" 替换为 "fantastic"： 
+
+<script type="text/vbscript"> 
+
+txt="This is a beautiful day!" 
+document.write(Replace(txt,"beautiful","fantastic")) 
+
+</script> 
+
+以上实例输出结果： 
+
+This is a fantastic day! 
+
+尝试一下 » 
+
+实例 2 
+
+把字母 "i" 替换为 "##"： 
+
+<script type="text/vbscript"> 
+
+txt="This is a beautiful day!" 
+document.write(Replace(txt,"i","##")) 
+
+</script> 
+
+以上实例输出结果： 
+
+Th##s ##s a beaut##ful day! 
+
+尝试一下 » 
+
+实例 3 
+
+把字母 "i" 替换为 "##"，从位置 15 开始： 
+
+请注意，位置 15 之前的所有字符都会被删除。 
+
+<script type="text/vbscript"> 
+
+txt="This is a beautiful day!" 
+document.write(Replace(txt,"i","##",15)) 
+
+</script> 
+
+以上实例输出结果： 
+
+t##ful day! 
+
+尝试一下 » 
+
+实例 4 
+
+从位置 1 开始，把前 2 个字母 "i" 替换为 "##"： 
+
+<script type="text/vbscript"> 
+
+txt="This is a beautiful day!" 
+document.write(Replace(txt,"i","##",1,2)) 
+
+</script> 
+
+以上实例输出结果： 
+
+Th##s ##s a beautiful day! 
+
+尝试一下 » 
+
+实例 5 
+
+把字母 "t" 替换为 "##"，采用文本和二进制比较： 
+
+<script type="text/vbscript"> 
+
+txt="This is a beautiful day!" 
+document.write(Replace(txt,"t","##",1,-1,1) & "<br />") 
+document.write(Replace(txt,"t","##",1,-1,0)) 
+
+</script> 
+
+以上实例输出结果： 
+
+##his is a beau##iful day! 
+This is a beau##iful day! 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Mid 函数 
+
+VBScript Right 函数

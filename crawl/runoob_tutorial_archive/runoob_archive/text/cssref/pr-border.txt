@@ -1,0 +1,128 @@
+URL: https://www.runoob.com/cssref/pr-border.html
+Title: CSS border 属性 | 菜鸟教程
+
+CSS border 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 background-size 属性 
+
+CSS border-bottom 属性 
+
+CSS border 属性 
+
+实例 
+
+设置四个边框样式： 
+
+p { border: 5 px solid red ; } 
+
+尝试一下 » 
+
+标签定义及使用说明 
+
+border 是边框属性的简写属性。 
+
+CSS border 属性用于指定元素边框的样式、宽度和颜色。 
+
+可以设置的属性分别（按顺序）：border-width, border-style 和 border-color。 
+
+也可以只设置一个值，例如 border：＃FF0000; 是正确的，其他值会设置成对应属性的初始值。 
+
+语法格式 
+
+可以使用下面列出的一个，两个或三个值来指定 border 属性，值的顺序无关紧要： 
+
+/* 边框样式 */ 
+
+border : solid ; 
+
+/* 边框宽度 | 边框样式 */ 
+
+border : 2px dotted ; 
+
+/* 边框样式 | 边框颜色 */ 
+
+border : outset #f33 ; 
+
+/* 边框宽度 | 边框样式 | 边框颜色 */ 
+
+border : medium dashed green ; 
+
+/* 全局值 */ 
+
+border : inherit ; 
+
+border : initial ; 
+
+border : unset ; 
+
+注意： 如果边框的样式未定义，它将不可见。这是因为样式默认 为none。 
+
+默认值: 
+
+not specified 
+
+继承: 
+
+no 
+
+版本: 
+
+CSS1 
+
+JavaScript 语法: 
+
+object object.style.border="3px solid blue" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+border 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+说明 
+
+border-width 
+
+指定边框的宽度 
+
+border-style 
+
+指定边框的样式 
+
+border-color 
+
+指定边框的颜色 
+
+inherit 
+
+指定应该从父元素继承border属性值 
+
+相关文章 
+
+CSS 教程: CSS 边框 
+
+AI 思考中... 
+
+CSS3 background-size 属性 
+
+CSS border-bottom 属性

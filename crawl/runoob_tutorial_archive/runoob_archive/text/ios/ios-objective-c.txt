@@ -1,0 +1,167 @@
+URL: https://www.runoob.com/ios/ios-objective-c.html
+Title: Objective C 基础知识 | 菜鸟教程
+
+Objective C 基础知识 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+iOS 教程 
+
+iOS环境搭建 
+
+创建第一款iPhone应用程序 
+
+Objective-C 简介 
+
+在iOS的开发中使用的是Objective C语言，它是一种面向对象的语言，因而对于已经掌握面向对象语言知识的编程者来说是非常简单的。 
+
+接口和实现 
+
+在Objective里完成的文件被称为界面文件，该类文件的定义被称为实现文件。 
+
+一个简单的界面文件MyClass.h将如图所示: 
+
+@interface MyClass:NSObject{ 
+// 类变量声明
+}
+// 类属性声明
+// 类方法和声明
+@end 
+
+执行MyClass.m文件，如下所示 
+
+@implementation MyClass
+// 类方法定义
+@end 
+
+创建对象 
+
+完成创建对象，如下所示 
+
+MyClass *objectName = [[MyClass alloc]init] ; 
+
+方法（methods） 
+
+Objective C中声明的方法如下所示: 
+
+-(returnType)methodName:(typeName) variable1 :(typeName)variable2; 
+
+下面显示了一个示例: 
+
+-(void)calculateAreaForRectangleWithLength:(CGfloat)length 
+andBreadth:(CGfloat)breadth; 
+
+你可能会想什么是andBreadth字符串，其实它的可选字符串可以帮助我们阅读和理解方法，尤其是当方法被调用的时候。 
+
+在同一类中调用此方法，我们使用下面的语句。 
+
+[self calculateAreaForRectangleWithLength:30 andBreadth:20]; 
+
+正如上文所说的andBreath使用有助于我们理解breath是20。Self用来指定它是一个类的方法。 
+
+类方法（class methods） 
+
+直接而无需创建的对象，可以访问类方法。他们没有任何变量和它关联的对象。示例如下: 
+
++(void)simpleClassMethod; 
+
+它可以通过使用类名（假设作为MyClass类名称）访问，如下所示: 
+
+[MyClass simpleClassMethod]; 
+
+实例方法 
+
+可以创建的类的对象后只访问实例方法，内存分配到的实例变量。实例方法如下所示: 
+
+-(void)simpleInstanceMethod; 
+
+创建类的对象后，它可以访问它。如下所示: 
+
+MyClass *objectName = [[MyClass alloc]init] ;
+[objectName simpleInstanceMethod]; 
+
+Objective C的重要数据类型 
+
+序号 
+
+数据类型 
+
+1 
+
+NSString字符串 
+
+2 
+
+CGfloat 浮点值的基本类型 
+
+3 
+
+NSInteger 整型 
+
+4 
+
+BOOL 布尔型 
+
+打印日志 
+
+NSLog用于打印一份声明，它将打印在设备日志和调试版本的控制台和分别调试模式上。 
+
+如 NSlog(@""); 
+
+控制结构 
+
+除了几个增补的条款外，大多数的控制结构与C以及C++相同 
+
+属性（properties） 
+
+用于访问类的外部类的变量属性 
+
+比如：@property（非原子、强）NSString*myString 
+
+访问属性 
+
+可以使用点运算符访问属性，若要访问上一属性可以执行以下操作 
+
+self.myString = @"Test"; 
+
+还可以使用set的方法，如下所示： 
+
+[self setMyString:@"Test"]; 
+
+类别（categories） 
+
+类用于将方法添加到现有类。通过这种方法可以将方法添加到类，甚至不用执行文件，就可以在其中定义实际的类。MyClass的样本类别，如下所示： 
+
+@interface MyClass(customAdditions)
+- (void)sampleCategoryMethod;
+@end
+
+@implementation MyClass(categoryAdditions)
+
+-(void)sampleCategoryMethod{
+ NSLog(@"Just a test category");
+} 
+
+数组 
+
+NSMutableArray 和 NSArray 是 ObjectiveC 中使用的数组类，前者是可变数组，后者是不可变数组。如下: 
+
+NSMutableArray *aMutableArray = [[NSMutableArray alloc]init];
+[anArray addObject:@"firstobject"];
+NSArray *aImmutableArray = [[NSArray alloc]
+initWithObjects:@"firstObject",nil]; 
+
+词典 
+
+NSMutableDictionary和NSDictionary是Objective中使用的字典，前者可变词典，后者不可变词典，如下所示: 
+
+NSMutableDictionary*aMutableDictionary = [[NSMutableArray alloc]init];
+[aMutableDictionary setObject:@"firstobject" forKey:@"aKey"];
+NSDictionary*aImmutableDictionary= [[NSDictionary alloc]initWithObjects:[NSArray arrayWithObjects:
+@"firstObject",nil] forKeys:[ NSArray arrayWithObjects:@"aKey"]]; 
+
+AI 思考中... 
+
+iOS环境搭建 
+
+创建第一款iPhone应用程序

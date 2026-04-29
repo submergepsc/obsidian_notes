@@ -1,0 +1,71 @@
+URL: https://www.runoob.com/tags/av-prop-seekable.html
+Title: HTML 音频/视频 DOM seekable 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM seekable 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM readyState 属性 
+
+HTML 音频/视频 DOM seeking 属性 
+
+HTML 音频/视频 DOM seekable 属性 
+
+实例 
+
+获得首个以秒计的视频可寻址范围（部分）： 
+
+myVid=document.getElementById("video1"); 
+alert("Start: " + 
+ myVid.seekable.start(0) 
++ " End: " + myVid.seekable.end(0)); 
+
+尝试一下 » 
+
+定义和用法 
+
+seekable 属性返回 TimeRanges 对象。 
+
+TimeRanges 对象表示音频/视频中用户可寻址的范围。 
+
+可寻址范围指的是用户在音频/视频中可寻址（移动播放位置）的时间范围。 
+
+对于非流视频，通常可以寻址到视频中的任何位置，即使其尚未完成缓冲。 
+
+浏览器支持 
+
+所有主流浏览器都支持 seekable 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持该属性。 
+
+语法 
+
+audio|video .seekable 
+
+返回值 
+
+类型 
+
+描述 
+
+TimeRanges Object 
+
+表示音频/视频中的可寻址部分。 
+
+TimeRanges 对象的属性： 
+
+length - 获得音频/视频中可寻址范围的数量 
+
+start( index ) - 获得可寻址范围的开始位置 
+
+end( index ) - 获得可寻址范围的结束位置 
+
+注释： 第一个可寻址范围的下标 index 是 0。 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM readyState 属性 
+
+HTML 音频/视频 DOM seeking 属性

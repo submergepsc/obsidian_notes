@@ -1,0 +1,66 @@
+URL: https://www.runoob.com/tags/av-prop-readystate.html
+Title: HTML 音频/视频 DOM readyState 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM readyState 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM preload 属性 
+
+HTML 音频/视频 DOM seekable 属性 
+
+HTML 音频/视频 DOM readyState 属性 
+
+实例 
+
+获得视频的就绪状态： 
+
+myVid=document.getElementById("video1"); 
+alert(myVid.readyState); 
+
+尝试一下 » 
+
+定义和用法 
+
+readyState 属性返回音频/视频的当前就绪状态。 
+
+就绪状态指示音频/视频是否已准备好播放。 
+
+浏览器支持 
+
+所有主流浏览器都支持 readyState 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持该属性。 
+
+语法 
+
+audio|video .readyState 
+
+返回值 
+
+类型 
+
+描述 
+
+Number 
+
+表示音频/视频（audio/video）元素的就绪状态： 
+
+0 
+ = HAVE_NOTHING - 没有关于音频/视频是否就绪的信息 
+
+1 = HAVE_METADATA - 关于音频/视频就绪的元数据 
+
+2 = HAVE_CURRENT_DATA - 关于当前播放位置的数据是可用的，但没有足够的数据来播放下一帧/毫秒 
+
+3 = H AVE_FUTURE_DATA - 当前及至少下一帧的数据是可用的 
+
+4 = HAVE_ENOUGH_DATA - 可用数据足以开始播放 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM preload 属性 
+
+HTML 音频/视频 DOM seekable 属性

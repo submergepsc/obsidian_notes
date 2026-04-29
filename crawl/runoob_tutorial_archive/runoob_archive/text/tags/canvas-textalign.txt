@@ -1,0 +1,100 @@
+URL: https://www.runoob.com/tags/canvas-textalign.html
+Title: HTML canvas textAlign 属性 | 菜鸟教程
+
+HTML canvas textAlign 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas font 属性 
+
+HTML canvas textBaseline 属性 
+
+HTML canvas textAlign 属性 
+
+实例 
+
+在位置 150 创建一条红线。位置 150 是下面实例中定义的所有文本的锚点。请研究每种 textAlign 属性值的效果： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+
+// Create a red line in position 150 
+ctx.strokeStyle="red"; 
+ctx.moveTo(150,20); 
+ctx.lineTo(150,170); 
+ctx.stroke(); 
+
+ctx.font="15px Arial"; 
+
+// Show the different textAlign values 
+ctx.textAlign="start"; 
+ctx.fillText("textAlign=start",150,60); 
+ctx.textAlign="end"; 
+ctx.fillText("textAlign=end",150,80); 
+ctx.textAlign="left"; 
+ctx.fillText("textAlign=left",150,100); 
+ctx.textAlign="center"; 
+ctx.fillText("textAlign=center",150,120); 
+ctx.textAlign="right"; 
+ctx.fillText("textAlign=right",150,140); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 textAlign 
+属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+textAlign 属性根据锚点，设置或返回文本内容的当前对齐方式。 
+
+通常，文本会从指定位置 开始 ，不过，如果您设置为 textAlign="right" 并将文本放置到位置 150，那么会在 位置 150 结束 。 
+
+提示： 请使用 fillText() 或 strokeText() 方法在画布上实际地绘制并定位文本。 
+
+默认值： 
+
+start 
+
+JavaScript 语法： 
+
+context .textAlign="center|end|left|right|start"; 
+
+属性值 
+
+值 
+
+描述 
+
+start 
+
+默认。文本在指定的位置开始。 
+
+end 
+
+文本在指定的位置结束。 
+
+center 
+
+文本的中心被放置在指定的位置。 
+
+left 
+
+文本在指定的位置开始。 
+
+right 
+
+文本在指定的位置结束。 
+
+AI 思考中... 
+
+HTML canvas font 属性 
+
+HTML canvas textBaseline 属性

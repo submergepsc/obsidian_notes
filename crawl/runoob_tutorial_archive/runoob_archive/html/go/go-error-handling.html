@@ -1,0 +1,1585 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Go 错误处理 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="go-error-handling.html" />
+<meta name="keywords" content="Go 错误处理">
+<meta name="description" content="Go 错误处理   Go 语言通过内置的错误接口提供了非常简单的错误处理机制。  Go 语言的错误处理采用显式返回错误的方式，而非传统的异常处理机制。这种设计使代码逻辑更清晰，便于开发者在编译时或运行时明确处理错误。  Go 的错误处理主要围绕以下机制展开： error 接口：标准的错误表示。显式返回值：通过函数的返回值返回错误。自定义错误：可以通过标准库或自定义的方式创建错误。panic 和 recover：处理不可恢复的严重错误。 ..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<style>
+/* 主题切换按钮 */
+/* ===== 主题变量（核心）===== */
+:root {
+  --theme-bg: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-icon: #333;
+  --theme-hover: #f3f4f6;
+}
+
+.dark {
+  --theme-bg: #1f2937;
+  --theme-border: #374151;
+  --theme-icon: #e5e7eb;
+  --theme-hover: #374151;
+}
+
+/* ===== 按钮容器 ===== */
+.nav-theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== 按钮本体 ===== */
+.nav-theme-toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+
+  background: var(--theme-bg);
+  color: var(--theme-icon);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ===== 图标大小 ===== */
+.nav-theme-toggle i {
+  font-size: 14px;
+}
+
+/* ===== hover 效果 ===== */
+.nav-theme-toggle button:hover {
+  background: var(--theme-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== 点击反馈 ===== */
+.nav-theme-toggle button:active {
+  transform: scale(0.95);
+}
+
+/* ===== 当前激活态（可选）===== */
+.nav-theme-toggle button.active {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+</style>
+<!-- 导航栏 -->
+<nav class="container navigation" aria-label="主导航">
+  <div class="row">
+    <div class="col nav">
+
+      <!-- PC 导航 -->
+      <ul class="pc-nav" id="runoob-detail-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../js/js-tutorial.html">JavaScript</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="javascript:void(0);" data-id="vue">Vue</a></li>
+        <li><a href="../react/react-tutorial.html">React</a></li>
+        <li><a href="../python3/python3-tutorial.html">Python3</a></li>
+        <li><a href="../java/java-tutorial.html">Java</a></li>
+        <li><a href="../cprogramming/c-tutorial.html">C</a></li>
+        <li><a href="../cplusplus/cpp-tutorial.html">C++</a></li>
+        <li><a href="../csharp/csharp-tutorial.html">C#</a></li>
+        <li><a href="javascript:void(0);" data-id="aiNav">AI</a></li>
+        <li><a href="go-tutorial.html">Go</a></li>
+        <li><a href="../sql/sql-tutorial.html">SQL</a></li>
+        <li><a href="../linux/linux-tutorial.html">Linux</a></li>
+        <li><a href="../vscode/vscode-tutorial.html">VS Code</a></li>
+        <li><a href="javascript:void(0);" data-id="bootstrap">Bootstrap</a></li>
+        <li><a href="../git/git-tutorial.html">Git</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+
+        <!-- 主题切换按钮，固定在最右侧 -->
+        <li class="nav-theme-toggle">
+          <button id="moon" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 移动端导航 -->
+      <ul class="mobile-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="../js/js-tutorial.html">JS</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+        <li><a href="javascript:void(0)" class="search-reveal">搜索</a></li>
+
+        <!-- 移动端主题切换 -->
+        <li class="nav-theme-toggle">
+          <button id="moon-mobile" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun-mobile" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- 二级导航 -->
+<div class="container sub-navigation sub-navigation-articles" style="display:none">
+  <div class="row">
+    <div class="col nav-sub">
+
+      <ul id="vue">
+        <li class="cat-item"><a href="../vue3/vue3-tutorial.html">Vue3 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../vue/vue-tutorial.html">Vue2 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="bootstrap">
+        <li class="cat-item"><a href="../bootstrap/bootstrap-tutorial.html">Bootstrap3 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="aiNav">
+        <li class="cat-item"><a href="../ml/ml-tutorial.html">机器学习 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../pytorch/pytorch-tutorial.html">PyTorch <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../tensorflow/tensorflow-tutorial.html">TensorFlow <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../sklearn/sklearn-tutorial.html">Sklearn <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../nlp/nlp-tutorial.html">NLP <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ai-agent/ai-agent-tutorial.html">AI Agent <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ollama/ollama-tutorial.html">Ollama <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+  </div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="runoob-col-md2">
+<div class="left-column">
+	<div class="tab" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+	<i class="fa fa-list" aria-hidden="true"></i> 
+	<span>Go 语言教程</span>
+
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" data-p="par" title="Go 语言教程" href="go-tutorial.html">
+			Go 语言教程			</a>
+						<a target="_top" data-p="par" title="Go 语言环境安装" href="go-environment.html">
+			Go 语言环境安装			</a>
+			<a target="_top" title="Go AI 编程助手" href="fitten-code-go.html">Go AI 编程助手</a>			<a target="_top" data-p="par" title="Go 语言结构" href="go-program-structure.html">
+			Go 语言结构			</a>
+						<a target="_top" data-p="par" title="Go 语言基础语法" href="go-basic-syntax.html">
+			Go 语言基础语法			</a>
+						<a target="_top" data-p="par" title="Go 语言数据类型" href="go-data-types.html">
+			Go 语言数据类型			</a>
+						<a target="_top" data-p="par" title="Go 语言变量" href="go-variables.html">
+			Go 语言变量			</a>
+						<a target="_top" data-p="par" title="Go 语言常量" href="go-constants.html">
+			Go 语言常量			</a>
+						<a target="_top" data-p="par" title="Go 语言运算符" href="go-operators.html">
+			Go 语言运算符			</a>
+						<a target="_top" data-p="par" title="Go 语言条件语句" href="go-decision-making.html">
+			Go 语言条件语句			</a>
+						<a target="_top" data-p="par" title="Go 语言循环语句" href="go-loops.html">
+			Go 语言循环语句			</a>
+						<a target="_top" data-p="par" title="Go 语言函数" href="go-functions.html">
+			Go 语言函数			</a>
+						<a target="_top" data-p="par" title="Go 语言变量作用域" href="go-scope-rules.html">
+			Go 语言变量作用域			</a>
+						<a target="_top" data-p="par" title="Go 语言数组" href="go-arrays.html">
+			Go 语言数组			</a>
+						<a target="_top" data-p="par" title="Go 语言指针" href="go-pointers.html">
+			Go 语言指针			</a>
+						<a target="_top" data-p="par" title="Go 语言结构体" href="go-structures.html">
+			Go 语言结构体			</a>
+						<a target="_top" data-p="par" title="Go 语言切片(Slice)" href="go-slice.html">
+			Go 语言切片(Slice)			</a>
+						<a target="_top" data-p="par" title="Go 语言范围(Range)" href="go-range.html">
+			Go 语言范围(Range)			</a>
+						<a target="_top" data-p="par" title="Go 语言 Map(集合)" href="go-map.html">
+			Go 语言 Map(集合)			</a>
+						<a target="_top" data-p="par" title="Go 语言递归函数" href="go-recursion.html">
+			Go 语言递归函数			</a>
+						<a target="_top" data-p="par" title="Go 语言类型转换" href="go-type-casting.html">
+			Go 语言类型转换			</a>
+						<a target="_top" data-p="par" title="Go 语言接口" href="go-interfaces.html">
+			Go 语言接口			</a>
+			<a target="_top" title="Go 语言泛型" href="go-generics.html">Go 语言泛型</a>			<a target="_top" data-p="par" title="Go 错误处理" href="go-error-handling.html">
+			Go 错误处理			</a>
+			<a target="_top" title="Go 并发" href="go-concurrent.html">Go 并发</a>
+<a target="_top" title="Go 文件处理" href="go-file-handle.html">Go 文件处理</a>
+<a target="_top" title="Go 语言正则表达式" href="go-regex.html">Go 语言正则表达式</a>
+<a target="_top" title="Go 类型断言" href="go-type-assertion.html">Go 类型断言</a>
+<a target="_top" title="Go 继承" href="go-inheritance.html">Go 继承</a>			<a target="_top" data-p="par" title="Go 语言开发工具" href="go-ide.html">
+			Go 语言开发工具			</a>
+						<a target="_top" data-p="par" title="Go 语言测验" href="go-quiz.html">
+			Go 语言测验			</a>
+						<a target="_top" data-p="par" title="Go Modules" href="go-modules.html">
+			Go Modules			</a>
+				
+		</div>
+	</div>	
+</div>
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="go-interfaces.html" rel="prev"> Go 语言接口</a> </div>
+			<div class="next-design-link"><a href="go-ide.html" rel="next"> Go 语言开发工具</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+<div class="article-heading-ad" style="display: block;">
+
+<style>
+  /* 隐藏移动端广告 */
+  @media (max-width: 768px) {
+    .adsbygoogle {
+      display: none !important;
+    }
+  }
+  
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 728*90 固定 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="2147566827"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<h1>Go 错误处理
+</h1>
+
+<p>Go 语言通过内置的错误接口提供了非常简单的错误处理机制。</p>
+<p>
+Go 语言的错误处理采用显式返回错误的方式，而非传统的异常处理机制。这种设计使代码逻辑更清晰，便于开发者在编译时或运行时明确处理错误。</p>
+<p>
+<strong>Go 的错误处理主要围绕以下机制展开：
+</strong></p><ol><li><strong><code>error</code> 接口</strong>：标准的错误表示。</li><li><strong>显式返回值</strong>：通过函数的返回值返回错误。</li><li><strong>自定义错误</strong>：可以通过标准库或自定义的方式创建错误。</li><li><strong><code>panic</code> 和 <code>recover</code></strong>：处理不可恢复的严重错误。</li></ol>
+<hr><h2>error 接口</h2><p>Go 标准库定义了一个 error 接口，表示一个错误的抽象。</p>
+<p>error 类型是一个接口类型，这是它的定义：
+</p>
+<pre>
+type error interface {
+    Error() string
+}
+</pre>
+
+<ul><li><strong>实现 <code>error</code> 接口</strong>：任何实现了 <code>Error()</code> 方法的类型都可以作为错误。</li><li><code>Error()</code> 方法返回一个描述错误的字符串。</li></ul>
+<h3>使用 errors 包创建错误</h3><p>我们可以在编码中通过实现 error 接口类型来生成错误信息。</p>
+<p>创建一个简单错误：</p>
+
+<div class="example"><h2 class="example">实例</h2> <div class="example_code">
+<span style="color: #b1b100; font-weight: bold;">package</span> main<br />
+<br />
+<span style="color: #b1b100; font-weight: bold;">import</span> <span style="color: #339933;">(</span><br />
+&nbsp; &nbsp; <span style="color: #cc66cc;">&quot;errors&quot;</span><br />
+&nbsp; &nbsp; <span style="color: #cc66cc;">&quot;fmt&quot;</span><br />
+<span style="color: #339933;">)</span><br />
+<br />
+<span style="color: #993333;">func</span> main<span style="color: #339933;">()</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; err <span style="color: #339933;">:=</span> errors<span style="color: #339933;">.</span>New<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;this is an error&quot;</span><span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; fmt<span style="color: #339933;">.</span><span style="">Println</span><span style="color: #339933;">(</span>err<span style="color: #339933;">)</span> <span style="color: #666666; font-style: italic;">// 输出：this is an error</span><br />
+<span style="color: #339933;">}</span><br />
+</div></div>
+
+<p>
+函数通常在最后的返回值中返回错误信息，使用 errors.New 可返回一个错误信息：</p>
+
+<pre>
+func Sqrt(f float64) (float64, error) {
+    if f &lt; 0 {
+        return 0, errors.New("math: square root of negative number")
+    }
+    // 实现
+}
+</pre>
+<p>在下面的例子中，我们在调用 Sqrt 的时候传递的一个负数，然后就得到了 non-nil 的 error 对象，将此对象与 nil 比较，结果为 true，所以 fmt.Println(fmt 包在处理 error 时会调用 Error 方法)被调用，以输出错误，请看下面调用的示例代码：</p>
+<pre>
+result, err:= Sqrt(-1)
+
+if err != nil {
+   fmt.Println(err)
+}
+</pre>
+<hr>
+
+<h2>显式返回错误</h2><p>
+Go 中，错误通常作为函数的返回值返回，开发者需要显式检查并处理。</p>
+
+<p>显式返回错误：</p>
+
+
+<div class="example"><h2 class="example">实例</h2> <div class="example_code">
+<span style="color: #b1b100; font-weight: bold;">package</span> main<br />
+<br />
+<span style="color: #b1b100; font-weight: bold;">import</span> <span style="color: #339933;">(</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cc66cc;">&quot;errors&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cc66cc;">&quot;fmt&quot;</span><br />
+<span style="color: #339933;">)</span><br />
+<br />
+<span style="color: #993333;">func</span> divide<span style="color: #339933;">(</span>a<span style="color: #339933;">,</span> b <span style="color: #993333;">int</span><span style="color: #339933;">)</span> <span style="color: #339933;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">,</span> error<span style="color: #339933;">)</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">if</span> b <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> errors<span style="color: #339933;">.</span>New<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;division by zero&quot;</span><span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span> a <span style="color: #339933;">/</span> b<span style="color: #339933;">,</span> <span style="color: #000000; font-weight: bold;">nil</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #993333;">func</span> main<span style="color: #339933;">()</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; result<span style="color: #339933;">,</span> err <span style="color: #339933;">:=</span> divide<span style="color: #339933;">(</span><span style="color: #cc66cc;">10</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">if</span> err <span style="color: #339933;">!=</span> <span style="color: #000000; font-weight: bold;">nil</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span>Println<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;Error:&quot;</span><span style="color: #339933;">,</span> err<span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}</span> <span style="color: #b1b100; font-weight: bold;">else</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span>Println<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;Result:&quot;</span><span style="color: #339933;">,</span> result<span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+<span style="color: #339933;">}</span><br />
+</div></div>
+<p>输出：</p>
+<pre>
+Error: division by zero</pre>
+
+<hr>
+<h2>自定义错误</h2><p>
+通过定义自定义类型，可以扩展 error 接口。</p>
+
+<p>自定义错误类型：</p>
+
+
+<div class="example"><h2 class="example">实例</h2> <div class="example_code">
+<span style="color: #b1b100; font-weight: bold;">package</span> main<br />
+<br />
+<span style="color: #b1b100; font-weight: bold;">import</span> <span style="color: #339933;">(</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cc66cc;">&quot;fmt&quot;</span><br />
+<span style="color: #339933;">)</span><br />
+<br />
+<span style="color: #b1b100; font-weight: bold;">type</span> DivideError <span style="color: #993333;">struct</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; Dividend <span style="color: #993333;">int</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; Divisor &nbsp;<span style="color: #993333;">int</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #993333;">func</span> <span style="color: #339933;">(</span>e <span style="color: #339933;">*</span>DivideError<span style="color: #339933;">)</span> Error<span style="color: #339933;">()</span> <span style="color: #993333;">string</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span> fmt<span style="color: #339933;">.</span>Sprintf<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;cannot divide %d by %d&quot;</span><span style="color: #339933;">,</span> e<span style="color: #339933;">.</span>Dividend<span style="color: #339933;">,</span> e<span style="color: #339933;">.</span>Divisor<span style="color: #339933;">)</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #993333;">func</span> divide<span style="color: #339933;">(</span>a<span style="color: #339933;">,</span> b <span style="color: #993333;">int</span><span style="color: #339933;">)</span> <span style="color: #339933;">(</span><span style="color: #993333;">int</span><span style="color: #339933;">,</span> error<span style="color: #339933;">)</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">if</span> b <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">,</span> &amp;DivideError<span style="color: #339933;">{</span>Dividend<span style="color: #339933;">:</span> a<span style="color: #339933;">,</span> Divisor<span style="color: #339933;">:</span> b<span style="color: #339933;">}</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span> a <span style="color: #339933;">/</span> b<span style="color: #339933;">,</span> <span style="color: #000000; font-weight: bold;">nil</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #993333;">func</span> main<span style="color: #339933;">()</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; _<span style="color: #339933;">,</span> err <span style="color: #339933;">:=</span> divide<span style="color: #339933;">(</span><span style="color: #cc66cc;">10</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">if</span> err <span style="color: #339933;">!=</span> <span style="color: #000000; font-weight: bold;">nil</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span>Println<span style="color: #339933;">(</span>err<span style="color: #339933;">)</span> <span style="color: #666666; font-style: italic;">// 输出：cannot divide 10 by 0</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+<span style="color: #339933;">}</span><br />
+</div></div>
+<hr>
+<h2>fmt 包与错误格式化</h2>
+
+<p><code>fmt</code> 包提供了对错误的格式化输出支持：</p>
+<ul><li><code>%v</code>：默认格式。</li><li><code>%+v</code>：如果支持，显示详细的错误信息。</li><li><code>%s</code>：作为字符串输出。</li></ul>
+
+
+<div class="example"><h2 class="example">实例</h2> <div class="example_code">
+<span style="color: #b1b100; font-weight: bold;">package</span> main<br />
+<br />
+<span style="color: #b1b100; font-weight: bold;">import</span> <span style="color: #339933;">(</span><br />
+&nbsp; &nbsp; <span style="color: #cc66cc;">&quot;fmt&quot;</span><br />
+<span style="color: #339933;">)</span><br />
+<br />
+<span style="color: #666666; font-style: italic;">// 定义一个 DivideError 结构</span><br />
+<span style="color: #b1b100; font-weight: bold;">type</span> DivideError <span style="color: #993333;">struct</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; dividee <span style="color: #993333;">int</span><br />
+&nbsp; &nbsp; divider <span style="color: #993333;">int</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #666666; font-style: italic;">// 实现 `error` 接口</span><br />
+<span style="color: #993333;">func</span> <span style="color: #339933;">(</span>de <span style="color: #339933;">*</span>DivideError<span style="color: #339933;">)</span> Error<span style="color: #339933;">()</span> <span style="color: #993333;">string</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; strFormat <span style="color: #339933;">:=</span> <span style="color: #0000ff;">`<br />
+&nbsp; &nbsp; Cannot proceed, the divider is zero.<br />
+&nbsp; &nbsp; dividee: %d<br />
+&nbsp; &nbsp; divider: 0<br />
+`</span><br />
+&nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span> fmt<span style="color: #339933;">.</span>Sprintf<span style="color: #339933;">(</span>strFormat<span style="color: #339933;">,</span> de<span style="color: #339933;">.</span>dividee<span style="color: #339933;">)</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #666666; font-style: italic;">// 定义 `int` 类型除法运算的函数</span><br />
+<span style="color: #993333;">func</span> Divide<span style="color: #339933;">(</span>varDividee <span style="color: #993333;">int</span><span style="color: #339933;">,</span> varDivider <span style="color: #993333;">int</span><span style="color: #339933;">)</span> <span style="color: #339933;">(</span>result <span style="color: #993333;">int</span><span style="color: #339933;">,</span> errorMsg <span style="color: #993333;">string</span><span style="color: #339933;">)</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">if</span> varDivider <span style="color: #339933;">==</span> <span style="color: #cc66cc;">0</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dData <span style="color: #339933;">:=</span> DivideError<span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; dividee<span style="color: #339933;">:</span> varDividee<span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; divider<span style="color: #339933;">:</span> varDivider<span style="color: #339933;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; errorMsg <span style="color: #339933;">=</span> dData<span style="color: #339933;">.</span>Error<span style="color: #339933;">()</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span><br />
+&nbsp; &nbsp; <span style="color: #339933;">}</span> <span style="color: #b1b100; font-weight: bold;">else</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span> varDividee <span style="color: #339933;">/</span> varDivider<span style="color: #339933;">,</span> <span style="color: #cc66cc;">&quot;&quot;</span><br />
+&nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #993333;">func</span> main<span style="color: #339933;">()</span> <span style="color: #339933;">{</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">// 正常情况</span><br />
+&nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">if</span> result<span style="color: #339933;">,</span> errorMsg <span style="color: #339933;">:=</span> Divide<span style="color: #339933;">(</span><span style="color: #cc66cc;">100</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">10</span><span style="color: #339933;">);</span> errorMsg <span style="color: #339933;">==</span> <span style="color: #cc66cc;">&quot;&quot;</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span><span style="">Println</span><span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;100/10 = &quot;</span><span style="color: #339933;">,</span> result<span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+&nbsp; &nbsp; <span style="color: #666666; font-style: italic;">// 当除数为零的时候会返回错误信息</span><br />
+&nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">if</span> _<span style="color: #339933;">,</span> errorMsg <span style="color: #339933;">:=</span> Divide<span style="color: #339933;">(</span><span style="color: #cc66cc;">100</span><span style="color: #339933;">,</span> <span style="color: #cc66cc;">0</span><span style="color: #339933;">);</span> errorMsg <span style="color: #339933;">!=</span> <span style="color: #cc66cc;">&quot;&quot;</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span><span style="">Println</span><span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;errorMsg is: &quot;</span><span style="color: #339933;">,</span> errorMsg<span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #339933;">}</span><br />
+</div></div>
+
+<p>执行以上程序，输出结果为：</p>
+<pre>
+100/10 =  10
+errorMsg is:  
+    Cannot proceed, the divider is zero.
+    dividee: 100
+    divider: 0
+
+</pre>
+<hr>
+<h2>
+使用 errors.Is 和 errors.As</h2><p>从 Go 1.13 开始，<code>errors</code> 包引入了 <code>errors.Is</code> 和 <code>errors.As</code> 用于处理错误链：</p>
+
+<h3><strong><code>errors.Is</code></strong></h3><p>检查某个错误是否是特定错误或由该错误包装而成。</p>
+
+<div class="example"><h2 class="example">实例</h2> <div class="example_code">
+<span style="color: #b1b100; font-weight: bold;">package</span> main<br />
+<br />
+<span style="color: #b1b100; font-weight: bold;">import</span> <span style="color: #339933;">(</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cc66cc;">&quot;errors&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cc66cc;">&quot;fmt&quot;</span><br />
+<span style="color: #339933;">)</span><br />
+<br />
+<span style="color: #b1b100; font-weight: bold;">var</span> ErrNotFound <span style="color: #339933;">=</span> errors<span style="color: #339933;">.</span>New<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;not found&quot;</span><span style="color: #339933;">)</span><br />
+<br />
+<span style="color: #993333;">func</span> findItem<span style="color: #339933;">(</span>id <span style="color: #993333;">int</span><span style="color: #339933;">)</span> error <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span> fmt<span style="color: #339933;">.</span>Errorf<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;database error: %w&quot;</span><span style="color: #339933;">,</span> ErrNotFound<span style="color: #339933;">)</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #993333;">func</span> main<span style="color: #339933;">()</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; err <span style="color: #339933;">:=</span> findItem<span style="color: #339933;">(</span><span style="color: #cc66cc;">1</span><span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">if</span> errors<span style="color: #339933;">.</span>Is<span style="color: #339933;">(</span>err<span style="color: #339933;">,</span> ErrNotFound<span style="color: #339933;">)</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span>Println<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;Item not found&quot;</span><span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}</span> <span style="color: #b1b100; font-weight: bold;">else</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span>Println<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;Other error:&quot;</span><span style="color: #339933;">,</span> err<span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+<span style="color: #339933;">}</span><br />
+</div></div><h3>errors.As</h3>
+<p>
+将错误转换为特定类型以便进一步处理。</p>
+
+<div class="example"><h2 class="example">实例</h2> <div class="example_code">
+<span style="color: #b1b100; font-weight: bold;">package</span> main<br />
+<br />
+<span style="color: #b1b100; font-weight: bold;">import</span> <span style="color: #339933;">(</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cc66cc;">&quot;errors&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #cc66cc;">&quot;fmt&quot;</span><br />
+<span style="color: #339933;">)</span><br />
+<br />
+<span style="color: #b1b100; font-weight: bold;">type</span> MyError <span style="color: #993333;">struct</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; Code <span style="color: #993333;">int</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; Msg &nbsp;<span style="color: #993333;">string</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #993333;">func</span> <span style="color: #339933;">(</span>e <span style="color: #339933;">*</span>MyError<span style="color: #339933;">)</span> Error<span style="color: #339933;">()</span> <span style="color: #993333;">string</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span> fmt<span style="color: #339933;">.</span>Sprintf<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;Code: %d, Msg: %s&quot;</span><span style="color: #339933;">,</span> e<span style="color: #339933;">.</span>Code<span style="color: #339933;">,</span> e<span style="color: #339933;">.</span>Msg<span style="color: #339933;">)</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #993333;">func</span> getError<span style="color: #339933;">()</span> error <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">return</span> &amp;MyError<span style="color: #339933;">{</span>Code<span style="color: #339933;">:</span> <span style="color: #cc66cc;">404</span><span style="color: #339933;">,</span> Msg<span style="color: #339933;">:</span> <span style="color: #cc66cc;">&quot;Not Found&quot;</span><span style="color: #339933;">}</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #993333;">func</span> main<span style="color: #339933;">()</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; err <span style="color: #339933;">:=</span> getError<span style="color: #339933;">()</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">var</span> myErr <span style="color: #339933;">*</span>MyError<br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">if</span> errors<span style="color: #339933;">.</span>As<span style="color: #339933;">(</span>err<span style="color: #339933;">,</span> &amp;myErr<span style="color: #339933;">)</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span>Printf<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;Custom error - Code: %d, Msg: %s<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><span style="color: #339933;">,</span> myErr<span style="color: #339933;">.</span><span style="">Code</span><span style="color: #339933;">,</span> myErr<span style="color: #339933;">.</span><span style="">Msg</span><span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+<span style="color: #339933;">}</span><br />
+</div></div><hr>
+<h2>panic 和 recover</h2><p>Go 的 panic 用于处理不可恢复的错误，recover 用于从 panic 中恢复。</p>
+<p>
+<span class="marked">panic:</span></p>
+<ul><li>导致程序崩溃并输出堆栈信息。</li><li>常用于程序无法继续运行的情况。</li></ul>
+
+<p><span class="marked">recover:</span></p>
+<ul><li>捕获 <code>panic</code>，避免程序崩溃。</li></ul>
+
+<div class="example"><h2 class="example">实例</h2> <div class="example_code">
+<span style="color: #b1b100; font-weight: bold;">package</span> main<br />
+<br />
+<span style="color: #b1b100; font-weight: bold;">import</span> <span style="color: #cc66cc;">&quot;fmt&quot;</span><br />
+<br />
+<span style="color: #993333;">func</span> safeFunction<span style="color: #339933;">()</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">defer</span> <span style="color: #993333;">func</span><span style="color: #339933;">()</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #b1b100; font-weight: bold;">if</span> r <span style="color: #339933;">:=</span> <span style="color: #000066;">recover</span><span style="color: #339933;">();</span> r <span style="color: #339933;">!=</span> <span style="color: #000000; font-weight: bold;">nil</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span>Println<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;Recovered from panic:&quot;</span><span style="color: #339933;">,</span> r<span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #339933;">}()</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #000066;">panic</span><span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;something went wrong&quot;</span><span style="color: #339933;">)</span><br />
+<span style="color: #339933;">}</span><br />
+<br />
+<span style="color: #993333;">func</span> main<span style="color: #339933;">()</span> <span style="color: #339933;">{</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span>Println<span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;Starting program...&quot;</span><span style="color: #339933;">)</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; safeFunction<span style="color: #339933;">()</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; fmt<span style="color: #339933;">.</span><span style="">Println</span><span style="color: #339933;">(</span><span style="color: #cc66cc;">&quot;Program continued after panic&quot;</span><span style="color: #339933;">)</span><br />
+<span style="color: #339933;">}</span><br />
+</div></div><p>
+执行以上代码，输出结果为：</p>
+<pre>Starting program...
+Recovered from panic: something went wrong
+Program continued after panic</pre>
+
+			<!-- 其他扩展 -->
+						
+			</div>
+			
+		</div>
+
+
+<div class="archive-list" style="display:none;font-size: 14px;line-height: 1.8;margin-top: 20px;padding: 10px;">
+<div class="archive-list-item">
+    <div class="post-intro" style="width: 100%;" id="ai-info">
+	  AI 思考中...
+    </div>
+</div>
+</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="go-interfaces.html" rel="prev"> Go 语言接口</a> </div>
+			<div class="next-design-link"><a href="go-ide.html" rel="next"> Go 语言开发工具</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+
+
+		
+		<div class="sidebar-box ">
+				
+
+<style>	
+.responsive_ad1 { display:none; }
+@media(min-width: 800px) { .responsive_ad1 {  display:block;margin:0 auto;} }
+</style>
+<div id="ad-336280" class="responsive_ad1">
+<!-- 336*280 固定 -->		
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 移动版 自动调整 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+				</div>
+		<!-- 笔记列表 -->
+		<style>
+.wrapper {
+  /*text-transform: uppercase; */
+  background: #ececec;
+  color: #555;
+  cursor: pointer;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.wrapper .tooltip {
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: left;
+  background: #96b97d;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 14px;
+  pointer-events: none;
+  position: absolute;
+  
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+.tooltip a {
+	color:#fff;
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}  
+
+/* CSS Triangles - see Trevor's post */
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #96b97d 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 20%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+.wrapper .tooltip1 {
+	margin-left: 50px;
+	padding-top: 0px;
+}
+/*
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+*/
+/* IE can just show/hide with no transition */
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.css">
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+<div class="title" id="comments">
+	<h2 class="">
+    <div class="altblock">
+				<i style="font-size:28px;margin-top: 8px;" class="fa fa-plus-square" aria-hidden="true"></i>
+		    </div>
+    <span class="mw-headline" id="qa_headline">6  篇笔记</span>
+	<span class="mw-headline" id="user_add_note" style="float:right;line-height: 62px;padding-right: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  写笔记</span>
+    </h2>
+</div>
+
+<div id="postcomments" style="display:none;">
+	<ol class="commentlist">
+		<li class="comment even thread-even depth-1" id="comment-38704"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;若小叶</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;zth***@126.com</p><p><i class="fa fa-external-link" aria-hidden="true"></i> <a rel="nofollow" target="_blank" href="https://blog.chutian.bid/index.php/archives/28/">&nbsp;&nbsp;参考地址</a></p></div><div id="runoobvote-id-38704" data-commid="38704" class="upvotejs"><a class="upvote"></a> <span class="count">137</span></div></div><div class="comt-main" id="div-comment-38704"><p data-title="Go panic 与 recover">这里应该介绍一下 panic 与 recover,一个用于主动抛出错误，一个用于捕获panic抛出的错误。</p>
+<p><strong>概念</strong></p>
+<p>panic 与 recover 是 Go 的两个内置函数，这两个内置函数用于处理 Go 运行时的错误，panic 用于主动抛出错误，recover 用来捕获 panic 抛出的错误。</p>
+
+
+<p><img src="//www.runoob.com/wp-content/uploads/2019/01/99459110.jpg"></p>
+<ul><li>引发<code>panic</code>有两种情况，一是程序主动调用，二是程序产生运行时错误，由运行时检测并退出。</li><li>发生<code>panic</code>后，程序会从调用<code>panic</code>的函数位置或发生<code>panic</code>的地方立即返回，逐层向上执行函数的<code>defer</code>语句，然后逐层打印函数调用堆栈，直到被<code>recover</code>捕获或运行到最外层函数。</li><li><code>panic</code>不但可以在函数正常流程中抛出，在<code>defer</code>逻辑里也可以再次调用<code>panic</code>或抛出<code>panic</code>。<code>defer</code>里面的<code>panic</code>能够被后续执行的<code>defer</code>捕获。</li><li><code>recover</code>用来捕获<code>panic</code>，阻止<code>panic</code>继续向上传递。<code>recover()</code>和<code>defer</code>一起使用，但是<code>defer</code>只有在后面的函数体内直接被掉用才能捕获<code>panic</code>来终止异常，否则返回<code>nil</code>，异常继续向外传递。</li></ul>
+
+<p>例子1</p>
+<pre>//以下捕获失败
+defer recover()
+defer fmt.Prinntln(recover)
+defer func(){
+    func(){
+        recover() //无效，嵌套两层
+    }()
+}()
+
+//以下捕获有效
+defer func(){
+    recover()
+}()
+
+func except(){
+    recover()
+}
+func test(){
+    defer except()
+    panic("runtime error")
+}</pre>
+<p>例子2</p>
+<p>多个panic只会捕捉最后一个：</p>
+
+<pre>package main
+import "fmt"
+func main(){
+    defer func(){
+        if err := recover() ; err != nil {
+            fmt.Println(err)
+        }
+    }()
+    defer func(){
+        panic("three")
+    }()
+    defer func(){
+        panic("two")
+    }()
+    panic("one")
+}</pre>
+<p><strong>使用场景</strong></p>
+<p>一般情况下有两种情况用到：</p>
+<ul><li>
+程序遇到无法执行下去的错误时，抛出错误，主动结束运行。</li><li>
+在调试程序时，通过 panic 来打印堆栈，方便定位错误。</li></ul><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="/note/38704">若小叶</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;若小叶</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;zth***@126.com</p><p><i class="fa fa-external-link" aria-hidden="true"></i> <a rel="nofollow" target="_blank" href="https://blog.chutian.bid/index.php/archives/28/">&nbsp;&nbsp;参考地址</a></p></div></span>7年前 (2019-01-05)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-40287"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;GG</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;401***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="5961192828773a3634">[email&#160;protected]</a></p></div><div id="runoobvote-id-40287" data-commid="40287" class="upvotejs"><a class="upvote"></a> <span class="count">38</span></div></div><div class="comt-main" id="div-comment-40287"><pre>if result, errorMsg := Divide(100, 10); errorMsg == "" {
+    fmt.Println("100/10 = ", result)
+}
+
+if _, errorMsg := Divide(100, 0); errorMsg != "" {
+    fmt.Println("errorMsg is: ", errorMsg)
+}</pre>
+<p>等价于:</p>
+
+<pre>result, errorMsg := Divide(100,10)
+if errorMsg == ""{
+    fmt.Println("100/10 = ", result)
+}
+
+result, errorMsg = Divide(100,0)
+if errorMsg != ""{
+    fmt.Println("errorMsg is: ", errorMsg)
+}</pre>
+<div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">GG</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;GG</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;401***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="99a1d9e8e8b7faf6f4">[email&#160;protected]</a></p></div></span>7年前 (2019-03-01)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-42532"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;zhu波比</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;568***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="033a33334372722d606c6e">[email&#160;protected]</a></p></div><div id="runoobvote-id-42532" data-commid="42532" class="upvotejs"><a class="upvote"></a> <span class="count">10</span></div></div><div class="comt-main" id="div-comment-42532"><p>fmt.Println 打印结构体的时候，会把其中的 error 的返回的信息打印出来。</p>
+
+<pre>type User struct {
+   username string
+   password string
+}
+
+func (p *User) init(username string ,password string) (*User,string)  {
+   if ""==username || ""==password {
+      return p,p.Error()
+   }
+   p.username = username
+   p.password = password
+   return p,""}
+
+func (p *User) Error() string {
+      return "Usernam or password shouldn't be empty!"}
+}
+
+func main() {
+   var user User
+   user1, _ :=user.init("","");
+   fmt.Println(user1)
+}</pre>
+<p>结果：</p>
+<pre>Usernam or password shouldn't be empty!</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">zhu波比</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;zhu波比</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;568***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="b68f8686f6c7c798d5d9db">[email&#160;protected]</a></p></div></span>7年前 (2019-05-07)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-43054"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;gibson1112</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;185***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="eaddd8dfd9dcaadbdcd9c4898587">[email&#160;protected]</a></p></div><div id="runoobvote-id-43054" data-commid="43054" class="upvotejs"><a class="upvote"></a> <span class="count">42</span></div></div><div class="comt-main" id="div-comment-43054"><p>个人多次试验，总结几点 panic，defer 和 recover。</p>
+<ul><li>
+1、panic 在没有用 recover 前以及在 recover 捕获那一级函数栈，panic 之后的代码均不会执行；一旦被 recover 捕获后，外层的函数栈代码恢复正常，所有代码均会得到执行；
+</li><li>
+2、panic 后，不再执行后面的代码，立即按照逆序执行 defer，并逐级往外层函数栈扩散；defer 就类似 finally；
+</li><li>
+3、利用 recover 捕获 panic 时，defer 需要再 panic 之前声明，否则由于 panic 之后的代码得不到执行，因此也无法 recover；
+</li></ul>
+<pre>package main
+
+import (
+"fmt"
+)
+
+func main() {
+  fmt.Println("外层开始")
+  defer func() {
+    fmt.Println("外层准备recover")
+    if err := recover(); err != nil {
+      fmt.Printf("%#v-%#v\n", "外层", err) // err已经在上一级的函数中捕获了，这里没有异常，只是例行先执行defer，然后执行后面的代码
+    } else {
+      fmt.Println("外层没做啥事")
+    }
+    fmt.Println("外层完成recover")
+  }()
+  fmt.Println("外层即将异常")
+  f()
+  fmt.Println("外层异常后")
+  defer func() {
+    fmt.Println("外层异常后defer")
+  }()
+}
+
+func f() {
+  fmt.Println("内层开始")
+  defer func() {
+    fmt.Println("内层recover前的defer")
+  }()
+
+  defer func() {
+    fmt.Println("内层准备recover")
+    if err := recover(); err != nil {
+      fmt.Printf("%#v-%#v\n", "内层", err) // 这里err就是panic传入的内容
+    }
+
+    fmt.Println("内层完成recover")
+  }()
+
+  defer func() {
+    fmt.Println("内层异常前recover后的defer")
+  }()
+
+  panic("异常信息")
+
+  defer func() {
+    fmt.Println("内层异常后的defer")
+  }()
+
+  fmt.Println("内层异常后语句") //recover捕获的一级或者完全不捕获这里开始下面代码不会再执行
+}</pre>
+
+<p>代码执行的结果：</p>
+
+<pre>外层开始
+外层即将异常
+内层开始
+内层异常前recover后的defer
+内层准备recover
+"内层"-"异常信息"
+内层完成recover
+内层recover前的defer
+外层异常后
+外层异常后defer
+外层准备recover
+外层没做啥事
+外层完成recover</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">gibson1112</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;gibson1112</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;185***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="8fb8bdbabcb9cfbeb9bca1ece0e2">[email&#160;protected]</a></p></div></span>7年前 (2019-05-23)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-44554"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;朝阳群众</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;cha***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="f39d9482868a9d899b9c9d94b3949e929a9fdd909c9e">[email&#160;protected]</a></p></div><div id="runoobvote-id-44554" data-commid="44554" class="upvotejs"><a class="upvote"></a> <span class="count">20</span></div></div><div class="comt-main" id="div-comment-44554"><p>这个例子不给力，我重写了一个:</p>
+
+<pre>package main
+
+import (
+    "fmt"
+)
+
+// 自定义错误信息结构
+type DIV_ERR struct {   
+    etype int  // 错误类型   
+    v1 int     // 记录下出错时的除数、被除数   
+    v2 int
+}
+// 实现接口方法 error.Error()
+func (div_err DIV_ERR) Error() string {   
+    if 0==div_err.etype {      
+        return "除零错误"   
+    }else{   
+        return "其他未知错误"  
+    }
+}
+// 除法
+func div(a int, b int) (int,*DIV_ERR) {  
+    if b == 0 {     
+        // 返回错误信息    
+        return 0,&amp;DIV_ERR{0,a,b}  
+    } else {   
+        // 返回正确的商  
+        return a / b, nil   
+    }
+}
+func main() { 
+    // 正确调用  
+    v,r :=div(100,2)  
+    if nil!=r{   
+        fmt.Println("(1)fail:",r)  
+    }else{   
+        fmt.Println("(1)succeed:",v) 
+    }   
+    // 错误调用
+    v,r =div(100,0) 
+    if nil!=r{   
+        fmt.Println("(2)fail:",r)  
+    }else{  
+        fmt.Println("(2)succeed:",v) 
+    }
+}</pre>
+<div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">朝阳群众</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;朝阳群众</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;cha***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="ec828b9d999582968483828bac8b818d8580c28f8381">[email&#160;protected]</a></p></div></span>7年前 (2019-07-12)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-72517"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;k</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;815***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="043030364475752a676b69">[email&#160;protected]</a></p></div><div id="runoobvote-id-72517" data-commid="72517" class="upvotejs"><a class="upvote"></a> <span class="count">5</span></div></div><div class="comt-main" id="div-comment-72517">最后一段代码有点问题，需要修改为：
+
+<pre>// 定义 `int` 类型除法运算的函数
+func Divide(varDividee int, varDivider int) (result int, errorMsg string){   
+  if varDivider == 0{      
+    dData := DivideError{         
+      dividee: varDividee,         
+      divider: varDivider,      
+    }      
+    errorMsg := dData.Error()     
+    return 0, errorMsg  
+  } else {     
+    return varDividee / varDivider, ""   
+  }
+}</pre>
+<div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">k</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;k</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;815***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="556161671524247b363a38">[email&#160;protected]</a></p></div></span>4年前 (2022-05-10)</div></div></li><!-- #comment-## -->
+	</ol>
+	<div class="pagenav">
+			</div>
+</div>
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style="display:none; padding: 20px 20px;"> 
+	<h3 class="text-muted" id="share_code" style="color: #799961;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<!--
+	<p style="font-size:14px;">笔记需要是本篇文章的内容扩展！</p><br>
+	<p style="font-size:12px;"><a href="//www.runoob.com/tougao" target="_blank">文章投稿，可点击这里</a></p>
+	<p style="font-size:14px;"><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>
+		<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display:none;">
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div id="mded"></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input type="hidden" name="comment_post_ID" value="12448" id="comment_post_ID" />
+<input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="引用地址"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload:false,
+	 // upload: {url:'/api/comment_upload_file.php',params: null,fileKey: 'upload_file',connectionCount: 1,leaveConfirm: '文件正在上传，您确定离开?'},
+	  defaultImage: 'https://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  autosave: 'editor-content',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+	$("#user_add_note").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		$('html, body').animate({
+       	    scrollTop: $("#respond").offset().top
+    	}, 200);
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" style="display:none;" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  12448;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>').show();
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>').show();
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>').show();
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>').show();
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>').show();
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>').show();
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	$(".comt-author").click(function() {
+		href = $(this).children("a").attr("href");
+		if(href.indexOf("/note/")!=-1) {
+			var win = window.open(href, '_blank');
+  			win.focus();
+		}
+	});
+	$(".comt-meta span").hover(function(){
+		$(this).children(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).children(".tooltip").removeAttr("style");
+	});
+	/*
+	$(".wrapper i").hover(function(){
+		$(this).siblings(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).siblings(".tooltip").css({ "opacity": 0, "pointer-events": "auto"});
+	});
+	*/
+	//Upvote.create('runoobvote-id', {callback: vote_callback});
+	var ajaxurl = 'https://www.runoob.com/wp-admin/admin-ajax.php';
+	var callback = function(data) {
+		//console.log($('#runoobvote-id').upvote('upvoted'));
+		//console.log($('#runoobvote-id').upvote('downvoted'));
+		//console.log(data);
+		_vote_action = data.action;
+		id_arr = data.id.split('-');
+		um_id= id_arr[2];
+		//console.log(um_id);
+		
+		var re = /^[1-9]+/;
+		if (re.test(um_id)) { 
+			var ajax_data = {
+				_vote_action: _vote_action,
+				action: "pinglun_zan",
+				um_id: um_id,
+				um_action: "ding"
+			};
+			//console.log(ajax_data);
+			$.post(ajaxurl,ajax_data,function(status){
+				//if(status.vote_num>999) {
+				//	_voteHtml = '<span style="display: block; text-align: center;font-size: 20px; color: #6a737c; margin: 8px 0;">'+kFormatter(status.vote_num) +'</span>';
+				//	$("#runoobvote-id-" + um_id + " .count").hide().after(_voteHtml);
+				//}
+				
+			});
+		}
+	};
+	if($('#comments').length && $('.upvotejs').length){
+		$('.upvotejs').upvote({id: 12448, callback: callback});
+	
+		$.post(ajaxurl,{"action":"pinglun_zan","postid":12448},function(data){  
+			$(data).each(function(key,value) {
+				$("#runoobvote-id-" + value.commid + " .upvote").addClass(value.upvotejs_class);
+				$("#runoobvote-id-" + value.commid + " .downvote").addClass(value.downvote_class);
+				$("#runoobvote-id-" + value.commid + " .count").text(value.upvote_count);
+			})
+		},'json');
+		
+	}
+	
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+function kFormatter(num) {
+	// return num;
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
+</script>
+
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/css/qa.css?1.45">
+<link rel="stylesheet" type="text/css" href="https://static.char123.com/assets/simditor/2.3.6/styles/simditor.min.css" />
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor.min.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor-autosave.js"></script>
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+
+<style>
+.sidebar-tree .double-li {
+    width:300px;
+}
+.sidebar-tree .double-li li {
+    width: 44%;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    display: inline;
+}
+</style>
+
+    
+        <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here" style="margin: 0 auto;">
+            <a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;"> <i class="fa fa-list" aria-hidden="true"></i> 分类导航</a>
+        </div>
+    <div class="sidebar-box sidebar-cate">
+        
+        <div class="sidebar-tree">
+            <ul><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="../html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="../html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="../css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="../css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Tailwind CSS 教程" href="../tailwindcss/tailwindcss-tutorial.html">Tailwind CSS 教程</a></li><li><a title="Bootstrap4 教程" href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Bootstrap5 教程" href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 教程</a></li><li><a title="Font Awesome 教程" href="../font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="../foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="../js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="../htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="../jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="../angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="../angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="../vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="Vue3 教程" href="../vue3/vue3-tutorial.html">Vue3 教程</a></li><li><a title="React 教程" href="../react/react-tutorial.html">React 教程</a></li><li><a title="Next.js 教程" href="../nextjs/nextjs-tutorial.html">Next.js 教程</a></li><li><a title="TypeScript 教程" href="../typescript/ts-tutorial.html">TypeScript 教程</a></li><li><a title="jQuery UI 教程" href="../jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="../jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="../nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="Electron 教程" href="../electron/electron-tutorial.html">Electron 教程</a></li><li><a title="Playwright 教程" href="../playwright/playwright-tutorial.html">Playwright 教程</a></li><li><a title="AJAX 教程" href="../ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="../json/json-tutorial.html">JSON 教程</a></li><li><a title="Echarts 教程" href="../echarts/echarts-tutorial.html">Echarts 教程</a></li><li><a title="Chart.js 教程" href="../chartjs/chartjs-tutorial.html">Chart.js 教程</a></li><li><a title="Highcharts 教程" href="../highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="../googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="Python2.x 教程" href="../python/python-tutorial.html">Python2.x 教程</a></li><li><a title="Linux 教程" href="../linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="../docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="../ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="../java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="../c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="../cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="../perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="../servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="../jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="../lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Rust 教程" href="../rust/rust-tutorial.html">Rust 教程</a></li><li><a title="Zig 教程" href="../zig/zig-tutorial.html">Zig 教程</a></li><li><a title="Scala 教程" href="../scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="go-tutorial.html">Go 教程</a></li><li><a title="PHP 教程" href="../php/php-tutorial.html">PHP 教程</a></li><li><a title="数据结构与算法" href="../data-structures/data-structures-tutorial.html">数据结构与算法</a></li><li><a title="Django 教程" href="../django/django-tutorial.html">Django 教程</a></li><li><a title="FastAPI 教程" href="../fastapi/fastapi-tutorial.html">FastAPI 教程</a></li><li><a title="Flask 教程" href="../flask/flask-tutorial.html">Flask 教程</a></li><li><a title="Pillow 教程" href="../pillow/pillow-tutorial.html">Pillow 教程</a></li><li><a title="Zookeeper 教程" href="//www.runoob.com/w3cnote/zookeeper-tutorial.html">Zookeeper 教程</a></li><li><a title="设计模式" href="../design-pattern/design-pattern-tutorial.html">设计模式</a></li><li><a title="Python 设计模式" href="../python-design-pattern/python-design-pattern-tutorial.html">Python 设计模式</a></li><li><a title="正则表达式" href="../regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="Maven 教程" href="../maven/maven-tutorial.html">Maven 教程</a></li><li><a title="CMake 教程" href="../cmake/cmake-tutorial.html">CMake 教程</a></li><li><a title="Verilog 教程" href="//www.runoob.com/w3cnote/verilog-tutorial.html">Verilog 教程</a></li><li><a title="ASP 教程" href="../asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="../appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="../vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="../sql/sql-tutorial.html">SQL 教程</a></li><li><a title="MySQL 教程" href="../mysql/mysql-tutorial.html">MySQL 教程</a></li><li><a title="PostgreSQL 教程" href="../postgresql/postgresql-tutorial.html">PostgreSQL 教程</a></li><li><a title="SQLite 教程" href="../sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="../mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="../redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="../Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit">  AI & 数据分析</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="NumPy 教程" href="../numpy/numpy-tutorial.html">NumPy 教程</a></li><li><a title="Pandas 教程" href="../pandas/pandas-tutorial.html">Pandas 教程</a></li><li><a title="Matplotlib 教程" href="../matplotlib/matplotlib-tutorial.html">Matplotlib 教程</a></li><li><a title="Scipy 教程" href="../scipy/scipy-tutorial.html">Scipy 教程</a></li><li><a title="Pytorch 教程" href="../pytorch/pytorch-tutorial.html">Pytorch 教程</a></li><li><a title="TensorFlow 教程" href="../tensorflow/tensorflow-tutorial.html">TensorFlow 教程</a></li><li><a title="Ollama 教程" href="../ollama/ollama-tutorial.html">Ollama 教程</a></li><li><a title="机器 教程" href="../ml/ml-tutorial.html">机器 教程</a></li><li><a title="Jupyter Notebook 教程" href="../jupyter-notebook/jupyter-notebook-tutorial.html">Jupyter Notebook 教程</a></li><li><a title="AI Agent(智能体)" href="../ai-agent/ai-agent-tutorial.html">AI Agent(智能体)</a></li><li><a title="Skills(技能)" href="../skills/skills-tutorial.html">Skills(技能)</a></li><li><a title="Claude Code" href="../claude-code/claude-code-tutorial.html">Claude Code</a></li><li><a title="OpenCode" href="../opencode/opencode-tutorial.html">OpenCode</a></li><li><a title="Codex 教程" href="../codex/codex-tutorial.html">Codex 教程</a></li><li><a title="scikit-learn 教程" href="../sklearn/sklearn-tutorial.html">scikit-learn 教程</a></li><li><a title="R 教程" href="../r/r-tutorial.html">R 教程</a></li><li><a title="OpenCV 教程" href="../opencv/opencv-tutorial.html">OpenCV 教程</a></li><li><a title="NLP 教程" href="../nlp/nlp-tutorial.html">NLP 教程</a></li><li><a title="Selenium 教程" href="../selenium/selenium-tutorial.html">Selenium 教程</a></li><li><a title="Julia 教程" href="../julia/julia-tutorial.html">Julia 教程</a></li><li><a title="量化交易" href="../qt/qt-tutorial.html">量化交易</a></li><li><a title="Dash 教程" href="../dash/dash-tutorial.html">Dash 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="//www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="../swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="../jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="../ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Flutter 教程" href="../flutter/flutter-tutorial.html">Flutter 教程</a></li><li><a title="Kotlin 教程" href="../kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="VS Code 教程" href="../vscode/vscode-tutorial.html">VS Code 教程</a></li><li><a title="PyCharm 教程" href="../pycharm/pycharm-tutorial.html">PyCharm 教程</a></li><li><a title="Swagger 教程" href="../swagger/swagger-tutorial.html">Swagger 教程</a></li><li><a title="RESTful API 教程" href="../restfulapi/restful-api-tutorial.html">RESTful API 教程</a></li><li><a title="Eclipse 教程" href="../eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="../git/git-tutorial.html">Git 教程</a></li><li><a title="Svn 教程" href="../svn/svn-tutorial.html">Svn 教程</a></li><li><a title="Markdown 教程" href="../markdown/md-tutorial.html">Markdown 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="../xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="../dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="../dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="../xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="../xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="../xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="../xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="../xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="../schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="../xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="../svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="../aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="../csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="PowerShell 教程" href="../powershell/powershell-tutorial.html">PowerShell 教程</a></li><li><a title="Web Pages 教程" href="../aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="../aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="../aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="../aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="../webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="../wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="../soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="../rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="../rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="../http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="../web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="../browsers/browser-information.html">浏览器信息</a></li><li><a title="网络协议" href="../np/np-tutorial.html">网络协议</a></li><li><a title="网站主机教程" href="../hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="../tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="../w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="../quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>            </div>
+    
+    </div>
+    </div>
+    <br>
+    
+    <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here">
+            <a href="javascript:void(0);">Advertisement</a>
+        </div>
+        <div class="re-600160" id="sidebar-right-re">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧栏1 -->
+        <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+                </div>
+    </div>
+</div></div>
+
+</div>
+
+<script>
+var aid = 12448;
+function coll() {
+	$.post( '/wp-content/themes/runoob/option/user/userinfo.php', {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+		if(data.error==0) {
+			$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+			$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+		}
+		alert(data.msg);
+	},'json');
+}
+
+(function () {
+    // 1. 仅 HTML 页面
+    if (!document.contentType || !document.contentType.includes('text/html')) return;
+
+    // 2. 容器判断
+    var container = document.querySelector('.article-intro');
+    if (!container) return;
+
+    var h1 = container.querySelector('h1');
+    if (!h1) return;
+
+    // 3. URL 判断
+    var url = window.location.href.toLowerCase();
+    var version = null;
+
+    if (url.includes('/python3/')) {
+        version = 'Python3.x';
+    } else if (url.includes('/python/')) {
+        version = 'Python2.x';
+    }
+
+    if (!version) return;
+
+    // 4. 防重复
+    if (h1.querySelector('.py-version-badge')) return;
+
+    // 5. 创建标签
+    var badge = document.createElement('span');
+    badge.className = 'py-version-badge';
+    badge.innerText = version;
+
+    // 6. 样式（核心：float 实现右上角）
+    badge.style.float = 'right';
+    badge.style.fontSize = '12px';
+    badge.style.padding = '2px 8px';
+    badge.style.borderRadius = '999px';
+
+   // 自适应亮/暗色 + 渐变背景（增强版）
+	badge.style.color = 'inherit';
+
+	// 渐变背景（低透明度，不影响暗黑模式）
+	if (version.includes('3')) {
+		badge.style.background = 'linear-gradient(90deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15))';
+	} else {
+		badge.style.background = 'linear-gradient(90deg, rgba(161,140,209,0.15), rgba(251,194,235,0.15))';
+	}
+
+	// 边框弱化（更精致）
+	badge.style.border = '1px solid rgba(127,127,127,0.3)';
+
+	// 提升可读性
+	badge.style.opacity = '0.95';
+
+    // 微调位置（更贴近“右上角”）
+    badge.style.marginTop = '4px';
+    badge.style.marginLeft = '10px';
+
+    // 7. 插入到 h1 最前面（让 float 生效更稳定）
+    h1.insertBefore(badge, h1.firstChild);
+
+})();
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.js?1.0"></script>
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.css?1.0" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // 获取窗口宽度
+    var windowWidth = $(window).width();
+
+    // 设置一个阈值，例如 768px，根据实际需要调整
+    var mobileThreshold = 768;
+
+    // 判断是否为移动端
+    if (windowWidth < mobileThreshold) {
+        // 在移动端执行的代码
+        $(".article-heading-ad").show();
+    } else {
+        // 在非移动端执行的代码
+		$(".article-heading-ad").show();
+    }
+	
+});
+</script>
+<script src="/wp-content/themes/runoob/assets/js/runoob-article-dir.min.js"></script>
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

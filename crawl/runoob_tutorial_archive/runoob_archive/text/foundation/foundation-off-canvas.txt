@@ -1,0 +1,81 @@
+URL: https://www.runoob.com/foundation/foundation-off-canvas.html
+Title: Foundation 滑动导航(Off-Canvas) | 菜鸟教程
+
+Foundation 滑动导航(Off-Canvas) | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 侧边栏 
+
+Foundation 麦哲伦（Magellan）导航 
+
+Foundation 滑动导航(Off-Canvas) 
+
+侧边栏导航 
+
+Off-Canvas 滑动导航现在逐渐在移动页面变得越来越流行了
+(点击菜单按钮菜单从左侧滑出): 
+
+创建滑动导航 
+
+创建滑动导航实例如下： 
+
+实例 
+
+<!-- 最外层div：页面布局 --> 
+< div class= "off-canvas-wrap" data-offcanvas > 
+<!-- 内部元素: "工具栏" 内容 (图标, 链接, 
+ 描述内容等)--> 
+< div class= "inner-wrap" > 
+< nav class= "tab-bar" > 
+< section class= "left-small" > 
+< a class= "left-off-canvas-toggle menu-icon" href= "#" > < span > < /span > < /a > 
+< /section > 
+
+< section class= "middle 
+ tab-bar-section" > 
+< h1 class= "title" > Off-canvas Example < /h1 > 
+< /section > 
+< /nav > 
+
+<!-- 滑动菜单 --> 
+< aside class= "left-off-canvas-menu" > 
+<!-- Add 
+ links or other stuff here --> 
+< ul class= "off-canvas-list test" > 
+< li > < label > Heading < /label > < /li > 
+< li > < a href= "#" > Link 1 < /a > < /li > 
+< li > < a href= "#" > Link 2 < /a > < /li > 
+... 
+< /ul > 
+< /aside > 
+
+<!-- 主要内容 --> 
+< section class= "main-section" > 
+< h3 > Lorem Ipsum < /h3 > 
+< p > .... < /p > 
+< /section > 
+
+<!-- 
+ 关闭菜单 --> 
+< a class= "exit-off-canvas" > < /a > 
+
+< /div > <!-- 结束内部内容 --> 
+< /div > <!-- 结束滑动菜单 --> 
+
+<!-- 初始化 Foundation JS --> 
+< script > 
+$(document).ready(function() { 
+$(document).foundation(); 
+}) 
+< /script > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Foundation 侧边栏 
+
+Foundation 麦哲伦（Magellan）导航

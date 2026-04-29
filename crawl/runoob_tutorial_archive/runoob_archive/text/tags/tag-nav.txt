@@ -1,0 +1,52 @@
+URL: https://www.runoob.com/tags/tag-nav.html
+Title: HTML <nav> 标签 | 菜鸟教程
+
+HTML <nav> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <noframes> 标签 
+
+HTML <meter> 标签 
+
+HTML <nav> 标签 
+
+实例 
+
+一个导航链接实例： 
+
+< nav > < a href = " /html/ " > HTML </ a > | < a href = " /css/ " > CSS </ a > | < a href = " /js/ " > JavaScript </ a > | < a href = " /jquery/ " > jQuery </ a > </ nav > 
+
+尝试一下 » 
+
+浏览器支持 
+
+目前大多数浏览器支持 <nav> 标签。 
+
+标签定义及使用说明 
+
+<nav> 标签定义导航链接的部分。 
+
+并不是所有的 HTML 文档都要使用到 <nav> 元素。<nav> 元素只是作为标注一个导航链接的区域。 
+
+在不同设备上（手机或者PC）可以制定导航链接是否显示，以适应不同屏幕的需求。 
+
+HTML 4.01 与 HTML5中的差异 
+
+<nav> 是 HTML5 的新标签。 
+
+全局属性 
+
+<nav> 标签支持全局属性，查看完整属性表 HTML全局属性 。 
+
+事件属性 
+
+<nav> 标签支持所有 HTML事件属性 。 
+
+AI 思考中... 
+
+HTML <noframes> 标签 
+
+HTML <meter> 标签

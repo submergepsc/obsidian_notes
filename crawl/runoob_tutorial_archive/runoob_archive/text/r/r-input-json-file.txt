@@ -1,0 +1,119 @@
+URL: https://www.runoob.com/r/r-input-json-file.html
+Title: R JSON 文件 | 菜鸟教程
+
+R JSON 文件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+R 教程 
+
+R XML 文件 
+
+R MySQL 连接 
+
+R JSON 文件 
+
+JSON: J ava S cript O bject N otation(JavaScript 对象表示法)。 
+
+JSON 是存储和交换文本信息的语法。 
+
+JSON 类似 XML，但比 XML 更小、更快，更易解析。 
+
+如果你对 JSON 还不了解，可以先查阅： JSON 教程 
+
+R 语言读写 JSON 文件需要安装扩展包，我们可以在 R 到控制台输入以下命令来安装： 
+
+install.packages("rjson", repos = "https://mirrors.ustc.edu.cn/CRAN/") 
+
+查看是否安装成功： 
+
+> any(grepl("rjson",installed.packages()))
+[1] TRUE 
+
+创建 sites.json 文件，json 文件与测试脚本同一目录下，代码如下： 
+
+实例 
+
+{ " id " : [ " 1 " , " 2 " , " 3 " ] , " name " : [ " Google " , " Runoob " , " Taobao " ] , " url " : [ " www.google.com " , " www.runoob.com " , " www.taobao.com " ] , " likes " : [ 111 , 222 , 333 ] } 
+
+接下来我们可以使用 rjson 包来载入 json 文件的数据。 
+
+查看数据，某一行使用 [ ] , 指定的行和列使用 [[ ]] : 
+
+实例 
+
+# 载入 rjson 包 
+
+library ( "rjson" ) 
+
+# 获取 json 数据 
+
+result <- fromJSON ( file = "sites.json" ) 
+
+# 输出结果 
+
+print ( result ) 
+
+print ( "===============" ) 
+
+# 输出第 1 列的结果 
+
+print ( result [ 1 ] ) 
+
+print ( "===============" ) 
+
+# 输出第 2 行第 2 列的结果 
+
+print ( result [ [ 2 ] ] [ [ 2 ] ] ) 
+
+执行以上代码输出结果为： 
+
+$id
+[1] "1" "2" "3"
+
+$name
+[1] "Google" "Runoob" "Taobao"
+
+$url
+[1] "www.google.com" "www.runoob.com" "www.taobao.com"
+
+$likes
+[1] 111 222 333
+
+[1] "==============="
+$id
+[1] "1" "2" "3"
+
+[1] "==============="
+[1] "Runoob" 
+
+我们也可以使用 as.data.frame() 函数将 json 文件数据可以转为数据框类型，这样我们就更方便对数据进行操作： 
+
+实例 
+
+# 载入 rjson 包 
+
+library ( "rjson" ) 
+
+# 获取 json 数据 
+
+result <- fromJSON ( file = "sites.json" ) 
+
+# 转为数据框 
+
+json_data_frame <- as. data . frame ( result ) 
+
+print ( json_data_frame ) 
+
+执行以上代码输出结果为： 
+
+id name url likes
+1 1 Google www.google.com 111
+2 2 Runoob www.runoob.com 222
+3 3 Taobao www.taobao.com 333 
+
+AI 思考中... 
+
+R XML 文件 
+
+R MySQL 连接

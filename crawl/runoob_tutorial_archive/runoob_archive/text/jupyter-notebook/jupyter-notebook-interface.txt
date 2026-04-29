@@ -1,0 +1,78 @@
+URL: https://www.runoob.com/jupyter-notebook/jupyter-notebook-interface.html
+Title: Jupyter Notebook 界面介绍 | 菜鸟教程
+
+Jupyter Notebook 界面介绍 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Jupyter Notebook 教程 
+
+Jupyter Notebook 中文设置 
+
+VS Code 中使用 Jupyter Notebook 
+
+Jupyter Notebook 界面介绍 
+
+成功启动 Jupyter Notebook 后，会经历两个核心界面： 
+
+文件浏览器界面 
+
+Notebook 编辑界面 
+
+1、文件浏览器界面 
+
+当你启动 Jupyter 时，看到的是这个管理界面，类似一个带后台控制功能的资源管理器： 
+
+工作目录： 这里显示的是你启动 Jupyter 时所在的文件夹。 
+
+注意图标颜色： 笔记本图标若是 绿色 ，代表该文档的内核（Kernel）正在后台运行，占用着 CPU 和内存； 灰色 则表示文件已保存但未激活。 
+
+点击正在运行的标签可以一键查看所有正在运行的 Notebook： 
+
+新建 按钮用于创建新笔记，通常选择第一个选项 Python 3 。 
+
+如果你下载了别人的 .ipynb 教程，使用 Upload 即可将其导入当前目录。 
+
+Notebook 编辑界面 
+
+点击新建文件后进入的界面，这是 Notebook 编辑界面。 
+
+1、文件重命名： 点击左上角 Jupyter Logo 旁的标题（如 Untitled ），即可弹出重命名框。 
+
+2、保存与恢复： 文件 菜单下的 恢复 Notebook 到检查点 ，Jupyter 会建立检查点，如果你代码改乱了，可以随时回滚到之前的状态。 
+
+工具栏 
+
+工具栏最核心的三个动作： 
+
+插入 ( + )： 在当前单元格下方"加一行"。 
+
+控制 (剪刀、复制、粘贴)： 用于调整代码块的顺序。 
+
+运行逻辑： Run ( ▶ ) 执行当前块； Interrupt ( ■ ) 强制停止报错的代码； Restart ( ↻ ) 相当于给大脑断电重启，清空所有已运行的变量。 
+
+单元格（Cell 
+
+单元格是 Jupyter 的灵魂，它有两种身份： 
+
+Code 模式： 左侧有 In [数字] 。 数字非常重要 ：它代表了代码执行的 先后顺序 。 
+
+例如：你在第 1 个单元格定义了 a = 10 ，那么在第 4 个单元格写 print(a) 也是能跑通的，只要你运行的先后顺序对。 
+
+Markdown 模式： 左侧没有 In [ ] 。写完后运行，它会瞬间从原始文本变成带有标题、加粗、甚至数学公式的精美文档。 
+
+单元格右侧可以对单元格进行位置移动等操作： 
+
+右上角：内核状态指示灯 
+
+空心圆 ( ○ ) ：大脑正闲着，等候指令。 
+
+实心黑圆 ( ● ) ：大脑正飞速运转（计算中）。 
+
+No Kernel / Python 3 ：如果显示 No Kernel，点击它重新连接，否则代码无法运行。 
+
+AI 思考中... 
+
+Jupyter Notebook 中文设置 
+
+VS Code 中使用 Jupyter Notebook

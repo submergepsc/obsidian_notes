@@ -1,0 +1,111 @@
+URL: https://www.runoob.com/tags/tag-keygen.html
+Title: HTML5 <keygen> 标签 | 菜鸟教程
+
+HTML5 <keygen> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <legend> 标签 
+
+HTML <kbd> 标签 
+
+HTML <keygen> 标签 
+
+该标签在新的 Web 标准中已废弃。 
+
+替代方案包括： 
+
+使用 Web Cryptography API 在 JavaScript 中生成密钥 
+
+使用专门的加密库 
+
+实例 
+
+带有 keygen 字段的表单： 
+
+<form action="demo_keygen.asp" method="get"> 
+用户名: <input type="text" name="usr_name"> 
+加密: <keygen name="security"> 
+<input type="submit"> 
+</form> 
+
+尝试一下 » 
+
+浏览器支持 
+
+Firefox、Opera、Chrome 和 Safari 6 都支持 <keygen> 标签。 
+
+标签定义及使用说明 
+
+<keygen> 标签规定用于表单的密钥对生成器字段。 
+
+当提交表单时，私钥存储在本地，公钥发送到服务器。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+<keygen> 元素是 HTML5 新标签。 
+
+属性 
+
+New ：HTML5 新属性。 
+
+属性 
+
+值 
+
+描述 
+
+autofocus New 
+
+autofocus 
+
+使 <keygen> 字段在页面加载时获得焦点。 
+
+challenge New 
+
+challenge 
+
+如果使用，则将 keygen 的值设置为在提交时询问。 
+
+disabled New 
+
+disabled 
+
+禁用 <keygen> 元素字段。 
+
+form New 
+
+form_id 
+
+定义该 <keygen> 字段所属的一个或多个表单。 
+
+keytype New 
+
+rsa 
+dsa 
+ec 
+
+定义密钥的安全算法。 
+
+name New 
+
+name 
+
+定义 <keygen> 元素的唯一名称。
+name 属性用于在提交表单时搜集字段的值。 
+
+全局属性 
+
+<keygen> 标签支持全局属性，查看完整属性表 HTML全局属性 . 
+
+事件属性 
+
+<keygen> 标签支持所有 HTML事件属性 . 
+
+AI 思考中... 
+
+HTML <legend> 标签 
+
+HTML <kbd> 标签

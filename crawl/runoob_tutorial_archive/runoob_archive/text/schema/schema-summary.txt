@@ -1,0 +1,40 @@
+URL: https://www.runoob.com/schema/schema-summary.html
+Title: XML Schema 总结 | 菜鸟教程
+
+XML Schema 总结 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML 编辑器 
+
+XML schema 元素 
+
+您已经学习了 XML Schema， 下一步学习什么呢？ 
+
+XML Schema 概要 
+
+本教程已经向您讲解了如何描述 XML 文档的结构。 
+
+您已经学习了如何使用 XML Schema 来定义 XML 文档的合法元素，就像 DTD。我们认为，XML Schema 作为 DTD 的替代者，会很快被应用于大多数 Web 应用程序中。 
+
+您还学习到，XML Schema 是很完善的。与 DTD 不同，XML Schema 支持数据类型（data type）和命名空间（namespace）。 
+
+请参阅我们的 XML Schema 参考手册 ，获得更多有关 XML Schema 的信息。 
+
+您已经学习了 XML Schema，下一步学习什么呢？ 
+
+下一步应该学习 WSDL。 
+
+WSDL 是一种基于 schema 的语言，用来描述 Web service 以及如何如何访问它们。 
+
+WSDL 可描述 Web service，连同用于 Web service 的消息格式和协议细节。 
+
+如果您希望学习更多有关 WSDL 的知识，请访问我们的 WSDL 教程 。 
+
+AI 思考中... 
+
+XML 编辑器 
+
+XML schema 元素

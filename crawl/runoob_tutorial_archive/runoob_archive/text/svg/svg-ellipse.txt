@@ -1,0 +1,108 @@
+URL: https://www.runoob.com/svg/svg-ellipse.html
+Title: SVG 椭圆 | 菜鸟教程
+
+SVG 椭圆 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SVG 教程 
+
+SVG 圆形 
+
+SVG 直线 
+
+SVG 椭圆 <ellipse> 
+
+SVG 中的 <ellipse> 元素用于绘制椭圆形，它是SVG中常用的基本形状之一。 
+
+使用 <ellipse> 元素可以创建椭圆形的图形，并可以通过设置属性来控制椭圆的位置、大小和样式。 
+
+基本语法 
+
+<ellipse
+ cx="x-coordinate" <!-- 椭圆中心点的 x 坐标 -->
+ cy="y-coordinate" <!-- 椭圆中心点的 y 坐标 -->
+ rx="x-radius" <!-- 椭圆水平轴的半径 -->
+ ry="y-radius" <!-- 椭圆垂直轴的半径 -->
+ fill="fill-color" <!-- 椭圆的填充颜色 -->
+ stroke="stroke-color" <!-- 椭圆的描边颜色 -->
+ stroke-width="width" <!-- 椭圆的描边宽度 -->
+/> 
+
+属性解析： 
+
+cx 和 cy 属性定义了椭圆的中心点坐标，即椭圆的中心位置。 
+
+rx 属性定义了椭圆水平轴（x轴）的半径。 
+
+ry 属性定义了椭圆垂直轴（y轴）的半径。 
+
+fill 属性定义了椭圆的填充颜色。 
+
+stroke 属性定义了椭圆的描边颜色。 
+
+stroke-width 属性定义了椭圆的描边宽度。 
+
+以下代码绘制了一个蓝色填充、黑色描边、水平轴半径为 80 像素、垂直轴半径为 50 像素的椭圆形，椭圆的中心点坐标为 (100, 100)。 
+
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+ <ellipse cx="100" cy="100" rx="80" ry="50" fill="blue" stroke="black" stroke-width="2" />
+</svg> 
+
+实例 1 
+
+椭圆与圆很相似，不同之处在于椭圆有不同的 x 和 y 半径，而圆的 x 和 y 半径是相同的。 
+
+下面是 SVG 代码： 
+
+实例 
+
+< svg xmlns = " http://www.w3.org/2000/svg " version = " 1.1 " > < ellipse cx = " 300 " cy = " 80 " rx = " 100 " ry = " 50 " style = " fill:yellow;stroke:purple;stroke-width:2 " /> </ svg > 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+代码解析： 
+
+CX 属性定义的椭圆中心的 x 坐标。 
+
+CY 属性定义的椭圆中心的 y 坐标。 
+
+RX 属性定义的水平半径。 
+
+RY 属性定义的垂直半径。 
+
+实例 2 
+
+下面的例子创建了三个累叠而上的椭圆。 
+
+下面是SVG代码： 
+
+实例 
+
+< svg xmlns = " http://www.w3.org/2000/svg " version = " 1.1 " > < ellipse cx = " 240 " cy = " 100 " rx = " 220 " ry = " 30 " style = " fill:purple " /> < ellipse cx = " 220 " cy = " 70 " rx = " 190 " ry = " 20 " style = " fill:lime " /> < ellipse cx = " 210 " cy = " 45 " rx = " 170 " ry = " 15 " style = " fill:yellow " /> </ svg > 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+实例 3 
+
+下面的例子组合了两个椭圆（一个黄的和一个白的）。 
+
+下面是SVG代码： 
+
+实例 
+
+< svg xmlns = " http://www.w3.org/2000/svg " version = " 1.1 " > < ellipse cx = " 240 " cy = " 50 " rx = " 220 " ry = " 30 " style = " fill:yellow " /> < ellipse cx = " 220 " cy = " 50 " rx = " 190 " ry = " 20 " style = " fill:white " /> </ svg > 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+AI 思考中... 
+
+SVG 圆形 
+
+SVG 直线

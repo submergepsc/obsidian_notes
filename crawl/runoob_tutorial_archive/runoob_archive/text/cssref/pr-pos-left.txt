@@ -1,0 +1,100 @@
+URL: https://www.runoob.com/cssref/pr-pos-left.html
+Title: CSS left 属性 | 菜鸟教程
+
+CSS left 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 icon 属性 
+
+CSS letter-spacing 属性 
+
+CSS left 属性 
+
+实例 
+
+把图像的左边缘设置在其包含元素左边缘向右5像素的位置： 
+
+img 
+{ 
+position:absolute; 
+left:5px; 
+} 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+left 属性规定元素的左边缘。该属性定义了定位元素左外边距边界与其包含块左边界之间的偏移。 
+
+如果 "position" 属性的值为 "static"，那么设置 "left" 属性不会产生任何效果。 
+
+注意： If "position:static", the left property has no effect. 
+
+默认值： 
+
+auto 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS2 
+
+JavaScript 语法： 
+
+object .style.left="50px" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+left 
+
+1.0 
+
+5.5 
+
+1.0 
+
+1.0 
+
+5.0 
+
+属性值 
+
+值 
+
+描述 
+
+auto 
+
+默认值。通过浏览器计算左边缘的位置。 
+
+% 
+
+设置以包含元素的百分比计的左边位置。可使用负值。 
+
+length 
+
+使用 px、cm 等单位设置元素的左边位置。可使用负值。 
+
+inherit 
+
+规定应该从父元素继承 left 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS Positioning 
+
+AI 思考中... 
+
+CSS3 icon 属性 
+
+CSS letter-spacing 属性

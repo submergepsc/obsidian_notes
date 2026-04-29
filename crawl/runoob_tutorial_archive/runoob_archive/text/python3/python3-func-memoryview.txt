@@ -1,0 +1,122 @@
+URL: https://www.runoob.com/python3/python3-func-memoryview.html
+Title: Python memoryview() 函数 | 菜鸟教程
+
+Python memoryview() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python frozenset() 函数 
+
+Python repr() 函数 
+
+Python memoryview() 函数 
+
+memoryview() 是 Python 中用于创建内存视图的内置函数。 
+
+memoryview 返回一个"内存视图"对象，它允许 Python 代码访问对象内部的数据缓冲区，而无需复制数据。这在处理大型二进制数据时可以提高性能。 
+
+单词释义 ： memoryview 意为"内存视图"，是访问数据缓冲区的对象。 
+
+基本语法与参数 
+
+语法格式 
+
+memoryview(obj) 
+
+参数说明 
+
+参数 obj ： 
+
+类型： 实现了缓冲区协议的对象（如 bytes、bytearray） 
+
+描述： 要创建内存视图的对象。 
+
+函数说明 
+
+返回值 ： 返回一个 memoryview 对象。 
+
+特点 ： 允许直接访问对象内部的数据，无需复制。 
+
+实例 
+
+示例 1：创建 memoryview 
+
+实例 
+
+# 从 bytearray 创建 
+
+data = bytearray ( b "Hello" ) 
+
+m = memoryview ( data ) 
+
+print ( m ) # 输出: <memory at 0x...> 
+
+# 从 bytes 创建 
+
+data = b "World" 
+
+m = memoryview ( data ) 
+
+print ( m [ 0 ] ) # 输出: 87 (W 的 ASCII 码) 
+
+# 访问多个字节 
+
+print ( m [ 0 : 3 ] ) # 输出: b'Wor' 
+
+运行结果预期: 
+
+<memory at 0x...>
+87
+b'Wor' 
+
+代码解析: 
+
+memoryview 可以从 bytes 或 bytearray 创建。 
+
+支持索引和切片操作。 
+
+示例 2：修改数据（仅对可变对象） 
+
+实例 
+
+# memoryview 可以直接修改底层数据 
+
+data = bytearray ( b "Hello" ) 
+
+m = memoryview ( data ) 
+
+# 修改底层数据 
+
+m [ 0 ] = 74 # 'J' 
+
+print ( data ) # 输出: bytearray(b'Jello') 
+
+# 切片修改 
+
+m [ 1 : 5 ] = b "abcd" 
+
+print ( data ) # 输出: bytearray(b'Jacd') 
+
+# C 类型格式 
+
+data = b " \x 01 \x 02 \x 03 \x 04" 
+
+m = memoryview ( data ) 
+
+print ( m. tobytes ( ) ) # 输出: b'\x01\x02\x03\x04' 
+
+运行结果预期: 
+
+bytearray(b'Jello')
+bytearray(b'Jacd')
+b'\x01\x02\x03\x04' 
+
+memoryview 允许直接修改底层数据，这对于处理大型二进制数据非常高效。 
+
+AI 思考中... 
+
+Python frozenset() 函数 
+
+Python repr() 函数

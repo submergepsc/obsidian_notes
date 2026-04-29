@@ -1,0 +1,78 @@
+URL: https://www.runoob.com/tags/tag-dialog.html
+Title: HTML <dialog> 标签 | 菜鸟教程
+
+HTML <dialog> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <dfn> 标签 
+
+HTML <dir> 标签 
+
+HTML <dialog> 标签 
+
+实例 
+
+使用 <dialog> 元素： 
+
+< table border = " 1 " > < tr > < th > January < dialog open > This is an open dialog window </ dialog > </ th > < th > February </ th > < th > March </ th > </ tr > < tr > < td > 31 </ td > < td > 28 </ td > < td > 31 </ td > </ tr > </ table > 
+
+尝试一下 » 
+
+浏览器支持 
+
+表格中的数字表示支持该元素的第一个浏览器版本号。 
+
+元素 
+
+<dialog> 
+
+37.0 
+
+不支持 
+
+59.0 
+
+6.0 
+
+24.0 
+
+标签定义及使用说明 
+
+<dialog> 标签定义一个对话框、确认框或窗口。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+<dialog> 标签是 HTML5 中的新标签。 
+
+属性 
+
+New ：HTML5 中的新属性。 
+
+属性 
+
+值 
+
+描述 
+
+open New 
+
+open 
+
+规定 dialog 元素是有效的，用户可以与它进行交互。 
+
+全局属性 
+
+<dialog> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<dialog> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <dfn> 标签 
+
+HTML <dir> 标签

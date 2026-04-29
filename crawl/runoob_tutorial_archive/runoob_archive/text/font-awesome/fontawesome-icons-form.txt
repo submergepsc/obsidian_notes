@@ -1,0 +1,72 @@
+URL: https://www.runoob.com/font-awesome/fontawesome-icons-form.html
+Title: Font Awesome 表单图标 | 菜鸟教程
+
+Font Awesome 表单图标 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Font Awesome 图标 
+
+Font Awesome 文件类型图标 
+
+Font Awesome 性别图标 
+
+Font Awesome 表单图标 
+
+下表显示了所有的 Font Awesome 表单图标： 
+
+图标 
+
+描述 
+
+实例 
+
+fa fa-check-square 
+
+尝试一下 
+
+fa fa-check-square-o 
+
+尝试一下 
+
+fa fa-circle 
+
+尝试一下 
+
+fa fa-circle-o 
+
+尝试一下 
+
+fa fa-dot-circle-o 
+
+尝试一下 
+
+fa fa-minus-square 
+
+尝试一下 
+
+fa fa-minus-square-o 
+
+尝试一下 
+
+fa fa-plus-square 
+
+尝试一下 
+
+fa fa-plus-square-o 
+
+尝试一下 
+
+fa fa-square 
+
+尝试一下 
+
+fa fa-square-o 
+
+尝试一下 
+
+AI 思考中... 
+
+Font Awesome 文件类型图标 
+
+Font Awesome 性别图标

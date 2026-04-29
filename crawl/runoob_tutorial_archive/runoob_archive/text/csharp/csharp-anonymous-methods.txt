@@ -1,0 +1,271 @@
+URL: https://www.runoob.com/csharp/csharp-anonymous-methods.html
+Title: C# 匿名方法 | 菜鸟教程
+
+C# 匿名方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+C# 教程 
+
+C# 泛型（Generic） 
+
+C# 不安全代码 
+
+C# 匿名方法 
+
+在 C# 中，匿名函数是一种没有名字的方法，可以在代码中定义和使用。 
+
+我们已经提到过，委托是用于引用与其具有相同标签的方法。换句话说，您可以使用委托对象调用可由委托引用的方法。 
+
+匿名方法（Anonymous methods） 提供了一种传递代码块作为委托参数的技术。 
+
+在匿名方法中您不需要指定返回类型，它是从方法主体内的 return 语句推断的。 
+
+Lambda 表达式是一个简洁的语法，用于创建匿名函数。它们通常用于 LINQ 查询和委托。 
+
+语法 
+
+(parameters) => expression
+// 或
+(parameters) => { statement; } 
+
+实例 
+
+// 示例：使用 Lambda 表达式定义一个委托 
+
+Func < int , int , int > add = ( a, b ) => a + b ; 
+
+Console . WriteLine ( add ( 2 , 3 ) ) ; // 输出 5 
+
+// 示例：使用 Lambda 表达式过滤数组中的元素 
+
+int [ ] numbers = { 1 , 2 , 3 , 4 , 5 } ; 
+
+var evenNumbers = numbers . Where ( n => n % 2 == 0 ) ; 
+
+foreach ( var num in evenNumbers ) 
+
+{ 
+
+Console . WriteLine ( num ) ; // 输出 2 4 
+
+} 
+
+匿名方法是通过使用 delegate 关键字创建委托实例来声明的。 
+
+语法 
+
+delegate(parameters) { statement; } 
+
+例如： 
+
+delegate void NumberChanger(int n);
+...
+NumberChanger nc = delegate(int x)
+{
+ Console.WriteLine("Anonymous Method: {0}", x);
+}; 
+
+代码块 Console.WriteLine("Anonymous Method: {0}", x); 是匿名方法的主体。 
+
+委托可以通过匿名方法调用，也可以通过命名方法调用，即，通过向委托对象传递方法参数。 
+
+注意: 匿名方法的主体后面需要一个 ; 。 
+
+例如： 
+
+nc(10); 
+
+实例 
+
+// 示例：使用匿名方法定义一个委托 
+
+Func < int , int , int > multiply = delegate ( int a, int b ) 
+
+{ 
+
+return a * b ; 
+
+} ; 
+
+Console . WriteLine ( multiply ( 2 , 3 ) ) ; // 输出 6 
+
+// 示例：使用匿名方法作为事件处理程序 
+
+Button button = new Button ( ) ; 
+
+button . Click += delegate ( object sender, EventArgs e ) 
+
+{ 
+
+Console . WriteLine ( "Button clicked!" ) ; 
+
+} ; 
+
+下面的实例演示了匿名方法的概念： 
+
+实例 
+
+using System ; 
+
+delegate void NumberChanger ( int n ) ; 
+
+namespace DelegateAppl 
+
+{ 
+
+class TestDelegate 
+
+{ 
+
+static int num = 10 ; 
+
+public static void AddNum ( int p ) 
+
+{ 
+
+num += p ; 
+
+Console . WriteLine ( "Named Method: {0}" , num ) ; 
+
+} 
+
+public static void MultNum ( int q ) 
+
+{ 
+
+num *= q ; 
+
+Console . WriteLine ( "Named Method: {0}" , num ) ; 
+
+} 
+
+static void Main ( string [ ] args ) 
+
+{ 
+
+// 使用匿名方法创建委托实例 
+
+NumberChanger nc = delegate ( int x ) 
+
+{ 
+
+Console . WriteLine ( "Anonymous Method: {0}" , x ) ; 
+
+} ; 
+
+// 使用匿名方法调用委托 
+
+nc ( 10 ) ; 
+
+// 使用命名方法实例化委托 
+
+nc = new NumberChanger ( AddNum ) ; 
+
+// 使用命名方法调用委托 
+
+nc ( 5 ) ; 
+
+// 使用另一个命名方法实例化委托 
+
+nc = new NumberChanger ( MultNum ) ; 
+
+// 使用命名方法调用委托 
+
+nc ( 2 ) ; 
+
+Console . ReadKey ( ) ; 
+
+} 
+
+} 
+
+} 
+
+当上面的代码被编译和执行时，它会产生下列结果： 
+
+Anonymous Method: 10
+Named Method: 15
+Named Method: 30 
+
+在 C# 2.0 及更高版本中，引入了 lambda 表达式，它是一种更简洁的语法形式，用于编写匿名方法。 
+
+使用 lambda 表达式： 
+
+实例 
+
+using System ; 
+
+delegate void NumberChanger ( int n ) ; 
+
+namespace DelegateAppl 
+
+{ 
+
+class TestDelegate 
+
+{ 
+
+static int num = 10 ; 
+
+public static void AddNum ( int p ) 
+
+{ 
+
+num += p ; 
+
+Console . WriteLine ( "Named Method: {0}" , num ) ; 
+
+} 
+
+public static void MultNum ( int q ) 
+
+{ 
+
+num *= q ; 
+
+Console . WriteLine ( "Named Method: {0}" , num ) ; 
+
+} 
+
+static void Main ( string [ ] args ) 
+
+{ 
+
+// 使用 lambda 表达式创建委托实例 
+
+NumberChanger nc = x => Console . WriteLine ( $ "Lambda Expression: {x}" ) ; 
+
+// 使用 lambda 表达式调用委托 
+
+nc ( 10 ) ; 
+
+// 使用命名方法实例化委托 
+
+nc = new NumberChanger ( AddNum ) ; 
+
+// 使用命名方法调用委托 
+
+nc ( 5 ) ; 
+
+// 使用另一个命名方法实例化委托 
+
+nc = new NumberChanger ( MultNum ) ; 
+
+// 使用命名方法调用委托 
+
+nc ( 2 ) ; 
+
+Console . ReadKey ( ) ; 
+
+} 
+
+} 
+
+} 
+
+AI 思考中... 
+
+C# 泛型（Generic） 
+
+C# 不安全代码

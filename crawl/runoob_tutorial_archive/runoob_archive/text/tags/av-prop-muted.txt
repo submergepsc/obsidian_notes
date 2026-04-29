@@ -1,0 +1,73 @@
+URL: https://www.runoob.com/tags/av-prop-muted.html
+Title: HTML 音频/视频 DOM muted 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM muted 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM mediaGroup 属性 
+
+HTML 音频/视频 DOM networkState 属性 
+
+HTML 音频/视频 DOM muted 属性 
+
+实例 
+
+关闭视频的声音： 
+
+myVid=document.getElementById("video1"); 
+myVid.muted=true; 
+
+尝试一下 » 
+
+定义和用法 
+
+muted 属性设置或返回音频/视频是否应该被静音（关闭声音）。 
+
+浏览器支持 
+
+所有主流浏览器都支持 muted 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持该属性。 
+
+语法 
+
+设置 muted 属性： 
+
+audio|video .muted=true|false 
+
+返回 muted 属性： 
+
+audio|video .muted 
+
+属性值 
+
+值 
+
+描述 
+
+true 
+
+指示应该关闭音频/视频的声音。 
+
+false 
+
+默认。指示应该打开音频/视频的声音。 
+
+技术细节 
+
+返回值： 
+
+布尔值，true|false 
+
+默认值： 
+
+false 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM mediaGroup 属性 
+
+HTML 音频/视频 DOM networkState 属性

@@ -1,0 +1,44 @@
+URL: https://www.runoob.com/vbscript/vb-func-now.html
+Title: VBScript Now 函数 | 菜鸟教程
+
+VBScript Now 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript MonthName 函数 
+
+VBScript Second 函数 
+
+VBScript Now 函数 
+
+Now 函数根据计算机系统的日期和时间设置返回当前的日期和时间。 
+
+语法 
+
+Now 
+
+实例 
+
+实例（仅适用于 IE） 
+
+<script type="text/vbscript"> 
+
+document.write("The current system date and time is: ") 
+document.write(Now) 
+
+</script> 
+
+以上实例输出结果： 
+
+document.write("The current system date and time is: ")
+document.write(Now) 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript MonthName 函数 
+
+VBScript Second 函数

@@ -1,0 +1,336 @@
+URL: https://www.runoob.com/typescript/ts-class-inheritance.html
+Title: TypeScript 类继承与多态 | 菜鸟教程
+
+TypeScript 类继承与多态 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+TypeScript 教程 
+
+TypeScript 映射类型 
+
+TypeScript 错误处理 
+
+TypeScript 类继承与多态 
+
+TypeScript 支持面向对象编程的继承和多态特性。 
+
+类的继承 
+
+使用 extends 关键字实现继承。 
+
+实例 
+
+class Animal { 
+
+name : string ; 
+
+constructor ( name : string ) { 
+
+this . name = name ; 
+
+} 
+
+speak ( ) : void { 
+
+console. log ( this . name + " 发出声音" ) ; 
+
+} 
+
+} 
+
+class Dog extends Animal { 
+
+breed : string ; 
+
+constructor ( name : string , breed : string ) { 
+
+super ( name ) ; // 调用父类构造函数 
+
+this . breed = breed ; 
+
+} 
+
+speak ( ) : void { 
+
+console. log ( this . name + " 汪汪汪!" ) ; 
+
+} 
+
+} 
+
+var dog = new Dog ( "旺财" , "金毛" ) ; 
+
+dog. speak ( ) ; 
+
+运行结果： 
+
+旺财 汪汪汪! 
+
+super 关键字 
+
+super 用于调用父类的方法和构造函数。 
+
+实例 
+
+class Shape { 
+
+color : string ; 
+
+constructor ( color : string ) { 
+
+this . color = color ; 
+
+} 
+
+describe ( ) : string { 
+
+return "这是一个 " + this . color + " 的图形" ; 
+
+} 
+
+} 
+
+class Circle extends Shape { 
+
+radius : number ; 
+
+constructor ( color : string , radius : number ) { 
+
+super ( color ) ; 
+
+this . radius = radius ; 
+
+} 
+
+// 重写父类方法 
+
+describe ( ) : string { 
+
+// 调用父类方法并扩展 
+
+return super . describe ( ) + "，半径是 " + this . radius ; 
+
+} 
+
+area ( ) : number { 
+
+return Math . PI * this . radius * this . radius ; 
+
+} 
+
+} 
+
+var circle = new Circle ( "红色" , 5 ) ; 
+
+console. log ( circle. describe ( ) ) ; 
+
+console. log ( "面积: " + circle. area ( ) . toFixed ( 2 ) ) ; 
+
+运行结果： 
+
+这是一个 红色的图形，半径是 5
+面积: 78.54 
+
+多态 
+
+子类的实例可以赋值给父类类型。 
+
+实例 
+
+class Animal { 
+
+name : string ; 
+
+constructor ( name : string ) { this . name = name ; } 
+
+speak ( ) : void { 
+
+console. log ( this . name + " 发出声音" ) ; 
+
+} 
+
+} 
+
+class Cat extends Animal { 
+
+speak ( ) : void { 
+
+console. log ( this . name + " 喵喵喵!" ) ; 
+
+} 
+
+} 
+
+class Dog extends Animal { 
+
+speak ( ) : void { 
+
+console. log ( this . name + " 汪汪汪!" ) ; 
+
+} 
+
+} 
+
+// 多态：数组中存储不同子类的实例 
+
+var animals : Animal [ ] = [ 
+
+new Cat ( "小白" ) , 
+
+new Dog ( "旺财" ) , 
+
+new Animal ( "动物" ) 
+
+] ; 
+
+// 调用同一方法，不同子类有不同实现 
+
+for ( var _i = 0 , animals_1 = animals ; _i < animals_1. length ; _i ++ ) { 
+
+var animal = animals_1 [ _i ] ; 
+
+animal. speak ( ) ; 
+
+} 
+
+运行结果： 
+
+小白 喵喵喵!
+旺财 汪汪汪!
+动物 发出声音 
+
+instanceof 检查 
+
+使用 instanceof 检查实例类型。 
+
+实例 
+
+class Rectangle { 
+
+width : number ; 
+
+height : number ; 
+
+constructor ( width : number , height : number ) { 
+
+this . width = width ; 
+
+this . height = height ; 
+
+} 
+
+area ( ) : number { 
+
+return this . width * this . height ; 
+
+} 
+
+} 
+
+class Circle { 
+
+radius : number ; 
+
+constructor ( radius : number ) { 
+
+this . radius = radius ; 
+
+} 
+
+area ( ) : number { 
+
+return Math . PI * this . radius ** 2 ; 
+
+} 
+
+} 
+
+var shapes = [ new Rectangle ( 4 , 5 ) , new Circle ( 3 ) ] ; 
+
+for ( var _i = 0 , shapes_1 = shapes ; _i < shapes_1. length ; _i ++ ) { 
+
+var shape = shapes_1 [ _i ] ; 
+
+if ( shape instanceof Rectangle ) { 
+
+console. log ( "矩形面积: " + shape. area ( ) ) ; 
+
+} else if ( shape instanceof Circle ) { 
+
+console. log ( "圆形面积: " + shape. area ( ) . toFixed ( 2 ) ) ; 
+
+} 
+
+} 
+
+运行结果： 
+
+矩形面积: 20
+圆形面积: 28.27 
+
+protected 成员 
+
+protected 成员在子类中可见。 
+
+实例 
+
+class Person { 
+
+protected name : string ; 
+
+constructor ( name : string ) { 
+
+this . name = name ; 
+
+} 
+
+} 
+
+class Employee extends Person { 
+
+private department : string ; 
+
+constructor ( name : string , department : string ) { 
+
+super ( name ) ; 
+
+this . department = department ; 
+
+} 
+
+public introduce ( ) : string { 
+
+// 可以访问 protected 成员 
+
+return "我是 " + this . name + "，在 " + this . department + " 工作" ; 
+
+} 
+
+} 
+
+var emp = new Employee ( "Alice" , "技术部" ) ; 
+
+console. log ( emp. introduce ( ) ) ; 
+
+// console.log(emp.name); // 错误：protected 外部不可访问 
+
+运行结果： 
+
+我是 Alice，在 技术部 工作 
+
+总结 
+
+继承： extends 关键字 
+
+super： 调用父类 
+
+多态： 同一接口不同实现 
+
+protected： 子类可见 
+
+AI 思考中... 
+
+TypeScript 映射类型 
+
+TypeScript 错误处理

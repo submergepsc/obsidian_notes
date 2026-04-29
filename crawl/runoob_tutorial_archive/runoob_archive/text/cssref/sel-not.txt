@@ -1,0 +1,109 @@
+URL: https://www.runoob.com/cssref/sel-not.html
+Title: CSS3 :not 选择器 | 菜鸟教程
+
+CSS3 :not 选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 :checked 选择器 
+
+CSS3 ::selection 选择器 
+
+CSS3 :not 选择器 
+
+实例 
+
+为每个并非 <p> 元素的元素设置背景颜色： 
+
+:not ( p ) { color: #ff0000 ; } 
+
+尝试一下 » 
+
+定义和用法 
+
+:not(selector) 选择器匹配每个元素是不是指定的元素/选择器。 
+
+CSS 的 :not 伪类允许你选择除了指定选择器之外的所有元素。这是通过排除特定元素来应用样式的一种方式。 
+
+基本语法 
+
+css
+:not(selector) {
+ /* 样式规则 */
+} 
+
+selector：这是你想要排除的选择器。 
+
+1、排除特定类型的元素 
+
+body :not(p) {
+ color: blue;
+} 
+
+这段代码将为 body 元素内除了 p 元素之外的所有元素设置文本颜色为蓝色。 
+
+2、排除具有特定类的元素 
+
+div :not(.highlight) {
+ background-color: gray;
+} 
+
+这段代码将为 div 元素内不具有 highlight 类的所有元素设置背景颜色为灰色。 
+
+3、排除多个选择器 
+
+:not(div, span) {
+ font-size: 14px;
+} 
+
+这段代码将为页面上不是 div 也不是 span 的所有元素设置字体大小为 14 像素。 
+
+4、排除伪类 
+
+a:not(:hover) {
+ color: black;
+} 
+
+这段代码将为所有不是悬停状态的链接设置文本颜色为黑色。 
+
+5、排除属性选择器 
+
+input:not([type="text"]) {
+ border: none;
+} 
+
+这段代码将为所有不是 type="text" 的 input 元素移除边框。 
+
+注意 
+
+:not 伪类是 CSS3 选择器的一部分，并且得到了广泛的浏览器支持。 
+
+:not 伪类可以提高 CSS 代码的灵活性，允许你更精确地控制样式的应用。 
+
+你可以在 :not 伪类中使用单个选择器或多个选择器，用逗号分隔。 
+
+浏览器支持 
+
+表格中的数字表示支持该选择器的第一个浏览器的版本号。 
+
+选择器 
+
+:not() 
+
+4.0 
+
+9.0 
+
+3.5 
+
+3.2 
+
+9.6 
+
+AI 思考中... 
+
+CSS3 :checked 选择器 
+
+CSS3 ::selection 选择器

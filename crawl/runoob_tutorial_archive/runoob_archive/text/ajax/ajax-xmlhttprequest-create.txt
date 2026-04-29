@@ -1,0 +1,98 @@
+URL: https://www.runoob.com/ajax/ajax-xmlhttprequest-create.html
+Title: AJAX 创建 XMLHttpRequest 对象 | 菜鸟教程
+
+AJAX 创建 XMLHttpRequest 对象 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Ajax 教程 
+
+AJAX – 向服务器发送 
+
+AJAX 简介 
+
+AJAX - 创建 XMLHttpRequest 对象 
+
+XMLHttpRequest 是 AJAX 的基础。 
+
+XMLHttpRequest 对象 
+
+所有现代浏览器均支持 XMLHttpRequest 对象（IE5 和 IE6 使用 ActiveXObject）。 
+
+XMLHttpRequest 用于在后台与服务器交换数据。这意味着可以在不重新加载整个网页的情况下，对网页的某部分进行更新。 
+
+创建 XMLHttpRequest 对象 
+
+所有现代浏览器（IE7+、Edge、Firefox、Chrome、Safari 以及 Opera）均内建 XMLHttpRequest 对象。 
+
+创建 XMLHttpRequest 对象的语法： 
+
+var xhr = new XMLHttpRequest(); 
+
+老版本的 Internet Explorer （IE5 和 IE6）使用 ActiveX 对象： 
+
+var xhr = new ActiveXObject("Microsoft.XMLHTTP"); 
+
+为了应对所有的现代浏览器，包括 IE5 和 IE6（ 现在应该很少人使用了 ），请检查浏览器是否支持 XMLHttpRequest 对象。如果支持，则创建 XMLHttpRequest 对象。如果不支持，则创建 ActiveXObject ： 
+
+实例 
+
+var xmlhttp ; if ( window . XMLHttpRequest ) { xmlhttp = new XMLHttpRequest ( ) ; } else { xmlhttp = new ActiveXObject ( " Microsoft.XMLHTTP " ) ; } 
+
+尝试一下 » 
+
+创建一个 XMLHttpRequest 对象的示例： 
+
+实例 
+
+// 创建 XMLHttpRequest 对象 
+
+var xhr = new XMLHttpRequest ( ) ; 
+
+// 配置请求 
+
+xhr. open ( 'GET' , 'https://api.example.com/data' , true ) ; 
+
+// 设置请求头（如果需要的话） 
+
+// xhr.setRequestHeader('Content-Type', 'application/json'); 
+
+// 定义回调函数 
+
+xhr. onload = function ( ) { 
+
+if ( xhr. status >= 200 && xhr. status < 300 ) { 
+
+// 请求成功，处理响应 
+
+console. log ( 'Response:' , xhr. responseText ) ; 
+
+} else { 
+
+// 处理错误 
+
+console. error ( 'Error:' , xhr. statusText ) ; 
+
+} 
+
+} ; 
+
+// 处理网络错误 
+
+xhr. onerror = function ( ) { 
+
+console. error ( 'Request failed' ) ; 
+
+} ; 
+
+// 发送请求 
+
+xhr. send ( ) ; 
+
+在下一章中，您将学习发送服务器请求的知识。 
+
+AI 思考中... 
+
+AJAX – 向服务器发送 
+
+AJAX 简介

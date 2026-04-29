@@ -1,0 +1,31 @@
+URL: https://www.runoob.com/java/data-replace.html
+Title: Java 实例 – 删除链表中的元素 | 菜鸟教程
+
+Java 实例 – 删除链表中的元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 获取链表的元素 
+
+Java 实例 – 数组转集合 
+
+Java 实例 - 删除链表中的元素 
+
+以下实例演示了使用 clear() 方法来删除链表中的元素： 
+
+Main.java 文件 
+
+import java . util .*; public class Main { public static void main ( String [ ] args ) { LinkedList < String > lList = new LinkedList < String > ( ) ; lList . add ( " 1 " ) ; lList . add ( " 8 " ) ; lList . add ( " 6 " ) ; lList . add ( " 4 " ) ; lList . add ( " 5 " ) ; System . out . println ( lList ) ; lList . subList ( 2 , 4 ) . clear ( ) ; System . out . println ( lList ) ; } } 
+
+以上代码运行输出结果为： 
+
+[1, 8, 6, 4, 5]
+[1, 8, 5] 
+
+AI 思考中... 
+
+Java 实例 – 获取链表的元素 
+
+Java 实例 – 数组转集合

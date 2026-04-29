@@ -1,0 +1,66 @@
+URL: https://www.runoob.com/web/web-buildingprimer.html
+Title: 网站建设指南 | 菜鸟教程
+
+网站建设指南 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+网站建设指南 
+
+WWW 指南- 万维网(World Wide Web) 
+
+网站建设 指南 
+
+一个网站开发人员必须掌握的知识是什么？ 
+
+HTML 和 CSS 
+
+客户端脚本 - JavaScript and the DOM 
+
+服务端脚本 - ASP, PHP 
+
+XML 和SQL 
+
+WWW - 万维网 
+web站点是一个到世界各地电脑都可以连接上的网络。他是如何工作的呢? 
+
+HTML - WEB标记语言。 
+超文本标记语言（英语：HyperText Markup Language，简称：HTML）是一种用于创建网页的标准标记语言。 
+
+CSS - 层叠样式表 
+样式表定义如何显示 HTML 元素。 
+
+JavaScript -客户端脚本 
+JavaScript 用于客户端的脚本化。客户端脚本化指的是 Web 浏览器编程。 
+
+XML -扩展标记语言 
+XML 不是 HTML 的替代者。XML 用来描述及传输数据，而 HTML 用来显示数据。 
+
+PHP 和 ASP - 服务器端脚本化 
+服务器端脚本化指的是服务器端编程。 
+
+SQL - 结构化查询语言 
+结构化查询语言 (SQL) 是用来访问诸如 SQL Server、Oracle、Sybase 及 Access 等数据库的通用标准。 
+
+Web 创建设计 
+介绍关于网站的设计，及需要的开发工具。 
+
+Web 标准 
+关于Web标准和万维网联盟. 
+
+web 网站验证 
+这个章节将介绍关于 HTML, XHTML, CSS, XML, 和 WMP
+页面标准的验证。 
+
+Web 语义化 
+本章节将介绍Web的语义 
+
+Web 词汇表 
+这是一个按字母顺序排列的互联网词汇表。 
+
+Web 搜索引擎优化 
+关于 SEO (搜索引擎优化) 
+
+AI 思考中... 
+
+WWW 指南- 万维网(World Wide Web)

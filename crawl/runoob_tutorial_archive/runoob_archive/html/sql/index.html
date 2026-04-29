@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>sql index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>sql index</h1>
+      <p>Offline pages under sql</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-516595e8">入门</a> <span>2 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>16 pages</span></li><li><a href="#subgroup-6d4b9a8c">测验</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>48 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>sql (67)</h2><p>二级分类：4 个</p><ul class="page-list"><li><a href="#subgroup-516595e8">入门</a> <span>2 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>16 pages</span></li><li><a href="#subgroup-6d4b9a8c">测验</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>48 pages</span></li></ul></section><section id="subgroup-516595e8"><h2>入门 (2)</h2><ol class="page-list"><li><a href="sql-tutorial.html">SQL 教程</a> <code>https://www.runoob.com/sql/sql-tutorial.html</code></li><li><a href="sql-intro.html">SQL 简介</a> <code>https://www.runoob.com/sql/sql-intro.html</code></li></ol></section><section id="subgroup-53c28003"><h2>参考 (16)</h2><ol class="page-list"><li><a href="sql-func-avg.html">SQL AVG() 函数</a> <code>https://www.runoob.com/sql/sql-func-avg.html</code></li><li><a href="sql-func-count.html">SQL COUNT() 函数</a> <code>https://www.runoob.com/sql/sql-func-count.html</code></li><li><a href="sql-func-first.html">SQL FIRST() 函数</a> <code>https://www.runoob.com/sql/sql-func-first.html</code></li><li><a href="sql-func-format.html">SQL FORMAT() 函数</a> <code>https://www.runoob.com/sql/sql-func-format.html</code></li><li><a href="sql-func-last.html">SQL LAST() 函数</a> <code>https://www.runoob.com/sql/sql-func-last.html</code></li><li><a href="sql-func-lcase.html">SQL LCASE() 函数</a> <code>https://www.runoob.com/sql/sql-func-lcase.html</code></li><li><a href="sql-func-len.html">SQL LEN() 函数</a> <code>https://www.runoob.com/sql/sql-func-len.html</code></li><li><a href="sql-func-max.html">SQL MAX() 函数</a> <code>https://www.runoob.com/sql/sql-func-max.html</code></li><li><a href="sql-func-mid.html">SQL MID() 函数</a> <code>https://www.runoob.com/sql/sql-func-mid.html</code></li><li><a href="sql-func-min.html">SQL MIN() 函数</a> <code>https://www.runoob.com/sql/sql-func-min.html</code></li><li><a href="sql-func-now.html">SQL NOW() 函数</a> <code>https://www.runoob.com/sql/sql-func-now.html</code></li><li><a href="sql-func-round.html">SQL ROUND() 函数</a> <code>https://www.runoob.com/sql/sql-func-round.html</code></li><li><a href="sql-func-sum.html">SQL SUM() 函数</a> <code>https://www.runoob.com/sql/sql-func-sum.html</code></li><li><a href="sql-func-ucase.html">SQL UCASE() 函数</a> <code>https://www.runoob.com/sql/sql-func-ucase.html</code></li><li><a href="sql-function.html">SQL 函数</a> <code>https://www.runoob.com/sql/sql-function.html</code></li><li><a href="sql-quickref.html">SQL 快速参考</a> <code>https://www.runoob.com/sql/sql-quickref.html</code></li></ol></section><section id="subgroup-6d4b9a8c"><h2>测验 (1)</h2><ol class="page-list"><li><a href="sql-quiz2.html">SQL 测验</a> <code>https://www.runoob.com/sql/sql-quiz2.html</code></li></ol></section><section id="subgroup-4e139898"><h2>专题 (48)</h2><ol class="page-list"><li><a href="sql-alter.html">SQL ALTER TABLE 语句</a> <code>https://www.runoob.com/sql/sql-alter.html</code></li><li><a href="sql-and-or.html">SQL AND &amp; OR 运算符</a> <code>https://www.runoob.com/sql/sql-and-or.html</code></li><li><a href="sql-autoincrement.html">SQL AUTO INCREMENT 字段</a> <code>https://www.runoob.com/sql/sql-autoincrement.html</code></li><li><a href="sql-between.html">SQL BETWEEN 操作符</a> <code>https://www.runoob.com/sql/sql-between.html</code></li><li><a href="sql-check.html">SQL CHECK 约束</a> <code>https://www.runoob.com/sql/sql-check.html</code></li><li><a href="sql-create-db.html">SQL CREATE DATABASE 语句</a> <code>https://www.runoob.com/sql/sql-create-db.html</code></li><li><a href="sql-create-index.html">SQL CREATE INDEX 语句</a> <code>https://www.runoob.com/sql/sql-create-index.html</code></li><li><a href="sql-create-table.html">SQL CREATE TABLE 语句</a> <code>https://www.runoob.com/sql/sql-create-table.html</code></li><li><a href="sql-view.html">SQL CREATE VIEW、REPLACE VIEW、 DROP VIEW 语句</a> <code>https://www.runoob.com/sql/sql-view.html</code></li><li><a href="sql-default.html">SQL DEFAULT 约束</a> <code>https://www.runoob.com/sql/sql-default.html</code></li><li><a href="sql-delete.html">SQL DELETE 语句</a> <code>https://www.runoob.com/sql/sql-delete.html</code></li><li><a href="sql-exists.html">SQL EXISTS 运算符</a> <code>https://www.runoob.com/sql/sql-exists.html</code></li><li><a href="sql-foreignkey.html">SQL FOREIGN KEY 约束</a> <code>https://www.runoob.com/sql/sql-foreignkey.html</code></li><li><a href="sql-join-full.html">SQL FULL OUTER JOIN 关键字</a> <code>https://www.runoob.com/sql/sql-join-full.html</code></li><li><a href="sql-groupby.html">SQL GROUP BY 语句</a> <code>https://www.runoob.com/sql/sql-groupby.html</code></li><li><a href="sql-having.html">SQL HAVING 子句</a> <code>https://www.runoob.com/sql/sql-having.html</code></li><li><a href="sql-in.html">SQL IN 操作符</a> <code>https://www.runoob.com/sql/sql-in.html</code></li><li><a href="sql-join-inner.html">SQL INNER JOIN 关键字</a> <code>https://www.runoob.com/sql/sql-join-inner.html</code></li><li><a href="sql-insert-into-select.html">SQL INSERT INTO SELECT 语句</a> <code>https://www.runoob.com/sql/sql-insert-into-select.html</code></li><li><a href="sql-insert.html">SQL INSERT INTO 语句</a> <code>https://www.runoob.com/sql/sql-insert.html</code></li><li><a href="sql-isnull.html">SQL ISNULL()、NVL()、IFNULL() 和 COALESCE() 函数</a> <code>https://www.runoob.com/sql/sql-isnull.html</code></li><li><a href="sql-join-left.html">SQL LEFT JOIN 关键字</a> <code>https://www.runoob.com/sql/sql-join-left.html</code></li><li><a href="sql-like.html">SQL LIKE 操作符</a> <code>https://www.runoob.com/sql/sql-like.html</code></li><li><a href="sql-datatypes.html">SQL MS Access、MySQL 和 SQL Server 数据类型</a> <code>https://www.runoob.com/sql/sql-datatypes.html</code></li><li><a href="sql-notnull.html">SQL NOT NULL 约束</a> <code>https://www.runoob.com/sql/sql-notnull.html</code></li><li><a href="sql-null-values.html">SQL NULL 值 – IS NULL 和 IS NOT NULL</a> <code>https://www.runoob.com/sql/sql-null-values.html</code></li><li><a href="sql-orderby.html">SQL ORDER BY 关键字</a> <code>https://www.runoob.com/sql/sql-orderby.html</code></li><li><a href="sql-primarykey.html">SQL PRIMARY KEY 约束</a> <code>https://www.runoob.com/sql/sql-primarykey.html</code></li><li><a href="sql-join-right.html">SQL RIGHT JOIN 关键字</a> <code>https://www.runoob.com/sql/sql-join-right.html</code></li><li><a href="sql-distinct.html">SQL SELECT DISTINCT 语句</a> <code>https://www.runoob.com/sql/sql-distinct.html</code></li><li><a href="sql-select-into.html">SQL SELECT INTO 语句</a> <code>https://www.runoob.com/sql/sql-select-into.html</code></li><li><a href="sql-top.html">SQL SELECT TOP, LIMIT, ROWNUM</a> <code>https://www.runoob.com/sql/sql-top.html</code></li><li><a href="sql-select.html">SQL SELECT 语句</a> <code>https://www.runoob.com/sql/sql-select.html</code></li><li><a href="sql-dates.html">SQL Server 和 MySQL 中的 Date 函数</a> <code>https://www.runoob.com/sql/sql-dates.html</code></li><li><a href="sql-union.html">SQL UNION 操作符</a> <code>https://www.runoob.com/sql/sql-union.html</code></li><li><a href="sql-unique.html">SQL UNIQUE 约束</a> <code>https://www.runoob.com/sql/sql-unique.html</code></li><li><a href="sql-update.html">SQL UPDATE 语句</a> <code>https://www.runoob.com/sql/sql-update.html</code></li><li><a href="sql-where.html">SQL WHERE 子句</a> <code>https://www.runoob.com/sql/sql-where.html</code></li><li><a href="sql-hosting.html">SQL 主机</a> <code>https://www.runoob.com/sql/sql-hosting.html</code></li><li><a href="sql-alias.html">SQL 别名</a> <code>https://www.runoob.com/sql/sql-alias.html</code></li><li><a href="sql-summary.html">SQL 总结</a> <code>https://www.runoob.com/sql/sql-summary.html</code></li><li><a href="sql-drop.html">SQL 撤销索引、表以及数据库</a> <code>https://www.runoob.com/sql/sql-drop.html</code></li><li><a href="sql-injection.html">SQL 注入</a> <code>https://www.runoob.com/sql/sql-injection.html</code></li><li><a href="sql-constraints.html">SQL 约束</a> <code>https://www.runoob.com/sql/sql-constraints.html</code></li><li><a href="sql-syntax.html">SQL 语法</a> <code>https://www.runoob.com/sql/sql-syntax.html</code></li><li><a href="sql-join.html">SQL 连接(JOIN)</a> <code>https://www.runoob.com/sql/sql-join.html</code></li><li><a href="sql-datatypes-general.html">SQL 通用数据类型</a> <code>https://www.runoob.com/sql/sql-datatypes-general.html</code></li><li><a href="sql-wildcards.html">SQL 通配符</a> <code>https://www.runoob.com/sql/sql-wildcards.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "SQL 别名", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-alias.html", "href": "sql-alias.html"}, {"title": "SQL ALTER TABLE 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-alter.html", "href": "sql-alter.html"}, {"title": "SQL AND & OR 运算符", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-and-or.html", "href": "sql-and-or.html"}, {"title": "SQL AUTO INCREMENT 字段", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-autoincrement.html", "href": "sql-autoincrement.html"}, {"title": "SQL BETWEEN 操作符", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-between.html", "href": "sql-between.html"}, {"title": "SQL CHECK 约束", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-check.html", "href": "sql-check.html"}, {"title": "SQL 约束", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-constraints.html", "href": "sql-constraints.html"}, {"title": "SQL CREATE DATABASE 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-create-db.html", "href": "sql-create-db.html"}, {"title": "SQL CREATE INDEX 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-create-index.html", "href": "sql-create-index.html"}, {"title": "SQL CREATE TABLE 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-create-table.html", "href": "sql-create-table.html"}, {"title": "SQL 通用数据类型", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-datatypes-general.html", "href": "sql-datatypes-general.html"}, {"title": "SQL MS Access、MySQL 和 SQL Server 数据类型", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-datatypes.html", "href": "sql-datatypes.html"}, {"title": "SQL Server 和 MySQL 中的 Date 函数", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-dates.html", "href": "sql-dates.html"}, {"title": "SQL DEFAULT 约束", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-default.html", "href": "sql-default.html"}, {"title": "SQL DELETE 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-delete.html", "href": "sql-delete.html"}, {"title": "SQL SELECT DISTINCT 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-distinct.html", "href": "sql-distinct.html"}, {"title": "SQL 撤销索引、表以及数据库", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-drop.html", "href": "sql-drop.html"}, {"title": "SQL EXISTS 运算符", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-exists.html", "href": "sql-exists.html"}, {"title": "SQL FOREIGN KEY 约束", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-foreignkey.html", "href": "sql-foreignkey.html"}, {"title": "SQL AVG() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-avg.html", "href": "sql-func-avg.html"}, {"title": "SQL COUNT() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-count.html", "href": "sql-func-count.html"}, {"title": "SQL FIRST() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-first.html", "href": "sql-func-first.html"}, {"title": "SQL FORMAT() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-format.html", "href": "sql-func-format.html"}, {"title": "SQL LAST() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-last.html", "href": "sql-func-last.html"}, {"title": "SQL LCASE() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-lcase.html", "href": "sql-func-lcase.html"}, {"title": "SQL LEN() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-len.html", "href": "sql-func-len.html"}, {"title": "SQL MAX() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-max.html", "href": "sql-func-max.html"}, {"title": "SQL MID() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-mid.html", "href": "sql-func-mid.html"}, {"title": "SQL MIN() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-min.html", "href": "sql-func-min.html"}, {"title": "SQL NOW() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-now.html", "href": "sql-func-now.html"}, {"title": "SQL ROUND() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-round.html", "href": "sql-func-round.html"}, {"title": "SQL SUM() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-sum.html", "href": "sql-func-sum.html"}, {"title": "SQL UCASE() 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-func-ucase.html", "href": "sql-func-ucase.html"}, {"title": "SQL 函数", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-function.html", "href": "sql-function.html"}, {"title": "SQL GROUP BY 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-groupby.html", "href": "sql-groupby.html"}, {"title": "SQL HAVING 子句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-having.html", "href": "sql-having.html"}, {"title": "SQL 主机", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-hosting.html", "href": "sql-hosting.html"}, {"title": "SQL IN 操作符", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-in.html", "href": "sql-in.html"}, {"title": "SQL 注入", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-injection.html", "href": "sql-injection.html"}, {"title": "SQL INSERT INTO SELECT 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-insert-into-select.html", "href": "sql-insert-into-select.html"}, {"title": "SQL INSERT INTO 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-insert.html", "href": "sql-insert.html"}, {"title": "SQL 简介", "group": "sql", "subgroup": "入门", "url": "https://www.runoob.com/sql/sql-intro.html", "href": "sql-intro.html"}, {"title": "SQL ISNULL()、NVL()、IFNULL() 和 COALESCE() 函数", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-isnull.html", "href": "sql-isnull.html"}, {"title": "SQL FULL OUTER JOIN 关键字", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-join-full.html", "href": "sql-join-full.html"}, {"title": "SQL INNER JOIN 关键字", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-join-inner.html", "href": "sql-join-inner.html"}, {"title": "SQL LEFT JOIN 关键字", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-join-left.html", "href": "sql-join-left.html"}, {"title": "SQL RIGHT JOIN 关键字", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-join-right.html", "href": "sql-join-right.html"}, {"title": "SQL 连接(JOIN)", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-join.html", "href": "sql-join.html"}, {"title": "SQL LIKE 操作符", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-like.html", "href": "sql-like.html"}, {"title": "SQL NOT NULL 约束", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-notnull.html", "href": "sql-notnull.html"}, {"title": "SQL NULL 值 – IS NULL 和 IS NOT NULL", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-null-values.html", "href": "sql-null-values.html"}, {"title": "SQL ORDER BY 关键字", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-orderby.html", "href": "sql-orderby.html"}, {"title": "SQL PRIMARY KEY 约束", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-primarykey.html", "href": "sql-primarykey.html"}, {"title": "SQL 快速参考", "group": "sql", "subgroup": "参考", "url": "https://www.runoob.com/sql/sql-quickref.html", "href": "sql-quickref.html"}, {"title": "SQL 测验", "group": "sql", "subgroup": "测验", "url": "https://www.runoob.com/sql/sql-quiz2.html", "href": "sql-quiz2.html"}, {"title": "SQL SELECT INTO 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-select-into.html", "href": "sql-select-into.html"}, {"title": "SQL SELECT 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-select.html", "href": "sql-select.html"}, {"title": "SQL 总结", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-summary.html", "href": "sql-summary.html"}, {"title": "SQL 语法", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-syntax.html", "href": "sql-syntax.html"}, {"title": "SQL SELECT TOP, LIMIT, ROWNUM", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-top.html", "href": "sql-top.html"}, {"title": "SQL 教程", "group": "sql", "subgroup": "入门", "url": "https://www.runoob.com/sql/sql-tutorial.html", "href": "sql-tutorial.html"}, {"title": "SQL UNION 操作符", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-union.html", "href": "sql-union.html"}, {"title": "SQL UNIQUE 约束", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-unique.html", "href": "sql-unique.html"}, {"title": "SQL UPDATE 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-update.html", "href": "sql-update.html"}, {"title": "SQL CREATE VIEW、REPLACE VIEW、 DROP VIEW 语句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-view.html", "href": "sql-view.html"}, {"title": "SQL WHERE 子句", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-where.html", "href": "sql-where.html"}, {"title": "SQL 通配符", "group": "sql", "subgroup": "专题", "url": "https://www.runoob.com/sql/sql-wildcards.html", "href": "sql-wildcards.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

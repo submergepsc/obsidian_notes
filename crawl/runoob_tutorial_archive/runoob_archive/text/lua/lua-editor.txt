@@ -1,0 +1,94 @@
+URL: https://www.runoob.com/lua/lua-editor.html
+Title: Lua 编辑器 | 菜鸟教程
+
+Lua 编辑器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Lua 教程 
+
+Lua goto 语句 
+
+Lua 编辑器 
+
+可以使用专业的编辑器来编辑 Lua，为大家推荐几款常用的编辑器： 
+
+VS Code： https://code.visualstudio.com/ 
+
+阿里 Qoder： https://qoder.com/ 
+
+字节 Trae： https://www.trae.com.cn/ 
+
+你可以从以上软件的官网中下载对应的软件，按步骤安装即可。 
+
+接下来我们将为大家演示如何使用 Qoder 工具来编写 Lua 代码。 
+
+Qoder 是基于 VSCode 开源框架打造的 AI 编程平台，本章节我们将介绍使用 Qoder 开发 Lua。 
+
+Qoder（/ˈkoʊdər/）是一款面向真实软件开发的 Agentic 编码平台,通过增强上下文工程与智能体无缝结合，全面理解你的代码库，并以系统化方式推进开发任务。 
+
+Qoder 提供代码智能生成、智能问答、多文件修改、编程智能体等能力，思考更深入、编码更高效、构建更出色，为开发者带来高效、流畅的编码体验。 
+
+Qoder 个人版目前向所有用户提供免费试用。 
+
+1、注册并安装 Qoder 
+
+首先访问 https://qoder.com/ 注册 Qoder 账号，注册完成后点击右上角的 下载 按钮，根据你的电脑系统，下载安装程序。 
+
+下载后，双击文件开始安装，然后，双击 Qoder IDE 图标启动 Qoder。 
+
+相关链接： 
+
+Qoder 官网： https://qoder.com/ 
+
+Qoder 文档： https://docs.qoder.com/zh/quick-start 
+
+Qoder 命令行工具： https://docs.qoder.com/zh/cli/quick-start 
+
+2、登录 Qoder 
+
+在 Qoder IDE 右上角，点击用户图标，或使用键盘快捷键（⌘ ⇧ ,（macOS）或 Ctrl Shift ,（Windows）），然后选择 登录。 
+
+如果还没账号，可以在打开的网页中点击底部的 立即注册 链接注册个账号，或使用 Google 或 GitHub 账号直接注册。 
+
+登录成功后，就会返回 Qoder IDE 后，然后我们可以自由使用所有功能。 
+
+整个界面上看，Qoder 操作上跟 VS Code 基本也没区别，本身 Qoder 是基于 VSCode 打造的，所以熟悉 VS Code 的用起来也轻车熟路。 
+
+点击右侧扩展按钮，安装 Lua 扩展： 
+
+创建 Lua 项目 
+
+创建项目目录： 
+
+mkdir lua-runoob-test 
+
+进行项目目录： 
+
+cd lua-runoob-test 
+
+使用 qoder 命令启动该 lua 项目： 
+
+qoder . 
+
+Qoder 就会打开该项目，我们创建文件 main.lua，输入以下代码： 
+
+print("Hello Lua")
+
+local function add(a,b)
+ return a+b
+end
+
+print(add(3,5)) 
+
+运行程序： 
+
+lua main.lua 
+
+输出： 
+
+Hello Lua 
+
+AI 思考中... 
+
+Lua goto 语句

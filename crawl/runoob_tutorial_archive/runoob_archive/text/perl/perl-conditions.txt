@@ -1,0 +1,78 @@
+URL: https://www.runoob.com/perl/perl-conditions.html
+Title: Perl 条件语句 | 菜鸟教程
+
+Perl 条件语句 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Perl 教程 
+
+Perl 哈希 
+
+Perl IF 语句 
+
+Perl 条件语句 
+
+Perl 条件语句是通过一条或多条语句的执行结果（True或者False）来决定执行的代码块。 
+
+可以通过下图来简单了解条件语句的执行过程: 
+
+注意，数字 0 , 字符串 '0' 、 "" , 空 list() , 和 undef 为 false ，其他值均为 true 。 true 前面使用 ! 或 not 则返回 false 。 
+
+Perl 提供了下列条件语句： 
+
+语句 
+
+描述 
+
+if 语句 
+
+一个 if 语句 由一个布尔表达式后跟一个或多个语句组成。 
+
+if...else 语句 
+
+一个 if 语句 后可跟一个可选的 else 语句 ，else 语句在布尔表达式为假时执行。 
+
+if...elsif...else 语句 
+
+您可以在一个 if 语句后可跟一个可选的 elsif 语句 ，然后再跟另一个 else 语句 。 
+
+unless 语句 
+
+一个 unless 语句 由一个布尔表达式后跟一个或多个语句组成。 
+
+unless...else 语句。 
+
+一个 unless 语句 后可跟一个可选的 else 语句 。 
+
+unless...elsif..else statement 
+
+一个 unless 语句 后可跟一个可选的 elsif 语句 ，然后再跟另一个 else 语句 。 
+
+switch 语句 
+
+在最新版本的 Perl 中，我们可以使用 switch 语句。它根据不同的值执行对应的代码块。 
+
+三元运算符 ? : 
+
+我们可以使用 条件运算 ? : 来简化 if...else 语句的操作。通常格式为： 
+
+Exp1 ? Exp2 : Exp3; 
+
+如果 Exp1 表达式为 true ，则返回 Exp2 表达式计算结果，否则返回 Exp3。 
+
+实例如下所示： 
+
+实例 
+
+#!/usr/local/bin/perl $name = " 菜鸟教程 " ; $favorite = 10 ; $status = ( $favorite > 60 ) ? " 热门网站 " : " 不是热门网站 " ; print " $name - $status \n " ; 
+
+执行以上程序，输出结果为： 
+
+菜鸟教程 - 不是热门网站 
+
+AI 思考中... 
+
+Perl 哈希 
+
+Perl IF 语句

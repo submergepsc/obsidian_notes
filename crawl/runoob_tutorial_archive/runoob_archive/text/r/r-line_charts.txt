@@ -1,0 +1,121 @@
+URL: https://www.runoob.com/r/r-line_charts.html
+Title: R 绘图 – 函数曲线图 | 菜鸟教程
+
+R 绘图 – 函数曲线图 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+R 教程 
+
+R 绘图 – 条形图 
+
+R 绘图 – 散点图 
+
+R 绘图 - 函数曲线图 
+
+函数曲线图是研究函数的重要工具。 
+
+R 中 curve() 函数可以绘制函数的图像，代码格式如下： 
+
+curve(expr, from = NULL, to = NULL, n = 101, add = FALSE,
+ type = "l", xname = "x", xlab = xname, ylab = NULL,
+ log = NULL, xlim = NULL, …)
+
+# S3 函数的方法
+plot(x, y = 0, to = 1, from = y, xlim = NULL, ylab = NULL, …) 
+
+注： R 语言的类有 S3 类和 S4 类，S3 类用的比较广，创建简单粗糙但是灵活，而 S4 类比较精细。 
+
+参数： 
+
+expr：函数表达式 
+
+from 和 to：绘图的起止范围 
+
+n：一个整数值，表示 x 取值的数量 
+
+add：是一个逻辑值，当为 TRUE 时，表示将绘图添加到已存在的绘图中。 
+
+type：绘图的类型，p 为点、l 为直线， o 同时绘制点和线，且线穿过点。 
+
+xname：用于 x 轴变量的名称。 
+
+xlim 和 ylim 表示x轴和y轴的范围。 
+
+xlab，ylab：x 轴和 y 轴的标签名称。 
+
+plot 函数中，x 和 y 分别表示所绘图形的横坐标和纵坐标。 
+
+以下我们绘制一个 sin(x) 函数的图表： 
+
+curve(sin(x), -2 * pi, 2 * pi) 
+
+注意：任何计算机绘图工具绘制的都是模式图，它并不能保证与真的函数图像一模一样，它只是每隔一段距离取一个点，然后计算这个点的"高度"并绘制出来，为了保证曲线连续性，相邻两个点之间会有直线连接，所以在某些情况下例如 tan(x) 可能会出现错误： 
+
+在每一个 (2n+1)Pi / 2 的位置都会出现断点，但是 R 的图像将它们连接了，希望大家理解这一点。 
+
+当然，不是所有的函数都像 sin 一样支持向量处理，我们也可以手动生成一个数字序列然后用 plot 函数生成函数图像。假设函数 f 仅支持单个数值作为参数： 
+
+实例 
+
+# 定义函数 f 
+
+f = function ( x ) { 
+
+if ( x >= 0 ) { 
+
+x 
+
+} else { 
+
+x ^ 2 
+
+} 
+
+} 
+
+# 生成自变量序列 
+
+x = seq ( - 2 , 2 , length = 100 ) 
+
+# 生成因变量序列 
+
+y = rep ( 0 , length ( x ) ) 
+
+j = 1 
+
+for ( i in x ) { 
+
+y [ j ] = f ( i ) 
+
+j = j + 1 
+
+} 
+
+# 绘制图像 
+
+plot ( x, y, type = 'l' ) 
+
+接下来我们使用 plot() 函数对向量数据进行绘图： 
+
+实例 
+
+# 向量数据 
+
+v <- c ( 7 , 12 , 28 , 3 , 41 ) 
+
+# 生成图片 
+
+png ( file = "line_chart_label_colored.jpg" ) 
+
+# 绘图、线图颜色为红色，main 参数用于设置标题 
+
+plot ( v,type = "o" , col = "red" , xlab = "Month" , ylab = "Rain fall" , 
+
+main = "Rain fall chart" ) 
+
+AI 思考中... 
+
+R 绘图 – 条形图 
+
+R 绘图 – 散点图

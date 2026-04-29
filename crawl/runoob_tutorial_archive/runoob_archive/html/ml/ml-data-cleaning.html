@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>数据清洗 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="ml-data-cleaning.html" />
+<meta name="keywords" content="数据清洗">
+<meta name="description" content="数据清洗  在机器学习中，我们常常听到一句话：“垃圾进，垃圾出”，这句话生动地比喻了数据质量对于模型性能的决定性影响。 想象一下，你是一位大厨，准备烹饪一道美味佳肴。即使你的厨艺再高超，如果食材不新鲜、有泥沙或者残缺不全，最终做出的菜肴也必然大打折扣。在机器学习中，原始数据就是我们的“食材”，而数据清洗就是那个至关重要的“备菜”过程。它旨在识别、纠正或移除数据中的错误、不一致、重复和不完整的部分，为后续的模型“烹饪”准备好干净、高质量的..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<style>
+/* 主题切换按钮 */
+/* ===== 主题变量（核心）===== */
+:root {
+  --theme-bg: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-icon: #333;
+  --theme-hover: #f3f4f6;
+}
+
+.dark {
+  --theme-bg: #1f2937;
+  --theme-border: #374151;
+  --theme-icon: #e5e7eb;
+  --theme-hover: #374151;
+}
+
+/* ===== 按钮容器 ===== */
+.nav-theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== 按钮本体 ===== */
+.nav-theme-toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+
+  background: var(--theme-bg);
+  color: var(--theme-icon);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ===== 图标大小 ===== */
+.nav-theme-toggle i {
+  font-size: 14px;
+}
+
+/* ===== hover 效果 ===== */
+.nav-theme-toggle button:hover {
+  background: var(--theme-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== 点击反馈 ===== */
+.nav-theme-toggle button:active {
+  transform: scale(0.95);
+}
+
+/* ===== 当前激活态（可选）===== */
+.nav-theme-toggle button.active {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+</style>
+<!-- 导航栏 -->
+<nav class="container navigation" aria-label="主导航">
+  <div class="row">
+    <div class="col nav">
+
+      <!-- PC 导航 -->
+      <ul class="pc-nav" id="runoob-detail-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../js/js-tutorial.html">JavaScript</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="javascript:void(0);" data-id="vue">Vue</a></li>
+        <li><a href="../react/react-tutorial.html">React</a></li>
+        <li><a href="../python3/python3-tutorial.html">Python3</a></li>
+        <li><a href="../java/java-tutorial.html">Java</a></li>
+        <li><a href="../cprogramming/c-tutorial.html">C</a></li>
+        <li><a href="../cplusplus/cpp-tutorial.html">C++</a></li>
+        <li><a href="../csharp/csharp-tutorial.html">C#</a></li>
+        <li><a href="javascript:void(0);" data-id="aiNav">AI</a></li>
+        <li><a href="../go/go-tutorial.html">Go</a></li>
+        <li><a href="../sql/sql-tutorial.html">SQL</a></li>
+        <li><a href="../linux/linux-tutorial.html">Linux</a></li>
+        <li><a href="../vscode/vscode-tutorial.html">VS Code</a></li>
+        <li><a href="javascript:void(0);" data-id="bootstrap">Bootstrap</a></li>
+        <li><a href="../git/git-tutorial.html">Git</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+
+        <!-- 主题切换按钮，固定在最右侧 -->
+        <li class="nav-theme-toggle">
+          <button id="moon" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 移动端导航 -->
+      <ul class="mobile-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="../js/js-tutorial.html">JS</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+        <li><a href="javascript:void(0)" class="search-reveal">搜索</a></li>
+
+        <!-- 移动端主题切换 -->
+        <li class="nav-theme-toggle">
+          <button id="moon-mobile" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun-mobile" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- 二级导航 -->
+<div class="container sub-navigation sub-navigation-articles" style="display:none">
+  <div class="row">
+    <div class="col nav-sub">
+
+      <ul id="vue">
+        <li class="cat-item"><a href="../vue3/vue3-tutorial.html">Vue3 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../vue/vue-tutorial.html">Vue2 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="bootstrap">
+        <li class="cat-item"><a href="../bootstrap/bootstrap-tutorial.html">Bootstrap3 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="aiNav">
+        <li class="cat-item"><a href="ml-tutorial.html">机器学习 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../pytorch/pytorch-tutorial.html">PyTorch <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../tensorflow/tensorflow-tutorial.html">TensorFlow <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../sklearn/sklearn-tutorial.html">Sklearn <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../nlp/nlp-tutorial.html">NLP <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ai-agent/ai-agent-tutorial.html">AI Agent <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ollama/ollama-tutorial.html">Ollama <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+  </div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="runoob-col-md2">
+<div class="left-column">
+	<div class="tab" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+	<i class="fa fa-list" aria-hidden="true"></i> 
+	<span>机器学习</span>
+
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" data-p="par" title="机器学习教程" href="ml-tutorial.html">
+			机器学习教程			</a>
+						<a target="_top" data-p="par" title="机器学习简介" href="ml-intro.html">
+			机器学习简介			</a>
+			<a target="_top" href="ml-how-to-learn.html">机器学习学习路线</a>
+<a target="_top" href="ml-project-lifecycle.html">机器学习生命周期</a>
+			<a target="_top" data-p="par" title="机器学习如何工作" href="ml-hw.html">
+			机器学习如何工作			</a>
+						<a target="_top" data-p="par" title="机器学习基础术语" href="ml-basics.html">
+			机器学习基础术语			</a>
+						<a target="_top" data-p="par" title="Python 入门机器学习" href="ml-python.html">
+			Python 入门机器学习			</a>
+			<a target="_top" href="ml-python-libs.html">Python 机器学习库</a>
+<a target="_top" href="ml-datatype.html">常用数据类型</a>
+<a target="_top" href="ml-applications.html">机器学习应用</a>
+<br>
+<h2 class="left"><span class="left_h2">数据处理与统计</span></h2>
+
+<a target="_top" href="ml-data-understanding.html">数据理解</a>
+<a target="_top" href="ml-data-cleaning.html">数据清洗</a>
+<a target="_top" href="ml-feature-engineering.html">特征工程</a>
+<a target="_top" href="ml-data-visualizations.html">数据可视化</a>
+<a target="_top" href="ml-training-and-test-set-splitting.html">训练集测试集划分</a>
+
+
+<a target="_top" href="ml-foundations-of-statistics.html"> 统计学基础</a>
+<a target="_top" href="ml-probabilistic-thinking.html"> 概率思维</a>
+<a target="_top" href="ml-loss-function-and-gradient.html">损失函数与梯度</a>
+<a target="_top" href="ml-overfitting-underfitting-bias-and-variance.html">过拟合、欠拟合、偏差与方差</a>
+<br>
+<h2 class="left"><span class="left_h2">监督学习</span></h2>
+			<a target="_top" data-p="par" title="机器学习算法" href="ml-algorithms.html">
+			机器学习算法			</a>
+						<a target="_top" data-p="par" title="线性回归 (Linear Regression)" href="ml-linear-regression.html">
+			线性回归			</a>
+			<a target="_top" href="ml-multiple-linear-regression.html">多元线性回归</a>
+<a target="_top" href="ml-multinomial-regression.html">多项式回归</a>			<a target="_top" data-p="par" title="逻辑回归（Logistic Regression）" href="ml-logistic-regression.html">
+			逻辑回归			</a>
+			<a target="_top" href="ml-regression-model-evaluation.html">回归模型评估</a>			<a target="_top" data-p="par" title="决策树（Decision Tree）" href="ml-decision-tree.html">
+			决策树			</a>
+						<a target="_top" data-p="par" title="支持向量机" href="ml-svm.html">
+			支持向量机			</a>
+						<a target="_top" data-p="par" title="K 近邻算法" href="ml-knn.html">
+			K 近邻算法			</a>
+						<a target="_top" data-p="par" title="集成学习" href="ml-ensemble-learning.html">
+			集成学习			</a>
+						<a target="_top" data-p="par" title="朴素贝叶斯" href="ml-naive-bayes.html">
+			朴素贝叶斯			</a>
+						<a target="_top" data-p="par" title="随机森林" href="ml-random-forest.html">
+			随机森林			</a>
+						<a target="_top" data-p="par" title="分类指标" href="ml-classification-metrics.html">
+			分类指标			</a>
+			<br><h2 class="left"><span class="left_h2">无监督学习</span></h2>			<a target="_top" data-p="par" title="无监督学习 – 聚类" href="ml-cluster-analysis.html">
+			聚类			</a>
+						<a target="_top" data-p="par" title="无监督学习 – 降维" href="ml-dimensionality-reduction.html">
+			降维			</a>
+			<br><h2 class="left"><span class="left_h2">强化学习</span></h2>			<a target="_top" data-p="par" title="强化学习基本框架" href="ml-basic-framework-of-reinforcement-learning.html">
+			强化学习基本框架			</a>
+						<a target="_top" data-p="par" title="强化学习探索vs开采" href="ml-exploration-exploitation.html">
+			强化学习探索vs开采			</a>
+						<a target="_top" data-p="par" title="强化学习 Q-learning 与 SARSA" href="ml-qlearning-sarsa.html">
+			强化学习 Q-learning 与 SARSA			</a>
+						<a target="_top" data-p="par" title="深度强化学习" href="ml-deep-reinforcement-learning.html">
+			深度强化学习			</a>
+			<br><h2 class="left"><span class="left_h2">深度学习</span></h2>			<a target="_top" data-p="par" title="神经网络的基本结构" href="ml-structure-of-neural-networks.html">
+			神经网络的基本结构			</a>
+						<a target="_top" data-p="par" title="前向传播与反向传播" href="ml-forward-and-backward-propagation.html">
+			前向传播与反向传播			</a>
+						<a target="_top" data-p="par" title="深度学习vs传统机器学习" href="ml-deep-learning-traditional-machine-learning.html">
+			深度学习vs传统机器学习			</a>
+						<a target="_top" data-p="par" title="常见网络类型" href="ml-common-network-types.html">
+			常见网络类型			</a>
+			<br><h2 class="left"><span class="left_h2">模型优化与工程</span></h2>			<a target="_top" data-p="par" title="交叉验证" href="ml-cross-validation.html">
+			交叉验证			</a>
+						<a target="_top" data-p="par" title="正则化" href="ml-model-optimization-regularization.html">
+			正则化			</a>
+						<a target="_top" data-p="par" title="数据泄漏" href="ml-model-optimization-data-leakage.html">
+			数据泄漏			</a>
+						<a target="_top" data-p="par" title="集成方法" href="ml-model-optimization-integrated-approaches.html">
+			集成方法			</a>
+						<a target="_top" data-p="par" title="超参搜索" href="ml-hyperparameter-search.html">
+			超参搜索			</a>
+						<a target="_top" data-p="par" title="MLOps 概念" href="ml-model-optimization-mlops.html">
+			MLOps 概念			</a>
+						<a target="_top" data-p="par" title="常见问题排查" href="ml-model-optimization-common-problems.html">
+			常见问题排查			</a>
+			<br><h2 class="left"><span class="left_h2">机器学习的限制与边界</span></h2>			<a target="_top" data-p="par" title="可解释性问题" href="ml-interpretability-problem.html">
+			可解释性问题			</a>
+						<a target="_top" data-p="par" title="假设限制" href="ml-hypothesis-limitations.html">
+			假设限制			</a>
+						<a target="_top" data-p="par" title="数据偏差" href="ml-data-bias.html">
+			数据偏差			</a>
+						<a target="_top" data-p="par" title="模型的现实成本" href="ml-cost-of-models.html">
+			模型的现实成本			</a>
+			<br><h2 class="left"><span class="left_h2">实战案例</span></h2>			<a target="_top" data-p="par" title="泰坦尼克号生存预测" href="ml-titanic-survival-prediction.html">
+			泰坦尼克号生存预测			</a>
+						<a target="_top" data-p="par" title="机器学习 – 房价预测" href="ml-house-price-prediction.html">
+			房价预测			</a>
+						<a target="_top" data-p="par" title="机器学习 – 客户分群" href="ml-customer-segmentation.html">
+			机器学习 - 客户分群			</a>
+						<a target="_top" data-p="par" title="机器学习 – PCA 可视化案例" href="ml-pca-visualization-case.html">
+			PCA 可视化			</a>
+						<a target="_top" data-p="par" title="机器学习 – 强化学习示例" href="ml-reinforcement-learning.html">
+			强化学习示例			</a>
+				
+		</div>
+	</div>	
+</div>
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="ml-data-understanding.html" rel="prev"> 数据理解</a> </div>
+			<div class="next-design-link"><a href="ml-feature-engineering.html" rel="next"> 特征工程</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+<div class="article-heading-ad" style="display: block;">
+
+<style>
+  /* 隐藏移动端广告 */
+  @media (max-width: 768px) {
+    .adsbygoogle {
+      display: none !important;
+    }
+  }
+  
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 728*90 固定 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="2147566827"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<h1>数据清洗</h1>
+
+<p>在机器学习中，我们常常听到一句话："垃圾进，垃圾出"，这句话生动地比喻了数据质量对于模型性能的决定性影响。</p>
+<p>想象一下，你是一位大厨，准备烹饪一道美味佳肴。即使你的厨艺再高超，如果食材不新鲜、有泥沙或者残缺不全，最终做出的菜肴也必然大打折扣。</p><p>在机器学习中，<strong>原始数据</strong>就是我们的"食材"，而<strong>数据清洗</strong>就是那个至关重要的"备菜"过程。它旨在识别、纠正或移除数据中的错误、不一致、重复和不完整的部分，为后续的模型"烹饪"准备好干净、高质量的"食材"。</p>
+<p>本文将带你系统性地了解数据清洗的核心概念、常用方法，并通过清晰的代码示例，让你掌握这项数据科学家的必备技能。</p>
+<hr>
+<h2>一、 数据清洗为何如此重要？</h2>
+<p>在深入技术细节之前，让我们先理解为什么数据清洗是机器学习流程中不可或缺的一环。</p>
+<h3>1.1 提升模型性能与准确性</h3>
+<p>脏数据（如异常值、错误值）会误导模型学习错误的规律。清洗后的干净数据能让模型更准确地捕捉数据中的真实模式，从而做出更可靠的预测。</p>
+<h3>1.2 保证分析结果的可靠性</h3>
+<p>无论是探索性数据分析还是最终的商业决策，基于错误数据得出的结论都是危险的。数据清洗确保了分析基础的坚实可靠。</p>
+<h3>1.3 提高算法稳定性</h3>
+<p>许多机器学习算法对数据质量非常敏感。例如，基于距离的算法（如 KNN、SVM）会受异常值的严重影响，而缺失值可能导致整个样本无法被使用。</p>
+<h3>1.4 节省计算资源与时间</h3>
+<p>清洗掉无关、重复的数据可以减少数据集大小，从而降低模型训练的计算成本和时间。</p>
+<p>为了更直观地理解数据清洗在机器学习全流程中的位置，请看下面的流程图：</p>
+
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/ml-data-cleaning.png" style="max-width:360px"></p>
+<p>从上图可以看出，数据清洗是预处理的第一步，并且当模型效果不佳时，我们常常需要回溯到这一步来检查并改进数据质量。</p>
+<hr>
+<h2>二、 常见的数据问题与清洗策略</h2>
+<p>数据清洗通常针对以下几类常见问题展开。我们可以通过一个简单的表格来快速了解：</p>
+<table class="reference">
+<thead>
+<tr>
+<th align="left">问题类型</th>
+<th align="left">描述</th>
+<th align="left">可能的影响</th>
+<th align="left">常用清洗策略</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>缺失值</strong></td>
+<td align="left">数据记录中某些字段的值为空（NaN, NULL）。</td>
+<td align="left">导致样本被丢弃，信息损失，计算错误。</td>
+<td align="left">删除、填充（均值/中位数/众数/预测）。</td>
+</tr>
+<tr>
+<td align="left"><strong>异常值</strong></td>
+<td align="left">与大多数数据明显偏离的极端值。</td>
+<td align="left">扭曲统计结果，影响模型性能。</td>
+<td align="left">识别（IQR、Z-Score）后删除或修正。</td>
+</tr>
+<tr>
+<td align="left"><strong>重复值</strong></td>
+<td align="left">数据集中存在完全相同的记录。</td>
+<td align="left">使模型过度偏向重复样本，影响泛化能力。</td>
+<td align="left">识别并删除重复项。</td>
+</tr>
+<tr>
+<td align="left"><strong>不一致性</strong></td>
+<td align="left">数据格式、单位或编码不统一（如"男"、"Male"、"M"）。</td>
+<td align="left">导致分组和分析错误。</td>
+<td align="left">标准化、规范化、映射转换。</td>
+</tr>
+<tr>
+<td align="left"><strong>错误值</strong></td>
+<td align="left">明显不合逻辑的值（如年龄为-1或300岁）。</td>
+<td align="left">产生毫无意义的分析结果。</td>
+<td align="left">根据业务逻辑进行修正或设为缺失。</td>
+</tr>
+</tbody></table>
+<p>接下来，我们将使用 Python 的 <code>pandas</code> 和 <code>numpy</code> 库，通过具体代码来演示如何解决这些问题。</p>
+<hr>
+<h2>三、 动手实践：使用 Python 进行数据清洗</h2>
+<p>假设我们有一个名为 <code>customer_data.csv</code> 的客户数据集，它包含了一些典型的数据质量问题。</p>
+<h3>3.1 环境准备与数据加载</h3>
+<p>首先，确保你已安装必要的库，然后加载数据。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 导入必要的库</span><br />
+<span style="color: Green;font-weight:bold;">import</span> pandas <span style="color: Green;font-weight:bold;">as</span> pd<br />
+<span style="color: Green;font-weight:bold;">import</span> numpy <span style="color: Green;font-weight:bold;">as</span> np<br />
+<br />
+<span style="color: #a50"># 加载数据集</span><br />
+df <span style="color: Gray;">=</span> pd.<span style="color: #05a;">read_csv</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">'customer_data.csv'</span><span style="color: Olive;">&#41;</span> <span style="color: #a50"># 请替换为你的文件路径</span><br />
+<br />
+<span style="color: #a50"># 查看数据的基本信息和前几行</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;数据集形状（行，列）:&quot;</span><span style="color: Gray;">,</span> df.<span style="color: #05a;">shape</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>数据前5行：&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>df.<span style="color: #05a;">head</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>数据基本信息：&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>df.<span style="color: #05a;">info</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>数据统计描述：&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>df.<span style="color: #05a;">describe</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>3.2 处理缺失值</h3>
+<p>发现缺失值是第一步。<code>pandas</code> 提供了方便的方法。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 1. 检查缺失值</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;各列缺失值数量：&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>df.<span style="color: #05a;">isnull</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span>.<span style="color: Teal;">sum</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 2. 处理缺失值 - 方法一：删除</span><br />
+<span style="color: #a50"># 删除任何包含缺失值的行（适用于缺失值很少的情况）</span><br />
+df_dropped <span style="color: Gray;">=</span> df.<span style="color: #05a;">dropna</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>删除缺失值后，数据形状: {df_dropped.shape}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 3. 处理缺失值 - 方法二：填充</span><br />
+<span style="color: #a50"># 更常用的方法是根据列的特性进行填充</span><br />
+df_filled <span style="color: Gray;">=</span> df.<span style="color: #05a;">copy</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 对于数值型列（如'年龄'），用中位数填充（比均值更抗异常值影响）</span><br />
+<span style="color: Green;font-weight:bold;">if</span> <span style="color: #a11;">'年龄'</span> <span style="color: Green;font-weight:bold;">in</span> df_filled.<span style="color: #05a;">columns</span>:<br />
+&nbsp; &nbsp; df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年龄'</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">fillna</span><span style="color: Olive;">&#40;</span>df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年龄'</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">median</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span> inplace<span style="color: Gray;">=</span><span style="color: Teal;">True</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 对于分类列（如'城市'），用众数（最频繁出现的值）填充</span><br />
+<span style="color: Green;font-weight:bold;">if</span> <span style="color: #a11;">'城市'</span> <span style="color: Green;font-weight:bold;">in</span> df_filled.<span style="color: #05a;">columns</span>:<br />
+&nbsp; &nbsp; df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'城市'</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">fillna</span><span style="color: Olive;">&#40;</span>df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'城市'</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">mode</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#91;</span><span style="color: Maroon;">0</span><span style="color: Olive;">&#93;</span><span style="color: Gray;">,</span> inplace<span style="color: Gray;">=</span><span style="color: Teal;">True</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 对于可能随时间变化的列（如'上次消费金额'），有时用0填充更有业务意义</span><br />
+<span style="color: Green;font-weight:bold;">if</span> <span style="color: #a11;">'上次消费金额'</span> <span style="color: Green;font-weight:bold;">in</span> df_filled.<span style="color: #05a;">columns</span>:<br />
+&nbsp; &nbsp; df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'上次消费金额'</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">fillna</span><span style="color: Olive;">&#40;</span><span style="color: Maroon;">0</span><span style="color: Gray;">,</span> inplace<span style="color: Gray;">=</span><span style="color: Teal;">True</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>填充缺失值后，各列缺失值数量：&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>df_filled.<span style="color: #05a;">isnull</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span>.<span style="color: Teal;">sum</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>3.3 识别与处理异常值</h3>
+<p>异常值处理需要谨慎，因为有时它们代表了重要的特殊事件。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 我们以'年收入'为例，假设它应该是一个合理的正值</span><br />
+<span style="color: Green;font-weight:bold;">if</span> <span style="color: #a11;">'年收入'</span> <span style="color: Green;font-weight:bold;">in</span> df_filled.<span style="color: #05a;">columns</span>:<br />
+&nbsp; &nbsp; <span style="color: #a50"># 方法一：使用四分位距（IQR）法识别</span><br />
+&nbsp; &nbsp; Q1 <span style="color: Gray;">=</span> df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年收入'</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">quantile</span><span style="color: Olive;">&#40;</span><span style="color: Maroon;">0.25</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; Q3 <span style="color: Gray;">=</span> df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年收入'</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">quantile</span><span style="color: Olive;">&#40;</span><span style="color: Maroon;">0.75</span><span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; IQR <span style="color: Gray;">=</span> Q3 - Q1<br />
+&nbsp; &nbsp; lower_bound <span style="color: Gray;">=</span> Q1 - <span style="color: Maroon;">1.5</span> * IQR<br />
+&nbsp; &nbsp; upper_bound <span style="color: Gray;">=</span> Q3 + <span style="color: Maroon;">1.5</span> * IQR<br />
+<br />
+&nbsp; &nbsp; <span style="color: #a50"># 找出异常值</span><br />
+&nbsp; &nbsp; outliers <span style="color: Gray;">=</span> df_filled<span style="color: Olive;">&#91;</span><span style="color: Olive;">&#40;</span>df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年收入'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">&lt;</span> lower_bound<span style="color: Olive;">&#41;</span> | <span style="color: Olive;">&#40;</span>df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年收入'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">&gt;</span> upper_bound<span style="color: Olive;">&#41;</span><span style="color: Olive;">&#93;</span><br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>使用IQR法发现的'年收入'异常值数量: {len(outliers)}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: #a50"># 处理异常值：这里选择用上下边界值进行截断（Winsorization）</span><br />
+&nbsp; &nbsp; df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年收入'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">=</span> np.<span style="color: #05a;">where</span><span style="color: Olive;">&#40;</span>df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年收入'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">&gt;</span> upper_bound<span style="color: Gray;">,</span> upper_bound<span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;np.<span style="color: #05a;">where</span><span style="color: Olive;">&#40;</span>df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年收入'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">&lt;</span> lower_bound<span style="color: Gray;">,</span> lower_bound<span style="color: Gray;">,</span> df_filled<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年收入'</span><span style="color: Olive;">&#93;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;已对'年收入'的异常值进行截断处理。&quot;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>3.4 处理重复值</h3>
+<p>重复的记录会增加计算负担并可能带来偏差。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 检查并删除完全重复的行</span><br />
+duplicate_rows <span style="color: Gray;">=</span> df_filled.<span style="color: #05a;">duplicated</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>发现完全重复的行数: {duplicate_rows.sum()}&quot;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 删除这些重复行，只保留第一次出现的记录</span><br />
+df_cleaned <span style="color: Gray;">=</span> df_filled.<span style="color: #05a;">drop_duplicates</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>f<span style="color: #a11;">&quot;删除重复值后，数据形状: {df_cleaned.shape}&quot;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>3.5 处理不一致性</h3>
+<p>确保数据格式和值的统一。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 1. 标准化文本格式：例如，将'城市'列统一为首字母大写</span><br />
+<span style="color: Green;font-weight:bold;">if</span> <span style="color: #a11;">'城市'</span> <span style="color: Green;font-weight:bold;">in</span> df_cleaned.<span style="color: #05a;">columns</span>:<br />
+&nbsp; &nbsp; df_cleaned<span style="color: Olive;">&#91;</span><span style="color: #a11;">'城市'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">=</span> df_cleaned<span style="color: Olive;">&#91;</span><span style="color: #a11;">'城市'</span><span style="color: Olive;">&#93;</span>.<span style="color: Teal;">str</span>.<span style="color: #05a;">title</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 2. 映射统一值：例如，将性别信息统一为'男'和'女'</span><br />
+<span style="color: Green;font-weight:bold;">if</span> <span style="color: #a11;">'性别'</span> <span style="color: Green;font-weight:bold;">in</span> df_cleaned.<span style="color: #05a;">columns</span>:<br />
+&nbsp; &nbsp; gender_mapping <span style="color: Gray;">=</span> <span style="color: Olive;">&#123;</span><span style="color: #a11;">'male'</span>: <span style="color: #a11;">'男'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'female'</span>: <span style="color: #a11;">'女'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'M'</span>: <span style="color: #a11;">'男'</span><span style="color: Gray;">,</span> <span style="color: #a11;">'F'</span>: <span style="color: #a11;">'女'</span><span style="color: Olive;">&#125;</span><br />
+&nbsp; &nbsp; df_cleaned<span style="color: Olive;">&#91;</span><span style="color: #a11;">'性别'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">=</span> df_cleaned<span style="color: Olive;">&#91;</span><span style="color: #a11;">'性别'</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">replace</span><span style="color: Olive;">&#40;</span>gender_mapping<span style="color: Olive;">&#41;</span><br />
+&nbsp; &nbsp; <span style="color: #a50"># 也可以使用 .map() 函数，但 .replace() 更灵活，未指定的值保持不变</span><br />
+<br />
+<span style="color: #a50"># 3. 转换数据类型：确保数值列是数字类型</span><br />
+<span style="color: Green;font-weight:bold;">if</span> <span style="color: #a11;">'年龄'</span> <span style="color: Green;font-weight:bold;">in</span> df_cleaned.<span style="color: #05a;">columns</span>:<br />
+&nbsp; &nbsp; df_cleaned<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年龄'</span><span style="color: Olive;">&#93;</span> <span style="color: Gray;">=</span> pd.<span style="color: #05a;">to_numeric</span><span style="color: Olive;">&#40;</span>df_cleaned<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年龄'</span><span style="color: Olive;">&#93;</span><span style="color: Gray;">,</span> errors<span style="color: Gray;">=</span><span style="color: #a11;">'coerce'</span><span style="color: Olive;">&#41;</span> <span style="color: #a50"># errors='coerce'将错误转换为NaN</span><br />
+&nbsp; &nbsp; <span style="color: #a50"># 转换后，可以再次用中位数填充因转换产生的新NaN</span><br />
+&nbsp; &nbsp; df_cleaned<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年龄'</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">fillna</span><span style="color: Olive;">&#40;</span>df_cleaned<span style="color: Olive;">&#91;</span><span style="color: #a11;">'年龄'</span><span style="color: Olive;">&#93;</span>.<span style="color: #05a;">median</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span> inplace<span style="color: Gray;">=</span><span style="color: Teal;">True</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;<span style="color: #000099; font-weight: bold;">\n</span>数据清洗完成！查看清洗后的数据前5行：&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>df_cleaned.<span style="color: #05a;">head</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<hr>
+<h2>四、 总结与最佳实践</h2>
+<p>通过上面的步骤，我们已经完成了一轮基本的数据清洗。记住，数据清洗不是一个一次性的步骤，而是一个迭代的过程。以下是一些最佳实践：</p>
+<ol>
+<li><strong>先探索，后清洗</strong>：在动手清洗之前，务必使用 <code>df.describe()</code>、<code>df.info()</code>、可视化（如直方图、箱线图）等手段充分了解你的数据。</li>
+<li><strong>备份原始数据</strong>：永远保留一份原始的、未经修改的数据副本。所有清洗操作都应在副本上进行。</li>
+<li><strong>记录清洗步骤</strong>：将你的清洗逻辑（如为什么用中位数填充、异常值的边界如何确定）记录下来。这对于项目可复现性和团队协作至关重要。</li>
+<li><strong>结合业务逻辑</strong>：数据清洗不是纯数学操作。例如，"年龄=0"在人口统计数据中是错误，但在婴幼儿产品数据中可能是合理的。始终与领域专家保持沟通。</li>
+<li><strong>迭代进行</strong>：清洗后，进入建模阶段。如果模型效果不佳，应回头检查数据质量，可能需要调整清洗策略。</li>
+</ol>
+<p>数据清洗可能占到一个数据科学项目 <strong>60%-80%</strong> 的时间，虽然繁琐，但它是构建强大、可靠机器学习模型的基石。掌握了它，你就为成为优秀的数据科学家迈出了坚实的一步。</p>
+			<!-- 其他扩展 -->
+						
+			</div>
+			
+		</div>
+
+
+<div class="archive-list" style="display:none;font-size: 14px;line-height: 1.8;margin-top: 20px;padding: 10px;">
+<div class="archive-list-item">
+    <div class="post-intro" style="width: 100%;" id="ai-info">
+	  AI 思考中...
+    </div>
+</div>
+</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="ml-data-understanding.html" rel="prev"> 数据理解</a> </div>
+			<div class="next-design-link"><a href="ml-feature-engineering.html" rel="next"> 特征工程</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+
+
+		
+		<div class="sidebar-box ">
+				
+
+<style>	
+.responsive_ad1 { display:none; }
+@media(min-width: 800px) { .responsive_ad1 {  display:block;margin:0 auto;} }
+</style>
+<div id="ad-336280" class="responsive_ad1">
+<!-- 336*280 固定 -->		
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 移动版 自动调整 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+				</div>
+		<!-- 笔记列表 -->
+		<style>
+.wrapper {
+  /*text-transform: uppercase; */
+  background: #ececec;
+  color: #555;
+  cursor: pointer;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.wrapper .tooltip {
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: left;
+  background: #96b97d;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 14px;
+  pointer-events: none;
+  position: absolute;
+  
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+.tooltip a {
+	color:#fff;
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}  
+
+/* CSS Triangles - see Trevor's post */
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #96b97d 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 20%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+.wrapper .tooltip1 {
+	margin-left: 50px;
+	padding-top: 0px;
+}
+/*
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+*/
+/* IE can just show/hide with no transition */
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.css">
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style=" padding: 20px 20px;"> 
+	<h3 class="text-muted" id="share_code" style="color: #799961;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<!--
+	<p style="font-size:14px;">笔记需要是本篇文章的内容扩展！</p><br>
+	<p style="font-size:12px;"><a href="//www.runoob.com/tougao" target="_blank">文章投稿，可点击这里</a></p>
+	<p style="font-size:14px;"><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>
+		<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display:none;">
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div id="mded"></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input type="hidden" name="comment_post_ID" value="28940" id="comment_post_ID" />
+<input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="引用地址"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script type="text/javascript">
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload:false,
+	 // upload: {url:'/api/comment_upload_file.php',params: null,fileKey: 'upload_file',connectionCount: 1,leaveConfirm: '文件正在上传，您确定离开?'},
+	  defaultImage: 'https://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  autosave: 'editor-content',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+	$("#user_add_note").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		$('html, body').animate({
+       	    scrollTop: $("#respond").offset().top
+    	}, 200);
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" style="display:none;" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  28940;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>').show();
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>').show();
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>').show();
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>').show();
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>').show();
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>').show();
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	$(".comt-author").click(function() {
+		href = $(this).children("a").attr("href");
+		if(href.indexOf("/note/")!=-1) {
+			var win = window.open(href, '_blank');
+  			win.focus();
+		}
+	});
+	$(".comt-meta span").hover(function(){
+		$(this).children(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).children(".tooltip").removeAttr("style");
+	});
+	/*
+	$(".wrapper i").hover(function(){
+		$(this).siblings(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).siblings(".tooltip").css({ "opacity": 0, "pointer-events": "auto"});
+	});
+	*/
+	//Upvote.create('runoobvote-id', {callback: vote_callback});
+	var ajaxurl = 'https://www.runoob.com/wp-admin/admin-ajax.php';
+	var callback = function(data) {
+		//console.log($('#runoobvote-id').upvote('upvoted'));
+		//console.log($('#runoobvote-id').upvote('downvoted'));
+		//console.log(data);
+		_vote_action = data.action;
+		id_arr = data.id.split('-');
+		um_id= id_arr[2];
+		//console.log(um_id);
+		
+		var re = /^[1-9]+/;
+		if (re.test(um_id)) { 
+			var ajax_data = {
+				_vote_action: _vote_action,
+				action: "pinglun_zan",
+				um_id: um_id,
+				um_action: "ding"
+			};
+			//console.log(ajax_data);
+			$.post(ajaxurl,ajax_data,function(status){
+				//if(status.vote_num>999) {
+				//	_voteHtml = '<span style="display: block; text-align: center;font-size: 20px; color: #6a737c; margin: 8px 0;">'+kFormatter(status.vote_num) +'</span>';
+				//	$("#runoobvote-id-" + um_id + " .count").hide().after(_voteHtml);
+				//}
+				
+			});
+		}
+	};
+	if($('#comments').length && $('.upvotejs').length){
+		$('.upvotejs').upvote({id: 28940, callback: callback});
+	
+		$.post(ajaxurl,{"action":"pinglun_zan","postid":28940},function(data){  
+			$(data).each(function(key,value) {
+				$("#runoobvote-id-" + value.commid + " .upvote").addClass(value.upvotejs_class);
+				$("#runoobvote-id-" + value.commid + " .downvote").addClass(value.downvote_class);
+				$("#runoobvote-id-" + value.commid + " .count").text(value.upvote_count);
+			})
+		},'json');
+		
+	}
+	
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+function kFormatter(num) {
+	// return num;
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
+</script>
+
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/css/qa.css?1.45">
+<link rel="stylesheet" type="text/css" href="https://static.char123.com/assets/simditor/2.3.6/styles/simditor.min.css" />
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor.min.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor-autosave.js"></script>
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+
+<style>
+.sidebar-tree .double-li {
+    width:300px;
+}
+.sidebar-tree .double-li li {
+    width: 44%;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    display: inline;
+}
+</style>
+
+    
+        <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here" style="margin: 0 auto;">
+            <a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;"> <i class="fa fa-list" aria-hidden="true"></i> 分类导航</a>
+        </div>
+    <div class="sidebar-box sidebar-cate">
+        
+        <div class="sidebar-tree">
+            <ul><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="../html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="../html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="../css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="../css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Tailwind CSS 教程" href="../tailwindcss/tailwindcss-tutorial.html">Tailwind CSS 教程</a></li><li><a title="Bootstrap4 教程" href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Bootstrap5 教程" href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 教程</a></li><li><a title="Font Awesome 教程" href="../font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="../foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="../js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="../htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="../jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="../angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="../angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="../vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="Vue3 教程" href="../vue3/vue3-tutorial.html">Vue3 教程</a></li><li><a title="React 教程" href="../react/react-tutorial.html">React 教程</a></li><li><a title="Next.js 教程" href="../nextjs/nextjs-tutorial.html">Next.js 教程</a></li><li><a title="TypeScript 教程" href="../typescript/ts-tutorial.html">TypeScript 教程</a></li><li><a title="jQuery UI 教程" href="../jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="../jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="../nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="Electron 教程" href="../electron/electron-tutorial.html">Electron 教程</a></li><li><a title="Playwright 教程" href="../playwright/playwright-tutorial.html">Playwright 教程</a></li><li><a title="AJAX 教程" href="../ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="../json/json-tutorial.html">JSON 教程</a></li><li><a title="Echarts 教程" href="../echarts/echarts-tutorial.html">Echarts 教程</a></li><li><a title="Chart.js 教程" href="../chartjs/chartjs-tutorial.html">Chart.js 教程</a></li><li><a title="Highcharts 教程" href="../highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="../googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="Python2.x 教程" href="../python/python-tutorial.html">Python2.x 教程</a></li><li><a title="Linux 教程" href="../linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="../docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="../ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="../java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="../c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="../cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="../perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="../servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="../jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="../lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Rust 教程" href="../rust/rust-tutorial.html">Rust 教程</a></li><li><a title="Zig 教程" href="../zig/zig-tutorial.html">Zig 教程</a></li><li><a title="Scala 教程" href="../scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="../go/go-tutorial.html">Go 教程</a></li><li><a title="PHP 教程" href="../php/php-tutorial.html">PHP 教程</a></li><li><a title="数据结构与算法" href="../data-structures/data-structures-tutorial.html">数据结构与算法</a></li><li><a title="Django 教程" href="../django/django-tutorial.html">Django 教程</a></li><li><a title="FastAPI 教程" href="../fastapi/fastapi-tutorial.html">FastAPI 教程</a></li><li><a title="Flask 教程" href="../flask/flask-tutorial.html">Flask 教程</a></li><li><a title="Pillow 教程" href="../pillow/pillow-tutorial.html">Pillow 教程</a></li><li><a title="Zookeeper 教程" href="//www.runoob.com/w3cnote/zookeeper-tutorial.html">Zookeeper 教程</a></li><li><a title="设计模式" href="../design-pattern/design-pattern-tutorial.html">设计模式</a></li><li><a title="Python 设计模式" href="../python-design-pattern/python-design-pattern-tutorial.html">Python 设计模式</a></li><li><a title="正则表达式" href="../regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="Maven 教程" href="../maven/maven-tutorial.html">Maven 教程</a></li><li><a title="CMake 教程" href="../cmake/cmake-tutorial.html">CMake 教程</a></li><li><a title="Verilog 教程" href="//www.runoob.com/w3cnote/verilog-tutorial.html">Verilog 教程</a></li><li><a title="ASP 教程" href="../asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="../appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="../vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="../sql/sql-tutorial.html">SQL 教程</a></li><li><a title="MySQL 教程" href="../mysql/mysql-tutorial.html">MySQL 教程</a></li><li><a title="PostgreSQL 教程" href="../postgresql/postgresql-tutorial.html">PostgreSQL 教程</a></li><li><a title="SQLite 教程" href="../sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="../mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="../redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="../Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit">  AI & 数据分析</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="NumPy 教程" href="../numpy/numpy-tutorial.html">NumPy 教程</a></li><li><a title="Pandas 教程" href="../pandas/pandas-tutorial.html">Pandas 教程</a></li><li><a title="Matplotlib 教程" href="../matplotlib/matplotlib-tutorial.html">Matplotlib 教程</a></li><li><a title="Scipy 教程" href="../scipy/scipy-tutorial.html">Scipy 教程</a></li><li><a title="Pytorch 教程" href="../pytorch/pytorch-tutorial.html">Pytorch 教程</a></li><li><a title="TensorFlow 教程" href="../tensorflow/tensorflow-tutorial.html">TensorFlow 教程</a></li><li><a title="Ollama 教程" href="../ollama/ollama-tutorial.html">Ollama 教程</a></li><li><a title="机器 教程" href="ml-tutorial.html">机器 教程</a></li><li><a title="Jupyter Notebook 教程" href="../jupyter-notebook/jupyter-notebook-tutorial.html">Jupyter Notebook 教程</a></li><li><a title="AI Agent(智能体)" href="../ai-agent/ai-agent-tutorial.html">AI Agent(智能体)</a></li><li><a title="Skills(技能)" href="../skills/skills-tutorial.html">Skills(技能)</a></li><li><a title="Claude Code" href="../claude-code/claude-code-tutorial.html">Claude Code</a></li><li><a title="OpenCode" href="../opencode/opencode-tutorial.html">OpenCode</a></li><li><a title="Codex 教程" href="../codex/codex-tutorial.html">Codex 教程</a></li><li><a title="scikit-learn 教程" href="../sklearn/sklearn-tutorial.html">scikit-learn 教程</a></li><li><a title="R 教程" href="../r/r-tutorial.html">R 教程</a></li><li><a title="OpenCV 教程" href="../opencv/opencv-tutorial.html">OpenCV 教程</a></li><li><a title="NLP 教程" href="../nlp/nlp-tutorial.html">NLP 教程</a></li><li><a title="Selenium 教程" href="../selenium/selenium-tutorial.html">Selenium 教程</a></li><li><a title="Julia 教程" href="../julia/julia-tutorial.html">Julia 教程</a></li><li><a title="量化交易" href="../qt/qt-tutorial.html">量化交易</a></li><li><a title="Dash 教程" href="../dash/dash-tutorial.html">Dash 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="//www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="../swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="../jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="../ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Flutter 教程" href="../flutter/flutter-tutorial.html">Flutter 教程</a></li><li><a title="Kotlin 教程" href="../kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="VS Code 教程" href="../vscode/vscode-tutorial.html">VS Code 教程</a></li><li><a title="PyCharm 教程" href="../pycharm/pycharm-tutorial.html">PyCharm 教程</a></li><li><a title="Swagger 教程" href="../swagger/swagger-tutorial.html">Swagger 教程</a></li><li><a title="RESTful API 教程" href="../restfulapi/restful-api-tutorial.html">RESTful API 教程</a></li><li><a title="Eclipse 教程" href="../eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="../git/git-tutorial.html">Git 教程</a></li><li><a title="Svn 教程" href="../svn/svn-tutorial.html">Svn 教程</a></li><li><a title="Markdown 教程" href="../markdown/md-tutorial.html">Markdown 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="../xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="../dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="../dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="../xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="../xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="../xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="../xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="../xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="../schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="../xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="../svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="../aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="../csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="PowerShell 教程" href="../powershell/powershell-tutorial.html">PowerShell 教程</a></li><li><a title="Web Pages 教程" href="../aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="../aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="../aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="../aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="../webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="../wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="../soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="../rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="../rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="../http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="../web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="../browsers/browser-information.html">浏览器信息</a></li><li><a title="网络协议" href="../np/np-tutorial.html">网络协议</a></li><li><a title="网站主机教程" href="../hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="../tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="../w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="../quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>            </div>
+    
+    </div>
+    </div>
+    <br>
+    
+    <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here">
+            <a href="javascript:void(0);">Advertisement</a>
+        </div>
+        <div class="re-600160" id="sidebar-right-re">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧栏1 -->
+        <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+                </div>
+    </div>
+</div></div>
+
+</div>
+
+<script>
+var aid = 28940;
+function coll() {
+	$.post( '/wp-content/themes/runoob/option/user/userinfo.php', {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+		if(data.error==0) {
+			$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+			$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+		}
+		alert(data.msg);
+	},'json');
+}
+
+(function () {
+    // 1. 仅 HTML 页面
+    if (!document.contentType || !document.contentType.includes('text/html')) return;
+
+    // 2. 容器判断
+    var container = document.querySelector('.article-intro');
+    if (!container) return;
+
+    var h1 = container.querySelector('h1');
+    if (!h1) return;
+
+    // 3. URL 判断
+    var url = window.location.href.toLowerCase();
+    var version = null;
+
+    if (url.includes('/python3/')) {
+        version = 'Python3.x';
+    } else if (url.includes('/python/')) {
+        version = 'Python2.x';
+    }
+
+    if (!version) return;
+
+    // 4. 防重复
+    if (h1.querySelector('.py-version-badge')) return;
+
+    // 5. 创建标签
+    var badge = document.createElement('span');
+    badge.className = 'py-version-badge';
+    badge.innerText = version;
+
+    // 6. 样式（核心：float 实现右上角）
+    badge.style.float = 'right';
+    badge.style.fontSize = '12px';
+    badge.style.padding = '2px 8px';
+    badge.style.borderRadius = '999px';
+
+   // 自适应亮/暗色 + 渐变背景（增强版）
+	badge.style.color = 'inherit';
+
+	// 渐变背景（低透明度，不影响暗黑模式）
+	if (version.includes('3')) {
+		badge.style.background = 'linear-gradient(90deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15))';
+	} else {
+		badge.style.background = 'linear-gradient(90deg, rgba(161,140,209,0.15), rgba(251,194,235,0.15))';
+	}
+
+	// 边框弱化（更精致）
+	badge.style.border = '1px solid rgba(127,127,127,0.3)';
+
+	// 提升可读性
+	badge.style.opacity = '0.95';
+
+    // 微调位置（更贴近“右上角”）
+    badge.style.marginTop = '4px';
+    badge.style.marginLeft = '10px';
+
+    // 7. 插入到 h1 最前面（让 float 生效更稳定）
+    h1.insertBefore(badge, h1.firstChild);
+
+})();
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.js?1.0"></script>
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.css?1.0" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // 获取窗口宽度
+    var windowWidth = $(window).width();
+
+    // 设置一个阈值，例如 768px，根据实际需要调整
+    var mobileThreshold = 768;
+
+    // 判断是否为移动端
+    if (windowWidth < mobileThreshold) {
+        // 在移动端执行的代码
+        $(".article-heading-ad").show();
+    } else {
+        // 在非移动端执行的代码
+		$(".article-heading-ad").show();
+    }
+	
+});
+</script>
+<script src="/wp-content/themes/runoob/assets/js/runoob-article-dir.min.js"></script>
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+URL: https://www.runoob.com/tags/tag-dt.html
+Title: HTML <dt> 标签 | 菜鸟教程
+
+HTML <dt> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <dl> 标签 
+
+HTML <em> 标签 
+
+HTML <dt> 标签 
+
+实例 
+
+带有项目和描述的描述列表： 
+
+< dl > < dt > Coffee </ dt > < dd > Black hot drink </ dd > < dt > Milk </ dt > < dd > White cold drink </ dd > </ dl > 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <dt> 标签。 
+
+标签定义及使用说明 
+
+<dt> 标签定义一个描述列表的项目/名字。 
+
+<dt> 标签与 <dl> （定义一个描述列表）和 <dd> （描述每一个项目/名字）一起使用。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+在 HTML 4.01 中，<dt> 标签定义一个定义列表的条目。 
+
+在 HTML5 中，<dt> 标签定义一个描述列表的项目/名字。 
+
+全局属性 
+
+<dt> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<dt> 标签支持 HTML 的事件属性 。 
+
+相关文章 
+
+HTML 教程： HTML 列表 
+
+AI 思考中... 
+
+HTML <dl> 标签 
+
+HTML <em> 标签

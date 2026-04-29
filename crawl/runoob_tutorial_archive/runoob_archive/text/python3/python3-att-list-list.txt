@@ -1,0 +1,142 @@
+URL: https://www.runoob.com/python3/python3-att-list-list.html
+Title: Python3 List list()方法 | 菜鸟教程
+
+Python3 List list()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 List min()方法 
+
+Python3 List append()方法 
+
+Python list() 函数 
+
+list() 是 Python 中用于将序列转换为列表（list）的内置函数。 
+
+列表是 Python 中最常用的可变序列类型，可以随时添加、删除或修改元素。 list() 函数可以将元组、字符串、字典、集合等可迭代对象转换为列表。 
+
+单词释义 ： list 意为"列表"，是 Python 中的可变序列类型。 
+
+基本语法与参数 
+
+语法格式 
+
+list(iterable) 
+
+参数说明 
+
+参数 iterable ： 
+
+类型： 可迭代对象（元组、字符串、字典、集合等） 
+
+描述： 要转换为列表的可迭代对象。 
+
+函数说明 
+
+返回值 ： 返回一个列表。 
+
+特殊值 ： 不带参数返回空列表 [] 。 
+
+实例 
+
+示例 1：从其他序列转换 
+
+实例 
+
+# 从元组转换为列表 
+
+t = ( 1 , 2 , 3 , 4 , 5 ) 
+
+lst = list ( t ) 
+
+print ( lst ) # 输出: [1, 2, 3, 4, 5] 
+
+# 从字符串转换 
+
+s = "hello" 
+
+lst = list ( s ) 
+
+print ( lst ) # 输出: ['h', 'e', 'l', 'l', 'o'] 
+
+# 从字典转换（只取键） 
+
+d = { "a" : 1 , "b" : 2 , "c" : 3 } 
+
+lst = list ( d ) 
+
+print ( lst ) # 输出: ['a', 'b', 'c'] 
+
+# 从集合转换 
+
+s = { 3 , 1 , 2 } 
+
+lst = list ( s ) 
+
+print ( lst ) # 输出: [1, 2, 3]（自动排序） 
+
+# 空列表 
+
+lst = list ( ) 
+
+print ( lst ) # 输出: [] 
+
+运行结果预期: 
+
+[1, 2, 3, 4, 5]
+['h', 'e', 'l', 'l', 'o']
+['a', 'b', 'c']
+[1, 2, 3]
+[] 
+
+代码解析: 
+
+元组转换为列表，保持元素顺序。 
+
+字符串转换时，每个字符成为列表的一个元素。 
+
+字典转换只包含键。 
+
+示例 2：列表的常用操作 
+
+实例 
+
+# 创建列表后可以修改 
+
+lst = list ( ( 1 , 2 , 3 ) ) 
+
+lst. append ( 4 ) # 添加元素 
+
+lst. insert ( 0 , 0 ) # 插入元素 
+
+print ( lst ) # 输出: [0, 1, 2, 3, 4] 
+
+# 列表推导式（更简洁的方式） 
+
+lst = [ x * 2 for x in range ( 5 ) ] 
+
+print ( lst ) # 输出: [0, 2, 4, 6, 8] 
+
+# 复制列表 
+
+original = [ 1 , 2 , 3 ] 
+
+copy = list ( original ) 
+
+print ( copy ) # 输出: [1, 2, 3] 
+
+运行结果预期: 
+
+[0, 1, 2, 3, 4]
+[0, 2, 4, 6, 8]
+[1, 2, 3] 
+
+列表是可变的，创建后可以随时添加、删除或修改元素。 
+
+AI 思考中... 
+
+Python3 List min()方法 
+
+Python3 List append()方法

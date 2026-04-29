@@ -1,0 +1,69 @@
+URL: https://www.runoob.com/tags/canvas-globalalpha.html
+Title: HTML canvas globalAlpha 属性 | 菜鸟教程
+
+HTML canvas globalAlpha 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas putImageData() 方法 
+
+HTML canvas globalCompositeOperation 属性 
+
+HTML canvas globalAlpha 属性 
+
+实例 
+
+首先，绘制一个红色的矩形，然后将透明度 (globalAlpha) 设置为 0.2，然后再绘制一个蓝色和一个绿色的矩形： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+ctx.fillStyle="red"; 
+ctx.fillRect(20,20,75,50); 
+// Turn transparency on 
+ctx.globalAlpha=0.2; 
+ctx.fillStyle="blue"; 
+ctx.fillRect(50,50,75,50); 
+ctx.fillStyle="green"; 
+ctx.fillRect(80,80,75,50); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 globalAlpha 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+globalAlpha 属性设置或返回绘图的当前透明值（alpha 或 transparency）。 
+
+globalAlpha 属性值必须是介于 0.0（完全透明） 与 1.0（不透明） 之间的数字。 
+
+默认值： 
+
+1.0 
+
+JavaScript 语法： 
+
+context .globalAlpha= number ; 
+
+属性值 
+
+值 
+
+描述 
+
+number 
+
+透明值。必须介于 0.0（完全透明） 与 1.0（不透明） 之间。 
+
+AI 思考中... 
+
+HTML canvas putImageData() 方法 
+
+HTML canvas globalCompositeOperation 属性

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>foundation index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>foundation index</h1>
+      <p>Offline pages under foundation</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-516595e8">入门</a> <span>1 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>3 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>35 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>foundation (40)</h2><p>二级分类：4 个</p><ul class="page-list"><li><a href="#subgroup-516595e8">入门</a> <span>1 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>3 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>35 pages</span></li></ul></section><section id="subgroup-516595e8"><h2>入门 (1)</h2><ol class="page-list"><li><a href="foundation-tutorial.html">Foundation 教程</a> <code>https://www.runoob.com/foundation/foundation-tutorial.html</code></li></ol></section><section id="subgroup-53c28003"><h2>参考 (3)</h2><ol class="page-list"><li><a href="foundation-ref-helpers.html">Foundation CSS 参考手册</a> <code>https://www.runoob.com/foundation/foundation-ref-helpers.html</code></li><li><a href="foundation-ref-visibility.html">Foundation CSS 可见性</a> <code>https://www.runoob.com/foundation/foundation-ref-visibility.html</code></li><li><a href="foundation-ref-icons.html">Foundation 图标参考手册</a> <code>https://www.runoob.com/foundation/foundation-ref-icons.html</code></li></ol></section><section id="subgroup-5b9e4f8b"><h2>实例 (1)</h2><ol class="page-list"><li><a href="foundation-grid-examples.html">Foundation 网格实例</a> <code>https://www.runoob.com/foundation/foundation-grid-examples.html</code></li></ol></section><section id="subgroup-4e139898"><h2>专题 (35)</h2><ol class="page-list"><li><a href="foundation-joyride.html">Foundation Joyride</a> <code>https://www.runoob.com/foundation/foundation-joyride.html</code></li><li><a href="foundation-dropdowns.html">Foundation 下拉菜单</a> <code>https://www.runoob.com/foundation/foundation-dropdowns.html</code></li><li><a href="foundation-pricing-tables.html">Foundation 价格表</a> <code>https://www.runoob.com/foundation/foundation-pricing-tables.html</code></li><li><a href="foundation-sidenav.html">Foundation 侧边栏</a> <code>https://www.runoob.com/foundation/foundation-sidenav.html</code></li><li><a href="foundation-pagination.html">Foundation 分页</a> <code>https://www.runoob.com/foundation/foundation-pagination.html</code></li><li><a href="foundation-lists.html">Foundation 列表</a> <code>https://www.runoob.com/foundation/foundation-lists.html</code></li><li><a href="foundation-icons.html">Foundation 图标</a> <code>https://www.runoob.com/foundation/foundation-icons.html</code></li><li><a href="foundation-images.html">Foundation 图片</a> <code>https://www.runoob.com/foundation/foundation-images.html</code></li><li><a href="foundation-equalizer.html">Foundation 均衡器(Equalizer)</a> <code>https://www.runoob.com/foundation/foundation-equalizer.html</code></li><li><a href="foundation-grid-block.html">Foundation 块状网格</a> <code>https://www.runoob.com/foundation/foundation-grid-block.html</code></li><li><a href="foundation-switches.html">Foundation 开关</a> <code>https://www.runoob.com/foundation/foundation-switches.html</code></li><li><a href="foundation-collapse.html">Foundation 折叠列表</a> <code>https://www.runoob.com/foundation/foundation-collapse.html</code></li><li><a href="foundation-buttons.html">Foundation 按钮</a> <code>https://www.runoob.com/foundation/foundation-buttons.html</code></li><li><a href="foundation-button-groups.html">Foundation 按钮组</a> <code>https://www.runoob.com/foundation/foundation-button-groups.html</code></li><li><a href="foundation-tooltips.html">Foundation 提示框</a> <code>https://www.runoob.com/foundation/foundation-tooltips.html</code></li><li><a href="foundation-alerts.html">Foundation 提醒框</a> <code>https://www.runoob.com/foundation/foundation-alerts.html</code></li><li><a href="foundation-typography.html">Foundation 文本</a> <code>https://www.runoob.com/foundation/foundation-typography.html</code></li><li><a href="foundation-labels.html">Foundation 标签</a> <code>https://www.runoob.com/foundation/foundation-labels.html</code></li><li><a href="foundation-modal.html">Foundation 模态框</a> <code>https://www.runoob.com/foundation/foundation-modal.html</code></li><li><a href="foundation-off-canvas.html">Foundation 滑动导航(Off-Canvas)</a> <code>https://www.runoob.com/foundation/foundation-off-canvas.html</code></li><li><a href="foundation-sliders.html">Foundation 滑块</a> <code>https://www.runoob.com/foundation/foundation-sliders.html</code></li><li><a href="foundation-grid-medium.html">Foundation 网格 – 中型设备</a> <code>https://www.runoob.com/foundation/foundation-grid-medium.html</code></li><li><a href="foundation-grid-large.html">Foundation 网格 – 大型设备</a> <code>https://www.runoob.com/foundation/foundation-grid-large.html</code></li><li><a href="foundation-grid-small.html">Foundation 网格 – 小型设备</a> <code>https://www.runoob.com/foundation/foundation-grid-small.html</code></li><li><a href="foundation-grid-stacked-to-horizontal.html">Foundation 网格 – 水平堆叠</a> <code>https://www.runoob.com/foundation/foundation-grid-stacked-to-horizontal.html</code></li><li><a href="foundation-grid-system.html">Foundation 网格系统</a> <code>https://www.runoob.com/foundation/foundation-grid-system.html</code></li><li><a href="foundation-forms.html">Foundation 表单</a> <code>https://www.runoob.com/foundation/foundation-forms.html</code></li><li><a href="foundation-tables.html">Foundation 表格</a> <code>https://www.runoob.com/foundation/foundation-tables.html</code></li><li><a href="foundation-get-started.html">Foundation 起步</a> <code>https://www.runoob.com/foundation/foundation-get-started.html</code></li><li><a href="foundation-input-sizing.html">Foundation 输入框尺寸</a> <code>https://www.runoob.com/foundation/foundation-input-sizing.html</code></li><li><a href="foundation-progressbars.html">Foundation 进度条</a> <code>https://www.runoob.com/foundation/foundation-progressbars.html</code></li><li><a href="foundation-tabs.html">Foundation 选项卡</a> <code>https://www.runoob.com/foundation/foundation-tabs.html</code></li><li><a href="foundation-panels.html">Foundation 面板</a> <code>https://www.runoob.com/foundation/foundation-panels.html</code></li><li><a href="foundation-topbar.html">Foundation 顶部导航栏</a> <code>https://www.runoob.com/foundation/foundation-topbar.html</code></li><li><a href="foundation-magellan.html">Foundation 麦哲伦（Magellan）导航</a> <code>https://www.runoob.com/foundation/foundation-magellan.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "Foundation 提醒框", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-alerts.html", "href": "foundation-alerts.html"}, {"title": "Foundation 按钮组", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-button-groups.html", "href": "foundation-button-groups.html"}, {"title": "Foundation 按钮", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-buttons.html", "href": "foundation-buttons.html"}, {"title": "Foundation 折叠列表", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-collapse.html", "href": "foundation-collapse.html"}, {"title": "Foundation 下拉菜单", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-dropdowns.html", "href": "foundation-dropdowns.html"}, {"title": "Foundation 均衡器(Equalizer)", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-equalizer.html", "href": "foundation-equalizer.html"}, {"title": "Foundation 表单", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-forms.html", "href": "foundation-forms.html"}, {"title": "Foundation 起步", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-get-started.html", "href": "foundation-get-started.html"}, {"title": "Foundation 块状网格", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-grid-block.html", "href": "foundation-grid-block.html"}, {"title": "Foundation 网格实例", "group": "foundation", "subgroup": "实例", "url": "https://www.runoob.com/foundation/foundation-grid-examples.html", "href": "foundation-grid-examples.html"}, {"title": "Foundation 网格 – 大型设备", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-grid-large.html", "href": "foundation-grid-large.html"}, {"title": "Foundation 网格 – 中型设备", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-grid-medium.html", "href": "foundation-grid-medium.html"}, {"title": "Foundation 网格 – 小型设备", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-grid-small.html", "href": "foundation-grid-small.html"}, {"title": "Foundation 网格 – 水平堆叠", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-grid-stacked-to-horizontal.html", "href": "foundation-grid-stacked-to-horizontal.html"}, {"title": "Foundation 网格系统", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-grid-system.html", "href": "foundation-grid-system.html"}, {"title": "Foundation 图标", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-icons.html", "href": "foundation-icons.html"}, {"title": "Foundation 图片", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-images.html", "href": "foundation-images.html"}, {"title": "Foundation 输入框\b尺寸", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-input-sizing.html", "href": "foundation-input-sizing.html"}, {"title": "Foundation Joyride", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-joyride.html", "href": "foundation-joyride.html"}, {"title": "Foundation 标签", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-labels.html", "href": "foundation-labels.html"}, {"title": "Foundation 列表", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-lists.html", "href": "foundation-lists.html"}, {"title": "Foundation 麦哲伦（Magellan）导航", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-magellan.html", "href": "foundation-magellan.html"}, {"title": "Foundation 模态框", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-modal.html", "href": "foundation-modal.html"}, {"title": "Foundation 滑动导航(Off-Canvas)", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-off-canvas.html", "href": "foundation-off-canvas.html"}, {"title": "Foundation 分页", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-pagination.html", "href": "foundation-pagination.html"}, {"title": "Foundation 面板", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-panels.html", "href": "foundation-panels.html"}, {"title": "Foundation 价格表", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-pricing-tables.html", "href": "foundation-pricing-tables.html"}, {"title": "Foundation 进度条", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-progressbars.html", "href": "foundation-progressbars.html"}, {"title": "Foundation CSS 参考手册", "group": "foundation", "subgroup": "参考", "url": "https://www.runoob.com/foundation/foundation-ref-helpers.html", "href": "foundation-ref-helpers.html"}, {"title": "Foundation 图标参考手册", "group": "foundation", "subgroup": "参考", "url": "https://www.runoob.com/foundation/foundation-ref-icons.html", "href": "foundation-ref-icons.html"}, {"title": "Foundation CSS 可见性", "group": "foundation", "subgroup": "参考", "url": "https://www.runoob.com/foundation/foundation-ref-visibility.html", "href": "foundation-ref-visibility.html"}, {"title": "Foundation 侧边栏", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-sidenav.html", "href": "foundation-sidenav.html"}, {"title": "Foundation 滑块", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-sliders.html", "href": "foundation-sliders.html"}, {"title": "Foundation 开关", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-switches.html", "href": "foundation-switches.html"}, {"title": "Foundation 表格", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-tables.html", "href": "foundation-tables.html"}, {"title": "Foundation 选项卡", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-tabs.html", "href": "foundation-tabs.html"}, {"title": "Foundation 提示框", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-tooltips.html", "href": "foundation-tooltips.html"}, {"title": "Foundation 顶部导航栏", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-topbar.html", "href": "foundation-topbar.html"}, {"title": "Foundation 教程", "group": "foundation", "subgroup": "入门", "url": "https://www.runoob.com/foundation/foundation-tutorial.html", "href": "foundation-tutorial.html"}, {"title": "Foundation 文本", "group": "foundation", "subgroup": "专题", "url": "https://www.runoob.com/foundation/foundation-typography.html", "href": "foundation-typography.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

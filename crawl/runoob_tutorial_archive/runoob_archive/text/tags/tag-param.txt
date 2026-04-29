@@ -1,0 +1,90 @@
+URL: https://www.runoob.com/tags/tag-param.html
+Title: HTML <param> 标签 | 菜鸟教程
+
+HTML <param> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <pre> 标签 
+
+HTML <p> 标签 
+
+HTML <param> 标签 
+
+实例 
+
+设置参数 "autoplay" 为 "true"，音频载入后会自动播放： 
+
+<object data="horse.wav"> 
+<param name="autoplay" value="true"> 
+</object> 
+
+尝试一下 » 
+
+浏览器支持 
+
+<param> 标签支持大部分主流浏览器。但是 <object> 定义的文件格式不是所有的浏览器都支持。 
+
+标签定义及使用说明 
+
+<param>元素允许您为插入 XHTML 文档的对象规定 run-time 设置，也就是说，此标签可为包含它的 <object> 或者 <applet> 标签提供参数。 
+
+在HTML 4.01 与 HTML5 之间的差异 
+
+HTML 4.01 属性： "type" 和 "valuetype"，在 HTML5 中不支持。 
+
+Differences Between HTML and XHTML 
+
+在 HTML 中，<param> 标签没有结束标签。 
+
+在 XHTML 中，<param> 标签必须被正确地关闭。 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+name 
+
+name 
+
+定义参数的名称（用在脚本中）。 
+
+type 
+
+MIME_type 
+
+HTML5不支持。 定义 MIME 类型参数。 
+
+value 
+
+value 
+
+描述参数值。 
+
+valuetype 
+
+data 
+ref 
+object 
+
+HTML5 不支持。 描述值的类型。 
+
+全局属性 
+
+<param> 标签支持全局属性，查看完整属性表 HTML全局属性 。 
+
+事件属性 
+
+<param> 标签支持所有 HTML事件属性 。 
+
+AI 思考中... 
+
+HTML <pre> 标签 
+
+HTML <p> 标签

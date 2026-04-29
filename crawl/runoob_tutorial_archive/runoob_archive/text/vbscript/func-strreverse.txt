@@ -1,0 +1,44 @@
+URL: https://www.runoob.com/vbscript/func-strreverse.html
+Title: VBScript StrReverse 函数 | 菜鸟教程
+
+VBScript StrReverse 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript String 函数 
+
+VBScript UCase 函数 
+
+VBScript StrReverse 函数 
+
+StrReverse 函数反转一个字符串。 
+
+语法 
+
+StrReverse(string) 
+
+参数 
+
+描述 
+
+string 
+
+必需。需被反转的字符串。 
+
+实例 1 
+
+Dim txt 
+txt="This is a beautiful day!" 
+document.write(StrReverse(txt)) 
+
+Output: 
+
+!yad lufituaeb a si sihT 
+
+AI 思考中... 
+
+VBScript String 函数 
+
+VBScript UCase 函数

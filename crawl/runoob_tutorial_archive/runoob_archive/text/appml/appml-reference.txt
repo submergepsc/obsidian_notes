@@ -1,0 +1,213 @@
+URL: https://www.runoob.com/appml/appml-reference.html
+Title: AppML 参考手册 | 菜鸟教程
+
+AppML 参考手册 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+AppML 教程 
+
+AppML 架构 
+
+AppML 案例简介 
+
+<AppML> 参考手册 
+
+<AppML> 数据模型： 
+
+<appml security=" security "> 
+
+<datasource> 
+Datasource definition goes here 
+</datasource> 
+
+<filters> 
+Filter definitions goes here (if any) 
+</filters> 
+
+<update> 
+Update definitions goes here (if any) 
+</update> 
+
+<anything> 
+Anything you want to add to the model 
+</anything> 
+
+</appml> 
+
+<AppML>安全 
+
+<AppML> 安全通过 <AppML> 标签中的安全属性设置。 
+
+<appml security="artists"> 
+
+以上应用开头包含了安全定义属性，只允许 artists 用户登陆。 
+
+在这种情况下，用户登录的用户名必须为 "artists"组的成员。 
+
+<datasource> 元素 
+
+<AppML>应用的的 <datasource> 元素定义了4个不同数据类型的: 
+
+子元素（只有一个可以适用） 
+
+元素 
+
+描述 
+
+<database> 
+
+定义数据类型 
+
+<xmlfile> 
+
+定义 XML 源文件 
+
+<csvfile> 
+
+定义一个逗号分隔的文本文件 
+
+<database> 元素 
+
+<database> 元素定义了数据库 
+
+子元素 
+
+元素 
+
+描述 
+
+<connection> 
+
+链接数据库名 
+
+<execute> 
+
+数据检索前执行的SQL语句（可选） 
+
+<sql> 
+
+用于检索数据的SQL语句 
+
+<maintable> 
+
+应用程序的主表（可选） 
+
+<keyfield> 
+
+主表的键字段（可选） 
+
+存储在SQL数据库中的数据 
+
+这是面向数据的应用程序最常用的解决方案。 
+
+<datasource> 
+<database> 
+<connection>CDDataBase</connection> 
+<sql>SELECT Artist, Title, Country FROM CD_Catalog</sql> 
+</database> 
+</datasource> 
+
+上面的模型可以从"CDDataBase"数据库的"CD_Catalog"表中选择三个数据选项 (Artist, Title, Country) 。 
+
+结果返回的行数是未知的。 
+
+存储在 XML 文件中的数据 
+
+<AppML> 可以从XML文件中读取数据: 
+
+实例 
+
+<appml> 
+
+<datasource> 
+<xmlfile src="cd_catalog.xml"> 
+
+<record>CD</record> 
+
+<item> 
+<name>Title</name> 
+<nodename>TITLE</nodename> 
+</item> 
+
+<item> 
+<name>Artist</name> 
+<nodename>ARTIST</nodename> 
+</item> 
+<item> 
+
+<name>Country</name> 
+<nodename>COUNTRY</nodename> 
+</item> 
+
+</xmlfile> 
+</datasource> 
+
+</appml> 
+
+尝试一下 » 
+
+此方法能够将数据存储在服务器上的XML文件。 
+
+数据存储在 文本（Text）文件中 
+
+<AppML> 可以从文本文件中读取数据： 
+
+实例 
+
+<appml> 
+
+<datasource> 
+<csvfile src="cd_catalog.txt"> 
+
+<item> 
+<name>Title</name> 
+<index>1</index> 
+</item> 
+
+<item> 
+<name>Artist</name> 
+<index>2</index> 
+</item> 
+
+<item> 
+<name>Price</name> 
+<index>5</index> 
+</item> 
+
+</csvfile> 
+</datasource> 
+
+</appml> 
+
+尝试一下 » 
+
+此方法可以在服务器上的将数据存储在文本文件中。 
+
+如果需要你可以创建数据库 
+
+<AppML> 如果有需要你可以创建一个数据库： 
+
+<database> 
+<connection>CDDataBase</connection> 
+
+<execute> 
+CREATE TABLE CD_catalog
+( 
+CD_Id INT IDENTITY, 
+Title NVARCHAR(255), 
+Artist NVARCHAR(255), 
+Country NVARCHAR(255), 
+Company NVARCHAR(255), 
+Price NUMBER,Published INT) 
+</execute> 
+
+</database> 
+
+完善快速原型模型！ 
+
+AI 思考中... 
+
+AppML 架构 
+
+AppML 案例简介

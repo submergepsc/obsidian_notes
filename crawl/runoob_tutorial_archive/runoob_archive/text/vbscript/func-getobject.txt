@@ -1,0 +1,38 @@
+URL: https://www.runoob.com/vbscript/func-getobject.html
+Title: VBScript GetObject 函数 | 菜鸟教程
+
+VBScript GetObject 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript GetLocale 函数 
+
+VBScript GetRef 函数 
+
+VBScript GetObject 函数 
+
+GetObject 函数返回对文件中 automation 对象的引用。 
+
+语法 
+
+GetObject([pathname][,class]) 
+
+参数 
+
+描述 
+
+pathname 
+
+可选。包含 automation 对象的文件的完整路径和名称。如果此参数被忽略，就必须有 class 参数。 
+
+class 
+
+可选。automation 对象的类。此参数使用此语法：appname.objectype。 
+
+AI 思考中... 
+
+VBScript GetLocale 函数 
+
+VBScript GetRef 函数

@@ -1,0 +1,72 @@
+URL: https://www.runoob.com/tags/tag-details.html
+Title: HTML <details> 标签 | 菜鸟教程
+
+HTML <details> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <del> 标签 
+
+HTML <dfn> 标签 
+
+HTML <details> 标签 
+
+实例 
+
+使用 <details> 元素： 
+
+< details > < summary > Copyright 1999-2011. </ summary > < p > - by Refsnes Data. All Rights Reserved. </ p > < p > All content and graphics on this web site are the property of the company Refsnes Data. </ p > </ details > 
+
+尝试一下 » 
+
+浏览器支持 
+
+目前，只有 Chrome 和 Safari 6 支持 <details> 标签。 
+
+标签定义及使用说明 
+
+<details> 标签规定了用户可见的或者隐藏的需求的补充细节。 
+
+<details> 标签用来供用户开启关闭的交互式控件。任何形式的内容都能被放在 <details> 标签里边。 
+
+<details> 元素的内容对用户是不可见的，除非设置了 open 属性。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+<details> 标签是 HTML5 中的新标签。 
+
+提示和注释 
+
+提示： 与 <summary> 标签配合使用可以为 details 定义标题。标题是可见的，用户点击标题时，会显示出 details。 
+
+属性 
+
+New ：HTML5 中的新属性。 
+
+属性 
+
+值 
+
+描述 
+
+open New 
+
+open 
+
+规定 details 是否可见。 
+
+全局属性 
+
+<details> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<details> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML <del> 标签 
+
+HTML <dfn> 标签

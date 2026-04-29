@@ -1,0 +1,28 @@
+URL: https://www.runoob.com/firebug/firebug-profile.html
+Title: Firebug页面概况查看 | 菜鸟教程
+
+Firebug页面概况查看 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Firebug 教程 
+
+使用 Firebug 调试 JavaScript 
+
+Firebug动态执行JavaScript 
+
+Firebug页面概况查看 
+
+Firebug 官网宣布已停止继续开发、更新维护 Firebug 的通知，邀请大家使用 Firefox 内置工具 DevTools 。 
+
+使用Firebug的概况，你可以测试Web页面导致延迟加载的文件。 
+
+通过打开页面 Firebug > Console（控制台）> Profile（概况）。 
+
+你需要重新加载页面，然后点击"概况"查看页面载入情况。 
+
+AI 思考中... 
+
+使用 Firebug 调试 JavaScript 
+
+Firebug动态执行JavaScript

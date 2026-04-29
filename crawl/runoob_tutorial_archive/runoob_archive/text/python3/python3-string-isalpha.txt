@@ -1,0 +1,104 @@
+URL: https://www.runoob.com/python3/python3-string-isalpha.html
+Title: Python3 isalpha()方法 | 菜鸟教程
+
+Python3 isalpha()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 isalnum()方法 
+
+Python3 isdigit()方法 
+
+Python3 isalpha()方法 
+
+描述 
+
+Python isalpha() 方法检测字符串是否只由字母或文字组成。 
+
+空字符串 ：如果字符串为空（长度为0），则返回 False ，因为空字符串不包含任何字母。 
+
+大小写敏感 ： isalpha() 方法区分大小写，即只有字母的字符才会被认为是有效的。 
+
+特殊字符 ：特殊字符（如标点符号、空格、数字、特殊符号等）不被认为是字母。 
+
+语法 
+
+isalpha()方法语法： 
+
+str.isalpha() 
+
+参数 
+
+无。 
+
+返回值 
+
+如果字符串至少有一个字符并且所有字符都是字母或文字则返回 True，否则返回 False。 
+
+实例 
+
+以下实例展示了isalpha()方法的实例： 
+
+实例 
+
+#!/usr/bin/python3 
+
+str = "runoob" 
+
+print ( str . isalpha ( ) ) 
+
+# 字母和中文文字 
+
+str = "runoob菜鸟教程" 
+
+print ( str . isalpha ( ) ) 
+
+str = "Runoob example....wow!!!" 
+
+print ( str . isalpha ( ) ) 
+
+以上实例输出结果如下： 
+
+True
+True
+False 
+
+更多实例： 
+
+实例 
+
+# 示例 1: 只包含字母的字符串 
+
+print ( "HelloWorld" . isalpha ( ) ) # 输出: True 
+
+# 示例 2: 包含数字的字符串 
+
+print ( "Hello123" . isalpha ( ) ) # 输出: False 
+
+# 示例 3: 包含空格的字符串 
+
+print ( "Hello World" . isalpha ( ) ) # 输出: False 
+
+# 示例 4: 包含特殊字符的字符串 
+
+print ( "Hello#World" . isalpha ( ) ) # 输出: False 
+
+# 示例 5: 空字符串 
+
+print ( "" . isalpha ( ) ) # 输出: False 
+
+# 示例 6: 包含下划线的字符串 
+
+print ( "Hello_World" . isalpha ( ) ) # 输出: False 
+
+# 示例 7: 包含非ASCII字母的字符串 
+
+print ( "HélloWorld" . isalpha ( ) ) # 输出: True，因为é是字母 
+
+AI 思考中... 
+
+Python3 isalnum()方法 
+
+Python3 isdigit()方法

@@ -1,0 +1,458 @@
+URL: https://www.runoob.com/codex/codex-examples.html
+Title: Codex CLI 实用示例 | 菜鸟教程
+
+Codex CLI 实用示例 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Codex 教程 
+
+Codex CLI 沙箱与安全 
+
+Codex CLI 提示词技巧 
+
+Codex CLI 实用示例 
+
+本节通过实际示例展示 Codex CLI 的各种使用场景，帮助你快速掌握在实际开发中的应用。 
+
+代码编写 
+
+示例 1：创建新功能 
+
+让 Codex 为你创建一个完整的功能模块： 
+
+任务 
+
+创建一个 Python 函数，接受一个字符串列表，返回最长的字符串及其索引位置 
+
+Codex 会生成类似以下的代码： 
+
+生成的代码 
+
+def find_longest_string ( strings ) : 
+
+""" 
+
+找到字符串列表中最长的字符串及其索引位置。 
+
+Args: 
+
+strings: 字符串列表 
+
+Returns: 
+
+tuple: (最长字符串, 索引位置) 
+
+如果列表为空，返回 (None, -1) 
+
+""" 
+
+if not strings: 
+
+return None , - 1 
+
+longest = max ( strings , key = len ) 
+
+index = strings. index ( longest ) 
+
+return longest , index 
+
+# 测试示例 
+
+if __name__ == "__main__" : 
+
+test_list = [ "apple" , "banana" , "cherry" , "dragonfruit" ] 
+
+result , idx = find_longest_string ( test_list ) 
+
+print ( f "最长字符串: {result}, 索引: {idx}" ) 
+
+# 输出: 最长字符串: dragonfruit, 索引: 3 
+
+Codex 生成的代码包含详细的文档注释和测试示例，可以直接使用。 
+
+示例 2：重构代码 
+
+请求 Codex 重构现有代码： 
+
+任务 
+
+将这个函数重构为使用生成器： 
+
+def get_squares ( n ) : 
+
+result = [ ] 
+
+for i in range ( n ) : 
+
+result.append ( i * i ) 
+
+return result 
+
+Codex 会提供重构后的代码： 
+
+重构后的代码 
+
+def get_squares ( n ) : 
+
+""" 
+
+生成 0 到 n-1 的平方数。 
+
+Args: 
+
+n: 生成平方数的个数 
+
+Yields: 
+
+int: 0 到 n-1 的平方数 
+
+""" 
+
+for i in range ( n ) : 
+
+yield i * i 
+
+# 使用示例 
+
+for square in get_squares ( 5 ) : 
+
+print ( square ) 
+
+# 输出: 0, 1, 4, 9, 16 
+
+代码审查 
+
+示例 1：审查代码问题 
+
+请求 Codex 审查代码并提出改进建议： 
+
+任务 
+
+审查以下代码的问题： 
+
+def process_data ( data ) : 
+
+result = [ ] 
+
+for item in data: 
+
+if item [ 'type' ] == 'a' : 
+
+result.append ( item [ 'value' ] * 2 ) 
+
+elif item [ 'type' ] == 'b' : 
+
+result.append ( item [ 'value' ] + 10 ) 
+
+elif item [ 'type' ] == 'c' : 
+
+result.append ( item [ 'value' ] ) 
+
+return result 
+
+Codex 会分析并提供审查报告： 
+
+## 代码审查报告
+
+### 问题
+1. **缺少错误处理**：没有检查 item 是否包含必要的键
+2. **类型不一致**：'c' 类型直接返回原值，而其他类型做了处理
+3. **硬编码值**：乘数和加数应该作为参数或配置
+
+### 改进建议
+1. 添加默认字典或 try-except 处理
+2. 统一处理逻辑
+3. 将 magic numbers 提取为常量 
+
+示例 2：使用 /review 命令 
+
+在 Codex 中使用内置的审查命令： 
+
+任务 
+
+/ review src / 
+
+Codex 会扫描整个 src/ 目录并生成全面的代码审查报告。 
+
+调试与问题排查 
+
+示例 1：分析错误信息 
+
+将错误信息交给 Codex 分析： 
+
+任务 
+
+帮我分析这个错误： 
+
+Traceback ( most recent call last ) : 
+
+File "app.py" , line 42 , in < module > 
+
+main ( ) 
+
+File "app.py" , line 38 , in fetch_data ( ) 
+
+File "app.py" , line 25 , in fetch_data 
+
+response = requests.get ( url ) 
+
+File "/usr/lib/python3.10/site-packages/requests/api.py" , line 88 , in in get 
+
+return session.request ( method = 'GET' , url =url, ** kwargs ) 
+
+requests.exceptions.ConnectionError: HTTPSConnectionPool ( host = 'api.example.com' , port = 443 ) : Max retries exceeded 
+
+Codex 会提供分析和解决方案： 
+
+## 错误分析
+
+### 原因
+网络连接问题 - 无法连接到 api.example.com
+
+### 可能的原因
+1. 网络不通
+2. 域名解析失败
+3. 服务器不可用
+4. 防火墙阻止
+
+### 建议的排查步骤
+1. 检查网络连接：ping api.example.com
+2. 验证域名解析：nslookup api.example.com
+3. 检查端口是否开放：telnet api.example.com 443
+4. 如果是本地开发，检查代理设置 
+
+示例 2：添加调试日志 
+
+请求 Codex 添加调试代码： 
+
+任务 
+
+为这个函数添加调试日志： 
+
+def calculate ( a, b ) : 
+
+return a + b * ( a - b ) 
+
+Codex 会生成带调试日志的版本： 
+
+添加调试日志 
+
+import logging 
+
+# 配置日志 
+
+logging . basicConfig ( level = logging . DEBUG ) 
+
+logger = logging . getLogger ( __name__ ) 
+
+def calculate ( a , b ) : 
+
+"""带调试日志的计算函数""" 
+
+logger. debug ( f "calculate called with a={a}, b={b}" ) 
+
+result = a + b * ( a - b ) 
+
+logger. debug ( f "a + b = {a} + {b} = {a + b}" ) 
+
+logger. debug ( f "a - b = {a} - {b} = {a - b}" ) 
+
+logger. debug ( f "b * (a - b) = {b} * {a - b} = {b * (a - b)}" ) 
+
+logger. debug ( f "final result: {result}" ) 
+
+return result 
+
+文件操作 
+
+示例 1：批量重命名文件 
+
+任务 
+
+将当前目录下所有 image_001.jpg 这样的文件重命名为 image-001.jpg（将下划线改为连字符） 
+
+示例 2：创建项目结构 
+
+任务 
+
+创建一个 Flask 项目的标准目录结构，包含： 
+
+- app.py 主文件 
+
+- config.py 配置文件 
+
+- requirements.txt 
+
+- tests / 目录 
+
+- static / 和 templates / 目录 
+
+Codex 会创建完整的项目结构，并生成所有必要的文件。 
+
+Codex 会先列出将创建的文件列表，确认后再执行。 
+
+命令执行 
+
+示例 1：运行测试 
+
+任务 
+
+运行项目的单元测试 
+
+Codex 会自动检测项目类型并运行相应的测试命令： 
+
+Python 项目：pytest 或 unittest 
+
+Node.js 项目：npm test 或 yarn test 
+
+Rust 项目：cargo test 
+
+示例 2：Git 操作 
+
+任务 
+
+创建一个 Git commit，包含所有修改并使用合适的提交信息 
+
+Codex 会分析所有未提交的变更，然后执行： 
+
+git status - 查看变更 
+
+git diff - 审查具体修改 
+
+git add -A - 添加所有文件 
+
+git commit -m "..." - 创建提交 
+
+对于 Git 操作，Codex 会先展示变更内容，确认后才执行。 
+
+项目分析 
+
+示例 1：理解项目结构 
+
+任务 
+
+分析这个项目的架构和技术栈 
+
+Codex 会检查项目的： 
+
+配置文件（package.json, Cargo.toml, requirements.txt 等） 
+
+目录结构 
+
+主要源文件 
+
+然后提供详细的分析报告。 
+
+示例 2：查找依赖关系 
+
+任务 
+
+找出 auth.py 文件被哪些文件引用 
+
+计划模式 
+
+使用 /plan 命令进行复杂任务的规划： 
+
+任务 
+
+/ plan 为这个 React 项目添加用户认证功能，包括登录、注册和 JWT 验证 
+
+Codex 会先展示详细的实施计划： 
+
+## 实施计划：用户认证功能
+
+### 步骤 1：准备
+- 创建用户模型
+- 安装认证依赖（jsonwebtoken, bcryptjs）
+
+### 步骤 2：后端实现
+- 创建 /api/auth/register 端点
+- 创建 /api/auth/login 端点
+- 实现 JWT 生成和验证中间件
+
+### 步骤 3：前端实现
+- 创建登录表单组件
+- 创建注册表单组件
+- 添加认证状态管理
+
+### 步骤 4：测试
+- 编写后端单元测试
+- 测试前端表单交互
+
+是否确认执行此计划？
+[Y] 确认 [N] 取消 [M] 修改 
+
+计划模式让你在执行前了解 Codex 的完整思路，可以避免不必要的返工。 
+
+综合示例 
+
+一个完整的工作流程示例： 
+
+完整工作流程 
+
+# 1. 开始新会话 
+
+/ new 
+
+# 2. 了解项目 
+
+这个项目使用什么框架？有哪些主要功能？ 
+
+# 3. 添加新功能 
+
+在 users 模块中添加一个发送验证码的功能，需要考虑： 
+
+- 验证码生成（ 6 位数字） 
+
+- 60 秒内不能重新发送 
+
+- 验证码 10 分钟有效 
+
+# 4. 测试 
+
+运行相关测试确保功能正常 
+
+# 5. 代码审查 
+
+/ review 
+
+这个示例展示了一个典型的开发流程：理解项目 → 实现功能 → 测试 → 审查。 
+
+快捷操作汇总 
+
+场景 
+
+使用的命令 
+
+写一个函数 
+
+描述需求即可 
+
+审查代码 
+
+/review 或 "帮我审查..." 
+
+调试问题 
+
+粘贴错误信息并请求分析 
+
+执行命令 
+
+以 ! 开头 
+
+复杂任务规划 
+
+/plan + 任务描述 
+
+理解代码 
+
+"这个函数是做什么的？" 
+
+熟能生巧，多使用 Codex 会让你越来越熟练，编写代码的效率也会大幅提升。 
+
+AI 思考中... 
+
+Codex CLI 沙箱与安全 
+
+Codex CLI 提示词技巧

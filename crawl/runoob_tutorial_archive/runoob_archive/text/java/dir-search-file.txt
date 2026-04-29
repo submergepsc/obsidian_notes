@@ -1,0 +1,31 @@
+URL: https://www.runoob.com/java/dir-search-file.html
+Title: Java 实例 – 在指定目录中查找文件 | 菜鸟教程
+
+Java 实例 – 在指定目录中查找文件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 遍历系统根目录 
+
+Java 实例 – 遍历指定目录下的所有文件 
+
+Java 实例 - 在指定目录中查找文件 
+
+以下实例演示了在 C 盘中查找以字母 'b' 开头的所有文件： 
+
+Main.java 文件 
+
+import java . io .*; class Main { public static void main ( String [ ] args ) { File dir = new File ( " C: " ) ; FilenameFilter filter = new FilenameFilter ( ) { public boolean accept ( File dir , String name ) { return name . startsWith ( " b " ) ; } } ; String [ ] children = dir . list ( filter ) ; if ( children == null ) { System . out . println ( " 目录不存在或它不是一个目录 " ) ; } else { for ( int i = 0 ; i < children . length ; i ++ ) { String filename = children [ i ] ; System . out . println ( filename ) ; } } } } 
+
+以上代码运行输出结果为： 
+
+build
+build.xml 
+
+AI 思考中... 
+
+Java 实例 – 遍历系统根目录 
+
+Java 实例 – 遍历指定目录下的所有文件

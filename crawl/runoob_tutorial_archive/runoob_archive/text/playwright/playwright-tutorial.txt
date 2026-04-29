@@ -1,0 +1,96 @@
+URL: https://www.runoob.com/playwright/playwright-tutorial.html
+Title: Playwright 教程 | 菜鸟教程
+
+Playwright 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Playwright 教程 
+
+Playwright 简介 
+
+Playwright 教程 
+
+Playwright 是微软（Microsoft） 在 2020 年推出的一个开源项目，用于 Web 自动化和端到端（End-to-End）测试的开源框架。 
+
+Playwright支持多种浏览器（Chromium、Firefox 和 WebKit）和多种编程语言（JavaScript/TypeScript、Python、Java 和 .NET），旨在提供可靠、快速且功能丰富的自动化测试解决方案。 
+
+学习 Playwright 需要的基础知识？ 
+
+学习 Playwright 前，掌握这几样就够了： 
+
+会点 JavaScript ，尤其是 async/await ； 
+
+会用 Node.js 和 npm 来运行脚本； 
+
+懂点 HTML 和选择器 （比如 #id 、 .class ）； 
+
+能用终端 跑命令。 
+
+要不要我帮你把这几句话做成一张 新手清单式配图 ？ 
+
+Playwright 能干什么？ 
+
+用一句话总结：只要人能在浏览器里点的，Playwright 几乎都能自动化完成。 
+
+比如： 
+
+点击按钮 
+
+填写表单 
+
+导航到不同的页面 
+
+截图和保存网页内容 
+
+Playwright 简单实例 
+
+以下是一个 Playwright 的简单实例，可以截图百度的首页： 
+
+实例 
+
+// hello.js 
+
+const { chromium } = require ( 'playwright' ) ; 
+
+( async ( ) => { 
+
+// 1. 启动浏览器 
+
+const browser = await chromium. launch ( { headless : false } ) ; // 设置 false 可以看到浏览器 
+
+const page = await browser. newPage ( ) ; 
+
+// 2. 打开网页 
+
+await page. goto ( 'https://www.baidu.com' ) ; 
+
+// 3. 截图保存 
+
+await page. screenshot ( { path : 'baidu.png' } ) ; 
+
+// 4. 关闭浏览器 
+
+await browser. close ( ) ; 
+
+console. log ( "截图已保存到 example.png" ) ; 
+
+} ) ( ) ; 
+
+运行： 
+
+node hello.js 
+
+浏览器会自动输入两条待办事项，并保存截图。 
+
+相关链接 
+
+Playwright 官网： https://playwright.dev/ 
+
+Playwright 开源地址： https://github.com/microsoft/playwright 
+
+Playwright API 文档： https://playwright.dev/docs/api/class-playwright/ 
+
+AI 思考中... 
+
+Playwright 简介

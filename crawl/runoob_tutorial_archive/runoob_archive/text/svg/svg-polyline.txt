@@ -1,0 +1,77 @@
+URL: https://www.runoob.com/svg/svg-polyline.html
+Title: SVG 多段线 | 菜鸟教程
+
+SVG 多段线 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+SVG 教程 
+
+SVG 路径 
+
+SVG 文本 
+
+SVG 多段 <polyline> 
+
+SVG 中的 <polyline> 元素用于绘制多段线，它是 SVG 中常用的基本形状之一。 
+
+与 <polygon> 元素不同， <polyline> 绘制的线条是未封闭的，即起点和终点不会自动连接。使用 <polyline> 元素可以创建多个连接的线段，并可以通过设置属性来控制线段的顶点坐标、填充颜色、边框颜色等。 
+
+基本语法 
+
+<polyline
+ points="x1,y1 x2,y2 x3,y3 ..." <!-- 多段线各个顶点的坐标 -->
+ fill="none" <!-- 多段线的填充颜色，使用 "none" 表示不填充 -->
+ stroke="stroke-color" <!-- 多段线的边框颜色 -->
+ stroke-width="width" <!-- 多段线的边框宽度 -->
+/> 
+
+属性解析： 
+
+points 属性定义了多段线各个顶点的坐标，多个顶点的坐标以空格或逗号分隔，并且每对坐标使用逗号分隔。 
+
+fill 属性用于定义多段线的填充颜色，通常设置为 "none" 表示不填充。 
+
+stroke 属性定义了多段线的边框颜色。 
+
+stroke-width 属性定义了多段线的边框宽度。 
+
+以下代码绘制了一个黑色描边、宽度为 2 像素的多段线，其顶点坐标分别为 (50, 50)、(100, 150)、(150, 100) 和 (200, 200)，形成了多个连接的线段。 
+
+<svg width="200" height="200" xmlns="http://www.w3.org/2000/svg">
+ <polyline points="50,50 100,150 150,100 200,200" fill="none" stroke="black" stroke-width="2" />
+</svg> 
+
+实例 1 
+
+<polyline> 元素是用于创建任何只有直线的形状： 
+
+下面是SVG代码： 
+
+实例 
+
+< svg xmlns = " http://www.w3.org/2000/svg " version = " 1.1 " > < polyline points = " 20,20 40,25 60,40 80,120 120,140 200,180 " style = " fill:none;stroke:black;stroke-width:3 " /> </ svg > 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+实例 2 
+
+只有直线的另一个例子： 
+
+下面是 SVG 代码： 
+
+实例 
+
+< svg xmlns = " http://www.w3.org/2000/svg " version = " 1.1 " > < polyline points = " 0,40 40,40 40,80 80,80 80,120 120,120 120,160 " style = " fill:white;stroke:red;stroke-width:4 " /> </ svg > 
+
+尝试一下 » 
+
+点击查看： 查看 SVG 文件 。 
+
+AI 思考中... 
+
+SVG 路径 
+
+SVG 文本

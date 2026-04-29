@@ -1,0 +1,77 @@
+URL: https://www.runoob.com/foundation/foundation-tooltips.html
+Title: Foundation 提示框 | 菜鸟教程
+
+Foundation 提示框 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 滑块 
+
+Foundation 模态框 
+
+Foundation 提示框 
+
+提示框在鼠标移动到元素上后显示： 
+
+我们可以在任何元素上添加 data-tooltip 属性来创建提示信息。使用 title 属性来设置提示信息的文本。 
+
+注意: 滑块需要使用 JavaScript。所以你需要初始化
+Foundation JS: 
+
+实例 
+
+< span data-tooltip title= "Hooray!" > Hover over me! < /span > 
+
+<!-- Initialize Foundation JS --> 
+< script > 
+$(document).ready(function() { 
+$(document).foundation(); 
+}) 
+< /script > 
+
+尝试一下 » 
+
+.has-tip 类可以加粗鼠标移动的文本: 
+
+实例 
+
+< span data-tooltip class= "has-tip" title= "Hooray!" > Hover over me! < /span > 
+
+尝试一下 » 
+
+提示框显示位置 
+
+默认情况下，提示框会出现在元素的底部。 
+
+可以使用 .tip-top , .tip-left , .tip-right or .tip-bottom (默认) 来设置提示框的位置。 
+
+注意: 在小尺寸的屏幕上，提示框的宽带是 100%。 
+
+实例 
+
+< span data-tooltip class= "has-tip tip-top" title= "Hooray!" > Top < /span > 
+< span data-tooltip class= "has-tip tip-bottom" title= "Hooray!" > Bottom < /span > 
+< span data-tooltip class= "has-tip tip-left" title= "Hooray!" > Left < /span > 
+< span data-tooltip class= "has-tip tip-right" title= "Hooray!" > Right < /span > 
+
+尝试一下 » 
+
+圆角提示框 
+
+.radius 和 .round 类用于设置圆角提示框： 
+
+实例 
+
+< span data-tooltip class= "has-tip" title= "Hooray!" > Default < /span > 
+< span data-tooltip class= "has-tip radius" title= "Hooray!" > Radius < /span > 
+< span data-tooltip class= "has-tip round" title= "Hooray!" > Round < /span > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Foundation 滑块 
+
+Foundation 模态框

@@ -1,0 +1,48 @@
+URL: https://www.runoob.com/tags/html-colorpicker.html
+Title: HTML 取色器/拾色器 | 菜鸟教程
+
+HTML 取色器/拾色器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 颜色名 
+
+HTML <pre> 标签 
+
+HTML 取色器/拾色器 
+
+选取颜色: 
+
+或输入颜色值: 
+
+OK 
+
+Wrong Input 
+
+或使用 HTML5: 
+
+选择的颜色: 
+
+黑色文本 
+
+阴影 
+
+白色文本 
+
+阴影 
+
+RGB (Red, Green, Blue) 
+
+Red 
+
+Green 
+
+Blue 
+
+AI 思考中... 
+
+HTML 颜色名 
+
+HTML <pre> 标签

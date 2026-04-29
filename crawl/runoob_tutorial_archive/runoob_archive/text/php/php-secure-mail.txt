@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/php/php-secure-mail.html
+Title: PHP 安全 E-mail | 菜鸟教程
+
+PHP 安全 E-mail | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+PHP 教程

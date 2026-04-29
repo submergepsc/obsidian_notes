@@ -1,0 +1,134 @@
+URL: https://www.runoob.com/xquery/xquery-select.html
+Title: XQuery 选择和过滤 | 菜鸟教程
+
+XQuery 选择和过滤 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XQuery 教程 
+
+XQuery 添加元素和属性 
+
+XQuery 函数 
+
+XQuery 选择 和 过滤 
+
+XML实例文档 
+
+我们将在下面的例子中继续使用这个 "books.xml" 文档（和上面的章节所使用的 XML 文件相同）。 
+
+在您的浏览器中查看 "books.xml" 文件 。 
+
+选择和过滤元素 
+
+正如在前面的章节所看到的，我们使用路径表达式或 FLWOR 表达式来选取和过滤元素。 
+
+请看下面的 FLWOR 表达式： 
+
+for $x in doc("books.xml")/bookstore/book 
+where $x/price>30 
+order by $x/title 
+return $x/title 
+
+for - （可选） 向每个由 in 表达式返回的项目捆绑一个变量 
+
+let - （可选） 
+
+where - （可选） 设定一个条件 
+
+order by - （可选） 设定结果的排列顺序 
+
+return - 规定在结果中返回的内容 
+
+for 语句 
+
+for 语句可将变量捆绑到由 in 表达式返回的每个项目。for 语句可产生迭代。在同一个 FLWOR 表达式中可存在多重 for 语句。 
+
+如需在一个 for 语句中进行指定次数地循环，您可使用关键词 to ： 
+
+for $x in (1 to 5) 
+return <test>{$x}</test> 
+
+结果： 
+
+<test>1</test> 
+<test>2</test> 
+<test>3</test> 
+<test>4</test> 
+<test>5</test> 
+
+关键词 at 可用于计算迭代： 
+
+for $x at $i in doc("books.xml")/bookstore/book/title 
+return <book>{$i}. {data($x)}</book> 
+
+结果： 
+
+<book>1. Everyday Italian</book> 
+<book>2. Harry Potter</book> 
+<book>3. XQuery Kick Start</book> 
+<book>4. Learning XML</book> 
+
+在 for 语句中同样允许多个 in 表达式。请使用逗号来分割每一个 in 表达式： 
+
+for $x in (10,20), $y in (100,200) 
+return <test>x={$x} and y={$y}</test> 
+
+结果： 
+
+<test>x=10 and y=100</test> 
+<test>x=10 and y=200</test> 
+<test>x=20 and y=100</test> 
+<test>x=20 and y=200</test> 
+
+let 语句 
+
+let 语句可完成变量分配，并可避免多次重复相同的表达式。let 语句不会导致迭代。 
+
+let $x := (1 to 5) 
+return <test>{$x}</test> 
+
+结果： 
+
+<test>1 2 3 4 5</test> 
+
+where 语句 
+
+where 语句用于为结果设定一个或多个条件（criteria）。 
+
+where $x/price>30 and $x/price<100 
+
+order by 语句 
+
+order by 语句用于规定结果的排序次序。在这里，我们要根据 category 和 title 来对结果进行排序： 
+
+for $x in doc("books.xml")/bookstore/book 
+order by $x/@category, $x/title 
+return $x/title 
+
+结果： 
+
+<title lang="en">Harry Potter</title> 
+<title lang="en">Everyday Italian</title> 
+<title lang="en">Learning XML</title> 
+<title lang="en">XQuery Kick Start</title> 
+
+return 语句： 
+
+return 语句规定要返回的内容。 
+
+for $x in doc("books.xml")/bookstore/book 
+return $x/title 
+
+结果： 
+
+<title lang="en">Everyday Italian</title> 
+<title lang="en">Harry Potter</title> 
+<title lang="en">XQuery Kick Start</title> 
+<title lang="en">Learning XML</title> 
+
+AI 思考中... 
+
+XQuery 添加元素和属性 
+
+XQuery 函数

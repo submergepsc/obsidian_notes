@@ -1,0 +1,394 @@
+URL: https://www.runoob.com/typescript/ts-literal-types.html
+Title: TypeScript 字面量类型 | 菜鸟教程
+
+TypeScript 字面量类型 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+TypeScript 教程 
+
+TypeScript type 别名 
+
+TypeScript 抽象类 
+
+TypeScript 字面量类型 
+
+字面量类型（Literal Types）是 TypeScript 中一种表示特定值而不是通用类型的特性。 
+
+它允许我们将变量类型限制为具体的值，而不是宽泛的 string、number 等类型。 
+
+这提供了更精确的类型控制，使代码更加类型安全。 
+
+为什么需要字面量类型 
+
+在 TypeScript 中，默认的类型如 string 和 number 过于宽泛。 
+
+有时我们需要更精确的类型控制。例如，一个变量只能取特定的几个值。 
+
+字面量类型正是为了解决这类问题而生的。 
+
+概念说明： 字面量类型是泛型类型（string、number）的具体值。例如 "up" 是 string 的子类型，只能赋值给它的值是特定的字符串。 
+
+字符串字面量类型 
+
+字符串字面量类型将变量的取值限制为特定的字符串。 
+
+这在需要限制变量只能取某些固定值时非常有用。 
+
+实例 
+
+// 定义字符串字面量类型 
+
+// direction 只能是四个特定值之一 
+
+var direction : "up" | "down" | "left" | "right" ; 
+
+// 正确：赋值为字面量类型中的值 
+
+direction = "up" ; 
+
+// 错误：赋值不在列表中的值 
+
+// direction = "upup"; // 编译错误！ 
+
+console. log ( "方向: " + direction ) ; 
+
+// 使用类型别名创建可复用的字面量类型 
+
+// 定义状态类型：只能是三个固定值之一 
+
+type Status = "pending" | "active" | "completed" ; 
+
+// 使用类型别名 
+
+var currentStatus : Status = "active" ; 
+
+console. log ( "状态: " + currentStatus ) ; 
+
+运行结果： 
+
+方向: up
+状态: active 
+
+应用场景： 字符串字面量常用于定义枚举值、状态码、配置选项等需要限制为特定值的场景。 
+
+数字字面量类型 
+
+数字字面量类型将变量的取值限制为特定的数字。 
+
+这在需要使用特定数值（如状态码、错误码）时非常有用。 
+
+实例 
+
+// 定义数字字面量类型 
+
+// code 只能是三个特定值之一 
+
+var code : 200 | 404 | 500 ; 
+
+// 正确：赋值 200 
+
+code = 200 ; 
+
+// 错误：赋值不在列表中的值 
+
+// code = 301; // 编译错误！ 
+
+console. log ( "状态码: " + code ) ; 
+
+// 使用数字字面量模拟枚举 
+
+// 定义一周的天数 
+
+type Weekday = 1 | 2 | 3 | 4 | 5 | 6 | 7 ; 
+
+// 只能赋值 1-7 之间的数字 
+
+var today : Weekday = 1 ; 
+
+console. log ( "今天是星期: " + today ) ; 
+
+说明： 数字字面量可以替代简单的枚举（enum）使用，尤其在只需要几个固定数值时。 
+
+布尔字面量类型 
+
+布尔字面量类型将变量的取值限制为 true 或 false。 
+
+实际上，TypeScript 中的 boolean 类型就是 true | false 的别名。 
+
+实例 
+
+// 定义布尔字面量类型 
+
+// isActive 只能是 true 或 false 
+
+var isActive : true | false ; 
+
+// 赋值 true 
+
+isActive = true ; 
+
+// 实际上 boolean 就是 true | false 的联合类型 
+
+// 所以这两种写法是等价的 
+
+var flag : boolean = true ; 
+
+console. log ( "是否激活: " + isActive ) ; 
+
+提示： 虽然 boolean 本身已经足够使用，但在需要明确区分 true 和 false 的类型时，可以使用 true 或 false 作为类型。 
+
+对象字面量类型 
+
+对象字面量类型可以定义对象的结构，并可以使用 readonly 修饰符将属性设为只读。 
+
+这在需要创建不可变对象时非常有用。 
+
+实例 
+
+// 定义对象字面量类型 
+
+// 指定对象的结构和属性类型 
+
+type Point = { 
+
+// 点的 x 坐标 
+
+x : number ; 
+
+// 点的 y 坐标 
+
+y : number ; 
+
+} ; 
+
+// 使用对象字面量类型 
+
+var p : Point = { x : 10 , y : 20 } ; 
+
+console. log ( "点: " + JSON. stringify ( p ) ) ; 
+
+// 定义只读对象类型 
+
+// 使用 readonly 修饰符将属性设为只读 
+
+type ReadonlyPoint = { 
+
+// 只读的 x 坐标 
+
+readonly x : number ; 
+
+// 只读的 y 坐标 
+
+readonly y : number ; 
+
+} ; 
+
+// 使用只读对象类型 
+
+var rp : ReadonlyPoint = { x : 1 , y : 2 } ; 
+
+// 尝试修改只读属性会报错 
+
+// rp.x = 3; // 编译错误：只读属性不能修改 
+
+console. log ( "只读点: " + JSON. stringify ( rp ) ) ; 
+
+运行结果： 
+
+点: {"x":10,"y":20}
+只读点: {"x":1,"y":2} 
+
+应用场景： 只读对象常用于定义配置对象、常量对象等不希望被修改的数据。 
+
+字面量类型与类型推断 
+
+TypeScript 会根据变量的声明方式自动推断为字面量类型。 
+
+使用 const 声明的变量会被推断为具体的字面量类型，而不是宽泛的类型。 
+
+实例 
+
+// 使用 var 声明并赋值 
+
+// TypeScript 会推断为宽泛类型 
+
+var name = "Alice" ; // 类型: string（因为 var 可以重新赋值） 
+
+var age = 25 ; // 类型: number 
+
+var enabled = true ; // 类型: boolean 
+
+console. log ( "名字: " + name + ", 年龄: " + age + ", 启用: " + enabled ) ; 
+
+// 使用 as const 创建深度只读字面量 
+
+// 数组变为只读元组，值为字面量类型 
+
+var colors = [ "red" , "green" , "blue" ] as const ; 
+
+// colors 的类型变为： 
+
+// readonly ["red", "green", "blue"] 
+
+// 访问数组元素 
+
+console. log ( "颜色: " + colors [ 0 ] ) ; 
+
+// 尝试修改会报错 
+
+// colors[0] = "yellow"; // 编译错误：只读 
+
+说明： as const 会将类型推断为最具体的字面量类型，并添加 readonly 修饰符。 
+
+模板字面量类型 
+
+模板字面量类型使用 JavaScript 模板字符串的语法来创建新的类型。 
+
+它允许我们动态地生成字符串类型。 
+
+实例 
+
+// 使用模板字面量类型定义事件名称 
+
+// `on${string}` 表示以 "on" 开头的任意字符串 
+
+type EventName = `on$ { string } ` ; 
+
+// 使用模板字面量类型定义处理器名称 
+
+// Capitalize 将字符串首字母大写 
+
+type Handler = `handle$ { Capitalize < string > } ` ; 
+
+// 使用模板字面量类型 
+
+var event : EventName = "onClick" ; 
+
+var handler : Handler = "handleSubmit" ; 
+
+console. log ( "事件: " + event ) ; 
+
+console. log ( "处理器: " + handler ) ; 
+
+// 错误：不符合模板格式 
+
+// var e: EventName = "click"; // 编译错误：不是以 "on" 开头 
+
+运行结果： 
+
+事件: onClick
+处理器: handleSubmit 
+
+内置工具类型： 模板字面量类型可以配合 Uppercase、Lowercase、Capitalize、Uncapitalize 等内置工具类型使用。 
+
+实际应用：Redux Action 
+
+字面量类型在实际开发中有广泛的应用。 
+
+下面展示如何使用字面量类型实现 Redux 风格的行为（Action）。 
+
+实例 
+
+// 定义 Redux 风格的 Action 类型 
+
+// 使用联合类型定义不同类型的 Action 
+
+type Action = 
+
+// 增加类型的 Action，包含数字类型的 payload 
+
+| { type : "increment" ; payload : number } 
+
+// 减少类型的 Action，包含数字类型的 payload 
+
+| { type : "decrement" ; payload : number } 
+
+// 重置类型的 Action，没有 payload 
+
+| { type : "reset" } ; 
+
+// 使用 action 的 reducer 函数 
+
+function reducer ( action : Action ) : void { 
+
+// TypeScript 会根据 action.type 的值自动推断 action 的具体类型 
+
+switch ( action. type ) { 
+
+case "increment" : 
+
+// 在这个分支中，action 被推断为 { type: "increment"; payload: number } 
+
+console. log ( "增加: " + action. payload ) ; 
+
+break ; 
+
+case "decrement" : 
+
+// 在这个分支中，action 被推断为 { type: "decrement"; payload: number } 
+
+console. log ( "减少: " + action. payload ) ; 
+
+break ; 
+
+case "reset" : 
+
+// 在这个分支中，action 被推断为 { type: "reset" } 
+
+console. log ( "重置" ) ; 
+
+break ; 
+
+} 
+
+} 
+
+// 派发不同类型的 Action 
+
+reducer ( { type : "increment" , payload : 5 } ) ; 
+
+reducer ( { type : "reset" } ) ; 
+
+运行结果： 
+
+增加: 5
+重置 
+
+可辨识联合： 这种模式叫做"可辨识联合"（Discriminated Union），是 TypeScript 中处理多种相关类型的最佳实践。 
+
+注意事项 
+
+类型收窄： 使用 switch 或 if 判断时，TypeScript 会自动收窄字面量类型 
+
+类型别名： 建议使用 type 别名为常用的字面量类型创建别名 
+
+const 推断： const 声明的变量会自动推断为字面量类型 
+
+as const： 需要深度只读时使用 as const 
+
+最佳实践： 在需要限制变量只能取特定值时，优先使用字面量类型而不是枚举。 
+
+总结 
+
+字面量类型是 TypeScript 实现精确类型控制的重要特性。 
+
+字符串字面量： 限制为特定字符串，如 "up" | "down" 
+
+数字字面量： 限制为特定数字，如 1 | 2 | 3 
+
+布尔字面量： 限制为 true 或 false 
+
+对象字面量： 定义对象结构，可使用 readonly 
+
+as const： 创建深度只读字面量类型 
+
+模板字面量： 使用模板字符串动态生成类型 
+
+进阶： 字面量类型与可辨识联合模式结合，可以实现强大的类型安全。 
+
+AI 思考中... 
+
+TypeScript type 别名 
+
+TypeScript 抽象类

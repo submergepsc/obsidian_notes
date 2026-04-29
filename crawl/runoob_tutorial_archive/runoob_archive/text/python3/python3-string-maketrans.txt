@@ -1,0 +1,101 @@
+URL: https://www.runoob.com/python3/python3-string-maketrans.html
+Title: Python3 maketrans()方法 | 菜鸟教程
+
+Python3 maketrans()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 lstrip()方法 
+
+Python3 max()方法 
+
+Python3 maketrans()方法 
+
+描述 
+
+maketrans() 方法用于创建字符映射的转换表，对于接受两个参数的最简单的调用方式，第一个参数是字符串，表示需要转换的字符，第二个参数也是字符串表示转换的目标。 
+
+两个字符串的长度必须相同，为一一对应的关系。 
+
+注： Python3.4 已经没有 string.maketrans() 了，取而代之的是内建函数: bytearray.maketrans()、bytes.maketrans()、str.maketrans() 。 
+
+语法 
+
+maketrans()方法语法： 
+
+string.maketrans(x[, y[, z]]) 
+
+参数 
+
+x -- 必需，字符串中要替代的字符组成的字符串。 
+
+y -- 可选，相应的映射字符的字符串。 
+
+z -- 可选，要删除的字符。 
+
+返回值 
+
+返回字符串转换后生成的新字符串。 
+
+实例 
+
+以下实例展示了使用 maketrans() 方法将所有元音字母转换为指定的数字： 
+
+实例 
+
+#!/usr/bin/python3 
+
+# 字母 R 替换为 N 
+
+txt = "Runoob!" 
+
+mytable = txt. maketrans ( "R" , "N" ) 
+
+print ( txt. translate ( mytable ) ) 
+
+# 使用字符串设置要替换的字符，一一对应 
+
+intab = "aeiou" 
+
+outtab = "12345" 
+
+trantab = str . maketrans ( intab , outtab ) 
+
+str = "this is string example....wow!!!" 
+
+print ( str . translate ( trantab ) ) 
+
+以上实例输出结果如下： 
+
+Nunoob!
+th3s 3s str3ng 2x1mpl2....w4w!!! 
+
+设置要删除的字符参数： 
+
+实例 
+
+#!/usr/bin/python3 
+
+txt = "Google Runoob Taobao!" 
+
+x = "mSa" 
+
+y = "eJo" 
+
+z = "odnght" # 设置删除的字符 
+
+mytable = txt. maketrans ( x , y , z ) 
+
+print ( txt. translate ( mytable ) ) 
+
+以上实例输出结果如下： 
+
+Gle Rub Tobo! 
+
+AI 思考中... 
+
+Python3 lstrip()方法 
+
+Python3 max()方法

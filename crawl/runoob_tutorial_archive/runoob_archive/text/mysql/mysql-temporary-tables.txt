@@ -1,0 +1,160 @@
+URL: https://www.runoob.com/mysql/mysql-temporary-tables.html
+Title: MySQL 临时表 | 菜鸟教程
+
+MySQL 临时表 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+MySQL 教程 
+
+MySQL 索引 
+
+MySQL 复制表 
+
+MySQL 临时表 
+
+MySQL 临时表在我们需要保存一些临时数据时是非常有用的。 
+
+临时表只在当前连接可见，当关闭连接时，MySQL 会自动删除表并释放所有空间。 
+
+在 MySQL 中，临时表是一种在当前会话中存在的表，它在会话结束时会自动被销毁。 
+
+MySQL 临时表只在当前连接可见，如果你使用PHP脚本来创建 MySQL 临时表，那每当 PHP 脚本执行完成后，该临时表也会自动销毁。 
+
+如果你使用了其他 MySQL 客户端程序连接 MySQL 数据库服务器来创建临时表，那么只有在关闭客户端程序时才会销毁临时表，当然你也可以手动销毁。 
+
+创建临时表 
+
+CREATE TEMPORARY TABLE temp_table_name (
+ column1 datatype,
+ column2 datatype,
+ ...
+); 
+
+或者简写为： 
+
+CREATE TEMPORARY TABLE temp_table_name AS
+SELECT column1, column2, ...
+FROM source_table
+WHERE condition; 
+
+插入数据到临时表 
+
+INSERT INTO temp_table_name (column1, column2, ...)
+VALUES (value1, value2, ...); 
+
+查询临时表 
+
+SELECT * FROM temp_table_name; 
+
+修改临时表 
+
+临时表的修改操作与普通表类似，可以使用 ALTER TABLE 命令。 
+
+ALTER TABLE temp_table_name
+ADD COLUMN new_column datatype; 
+
+删除临时表 
+
+临时表在会话结束时会自动被销毁，但你也可以使用 DROP TABLE 明确删除它。 
+
+DROP TEMPORARY TABLE IF EXISTS temp_table_name; 
+
+实例 
+
+实例 
+
+-- 创建临时表 
+
+CREATE TEMPORARY TABLE temp_orders AS 
+
+SELECT * FROM orders WHERE order_date >= '2023-01-01' ; 
+
+-- 查询临时表 
+
+SELECT * FROM temp_orders; 
+
+-- 插入数据到临时表 
+
+INSERT INTO temp_orders ( order_id , customer_id , order_date ) 
+
+VALUES ( 1001 , 1 , '2023-01-05' ) ; 
+
+-- 查询临时表 
+
+SELECT * FROM temp_orders; 
+
+-- 删除临时表 
+
+DROP TEMPORARY TABLE IF EXISTS temp_orders; 
+
+临时表对于需要在某个会话中存储中间结果集或进行复杂查询时非常有用。 
+
+临时表的作用范围仅限于创建它的会话。其他会话无法直接访问或引用该临时表。在多个会话之间共享数据时，可以考虑使用普通表而不是临时表。 
+
+请注意，临时表在会话结束时会被自动删除，但也可以使用 DROP TEMPORARY TABLE 明确删除它，这样可以更早地释放资源。 
+
+实例 
+
+以下展示了使用 MySQL 临时表的简单实例，以下的 SQL 代码可以适用于PHP脚本的 mysql_query() 函数。 
+
+mysql> CREATE TEMPORARY TABLE SalesSummary (
+ -> product_name VARCHAR(50) NOT NULL
+ -> , total_sales DECIMAL(12,2) NOT NULL DEFAULT 0.00
+ -> , avg_unit_price DECIMAL(7,2) NOT NULL DEFAULT 0.00
+ -> , total_units_sold INT UNSIGNED NOT NULL DEFAULT 0
+);
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO SalesSummary
+ -> (product_name, total_sales, avg_unit_price, total_units_sold)
+ -> VALUES
+ -> ('cucumber', 100.25, 90, 2);
+
+mysql> SELECT * FROM SalesSummary;
++--------------+-------------+----------------+------------------+
+| product_name | total_sales | avg_unit_price | total_units_sold |
++--------------+-------------+----------------+------------------+
+| cucumber | 100.25 | 90.00 | 2 |
++--------------+-------------+----------------+------------------+
+1 row in set (0.00 sec) 
+
+当你使用 SHOW TABLES 命令显示数据表列表时，你将无法看到 SalesSummary表。 
+
+如果你退出当前MySQL会话，再使用 SELECT 命令来读取原先创建的临时表数据，那你会发现数据库中没有该表的存在，因为在你退出时该临时表已经被销毁了。 
+
+删除MySQL 临时表 
+
+默认情况下，当你断开与数据库的连接后，临时表就会自动被销毁。当然你也可以在当前MySQL会话使用 DROP TABLE 命令来手动删除临时表。 
+
+以下是手动删除临时表的实例： 
+
+mysql> CREATE TEMPORARY TABLE SalesSummary (
+ -> product_name VARCHAR(50) NOT NULL
+ -> , total_sales DECIMAL(12,2) NOT NULL DEFAULT 0.00
+ -> , avg_unit_price DECIMAL(7,2) NOT NULL DEFAULT 0.00
+ -> , total_units_sold INT UNSIGNED NOT NULL DEFAULT 0
+);
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> INSERT INTO SalesSummary
+ -> (product_name, total_sales, avg_unit_price, total_units_sold)
+ -> VALUES
+ -> ('cucumber', 100.25, 90, 2);
+
+mysql> SELECT * FROM SalesSummary;
++--------------+-------------+----------------+------------------+
+| product_name | total_sales | avg_unit_price | total_units_sold |
++--------------+-------------+----------------+------------------+
+| cucumber | 100.25 | 90.00 | 2 |
++--------------+-------------+----------------+------------------+
+1 row in set (0.00 sec)
+mysql> DROP TABLE SalesSummary;
+mysql> SELECT * FROM SalesSummary;
+ERROR 1146: Table 'RUNOOB.SalesSummary' doesn't exist 
+
+AI 思考中... 
+
+MySQL 索引 
+
+MySQL 复制表

@@ -1,0 +1,216 @@
+URL: https://www.runoob.com/appml/appml-case-templates.html
+Title: AppML 案例模板 | 菜鸟教程
+
+AppML 案例模板 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+AppML 教程 
+
+AppML 案例模型 
+
+AppML 案例 Employees 
+
+<AppML> 案例研究 - HTML 模板 
+
+此案例研究演示了如何构建一个完整的 <AppML> 互联网应用程序，具有针对数据库中的若干表进行信息列举、编辑和搜索的功能。 
+
+添加 HTML 模板 
+
+在本章中，我们将演示如何向 HTML 页面添加 HTML 模板。 
+
+列出客户 
+
+HTML - View 
+
+<h1>Customers</h1> 
+
+<div id="List01"></div><br> 
+
+<table 
+id="Template01" class="appmltable" style="display:none"> 
+<tr> 
+<th>Customer</th> 
+<th>City</th> 
+<th>Country</th> 
+</tr> 
+<tr id="appml_row"> 
+<td>#CustomerName#</td> 
+<td>#City#</td> 
+<td>#Country#</td> 
+</tr> 
+</table> 
+
+<script src="appml.js"></script> 
+<script> 
+var customers 
+customers=new AppML("appml.php","Models/Customers"); 
+customers.run("List01","Template01"); 
+</script> 
+
+尝试一下 » 
+
+列出客户和客户表单 
+
+通过巧妙地使用模板，可以很容易添加 <AppML> 列表对象和 <AppML> 表单之间的链接： 
+
+HTML - View 
+
+<h1>Customers</h1> 
+<div id="Form01"></div><br> 
+<div 
+id="List01"></div><br> 
+
+<table id="Template01" class="appmltable" 
+style="width:100%;display:none"> 
+<tr> 
+<th></th> 
+<th>Customer</th> 
+<th>City</th> 
+<th>Country</th> 
+</tr> 
+<tr id="appml_row"> 
+<td 
+style="cursor:pointer" onclick="openForm('#CustomerID#')"> 
+<img 
+src="images/appmlFolder.png"></td> 
+<td>#CustomerName#</td> 
+<td>#City#</td> 
+<td>#Country#</td> 
+</tr> 
+</table> 
+
+<script 
+src="appml.js"></script> 
+<script> 
+var customers,customerForm; 
+customers=new AppML("appml.php","Models/Customers"); 
+customers.run("List01","Template01"); 
+
+function openForm(id) 
+{ 
+customerForm=new AppML("appml.php","Models/Customers"); 
+customerForm.displayType="form"; 
+customerForm.run("Form01","",id); 
+} 
+</script> 
+
+尝试一下 » 
+
+列出客户和客户订单 
+
+通过巧妙地使用模板，可以很容易添加 <AppML> 列表对象和所链接的列表之间的链接： 
+
+HTML - View 
+
+<h1>Customers</h1> 
+<div id="List01"></div><br> 
+<div 
+id="Orders01"></div><br> 
+
+<table id="Template01" class="appmltable" 
+style="width:100%;display:none"> 
+<tr> 
+<th>Customer</th> 
+<th>City</th> 
+<th>Country</th> 
+<th></th> 
+</tr> 
+<tr 
+id="appml_row"> 
+<td>#CustomerName#</td> 
+<td>#City#</td> 
+<td>#Country#</td> 
+<td><a href='' 
+onclick='openOrders("#CustomerID#");return false;'>Orders</a></td> 
+</tr> 
+</table> 
+
+<table id="Template02" class="appmltable" 
+style="width:100%;display:none"> 
+<tr> 
+<th>Customer</th> 
+<th>Date</th> 
+<th>Salesperson</th> 
+<th>Shipper</th> 
+</tr> 
+<tr 
+id="appml_row"> 
+<td>#CustomerName#</td> 
+<td>#OrderDate#</td> 
+<td>#Salesperson#</td> 
+<td>#ShipperName#</td> 
+</tr> 
+</table> 
+
+<script src="appml.js"></script> 
+<script> 
+var customers,orders; 
+customers=new AppML("appml.php","Models/Customers"); 
+customers.run("List01","Template01"); 
+function openOrders(id) 
+{ 
+orders=new AppML("appml.php","Models/Orders"); 
+orders.setQuery("orders.customerid",id); 
+orders.commands=false; 
+orders.run("Orders01","Template02"); 
+} 
+</script> 
+
+尝试一下 » 
+
+现在把所有的合并在一起 
+
+最后，通过少量代码复制，我们就可以完成项目。 
+
+客户列表、表单和订单 
+
+<h1>Customers</h1> 
+
+<div id="List01"> 
+<table id="appml_list" 
+class="appmllist"> 
+<tr> 
+<th>Customer</th> 
+<th>City</th> 
+<th>Country</th> 
+<th></th> 
+</tr> 
+<tr id="appml_row"> 
+<td>#CustomerName#</td> 
+<td>#City#</td> 
+<td>#Country#</td> 
+<td><a 
+href='' onclick='openOrders("#CustomerID#");return false;'>Orders</a></td> 
+</tr> 
+</table> 
+</div> 
+
+<div 
+id="List02"></div> 
+
+<script src="appml.js"></script> 
+<script> 
+var Customers,Orders 
+Customers=new AppML("appml.php","Models/Customers"); 
+Customers.run("List01"); 
+
+function openOrders(id) 
+{ 
+var Orders=new 
+AppML("appml.php","Models/Orders"); 
+Orders.setQuery("orders.customerid",id); 
+Orders.commands=false; 
+Orders.run("List02"); 
+} 
+</script> 
+
+尝试一下 » 
+
+在接下来的章节中，您可以看到更多带有完整源代码的应用程序。 
+
+AI 思考中... 
+
+AppML 案例模型 
+
+AppML 案例 Employees

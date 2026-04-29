@@ -1,0 +1,222 @@
+URL: https://www.runoob.com/r/r-bar-charts.html
+Title: R 绘图 – 条形图 | 菜鸟教程
+
+R 绘图 – 条形图 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+R 教程 
+
+R 绘图 – 中文支持 
+
+R 绘图 – 函数曲线图 
+
+R 绘图 - 条形图 
+
+条形图，也称为柱状图条形图，是一种以长方形的长度为变量的统计图表。 
+
+条形图可以是水平或垂直的，每个长方形可以有不同的颜色。 
+
+R 语言使用 barplot() 函数来创建条形图，格式如下： 
+
+barplot(H,xlab,ylab,main, names.arg,col,beside) 
+
+参数说明： 
+
+H 向量或矩阵，包含图表用的数字值，每个数值表示矩形条的高度。 
+
+xlab x 轴标签。 
+
+ylab y 轴标签。 
+
+main 图表标题。 
+
+names.arg 每个矩形条的名称。 
+
+col 每个矩形条的颜色。 
+
+接下来我们创建一个简单的条形图： 
+
+实例 
+
+# 准备一个向量 
+
+cvd19 = c ( 83534 , 2640626 , 585493 ) 
+
+# 显示条形图 
+
+barplot ( cvd19 ) 
+
+执行绘图程序，会在当前目录下生存一个 PDF 文件（Rplots.pdf）,打开文件可以看到图形效果如下： 
+
+为了更好地表达信息，我们可以在图表上添加标题、颜色及每个矩形条的名称。 
+
+以下我们创建 2020 年 7 月 1 日中国、美国和印度的新冠疫情确诊人数统计图。 
+
+中文字体需要设置字体参数 family='GB1' ： 
+
+实例 
+
+cvd19 = c ( 83534 , 2640626 , 585493 ) 
+
+barplot ( cvd19, 
+
+main = "新冠疫情条形图" , 
+
+col = c ( "#ED1C24" , "#22B14C" , "#FFC90E" ) , 
+
+names. arg = c ( "中国" , "美国" , "印度" ) , 
+
+family = 'GB1' 
+
+) 
+
+barplot 中的数据既可以是向量，也可以是矩阵，现在我们生成一张新冠疫情 6 月和 7 月对比图。 
+
+首先准备数据： 
+
+中国 
+
+美国 
+
+印度 
+
+6 月 
+
+83017 
+
+1794546 
+
+190535 
+
+7 月 
+
+83534 
+
+2640626 
+
+585493 
+
+转换成矩阵，生成条形图，按并排格式显示，而且要显示颜色样本。 
+
+这里我们设置了自己的字体库，详细内容可以参考 R 绘图 - 中文支持 
+
+实例 
+
+library ( showtext ) ; 
+
+font_add ( "SyHei" , "SourceHanSansSC-Bold.otf" ) ; 
+
+cvd19 = matrix ( 
+
+c ( 83017 , 83534 , 1794546 , 2640626 , 190535 , 585493 ) , 
+
+2 , 3 
+
+) 
+
+# 设置文件名，输出为 png 
+
+png ( file = "runoob-bar-1.png" ) 
+
+#加载字体 
+
+showtext_begin ( ) ; 
+
+colnames ( cvd19 ) = c ( "中国" , "美国" , "印度" ) 
+
+rownames ( cvd19 ) = c ( "6月" , "7月" ) 
+
+barplot ( cvd19, main = "新冠疫情条形图" , beside = TRUE, legend = TRUE, family = 'SyHei' ) 
+
+# 去掉字体 
+
+showtext_end ( ) ; 
+
+以下代码会在当前程序目录下生存一个 runoob-bar-1.png 文件，如下所示： 
+
+我们设置的颜色样本将是每各组的颜色样本： 
+
+实例 
+
+library ( plotrix ) 
+
+library ( showtext ) ; 
+
+font_add ( "SyHei" , "SourceHanSansSC-Bold.otf" ) ; 
+
+cvd19 = matrix ( 
+
+c ( 83017 , 83534 , 1794546 , 2640626 , 190535 , 585493 ) , 
+
+2 , 3 
+
+) 
+
+# 设置文件名，输出为 png 
+
+png ( file = "runoob-bar-2.png" ) 
+
+#加载字体 
+
+showtext_begin ( ) ; 
+
+colnames ( cvd19 ) = c ( "中国" , "美国" , "印度" ) 
+
+rownames ( cvd19 ) = c ( "6月" , "7月" ) 
+
+barplot ( cvd19, main = "新冠疫情条形图" , beside = TRUE, legend = TRUE, col = c ( "blue" , "green" ) , family = 'SyHei' ) 
+
+# 去掉字体 
+
+showtext_end ( ) ; 
+
+以下代码会在当前程序目录下生存一个 runoob-bar-2.png 文件，如下所示： 
+
+beside 参数 
+
+beside 设置矩形条堆叠的方式，默认为 FALSE： 
+
+beside=FALSE 时，条形图的高度是矩阵的数值，矩形条是水平堆叠的。 
+
+beside=TRUE 时，条形图的高度是矩阵的数值，矩形条是并列的。 
+
+实例 
+
+library ( showtext ) ; 
+
+font_add ( "SyHei" , "SourceHanSansSC-Bold.otf" ) ; 
+
+cvd19 = matrix ( 
+
+c ( 83017 , 83534 , 1794546 , 2640626 , 190535 , 585493 ) , 
+
+2 , 3 
+
+) 
+
+# 设置文件名，输出为 png 
+
+png ( file = "runoob-bar-3.png" ) 
+
+#加载字体 
+
+showtext_begin ( ) ; 
+
+colnames ( cvd19 ) = c ( "中国" , "美国" , "印度" ) 
+
+rownames ( cvd19 ) = c ( "6月" , "7月" ) 
+
+barplot ( cvd19, main = "新冠疫情条形图" , beside = FALSE, legend = TRUE, col = c ( "blue" , "green" ) , family = 'SyHei' ) 
+
+# 去掉字体 
+
+showtext_end ( ) ; 
+
+以下代码会在当前程序目录下生存一个 runoob-bar-3.png 文件，如下所示： 
+
+AI 思考中... 
+
+R 绘图 – 中文支持 
+
+R 绘图 – 函数曲线图

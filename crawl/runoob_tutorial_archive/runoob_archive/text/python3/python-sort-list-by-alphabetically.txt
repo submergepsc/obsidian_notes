@@ -1,0 +1,76 @@
+URL: https://www.runoob.com/python3/python-sort-list-by-alphabetically.html
+Title: Python 按字母顺序对列表排序 | 菜鸟教程
+
+Python 按字母顺序对列表排序 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python 删除字符串首尾的空格 
+
+Python lambda（匿名函数） 
+
+Python 按字母顺序对列表排序 
+
+Python 按字母顺序对列表排序，可以使用以下两个方法： 
+
+sort() 方法 -- 即直接修改原始列表，不创建新的排序副本，该方法会改变原列表的顺序，不返回新的排序列表。 
+
+sorted() 函数 -- 创建一个新的已排序列表，不修改原始列表，该函数返回一个新的已排序列表，原列表保持不变。 
+
+sort() 方法实例： 
+
+实例 
+
+my_list = [ "apple" , "banana" , "cherry" , "date" ] 
+
+my_list. sort ( ) # 按字母顺序排序 
+
+print ( my_list ) 
+
+以上代码执行输出结果如下： 
+
+['apple', 'banana', 'cherry', 'date'] 
+
+sorted() 函数实例： 
+
+实例 
+
+my_list = [ "apple" , "banana" , "cherry" , "date" ] 
+
+sorted_list = sorted ( my_list ) # 创建一个新的已排序列表 
+
+print ( sorted_list ) 
+
+以上代码执行输出结果如下： 
+
+['apple', 'banana', 'cherry', 'date'] 
+
+无论你选择哪种方法，都可以按字母顺序对列表进行排序。如果你希望按字母顺序的反向顺序排序（降序），可以在 sort() 方法或 sorted() 函数中传递 reverse=True 参数。 
+
+sort() 方法： 
+
+实例 
+
+my_list = [ "apple" , "banana" , "cherry" , "date" ] 
+
+my_list. sort ( reverse = True ) # 按字母顺序降序排序 
+
+print ( my_list ) 
+
+sorted() 函数： 
+
+实例 
+
+my_list = [ "apple" , "banana" , "cherry" , "date" ] 
+
+sorted_list = sorted ( my_list , reverse = True ) # 创建一个新的已排序列表，按字母顺序降序排序 
+
+print ( sorted_list ) 
+
+AI 思考中... 
+
+Python 删除字符串首尾的空格 
+
+Python lambda（匿名函数）

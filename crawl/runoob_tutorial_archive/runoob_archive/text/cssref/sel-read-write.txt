@@ -1,0 +1,66 @@
+URL: https://www.runoob.com/cssref/sel-read-write.html
+Title: CSS :read-write选择器 | 菜鸟教程
+
+CSS :read-write选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS :in-range选择器 
+
+CSS :read-only选择器 
+
+CSS :read-write 选择器 
+
+实例 
+
+如果 input 元素不是只读，即没有 "readonly" 属性，设置输入框样式为黄色: 
+
+input:read-write 
+{ 
+background-color: yellow; 
+} 
+
+尝试一下 » 
+
+定义和使用 
+
+:read-write 选择器用于匹配可读及可写的元素。 
+
+注意: 目前, 在大多浏览器中, :read-write 选择器只使用于设置了input 和 textarea 元素。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+:read-only 
+
+支持 
+
+不支持 
+
+-moz- 
+
+Yes 
+
+Yes 
+
+CSS 语法 
+
+:read-write 
+{ 
+css 声明 ; 
+} 
+
+相关页面 
+
+CSS 选择器 :read-only 
+
+AI 思考中... 
+
+CSS :in-range选择器 
+
+CSS :read-only选择器

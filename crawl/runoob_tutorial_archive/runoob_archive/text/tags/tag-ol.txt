@@ -1,0 +1,143 @@
+URL: https://www.runoob.com/tags/tag-ol.html
+Title: HTML <ol> 标签 | 菜鸟教程
+
+HTML <ol> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <optgroup> 标签 
+
+HTML <object> 标签 
+
+HTML <ol> 标签 
+
+实例 
+
+2 个不同的有序列表实例： 
+
+< ol > < li > Coffee </ li > < li > Tea </ li > < li > Milk </ li > </ ol > < ol start = " 50 " > < li > Coffee </ li > < li > Tea </ li > < li > Milk </ li > </ ol > 
+
+尝试一下 » 
+
+浏览器支持 
+
+元素 
+
+<ol> 
+
+Yes 
+
+Yes 
+
+Yes 
+
+Yes 
+
+Yes 
+
+标签定义及使用说明 
+
+<ol> 标签定义了一个有序列表. 列表排序以数字来显示。 
+
+使用 <li> 标签来定义列表选项。 
+
+提示和注释 
+
+提示: 可以使用 CSS 来渲染，详细查看 CSS 列表 。 
+
+提示: 无序列表，可以使用 <ul> 标签。 
+
+HTML 4.01 与 HTML5中的差异 
+
+"reversed" 属性是 HTML5 中的新属性。 
+
+在HTML 4.01中"compact" 属性已经废弃,在 HTML5中不支持该属性。 
+
+属性 
+
+New ：HTML5 新属性。 
+
+属性 
+
+值 
+
+描述 
+
+compact 
+
+compact 
+
+HTML5 中不支持，不赞成使用。 请使用样式取代它。
+规定列表呈现的效果比正常情况更小巧。 
+
+reversed New 
+
+reversed 
+
+指定列表倒序(9,8,7...) 
+
+start 
+
+number 
+
+一个整数值属性，指定了列表编号的起始值。 这个属性在 HTML4中弃用，但是在 HTML5 中被重新引入。 
+
+type 
+
+a 表示小写英文字母编号 
+
+A 表示大写英文字母编号 
+
+i 表示小写罗马数字编号 
+
+I 表示大写罗马数字编号 
+
+1 表示数字编号（默认） 
+
+规定列表的类型。不赞成使用。请使用样式代替。 
+
+更多实例 
+
+实例 
+
+设置不同的列表样式(使用 CSS): 
+
+< ol style = " list-style-type:upper-roman " > < li > Coffee </ li > < li > Tea </ li > < li > Milk </ li > </ ol > < ol style = " list-style-type:lower-alpha " > < li > Coffee </ li > < li > Tea </ li > < li > Milk </ li > </ ol > 
+
+尝试一下 » 
+
+实例 
+
+使用 CSS 显示不同的列表样式: 
+
+ol .a { list-style-type: armenian ; } ol .b { list-style-type: cjk-ideographic ; } ol .c { list-style-type: decimal ; } ol .d { list-style-type: decimal-leading-zero ; } ol .e { list-style-type: georgian ; } ol .f { list-style-type: hebrew ; } ol .g { list-style-type: hiragana ; } ol .h { list-style-type: hiragana-iroha ; } ol .i { list-style-type: katakana ; } ol .j { list-style-type: katakana-iroha ; } ol .k { list-style-type: lower-alpha ; } ol .l { list-style-type: lower-greek ; } ol .m { list-style-type: lower-latin ; } ol .n { list-style-type: lower-roman ; } ol .o { list-style-type: upper-alpha ; } ol .p { list-style-type: upper-latin ; } ol .q { list-style-type: upper-roman ; } ol .r { list-style-type: none ; } ol .s { list-style-type: inherit ; } 
+
+尝试一下 » 
+
+实例 
+
+列表嵌套: 
+
+< ol > < li > Coffee </ li > < li > Tea < ul > < li > Black tea </ li > < li > Green tea </ li > </ ul > </ li > < li > Milk </ li > </ ol > 
+
+尝试一下 » 
+
+全局属性 
+
+<ol> 标签支持全局属性，查看完整属性表 HTML全局属性 。 
+
+事件属性 
+
+<ol> 标签支持所有 HTML事件属性 。 
+
+相关文章 
+
+HTML 教程： HTML 列表 
+
+AI 思考中... 
+
+HTML <optgroup> 标签 
+
+HTML <object> 标签

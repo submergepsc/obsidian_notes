@@ -1,0 +1,52 @@
+URL: https://www.runoob.com/swift/swift-tutorial.html
+Title: Swift 教程 | 菜鸟教程
+
+Swift 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Swift 教程 
+
+Swift 环境搭建 
+
+Swift 教程 
+
+Swift 是一种支持多编程范式和编译式的开源编程语言,苹果于2014年WWDC（苹果开发者大会）发布，用于开发 iOS，OS X 和 watchOS 应用程序。 
+
+Swift 结合了 C 和 Objective-C 的优点并且不受 C 兼容性的限制。 
+
+Swift 在 Mac OS 和 iOS 平台可以和 Object-C 使用相同的运行环境。 
+
+2015年6月8日，苹果于WWDC 2015上宣布，Swift将开放源代码，包括编译器和标准库。 
+
+谁适合阅读本教程？ 
+
+本教程适合想从事移动端(iphone)开发或 OS X 应用的编程人员，如果之前有编程基础更好。 
+
+本教程所有实例基于 Xcode8.2.1（Swift 3.0.2 的语法格式） 开发测试。 
+
+第一个 Swift 程序 
+
+第一个 Swift 程序当然从输出 "Hello, World!" 开始，代码如下所示： 
+
+实例 
+
+var myString = " Hello, World! " print ( myString ) 
+
+运行实例 » 
+
+实例解析 
+
+var myString = "Hello, World!" : 使用 var 关键字定义一个变量 myString，值为 Hello, World! 
+
+print : 输出变量的值 
+
+相关资料 
+
+Swift 官方手册 
+
+Swift 中文手册(5.0) 
+
+AI 思考中... 
+
+Swift 环境搭建

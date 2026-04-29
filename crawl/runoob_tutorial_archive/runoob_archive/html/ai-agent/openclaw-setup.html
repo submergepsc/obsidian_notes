@@ -1,0 +1,1440 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OpenClaw 配置目录 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="openclaw-setup.html" />
+<meta name="keywords" content="OpenClaw 配置目录">
+<meta name="description" content="OpenClaw 配置目录 OpenClaw（也称 Clawdbot）的所有配置、状态数据、工作区和技能均集中在用户主目录下的 ~/.openclaw/（Linux/macOS）或 %USERPROFILE%\.openclaw\（Windows）这个核心目录中。 ~/.openclaw/ 是整个系统的根配置目录，首次安装/运行 openclaw onboard 或 openclaw onboard --install-daemon 时..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<style>
+/* 主题切换按钮 */
+/* ===== 主题变量（核心）===== */
+:root {
+  --theme-bg: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-icon: #333;
+  --theme-hover: #f3f4f6;
+}
+
+.dark {
+  --theme-bg: #1f2937;
+  --theme-border: #374151;
+  --theme-icon: #e5e7eb;
+  --theme-hover: #374151;
+}
+
+/* ===== 按钮容器 ===== */
+.nav-theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== 按钮本体 ===== */
+.nav-theme-toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+
+  background: var(--theme-bg);
+  color: var(--theme-icon);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ===== 图标大小 ===== */
+.nav-theme-toggle i {
+  font-size: 14px;
+}
+
+/* ===== hover 效果 ===== */
+.nav-theme-toggle button:hover {
+  background: var(--theme-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== 点击反馈 ===== */
+.nav-theme-toggle button:active {
+  transform: scale(0.95);
+}
+
+/* ===== 当前激活态（可选）===== */
+.nav-theme-toggle button.active {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+</style>
+<!-- 导航栏 -->
+<nav class="container navigation" aria-label="主导航">
+  <div class="row">
+    <div class="col nav">
+
+      <!-- PC 导航 -->
+      <ul class="pc-nav" id="runoob-detail-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../js/js-tutorial.html">JavaScript</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="javascript:void(0);" data-id="vue">Vue</a></li>
+        <li><a href="../react/react-tutorial.html">React</a></li>
+        <li><a href="../python3/python3-tutorial.html">Python3</a></li>
+        <li><a href="../java/java-tutorial.html">Java</a></li>
+        <li><a href="../cprogramming/c-tutorial.html">C</a></li>
+        <li><a href="../cplusplus/cpp-tutorial.html">C++</a></li>
+        <li><a href="../csharp/csharp-tutorial.html">C#</a></li>
+        <li><a href="javascript:void(0);" data-id="aiNav">AI</a></li>
+        <li><a href="../go/go-tutorial.html">Go</a></li>
+        <li><a href="../sql/sql-tutorial.html">SQL</a></li>
+        <li><a href="../linux/linux-tutorial.html">Linux</a></li>
+        <li><a href="../vscode/vscode-tutorial.html">VS Code</a></li>
+        <li><a href="javascript:void(0);" data-id="bootstrap">Bootstrap</a></li>
+        <li><a href="../git/git-tutorial.html">Git</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+
+        <!-- 主题切换按钮，固定在最右侧 -->
+        <li class="nav-theme-toggle">
+          <button id="moon" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 移动端导航 -->
+      <ul class="mobile-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="../js/js-tutorial.html">JS</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+        <li><a href="javascript:void(0)" class="search-reveal">搜索</a></li>
+
+        <!-- 移动端主题切换 -->
+        <li class="nav-theme-toggle">
+          <button id="moon-mobile" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun-mobile" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- 二级导航 -->
+<div class="container sub-navigation sub-navigation-articles" style="display:none">
+  <div class="row">
+    <div class="col nav-sub">
+
+      <ul id="vue">
+        <li class="cat-item"><a href="../vue3/vue3-tutorial.html">Vue3 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../vue/vue-tutorial.html">Vue2 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="bootstrap">
+        <li class="cat-item"><a href="../bootstrap/bootstrap-tutorial.html">Bootstrap3 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="aiNav">
+        <li class="cat-item"><a href="../ml/ml-tutorial.html">机器学习 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../pytorch/pytorch-tutorial.html">PyTorch <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../tensorflow/tensorflow-tutorial.html">TensorFlow <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../sklearn/sklearn-tutorial.html">Sklearn <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../nlp/nlp-tutorial.html">NLP <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="ai-agent-tutorial.html">AI Agent <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ollama/ollama-tutorial.html">Ollama <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+  </div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="runoob-col-md2">
+<div class="left-column">
+	<div class="tab" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+	<i class="fa fa-list" aria-hidden="true"></i> 
+	<span>AI Agent 教程</span>
+
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" data-p="par" title="AI Agent(智能体) 教程" href="ai-agent-tutorial.html">
+			AI Agent(智能体) 教程			</a>
+						<a target="_top" data-p="par" title="AI Agent 简介" href="ai-agent-intro.html">
+			AI Agent 简介			</a>
+						<a target="_top" data-p="par" title="AI Agent  核心组件" href="ai-agent-core.html">
+			AI Agent  核心组件			</a>
+			<a target="_top" title="AI Agent 工作原理" href="ai-agent-working-principle.html">AI Agent 工作原理</a>
+<a target="_top" title="大语言模型基础" href="ai-agent-llm.html">大语言模型基础</a>
+<a target="_top" title="提示词工程" href="prompt-engineering.html">提示词工程</a>
+<a target="_top" title="Token (词元)" href="token-intro.html">Token (词元)</a>
+<a target="_top" title="推理与规划" href="reasoning-planning.html">推理与规划</a>
+<a target="_top" title="RAG 与知识检索" href="retrieval-augmented-generation.html">RAG 与知识检索</a>
+<a target="_top" title="Harness Engineering" href="harness-engineering.html">Harness Engineering</a>
+<a target="_top" title="Hermes Agent" href="hermes-agent.html">Hermes Agent</a>
+<br>
+<h2 class="left"> <span class="left_h2">智能体工具</span></h2>			<a target="_top" data-p="par" title="第一个 AI Agent" href="first-ai-agent.html">
+			第一个 AI Agent			</a>
+			<a target="_top" title="AI 开发平台" href="ai-monkeycode.html"> AI 开发平台</a>
+<a target="_top" title="OpenClaw (Clawdbot) 教程" href="openclaw-clawdbot-tutorial.html"> OpenClaw (Clawdbot) 教程</a>
+<a target="_top" title="OpenClaw 快速上手" href="openclaw-quickstart.html"> OpenClaw 快速上手</a>
+<a target="_top" title="Qoder 教程" href="qoderwork.html"> QoderWork 教程</a>
+<a target="_top" title="OpenClaw 一键部署" href="openclaw-cloud.html"> OpenClaw 一键部署</a>
+<a target="_top" title="OpenClaw 配置目录" href="openclaw-setup.html"> OpenClaw 配置目录</a>
+<a target="_top" title="OpenClaw 工作原理" href="openclaw-how-it-works.html"> OpenClaw 工作原理</a>
+<a target="_top" title="OpenClaw 接入微信" href="openclaw-weixin.html"> OpenClaw 接入微信</a>
+
+<a target="_top" title="OpenClaw 接入飞书" href="openclaw-feishu.html"> OpenClaw 接入飞书</a>
+<a target="_top" title="OpenClaw Skills" href="openclaw-skills.html"> OpenClaw Skills</a>
+<a target="_top" title="OpenClaw 卸载指南" href="openclaw-uninstall.html"> OpenClaw 卸载指南</a>			<a target="_top" data-p="par" title="CrewAI 构建智能体" href="crewai-agent.html">
+			CrewAI 构建智能体			</a>
+						<a target="_top" data-p="par" title="LangChain 制作智能体" href="langchain-agent.html">
+			LangChain 制作智能体			</a>
+			<a target="_top" title="LangGraph 入门教程" href="langgraph-quick-start.html">LangGraph 入门教程</a>
+
+<br><h2 class="left"> <span class="left_h2">Vibe Coding</span></h2>			<a target="_top" data-p="par" title="Claude Code 入门教程" href="claude-code.html">
+			Claude Code 入门教程			</a>
+						<a target="_top" data-p="par" title="OpenCode 入门教程" href="opencode-coding-agent.html">
+			OpenCode 入门教程			</a>
+			<a target="_top" title="OpenCode Coding Plan" href="opencode-coding-plan.html">OpenCode Coding Plan</a>
+<a target="_top" title="CC Switch" href="cc-switch.html">CC Switch</a>
+<a target="_top" title="Skills 教程" href="skills-agent.html">Skills 教程</a>
+<a target="_top" title="OpenCode skills" href="opencode-skills-intro.html">OpenCode skills</a>
+<a target="_top" title="Qoder 教程" href="qoder-quick-start.html">Qoder 教程</a>
+<a target="_top" title="Qoder Quest 模式" href="qoder-quest-mode.html">Qoder Quest 模式</a>			<a target="_top" data-p="par" title="Qoder CLI" href="qoder-cli.html">
+			Qoder CLI			</a>
+			<a target="_top" title="Trae 教程" href="trae-quick-star.html">Trae 教程</a>			<a target="_top" data-p="par" title="Trae Solo" href="trae-solo.html">
+			Trae Solo			</a>
+			<br><h2 class="left"> <span class="left_h2">Python 实现智能体</span></h2>
+<a target="_top" title="Python 实现 AI Agent" href="python-ai-agent.html">Python 实现 AI Agent</a>
+<a target="_top" title="工具调用" href="ai-agent-function-calling.html">工具调用</a>
+<a target="_top" title="记忆系统" href="ai-agent-memory-system-design.html">记忆系统</a>			<a target="_top" data-p="par" title="Python 智能体环境配置" href="ai-agent-python-setup.html">
+			Python 智能体环境配置			</a>
+						<a target="_top" data-p="par" title="AI Agent 问答实例" href="ai-agent-answer-demo.html">
+			AI Agent 问答实例			</a>
+						<a target="_top" data-p="par" title="Python 实现推理与规划" href="python-reasoning-planning.html">
+			推理与规划			</a>
+						<a target="_top" data-p="par" title="Python 实现 RAG 与知识检索" href="python-rag.html">
+			RAG 与知识检索			</a>
+						<a target="_top" data-p="par" title="多智能体系统（Multi-Agent System）" href="multi-agent-system.html">
+			多智能体系统			</a>
+						<a target="_top" data-p="par" title="AI Agent 工具与外部集成" href="tools-integration.html">
+			工具与外部集成			</a>
+						<a target="_top" data-p="par" title="多模态 Agent" href="multimodal-agent.html">
+			多模态 Agent			</a>
+						<a target="_top" data-p="par" title="Agent 评估、安全与对齐" href="evaluation-safety-alignment.html">
+			评估、安全与对齐			</a>
+						<a target="_top" data-p="par" title="AI Agent 生产部署与工程化" href="production-deployment.html">
+			生产部署与工程化			</a>
+						<a target="_top" data-p="par" title="AI Agent 垂直应用场景" href="vertical-applications.html">
+			垂直应用场景			</a>
+				
+		</div>
+	</div>	
+</div>
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="openclaw-how-it-works.html" rel="prev"> OpenClaw 工作原理</a> </div>
+			<div class="next-design-link"><a href="cc-switch.html" rel="next"> CC Switch 一键切换 API</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+<div class="article-heading-ad" style="display: block;">
+
+<style>
+  /* 隐藏移动端广告 */
+  @media (max-width: 768px) {
+    .adsbygoogle {
+      display: none !important;
+    }
+  }
+  
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 728*90 固定 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="2147566827"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<h1>OpenClaw 配置目录</h1>
+<p>OpenClaw（也称 Clawdbot）的所有配置、状态数据、工作区和技能均集中在用户主目录下的 ~/.openclaw/（Linux/macOS）或 %USERPROFILE%\.openclaw\（Windows）这个核心目录中。</p>
+<p><span class="marked">~/.openclaw/</span> 是整个系统的根配置目录，首次安装/运行 <span class="marked">openclaw onboard</span> 或 <span class="marked">openclaw onboard --install-daemon</span> 时会自动创建。</p>
+
+<pre>~/.openclaw/
+├── openclaw.json                 # 主配置文件（JSON/JSON5）
+├── workspace/                    # 你的 AI &ldquo;灵魂&rdquo;文件夹（推荐 git 版本控制）
+│   ├── SOUL.md                   # 人格设定（语气、风格）
+│   ├── USER.md                   # 你的个人信息（让 AI 更懂你）
+│   ├── MEMORY.md                 # 长期记忆（手动可编辑）
+│   ├── IDENTITY.md               # Agent 名称、形象
+│   ├── AGENTS.md                 # 多 Agent 路由规则
+│   ├── BOOT.md                   # 启动提示词
+│   ├── HEARTBEAT.md              # 每日检查清单
+│   └── skills/                   # 已安装技能（每个技能一个子文件夹）
+├── agents/&lt;cid&gt;/                 # 每个 Agent 的独立状态
+├── memory/&lt;cid&gt;.sqlite           # 向量记忆库
+├── credentials/                  # API Key、OAuth（旧版）
+├── skills/                       # 全局技能包
+└── secrets.json                  # 加密凭证（可选）</pre>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2026/03/openclaw-setup-runoob-2.svg"></p>
+<p><strong>最重要文件</strong>：</p>
+<ul>
+    <li><code>openclaw.json</code>：全局设置（模型、渠道、端口、安全策略）</li>
+    <li><code>workspace/</code> 下所有 <code>.md</code> 文件：<strong>直接用 VS Code 编辑即可实时生效</strong>！</li>
+</ul>
+<p>查看/修改配置命令：</p><pre>
+openclaw configure      # 交互式配置向导
+openclaw config file          # 显示完整路径
+openclaw config get agent.model
+openclaw config set agent.model "anthropic/claude-3-5-sonnet"
+openclaw config validate      # 校验合法性</pre>
+
+
+<table class="reference">
+    <thead>
+        <tr>
+            <th>路径</th>
+            <th>用途说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>~/.openclaw/openclaw.json</code></td>
+            <td><strong>主配置文件</strong>（最重要！）<br>存储全局设置（模型、Gateway 模式、绑定地址、Agents 默认值、插件等）。<br>可用命令查看/修改：<br>• <code>openclaw config file</code>（显示完整路径）<br>• <code>openclaw config get &lt;json路径&gt;</code><br>• <code>openclaw config set &lt;json路径&gt; &lt;值&gt;</code></td>
+        </tr>
+        <tr>
+            <td><code>~/.openclaw/workspace/</code></td>
+            <td><strong>默认工作区</strong>（Agent 的"灵魂"所在地）<br>存放以下 Markdown 文件（可直接编辑生效）：<br>• <code>SOUL.md</code>：AI 人格/语气设定<br>• <code>USER.md</code>：你的个人偏好和背景<br>• <code>MEMORY.md</code>：长期记忆记录<br>• <code>AGENTS.md</code>：指令说明<br>• <code>IDENTITY.md</code>：名称/主题<br>• <code>BOOT.md</code>：启动配置<br>• <code>HEARTBEAT.md</code>：定期检查清单</td>
+        </tr>
+        <tr>
+            <td><code>~/.openclaw/agents/&lt;cid&gt;/</code></td>
+            <td>单个智能体（Agent）的状态目录（<code>&lt;cid&gt;</code> 为实例 ID）</td>
+        </tr>
+        <tr>
+            <td><code>~/.openclaw/agents/&lt;agentId&gt;/agent/auth-profiles.json</code></td>
+            <td><strong>API Key &amp; OAuth 凭证</strong>（新版推荐位置）<br>旧版可能在 <code>~/.openclaw/credentials/</code></td>
+        </tr>
+        <tr>
+            <td><code>~/.openclaw/memory/&lt;cid&gt;.sqlite</code></td>
+            <td>向量索引存储（记忆搜索用）</td>
+        </tr>
+        <tr>
+            <td><code>~/.openclaw/skills/</code></td>
+            <td><strong>全局技能目录</strong><br>通过 <code>openclaw skills install</code> 或 <code>clawhub install</code> 安装的技能包均放在这里（每个技能是一个子文件夹，内含 SKILL.md）</td>
+        </tr>
+        <tr>
+            <td><code>~/.openclaw/memory/</code></td>
+            <td>长期记忆相关文件（SQLite + 向量嵌入）</td>
+        </tr>
+        <tr>
+            <td><code>/tmp/openclaw/*.log</code></td>
+            <td>Gateway 服务日志（调试用）</td>
+        </tr>
+    </tbody>
+</table>
+
+
+<h3>1. 主配置文件</h3>
+<p><strong>路径:</strong> <code>~/.openclaw/openclaw.json</code></p>
+<p><strong>说明:</strong> OpenClaw 的核心配置文件,包含所有系统级设置。</p>
+<p><strong>主要配置项:</strong></p>
+<ul>
+    <li><strong>gateway</strong> - 网关服务配置<ul>
+            <li><code>mode</code>: 网关模式(如 "local")</li>
+            <li><code>port</code>: 网关端口号(默认 18789)</li>
+            <li><code>bind</code>: 绑定地址(默认 127.0.0.1)</li>
+            <li><code>token</code>: 访问令牌,用于 Web UI 认证</li>
+        </ul>
+    </li>
+    <li><strong>models</strong> - AI 模型配置<ul>
+            <li>默认模型设置</li>
+            <li>API 认证信息</li>
+        </ul>
+    </li>
+    <li><strong>messages</strong> - 消息处理配置<ul>
+            <li>TTS(文本转语音)设置</li>
+            <li>消息格式配置</li>
+        </ul>
+    </li>
+</ul>
+<p><strong>示例配置片段:</strong></p>
+<pre>{
+  "gateway": {
+    "mode": "local",
+    "port": 18789,
+    "bind": "127.0.0.1",
+    "token": "c9917c5a066beeb26266d09baed99495e7563b33c771e89a"
+  }
+}</pre>
+<p><strong>操作建议:</strong></p>
+<ul>
+    <li>首次安装后通过 <code>openclaw onboard</code> 向导自动生成</li>
+    <li>修改配置后需重启网关服务生效</li>
+    <li>token 值用于 Web UI 访问,请妥善保管</li>
+</ul>
+<h3>2. 工作区目录</h3>
+<p><strong>路径:</strong> <code>~/.openclaw/workspace/</code></p>
+<p><strong>说明:</strong> OpenClaw 的默认工作目录,所有 AI 生成的文件、临时文件和用户请求的输出文件都保存在此。</p>
+<p><strong>主要用途:</strong></p>
+<ul>
+    <li>AI 智能体读写文件的默认位置</li>
+    <li>代码执行输出存储</li>
+    <li>文档生成和编辑</li>
+    <li>临时数据存储</li>
+</ul>
+<p><strong>权限说明:</strong></p>
+<ul>
+    <li>默认情况下,AI 只能访问此目录及其子目录</li>
+    <li>若需访问其他路径,需要配置 <code>filesystem-mcp</code> 技能并授予额外权限</li>
+    <li>Windows 用户可能需要将文件从工作区复制到其他位置</li>
+</ul>
+<p><strong>使用建议:</strong></p>
+<ul>
+    <li>定期清理不需要的临时文件</li>
+    <li>重要输出建议备份到工作区外</li>
+    <li>可以在此建立项目子目录进行组织管理</li>
+</ul>
+<h3>3. 智能体状态目录</h3>
+<p><strong>路径:</strong> <code>~/.openclaw/agents/&lt;cid&gt;/</code></p>
+<p><strong>说明:</strong> 每个会话(Conversation)的智能体状态和配置存储目录。<code>&lt;cid&gt;</code> 是会话 ID,每个会话都有独立的配置空间。</p>
+<p><strong>目录结构:</strong></p>
+<pre>~/.openclaw/agents/&lt;cid&gt;/
+├── agent/
+│   ├── auth-profiles.json    # 该会话的 OAuth 和 API 密钥
+│   └── ...
+└── ...</pre>
+<p><strong>auth-profiles.json 说明:</strong></p>
+<ul>
+    <li>存储该智能体使用的 API 认证信息</li>
+    <li>包含各个服务的 OAuth token</li>
+    <li>新版本使用此路径,旧版本存储在 <code>~/.openclaw/credentials/</code></li>
+</ul>
+<p><strong>数据隔离:</strong></p>
+<ul>
+    <li>每个会话的认证信息相互独立</li>
+    <li>可以为不同会话配置不同的 API 密钥</li>
+    <li>支持多智能体并行运行</li>
+</ul>
+<h3>4. 认证凭据目录(旧版)</h3>
+<p><strong>路径:</strong> <code>~/.openclaw/credentials/</code></p>
+<p><strong>说明:</strong> 旧版本 OpenClaw 的凭据存储位置。</p>
+<p><strong>迁移说明:</strong></p>
+<ul>
+    <li>新版本已迁移至 <code>~/.openclaw/agents/&lt;agentId&gt;/agent/auth-profiles.json</code></li>
+    <li>旧版本用户升级后,凭据可能需要重新配置</li>
+    <li>建议使用 <code>openclaw models auth setup</code> 重新设置</li>
+</ul>
+<h3>5. 记忆存储目录</h3>
+<p><strong>路径:</strong> <code>~/.openclaw/memory/</code></p>
+<p><strong>说明:</strong> OpenClaw 的持久化记忆系统存储位置,包含向量索引和对话历史。</p>
+<p><strong>主要文件:</strong></p>
+<ul>
+    <li>
+        <p><strong><code>&lt;cid&gt;.sqlite</code></strong> - 向量索引数据库</p>
+        <ul>
+            <li>存储对话的语义向量</li>
+            <li>支持语义搜索功能</li>
+            <li>用于长期记忆检索</li>
+        </ul>
+    </li>
+    <li>
+        <p><strong><code>YYYY-MM-DD.md</code></strong> - 每日对话日志</p>
+        <ul>
+            <li>以日期命名的 Markdown 文件</li>
+            <li>记录当天所有对话内容</li>
+            <li>便于人工查看和归档</li>
+        </ul>
+    </li>
+</ul>
+<p><strong>记忆功能:</strong></p>
+<ul>
+    <li><strong>向量搜索:</strong> 使用 <code>memory search "关键词"</code> 搜索历史对话</li>
+    <li><strong>上下文关联:</strong> 支持跨会话的上下文理解</li>
+    <li><strong>长期记忆:</strong> 智能体会"记住"用户的偏好和习惯</li>
+</ul>
+<p><strong>维护建议:</strong></p>
+<ul>
+    <li>定期备份 memory 目录</li>
+    <li>大型数据库可能影响性能,可考虑定期归档</li>
+    <li>日志文件可用于审计和问题排查</li>
+</ul>
+<h3>6. 技能目录</h3>
+<p><strong>路径:</strong> <code>~/.openclaw/skills/</code></p>
+<p><strong>说明:</strong> 全局共享技能(Skills)的安装位置。技能是扩展 OpenClaw 功能的插件。</p>
+<p><strong>技能管理:</strong></p>
+<ul>
+    <li><strong>安装技能:</strong> <code>npx clawhub install &lt;skill-name&gt;</code></li>
+    <li><strong>列出技能:</strong> <code>openclaw skills list</code></li>
+    <li><strong>搜索技能:</strong> <code>npx clawhub search &lt;关键词&gt;</code></li>
+</ul>
+<p><strong>常用技能示例:</strong></p>
+<ul>
+    <li><code>filesystem-mcp</code> - 文件系统操作</li>
+    <li><code>github</code> - GitHub 集成</li>
+    <li><code>nano-pdf</code> - PDF 编辑</li>
+    <li><code>notion</code> / <code>obsidian</code> - 笔记同步</li>
+    <li><code>weather</code> - 天气查询</li>
+    <li><code>summarize</code> - 内容摘要生成</li>
+</ul>
+<p><strong>技能生态:</strong></p>
+<ul>
+    <li>社区技能库 ClawHub 提供 500+ 技能</li>
+    <li>支持自定义技能开发</li>
+    <li>技能可访问外部 API 和系统资源</li>
+</ul>
+<p><strong>配置说明:</strong></p>
+<ul>
+    <li>每个技能可能需要单独的 API Key 配置</li>
+    <li>部分技能依赖系统工具(如 GitHub CLI)</li>
+    <li>macOS 专有技能在 Windows/Linux 上不可用</li>
+</ul>
+<h3>7. 网关日志目录</h3>
+<p><strong>路径:</strong> <code>/tmp/openclaw/*.log</code></p>
+<p><strong>说明:</strong> 网关服务的运行日志,存储在系统临时目录。</p>
+<p><strong>日志类型:</strong></p>
+<ul>
+    <li>网关启动/停止日志</li>
+    <li>API 请求/响应日志</li>
+    <li>错误和异常日志</li>
+    <li>性能监控信息</li>
+</ul>
+<p><strong>日志管理:</strong></p>
+<ul>
+    <li>临时目录的日志可能在系统重启后清除</li>
+    <li>使用 <code>openclaw gateway --verbose</code> 可以查看详细日志</li>
+    <li>排查问题时应首先检查日志文件</li>
+</ul>
+<p><strong>网关服务管理:</strong></p>
+<pre>openclaw gateway start    # 启动网关
+openclaw gateway status   # 查看状态
+openclaw gateway stop     # 停止网关</pre><hr>
+<h2>其他重要文件</h2>
+<h3>USER.md</h3>
+<p><strong>路径:</strong> 通常位于工作区或用户自定义位置</p>
+<p><strong>说明:</strong> 用户信息文件,包含关于用户的个性化信息,帮助 AI 更好地理解用户需求。</p>
+<p><strong>内容示例:</strong></p>
+<ul>
+    <li>用户偏好设置</li>
+    <li>常用工作流程</li>
+    <li>项目背景信息</li>
+    <li>自定义指令</li>
+</ul><hr>
+<h2>配置文件管理最佳实践</h2>
+<h3>1. 备份策略</h3>
+<p><strong>关键目录备份:</strong></p>
+<pre># 备份整个配置目录
+tar -czf openclaw-backup-$(date +%Y%m%d).tar.gz ~/.openclaw/
+
+# 仅备份核心配置
+cp ~/.openclaw/openclaw.json ~/backups/
+cp -r ~/.openclaw/memory/ ~/backups/memory/</pre>
+<p><strong>建议备份频率:</strong></p>
+<ul>
+    <li>主配置文件:每次修改后</li>
+    <li>记忆数据库:每周一次</li>
+    <li>技能配置:安装新技能后</li>
+</ul>
+<h3>2. 安全建议</h3>
+<p><strong>敏感信息保护:</strong></p>
+<ul>
+    <li><code>openclaw.json</code> 包含网关 token,不应公开</li>
+    <li><code>auth-profiles.json</code> 包含 API 密钥,需加密保护</li>
+    <li>定期更换 API 密钥</li>
+    <li>不要将配置文件提交到版本控制系统</li>
+</ul>
+<p><strong>权限设置:</strong></p>
+<pre># 确保配置目录仅用户可访问
+chmod 700 ~/.openclaw/
+chmod 600 ~/.openclaw/openclaw.json
+chmod 600 ~/.openclaw/agents/*/agent/auth-profiles.json</pre>
+<h3>3. 迁移和升级</h3>
+<p><strong>版本升级注意事项:</strong></p>
+<ul>
+    <li>升级前备份整个 <code>~/.openclaw/</code> 目录</li>
+    <li>检查 release notes 了解配置变更</li>
+    <li>旧版本凭据可能需要迁移</li>
+</ul>
+<p><strong>跨设备同步:</strong></p>
+<ul>
+    <li>可以同步配置文件实现多设备一致性</li>
+    <li>注意路径差异(Windows vs Unix)</li>
+    <li>敏感信息建议独立配置</li>
+</ul>
+<h3>4. 故障排查</h3>
+<p><strong>配置问题诊断:</strong></p>
+<pre># 检查配置文件语法
+cat ~/.openclaw/openclaw.json | json_pp
+
+# 深度检查
+openclaw doctor --deep
+
+# 查看网关状态
+openclaw gateway status</pre>
+<p><strong>常见问题:</strong></p>
+<ul>
+    <li><strong>认证失效:</strong> 运行 <code>openclaw models auth setup</code> 重新配置</li>
+    <li><strong>网关无法启动:</strong> 检查端口占用,查看日志文件</li>
+    <li><strong>技能无法使用:</strong> 确认技能依赖已安装,检查 API 密钥</li>
+</ul><hr>
+<h2>环境变量配置</h2>
+<p>OpenClaw 支持通过环境变量进行配置:</p>
+<pre># API 密钥环境变量
+export ANTHROPIC_API_KEY="your-key-here"
+export OPENAI_API_KEY="your-key-here"
+export DEEPSEEK_API_KEY="your-key-here"
+
+# 自定义配置目录
+export OPENCLAW_HOME="~/custom-path/.openclaw"</pre>
+<p><strong>环境变量优先级:</strong></p>
+<ul>
+    <li>环境变量中的 API Key 会被 onboard 向导自动检测</li>
+    <li>可以覆盖配置文件中的默认值</li>
+    <li>适合 CI/CD 环境和容器化部署</li>
+</ul><hr>
+<h2>网络和部署配置</h2>
+<h3><a name="本地部署"></a><span></span>本地部署</h3>
+<p><strong>默认配置:</strong></p>
+<ul>
+    <li>绑定地址: 127.0.0.1(仅本机访问)</li>
+    <li>网关端口: 18789</li>
+</ul>
+<p><strong>访问方式:</strong></p>
+<pre>http://127.0.0.1:18789/#token=&lt;your-token&gt;</pre>
+<h3><a name="云端部署"></a><span></span>云端部署</h3>
+<p>OpenClaw 支持部署在云服务器上:</p>
+<p><strong>支持平台:</strong></p>
+<ul>
+    <li>阿里云:<a href="https://www.aliyun.com/activity/ecs/clawdbot?userCode=i5mn5r7m" target="_blank">https://www.aliyun.com/activity/ecs/clawdbot</a></li>
+ <li>
+腾讯云：<a href="https://cloud.tencent.com/act/cps/redirect?redirect=37925&amp;cps_key=4537fb0f9e70f157220dafdec0f9c750" target="_blank">https://cloud.tencent.com/developer/article/2624973</a></li>
+    <li>1Panel</li>
+    <li>Docker 容器</li>
+</ul>
+<p><strong>云端配置特点:</strong></p>
+<ul>
+    <li>需要配置公网访问权限</li>
+    <li>可能需要配置防火墙规则</li>
+    <li>支持域名绑定和 SSL 证书</li>
+</ul><hr>
+<h2>集成平台配置</h2>
+<p>OpenClaw 支持多种即时通讯平台:</p>
+<h3><a name="支持的平台"></a><span></span>支持的平台</h3>
+<ul>
+    <li><strong>国外:</strong> WhatsApp, Telegram, Discord, Slack, iMessage</li>
+    <li><strong>国内:</strong> 飞书, 钉钉</li>
+</ul>
+<h3><a name="配置位置"></a><span></span>配置位置</h3>
+<p>聊天渠道配置存储在 <code>openclaw.json</code> 中,包含:</p>
+<ul>
+    <li>渠道类型(Slack/飞书等)</li>
+    <li>认证 Token</li>
+    <li>频道白名单/黑名单</li>
+    <li>响应模式(DM/群聊)</li>
+</ul>
+<h3>配置管理</h3>
+
+<pre># 添加新渠道
+openclaw channels add
+
+# 列出已配置渠道
+openclaw channels list
+
+# 配对管理
+openclaw pairing list
+openclaw pairing approve &lt;platform&gt; &lt;code&gt;</pre>			<!-- 其他扩展 -->
+						
+			</div>
+			
+		</div>
+
+
+<div class="archive-list" style="display:none;font-size: 14px;line-height: 1.8;margin-top: 20px;padding: 10px;">
+<div class="archive-list-item">
+    <div class="post-intro" style="width: 100%;" id="ai-info">
+	  AI 思考中...
+    </div>
+</div>
+</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="openclaw-how-it-works.html" rel="prev"> OpenClaw 工作原理</a> </div>
+			<div class="next-design-link"><a href="cc-switch.html" rel="next"> CC Switch 一键切换 API</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+
+
+		
+		<div class="sidebar-box ">
+				
+
+<style>	
+.responsive_ad1 { display:none; }
+@media(min-width: 800px) { .responsive_ad1 {  display:block;margin:0 auto;} }
+</style>
+<div id="ad-336280" class="responsive_ad1">
+<!-- 336*280 固定 -->		
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 移动版 自动调整 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+				</div>
+		<!-- 笔记列表 -->
+		<style>
+.wrapper {
+  /*text-transform: uppercase; */
+  background: #ececec;
+  color: #555;
+  cursor: pointer;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.wrapper .tooltip {
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: left;
+  background: #96b97d;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 14px;
+  pointer-events: none;
+  position: absolute;
+  
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+.tooltip a {
+	color:#fff;
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}  
+
+/* CSS Triangles - see Trevor's post */
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #96b97d 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 20%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+.wrapper .tooltip1 {
+	margin-left: 50px;
+	padding-top: 0px;
+}
+/*
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+*/
+/* IE can just show/hide with no transition */
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.css">
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style=" padding: 20px 20px;"> 
+	<h3 class="text-muted" id="share_code" style="color: #799961;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<!--
+	<p style="font-size:14px;">笔记需要是本篇文章的内容扩展！</p><br>
+	<p style="font-size:12px;"><a href="//www.runoob.com/tougao" target="_blank">文章投稿，可点击这里</a></p>
+	<p style="font-size:14px;"><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>
+		<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display:none;">
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div id="mded"></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input type="hidden" name="comment_post_ID" value="29535" id="comment_post_ID" />
+<input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="引用地址"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script type="text/javascript">
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload:false,
+	 // upload: {url:'/api/comment_upload_file.php',params: null,fileKey: 'upload_file',connectionCount: 1,leaveConfirm: '文件正在上传，您确定离开?'},
+	  defaultImage: 'https://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  autosave: 'editor-content',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+	$("#user_add_note").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		$('html, body').animate({
+       	    scrollTop: $("#respond").offset().top
+    	}, 200);
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" style="display:none;" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  29535;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>').show();
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>').show();
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>').show();
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>').show();
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>').show();
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>').show();
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	$(".comt-author").click(function() {
+		href = $(this).children("a").attr("href");
+		if(href.indexOf("/note/")!=-1) {
+			var win = window.open(href, '_blank');
+  			win.focus();
+		}
+	});
+	$(".comt-meta span").hover(function(){
+		$(this).children(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).children(".tooltip").removeAttr("style");
+	});
+	/*
+	$(".wrapper i").hover(function(){
+		$(this).siblings(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).siblings(".tooltip").css({ "opacity": 0, "pointer-events": "auto"});
+	});
+	*/
+	//Upvote.create('runoobvote-id', {callback: vote_callback});
+	var ajaxurl = 'https://www.runoob.com/wp-admin/admin-ajax.php';
+	var callback = function(data) {
+		//console.log($('#runoobvote-id').upvote('upvoted'));
+		//console.log($('#runoobvote-id').upvote('downvoted'));
+		//console.log(data);
+		_vote_action = data.action;
+		id_arr = data.id.split('-');
+		um_id= id_arr[2];
+		//console.log(um_id);
+		
+		var re = /^[1-9]+/;
+		if (re.test(um_id)) { 
+			var ajax_data = {
+				_vote_action: _vote_action,
+				action: "pinglun_zan",
+				um_id: um_id,
+				um_action: "ding"
+			};
+			//console.log(ajax_data);
+			$.post(ajaxurl,ajax_data,function(status){
+				//if(status.vote_num>999) {
+				//	_voteHtml = '<span style="display: block; text-align: center;font-size: 20px; color: #6a737c; margin: 8px 0;">'+kFormatter(status.vote_num) +'</span>';
+				//	$("#runoobvote-id-" + um_id + " .count").hide().after(_voteHtml);
+				//}
+				
+			});
+		}
+	};
+	if($('#comments').length && $('.upvotejs').length){
+		$('.upvotejs').upvote({id: 29535, callback: callback});
+	
+		$.post(ajaxurl,{"action":"pinglun_zan","postid":29535},function(data){  
+			$(data).each(function(key,value) {
+				$("#runoobvote-id-" + value.commid + " .upvote").addClass(value.upvotejs_class);
+				$("#runoobvote-id-" + value.commid + " .downvote").addClass(value.downvote_class);
+				$("#runoobvote-id-" + value.commid + " .count").text(value.upvote_count);
+			})
+		},'json');
+		
+	}
+	
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+function kFormatter(num) {
+	// return num;
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
+</script>
+
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/css/qa.css?1.45">
+<link rel="stylesheet" type="text/css" href="https://static.char123.com/assets/simditor/2.3.6/styles/simditor.min.css" />
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor.min.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor-autosave.js"></script>
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+
+<style>
+.sidebar-tree .double-li {
+    width:300px;
+}
+.sidebar-tree .double-li li {
+    width: 44%;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    display: inline;
+}
+</style>
+
+    
+        <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here" style="margin: 0 auto;">
+            <a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;"> <i class="fa fa-list" aria-hidden="true"></i> 分类导航</a>
+        </div>
+    <div class="sidebar-box sidebar-cate">
+        
+        <div class="sidebar-tree">
+            <ul><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="../html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="../html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="../css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="../css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Tailwind CSS 教程" href="../tailwindcss/tailwindcss-tutorial.html">Tailwind CSS 教程</a></li><li><a title="Bootstrap4 教程" href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Bootstrap5 教程" href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 教程</a></li><li><a title="Font Awesome 教程" href="../font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="../foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="../js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="../htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="../jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="../angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="../angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="../vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="Vue3 教程" href="../vue3/vue3-tutorial.html">Vue3 教程</a></li><li><a title="React 教程" href="../react/react-tutorial.html">React 教程</a></li><li><a title="Next.js 教程" href="../nextjs/nextjs-tutorial.html">Next.js 教程</a></li><li><a title="TypeScript 教程" href="../typescript/ts-tutorial.html">TypeScript 教程</a></li><li><a title="jQuery UI 教程" href="../jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="../jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="../nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="Electron 教程" href="../electron/electron-tutorial.html">Electron 教程</a></li><li><a title="Playwright 教程" href="../playwright/playwright-tutorial.html">Playwright 教程</a></li><li><a title="AJAX 教程" href="../ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="../json/json-tutorial.html">JSON 教程</a></li><li><a title="Echarts 教程" href="../echarts/echarts-tutorial.html">Echarts 教程</a></li><li><a title="Chart.js 教程" href="../chartjs/chartjs-tutorial.html">Chart.js 教程</a></li><li><a title="Highcharts 教程" href="../highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="../googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="Python2.x 教程" href="../python/python-tutorial.html">Python2.x 教程</a></li><li><a title="Linux 教程" href="../linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="../docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="../ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="../java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="../c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="../cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="../perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="../servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="../jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="../lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Rust 教程" href="../rust/rust-tutorial.html">Rust 教程</a></li><li><a title="Zig 教程" href="../zig/zig-tutorial.html">Zig 教程</a></li><li><a title="Scala 教程" href="../scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="../go/go-tutorial.html">Go 教程</a></li><li><a title="PHP 教程" href="../php/php-tutorial.html">PHP 教程</a></li><li><a title="数据结构与算法" href="../data-structures/data-structures-tutorial.html">数据结构与算法</a></li><li><a title="Django 教程" href="../django/django-tutorial.html">Django 教程</a></li><li><a title="FastAPI 教程" href="../fastapi/fastapi-tutorial.html">FastAPI 教程</a></li><li><a title="Flask 教程" href="../flask/flask-tutorial.html">Flask 教程</a></li><li><a title="Pillow 教程" href="../pillow/pillow-tutorial.html">Pillow 教程</a></li><li><a title="Zookeeper 教程" href="//www.runoob.com/w3cnote/zookeeper-tutorial.html">Zookeeper 教程</a></li><li><a title="设计模式" href="../design-pattern/design-pattern-tutorial.html">设计模式</a></li><li><a title="Python 设计模式" href="../python-design-pattern/python-design-pattern-tutorial.html">Python 设计模式</a></li><li><a title="正则表达式" href="../regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="Maven 教程" href="../maven/maven-tutorial.html">Maven 教程</a></li><li><a title="CMake 教程" href="../cmake/cmake-tutorial.html">CMake 教程</a></li><li><a title="Verilog 教程" href="//www.runoob.com/w3cnote/verilog-tutorial.html">Verilog 教程</a></li><li><a title="ASP 教程" href="../asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="../appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="../vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="../sql/sql-tutorial.html">SQL 教程</a></li><li><a title="MySQL 教程" href="../mysql/mysql-tutorial.html">MySQL 教程</a></li><li><a title="PostgreSQL 教程" href="../postgresql/postgresql-tutorial.html">PostgreSQL 教程</a></li><li><a title="SQLite 教程" href="../sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="../mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="../redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="../Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit">  AI & 数据分析</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="NumPy 教程" href="../numpy/numpy-tutorial.html">NumPy 教程</a></li><li><a title="Pandas 教程" href="../pandas/pandas-tutorial.html">Pandas 教程</a></li><li><a title="Matplotlib 教程" href="../matplotlib/matplotlib-tutorial.html">Matplotlib 教程</a></li><li><a title="Scipy 教程" href="../scipy/scipy-tutorial.html">Scipy 教程</a></li><li><a title="Pytorch 教程" href="../pytorch/pytorch-tutorial.html">Pytorch 教程</a></li><li><a title="TensorFlow 教程" href="../tensorflow/tensorflow-tutorial.html">TensorFlow 教程</a></li><li><a title="Ollama 教程" href="../ollama/ollama-tutorial.html">Ollama 教程</a></li><li><a title="机器 教程" href="../ml/ml-tutorial.html">机器 教程</a></li><li><a title="Jupyter Notebook 教程" href="../jupyter-notebook/jupyter-notebook-tutorial.html">Jupyter Notebook 教程</a></li><li><a title="AI Agent(智能体)" href="ai-agent-tutorial.html">AI Agent(智能体)</a></li><li><a title="Skills(技能)" href="../skills/skills-tutorial.html">Skills(技能)</a></li><li><a title="Claude Code" href="../claude-code/claude-code-tutorial.html">Claude Code</a></li><li><a title="OpenCode" href="../opencode/opencode-tutorial.html">OpenCode</a></li><li><a title="Codex 教程" href="../codex/codex-tutorial.html">Codex 教程</a></li><li><a title="scikit-learn 教程" href="../sklearn/sklearn-tutorial.html">scikit-learn 教程</a></li><li><a title="R 教程" href="../r/r-tutorial.html">R 教程</a></li><li><a title="OpenCV 教程" href="../opencv/opencv-tutorial.html">OpenCV 教程</a></li><li><a title="NLP 教程" href="../nlp/nlp-tutorial.html">NLP 教程</a></li><li><a title="Selenium 教程" href="../selenium/selenium-tutorial.html">Selenium 教程</a></li><li><a title="Julia 教程" href="../julia/julia-tutorial.html">Julia 教程</a></li><li><a title="量化交易" href="../qt/qt-tutorial.html">量化交易</a></li><li><a title="Dash 教程" href="../dash/dash-tutorial.html">Dash 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="//www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="../swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="../jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="../ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Flutter 教程" href="../flutter/flutter-tutorial.html">Flutter 教程</a></li><li><a title="Kotlin 教程" href="../kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="VS Code 教程" href="../vscode/vscode-tutorial.html">VS Code 教程</a></li><li><a title="PyCharm 教程" href="../pycharm/pycharm-tutorial.html">PyCharm 教程</a></li><li><a title="Swagger 教程" href="../swagger/swagger-tutorial.html">Swagger 教程</a></li><li><a title="RESTful API 教程" href="../restfulapi/restful-api-tutorial.html">RESTful API 教程</a></li><li><a title="Eclipse 教程" href="../eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="../git/git-tutorial.html">Git 教程</a></li><li><a title="Svn 教程" href="../svn/svn-tutorial.html">Svn 教程</a></li><li><a title="Markdown 教程" href="../markdown/md-tutorial.html">Markdown 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="../xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="../dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="../dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="../xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="../xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="../xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="../xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="../xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="../schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="../xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="../svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="../aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="../csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="PowerShell 教程" href="../powershell/powershell-tutorial.html">PowerShell 教程</a></li><li><a title="Web Pages 教程" href="../aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="../aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="../aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="../aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="../webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="../wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="../soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="../rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="../rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="../http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="../web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="../browsers/browser-information.html">浏览器信息</a></li><li><a title="网络协议" href="../np/np-tutorial.html">网络协议</a></li><li><a title="网站主机教程" href="../hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="../tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="../w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="../quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>            </div>
+    
+    </div>
+    </div>
+    <br>
+    
+    <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here">
+            <a href="javascript:void(0);">Advertisement</a>
+        </div>
+        <div class="re-600160" id="sidebar-right-re">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧栏1 -->
+        <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+                </div>
+    </div>
+</div></div>
+
+</div>
+
+<script>
+var aid = 29535;
+function coll() {
+	$.post( '/wp-content/themes/runoob/option/user/userinfo.php', {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+		if(data.error==0) {
+			$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+			$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+		}
+		alert(data.msg);
+	},'json');
+}
+
+(function () {
+    // 1. 仅 HTML 页面
+    if (!document.contentType || !document.contentType.includes('text/html')) return;
+
+    // 2. 容器判断
+    var container = document.querySelector('.article-intro');
+    if (!container) return;
+
+    var h1 = container.querySelector('h1');
+    if (!h1) return;
+
+    // 3. URL 判断
+    var url = window.location.href.toLowerCase();
+    var version = null;
+
+    if (url.includes('/python3/')) {
+        version = 'Python3.x';
+    } else if (url.includes('/python/')) {
+        version = 'Python2.x';
+    }
+
+    if (!version) return;
+
+    // 4. 防重复
+    if (h1.querySelector('.py-version-badge')) return;
+
+    // 5. 创建标签
+    var badge = document.createElement('span');
+    badge.className = 'py-version-badge';
+    badge.innerText = version;
+
+    // 6. 样式（核心：float 实现右上角）
+    badge.style.float = 'right';
+    badge.style.fontSize = '12px';
+    badge.style.padding = '2px 8px';
+    badge.style.borderRadius = '999px';
+
+   // 自适应亮/暗色 + 渐变背景（增强版）
+	badge.style.color = 'inherit';
+
+	// 渐变背景（低透明度，不影响暗黑模式）
+	if (version.includes('3')) {
+		badge.style.background = 'linear-gradient(90deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15))';
+	} else {
+		badge.style.background = 'linear-gradient(90deg, rgba(161,140,209,0.15), rgba(251,194,235,0.15))';
+	}
+
+	// 边框弱化（更精致）
+	badge.style.border = '1px solid rgba(127,127,127,0.3)';
+
+	// 提升可读性
+	badge.style.opacity = '0.95';
+
+    // 微调位置（更贴近“右上角”）
+    badge.style.marginTop = '4px';
+    badge.style.marginLeft = '10px';
+
+    // 7. 插入到 h1 最前面（让 float 生效更稳定）
+    h1.insertBefore(badge, h1.firstChild);
+
+})();
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.js?1.0"></script>
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.css?1.0" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // 获取窗口宽度
+    var windowWidth = $(window).width();
+
+    // 设置一个阈值，例如 768px，根据实际需要调整
+    var mobileThreshold = 768;
+
+    // 判断是否为移动端
+    if (windowWidth < mobileThreshold) {
+        // 在移动端执行的代码
+        $(".article-heading-ad").show();
+    } else {
+        // 在非移动端执行的代码
+		$(".article-heading-ad").show();
+    }
+	
+});
+</script>
+<script src="/wp-content/themes/runoob/assets/js/runoob-article-dir.min.js"></script>
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

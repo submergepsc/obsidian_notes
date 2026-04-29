@@ -1,0 +1,36 @@
+URL: https://www.runoob.com/servlet/servlet-useful-resources.html
+Title: Servlet 有用的资源 | 菜鸟教程
+
+Servlet 有用的资源 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Servlet 教程 
+
+Servlet 国际化 
+
+Servlet 有用的资源 
+
+本章列出了 Servlet 网站、书籍和文章。 
+
+Java Servlet 有用的网站 
+
+Sun's Site on Servlets - Sun 的官方网站上关于 Servlet 的相关资料。 
+
+JSP Engine - Tomcat - Apache Tomcat 是一个开源软件，实现了对 Java Servlet 和 JSP（JavaServer Pages）技术的支持。 
+
+MySQL Connector/J - MySQL Connector/J 是 MySQL 官方 JDBC 驱动程序。 
+
+The Java TM Tutorials - 该 Java 教程是为那些想用 Java 编程语言创建应用程序的编程人员提供的实用指南。 
+
+Java TM 2 SDK, Standard Edition - Java TM 2 SDK, Standard Edition 的官网。 
+
+Free Java Download - 为您的桌面计算机下载 Java！ 
+
+Sun Developer Network - Sun Microsystem 的官方网站，上面列出了所有的 API 文档，最新的 Java 技术、书籍和其他资源。 
+
+Java Servlet 有用的书籍 
+
+AI 思考中... 
+
+Servlet 国际化

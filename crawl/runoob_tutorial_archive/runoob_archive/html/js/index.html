@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>js index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>js index</h1>
+      <p>Offline pages under js</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-516595e8">入门</a> <span>4 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>20 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>4 pages</span></li><li><a href="#subgroup-6d4b9a8c">测验</a> <span>1 pages</span></li><li><a href="#subgroup-ai-5de55177">AI / 工具</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>68 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>js (98)</h2><p>二级分类：6 个</p><ul class="page-list"><li><a href="#subgroup-516595e8">入门</a> <span>4 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>20 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>4 pages</span></li><li><a href="#subgroup-6d4b9a8c">测验</a> <span>1 pages</span></li><li><a href="#subgroup-ai-5de55177">AI / 工具</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>68 pages</span></li></ul></section><section id="subgroup-516595e8"><h2>入门 (4)</h2><ol class="page-list"><li><a href="js-obj-intro.html">JavaScript 对象</a> <code>https://www.runoob.com/js/js-obj-intro.html</code></li><li><a href="js-tutorial.html">JavaScript 教程</a> <code>https://www.runoob.com/js/js-tutorial.html</code></li><li><a href="js-intro.html">JavaScript 简介</a> <code>https://www.runoob.com/js/js-intro.html</code></li><li><a href="js-class-intro.html">JavaScript 类(class)</a> <code>https://www.runoob.com/js/js-class-intro.html</code></li></ol></section><section id="subgroup-53c28003"><h2>参考 (20)</h2><ol class="page-list"><li><a href="jsref-obj-array.html">JavaScript Array 对象</a> <code>https://www.runoob.com/js/jsref-obj-array.html</code></li><li><a href="jsref-obj-date.html">JavaScript Date 对象</a> <code>https://www.runoob.com/js/jsref-obj-date.html</code></li><li><a href="js-htmldom-eventlistener.html">JavaScript HTML DOM EventListener</a> <code>https://www.runoob.com/js/js-htmldom-eventlistener.html</code></li><li><a href="js-htmldom-events.html">JavaScript HTML DOM 事件</a> <code>https://www.runoob.com/js/js-htmldom-events.html</code></li><li><a href="js-htmldom-elements.html">JavaScript HTML DOM 元素 (节点)</a> <code>https://www.runoob.com/js/js-htmldom-elements.html</code></li><li><a href="js-object-prototype.html">JavaScript prototype（原型对象）</a> <code>https://www.runoob.com/js/js-object-prototype.html</code></li><li><a href="js-events.html">JavaScript 事件</a> <code>https://www.runoob.com/js/js-events.html</code></li><li><a href="js-functions.html">JavaScript 函数</a> <code>https://www.runoob.com/js/js-functions.html</code></li><li><a href="js-function-parameters.html">JavaScript 函数参数</a> <code>https://www.runoob.com/js/js-function-parameters.html</code></li><li><a href="js-function-definition.html">JavaScript 函数定义</a> <code>https://www.runoob.com/js/js-function-definition.html</code></li><li><a href="js-function-invocation.html">JavaScript 函数调用</a> <code>https://www.runoob.com/js/js-function-invocation.html</code></li><li><a href="js-objects.html">JavaScript 对象</a> <code>https://www.runoob.com/js/js-objects.html</code></li><li><a href="jsref-class-super.html">JavaScript 类(class)  super 关键字</a> <code>https://www.runoob.com/js/jsref-class-super.html</code></li><li><a href="jsref-constructor-class.html">JavaScript 类(class) constructor() 方法</a> <code>https://www.runoob.com/js/jsref-constructor-class.html</code></li><li><a href="jsref-class-extends.html">JavaScript 类(class) extends 关键字</a> <code>https://www.runoob.com/js/jsref-class-extends.html</code></li><li><a href="jsref-class-static.html">JavaScript 类(class) static 关键字</a> <code>https://www.runoob.com/js/jsref-class-static.html</code></li><li><a href="js-operators.html">JavaScript 运算符</a> <code>https://www.runoob.com/js/js-operators.html</code></li><li><a href="js-function-closures.html">JavaScript 闭包</a> <code>https://www.runoob.com/js/js-function-closures.html</code></li><li><a href="js-function.html">JavaScript 闭包</a> <code>https://www.runoob.com/js/js-function.html</code></li><li><a href="js-validation-api.html">JavaScript 验证 API</a> <code>https://www.runoob.com/js/js-validation-api.html</code></li></ol></section><section id="subgroup-5b9e4f8b"><h2>实例 (4)</h2><ol class="page-list"><li><a href="js-ex-dom.html">JavaScript HTML DOM 实例</a> <code>https://www.runoob.com/js/js-ex-dom.html</code></li><li><a href="js-examples.html">JavaScript 实例</a> <code>https://www.runoob.com/js/js-examples.html</code></li><li><a href="js-ex-objects.html">JavaScript 对象实例</a> <code>https://www.runoob.com/js/js-ex-objects.html</code></li><li><a href="js-ex-browser.html">JavaScript 浏览器对象实例</a> <code>https://www.runoob.com/js/js-ex-browser.html</code></li></ol></section><section id="subgroup-6d4b9a8c"><h2>测验 (1)</h2><ol class="page-list"><li><a href="js-quiz.html">JavaScript 测验</a> <code>https://www.runoob.com/js/js-quiz.html</code></li></ol></section><section id="subgroup-ai-5de55177"><h2>AI / 工具 (1)</h2><ol class="page-list"><li><a href="fitten-code-js.html">JavaScript AI 编程助手</a> <code>https://www.runoob.com/js/fitten-code-js.html</code></li></ol></section><section id="subgroup-4e139898"><h2>专题 (68)</h2><ol class="page-list"><li><a href="js-chrome.html">Chrome 浏览器中执行 JavaScript</a> <code>https://www.runoob.com/js/js-chrome.html</code></li><li><a href="js-obj-array.html">JavaScript  Array（数组）对象</a> <code>https://www.runoob.com/js/js-obj-array.html</code></li><li><a href="js-variable.html">JavaScript  变量</a> <code>https://www.runoob.com/js/js-variable.html</code></li><li><a href="js-variables.html">JavaScript  变量</a> <code>https://www.runoob.com/js/js-variables.html</code></li><li><a href="js-async-await.html">JavaScript async/await</a> <code>https://www.runoob.com/js/js-async-await.html</code></li><li><a href="js-obj-boolean.html">JavaScript Boolean（布尔）对象</a> <code>https://www.runoob.com/js/js-obj-boolean.html</code></li><li><a href="js-break.html">JavaScript break 和 continue 语句</a> <code>https://www.runoob.com/js/js-break.html</code></li><li><a href="js-cookies.html">JavaScript Cookie</a> <code>https://www.runoob.com/js/js-cookies.html</code></li><li><a href="js-obj-date.html">JavaScript Date（日期）对象</a> <code>https://www.runoob.com/js/js-obj-date.html</code></li><li><a href="js-loop-for.html">JavaScript for 循环</a> <code>https://www.runoob.com/js/js-loop-for.html</code></li><li><a href="js-htmldom.html">JavaScript HTML DOM</a> <code>https://www.runoob.com/js/js-htmldom.html</code></li><li><a href="js-htmldom-css.html">JavaScript HTML DOM 改变 CSS</a> <code>https://www.runoob.com/js/js-htmldom-css.html</code></li><li><a href="js-htmldom-html.html">JavaScript HTML DOM 改变 HTML 内容</a> <code>https://www.runoob.com/js/js-htmldom-html.html</code></li><li><a href="js-htmldom-nodelist.html">JavaScript HTML DOM 节点列表</a> <code>https://www.runoob.com/js/js-htmldom-nodelist.html</code></li><li><a href="js-htmldom-collections.html">JavaScript HTML DOM 集合(Collection)</a> <code>https://www.runoob.com/js/js-htmldom-collections.html</code></li><li><a href="js-if-else.html">JavaScript If…Else 语句</a> <code>https://www.runoob.com/js/js-if-else.html</code></li><li><a href="js-json.html">JavaScript JSON</a> <code>https://www.runoob.com/js/js-json.html</code></li><li><a href="javascript-json-parse.html">JavaScript JSON.parse()</a> <code>https://www.runoob.com/js/javascript-json-parse.html</code></li><li><a href="javascript-json-stringify.html">JavaScript JSON.stringify()</a> <code>https://www.runoob.com/js/javascript-json-stringify.html</code></li><li><a href="js-let-const.html">JavaScript let 和 const</a> <code>https://www.runoob.com/js/js-let-const.html</code></li><li><a href="js-obj-math.html">JavaScript Math（算数）对象</a> <code>https://www.runoob.com/js/js-obj-math.html</code></li><li><a href="js-obj-number.html">JavaScript Number 对象</a> <code>https://www.runoob.com/js/js-obj-number.html</code></li><li><a href="js-promise.html">JavaScript Promise</a> <code>https://www.runoob.com/js/js-promise.html</code></li><li><a href="js-obj-regexp.html">JavaScript RegExp 对象</a> <code>https://www.runoob.com/js/js-obj-regexp.html</code></li><li><a href="js-switch.html">JavaScript switch 语句</a> <code>https://www.runoob.com/js/js-switch.html</code></li><li><a href="js-this.html">JavaScript this 关键字</a> <code>https://www.runoob.com/js/js-this.html</code></li><li><a href="js-typeof.html">JavaScript typeof, null, 和 undefined</a> <code>https://www.runoob.com/js/js-typeof.html</code></li><li><a href="js-vscode.html">JavaScript VScode</a> <code>https://www.runoob.com/js/js-vscode.html</code></li><li><a href="js-loop-while.html">JavaScript while 循环</a> <code>https://www.runoob.com/js/js-loop-while.html</code></li><li><a href="js-window.html">JavaScript Window</a> <code>https://www.runoob.com/js/js-window.html</code></li><li><a href="js-window-history.html">JavaScript Window History</a> <code>https://www.runoob.com/js/js-window-history.html</code></li><li><a href="js-window-location.html">JavaScript Window Location</a> <code>https://www.runoob.com/js/js-window-location.html</code></li><li><a href="js-window-navigator.html">JavaScript Window Navigator</a> <code>https://www.runoob.com/js/js-window-navigator.html</code></li><li><a href="js-window-screen.html">JavaScript Window Screen</a> <code>https://www.runoob.com/js/js-window-screen.html</code></li><li><a href="js-strict.html">JavaScript 严格模式(use strict)</a> <code>https://www.runoob.com/js/js-strict.html</code></li><li><a href="js-conventions.html">JavaScript 代码规范</a> <code>https://www.runoob.com/js/js-conventions.html</code></li><li><a href="js-scope.html">JavaScript 作用域</a> <code>https://www.runoob.com/js/js-scope.html</code></li><li><a href="js-mistakes.html">JavaScript 使用误区</a> <code>https://www.runoob.com/js/js-mistakes.html</code></li><li><a href="js-reserved.html">JavaScript 保留关键字</a> <code>https://www.runoob.com/js/js-reserved.html</code></li><li><a href="js-hoisting.html">JavaScript 声明提升</a> <code>https://www.runoob.com/js/js-hoisting.html</code></li><li><a href="js-strings.html">JavaScript 字符串</a> <code>https://www.runoob.com/js/js-strings.html</code></li><li><a href="js-obj-string.html">JavaScript 字符串（String）对象</a> <code>https://www.runoob.com/js/js-obj-string.html</code></li><li><a href="js-libraries.html">JavaScript 库</a> <code>https://www.runoob.com/js/js-libraries.html</code></li><li><a href="javascript-async.html">JavaScript 异步编程</a> <code>https://www.runoob.com/js/javascript-async.html</code></li><li><a href="js-async.html">JavaScript 异步编程</a> <code>https://www.runoob.com/js/js-async.html</code></li><li><a href="js-popup.html">JavaScript 弹窗</a> <code>https://www.runoob.com/js/js-popup.html</code></li><li><a href="js-summary.html">JavaScript 总结</a> <code>https://www.runoob.com/js/js-summary.html</code></li><li><a href="js-datatypes.html">JavaScript 数据类型</a> <code>https://www.runoob.com/js/js-datatypes.html</code></li><li><a href="js-string-templates.html">JavaScript 模板字符串</a> <code>https://www.runoob.com/js/js-string-templates.html</code></li><li><a href="js-regexp.html">JavaScript 正则表达式</a> <code>https://www.runoob.com/js/js-regexp.html</code></li><li><a href="js-comparisons.html">JavaScript 比较和逻辑运算符</a> <code>https://www.runoob.com/js/js-comparisons.html</code></li><li><a href="js-comments.html">JavaScript 注释</a> <code>https://www.runoob.com/js/js-comments.html</code></li><li><a href="js-lib-jquery.html">JavaScript 测试 jQuery</a> <code>https://www.runoob.com/js/js-lib-jquery.html</code></li><li><a href="js-lib-prototype.html">JavaScript 测试 Prototype</a> <code>https://www.runoob.com/js/js-lib-prototype.html</code></li><li><a href="js-howto.html">JavaScript 用法</a> <code>https://www.runoob.com/js/js-howto.html</code></li><li><a href="js-type-conversion.html">JavaScript 类型转换</a> <code>https://www.runoob.com/js/js-type-conversion.html</code></li><li><a href="js-class-inheritance.html">JavaScript 类继承</a> <code>https://www.runoob.com/js/js-class-inheritance.html</code></li><li><a href="js-validation.html">JavaScript 表单</a> <code>https://www.runoob.com/js/js-validation.html</code></li><li><a href="js-form-validation.html">JavaScript 表单验证</a> <code>https://www.runoob.com/js/js-form-validation.html</code></li><li><a href="js-timing.html">JavaScript 计时事件</a> <code>https://www.runoob.com/js/js-timing.html</code></li><li><a href="js-statements.html">JavaScript 语句</a> <code>https://www.runoob.com/js/js-statements.html</code></li><li><a href="js-syntax.html">JavaScript 语法</a> <code>https://www.runoob.com/js/js-syntax.html</code></li><li><a href="js-debugging.html">JavaScript 调试</a> <code>https://www.runoob.com/js/js-debugging.html</code></li><li><a href="js-output.html">JavaScript 输出</a> <code>https://www.runoob.com/js/js-output.html</code></li><li><a href="js-errors.html">JavaScript 错误 – Throw、Try 和 Catch</a> <code>https://www.runoob.com/js/js-errors.html</code></li><li><a href="js-class-static.html">JavaScript 静态方法</a> <code>https://www.runoob.com/js/js-class-static.html</code></li><li><a href="js-void.html">javascript:void(0) 含义</a> <code>https://www.runoob.com/js/js-void.html</code></li><li><a href="met-win-postmessage.html">Window postMessage() 方法</a> <code>https://www.runoob.com/js/met-win-postmessage.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "JavaScript AI 编程助手", "group": "js", "subgroup": "AI / 工具", "url": "https://www.runoob.com/js/fitten-code-js.html", "href": "fitten-code-js.html"}, {"title": "JavaScript 异步编程", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/javascript-async.html", "href": "javascript-async.html"}, {"title": "JavaScript JSON.parse()", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/javascript-json-parse.html", "href": "javascript-json-parse.html"}, {"title": "JavaScript JSON.stringify()", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/javascript-json-stringify.html", "href": "javascript-json-stringify.html"}, {"title": "JavaScript async/await", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-async-await.html", "href": "js-async-await.html"}, {"title": "JavaScript 异步编程", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-async.html", "href": "js-async.html"}, {"title": "JavaScript break 和 continue 语句", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-break.html", "href": "js-break.html"}, {"title": "Chrome 浏览器中执行 JavaScript", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-chrome.html", "href": "js-chrome.html"}, {"title": "JavaScript 类继承", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-class-inheritance.html", "href": "js-class-inheritance.html"}, {"title": "JavaScript 类(class)", "group": "js", "subgroup": "入门", "url": "https://www.runoob.com/js/js-class-intro.html", "href": "js-class-intro.html"}, {"title": "JavaScript 静态方法", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-class-static.html", "href": "js-class-static.html"}, {"title": "JavaScript 注释", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-comments.html", "href": "js-comments.html"}, {"title": "JavaScript 比较和逻辑运算符", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-comparisons.html", "href": "js-comparisons.html"}, {"title": "JavaScript 代码规范", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-conventions.html", "href": "js-conventions.html"}, {"title": "JavaScript Cookie", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-cookies.html", "href": "js-cookies.html"}, {"title": "JavaScript 数据类型", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-datatypes.html", "href": "js-datatypes.html"}, {"title": "JavaScript 调试", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-debugging.html", "href": "js-debugging.html"}, {"title": "JavaScript 错误 – Throw、Try 和 Catch", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-errors.html", "href": "js-errors.html"}, {"title": "JavaScript 事件", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-events.html", "href": "js-events.html"}, {"title": "JavaScript 浏览器对象实例", "group": "js", "subgroup": "实例", "url": "https://www.runoob.com/js/js-ex-browser.html", "href": "js-ex-browser.html"}, {"title": "JavaScript HTML DOM 实例", "group": "js", "subgroup": "实例", "url": "https://www.runoob.com/js/js-ex-dom.html", "href": "js-ex-dom.html"}, {"title": "JavaScript 对象实例", "group": "js", "subgroup": "实例", "url": "https://www.runoob.com/js/js-ex-objects.html", "href": "js-ex-objects.html"}, {"title": "JavaScript 实例", "group": "js", "subgroup": "实例", "url": "https://www.runoob.com/js/js-examples.html", "href": "js-examples.html"}, {"title": "JavaScript 表单验证", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-form-validation.html", "href": "js-form-validation.html"}, {"title": "JavaScript 闭包", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-function-closures.html", "href": "js-function-closures.html"}, {"title": "JavaScript 函数定义", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-function-definition.html", "href": "js-function-definition.html"}, {"title": "JavaScript 函数调用", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-function-invocation.html", "href": "js-function-invocation.html"}, {"title": "JavaScript 函数参数", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-function-parameters.html", "href": "js-function-parameters.html"}, {"title": "JavaScript 闭包", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-function.html", "href": "js-function.html"}, {"title": "JavaScript 函数", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-functions.html", "href": "js-functions.html"}, {"title": "JavaScript 声明提升", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-hoisting.html", "href": "js-hoisting.html"}, {"title": "JavaScript 用法", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-howto.html", "href": "js-howto.html"}, {"title": "JavaScript HTML DOM 集合(Collection)", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-htmldom-collections.html", "href": "js-htmldom-collections.html"}, {"title": "JavaScript HTML DOM 改变 CSS", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-htmldom-css.html", "href": "js-htmldom-css.html"}, {"title": "JavaScript HTML DOM 元素 (节点)", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-htmldom-elements.html", "href": "js-htmldom-elements.html"}, {"title": "JavaScript HTML DOM EventListener", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-htmldom-eventlistener.html", "href": "js-htmldom-eventlistener.html"}, {"title": "JavaScript HTML DOM 事件", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-htmldom-events.html", "href": "js-htmldom-events.html"}, {"title": "JavaScript HTML DOM 改变 HTML 内容", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-htmldom-html.html", "href": "js-htmldom-html.html"}, {"title": "JavaScript HTML DOM 节点列表", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-htmldom-nodelist.html", "href": "js-htmldom-nodelist.html"}, {"title": "JavaScript HTML DOM", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-htmldom.html", "href": "js-htmldom.html"}, {"title": "JavaScript If…Else 语句", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-if-else.html", "href": "js-if-else.html"}, {"title": "JavaScript 简介", "group": "js", "subgroup": "入门", "url": "https://www.runoob.com/js/js-intro.html", "href": "js-intro.html"}, {"title": "JavaScript JSON", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-json.html", "href": "js-json.html"}, {"title": "JavaScript let 和 const", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-let-const.html", "href": "js-let-const.html"}, {"title": "JavaScript 测试 jQuery", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-lib-jquery.html", "href": "js-lib-jquery.html"}, {"title": "JavaScript 测试 Prototype", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-lib-prototype.html", "href": "js-lib-prototype.html"}, {"title": "JavaScript 库", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-libraries.html", "href": "js-libraries.html"}, {"title": "JavaScript for 循环", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-loop-for.html", "href": "js-loop-for.html"}, {"title": "JavaScript while 循环", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-loop-while.html", "href": "js-loop-while.html"}, {"title": "JavaScript 使用误区", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-mistakes.html", "href": "js-mistakes.html"}, {"title": "JavaScript  Array（数组）对象", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-obj-array.html", "href": "js-obj-array.html"}, {"title": "JavaScript Boolean（布尔）对象", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-obj-boolean.html", "href": "js-obj-boolean.html"}, {"title": "JavaScript Date（日期）对象", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-obj-date.html", "href": "js-obj-date.html"}, {"title": "JavaScript 对象", "group": "js", "subgroup": "入门", "url": "https://www.runoob.com/js/js-obj-intro.html", "href": "js-obj-intro.html"}, {"title": "JavaScript Math（算数）对象", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-obj-math.html", "href": "js-obj-math.html"}, {"title": "JavaScript Number 对象", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-obj-number.html", "href": "js-obj-number.html"}, {"title": "JavaScript RegExp 对象", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-obj-regexp.html", "href": "js-obj-regexp.html"}, {"title": "JavaScript 字符串（String）对象", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-obj-string.html", "href": "js-obj-string.html"}, {"title": "JavaScript prototype（原型对象）", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-object-prototype.html", "href": "js-object-prototype.html"}, {"title": "JavaScript 对象", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-objects.html", "href": "js-objects.html"}, {"title": "JavaScript 运算符", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-operators.html", "href": "js-operators.html"}, {"title": "JavaScript 输出", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-output.html", "href": "js-output.html"}, {"title": "JavaScript 弹窗", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-popup.html", "href": "js-popup.html"}, {"title": "JavaScript Promise", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-promise.html", "href": "js-promise.html"}, {"title": "JavaScript 测验", "group": "js", "subgroup": "测验", "url": "https://www.runoob.com/js/js-quiz.html", "href": "js-quiz.html"}, {"title": "JavaScript 正则表达式", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-regexp.html", "href": "js-regexp.html"}, {"title": "JavaScript 保留关键字", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-reserved.html", "href": "js-reserved.html"}, {"title": "JavaScript 作用域", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-scope.html", "href": "js-scope.html"}, {"title": "JavaScript 语句", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-statements.html", "href": "js-statements.html"}, {"title": "JavaScript 严格模式(use strict)", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-strict.html", "href": "js-strict.html"}, {"title": "JavaScript 模板字符串", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-string-templates.html", "href": "js-string-templates.html"}, {"title": "JavaScript 字符串", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-strings.html", "href": "js-strings.html"}, {"title": "JavaScript 总结", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-summary.html", "href": "js-summary.html"}, {"title": "JavaScript switch 语句", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-switch.html", "href": "js-switch.html"}, {"title": "JavaScript 语法", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-syntax.html", "href": "js-syntax.html"}, {"title": "JavaScript this 关键字", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-this.html", "href": "js-this.html"}, {"title": "JavaScript 计时事件", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-timing.html", "href": "js-timing.html"}, {"title": "JavaScript 教程", "group": "js", "subgroup": "入门", "url": "https://www.runoob.com/js/js-tutorial.html", "href": "js-tutorial.html"}, {"title": "JavaScript 类型转换", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-type-conversion.html", "href": "js-type-conversion.html"}, {"title": "JavaScript typeof, null, 和 undefined", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-typeof.html", "href": "js-typeof.html"}, {"title": "JavaScript 验证 API", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/js-validation-api.html", "href": "js-validation-api.html"}, {"title": "JavaScript 表单", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-validation.html", "href": "js-validation.html"}, {"title": "JavaScript  变量", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-variable.html", "href": "js-variable.html"}, {"title": "JavaScript  变量", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-variables.html", "href": "js-variables.html"}, {"title": "javascript:void(0) 含义", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-void.html", "href": "js-void.html"}, {"title": "JavaScript VScode", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-vscode.html", "href": "js-vscode.html"}, {"title": "JavaScript Window History", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-window-history.html", "href": "js-window-history.html"}, {"title": "JavaScript Window Location", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-window-location.html", "href": "js-window-location.html"}, {"title": "JavaScript Window Navigator", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-window-navigator.html", "href": "js-window-navigator.html"}, {"title": "JavaScript Window Screen", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-window-screen.html", "href": "js-window-screen.html"}, {"title": "JavaScript Window", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/js-window.html", "href": "js-window.html"}, {"title": "JavaScript 类(class) extends 关键字", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/jsref-class-extends.html", "href": "jsref-class-extends.html"}, {"title": "JavaScript 类(class) static 关键字", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/jsref-class-static.html", "href": "jsref-class-static.html"}, {"title": "JavaScript 类(class)  super 关键字", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/jsref-class-super.html", "href": "jsref-class-super.html"}, {"title": "JavaScript 类(class) constructor() 方法", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/jsref-constructor-class.html", "href": "jsref-constructor-class.html"}, {"title": "JavaScript Array 对象", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/jsref-obj-array.html", "href": "jsref-obj-array.html"}, {"title": "JavaScript Date 对象", "group": "js", "subgroup": "参考", "url": "https://www.runoob.com/js/jsref-obj-date.html", "href": "jsref-obj-date.html"}, {"title": "Window postMessage() 方法", "group": "js", "subgroup": "专题", "url": "https://www.runoob.com/js/met-win-postmessage.html", "href": "met-win-postmessage.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

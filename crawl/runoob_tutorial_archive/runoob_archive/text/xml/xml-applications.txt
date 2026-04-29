@@ -1,0 +1,80 @@
+URL: https://www.runoob.com/xml/xml-applications.html
+Title: XML 应用程序 | 菜鸟教程
+
+XML 应用程序 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML 教程 
+
+在 HTML 页面中显示 XML 数据 
+
+XML 命名空间 
+
+XML 应用程序 
+
+本章演示一些基于 XML, HTML, XML DOM 和 JavaScript 构建的小型 XML 应用程序。 
+
+XML 文档实例 
+
+在本应用程序中，我们将使用 "cd_catalog.xml" 文件。 
+
+在 HTML div 元素中显示第一个 CD 
+
+下面的实例从第一个 CD 元素中获取 XML 数据，然后在 id="showCD" 的 HTML 元素中显示数据。displayCD() 函数在页面加载时调用： 
+
+实例 
+
+x=xmlDoc.getElementsByTagName("CD"); 
+i=0; 
+
+function displayCD() 
+{ 
+artist=(x[i].getElementsByTagName("ARTIST")[0].childNodes[0].nodeValue); 
+title=(x[i].getElementsByTagName("TITLE")[0].childNodes[0].nodeValue); 
+year=(x[i].getElementsByTagName("YEAR")[0].childNodes[0].nodeValue); 
+txt="Artist: " + artist + "<br />Title: " + title + "<br />Year: "+ year; 
+document.getElementById("showCD").innerHTML=txt; 
+} 
+
+尝试一下 » 
+
+添加导航脚本 
+
+为了向上面的实例添加导航（功能），需要创建 next() 和 previous() 两个函数： 
+
+实例 
+
+function next() 
+{ // display the next CD, unless you are on the last CD 
+if (i<x.length-1) 
+{ 
+i++; 
+displayCD(); 
+} 
+} 
+
+function previous() 
+{ // displays the previous CD, unless you are on the first CD 
+if (i>0) 
+{ 
+i--; 
+displayCD(); 
+} 
+} 
+
+尝试一下 » 
+
+当点击 CD 时显示专辑信息 
+
+最后的实例展示如何在用户点击某个 CD 项目时显示专辑信息： 
+
+尝试一下 。 
+
+如需了解更多关于使用 JavaScript 和 XML DOM 的信息，请访问我们的 XML DOM 教程 。 
+
+AI 思考中... 
+
+在 HTML 页面中显示 XML 数据 
+
+XML 命名空间

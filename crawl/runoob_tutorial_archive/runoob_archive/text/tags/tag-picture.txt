@@ -1,0 +1,68 @@
+URL: https://www.runoob.com/tags/tag-picture.html
+Title: HTML <picture> 元素 | 菜鸟教程
+
+HTML <picture> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 颜色混搭 
+
+HTML main 标签 
+
+HTML <picture> 元素 
+
+实例 
+
+根据屏幕匹配的不同尺寸显示不同图片，如果没有匹配到或浏览器不支持 picture 属性则使用 img 元素： 
+
+< picture > < source media = " (min-width: 650px) " srcset = " demo1.jpg " > < source media = " (min-width: 465px) " srcset = " demo2.jpg " > < img src = " img_girl.jpg " > </ picture > 
+
+尝试一下 » 
+
+定义 
+
+picture 元素允许我们在不同的设备上显示不同的图片，一般用于响应式。 
+
+HTML5 引入了 <picture> 元素，该元素可以让图片资源的调整更加灵活。 
+
+<picture> 元素零或多个 <source> 元素和一个 <img> 元素，每个 <source> 元素匹配不同的设备并引用不同的图像源，如果没有匹配的，就选择 <img> 元素的 src 属性中的 url。 
+
+注意: <img> 元素是放在最后一个 <picture> 元素之后，如果浏览器不支持该属性则显示 <img> 元素的的图片。 
+
+浏览器支持 
+
+表格中的数字表示支持该元素的第一个浏览器版本号。 
+
+元素 
+
+<picture> 
+
+38.0 
+
+13.0 
+
+38.0 
+
+9.1 
+
+25.0 
+
+HTML 4.01 与 HTML5 之间的差异 
+
+<picture> 属性是 HTML5 新定义的。 
+
+全局属性 
+
+<picture> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<picture> 标签支持 HTML 的事件属性 。 
+
+AI 思考中... 
+
+HTML 颜色混搭 
+
+HTML main 标签

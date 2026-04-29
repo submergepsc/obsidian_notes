@@ -1,0 +1,82 @@
+URL: https://www.runoob.com/tags/av-prop-defaultplaybackrate.html
+Title: HTML 音频/视频 DOM defaultPlaybackRate 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM defaultPlaybackRate 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM defaultMuted 属性 
+
+HTML 音频/视频 DOM duration 属性 
+
+HTML 音频/视频 DOM defaultPlaybackRate 属性 
+
+实例 
+
+把视频设置为默认低速播放： 
+
+myVid=document.getElementById("video1"); 
+myVid.defaultPlaybackRate=0.5; 
+
+尝试一下 » 
+
+定义和用法 
+
+defaultPlaybackRate 属性设置或返回音频/视频的默认播放速度。 
+
+设置该属性仅会改变默认的播放速度，而不是当前的。要改变当前的播放速度，请使用 playbackRate 属性。 
+
+浏览器支持 
+
+只有 Internet Explorer 10、Firefox 和 Chrome 支持 defaultPlaybackRate 属性。 
+
+注意： Safari、Opera 或 Internet Explorer 9 及之前的版本不支持 defaultPlaybackRate 属性。 
+
+语法 
+
+设置 defaultPlaybackRate 属性： 
+
+audio|video .defaultPlaybackRate= playbackspeed 
+
+返回 defaultPlaybackRate 属性： 
+
+audio|video .defaultPlaybackRate 
+
+属性值 
+
+值 
+
+描述 
+
+playbackspeed 
+
+指示音频/视频的默认播放速度。 
+例值： 
+
+1.0 正常速度 
+
+0.5 半速（更慢） 
+
+2.0 倍速（更快） 
+
+-1.0 向后，正常速度 
+
+-0.5 向后，半速 
+
+技术细节 
+
+返回值： 
+
+数字值，默认的播放速度 
+
+默认值： 
+
+1.0 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM defaultMuted 属性 
+
+HTML 音频/视频 DOM duration 属性

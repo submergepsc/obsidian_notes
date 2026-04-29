@@ -1,0 +1,41 @@
+URL: https://www.runoob.com/java/string-split.html
+Title: Java 实例 – 字符串分割 | 菜鸟教程
+
+Java 实例 – 字符串分割 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 字符串查找 
+
+Java 实例 – 字符串小写转大写 
+
+Java 实例 - 字符串分割 
+
+以下实例使用了 split(string) 方法通过指定分隔符将字符串分割为数组： 
+
+JavaStringSplitEmp.java 文件 
+
+public class JavaStringSplitEmp { public static void main ( String args [ ] ) { String str = " www-runoob-com " ; String [ ] temp ; String delimeter = " - " ; temp = str . split ( delimeter ) ; for ( int i = 0 ; i < temp . length ; i ++ ) { System . out . println ( temp [ i ] ) ; System . out . println ( " " ) ; } System . out . println ( " ------java for each循环输出的方法----- " ) ; String str1 = " www.runoob.com " ; String [ ] temp1 ; String delimeter1 = " \\ . " ; temp1 = str1 . split ( delimeter1 ) ; for ( String x : temp1 ) { System . out . println ( x ) ; System . out . println ( " " ) ; } } } 
+
+以上代码实例输出结果为： 
+
+www
+
+runoob
+
+com
+
+------java for each循环输出的方法-----
+www
+
+runoob
+
+com 
+
+AI 思考中... 
+
+Java 实例 – 字符串查找 
+
+Java 实例 – 字符串小写转大写

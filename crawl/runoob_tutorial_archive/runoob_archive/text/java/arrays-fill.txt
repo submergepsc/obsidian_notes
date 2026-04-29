@@ -1,0 +1,42 @@
+URL: https://www.runoob.com/java/arrays-fill.html
+Title: Java 实例 – 数组填充 | 菜鸟教程
+
+Java 实例 – 数组填充 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 数组合并 
+
+Java 实例 – 数组扩容 
+
+Java 实例 - 数组填充 
+
+以下实例我们通过 Java Util 类的 Arrays.fill(arrayname,value) 方法和Arrays.fill(arrayname ,starting index ,ending index ,value) 方法向数组中填充元素： 
+
+Main.java 文件 
+
+import java . util .*; public class FillTest { public static void main ( String args [ ] ) { int array [ ] = new int [ 6 ] ; Arrays . fill ( array , 100 ) ; for ( int i = 0 , n = array . length ; i < n ; i ++ ) { System . out . println ( array [ i ] ) ; } System . out . println ( ) ; Arrays . fill ( array , 3 , 6 , 50 ) ; for ( int i = 0 , n = array . length ; i < n ; i ++ ) { System . out . println ( array [ i ] ) ; } } } 
+
+以上代码运行输出结果为： 
+
+100
+100
+100
+100
+100
+100
+
+100
+100
+100
+50
+50
+50 
+
+AI 思考中... 
+
+Java 实例 – 数组合并 
+
+Java 实例 – 数组扩容

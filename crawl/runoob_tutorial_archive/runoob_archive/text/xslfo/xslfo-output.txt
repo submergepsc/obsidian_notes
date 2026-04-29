@@ -1,0 +1,62 @@
+URL: https://www.runoob.com/xslfo/xslfo-output.html
+Title: XSL-FO 输出 | 菜鸟教程
+
+XSL-FO 输出 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLFO 教程 
+
+XSL-FO 区域属性 
+
+XSL-FO 流 
+
+XSL-FO 输出 
+
+XSL-FO 在 <fo:flow> 元素内部定义输出。 
+
+XSL-FO 页面（Page）、流（Flow）以及块（Block） 
+
+内容"块"会"流"入"页面"中，然后输出到媒介。 
+
+XSL-FO 输出通常被嵌套在 <fo:block> 元素内，<fo:block> 嵌套于 <fo:flow> 元素内，<fo:flow> 嵌套于 <fo:page-sequence> 元素内： 
+
+<fo:page-sequence> 
+<fo:flow flow-name="xsl-region-body"> 
+<fo:block> 
+<!-- Output goes here --> 
+</fo:block> 
+</fo:flow> 
+</fo:page-sequence> 
+
+XSL-FO 实例 
+
+现在让我们看一个真实的 XSL-FO 实例： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+
+<fo:root xmlns:fo="http://www.w3.org/1999/XSL/Format"> 
+
+<fo:layout-master-set> 
+<fo:simple-page-master master-name="A4"> 
+<fo:region-body /> 
+</fo:simple-page-master> 
+</fo:layout-master-set> 
+
+<fo:page-sequence master-reference="A4"> 
+<fo:flow flow-name="xsl-region-body"> 
+<fo:block>Hello RUNOOB</fo:block> 
+</fo:flow> 
+</fo:page-sequence> 
+
+</fo:root> 
+
+以上代码的输出如下所示： 
+
+Hello RUNOOB 
+
+AI 思考中... 
+
+XSL-FO 区域属性 
+
+XSL-FO 流

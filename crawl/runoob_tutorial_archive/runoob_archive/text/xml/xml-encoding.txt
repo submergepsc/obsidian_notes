@@ -1,0 +1,87 @@
+URL: https://www.runoob.com/xml/xml-encoding.html
+Title: XML 编码 | 菜鸟教程
+
+XML 编码 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML 教程 
+
+XML CDATA 
+
+服务器上的 XML 
+
+XML 编码 
+
+XML 文档可以包含非 ASCII 字符，比如挪威语 æ ø å，或者法语 ê è é。 
+
+为了避免错误，需要规定 XML 编码，或者将 XML 文件存为 Unicode。 
+
+XML 编码错误 
+
+如果您载入一个 XML 文档，您可以得到两个不同的错误，表示编码问题： 
+
+在文本内容中发现无效字符。 
+
+如果您的 XML 中包含非 ASCII 字符，且文件保存为没有指定编码的单字节 ANSI（或 ASCII），您会得到一个错误。 
+
+单字节编码属性的 XML 文件 。 
+
+相同的单字节没有编码属性的 XML 文件 。 
+
+将当前编码切换为不被支持的指定编码 
+
+如果您的 XML 文件保存为带有指定的单字节编码（WINDOWS-1252、ISO-8859-1、UTF-8）的双字节 Unicode（或 UTF-16），您会得到一个错误。 
+
+如果您的 XML 文件保存为带有指定的双字节编码（UTF-16）的单字节 ANSI（或 ASCII），您也会得到一个错误。 
+
+双字节没有编码的 XML 文件 。 
+
+相同的双字节具有单字节编码的 XML 文件 。 
+
+Windows 记事本 
+
+Windows 记事本默认会将文件保存为单字节的 ANSI（ASCII）。 
+
+如果您选择 "另存为..."，就可以指定 ANSI、UTF-8、Unicode（UTF-16）或 Unicode Big。 
+
+将下面的 XML 保存为 ANSI、UTF-8 和 Unicode（注意文档不包含任何编码属性）。 
+
+<?xml version="1.0"?> 
+<note> 
+<from>Jani</from> 
+<to>Tove</to> 
+<message>Norwegian: æøå. French: êèé</message> 
+</note> 
+
+尝试将文件拖到您的浏览器，并查看结果。不同的浏览器会显示不同的结果。 
+
+不同编码的体验： 
+
+<?xml version="1.0" encoding="us-ascii"?> 
+<?xml version="1.0" encoding="windows-1252"?> 
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<?xml version="1.0" encoding="UTF-8"?> 
+<?xml version="1.0" encoding="UTF-16"?> 
+
+请尝试： 
+
+带有正确编码的保存 
+
+带有错误编码的保存 
+
+结论 
+
+始终使用编码属性 
+
+使用支持编码的编辑器 
+
+确保您知道编辑器使用什么编码 
+
+在您的编码属性中使用相同的编码 
+
+AI 思考中... 
+
+XML CDATA 
+
+服务器上的 XML

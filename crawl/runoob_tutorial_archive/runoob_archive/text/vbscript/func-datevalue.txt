@@ -1,0 +1,57 @@
+URL: https://www.runoob.com/vbscript/func-datevalue.html
+Title: VBScript DateValue 函数 | 菜鸟教程
+
+VBScript DateValue 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript DateSerial 函数 
+
+VBScript Day 函数 
+
+VBScript DateValue 函数 
+
+DateValue 函数把字符串转换为 Date。 
+
+注意： 如果日期中的年份部分被省略，那么函数会使用来自计算机系统日期的当前年份。 
+
+注意： 如果 date 参数含有时间信息，那么时间信息不会被返回。如果日期中含有无效的时间信息，那么会发生 run-time 错误。 
+
+语法 
+
+DateValue(date) 
+
+参数 
+
+描述 
+
+date 
+
+必需。一个介于 100 年 1 月 1 日到 9999 年 12 月 31 日的日期，或者任何可表示日期、时间或日期时间兼有的表达式。 
+
+实例 
+
+实例 
+
+<script type="text/vbscript"> 
+
+document.write(DateValue("31-Jan-10")) 
+document.write("<br />") 
+document.write(DateValue("31-Jan")) 
+
+</script> 
+
+以上实例输出结果： 
+
+1/31/2010 
+1/31/2010 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript DateSerial 函数 
+
+VBScript Day 函数

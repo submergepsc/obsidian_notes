@@ -1,0 +1,63 @@
+URL: https://www.runoob.com/tags/tag-dd.html
+Title: HTML <dd> 标签 | 菜鸟教程
+
+HTML <dd> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <datalist> 标签 
+
+HTML <del> 标签 
+
+HTML <dd> 标签 
+
+实例 
+
+带有项目和描述的描述列表： 
+
+<dl> 
+<dt>Coffee</dt> 
+<dd>Black hot drink</dd> 
+<dt>Milk</dt> 
+<dd>White cold drink</dd> 
+</dl> 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <dd> 标签。 
+
+标签定义及使用说明 
+
+<dd> 标签被用来对一个描述列表中的项目/名字进行描述。 
+
+<dd> 标签与 <dl> （定义一个描述列表）和 <dt> （定义项目/名字）一起使用。 
+
+在 <dd> 标签内，您能放置段落、换行、图片、链接、列表等等。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+在 HTML 4.01 中，<dd> 标签被用来描述一个定义列表中的条目。 
+
+在 HTML5 中，<dd> 标签被用来描述一个描述列表的项目/名字。 
+
+全局属性 
+
+<dd> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<dd> 标签支持 HTML 的事件属性 。 
+
+相关文章 
+
+HTML 教程： HTML 列表 
+
+AI 思考中... 
+
+HTML <datalist> 标签 
+
+HTML <del> 标签

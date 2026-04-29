@@ -1,0 +1,52 @@
+URL: https://www.runoob.com/java/thread-alive.html
+Title: Java 实例 – 查看线程是否存活 | 菜鸟教程
+
+Java 实例 – 查看线程是否存活 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 查看端口是否已使用 
+
+Java 实例 – 死锁及解决方法 
+
+Java 实例 - 查看线程是否存活 
+
+以下实例演示了如何通过继承 Thread 类并使用 isAlive() 方法来检测一个线程是否存活： 
+
+TwoThreadAlive.java 文件 
+
+public class TwoThreadAlive extends Thread { public void run ( ) { for ( int i = 0 ; i < 10 ; i ++ ) { printMsg ( ) ; } } public void printMsg ( ) { Thread t = Thread . currentThread ( ) ; String name = t . getName ( ) ; System . out . println ( " name= " + name ) ; } public static void main ( String [ ] args ) { TwoThreadAlive tt = new TwoThreadAlive ( ) ; tt . setName ( " Thread " ) ; System . out . println ( " before start(), tt.isAlive()= " + tt . isAlive ( ) ) ; tt . start ( ) ; System . out . println ( " just after start(), tt.isAlive()= " + tt . isAlive ( ) ) ; for ( int i = 0 ; i < 10 ; i ++ ) { tt . printMsg ( ) ; } System . out . println ( " The end of main(), tt.isAlive()= " + tt . isAlive ( ) ) ; } } 
+
+以上代码运行输出结果为： 
+
+before start(), tt.isAlive()=false
+just after start(), tt.isAlive()=true
+name=main
+name=Thread
+name=main
+name=main
+name=main
+name=main
+name=main
+name=main
+name=main
+name=main
+name=main
+name=Thread
+name=Thread
+name=Thread
+name=Thread
+name=Thread
+The end of main(), tt.isAlive()=true
+name=Thread
+name=Thread
+name=Thread
+name=Thread 
+
+AI 思考中... 
+
+Java 实例 – 查看端口是否已使用 
+
+Java 实例 – 死锁及解决方法

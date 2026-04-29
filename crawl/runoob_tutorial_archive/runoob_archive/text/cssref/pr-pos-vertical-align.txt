@@ -1,0 +1,122 @@
+URL: https://www.runoob.com/cssref/pr-pos-vertical-align.html
+Title: CSS vertical-align 属性 | 菜鸟教程
+
+CSS vertical-align 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS3 transition-delay 属性 
+
+CSS visibility 属性 
+
+CSS vertical-align 属性 
+
+实例 
+
+垂直对齐图像： 
+
+img { vertical-align: text-top ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+vertical-align 属性设置一个元素的垂直对齐方式。 
+
+该属性定义行内元素的基线相对于该元素所在行的基线的垂直对齐。允许指定负长度值和百分比值。这会使元素降低而不是升高。在表单元格中，这个属性会设置单元格框中的单元格内容的对齐方式。 
+
+默认值： 
+
+baseline 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.verticalAlign="bottom" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+vertical-align 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+4.0 
+
+属性值 
+
+值 
+
+描述 
+
+baseline 
+
+默认。元素放置在父元素的基线上。 
+
+sub 
+
+垂直对齐文本的下标。 
+
+super 
+
+垂直对齐文本的上标 
+
+top 
+
+把元素的顶端与行中最高元素的顶端对齐 
+
+text-top 
+
+把元素的顶端与父元素字体的顶端对齐 
+
+middle 
+
+把此元素放置在父元素的中部。 
+
+bottom 
+
+使元素及其后代元素的底部与整行的底部对齐。 
+
+text-bottom 
+
+把元素的底端与父元素字体的底端对齐。 
+
+length 
+
+将元素升高或降低指定的高度，可以是负数。 
+
+% 
+
+使用 "line-height" 属性的百分比值来排列此元素。允许使用负值。 
+
+inherit 
+
+规定应该从父元素继承 vertical-align 属性的值。 
+
+相关文章 
+
+CSS 教程: CSS 文本 
+
+AI 思考中... 
+
+CSS3 transition-delay 属性 
+
+CSS visibility 属性

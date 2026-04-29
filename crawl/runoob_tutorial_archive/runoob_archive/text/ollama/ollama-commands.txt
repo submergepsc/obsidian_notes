@@ -1,0 +1,299 @@
+URL: https://www.runoob.com/ollama/ollama-commands.html
+Title: Ollama 相关命令 | 菜鸟教程
+
+Ollama 相关命令 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Ollama 教程 
+
+Ollama 运行模型 
+
+Ollama 基本概念 
+
+Ollama 相关命令 
+
+Ollama 提供了多种命令行工具（CLI）供用户与本地运行的模型进行交互。 
+
+基本格式： 
+
+ollama <command> [args] 
+
+我们可以用 ollama --help 查看包含有哪些命令： 
+
+Large language model runner
+
+Usage:
+ ollama [flags]
+ ollama [command]
+
+Available Commands:
+ serve Start ollama
+ create Create a model from a Modelfile
+ show Show information for a model
+ run Run a model
+ stop Stop a running model
+ pull Pull a model from a registry
+ push Push a model to a registry
+ list List models
+ ps List running models
+ cp Copy a model
+ rm Remove a model
+ help Help about any command
+
+Flags:
+ -h, --help help for ollama
+ -v, --version Show version information 
+
+1、使用方法 
+
+ollama [flags] ：使用标志（flags）运行 ollama。 
+
+ollama [command] ：运行 ollama 的某个具体命令。 
+
+2、可用命令 
+
+serve：启动 ollama 服务。 
+
+create：根据一个 Modelfile 创建一个模型。 
+
+show：显示某个模型的详细信息。 
+
+run：运行一个模型。 
+
+stop：停止一个正在运行的模型。 
+
+pull：从一个模型仓库（registry）拉取一个模型。 
+
+push：将一个模型推送到一个模型仓库。 
+
+list：列出所有模型。 
+
+ps：列出所有正在运行的模型。 
+
+cp：复制一个模型。 
+
+rm：删除一个模型。 
+
+help：获取关于任何命令的帮助信息。 
+
+3、标志（Flags） 
+
+-h, --help：显示 ollama 的帮助信息。 
+
+-v, --version：显示版本信息。 
+
+完整示例： 
+
+命令 (Command) 
+
+说明 (Description) 
+
+示例 (Example) 
+
+ollama run 
+
+运行模型 。如果不存在则自动拉取。 
+
+ollama run llama3 
+
+ollama pull 
+
+拉取模型 。从库中下载模型但不运行。 
+
+ollama pull mistral 
+
+ollama list 
+
+列出模型 。显示本地所有已下载的模型。 
+
+ollama list 
+
+ollama rm 
+
+删除模型 。移除本地模型释放空间。 
+
+ollama rm llama3 
+
+ollama cp 
+
+复制模型 。将现有模型复制为新名称（用于测试）。 
+
+ollama cp llama3 my-model 
+
+ollama create 
+
+创建模型 。根据 Modelfile 创建自定义模型（高级）。 
+
+ollama create my-bot -f ./Modelfile 
+
+ollama show 
+
+显示信息 。查看模型的元数据、参数或 Modelfile。 
+
+ollama show --modelfile llama3 
+
+ollama ps 
+
+查看进程 。显示当前正在运行的模型及显存占用。 
+
+ollama ps 
+
+ollama push 
+
+推送模型 。将你自定义的模型上传到 ollama.com。 
+
+ollama push my-username/my-model 
+
+ollama serve 
+
+启动服务 。启动 Ollama 的 API 服务（通常后台自动运行）。 
+
+ollama serve 
+
+ollama help 
+
+帮助 。查看任何命令的帮助信息。 
+
+ollama help run 
+
+1. 拉取与删除模型 
+
+pull 
+拉取远端模型到本地。 
+
+ollama pull <model> 
+
+rm / remove 
+删除本地模型。 
+
+ollama rm <model> 
+
+list / ls 
+列出所有本地模型。 
+
+ollama list 
+
+2. 运行模型 
+
+run 
+交互模式运行模型，不退出。 
+
+ollama run <model> 
+
+可带系统信息与 prompt： 
+
+ollama run <model> -s "<system>" -p "<prompt>" 
+
+run + script 
+从文件读取 prompt： 
+
+ollama run <model> < input.txt 
+
+当你输入 ollama run 进入聊天界面后，你不再是在操作命令行，而是在和 AI 对话。这时你可以使用以 / 开头的快捷指令来控制对话： 
+
+/bye 或 /exit ： 最重要！ 退出聊天界面，返回命令行。 
+
+/clear ：清空当前的上下文记忆（开启一段新的对话）。 
+
+/show info ：查看当前模型的详细参数信息。 
+
+/set parameter seed 123 ：设置随机种子（高级玩法，用于复现结果）。 
+
+/help ：在聊天中查看所有可用的快捷键。 
+
+3. 推理接口（一次性执行） 
+
+generate 
+执行单次推理，输出文本。 
+
+ollama generate <model> -p "<prompt>" 
+
+4. 创建与修改模型 
+
+create 
+用 Modelfile 创建本地模型。 
+
+ollama create <model-name> -f Modelfile 
+
+cp 
+复制一个模型为新名字。 
+
+ollama cp <src> <dst> 
+
+5. 服务器相关 
+
+serve 
+启动 Ollama 本地服务（默认 11434）。 
+
+ollama serve 
+
+run serverless 
+当 ollama run 时会自动拉起后台服务，不需单独执行。 
+
+6. 模型信息 
+
+show 
+查看模型元数据、参数、模板。 
+
+ollama show <model> 
+
+7. 专用参数 
+
+这些参数多数可用于 run/generate： 
+
+--num-predict <number> 限制输出 token 数
+--temperature <float> 控制随机性
+--top-k <int> 采样范围
+--top-p <float> 核采样
+--seed <int> 固定随机性
+--format json 输出 JSON
+--keepalive <seconds> 会话保持时间 
+
+8. Modelfile 指令 
+
+构建模型时使用： 
+
+FROM <model> ：基础模型 
+
+SYSTEM "xxx" ：设定系统提示 
+
+PARAMETER key=value ：设定默认参数 
+
+TEMPLATE "xxx" ：自定义 Chat 模板 
+
+LICENSE "xxx" ：设置 License 
+
+ADAPTER <file> / WEIGHTS <file> ：加载 LoRA 或额外权重 
+
+9. API（当 serve 运行时） 
+
+REST 端点（默认 http://localhost:11434/api）： 
+
+/api/generate ：文本生成 
+
+/api/chat ：对话流式接口 
+
+/api/pull ：远程拉取 
+
+/api/tags ：本地模型列表 
+
+调用示例（curl）： 
+
+curl http://localhost:11434/api/generate \
+ -d '{"model":"qwen2.5","prompt":"hello"}' 
+
+10. 进阶 
+
+自定义参数运行： 
+
+ollama run <model> --temperature 0.2 --top-p 0.9 
+
+持久会话（保留上下文）： 
+会话由模型内部缓存自动管理，无需额外命令。 
+
+AI 思考中... 
+
+Ollama 运行模型 
+
+Ollama 基本概念

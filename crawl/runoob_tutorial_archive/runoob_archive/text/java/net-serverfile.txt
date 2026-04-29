@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/net-serverfile.html
+Title: Java 实例 –  获取远程文件大小 | 菜鸟教程
+
+Java 实例 – 获取远程文件大小 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – Socket 实现多线程服务器程序 
+
+Java 实例 – ServerSocket 和 Socket 通信实例 
+
+Java 实例 - 获取远程文件大小 
+
+以下实例演示了如何获取远程文件的大小： 
+
+Main.java 文件 
+
+import java . net . URL ; import java . net . URLConnection ; public class Main { public static void main ( String [ ] args ) throws Exception { int size ; URL url = new URL ( " http://www.runoob.com/wp-content/themes/runoob/assets/img/newlogo.png " ) ; URLConnection conn = url . openConnection ( ) ; size = conn . getContentLength ( ) ; if ( size < 0 ) System . out . println ( " 无法获取文件大小。 " ) ; else System . out . println ( " 文件大小为： " + size + " bytes " ) ; conn . getInputStream ( ) . close ( ) ; } } 
+
+以上代码运行输出结果为： 
+
+文件大小为：4261 bytes 
+
+AI 思考中... 
+
+Java 实例 – Socket 实现多线程服务器程序 
+
+Java 实例 – ServerSocket 和 Socket 通信实例

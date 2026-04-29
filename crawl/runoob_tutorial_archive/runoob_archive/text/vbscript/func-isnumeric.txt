@@ -1,0 +1,66 @@
+URL: https://www.runoob.com/vbscript/func-isnumeric.html
+Title: VBScript IsNumeric 函数 | 菜鸟教程
+
+VBScript IsNumeric 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript IsNull 函数 
+
+VBScript IsObject 函数 
+
+VBScript IsNumeric 函数 
+
+IsNumeric 函数返回一个布尔值，指示指定的表达式是否可作为数字来计算。如果表达式作为数字来计算则返回 True ，否则返回 False。 
+
+注意： 如果表达式是一个日期，IsNumeric 函数将返回 False。 
+
+语法 
+
+IsNumeric(expression) 
+
+参数 
+
+描述 
+
+expression 
+
+必需。一个表达式。 
+
+实例 
+
+实例 
+
+<script type="text/vbscript"> 
+
+Dim x 
+x=10 
+document.write(IsNumeric(x) & "<br />") 
+x=Empty 
+document.write(IsNumeric(x) & "<br />") 
+x=Null 
+document.write(IsNumeric(x) & "<br />") 
+x="10" 
+document.write(IsNumeric(x) & "<br />") 
+x="911 Help" 
+document.write(IsNumeric(x)) 
+
+</script> 
+
+以上实例输出结果： 
+
+True 
+True 
+False 
+True 
+False 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript IsNull 函数 
+
+VBScript IsObject 函数

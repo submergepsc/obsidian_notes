@@ -1,0 +1,97 @@
+URL: https://www.runoob.com/rdf/rdf-main.html
+Title: RDF 主要元素 | 菜鸟教程
+
+RDF 主要元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+RDF 教程 
+
+RDF 实例 
+
+RDF 容器 
+
+RDF 主要 元素 
+
+RDF 的主要元素是 <RDF> 以及可表示某个资源的 <Description> 元素。 
+
+<rdf:RDF> 元素 
+
+<rdf:RDF> 是 RDF 文档的根元素。它把 XML 文档定义为一个 RDF 文档。它也包含了对 RDF 命名空间的引用： 
+
+<?xml version="1.0"?> 
+
+<rdf:RDF 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"> 
+... Description goes here... 
+</rdf:RDF> 
+
+<rdf:Description> 元素 
+
+<rdf:Description> 元素可通过 about 属性标识一个资源。 
+
+<rdf:Description> 元素可包含描述资源的那些元素： 
+
+<?xml version="1.0"?> 
+
+<rdf:RDF 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+xmlns:cd="http://www.recshop.fake/cd#"> 
+
+<rdf:Description 
+rdf:about="http://www.recshop.fake/cd/Empire Burlesque"> 
+<cd:artist>Bob Dylan</cd:artist> 
+<cd:country>USA</cd:country> 
+<cd:company>Columbia</cd:company> 
+<cd:price>10.90</cd:price> 
+<cd:year>1985</cd:year> 
+</rdf:Description> 
+
+</rdf:RDF> 
+
+artist、country、company、price 以及 year 这些元素被定义在命名空间 http://www.recshop.fake/cd# 中。此命名空间在 RDF 之外（并非 RDF 的组成部分）。RDF 仅仅定义了这个框架。而 artist、country、company、price 以及 year 这些元素必须被其他人（公司、组织或个人等）进行定义。 
+
+属性（property）来定义属性（attribute） 
+
+属性元素（property elements）也可作为属性（attributes）来被定义（取代元素）： 
+
+<?xml version="1.0"?> 
+
+<rdf:RDF 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+xmlns:cd="http://www.recshop.fake/cd#"> 
+
+<rdf:Description 
+rdf:about="http://www.recshop.fake/cd/Empire Burlesque" 
+cd:artist="Bob Dylan" cd:country="USA" 
+cd:company="Columbia" cd:price="10.90" 
+cd:year="1985" /> 
+
+</rdf:RDF> 
+
+属性（property）来定义属性（attribute） 
+
+属性元素（property elements）也可作为属性（attributes）来被定义（取代元素）： 
+
+<?xml version="1.0"?> 
+
+<rdf:RDF 
+xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" 
+xmlns:cd="http://www.recshop.fake/cd#"> 
+
+<rdf:Description 
+rdf:about="http://www.recshop.fake/cd/Empire Burlesque"> 
+<cd:artist rdf:resource="http://www.recshop.fake/cd/dylan" /> 
+... 
+... 
+</rdf:Description> 
+
+</rdf:RDF> 
+
+上面的例子中，属性 artist 没有值，但是却引用了一个对包含有关艺术家的信息的资源。 
+
+AI 思考中... 
+
+RDF 实例 
+
+RDF 容器

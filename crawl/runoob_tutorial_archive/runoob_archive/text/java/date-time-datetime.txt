@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/java/date-time-datetime.html
+Title: Java 实例 – 获取当前时间 | 菜鸟教程
+
+Java 实例 – 获取当前时间 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 格式化时间（SimpleDateFormat） 
+
+Java 实例 – 获取年份、月份等 
+
+Java 实例 - 获取当前时间 
+
+以下实例演示了如何使用 Date 类及 SimpleDateFormat 类的 format(date) 方法来输出当前时间： 
+
+Main.java 文件 
+
+import java . text . SimpleDateFormat ; import java . util . Date ; public class Main { public static void main ( String [ ] args ) { SimpleDateFormat sdf = new SimpleDateFormat ( ) ; sdf . applyPattern ( " yyyy-MM-dd HH:mm:ss a " ) ; Date date = new Date ( ) ; System . out . println ( " 现在时间： " + sdf . format ( date ) ) ; } } 
+
+以上代码运行输出结果为： 
+
+现在时间：2015-03-27 21:27:28 下午 
+
+AI 思考中... 
+
+Java 实例 – 格式化时间（SimpleDateFormat） 
+
+Java 实例 – 获取年份、月份等

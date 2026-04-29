@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/js/js-ex-browser.html
+Title: JavaScript 浏览器对象实例 | 菜鸟教程
+
+JavaScript 浏览器对象实例 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Javascript 教程

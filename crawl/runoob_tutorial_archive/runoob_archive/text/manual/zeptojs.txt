@@ -1,0 +1,1760 @@
+URL: https://www.runoob.com/manual/zeptojs.html
+Title: Zepto.js (1.1.6) API ä¸­æææ¡£-è½»éçº§å¼å®¹jQueryçJavaScriptåº
+
+Zepto.js (1.1.6) API ä¸­æææ¡£-è½»éçº§å¼å®¹jQueryçJavaScriptåº 
+
+Zepto æ¯ä¸ä¸ªè½»éçº§ç éå¯¹ç°ä»£é«çº§æµè§å¨çJavaScriptåºï¼ å®ä¸jquery æçç±»ä¼¼çapi ã å¦æä½ ä¼ç¨jqueryï¼é£ä¹ä½ ä¹ä¼ç¨zeptoã 
+
+Zepto çè®¾è®¡ç®çæ¯ æä¾ jQuery çç±»ä¼¼çAPI ï¼ä½å¹¶ä¸æ¯100%è¦ç jQuery ã Zepto è®¾è®¡çç®çæ¯æä¸ä¸ª5-10kçéç¨åºã ä¸è½½å¹¶å¿«éæ§è¡ ãæä¸ä¸ªçæéç¨çAPIï¼æä»¥ä½ è½æä½ ä¸»è¦çç²¾åæ¾å°åºç¨å¼åä¸ ã 
+
+Zepto æ¯ä¸æ¬¾å¼æºè½¯ä»¶ï¼å®å¯ä»¥è¢«å¼åèååä¸åå¸ã MIT license . 
+
+Tweet 
+
+Download Zepto 
+
+é»è®¤æå»ºåå«ä»¥ä¸æ¨¡åï¼ 
+Core, Ajax, Event, Form, IE . 
+
+Zepto v1.0 é»è®¤æç»äºEffects, iOS3, å Detect æ¨¡åã 
+è¯·åéä¸é¢ç å¯éæ¨¡å(optional modules) ã 
+
+zepto.js v1.1.6 (for development) â 54.6k uncompressed, lots of comments 
+
+zepto.min.js v1.1.6 (for production) â 9.1k when gzipped 
+
+Or grab the latest version on GitHub . 
+
+ç¨ä¸ä¸ªscriptæ ç­¾å¼å¥Zeptoå°ä½ çé¡µé¢çåºé¨ï¼ 
+
+... <script src= zepto.min.js ></script> </body> </html> 
+
+å¦æ $ åéå°æªå®ä¹ï¼Zeptoåªè®¾ç½®å¨å±åé $ æåå®æ¬èº«ã
+æ²¡æ Zepto.noConflict æ¹æ³ã 
+
+å¦æä½ éè¦æ¯ææ§çæµè§å¨ï¼å¦Internet Explorer 9æä»¥ä¸ï¼ä½ å¯ä»¥éåå°jQueryç1.xã 
+
+æµè§å¨æ¯æ 
+
+åçº§ (100% æ¯æ) 
+
+Safari 6+ (Mac) 
+
+Chrome 30+ (Windows, Mac, Android, iOS, Linux, Chrome OS) 
+
+Firefox 24+ (Windows, Mac, Android, Linux, Firefox OS) 
+
+iOS 5+ Safari 
+
+Android 2.3+ Browser 
+
+Internet Explorer 10+ (Windows, Windows Phone) 
+
+æ¬¡è¦ç®æ ï¼å®å¨æå¤§é¨åæ¯æï¼ 
+
+iOS 3+ Safari 
+
+Chrome <30 
+
+Firefox 4+ 
+
+Safari <6 
+
+Android Browser 2.2 
+
+Opera 10+ 
+
+webOS 1.4.5+ Browser 
+
+BlackBerry Tablet OS 1.0.7+ Browser 
+
+Amazon Silk 1.0+ 
+
+Other WebKit-based browsers/runtimes 
+
+éè¦æ³¨æçæ¯Zeptoçä¸äºå¯éåè½æ¯ä¸é¨éå¯¹ç§»å¨ç«¯æµè§å¨çï¼å ä¸ºå®çæåç®æ å¨ç§»å¨ç«¯æä¾ä¸ä¸ªç²¾ç®çç±»ä¼¼jqueryçjsåºã 
+
+å¨æµè§å¨ä¸(SafariãChromeåFirefox)ä¸å¼åé¡µé¢åºç¨æèæå»ºåºäºhtmlçweb-viewæ¬å°åºç¨ï¼ä½ å¦ PhoneGap ï¼ä½¿ç¨Zeptoæ¯ä¸ä¸ªä¸éçéæ©ã 
+
+æ»ä¹ï¼Zeptoå¸æå¨ææçç°ä»£æµè§å¨ä¸­ä½ä¸ºä¸ç§åºç¡ç¯å¢æ¥ä½¿ç¨ãZeptoä¸æ¯ææ§çæ¬çInternet Exploreræµè§å¨(<10)ã 
+
+æå¨å»ºç«Zepto 
+
+zepto.js å zepto.min.js æä¾ä»¥ä¸ä½¿ç¨æ¹å¼ã
+ ç¶èï¼ä¸ºäºæ´å¥½çç¨åºææåèªç±æ§ï¼å¯ä»¥å¨ä½¿ç¨Zeptoæºç æå»ºZepto.jsåzepto.min.jsçæ¶åéæ©æ¨¡åå¹¶ä½æµè¯ï¼
+ ä½¿ç¨ UglifyJS æ ¹æ®ä½ çéè¦æ¥çæ(å½æå¡ç«¯å¼å¯gzippedåï¼æç²¾ç®çä»£ç )ä»£ç ã 
+
+å³äºå¦ä½å»ºç«Zeptoç the README ï¼åå«è¿è¡æµè¯åè¡¥ä¸ã 
+
+Zepto æ¨¡å 
+
+module 
+
+default 
+
+description 
+
+zepto 
+
+â 
+
+æ ¸å¿æ¨¡åï¼åå«è®¸å¤æ¹æ³ 
+
+event 
+
+â 
+
+éè¿ on() & off() å¤çäºä»¶ 
+
+ajax 
+
+â 
+
+XMLHttpRequest å JSONP å®ç¨åè½ 
+
+form 
+
+â 
+
+åºåå & æäº¤webè¡¨å 
+
+ie 
+
+â 
+
+å¢å æ¯ææ¡é¢çInternet Explorer 10+åWindows Phone 8ã 
+
+detect 
+
+æä¾ $.os å $.browser æ¶æ¯ 
+
+fx 
+
+The animate() æ¹æ³ 
+
+fx_methods 
+
+ä»¥å¨ç»å½¢å¼ç show , hide , toggle , å fade*() æ¹æ³. 
+
+assets 
+
+å®éªæ§æ¯æä»DOMä¸­ç§»é¤imageåç´ åæ¸çiOSçåå­ã 
+
+data 
+
+ä¸ä¸ªå¨é¢ç data() æ¹æ³, è½å¤å¨åå­ä¸­å­å¨ä»»æå¯¹è±¡ã 
+
+deferred 
+
+æä¾ $.Deferred promises API. ä¾èµ"callbacks" æ¨¡å. 
+å½åå«è¿ä¸ªæ¨¡åæ¶å, $.ajax() æ¯æpromiseæ¥å£é¾å¼çåè°ã 
+
+callbacks 
+
+ä¸º"deferred"æ¨¡åæä¾ $.Callbacks ã 
+
+selector 
+
+å®éªæ§çæ¯æ jQuery
+ CSS è¡¨è¾¾å¼ å®ç¨åè½ï¼æ¯å¦ $('div:first') å el.is(':visible') ã 
+
+touch 
+
+å¨è§¦æ¸è®¾å¤ä¸è§¦åtapâ å swipeâ ç¸å³äºä»¶ãè¿éç¨äºææç`touch`(iOS, Android)å`pointer`äºä»¶(Windows Phone)ã 
+
+gesture 
+
+å¨è§¦æ¸è®¾å¤ä¸è§¦å pinch æå¿äºä»¶ã 
+
+stack 
+
+æä¾ andSelf & end() é¾å¼è°ç¨æ¹æ³ 
+
+ios3 
+
+String.prototype.trim å Array.prototype.reduce æ¹æ³ (å¦æä»ä»¬ä¸å­å¨) ï¼ä»¥å¼å®¹ iOS 3.x. 
+
+åå»ºæä»¶ 
+
+å¯ä»¥éè¿æ·»å æ¹æ³ä½ä¸º $.fn çå±æ§æ¥åæä»¶ï¼ 
+
+;( function ( $ ){ $ . extend ( $ . fn , { foo : function (){ // `this` refers to the current Zepto collection. // When possible, return the Zepto collection to allow chaining. return this . html ( 'bar' ) } }) })( Zepto ) 
+
+ä¸ºäºæ´å¥½å¼å§å¼åæä»¶ï¼åçä¸ source of Zepto's core module ï¼å¹¶ç¡®è®¤è¯»è¿ coding style guidelines 
+
+æ ¸å¿æ¹æ³ 
+
+$() 
+
+$(selector, [context]) â collection $(<Zepto collection>) â same collection $(<DOM nodes>) â collection $(htmlString) â collection $(htmlString, attributes) â collection v1.0+ Zepto(function($){ ... }) 
+
+éè¿æ§è¡csséæ©å¨ï¼åè£domèç¹ï¼æèéè¿ä¸ä¸ªhtmlå­ç¬¦ä¸²åå»ºå¤ä¸ªåç´ æ¥åå»ºä¸ä¸ªZeptoéåå¯¹è±¡ã 
+
+Zeptoéåæ¯ä¸ä¸ªç±»ä¼¼æ°ç»çå¯¹è±¡ï¼å®å·æé¾å¼æ¹æ³æ¥æä½å®æåçDOMèç¹ï¼é¤äº$( Zepto )å¯¹è±¡ä¸çç´æ¥æ¹æ³å¤(å¦ $.extend )ï¼ææ¡£å¯¹è±¡ä¸­çæææ¹æ³é½æ¯éåæ¹æ³ã 
+
+å¦æéæ©å¨ä¸­å­å¨contentåæ°(csséæ©å¨ï¼domï¼æèZeptoéåå¯¹è±¡)ï¼é£ä¹åªå¨æç»çèç¹èæ¯ä¸è¿è¡csséæ©å¨ï¼è¿ä¸ªåè½åä½¿ç¨ $(context).find(selector) æ¯ä¸æ ·çã 
+
+å½ç»å®ä¸ä¸ªhtmlå­ç¬¦ä¸²çæ®µæ¥åå»ºä¸ä¸ªdomèç¹æ¶ãä¹å¯ä»¥éè¿ç»å®ä¸ç»å±æ§æ å°æ¥åå»ºèç¹ãæå¿«çåå»ºä½åç´ ï¼ä½¿ç¨ <div> æ <div/> å½¢å¼ã 
+
+å½ä¸ä¸ªå½æ°éå å¨ DOMContentLoaded äºä»¶çå¤çæµç¨ä¸­ãå¦æé¡µé¢å·²ç»å è½½å®æ¯ï¼è¿ä¸ªæ¹æ³å°ä¼ç«å³è¢«æ§è¡ã 
+
+$ ( 'div' ) //=> ææé¡µé¢ä¸­å¾divåç´ $ ( '#foo' ) //=> ID ä¸º "foo" çåç´ // åå»ºåç´ : $ ( "<p>Hello</p>" ) //=> æ°çpåç´ // åå»ºå¸¦æå±æ§çåç´ : $ ( "<p />" , { text : "Hello" , id : "greeting" , css : { color : 'darkblue' } }) //=> <p id=greeting style="color:darkblue">Hello</p> // å½é¡µé¢readyçæ¶åï¼æ§è¡åè°: Zepto ( function ( $ ){ alert ( 'Ready to Zepto!' ) }) 
+
+ä¸æ¯æ jQuery CSS æ©å± ï¼
+ ç¶èï¼å¯éçâselectorâæ¨¡åæéæä¾äºæ¯æå ä¸ªæå¸¸ç¨çä¼ªéæ©å¨ï¼èä¸å¯ä»¥è¢«ä¸¢å¼ï¼ä¸ç°æçä»£ç ææä»¶çå¼å®¹æ§è¡ã 
+
+å¦æ $ åéå°æªå®ä¹ï¼Zeptoåªè®¾ç½®äºå¨å±åé $ æåå®æ¬èº«ãåè®¸æ¨åæ¶ä½¿ç¨çZeptoåæç¨çéçä»£ç ï¼ä¾å¦ï¼prototype.jsãåªè¦é¦åå è½½Prototypeï¼Zeptoå°ä¸ä¼è¦çPrototypeç $ å½æ°ãZeptoå°å§ç»è®¾ç½®å¨å±åé Zepto æåå®æ¬èº«ã 
+
+$.camelCase v1.0+ 
+
+$.camelCase(string) â string 
+
+å°ä¸ç»å­ç¬¦ä¸²åæâéªé©¼âå½åæ³çæ°å­ç¬¦ä¸²ï¼å¦æè¯¥å­ç¬¦å·²ç»æ¯âéªé©¼âå½åæ³ï¼åä¸ååã 
+
+$ . camelCase ( 'hello-there' ) //=> "helloThere" $ . camelCase ( 'helloThere' ) //=> "helloThere" 
+
+$.contains v1.0+ 
+
+$.contains(parent, node) â boolean 
+
+æ£æ¥ç¶èç¹æ¯å¦åå«ç»å®çdomèç¹ï¼å¦æä¸¤èæ¯ç¸åçèç¹ï¼åè¿å false ã 
+
+$.each 
+
+$.each(collection, function(index, item){ ... }) â collection 
+
+éåæ°ç»åç´ æä»¥key-valueå¼å¯¹æ¹å¼éåå¯¹è±¡ãåè°å½æ°è¿å false æ¶åæ­¢éåã 
+
+$ . each ([ 'a' , 'b' , 'c' ], function ( index , item ){ console . log ( 'item %d is: %s' , index , item ) }) var hash = { name : 'zepto.js' , size : 'micro' } $ . each ( hash , function ( key , value ){ console . log ( '%s: %s' , key , value ) }) 
+
+$.extend 
+
+$.extend(target, [source, [source2, ...]]) â target $.extend(true, target, [source, ...]) â target v1.0+ 
+
+éè¿æºå¯¹è±¡æ©å±ç®æ å¯¹è±¡çå±æ§ï¼æºå¯¹è±¡å±æ§å°è¦çç®æ å¯¹è±¡å±æ§ã 
+
+é»è®¤æåµä¸ä¸ºï¼å¤å¶ä¸ºæµæ·è´ï¼æµå¤å¶ï¼ãå¦æç¬¬ä¸ä¸ªåæ°ä¸ºtrueè¡¨ç¤ºæ·±åº¦æ·è´ï¼æ·±åº¦å¤å¶ï¼ã 
+
+var target = { one : 'patridge' }, source = { two : 'turtle doves' } $ . extend ( target , source ) //=> { one: 'patridge', // two: 'turtle doves' } 
+
+$.fn 
+
+Zepto.fn æ¯ä¸ä¸ªå¯¹è±¡ï¼å®æ¥æZeptoå¯¹è±¡ä¸ææå¯ç¨çæ¹æ³ï¼å¦ addClass() ï¼ attr() ï¼åå¶å®æ¹æ³ãå¨è¿ä¸ªå¯¹è±¡æ·»å ä¸ä¸ªæ¹æ³ï¼ææçZeptoå¯¹è±¡ä¸é½è½ç¨å°è¯¥æ¹æ³ã 
+
+è¿éæä¸ä¸ªå®ç° Zepto ç empty() æ¹æ³çä¾å­ï¼ 
+
+$ . fn . empty = function (){ return this . each ( function (){ this . innerHTML = '' }) } 
+
+$.grep v1.0+ 
+
+$.grep(items, function(item){ ... }) â array 
+
+è·åä¸ä¸ªæ°æ°ç»ï¼æ°æ°ç»åªåå«åè°å½æ°ä¸­è¿å ture çæ°ç»é¡¹ã 
+
+$ . grep ([1,2,3], function ( item ){ return item > 1
+}); //=>[2,3] 
+
+$.inArray v1.0+ 
+
+$.inArray(element, array, [fromIndex]) â number 
+
+è¿åæ°ç»ä¸­æå®åç´ çç´¢å¼å¼ï¼æäººç å¤´æ³¨ï¼ä»¥0ä¸ºåºæ°ï¼ï¼å¦ææ²¡ææ¾å°è¯¥åç´ åè¿å -1 ã 
+
+æäººç å¤´æ³¨ï¼ [fromIndex] åæ°å¯éï¼è¡¨ç¤ºä»åªä¸ªç´¢å¼å¼å¼å§ååæ¥æ¾ã 
+
+$ . inArray ("abc",["bcd","abc","edf","aaa" ]); //=>1 $ . inArray ("abc",["bcd","abc","edf","aaa" ],1); //=>1 $ . inArray ("abc",["bcd","abc","edf","aaa" ],2); //=>-1 
+
+$.isArray 
+
+$.isArray(object) â boolean 
+
+å¦æobjectæ¯arrayï¼åè¿åtureã 
+
+$.isFunction 
+
+$.isFunction(object) â boolean 
+
+å¦æobjectæ¯functionï¼åè¿åtureã 
+
+$.isPlainObject v1.0+ 
+
+$.isPlainObject(object) â boolean 
+
+æµè¯å¯¹è±¡æ¯å¦æ¯“çº¯ç²¹”çå¯¹è±¡ï¼è¿ä¸ªå¯¹è±¡æ¯éè¿ å¯¹è±¡å¸¸éï¼"{}"ï¼ æè new Object åå»ºçï¼å¦ææ¯ï¼åè¿åtrueã 
+
+$ . isPlainObject ({}) // => true $ . isPlainObject ( new Object ) // => true $ . isPlainObject ( new Date ) // => false $ . isPlainObject ( window ) // => false 
+
+$.isWindow v1.0+ 
+
+$.isWindow(object) â boolean 
+
+å¦æobjectåæ°æ¯å¦ä¸ºä¸ä¸ªwindowå¯¹è±¡ï¼é£ä¹è¿åtrueãè¿å¨å¤çiframeæ¶éå¸¸æç¨ï¼å ä¸ºæ¯ä¸ªiframeé½æå®ä»¬èªå·±çwindowå¯¹è±¡ï¼ä½¿ç¨å¸¸è§æ¹æ³ obj === window æ ¡éªè¿äºobjectsçæ¶åä¼å¤±è´¥ã 
+
+$.map 
+
+$.map(collection, function(item, index){ ... }) â collection 
+
+éè¿éåéåä¸­çåç´ ï¼è¿åéè¿è¿­ä»£å½æ°çå¨é¨ç»æï¼ï¼æäººç å¤´æ³¨ï¼ä¸ä¸ªæ°æ°ç»ï¼ null å undefined å°è¢«è¿æ»¤æã 
+
+$ . map([1,2,3,4,5], function (item,index){ if(item>1){ return item*item;}
+} ) ; // =>[4, 9, 16, 25] $ . map({"yao":1,"tai":2,"yang":3}, function (item,index){ if(item>1){ return item*item;}
+} ) ; // =>[4, 9] 
+
+$.parseJSON v1.0+ 
+
+$.parseJSON(string) â object 
+
+åç JSON.parse æ¹æ³çå«åãï¼æäººç å¤´æ³¨ï¼æ¥åä¸ä¸ªæ åæ ¼å¼ç JSON å­ç¬¦ä¸²ï¼å¹¶è¿åè§£æåç JavaScript å¯¹è±¡ãï¼ 
+
+$.trim v1.0+ 
+
+$.trim(string) â string 
+
+å é¤å­ç¬¦ä¸²é¦å°¾çç©ºç½ç¬¦ãç±»ä¼¼String.prototype.trim()ã 
+
+$.type v1.0+ 
+
+$.type(object) â string 
+
+è·åJavaScript å¯¹è±¡çç±»åãå¯è½çç±»åæï¼ null undefined boolean number string function array date regexp object error ã 
+
+å¯¹äºå¶å®å¯¹è±¡ï¼å®åªæ¯ç®åæ¥åä¸ºâobjectâï¼å¦æä½ æ³ç¥éä¸ä¸ªå¯¹è±¡æ¯å¦æ¯ä¸ä¸ªjavascriptæ®éå¯¹è±¡ï¼ä½¿ç¨ isPlainObject ã 
+
+add 
+
+add(selector, [context]) â self 
+
+æ·»å åç´ å°å½åå¹éçåç´ éåä¸­ãå¦æç»å®contentåæ°ï¼å°åªå¨contentåç´ ä¸­è¿è¡æ¥æ¾ï¼å¦åå¨æ´ä¸ªdocumentä¸­æ¥æ¾ã 
+
+<ul>
+ <li>list item 1</li>
+ <li>list item 2</li>
+ <li>list item 3</li>
+</ul>
+<p>a paragraph</p>
+
+<script type="text/javascript">
+ $('li').add('p').css('background-color', 'red');
+</script> 
+
+addClass 
+
+addClass(name) â self addClass(function(index, oldClassName){ ... }) â self 
+
+ä¸ºæ¯ä¸ªå¹éçåç´ æ·»å æå®çclassç±»åãå¤ä¸ªclassç±»åä½¿ç¨ç©ºæ ¼åéã 
+
+after 
+
+after(content) â self 
+
+å¨æ¯ä¸ªå¹éçåç´ åæå¥åå®¹ï¼æäººç å¤´æ³¨ï¼å¤é¨æå¥ï¼ãåå®¹å¯ä»¥ä¸ºhtmlå­ç¬¦ä¸²ï¼domèç¹ï¼æèèç¹ç»æçæ°ç»ã 
+
+$ ( 'form label' ). after ( '<p>A note below the label</p>' ) 
+
+append 
+
+append(content) â self 
+
+å¨æ¯ä¸ªå¹éçåç´ æ«å°¾æå¥åå®¹ï¼æäººç å¤´æ³¨ï¼åé¨æå¥ï¼ãåå®¹å¯ä»¥ä¸ºhtmlå­ç¬¦ä¸²ï¼domèç¹ï¼æèèç¹ç»æçæ°ç»ã 
+
+$ ( 'ul' ). append ( '<li>new list item</li>' ) 
+
+appendTo 
+
+appendTo(target) â self 
+
+å°å¹éçåç´ æå¥å°ç®æ åç´ çæ«å°¾ï¼æäººç å¤´æ³¨ï¼åé¨æå¥ï¼ãè¿ä¸ªæç¹å append ï¼ä½æ¯æå¥çç®æ ä¸å¶ç¸åã 
+
+$ ( '<li>new list item</li>' ). appendTo ( 'ul' ) 
+
+attr 
+
+attr(name) â string attr(name, value) â self attr(name, function(index, oldValue){ ... }) â self attr({ name: value, name2: value2, ... }) â self 
+
+è¯»åæè®¾ç½®domçå±æ§ãå¦ææ²¡æç»å®valueåæ°ï¼åè¯»åå¯¹è±¡éåä¸­ç¬¬ä¸ä¸ªåç´ çå±æ§å¼ãå½ç»å®äºvalueåæ°ãåè®¾ç½®å¯¹è±¡éåä¸­ææåç´ çè¯¥å±æ§çå¼ãå½valueåæ°ä¸º null ï¼é£ä¹è¿ä¸ªå±æ§å°è¢«ç§»é¤(ç±»ä¼¼ removeAttr )ï¼å¤ä¸ªå±æ§å¯ä»¥éè¿å¯¹è±¡é®å¼å¯¹çæ¹å¼è¿è¡è®¾ç½®ã 
+
+è¦è¯»åDOMçå±æ§å¦ checked å selected , ä½¿ç¨ prop ã 
+
+var form = $ ( 'form' ) form . attr ( 'action' ) //=> è¯»åå¼ form . attr ( 'action' , '/create' ) //=> è®¾ç½®å¼ form . attr ( 'action' , null ) //=> ç§»é¤å±æ§ // å¤ä¸ªå±æ§: form . attr ({ action : '/create' , method : 'post' }) 
+
+before 
+
+before(content) â self 
+
+å¨å¹éæ¯ä¸ªåç´ çåé¢æå¥åå®¹ï¼æäººç å¤´æ³¨ï¼å¤é¨æå¥ï¼ãåå®¹å¯ä»¥ä¸ºhtmlå­ç¬¦ä¸²ï¼domèç¹ï¼æèèç¹ç»æçæ°ç»ã 
+
+$ ( 'table' ). before ( '<p>See the following table:</p>' ) 
+
+children 
+
+children([selector]) â collection 
+
+è·å¾æ¯ä¸ªå¹éåç´ éååç´ çç´æ¥å­åç´ ï¼å¦æç»å®selectorï¼é£ä¹è¿åçç»æä¸­åªåå«ç¬¦åcsséæ©å¨çåç´ ã 
+
+$ ( 'ol' ). children ( '*:nth-child(2n)' ) //=> every other list item from every ordered list 
+
+clone v1.0+ 
+
+clone() â collection 
+
+éè¿æ·±åº¦åéæ¥å¤å¶éåä¸­çææåç´ ã 
+
+æ­¤æ¹æ³ä¸ä¼å°æ°æ®åäºä»¶å¤çç¨åºå¤å¶å°æ°çåç´ ãè¿ç¹åjqueryä¸­å©ç¨ä¸ä¸ªåæ°æ¥ç¡®å®æ¯å¦å¤å¶æ°æ®åäºä»¶å¤çä¸ç¸åã 
+
+closest 
+
+closest(selector, [context]) â collection closest(collection) â collection v1.0+ closest(element) â collection v1.0+ 
+
+ä»åç´ æ¬èº«å¼å§ï¼éçº§åä¸çº§åç´ å¹éï¼å¹¶è¿åæåå¹éselectorçåç´ ãå¦æç»å®contextèç¹åæ°ï¼é£ä¹åªå¹éè¯¥èç¹çåä»£åç´ ãè¿ä¸ªæ¹æ³ä¸ parents(selector) æç¹ç¸åï¼ä½å®åªè¿åæåå¹éçç¥ååç´ ã 
+
+å¦æåæ°æ¯ä¸ä¸ªZeptoå¯¹è±¡éåæèä¸ä¸ªåç´ ï¼ç»æå¿é¡»å¹éç»å®çåç´ èä¸æ¯éæ©å¨ã 
+
+var input = $ ( 'input[type=text]' ) input . closest ( 'form' ) 
+
+concat 
+
+concat(nodes, [node2, ...]) â self 
+
+æ·»å åç´ å°ä¸ä¸ªZeptoå¯¹è±¡éåå½¢æä¸ä¸ªæ°æ°ç»ãå¦æåæ°æ¯ä¸ä¸ªæ°ç»ï¼é£ä¹è¿ä¸ªæ°ç»ä¸­çåç´ å°ä¼åå¹¶å°Zeptoå¯¹è±¡éåä¸­ã 
+
+è¿æ¯ä¸ä¸ªZeptoæä¾çæ¹æ³ï¼ä¸æ¯jqueyçAPI ã 
+
+contents v1.0+ 
+
+contents() â collection 
+
+è·å¾æ¯ä¸ªå¹éåç´ éååç´ çå­åç´ ï¼åæ¬æå­åæ³¨éèç¹ãï¼æäººç å¤´æ³¨ï¼.contents()å .children() æ¹æ³ç±»ä¼¼ï¼åªä¸è¿åèåæ¬ææ¬èç¹ä»¥åjQueryå¯¹è±¡ä¸­äº§ççHTMLåç´ ãï¼ 
+
+css 
+
+css(property) â value css([property1, property2, ...]) â object v1.1+ css(property, value) â self css({ property: value, property2: value2, ... }) â self 
+
+è¯»åæè®¾ç½®DOMåç´ çcsså±æ§ãå½valueåæ°ä¸å­å¨çæ¶åï¼è¿åå¯¹è±¡éåä¸­ç¬¬ä¸ä¸ªåç´ çcsså±æ§ãå½valueåæ°å­å¨æ¶ï¼è®¾ç½®å¯¹è±¡éåä¸­æ¯ä¸ä¸ªåç´ çå¯¹åºcsså±æ§ã 
+
+å¤ä¸ªå±æ§å¯ä»¥éè¿ä¼ éä¸ä¸ªå±æ§åç»æçæ°ç»ä¸æ¬¡æ§è·åãå¤ä¸ªå±æ§å¯ä»¥å©ç¨å¯¹è±¡é®å¼å¯¹çæ¹å¼è¿è¡è®¾ç½®ã 
+
+å½valueä¸ºç©º(ç©ºå­ç¬¦ä¸²ï¼ null æ undefined )ï¼é£ä¸ªcsså±æ§å°ä¼è¢«ç§»åºãå½valueåæ°ä¸ºä¸ä¸ªæ åä½çæ°å­ï¼å¦æè¯¥csså±æ§éè¦åä½ï¼âpxâå°ä¼èªå¨æ·»å å°è¯¥å±æ§ä¸ã 
+
+var elem = $ ( 'h1' ) elem . css ( 'background-color' ) // read property elem . css ( 'background-color' , '#369' ) // set property elem . css ( 'background-color' , '' ) // remove property // set multiple properties: elem . css ({ backgroundColor : '#8EE' , fontSize : 28 }) // read multiple properties: elem . css ([ 'backgroundColor' , 'fontSize' ])[ 'fontSize' ] 
+
+data 
+
+data(name) â value data(name, value) â self 
+
+è¯»åæåå¥domç data-* å±æ§ãè¡ä¸ºæç¹å attr ï¼ä½æ¯å±æ§åç§°åé¢å ä¸ data- ã 
+
+å½è¯»åå±æ§å¼æ¶ï¼ä¼æä¸åè½¬æ¢ï¼ v1.0+ 
+
+âtrueâ, âfalseâ, and ânullâ è¢«è½¬æ¢ä¸ºç¸åºçç±»åï¼ 
+
+æ°å­å¼è½¬æ¢ä¸ºå®éçæ°å­ç±»åï¼ 
+
+JSONå¼å°ä¼è¢«è§£æï¼å¦æå®æ¯ææçJSONï¼ 
+
+å¶å®çä¸åä½ä¸ºå­ç¬¦ä¸²è¿åã 
+
+Zepto
+ åºæ¬å®ç°`data()`åªè½å­å¨å­ç¬¦ä¸²ãå¦æä½ è¦å­å¨ä»»æå¯¹è±¡ï¼è¯·å¼å¥å¯éçâdataâæ¨¡åå°ä½ æå»ºçZeptoä¸­ã 
+
+each 
+
+each(function(index, item){ ... }) â self 
+
+éåä¸ä¸ªå¯¹è±¡éåæ¯ä¸ªåç´ ãå¨è¿­ä»£å½æ°ä¸­ï¼ this å³é®å­æåå½åé¡¹(ä½ä¸ºå½æ°çç¬¬äºä¸ªåæ°ä¼ é)ãå¦æè¿­ä»£å½æ°è¿å false ï¼éåç»æã 
+
+$ ( 'form input' ). each ( function ( index ){ console . log ( 'input %d is: %o' , index , this ) }) 
+
+empty 
+
+empty() â self 
+
+æ¸ç©ºå¯¹è±¡éåä¸­æ¯ä¸ªåç´ çDOMåå®¹ã 
+
+eq 
+
+eq(index) â collection 
+
+ä»å½åå¯¹è±¡éåä¸­è·åç»å®ç´¢å¼å¼ï¼æäººç å¤´æ³¨ï¼ä»¥0ä¸ºåºæ°ï¼çåç´ ã 
+
+$ ( 'li' ). eq ( 0 ) //=> only the first list item $ ( 'li' ). eq ( - 1 ) //=> only the last list item 
+
+filter 
+
+filter(selector) â collection filter(function(index){ ... }) â collection v1.0+ 
+
+è¿æ»¤å¯¹è±¡éåï¼è¿åå¯¹è±¡éåä¸­æ»¡è¶³csséæ©å¨çé¡¹ãå¦æåæ°ä¸ºä¸ä¸ªå½æ°ï¼å½æ°è¿åæå®éå¼å¾æ¶åï¼åç´ æä¼è¢«è¿åãå¨å½æ°ä¸­ï¼ this å³é®å­æåå½åçåç´ ã 
+
+ä¸æ­¤ç¸åçåè½ï¼æ¥ç not . 
+
+find 
+
+find(selector) â collection find(collection) â collection v1.0+ find(element) â collection v1.0+ 
+
+å¨å½å¯¹è±¡åéååæ¥æ¾ç¬¦åCSSéæ©å¨çæ¯ä¸ªåç´ çåä»£åç´ ã 
+
+å¦æç»å®Zeptoå¯¹è±¡éåæèåç´ ï¼è¿æ»¤å®ä»¬ï¼åªæå½å®ä»¬å¨å½åZeptoéåå¯¹è±¡ä¸­æ¶ï¼æåè¢«è¿åã 
+
+var form = $ ( '#myform' ) form . find ( 'input, select' ) 
+
+first 
+
+first() â collection 
+
+è·åå½åå¯¹è±¡éåä¸­çç¬¬ä¸ä¸ªåç´ ã 
+
+$ ( 'form' ). first () 
+
+forEach 
+
+forEach(function(item, index, array){ ... }, [context]) 
+
+éåå¯¹è±¡éåä¸­æ¯ä¸ªåç´ ï¼æç¹ç±»ä¼¼ each ï¼ä½æ¯éåå½æ°çåæ°ä¸ä¸æ ·ï¼å½å½æ°è¿å false çæ¶åï¼éåä¸ä¼åæ­¢ã 
+
+è¿æ¯ä¸ä¸ªZeptoæä¾çæ¹æ³ï¼ä¸æ¯jqueryçAPIã 
+
+get 
+
+get() â array get(index) â DOM node 
+
+ä»å½åå¯¹è±¡éåä¸­è·åææåç´ æåä¸ªåç´ ãå½indexåæ°ä¸å­å¨çæ¶ï¼ä»¥æ®éæ°ç»çæ¹å¼è¿åææçåç´ ãå½æå®indexæ¶ï¼åªè¿åè¯¥ç½®çåç´ ãè¿ç¹ä¸ eq ä¸åï¼è¯¥æ¹æ³è¿åçæ¯DOMèç¹ï¼ä¸æ¯Zeptoå¯¹è±¡éåã 
+
+var elements = $ ( 'h2' ) elements . get () //=> get all headings as an array elements . get ( 0 ) //=> get first heading node 
+
+has v1.0+ 
+
+has(selector) â collection has(node) â collection 
+
+å¤æ­å½åå¯¹è±¡éåçå­åç´ æ¯å¦æç¬¦åéæ©å¨çåç´ ï¼æèæ¯å¦åå«æå®çDOMèç¹ï¼å¦ææï¼åè¿åæ°çå¯¹è±¡éåï¼è¯¥å¯¹è±¡è¿æ»¤æä¸å«æéæ©å¨å¹éåç´ æèä¸å«ææå®DOMèç¹çå¯¹è±¡ã 
+
+$ ( 'ol > li' ). has ( 'a[href]' ) //=> get only LI elements that contain links 
+
+hasClass 
+
+hasClass(name) â boolean 
+
+æ£æ¥å¯¹è±¡éåä¸­æ¯å¦æåç´ å«ææå®çclassã 
+
+<ul>
+ <li>list item 1</li>
+ <li class="yaotaiyang">list item 2</li>
+ <li>list item 3</li>
+</ul>
+<p>a paragraph</p>
+
+<script type="text/javascript">
+ $("li").hasClass("yaotaiyang"); //=> true </script> 
+
+height 
+
+height() â number height(value) â self height(function(index, oldHeight){ ... }) â self 
+
+è·åå¯¹è±¡éåä¸­ç¬¬ä¸ä¸ªåç´ çé«åº¦ï¼æèè®¾ç½®å¯¹è±¡éåä¸­ææåç´ çé«åº¦ã 
+
+$ ( '#foo' ). height () // => 123 $ ( window ). height () // => 838 (viewport height) $ ( document ). height () // => 22302 
+
+hide 
+
+hide() â self 
+
+Hide elements in this collection by setting their display CSS property to none . 
+
+éè¿è®¾ç½®cssçå±æ§ display ä¸º none æ¥å°å¯¹è±¡éåä¸­çåç´ éèã 
+
+html 
+
+html() â string html(content) â self html(function(index, oldHtml){ ... }) â self 
+
+è·åæè®¾ç½®å¯¹è±¡éåä¸­åç´ çHTMLåå®¹ãå½æ²¡æç»å®contentåæ°æ¶ï¼è¿åå¯¹è±¡éåä¸­ç¬¬ä¸ä¸ªåç´ çinnerHtmlãå½ç»å®contentåæ°æ¶ï¼ç¨å¶æ¿æ¢å¯¹è±¡éåä¸­æ¯ä¸ªåç´ çåå®¹ãcontentå¯ä»¥æ¯ append ä¸­æè¿°çææç±»åã 
+
+// autolink everything that looks like a Twitter username $ ( '.comment p' ). html ( function ( idx , oldHtml ){ return oldHtml . replace ( /(^|\W)@(\w{1,15})/g , '$1@<a href="http://twitter.com/$2">$2</a>' ) }) 
+
+index 
+
+index([element]) â number 
+
+è·åä¸ä¸ªåç´ çç´¢å¼å¼ï¼æäººç å¤´æ³¨ï¼ä»0å¼å§è®¡æ°ï¼ãå½elemenåæ°æ²¡æç»åºæ¶ï¼è¿åå½ååç´ å¨åå¼èç¹ä¸­çä½ç½®ãå½elementåæ°ç»åºæ¶ï¼è¿åå®å¨å½åå¯¹è±¡éåä¸­çä½ç½®ãå¦ææ²¡ææ¾å°è¯¥åç´ ï¼åè¿å -1 ã 
+
+$ ( 'li:nth-child(2)' ). index () //=> 1 
+
+indexOf 
+
+indexOf(element, [fromIndex]) â number 
+
+Get the position of an element in the current collection. If fromIndex number is
+given, search only from that position onwards. Returns the 0-based position when
+found and -1 if not found. Use of index is recommended over this
+method. 
+
+å¨å½åå¯¹è±¡éåä¸­è·åä¸ä¸ªåç´ çç´¢å¼å¼ï¼æäººç å¤´æ³¨ï¼ä»0å¼å§è®¡æ°ï¼ãå¦æç»å®formindexåæ°ï¼ä»è¯¥ä½ç½®å¼å§å¾åæ¥æ¾ï¼è¿ååºäº0çç´¢å¼å¼ï¼å¦ææ²¡æ¾å°ï¼åè¿å -1 ã index æ¹æ³æ¯åºäºè¿ä¸ªæ¹æ³å®ç°çã 
+
+è¿æ¯ä¸ä¸ªZeptoçæ¹æ³ï¼ä¸æ¯jquerçapiã 
+
+insertAfter 
+
+insertAfter(target) â self 
+
+å°éåä¸­çåç´ æå¥å°æå®çç®æ åç´ åé¢ï¼æäººç å¤´æ³¨ï¼å¤é¨æå¥ï¼ãè¿ä¸ªæç¹å after ï¼ä½æ¯ä½¿ç¨æ¹å¼ç¸åã 
+
+$ ( '<p>Emphasis mine.</p>' ). insertAfter ( 'blockquote' ) 
+
+insertBefore 
+
+insertBefore(target) â self 
+
+å°éåä¸­çåç´ æå¥å°æå®çç®æ åç´ åé¢ï¼æäººç å¤´æ³¨ï¼å¤é¨æå¥ï¼ãè¿ä¸ªæç¹å before ï¼ä½æ¯ä½¿ç¨æ¹å¼ç¸åã 
+
+$ ( '<p>See the following table:</p>' ). insertBefore ( 'table' ) 
+
+is 
+
+is(selector) â boolean 
+
+å¤æ­å½ååç´ éåä¸­çç¬¬ä¸ä¸ªåç´ æ¯å¦ç¬¦csséæ©å¨ãå¯¹äºåºç¡æ¯æjqueryçéæ åéæ©å¨ç±»ä¼¼ï¼ :visible åå«å¨å¯éçâselectorâæ¨¡åä¸­ã 
+
+jQuery
+ CSS extensions ä¸è¢«æ¯æã éæ©âselectorâæ¨¡åä»ä»è½æ¯ææéå ä¸ªæå¸¸ç¨çæ¹å¼ã 
+
+last 
+
+last() â collection 
+
+è·åå¯¹è±¡éåä¸­æåä¸ä¸ªåç´ ã 
+
+$ ( 'li' ). last () 
+
+map 
+
+map(function(index, item){ ... }) â collection 
+
+éåå¯¹è±¡éåä¸­çææåç´ ãéè¿éåå½æ°è¿åå¼å½¢æä¸ä¸ªæ°çéåå¯¹è±¡ãå¨éåå½æ°ä¸­ this å³é®ä¹æåå½åå¾ªç¯çé¡¹ï¼éåå½æ°ä¸­çç¬¬äºä¸ªåæ°ï¼ã 
+
+éåä¸­è¿å null å undefined ï¼éåå°ç»æã 
+
+// get text contents of all elements in collection elements . map ( function (){ return $ ( this ). text () }). get (). join ( ', ' ) 
+
+next 
+
+next() â collection next(selector) â collection v1.0+ 
+
+Get the next siblingâoptionally filtered by selectorâof each element in the
+collection. 
+
+è·åå¯¹è±¡éåä¸­æ¯ä¸ä¸ªåç´ çä¸ä¸ä¸ªåå¼èç¹(å¯ä»¥éæ©æ§çå¸¦ä¸è¿æ»¤éæ©å¨)ã 
+
+$ ( 'dl dt' ). next () //=> the DD elements 
+
+not 
+
+not(selector) â collection not(collection) â collection not(function(index){ ... }) â collection 
+
+è¿æ»¤å½åå¯¹è±¡éåï¼è·åä¸ä¸ªæ°çå¯¹è±¡éåï¼å®éé¢çåç´ ä¸è½å¹écsséæ©å¨ãå¦æå¦ä¸ä¸ªåæ°ä¸ºZeptoå¯¹è±¡éåï¼é£ä¹è¿åçæ°Zeptoå¯¹è±¡ä¸­çåç´ é½ä¸åå«å¨è¯¥åæ°å¯¹è±¡ä¸­ãå¦æåæ°æ¯ä¸ä¸ªå½æ°ãä»ä»åå«å½æ°æ§è¡ä¸ºfalseå¼å¾æ¶åçåç´ ï¼å½æ°ç this å³é®å­æåå½åå¾ªç¯åç´ ã 
+
+ä¸å®ç¸åçåè½ï¼æ¥ç filter . 
+
+offset 
+
+offset() â object offset(coordinates) â self v1.0+ offset(function(index, oldOffset){ ... }) â self v1.0+ 
+
+è·å¾å½ååç´ ç¸å¯¹äºdocumentçä½ç½®ãè¿åä¸ä¸ªå¯¹è±¡å«æï¼ top , left , width å height 
+
+å½ç»å®ä¸ä¸ªå«æ left å top å±æ§å¯¹è±¡æ¶ï¼ä½¿ç¨è¿äºå¼æ¥å¯¹éåä¸­æ¯ä¸ä¸ªåç´ è¿è¡ç¸å¯¹äºdocumentçå®ä½ã 
+
+offsetParent v1.0+ 
+
+offsetParent() â collection 
+
+æ¾å°ç¬¬ä¸ä¸ªå®ä½è¿çç¥ååç´ ï¼æå³çå®çcssä¸­ç position å±æ§å¼ä¸ºârelativeâ, âabsoluteâ or âfixedâ 
+
+parent 
+
+parent([selector]) â collection 
+
+è·åå¯¹è±¡éåä¸­æ¯ä¸ªåç´ çç´æ¥ç¶åç´ ãå¦æcsséæ©å¨åæ°ç»åºãè¿æ»¤åºç¬¦åæ¡ä»¶çåç´ ã 
+
+parents 
+
+parents([selector]) â collection 
+
+è·åå¯¹è±¡éåæ¯ä¸ªåç´ ææçç¥ååç´ ãå¦æcsséæ©å¨åæ°ç»åºï¼è¿æ»¤åºç¬¦åæ¡ä»¶çåç´ ã 
+
+å¦ææ³è·åç´æ¥ç¶çº§åç´ ï¼ä½¿ç¨ parent ãå¦æåªæ³è·åå°ç¬¬ä¸ä¸ªç¬¦åcsséæ©å¨çåç´ ï¼ä½¿ç¨ closest ã 
+
+$ ( 'h1' ). parents () //=> [<div#container>, <body>, <html>] 
+
+pluck 
+
+pluck(property) â array 
+
+è·åå¯¹è±¡éåä¸­æ¯ä¸ä¸ªåç´ çå±æ§å¼ãè¿åå¼ä¸º null æ undefined å¼å¾è¿æ»¤æã 
+
+$ ( 'body > *' ). pluck ( 'nodeName' ) // => ["DIV", "SCRIPT"] // implementation of Zepto's `next` method $ . fn . next = function (){ return $ ( this . pluck ( 'nextElementSibling' )) } 
+
+è¿æ¯ä¸ä¸ªZeptoçæ¹æ³ï¼ä¸æ¯jqueryçapi 
+
+position v1.0+ 
+
+position() â object 
+
+è·åå¯¹è±¡éåä¸­ç¬¬ä¸ä¸ªåç´ çä½ç½®ãç¸å¯¹äº offsetParent ãå½ç»å¯¹å®ä½çä¸ä¸ªåç´ é è¿å¦ä¸ä¸ªåç´ çæ¶åï¼è¿ä¸ªæ¹æ³æ¯æç¨çã 
+
+Returns an object with properties: top , left . 
+
+var pos = element . position () // position a tooltip relative to the element $ ( '#tooltip' ). css ({ position : 'absolute' , top : pos . top - 30 , left : pos . left }) 
+
+prepend 
+
+prepend(content) â self 
+
+å°åæ°åå®¹æå¥å°æ¯ä¸ªå¹éåç´ çåé¢ï¼æäººç å¤´æ³¨ï¼åç´ åé¨æå¥ï¼ãæå¥dçåç´ å¯ä»¥è¯htmlå­ç¬¦ä¸²çæ®µï¼ä¸ä¸ªdomèç¹ï¼æèä¸ä¸ªèç¹çæ°ç»ã 
+
+$ ( 'ul' ). prepend ( '<li>first list item</li>' ) 
+
+prependTo 
+
+prependTo(target) â self 
+
+å°ææåç´ æå¥å°ç®æ åé¢ï¼æäººç å¤´æ³¨ï¼åç´ åé¨æå¥ï¼ãè¿æç¹å prepend ï¼ä½æ¯æ¯ç¸åçæ¹å¼ã 
+
+$ ( '<li>first list item</li>' ). prependTo ( 'ul' ) 
+
+prev 
+
+prev() â collection prev(selector) â collection v1.0+ 
+
+è·åå¯¹è±¡éåä¸­æ¯ä¸ä¸ªåç´ çåä¸ä¸ªåå¼èç¹ï¼éè¿éæ©å¨æ¥è¿è¡è¿æ»¤ã 
+
+prop v1.0+ 
+
+prop(name) â value prop(name, value) â self prop(name, function(index, oldValue){ ... }) â self 
+
+è¯»åæè®¾ç½®domåç´ çå±æ§å¼ãå®å¨è¯»åå±æ§å¼çæåµä¸ä¼åäº attr ï¼å ä¸ºè¿äºå±æ§å¼ä¼å ä¸ºç¨æ·çäº¤äºåçæ¹åï¼å¦ checked å selected ã 
+
+ç®åæå°ååç§°ï¼æ¯å¦ for , class , readonly åç±»ä¼¼çå±æ§ï¼å°è¢«æ å°å°å®éçå±æ§ä¸ï¼æ¯å¦ htmlFor , className , readOnly , ç­ç­ã 
+
+push 
+
+push(element, [element2, ...]) â self 
+
+Add elements to the end of the current collection. 
+
+æ·»å åç´ å°å½åå¯¹è±¡éåçæåã 
+
+è¿æ¯ä¸ä¸ªzeptoçæ¹æ³ï¼ä¸æ¯jqueryçapi 
+
+ready 
+
+ready(function($){ ... }) â self 
+
+æ·»å ä¸ä¸ªäºä»¶ä¾¦å¬å¨ï¼å½é¡µé¢DOMå è½½å®æ¯ âDOMContentLoadedâ äºä»¶è§¦åæ¶è§¦åãå»ºè®®ä½¿ç¨ $() æ¥ä»£æ¿è¿ç§ç¨æ³ã 
+
+reduce 
+
+reduce(function(memo, item, index, array){ ... }, [initial]) â value 
+
+ä¸ Array.reduce æç¸åçç¨æ³ï¼éåå½åå¯¹è±¡éåãmemoæ¯å½æ°ä¸æ¬¡çè¿åå¼ãè¿­ä»£è¿è¡éåã 
+
+è¿æ¯ä¸ä¸ªzeptoçæ¹æ³ï¼ä¸æ¯jqueryçapi 
+
+remove 
+
+remove() â self 
+
+ä»å¶ç¶èç¹ä¸­å é¤å½åéåä¸­çåç´ ï¼ææçä»domä¸­ç§»é¤ã 
+
+removeAttr 
+
+removeAttr(name) â self 
+
+ç§»é¤å½åå¯¹è±¡éåä¸­ææåç´ çæå®å±æ§ã 
+
+removeClass 
+
+removeClass([name]) â self removeClass(function(index, oldClassName){ ... }) â self 
+
+ç§»é¤å½åå¯¹è±¡éåä¸­ææåç´ çæå®classãå¦ææ²¡ææå®nameåæ°ï¼å°ç§»åºææçclassãå¤ä¸ªclassåæ°åç§°å¯ä»¥å©ç¨ç©ºæ ¼åéãä¸ä¾ç§»é¤äºä¸¤ä¸ªclassã 
+
+<input class="taiyang yueliang" id="check1" type="checkbox" checked="checked"> 
+<input class="yaotaiyang" id="check2" type="checkbox">
+
+<script type="text/javascript">
+ $("#check1").removeClass("taiyang yueliang") //=>[<input class id="check1" type="checkbox" checked="checked">] </script> 
+
+replaceWith 
+
+replaceWith(content) â self 
+
+ç¨ç»å®çåå®¹æ¿æ¢ææå¹éçåç´ ã(åå«åç´ æ¬èº«)ãcontentåæ°å¯ä»¥ä¸º before ä¸­æè¿°çç±»åã 
+
+scrollLeft v1.1+ 
+
+scrollLeft() â number scrollLeft(value) â self 
+
+è·åæè®¾ç½®é¡µé¢ä¸çæ»å¨åç´ æèæ´ä¸ªçªå£åå³æ»å¨çåç´ å¼ã 
+
+scrollTop v1.0+ 
+
+scrollTop() â number scrollTop(value) â self v1.1+ 
+
+è·åæè®¾ç½®é¡µé¢ä¸çæ»å¨åç´ æèæ´ä¸ªçªå£åä¸æ»å¨çåç´ å¼ã 
+
+show 
+
+show() â self 
+
+æ¢å¤å¯¹è±¡éåä¸­æ¯ä¸ªåç´ é»è®¤çâdisplayâå¼ãå¦æä½ ç¨ hide å°åç´ éèï¼ç¨è¯¥å±æ§å¯ä»¥å°å¶æ¾ç¤ºãç¸å½äºå»æäº displayï¼none ã 
+
+siblings 
+
+siblings([selector]) â collection 
+
+è·åå¯¹è±¡éåä¸­ææåç´ çåå¼èç¹ãå¦æç»å®CSSéæ©å¨åæ°ï¼è¿æ»¤åºç¬¦åéæ©å¨çåç´ ã 
+
+size 
+
+size() â number 
+
+è·åå¯¹è±¡éåä¸­åç´ çæ°éã 
+
+slice 
+
+slice(start, [end]) â array 
+
+æåè¿ä¸ªæ°ç» array çå­éï¼ä» start å¼å§ï¼å¦æç»å® end ï¼æåä»ä» start å¼å§å° end ç»æçåç´ ï¼ä½æ¯ä¸åå« end ä½ç½®çåç´ ã 
+
+text 
+
+text() â string text(content) â self text(function(index, oldText){ ... }) â self v1.1.4+ 
+
+è·åæèè®¾ç½®ææå¯¹è±¡éåä¸­åç´ çææ¬åå®¹ãå½æ²¡æç»å®contentåæ°æ¶ï¼è¿åå½åå¯¹è±¡éåä¸­ç¬¬ä¸ä¸ªåç´ çææ¬åå®¹ï¼åå«å­èç¹ä¸­çææ¬åå®¹ï¼ãå½ç»å®contentåæ°æ¶ï¼ä½¿ç¨å®æ¿æ¢å¯¹è±¡éåä¸­ææåç´ çææ¬åå®¹ãå®æå¾ç¹ä¼¼ html ï¼ä¸å®ä¸åçæ¯å®ä¸è½ç¨æ¥è·åæè®¾ç½® HTMLã 
+
+toggle 
+
+toggle([setting]) â self 
+
+æ¾ç¤ºæéèå¹éåç´ ãå¦æ setting ä¸ºtrueï¼ç¸å½äº show æ³ãå¦æ setting ä¸ºfalseãç¸å½äº hide æ¹æ³ã 
+
+var input = $ ( 'input[type=text]' ) $ ( '#too_long' ). toggle ( input . val (). length > 140 ) 
+
+toggleClass 
+
+toggleClass(names, [setting]) â self toggleClass(function(index, oldClassNames){ ... }, [setting]) â self 
+
+å¨å¹éçåç´ éåä¸­çæ¯ä¸ªåç´ ä¸æ·»å æå é¤ä¸ä¸ªæå¤ä¸ªæ ·å¼ç±»ãå¦æclassçåç§°å­å¨åå é¤å®ï¼å¦æä¸å­å¨ï¼å°±æ·»å å®ãå¦æ setting çå¼ä¸ºçï¼è¿ä¸ªåè½ç±»ä¼¼äº addClass ï¼å¦æä¸ºåï¼è¿ä¸ªåè½ç±»ä¼¼ä¸ removeClass ã 
+
+unwrap 
+
+unwrap() â self 
+
+ç§»é¤éåä¸­æ¯ä¸ªåç´ çç´æ¥ç¶èç¹ï¼å¹¶æä»ä»¬çå­åç´ ä¿çå¨åæ¥çä½ç½®ã
+åºæ¬ä¸ï¼è¿ç§æ¹æ³å é¤ä¸ä¸çç¥ååç´ ï¼åæ¶ä¿æDOMä¸­çå½ååç´ ã 
+
+$ ( document . body ). append ( '<div id=wrapper><p>Content</p></div>' ) $ ( '#wrapper p' ). unwrap (). parents () //=> [<body>, <html>] 
+
+val 
+
+val() â string val(value) â self val(function(index, oldValue){ ... }) â self 
+
+è·åæè®¾ç½®å¹éåç´ çå¼ãå½æ²¡æç»å®valueåæ°ï¼è¿åç¬¬ä¸ä¸ªåç´ çå¼ãå¦ææ¯ <select multiple> æ ç­¾ï¼åè¿åä¸ä¸ªæ°ç»ãå½ç»å®valueåæ°ï¼é£ä¹å°è®¾ç½®ææåç´ çå¼ã 
+
+width 
+
+width() â number width(value) â self width(function(index, oldWidth){ ... }) â self 
+
+è·åå¯¹è±¡éåä¸­ç¬¬ä¸ä¸ªåç´ çå®½ï¼æèè®¾ç½®å¯¹è±¡éåä¸­ææåç´ çå®½ã 
+
+$ ( '#foo' ). width () // => 123 $ ( window ). width () // => 768 (viewport width) $ ( document ). width () // => 768 
+
+wrap 
+
+wrap(structure) â self wrap(function(index){ ... }) â self v1.0+ 
+
+å¨æ¯ä¸ªå¹éçåç´ å¤å±åä¸ä¸ä¸ªhtmlåç´ ãstructureåæ°å¯ä»¥æ¯ä¸ä¸ªåç¬çåç´ æèä¸äºåµå¥çåç´ ãä¹å¯ä»¥æ¯ä¸ä¸ªhtmlå­ç¬¦ä¸²çæ®µæèdomèç¹ãè¿å¯ä»¥æ¯ä¸ä¸ªçæç¨æ¥ååç´ çåè°å½æ°ï¼è¿ä¸ªå½æ°è¿ååä¸¤ç§ç±»åçåè£¹çæ®µã 
+
+éè¦æéçæ¯ï¼ è¯¥æ¹æ³å¯¹äºdomä¸­çèç¹æçå¾å¥½çæ¯æãå¦æå° wrap() ç¨å¨ä¸ä¸ªæ°çåç´ ä¸ï¼ç¶ååå°ç»ææå¥å°documentä¸­ï¼æ­¤æ¶è¯¥æ¹æ³æ æã 
+
+// wrap each button in a separate span: $ ( '.buttons a' ). wrap ( '<span>' ) // wrap each code block in a div and pre: $ ( 'code' ). wrap ( '<div class=highlight><pre /></div>' ) // wrap all form inputs in a span with classname // corresponding to input type: $ ( 'input' ). wrap ( function ( index ){ return '<span class=' + this . type + 'field />' }) //=> <span class=textfield><input type=text /></span>, // <span class=searchfield><input type=search /></span> // WARNING: will not work as expected! $ ( '<em>broken</em>' ). wrap ( '<li>' ). appendTo ( document . body ) // do this instead: $ ( '<em>better</em>' ). appendTo ( document . body ). wrap ( '<li>' ) 
+
+wrapAll 
+
+wrapAll(structure) â self 
+
+å¨ææå¹éåç´ å¤é¢åä¸ä¸ªåç¬çç»æãç»æå¯ä»¥æ¯åä¸ªåç´ æ
+å ä¸ªåµå¥çåç´ ï¼å¹¶ä¸å¯ä»¥éè¿å¨ä½ä¸ºHTMLå­ç¬¦ä¸²æDOMèç¹ã 
+
+// wrap all buttons in a single div: $ ( 'a.button' ). wrapAll ( '<div id=buttons />' ) 
+
+wrapInner 
+
+wrapInner(structure) â self wrapInner(function(index){ ... }) â self v1.0+ 
+
+å°æ¯ä¸ªåç´ ä¸­ç åå®¹ åè£¹å¨ä¸ä¸ªåç¬çç»æä¸­ãç»æå¯ä»¥æ¯åä¸ªåä»¶æå¤ä¸ªåµå¥åä»¶ï¼å¹¶ä¸å¯ä»¥éè¿å¨ä½ä¸ºHTMLå­ç¬¦ä¸²æDOMèç¹ï¼æèæ¯ä¸ä¸ªçæç¨æ¥ååç´ çåè°å½æ°ï¼è¿ä¸ªå½æ°è¿ååä¸¤ç§ç±»åçåè£¹çæ®µã 
+
+// wrap the contents of each navigation link in a span: $ ( 'nav a' ). wrapInner ( '<span>' ) // wrap the contents of each list item in a paragraph and emphasis: $ ( 'ol li' ). wrapInner ( '<p><em /></p>' ) 
+
+Detect methods 
+
+Detect module 
+
+è¯¥æ£æµæ¹æ³å¯ä»¥å¨ä¸åçç¯å¢ä¸­å¾®è°ä½ çç«ç¹æèåºç¨ç¨åºï¼å¹¶å¸®å©ä½ è¯å«ææºåå¹³æ¿ï¼ä»¥åä¸åçæµè§å¨åæä½ç³»ç»ã 
+
+// The following boolean flags are set to true if they apply, // if not they're either set to `false` or `undefined`. // We recommend accessing them with `!!` prefixed to coerce to a boolean. // general device type $ . os . phone $ . os . tablet // specific OS $ . os . ios $ . os . android $ . os . webos $ . os . blackberry $ . os . bb10 $ . os . rimtabletos // specific device type $ . os . iphone $ . os . ipad $ . os . ipod // [v1.1] $ . os . touchpad $ . os . kindle // specific browser $ . browser . chrome $ . browser . firefox $ . browser . safari // [v1.1] $ . browser . webview // (iOS) [v1.1] $ . browser . silk $ . browser . playbook $ . browser . ie // [v1.1] // æ­¤å¤ï¼çæ¬ä¿¡æ¯æ¯å¯ç¨çã // ä¸é¢æ¯è¿è¡ââiOS 6.1çiPhoneæè¿åçã !! $ . os . phone // => true !! $ . os . iphone // => true !! $ . os . ios // => true $ . os . version // => "6.1" $ . browser . version // => "536.26" 
+
+äºä»¶å¤ç 
+
+$.Event 
+
+$.Event(type, [properties]) â event 
+
+åå»ºå¹¶åå§åä¸ä¸ªæå®çDOMäºä»¶ãå¦æç»å®propertieså¯¹è±¡ï¼ä½¿ç¨å®æ¥æ©å±åºæ°çäºä»¶å¯¹è±¡ãé»è®¤æåµä¸ï¼äºä»¶è¢«è®¾ç½®ä¸ºåæ³¡æ¹å¼ï¼è¿ä¸ªå¯ä»¥éè¿è®¾ç½® bubbles ä¸º false æ¥å³é­ã 
+
+ä¸ä¸ªäºä»¶åå§åçå½æ°å¯ä»¥ä½¿ç¨ trigger æ¥è§¦åã 
+
+$ . Event ( 'mylib:change' , { bubbles : false }) 
+
+$.proxy v1.0+ 
+
+$.proxy(fn, context) â function $.proxy(fn, context, [additionalArguments...]) â function v1.1.4+ $.proxy(context, property) â function $.proxy(context, property, [additionalArguments...]) â function v1.1.4+ 
+
+æ¥åä¸ä¸ªå½æ°ï¼ç¶åè¿åä¸ä¸ªæ°å½æ°ï¼å¹¶ä¸è¿ä¸ªæ°å½æ°å§ç»ä¿æäºç¹å®çä¸ä¸æ(context)è¯­å¢ï¼æ°å½æ°ä¸­ this æåcontextåæ°ãå¦å¤ä¸ç§å½¢å¼ï¼åå§çfunctionæ¯ä»ä¸ä¸æ(context)å¯¹è±¡çç¹å®å±æ§è¯»åã 
+
+å¦æä¼ éè¶è¿2ä¸ªçé¢å¤åæ°ï¼å®ä»¬è¢«ç¨äº ä¼ éç»fnåæ°çå½æ° å¼ç¨ã 
+
+var obj = { name : 'Zepto' }, handler = function (){ console . log ( "hello from + " , this . name ) } // ensures that the handler will be executed in the context of `obj`: $ ( document ). on ( 'click' , $ . proxy ( handler , obj )) 
+
+bind ð¶ð« 
+
+ä¸æ¨è, ä½¿ç¨ on ä»£æ¿ã 
+
+bind(type, function(e){ ... }) â self bind(type, [data], function(e){ ... }) â self v1.1+ bind({ type: handler, type2: handler2, ... }) â self bind({ type: handler, type2: handler2, ... }, [data]) â self v1.1+ 
+
+ä¸ºä¸ä¸ªåç´ ç»å®ä¸ä¸ªå¤çäºä»¶ã 
+
+delegate ð¶ð« 
+
+ä¸æ¨è, ä½¿ç¨ on ä»£æ¿ã 
+
+delegate(selector, type, function(e){ ... }) â self delegate(selector, { type: handler, type2: handler2, ... }) â self 
+
+åºäºä¸ç»ç¹å®çæ ¹åç´ ä¸ºææéæ©å¨å¹éçåç´ éå ä¸ä¸ªå¤çäºä»¶ï¼å¹éçåç´ å¯è½ç°å¨æå°æ¥æåå»ºã 
+
+die ð¶ð« 
+
+ä¸æ¨è, ä½¿ç¨ on ä»£æ¿ã 
+
+die(type, function(e){ ... }) â self die({ type: handler, type2: handler2, ... }) â self 
+
+å é¤éè¿ live æ·»å çäºä»¶ã 
+
+event.isDefaultPrevented v1.1+ 
+
+event.isDefaultPrevented() â boolean 
+
+å¦æ preventDefault() è¢«è¯¥äºä»¶çå®ä¾è°ç¨ï¼é£ä¹è¿åtrueã
+è¿å¯ä½ä¸ºè·¨å¹³å°çæ¿ä»£åçç defaultPrevented å±æ§ï¼å¦æ defaultPrevented ç¼ºå¤±æå¨æäºæµè§å¨ä¸ä¸å¯é çæ¶åã 
+
+// trigger a custom event and check whether it was cancelled var event = $ . Event ( 'custom' ) element . trigger ( event ) event . isDefaultPrevented () 
+
+event.isImmediatePropagationStopped v1.1+ 
+
+event.isImmediatePropagationStopped() â boolean 
+
+å¦æ stopImmediatePropagation() è¢«è¯¥äºä»¶çå®ä¾è°ç¨ï¼é£ä¹è¿åtrueãZeptoå¨ä¸æ¯æè¯¥åçæ¹æ³çæµè§å¨ä¸­å®ç°å®ï¼
+
+ ï¼ä¾å¦èçæ¬çAndroidï¼ã 
+
+event.isPropagationStopped v1.1+ 
+
+event.isPropagationStopped() â boolean 
+
+å¦æ stopPropagation() è¢«è¯¥äºä»¶çå®ä¾è°ç¨ï¼é£ä¹è¿åtrueã 
+
+live ð¶ð« 
+
+ä¸æ¨è, ä½¿ç¨ on ä»£æ¿ã 
+
+live(type, function(e){ ... }) â self live({ type: handler, type2: handler2, ... }) â self 
+
+ç±»ä¼¼ delegate ï¼æ·»å ä¸ä¸ªä¸ªäºä»¶å¤çå¨å°ç¬¦åç®åéæ©å¨çææåç´ å¹éï¼å¹éçåç´ å¯è½ç°å¨æå°æ¥æåå»ºã 
+
+off 
+
+off(type, [selector], function(e){ ... }) â self off({ type: handler, type2: handler2, ... }, [selector]) â self off(type, [selector]) â self off() â self 
+
+ç§»é¤éè¿ on æ·»å çäºä»¶.ç§»é¤ä¸ä¸ªç¹å®çäºä»¶å¤çç¨åºï¼
+å¿é¡»éè¿ç¨ on() æ·»å çé£ä¸ªç¸åçå½æ°ãå¦åï¼åªéè¿äºä»¶ç±»åè°ç¨æ­¤æ¹æ³å°ç§»é¤è¯¥ç±»åçææå¤çç¨åºãå¦ææ²¡æåæ°ï¼å°ç§»åºå½ååç´ ä¸ å¨é¨ çæ³¨åäºä»¶ã 
+
+on 
+
+on(type, [selector], function(e){ ... }) â self on(type, [selector], [data], function(e){ ... }) â self v1.1+ on({ type: handler, type2: handler2, ... }, [selector]) â self on({ type: handler, type2: handler2, ... }, [selector], [data]) â self v1.1+ 
+
+æ·»å äºä»¶å¤çç¨åºå°å¯¹è±¡éåä¸­å¾åç´ ä¸ãå¤ä¸ªäºä»¶å¯ä»¥éè¿ç©ºæ ¼çå­ç¬¦ä¸²æ¹å¼æ·»å ï¼æèä»¥äºä»¶ç±»åä¸ºé®ãä»¥å½æ°ä¸ºå¼çå¯¹è±¡ æ¹å¼ãå¦æç»å®csséæ©å¨ï¼å½äºä»¶å¨å¹éè¯¥éæ©å¨çåç´ ä¸åèµ·æ¶ï¼äºä»¶æä¼è¢«è§¦åï¼æäººç å¤´æ³¨ï¼å³äºä»¶å§æ´¾ï¼æèè¯´äºä»¶ä»£çï¼ã 
+
+å¦æç»å® data åæ°ï¼è¿ä¸ªå¼å°å¨äºä»¶å¤çç¨åºæ§è¡æé´è¢«ä½ä¸ºæç¨ç event.data å±æ§ 
+
+äºä»¶å¤çç¨åºå¨æ·»å è¯¥å¤çç¨åºçåç´ ãæå¨ç»å®éæ©å¨æåµä¸å¹éè¯¥éæ©å¨çåç´ çä¸ä¸æä¸­æ§è¡(æäººç å¤´æ³¨ï¼thisæåè§¦åäºä»¶çåç´ )ã
+
+å½ä¸ä¸ªäºä»¶å¤çç¨åºè¿å false ï¼ preventDefault() å stopPropagation() è¢«å½åäºä»¶è°ç¨çæåµä¸ï¼
+ å°é²æ­¢é»è®¤æµè§å¨æä½ï¼å¦é¾æ¥ã 
+
+å¦æ false å¨åè°å½æ°çä½ç½®ä¸ä½ä¸ºåæ°ä¼ éç»è¿ä¸ªæ¹æ³ï¼
+å®ç¸å½äºä¼ éä¸ä¸ªå½æ°ï¼è¿ä¸ªå½æ°ç´æ¥è¿å false ãï¼æäººç å¤´æ³¨ï¼å³å° false å½ä½ function(e){ ... } çåæ°ï¼ä½ä¸º function(){ return false; } çç®åå½¢å¼ï¼ä¾å¦ï¼ $("a.disabled").on("click", false); è¿ç¸å½äº $("a.disabled").on("click", function(){ return false; } ); ï¼ 
+
+var elem = $ ( '#content' ) // observe all clicks inside #content: elem . on ( 'click' , function ( e ){ ... }) // observe clicks inside navigation links in #content elem . on ( 'click' , 'nav a' , function ( e ){ ... }) // all clicks inside links in the document $ ( document ). on ( 'click' , 'a' , function ( e ){ ... }) // disable following any navigation link on the page $ ( document ). on ( 'click' , 'nav a' , false ) 
+
+one 
+
+one(type, [selector], function(e){ ... }) â self one(type, [selector], [data], function(e){ ... }) â self v1.1+ one({ type: handler, type2: handler2, ... }, [selector]) â self one({ type: handler, type2: handler2, ... }, [selector], [data]) â self v1.1+ 
+
+æ·»å ä¸ä¸ªå¤çäºä»¶å°åç´ ï¼å½ç¬¬ä¸æ¬¡æ§è¡äºä»¶ä»¥åï¼è¯¥äºä»¶å°èªå¨è§£é¤ç»å®ï¼ä¿è¯å¤çå½æ°å¨æ¯ä¸ªåç´ ä¸æå¤æ§è¡ä¸æ¬¡ã selector å data ç­åæ°è¯´æè¯·æ¥ç .on() ã 
+
+trigger 
+
+trigger(event, [args]) â self 
+
+å¨å¯¹è±¡éåçåç´ ä¸è§¦åæå®çäºä»¶ãäºä»¶å¯ä»¥æ¯ä¸ä¸ªå­ç¬¦ä¸²ç±»åï¼ä¹å¯ä»¥æ¯ä¸ä¸ª éè¿ $.Event å®ä¹çäºä»¶å¯¹è±¡ãå¦æç»å®argsåæ°ï¼å®ä¼ä½ä¸ºåæ°ä¼ éç»äºä»¶å½æ°ã 
+
+// add a handler for a custom event $ ( document ). on ( 'mylib:change' , function ( e , from , to ){ console . log ( 'change on %o with data %s, %s' , e . target , from , to ) }) // trigger the custom event $ ( document . body ). trigger ( 'mylib:change' , [ 'one' , 'two' ]) 
+
+Zeptoä»ä»æ¯æå¨domåç´ ä¸è§¦åäºä»¶ã 
+
+triggerHandler 
+
+triggerHandler(event, [args]) â self 
+
+å trigger ï¼å®åªå¨å½ååç´ ä¸è§¦åäºä»¶ï¼ä½ä¸åæ³¡ã 
+
+$ ( "input" ). triggerHandler ( 'focus' ) ; // æ­¤æ¶inputä¸çfocusäºä»¶è§¦åï¼ä½æ¯inputä¸ä¼è·åç¦ç¹ $ ( "input" ). trigger ( 'focus' ) ; // æ­¤æ¶inputä¸çfocusäºä»¶è§¦åï¼inputè·åç¦ç¹ 
+
+unbind ð¶ð« 
+
+Deprecated, use off instead. 
+
+unbind(type, function(e){ ... }) â self unbind({ type: handler, type2: handler2, ... }) â self 
+
+ç§»é¤éè¿ bind æ³¨åçäºä»¶ã 
+
+undelegate ð¶ð« 
+
+Deprecated, use off instead. 
+
+undelegate(selector, type, function(e){ ... }) â self undelegate(selector, { type: handler, type2: handler2, ... }) â self 
+
+ç§»é¤éè¿ delegate æ³¨åçäºä»¶ã 
+
+Ajax è¯·æ± 
+
+$.ajax 
+
+$.ajax(options) â XMLHttpRequest 
+
+æ§è¡Ajaxè¯·æ±ãå®å¯ä»¥æ¯æ¬å°èµæºï¼æèéè¿æ¯æ HTTP access control çæµè§å¨
+ æèéè¿ JSONP æ¥å®ç°è·¨åã 
+
+éé¡¹: 
+
+type (é»è®¤ï¼ âGETâ)ï¼è¯·æ±æ¹æ³ (âGETâ, âPOSTâ, or other) 
+
+url (é»è®¤ï¼ å½åå°å)ï¼åéè¯·æ±çå°å 
+
+data (é»è®¤ï¼none)ï¼åéå°æå¡å¨çæ°æ®ï¼å¦ææ¯GETè¯·æ±ï¼å®ä¼èªå¨è¢«ä½ä¸ºåæ°æ¼æ¥å°urlä¸ãéStringå¯¹è±¡å°éè¿ $.param å¾å°åºååå­ç¬¦ä¸²ã 
+
+processData (é»è®¤ï¼ true)ï¼ å¯¹äºéGetè¯·æ±ãæ¯å¦èªå¨å° data è½¬æ¢ä¸ºå­ç¬¦ä¸²ã 
+
+contentType (é»è®¤ï¼ âapplication/x-www-form-urlencodedâ)ï¼ åéä¿¡æ¯è³æå¡å¨æ¶åå®¹ç¼ç ç±»åã (è¿ä¹å¯ä»¥éè¿è®¾ç½® headers )ãéè¿è®¾ç½® false è·³è¿è®¾ç½®é»è®¤å¼ã 
+
+mimeType (é»è®¤ï¼ none): è¦çååºçMIMEç±»åã v1.1+ 
+
+dataType (é»è®¤ï¼ none)ï¼é¢ææå¡å¨è¿åçæ°æ®ç±»å(âjsonâ, âjsonpâ, âxmlâ, âhtmlâ, or âtextâ) 
+
+jsonp (é»è®¤ï¼âcallbackâ): JSONPåè°æ¥è¯¢åæ°çåç§° 
+
+jsonpCallback (é»è®¤ï¼ âjsonp{N}â): å¨å±JSONPåè°å½æ°ç å­ç¬¦ä¸²ï¼æè¿åçä¸ä¸ªå½æ°ï¼åãè®¾ç½®è¯¥é¡¹è½å¯ç¨æµè§å¨çç¼å­ã v1.1+ 
+
+timeout (é»è®¤ï¼ 0 ): ä»¥æ¯«ç§ä¸ºåä½çè¯·æ±è¶æ¶æ¶é´, 0 è¡¨ç¤ºä¸è¶æ¶ã 
+
+headers : Ajaxè¯·æ±ä¸­é¢å¤çHTTPä¿¡æ¯å¤´å¯¹è±¡ 
+
+async (é»è®¤ï¼true): é»è®¤è®¾ç½®ä¸ï¼ææè¯·æ±åä¸ºå¼æ­¥ãå¦æéåéåæ­¥è¯·æ±ï¼è¯·å°æ­¤è®¾ç½®ä¸º false ã 
+
+global (é»è®¤ï¼true): è¯·æ±å°è§¦åå¨å±Ajaxäºä»¶å¤çç¨åºï¼è®¾ç½®ä¸º false å°ä¸ä¼è§¦åå¨å± Ajax äºä»¶ã 
+
+context (é»è®¤ï¼window): è¿ä¸ªå¯¹è±¡ç¨äºè®¾ç½®Ajaxç¸å³åè°å½æ°çä¸ä¸æ(thisæå)ã 
+
+traditional (é»è®¤ï¼ false): æ¿æ´»ä¼ ç»çæ¹å¼éè¿ $.param æ¥å¾å°åºååç data ã 
+
+cache (é»è®¤ï¼ true): æµè§å¨æ¯å¦åºè¯¥è¢«åè®¸ç¼å­GETååºãä» v1.1.4 å¼å§ï¼å½dataTypeéé¡¹ä¸º "script" æ jsonp æ¶ï¼é»è®¤ä¸º false ã 
+
+xhrFields (é»è®¤ï¼ none): ä¸ä¸ªå¯¹è±¡åå«çå±æ§è¢«éå­å¤å¶å°XMLHttpRequestçå®ä¾ã v1.1+ 
+
+username & password (é»è®¤ï¼ none): HTTPåºæ¬èº«ä»½éªè¯å­æ®ã v1.1+ 
+
+å¦æURLä¸­å«æ =? æè dataType æ¯âjsonpâï¼è¿è®²æ±å°ä¼éè¿æ³¨å¥ä¸ä¸ª <script> æ ç­¾æ¥ä»£æ¿ä½¿ç¨ XMLHttpRequest (æ¥ç JSONP )ãæ­¤æ¶ contentType , dataType , headers æéå¶ï¼ async ä¸è¢«æ¯æã 
+
+Ajax åè°å½æ° 
+
+ä½ å¯ä»¥æå®ä»¥ä¸çåè°å½æ°ï¼ä»ä»¬å°æç»å®çé¡ºåºæ§è¡ï¼ 
+
+beforeSend(xhr, settings) ï¼è¯·æ±ååºåè°ç¨ï¼å®æ¥æ¶xhrå¯¹è±¡åsettingsä½ä¸ºåæ°å¯¹è±¡ãå¦æå®è¿å false ï¼è¯·æ±å°è¢«åæ¶ã 
+
+success(data, status, xhr) ï¼è¯·æ±æåä¹åè°ç¨ãä¼ å¥è¿ååçæ°æ®ï¼ä»¥ååå«æåä»£ç çå­ç¬¦ä¸²ã 
+
+error(xhr, errorType, error) ï¼è¯·æ±åºéæ¶è°ç¨ã (è¶æ¶ï¼è§£æéè¯¯ï¼æèç¶æç ä¸å¨HTTP 2xx)ã 
+
+complete(xhr, status) ï¼è¯·æ±å®ææ¶è°ç¨ï¼æ è®ºè¯·æ±å¤±è´¥ææåã 
+
+Promise åè°æ¥å£ v1.1+ 
+
+å¦æå¯éçâcallbacksâ å âdeferredâ æ¨¡åè¢«å è½½ï¼ä» $.ajax() è¿åçXHRå¯¹è±¡å®ç°äºpromiseæ¥å£é¾å¼çåè°ï¼ 
+
+xhr . done ( function ( data , status , xhr ){ ... }) xhr . fail ( function ( xhr , errorType , error ){ ... }) xhr . always ( function (){ ... }) xhr . then ( function (){ ... }) 
+
+è¿äºæ¹æ³åä»£äº success , error , å complete åè°éé¡¹. 
+
+Ajax äºä»¶ 
+
+å½ global: true æ¶ãå¨Ajaxè¯·æ±çå½å¨æåï¼ä»¥ä¸è¿äºäºä»¶å°è¢«è§¦åã 
+
+ajaxStart (global) ï¼å¦ææ²¡æå¶ä»Ajaxè¯·æ±å½åæ´»è·å°ä¼è¢«è§¦åã 
+
+ajaxBeforeSend (data: xhr, options)ï¼ååéè¯·æ±åï¼å¯ä»¥è¢«åæ¶ã 
+
+ajaxSend (data: xhr, options)ï¼å ajaxBeforeSend ï¼ä½ä¸è½åæ¶ã 
+
+ajaxSuccess (data: xhr, options, data)ï¼å½è¿åæåæ¶ã 
+
+ajaxError (data: xhr, options, error)ï¼å½æéè¯¯æ¶ã 
+
+ajaxComplete (data: xhr, options)ï¼è¯·æ±å·²ç»å®æåï¼æ è®ºè¯·æ±æ¯æåæèå¤±è´¥ã 
+
+ajaxStop (global) ï¼å¦æè¿æ¯æåä¸ä¸ªæ´»è·ççAjaxè¯·æ±ï¼å°ä¼è¢«è§¦åã 
+
+é»è®¤æåµä¸ï¼Ajaxäºä»¶å¨documentå¯¹è±¡ä¸è§¦åãç¶èï¼å¦æè¯·æ±ç context æ¯ä¸ä¸ªDOMèç¹ï¼è¯¥äºä»¶ä¼å¨æ­¤èç¹ä¸è§¦åç¶ååDOMä¸­åæ³¡ãå¯ä¸çä¾å¤æ¯ ajaxStart & ajaxStop è¿ä¸¤ä¸ªå¨å±äºä»¶ã 
+
+$ ( document ). on ( 'ajaxBeforeSend' , function ( e , xhr , options ){ // This gets fired for every Ajax request performed on the page. // The xhr object and $.ajax() options are available for editing. // Return false to cancel this request. }) $ . ajax ({ type : 'GET' , url : '/projects' , // data to be added to query string: data : { name : 'Zepto.js' }, // type of data we are expecting in return: dataType : 'json' , timeout : 300 , context : $ ( 'body' ), success : function ( data ){ // Supposing this JSON payload was received: // {"project": {"id": 42, "html": "<div>..." }} // append the HTML to context object. this . append ( data . project . html ) }, error : function ( xhr , type ){ alert ( 'Ajax error!' ) } }) // post a JSON payload: $ . ajax ({ type : 'POST' , url : '/projects' , // post payload: data : JSON . stringify ({ name : 'Zepto.js' }), contentType : 'application/json' }) 
+
+$.ajaxJSONP ð¶ð« 
+
+ä¸æ¨è, ä½¿ç¨ $.ajax ä»£æ¿ã 
+
+$.ajaxJSONP(options) â mock XMLHttpRequest 
+
+æ§è¡JSONPè·¨åè·åæ°æ®ã 
+
+æ­¤æ¹æ³ç¸å¯¹ $.ajax æ²¡æä¼å¿ï¼å»ºè®®ä¸è¦ä½¿ç¨ã 
+
+$.ajaxSettings 
+
+ä¸ä¸ªåå«Ajaxè¯·æ±çé»è®¤è®¾ç½®çå¯¹è±¡ãå¤§é¨åçè®¾ç½®å¨ $.ajax ä¸­å·²ç»æè¿°ãä»¥ä¸è®¾ç½®ä¸ºå¨å±éå¸¸æç¨ï¼ 
+
+timeout (é»è®¤ï¼ 0 )ï¼å¯¹Ajaxè¯·æ±è®¾ç½®ä¸ä¸ªéé¶çå¼æå®ä¸ä¸ªé»è®¤çè¶æ¶æ¶é´ï¼ä»¥æ¯«ç§ä¸ºåä½ã 
+
+global (é»è®¤ï¼ true)ï¼è®¾ç½®ä¸ºfalseãä»¥é²æ­¢è§¦åAjaxäºä»¶ã 
+
+xhr (é»è®¤ï¼XMLHttpRequest factory)ï¼è®¾ç½®ä¸ºä¸ä¸ªå½æ°ï¼å®è¿åXMLHttpRequestå®ä¾(æä¸ä¸ªå¼å®¹çå¯¹è±¡) 
+
+accepts : ä»æå¡å¨è¯·æ±çMIMEç±»åï¼æå® dataType å¼ï¼ 
+
+script: âtext/javascript, application/javascriptâ 
+
+json: âapplication/jsonâ 
+
+xml: âapplication/xml, text/xmlâ 
+
+html: âtext/htmlâ 
+
+text: âtext/plainâ 
+
+$.get 
+
+$.get(url, function(data, status, xhr){ ... }) â XMLHttpRequest $.get(url, [data], [function(data, status, xhr){ ... }], [dataType]) â XMLHttpRequest v1.0+ 
+
+æ§è¡ä¸ä¸ªAjax GETè¯·æ±ãè¿æ¯ä¸ä¸ª $.ajax çç®åæ¹å¼ã 
+
+$ . get ( '/whatevs.html' , function ( response ){ $ ( document . body ). append ( response ) }) 
+
+$.getJSON 
+
+$.getJSON(url, function(data, status, xhr){ ... }) â XMLHttpRequest $.getJSON(url, [data], function(data, status, xhr){ ... }) â XMLHttpRequest v1.0+ 
+
+éè¿ Ajax GETè¯·æ±è·åJSONæ°æ®ãè¿æ¯ä¸ä¸ª $.ajax çç®åæ¹å¼ã 
+
+$ . getJSON ( '/awesome.json' , function ( data ){ console . log ( data ) }) // fetch data from another domain with JSONP $ . getJSON ( '//example.com/awesome.json?callback=?' , function ( remoteData ){ console . log ( remoteData ) }) 
+
+$.param 
+
+$.param(object, [shallow]) â string $.param(array) â string 
+
+åºååä¸ä¸ªå¯¹è±¡ï¼å¨Ajaxè¯·æ±ä¸­æäº¤çæ°æ®ä½¿ç¨URLç¼ç çæ¥è¯¢å­ç¬¦ä¸²è¡¨ç¤ºå½¢å¼ãå¦æshallowè®¾ç½®ä¸ºtrueãåµå¥å¯¹è±¡ä¸ä¼è¢«åºååï¼åµå¥æ°ç»çå¼ä¸ä¼ä½¿ç¨æ¾æ¬å·å¨ä»ä»¬çkeyä¸ã 
+
+å¦æä»»ä½å¯¹è±¡çæä¸ªå±æ§å¼æ¯ä¸ä¸ªå½æ°ï¼èä¸æ¯ä¸ä¸ªå­ç¬¦ä¸²ï¼è¯¥å½æ°å°è¢«è°ç¨å¹¶ä¸è¿åå¼åæä¼è¢«åºååã 
+
+æ­¤å¤ï¼è¿æ¥å serializeArray æ ¼å¼çæ°ç»ï¼å¶ä¸­æ¯ä¸ªé¡¹é½æ ânameâ å âvalueâå±æ§ã 
+
+$ . param ({ foo : { one : 1 , two : 2 }}) //=> "foo[one]=1&foo[two]=2)" $ . param ({ ids : [ 1 , 2 , 3 ] }) //=> "ids[]=1&ids[]=2&ids[]=3" $ . param ({ ids : [ 1 , 2 , 3 ] }, true ) //=> "ids=1&ids=2&ids=3" $ . param ({ foo : 'bar' , nested : { will : 'not be ignored' }}) //=> "foo=bar&nested[will]=not+be+ignored" $ . param ({ foo : 'bar' , nested : { will : 'be ignored' }}, true ) //=> "foo=bar&nested=[object+Object]" $ . param ({ id : function (){ return 1 + 2 } }) //=> "id=3" 
+
+$.post 
+
+$.post(url, [data], function(data, status, xhr){ ... }, [dataType]) â XMLHttpRequest 
+
+æ§è¡Ajax POSTè¯·æ±ãè¿æ¯ä¸ä¸ª $.ajax çç®åæ¹å¼ã 
+
+$ . post ( '/create' , { sample : 'payload' }, function ( response ){ // process response }) 
+
+data åæ°å¯ä»¥æ¯ä¸ä¸ªå­ç¬¦ä¸²ï¼ 
+
+$ . post ( '/create' , $ ( '#some_form' ). serialize (), function ( response ){ // ... }) 
+
+load 
+
+load(url, function(data, status, xhr){ ... }) â self 
+
+éè¿GET Ajaxè½½å¥è¿ç¨ HTML åå®¹ä»£ç å¹¶æå¥è³ å½åçéå ä¸­ãå¦å¤ï¼ä¸ä¸ªcsséæ©å¨å¯ä»¥å¨urlä¸­æå®ï¼åè¿æ ·ï¼å¯ä»¥ä½¿ç¨å¹éselectoréæ©å¨çHTMLåå®¹æ¥æ´æ°éåã 
+
+$ ( '#some_element' ). load ( '/foo.html #bar' ) 
+
+å¦ææ²¡æç»å®CSSéæ©å¨ï¼å°ä½¿ç¨å®æ´çè¿åææ¬ã 
+
+è¯·æ³¨æï¼å¨æ²¡æéæ©å¨çæåµä¸ï¼ä»»ä½javascriptåé½ä¼æ§è¡ãå¦æå¸¦ä¸éæ©å¨ï¼å¹ééæ©å¨åçscriptå°ä¼è¢«å é¤ã 
+
+è¡¨åæ¹æ³ 
+
+serialize 
+
+serialize() â string 
+
+å¨Ajax postè¯·æ±ä¸­å°ç¨ä½æäº¤çè¡¨ååç´ çå¼ç¼è¯æ URLç¼ç ç å­ç¬¦ä¸²ã 
+
+serializeArray 
+
+serializeArray() â array 
+
+å°ç¨ä½æäº¤çè¡¨ååç´ çå¼ç¼è¯ææ¥æ name å value å¯¹è±¡ç»æçæ°ç»ãä¸è½ä½¿ç¨çè¡¨ååç´ ï¼buttonsï¼æªéä¸­çradio buttons/checkboxs å°ä¼è¢«è·³è¿ãç»æä¸åå«file inputsçæ°æ®ã 
+
+$ ( 'form' ). serializeArray () //=> [{ name: 'size', value: 'micro' }, // { name: 'name', value: 'Zepto' }] 
+
+submit 
+
+submit() â self submit(function(e){ ... }) â self 
+
+ä¸º "submit" äºä»¶ç»å®ä¸ä¸ªå¤çå½æ°ï¼æèè§¦ååç´ ä¸ç "submit" äºä»¶ãå½æ²¡æç»å®functionåæ°æ¶ï¼è§¦åå½åè¡¨åâsubmitâäºä»¶ï¼å¹¶ä¸æ§è¡é»è®¤çæäº¤è¡¨åè¡ä¸ºï¼é¤éè°ç¨äº preventDefault() ã 
+
+å½ç»å®functionåæ°æ¶ï¼å¨å½ååç´ ä¸å®ç®åå¾ä¸ºå¶å¨âsubmitâäºä»¶ç»å®ä¸ä¸ªå¤çå½æ°ã 
+
+Effects 
+
+$.fx 
+
+å¨å±å°å¨ç»è®¾ç½®ï¼ 
+
+$.fx.off (å¨æ¯æcss transition çæµè§å¨ä¸­é»è®¤ä¸ºfalse)ï¼è®¾ç½®trueæ¥ç¦æ­¢ææ animate() transitionsã 
+
+$.fx.speeds ï¼ç¨æ¥è®¾ç½®å¨ç»æ¶é´çå¯¹è±¡ã 
+
+_default (400 ms) 
+
+fast (200 ms) 
+
+slow (600 ms) 
+
+æ¹åç°æå¼æèæ·»å ä¸ä¸ªæ°å±æ§å»å½±åä½¿ç¨ä¸ä¸ªå­ç¬¦ä¸²æ¥è®¾ç½®æ¶é´çå¨ç»ã 
+
+animate 
+
+animate(properties, [duration, [easing, [function(){ ... }]]]) â self animate(properties, { duration: msec, easing: type, complete: fn }) â self animate(animationName, { ... }) â self 
+
+å¯¹å½åå¯¹è±¡éåä¸­åç´ è¿è¡css transitionå±æ§å¹³æ»è¿æ¸¡ã 
+
+properties : ä¸ä¸ªå¯¹è±¡ï¼è¯¥å¯¹è±¡åå«äºcsså¨ç»çå¼ï¼æècsså¸§å¨ç»çåç§°ã 
+
+duration (é»è®¤ 400)ï¼ä»¥æ¯«ç§ä¸ºåä½çæ¶é´ï¼æèä¸ä¸ªå­ç¬¦ä¸²ã 
+
+fast (200 ms) 
+
+slow (600 ms) 
+
+ä»»ä½ $.fx.speeds èªå®ä¹å±æ§ 
+
+easing (é»è®¤ linear )ï¼æå®å¨ç»çç¼å¨ç±»åï¼ä½¿ç¨ä»¥ä¸ä¸ä¸ªï¼ 
+
+ease 
+
+linear 
+
+ease-in / ease-out 
+
+ease-in-out 
+
+cubic-bezier(...) 
+
+complete ï¼å¨ç»å®ææ¶çåè°å½æ° 
+
+li> delay : ä»¥æ¯«ç§ä¸ºåä½çè¿åº¦å»¶è¿æ¶é´ v1.1+ 
+
+Zepto è¿æ¯æä»¥ä¸ CSS transform å±æ§ï¼ 
+
+translate(X|Y|Z|3d) 
+
+rotate(X|Y|Z|3d) 
+
+scale(X|Y|Z) 
+
+matrix(3d) 
+
+perspective 
+
+skew(X|Y) 
+
+å¦ædurationåæ°ä¸º 0 æ $.fx.off ä¸º true(å¨ä¸æ¯æcss transitionsçæµè§å¨ä¸­é»è®¤ä¸ºtrue)ï¼å¨ç»å°ä¸è¢«æ§è¡ï¼æ¿ä»£å¨ç»ææçç®æ ä½ç½®ä¼å³å»çæãç±»ä¼¼çï¼å¦ææå®çå¨ç»ä¸æ¯éè¿å¨ç»å®æï¼èä¸å¨ç»çç®æ ä½ç½®å³å¯çæãè¿ç§æåµä¸æ²¡æå¨ç»ï¼ complete æ¹æ³ä¹ä¸ä¼è¢«è°ç¨ã 
+
+å¦æç¬¬ä¸ä¸ªåæ°æ¯å­ç¬¦ä¸²èä¸æ¯ä¸ä¸ªå¯¹è±¡ï¼å®å°è¢«å½ä½ä¸ä¸ªcsså³é®å¸§å¨ç» CSS
+ keyframe animation çåç§°ã 
+
+$ ( "#some_element" ). animate ({ opacity : 0.25 , left : '50px' , color : '#abcdef' , rotateZ : '45deg' , translate3d : '0,10px,0' }, 500 , 'ease-out' ) 
+
+Zeptoåªä½¿ç¨cssè¿æ¸¡ææçå¨ç»ãjqueryçeasingsä¸ä¼æ¯æãjqueryçç¸å¯¹åå("=+10px") syntax ä¹ä¸æ¯æãè¯·æ¥ç list of animatable properties ãæµè§å¨çæ¯æå¯è½ä¸åï¼æä»¥ä¸å®è¦æµè¯ä½ ææ³è¦æ¯æçæµè§å¨ã 
+
+Touch 
+
+Touch events 
+
+âtouchâæ¨¡åæ·»å ä»¥ä¸äºä»¶ï¼å¯ä»¥ä½¿ç¨ on å off ã 
+
+tap âåç´ tapçæ¶åè§¦åã 
+
+singleTap and doubleTap â è¿ä¸å¯¹äºä»¶å¯ä»¥ç¨æ¥æ£æµåç´ ä¸çåå»ååå»ã(å¦æä½ ä¸éè¦æ£æµåå»ãåå»ï¼ä½¿ç¨ tap ä»£æ¿)ã 
+
+longTap â å½ä¸ä¸ªåç´ è¢«æä½è¶è¿750msè§¦åã 
+
+swipe , swipeLeft , swipeRight , swipeUp , swipeDown â å½åç´ è¢«åè¿æ¶è§¦åã(å¯éæ©ç»å®çæ¹å) 
+
+è¿äºäºä»¶ä¹æ¯ææZeptoå¯¹è±¡éåä¸çå¿«æ·æ¹æ³ã 
+
+<style> .delete { display : none ; } </style> <ul id= items > <li> List item 1 <span class= delete > DELETE </span></li> <li> List item 2 <span class= delete > DELETE </span></li> </ul> <script> // show delete buttons on swipe $ ( '#items li' ). swipe ( function (){ $ ( '.delete' ). hide () $ ( '.delete' , this ). show () }) // delete row on tapping delete button $ ( '.delete' ). tap ( function (){ $ ( this ). parent ( 'li' ). remove () }) </script> 
+
+Change Log 
+
+v1.1.0 â 05 Dec 2013 â diff 
+
+Notable changes 
+
+IE10+ support 
+
+Huge speed optimizations for simple CSS selectors (classname, ID) and DOM element creation 
+
+Provide $.Callbacks and $.Deferred in optional modules 
+
+Removed fx and detect modules from default build 
+
+Ajax 
+
+New supported $.ajax() options: 
+
+xhrFields 
+
+mimeType 
+
+jsonpCallback 
+
+username & password 
+
+Promise interface supported when loading the optional âcallbacksâ and âdeferredâ modules: 
+
+xhr.done(function(data, status, xhr){ ... }) 
+
+xhr.fail(function(xhr, errorType, error){ ... }) 
+
+xhr.always(function(){ ... }) 
+
+Enable mutating Ajax settings in the beforeSend callback 
+
+Fix JSONP callbacks for errored responses on Android 
+
+Ensure consistent Accept request HTTP header across browsers 
+
+Fix $.param() for jQuery compatibility when handling complex nested objects 
+
+Support IIS JavaScript MIME type 
+
+Pass âabortâ and âtimeoutâ status to global ajaxError event handlers 
+
+Event 
+
+Provide isDefaultPrevented() , stopImmediatePropagation() , and related methods for all events 
+
+Support the data argument in .bind() , .on() , and .one() 
+
+Support CSS selector argument in .one() for event delegation 
+
+Support .on('ready') as an alias for .ready() 
+
+Enable event handlers on plain old JS objects 
+
+Many fixes related to event delegation 
+
+Data 
+
+Cleanup .data() values on DOM element removal with .remove/empty() 
+
+.data() now assumes that numbers that begin with zeroes are strings 
+
+.removeData() (no argument) now removes all data on the element 
+
+Enable reading data-* attributes that have underscores in the name 
+
+Misc. 
+
+Support simple DOM property names in .prop(name) such as for , class , readonly â¦ 
+
+Implement the .scrollLeft([value]) method 
+
+Support setting .scrollTop(value) 
+
+Fix $(document).width/height() 
+
+Support fetching multiple CSS values via array in .css(['prop1', 'prop2', ...]) 
+
+Support setting CSS transition delay via delay option for .animate() 
+
+Ensure that .animate() callback always firesParty like itâs one-oh!_ 
+
+v1.0 â 02 Mar 2013 â diff 
+
+Party like itâs one-oh! 
+
+Notable changes 
+
+Zepto is now compatible with Twitter Bootstrap 
+
+Portable, completely new node.js-based build system 
+
+Fully automated tests with PhantomJS and Travis CI 
+
+Removed touch module from default distribution 
+
+New features 
+
+$.fn.filter(function(index){ ... }) 
+
+$.fn.contents() 
+
+$.fn.wrapInner() 
+
+$.fn.scrollTop() 
+
+$.contains() 
+
+$.fn.has() 
+
+$.fn.position() 
+
+$.fn.offsetParent() 
+
+$.parseJSON() 
+
+$.camelCase() 
+
+$.isWindow() 
+
+$.grep() (interface to Array.filter ) 
+
+Support $(html, attributes) syntax for element creation 
+
+Emulate mouseenter and mouseleave events 
+
+Bootstrap compat: support $.fn.offset(coordinates) 
+
+Bootstrap compat: implement $.fn.detach() 
+
+Add support for Ajax cache: false option 
+
+Prevent scrolling when horizontal swipe events are detected 
+
+cancelTouch for tap events 
+
+prev and next now support an optional selector argument 
+
+$.fn.find and $.fn.closest now support Zepto objects as arguments 
+
+Enable deep copy via $.extend(true, target, source) 
+
+Enable nested structures for $.fn.wrap() and $.fn.wrapAll() 
+
+Enable function arguments for $.fn.wrap() and $.fn.wrapInner() 
+
+Support number, boolean, JSON types in data attributes 
+
+Support manipulating classnames on SVG elements 
+
+Enable named durations for animate , e.g. slow . 
+
+Support timing-function for animate 
+
+Support event properties passed to $.fn.trigger() or $.Event() 
+
+Selector module: support child > * queries 
+
+Add detect support for mobile Chrome browser 
+
+Add $.os.phone and $.os.tablet (booleans) 
+
+Detect Firefox mobile, Playbooks and BB10 
+
+Fixes 
+
+Fix passing null selector to on or off 
+
+Fixed bug where self-closing html tags would act as open tags 
+
+Fix val for multiple select 
+
+Fix various touch and gesture bugs. 
+
+Corrected parameters of load success callback to match jQuery. 
+
+Fix css with 0 values and falsy values 
+
+Fix a css performance issues with string values 
+
+Fix $.ajaxJSONP when invoked directly 
+
+Fix animate with 0 durations. 
+
+Fix toggle and fadeToggle for multiple elements. 
+
+Fix ajax $.fn.load behavior with selector 
+
+Make attr(name, null) unset attribute 
+
+Fix animate in Firefox 
+
+Fix animate for elements just added to DOM 
+
+Fix an escaping issue with $.param 
+
+Respect traditional: true option in $.ajax 
+
+Fix focus & blur event delegation and enable unbind 
+
+Simple wrapping for any object passed to $() 
+
+Enable children method for XML documents 
+
+Donât eval <script> content when src is present 
+
+Support processData option for $.ajax() 
+
+Enable passing contentType: false to $.ajax() 
+
+Apply focus() and blur() to all elements in collection 
+
+Change $.fn.map() to return a Zepto collection 
+
+Selector argument for on(evt, selector, fn) can be false 
+
+Donât raise error on $('#') 
+
+Provide empty object in $.support 
+
+return false in event handler calls stopPropagation() 
+
+Fix $.isPlainObject() for window in Opera 
+
+$.ajax error callback correctly reports abort status 
+
+Fix hasClass in collections of multiple elements 
+
+Stop iteration in each() when the callback returns false 
+
+Add ability to set xhr factory per-request 
+
+Have get() method accept negative index 
+
+Support for multiple class names in toggleClass() 
+
+Fix error callbacks for ajaxJSONP 
+
+Support optional data argument for various Ajax methods 
+
+Fix DOM insertion operators for null values 
+
+Fix dataType being set for $.getJSON 
+
+v1.0rc1 â 09 Apr 2012 â diff 
+
+The semicolon-free edition! Thatâs right, we removed all trailing semicolons
+from the source and tests. They were never needed anyway . 
+
+New methods: 
+
+clone 
+
+prop 
+
+$.isPlainObject 
+
+$.inArray 
+
+$.trim 
+
+$.proxy 
+
+New module: 
+
+âselector.jsâ with experimental support for jQuery CSS
+pseudo-selectors such as :visible and :first 
+
+Improvements in core: 
+
+added missing methods for Ember.js compatibility 
+
+improved creating DOM fragments from HTML with $() 
+
+enable append & family to accept multiple arguments 
+
+fix $.each context 
+
+fix calling get without index 
+
+fix calling val on empty collection 
+
+using css(property, '') removes the property 
+
+fix filter , is , and closest when operating on
+nodes that are detached from the document 
+
+remove end & andSelf from core to the new âstack.jsâ plugin 
+
+exposed important internal Zepto functions through the $.zepto object for
+extending or overriding Zepto functionality. 
+
+data method returns undefined when there is no data 
+
+support camelized names in data method 
+
+Apart from improving the basic data method in core, the âdata.jsâ module got
+improvements as well: 
+
+better jQuery compatibility 
+
+ability to store functions 
+
+new removeData method 
+
+Ajax: 
+
+have correct ajaxComplete argument order for JSONP abort and timeout 
+
+JSONP requests that hit a 404 will now correctly invoke the error callback 
+
+add support for dataType: 'jsonp' in $.ajax 
+
+add support for data in $.ajaxJSONP 
+
+HTTP 304 status is treated as success instead of an error 
+
+made load more compatible with jQuery 
+
+allow Content-Type to be set via request headers 
+
+respect Content-Type of the response if dataType isnât set 
+
+work around Chrome CORS bug when data is empty 
+
+Changes in other modules: 
+
+fix animate for edge cases such as when there is an animation
+within an animated element, and improve handling of transition CSS properties 
+
+new âsingleTapâ event 
+
+improved âlongTapâ detection 
+
+0.8 â 03 Nov 2011 â diff 
+
+CSS transitions for every browser with animate() method; 
+
+unified event handling with fn.on() & off() ; 
+
+Ajax global events & timeout support; 
+
+performance boost for selectors. 
+
+See full release notes . 
+
+0.7 â 01 Aug 2011 â diff 
+
+add $.each , $.map , $.slice ; 
+
+add .serializeArray() , .serialize() ; 
+
+add .triggerHandler() ; 
+
+add .wrap , .wrapAll , .unwrap , .width/height setters, .append (and
+friends) improvements; 
+
+add âlongTapâ event; 
+
+.anim() accepts CSS transform properties; 
+
+return false in event handlers cancels browser event behavior. 
+
+0.6 â 14 May 2011 â diff 
+
+add .add , .appendTo , .prependTo , .replaceWith , .empty , .submit ; 
+
+allow function args for .add/.remove/.toggleClass ; 
+
+improvements to events and xhr. 
+
+0.5 â 01 Mar 2011 â diff 
+
+add .not , .children , .siblings , $.param ; 
+
+improve .attr & .html ; 
+
+support callback for .anim . 
+
+0.4 â 21 Jan 2011 â diff 
+
+JSONP; 
+
+better .find , .each , .closest ; 
+
+add .eq , .size , .parent , .parents , .removeAttr , .val ; 
+
+support function args in .html , .attr ; 
+
+adjacency methods now take Zepto objects. 
+
+0.3 â 17 Dec 2010 â diff 
+
+add .toggleClass , .attr setter, .last , .undelegate , .die ; 
+
+proxied event objects for event delegation; 
+
+support $ fragments. 
+
+0.2 â 01 Dec 2010 â diff 
+
+now compatible with backbone.js ; 
+
+support event unbind; 
+
+ajax posts with data. 
+
+0.1 â 26 Oct 2010 
+
+First. Release. Ever. 
+
+Acknowledgements & Thanks 
+
+A big Thank-You goes out to all of our awesome Zepto.js contributors .
+ May you all forever bask in glory. 
+
+The Zepto API is based on jQuery's Core API , which
+ is released under the MIT license . 
+
+This documentation is based on the layout of the Backbone.js documentation, which is released under the MIT license . 
+
+Â© 2010-2014 Thomas Fuchs, Freckle Online Time Tracking 
+Zepto and this documentation is released under the terms of the MIT license .

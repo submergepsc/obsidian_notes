@@ -1,0 +1,68 @@
+URL: https://www.runoob.com/vbscript/func-lcase.html
+Title: VBScript LCase 函数 | 菜鸟教程
+
+VBScript LCase 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript InStrRev 函数 
+
+VBScript Left 函数 
+
+VBScript LCase 函数 
+
+LCase 函数把指定字符串转换为小写。 
+
+提示： 请参阅 UCase 函数。 
+
+语法 
+
+LCase(string) 
+
+参数 
+
+描述 
+
+string 
+
+必需。需要被转换为小写的字符串。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+txt="THIS IS A BEAUTIFUL DAY!" 
+document.write(LCase(txt)) 
+
+</script> 
+
+以上实例输出结果： 
+
+this is a beautiful day! 
+
+尝试一下 » 
+
+实例 2 
+
+<script type="text/vbscript"> 
+
+txt="This is a BEAUTIFUL day!" 
+document.write(LCase(txt)) 
+
+</script> 
+
+以上实例输出结果： 
+
+this is a beautiful day! 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript InStrRev 函数 
+
+VBScript Left 函数

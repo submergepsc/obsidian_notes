@@ -1,0 +1,75 @@
+URL: https://www.runoob.com/foundation/foundation-sidenav.html
+Title: Foundation 侧边栏 | 菜鸟教程
+
+Foundation 侧边栏 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 顶部导航栏 
+
+Foundation 滑动导航(Off-Canvas) 
+
+Foundation 侧边栏 
+
+侧边栏导航 
+
+Foundation 使用 <ul class="side-nav"> 创建侧边栏: 
+
+实例 
+
+< ul class= "side-nav" > 
+< li > < a href= "#" > Link 1 < /a > < /li > 
+< li > < a href= "#" > Link 2 < /a > < /li > 
+< li > < a href= "#" > Link 3 < /a > < /li > 
+< li > < a href= "#" > Link 4 < /a > < /li > 
+< /ul > 
+
+尝试一下 » 
+
+激活链接与分割线 
+
+已点击的链接可以在 <li> 上使用 .active 类来标识，使用 .divider 类添加水平分割线： 
+
+实例 
+
+< ul class= "side-nav" > 
+< li class= "active" > < a class= "a" href= "#" > Link 
+ 1 < /a > < /li > 
+< li > < a class= "a" href= "#" > Link 2 < /a > < /li > 
+< li class= "divider" > < /li > 
+< li > < a class= "a" href= "#" > Link 3 < /a > < /li > 
+< li > < a class= "a" href= "#" > Link 4 < /a > < /li > 
+< /ul > 
+
+尝试一下 » 
+
+网格中的侧边栏 
+
+我们可以使用网格设计模式来设置侧边导航栏，实例如下： 
+
+实例 
+
+< div class= "row" > 
+< div class= "medium-4 columns" style= "background-color:#f1f1f1;" > 
+< ul class= "side-nav" > 
+< li class= "active" > < a href= "#" > Home < /a > < /li > 
+< li > < a href= "#" > Learn HTML < /a > < /li > 
+... 
+< /ul > 
+< /div > 
+< div class= "medium-8 columns" > 
+< h1 > Side Nav < /h1 > 
+< p > Some text.. < /p > 
+... 
+< /div > 
+< /div > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Foundation 顶部导航栏 
+
+Foundation 滑动导航(Off-Canvas)

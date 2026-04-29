@@ -1,0 +1,340 @@
+URL: https://www.runoob.com/typescript/ts-error-handling.html
+Title: TypeScript 错误处理 | 菜鸟教程
+
+TypeScript 错误处理 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+TypeScript 教程 
+
+TypeScript 类继承与多态 
+
+TypeScript 交叉类型 
+
+TypeScript 错误处理 
+
+错误处理是保证程序健壮性的重要环节。 
+
+TypeScript 提供了强大的类型系统，可以帮助开发者更好地处理和预防错误。 
+
+本文介绍 TypeScript 中常见的错误处理模式和最佳实践。 
+
+为什么需要良好的错误处理 
+
+任何程序都可能遇到错误情况，如网络请求失败、文件不存在、用户输入错误等。 
+
+良好的错误处理可以防止程序崩溃，提供友好的错误提示，并帮助开发者定位问题。 
+
+TypeScript 的类型系统可以在编译阶段发现潜在问题，减少运行时错误。 
+
+概念说明： 错误处理有两种主要方式：异常处理（try-catch）和返回值处理（Result 类型）。前者使用抛出异常表示错误，后者使用返回值携带错误信息。 
+
+自定义错误类型 
+
+通过扩展 Error 类创建自定义错误类型，可以携带更多错误信息。 
+
+这使得错误处理更加精确和结构化。 
+
+实例 
+
+// 定义应用程序错误类 
+
+// 扩展内置 Error 类，添加错误码 
+
+class AppError extends Error { 
+
+// 错误码，用于程序化处理错误 
+
+code : string ; 
+
+// 构造函数 
+
+constructor ( message : string , code : string ) { 
+
+super ( message ) ; // 调用父类构造函数 
+
+this . name = "AppError" ; // 设置错误名称 
+
+this . code = code ; // 保存错误码 
+
+} 
+
+} 
+
+// 安全的除法函数 
+
+function divide ( a : number , b : number ) : number { 
+
+// 检查除数是否为零 
+
+if ( b === 0 ) { 
+
+// 抛出自定义错误 
+
+throw new AppError ( "Cannot divide by zero" , "DIVIDE_BY_ZERO" ) ; 
+
+} 
+
+return a / b ; 
+
+} 
+
+// 使用 try-catch 捕获错误 
+
+try { 
+
+var result = divide ( 10 , 0 ) ; 
+
+} catch ( error ) { 
+
+// 检查错误类型 
+
+if ( error instanceof AppError ) { 
+
+console. log ( "应用错误: " + error. message + ", 代码: " + error. code ) ; 
+
+} else { 
+
+console. log ( "未知错误: " + error ) ; 
+
+} 
+
+} 
+
+运行结果： 
+
+应用错误: Cannot divide by zero, 代码: DIVIDE_BY_ZERO 
+
+错误码： 为错误添加代码可以帮助程序更精确地处理不同类型的错误。 
+
+Result 类型避免异常 
+
+另一种错误处理方式是使用 Result 类型。 
+
+它通过返回值携带错误信息，而不是抛出异常。这种方式在函数式编程中很常见。 
+
+实例 
+
+// 定义 Result 类型，使用联合类型 
+
+// 成功时包含 ok: true 和值，失败时包含 ok: false 和错误 
+
+type Result < T , E = Error > = 
+
+| { ok : true ; value : T } 
+
+| { ok : false ; error : E } ; 
+
+// 使用 Result 类型的除法函数 
+
+function safeDivide ( a : number , b : number ) : Result < number , string > { 
+
+// 检查除数是否为零 
+
+if ( b === 0 ) { 
+
+// 返回错误结果 
+
+return { ok : false , error : "Cannot divide by zero" } ; 
+
+} 
+
+// 返回成功结果 
+
+return { ok : true , value : a / b } ; 
+
+} 
+
+// 调用函数并处理结果 
+
+var result = safeDivide ( 10 , 2 ) ; 
+
+// 根据结果类型进行处理 
+
+if ( result. ok ) { 
+
+console. log ( "结果: " + result. value ) ; 
+
+} else { 
+
+console. log ( "错误: " + result. error ) ; 
+
+} 
+
+运行结果： 
+
+结果: 5 
+
+优势： Result 类型让错误处理变得显式，调用者必须处理可能的错误，而不会忽略它。 
+
+Async 函数错误处理 
+
+在异步函数中，错误处理尤为重要。 
+
+可以使用 try-catch 或 Result 类型来处理异步操作中的错误。 
+
+实例 
+
+// 定义用户接口 
+
+interface User { 
+
+id : number ; 
+
+name : string ; 
+
+} 
+
+// 模拟获取用户的异步函数 
+
+async function fetchUser ( id : number ) : Promise < Result < User , Error >> { 
+
+try { 
+
+// 模拟网络请求 
+
+var response = await fetch ( "/api/users/" + id ) ; 
+
+var user = await response. json ( ) ; 
+
+// 返回成功结果 
+
+return { ok : true , value : user } ; 
+
+} catch ( error ) { 
+
+// 返回错误结果 
+
+return { ok : false , error : error as Error } ; 
+
+} 
+
+} 
+
+// 主函数 
+
+async function main ( ) { 
+
+// 调用异步函数 
+
+var result = await fetchUser ( 1 ) ; 
+
+// 处理结果 
+
+if ( result. ok ) { 
+
+console. log ( "用户: " + JSON. stringify ( result. value ) ) ; 
+
+} else { 
+
+console. log ( "错误: " + result. error . message ) ; 
+
+} 
+
+} 
+
+// 执行主函数 
+
+main ( ) ; 
+
+运行结果： 
+
+用户: {"id":1,"name":"Alice"} 
+
+提示： 异步函数中的 try-catch 会捕获 await 表达式抛出的任何错误。 
+
+通用错误处理封装 
+
+可以创建一个通用的错误处理函数，简化异步代码的错误处理。 
+
+实例 
+
+// 通用错误处理包装函数 
+
+// 接受一个异步函数，返回 Result 类型 
+
+async function withErrorHandling < T > ( 
+
+fn : ( ) => Promise < T > 
+
+) : Promise < Result < T , Error >> { 
+
+try { 
+
+// 执行传入的异步函数 
+
+var data = await fn ( ) ; 
+
+// 返回成功结果 
+
+return { ok : true , value : data } ; 
+
+} catch ( error ) { 
+
+// 返回错误结果 
+
+return { ok : false , error : error as Error } ; 
+
+} 
+
+} 
+
+// 使用通用错误处理 
+
+// 模拟获取数据 
+
+var result = await withErrorHandling ( async function ( ) { 
+
+var response = await fetch ( "/api/data" ) ; 
+
+return response. json ( ) ; 
+
+} ) ; 
+
+// 根据结果处理 
+
+if ( result. ok ) { 
+
+console. log ( "数据: " + JSON. stringify ( result. value ) ) ; 
+
+} else { 
+
+console. error ( "错误:" , result. error ) ; 
+
+} 
+
+最佳实践： 封装通用的错误处理逻辑可以减少代码重复，提高代码可维护性。 
+
+注意事项 
+
+不要忽略错误： 不要使用空的 catch 块捕获并忽略错误 
+
+明确错误类型： 尽量使用具体的错误类型，而不是通用的 Error 
+
+错误边界： 在应用中建立统一的错误处理机制 
+
+不要过度使用异常： 对于可预期的错误，优先使用返回值而非抛异常 
+
+建议： 根据场景选择错误处理方式：程序错误用异常，业务错误用 Result。 
+
+总结 
+
+良好的错误处理是构建健壮应用的基础。 
+
+自定义错误： 扩展 Error 类，添加错误码等信息 
+
+Result 类型： 通过返回值处理错误，避免异常 
+
+async/await： 使用 try-catch 处理异步错误 
+
+错误封装： 创建通用错误处理函数 
+
+错误边界： 建立统一的错误处理机制 
+
+最佳实践： 根据具体场景选择合适的错误处理方式，平衡代码可读性和健壮性。 
+
+AI 思考中... 
+
+TypeScript 类继承与多态 
+
+TypeScript 交叉类型

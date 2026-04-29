@@ -1,0 +1,1803 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CrewAI 构建智能体 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="crewai-agent.html" />
+<meta name="keywords" content="CrewAI 构建智能体">
+<meta name="description" content="CrewAI 制作智能体 CrewAI 是一个多智能体协作的开源框架，专门用于编排和协调多个 AI Agent 进行协作。  CrewAI 可以把一个复杂任务，拆成多个角色，各自负责一部分，通过流程协作完成。  对比理解：  	 单 Agent：一个大模型，从头干到尾  	 CrewAI：产品经理 + 工程师 + 分析师 + 编辑，各司其职    CrewAI 是一个协调、管理和框架化 AI Agent 的工具，它基于 LangChai..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<style>
+/* 主题切换按钮 */
+/* ===== 主题变量（核心）===== */
+:root {
+  --theme-bg: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-icon: #333;
+  --theme-hover: #f3f4f6;
+}
+
+.dark {
+  --theme-bg: #1f2937;
+  --theme-border: #374151;
+  --theme-icon: #e5e7eb;
+  --theme-hover: #374151;
+}
+
+/* ===== 按钮容器 ===== */
+.nav-theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== 按钮本体 ===== */
+.nav-theme-toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+
+  background: var(--theme-bg);
+  color: var(--theme-icon);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ===== 图标大小 ===== */
+.nav-theme-toggle i {
+  font-size: 14px;
+}
+
+/* ===== hover 效果 ===== */
+.nav-theme-toggle button:hover {
+  background: var(--theme-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== 点击反馈 ===== */
+.nav-theme-toggle button:active {
+  transform: scale(0.95);
+}
+
+/* ===== 当前激活态（可选）===== */
+.nav-theme-toggle button.active {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+</style>
+<!-- 导航栏 -->
+<nav class="container navigation" aria-label="主导航">
+  <div class="row">
+    <div class="col nav">
+
+      <!-- PC 导航 -->
+      <ul class="pc-nav" id="runoob-detail-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../js/js-tutorial.html">JavaScript</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="javascript:void(0);" data-id="vue">Vue</a></li>
+        <li><a href="../react/react-tutorial.html">React</a></li>
+        <li><a href="../python3/python3-tutorial.html">Python3</a></li>
+        <li><a href="../java/java-tutorial.html">Java</a></li>
+        <li><a href="../cprogramming/c-tutorial.html">C</a></li>
+        <li><a href="../cplusplus/cpp-tutorial.html">C++</a></li>
+        <li><a href="../csharp/csharp-tutorial.html">C#</a></li>
+        <li><a href="javascript:void(0);" data-id="aiNav">AI</a></li>
+        <li><a href="../go/go-tutorial.html">Go</a></li>
+        <li><a href="../sql/sql-tutorial.html">SQL</a></li>
+        <li><a href="../linux/linux-tutorial.html">Linux</a></li>
+        <li><a href="../vscode/vscode-tutorial.html">VS Code</a></li>
+        <li><a href="javascript:void(0);" data-id="bootstrap">Bootstrap</a></li>
+        <li><a href="../git/git-tutorial.html">Git</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+
+        <!-- 主题切换按钮，固定在最右侧 -->
+        <li class="nav-theme-toggle">
+          <button id="moon" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 移动端导航 -->
+      <ul class="mobile-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="../js/js-tutorial.html">JS</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+        <li><a href="javascript:void(0)" class="search-reveal">搜索</a></li>
+
+        <!-- 移动端主题切换 -->
+        <li class="nav-theme-toggle">
+          <button id="moon-mobile" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun-mobile" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- 二级导航 -->
+<div class="container sub-navigation sub-navigation-articles" style="display:none">
+  <div class="row">
+    <div class="col nav-sub">
+
+      <ul id="vue">
+        <li class="cat-item"><a href="../vue3/vue3-tutorial.html">Vue3 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../vue/vue-tutorial.html">Vue2 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="bootstrap">
+        <li class="cat-item"><a href="../bootstrap/bootstrap-tutorial.html">Bootstrap3 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="aiNav">
+        <li class="cat-item"><a href="../ml/ml-tutorial.html">机器学习 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../pytorch/pytorch-tutorial.html">PyTorch <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../tensorflow/tensorflow-tutorial.html">TensorFlow <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../sklearn/sklearn-tutorial.html">Sklearn <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../nlp/nlp-tutorial.html">NLP <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="ai-agent-tutorial.html">AI Agent <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ollama/ollama-tutorial.html">Ollama <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+  </div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="runoob-col-md2">
+<div class="left-column">
+	<div class="tab" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+	<i class="fa fa-list" aria-hidden="true"></i> 
+	<span>AI Agent 教程</span>
+
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" data-p="par" title="AI Agent(智能体) 教程" href="ai-agent-tutorial.html">
+			AI Agent(智能体) 教程			</a>
+						<a target="_top" data-p="par" title="AI Agent 简介" href="ai-agent-intro.html">
+			AI Agent 简介			</a>
+						<a target="_top" data-p="par" title="AI Agent  核心组件" href="ai-agent-core.html">
+			AI Agent  核心组件			</a>
+			<a target="_top" title="AI Agent 工作原理" href="ai-agent-working-principle.html">AI Agent 工作原理</a>
+<a target="_top" title="大语言模型基础" href="ai-agent-llm.html">大语言模型基础</a>
+<a target="_top" title="提示词工程" href="prompt-engineering.html">提示词工程</a>
+<a target="_top" title="Token (词元)" href="token-intro.html">Token (词元)</a>
+<a target="_top" title="推理与规划" href="reasoning-planning.html">推理与规划</a>
+<a target="_top" title="RAG 与知识检索" href="retrieval-augmented-generation.html">RAG 与知识检索</a>
+<a target="_top" title="Harness Engineering" href="harness-engineering.html">Harness Engineering</a>
+<a target="_top" title="Hermes Agent" href="hermes-agent.html">Hermes Agent</a>
+<br>
+<h2 class="left"> <span class="left_h2">智能体工具</span></h2>			<a target="_top" data-p="par" title="第一个 AI Agent" href="first-ai-agent.html">
+			第一个 AI Agent			</a>
+			<a target="_top" title="AI 开发平台" href="ai-monkeycode.html"> AI 开发平台</a>
+<a target="_top" title="OpenClaw (Clawdbot) 教程" href="openclaw-clawdbot-tutorial.html"> OpenClaw (Clawdbot) 教程</a>
+<a target="_top" title="OpenClaw 快速上手" href="openclaw-quickstart.html"> OpenClaw 快速上手</a>
+<a target="_top" title="Qoder 教程" href="qoderwork.html"> QoderWork 教程</a>
+<a target="_top" title="OpenClaw 一键部署" href="openclaw-cloud.html"> OpenClaw 一键部署</a>
+<a target="_top" title="OpenClaw 配置目录" href="openclaw-setup.html"> OpenClaw 配置目录</a>
+<a target="_top" title="OpenClaw 工作原理" href="openclaw-how-it-works.html"> OpenClaw 工作原理</a>
+<a target="_top" title="OpenClaw 接入微信" href="openclaw-weixin.html"> OpenClaw 接入微信</a>
+
+<a target="_top" title="OpenClaw 接入飞书" href="openclaw-feishu.html"> OpenClaw 接入飞书</a>
+<a target="_top" title="OpenClaw Skills" href="openclaw-skills.html"> OpenClaw Skills</a>
+<a target="_top" title="OpenClaw 卸载指南" href="openclaw-uninstall.html"> OpenClaw 卸载指南</a>			<a target="_top" data-p="par" title="CrewAI 构建智能体" href="crewai-agent.html">
+			CrewAI 构建智能体			</a>
+						<a target="_top" data-p="par" title="LangChain 制作智能体" href="langchain-agent.html">
+			LangChain 制作智能体			</a>
+			<a target="_top" title="LangGraph 入门教程" href="langgraph-quick-start.html">LangGraph 入门教程</a>
+
+<br><h2 class="left"> <span class="left_h2">Vibe Coding</span></h2>			<a target="_top" data-p="par" title="Claude Code 入门教程" href="claude-code.html">
+			Claude Code 入门教程			</a>
+						<a target="_top" data-p="par" title="OpenCode 入门教程" href="opencode-coding-agent.html">
+			OpenCode 入门教程			</a>
+			<a target="_top" title="OpenCode Coding Plan" href="opencode-coding-plan.html">OpenCode Coding Plan</a>
+<a target="_top" title="CC Switch" href="cc-switch.html">CC Switch</a>
+<a target="_top" title="Skills 教程" href="skills-agent.html">Skills 教程</a>
+<a target="_top" title="OpenCode skills" href="opencode-skills-intro.html">OpenCode skills</a>
+<a target="_top" title="Qoder 教程" href="qoder-quick-start.html">Qoder 教程</a>
+<a target="_top" title="Qoder Quest 模式" href="qoder-quest-mode.html">Qoder Quest 模式</a>			<a target="_top" data-p="par" title="Qoder CLI" href="qoder-cli.html">
+			Qoder CLI			</a>
+			<a target="_top" title="Trae 教程" href="trae-quick-star.html">Trae 教程</a>			<a target="_top" data-p="par" title="Trae Solo" href="trae-solo.html">
+			Trae Solo			</a>
+			<br><h2 class="left"> <span class="left_h2">Python 实现智能体</span></h2>
+<a target="_top" title="Python 实现 AI Agent" href="python-ai-agent.html">Python 实现 AI Agent</a>
+<a target="_top" title="工具调用" href="ai-agent-function-calling.html">工具调用</a>
+<a target="_top" title="记忆系统" href="ai-agent-memory-system-design.html">记忆系统</a>			<a target="_top" data-p="par" title="Python 智能体环境配置" href="ai-agent-python-setup.html">
+			Python 智能体环境配置			</a>
+						<a target="_top" data-p="par" title="AI Agent 问答实例" href="ai-agent-answer-demo.html">
+			AI Agent 问答实例			</a>
+						<a target="_top" data-p="par" title="Python 实现推理与规划" href="python-reasoning-planning.html">
+			推理与规划			</a>
+						<a target="_top" data-p="par" title="Python 实现 RAG 与知识检索" href="python-rag.html">
+			RAG 与知识检索			</a>
+						<a target="_top" data-p="par" title="多智能体系统（Multi-Agent System）" href="multi-agent-system.html">
+			多智能体系统			</a>
+						<a target="_top" data-p="par" title="AI Agent 工具与外部集成" href="tools-integration.html">
+			工具与外部集成			</a>
+						<a target="_top" data-p="par" title="多模态 Agent" href="multimodal-agent.html">
+			多模态 Agent			</a>
+						<a target="_top" data-p="par" title="Agent 评估、安全与对齐" href="evaluation-safety-alignment.html">
+			评估、安全与对齐			</a>
+						<a target="_top" data-p="par" title="AI Agent 生产部署与工程化" href="production-deployment.html">
+			生产部署与工程化			</a>
+						<a target="_top" data-p="par" title="AI Agent 垂直应用场景" href="vertical-applications.html">
+			垂直应用场景			</a>
+				
+		</div>
+	</div>	
+</div>
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="prompt-engineering.html" rel="prev"> 提示词工程（Prompt Engineering）</a> </div>
+			<div class="next-design-link"><a href="langchain-agent.html" rel="next"> LangChain 制作智能体</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+<div class="article-heading-ad" style="display: block;">
+
+<style>
+  /* 隐藏移动端广告 */
+  @media (max-width: 768px) {
+    .adsbygoogle {
+      display: none !important;
+    }
+  }
+  
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 728*90 固定 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="2147566827"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<h1>CrewAI 制作智能体</h1>
+<p>CrewAI 是一个多智能体协作的开源框架，专门用于编排和协调多个 AI Agent 进行协作。</p>
+
+<p>CrewAI 可以把一个复杂任务，拆成多个角色，各自负责一部分，通过流程协作完成。</p>
+
+<p><strong>对比理解：</strong></p>
+
+	<ul>
+<li><strong>单 Agent</strong>：一个大模型，从头干到尾</li>
+
+	<li>
+<strong>CrewAI</strong>：产品经理 + 工程师 + 分析师 + 编辑，各司其职</li></ul>
+
+
+<p>
+CrewAI 是一个协调、管理和框架化 AI Agent 的工具，它基于 LangChain 和 Pydantic 构建，用于促进角色扮演、自治和协作的 Agent 团队。</p>
+<ul>
+<li><strong>Crew（团队）</strong>： 一个由多个 <code>Agent</code> 组成的项目组。</li>
+<li><strong>Agent（成员）</strong>： 团队中的个体，每个都有明确的 <code>role</code>（角色）、<code>goal</code>（目标）和 <code>backstory</code>（背景故事）。</li>
+<li><strong>Task（任务）</strong>： 需要团队完成的具体工作。一个 <code>Crew</code> 包含多个有序或并行的 <code>Task</code>，并分配给合适的 <code>Agent</code>。</li>
+<li><strong>Process（流程）</strong>： 定义团队的工作流程，例如是顺序执行还是同时执行任务。</li>
+</ul>
+<p>简单来说，crewAI 提供了一个结构化的方式来定义谁（Agent）在什么流程（Process）下，完成哪些事（Task），最终达成团队目标。</p>
+<p>下面的流程图清晰地展示了 crewAI 框架中各个核心组件是如何协同工作的：</p>
+
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/db4e3f11-c721-4930-ab19-1d29ba1a0f27.png"></p>
+
+<p>流程始于定义具备特定角色和目标的智能体（Agent），然后为其创建具体的任务（Task）。</p><p>接着，将这些智能体及其任务组建成一个团队（Crew），并为团队选择协同工作的流程（Process），如顺序执行或并行执行。最终，团队按照既定流程执行所有任务，产出最终结果。</p>
+<hr>
+<h2>环境搭建与安装</h2>
+<p>开始构建前，我们需要准备好开发环境。</p>
+<h3>前置条件</h3>
+<p><strong>Python 版本要求：</strong></p>
+<ul>
+    <li><strong>必须</strong>：Python ≥ 3.10 且 &lt; 3.14</li>
+
+    <li>可以在终端输入 <code><span class="marked">python --version</span></code> 来检查，不满足版本范围，后续问题会非常多，不建议硬扛</li>
+</ul>
+<p>CrewAI 使用 <strong>UV</strong> 做依赖和包管理，目的只有一个：<br><strong>让多 Agent 项目更稳定，不被环境问题拖垮</strong></p><p>
+UV 入门教程参考：<a href="../python3/uv-tutorial.html" target="_blank">UV - Python 包与环境管理工具</a>。</p>
+<p>API 密钥：</p>
+<p>crewAI 本身不提供 AI 模型，它需要连接像 OpenAI 的 GPT、Anthropic 的 Claude 等大语言模型。</p>
+<h3>安装 crewAI</h3>
+<p>打开你的终端或命令行工具，使用 pip 命令安装 crewAI 包。</p>
+<pre>
+# 正常安装
+pip install crewai
+# 其他依赖
+pip install langchain
+pip install openai
+
+
+# 如果安装慢，可以使用国内镜像安装
+pip install crewai -i https://mirrors.aliyun.com/pypi/simple/
+pip install langchain -i https://mirrors.aliyun.com/pypi/simple/
+pip install openai -i https://mirrors.aliyun.com/pypi/simple/
+</pre>
+
+<p>如果希望使用 crewAI 内置的一些高级工具（如网络搜索），可以安装额外的依赖项：</p>
+<pre>
+# 正常安装
+pip install 'crewai[tools]'
+
+# 如果安装慢，可以使用国内镜像安装
+pip install 'crewai[tools]' -i https://mirrors.aliyun.com/pypi/simple/
+</pre>
+
+<p>国内我们可以采用 DeepSeek 大模型来测试，如果还没有需要先去 <a href="https://platform.deepseek.com/api_keys" target="_blank">https://platform.deepseek.com/api_keys</a> 创建一个 API key。</p><p>
+DeepSeek 的 API 文档参考：<a href="https://api-docs.deepseek.com/zh-cn/" target="_blank">https://api-docs.deepseek.com/zh-cn/</a>。</p>
+<p>安装完成后，创建一个新的 Python 文件，例如 <code>my_first_crew.py</code>，并导入必要的库。</p>
+<p>CrewAI 的 LLM 对第三方模型（包括 DeepSeek）底层必须通过 LiteLLM，使用前我们需要先安装：</p>
+<pre>
+pip install -U litellm</pre>
+
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">from</span> crewai <span style="color: Green;font-weight:bold;">import</span> Agent<span style="color: Gray;">,</span> Task<span style="color: Gray;">,</span> Crew<span style="color: Gray;">,</span> Process<br />
+<span style="color: Green;font-weight:bold;">from</span> crewai.<span style="color: #05a;">llm</span> <span style="color: Green;font-weight:bold;">import</span> LLM<br />
+<br />
+<br />
+<span style="color: #a50"># =====================================================</span><br />
+<span style="color: #a50"># LLM 配置（DeepSeek｜LiteLLM 规范写法）</span><br />
+<span style="color: #a50"># =====================================================</span><br />
+llm <span style="color: Gray;">=</span> LLM<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; model<span style="color: Gray;">=</span><span style="color: #a11;">&quot;deepseek/deepseek-chat&quot;</span><span style="color: Gray;">,</span> &nbsp;<span style="color: #a50"># 关键： 必须包含服务商 deepseek，然后再写模型名</span><br />
+&nbsp; &nbsp; api_key<span style="color: Gray;">=</span><span style="color: #a11;">&quot;sk-xxxxx&quot;</span><span style="color: Gray;">,</span> &nbsp; <span style="color: #a50"># 设置 API key</span><br />
+&nbsp; &nbsp; api_base<span style="color: Gray;">=</span><span style="color: #a11;">&quot;https://api.deepseek.com/v1&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; temperature<span style="color: Gray;">=</span><span style="color: Maroon;">0.7</span><span style="color: Gray;">,</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># =====================================================</span><br />
+<span style="color: #a50"># Agents</span><br />
+<span style="color: #a50"># =====================================================</span><br />
+researcher <span style="color: Gray;">=</span> Agent<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; role<span style="color: Gray;">=</span><span style="color: #a11;">&quot;技术研究员&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; goal<span style="color: Gray;">=</span><span style="color: #a11;">&quot;寻找最新、准确、可验证的技术资料，并给出代码证明。&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; backstory<span style="color: Gray;">=</span><span style="color: #a11;">&quot;擅长系统性分析技术问题，注重事实和可复现性。&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; llm<span style="color: Gray;">=</span>llm<span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; verbose<span style="color: Gray;">=</span><span style="color: Teal;">True</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; allow_delegation<span style="color: Gray;">=</span><span style="color: Teal;">False</span><span style="color: Gray;">,</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+writer <span style="color: Gray;">=</span> Agent<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; role<span style="color: Gray;">=</span><span style="color: #a11;">&quot;技术博客作家&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; goal<span style="color: Gray;">=</span><span style="color: #a11;">&quot;将研究成果整理成适合初学者阅读的技术文章。&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; backstory<span style="color: Gray;">=</span><span style="color: #a11;">&quot;擅长将复杂概念拆解为清晰步骤，并提供完整示例。&quot;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; llm<span style="color: Gray;">=</span>llm<span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; verbose<span style="color: Gray;">=</span><span style="color: Teal;">True</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; allow_delegation<span style="color: Gray;">=</span><span style="color: Teal;">True</span><span style="color: Gray;">,</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># =====================================================</span><br />
+<span style="color: #a50"># Tasks</span><br />
+<span style="color: #a50"># =====================================================</span><br />
+research_task <span style="color: Gray;">=</span> Task<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; description<span style="color: Gray;">=</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;深入研究：使用 Python 进行自动化数据清洗。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;重点包括：pandas、numpy、缺失值、重复值、格式不一致问题。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;必须提供完整、可运行的代码示例。&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; agent<span style="color: Gray;">=</span>researcher<span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; expected_output<span style="color: Gray;">=</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;一份研究报告，包含问题分类、解决方案代码和完整清洗流程。&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+write_task <span style="color: Gray;">=</span> Task<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; description<span style="color: Gray;">=</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;基于研究报告，撰写入门级技术博客。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;标题：《Python 数据清洗入门：用 pandas 告别脏数据》。&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; agent<span style="color: Gray;">=</span>writer<span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; context<span style="color: Gray;">=</span><span style="color: Olive;">&#91;</span>research_task<span style="color: Olive;">&#93;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; expected_output<span style="color: Gray;">=</span><span style="color: #a11;">&quot;不少于 800 字的 Markdown 技术博客。&quot;</span><span style="color: Gray;">,</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># =====================================================</span><br />
+<span style="color: #a50"># Crew</span><br />
+<span style="color: #a50"># =====================================================</span><br />
+crew <span style="color: Gray;">=</span> Crew<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; agents<span style="color: Gray;">=</span><span style="color: Olive;">&#91;</span>researcher<span style="color: Gray;">,</span> writer<span style="color: Olive;">&#93;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; tasks<span style="color: Gray;">=</span><span style="color: Olive;">&#91;</span>research_task<span style="color: Gray;">,</span> write_task<span style="color: Olive;">&#93;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; process<span style="color: Gray;">=</span>Process.<span style="color: #05a;">sequential</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; verbose<span style="color: Gray;">=</span><span style="color: Teal;">True</span><span style="color: Gray;">,</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># =====================================================</span><br />
+<span style="color: #a50"># Run</span><br />
+<span style="color: #a50"># =====================================================</span><br />
+<span style="color: Green;font-weight:bold;">if</span> __name__ <span style="color: Gray;">==</span> <span style="color: #a11;">&quot;__main__&quot;</span>:<br />
+&nbsp; &nbsp; result <span style="color: Gray;">=</span> crew.<span style="color: #05a;">kickoff</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+&nbsp; &nbsp; output <span style="color: Gray;">=</span> result.<span style="color: #05a;">raw</span><br />
+<br />
+&nbsp; &nbsp; <span style="color: Green;font-weight:bold;">with</span> <span style="color: Teal;">open</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;python_data_cleaning_blog.md&quot;</span><span style="color: Gray;">,</span> <span style="color: #a11;">&quot;w&quot;</span><span style="color: Gray;">,</span> encoding<span style="color: Gray;">=</span><span style="color: #a11;">&quot;utf-8&quot;</span><span style="color: Olive;">&#41;</span> <span style="color: Green;font-weight:bold;">as</span> f:<br />
+&nbsp; &nbsp; &nbsp; &nbsp; f.<span style="color: #05a;">write</span><span style="color: Olive;">&#40;</span>output<span style="color: Olive;">&#41;</span><br />
+<br />
+</div>
+</div>
+<p>
+接下来，就会开始执行任务，输出相关信息：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/218f1d28-25c0-4423-8edf-0e0fa0d657d6.png"></p>
+<p>
+完成后就会把输出的内容写入到  python_data_cleaning_blog.md 文件中。</p>
+<p>以下是代码中相关属性的说明。</p>
+<h3>LLM（模型层）关键属性</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>示例值</th>
+            <th>作用</th>
+            <th>错误后果</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>model</code></td>
+            <td><code>deepseek/deepseek-chat</code></td>
+            <td><strong>LiteLLM 规范写法</strong>：<code>服务商/模型名</code></td>
+            <td>少了 <code>deepseek/</code> 会直接报 <code>LLM Provider NOT provided</code></td>
+        </tr>
+        <tr>
+            <td><code>api_key</code></td>
+            <td><code>sk-xxxxx</code></td>
+            <td>模型鉴权</td>
+            <td>为空或错误直接 401 / LLM Failed</td>
+        </tr>
+        <tr>
+            <td><code>api_base</code></td>
+            <td><code>https://api.deepseek.com/v1</code></td>
+            <td>DeepSeek API 地址</td>
+            <td>根据具体模型的地址来</td>
+        </tr>
+        <tr>
+            <td><code>temperature</code></td>
+            <td><code>0.7</code></td>
+            <td>控制输出随机性</td>
+            <td>过高内容发散，过低文本僵硬</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Agent（智能体）关键属性</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>作用</th>
+            <th>本质</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>role</code></td>
+            <td>Agent 的"身份标签"</td>
+            <td>写进 system prompt</td>
+        </tr>
+        <tr>
+            <td><code>goal</code></td>
+            <td>当前 Agent 的核心目标</td>
+            <td>决定回答方向</td>
+        </tr>
+        <tr>
+            <td><code>backstory</code></td>
+            <td>行为约束与风格</td>
+            <td>稳定输出质量</td>
+        </tr>
+        <tr>
+            <td><code>llm</code></td>
+            <td>使用哪个模型</td>
+            <td>必须显式绑定</td>
+        </tr>
+        <tr>
+            <td><code>verbose</code></td>
+            <td>打印执行过程</td>
+            <td>仅影响日志</td>
+        </tr>
+        <tr>
+            <td><code>allow_delegation</code></td>
+            <td>是否允许转派任务</td>
+            <td><strong>极易踩坑</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>researcher（研究员）</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>值</th>
+            <th>设计意图</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>allow_delegation</code></td>
+            <td><code>False</code></td>
+            <td>防止无限拆任务</td>
+        </tr>
+        <tr>
+            <td><code>goal</code></td>
+            <td>找资料 + 给代码</td>
+            <td>输出是"原料"</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>writer（写作）</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>值</th>
+            <th>风险</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>allow_delegation</code></td>
+            <td><code>True</code></td>
+            <td>可能触发 delegate 再研究</td>
+        </tr>
+        <tr>
+            <td><code>context</code></td>
+            <td><code>[research_task]</code></td>
+            <td>已有输入，其实不需要再 delegate</td>
+        </tr>
+    </tbody>
+</table>
+<p><strong>结论</strong><br>顺序流水线中，写作 Agent <strong>应关闭 delegation</strong>，否则容易二次委托失败。</p>
+
+<h3>Task（任务）关键属性</h3>
+<p><strong>Task 通用字段:</strong></p>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>作用</th>
+            <th>关键点</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>description</code></td>
+            <td>实际发给 LLM 的任务文本</td>
+            <td>越具体越稳</td>
+        </tr>
+        <tr>
+            <td><code>agent</code></td>
+            <td>谁来执行</td>
+            <td>必须唯一</td>
+        </tr>
+        <tr>
+            <td><code>expected_output</code></td>
+            <td>结果约束</td>
+            <td>不强制，但强烈建议</td>
+        </tr>
+        <tr>
+            <td><code>context</code></td>
+            <td>依赖的上游任务</td>
+            <td><strong>顺序执行核心</strong></td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>research_task:</strong></p>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>agent=researcher</code></td>
+            <td>绑定研究员</td>
+        </tr>
+        <tr>
+            <td>无 <code>context</code></td>
+            <td>第一阶段任务</td>
+        </tr>
+        <tr>
+            <td>输出</td>
+            <td>结构化研究内容</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>write_task:</strong></p>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>context=[research_task]</code></td>
+            <td>强制读取研究结果</td>
+        </tr>
+        <tr>
+            <td><code>agent=writer</code></td>
+            <td>只做整理与表达</td>
+        </tr>
+        <tr>
+            <td>输出</td>
+            <td>最终 Markdown 文本</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Crew（执行器）关键属性</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>属性</th>
+            <th>示例值</th>
+            <th>作用</th>
+            <th>错误后果</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>agents</code></td>
+            <td><code>[researcher, writer]</code></td>
+            <td>所有可用 Agent</td>
+            <td>少一个直接报错</td>
+        </tr>
+        <tr>
+            <td><code>tasks</code></td>
+            <td><code>[research_task, write_task]</code></td>
+            <td>执行队列</td>
+            <td>顺序按列表</td>
+        </tr>
+        <tr>
+            <td><code>process</code></td>
+            <td><code>Process.sequential</code></td>
+            <td>执行策略</td>
+            <td>并行会打乱依赖</td>
+        </tr>
+        <tr>
+            <td><code>verbose</code></td>
+            <td><code>True</code></td>
+            <td>日志开关</td>
+            <td>只能是 bool</td>
+        </tr>
+    </tbody>
+</table>
+<h3>kickoff() 与输出结构</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>表达式</th>
+            <th>类型</th>
+            <th>用途</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>crew.kickoff()</code></td>
+            <td><code>CrewOutput</code></td>
+            <td>执行结果容器</td>
+        </tr>
+        <tr>
+            <td><code>result.raw</code></td>
+            <td><code>str</code></td>
+            <td><strong>最终文本输出</strong></td>
+        </tr>
+        <tr>
+            <td><code>result.tasks_output</code></td>
+            <td>list/dict</td>
+            <td>每个 Task 的输出</td>
+        </tr>
+        <tr>
+            <td><code>result.token_usage</code></td>
+            <td>dict</td>
+            <td>统计信息</td>
+        </tr>
+    </tbody>
+</table><hr>
+<h2>crewai 命令</h2>
+<p>
+我们可以使用 <span class="marked">crewai</span> 命令生成完整工程结构：</p>
+<pre>crewai create crew &lt;项目名&gt;</pre><p>
+例如我们创建一个项目 runoob-agent-test，还行以下命令：</p>
+
+<pre>crewai create crew runoob-agent-test</pre>
+<p>接下来出现以下内容，可以先选择大模型的提供商：</p>
+<pre>Creating folder runoob_agent_test...
+Cache expired or not found. Fetching provider data from the web...
+Downloading  [####################################]  1102019/56339
+Select a provider to set up:
+1. openai
+2. anthropic
+3. gemini
+4. nvidia_nim
+5. groq
+6. huggingface
+7. ollama
+8. watson
+9. bedrock
+10. azure
+11. cerebras
+12. sambanova
+13. other
+q. Quit</pre>
+<p>本章节，我们就选 DeepSeek，先输入 13 选 other，然后可以鼠标滚动看下 DeepSeek 在 23，输入序号 23 即可：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/8abbadb1-53cd-4e78-bda8-5eef6b761b48.png"></p>
+<p>如果你有其他模型的 API key ，根据序号选择即可。</p>
+
+
+
+<p>完成后，可以看到生成的目录如下：</p>
+<img decoding="async" src="https://www.runoob.com/wp-content/uploads/2025/12/66cc62f1-cc7f-499b-8551-0b1e7edc26dc.png"></p>
+<p>项目结构说明:</p>
+<pre>my_project/
+├── .env                # 环境变量（API Key）
+├── pyproject.toml      # 项目依赖声明
+├── README.md
+└── src/
+    └── my_project/
+        ├── main.py     # 程序入口
+        ├── crew.py     # Crew 与 Agent 的核心逻辑
+        ├── tools/      # 自定义工具
+        └── config/
+            ├── agents.yaml  # Agent 定义
+            └── tasks.yaml   # Task 定义</pre>
+
+
+<h3>运行你的 Crew</h3>
+<p>进入项目根目录：</p>
+<pre>
+cd my_project</pre><p>
+锁定并安装依赖：</p>
+<pre>
+crewai install</pre>
+<p>运行：</p>
+<pre>
+crewai run</pre>
+<p>或直接：</p>
+<pre>
+python src/my_project/main.py</pre>
+
+
+<h3>配置 API 密钥</h3>
+<p>为了安全起见，不建议将 API Key 直接写在代码里，我们可以将其设置为环境变量。</p>
+<p><strong>在代码中设置（仅用于测试）</strong>：</p>
+<pre>
+import os
+os.environ["OPENAI_API_KEY"] = "你的-openai-api-key-here"</pre>
+
+
+<p><strong>推荐方式：使用 <code>.env</code> 文件</strong></p>
+<p>在项目根目录创建一个名为 <code>.env</code> 的文件。</p><p>
+在文件中写入：<code>OPENAI_API_KEY=你的-openai-api-key-here</code></p>
+<p>在 Python 代码中，使用 <code>python-dotenv</code> 包来加载。</p>
+<p>安装命令：</p>
+<pre>
+pip install python-dotenv</pre>
+<p>接下来在代码中载入：</p>
+<pre>
+from dotenv import load_dotenv
+load_dotenv() # 这会自动加载 .env 文件中的变量
+# 现在 os.environ["OPENAI_API_KEY"] 就已经有了值</pre>
+
+<hr>
+<h2>核心组件详解与实战</h2>
+<p>现在，让我们像组建公司一样，一步步创建我们的 AI 团队，我们将模拟一个技术博客创作团队。</p>
+<h3>第一步：定义智能体 (Agent)</h3>
+<p><code>Agent</code> 是你的团队成员。创建时需要定义几个关键属性：</p>
+<table class="reference">
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>role</strong></td>
+<td align="left">代理的角色或职位。</td>
+<td align="left"><code>资深技术作家</code></td>
+</tr>
+<tr>
+<td align="left"><strong>goal</strong></td>
+<td align="left">代理的最终目标。</td>
+<td align="left"><code>创作深入浅出、实用的技术教程</code></td>
+</tr>
+<tr>
+<td align="left"><strong>backstory</strong></td>
+<td align="left">角色的背景故事，用于塑造其行为和语气。</td>
+<td align="left"><code>你是一位拥有10年全栈开发经验的开发者，热爱分享，擅长将复杂概念简单化。</code></td>
+</tr>
+<tr>
+<td align="left"><strong>llm</strong></td>
+<td align="left">指定代理使用的大语言模型。</td>
+<td align="left"><code>ChatOpenAI(model="gpt-4", temperature=0.7)</code></td>
+</tr>
+<tr>
+<td align="left"><strong>verbose</strong></td>
+<td align="left">设置为 <code>True</code> 时，会输出代理的详细思考过程。</td>
+<td align="left"><code>True</code> (调试时很有用)</td>
+</tr>
+<tr>
+<td align="left"><strong>allow_delegation</strong></td>
+<td align="left">是否允许此代理将任务委托给其他代理。</td>
+<td align="left"><code>True</code></td>
+</tr>
+</tbody></table>
+<p>让我们创建两个代理：一个<strong>研究员</strong>和一个<strong>作家</strong>。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 首先，定义一个共享的 LLM，这样所有代理可以使用相同的模型配置</span><br />
+llm <span style="color: Gray;">=</span> ChatOpenAI<span style="color: Olive;">&#40;</span>model<span style="color: Gray;">=</span><span style="color: #a11;">&quot;gpt-3.5-turbo&quot;</span><span style="color: Gray;">,</span> temperature<span style="color: Gray;">=</span><span style="color: Maroon;">0.7</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 创建研究员代理</span><br />
+researcher <span style="color: Gray;">=</span> Agent<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; role<span style="color: Gray;">=</span><span style="color: #a11;">'技术研究员'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; goal<span style="color: Gray;">=</span><span style="color: #a11;">'为你分配的主题，寻找最新、最准确、最相关的技术信息。'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; backstory<span style="color: Gray;">=</span><span style="color: #a11;">'你是一位专注且严谨的技术分析师，擅长从海量信息中筛选出关键点，并验证其来源的可靠性。'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; llm<span style="color: Gray;">=</span>llm<span style="color: Gray;">,</span> <span style="color: #a50"># 使用上面定义的模型</span><br />
+&nbsp; &nbsp; verbose<span style="color: Gray;">=</span><span style="color: Teal;">True</span><span style="color: Gray;">,</span> <span style="color: #a50"># 输出详细日志</span><br />
+&nbsp; &nbsp; allow_delegation<span style="color: Gray;">=</span><span style="color: Teal;">False</span> <span style="color: #a50"># 研究员不需要委托任务</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 创建作家代理</span><br />
+writer <span style="color: Gray;">=</span> Agent<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; role<span style="color: Gray;">=</span><span style="color: #a11;">'技术博客作家'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; goal<span style="color: Gray;">=</span><span style="color: #a11;">'根据研究员提供的资料，撰写结构清晰、生动有趣、代码示例完整的技术博客文章。'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; backstory<span style="color: Gray;">=</span><span style="color: #a11;">'你是一位广受欢迎的技术博主，文风亲切，逻辑严谨，尤其擅长通过比喻和实例来解释复杂概念。'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; llm<span style="color: Gray;">=</span>llm<span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; verbose<span style="color: Gray;">=</span><span style="color: Teal;">True</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; allow_delegation<span style="color: Gray;">=</span><span style="color: Teal;">True</span> <span style="color: #a50"># 作家如果觉得需要，可以委托任务（比如回去让研究员补充资料）</span><br />
+<span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<h3>第二步：创建任务 (Task)</h3>
+<p><code>Task</code> 是具体的工作项，需要分配给 <code>Agent</code> 去完成。关键属性包括：</p>
+<table class="reference">
+<thead>
+<tr>
+<th align="left">参数</th>
+<th align="left">说明</th>
+<th align="left">示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left"><strong>description</strong></td>
+<td align="left">对任务的清晰描述。</td>
+<td align="left"><code>研究 "Python异步编程asyncio" 在 2023 年后的核心应用场景和最佳实践。</code></td>
+</tr>
+<tr>
+<td align="left"><strong>agent</strong></td>
+<td align="left">负责执行此任务的 <code>Agent</code> 对象。</td>
+<td align="left"><code>researcher</code></td>
+</tr>
+<tr>
+<td align="left"><strong>expected_output</strong></td>
+<td align="left">对任务产出物的详细描述。</td>
+<td align="left"><code>一份结构化的研究报告，包含概述、3-4个核心应用场景、2-3个代码片段示例以及总结。</code></td>
+</tr>
+</tbody></table>
+<p>我们为研究员和作家各创建一个任务。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 创建研究任务</span><br />
+research_task <span style="color: Gray;">=</span> Task<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; description<span style="color: Gray;">=</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;对 '使用 Python 进行自动化数据清洗' 这个主题进行深入研究。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;重点关注 pandas 和 numpy 库的最新用法（2023年后），常见的脏数据问题（如缺失值、重复值、格式不一致），以及高效的清洗流程。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;请提供具体的代码片段来说明每个步骤。&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; agent<span style="color: Gray;">=</span>researcher<span style="color: Gray;">,</span> <span style="color: #a50"># 这个任务交给研究员</span><br />
+&nbsp; &nbsp; expected_output<span style="color: Gray;">=</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;一份完整的研究报告，格式如下：<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;1. 主题概述<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;2. 常见数据问题分类（至少3类）<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;3. 针对每类问题的 pandas/numpy 解决方案（附代码片段）<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;4. 一个完整的端到端清洗流程示例<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;5. 总结与建议&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#41;</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 创建写作任务</span><br />
+write_task <span style="color: Gray;">=</span> Task<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; description<span style="color: Gray;">=</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;利用研究员提供的研究报告，撰写一篇面向初学者的技术博客文章。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;文章标题为：'Python 数据清洗入门：用 pandas 告别脏数据'。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;文章要求：语言通俗易懂，逻辑层层递进，包含研究员提供的所有关键代码片段并添加详细注释。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;最后，提供一个完整的、可运行的示例，演示清洗一个模拟数据集的全过程。&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; agent<span style="color: Gray;">=</span>writer<span style="color: Gray;">,</span> <span style="color: #a50"># 这个任务交给作家</span><br />
+&nbsp; &nbsp; expected_output<span style="color: Gray;">=</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;一篇不少于800字的 Markdown 格式博客文章。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;包含引言、正文（分小节）、代码块、总结。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;文末必须附上一个完整的、包含模拟数据和清洗代码的 Python 脚本。&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; <span style="color: #a50"># context 参数非常重要！它指定了此任务的依赖，即需要先完成 research_task</span><br />
+&nbsp; &nbsp; context<span style="color: Gray;">=</span><span style="color: Olive;">&#91;</span>research_task<span style="color: Olive;">&#93;</span><br />
+<span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<p><strong>注意</strong> <code>write_task</code> 中的 <code>context=[research_task]</code>，这建立了任务间的依赖关系，意味着作家需要等研究员完成任务后才能开始工作。</p>
+<h3>第三步：组建团队与设置流程 (Crew &amp; Process)</h3>
+<p>现在，将 <code>Agent</code> 和 <code>Task</code> 组装成 <code>Crew</code>，并定义他们的工作 <code>Process</code>。</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 组建团队</span><br />
+blog_crew <span style="color: Gray;">=</span> Crew<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; agents<span style="color: Gray;">=</span><span style="color: Olive;">&#91;</span>researcher<span style="color: Gray;">,</span> writer<span style="color: Olive;">&#93;</span><span style="color: Gray;">,</span> <span style="color: #a50"># 团队由哪些成员构成</span><br />
+&nbsp; &nbsp; tasks<span style="color: Gray;">=</span><span style="color: Olive;">&#91;</span>research_task<span style="color: Gray;">,</span> write_task<span style="color: Olive;">&#93;</span><span style="color: Gray;">,</span> <span style="color: #a50"># 团队有哪些任务</span><br />
+&nbsp; &nbsp; process<span style="color: Gray;">=</span>Process.<span style="color: #05a;">sequential</span><span style="color: Gray;">,</span> <span style="color: #a50"># 流程类型：顺序执行。研究员做完，作家再做。</span><br />
+&nbsp; &nbsp; verbose<span style="color: Gray;">=</span><span style="color: Maroon;">2</span> <span style="color: #a50"># 设置团队执行时的日志详细程度 (0=安静, 1=基础, 2=详细)</span><br />
+<span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<p>crewAI 主要支持两种流程：</p>
+<ul>
+<li><strong><code>Process.sequential</code></strong>： 任务按在列表中的顺序依次执行。适合有严格依赖关系的流水线作业。</li>
+<li><strong><code>Process.hierarchical</code></strong>： 配合一个管理者（Manager）Agent，由它来协调和分配任务。适合更复杂、动态的协作场景。</li>
+</ul>
+<h3>第四步：执行任务并获取结果</h3>
+<p>一切就绪，启动你的 AI 团队！</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: #a50"># 执行团队任务</span><br />
+result <span style="color: Gray;">=</span> blog_crew.<span style="color: #05a;">kickoff</span><span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 打印最终结果</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span><span style="color: #a11;">&quot;###################### 最终成果 ######################&quot;</span><span style="color: Olive;">&#41;</span><br />
+<span style="color: Green;font-weight:bold;">print</span><span style="color: Olive;">&#40;</span>result<span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+
+<p>运行你的 Python 脚本 (<code>python my_first_crew.py</code>)。由于我们设置了 <code>verbose=True</code> 和 <code>verbose=2</code>，你将在终端看到每个 Agent 的思考过程和任务执行日志，最后看到生成的博客文章。</p>
+<hr>
+<h2>进阶技巧：为 Agent 配备工具 (Tools)</h2>
+<p>crewAI 可以让 <code>Agent</code> 调用外部 <code>Tool</code>，如搜索网络、查询数据库、执行计算等。</p>
+<p>以下示例为研究员配备<strong>网络搜索</strong>和<strong>计算</strong>工具：</p>
+
+<div class="example">
+<h2 class="example">实例</h2>
+<div class="example_code">
+<span style="color: Green;font-weight:bold;">from</span> crewai_tools <span style="color: Green;font-weight:bold;">import</span> SerperDevTool<span style="color: Gray;">,</span> CalculatorTool<br />
+<br />
+<span style="color: #a50"># 初始化工具</span><br />
+<span style="color: #a50"># 注意：SerperDevTool 需要单独的 API Key，请在 https://serper.dev/ 注册获取</span><br />
+search_tool <span style="color: Gray;">=</span> SerperDevTool<span style="color: Olive;">&#40;</span>serper_api_key<span style="color: Gray;">=</span><span style="color: #a11;">&quot;你的-serper-api-key&quot;</span><span style="color: Olive;">&#41;</span><br />
+calc_tool <span style="color: Gray;">=</span> CalculatorTool<span style="color: Olive;">&#40;</span><span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 创建配备工具的研究员</span><br />
+advanced_researcher <span style="color: Gray;">=</span> Agent<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; role<span style="color: Gray;">=</span><span style="color: #a11;">'高级技术研究员'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; goal<span style="color: Gray;">=</span><span style="color: #a11;">'搜索最新的技术动态并进行量化分析'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; backstory<span style="color: Gray;">=</span><span style="color: #a11;">'你不仅善于查找信息，还能对数据进行简单的计算和对比。'</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; tools<span style="color: Gray;">=</span><span style="color: Olive;">&#91;</span>search_tool<span style="color: Gray;">,</span> calc_tool<span style="color: Olive;">&#93;</span><span style="color: Gray;">,</span> <span style="color: #a50"># 将工具列表赋予代理</span><br />
+&nbsp; &nbsp; llm<span style="color: Gray;">=</span>llm<span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; verbose<span style="color: Gray;">=</span><span style="color: Teal;">True</span><br />
+<span style="color: Olive;">&#41;</span><br />
+<br />
+<span style="color: #a50"># 创建一个使用工具的任务</span><br />
+analysis_task <span style="color: Gray;">=</span> Task<span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; description<span style="color: Gray;">=</span><span style="color: Olive;">&#40;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;搜索并比较 'FastAPI' 和 'Django' 在 GitHub 上过去一年的 Star 增长数量。<span style="color: #000099; font-weight: bold;">\n</span>&quot;</span><br />
+&nbsp; &nbsp; &nbsp; &nbsp; <span style="color: #a11;">&quot;计算两者的增长率，并分析可能的原因。&quot;</span><br />
+&nbsp; &nbsp; <span style="color: Olive;">&#41;</span><span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; agent<span style="color: Gray;">=</span>advanced_researcher<span style="color: Gray;">,</span><br />
+&nbsp; &nbsp; expected_output<span style="color: Gray;">=</span><span style="color: #a11;">&quot;包含具体数据、计算过程和原因分析的简短报告。&quot;</span><br />
+<span style="color: Olive;">&#41;</span><br />
+</div>
+</div>
+			<!-- 其他扩展 -->
+						
+			</div>
+			
+		</div>
+
+
+<div class="archive-list" style="display:none;font-size: 14px;line-height: 1.8;margin-top: 20px;padding: 10px;">
+<div class="archive-list-item">
+    <div class="post-intro" style="width: 100%;" id="ai-info">
+	  AI 思考中...
+    </div>
+</div>
+</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="prompt-engineering.html" rel="prev"> 提示词工程（Prompt Engineering）</a> </div>
+			<div class="next-design-link"><a href="langchain-agent.html" rel="next"> LangChain 制作智能体</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+
+
+		
+		<div class="sidebar-box ">
+				
+
+<style>	
+.responsive_ad1 { display:none; }
+@media(min-width: 800px) { .responsive_ad1 {  display:block;margin:0 auto;} }
+</style>
+<div id="ad-336280" class="responsive_ad1">
+<!-- 336*280 固定 -->		
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 移动版 自动调整 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+				</div>
+		<!-- 笔记列表 -->
+		<style>
+.wrapper {
+  /*text-transform: uppercase; */
+  background: #ececec;
+  color: #555;
+  cursor: pointer;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.wrapper .tooltip {
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: left;
+  background: #96b97d;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 14px;
+  pointer-events: none;
+  position: absolute;
+  
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+.tooltip a {
+	color:#fff;
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}  
+
+/* CSS Triangles - see Trevor's post */
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #96b97d 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 20%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+.wrapper .tooltip1 {
+	margin-left: 50px;
+	padding-top: 0px;
+}
+/*
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+*/
+/* IE can just show/hide with no transition */
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.css">
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style=" padding: 20px 20px;"> 
+	<h3 class="text-muted" id="share_code" style="color: #799961;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<!--
+	<p style="font-size:14px;">笔记需要是本篇文章的内容扩展！</p><br>
+	<p style="font-size:12px;"><a href="//www.runoob.com/tougao" target="_blank">文章投稿，可点击这里</a></p>
+	<p style="font-size:14px;"><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>
+		<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display:none;">
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div id="mded"></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input type="hidden" name="comment_post_ID" value="29114" id="comment_post_ID" />
+<input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="引用地址"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script type="text/javascript">
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload:false,
+	 // upload: {url:'/api/comment_upload_file.php',params: null,fileKey: 'upload_file',connectionCount: 1,leaveConfirm: '文件正在上传，您确定离开?'},
+	  defaultImage: 'https://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  autosave: 'editor-content',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+	$("#user_add_note").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		$('html, body').animate({
+       	    scrollTop: $("#respond").offset().top
+    	}, 200);
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" style="display:none;" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  29114;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>').show();
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>').show();
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>').show();
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>').show();
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>').show();
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>').show();
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	$(".comt-author").click(function() {
+		href = $(this).children("a").attr("href");
+		if(href.indexOf("/note/")!=-1) {
+			var win = window.open(href, '_blank');
+  			win.focus();
+		}
+	});
+	$(".comt-meta span").hover(function(){
+		$(this).children(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).children(".tooltip").removeAttr("style");
+	});
+	/*
+	$(".wrapper i").hover(function(){
+		$(this).siblings(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).siblings(".tooltip").css({ "opacity": 0, "pointer-events": "auto"});
+	});
+	*/
+	//Upvote.create('runoobvote-id', {callback: vote_callback});
+	var ajaxurl = 'https://www.runoob.com/wp-admin/admin-ajax.php';
+	var callback = function(data) {
+		//console.log($('#runoobvote-id').upvote('upvoted'));
+		//console.log($('#runoobvote-id').upvote('downvoted'));
+		//console.log(data);
+		_vote_action = data.action;
+		id_arr = data.id.split('-');
+		um_id= id_arr[2];
+		//console.log(um_id);
+		
+		var re = /^[1-9]+/;
+		if (re.test(um_id)) { 
+			var ajax_data = {
+				_vote_action: _vote_action,
+				action: "pinglun_zan",
+				um_id: um_id,
+				um_action: "ding"
+			};
+			//console.log(ajax_data);
+			$.post(ajaxurl,ajax_data,function(status){
+				//if(status.vote_num>999) {
+				//	_voteHtml = '<span style="display: block; text-align: center;font-size: 20px; color: #6a737c; margin: 8px 0;">'+kFormatter(status.vote_num) +'</span>';
+				//	$("#runoobvote-id-" + um_id + " .count").hide().after(_voteHtml);
+				//}
+				
+			});
+		}
+	};
+	if($('#comments').length && $('.upvotejs').length){
+		$('.upvotejs').upvote({id: 29114, callback: callback});
+	
+		$.post(ajaxurl,{"action":"pinglun_zan","postid":29114},function(data){  
+			$(data).each(function(key,value) {
+				$("#runoobvote-id-" + value.commid + " .upvote").addClass(value.upvotejs_class);
+				$("#runoobvote-id-" + value.commid + " .downvote").addClass(value.downvote_class);
+				$("#runoobvote-id-" + value.commid + " .count").text(value.upvote_count);
+			})
+		},'json');
+		
+	}
+	
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+function kFormatter(num) {
+	// return num;
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
+</script>
+
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/css/qa.css?1.45">
+<link rel="stylesheet" type="text/css" href="https://static.char123.com/assets/simditor/2.3.6/styles/simditor.min.css" />
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor.min.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor-autosave.js"></script>
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+
+<style>
+.sidebar-tree .double-li {
+    width:300px;
+}
+.sidebar-tree .double-li li {
+    width: 44%;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    display: inline;
+}
+</style>
+
+    
+        <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here" style="margin: 0 auto;">
+            <a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;"> <i class="fa fa-list" aria-hidden="true"></i> 分类导航</a>
+        </div>
+    <div class="sidebar-box sidebar-cate">
+        
+        <div class="sidebar-tree">
+            <ul><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="../html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="../html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="../css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="../css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Tailwind CSS 教程" href="../tailwindcss/tailwindcss-tutorial.html">Tailwind CSS 教程</a></li><li><a title="Bootstrap4 教程" href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Bootstrap5 教程" href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 教程</a></li><li><a title="Font Awesome 教程" href="../font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="../foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="../js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="../htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="../jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="../angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="../angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="../vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="Vue3 教程" href="../vue3/vue3-tutorial.html">Vue3 教程</a></li><li><a title="React 教程" href="../react/react-tutorial.html">React 教程</a></li><li><a title="Next.js 教程" href="../nextjs/nextjs-tutorial.html">Next.js 教程</a></li><li><a title="TypeScript 教程" href="../typescript/ts-tutorial.html">TypeScript 教程</a></li><li><a title="jQuery UI 教程" href="../jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="../jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="../nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="Electron 教程" href="../electron/electron-tutorial.html">Electron 教程</a></li><li><a title="Playwright 教程" href="../playwright/playwright-tutorial.html">Playwright 教程</a></li><li><a title="AJAX 教程" href="../ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="../json/json-tutorial.html">JSON 教程</a></li><li><a title="Echarts 教程" href="../echarts/echarts-tutorial.html">Echarts 教程</a></li><li><a title="Chart.js 教程" href="../chartjs/chartjs-tutorial.html">Chart.js 教程</a></li><li><a title="Highcharts 教程" href="../highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="../googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="Python2.x 教程" href="../python/python-tutorial.html">Python2.x 教程</a></li><li><a title="Linux 教程" href="../linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="../docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="../ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="../java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="../c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="../cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="../perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="../servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="../jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="../lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Rust 教程" href="../rust/rust-tutorial.html">Rust 教程</a></li><li><a title="Zig 教程" href="../zig/zig-tutorial.html">Zig 教程</a></li><li><a title="Scala 教程" href="../scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="../go/go-tutorial.html">Go 教程</a></li><li><a title="PHP 教程" href="../php/php-tutorial.html">PHP 教程</a></li><li><a title="数据结构与算法" href="../data-structures/data-structures-tutorial.html">数据结构与算法</a></li><li><a title="Django 教程" href="../django/django-tutorial.html">Django 教程</a></li><li><a title="FastAPI 教程" href="../fastapi/fastapi-tutorial.html">FastAPI 教程</a></li><li><a title="Flask 教程" href="../flask/flask-tutorial.html">Flask 教程</a></li><li><a title="Pillow 教程" href="../pillow/pillow-tutorial.html">Pillow 教程</a></li><li><a title="Zookeeper 教程" href="//www.runoob.com/w3cnote/zookeeper-tutorial.html">Zookeeper 教程</a></li><li><a title="设计模式" href="../design-pattern/design-pattern-tutorial.html">设计模式</a></li><li><a title="Python 设计模式" href="../python-design-pattern/python-design-pattern-tutorial.html">Python 设计模式</a></li><li><a title="正则表达式" href="../regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="Maven 教程" href="../maven/maven-tutorial.html">Maven 教程</a></li><li><a title="CMake 教程" href="../cmake/cmake-tutorial.html">CMake 教程</a></li><li><a title="Verilog 教程" href="//www.runoob.com/w3cnote/verilog-tutorial.html">Verilog 教程</a></li><li><a title="ASP 教程" href="../asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="../appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="../vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="../sql/sql-tutorial.html">SQL 教程</a></li><li><a title="MySQL 教程" href="../mysql/mysql-tutorial.html">MySQL 教程</a></li><li><a title="PostgreSQL 教程" href="../postgresql/postgresql-tutorial.html">PostgreSQL 教程</a></li><li><a title="SQLite 教程" href="../sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="../mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="../redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="../Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit">  AI & 数据分析</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="NumPy 教程" href="../numpy/numpy-tutorial.html">NumPy 教程</a></li><li><a title="Pandas 教程" href="../pandas/pandas-tutorial.html">Pandas 教程</a></li><li><a title="Matplotlib 教程" href="../matplotlib/matplotlib-tutorial.html">Matplotlib 教程</a></li><li><a title="Scipy 教程" href="../scipy/scipy-tutorial.html">Scipy 教程</a></li><li><a title="Pytorch 教程" href="../pytorch/pytorch-tutorial.html">Pytorch 教程</a></li><li><a title="TensorFlow 教程" href="../tensorflow/tensorflow-tutorial.html">TensorFlow 教程</a></li><li><a title="Ollama 教程" href="../ollama/ollama-tutorial.html">Ollama 教程</a></li><li><a title="机器 教程" href="../ml/ml-tutorial.html">机器 教程</a></li><li><a title="Jupyter Notebook 教程" href="../jupyter-notebook/jupyter-notebook-tutorial.html">Jupyter Notebook 教程</a></li><li><a title="AI Agent(智能体)" href="ai-agent-tutorial.html">AI Agent(智能体)</a></li><li><a title="Skills(技能)" href="../skills/skills-tutorial.html">Skills(技能)</a></li><li><a title="Claude Code" href="../claude-code/claude-code-tutorial.html">Claude Code</a></li><li><a title="OpenCode" href="../opencode/opencode-tutorial.html">OpenCode</a></li><li><a title="Codex 教程" href="../codex/codex-tutorial.html">Codex 教程</a></li><li><a title="scikit-learn 教程" href="../sklearn/sklearn-tutorial.html">scikit-learn 教程</a></li><li><a title="R 教程" href="../r/r-tutorial.html">R 教程</a></li><li><a title="OpenCV 教程" href="../opencv/opencv-tutorial.html">OpenCV 教程</a></li><li><a title="NLP 教程" href="../nlp/nlp-tutorial.html">NLP 教程</a></li><li><a title="Selenium 教程" href="../selenium/selenium-tutorial.html">Selenium 教程</a></li><li><a title="Julia 教程" href="../julia/julia-tutorial.html">Julia 教程</a></li><li><a title="量化交易" href="../qt/qt-tutorial.html">量化交易</a></li><li><a title="Dash 教程" href="../dash/dash-tutorial.html">Dash 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="//www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="../swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="../jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="../ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Flutter 教程" href="../flutter/flutter-tutorial.html">Flutter 教程</a></li><li><a title="Kotlin 教程" href="../kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="VS Code 教程" href="../vscode/vscode-tutorial.html">VS Code 教程</a></li><li><a title="PyCharm 教程" href="../pycharm/pycharm-tutorial.html">PyCharm 教程</a></li><li><a title="Swagger 教程" href="../swagger/swagger-tutorial.html">Swagger 教程</a></li><li><a title="RESTful API 教程" href="../restfulapi/restful-api-tutorial.html">RESTful API 教程</a></li><li><a title="Eclipse 教程" href="../eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="../git/git-tutorial.html">Git 教程</a></li><li><a title="Svn 教程" href="../svn/svn-tutorial.html">Svn 教程</a></li><li><a title="Markdown 教程" href="../markdown/md-tutorial.html">Markdown 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="../xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="../dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="../dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="../xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="../xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="../xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="../xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="../xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="../schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="../xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="../svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="../aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="../csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="PowerShell 教程" href="../powershell/powershell-tutorial.html">PowerShell 教程</a></li><li><a title="Web Pages 教程" href="../aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="../aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="../aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="../aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="../webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="../wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="../soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="../rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="../rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="../http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="../web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="../browsers/browser-information.html">浏览器信息</a></li><li><a title="网络协议" href="../np/np-tutorial.html">网络协议</a></li><li><a title="网站主机教程" href="../hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="../tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="../w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="../quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>            </div>
+    
+    </div>
+    </div>
+    <br>
+    
+    <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here">
+            <a href="javascript:void(0);">Advertisement</a>
+        </div>
+        <div class="re-600160" id="sidebar-right-re">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧栏1 -->
+        <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+                </div>
+    </div>
+</div></div>
+
+</div>
+
+<script>
+var aid = 29114;
+function coll() {
+	$.post( '/wp-content/themes/runoob/option/user/userinfo.php', {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+		if(data.error==0) {
+			$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+			$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+		}
+		alert(data.msg);
+	},'json');
+}
+
+(function () {
+    // 1. 仅 HTML 页面
+    if (!document.contentType || !document.contentType.includes('text/html')) return;
+
+    // 2. 容器判断
+    var container = document.querySelector('.article-intro');
+    if (!container) return;
+
+    var h1 = container.querySelector('h1');
+    if (!h1) return;
+
+    // 3. URL 判断
+    var url = window.location.href.toLowerCase();
+    var version = null;
+
+    if (url.includes('/python3/')) {
+        version = 'Python3.x';
+    } else if (url.includes('/python/')) {
+        version = 'Python2.x';
+    }
+
+    if (!version) return;
+
+    // 4. 防重复
+    if (h1.querySelector('.py-version-badge')) return;
+
+    // 5. 创建标签
+    var badge = document.createElement('span');
+    badge.className = 'py-version-badge';
+    badge.innerText = version;
+
+    // 6. 样式（核心：float 实现右上角）
+    badge.style.float = 'right';
+    badge.style.fontSize = '12px';
+    badge.style.padding = '2px 8px';
+    badge.style.borderRadius = '999px';
+
+   // 自适应亮/暗色 + 渐变背景（增强版）
+	badge.style.color = 'inherit';
+
+	// 渐变背景（低透明度，不影响暗黑模式）
+	if (version.includes('3')) {
+		badge.style.background = 'linear-gradient(90deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15))';
+	} else {
+		badge.style.background = 'linear-gradient(90deg, rgba(161,140,209,0.15), rgba(251,194,235,0.15))';
+	}
+
+	// 边框弱化（更精致）
+	badge.style.border = '1px solid rgba(127,127,127,0.3)';
+
+	// 提升可读性
+	badge.style.opacity = '0.95';
+
+    // 微调位置（更贴近“右上角”）
+    badge.style.marginTop = '4px';
+    badge.style.marginLeft = '10px';
+
+    // 7. 插入到 h1 最前面（让 float 生效更稳定）
+    h1.insertBefore(badge, h1.firstChild);
+
+})();
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.js?1.0"></script>
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.css?1.0" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // 获取窗口宽度
+    var windowWidth = $(window).width();
+
+    // 设置一个阈值，例如 768px，根据实际需要调整
+    var mobileThreshold = 768;
+
+    // 判断是否为移动端
+    if (windowWidth < mobileThreshold) {
+        // 在移动端执行的代码
+        $(".article-heading-ad").show();
+    } else {
+        // 在非移动端执行的代码
+		$(".article-heading-ad").show();
+    }
+	
+});
+</script>
+<script src="/wp-content/themes/runoob/assets/js/runoob-article-dir.min.js"></script>
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

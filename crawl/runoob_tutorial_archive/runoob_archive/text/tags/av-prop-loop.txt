@@ -1,0 +1,73 @@
+URL: https://www.runoob.com/tags/av-prop-loop.html
+Title: HTML 音频/视频 DOM loop 属性 | 菜鸟教程
+
+HTML 音频/视频 DOM loop 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML 音频/视频 DOM error 属性 
+
+HTML 音频/视频 DOM mediaGroup 属性 
+
+HTML 音频/视频 DOM loop 属性 
+
+实例 
+
+将视频设置为循环播放： 
+
+myVid=document.getElementById("video1"); 
+myVid.loop=true; 
+
+尝试一下 » 
+
+定义和用法 
+
+loop 属性设置或返回音频/视频是否应该在结束时重新播放。 
+
+浏览器支持 
+
+所有主流浏览器都支持 loop 属性。 
+
+注意： Internet Explorer 8 及之前的版本不支持该属性。 
+
+语法 
+
+设置 loop 属性： 
+
+audio|video .loop=true|false 
+
+返回 loop 属性： 
+
+audio|video .loop 
+
+属性值 
+
+值 
+
+描述 
+
+true 
+
+指示音频/视频应该在结束时重新播放。 
+
+false 
+
+默认。指示音频/视频不应该在结束时重新播放。 
+
+技术细节 
+
+返回值： 
+
+布尔值，true|false 
+
+默认值： 
+
+false 
+
+AI 思考中... 
+
+HTML 音频/视频 DOM error 属性 
+
+HTML 音频/视频 DOM mediaGroup 属性

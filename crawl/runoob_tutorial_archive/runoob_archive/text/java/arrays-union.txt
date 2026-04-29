@@ -1,0 +1,36 @@
+URL: https://www.runoob.com/java/arrays-union.html
+Title: Java 实例 – 数组并集 | 菜鸟教程
+
+Java 实例 – 数组并集 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Java 教程 
+
+Java 实例 – 判断数组是否相等 
+
+Java 实例 – 格式化时间（SimpleDateFormat） 
+
+Java 实例 - 数组并集 
+
+以下实例演示了如何使用 union ()方法来计算两个数组的并集： 
+
+Main.java 文件 
+
+import java . util . Arrays ; import java . util . HashSet ; import java . util . Set ; public class Main { public static void main ( String [ ] args ) throws Exception { String [ ] arr1 = { " 1 " , " 2 " , " 3 " } ; String [ ] arr2 = { " 4 " , " 5 " , " 6 " } ; String [ ] result_union = union ( arr1 , arr2 ) ; System . out . println ( " 并集的结果如下： " ) ; for ( String str : result_union ) { System . out . println ( str ) ; } } public static String [ ] union ( String [ ] arr1 , String [ ] arr2 ) { Set < String > set = new HashSet < String > ( ) ; for ( String str : arr1 ) { set . add ( str ) ; } for ( String str : arr2 ) { set . add ( str ) ; } String [ ] result = { } ; return set . toArray ( result ) ; } } 
+
+以上代码运行输出结果为： 
+
+并集的结果如下：
+3
+2
+1
+6
+5
+4 
+
+AI 思考中... 
+
+Java 实例 – 判断数组是否相等 
+
+Java 实例 – 格式化时间（SimpleDateFormat）

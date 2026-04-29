@@ -1,0 +1,124 @@
+URL: https://www.runoob.com/cssref/pr-border-color.html
+Title: CSS border-color 属性 | 菜鸟教程
+
+CSS border-color 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS border-collapse 属性 
+
+CSS Border-left 属性 
+
+CSS border-color 属性 
+
+实例 
+
+设置四个边框颜色： 
+
+p 
+{ 
+border-style:solid; 
+border-color:#ff0000 #0000ff; 
+} 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+border-color属性设置一个元素的四个边框颜色。此属性可以有一到四个值。 
+
+实例: 
+
+border-color:红，绿，蓝,粉红色; 
+
+上边框是红色 
+
+右边框是绿色 
+
+底部边框是蓝 
+
+左边框是粉红色 
+
+border-color：红，绿，蓝; 
+
+上边框是红色 
+
+左，右边框是绿色 
+
+底部边框是蓝 
+
+border-color：红，绿; 
+
+顶部和底部边框是红色 
+
+左右边框是绿色 
+
+border-color：红色; 
+
+所有四个边框是红色 
+
+注意： 请始终把 border-style 属性声明到 border-color 属性之前。元素必须在您改变其颜色之前获得边框。 
+
+默认值: 
+
+not specified 
+
+继承: 
+
+no 
+
+版本: 
+
+CSS1 
+
+JavaScript 语法: 
+
+object object.style.borderColor="#FF0000 blue" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+border-color 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+说明 
+
+color 
+
+指定背景颜色。在 CSS颜色值 查找颜色值的完整列表 
+
+transparent 
+
+指定边框的颜色应该是透明的。这是默认 
+
+inherit 
+
+指定边框的颜色，应该从父元素继承 
+
+相关文章 
+
+CSS 教程: CSS Border 
+
+AI 思考中... 
+
+CSS border-collapse 属性 
+
+CSS Border-left 属性

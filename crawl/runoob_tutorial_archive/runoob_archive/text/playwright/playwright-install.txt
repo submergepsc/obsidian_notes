@@ -1,0 +1,110 @@
+URL: https://www.runoob.com/playwright/playwright-install.html
+Title: Playwright 安装 | 菜鸟教程
+
+Playwright 安装 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Playwright 教程 
+
+Playwright 简介 
+
+Playwright 开发环境配置 
+
+Playwright 安装 
+
+Playwright 是一个 Node.js 库，所以需要我们本地安装 Node.js，如果你已经安装了可以跳过。 
+
+1、安装 Node.js 
+
+Playwright 官方推荐使用 Node.js。 
+
+打开 Node.js 官网 
+
+下载并安装 LTS（长期支持版） 
+
+验证是否安装成功： 
+
+node -v
+npm -v 
+
+能看到版本号即可。 
+
+更多安装可以参考： https://www.runoob.com/nodejs/nodejs-install-setup.html 
+
+2、新建项目目录 
+
+如果成功安装 node，我们就可以开始 Playwright 的安装与使用。 
+
+在命令行执行： 
+
+mkdir runoob-playwright-demo
+cd runoob-playwright-demo 
+
+3、初始化并安装 Playwright 
+
+执行： 
+
+npm init playwright@latest 
+
+安装过程会提示： 
+
+选择语言： JavaScript 或 TypeScript ，熟悉哪个选哪个 
+
+是否要安装测试示例：推荐选 Yes （方便学习） 
+
+是否下载浏览器：选 Yes （Playwright 会下载 Chromium、Firefox、WebKit 三大引擎） 
+
+安装完成后，你的项目目录大概长这样： 
+
+playwright-demo/
+├─ tests/ # 示例测试用例
+├─ playwright.config.js # 配置文件
+├─ package.json
+└─ node_modules/ 
+
+第一个脚本：Hello World 
+
+新建一个 test.js 文件，写入以下内容： 
+
+实例 
+
+// test.js 
+
+const { chromium } = require ( 'playwright' ) ; 
+
+( async ( ) => { 
+
+// 1. 启动浏览器 
+
+const browser = await chromium. launch ( { headless : false } ) ; // 设置 false 可以看到浏览器 
+
+const page = await browser. newPage ( ) ; 
+
+// 2. 打开网页 
+
+await page. goto ( 'https://www.baidu.com' ) ; 
+
+// 3. 截图保存 
+
+await page. screenshot ( { path : 'baidu.png' } ) ; 
+
+// 4. 关闭浏览器 
+
+await browser. close ( ) ; 
+
+console. log ( "截图已保存到 example.png" ) ; 
+
+} ) ( ) ; 
+
+运行： 
+
+node test.js 
+
+以上是一个 Playwright 的简单实例，可以截图百度的首页。 
+
+AI 思考中... 
+
+Playwright 简介 
+
+Playwright 开发环境配置

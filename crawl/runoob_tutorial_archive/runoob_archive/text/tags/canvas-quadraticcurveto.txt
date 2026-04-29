@@ -1,0 +1,88 @@
+URL: https://www.runoob.com/tags/canvas-quadraticcurveto.html
+Title: HTML canvas quadraticCurveTo() 方法 | 菜鸟教程
+
+HTML canvas quadraticCurveTo() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas clip() 方法 
+
+HTML canvas bezierCurveTo() 方法 
+
+HTML canvas quadraticCurveTo() 方法 
+
+实例 
+
+绘制一条二次贝塞尔曲线： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+ctx.beginPath(); 
+ctx.moveTo(20,20); 
+ctx.quadraticCurveTo(20,100,200,20); 
+ctx.stroke(); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 quadraticCurveTo() 
+方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+quadraticCurveTo() 方法通过使用表示二次贝塞尔曲线的指定控制点，向当前路径添加一个点。 
+
+二次贝塞尔曲线需要两个点。第一个点是用于二次贝塞尔计算中的控制点，第二个点是曲线的结束点。曲线的开始点是当前路径中最后一个点。如果路径不存在，那么请使用 beginPath() 和 moveTo() 方法来定义开始点。 
+
+开始点： 
+
+moveTo( 20,20 ) 
+
+控制点： 
+
+quadraticCurveTo( 20,100 ,200,20) 
+
+结束点： 
+
+quadraticCurveTo(20,100, 200,20 ) 
+
+提示： 请查看 bezierCurveTo() 方法。 它有两个控制点，而不是一个。 
+
+JavaScript 语法： 
+
+context .quadraticCurveTo( cpx,cpy,x,y ); 
+
+参数值 
+
+参数 
+
+描述 
+
+cpx 
+
+贝塞尔控制点的 x 坐标。 
+
+cpy 
+
+贝塞尔控制点的 y 坐标。 
+
+x 
+
+结束点的 x 坐标。 
+
+y 
+
+结束点的 y 坐标。 
+
+AI 思考中... 
+
+HTML canvas clip() 方法 
+
+HTML canvas bezierCurveTo() 方法

@@ -1,0 +1,116 @@
+URL: https://www.runoob.com/tags/canvas-createlineargradient.html
+Title: HTML canvas createLinearGradient() 方法 | 菜鸟教程
+
+HTML canvas createLinearGradient() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas shadowOffsetY 属性 
+
+HTML canvas createPattern() 方法 
+
+HTML canvas createLinearGradient() 方法 
+
+实例 
+
+定义从黑到白的渐变（从左向右），作为矩形的填充样式： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var 
+ ctx=c.getContext("2d"); 
+
+var grd=ctx.createLinearGradient(0,0,170,0); 
+grd.addColorStop(0,"black"); 
+grd.addColorStop(1,"white"); 
+
+ctx.fillStyle=grd; 
+ctx.fillRect(20,20,150,100); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 createLinearGradient() 方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+createLinearGradient() 方法创建线性的渐变对象。 
+
+渐变可用于填充矩形、圆形、线条、文本等等。 
+
+提示： 请使用该对象作为 strokeStyle 或 fillStyle 属性的值。 
+
+提示： 请使用 addColorStop() 方法规定不同的颜色，以及在 gradient 对象中的何处定位颜色。 
+
+JavaScript 语法： 
+
+context .createLinearGradient( x0,y0,x1,y1 ); 
+
+参数值 
+
+参数 
+
+描述 
+
+x0 
+
+渐变开始点的 x 坐标 
+
+y0 
+
+渐变开始点的 y 坐标 
+
+x1 
+
+渐变结束点的 x 坐标 
+
+y1 
+
+渐变结束点的 y 坐标 
+
+更多实例 
+
+实例 
+
+定义一个渐变（从上到下）作为矩形的填充样式： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+var my_gradient=ctx.createLinearGradient(0,0,0,170); 
+my_gradient.addColorStop(0,"black"); 
+my_gradient.addColorStop(1,"white"); 
+ctx.fillStyle=my_gradient; 
+ctx.fillRect(20,20,150,100); 
+
+尝试一下 » 
+
+实例 
+
+定义一个从黑到红再到白的渐变，作为矩形的填充样式： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+var my_gradient=ctx.createLinearGradient(0,0,170,0); 
+my_gradient.addColorStop(0,"black"); 
+my_gradient.addColorStop(0.5,"red"); 
+my_gradient.addColorStop(1,"white"); 
+ctx.fillStyle=my_gradient; 
+ctx.fillRect(20,20,150,100); 
+
+尝试一下 » 
+
+AI 思考中... 
+
+HTML canvas shadowOffsetY 属性 
+
+HTML canvas createPattern() 方法

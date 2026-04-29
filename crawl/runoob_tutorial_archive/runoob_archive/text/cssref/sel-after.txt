@@ -1,0 +1,72 @@
+URL: https://www.runoob.com/cssref/sel-after.html
+Title: CSS :after 选择器 | 菜鸟教程
+
+CSS :after 选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS :before 选择器 
+
+CSS counter-increment 属性 
+
+CSS :after 选择器 
+
+实例 
+
+每个<p>元素之后插入内容： 
+
+p : after { content : " - Remember this " ; } 
+
+尝试一下 » 
+
+定义和说明 
+
+:after 选择器向选定元素的最后子元素后面插入内容。 
+
+使用 content 属性来指定要插入的内容。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+::after 
+
+4.0 
+
+9.0 
+部分从 8.0 
+
+3.5 
+
+3.1 
+
+7.0 
+部分从4.0 
+
+注意： after在IE8中运行，必须声明 <!DOCTYPE> . 
+
+相关文章 
+
+CSS 教程: CSS Pseudo-elements 
+
+CSS 选择器参考手册: CSS :before 选择器 
+
+更多实例 
+
+实例 
+
+在每个 <p>之后插入的内容和样式: 
+
+p : after { content : " - Remember this " ; background - color : yellow ; color : red ; font - weight : bold ; } 
+
+尝试一下 » 
+
+AI 思考中... 
+
+CSS :before 选择器 
+
+CSS counter-increment 属性

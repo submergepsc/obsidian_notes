@@ -1,0 +1,8 @@
+URL: https://www.runoob.com/jquerymobile/jquerymobile-events-orientation.html
+Title: jQuery Mobile 方向改变事件 | 菜鸟教程
+
+jQuery Mobile 方向改变事件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+jQuery Mobile 教程

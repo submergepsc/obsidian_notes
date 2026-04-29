@@ -1,0 +1,433 @@
+URL: https://www.runoob.com/foundation/foundation-ref-helpers.html
+Title: Foundation CSS 参考手册 | 菜鸟教程
+
+Foundation CSS 参考手册 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 图标参考手册 
+
+Foundation CSS 可见性 
+
+Foundation CSS 参考手册 
+
+Foundation 默认设置 
+
+Foundation 使用浏览器默认字体大小 ( font-size:100% )。对于大多数桌面设备的浏览器来说，字体大小默认为 16px。对于移动设备的浏览器，字体默认大小为 12px。
+默认的字体为 "Helvetica Neue" ， line-height 默认为 1.5 。 
+
+这些设置是适用于 <body> 元素内的元素。 
+
+此外， <p> 元素与底部的外边距(margin-bottom) 为 1.25rem , line-height 为 1.6。 
+
+文本 
+
+以下的 HTML 元素，Foundation 设置了独立的样式渲染它，不会采用浏览器默认样式。点击 "尝试一下" 查看在线实例。 
+
+元素 
+
+描述 
+
+在线实例 
+
+<h1> - <h6> 
+
+h1 - h6 标题 
+
+尝试一下 
+
+<a> 
+
+浅蓝色的链接，鼠标移动到链接会有下划线 
+
+尝试一下 
+
+<small> 
+
+浅灰色的副标题文本 
+
+尝试一下 
+
+<blockquote> 
+
+引用内容模块 
+
+尝试一下 
+
+<strong> 
+
+加粗文本 
+
+尝试一下 
+
+<em> 
+
+斜体 
+
+尝试一下 
+
+<abbr> 
+
+指定单词的缩写，使用该元素文本出现虚线下划线，鼠标移动上去会有提示信息 
+
+尝试一下 
+
+<kbd> 
+
+接收键盘输入指令: CTRL + P 
+
+尝试一下 
+
+<hr> 
+
+水平线 
+
+尝试一下 
+
+<code> 
+
+代码片段 
+
+尝试一下 
+
+<ul> 
+
+无序列表 
+
+尝试一下 
+
+<ol> 
+
+有序列表 
+
+尝试一下 
+
+<dl> 
+
+描述性列表 
+
+尝试一下 
+
+文本对齐 
+
+使用 CSS 类来修改文本的对齐方式： 
+
+类 
+
+描述 
+
+实例 
+
+.text-left 
+
+左对齐文本 
+
+尝试一下 
+
+.text-right 
+
+右对齐文本 
+
+尝试一下 
+
+.text-center 
+
+居中 
+
+尝试一下 
+
+.text-justify 
+
+两端对齐 
+
+尝试一下 
+
+不同尺寸屏幕的对齐 
+
+使用 CSS 类来修改文本的不同尺寸屏幕的对齐方式： 
+
+类 
+
+描述 
+
+实例 
+
+左对齐 
+
+.small-text-left 
+
+所有尺寸屏幕左对齐 
+
+尝试一下 
+
+.small-only-text-left 
+
+小尺寸屏幕左对齐(宽度小于 40em ) 
+
+尝试一下 
+
+.medium-text-left 
+
+宽度大于 40.0625em 尺寸屏幕左对齐 
+
+尝试一下 
+
+.medium-only-text-left 
+
+宽度在 40.0625em 到 64em 尺寸的屏幕左对齐 
+
+尝试一下 
+
+.large-text-left 
+
+宽度大于 64.0625em 尺寸屏幕左对齐 
+
+尝试一下 
+
+.large-only-text-left 
+
+宽度在 64.0625em 到 90em 尺寸的屏幕左对齐 
+
+尝试一下 
+
+.xlarge-text-left 
+
+宽度大于 90.0625em 尺寸屏幕左对齐 
+
+尝试一下 
+
+.xlarge-only-text-left 
+
+宽度在 90.0625em 到 120em 尺寸的屏幕左对齐 
+
+尝试一下 
+
+.xxlarge-text-left 
+
+宽度大于 120em 尺寸屏幕左对齐 
+
+尝试一下 
+
+右对齐 
+
+.small-text-right 
+
+所有尺寸屏幕右对齐 
+
+尝试一下 
+
+.small-only-text-right 
+
+小尺寸屏幕右对齐(宽度小于 40em ) 
+
+尝试一下 
+
+.medium-text-right 
+
+宽度大于 40.0625em 尺寸屏幕右对齐 
+
+尝试一下 
+
+.medium-only-text-right 
+
+宽度在 40.0625em 到 64em 尺寸的屏幕右对齐 
+
+尝试一下 
+
+.large-text-right 
+
+宽度大于 64.0625em 尺寸屏幕右对齐 
+
+尝试一下 
+
+.large-only-text-right 
+
+宽度在 64.0625em 到 90em 尺寸的屏幕右对齐 
+
+尝试一下 
+
+.xlarge-text-right 
+
+宽度大于 90.0625em 尺寸屏幕右对齐 
+
+尝试一下 
+
+.xlarge-only-text-right 
+
+宽度在 90.0625em 到 120em 尺寸的屏幕右对齐 
+
+尝试一下 
+
+.xxlarge-text-right 
+
+宽度大于 120em 尺寸屏幕右对齐 
+
+尝试一下 
+
+居中对齐 
+
+.small-text-center 
+
+所有尺寸屏幕居中对齐 
+
+尝试一下 
+
+.small-only-text-center 
+
+小尺寸屏幕居中对齐(宽度小于 40em ) 
+
+尝试一下 
+
+.medium-text-center 
+
+宽度大于 40.0625em 尺寸屏幕居中对齐 
+
+尝试一下 
+
+.medium-only-text-center 
+
+宽度在 40.0625em 到 64em 尺寸的屏幕居中对齐 
+
+尝试一下 
+
+.large-text-center 
+
+宽度大于 64.0625em 尺寸屏幕居中对齐 
+
+尝试一下 
+
+.large-only-text-center 
+
+宽度在 64.0625em 到 90em 尺寸的屏幕居中对齐 
+
+尝试一下 
+
+.xlarge-text-center 
+
+宽度大于 90.0625em 尺寸屏幕居中对齐 
+
+尝试一下 
+
+.xlarge-only-text-center 
+
+宽度在 90.0625em 到 120em 尺寸的屏幕居中对齐 
+
+尝试一下 
+
+.xxlarge-text-center 
+
+宽度大于 120em 尺寸屏幕居中对齐 
+
+尝试一下 
+
+两端对齐 
+
+.small-text-justify 
+
+所有尺寸屏幕都两端对齐 
+
+尝试一下 
+
+.small-only-text-justify 
+
+小尺寸屏幕两端对齐(宽度小于 40em ) 
+
+尝试一下 
+
+.medium-text-justify 
+
+宽度大于 40.0625em 尺寸屏幕两端对齐 
+
+尝试一下 
+
+.medium-only-text-justify 
+
+宽度在 40.0625em 到 64em 尺寸的屏幕两端对齐 
+
+尝试一下 
+
+.large-text-justify 
+
+宽度大于 64.0625em 尺寸屏幕两端对齐 
+
+尝试一下 
+
+.large-only-text-justify 
+
+宽度在 64.0625em 到 90em 尺寸的屏幕两端对齐 
+
+尝试一下 
+
+.xlarge-text-justify 
+
+宽度大于 90.0625em 尺寸屏幕两端对齐 
+
+尝试一下 
+
+.xlarge-only-text-justify 
+
+宽度在 90.0625em 到 120em 尺寸的屏幕两端对齐 
+
+尝试一下 
+
+.xxlarge-text-justify 
+
+宽度大于 120em 尺寸屏幕两端对齐 
+
+尝试一下 
+
+其他 
+
+类 
+
+描述 
+
+实例 
+
+.left 
+
+元素向左浮动 
+
+尝试一下 
+
+.right 
+
+元素向右浮动 
+
+尝试一下 
+
+.clearfix 
+
+清除浮动 - 必须添加在浮动元素的父元素上 
+
+.hide 
+
+隐藏元素 (CSS display: none ) 
+
+尝试一下 
+
+.list-inline 
+
+将所有元素设置在同一行 
+
+尝试一下 
+
+.lead 
+
+让 <p> 元素更突出 
+
+尝试一下 
+
+.subheader 
+
+设置浅色的 <h1> - <h6> 元素 
+
+尝试一下 
+
+AI 思考中... 
+
+Foundation 图标参考手册 
+
+Foundation CSS 可见性

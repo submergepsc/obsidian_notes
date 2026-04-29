@@ -1,0 +1,81 @@
+URL: https://www.runoob.com/xml/xml-validator.html
+Title: XML 验证器 | 菜鸟教程
+
+XML 验证器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML 教程 
+
+XML DTD 
+
+查看 XML 文件 
+
+XML 验证器 
+
+使用我们的 XML 验证器来对您的 XML 文件进行语法检查。 
+
+XML 错误会终止您的程序 
+
+XML 文档中的错误会终止您的 XML 应用程序。 
+
+W3C 的 XML 规范声明：如果 XML 文档存在错误，那么程序就不应当继续处理这个文档。理由是，XML 软件应当轻巧，快速，具有良好的兼容性。 
+
+如果使用 HTML，创建包含大量错误的文档是有可能的（比如您忘记了结束标签）。其中一个主要的原因是 HTML 浏览器相当臃肿，兼容性也很差，并且它们有自己的方式来确定当发现错误时文档应该显示为什么样子。 
+
+使用 XML 时，这种情况不应当存在。 
+
+对您的 XML 进行语法检查 
+
+为了帮助您对 XML 进行语法检查，我们创建了一个 XML 验证器。 
+
+把您的 XML 粘贴到下面的文本框中，然后点击"验证"按钮来进行语法检查。 
+
+语法正确实例： 
+
+<?xml version="1.0" encoding="UTF-8"?>
+<note>
+<to>Tove</to>
+<from>Jani</from> 
+<heading>Reminder</heading>
+<body>Don't forget me this weekend!</body>
+</note> 
+
+语法错误实例： 
+
+<?xml version="1.0" ?> 
+<note>
+<to>Tove</to> 
+<from>Jani</Ffrom> 
+<heading>Reminder</heading> 
+<body>Don't forget me this weekend!</body> 
+</note> 
+
+注释： 只会检查您的 XML 是否"形式良好"。如果您想根据 DTD 来验证 XML，请参阅此页面上的最后一段。 
+
+根据 DTD 来验证 XML 
+
+如果您运行 Internet Explorer ，您可以在下面的文本区域中根据 DTD 验证您的 XML。 
+
+只要把 DOCTYPE 声明（带有 DTD）添加到您的 XML 中 <xml> 元素后，然后点击"验证"按钮即可： 
+
+<?xml version="1.0" ?> 
+<!DOCTYPE note [
+ <!ELEMENT note (to,from,heading,body)>
+ <!ELEMENT to (#PCDATA)>
+ <!ELEMENT from (#PCDATA)>
+ <!ELEMENT heading (#PCDATA)>
+ <!ELEMENT body (#PCDATA)>
+]>
+<note>
+<to>Tove</to> 
+<from>Jani</from> 
+<heading>Reminder</heading> 
+<message>Don't forget me this weekend!</message> 
+</note> 
+
+AI 思考中... 
+
+XML DTD 
+
+查看 XML 文件

@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ml index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>ml index</h1>
+      <p>Offline pages under ml</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-516595e8">入门</a> <span>5 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>1 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>1 pages</span></li><li><a href="#subgroup-6d4b9a8c">测验</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>50 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>ml (58)</h2><p>二级分类：5 个</p><ul class="page-list"><li><a href="#subgroup-516595e8">入门</a> <span>5 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>1 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>1 pages</span></li><li><a href="#subgroup-6d4b9a8c">测验</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>50 pages</span></li></ul></section><section id="subgroup-516595e8"><h2>入门 (5)</h2><ol class="page-list"><li><a href="ml-python.html">Python 入门机器学习</a> <code>https://www.runoob.com/ml/ml-python.html</code></li><li><a href="ml-basics.html">机器学习基础术语</a> <code>https://www.runoob.com/ml/ml-basics.html</code></li><li><a href="ml-tutorial.html">机器学习教程</a> <code>https://www.runoob.com/ml/ml-tutorial.html</code></li><li><a href="ml-intro.html">机器学习简介</a> <code>https://www.runoob.com/ml/ml-intro.html</code></li><li><a href="ml-foundations-of-statistics.html">统计学基础</a> <code>https://www.runoob.com/ml/ml-foundations-of-statistics.html</code></li></ol></section><section id="subgroup-53c28003"><h2>参考 (1)</h2><ol class="page-list"><li><a href="ml-loss-function-and-gradient.html">损失函数与梯度</a> <code>https://www.runoob.com/ml/ml-loss-function-and-gradient.html</code></li></ol></section><section id="subgroup-5b9e4f8b"><h2>实例 (1)</h2><ol class="page-list"><li><a href="ml-pca-visualization-case.html">机器学习 – PCA 可视化案例</a> <code>https://www.runoob.com/ml/ml-pca-visualization-case.html</code></li></ol></section><section id="subgroup-6d4b9a8c"><h2>测验 (1)</h2><ol class="page-list"><li><a href="ml-training-and-test-set-splitting.html">训练集测试集划分</a> <code>https://www.runoob.com/ml/ml-training-and-test-set-splitting.html</code></li></ol></section><section id="subgroup-4e139898"><h2>专题 (50)</h2><ol class="page-list"><li><a href="ml-knn.html">K 近邻算法</a> <code>https://www.runoob.com/ml/ml-knn.html</code></li><li><a href="ml-model-optimization-mlops.html">MLOps 概念</a> <code>https://www.runoob.com/ml/ml-model-optimization-mlops.html</code></li><li><a href="ml-python-libs.html">Python 机器学习库</a> <code>https://www.runoob.com/ml/ml-python-libs.html</code></li><li><a href="ml-cross-validation.html">交叉验证</a> <code>https://www.runoob.com/ml/ml-cross-validation.html</code></li><li><a href="ml-hypothesis-limitations.html">假设限制</a> <code>https://www.runoob.com/ml/ml-hypothesis-limitations.html</code></li><li><a href="ml-decision-tree.html">决策树（Decision Tree）</a> <code>https://www.runoob.com/ml/ml-decision-tree.html</code></li><li><a href="ml-classification-metrics.html">分类指标</a> <code>https://www.runoob.com/ml/ml-classification-metrics.html</code></li><li><a href="ml-forward-and-backward-propagation.html">前向传播与反向传播</a> <code>https://www.runoob.com/ml/ml-forward-and-backward-propagation.html</code></li><li><a href="ml-interpretability-problem.html">可解释性问题</a> <code>https://www.runoob.com/ml/ml-interpretability-problem.html</code></li><li><a href="ml-regression-model-evaluation.html">回归模型评估</a> <code>https://www.runoob.com/ml/ml-regression-model-evaluation.html</code></li><li><a href="ml-multiple-linear-regression.html">多元线性回归</a> <code>https://www.runoob.com/ml/ml-multiple-linear-regression.html</code></li><li><a href="ml-multinomial-regression.html">多项式回归</a> <code>https://www.runoob.com/ml/ml-multinomial-regression.html</code></li><li><a href="ml-datatype.html">常用数据类型</a> <code>https://www.runoob.com/ml/ml-datatype.html</code></li><li><a href="ml-common-network-types.html">常见网络类型</a> <code>https://www.runoob.com/ml/ml-common-network-types.html</code></li><li><a href="ml-model-optimization-common-problems.html">常见问题排查</a> <code>https://www.runoob.com/ml/ml-model-optimization-common-problems.html</code></li><li><a href="ml-qlearning-sarsa.html">强化学习 Q-learning 与 SARSA</a> <code>https://www.runoob.com/ml/ml-qlearning-sarsa.html</code></li><li><a href="ml-basic-framework-of-reinforcement-learning.html">强化学习基本框架</a> <code>https://www.runoob.com/ml/ml-basic-framework-of-reinforcement-learning.html</code></li><li><a href="ml-exploration-exploitation.html">强化学习探索vs开采</a> <code>https://www.runoob.com/ml/ml-exploration-exploitation.html</code></li><li><a href="ml-svm.html">支持向量机</a> <code>https://www.runoob.com/ml/ml-svm.html</code></li><li><a href="ml-data-bias.html">数据偏差</a> <code>https://www.runoob.com/ml/ml-data-bias.html</code></li><li><a href="ml-data-visualizations.html">数据可视化</a> <code>https://www.runoob.com/ml/ml-data-visualizations.html</code></li><li><a href="ml-model-optimization-data-leakage.html">数据泄漏</a> <code>https://www.runoob.com/ml/ml-model-optimization-data-leakage.html</code></li><li><a href="ml-data-cleaning.html">数据清洗</a> <code>https://www.runoob.com/ml/ml-data-cleaning.html</code></li><li><a href="ml-data-understanding.html">数据理解</a> <code>https://www.runoob.com/ml/ml-data-understanding.html</code></li><li><a href="ml-cluster-analysis.html">无监督学习 – 聚类</a> <code>https://www.runoob.com/ml/ml-cluster-analysis.html</code></li><li><a href="ml-dimensionality-reduction.html">无监督学习 – 降维</a> <code>https://www.runoob.com/ml/ml-dimensionality-reduction.html</code></li><li><a href="ml-naive-bayes.html">朴素贝叶斯</a> <code>https://www.runoob.com/ml/ml-naive-bayes.html</code></li><li><a href="ml-customer-segmentation.html">机器学习 – 客户分群</a> <code>https://www.runoob.com/ml/ml-customer-segmentation.html</code></li><li><a href="ml-reinforcement-learning.html">机器学习 – 强化学习示例</a> <code>https://www.runoob.com/ml/ml-reinforcement-learning.html</code></li><li><a href="ml-house-price-prediction.html">机器学习 – 房价预测</a> <code>https://www.runoob.com/ml/ml-house-price-prediction.html</code></li><li><a href="ml-how-to-learn.html">机器学习-学习路线</a> <code>https://www.runoob.com/ml/ml-how-to-learn.html</code></li><li><a href="ml-hw.html">机器学习如何工作</a> <code>https://www.runoob.com/ml/ml-hw.html</code></li><li><a href="ml-applications.html">机器学习应用</a> <code>https://www.runoob.com/ml/ml-applications.html</code></li><li><a href="ml-algorithms.html">机器学习算法</a> <code>https://www.runoob.com/ml/ml-algorithms.html</code></li><li><a href="ml-project-lifecycle.html">机器学习项目生命周期</a> <code>https://www.runoob.com/ml/ml-project-lifecycle.html</code></li><li><a href="ml-probabilistic-thinking.html">概率思维</a> <code>https://www.runoob.com/ml/ml-probabilistic-thinking.html</code></li><li><a href="ml-cost-of-models.html">模型的现实成本</a> <code>https://www.runoob.com/ml/ml-cost-of-models.html</code></li><li><a href="ml-model-optimization-regularization.html">正则化</a> <code>https://www.runoob.com/ml/ml-model-optimization-regularization.html</code></li><li><a href="ml-titanic-survival-prediction.html">泰坦尼克号生存预测</a> <code>https://www.runoob.com/ml/ml-titanic-survival-prediction.html</code></li><li><a href="ml-deep-learning-traditional-machine-learning.html">深度学习vs传统机器学习</a> <code>https://www.runoob.com/ml/ml-deep-learning-traditional-machine-learning.html</code></li><li><a href="ml-deep-reinforcement-learning.html">深度强化学习</a> <code>https://www.runoob.com/ml/ml-deep-reinforcement-learning.html</code></li><li><a href="ml-feature-engineering.html">特征工程</a> <code>https://www.runoob.com/ml/ml-feature-engineering.html</code></li><li><a href="ml-structure-of-neural-networks.html">神经网络的基本结构</a> <code>https://www.runoob.com/ml/ml-structure-of-neural-networks.html</code></li><li><a href="ml-linear-regression.html">线性回归 (Linear Regression)</a> <code>https://www.runoob.com/ml/ml-linear-regression.html</code></li><li><a href="ml-hyperparameter-search.html">超参搜索</a> <code>https://www.runoob.com/ml/ml-hyperparameter-search.html</code></li><li><a href="ml-overfitting-underfitting-bias-and-variance.html">过拟合、欠拟合、偏差与方差</a> <code>https://www.runoob.com/ml/ml-overfitting-underfitting-bias-and-variance.html</code></li><li><a href="ml-logistic-regression.html">逻辑回归（Logistic Regression）</a> <code>https://www.runoob.com/ml/ml-logistic-regression.html</code></li><li><a href="ml-random-forest.html">随机森林</a> <code>https://www.runoob.com/ml/ml-random-forest.html</code></li><li><a href="ml-ensemble-learning.html">集成学习</a> <code>https://www.runoob.com/ml/ml-ensemble-learning.html</code></li><li><a href="ml-model-optimization-integrated-approaches.html">集成方法</a> <code>https://www.runoob.com/ml/ml-model-optimization-integrated-approaches.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "机器学习算法", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-algorithms.html", "href": "ml-algorithms.html"}, {"title": "机器学习应用", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-applications.html", "href": "ml-applications.html"}, {"title": "强化学习基本框架", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-basic-framework-of-reinforcement-learning.html", "href": "ml-basic-framework-of-reinforcement-learning.html"}, {"title": "机器学习基础术语", "group": "ml", "subgroup": "入门", "url": "https://www.runoob.com/ml/ml-basics.html", "href": "ml-basics.html"}, {"title": "分类指标", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-classification-metrics.html", "href": "ml-classification-metrics.html"}, {"title": "无监督学习 – 聚类", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-cluster-analysis.html", "href": "ml-cluster-analysis.html"}, {"title": "常见网络类型", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-common-network-types.html", "href": "ml-common-network-types.html"}, {"title": "模型的现实成本", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-cost-of-models.html", "href": "ml-cost-of-models.html"}, {"title": "交叉验证", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-cross-validation.html", "href": "ml-cross-validation.html"}, {"title": "机器学习 – 客户分群", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-customer-segmentation.html", "href": "ml-customer-segmentation.html"}, {"title": "数据偏差", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-data-bias.html", "href": "ml-data-bias.html"}, {"title": "数据清洗", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-data-cleaning.html", "href": "ml-data-cleaning.html"}, {"title": "数据理解", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-data-understanding.html", "href": "ml-data-understanding.html"}, {"title": "数据可视化", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-data-visualizations.html", "href": "ml-data-visualizations.html"}, {"title": "常用数据类型", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-datatype.html", "href": "ml-datatype.html"}, {"title": "决策树（Decision Tree）", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-decision-tree.html", "href": "ml-decision-tree.html"}, {"title": "深度学习vs传统机器学习", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-deep-learning-traditional-machine-learning.html", "href": "ml-deep-learning-traditional-machine-learning.html"}, {"title": "深度强化学习", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-deep-reinforcement-learning.html", "href": "ml-deep-reinforcement-learning.html"}, {"title": "无监督学习 – 降维", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-dimensionality-reduction.html", "href": "ml-dimensionality-reduction.html"}, {"title": "集成学习", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-ensemble-learning.html", "href": "ml-ensemble-learning.html"}, {"title": "强化学习探索vs开采", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-exploration-exploitation.html", "href": "ml-exploration-exploitation.html"}, {"title": "特征工程", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-feature-engineering.html", "href": "ml-feature-engineering.html"}, {"title": "前向传播与反向传播", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-forward-and-backward-propagation.html", "href": "ml-forward-and-backward-propagation.html"}, {"title": "统计学基础", "group": "ml", "subgroup": "入门", "url": "https://www.runoob.com/ml/ml-foundations-of-statistics.html", "href": "ml-foundations-of-statistics.html"}, {"title": "机器学习 – 房价预测", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-house-price-prediction.html", "href": "ml-house-price-prediction.html"}, {"title": "机器学习-学习路线", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-how-to-learn.html", "href": "ml-how-to-learn.html"}, {"title": "机器学习如何工作", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-hw.html", "href": "ml-hw.html"}, {"title": "超参搜索", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-hyperparameter-search.html", "href": "ml-hyperparameter-search.html"}, {"title": "假设限制", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-hypothesis-limitations.html", "href": "ml-hypothesis-limitations.html"}, {"title": "可解释性问题", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-interpretability-problem.html", "href": "ml-interpretability-problem.html"}, {"title": "机器学习简介", "group": "ml", "subgroup": "入门", "url": "https://www.runoob.com/ml/ml-intro.html", "href": "ml-intro.html"}, {"title": "K 近邻算法", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-knn.html", "href": "ml-knn.html"}, {"title": "线性回归 (Linear Regression)", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-linear-regression.html", "href": "ml-linear-regression.html"}, {"title": "逻辑回归（Logistic Regression）", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-logistic-regression.html", "href": "ml-logistic-regression.html"}, {"title": "损失函数与梯度", "group": "ml", "subgroup": "参考", "url": "https://www.runoob.com/ml/ml-loss-function-and-gradient.html", "href": "ml-loss-function-and-gradient.html"}, {"title": "常见问题排查", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-model-optimization-common-problems.html", "href": "ml-model-optimization-common-problems.html"}, {"title": "数据泄漏", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-model-optimization-data-leakage.html", "href": "ml-model-optimization-data-leakage.html"}, {"title": "集成方法", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-model-optimization-integrated-approaches.html", "href": "ml-model-optimization-integrated-approaches.html"}, {"title": "MLOps 概念", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-model-optimization-mlops.html", "href": "ml-model-optimization-mlops.html"}, {"title": "正则化", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-model-optimization-regularization.html", "href": "ml-model-optimization-regularization.html"}, {"title": "多项式回归", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-multinomial-regression.html", "href": "ml-multinomial-regression.html"}, {"title": "多元线性回归", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-multiple-linear-regression.html", "href": "ml-multiple-linear-regression.html"}, {"title": "朴素贝叶斯", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-naive-bayes.html", "href": "ml-naive-bayes.html"}, {"title": "过拟合、欠拟合、偏差与方差", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-overfitting-underfitting-bias-and-variance.html", "href": "ml-overfitting-underfitting-bias-and-variance.html"}, {"title": "机器学习 – PCA 可视化案例", "group": "ml", "subgroup": "实例", "url": "https://www.runoob.com/ml/ml-pca-visualization-case.html", "href": "ml-pca-visualization-case.html"}, {"title": "概率思维", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-probabilistic-thinking.html", "href": "ml-probabilistic-thinking.html"}, {"title": "机器学习项目生命周期", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-project-lifecycle.html", "href": "ml-project-lifecycle.html"}, {"title": "Python 机器学习库", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-python-libs.html", "href": "ml-python-libs.html"}, {"title": "Python 入门机器学习", "group": "ml", "subgroup": "入门", "url": "https://www.runoob.com/ml/ml-python.html", "href": "ml-python.html"}, {"title": "强化学习 Q-learning 与 SARSA", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-qlearning-sarsa.html", "href": "ml-qlearning-sarsa.html"}, {"title": "随机森林", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-random-forest.html", "href": "ml-random-forest.html"}, {"title": "回归模型评估", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-regression-model-evaluation.html", "href": "ml-regression-model-evaluation.html"}, {"title": "机器学习 – 强化学习示例", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-reinforcement-learning.html", "href": "ml-reinforcement-learning.html"}, {"title": "神经网络的基本结构", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-structure-of-neural-networks.html", "href": "ml-structure-of-neural-networks.html"}, {"title": "支持向量机", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-svm.html", "href": "ml-svm.html"}, {"title": "泰坦尼克号生存预测", "group": "ml", "subgroup": "专题", "url": "https://www.runoob.com/ml/ml-titanic-survival-prediction.html", "href": "ml-titanic-survival-prediction.html"}, {"title": "训练集测试集划分", "group": "ml", "subgroup": "测验", "url": "https://www.runoob.com/ml/ml-training-and-test-set-splitting.html", "href": "ml-training-and-test-set-splitting.html"}, {"title": "机器学习教程", "group": "ml", "subgroup": "入门", "url": "https://www.runoob.com/ml/ml-tutorial.html", "href": "ml-tutorial.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

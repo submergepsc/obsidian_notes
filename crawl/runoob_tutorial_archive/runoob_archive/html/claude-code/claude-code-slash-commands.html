@@ -1,0 +1,2457 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Claude Code 斜杠 / 命令 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="claude-code-slash-commands.html" />
+<meta name="keywords" content="Claude Code 斜杠 / 命令">
+<meta name="description" content=".new-badge {     display: inline-block;     background: #4CAF50;     color: #fff;     font-size: .72em;     border-radius: 3px;     padding: 1px 6px;     vertical-align: middle;     margin-left: 5px;     font-weight: nor..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<style>
+/* 主题切换按钮 */
+/* ===== 主题变量（核心）===== */
+:root {
+  --theme-bg: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-icon: #333;
+  --theme-hover: #f3f4f6;
+}
+
+.dark {
+  --theme-bg: #1f2937;
+  --theme-border: #374151;
+  --theme-icon: #e5e7eb;
+  --theme-hover: #374151;
+}
+
+/* ===== 按钮容器 ===== */
+.nav-theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== 按钮本体 ===== */
+.nav-theme-toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+
+  background: var(--theme-bg);
+  color: var(--theme-icon);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ===== 图标大小 ===== */
+.nav-theme-toggle i {
+  font-size: 14px;
+}
+
+/* ===== hover 效果 ===== */
+.nav-theme-toggle button:hover {
+  background: var(--theme-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== 点击反馈 ===== */
+.nav-theme-toggle button:active {
+  transform: scale(0.95);
+}
+
+/* ===== 当前激活态（可选）===== */
+.nav-theme-toggle button.active {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+</style>
+<!-- 导航栏 -->
+<nav class="container navigation" aria-label="主导航">
+  <div class="row">
+    <div class="col nav">
+
+      <!-- PC 导航 -->
+      <ul class="pc-nav" id="runoob-detail-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../js/js-tutorial.html">JavaScript</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="javascript:void(0);" data-id="vue">Vue</a></li>
+        <li><a href="../react/react-tutorial.html">React</a></li>
+        <li><a href="../python3/python3-tutorial.html">Python3</a></li>
+        <li><a href="../java/java-tutorial.html">Java</a></li>
+        <li><a href="../cprogramming/c-tutorial.html">C</a></li>
+        <li><a href="../cplusplus/cpp-tutorial.html">C++</a></li>
+        <li><a href="../csharp/csharp-tutorial.html">C#</a></li>
+        <li><a href="javascript:void(0);" data-id="aiNav">AI</a></li>
+        <li><a href="../go/go-tutorial.html">Go</a></li>
+        <li><a href="../sql/sql-tutorial.html">SQL</a></li>
+        <li><a href="../linux/linux-tutorial.html">Linux</a></li>
+        <li><a href="../vscode/vscode-tutorial.html">VS Code</a></li>
+        <li><a href="javascript:void(0);" data-id="bootstrap">Bootstrap</a></li>
+        <li><a href="../git/git-tutorial.html">Git</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+
+        <!-- 主题切换按钮，固定在最右侧 -->
+        <li class="nav-theme-toggle">
+          <button id="moon" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 移动端导航 -->
+      <ul class="mobile-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="../js/js-tutorial.html">JS</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+        <li><a href="javascript:void(0)" class="search-reveal">搜索</a></li>
+
+        <!-- 移动端主题切换 -->
+        <li class="nav-theme-toggle">
+          <button id="moon-mobile" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun-mobile" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- 二级导航 -->
+<div class="container sub-navigation sub-navigation-articles" style="display:none">
+  <div class="row">
+    <div class="col nav-sub">
+
+      <ul id="vue">
+        <li class="cat-item"><a href="../vue3/vue3-tutorial.html">Vue3 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../vue/vue-tutorial.html">Vue2 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="bootstrap">
+        <li class="cat-item"><a href="../bootstrap/bootstrap-tutorial.html">Bootstrap3 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="aiNav">
+        <li class="cat-item"><a href="../ml/ml-tutorial.html">机器学习 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../pytorch/pytorch-tutorial.html">PyTorch <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../tensorflow/tensorflow-tutorial.html">TensorFlow <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../sklearn/sklearn-tutorial.html">Sklearn <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../nlp/nlp-tutorial.html">NLP <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ai-agent/ai-agent-tutorial.html">AI Agent <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ollama/ollama-tutorial.html">Ollama <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+  </div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="runoob-col-md2">
+<div class="left-column">
+	<div class="tab" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+	<i class="fa fa-list" aria-hidden="true"></i> 
+	<span>Claude Code 教程</span>
+
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" data-p="par" title="Claude Code 教程" href="claude-code-tutorial.html">
+			Claude Code 教程			</a>
+						<a target="_top" data-p="par" title="Claude Code 简介" href="claude-code-intro.html">
+			Claude Code 简介			</a>
+						<a target="_top" data-p="par" title="Claude Code 安装与使用" href="claude-code-install.html">
+			Claude Code 安装与使用			</a>
+			<a target="_top" title="Claude Code 如何工作" href="claude-code-how-it-work.html">Claude Code 如何工作</a>			<a target="_top" data-p="par" title="Claude Code API 配置" href="claude-code-setup.html">
+			Claude Code API 配置			</a>
+			<a target="_top" title="Coding Plan" href="coding-plan.html">Coding Plan</a>			<a target="_top" data-p="par" title="Claude Code 第一次使用" href="claude-code-first-demo.html">
+			Claude Code 第一次使用			</a>
+			<a target="_top" title="VS Code Claude Code" href="vscode-install-claude-code.html">VS Code Claude Code</a>
+<a target="_top" title="Claude Code 项目初始化" href="claude-code-init.html">Claude Code 项目初始化</a>
+<a target="_top" title="Claude Code 项目结构" href="claude-code-project.html">Claude Code 项目结构</a>			<a target="_top" data-p="par" title="Claude Code 交互模式" href="claude-code-cli.html">
+			Claude Code 交互模式			</a>
+			<a target="_top" title="Claude Code 操作说明" href="claude-code-symbols.html">Claude Code 操作说明</a>			<a target="_top" data-p="par" title="Claude Code 基础用法" href="claude-code-basic.html">
+			Claude Code 基础用法			</a>
+			<a target="_top" title="CLAUDE.md 使用指南" href="claude-code-claudemd.html">CLAUDE.md 使用指南</a>
+<a target="_top" title="Claude Code 上下文管理" href="claude-code-context.html">Claude Code 上下文管理</a>
+<a target="_top" title="Claude Code 权限配置" href="claude-code-permission.html">Claude Code 权限配置</a>			<a target="_top" data-p="par" title="Claude Code MCP" href="claude-code-mcp.html">
+			Claude Code MCP			</a>
+						<a target="_top" data-p="par" title="Claude Code 子代理" href="claude-code-subagent.html">
+			Claude Code 子代理			</a>
+						<a target="_top" data-p="par" title="Claude Code 插件" href="claude-code-plugins.html">
+			Claude Code 插件			</a>
+			<a target="_top" title="Claude Code 记忆系统" href="claude-code-memory.html">Claude Code 记忆系统</a>
+<a target="_top" title="Agent Skills" href="claude-agent-skills.html">Agent Skills</a>
+<a target="_top" title="Skills 使用实例" href="claude-code-ui-ux-pro-max-skill.html">Skills 使用实例</a>
+<a target="_top" title="skill-creator 使用" href="skill-creator-usage.html">skill-creator 使用</a>			<a target="_top" data-p="par" title="Claude Code 输出样式" href="claude-code-outputstyles.html">
+			Claude Code 输出样式			</a>
+						<a target="_top" data-p="par" title="Claude Code 钩子" href="claude-code-hooks.html">
+			Claude Code 钩子			</a>
+						<a target="_top" data-p="par" title="Claude Code CLI 参考手册" href="claude-code-cli-ref.html">
+			Claude Code CLI 参考手册			</a>
+						<a target="_top" data-p="par" title="Claude Code 控制与模式" href="claude-code-control.html">
+			Claude Code 控制与模式			</a>
+						<a target="_top" data-p="par" title="Claude Code 斜杠 / 命令" href="claude-code-slash-commands.html">
+			Claude Code 斜杠 / 命令			</a>
+						<a target="_top" data-p="par" title="Claude Code 检查点" href="claude-code-checkpointing.html">
+			Claude Code 检查点			</a>
+						<a target="_top" data-p="par" title="Claude Code 插件参考手册" href="claude-code-plugin-ref.html">
+			Claude Code 插件参考手册			</a>
+						<a target="_top" data-p="par" title="Claude Code 实战" href="claude-code-practical.html">
+			Claude Code 实战			</a>
+						<a target="_top" data-p="par" title="Claude Code 控制 Chrome 浏览器" href="claude-code-chrome.html">
+			Claude Code Chrome			</a>
+						<a target="_top" data-p="par" title="Claude Code 并行任务" href="claude-code-parallel-tasks.html">
+			Claude Code 并行任务			</a>
+						<a target="_top" data-p="par" title="Claude Code 环境变量" href="claude-code-env.html">
+			Claude Code 环境变量			</a>
+						<a target="_top" data-p="par" title="Claude Code Git 工作流" href="claude-code-git-workflow.html">
+			Claude Code Git 工作流			</a>
+						<a target="_top" data-p="par" title="Claude Code GitHub Actions" href="claude-code-github-actions.html">
+			Claude Code GitHub Actions			</a>
+				
+		</div>
+	</div>	
+</div>
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="claude-code-control.html" rel="prev"> Claude Code 控制与模式</a> </div>
+			<div class="next-design-link"><a href="claude-code-checkpointing.html" rel="next"> Claude Code 检查点</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+<div class="article-heading-ad" style="display: block;">
+
+<style>
+  /* 隐藏移动端广告 */
+  @media (max-width: 768px) {
+    .adsbygoogle {
+      display: none !important;
+    }
+  }
+  
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 728*90 固定 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="2147566827"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<style>
+.new-badge {
+    display: inline-block;
+    background: #4CAF50;
+    color: #fff;
+    font-size: .72em;
+    border-radius: 3px;
+    padding: 1px 6px;
+    vertical-align: middle;
+    margin-left: 5px;
+    font-weight: normal;
+}
+.legacy-badge {
+    display: inline-block;
+    background: #f0ad4e;
+    color: #fff;
+    font-size: .72em;
+    border-radius: 3px;
+    padding: 1px 6px;
+    vertical-align: middle;
+    margin-left: 5px;
+    font-weight: normal;
+}
+.tip-box {
+    background: #e8f4fd;
+    border-left: 4px solid #3498db;
+    padding: 10px 16px;
+    margin: 12px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: .95em;
+}
+.warn-box {
+    background: #fff8e1;
+    border-left: 4px solid #f0ad4e;
+    padding: 10px 16px;
+    margin: 12px 0;
+    border-radius: 0 4px 4px 0;
+    font-size: .95em;
+}
+.tip-box .fa, .warn-box .fa {
+    margin-right: 6px;
+}
+</style>
+
+<h1>Claude Code 斜杠 / 命令</h1>
+
+<p>斜杠 <span class="marked">/</span> 命令是 Claude Code 交互式会话的<strong>快捷控制入口</strong>，通过输入 <code><span class="marked">/</span></code> 开头的指令，就能快速调用功能、管理会话、自定义工作流。</p>
+
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2026/01/23e5a097-f781-4f4b-8597-35d18a7aae29.png"></p>
+
+<p>查看所有可用命令：</p>
+<pre>/help</pre>
+<p><code>/help</code> 会列出所有内置命令、当前项目的自定义命令（Skills / Commands），以及已连接 MCP 服务器暴露的命令。</p>
+
+<p>命令类型：</p>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>类型</th>
+            <th>触发方式</th>
+            <th>来源</th>
+            <th>存储位置</th>
+            <th>适用场景</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><strong>内置命令</strong></td>
+            <td><code>/command</code></td>
+            <td>随 Claude Code 安装</td>
+            <td>内部实现</td>
+            <td>会话管理、配置、集成等系统操作</td>
+        </tr>
+        <tr>
+            <td><strong>内置 Skills</strong> </td>
+            <td><code>/skill-name</code></td>
+            <td>随 Claude Code 附带</td>
+            <td>内部实现</td>
+            <td>代码审查、调试、批处理等预置 AI 工作流</td>
+        </tr>
+        <tr>
+            <td><strong>项目自定义 Skills</strong> <span class="new-badge">推荐</span></td>
+            <td><code>/skill-name</code></td>
+            <td>用户创建目录 + SKILL.md</td>
+            <td><code>.claude/skills/&lt;名称&gt;/SKILL.md</code></td>
+            <td>团队共享的可复用工作流，纳入 git；支持 Claude 自动触发</td>
+        </tr>
+        <tr>
+            <td><strong>项目自定义命令</strong> <span class="legacy-badge">旧格式</span></td>
+            <td><code>/command</code></td>
+            <td>用户创建 <code>.md</code> 文件</td>
+            <td><code>.claude/commands/</code></td>
+            <td>团队共享的重复工作流，纳入 git</td>
+        </tr>
+        <tr>
+            <td><strong>个人自定义 Skills</strong></td>
+            <td><code>/skill-name</code></td>
+            <td>用户创建目录 + SKILL.md</td>
+            <td><code>~/.claude/skills/&lt;名称&gt;/SKILL.md</code></td>
+            <td>跨项目通用的个人工作流</td>
+        </tr>
+        <tr>
+            <td><strong>个人自定义命令</strong></td>
+            <td><code>/command</code></td>
+            <td>用户创建 <code>.md</code> 文件</td>
+            <td><code>~/.claude/commands/</code></td>
+            <td>跨项目通用的个人工作流（旧格式）</td>
+        </tr>
+        <tr>
+            <td><strong>MCP 命令</strong></td>
+            <td><code>/mcp__服务器__命令</code></td>
+            <td>MCP 服务器自动暴露</td>
+            <td>由 MCP 服务器提供</td>
+            <td>调用 GitHub、Slack、数据库等外部工具</td>
+        </tr>
+        <tr>
+            <td><strong><code>!</code> Shell 命令</strong></td>
+            <td><code>!bash命令</code></td>
+            <td>直接执行</td>
+            <td>—</td>
+            <td>绕过 AI 处理，直接运行终端命令</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>命令优先级（同名时）</strong>：企业级 &gt; 个人级 &gt; 项目级 &gt; 内置</p>
+
+<div class="tip-box">
+<i class="fa fa-info-circle"></i> <strong>Skills vs Commands</strong>：两者均用 <code>/</code> 触发，但 Skills（<code>.claude/skills/</code>）是新一代格式，支持多文件组织、Claude 自动触发、更丰富的 frontmatter 控制；Commands（<code>.claude/commands/</code>）为旧格式，仍完全兼容，新项目推荐直接使用 Skills。
+</div>
+
+<hr>
+<h2>一、常用内置斜杠命令</h2>
+<p>内置命令是 Claude Code 自带的核心功能，直接输入就能用。新手优先掌握这几类高频命令：</p>
+
+<h3>基础操作命令</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>用途</th>
+            <th>新手示例</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/help</code></td>
+            <td>查看所有可用命令及说明（含 MCP 命令）</td>
+            <td>输入 <code>/help</code> 快速查命令清单</td>
+        </tr>
+        <tr>
+            <td><code>/exit</code></td>
+            <td>退出当前交互式会话</td>
+            <td>不想继续聊了，输 <code>/exit</code> 直接走</td>
+        </tr>
+        <tr>
+            <td><code>/clear</code></td>
+            <td>清除当前对话历史</td>
+            <td>会话太乱？<code>/clear</code> 一键清空</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>例如我们使用 <span class="marked">/help</span> 命令查看帮助信息，<span class="marked">Tab</span> 键可以切换菜单，<span class="marked">Esc</span> 退出：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2026/01/93013ac4-eb3c-4b2c-8d8a-86edb32d778e.png"></p>
+
+<h3>会话管理命令</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>语法</th>
+            <th>功能说明</th>
+            <th>使用示例</th>
+            <th>注意事项</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/clear</code></td>
+            <td><code>/clear</code></td>
+            <td>清除全部对话历史，开始全新会话</td>
+            <td><code>/clear</code></td>
+            <td>不可恢复，建议先 <code>/export</code></td>
+        </tr>
+        <tr>
+            <td><code>/compact</code></td>
+            <td><code>/compact [侧重点]</code></td>
+            <td>智能压缩历史对话，保留语义，缩小 Token 占用</td>
+            <td><code>/compact 保留数据库设计部分</code></td>
+            <td>与 <code>/clear</code> 区别：保留语义摘要而非完全清空</td>
+        </tr>
+        <tr>
+            <td><code>/resume</code></td>
+            <td><code>/resume [id或名称]</code></td>
+            <td>恢复历史会话；不带参数列出所有可恢复会话</td>
+            <td><code>/resume task-hub-backend</code></td>
+            <td>配合 <code>/rename</code> 效果更佳</td>
+        </tr>
+        <tr>
+            <td><code>/rewind</code></td>
+            <td><code>/rewind</code></td>
+            <td>撤销最近操作，含文件修改和对话内容，恢复到上一检查点；新版新增"仅回退代码"选项，可保留对话历史</td>
+            <td>按 <code>Esc</code> 两次呼出回退菜单</td>
+            <td>适合 Agent 执行结果不满意时回退</td>
+        </tr>
+        <tr>
+            <td><code>/rename</code></td>
+            <td><code>/rename &lt;名称&gt;</code></td>
+            <td>为当前会话命名，便于后续 <code>/resume</code> 找回</td>
+            <td><code>/rename auth-module-refactor</code></td>
+            <td>建议命名规范：<code>功能-操作</code></td>
+        </tr>
+        <tr>
+            <td><code>/export</code></td>
+            <td><code>/export [文件名]</code></td>
+            <td>导出对话为文件；不指定文件名则复制到剪贴板</td>
+            <td><code>/export debug-session.md</code></td>
+            <td>支持 Markdown 格式</td>
+        </tr>
+        <tr>
+            <td><code>/copy</code> <span class="new-badge">NEW</span></td>
+            <td><code>/copy</code></td>
+            <td>将 Claude 最近一次回复复制到剪贴板；若含多个代码块，会弹出交互式选择器</td>
+            <td><code>/copy</code></td>
+            <td>比手动框选文本快得多</td>
+        </tr>
+        <tr>
+            <td><code>/btw</code> <span class="new-badge">NEW</span></td>
+            <td><code>/btw &lt;问题&gt;</code></td>
+            <td>在不影响主任务上下文的情况下，快速插问一个临时问题，回答不会污染主对话流</td>
+            <td><code>/btw Redis 的默认端口是多少？</code></td>
+            <td>适合临时查阅而不想干扰当前任务</td>
+        </tr>
+        <tr>
+            <td><code>/exit</code></td>
+            <td><code>/exit</code></td>
+            <td>安全退出 Claude Code REPL</td>
+            <td><code>/exit</code></td>
+            <td>—</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>上下文与记忆</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>语法</th>
+            <th>功能说明</th>
+            <th>使用示例</th>
+            <th>注意事项</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/context</code></td>
+            <td><code>/context</code></td>
+            <td>可视化上下文窗口使用量，显示各部分（历史/文件/系统提示/Skills）占比</td>
+            <td><code>/context</code></td>
+            <td>接近上限时应执行 <code>/compact</code> 或 <code>/clear</code></td>
+        </tr>
+        <tr>
+            <td><code>/memory</code></td>
+            <td><code>/memory</code></td>
+            <td>打开编辑器修改 <code>CLAUDE.md</code>（项目级与全局级），跨会话持久化项目约定</td>
+            <td><code>/memory</code></td>
+            <td>修改后对后续所有会话生效</td>
+        </tr>
+        <tr>
+            <td><code>/add-dir</code></td>
+            <td><code>/add-dir &lt;路径&gt;</code></td>
+            <td>将额外目录纳入工作范围，适合 monorepo 或跨目录操作</td>
+            <td><code>/add-dir ../packages/shared</code></td>
+            <td>可多次调用添加多个目录</td>
+        </tr>
+        <tr>
+            <td><code>/todos</code></td>
+            <td><code>/todos</code></td>
+            <td>列出当前会话中 Claude 记录的 TODO 事项</td>
+            <td><code>/todos</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/diff</code> <span class="new-badge">NEW</span></td>
+            <td><code>/diff</code></td>
+            <td>查看本次会话中所有文件变更的 diff 摘要，便于回顾 Claude 做了哪些修改</td>
+            <td><code>/diff</code></td>
+            <td>与 <code>/rewind</code> 配合：先 <code>/diff</code> 确认变更，再决定是否回滚</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>项目与配置</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>语法</th>
+            <th>功能说明</th>
+            <th>使用示例</th>
+            <th>注意事项</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/init</code></td>
+            <td><code>/init</code></td>
+            <td>分析项目结构，自动生成 <code>CLAUDE.md</code>，写入技术栈/构建命令/代码规范</td>
+            <td><code>/init</code></td>
+            <td>新项目必备第一步</td>
+        </tr>
+        <tr>
+            <td><code>/config</code></td>
+            <td><code>/config</code></td>
+            <td>以交互式界面管理 Claude Code 全局配置</td>
+            <td><code>/config</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/status</code></td>
+            <td><code>/status</code></td>
+            <td>打开设置状态页，查看当前配置概览</td>
+            <td><code>/status</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/hooks</code></td>
+            <td><code>/hooks</code></td>
+            <td>交互式配置生命周期 Hook（如提交前 lint、保存后格式化）</td>
+            <td><code>/hooks</code></td>
+            <td>支持 PreToolUse / PostToolUse / Notification / Stop</td>
+        </tr>
+        <tr>
+            <td><code>/permissions</code></td>
+            <td><code>/permissions</code></td>
+            <td>查看或更新工具权限（读文件/写文件/执行命令等）</td>
+            <td><code>/permissions</code></td>
+            <td>限制权限可提升操作安全性</td>
+        </tr>
+        <tr>
+            <td><code>/sandbox</code></td>
+            <td><code>/sandbox</code></td>
+            <td>启用隔离沙盒环境执行 Bash 命令，防止影响宿主系统</td>
+            <td><code>/sandbox</code></td>
+            <td>适合测试不确定的脚本</td>
+        </tr>
+        <tr>
+            <td><code>/doctor</code></td>
+            <td><code>/doctor</code></td>
+            <td>诊断安装状态，检查依赖/配置/网络连接是否正常</td>
+            <td><code>/doctor</code></td>
+            <td>遇到异常时首先执行</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>模型与输出</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>语法</th>
+            <th>功能说明</th>
+            <th>使用示例</th>
+            <th>注意事项</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/model</code></td>
+            <td><code>/model [模型名]</code></td>
+            <td>切换底层 AI 模型；不带参数显示交互式选择菜单</td>
+            <td><code>/model claude-haiku-4-5-20251001</code></td>
+            <td>见下方模型对照表</td>
+        </tr>
+        <tr>
+            <td><code>/plan</code></td>
+            <td><code>/plan [任务描述]</code></td>
+            <td>进入计划模式，Claude 先输出执行计划供确认再行动</td>
+            <td><code>/plan 重构认证模块并补充测试</code></td>
+            <td>适合复杂多步骤任务，避免走偏</td>
+        </tr>
+        <tr>
+            <td><code>/output-style</code></td>
+            <td><code>/output-style</code></td>
+            <td>设置响应格式（代码优先/说明优先/简洁模式等）</td>
+            <td><code>/output-style</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/theme</code></td>
+            <td><code>/theme</code></td>
+            <td>切换终端界面颜色方案</td>
+            <td><code>/theme</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/statusline</code></td>
+            <td><code>/statusline</code></td>
+            <td>定制终端底部状态栏显示内容</td>
+            <td><code>/statusline</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/vim</code></td>
+            <td><code>/vim</code></td>
+            <td>启用 Vim 键位绑定</td>
+            <td><code>/vim</code></td>
+            <td>适合 Vim 用户</td>
+        </tr>
+        <tr>
+            <td><code>/terminal-setup</code></td>
+            <td><code>/terminal-setup</code></td>
+            <td>安装 <code>Shift+Enter</code> 换行绑定，方便输入多行 Prompt</td>
+            <td><code>/terminal-setup</code></td>
+            <td>首次使用建议配置</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>可用模型对照表（2026）：</strong></p>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>模型标识</th>
+            <th>定位</th>
+            <th>适用场景</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>claude-sonnet-4-6</code></td>
+            <td>均衡型（默认）</td>
+            <td>日常开发任务，Pro/Max5 用户首选</td>
+        </tr>
+        <tr>
+            <td><code>claude-haiku-4-5-20251001</code></td>
+            <td>快速轻量</td>
+            <td>简单查询、自定义命令中节省 Token</td>
+        </tr>
+        <tr>
+            <td><code>claude-opus-4-6</code></td>
+            <td>高能力旗舰</td>
+            <td>复杂架构规划、高难度代码推理，Max20 用户可作默认</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>代码与工具</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>语法</th>
+            <th>功能说明</th>
+            <th>使用示例</th>
+            <th>注意事项</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/review</code></td>
+            <td><code>/review</code></td>
+            <td>对最近修改的代码进行结构化 Code Review，按优先级输出改进建议</td>
+            <td><code>/review</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/security-review</code></td>
+            <td><code>/security-review</code></td>
+            <td>针对当前改动进行安全专项审查（SQL 注入/XSS/敏感信息泄露等）</td>
+            <td><code>/security-review</code></td>
+            <td>上线前必执行</td>
+        </tr>
+        <tr>
+            <td><code>/pr-comments</code></td>
+            <td><code>/pr-comments</code></td>
+            <td>拉取当前分支关联 PR 的审查意见，在终端中直接处理</td>
+            <td><code>/pr-comments</code></td>
+            <td>需配置 GitHub 集成</td>
+        </tr>
+        <tr>
+            <td><code>/install-github-app</code></td>
+            <td><code>/install-github-app</code></td>
+            <td>配置 GitHub Actions 集成，Claude 自动 Review 新 PR</td>
+            <td><code>/install-github-app</code></td>
+            <td>生成 <code>.github/workflows/claude-code-review.yml</code></td>
+        </tr>
+        <tr>
+            <td><code>/agents</code></td>
+            <td><code>/agents</code></td>
+            <td>查看、创建和管理专项子代理（DB 专家/安全专家/测试专家等）</td>
+            <td><code>/agents</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/bashes</code></td>
+            <td><code>/bashes</code></td>
+            <td>查看当前后台运行的 Bash 进程，可中断或查看输出</td>
+            <td><code>/bashes</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/skills</code> <span class="new-badge">NEW</span></td>
+            <td><code>/skills</code></td>
+            <td>列出所有可用的 Skills（内置 + 项目级 + 个人级），含描述和触发方式</td>
+            <td><code>/skills</code></td>
+            <td>上下文预算不足时部分 Skills 会被排除，通过此命令可确认加载状态</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>集成与扩展</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>语法</th>
+            <th>功能说明</th>
+            <th>使用示例</th>
+            <th>注意事项</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/mcp</code></td>
+            <td><code>/mcp</code></td>
+            <td>管理 MCP 服务器连接（连接/断开/查看可用工具）</td>
+            <td><code>/mcp</code></td>
+            <td>见第七节 MCP 命令详解</td>
+        </tr>
+        <tr>
+            <td><code>/ide</code></td>
+            <td><code>/ide</code></td>
+            <td>配置与 VSCode / JetBrains 等 IDE 的联动集成</td>
+            <td><code>/ide</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/plugin</code></td>
+            <td><code>/plugin [子命令]</code></td>
+            <td>管理 Claude Code 插件：安装、卸载、更新、浏览市场</td>
+            <td><code>/plugin install typescript-lsp</code></td>
+            <td>官方插件市场含 36 款精选插件</td>
+        </tr>
+        <tr>
+            <td><code>/teleport</code></td>
+            <td><code>/teleport</code></td>
+            <td>将 claude.ai 网页端发起的会话迁移到本地终端继续（云端 → 本地方向）</td>
+            <td><code>/teleport</code></td>
+            <td>需安装 GitHub App，仅支持 GitHub 托管仓库</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong><code>/plugin</code> 子命令详情：</strong></p>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>子命令</th>
+            <th>功能</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/plugin install &lt;名称&gt;</code></td>
+            <td>安装指定插件</td>
+        </tr>
+        <tr>
+            <td><code>/plugin list</code></td>
+            <td>列出所有已安装插件</td>
+        </tr>
+        <tr>
+            <td><code>/plugin update</code></td>
+            <td>更新所有已安装插件</td>
+        </tr>
+        <tr>
+            <td><code>/plugin marketplace</code></td>
+            <td>浏览官方插件市场</td>
+        </tr>
+        <tr>
+            <td><code>/plugin uninstall &lt;名称&gt;</code></td>
+            <td>卸载指定插件</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>统计与账户</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>语法</th>
+            <th>功能说明</th>
+            <th>使用示例</th>
+            <th>注意事项</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/cost</code></td>
+            <td><code>/cost</code></td>
+            <td>显示当前会话的 Token 消耗量与预估费用</td>
+            <td><code>/cost</code></td>
+            <td>API 计费用户可见；订阅制用户 Token 已含在套餐内</td>
+        </tr>
+        <tr>
+            <td><code>/usage</code></td>
+            <td><code>/usage</code></td>
+            <td>查看当前套餐用量、剩余配额和速率限制状态</td>
+            <td><code>/usage</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/stats</code></td>
+            <td><code>/stats</code></td>
+            <td>图表形式展示历史使用数据（每日 Token / 会话数量）</td>
+            <td><code>/stats</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/release-notes</code></td>
+            <td><code>/release-notes</code></td>
+            <td>查看 Claude Code 最新版本变更记录</td>
+            <td><code>/release-notes</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/bug</code></td>
+            <td><code>/bug</code></td>
+            <td>将当前会话上下文打包，向 Anthropic 提交 Bug 报告</td>
+            <td><code>/bug</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/login</code></td>
+            <td><code>/login</code></td>
+            <td>登录或切换 Anthropic 账户</td>
+            <td><code>/login</code></td>
+            <td>适合多账号开发者</td>
+        </tr>
+        <tr>
+            <td><code>/logout</code></td>
+            <td><code>/logout</code></td>
+            <td>注销当前账户</td>
+            <td><code>/logout</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/privacy-settings</code></td>
+            <td><code>/privacy-settings</code></td>
+            <td>管理数据使用偏好（是否允许对话用于模型训练等）</td>
+            <td><code>/privacy-settings</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>/remote-env</code></td>
+            <td><code>/remote-env</code></td>
+            <td>配置远程会话的环境变量</td>
+            <td><code>/remote-env</code></td>
+            <td>—</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+<h2>二、内置 Skills <span class="new-badge">NEW</span></h2>
+
+<p>内置 Skills 是随 Claude Code 附带的预置 AI 工作流，与内置命令不同——它们加载详细提示词后由 Claude 推理执行，可产出更丰富的分析和操作结果，同样用 <code>/</code> 触发。</p>
+
+<div class="tip-box">
+<i class="fa fa-lightbulb-o"></i> <strong>区别：内置命令 vs 内置 Skills</strong><br>
+内置命令（如 <code>/clear</code>、<code>/compact</code>）执行固定逻辑，不涉及 AI 推理，速度极快。<br>
+内置 Skills（如 <code>/debug</code>、<code>/simplify</code>）加载提示词后由 Claude 推理执行，结果更丰富，适合复杂分析任务。
+</div>
+
+<table class="reference">
+    <thead>
+        <tr>
+            <th>命令</th>
+            <th>功能说明</th>
+            <th>适用场景</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/simplify</code></td>
+            <td>将指定代码或文本简化，提升可读性，消除不必要的复杂度</td>
+            <td>重构冗长函数、简化过度工程化的代码</td>
+        </tr>
+        <tr>
+            <td><code>/debug</code></td>
+            <td>对报错信息或异常行为进行系统化根因分析，给出修复思路</td>
+            <td>定位难以复现的 bug</td>
+        </tr>
+        <tr>
+            <td><code>/batch</code></td>
+            <td>对多个文件或目标并行执行相同任务（如批量重命名、批量添加类型注解）</td>
+            <td>大批量重复性代码改动</td>
+        </tr>
+        <tr>
+            <td><code>/loop</code></td>
+            <td>在循环中反复执行某个操作直到满足退出条件（如不断重试测试直至通过）</td>
+            <td>自动化 CI 修复循环</td>
+        </tr>
+        <tr>
+            <td><code>/claude-api</code></td>
+            <td>快速生成调用 Anthropic API 的示例代码，支持指定模型和任务类型</td>
+            <td>搭建 Claude API 集成原型</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+<h2>三、命令前缀语法</h2>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>前缀</th>
+            <th>语法</th>
+            <th>功能说明</th>
+            <th>示例</th>
+            <th>对比</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>/</code></td>
+            <td><code>/command</code></td>
+            <td>触发内置命令、内置 Skills 或自定义 Skills/Commands</td>
+            <td><code>/review</code></td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>!</code></td>
+            <td><code>!&lt;bash命令&gt;</code></td>
+            <td>直接执行 Shell 命令，绕过 AI 处理，节省 Token</td>
+            <td><code>!git status</code></td>
+            <td>等价于在终端直接运行，但比「帮我查看 git 状态」省 Token</td>
+        </tr>
+        <tr>
+            <td><code>@</code></td>
+            <td><code>@&lt;文件路径&gt;</code></td>
+            <td>将文件内容注入当前上下文</td>
+            <td><code>@src/api/users.ts</code></td>
+            <td>比手动粘贴代码更精准，支持多文件</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong><code><span class="marked">!</span></code> 前缀使用示例：</strong></p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2026/01/4d37b1ea-521b-49b5-badf-85636f7e756d.png"></p>
+<pre>
+&gt; ! ls
+&gt; !git log --oneline -10
+&gt; !npm test -- --coverage
+&gt; !cat logs/error.log | tail -50</pre>
+
+<p><span class="marked">@</span> 前缀使用示例：</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2026/01/ec825797-0ed6-43ba-b694-c9bdc16d32e9.png"></p>
+<pre>&gt; 对比 @src/auth/v1.ts 和 @src/auth/v2.ts 的实现差异
+&gt; 审查 @src/api/users.ts 中的错误处理逻辑是否完善</pre>
+
+<hr>
+<h2>四、自定义 Skills（新推荐格式）</h2>
+
+<p>Skills 是自定义命令的新一代格式，取代旧版 <code>.claude/commands/</code>。两种格式均可正常使用，但新项目建议直接使用 Skills。</p>
+
+<h3>Skills vs Commands 对比</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>特性</th>
+            <th>Skills（推荐）</th>
+            <th>Commands（旧格式）</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>存储路径</td>
+            <td><code>.claude/skills/&lt;名称&gt;/SKILL.md</code></td>
+            <td><code>.claude/commands/&lt;名称&gt;.md</code></td>
+        </tr>
+        <tr>
+            <td>触发方式</td>
+            <td><code>/名称</code> 手动触发，或 Claude 根据描述自动触发</td>
+            <td><code>/名称</code>（仅手动触发）</td>
+        </tr>
+        <tr>
+            <td>多文件支持</td>
+            <td><i class="fa fa-check" style="color:#4CAF50"></i> 支持附带模板、示例、辅助脚本</td>
+            <td><i class="fa fa-times" style="color:#e74c3c"></i> 单文件</td>
+        </tr>
+        <tr>
+            <td>Claude 自动触发</td>
+            <td><i class="fa fa-check" style="color:#4CAF50"></i> Claude 根据 description 智能判断调用</td>
+            <td><i class="fa fa-times" style="color:#e74c3c"></i></td>
+        </tr>
+        <tr>
+            <td>Agent Skills 标准</td>
+            <td><i class="fa fa-check" style="color:#4CAF50"></i> 符合开放标准，可跨工具共享</td>
+            <td><i class="fa fa-times" style="color:#e74c3c"></i></td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>创建 Skill 步骤</h3>
+
+<h4>步骤 1：创建目录结构</h4>
+<p>自定义 Skills 分两种，存储位置不同：</p>
+<ul>
+    <li><strong>项目 Skill</strong>：只在当前项目生效，团队共享 → 目录：<code>.claude/skills/&lt;名称&gt;/</code></li>
+    <li><strong>个人 Skill</strong>：所有项目通用，自己用 → 目录：<code>~/.claude/skills/&lt;名称&gt;/</code></li>
+</ul>
+<pre># 创建项目级 Skill（团队共享，纳入 git）
+mkdir -p .claude/skills/optimize
+
+# 创建个人级 Skill（跨项目通用，本地私有）
+mkdir -p ~/.claude/skills/fix-bug</pre>
+
+<h4>步骤 2：编写 SKILL.md</h4>
+<p>新建 <code>SKILL.md</code> 文件，YAML frontmatter 写配置，下方 Markdown 正文写提示词。<code>name</code> 字段定义触发命令名。</p>
+
+<p><strong>示例：创建代码性能优化 Skill</strong></p>
+<pre>---
+name: optimize
+description: 分析代码性能瓶颈，给出优化建议。当用户提到性能问题时自动触发。
+allowed-tools: Read, Grep, Glob
+argument-hint: [目标文件或目录]
+model: claude-sonnet-4-6
+---
+
+分析以下代码的性能瓶颈，给出具体的优化建议，优先考虑时间复杂度和内存占用：
+$ARGUMENTS</pre>
+
+<p>使用时输入：</p>
+<pre>/optimize src/utils/data-processor.ts</pre>
+
+<h3>子目录命名空间组织</h3>
+<p>可在 <code>.claude/skills/</code> 下用子目录按职能分类管理，目录名即命令名：</p>
+<pre>.claude/skills/
+├── optimize/            &rarr; /optimize
+│   ├── SKILL.md
+│   └── examples/        # 可选：示例文件辅助 Claude 理解
+├── debug/               &rarr; /debug
+│   ├── SKILL.md
+│   └── scripts/         # 可选：辅助脚本
+└── commit/              &rarr; /commit
+    └── SKILL.md</pre>
+
+<hr>
+<h2>五、自定义斜杠命令（旧格式，兼容）</h2>
+
+<p>如果有<strong>重复使用的提示词</strong>（比如固定的代码审查要求、重复的指令模板），可以把它做成自定义命令，一键调用。</p>
+
+<p><strong>命令文件存储位置：</strong></p>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>作用域</th>
+            <th>存储路径</th>
+            <th>共享方式</th>
+            <th>适用场景</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>项目级</td>
+            <td><code>.claude/commands/&lt;命令名&gt;.md</code></td>
+            <td>纳入 git，团队共享</td>
+            <td>项目专属工作流（如特定框架的代码生成）</td>
+        </tr>
+        <tr>
+            <td>个人级</td>
+            <td><code>~/.claude/commands/&lt;命令名&gt;.md</code></td>
+            <td>本地私有</td>
+            <td>通用开发习惯（如个人代码风格检查）</td>
+        </tr>
+    </tbody>
+</table>
+
+<p><strong>参数语法：</strong></p>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>语法</th>
+            <th>说明</th>
+            <th>命令文件示例</th>
+            <th>调用示例</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>$ARGUMENTS</code></td>
+            <td>捕获命令名之后的所有内容</td>
+            <td><code>分析并修复：$ARGUMENTS</code></td>
+            <td><code>/fix 登录接口返回 500，见 logs/error.log</code></td>
+        </tr>
+        <tr>
+            <td><code>$1</code> <code>$2</code></td>
+            <td>按空格分割的位置参数</td>
+            <td><code>修复 Issue #$1，优先级 $2</code></td>
+            <td><code>/fix-issue 42 high</code></td>
+        </tr>
+        <tr>
+            <td><code>!`cmd`</code></td>
+            <td>执行 Shell 命令并将输出嵌入 Prompt</td>
+            <td><code>!`git diff HEAD`</code></td>
+            <td>自动展开为命令执行结果</td>
+        </tr>
+        <tr>
+            <td><code>@文件路径</code></td>
+            <td>将文件内容注入 Prompt</td>
+            <td><code>审查 @src/utils/helpers.ts</code></td>
+            <td>自动读取文件内容</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>核心原理</h3>
+<p>自定义命令本质是 <strong>Markdown 文本文件</strong>——文件名就是命令名，文件内容就是要执行的提示词，支持传参数、调用 Bash 命令。</p>
+
+<h3>步骤创建自定义命令</h3>
+
+<h4>步骤 1：创建命令存储目录</h4>
+<p>自定义命令分两种，存储位置不同：</p>
+<ul>
+    <li><strong>项目命令</strong>：只在当前项目生效，团队共享 → 目录：<code>.claude/commands/</code></li>
+    <li><strong>个人命令</strong>：所有项目通用，自己用 → 目录：<code>~/.claude/commands/</code></li>
+</ul>
+<p>以创建项目命令为例，先建目录：</p>
+<pre># 在项目根目录执行
+mkdir -p .claude/commands</pre>
+
+<h4>步骤 2：写 Markdown 命令文件</h4>
+<p>新建一个 <code>.md</code> 文件，文件名就是命令名（比如 <code>optimize.md</code> → 命令 <code>/optimize</code>），文件内容写提示词。</p>
+
+<p><strong>示例：创建代码性能优化命令</strong></p>
+<pre># 写入提示词到文件
+echo "分析这段代码的性能瓶颈，给出具体的优化建议，优先考虑时间复杂度和内存占用：" &gt; .claude/commands/optimize.md</pre>
+<p>现在，在会话里输入 <code>/optimize</code>，再粘贴代码，Claude 就会按你的要求做性能分析！</p>
+
+<h3>高级技巧：给命令加参数</h3>
+<p>命令可以带参数，用 <code>$ARGUMENTS</code>（捕获所有参数）或 <code>$1</code> <code>$2</code>（按位置取参数）。</p>
+
+<p><strong>示例：带参数的 Bug 修复命令</strong></p>
+<p>创建命令文件 <code>.claude/commands/fix-issue.md</code>：</p>
+<pre>修复 Issue #$ARGUMENTS，要求：
+1. 符合项目编码规范
+2. 附上测试用例
+3. 说明修复思路</pre>
+<p>使用命令：</p>
+<pre>/fix-issue 123  # $ARGUMENTS 会被替换成 "123"</pre>
+
+<hr>
+<h2>六、Frontmatter 字段参考</h2>
+<p>自定义命令文件（<code>commands/*.md</code>）和 Skills（<code>skills/*/SKILL.md</code>）顶部均可添加 YAML Frontmatter 进行精细配置：</p>
+<pre>---
+name: commit                          # Skills 中必填；命令文件中可选（默认取文件名）
+allowed-tools: Bash(git add:*), Bash(git commit:*), Read, Edit
+argument-hint: [commit-message]
+description: 检查代码质量后提交
+model: claude-haiku-4-5-20251001
+context: fork
+agent: general-purpose
+disable-model-invocation: false
+user-invocable: true
+hooks:
+  PreToolUse:
+    - matcher: "Bash"
+      hooks:
+        - type: command
+          command: "./scripts/validate.sh"
+          once: true
+---</pre>
+
+<h3>字段说明</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>字段</th>
+            <th>类型</th>
+            <th>必填</th>
+            <th>说明</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>name</code></td>
+            <td>string</td>
+            <td>Skills 必填</td>
+            <td>定义触发命令名（<code>/name</code>）；命令文件默认取文件名</td>
+        </tr>
+        <tr>
+            <td><code>allowed-tools</code></td>
+            <td>string</td>
+            <td>否</td>
+            <td>命令可使用的工具，匹配的工具无需每次人工确认</td>
+        </tr>
+        <tr>
+            <td><code>argument-hint</code></td>
+            <td>string</td>
+            <td>否</td>
+            <td>在 <code>/help</code> 列表中显示的参数格式提示，如 <code>[message]</code></td>
+        </tr>
+        <tr>
+            <td><code>description</code></td>
+            <td>string</td>
+            <td>否</td>
+            <td>命令功能描述，展示在 <code>/help</code> 和 <code>/skills</code> 列表中；Skills 中还用于让 Claude 判断是否自动触发</td>
+        </tr>
+        <tr>
+            <td><code>model</code></td>
+            <td>string</td>
+            <td>否</td>
+            <td>强制指定模型；简单任务用 Haiku 可降低成本</td>
+        </tr>
+        <tr>
+            <td><code>context</code></td>
+            <td>enum</td>
+            <td>否</td>
+            <td><code>fork</code>：以独立子代理运行；<code>inline</code>：在当前会话内运行</td>
+        </tr>
+        <tr>
+            <td><code>agent</code></td>
+            <td>string</td>
+            <td>否</td>
+            <td><code>context: fork</code> 时指定代理类型</td>
+        </tr>
+        <tr>
+            <td><code>disable-model-invocation</code></td>
+            <td>bool</td>
+            <td>否</td>
+            <td>为 <code>true</code> 时禁止通过 Skill 工具编程调用此命令</td>
+        </tr>
+        <tr>
+            <td><code>user-invocable</code> <span class="new-badge">NEW</span></td>
+            <td>bool</td>
+            <td>否</td>
+            <td>为 <code>false</code> 时只允许 Claude 自动触发，用户无法手动 <code>/调用</code></td>
+        </tr>
+        <tr>
+            <td><code>hooks</code></td>
+            <td>object</td>
+            <td>否</td>
+            <td>命令执行过程中的生命周期 Hook</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3><code>allowed-tools</code> 写法示例</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>写法</th>
+            <th>含义</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>Read</code></td>
+            <td>允许读取任意文件</td>
+        </tr>
+        <tr>
+            <td><code>Read(src/*)</code></td>
+            <td>只允许读取 <code>src/</code> 目录</td>
+        </tr>
+        <tr>
+            <td><code>Bash(git *:*)</code></td>
+            <td>允许所有 git 子命令</td>
+        </tr>
+        <tr>
+            <td><code>Bash(npm test:*)</code></td>
+            <td>只允许运行 <code>npm test</code></td>
+        </tr>
+        <tr>
+            <td><code>Read, Grep, Glob</code></td>
+            <td>组合多个工具</td>
+        </tr>
+    </tbody>
+</table>
+
+<h3>Hook 触发时机</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>时机</th>
+            <th>说明</th>
+            <th>典型用途</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>PreToolUse</code></td>
+            <td>工具调用前</td>
+            <td>提交前运行 lint、写文件前备份</td>
+        </tr>
+        <tr>
+            <td><code>PostToolUse</code></td>
+            <td>工具调用后</td>
+            <td>修改后自动格式化、生成变更日志</td>
+        </tr>
+        <tr>
+            <td><code>Notification</code></td>
+            <td>Claude 发出通知时</td>
+            <td>发送 Slack 消息、桌面通知</td>
+        </tr>
+        <tr>
+            <td><code>Stop</code></td>
+            <td>Claude 完成响应时</td>
+            <td>记录日志、触发下游任务</td>
+        </tr>
+    </tbody>
+</table>
+
+<hr>
+<h2>七、插件与 MCP 命令</h2>
+<p>除了自己写，还能通过<strong>插件</strong>和 <strong>MCP 服务器</strong>获取更多扩展命令。</p>
+
+<p>命名格式：</p>
+<pre>/mcp__&lt;服务器名&gt;__&lt;命令名&gt; [参数]</pre>
+
+<h3>常用 MCP 命令示例</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>MCP 服务器</th>
+            <th>命令示例</th>
+            <th>功能</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>GitHub</td>
+            <td><code>/mcp__github__list_prs</code></td>
+            <td>列出当前仓库的 PR</td>
+        </tr>
+        <tr>
+            <td>GitHub</td>
+            <td><code>/mcp__github__create_issue "Bug标题" high</code></td>
+            <td>创建 Issue</td>
+        </tr>
+        <tr>
+            <td>PostgreSQL</td>
+            <td><code>/mcp__postgres__query "SELECT * FROM users LIMIT 10"</code></td>
+            <td>执行 SQL 查询</td>
+        </tr>
+        <tr>
+            <td>Slack</td>
+            <td><code>/mcp__slack__send_message "#dev" "部署完成"</code></td>
+            <td>发送 Slack 消息</td>
+        </tr>
+        <tr>
+            <td>Jira</td>
+            <td><code>/mcp__jira__create_issue "修复登录Bug" high</code></td>
+            <td>创建 Jira 工单</td>
+        </tr>
+        <tr>
+            <td>Figma</td>
+            <td><code>/mcp__figma__get_component "Button"</code></td>
+            <td>获取 Figma 组件信息</td>
+        </tr>
+    </tbody>
+</table>
+<p>查看所有可用 MCP 命令：<code>/help</code>（MCP 命令在帮助列表底部单独分组展示）</p>
+
+<h3>1. 插件命令</h3>
+<p>安装 Claude Code 插件后，会自动新增插件专属命令，格式通常是：</p>
+<pre>/plugin-name:command-name  # 避免命令名冲突</pre>
+<p>比如安装 Git 插件后，可能会有 <code>/git:commit</code> 命令，一键生成规范的 commit 信息。</p>
+
+<h3>2. MCP 命令</h3>
+<p>MCP（模型上下文协议）服务器可以把外部工具（比如 GitHub、Jira）的功能变成斜杠命令，格式：</p>
+<pre>/mcp__&lt;服务器名&gt;__&lt;功能名&gt; [参数]</pre>
+<p>示例：</p>
+<pre>/mcp__github__list_prs  # 列出 GitHub 仓库的 PR
+/mcp__jira__create_issue "登录按钮失效" high  # 在 Jira 创建高优先级问题</pre>
+
+<hr>
+<h2>八、实用命令模板库</h2>
+
+<h3>模板概览</h3>
+<table class="reference">
+    <thead>
+        <tr>
+            <th>模板名</th>
+            <th>文件路径</th>
+            <th>推荐模型</th>
+            <th>功能</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>智能 Git 提交</td>
+            <td><code>.claude/commands/commit.md</code></td>
+            <td>Haiku</td>
+            <td>检查调试残留后提交</td>
+        </tr>
+        <tr>
+            <td>PR 代码审查</td>
+            <td><code>.claude/commands/pr-review.md</code></td>
+            <td>Sonnet</td>
+            <td>全面分级审查</td>
+        </tr>
+        <tr>
+            <td>智能测试运行</td>
+            <td><code>.claude/commands/test.md</code></td>
+            <td>Sonnet</td>
+            <td>运行并自动修复失败用例</td>
+        </tr>
+        <tr>
+            <td>安全漏洞扫描</td>
+            <td><code>.claude/commands/security-scan.md</code></td>
+            <td>Opus</td>
+            <td>OWASP Top 10 扫描</td>
+        </tr>
+        <tr>
+            <td>API 文档生成</td>
+            <td><code>.claude/commands/api-docs.md</code></td>
+            <td>Sonnet</td>
+            <td>自动生成 REST API 文档</td>
+        </tr>
+        <tr>
+            <td>代码重构</td>
+            <td><code>.claude/commands/refactor.md</code></td>
+            <td>Sonnet</td>
+            <td>可读性 / DRY / 类型安全重构</td>
+        </tr>
+        <tr>
+            <td>文档链接检查</td>
+            <td><code>.claude/commands/check-links.md</code></td>
+            <td>Haiku</td>
+            <td>批量验证文档中的超链接有效性</td>
+        </tr>
+    </tbody>
+</table>
+
+<p>智能 Git 提交：</p>
+<pre>&lt;!-- .claude/commands/commit.md --&gt;
+---
+allowed-tools: Bash(git add:*), Bash(git status:*), Bash(git diff:*), Bash(git commit:*)
+argument-hint: [commit-message]
+description: 检查代码质量后提交
+model: claude-haiku-4-5-20251001
+---
+
+## 暂存区内容
+!`git diff --cached`
+
+提交前检查以下问题，发现问题则报告并询问是否继续：
+1. 遗留的 `console.log` / `print` 调试语句
+2. 未处理的 `TODO` / `FIXME` 注释
+3. 大段被注释掉的代码
+4. 测试文件中的 `.only` / `.skip` 标记
+
+若无问题，使用以下信息提交：$ARGUMENTS</pre>
+
+<p>PR 代码审查：</p>
+<pre>&lt;!-- .claude/commands/pr-review.md --&gt;
+---
+allowed-tools: Read, Grep, Glob, Bash(git diff:*), Bash(git log:*)
+description: 全面的 PR 代码审查
+---
+
+## 变更文件
+!`git diff --name-only HEAD~1`
+
+## 详细差异
+!`git diff HEAD~1`
+
+## 近期提交
+!`git log --oneline -5`
+
+按 Critical / Major / Minor 三级优先级输出审查结果，涵盖：
+代码逻辑与可读性、安全漏洞、性能隐患（N+1 查询）、测试覆盖率、文档完整性</pre>
+
+<p>智能测试运行：</p>
+<pre>&lt;!-- .claude/commands/test.md --&gt;
+---
+allowed-tools: Bash, Read, Edit
+argument-hint: [test-pattern]
+description: 运行测试并自动修复失败用例
+---
+
+运行匹配 "$ARGUMENTS" 的测试：
+1. 自动检测测试框架（Jest / pytest / Go test）
+2. 运行指定模式的测试
+3. 若有失败，分析根因并修复代码
+4. 重新运行验证修复
+
+不提供参数则运行全量测试并输出覆盖率报告。</pre>
+
+<p>安全漏洞扫描：</p>
+<pre>&lt;!-- .claude/commands/security-scan.md --&gt;
+---
+allowed-tools: Read, Grep, Glob
+description: OWASP Top 10 安全漏洞扫描
+model: claude-opus-4-6
+---
+
+以安全工程师视角审查代码库：
+
+高危：SQL 注入、XSS、命令注入、硬编码密钥
+中危：不安全的反序列化、过时依赖、敏感信息写入日志、CORS 配置过宽
+低危：缺失安全响应头、错误信息暴露内部细节
+
+输出格式：漏洞位置 + 危险级别 + 修复建议代码示例</pre>
+
+<p>API 文档生成：</p>
+<pre>&lt;!-- .claude/commands/api-docs.md --&gt;
+---
+allowed-tools: Read, Glob, Edit
+argument-hint: [输出文件路径]
+description: 自动生成 REST API 文档
+---
+
+扫描 @src/routes/ 和 @src/controllers/，为所有端点生成 Markdown 文档：
+- 端点路径与 HTTP 方法
+- 请求参数（Query / Body / Path）及类型
+- 响应结构（成功与错误）
+- 认证要求
+- curl 调用示例
+
+保存到：$ARGUMENTS（默认：docs/api.md）</pre>
+
+<p>代码重构：</p>
+<pre>&lt;!-- .claude/commands/refactor.md --&gt;
+---
+allowed-tools: Read, Edit, Glob
+argument-hint: [目标文件或目录]
+description: 代码质量重构
+---
+
+对 $ARGUMENTS 进行重构，遵循原则：
+- 可读性：变量/函数命名语义化，消除魔法数字
+- DRY 原则：提取重复逻辑为复用函数
+- 单一职责：拆分超过 50 行的函数
+- 错误处理：完善异常捕获和错误边界
+- TypeScript：消除 `any` 类型，补全类型注解
+
+重构前先输出变更计划，确认后再执行。</pre>
+
+<p>文档链接检查：</p>
+<pre>&lt;!-- .claude/commands/check-links.md --&gt;
+---
+allowed-tools: Read, Bash, WebFetch
+argument-hint: [文档文件路径]
+description: 检查文档中的链接是否全部有效
+model: claude-haiku-4-5-20251001
+---
+
+读取 $ARGUMENTS 文件，提取所有超链接（http/https），逐一请求并检查响应状态码。
+
+输出格式：
+- 有效链接（200）
+- 重定向链接（3xx）及目标地址
+- 失效链接（4xx/5xx）及建议替代链接
+
+最后输出汇总：共 N 个链接，M 个失效。</pre>
+
+<hr>
+<h2>附：配置文件说明</h2>
+
+<div class="warn-box">
+<i class="fa fa-exclamation-triangle"></i> <strong>建议：</strong>将 <code>CLAUDE.local.md</code> 和 <code>.claude/settings.local.json</code> 加入 <code>.gitignore</code>，避免个人偏好影响团队成员。
+</div>
+
+<table class="reference">
+    <thead>
+        <tr>
+            <th>文件 / 目录</th>
+            <th>作用</th>
+            <th>版本控制</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td><code>CLAUDE.md</code></td>
+            <td>项目级共享指令（技术栈、构建命令、编码规范等）</td>
+            <td><i class="fa fa-check" style="color:#4CAF50"></i> 纳入 git</td>
+        </tr>
+        <tr>
+            <td><code>CLAUDE.local.md</code> <span class="new-badge">NEW</span></td>
+            <td>个人私有指令（个人偏好，不共享给团队）</td>
+            <td><i class="fa fa-times" style="color:#e74c3c"></i> 加入 .gitignore</td>
+        </tr>
+        <tr>
+            <td><code>~/.claude/CLAUDE.md</code></td>
+            <td>全局指令，所有项目通用</td>
+            <td>—</td>
+        </tr>
+        <tr>
+            <td><code>.claude/settings.json</code></td>
+            <td>项目共享配置（工具权限、hooks 等）</td>
+            <td><i class="fa fa-check" style="color:#4CAF50"></i> 纳入 git</td>
+        </tr>
+        <tr>
+            <td><code>.claude/settings.local.json</code></td>
+            <td>项目个人配置（覆盖 settings.json，不共享）</td>
+            <td><i class="fa fa-times" style="color:#e74c3c"></i> 加入 .gitignore</td>
+        </tr>
+        <tr>
+            <td><code>.claude/skills/</code> <span class="new-badge">推荐</span></td>
+            <td>项目级自定义 Skills（新推荐格式）</td>
+            <td><i class="fa fa-check" style="color:#4CAF50"></i> 纳入 git</td>
+        </tr>
+        <tr>
+            <td><code>.claude/commands/</code> <span class="legacy-badge">旧格式</span></td>
+            <td>项目级自定义命令（旧格式，仍完全兼容）</td>
+            <td><i class="fa fa-check" style="color:#4CAF50"></i> 纳入 git</td>
+        </tr>
+        <tr>
+            <td><code>~/.claude/skills/</code></td>
+            <td>个人全局 Skills（跨项目通用，本地私有）</td>
+            <td>—</td>
+        </tr>
+    </tbody>
+</table>			<!-- 其他扩展 -->
+						
+			</div>
+			
+		</div>
+
+
+<div class="archive-list" style="display:none;font-size: 14px;line-height: 1.8;margin-top: 20px;padding: 10px;">
+<div class="archive-list-item">
+    <div class="post-intro" style="width: 100%;" id="ai-info">
+	  AI 思考中...
+    </div>
+</div>
+</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="claude-code-control.html" rel="prev"> Claude Code 控制与模式</a> </div>
+			<div class="next-design-link"><a href="claude-code-checkpointing.html" rel="next"> Claude Code 检查点</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+
+
+		
+		<div class="sidebar-box ">
+				
+
+<style>	
+.responsive_ad1 { display:none; }
+@media(min-width: 800px) { .responsive_ad1 {  display:block;margin:0 auto;} }
+</style>
+<div id="ad-336280" class="responsive_ad1">
+<!-- 336*280 固定 -->		
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 移动版 自动调整 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+				</div>
+		<!-- 笔记列表 -->
+		<style>
+.wrapper {
+  /*text-transform: uppercase; */
+  background: #ececec;
+  color: #555;
+  cursor: pointer;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.wrapper .tooltip {
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: left;
+  background: #96b97d;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 14px;
+  pointer-events: none;
+  position: absolute;
+  
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+.tooltip a {
+	color:#fff;
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}  
+
+/* CSS Triangles - see Trevor's post */
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #96b97d 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 20%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+.wrapper .tooltip1 {
+	margin-left: 50px;
+	padding-top: 0px;
+}
+/*
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+*/
+/* IE can just show/hide with no transition */
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.css">
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style=" padding: 20px 20px;"> 
+	<h3 class="text-muted" id="share_code" style="color: #799961;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<!--
+	<p style="font-size:14px;">笔记需要是本篇文章的内容扩展！</p><br>
+	<p style="font-size:12px;"><a href="//www.runoob.com/tougao" target="_blank">文章投稿，可点击这里</a></p>
+	<p style="font-size:14px;"><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>
+		<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display:none;">
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div id="mded"></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input type="hidden" name="comment_post_ID" value="29256" id="comment_post_ID" />
+<input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="引用地址"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script type="text/javascript">
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload:false,
+	 // upload: {url:'/api/comment_upload_file.php',params: null,fileKey: 'upload_file',connectionCount: 1,leaveConfirm: '文件正在上传，您确定离开?'},
+	  defaultImage: 'https://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  autosave: 'editor-content',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+	$("#user_add_note").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		$('html, body').animate({
+       	    scrollTop: $("#respond").offset().top
+    	}, 200);
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" style="display:none;" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  29256;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>').show();
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>').show();
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>').show();
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>').show();
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>').show();
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>').show();
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	$(".comt-author").click(function() {
+		href = $(this).children("a").attr("href");
+		if(href.indexOf("/note/")!=-1) {
+			var win = window.open(href, '_blank');
+  			win.focus();
+		}
+	});
+	$(".comt-meta span").hover(function(){
+		$(this).children(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).children(".tooltip").removeAttr("style");
+	});
+	/*
+	$(".wrapper i").hover(function(){
+		$(this).siblings(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).siblings(".tooltip").css({ "opacity": 0, "pointer-events": "auto"});
+	});
+	*/
+	//Upvote.create('runoobvote-id', {callback: vote_callback});
+	var ajaxurl = 'https://www.runoob.com/wp-admin/admin-ajax.php';
+	var callback = function(data) {
+		//console.log($('#runoobvote-id').upvote('upvoted'));
+		//console.log($('#runoobvote-id').upvote('downvoted'));
+		//console.log(data);
+		_vote_action = data.action;
+		id_arr = data.id.split('-');
+		um_id= id_arr[2];
+		//console.log(um_id);
+		
+		var re = /^[1-9]+/;
+		if (re.test(um_id)) { 
+			var ajax_data = {
+				_vote_action: _vote_action,
+				action: "pinglun_zan",
+				um_id: um_id,
+				um_action: "ding"
+			};
+			//console.log(ajax_data);
+			$.post(ajaxurl,ajax_data,function(status){
+				//if(status.vote_num>999) {
+				//	_voteHtml = '<span style="display: block; text-align: center;font-size: 20px; color: #6a737c; margin: 8px 0;">'+kFormatter(status.vote_num) +'</span>';
+				//	$("#runoobvote-id-" + um_id + " .count").hide().after(_voteHtml);
+				//}
+				
+			});
+		}
+	};
+	if($('#comments').length && $('.upvotejs').length){
+		$('.upvotejs').upvote({id: 29256, callback: callback});
+	
+		$.post(ajaxurl,{"action":"pinglun_zan","postid":29256},function(data){  
+			$(data).each(function(key,value) {
+				$("#runoobvote-id-" + value.commid + " .upvote").addClass(value.upvotejs_class);
+				$("#runoobvote-id-" + value.commid + " .downvote").addClass(value.downvote_class);
+				$("#runoobvote-id-" + value.commid + " .count").text(value.upvote_count);
+			})
+		},'json');
+		
+	}
+	
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+function kFormatter(num) {
+	// return num;
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
+</script>
+
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/css/qa.css?1.45">
+<link rel="stylesheet" type="text/css" href="https://static.char123.com/assets/simditor/2.3.6/styles/simditor.min.css" />
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor.min.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor-autosave.js"></script>
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+
+<style>
+.sidebar-tree .double-li {
+    width:300px;
+}
+.sidebar-tree .double-li li {
+    width: 44%;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    display: inline;
+}
+</style>
+
+    
+        <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here" style="margin: 0 auto;">
+            <a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;"> <i class="fa fa-list" aria-hidden="true"></i> 分类导航</a>
+        </div>
+    <div class="sidebar-box sidebar-cate">
+        
+        <div class="sidebar-tree">
+            <ul><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="../html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="../html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="../css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="../css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Tailwind CSS 教程" href="../tailwindcss/tailwindcss-tutorial.html">Tailwind CSS 教程</a></li><li><a title="Bootstrap4 教程" href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Bootstrap5 教程" href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 教程</a></li><li><a title="Font Awesome 教程" href="../font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="../foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="../js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="../htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="../jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="../angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="../angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="../vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="Vue3 教程" href="../vue3/vue3-tutorial.html">Vue3 教程</a></li><li><a title="React 教程" href="../react/react-tutorial.html">React 教程</a></li><li><a title="Next.js 教程" href="../nextjs/nextjs-tutorial.html">Next.js 教程</a></li><li><a title="TypeScript 教程" href="../typescript/ts-tutorial.html">TypeScript 教程</a></li><li><a title="jQuery UI 教程" href="../jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="../jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="../nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="Electron 教程" href="../electron/electron-tutorial.html">Electron 教程</a></li><li><a title="Playwright 教程" href="../playwright/playwright-tutorial.html">Playwright 教程</a></li><li><a title="AJAX 教程" href="../ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="../json/json-tutorial.html">JSON 教程</a></li><li><a title="Echarts 教程" href="../echarts/echarts-tutorial.html">Echarts 教程</a></li><li><a title="Chart.js 教程" href="../chartjs/chartjs-tutorial.html">Chart.js 教程</a></li><li><a title="Highcharts 教程" href="../highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="../googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="Python2.x 教程" href="../python/python-tutorial.html">Python2.x 教程</a></li><li><a title="Linux 教程" href="../linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="../docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="../ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="../java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="../c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="../cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="../perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="../servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="../jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="../lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Rust 教程" href="../rust/rust-tutorial.html">Rust 教程</a></li><li><a title="Zig 教程" href="../zig/zig-tutorial.html">Zig 教程</a></li><li><a title="Scala 教程" href="../scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="../go/go-tutorial.html">Go 教程</a></li><li><a title="PHP 教程" href="../php/php-tutorial.html">PHP 教程</a></li><li><a title="数据结构与算法" href="../data-structures/data-structures-tutorial.html">数据结构与算法</a></li><li><a title="Django 教程" href="../django/django-tutorial.html">Django 教程</a></li><li><a title="FastAPI 教程" href="../fastapi/fastapi-tutorial.html">FastAPI 教程</a></li><li><a title="Flask 教程" href="../flask/flask-tutorial.html">Flask 教程</a></li><li><a title="Pillow 教程" href="../pillow/pillow-tutorial.html">Pillow 教程</a></li><li><a title="Zookeeper 教程" href="//www.runoob.com/w3cnote/zookeeper-tutorial.html">Zookeeper 教程</a></li><li><a title="设计模式" href="../design-pattern/design-pattern-tutorial.html">设计模式</a></li><li><a title="Python 设计模式" href="../python-design-pattern/python-design-pattern-tutorial.html">Python 设计模式</a></li><li><a title="正则表达式" href="../regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="Maven 教程" href="../maven/maven-tutorial.html">Maven 教程</a></li><li><a title="CMake 教程" href="../cmake/cmake-tutorial.html">CMake 教程</a></li><li><a title="Verilog 教程" href="//www.runoob.com/w3cnote/verilog-tutorial.html">Verilog 教程</a></li><li><a title="ASP 教程" href="../asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="../appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="../vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="../sql/sql-tutorial.html">SQL 教程</a></li><li><a title="MySQL 教程" href="../mysql/mysql-tutorial.html">MySQL 教程</a></li><li><a title="PostgreSQL 教程" href="../postgresql/postgresql-tutorial.html">PostgreSQL 教程</a></li><li><a title="SQLite 教程" href="../sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="../mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="../redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="../Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit">  AI & 数据分析</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="NumPy 教程" href="../numpy/numpy-tutorial.html">NumPy 教程</a></li><li><a title="Pandas 教程" href="../pandas/pandas-tutorial.html">Pandas 教程</a></li><li><a title="Matplotlib 教程" href="../matplotlib/matplotlib-tutorial.html">Matplotlib 教程</a></li><li><a title="Scipy 教程" href="../scipy/scipy-tutorial.html">Scipy 教程</a></li><li><a title="Pytorch 教程" href="../pytorch/pytorch-tutorial.html">Pytorch 教程</a></li><li><a title="TensorFlow 教程" href="../tensorflow/tensorflow-tutorial.html">TensorFlow 教程</a></li><li><a title="Ollama 教程" href="../ollama/ollama-tutorial.html">Ollama 教程</a></li><li><a title="机器 教程" href="../ml/ml-tutorial.html">机器 教程</a></li><li><a title="Jupyter Notebook 教程" href="../jupyter-notebook/jupyter-notebook-tutorial.html">Jupyter Notebook 教程</a></li><li><a title="AI Agent(智能体)" href="../ai-agent/ai-agent-tutorial.html">AI Agent(智能体)</a></li><li><a title="Skills(技能)" href="../skills/skills-tutorial.html">Skills(技能)</a></li><li><a title="Claude Code" href="claude-code-tutorial.html">Claude Code</a></li><li><a title="OpenCode" href="../opencode/opencode-tutorial.html">OpenCode</a></li><li><a title="Codex 教程" href="../codex/codex-tutorial.html">Codex 教程</a></li><li><a title="scikit-learn 教程" href="../sklearn/sklearn-tutorial.html">scikit-learn 教程</a></li><li><a title="R 教程" href="../r/r-tutorial.html">R 教程</a></li><li><a title="OpenCV 教程" href="../opencv/opencv-tutorial.html">OpenCV 教程</a></li><li><a title="NLP 教程" href="../nlp/nlp-tutorial.html">NLP 教程</a></li><li><a title="Selenium 教程" href="../selenium/selenium-tutorial.html">Selenium 教程</a></li><li><a title="Julia 教程" href="../julia/julia-tutorial.html">Julia 教程</a></li><li><a title="量化交易" href="../qt/qt-tutorial.html">量化交易</a></li><li><a title="Dash 教程" href="../dash/dash-tutorial.html">Dash 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="//www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="../swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="../jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="../ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Flutter 教程" href="../flutter/flutter-tutorial.html">Flutter 教程</a></li><li><a title="Kotlin 教程" href="../kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="VS Code 教程" href="../vscode/vscode-tutorial.html">VS Code 教程</a></li><li><a title="PyCharm 教程" href="../pycharm/pycharm-tutorial.html">PyCharm 教程</a></li><li><a title="Swagger 教程" href="../swagger/swagger-tutorial.html">Swagger 教程</a></li><li><a title="RESTful API 教程" href="../restfulapi/restful-api-tutorial.html">RESTful API 教程</a></li><li><a title="Eclipse 教程" href="../eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="../git/git-tutorial.html">Git 教程</a></li><li><a title="Svn 教程" href="../svn/svn-tutorial.html">Svn 教程</a></li><li><a title="Markdown 教程" href="../markdown/md-tutorial.html">Markdown 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="../xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="../dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="../dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="../xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="../xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="../xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="../xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="../xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="../schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="../xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="../svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="../aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="../csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="PowerShell 教程" href="../powershell/powershell-tutorial.html">PowerShell 教程</a></li><li><a title="Web Pages 教程" href="../aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="../aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="../aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="../aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="../webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="../wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="../soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="../rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="../rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="../http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="../web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="../browsers/browser-information.html">浏览器信息</a></li><li><a title="网络协议" href="../np/np-tutorial.html">网络协议</a></li><li><a title="网站主机教程" href="../hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="../tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="../w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="../quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>            </div>
+    
+    </div>
+    </div>
+    <br>
+    
+    <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here">
+            <a href="javascript:void(0);">Advertisement</a>
+        </div>
+        <div class="re-600160" id="sidebar-right-re">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧栏1 -->
+        <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+                </div>
+    </div>
+</div></div>
+
+</div>
+
+<script>
+var aid = 29256;
+function coll() {
+	$.post( '/wp-content/themes/runoob/option/user/userinfo.php', {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+		if(data.error==0) {
+			$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+			$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+		}
+		alert(data.msg);
+	},'json');
+}
+
+(function () {
+    // 1. 仅 HTML 页面
+    if (!document.contentType || !document.contentType.includes('text/html')) return;
+
+    // 2. 容器判断
+    var container = document.querySelector('.article-intro');
+    if (!container) return;
+
+    var h1 = container.querySelector('h1');
+    if (!h1) return;
+
+    // 3. URL 判断
+    var url = window.location.href.toLowerCase();
+    var version = null;
+
+    if (url.includes('/python3/')) {
+        version = 'Python3.x';
+    } else if (url.includes('/python/')) {
+        version = 'Python2.x';
+    }
+
+    if (!version) return;
+
+    // 4. 防重复
+    if (h1.querySelector('.py-version-badge')) return;
+
+    // 5. 创建标签
+    var badge = document.createElement('span');
+    badge.className = 'py-version-badge';
+    badge.innerText = version;
+
+    // 6. 样式（核心：float 实现右上角）
+    badge.style.float = 'right';
+    badge.style.fontSize = '12px';
+    badge.style.padding = '2px 8px';
+    badge.style.borderRadius = '999px';
+
+   // 自适应亮/暗色 + 渐变背景（增强版）
+	badge.style.color = 'inherit';
+
+	// 渐变背景（低透明度，不影响暗黑模式）
+	if (version.includes('3')) {
+		badge.style.background = 'linear-gradient(90deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15))';
+	} else {
+		badge.style.background = 'linear-gradient(90deg, rgba(161,140,209,0.15), rgba(251,194,235,0.15))';
+	}
+
+	// 边框弱化（更精致）
+	badge.style.border = '1px solid rgba(127,127,127,0.3)';
+
+	// 提升可读性
+	badge.style.opacity = '0.95';
+
+    // 微调位置（更贴近“右上角”）
+    badge.style.marginTop = '4px';
+    badge.style.marginLeft = '10px';
+
+    // 7. 插入到 h1 最前面（让 float 生效更稳定）
+    h1.insertBefore(badge, h1.firstChild);
+
+})();
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.js?1.0"></script>
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.css?1.0" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // 获取窗口宽度
+    var windowWidth = $(window).width();
+
+    // 设置一个阈值，例如 768px，根据实际需要调整
+    var mobileThreshold = 768;
+
+    // 判断是否为移动端
+    if (windowWidth < mobileThreshold) {
+        // 在移动端执行的代码
+        $(".article-heading-ad").show();
+    } else {
+        // 在非移动端执行的代码
+		$(".article-heading-ad").show();
+    }
+	
+});
+</script>
+<script src="/wp-content/themes/runoob/assets/js/runoob-article-dir.min.js"></script>
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

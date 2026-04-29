@@ -1,0 +1,151 @@
+URL: https://www.runoob.com/tags/tag-area.html
+Title: HTML <area> 标签 | 菜鸟教程
+
+HTML <area> 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <applet> 标签 
+
+HTML <article> 标签 
+
+HTML <area> 标签 
+
+实例 
+
+带有可点击区域的图像映射： 
+
+< img src = " planets.gif " width = " 145 " height = " 126 " alt = " Planets " usemap = " #planetmap " > < map name = " planetmap " > < area shape = " rect " coords = " 0,0,82,126 " alt = " Sun " href = " sun.htm " > < area shape = " circle " coords = " 90,58,3 " alt = " Mercury " href = " mercur.htm " > < area shape = " circle " coords = " 124,58,8 " alt = " Venus " href = " venus.htm " > </ map > 
+
+尝试一下 » 
+
+浏览器支持 
+
+所有主流浏览器都支持 <area> 标签。 
+
+标签定义及使用说明 
+
+<area> 标签定义图像映射内部的区域（图像映射指的是带有可点击区域的图像）。 
+
+<area> 元素始终嵌套在 <map> 标签内部。 
+
+注释： <img> 标签中的 usemap 属性与 <map> 元素中的 name 相关联，以创建图像与映射之间的关系。 
+
+HTML 4.01 与 HTML5之间的差异 
+
+HTML5 提供了一些新属性，同时不再支持 HTML 4.01 中的某些属性。 
+
+HTML 与 XHTML 之间的差异 
+
+在 HTML 中，<area> 标签没有结束标签。 
+
+在 XHTML 中，<area> 标签必须正确地关闭。 
+
+属性 
+
+New ：HTML5 中的新属性。 
+
+属性 
+
+值 
+
+描述 
+
+alt 
+
+text 
+
+规定区域的替代文本。如果使用 href 属性，则该属性是必需的。 
+
+coords 
+
+coordinates 
+
+规定区域的坐标。 
+
+href 
+
+URL 
+
+规定区域的目标 URL。 
+
+hreflang New 
+
+language_code 
+
+规定目标 URL 的语言。 
+
+media New 
+
+media query 
+
+规定目标 URL 是为何种媒介/设备优化的。默认：all。 
+
+nohref 
+
+value 
+
+HTML5 不支持。 规定没有相关链接的区域。 
+
+rel New 
+
+alternate 
+author 
+bookmark 
+help 
+license 
+next 
+nofollow 
+noreferrer 
+prefetch 
+prev 
+search 
+tag 
+
+规定当前文档与目标 URL 之间的关系。 
+
+shape 
+
+default 
+rect 
+circle 
+poly 
+
+规定区域的形状。 
+
+target 
+
+_blank 
+_parent 
+_self 
+_top 
+framename 
+
+规定在何处打开目标 URL。 
+
+type New 
+
+MIME_type 
+
+规定目标 URL 的 MIME 类型。 
+注：MIME = Multipurpose Internet Mail Extensions。 
+
+全局属性 
+
+<area> 标签支持 HTML 的全局属性 。 
+
+事件属性 
+
+<area> 标签支持 HTML 的事件属性 。 
+
+相关文章 
+
+HTML DOM 参考手册： Area 对象 
+
+AI 思考中... 
+
+HTML <applet> 标签 
+
+HTML <article> 标签

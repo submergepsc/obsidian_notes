@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>java index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>java index</h1>
+      <p>Offline pages under java</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-516595e8">入门</a> <span>5 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>5 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>154 pages</span></li><li><a href="#subgroup-ai-5de55177">AI / 工具</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>46 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>java (211)</h2><p>二级分类：5 个</p><ul class="page-list"><li><a href="#subgroup-516595e8">入门</a> <span>5 pages</span></li><li><a href="#subgroup-53c28003">参考</a> <span>5 pages</span></li><li><a href="#subgroup-5b9e4f8b">实例</a> <span>154 pages</span></li><li><a href="#subgroup-ai-5de55177">AI / 工具</a> <span>1 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>46 pages</span></li></ul></section><section id="subgroup-516595e8"><h2>入门 (5)</h2><ol class="page-list"><li><a href="java-applet-basics.html">Java Applet 基础</a> <code>https://www.runoob.com/java/java-applet-basics.html</code></li><li><a href="java-basic-syntax.html">Java 基础语法</a> <code>https://www.runoob.com/java/java-basic-syntax.html</code></li><li><a href="java-environment-setup.html">Java 开发环境配置</a> <code>https://www.runoob.com/java/java-environment-setup.html</code></li><li><a href="java-tutorial.html">Java 教程</a> <code>https://www.runoob.com/java/java-tutorial.html</code></li><li><a href="java-intro.html">Java 简介</a> <code>https://www.runoob.com/java/java-intro.html</code></li></ol></section><section id="subgroup-53c28003"><h2>参考 (5)</h2><ol class="page-list"><li><a href="java-object-class.html">Java Object 类</a> <code>https://www.runoob.com/java/java-object-class.html</code></li><li><a href="java-reflection.html">Java 反射（Reflection）</a> <code>https://www.runoob.com/java/java-reflection.html</code></li><li><a href="java-object-classes.html">Java 对象和类</a> <code>https://www.runoob.com/java/java-object-classes.html</code></li><li><a href="java-methods.html">Java 方法</a> <code>https://www.runoob.com/java/java-methods.html</code></li><li><a href="java-operators.html">Java 运算符</a> <code>https://www.runoob.com/java/java-operators.html</code></li></ol></section><section id="subgroup-5b9e4f8b"><h2>实例 (154)</h2><ol class="page-list"><li><a href="java-examples.html">Java 实例</a> <code>https://www.runoob.com/java/java-examples.html</code></li><li><a href="net-serversocket-socket.html">Java 实例 –   ServerSocket 和 Socket 通信实例</a> <code>https://www.runoob.com/java/net-serversocket-socket.html</code></li><li><a href="arrays-find.html">Java 实例 –  在数组中查找指定元素</a> <code>https://www.runoob.com/java/arrays-find.html</code></li><li><a href="arrays-retainall.html">Java 实例 –  数组交集</a> <code>https://www.runoob.com/java/arrays-retainall.html</code></li><li><a href="net-serverfile.html">Java 实例 –  获取远程文件大小</a> <code>https://www.runoob.com/java/net-serverfile.html</code></li><li><a href="net-url.html">Java 实例 –  解析 URL</a> <code>https://www.runoob.com/java/net-url.html</code></li><li><a href="java/method-break.html">Java 实例 – break 关键字用法</a> <code>https://www.runoob.com/java/java/method-break.html</code></li><li><a href="java/method-continue.html">Java 实例 – continue 关键字用法</a> <code>https://www.runoob.com/java/java/method-continue.html</code></li><li><a href="java/method-enum.html">Java 实例 – enum 和 switch 语句使用</a> <code>https://www.runoob.com/java/java/method-enum.html</code></li><li><a href="java/method-enum1.html">Java 实例 – Enum（枚举）构造函数及方法的使用</a> <code>https://www.runoob.com/java/java/method-enum1.html</code></li><li><a href="exception-finally.html">Java 实例 – Finally的用法</a> <code>https://www.runoob.com/java/exception-finally.html</code></li><li><a href="java/method-for.html">Java 实例 – for 和 foreach循环使用</a> <code>https://www.runoob.com/java/java/method-for.html</code></li><li><a href="collection-iterate.html">Java 实例 – HashMap遍历</a> <code>https://www.runoob.com/java/collection-iterate.html</code></li><li><a href="java/method-instanceof.html">Java 实例 – instanceof 关键字用法</a> <code>https://www.runoob.com/java/java/method-instanceof.html</code></li><li><a href="collection-replace.html">Java 实例 – List 元素替换</a> <code>https://www.runoob.com/java/collection-replace.html</code></li><li><a href="collection-rotate.html">Java 实例 – List 循环移动元素</a> <code>https://www.runoob.com/java/collection-rotate.html</code></li><li><a href="collection-sublist.html">Java 实例 – List 截取</a> <code>https://www.runoob.com/java/collection-sublist.html</code></li><li><a href="net-multisoc.html">Java 实例 – Socket 实现多线程服务器程序</a> <code>https://www.runoob.com/java/net-multisoc.html</code></li><li><a href="java/method-varargs.html">Java 实例 – Varargs 可变参数使用</a> <code>https://www.runoob.com/java/java/method-varargs.html</code></li><li><a href="thread-interrupt.html">Java 实例 – 中断线程</a> <code>https://www.runoob.com/java/thread-interrupt.html</code></li><li><a href="java-print-multiplicationtable.html">Java 实例 – 九九乘法表</a> <code>https://www.runoob.com/java/java-print-multiplicationtable.html</code></li><li><a href="exception-catch.html">Java 实例 – 使用 catch 处理异常</a> <code>https://www.runoob.com/java/exception-catch.html</code></li><li><a href="collection-enumeration.html">Java 实例 – 使用 Enumeration 遍历 HashTable</a> <code>https://www.runoob.com/java/collection-enumeration.html</code></li><li><a href="net-connected.html">Java 实例 – 使用 Socket 连接到指定主机</a> <code>https://www.runoob.com/java/net-connected.html</code></li><li><a href="file-date-modify.html">Java 实例 – 修改文件最后的修改日期</a> <code>https://www.runoob.com/java/file-date-modify.html</code></li><li><a href="file-create-temp.html">Java 实例 – 创建临时文件</a> <code>https://www.runoob.com/java/file-create-temp.html</code></li><li><a href="file-create.html">Java 实例 – 创建文件</a> <code>https://www.runoob.com/java/file-create.html</code></li><li><a href="string-removing-char.html">Java 实例 – 删除字符串中的一个字符</a> <code>https://www.runoob.com/java/string-removing-char.html</code></li><li><a href="arrays-remove.html">Java 实例 – 删除数组元素</a> <code>https://www.runoob.com/java/arrays-remove.html</code></li><li><a href="file-delete.html">Java 实例 – 删除文件</a> <code>https://www.runoob.com/java/file-delete.html</code></li><li><a href="dir-delete.html">Java 实例 – 删除目录</a> <code>https://www.runoob.com/java/dir-delete.html</code></li><li><a href="data-replace.html">Java 实例 – 删除链表中的元素</a> <code>https://www.runoob.com/java/data-replace.html</code></li><li><a href="collection-remove.html">Java 实例 – 删除集合中指定元素</a> <code>https://www.runoob.com/java/collection-remove.html</code></li><li><a href="arrays-equal.html">Java 实例 – 判断数组是否相等</a> <code>https://www.runoob.com/java/arrays-equal.html</code></li><li><a href="dir-hidden.html">Java 实例 – 判断文件是否隐藏</a> <code>https://www.runoob.com/java/dir-hidden.html</code></li><li><a href="dir-empty.html">Java 实例 – 判断目录是否为空</a> <code>https://www.runoob.com/java/dir-empty.html</code></li><li><a href="data-intopost.html">Java 实例 – 利用堆栈将中缀表达式转换成后缀表达式</a> <code>https://www.runoob.com/java/data-intopost.html</code></li><li><a href="data-reverse.html">Java 实例 – 压栈出栈的方法实现字符串反转</a> <code>https://www.runoob.com/java/data-reverse.html</code></li><li><a href="collection-readonly.html">Java 实例 – 只读集合</a> <code>https://www.runoob.com/java/collection-readonly.html</code></li><li><a href="file-append.html">Java 实例 – 向文件中追加数据</a> <code>https://www.runoob.com/java/file-append.html</code></li><li><a href="file-dir.html">Java 实例 – 在指定目录中创建文件</a> <code>https://www.runoob.com/java/file-dir.html</code></li><li><a href="dir-search-file.html">Java 实例 – 在指定目录中查找文件</a> <code>https://www.runoob.com/java/dir-search-file.html</code></li><li><a href="dir-search.html">Java 实例 – 在指定目录中查找文件</a> <code>https://www.runoob.com/java/dir-search.html</code></li><li><a href="data-insert.html">Java 实例 – 在链表（LinkedList）的开头和结尾添加元素</a> <code>https://www.runoob.com/java/data-insert.html</code></li><li><a href="exception-hierarchy.html">Java 实例 – 多个异常处理（多个catch）</a> <code>https://www.runoob.com/java/exception-hierarchy.html</code></li><li><a href="exception-thread.html">Java 实例 – 多线程异常处理</a> <code>https://www.runoob.com/java/exception-thread.html</code></li><li><a href="env-classpath.html">Java 实例 – 如何执行指定class文件目录（classpath）</a> <code>https://www.runoob.com/java/env-classpath.html</code></li><li><a href="env-run.html">Java 实例 – 如何执行编译过 Java 文件</a> <code>https://www.runoob.com/java/env-run.html</code></li><li><a href="env-version.html">Java 实例 – 如何查看当前 Java 运行的版本?</a> <code>https://www.runoob.com/java/env-version.html</code></li><li><a href="env-compile.html">Java 实例 – 如何编译 Java 文件</a> <code>https://www.runoob.com/java/env-compile.html</code></li><li><a href="string-optimization.html">Java 实例 – 字符串优化</a> <code>https://www.runoob.com/java/string-optimization.html</code></li><li><a href="string-split.html">Java 实例 – 字符串分割</a> <code>https://www.runoob.com/java/string-split.html</code></li><li><a href="java-stringtokenizer-example.html">Java 实例 – 字符串分隔(StringTokenizer)</a> <code>https://www.runoob.com/java/java-stringtokenizer-example.html</code></li><li><a href="string-reverse.html">Java 实例 – 字符串反转</a> <code>https://www.runoob.com/java/string-reverse.html</code></li><li><a href="string-uppercase.html">Java 实例 – 字符串小写转大写</a> <code>https://www.runoob.com/java/string-uppercase.html</code></li><li><a href="string-performance.html">Java 实例 – 字符串性能比较测试</a> <code>https://www.runoob.com/java/string-performance.html</code></li><li><a href="string-replace.html">Java 实例 – 字符串替换</a> <code>https://www.runoob.com/java/string-replace.html</code></li><li><a href="string-search.html">Java 实例 – 字符串查找</a> <code>https://www.runoob.com/java/string-search.html</code></li><li><a href="string-format.html">Java 实例 – 字符串格式化</a> <code>https://www.runoob.com/java/string-format.html</code></li><li><a href="string-compare.html">Java 实例 – 字符串比较</a> <code>https://www.runoob.com/java/string-compare.html</code></li><li><a href="file-copy.html">Java 实例 – 将文件内容复制到另一个文件</a> <code>https://www.runoob.com/java/file-copy.html</code></li><li><a href="exception-method.html">Java 实例 – 异常处理方法</a> <code>https://www.runoob.com/java/exception-method.html</code></li><li><a href="java-print-invertedtriangle.html">Java 实例 – 打印倒立的三角形</a> <code>https://www.runoob.com/java/java-print-invertedtriangle.html</code></li><li><a href="java-print-parallelogram.html">Java 实例 – 打印平行四边形</a> <code>https://www.runoob.com/java/java-print-parallelogram.html</code></li><li><a href="dir-hierarchy.html">Java 实例 – 打印目录结构</a> <code>https://www.runoob.com/java/dir-hierarchy.html</code></li><li><a href="java-print-rect.html">Java 实例 – 打印矩形</a> <code>https://www.runoob.com/java/java-print-rect.html</code></li><li><a href="java-print-diamond.html">Java 实例 – 打印菱形</a> <code>https://www.runoob.com/java/java-print-diamond.html</code></li><li><a href="data-add.html">Java 实例 – 数字求和运算</a> <code>https://www.runoob.com/java/data-add.html</code></li><li><a href="arrays-reverse.html">Java 实例 – 数组反转</a> <code>https://www.runoob.com/java/arrays-reverse.html</code></li><li><a href="arrays_merge.html">Java 实例 – 数组合并</a> <code>https://www.runoob.com/java/arrays_merge.html</code></li><li><a href="arrays-fill.html">Java 实例 – 数组填充</a> <code>https://www.runoob.com/java/arrays-fill.html</code></li><li><a href="arrays-removeall.html">Java 实例 – 数组差集</a> <code>https://www.runoob.com/java/arrays-removeall.html</code></li><li><a href="arrays-union.html">Java 实例 – 数组并集</a> <code>https://www.runoob.com/java/arrays-union.html</code></li><li><a href="arrays-extension.html">Java 实例 – 数组扩容</a> <code>https://www.runoob.com/java/arrays-extension.html</code></li><li><a href="arrays-search.html">Java 实例 – 数组排序及元素查找</a> <code>https://www.runoob.com/java/arrays-search.html</code></li><li><a href="arrays-insert.html">Java 实例 – 数组添加元素</a> <code>https://www.runoob.com/java/arrays-insert.html</code></li><li><a href="arrays-min-max.html">Java 实例 – 数组获取最大和最小值</a> <code>https://www.runoob.com/java/arrays-min-max.html</code></li><li><a href="collection-array.html">Java 实例 – 数组转集合</a> <code>https://www.runoob.com/java/collection-array.html</code></li><li><a href="arrays-output.html">Java 实例 – 数组输出</a> <code>https://www.runoob.com/java/arrays-output.html</code></li><li><a href="file-write.html">Java 实例 – 文件写入</a> <code>https://www.runoob.com/java/file-write.html</code></li><li><a href="file-compare.html">Java 实例 – 文件路径比较</a> <code>https://www.runoob.com/java/file-compare.html</code></li><li><a href="file-rename.html">Java 实例 – 文件重命名</a> <code>https://www.runoob.com/java/file-rename.html</code></li><li><a href="method-fibonacci.html">Java 实例 – 斐波那契数列</a> <code>https://www.runoob.com/java/method-fibonacci.html</code></li><li><a href="java/method-override.html">Java 实例 – 方法覆盖</a> <code>https://www.runoob.com/java/java/method-override.html</code></li><li><a href="method-overloading.html">Java 实例 – 方法重载</a> <code>https://www.runoob.com/java/method-overloading.html</code></li><li><a href="data-swap.html">Java 实例 – 旋转向量</a> <code>https://www.runoob.com/java/data-swap.html</code></li><li><a href="date-timestamp2date.html">Java 实例 – 时间戳转换成时间</a> <code>https://www.runoob.com/java/date-timestamp2date.html</code></li><li><a href="collection-minmax.html">Java 实例 – 查找 List 中的最大最小值</a> <code>https://www.runoob.com/java/collection-minmax.html</code></li><li><a href="string-last-occurance.html">Java 实例 – 查找字符串最后一次出现的位置</a> <code>https://www.runoob.com/java/string-last-occurance.html</code></li><li><a href="arrays-compare.html">Java 实例 – 查找数组中的重复元素</a> <code>https://www.runoob.com/java/arrays-compare.html</code></li><li><a href="net-filetime.html">Java 实例 – 查看主机指定文件的最后修改时间</a> <code>https://www.runoob.com/java/net-filetime.html</code></li><li><a href="dir-current.html">Java 实例 – 查看当前工作目录</a> <code>https://www.runoob.com/java/dir-current.html</code></li><li><a href="net-port.html">Java 实例 – 查看端口是否已使用</a> <code>https://www.runoob.com/java/net-port.html</code></li><li><a href="thread-priorityinfo.html">Java 实例 – 查看线程优先级</a> <code>https://www.runoob.com/java/thread-priorityinfo.html</code></li><li><a href="thread-alive.html">Java 实例 – 查看线程是否存活</a> <code>https://www.runoob.com/java/thread-alive.html</code></li><li><a href="java/method-label.html">Java 实例 – 标签(Label)</a> <code>https://www.runoob.com/java/java/method-label.html</code></li><li><a href="data-stack.html">Java 实例 – 栈的实现</a> <code>https://www.runoob.com/java/data-stack.html</code></li><li><a href="date-time-am-pm.html">Java 实例 – 格式化时间（SimpleDateFormat）</a> <code>https://www.runoob.com/java/date-time-am-pm.html</code></li><li><a href="file-exist.html">Java 实例 – 检测文件是否存在</a> <code>https://www.runoob.com/java/file-exist.html</code></li><li><a href="thread-deadlock.html">Java 实例 – 死锁及解决方法</a> <code>https://www.runoob.com/java/thread-deadlock.html</code></li><li><a href="method-tower.html">Java 实例 – 汉诺塔算法</a> <code>https://www.runoob.com/java/method-tower.html</code></li><li><a href="string-regionmatch.html">Java 实例 – 测试两个字符串区域是否相等</a> <code>https://www.runoob.com/java/string-regionmatch.html</code></li><li><a href="thread-monitor.html">Java 实例 – 状态监测</a> <code>https://www.runoob.com/java/thread-monitor.html</code></li><li><a href="thread-getpri.html">Java 实例 – 线程优先级设置</a> <code>https://www.runoob.com/java/thread-getpri.html</code></li><li><a href="thread-suspend.html">Java 实例 – 线程挂起</a> <code>https://www.runoob.com/java/thread-suspend.html</code></li><li><a href="thread-stop.html">Java 实例 – 终止线程</a> <code>https://www.runoob.com/java/thread-stop.html</code></li><li><a href="net-webpage.html">Java 实例 – 网页抓取</a> <code>https://www.runoob.com/java/net-webpage.html</code></li><li><a href="exception-user.html">Java 实例 – 自定义异常</a> <code>https://www.runoob.com/java/exception-user.html</code></li><li><a href="net-url-header.html">Java 实例 – 获取 URL 响应头信息</a> <code>https://www.runoob.com/java/net-url-header.html</code></li><li><a href="net-urldate.html">Java 实例 – 获取 URL响应头的日期信息</a> <code>https://www.runoob.com/java/net-urldate.html</code></li><li><a href="data-vecsort.html">Java 实例 – 获取向量元素的索引值</a> <code>https://www.runoob.com/java/data-vecsort.html</code></li><li><a href="data-vec-max.html">Java 实例 – 获取向量的最大元素</a> <code>https://www.runoob.com/java/data-vec-max.html</code></li><li><a href="date-year-month.html">Java 实例 – 获取年份、月份等</a> <code>https://www.runoob.com/java/date-year-month.html</code></li><li><a href="exception-printstack.html">Java 实例 – 获取异常的堆栈信息</a> <code>https://www.runoob.com/java/exception-printstack.html</code></li><li><a href="date-time-datetime.html">Java 实例 – 获取当前时间</a> <code>https://www.runoob.com/java/date-time-datetime.html</code></li><li><a href="thread-name.html">Java 实例 – 获取当前线程名称</a> <code>https://www.runoob.com/java/thread-name.html</code></li><li><a href="thread-showall.html">Java 实例 – 获取所有线程</a> <code>https://www.runoob.com/java/thread-showall.html</code></li><li><a href="net-address.html">Java 实例 – 获取指定主机的IP地址</a> <code>https://www.runoob.com/java/net-address.html</code></li><li><a href="arrays-upperbound.html">Java 实例 – 获取数组长度</a> <code>https://www.runoob.com/java/arrays-upperbound.html</code></li><li><a href="file-date.html">Java 实例 – 获取文件修改时间</a> <code>https://www.runoob.com/java/file-date.html</code></li><li><a href="file-size.html">Java 实例 – 获取文件大小</a> <code>https://www.runoob.com/java/file-size.html</code></li><li><a href="dir-parent.html">Java 实例 – 获取文件的上级目录</a> <code>https://www.runoob.com/java/dir-parent.html</code></li><li><a href="net-localip.html">Java 实例 – 获取本机ip地址及主机名</a> <code>https://www.runoob.com/java/net-localip.html</code></li><li><a href="dir-size.html">Java 实例 – 获取目录大小</a> <code>https://www.runoob.com/java/dir-size.html</code></li><li><a href="dir-modification.html">Java 实例 – 获取目录最后修改时间</a> <code>https://www.runoob.com/java/dir-modification.html</code></li><li><a href="thread-id.html">Java 实例 – 获取线程id</a> <code>https://www.runoob.com/java/thread-id.html</code></li><li><a href="thread-status.html">Java 实例 – 获取线程状态</a> <code>https://www.runoob.com/java/thread-status.html</code></li><li><a href="data_linklist.html">Java 实例 – 获取链表的元素</a> <code>https://www.runoob.com/java/data_linklist.html</code></li><li><a href="data-element.html">Java 实例 – 获取链表（LinkedList）的第一个和最后一个元素</a> <code>https://www.runoob.com/java/data-element.html</code></li><li><a href="file-read-only.html">Java 实例 – 设置文件只读</a> <code>https://www.runoob.com/java/file-read-only.html</code></li><li><a href="file-read.html">Java 实例 – 读取文件内容</a> <code>https://www.runoob.com/java/file-read.html</code></li><li><a href="method-array.html">Java 实例 – 输出数组元素</a> <code>https://www.runoob.com/java/method-array.html</code></li><li><a href="string-concatenation.html">Java 实例 – 连接字符串</a> <code>https://www.runoob.com/java/string-concatenation.html</code></li><li><a href="dir-create.html">Java 实例 – 递归创建目录</a> <code>https://www.runoob.com/java/dir-create.html</code></li><li><a href="collection-hashtable-key.html">Java 实例 – 遍历 HashTable 的键值</a> <code>https://www.runoob.com/java/collection-hashtable-key.html</code></li><li><a href="dir-sub.html">Java 实例 – 遍历指定目录下的所有文件</a> <code>https://www.runoob.com/java/dir-sub.html</code></li><li><a href="dir-display.html">Java 实例 – 遍历指定目录下的所有目录</a> <code>https://www.runoob.com/java/dir-display.html</code></li><li><a href="dir-traverse.html">Java 实例 – 遍历目录</a> <code>https://www.runoob.com/java/dir-traverse.html</code></li><li><a href="dir-root.html">Java 实例 – 遍历系统根目录</a> <code>https://www.runoob.com/java/dir-root.html</code></li><li><a href="java/method-varargs1.html">Java 实例 – 重载(overloading)方法中使用 Varargs</a> <code>https://www.runoob.com/java/java/method-varargs1.html</code></li><li><a href="exception-overloaded-method.html">Java 实例 – 重载方法异常处理</a> <code>https://www.runoob.com/java/exception-overloaded-method.html</code></li><li><a href="data-update.html">Java 实例 – 链表修改</a> <code>https://www.runoob.com/java/data-update.html</code></li><li><a href="data-search.html">Java 实例 – 链表元素查找</a> <code>https://www.runoob.com/java/data-search.html</code></li><li><a href="exception-chain.html">Java 实例 – 链试异常</a> <code>https://www.runoob.com/java/exception-chain.html</code></li><li><a href="data-queue.html">Java 实例 – 队列（Queue）用法</a> <code>https://www.runoob.com/java/data-queue.html</code></li><li><a href="method-factorial.html">Java 实例 – 阶乘</a> <code>https://www.runoob.com/java/method-factorial.html</code></li><li><a href="collection-all.html">Java 实例 – 集合中添加不同类型元素</a> <code>https://www.runoob.com/java/collection-all.html</code></li><li><a href="collection-reverse.html">Java 实例 – 集合反转</a> <code>https://www.runoob.com/java/collection-reverse.html</code></li><li><a href="collection-shuffle.html">Java 实例 – 集合打乱顺序</a> <code>https://www.runoob.com/java/collection-shuffle.html</code></li><li><a href="collection-compare.html">Java 实例 – 集合比较</a> <code>https://www.runoob.com/java/collection-compare.html</code></li><li><a href="collection-conversion.html">Java 实例 – 集合转数组</a> <code>https://www.runoob.com/java/collection-conversion.html</code></li><li><a href="collection-print.html">Java 实例 – 集合输出</a> <code>https://www.runoob.com/java/collection-print.html</code></li><li><a href="collection-iterator.html">Java 实例 – 集合遍历</a> <code>https://www.runoob.com/java/collection-iterator.html</code></li><li><a href="collection-size.html">Java 实例 – 集合长度</a> <code>https://www.runoob.com/java/collection-size.html</code></li></ol></section><section id="subgroup-ai-5de55177"><h2>AI / 工具 (1)</h2><ol class="page-list"><li><a href="fitten-code-java.html">Java AI 编程助手</a> <code>https://www.runoob.com/java/fitten-code-java.html</code></li></ol></section><section id="subgroup-4e139898"><h2>专题 (46)</h2><ol class="page-list"><li><a href="java-scanner-class.html">Java  Scanner 类</a> <code>https://www.runoob.com/java/java-scanner-class.html</code></li><li><a href="java8-new-features.html">Java 8  新特性</a> <code>https://www.runoob.com/java/java8-new-features.html</code></li><li><a href="java9-new-features.html">Java 9 新特性</a> <code>https://www.runoob.com/java/java9-new-features.html</code></li><li><a href="java-arraylist.html">Java ArrayList</a> <code>https://www.runoob.com/java/java-arraylist.html</code></li><li><a href="java-character.html">Java Character 类</a> <code>https://www.runoob.com/java/java-character.html</code></li><li><a href="java-hashmap.html">Java HashMap</a> <code>https://www.runoob.com/java/java-hashmap.html</code></li><li><a href="java-hashset.html">Java HashSet</a> <code>https://www.runoob.com/java/java-hashset.html</code></li><li><a href="java-iterator.html">Java Iterator（迭代器）</a> <code>https://www.runoob.com/java/java-iterator.html</code></li><li><a href="java-linkedlist.html">Java LinkedList</a> <code>https://www.runoob.com/java/java-linkedlist.html</code></li><li><a href="java-mysql-connect.html">Java MySQL 连接</a> <code>https://www.runoob.com/java/java-mysql-connect.html</code></li><li><a href="java-nio-file.html">Java NIO Files 类</a> <code>https://www.runoob.com/java/java-nio-file.html</code></li><li><a href="java-number.html">Java Number &amp; Math 类</a> <code>https://www.runoob.com/java/java-number.html</code></li><li><a href="java-string.html">Java String 类</a> <code>https://www.runoob.com/java/java-string.html</code></li><li><a href="java-stringbuffer.html">Java StringBuffer 和 StringBuilder 类</a> <code>https://www.runoob.com/java/java-stringbuffer.html</code></li><li><a href="java-switch-case.html">Java switch case 语句</a> <code>https://www.runoob.com/java/java-switch-case.html</code></li><li><a href="java-modifier-types.html">Java 修饰符</a> <code>https://www.runoob.com/java/java-modifier-types.html</code></li><li><a href="java-package.html">Java 包(package)</a> <code>https://www.runoob.com/java/java-package.html</code></li><li><a href="java-sending-email.html">Java 发送邮件</a> <code>https://www.runoob.com/java/java-sending-email.html</code></li><li><a href="java-variable-naming-rules.html">Java 变量命名规则</a> <code>https://www.runoob.com/java/java-variable-naming-rules.html</code></li><li><a href="java-variable-types.html">Java 变量类型</a> <code>https://www.runoob.com/java/java-variable-types.html</code></li><li><a href="java-basic-datatypes.html">Java 基本数据类型</a> <code>https://www.runoob.com/java/java-basic-datatypes.html</code></li><li><a href="java-polymorphism.html">Java 多态</a> <code>https://www.runoob.com/java/java-polymorphism.html</code></li><li><a href="java-multithreading.html">Java 多线程编程</a> <code>https://www.runoob.com/java/java-multithreading.html</code></li><li><a href="java-encapsulation.html">Java 封装</a> <code>https://www.runoob.com/java/java-encapsulation.html</code></li><li><a href="java-libs.html">Java 常用类库</a> <code>https://www.runoob.com/java/java-libs.html</code></li><li><a href="java-serialization.html">Java 序列化</a> <code>https://www.runoob.com/java/java-serialization.html</code></li><li><a href="java-exceptions.html">Java 异常处理</a> <code>https://www.runoob.com/java/java-exceptions.html</code></li><li><a href="java-loop.html">Java 循环结构 – for, while 及 do…while</a> <code>https://www.runoob.com/java/java-loop.html</code></li><li><a href="java-print-the-triangle.html">JAVA 打印三角形</a> <code>https://www.runoob.com/java/java-print-the-triangle.html</code></li><li><a href="java-abstraction.html">Java 抽象类</a> <code>https://www.runoob.com/java/java-abstraction.html</code></li><li><a href="java-interfaces.html">Java 接口</a> <code>https://www.runoob.com/java/java-interfaces.html</code></li><li><a href="java-data-structures.html">Java 数据结构</a> <code>https://www.runoob.com/java/java-data-structures.html</code></li><li><a href="java-array.html">Java 数组</a> <code>https://www.runoob.com/java/java-array.html</code></li><li><a href="java-documentation.html">Java 文档注释</a> <code>https://www.runoob.com/java/java-documentation.html</code></li><li><a href="java-date-time.html">Java 日期时间</a> <code>https://www.runoob.com/java/java-date-time.html</code></li><li><a href="java-if-else-switch.html">Java 条件语句 – if…else</a> <code>https://www.runoob.com/java/java-if-else-switch.html</code></li><li><a href="java-constructor.html">Java 构造方法</a> <code>https://www.runoob.com/java/java-constructor.html</code></li><li><a href="java-enum.html">Java 枚举(enum)</a> <code>https://www.runoob.com/java/java-enum.html</code></li><li><a href="java-regular-expressions.html">Java 正则表达式</a> <code>https://www.runoob.com/java/java-regular-expressions.html</code></li><li><a href="java-generics.html">Java 泛型</a> <code>https://www.runoob.com/java/java-generics.html</code></li><li><a href="java-comments.html">Java 注释</a> <code>https://www.runoob.com/java/java-comments.html</code></li><li><a href="java-files-io.html">Java 流(Stream)、文件(File)和IO</a> <code>https://www.runoob.com/java/java-files-io.html</code></li><li><a href="java-inheritance.html">Java 继承</a> <code>https://www.runoob.com/java/java-inheritance.html</code></li><li><a href="java-networking.html">Java 网络编程</a> <code>https://www.runoob.com/java/java-networking.html</code></li><li><a href="java-override-overload.html">Java 重写(Override)与重载(Overload)</a> <code>https://www.runoob.com/java/java-override-overload.html</code></li><li><a href="java-collections.html">Java 集合框架</a> <code>https://www.runoob.com/java/java-collections.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "Java 实例 – 查找数组中的重复元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-compare.html", "href": "arrays-compare.html"}, {"title": "Java 实例 – 判断数组是否相等", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-equal.html", "href": "arrays-equal.html"}, {"title": "Java 实例 – 数组扩容", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-extension.html", "href": "arrays-extension.html"}, {"title": "Java 实例 – 数组填充", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-fill.html", "href": "arrays-fill.html"}, {"title": "Java 实例 –  在数组中查找指定元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-find.html", "href": "arrays-find.html"}, {"title": "Java 实例 – 数组添加元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-insert.html", "href": "arrays-insert.html"}, {"title": "Java 实例 – 数组获取最大和最小值", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-min-max.html", "href": "arrays-min-max.html"}, {"title": "Java 实例 – 数组输出", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-output.html", "href": "arrays-output.html"}, {"title": "Java 实例 – 删除数组元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-remove.html", "href": "arrays-remove.html"}, {"title": "Java 实例 – 数组差集", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-removeall.html", "href": "arrays-removeall.html"}, {"title": "Java 实例 –  数组交集", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-retainall.html", "href": "arrays-retainall.html"}, {"title": "Java 实例 – 数组反转", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-reverse.html", "href": "arrays-reverse.html"}, {"title": "Java 实例 – 数组排序及元素查找", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-search.html", "href": "arrays-search.html"}, {"title": "Java 实例 – 数组并集", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-union.html", "href": "arrays-union.html"}, {"title": "Java 实例 – 获取数组长度", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays-upperbound.html", "href": "arrays-upperbound.html"}, {"title": "Java 实例 – 数组合并", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/arrays_merge.html", "href": "arrays_merge.html"}, {"title": "Java 实例 – 集合中添加不同类型元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-all.html", "href": "collection-all.html"}, {"title": "Java 实例 – 数组转集合", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-array.html", "href": "collection-array.html"}, {"title": "Java 实例 – 集合比较", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-compare.html", "href": "collection-compare.html"}, {"title": "Java 实例 – 集合转数组", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-conversion.html", "href": "collection-conversion.html"}, {"title": "Java 实例 – 使用 Enumeration 遍历 HashTable", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-enumeration.html", "href": "collection-enumeration.html"}, {"title": "Java 实例 – 遍历 HashTable 的键值", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-hashtable-key.html", "href": "collection-hashtable-key.html"}, {"title": "Java 实例 – HashMap遍历", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-iterate.html", "href": "collection-iterate.html"}, {"title": "Java 实例 – 集合遍历", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-iterator.html", "href": "collection-iterator.html"}, {"title": "Java 实例 – 查找 List 中的最大最小值", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-minmax.html", "href": "collection-minmax.html"}, {"title": "Java 实例 – 集合输出", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-print.html", "href": "collection-print.html"}, {"title": "Java 实例 – 只读集合", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-readonly.html", "href": "collection-readonly.html"}, {"title": "Java 实例 – 删除集合中指定元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-remove.html", "href": "collection-remove.html"}, {"title": "Java 实例 – List 元素替换", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-replace.html", "href": "collection-replace.html"}, {"title": "Java 实例 – 集合反转", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-reverse.html", "href": "collection-reverse.html"}, {"title": "Java 实例 – List 循环移动元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-rotate.html", "href": "collection-rotate.html"}, {"title": "Java 实例 – 集合打乱顺序", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-shuffle.html", "href": "collection-shuffle.html"}, {"title": "Java 实例 – 集合长度", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-size.html", "href": "collection-size.html"}, {"title": "Java 实例 – List 截取", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/collection-sublist.html", "href": "collection-sublist.html"}, {"title": "Java 实例 – 数字求和运算", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-add.html", "href": "data-add.html"}, {"title": "Java 实例 – 获取链表（LinkedList）的第一个和最后一个元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-element.html", "href": "data-element.html"}, {"title": "Java 实例 – 在链表（LinkedList）的开头和结尾添加元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-insert.html", "href": "data-insert.html"}, {"title": "Java 实例 – 利用堆栈将中缀表达式转换成后缀表达式", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-intopost.html", "href": "data-intopost.html"}, {"title": "Java 实例 – 队列（Queue）用法", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-queue.html", "href": "data-queue.html"}, {"title": "Java 实例 – 删除链表中的元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-replace.html", "href": "data-replace.html"}, {"title": "Java 实例 – 压栈出栈的方法实现字符串反转", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-reverse.html", "href": "data-reverse.html"}, {"title": "Java 实例 – 链表元素查找", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-search.html", "href": "data-search.html"}, {"title": "Java 实例 – 栈的实现", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-stack.html", "href": "data-stack.html"}, {"title": "Java 实例 – 旋转向量", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-swap.html", "href": "data-swap.html"}, {"title": "Java 实例 – 链表修改", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-update.html", "href": "data-update.html"}, {"title": "Java 实例 – 获取向量的最大元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-vec-max.html", "href": "data-vec-max.html"}, {"title": "Java 实例 – 获取向量元素的索引值", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data-vecsort.html", "href": "data-vecsort.html"}, {"title": "Java 实例 – 获取链表的元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/data_linklist.html", "href": "data_linklist.html"}, {"title": "Java 实例 – 格式化时间（SimpleDateFormat）", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/date-time-am-pm.html", "href": "date-time-am-pm.html"}, {"title": "Java 实例 – 获取当前时间", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/date-time-datetime.html", "href": "date-time-datetime.html"}, {"title": "Java 实例 – 时间戳转换成时间", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/date-timestamp2date.html", "href": "date-timestamp2date.html"}, {"title": "Java 实例 – 获取年份、月份等", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/date-year-month.html", "href": "date-year-month.html"}, {"title": "Java 实例 – 递归创建目录", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-create.html", "href": "dir-create.html"}, {"title": "Java 实例 – 查看当前工作目录", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-current.html", "href": "dir-current.html"}, {"title": "Java 实例 – 删除目录", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-delete.html", "href": "dir-delete.html"}, {"title": "Java 实例 – 遍历指定目录下的所有目录", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-display.html", "href": "dir-display.html"}, {"title": "Java 实例 – 判断目录是否为空", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-empty.html", "href": "dir-empty.html"}, {"title": "Java 实例 – 判断文件是否隐藏", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-hidden.html", "href": "dir-hidden.html"}, {"title": "Java 实例 – 打印目录结构", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-hierarchy.html", "href": "dir-hierarchy.html"}, {"title": "Java 实例 – 获取目录最后修改时间", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-modification.html", "href": "dir-modification.html"}, {"title": "Java 实例 – 获取文件的上级目录", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-parent.html", "href": "dir-parent.html"}, {"title": "Java 实例 – 遍历系统根目录", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-root.html", "href": "dir-root.html"}, {"title": "Java 实例 – 在指定目录中查找文件", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-search-file.html", "href": "dir-search-file.html"}, {"title": "Java 实例 – 在指定目录中查找文件", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-search.html", "href": "dir-search.html"}, {"title": "Java 实例 – 获取目录大小", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-size.html", "href": "dir-size.html"}, {"title": "Java 实例 – 遍历指定目录下的所有文件", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-sub.html", "href": "dir-sub.html"}, {"title": "Java 实例 – 遍历目录", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/dir-traverse.html", "href": "dir-traverse.html"}, {"title": "Java 实例 – 如何执行指定class文件目录（classpath）", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/env-classpath.html", "href": "env-classpath.html"}, {"title": "Java 实例 – 如何编译 Java 文件", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/env-compile.html", "href": "env-compile.html"}, {"title": "Java 实例 – 如何执行编译过 Java 文件", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/env-run.html", "href": "env-run.html"}, {"title": "Java 实例 – 如何查看当前 Java 运行的版本?", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/env-version.html", "href": "env-version.html"}, {"title": "Java 实例 – 使用 catch 处理异常", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/exception-catch.html", "href": "exception-catch.html"}, {"title": "Java 实例 – 链试异常", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/exception-chain.html", "href": "exception-chain.html"}, {"title": "Java 实例 – Finally的用法", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/exception-finally.html", "href": "exception-finally.html"}, {"title": "Java 实例 – 多个异常处理（多个catch）", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/exception-hierarchy.html", "href": "exception-hierarchy.html"}, {"title": "Java 实例 – 异常处理方法", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/exception-method.html", "href": "exception-method.html"}, {"title": "Java 实例 – 重载方法异常处理", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/exception-overloaded-method.html", "href": "exception-overloaded-method.html"}, {"title": "Java 实例 – 获取异常的堆栈信息", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/exception-printstack.html", "href": "exception-printstack.html"}, {"title": "Java 实例 – 多线程异常处理", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/exception-thread.html", "href": "exception-thread.html"}, {"title": "Java 实例 – 自定义异常", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/exception-user.html", "href": "exception-user.html"}, {"title": "Java 实例 – 向文件中追加数据", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-append.html", "href": "file-append.html"}, {"title": "Java 实例 – 文件路径比较", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-compare.html", "href": "file-compare.html"}, {"title": "Java 实例 – 将文件内容复制到另一个文件", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-copy.html", "href": "file-copy.html"}, {"title": "Java 实例 – 创建临时文件", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-create-temp.html", "href": "file-create-temp.html"}, {"title": "Java 实例 – 创建文件", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-create.html", "href": "file-create.html"}, {"title": "Java 实例 – 修改文件最后的修改日期", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-date-modify.html", "href": "file-date-modify.html"}, {"title": "Java 实例 – 获取文件修改时间", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-date.html", "href": "file-date.html"}, {"title": "Java 实例 – 删除文件", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-delete.html", "href": "file-delete.html"}, {"title": "Java 实例 – 在指定目录中创建文件", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-dir.html", "href": "file-dir.html"}, {"title": "Java 实例 – 检测文件是否存在", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-exist.html", "href": "file-exist.html"}, {"title": "Java 实例 – 设置文件只读", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-read-only.html", "href": "file-read-only.html"}, {"title": "Java 实例 – 读取文件内容", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-read.html", "href": "file-read.html"}, {"title": "Java 实例 – 文件重命名", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-rename.html", "href": "file-rename.html"}, {"title": "Java 实例 – 获取文件大小", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-size.html", "href": "file-size.html"}, {"title": "Java 实例 – 文件写入", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/file-write.html", "href": "file-write.html"}, {"title": "Java AI 编程助手", "group": "java", "subgroup": "AI / 工具", "url": "https://www.runoob.com/java/fitten-code-java.html", "href": "fitten-code-java.html"}, {"title": "Java 实例 – break 关键字用法", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java/method-break.html", "href": "java/method-break.html"}, {"title": "Java 实例 – continue 关键字用法", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java/method-continue.html", "href": "java/method-continue.html"}, {"title": "Java 实例 – enum 和 switch 语句使用", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java/method-enum.html", "href": "java/method-enum.html"}, {"title": "Java 实例 – Enum（枚举）构造函数及方法的使用", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java/method-enum1.html", "href": "java/method-enum1.html"}, {"title": "Java 实例 – for 和 foreach循环使用", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java/method-for.html", "href": "java/method-for.html"}, {"title": "Java 实例 – instanceof 关键字用法", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java/method-instanceof.html", "href": "java/method-instanceof.html"}, {"title": "Java 实例 – 标签(Label)", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java/method-label.html", "href": "java/method-label.html"}, {"title": "Java 实例 – 方法覆盖", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java/method-override.html", "href": "java/method-override.html"}, {"title": "Java 实例 – Varargs 可变参数使用", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java/method-varargs.html", "href": "java/method-varargs.html"}, {"title": "Java 实例 – 重载(overloading)方法中使用 Varargs", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java/method-varargs1.html", "href": "java/method-varargs1.html"}, {"title": "Java 抽象类", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-abstraction.html", "href": "java-abstraction.html"}, {"title": "Java Applet 基础", "group": "java", "subgroup": "入门", "url": "https://www.runoob.com/java/java-applet-basics.html", "href": "java-applet-basics.html"}, {"title": "Java 数组", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-array.html", "href": "java-array.html"}, {"title": "Java ArrayList", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-arraylist.html", "href": "java-arraylist.html"}, {"title": "Java 基本数据类型", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-basic-datatypes.html", "href": "java-basic-datatypes.html"}, {"title": "Java 基础语法", "group": "java", "subgroup": "入门", "url": "https://www.runoob.com/java/java-basic-syntax.html", "href": "java-basic-syntax.html"}, {"title": "Java Character 类", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-character.html", "href": "java-character.html"}, {"title": "Java 集合框架", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-collections.html", "href": "java-collections.html"}, {"title": "Java 注释", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-comments.html", "href": "java-comments.html"}, {"title": "Java 构造方法", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-constructor.html", "href": "java-constructor.html"}, {"title": "Java 数据结构", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-data-structures.html", "href": "java-data-structures.html"}, {"title": "Java 日期时间", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-date-time.html", "href": "java-date-time.html"}, {"title": "Java 文档注释", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-documentation.html", "href": "java-documentation.html"}, {"title": "Java 封装", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-encapsulation.html", "href": "java-encapsulation.html"}, {"title": "Java 枚举(enum)", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-enum.html", "href": "java-enum.html"}, {"title": "Java 开发环境配置", "group": "java", "subgroup": "入门", "url": "https://www.runoob.com/java/java-environment-setup.html", "href": "java-environment-setup.html"}, {"title": "Java 实例", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java-examples.html", "href": "java-examples.html"}, {"title": "Java 异常处理", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-exceptions.html", "href": "java-exceptions.html"}, {"title": "Java 流(Stream)、文件(File)和IO", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-files-io.html", "href": "java-files-io.html"}, {"title": "Java 泛型", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-generics.html", "href": "java-generics.html"}, {"title": "Java HashMap", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-hashmap.html", "href": "java-hashmap.html"}, {"title": "Java HashSet", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-hashset.html", "href": "java-hashset.html"}, {"title": "Java 条件语句 – if…else", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-if-else-switch.html", "href": "java-if-else-switch.html"}, {"title": "Java 继承", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-inheritance.html", "href": "java-inheritance.html"}, {"title": "Java 接口", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-interfaces.html", "href": "java-interfaces.html"}, {"title": "Java 简介", "group": "java", "subgroup": "入门", "url": "https://www.runoob.com/java/java-intro.html", "href": "java-intro.html"}, {"title": "Java Iterator（迭代器）", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-iterator.html", "href": "java-iterator.html"}, {"title": "Java 常用类库", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-libs.html", "href": "java-libs.html"}, {"title": "Java LinkedList", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-linkedlist.html", "href": "java-linkedlist.html"}, {"title": "Java 循环结构 – for, while 及 do…while", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-loop.html", "href": "java-loop.html"}, {"title": "Java 方法", "group": "java", "subgroup": "参考", "url": "https://www.runoob.com/java/java-methods.html", "href": "java-methods.html"}, {"title": "Java 修饰符", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-modifier-types.html", "href": "java-modifier-types.html"}, {"title": "Java 多线程编程", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-multithreading.html", "href": "java-multithreading.html"}, {"title": "Java MySQL 连接", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-mysql-connect.html", "href": "java-mysql-connect.html"}, {"title": "Java 网络编程", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-networking.html", "href": "java-networking.html"}, {"title": "Java NIO Files 类", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-nio-file.html", "href": "java-nio-file.html"}, {"title": "Java Number & Math 类", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-number.html", "href": "java-number.html"}, {"title": "Java Object 类", "group": "java", "subgroup": "参考", "url": "https://www.runoob.com/java/java-object-class.html", "href": "java-object-class.html"}, {"title": "Java 对象和类", "group": "java", "subgroup": "参考", "url": "https://www.runoob.com/java/java-object-classes.html", "href": "java-object-classes.html"}, {"title": "Java 运算符", "group": "java", "subgroup": "参考", "url": "https://www.runoob.com/java/java-operators.html", "href": "java-operators.html"}, {"title": "Java 重写(Override)与重载(Overload)", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-override-overload.html", "href": "java-override-overload.html"}, {"title": "Java 包(package)", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-package.html", "href": "java-package.html"}, {"title": "Java 多态", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-polymorphism.html", "href": "java-polymorphism.html"}, {"title": "Java 实例 – 打印菱形", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java-print-diamond.html", "href": "java-print-diamond.html"}, {"title": "Java 实例 – 打印倒立的三角形", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java-print-invertedtriangle.html", "href": "java-print-invertedtriangle.html"}, {"title": "Java 实例 – 九九乘法表", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java-print-multiplicationtable.html", "href": "java-print-multiplicationtable.html"}, {"title": "Java 实例 – 打印平行四边形", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java-print-parallelogram.html", "href": "java-print-parallelogram.html"}, {"title": "Java 实例 – 打印矩形", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java-print-rect.html", "href": "java-print-rect.html"}, {"title": "JAVA 打印三角形", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-print-the-triangle.html", "href": "java-print-the-triangle.html"}, {"title": "Java 反射（Reflection）", "group": "java", "subgroup": "参考", "url": "https://www.runoob.com/java/java-reflection.html", "href": "java-reflection.html"}, {"title": "Java 正则表达式", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-regular-expressions.html", "href": "java-regular-expressions.html"}, {"title": "Java  Scanner 类", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-scanner-class.html", "href": "java-scanner-class.html"}, {"title": "Java 发送邮件", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-sending-email.html", "href": "java-sending-email.html"}, {"title": "Java 序列化", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-serialization.html", "href": "java-serialization.html"}, {"title": "Java String 类", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-string.html", "href": "java-string.html"}, {"title": "Java StringBuffer 和 StringBuilder 类", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-stringbuffer.html", "href": "java-stringbuffer.html"}, {"title": "Java 实例 – 字符串分隔(StringTokenizer)", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/java-stringtokenizer-example.html", "href": "java-stringtokenizer-example.html"}, {"title": "Java switch case 语句", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-switch-case.html", "href": "java-switch-case.html"}, {"title": "Java 教程", "group": "java", "subgroup": "入门", "url": "https://www.runoob.com/java/java-tutorial.html", "href": "java-tutorial.html"}, {"title": "Java 变量命名规则", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-variable-naming-rules.html", "href": "java-variable-naming-rules.html"}, {"title": "Java 变量类型", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java-variable-types.html", "href": "java-variable-types.html"}, {"title": "Java 8  新特性", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java8-new-features.html", "href": "java8-new-features.html"}, {"title": "Java 9 新特性", "group": "java", "subgroup": "专题", "url": "https://www.runoob.com/java/java9-new-features.html", "href": "java9-new-features.html"}, {"title": "Java 实例 – 输出数组元素", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/method-array.html", "href": "method-array.html"}, {"title": "Java 实例 – 阶乘", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/method-factorial.html", "href": "method-factorial.html"}, {"title": "Java 实例 – 斐波那契数列", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/method-fibonacci.html", "href": "method-fibonacci.html"}, {"title": "Java 实例 – 方法重载", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/method-overloading.html", "href": "method-overloading.html"}, {"title": "Java 实例 – 汉诺塔算法", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/method-tower.html", "href": "method-tower.html"}, {"title": "Java 实例 – 获取指定主机的IP地址", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-address.html", "href": "net-address.html"}, {"title": "Java 实例 – 使用 Socket 连接到指定主机", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-connected.html", "href": "net-connected.html"}, {"title": "Java 实例 – 查看主机指定文件的最后修改时间", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-filetime.html", "href": "net-filetime.html"}, {"title": "Java 实例 – 获取本机ip地址及主机名", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-localip.html", "href": "net-localip.html"}, {"title": "Java 实例 – Socket 实现多线程服务器程序", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-multisoc.html", "href": "net-multisoc.html"}, {"title": "Java 实例 – 查看端口是否已使用", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-port.html", "href": "net-port.html"}, {"title": "Java 实例 –  获取远程文件大小", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-serverfile.html", "href": "net-serverfile.html"}, {"title": "Java 实例 –   ServerSocket 和 Socket 通信实例", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-serversocket-socket.html", "href": "net-serversocket-socket.html"}, {"title": "Java 实例 – 获取 URL 响应头信息", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-url-header.html", "href": "net-url-header.html"}, {"title": "Java 实例 –  解析 URL", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-url.html", "href": "net-url.html"}, {"title": "Java 实例 – 获取 URL响应头的日期信息", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-urldate.html", "href": "net-urldate.html"}, {"title": "Java 实例 – 网页抓取", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/net-webpage.html", "href": "net-webpage.html"}, {"title": "Java 实例 – 字符串比较", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-compare.html", "href": "string-compare.html"}, {"title": "Java 实例 – 连接字符串", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-concatenation.html", "href": "string-concatenation.html"}, {"title": "Java 实例 – 字符串格式化", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-format.html", "href": "string-format.html"}, {"title": "Java 实例 – 查找字符串最后一次出现的位置", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-last-occurance.html", "href": "string-last-occurance.html"}, {"title": "Java 实例 – 字符串优化", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-optimization.html", "href": "string-optimization.html"}, {"title": "Java 实例 – 字符串性能比较测试", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-performance.html", "href": "string-performance.html"}, {"title": "Java 实例 – 测试两个字符串区域是否相等", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-regionmatch.html", "href": "string-regionmatch.html"}, {"title": "Java 实例 – 删除字符串中的一个字符", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-removing-char.html", "href": "string-removing-char.html"}, {"title": "Java 实例 – 字符串替换", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-replace.html", "href": "string-replace.html"}, {"title": "Java 实例 – 字符串反转", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-reverse.html", "href": "string-reverse.html"}, {"title": "Java 实例 – 字符串查找", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-search.html", "href": "string-search.html"}, {"title": "Java 实例 – 字符串分割", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-split.html", "href": "string-split.html"}, {"title": "Java 实例 – 字符串小写转大写", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/string-uppercase.html", "href": "string-uppercase.html"}, {"title": "Java 实例 – 查看线程是否存活", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-alive.html", "href": "thread-alive.html"}, {"title": "Java 实例 – 死锁及解决方法", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-deadlock.html", "href": "thread-deadlock.html"}, {"title": "Java 实例 – 线程优先级设置", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-getpri.html", "href": "thread-getpri.html"}, {"title": "Java 实例 – 获取线程id", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-id.html", "href": "thread-id.html"}, {"title": "Java 实例 – 中断线程", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-interrupt.html", "href": "thread-interrupt.html"}, {"title": "Java 实例 – 状态监测", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-monitor.html", "href": "thread-monitor.html"}, {"title": "Java 实例 – 获取当前线程名称", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-name.html", "href": "thread-name.html"}, {"title": "Java 实例 – 查看线程优先级", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-priorityinfo.html", "href": "thread-priorityinfo.html"}, {"title": "Java 实例 – 获取所有线程", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-showall.html", "href": "thread-showall.html"}, {"title": "Java 实例 – 获取线程状态", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-status.html", "href": "thread-status.html"}, {"title": "Java 实例 – 终止线程", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-stop.html", "href": "thread-stop.html"}, {"title": "Java 实例 – 线程挂起", "group": "java", "subgroup": "实例", "url": "https://www.runoob.com/java/thread-suspend.html", "href": "thread-suspend.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

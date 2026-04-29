@@ -1,0 +1,78 @@
+URL: https://www.runoob.com/pycharm/pycharm-first-python-project.html
+Title: PyCharm 创建第一个 Python 项目 | 菜鸟教程
+
+PyCharm 创建第一个 Python 项目 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Pycharm 教程 
+
+PyCharm 安装 
+
+PyCharm 界面说明 
+
+PyCharm 创建第一个 Python 项目 
+
+PyCharm 启动的时候其实已经提供了很多快捷方式： 
+
+我们点击"新建脚本"这个按钮，PyCharm 就会帮我们创建一个 script.py 文件，并自动初始化代码和环境： 
+
+我们可以尝试修改脚本文件，并运行查看输出结果： 
+
+通过菜单栏创建项目 
+
+启动 PyCharm，点击 "新建项目(New Project)"。 
+
+输入项目名称 RUNOOB ，设置项目路径，选择 Python 解释器，点击 "创建(Create)" 创建项目。 
+
+接下来我们设置项目为 RUNOOB，然后在该项目下创建一个 Pyhton 脚本文件。 
+
+在项目 RUNOOB 中右键点击，选择 "新建 -> Python 文件" 创建一个新的 Python 文件。 
+
+输入文件名，例如 runoob-test.py ，创建新的 Python 文件： 
+
+在文件中输入以下代码： 
+
+实例 
+
+print ( "Hello Runoob!" ) 
+
+代码输入完成后，可以点击右上角的运行按钮： 
+
+也可以右键点击代码区域，选择 "运行 'runoob-test'" 运行代码。 
+
+项目设置 
+
+项目创建好后，我们可以点击右上角的设置图标进行一些配置： 
+
+包含一些常规的编辑器配置，也可以配置 Python 解释器: 
+
+常见问题解答 
+
+1. PyCharm 启动时提示"No Python interpreter configured"怎么办？ 
+
+这意味着 PyCharm 没有检测到 Python 解释器。你可以手动添加解释器： 
+
+打开"文件 -> 设置"（Windows/Linux）或"PyCharm -> 设置"（macOS）。 
+
+在左侧菜单中选择"项目: <项目名称> -> Python 解释器"。 
+
+点击右上角 "添加解释器"。 
+
+选择已安装的 Python 解释器路径。 
+
+2. 如何安装第三方库？ 
+
+在 PyCharm 中，你可以通过以下步骤安装第三方库： 
+
+打开"File -> Settings"（Windows/Linux）或"PyCharm -> Preferences"（macOS）。 
+
+在左侧菜单中选择"项目: <项目名称> -> Python 解释器"。 
+
+点击右下角的"+"按钮，搜索并安装所需的库。 
+
+AI 思考中... 
+
+PyCharm 安装 
+
+PyCharm 界面说明

@@ -1,0 +1,65 @@
+URL: https://www.runoob.com/tags/canvas-ispointinpath.html
+Title: HTML canvas isPointInPath() 方法 | 菜鸟教程
+
+HTML canvas isPointInPath() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas arcTo() 方法 
+
+HTML canvas scale() 方法 
+
+HTML canvas isPointInPath() 方法 
+
+实例 
+
+如果点 20,50 位于当前路径中，则绘制一个矩形： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+ctx.rect(20,20,150,100); 
+if (ctx.isPointInPath(20,50)) 
+{ 
+ctx.stroke(); 
+}; 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 isPointInPath() 
+方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+如果指定的点位于当前路径中，isPointInPath() 方法返回 true，否则返回 false。 
+
+JavaScript 语法： 
+
+context .isPointInPath( x,y ); 
+
+参数值 
+
+参数 
+
+描述 
+
+x 
+
+要测试的 x 坐标。 
+
+y 
+
+要测试的 y 坐标。 
+
+AI 思考中... 
+
+HTML canvas arcTo() 方法 
+
+HTML canvas scale() 方法

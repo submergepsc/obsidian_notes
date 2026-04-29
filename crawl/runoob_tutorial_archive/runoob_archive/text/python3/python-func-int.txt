@@ -1,0 +1,46 @@
+URL: https://www.runoob.com/python3/python-func-int.html
+Title: Python int() 函数 | 菜鸟教程
+
+Python int() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 基础教程 
+
+Python enumerate() 函数 
+
+Python ord() 函数 
+
+Python int() 函数 
+
+描述 
+
+int() 函数用于将一个字符串或数字转换为整型。 
+
+语法 
+
+以下是 int() 方法的语法: 
+
+class int(x, base=10) 
+
+参数 
+
+x -- 字符串或数字。 
+
+base -- 进制数，默认十进制。 
+
+返回值 
+
+返回整型数据。 
+
+实例 
+
+以下展示了使用 int() 方法的实例： 
+
+>>> int ( ) 0 >>> int ( 3 ) 3 >>> int ( 3.6 ) 3 >>> int ( ' 12 ' , 16 ) 18 >>> int ( ' 0xa ' , 16 ) 10 >>> int ( ' 10 ' , 8 ) 8 
+
+AI 思考中... 
+
+Python enumerate() 函数 
+
+Python ord() 函数

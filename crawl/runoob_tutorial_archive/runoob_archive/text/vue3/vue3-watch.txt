@@ -1,0 +1,574 @@
+URL: https://www.runoob.com/vue3/vue3-watch.html
+Title: Vue3 监听属性 | 菜鸟教程
+
+Vue3 监听属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Vue3 教程 
+
+Vue3 组件 
+
+Vue3 样式绑定 
+
+Vue3 监听属性 
+
+本章节，我们将为大家介绍 Vue3 监听属性 watch ，我们可以通过 watch 来响应数据的变化。 
+
+watch 的作用是用于监测响应式属性的变化，并在属性发生改变时执行特定的操作，它是 Vue 中的一种响应式机制，允许你在数据发生变化时做出相应的响应，执行自定义的逻辑。 
+
+watch 使得在响应式属性变化时能够有更多的控制权和灵活性，让你的组件能够更好地响应数据的变化并执行相应的逻辑。 
+
+以下实例通过使用 watch 实现计数器： 
+
+实例 
+
+< div id = "app" > 
+
+< p style = "font-size:25px;" > 计数器 : { { counter } } </ p > 
+
+< button @ click = "counter++" style = "font-size:25px;" > 点我 </ button > 
+
+</ div > 
+
+< script > 
+
+const app = { 
+
+data ( ) { 
+
+return { 
+
+counter : 1 
+
+} 
+
+} 
+
+} 
+
+vm = Vue. createApp ( app ) . mount ( '#app' ) 
+
+vm.$watch ( 'counter' , function ( nval , oval ) { 
+
+alert ( '计数器值的变化 :' + oval + ' 变为 ' + nval + '!' ) ; 
+
+} ) ; 
+
+</ script > 
+
+尝试一下 » 
+
+以下实例进行 千米 与 米 之间的换算： 
+
+实例 
+
+< div id = "app" > 
+
+千米 : < input type = "text" v - model = "kilometers" @ focus = "currentlyActiveField = 'kilometers'" > 
+
+米 : < input type = "text" v - model = "meters" @ focus = "currentlyActiveField = 'meters'" > 
+
+</ div > 
+
+< p id = "info" ></ p > 
+
+< script > 
+
+const app = { 
+
+data ( ) { 
+
+return { 
+
+kilometers : 0 , 
+
+meters : 0 
+
+} 
+
+} , 
+
+watch : { 
+
+kilometers : function ( newValue , oldValue ) { 
+
+// 判断是否是当前输入框 
+
+if ( this . currentlyActiveField === 'kilometers' ) { 
+
+this . meters = newValue * 1000 
+
+} 
+
+} , 
+
+meters : function ( newValue , oldValue ) { 
+
+// 判断是否是当前输入框 
+
+if ( this . currentlyActiveField === 'meters' ) { 
+
+this . kilometers = newValue / 1000 ; 
+
+} 
+
+} 
+
+} 
+
+} 
+
+vm = Vue. createApp ( app ) . mount ( '#app' ) 
+
+vm.$watch ( 'kilometers' , function ( newValue , oldValue ) { 
+
+// 这个回调将在 vm.kilometers 改变后调用 
+
+document. getElementById ( "info" ) . innerHTML = "修改前值为: " + oldValue + "，修改后值为: " + newValue ; 
+
+} ) 
+
+</ script > 
+
+尝试一下 » 
+
+点击 "尝试一下" 按钮查看在线实例 
+
+以上代码中我们创建了两个输入框，data 属性中， kilometers 和 meters 初始值都为 0。watch 对象创建了 data 对象的两个监控方法： kilometers 和 meters。 
+
+当我们在输入框输入数据时，watch 会实时监听数据变化并改变自身的值。可以看下如下视频演示： 
+
+您的浏览器不支持 video 标签。 
+
+异步加载中使用 watch 
+
+异步数据的加载 Vue 通过 watch 选项提供了一个更通用的方法，来响应数据的变化。 
+
+以下实例我们使用 axios 库，后面会具体介绍。 
+
+实例 
+
+<!-- 因为 AJAX 库和通用工具的生态已经相当丰富，Vue 核心代码没有重复 --> 
+
+<!-- 提供这些功能以保持精简。这也可以让你自由选择自己更熟悉的工具。 --> 
+
+< script src = "https://cdn.staticfile.org/axios/0.27.2/axios.min.js" ></ script > 
+
+< script src = "https://cdn.staticfile.org/vue/3.2.37/vue.global.min.js" ></ script > 
+
+< script > 
+
+const watchExampleVM = Vue. createApp ( { 
+
+data ( ) { 
+
+return { 
+
+question : '' , 
+
+answer : '每个问题结尾需要输入 ? 号。' 
+
+} 
+
+} , 
+
+watch : { 
+
+// 每当问题改变时，此功能将运行，以 ? 号结尾，兼容中英文 ? 
+
+question ( newQuestion , oldQuestion ) { 
+
+if ( newQuestion. indexOf ( '?' ) > - 1 || newQuestion. indexOf ( '？' ) > - 1 ) { 
+
+this . getAnswer ( ) 
+
+} 
+
+} 
+
+} , 
+
+methods : { 
+
+getAnswer ( ) { 
+
+this . answer = '加载中...' 
+
+axios 
+
+. get ( '/try/ajax/json_vuetest.php' ) 
+
+. then ( response => { 
+
+this . answer = response. data . answer 
+
+} ) 
+
+. catch ( error => { 
+
+this . answer = '错误! 无法访问 API。 ' + error 
+
+} ) 
+
+} 
+
+} 
+
+} ) . mount ( '#watch-example' ) 
+
+</ script > 
+
+尝试一下 » 
+
+用法总结 
+
+watch 是 Vue 3 提供的一种响应式数据监听机制，可以监听单个或多个属性。 
+
+你可以通过传递回调函数来处理数据变化，支持深度监听、立即执行等选项。 
+
+1. 基本用法 
+
+在 Vue 3 中，watch 函数用于监听响应式属性。 
+
+当监听的属性值发生变化时，Vue 会触发回调函数执行。 
+
+实例 
+
+import { reactive , watch } from 'vue' ; 
+
+export default { 
+
+setup ( ) { 
+
+const state = reactive ( { 
+
+count : 0 
+
+} ) ; 
+
+watch ( 
+
+( ) => state. count , // 监听的属性 
+
+( newVal , oldVal ) => { // 变化时的回调函数 
+
+console. log ( `count changed from $ { oldVal } to $ { newVal } ` ) ; 
+
+} 
+
+) ; 
+
+return { 
+
+state 
+
+} ; 
+
+} 
+
+} ; 
+
+2. 监听多个响应式属性 
+
+如果你想同时监听多个响应式属性，可以通过一个数组来传递监听的多个属性： 
+
+实例 
+
+import { reactive , watch } from 'vue' ; 
+
+export default { 
+
+setup ( ) { 
+
+const state = reactive ( { 
+
+count : 0 , 
+
+name : 'Vue3' 
+
+} ) ; 
+
+watch ( 
+
+[ ( ) => state. count , ( ) => state. name ] , // 监听多个属性 
+
+( [ newCount , newName ] , [ oldCount , oldName ] ) => { 
+
+console. log ( `count changed from $ { oldCount } to $ { newCount } ` ) ; 
+
+console. log ( `name changed from $ { oldName } to $ { newName } ` ) ; 
+
+} 
+
+) ; 
+
+return { 
+
+state 
+
+} ; 
+
+} 
+
+} ; 
+
+3. 深度监听 
+
+如果你要监听的是一个对象或数组，并希望对其内部的嵌套属性进行监听，可以使用 deep: true 选项。这会监听对象的所有属性变化。 
+
+实例 
+
+import { reactive , watch } from 'vue' ; 
+
+export default { 
+
+setup ( ) { 
+
+const state = reactive ( { 
+
+user : { 
+
+name : 'Alice' , 
+
+age : 25 
+
+} 
+
+} ) ; 
+
+watch ( 
+
+( ) => state. user , // 监听整个对象 
+
+( newVal , oldVal ) => { 
+
+console. log ( 'User object changed:' , newVal , oldVal ) ; 
+
+} , 
+
+{ deep : true } // 启用深度监听 
+
+) ; 
+
+return { 
+
+state 
+
+} ; 
+
+} 
+
+} ; 
+
+4. 立即执行 
+
+默认情况下，watch 只会在监听的值发生变化时触发回调，如果你希望在组件加载时就立即执行一次回调，可以设置 immediate: true 。 
+
+实例 
+
+import { reactive , watch } from 'vue' ; 
+
+export default { 
+
+setup ( ) { 
+
+const state = reactive ( { 
+
+count : 0 
+
+} ) ; 
+
+watch ( 
+
+( ) => state. count , // 监听属性 
+
+( newVal , oldVal ) => { 
+
+console. log ( `count changed from $ { oldVal } to $ { newVal } ` ) ; 
+
+} , 
+
+{ immediate : true } // 立即执行 
+
+) ; 
+
+return { 
+
+state 
+
+} ; 
+
+} 
+
+} ; 
+
+5. 异步操作 
+
+如果你在 watch 中需要执行异步操作，可以直接在回调函数中使用 async 和 await，这可以让你处理诸如 API 请求、数据存储等操作。 
+
+实例 
+
+import { reactive , watch } from 'vue' ; 
+
+export default { 
+
+setup ( ) { 
+
+const state = reactive ( { 
+
+count : 0 
+
+} ) ; 
+
+watch ( 
+
+( ) => state. count , 
+
+async ( newVal , oldVal ) => { 
+
+console. log ( `count changed from $ { oldVal } to $ { newVal } ` ) ; 
+
+// 假设执行一个异步请求 
+
+await fetch ( `https : //api.example.com/count/${newVal}`); 
+
+} 
+
+) ; 
+
+return { 
+
+state 
+
+} ; 
+
+} 
+
+} ; 
+
+6. 监听多个属性并使用 handler 函数 
+
+你还可以将 watch 用作监听多个属性的处理程序，像这样： 
+
+实例 
+
+import { reactive , watch } from 'vue' ; 
+
+export default { 
+
+setup ( ) { 
+
+const state = reactive ( { 
+
+count : 0 , 
+
+name : 'Vue3' 
+
+} ) ; 
+
+const handler = ( [ newCount , newName ] , [ oldCount , oldName ] ) => { 
+
+console. log ( `count changed : $ { oldCount } → $ { newCount } ` ) ; 
+
+console. log ( `name changed : $ { oldName } → $ { newName } ` ) ; 
+
+} ; 
+
+watch ( [ ( ) => state. count , ( ) => state. name ] , handler ) ; 
+
+return { 
+
+state 
+
+} ; 
+
+} 
+
+} ; 
+
+7. watchEffect 简化版的监听 
+
+Vue 3 还提供了 watchEffect API，它比 watch 更加简洁，可以自动地跟踪响应式数据的变化，而不需要指定具体的数据源。 
+
+实例 
+
+import { reactive , watchEffect } from 'vue' ; 
+
+export default { 
+
+setup ( ) { 
+
+const state = reactive ( { 
+
+count : 0 
+
+} ) ; 
+
+watchEffect ( ( ) => { 
+
+console. log ( `count is : $ { state. count } ` ) ; 
+
+} ) ; 
+
+return { 
+
+state 
+
+} ; 
+
+} 
+
+} ; 
+
+watchEffect 会自动检测到 state.count 的变化并在变化时触发回调。 
+
+8. flush 选项 
+
+flush 选项用于控制 watch 的回调执行时机。 
+
+默认情况下，watch 回调会在 DOM 更新后执行。如果你需要在更新之前执行回调，可以使用 flush: 'pre' 。 
+
+实例 
+
+import { reactive , watch } from 'vue' ; 
+
+export default { 
+
+setup ( ) { 
+
+const state = reactive ( { 
+
+count : 0 
+
+} ) ; 
+
+watch ( 
+
+( ) => state. count , 
+
+( newVal , oldVal ) => { 
+
+console. log ( `count changed from $ { oldVal } to $ { newVal } ` ) ; 
+
+} , 
+
+{ flush : 'pre' } // 在更新之前执行回调 
+
+) ; 
+
+return { 
+
+state 
+
+} ; 
+
+} 
+
+} ; 
+
+AI 思考中... 
+
+Vue3 组件 
+
+Vue3 样式绑定

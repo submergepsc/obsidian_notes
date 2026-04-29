@@ -1,0 +1,90 @@
+URL: https://www.runoob.com/tags/av-event-suspend.html
+Title: HTML Audio/Video DOM suspend 事件 | 菜鸟教程
+
+HTML Audio/Video DOM suspend 事件 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML Audio/Video DOM stalled 事件 
+
+HTML Audio/Video DOM waiting 事件 
+
+HTML Audio/Video DOM suspend 事件 
+
+实例 
+
+在媒体数据被阻止加载时弹出提示信息： 
+
+var vid = document.getElementById("myVideo"); 
+vid.onsuspend = 
+ function() { 
+alert("媒体数据加载被阻止"); 
+}; 
+
+定义和用法 
+
+suspend 事件在浏览器刻意不加载媒体数据时触发。 
+
+该事件在媒体数据被阻止加载时触发。 可以是完成加载后触发，或者因为被暂停的原因。 
+
+提示： 影响媒体数据加载的事件有： 
+
+abort 
+
+emptied 
+
+error 
+
+stalled 
+
+浏览器支持 
+
+表格中的数字表示支持该事件的第一个浏览器的版本号。 
+
+事件 
+
+suspend 
+
+Yes 
+
+9.0 
+
+Yes 
+
+Yes 
+
+Yes 
+
+语法 
+
+HTML 中： 
+
+< element onsuspend=" myScript "> 
+
+JavaScript 中： 
+
+object .onsuspend=function(){ myScript }; 
+
+JavaScript 中, 使用 addEventListener() 方法: 
+
+object .addEventListener("suspend", myScript ); 
+
+注意： Internet Explorer 8 及更早 IE 版本不支持 addEventListener() 方法。 
+
+技术细节 
+
+支持的 HTML 标签: 
+
+<audio> 和 <video> 
+
+支持的 JavaScript 对象: 
+
+Audio, Video 
+
+AI 思考中... 
+
+HTML Audio/Video DOM stalled 事件 
+
+HTML Audio/Video DOM waiting 事件

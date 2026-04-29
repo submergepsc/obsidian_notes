@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>charsets index</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f4efe6;
+      --panel: #fffaf1;
+      --ink: #1f2937;
+      --muted: #6b7280;
+      --line: #d6c7ae;
+      --accent: #9a3412;
+      --accent-soft: #f3dfc1;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Noto Serif SC", "Source Han Serif SC", serif;
+      background:
+        radial-gradient(circle at top left, #fff6dd 0, transparent 28rem),
+        linear-gradient(180deg, #f7f1e7 0%, #efe5d6 100%);
+      color: var(--ink);
+    }
+    main {
+      max-width: 1380px;
+      margin: 0 auto;
+      padding: 32px 20px 64px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 280px minmax(0, 1fr);
+      gap: 24px;
+      align-items: start;
+    }
+    aside {
+      position: sticky;
+      top: 20px;
+    }
+    h1, h2 { margin: 0 0 12px; }
+    p { color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+    header {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      margin-bottom: 24px;
+    }
+    section {
+      background: rgba(255, 250, 241, 0.9);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+    }
+    .search-panel {
+      background: rgba(255, 250, 241, 0.95);
+    }
+    .search-controls {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+      align-items: end;
+    }
+    .search-select-wrap {
+      display: grid;
+      gap: 6px;
+      color: var(--muted);
+      font-size: 0.95em;
+    }
+    .search-select {
+      min-width: 140px;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input {
+      flex: 1 1 320px;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: #fffdf8;
+      color: var(--ink);
+      font: inherit;
+    }
+    .search-input:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-select:focus {
+      outline: 2px solid rgba(154, 52, 18, 0.18);
+      border-color: var(--accent);
+    }
+    .search-clear {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font: inherit;
+      cursor: pointer;
+    }
+    .search-status {
+      margin: 0 0 12px;
+    }
+    .search-hint {
+      margin: 0 0 10px;
+      font-size: 0.95em;
+    }
+    .search-results {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .search-results li {
+      margin: 10px 0;
+      line-height: 1.5;
+    }
+    .search-results span,
+    .search-results code {
+      display: block;
+      margin-top: 4px;
+    }
+    mark {
+      background: #f8d689;
+      color: #7c2d12;
+      padding: 0 0.15em;
+      border-radius: 0.2em;
+    }
+    kbd {
+      display: inline-block;
+      min-width: 1.6em;
+      padding: 0.1em 0.4em;
+      border: 1px solid var(--line);
+      border-bottom-width: 2px;
+      border-radius: 0.45em;
+      background: #fffdf8;
+      color: var(--ink);
+      font: 0.9em/1.4 ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      text-align: center;
+    }
+    .group-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      padding: 16px;
+    }
+    .sidebar-card {
+      background: rgba(255, 250, 241, 0.96);
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: 0 10px 30px rgba(84, 51, 16, 0.08);
+      max-height: calc(100vh - 40px);
+      overflow: auto;
+    }
+    .sidebar-list {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      list-style: none;
+      margin: 10px 0 0;
+      padding: 0 0 0 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 10px;
+      line-height: 1.5;
+      padding-bottom: 10px;
+      border-bottom: 1px dashed var(--line);
+    }
+    .sidebar-list li:last-child {
+      margin-bottom: 0;
+      padding-bottom: 0;
+      border-bottom: 0;
+    }
+    .sidebar-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    .sidebar-list details {
+      display: block;
+    }
+    .sidebar-list summary {
+      cursor: pointer;
+      font-weight: 600;
+      list-style: none;
+    }
+    .sidebar-list summary::-webkit-details-marker {
+      display: none;
+    }
+    .sidebar-list summary::before {
+      content: "▸";
+      display: inline-block;
+      margin-right: 8px;
+      color: var(--accent);
+      transition: transform 0.15s ease;
+    }
+    .sidebar-list details[open] > summary::before {
+      transform: rotate(90deg);
+    }
+    .sidebar-sublist li {
+      margin: 8px 0 0;
+      padding: 0;
+      border: 0;
+    }
+    .group-card ul, .page-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    .group-card li, .page-list li {
+      margin: 6px 0;
+      line-height: 1.5;
+    }
+    .page-list span {
+      color: var(--muted);
+      font-size: 0.9em;
+      margin-left: 8px;
+    }
+    code {
+      color: var(--muted);
+      font-size: 0.85em;
+      word-break: break-all;
+    }
+    @media (max-width: 960px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        flex-direction: column;
+        align-items: stretch;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>charsets index</h1>
+      <p>Offline pages under charsets</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><details open><summary>分类目录</summary><ul class="sidebar-sublist"><li><a href="#subgroup-53c28003">参考</a> <span>51 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>3 pages</span></li></ul></details></li></ul></nav></aside>
+      <div><p><a href="../index.html">HTML index</a> | <a href="../../index.html">Archive home</a></p><section class="search-panel"><h2>组内搜索</h2><div class="search-controls"><label class="search-select-wrap" for="archive-search-group"><span>分组</span><select id="archive-search-group" class="search-select"><option value="">全部分组</option></select></label><input id="archive-search-input" class="search-input" type="search" placeholder="搜索当前分组下的页面标题、分类或 URL" autocomplete="off"><button id="archive-search-clear" class="search-clear" type="button">清空</button></div><p class="search-hint">支持标题、分组、分类、URL 关键词，按 <kbd>/</kbd> 聚焦，按 <kbd>Esc</kbd> 清空，搜索状态会写入地址栏。</p><p id="archive-search-status" class="search-status">输入标题、分组、分类或 URL 关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>charsets (54)</h2><p>二级分类：2 个</p><ul class="page-list"><li><a href="#subgroup-53c28003">参考</a> <span>51 pages</span></li><li><a href="#subgroup-4e139898">专题</a> <span>3 pages</span></li></ul></section><section id="subgroup-53c28003"><h2>参考 (51)</h2><ol class="page-list"><li><a href="ref-emoji.html">Emoji 参考手册</a> <code>https://www.runoob.com/charsets/ref-emoji.html</code></li><li><a href="ref-html-entities-4.html">HTML 4 实体名称</a> <code>https://www.runoob.com/charsets/ref-html-entities-4.html</code></li><li><a href="ref-html-ansi.html">HTML ANSI 参考手册</a> <code>https://www.runoob.com/charsets/ref-html-ansi.html</code></li><li><a href="ref-html-ascii.html">HTML ASCII 参考手册</a> <code>https://www.runoob.com/charsets/ref-html-ascii.html</code></li><li><a href="ref-html-8859.html">HTML ISO-8859-1 参考手册</a> <code>https://www.runoob.com/charsets/ref-html-8859.html</code></li><li><a href="ref-html-utf8.html">HTML UTF-8 参考手册</a> <code>https://www.runoob.com/charsets/ref-html-utf8.html</code></li><li><a href="ref-html-symbols.html">HTML 符号实体参考手册</a> <code>https://www.runoob.com/charsets/ref-html-symbols.html</code></li><li><a href="ref-html-entities-a.html">HTML5 实体名称（字母 – A）</a> <code>https://www.runoob.com/charsets/ref-html-entities-a.html</code></li><li><a href="ref-html-entities-b.html">HTML5 实体名称（字母 – B）</a> <code>https://www.runoob.com/charsets/ref-html-entities-b.html</code></li><li><a href="ref-html-entities-c.html">HTML5 实体名称（字母 – C）</a> <code>https://www.runoob.com/charsets/ref-html-entities-c.html</code></li><li><a href="ref-html-entities-d.html">HTML5 实体名称（字母 – D）</a> <code>https://www.runoob.com/charsets/ref-html-entities-d.html</code></li><li><a href="ref-html-entities-e.html">HTML5 实体名称（字母 – E）</a> <code>https://www.runoob.com/charsets/ref-html-entities-e.html</code></li><li><a href="ref-html-entities-f.html">HTML5 实体名称（字母 – F）</a> <code>https://www.runoob.com/charsets/ref-html-entities-f.html</code></li><li><a href="ref-html-entities-g.html">HTML5 实体名称（字母 – G）</a> <code>https://www.runoob.com/charsets/ref-html-entities-g.html</code></li><li><a href="ref-html-entities-h.html">HTML5 实体名称（字母 – H）</a> <code>https://www.runoob.com/charsets/ref-html-entities-h.html</code></li><li><a href="ref-html-entities-i.html">HTML5 实体名称（字母 – I）</a> <code>https://www.runoob.com/charsets/ref-html-entities-i.html</code></li><li><a href="ref-html-entities-j.html">HTML5 实体名称（字母 – J）</a> <code>https://www.runoob.com/charsets/ref-html-entities-j.html</code></li><li><a href="ref-html-entities-k.html">HTML5 实体名称（字母 – K）</a> <code>https://www.runoob.com/charsets/ref-html-entities-k.html</code></li><li><a href="ref-html-entities-l.html">HTML5 实体名称（字母 – L）</a> <code>https://www.runoob.com/charsets/ref-html-entities-l.html</code></li><li><a href="ref-html-entities-m.html">HTML5 实体名称（字母 – M）</a> <code>https://www.runoob.com/charsets/ref-html-entities-m.html</code></li><li><a href="ref-html-entities-n.html">HTML5 实体名称（字母 – N）</a> <code>https://www.runoob.com/charsets/ref-html-entities-n.html</code></li><li><a href="ref-html-entities-o.html">HTML5 实体名称（字母 – O）</a> <code>https://www.runoob.com/charsets/ref-html-entities-o.html</code></li><li><a href="ref-html-entities-p.html">HTML5 实体名称（字母 – P）</a> <code>https://www.runoob.com/charsets/ref-html-entities-p.html</code></li><li><a href="ref-html-entities-q.html">HTML5 实体名称（字母 – Q）</a> <code>https://www.runoob.com/charsets/ref-html-entities-q.html</code></li><li><a href="ref-html-entities-r.html">HTML5 实体名称（字母 – R）</a> <code>https://www.runoob.com/charsets/ref-html-entities-r.html</code></li><li><a href="ref-html-entities-s.html">HTML5 实体名称（字母 – S）</a> <code>https://www.runoob.com/charsets/ref-html-entities-s.html</code></li><li><a href="ref-html-entities-t.html">HTML5 实体名称（字母 – T）</a> <code>https://www.runoob.com/charsets/ref-html-entities-t.html</code></li><li><a href="ref-html-entities-u.html">HTML5 实体名称（字母 – U）</a> <code>https://www.runoob.com/charsets/ref-html-entities-u.html</code></li><li><a href="ref-html-entities-v.html">HTML5 实体名称（字母 – V）</a> <code>https://www.runoob.com/charsets/ref-html-entities-v.html</code></li><li><a href="ref-html-entities-w.html">HTML5 实体名称（字母 – W）</a> <code>https://www.runoob.com/charsets/ref-html-entities-w.html</code></li><li><a href="ref-html-entities-x.html">HTML5 实体名称（字母 – X）</a> <code>https://www.runoob.com/charsets/ref-html-entities-x.html</code></li><li><a href="ref-html-entities-y.html">HTML5 实体名称（字母 – Y）</a> <code>https://www.runoob.com/charsets/ref-html-entities-y.html</code></li><li><a href="ref-html-entities-z.html">HTML5 实体名称（字母 – Z）</a> <code>https://www.runoob.com/charsets/ref-html-entities-z.html</code></li><li><a href="ref-utf-basic-latin.html">UTF-8 C0 控制与基本的 Latin（拉丁字母）</a> <code>https://www.runoob.com/charsets/ref-utf-basic-latin.html</code></li><li><a href="ref-utf-latin1-supplement.html">UTF-8 C1 控制与 Latin1 补充</a> <code>https://www.runoob.com/charsets/ref-utf-latin1-supplement.html</code></li><li><a href="ref-utf-cyrillic.html">UTF-8 Cyrillic（西里尔字母）</a> <code>https://www.runoob.com/charsets/ref-utf-cyrillic.html</code></li><li><a href="ref-utf-cyrillic-supplement.html">UTF-8 Cyrillic（西里尔字母） 补充</a> <code>https://www.runoob.com/charsets/ref-utf-cyrillic-supplement.html</code></li><li><a href="ref-utf-greek.html">UTF-8 Greek（希腊字母）与 Coptic（科普特字母）</a> <code>https://www.runoob.com/charsets/ref-utf-greek.html</code></li><li><a href="ref-utf-latin-extended-a.html">UTF-8 Latin（拉丁字母）扩展 A</a> <code>https://www.runoob.com/charsets/ref-utf-latin-extended-a.html</code></li><li><a href="ref-utf-latin-extended-b.html">UTF-8 Latin（拉丁字母）扩展 B</a> <code>https://www.runoob.com/charsets/ref-utf-latin-extended-b.html</code></li><li><a href="ref-utf-geometric.html">UTF-8 几何图形</a> <code>https://www.runoob.com/charsets/ref-utf-geometric.html</code></li><li><a href="ref-utf-box.html">UTF-8 制表符</a> <code>https://www.runoob.com/charsets/ref-utf-box.html</code></li><li><a href="ref-utf-dingbats.html">UTF-8 印刷符号</a> <code>https://www.runoob.com/charsets/ref-utf-dingbats.html</code></li><li><a href="ref-utf-diacritical.html">UTF-8 变音符号</a> <code>https://www.runoob.com/charsets/ref-utf-diacritical.html</code></li><li><a href="ref-utf-letterlike.html">UTF-8 字母式符号</a> <code>https://www.runoob.com/charsets/ref-utf-letterlike.html</code></li><li><a href="ref-utf-punctuation.html">UTF-8 常用标点符号</a> <code>https://www.runoob.com/charsets/ref-utf-punctuation.html</code></li><li><a href="ref-utf-math.html">UTF-8 数学运算符</a> <code>https://www.runoob.com/charsets/ref-utf-math.html</code></li><li><a href="ref-utf-block.html">UTF-8 方块元素</a> <code>https://www.runoob.com/charsets/ref-utf-block.html</code></li><li><a href="ref-utf-symbols.html">UTF-8 杂项符号</a> <code>https://www.runoob.com/charsets/ref-utf-symbols.html</code></li><li><a href="ref-utf-arrows.html">UTF-8 箭头</a> <code>https://www.runoob.com/charsets/ref-utf-arrows.html</code></li><li><a href="ref-utf-currency.html">UTF-8 货币符号</a> <code>https://www.runoob.com/charsets/ref-utf-currency.html</code></li></ol></section><section id="subgroup-4e139898"><h2>专题 (3)</h2><ol class="page-list"><li><a href="emoji-smiley.html">Emoji 笑脸</a> <code>https://www.runoob.com/charsets/emoji-smiley.html</code></li><li><a href="emoji-skin-tones.html">Emoji 肤色</a> <code>https://www.runoob.com/charsets/emoji-skin-tones.html</code></li><li><a href="html-charsets.html">HTML 字符集</a> <code>https://www.runoob.com/charsets/html-charsets.html</code></li></ol></section></div>
+    </div>
+  </main>
+
+  <script id="archive-search-data" type="application/json">[{"title": "Emoji 肤色", "group": "charsets", "subgroup": "专题", "url": "https://www.runoob.com/charsets/emoji-skin-tones.html", "href": "emoji-skin-tones.html"}, {"title": "Emoji 笑脸", "group": "charsets", "subgroup": "专题", "url": "https://www.runoob.com/charsets/emoji-smiley.html", "href": "emoji-smiley.html"}, {"title": "HTML 字符集", "group": "charsets", "subgroup": "专题", "url": "https://www.runoob.com/charsets/html-charsets.html", "href": "html-charsets.html"}, {"title": "Emoji 参考手册", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-emoji.html", "href": "ref-emoji.html"}, {"title": "HTML ISO-8859-1 参考手册", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-8859.html", "href": "ref-html-8859.html"}, {"title": "HTML ANSI 参考手册", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-ansi.html", "href": "ref-html-ansi.html"}, {"title": "HTML ASCII 参考手册", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-ascii.html", "href": "ref-html-ascii.html"}, {"title": "HTML 4 实体名称", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-4.html", "href": "ref-html-entities-4.html"}, {"title": "HTML5 实体名称（字母 – A）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-a.html", "href": "ref-html-entities-a.html"}, {"title": "HTML5 实体名称（字母 – B）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-b.html", "href": "ref-html-entities-b.html"}, {"title": "HTML5 实体名称（字母 – C）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-c.html", "href": "ref-html-entities-c.html"}, {"title": "HTML5 实体名称（字母 – D）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-d.html", "href": "ref-html-entities-d.html"}, {"title": "HTML5 实体名称（字母 – E）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-e.html", "href": "ref-html-entities-e.html"}, {"title": "HTML5 实体名称（字母 – F）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-f.html", "href": "ref-html-entities-f.html"}, {"title": "HTML5 实体名称（字母 – G）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-g.html", "href": "ref-html-entities-g.html"}, {"title": "HTML5 实体名称（字母 – H）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-h.html", "href": "ref-html-entities-h.html"}, {"title": "HTML5 实体名称（字母 – I）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-i.html", "href": "ref-html-entities-i.html"}, {"title": "HTML5 实体名称（字母 – J）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-j.html", "href": "ref-html-entities-j.html"}, {"title": "HTML5 实体名称（字母 – K）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-k.html", "href": "ref-html-entities-k.html"}, {"title": "HTML5 实体名称（字母 – L）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-l.html", "href": "ref-html-entities-l.html"}, {"title": "HTML5 实体名称（字母 – M）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-m.html", "href": "ref-html-entities-m.html"}, {"title": "HTML5 实体名称（字母 – N）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-n.html", "href": "ref-html-entities-n.html"}, {"title": "HTML5 实体名称（字母 – O）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-o.html", "href": "ref-html-entities-o.html"}, {"title": "HTML5 实体名称（字母 – P）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-p.html", "href": "ref-html-entities-p.html"}, {"title": "HTML5 实体名称（字母 – Q）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-q.html", "href": "ref-html-entities-q.html"}, {"title": "HTML5 实体名称（字母 – R）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-r.html", "href": "ref-html-entities-r.html"}, {"title": "HTML5 实体名称（字母 – S）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-s.html", "href": "ref-html-entities-s.html"}, {"title": "HTML5 实体名称（字母 – T）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-t.html", "href": "ref-html-entities-t.html"}, {"title": "HTML5 实体名称（字母 – U）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-u.html", "href": "ref-html-entities-u.html"}, {"title": "HTML5 实体名称（字母 – V）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-v.html", "href": "ref-html-entities-v.html"}, {"title": "HTML5 实体名称（字母 – W）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-w.html", "href": "ref-html-entities-w.html"}, {"title": "HTML5 实体名称（字母 – X）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-x.html", "href": "ref-html-entities-x.html"}, {"title": "HTML5 实体名称（字母 – Y）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-y.html", "href": "ref-html-entities-y.html"}, {"title": "HTML5 实体名称（字母 – Z）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-entities-z.html", "href": "ref-html-entities-z.html"}, {"title": "HTML 符号实体参考手册", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-symbols.html", "href": "ref-html-symbols.html"}, {"title": "HTML UTF-8 参考手册", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-html-utf8.html", "href": "ref-html-utf8.html"}, {"title": "UTF-8 箭头", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-arrows.html", "href": "ref-utf-arrows.html"}, {"title": "UTF-8 C0 控制与基本的 Latin（拉丁字母）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-basic-latin.html", "href": "ref-utf-basic-latin.html"}, {"title": "UTF-8 方块元素", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-block.html", "href": "ref-utf-block.html"}, {"title": "UTF-8 制表符", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-box.html", "href": "ref-utf-box.html"}, {"title": "UTF-8 货币符号", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-currency.html", "href": "ref-utf-currency.html"}, {"title": "UTF-8 Cyrillic（西里尔字母） 补充", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-cyrillic-supplement.html", "href": "ref-utf-cyrillic-supplement.html"}, {"title": "UTF-8 Cyrillic（西里尔字母）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-cyrillic.html", "href": "ref-utf-cyrillic.html"}, {"title": "UTF-8 变音符号", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-diacritical.html", "href": "ref-utf-diacritical.html"}, {"title": "UTF-8 印刷符号", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-dingbats.html", "href": "ref-utf-dingbats.html"}, {"title": "UTF-8 几何图形", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-geometric.html", "href": "ref-utf-geometric.html"}, {"title": "UTF-8 Greek（希腊字母）与 Coptic（科普特字母）", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-greek.html", "href": "ref-utf-greek.html"}, {"title": "UTF-8 Latin（拉丁字母）扩展 A", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-latin-extended-a.html", "href": "ref-utf-latin-extended-a.html"}, {"title": "UTF-8 Latin（拉丁字母）扩展 B", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-latin-extended-b.html", "href": "ref-utf-latin-extended-b.html"}, {"title": "UTF-8 C1 控制与 Latin1 补充", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-latin1-supplement.html", "href": "ref-utf-latin1-supplement.html"}, {"title": "UTF-8 字母式符号", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-letterlike.html", "href": "ref-utf-letterlike.html"}, {"title": "UTF-8 数学运算符", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-math.html", "href": "ref-utf-math.html"}, {"title": "UTF-8 常用标点符号", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-punctuation.html", "href": "ref-utf-punctuation.html"}, {"title": "UTF-8 杂项符号", "group": "charsets", "subgroup": "参考", "url": "https://www.runoob.com/charsets/ref-utf-symbols.html", "href": "ref-utf-symbols.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) {
+        return;
+      }
+
+      let items = [];
+      try {
+        items = JSON.parse(dataNode.textContent || "[]");
+      } catch (_error) {
+        status.textContent = "搜索索引加载失败。";
+        return;
+      }
+
+      const syncHash = (query, group) => {
+        const params = new URLSearchParams();
+        if (query) {
+          params.set("search", query);
+        }
+        if (group) {
+          params.set("group", group);
+        }
+        const nextHash = params.toString();
+        const target = nextHash ? `#${nextHash}` : window.location.pathname + window.location.search;
+        if (nextHash) {
+          history.replaceState(null, "", `#${nextHash}`);
+          return;
+        }
+        history.replaceState(null, "", target);
+      };
+
+      const parseHashState = () => {
+        const raw = window.location.hash.startsWith("#") ? window.location.hash.slice(1) : "";
+        const params = new URLSearchParams(raw);
+        return {
+          query: params.get("search") || "",
+          group: params.get("group") || "",
+        };
+      };
+
+      const populateGroups = () => {
+        const groups = [...new Set(items.map((item) => item.group))].sort((left, right) =>
+          left.localeCompare(right, "zh-CN")
+        );
+        for (const group of groups) {
+          const option = document.createElement("option");
+          option.value = group;
+          option.textContent = group;
+          groupSelect.append(option);
+        }
+      };
+
+      const renderResults = (matches, query) => {
+        const selectedGroup = groupSelect.value;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `当前分组 ${selectedGroup} 下可搜索 ${items.filter((item) => item.group === selectedGroup).length} 个页面。`
+            : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+
+        if (!matches.length) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup
+            ? `分组 ${selectedGroup} 下没有匹配“${query}”的结果。`
+            : `没有匹配“${query}”的结果。`;
+          return;
+        }
+
+        results.hidden = false;
+        results.innerHTML = matches
+          .slice(0, 80)
+          .map((item) => (
+            `<li><a href="${item.href}">${highlight(item.title, query)}</a><span>${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</span><code>${highlight(item.url, query)}</code></li>`
+          ))
+          .join("");
+        const suffix = matches.length > 80 ? `，显示前 80 条 / 共 ${matches.length} 条` : `，共 ${matches.length} 条`;
+        status.textContent = selectedGroup
+          ? `在 ${selectedGroup} 中搜索“${query}”${suffix}。`
+          : `搜索“${query}”${suffix}。`;
+      };
+
+      const escapeHtml = (value) =>
+        value
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;");
+
+      const highlight = (value, query) => {
+        if (!query) {
+          return escapeHtml(value);
+        }
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+
+      const scoreItem = (item, query) => {
+        const title = item.title.toLowerCase();
+        const group = item.group.toLowerCase();
+        const subgroup = item.subgroup.toLowerCase();
+        const url = item.url.toLowerCase();
+        let score = 0;
+        if (title === query) score += 120;
+        if (title.startsWith(query)) score += 80;
+        if (title.includes(query)) score += 40;
+        if (group === query) score += 36;
+        if (group.startsWith(query)) score += 24;
+        if (group.includes(query)) score += 12;
+        if (subgroup === query) score += 18;
+        if (subgroup.includes(query)) score += 8;
+        if (url.includes(query)) score += 6;
+        return score;
+      };
+
+      const runSearch = () => {
+        const query = input.value.trim().toLowerCase();
+        const selectedGroup = groupSelect.value;
+        const scopedItems = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        syncHash(input.value.trim(), selectedGroup);
+        if (!query) {
+          renderResults([], "");
+          return;
+        }
+
+        const matches = scopedItems
+          .filter((item) =>
+            [item.title, item.group, item.subgroup, item.url].some((field) => field.toLowerCase().includes(query))
+          )
+          .sort((left, right) => {
+            const scoreDiff = scoreItem(right, query) - scoreItem(left, query);
+            if (scoreDiff !== 0) {
+              return scoreDiff;
+            }
+            return left.title.localeCompare(right.title, "zh-CN");
+          });
+        renderResults(matches, input.value.trim());
+      };
+
+      input.addEventListener("input", runSearch);
+      groupSelect.addEventListener("change", runSearch);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        syncHash("", "");
+        renderResults([], "");
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+          input.select();
+          return;
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          renderResults([], "");
+        }
+      });
+      populateGroups();
+      const initialState = parseHashState();
+      if (initialState.group && [...groupSelect.options].some((option) => option.value === initialState.group)) {
+        groupSelect.value = initialState.group;
+      }
+      if (initialState.query) {
+        input.value = initialState.query;
+      }
+      window.addEventListener("hashchange", () => {
+        const state = parseHashState();
+        if (state.group !== groupSelect.value && [...groupSelect.options].some((option) => option.value === state.group)) {
+          groupSelect.value = state.group;
+        }
+        if (state.query !== input.value) {
+          input.value = state.query;
+        }
+        runSearch();
+      });
+      runSearch();
+    })();
+  </script>
+</body>
+</html>

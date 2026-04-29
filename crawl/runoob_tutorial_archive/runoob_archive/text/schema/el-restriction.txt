@@ -1,0 +1,133 @@
+URL: https://www.runoob.com/schema/el-restriction.html
+Title: XML Schema restriction  元素 | 菜鸟教程
+
+XML Schema restriction 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema redefine 元素 
+
+XML Schema 参考手册 
+
+XML Schema restriction 元素 
+
+定义和用法 
+
+restriction 元素定义对 simpleType、simpleContent 或 complexContent 定义的约束。 
+
+元素信息 
+
+父元素： simpleType, simpleContent, complexContent 
+
+语法 
+
+<restriction 
+id=ID 
+base=QName 
+any attributes 
+> 
+
+Content for simpleType: 
+(annotation?,(simpleType?,(minExclusive|minInclusive| 
+maxExclusive|maxInclusive|totalDigits|fractionDigits| 
+length|minLength|maxLength|enumeration|whiteSpace|pattern)*)) 
+
+Content for simpleContent: 
+(annotation?,(simpleType?,(minExclusive |minInclusive| 
+maxExclusive|maxInclusive|totalDigits|fractionDigits| 
+length|minLength|maxLength|enumeration|whiteSpace|pattern)*)?, 
+((attribute|attributeGroup)*,anyAttribute?)) 
+
+Content for complexContent: 
+(annotation?,(group|all|choice|sequence)?, 
+((attribute|attributeGroup)*,anyAttribute?)) 
+
+</restriction> 
+
+（? 符号声明在 restriction 元素中该元素可出现零次或一次。） 
+
+属性 
+
+描述 
+
+id 
+
+可选。规定该元素的唯一的 ID。 
+
+base 
+
+必需。规定在该 schema（或由指定的命名空间指示的其他 schema）中定义的内建数据类型、simpleType 或 complexType 元素的名称。 
+
+any attributes 
+
+可选。规定带有 non-schema 命名空间的任何其他属性。 
+
+实例 1 
+
+下面的例子定义了一个带有约束且名为 "age" 的元素。age 的值不能小于 0 或大于 100： 
+
+<xs:element name="age"> 
+<xs:simpleType> 
+<xs:restriction base="xs:integer"> 
+<xs:minInclusive value="0"/> 
+<xs:maxInclusive value="100"/> 
+</xs:restriction> 
+</xs:simpleType> 
+</xs:element> 
+
+实例 2 
+
+本例定义了一个名为 "initials" 的元素。"initials" 元素是带有约束的简单类型。可接受的值是三个从 a 到 z 的大写或小写字母： 
+
+<xs:element name="initials"> 
+<xs:simpleType> 
+<xs:restriction base="xs:string"> 
+<xs:pattern value="[a-zA-Z][a-zA-Z][a-zA-Z]"/> 
+</xs:restriction> 
+</xs:simpleType> 
+</xs:element> 
+
+实例 3 
+
+本例定义了一个名为 "password" 元素。"password" 元素是带有约束的简单类型。值必须为最少 5 个字符且最多 8 个字符： 
+
+<xs:element name="password"> 
+<xs:simpleType> 
+<xs:restriction base="xs:string"> 
+<xs:minLength value="5"/> 
+<xs:maxLength value="8"/> 
+</xs:restriction> 
+</xs:simpleType> 
+</xs:element> 
+
+实例 4 
+
+本例展示了一个使用约束的复杂类型定义。复杂类型 "Chinese_customer" 从一个普通的 customer 复杂类型派生而来，其 country 元素的固定值是 "China"： 
+
+<xs:complexType name="customer"> 
+<xs:sequence> 
+<xs:element name="firstname" type="xs:string"/> 
+<xs:element name="lastname" type="xs:string"/> 
+<xs:element name="country" type="xs:string"/> 
+</xs:sequence> 
+</xs:complexType> 
+
+<xs:complexType name="Norwegian_customer"> 
+<xs:complexContent> 
+<xs:restriction base="customer"> 
+<xs:sequence> 
+<xs:element name="firstname" type="xs:string"/> 
+<xs:element name="lastname" type="xs:string"/> 
+<xs:element name="country" type="xs:string" fixed="Norway"/> 
+</xs:sequence> 
+</xs:restriction> 
+</xs:complexContent> 
+</xs:complexType> 
+
+AI 思考中... 
+
+XML Schema redefine 元素 
+
+XML Schema 参考手册

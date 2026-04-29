@@ -1,0 +1,58 @@
+URL: https://www.runoob.com/tags/tag-main.html
+Title: HTML main 标签 | 菜鸟教程
+
+HTML main 标签 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML <picture> 元素 
+
+HTML img loading 属性 
+
+HTML main 标签 
+
+实例 
+
+使用 main 标签来展示文档的主体部分： 
+
+< main > < h1 > Web 浏览器 </ h1 > < p > Google Chrome、Firefox 以及 Internet Explorer 是目前最流行的浏览器。 </ p > < article > < h1 > Google Chrome 浏览器 </ h1 > < p > Google Chrome 浏览器是由 Google 开发的一款免费的开源 web 浏览器，于 2008 年发布。 </ p > </ article > < article > < h1 > Internet Explorer 浏览器 </ h1 > < p > Internet Explorer 浏览器由微软开发的一款免费的 web 浏览器，发布于 1995 年。 </ p > </ article > < article > < h1 > Mozilla Firefox 浏览器 </ h1 > < p > Firefox 浏览器是一款来自 Mozilla 的免费开源 web 浏览器，发布于 2004 年。 </ p > </ article > </ main > 
+
+尝试一下 » 
+
+定义和用法 
+
+<main> 标签用于指定文档的主体内容。 
+
+<main> 标签中的内容在文档中是唯一的。它不应包含在文档中重复出现的内容，比如侧栏、导航栏、版权信息、站点标志或搜索表单。 
+
+注意 在一个文档中，<main> 元素是唯一的，所以不能出现一个以上的 <main> 元素。<main> 元素不能是以下元素的后代：<article>、<aside>、<footer>、<header> 或 <nav>。 
+
+浏览器支持 
+
+表格中的数字表示支持该元素的第一个浏览器版本号。 
+
+元素 
+
+<main> 
+
+6.0 
+
+12.0 
+
+4.0 
+
+5.0 
+
+11.1 
+
+HTML 4.01 与 HTML5之间的差异 
+
+<main> 标签是 HTML5 中新增加的。 
+
+AI 思考中... 
+
+HTML <picture> 元素 
+
+HTML img loading 属性

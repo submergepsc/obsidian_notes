@@ -1,0 +1,92 @@
+URL: https://www.runoob.com/xsl/el-import.html
+Title: XSLT <xsl:import> 元素 | 菜鸟教程
+
+XSLT <xsl:import> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:if> 元素 
+
+XSLT <xsl:include> 元素 
+
+XSLT <xsl:import> 元素 
+
+定义和用法 
+
+<xsl:import> 元素是顶层元素，用于把一个样式表中的内容导入另一个样式表中。 
+
+注意： 被导入的样式表的优先级低于导出的样式表。 
+
+注意： 该元素必须是 <xsl:stylesheet> 或 <xsl:transform> 的第一个子节点。 
+
+语法 
+
+<xsl:import href="URI"/> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+href 
+
+URI 
+
+必需。规定要导入的样式表的 URI。 
+
+实例 1 
+
+假设您有一个名为 "cdcatalog_ex3.xsl" 的样式表： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<h2>My CD Collection</h2> 
+<table border="1"> 
+<tr bgcolor="#9acd32"> 
+<th>Title</th> 
+<th>Artist</th> 
+</tr> 
+<tr> 
+<td><xsl:value-of select="catalog/cd/title"/></td> 
+<td><xsl:value-of select="catalog/cd/artist"/></td> 
+</tr> 
+</table> 
+</body> 
+</html> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+第二个名为 "cdcatalog_import.xsl" 的样式表会导入 "cdcatalog_ex3.xsl"： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:import href="cdcatalog_ex3.xsl"/> 
+
+<xsl:template match="/"> 
+<xsl:apply-imports/> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+查看 XML 文件 、 查看 XSL 文件 、 查看结果 。 
+
+注意： 该实例无法在 Netscape 6 运行，因为 Netscape 6 不支持 <xsl:apply-imports> 元素！ 
+
+AI 思考中... 
+
+XSLT <xsl:if> 元素 
+
+XSLT <xsl:include> 元素

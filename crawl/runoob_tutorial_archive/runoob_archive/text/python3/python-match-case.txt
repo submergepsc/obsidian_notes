@@ -1,0 +1,160 @@
+URL: https://www.runoob.com/python3/python-match-case.html
+Title: Python match…case 语句 | 菜鸟教程
+
+Python match…case 语句 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python 创建一个简单的任务清单（to-do list） 
+
+Python 量化 
+
+Python match...case 语句 
+
+match...case 提供了一种更强大的模式匹配方法。 
+
+模式匹配是一种在编程中处理数据结构的方式，可以使代码更简洁、易读。 
+
+match...case 是 Python 3.10 版本引入的新语法。 
+
+match...case 语法结构如下： 
+
+match expression:
+ case pattern1:
+ # 处理pattern1的逻辑
+ case pattern2 if condition:
+ # 处理pattern2并且满足condition的逻辑
+ case _:
+ # 处理其他情况的逻辑 
+
+参数说明： 
+
+match 语句后跟一个表达式，然后使用 case 语句来定义不同的模式。 
+
+case 后跟一个模式，可以是具体值、变量、通配符等。 
+
+可以使用 if 关键字在 case 中添加条件。 
+
+_ 通常用作通配符，匹配任何值。 
+
+实例 
+
+1. 简单的值匹配 
+
+实例 
+
+def match_example ( value ) : 
+
+match value: 
+
+case 1 : 
+
+print ( "匹配到值为1" ) 
+
+case 2 : 
+
+print ( "匹配到值为2" ) 
+
+case _: 
+
+print ( "匹配到其他值" ) 
+
+match_example ( 1 ) # 输出: 匹配到值为1 
+
+match_example ( 2 ) # 输出: 匹配到值为2 
+
+match_example ( 3 ) # 输出: 匹配到其他值 
+
+以上代码中， match 语句用于匹配 value 的不同情况，每个 case 语句表示一种可能的匹配情况， _ 通配符表示其他情况。 
+
+输出结果为： 
+
+匹配到值为1
+匹配到值为2
+匹配到其他值 
+
+2. 使用变量 
+
+实例 
+
+def match_example ( item ) : 
+
+match item : 
+
+case ( x , y ) if x == y : 
+
+print ( f "匹配到相等的元组: {item}" ) 
+
+case ( x , y ) : 
+
+print ( f "匹配到元组: {item}" ) 
+
+case _ : 
+
+print ( "匹配到其他情况" ) 
+
+match_example ( ( 1 , 1 ) ) # 输出 : 匹配到相等的元组 : ( 1 , 1 ) 
+
+match_example ( ( 1 , 2 ) ) # 输出 : 匹配到元组 : ( 1 , 2 ) 
+
+match_example ( "other" ) # 输出 : 匹配到其他情况 
+
+输出结果为： 
+
+匹配到相等的元组: (1, 1)
+匹配到元组: (1, 2)
+匹配到其他情况 
+
+3. 类型匹配 
+
+实例 
+
+class Circle: 
+
+def __init__ ( self , radius ) : 
+
+self . radius = radius 
+
+class Rectangle: 
+
+def __init__ ( self , width , height ) : 
+
+self . width = width 
+
+self . height = height 
+
+def match_shape ( shape ) : 
+
+match shape: 
+
+case Circle ( radius = 1 ) : 
+
+print ( "匹配到半径为1的圆" ) 
+
+case Rectangle ( width = 1 , height = 2 ) : 
+
+print ( "匹配到宽度为1，高度为2的矩形" ) 
+
+case _: 
+
+print ( "匹配到其他形状" ) 
+
+match_shape ( Circle ( radius = 1 ) ) # 输出: 匹配到半径为1的圆 
+
+match_shape ( Rectangle ( width = 1 , height = 2 ) ) # 输出: 匹配到宽度为1，高度为2的矩形 
+
+match_shape ( "other" ) # 输出: 匹配到其他形状 
+
+输出结果为： 
+
+匹配到半径为1的圆
+匹配到宽度为1，高度为2的矩形
+匹配到其他形状 
+
+AI 思考中... 
+
+Python 创建一个简单的任务清单（to-do list） 
+
+Python 量化

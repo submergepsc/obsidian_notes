@@ -1,0 +1,72 @@
+URL: https://www.runoob.com/vbscript/func-rgb.html
+Title: VBScript RGB 函数 | 菜鸟教程
+
+VBScript RGB 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript MsgBox 函数 
+
+VBScript Round 函数 
+
+VBScript RGB 函数 
+
+RGB 函数返回表示 RGB 颜色值的数字。 
+
+语法 
+
+RGB(red,green,blue) 
+
+参数 
+
+描述 
+
+red 
+
+必需。介于 0 - 255 之间（且包括）的数字，代表颜色的红色部分。 
+
+green 
+
+必需。介于 0 - 255 之间（且包括）的数字，代表颜色的绿色部分。 
+
+blue 
+
+必需。介于 0 - 255 之间（且包括）的数字，代表颜色的蓝色部分。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+document.write(rgb(255,0,0)) 
+
+</script> 
+
+以上实例输出结果： 
+
+255 
+
+尝试一下 » 
+
+实例 2 
+
+<script type="text/vbscript"> 
+
+document.write(rgb(255,30,30)) 
+
+</script> 
+
+以上实例输出结果： 
+
+1974015 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript MsgBox 函数 
+
+VBScript Round 函数

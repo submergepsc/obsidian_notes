@@ -1,0 +1,54 @@
+URL: https://www.runoob.com/python3/python3-att-dictionary-in.html
+Title: Python3 字典 in 操作符 | 菜鸟教程
+
+Python3 字典 in 操作符 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 字典 get() 方法 
+
+Python3 字典 items() 方法 
+
+Python3 字典 in 操作符 
+
+描述 
+
+Python 字典 in 操作符用于判断键是否存在于字典中，如果键在字典 dict 里返回 true，否则返回 false。 
+
+而 not in 操作符刚好相反，如果键在字典 dict 里返回 false，否则返回 true。 
+
+语法 
+
+in 操作符语法： 
+
+key in dict 
+
+参数 
+
+key -- 要在字典中查找的键。 
+
+返回值 
+
+如果键在字典里返回true，否则返回false。 
+
+实例 
+
+以下实例展示了 in 操作符在字典中的使用方法： 
+
+实例(Python 3.0+) 
+
+thisdict = { ' Name ' : ' Runoob ' , ' Age ' : 7 } if ' Age ' in thisdict : print ( " 键 Age 存在 " ) else : print ( " 键 Age 不存在 " ) if ' Sex ' in thisdict : print ( " 键 Sex 存在 " ) else : print ( " 键 Sex 不存在 " ) if ' Age ' not in thisdict : print ( " 键 Age 不存在 " ) else : print ( " 键 Age 存在 " ) 
+
+以上实例输出结果为： 
+
+键 Age 存在
+键 Sex 不存在
+键 Age 存在 
+
+AI 思考中... 
+
+Python3 字典 get() 方法 
+
+Python3 字典 items() 方法

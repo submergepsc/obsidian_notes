@@ -1,0 +1,98 @@
+URL: https://www.runoob.com/redis/redis-php.html
+Title: PHP 使用 Redis | 菜鸟教程
+
+PHP 使用 Redis | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Redis 教程 
+
+Java 使用 Redis 
+
+Redis PEXPIRE 命令 
+
+PHP 使用 Redis 
+
+安装 
+
+开始在 PHP 中使用 Redis 前，
+我们需要确保已经安装了 redis 服务及 PHP redis 驱动，且你的机器上能正常使用 PHP。
+接下来让我们安装 PHP redis 驱动：下载地址为: https://github.com/phpredis/phpredis/releases 。 
+
+PHP安装redis扩展 
+
+以下操作需要在下载的 phpredis 目录中完成： 
+
+$ wget https://github.com/phpredis/phpredis/archive/3.1.4.tar.gz
+$ tar zxvf 3.1.4.tar.gz # 解压
+$ cd phpredis-3.1.4 # 进入 phpredis 目录
+$ /usr/local/php/bin/phpize # php安装后的路径
+$ ./configure --with-php-config=/usr/local/php/bin/php-config
+$ make && make install 
+
+修改php.ini文件 
+
+vi /usr/local/php/lib/php.ini 
+
+增加如下内容: 
+
+extension_dir = "/usr/local/php/lib/php/extensions/no-debug-zts-20090626"
+
+extension=redis.so 
+
+安装完成后重启php-fpm 或 apache。查看phpinfo信息，就能看到redis扩展。 
+
+连接到 redis 服务 
+
+实例 
+
+<?php $redis = new Redis ( ) ; $redis -> connect ( ' 127.0.0.1 ' , 6379 ) ; echo " Connection to server successfully " ; echo " Server is running: " . $redis -> ping ( ) ; ?> 
+
+执行脚本，输出结果为： 
+
+Connection to server successfully
+Server is running: PONG 
+
+Redis PHP String(字符串) 实例 
+
+实例 
+
+<?php $redis = new Redis ( ) ; $redis -> connect ( ' 127.0.0.1 ' , 6379 ) ; echo " Connection to server successfully " ; $redis -> set ( " tutorial-name " , " Redis tutorial " ) ; echo " Stored string in redis:: " . $redis -> get ( " tutorial-name " ) ; ?> 
+
+执行脚本，输出结果为： 
+
+Connection to server successfully
+Stored string in redis:: Redis tutorial 
+
+Redis PHP List(列表) 实例 
+
+实例 
+
+<?php $redis = new Redis ( ) ; $redis -> connect ( ' 127.0.0.1 ' , 6379 ) ; echo " Connection to server successfully " ; $redis -> lpush ( " tutorial-list " , " Redis " ) ; $redis -> lpush ( " tutorial-list " , " Mongodb " ) ; $redis -> lpush ( " tutorial-list " , " Mysql " ) ; $arList = $redis -> lrange ( " tutorial-list " , 0 , 5 ) ; echo " Stored string in redis " ; print_r ( $arList ) ; ?> 
+
+执行脚本，输出结果为： 
+
+Connection to server successfully
+Stored string in redis
+Mysql
+Mongodb
+Redis 
+
+Redis PHP Keys 实例 
+
+实例 
+
+<?php $redis = new Redis ( ) ; $redis -> connect ( ' 127.0.0.1 ' , 6379 ) ; echo " Connection to server successfully " ; $arList = $redis -> keys ( " * " ) ; echo " Stored keys in redis:: " ; print_r ( $arList ) ; ?> 
+
+执行脚本，输出结果为： 
+
+Connection to server successfully
+Stored string in redis::
+tutorial-name
+tutorial-list 
+
+AI 思考中... 
+
+Java 使用 Redis 
+
+Redis PEXPIRE 命令

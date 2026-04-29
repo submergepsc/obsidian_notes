@@ -1,0 +1,108 @@
+URL: https://www.runoob.com/font-awesome/fontawesome-icons-video.html
+Title: Font Awesome 音/视频图标 | 菜鸟教程
+
+Font Awesome 音/视频图标 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Font Awesome 图标 
+
+Font Awesome 交通工具图标 
+
+Font Awesome Web 应用图标 
+
+Font Awesome 音/视频图标 
+
+下表显示了所有的 Font Awesome 音/视频图标： 
+
+图标 
+
+描述 
+
+实例 
+
+fa fa-arrows-alt 
+
+尝试一下 
+
+fa fa-backward 
+
+尝试一下 
+
+fa fa-compress 
+
+尝试一下 
+
+fa fa-eject 
+
+尝试一下 
+
+fa fa-expand 
+
+尝试一下 
+
+fa fa-fast-backward 
+
+尝试一下 
+
+fa fa-fast-forward 
+
+尝试一下 
+
+fa fa-forward 
+
+尝试一下 
+
+fa fa-pause 
+
+尝试一下 
+
+fa fa-pause-circle 
+
+尝试一下 
+
+fa fa-pause-circle-o 
+
+尝试一下 
+
+fa fa-play 
+
+尝试一下 
+
+fa fa-play-circle 
+
+尝试一下 
+
+fa fa-play-circle-o 
+
+尝试一下 
+
+fa fa-step-backward 
+
+尝试一下 
+
+fa fa-step-forward 
+
+尝试一下 
+
+fa fa-stop 
+
+尝试一下 
+
+fa fa-stop-circle 
+
+尝试一下 
+
+fa fa-stop-circle-o 
+
+尝试一下 
+
+fa fa-youtube-play 
+
+尝试一下 
+
+AI 思考中... 
+
+Font Awesome 交通工具图标 
+
+Font Awesome Web 应用图标

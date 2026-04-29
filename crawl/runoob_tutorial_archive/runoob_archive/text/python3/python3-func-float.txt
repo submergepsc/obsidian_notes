@@ -1,0 +1,189 @@
+URL: https://www.runoob.com/python3/python3-func-float.html
+Title: Python float() 函数 | 菜鸟教程
+
+Python float() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python int() 函数 
+
+Python complex() 函数 
+
+Python float() 函数 
+
+float() 是 Python 中用于将其他类型的数据转换为浮点数（小数）的内置函数。 
+
+浮点数在科学计算、数据分析、图形处理等场景中非常重要， float() 函数可以帮助我们将整数、字符串等转换为浮点数类型。 
+
+单词释义 ： float 意为"浮点"，是计算机中表示小数的一种方式。 
+
+基本语法与参数 
+
+float() 是一个内置函数，可以直接调用。 
+
+语法格式 
+
+float(x) 
+
+参数说明 
+
+参数 x ： 
+
+类型： 整数、字符串或其他可转换为浮点数的对象 
+
+描述： 要转换为浮点数的值。常见的是数字字符串或整数。 
+
+函数说明 
+
+返回值 ： 返回一个浮点数对象。 
+
+特殊情况 ： 
+
+float() 不带参数返回 0.0 
+
+整数转换为浮点数时，小数部分为 .0 
+
+字符串 "inf" 或 "infinity" 表示无穷大 
+
+字符串 "nan" 表示非数字（Not a Number） 
+
+实例 
+
+让我们通过一系列例子，掌握 float() 的用法。 
+
+示例 1：基础用法 - 转换数字 
+
+实例 
+
+# 从整数转换 
+
+print ( float ( 10 ) ) # 输出: 10.0 
+
+print ( float ( - 5 ) ) # 输出: -5.0 
+
+# 从字符串转换 
+
+print ( float ( "3.14" ) ) # 输出: 3.14 
+
+print ( float ( " 2.5 " ) ) # 输出: 2.5（自动去除空格） 
+
+# 从布尔值转换 
+
+print ( float ( True ) ) # 输出: 1.0 
+
+print ( float ( False ) ) # 输出: 0.0 
+
+# 不带参数 
+
+print ( float ( ) ) # 输出: 0.0 
+
+运行结果预期: 
+
+10.0
+-5.0
+3.14
+2.5
+1.0
+0.0
+0.0 
+
+代码解析: 
+
+整数转换为浮点数时，会自动添加 .0 小数部分。 
+
+字符串转换支持首尾空白字符的自动去除。 
+
+布尔值 True 转换为 1.0， False 转换为 0.0。 
+
+示例 2：特殊值 - 无穷大和 NaN 
+
+Python 浮点数支持无穷大和 NaN 的表示。 
+
+实例 
+
+# 无穷大 
+
+print ( float ( "inf" ) ) # 输出: inf 
+
+print ( float ( "infinity" ) ) # 输出: infinity 
+
+print ( float ( "-inf" ) ) # 输出: -inf 
+
+# NaN (Not a Number) 
+
+print ( float ( "nan" ) ) # 输出: nan 
+
+# 使用数学模块验证 
+
+import math 
+
+print ( math . isinf ( float ( "inf" ) ) ) # 输出: True 
+
+print ( math . isnan ( float ( "nan" ) ) ) # 输出: True 
+
+运行结果预期: 
+
+inf
+infinity
+-inf
+nan
+True
+True 
+
+代码解析: 
+
+"inf" 或 "infinity" 表示正无穷大，"-inf" 表示负无穷大。 
+
+"nan" 表示非数字，常用于表示未定义或不可表示的结果。 
+
+可以使用 math.isinf() 和 math.isnan() 来检测这些特殊值。 
+
+示例 3：数学计算中的应用 
+
+实例 
+
+# 整数相除结果自动转为浮点数 
+
+result = 7 / 2 
+
+print ( result ) # 输出: 3.5 
+
+print ( type ( result ) ) # 输出: <class 'float'> 
+
+# 强制转换为浮点数进行精确计算 
+
+a = 10 
+
+b = float ( a ) / 3 
+
+print ( b ) # 输出: 3.3333333333333335 
+
+# 处理用户输入的小数 
+
+user_input = "3.14159" 
+
+pi = float ( user_input ) 
+
+print ( f "圆周率: {pi}" ) # 输出: 圆周率: 3.14159 
+
+# 浮点数精度问题 
+
+print ( 0.1 + 0.2 ) # 输出: 0.30000000000000004 
+
+运行结果预期: 
+
+3.5
+<class 'float'>
+3.3333333333333335
+圆周率: 3.14159
+0.30000000000000004 
+
+这个例子展示了浮点数在数学计算中的应用，以及浮点数精度问题的存在。 
+
+AI 思考中... 
+
+Python int() 函数 
+
+Python complex() 函数

@@ -1,0 +1,44 @@
+URL: https://www.runoob.com/runoob-app
+Title: 菜鸟教程移动端App | 菜鸟教程
+
+菜鸟教程移动端App | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+关于菜鸟教程 
+
+菜鸟笔记 打开CHM遇到问题…… 
+
+菜鸟教程移动端App 
+
+目前用户反馈在市场上出现了山寨菜鸟教程的 APP，并进行收费，这边做一个说明：我们目前并没有开发上架到各大应用市场对APP，更不会去收费，请大家注意甄别。 
+
+如已购买可以参见退款说明： https://support.apple.com/zh-cn/HT204084 
+
+另外附举报方法： 
+
+1. 在 App Store 完成一次购买（点下载，出现进度后取消即可）； 
+
+2. 访问 https://reportaproblem.apple.com/ ，用购买该 App 的 Apple ID 登录； 
+
+3. 点击对应应用右边的 Report a problem ； 
+
+4. 填写举报理由，然后选择提交（ Submit） 。 
+
+也可以直接发送邮件到 [email protected] , 配上 app 截图内容。 
+
+Android 
+
+Android 测试版： https://www.runoob.com/api/runoob.apk 
+
+二维码： 
+
+2、iOS 桌面 
+
+iOS 用户可以通过 Safari 浏￼览器来保存我们到应用到首页屏幕上，具体操作如下，在 Safari 浏览器中打开我们的官网 https://www.runoob.com 点击分享按钮： 
+
+点击出现添加到主屏幕： 
+
+可编辑标题： 
+
+成功后，屏幕显示如下：

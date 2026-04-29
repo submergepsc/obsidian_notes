@@ -1,0 +1,237 @@
+URL: https://www.runoob.com/ionic/ionic-grid.html
+Title: ionic 网格(Grid) | 菜鸟教程
+
+ionic 网格(Grid) | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+ionic 教程 
+
+ionic tab(选项卡) 
+
+ionic 颜色 
+
+ionic 网格(Grid) 
+
+ionic 的网格(Grid)和其他大部分框架有所不同，它采用了弹性盒子模型(Flexible Box Model) 。而且在移动端，基本上的手机都支持。row 样式指定行，col 样式指定列。 
+
+同等大小网格 
+
+在带有 row 的样式的元素里如果包含了 col 的样式，col 就会设置为同等大小。 
+
+以下实例中 row 的样式包含了 5 个 col 样式，每个 col 的宽度为 20%。 
+
+<div class="row">
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+</div> 
+
+尝试一下 » 
+
+指定列宽 
+
+你可以设定一行中各个列的大小不一样。默认情况下，列都会被划分为同等大小。但你也可以按百分比来设置列的宽度（一行为 12 个网格）。 
+
+<div class="row">
+ <div class="col col-50">.col.col-50</div>
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+</div>
+
+<div class="row">
+ <div class="col col-75">.col.col-75</div>
+ <div class="col">.col</div>
+</div>
+
+<div class="row">
+ <div class="col">.col</div>
+ <div class="col col-75">.col.col-75</div>
+</div>
+
+<div class="row">
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+</div> 
+
+尝试一下 » 
+
+注意：实例中，每个 col 样式会自动添加上边框和灰色背景。 
+
+下面列出了指定列宽的一些百分比的样式名: 
+
+.col-10 
+
+10% 
+
+.col-20 
+
+20% 
+
+.col-25 
+
+25% 
+
+.col-33 
+
+33.3333% 
+
+.col-50 
+
+50% 
+
+.col-67 
+
+66.6666% 
+
+.col-75 
+
+75% 
+
+.col-80 
+
+80% 
+
+.col-90 
+
+90% 
+
+有偏移量的网格 
+
+列可以设置左侧偏移量，实例如下： 
+
+<div class="row">
+ <div class="col col-33 col-offset-33">.col</div>
+ <div class="col">.col</div>
+</div>
+
+<div class="row">
+ <div class="col col-33">.col</div>
+ <div class="col col-33 col-offset-33">.col</div>
+</div>
+
+<div class="row">
+ <div class="col col-33 col-offset-67">.col</div>
+</div> 
+
+尝试一下 » 
+
+下面是一些百分比的偏移量样式名： 
+
+.col-offset-10 
+
+10% 
+
+.col-offset-20 
+
+20% 
+
+.col-offset-25 
+
+25% 
+
+.col-offset-33 
+
+33.3333% 
+
+.col-offset-50 
+
+50% 
+
+.col-offset-67 
+
+66.6666% 
+
+.col-offset-75 
+
+75% 
+
+.col-offset-80 
+
+80% 
+
+.col-offset-90 
+
+90% 
+
+纵向对齐网格 
+
+弹性盒子模型可以很容易设置列纵向对齐。纵向对齐包含顶部，中间部分，底部，可以应用到每一行的列，或者指定的某列。 
+
+实例中，最后一列设置了最高的内容用于更好的演示纵向对齐网格。 
+
+<div class="row">
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">1<br>2<br>3<br>4</div>
+</div>
+
+<div class="row">
+ <div class="col col-top">.col</div>
+ <div class="col col-center">.col</div>
+ <div class="col col-bottom">.col</div>
+ <div class="col">1<br>2<br>3<br>4</div>
+</div>
+
+<div class="row row-top">
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">1<br>2<br>3<br>4</div>
+</div>
+
+<div class="row row-center">
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">1<br>2<br>3<br>4</div>
+</div>
+
+<div class="row row-bottom">
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">1<br>2<br>3<br>4</div>
+</div> 
+
+尝试一下 » 
+
+响应式网格 
+
+手持设备屏幕在切换时，例如横屏，竖屏等。就需要设置每行的网格可以实现根据不同宽度自适应大小。 
+
+不同设备响应式类的样式如下: 
+
+响应式类 
+
+描述 
+
+.responsive-sm 
+
+小于手机横屏 
+
+.responsive-md 
+
+小于平板竖屏 
+
+.responsive-lg 
+
+小于平板横屏 
+
+<div class="row responsive-sm">
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+ <div class="col">.col</div>
+</div> 
+
+尝试一下 » 
+
+AI 思考中... 
+
+ionic tab(选项卡) 
+
+ionic 颜色

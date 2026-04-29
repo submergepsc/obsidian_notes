@@ -1,0 +1,33 @@
+URL: https://www.runoob.com/xquery/xquery-tutorial.html
+Title: XQuery 教程 | 菜鸟教程
+
+XQuery 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XQuery 教程 
+
+XQuery 简介 
+
+XQuery 教程 
+
+XQuery 之于 XML 作用就类似于 SQL 之于数据库的作用。 
+
+XQuery 被设计用来查询 XML 数据。 
+
+现在开始学习 XQuery ! 
+
+XQuery 实例 
+
+for $x in doc("books.xml")/bookstore/book 
+where $x/price>30 
+order by $x/title 
+return $x/title 
+
+在菜鸟教程中，我们提供 XQuery 1.0 中所有运算符、内置函数、数据类型的完整参考手册。 
+
+XQuery 参考手册 
+
+AI 思考中... 
+
+XQuery 简介

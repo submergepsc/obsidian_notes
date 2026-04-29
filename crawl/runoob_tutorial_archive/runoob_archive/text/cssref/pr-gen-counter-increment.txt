@@ -1,0 +1,84 @@
+URL: https://www.runoob.com/cssref/pr-gen-counter-increment.html
+Title: CSS counter-increment 属性 | 菜鸟教程
+
+CSS counter-increment 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS :after 选择器 
+
+CSS counter-reset 属性 
+
+CSS counter-increment 属性 
+
+实例 
+
+对部分和子部分进行编号（比如 "Section 1"、"1.1"、"1.2"）的方法： 
+
+body { counter-reset: section ; } h1 { counter-reset: subsection ; } h1 :before { counter-increment: section ; content: " Section " counter ( section ) ". " ; } h2 :before { counter-increment: subsection ; content: counter ( section ) "." counter ( subsection ) " " ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+counter-increment属性递增一个或多个计数器值。 
+
+counter-increment属性通常用于counter-reset属性和content属性。 
+
+默认值： 
+
+none 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS2 
+
+JavaScript 语法： 
+
+object .style.counterIncrement="subsection" 
+
+浏览器支持 
+
+所有主流浏览器都支持counter-increment属性。 
+
+注意： IE8只有指定!DOCTYPE才支持counter-increment属性。 
+
+属性值 
+
+值 
+
+说明 
+
+none 
+
+没有计数器将递增 
+
+id number 
+
+id 定义将增加计数的选择器、id 或 class。number 定义增量。number 可以是正数、零或者负数。 
+
+inherit 
+
+指定counter-increment属性的值，应该从父元素继承 
+
+相关文章 
+
+CSS 参考手册: :before 伪元素 
+
+CSS 参考手册: :after 伪元素 
+
+CSS 参考手册: content 属性 
+
+CSS 参考手册: counter-reset 属性 
+
+AI 思考中... 
+
+CSS :after 选择器 
+
+CSS counter-reset 属性

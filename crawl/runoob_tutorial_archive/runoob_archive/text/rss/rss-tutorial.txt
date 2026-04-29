@@ -1,0 +1,30 @@
+URL: https://www.runoob.com/rss/rss-tutorial.html
+Title: RSS 教程 | 菜鸟教程
+
+RSS 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+RSS 教程 
+
+RSS 简介 
+
+RSS 教程 
+
+通过使用 RSS，您可以有选择地浏览您感兴趣的以及与您的工作相关的新闻。 
+
+通过使用 RSS，您可以把需要的信息从不需要的信息（兜售信息，垃圾邮件等）中分离出来。 
+
+通过使用 RSS，您可以创建自己的新闻频道，并将之发布到因特网。 
+
+现在开始学习 RSS! 
+
+RSS 文档实例 
+
+<? xml version = " 1.0 " encoding = " UTF-8 " ?> < rss version = " 2.0 " > < channel > < title > 菜鸟教程首页 </ title > < link > http://www.runoob.com </ link > < description > 免费编程教程 </ description > < item > < title > RSS 教程 </ title > < link > http://www.runoob.com/rss </ link > < description > 菜鸟教程 Rss 教程 </ description > </ item > < item > < title > XML 教程 </ title > < link > http://www.runoob.com/xml </ link > < description > 菜鸟教程 XML 教程 </ description > </ item > </ channel > </ rss > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+RSS 简介

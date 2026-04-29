@@ -1,0 +1,96 @@
+URL: https://www.runoob.com/xsl/el-apply-templates.html
+Title: XSLT <xsl:apply-templates> 元素 | 菜鸟教程
+
+XSLT <xsl:apply-templates> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:apply-imports> 元素 
+
+XSLT <xsl:attribute> 元素 
+
+XSLT <xsl:apply-templates> 元素 
+
+定义和用法 
+
+<xsl:apply-templates> 元素可向当前元素或当前元素的子节点应用模板。 
+
+如果我们向 <xsl:apply-templates> 元素添加 select 属性，那么它仅会处理匹配该属性的值的子元素。我们可使用 select 属性来规定要处理的子节点的顺序。 
+
+语法 
+
+<xsl:apply-templates select="expression" mode="name"> 
+
+<!-- Content:(xsl:sort|xsl:with-param)* --> 
+
+</xsl:apply-templates> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+select 
+
+expression 
+
+可选。规定要处理的节点。星号选取整个节点集。如果省略该属性，则将选取当前节点的所有子节点。 
+
+mode 
+
+name 
+
+可选。如果存在为相同元素定义的多个处理方法，那么用 mode 可以区分它们。 
+
+实例 1 
+
+用 h1 元素包围文档中每个 title 元素： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="title"> 
+<h1><xsl:apply-templates/></h1> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+实例 2 
+
+用 h1 元素包围文档中所有属于 message 的子元素的 title 元素： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="message"> 
+<h1><xsl:apply-templates select="title"/></h1> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+实例 3 
+
+用 h1 元素包围文档中 mode 属性设置为 "big" 的 message 所有子节点： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:template match="message"> 
+<h1><xsl:apply-templates select="*" mode="big"/></h1> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+AI 思考中... 
+
+XSLT <xsl:apply-imports> 元素 
+
+XSLT <xsl:attribute> 元素

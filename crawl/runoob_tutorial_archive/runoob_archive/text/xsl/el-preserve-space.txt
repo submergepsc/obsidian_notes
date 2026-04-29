@@ -1,0 +1,82 @@
+URL: https://www.runoob.com/xsl/el-preserve-space.html
+Title: XSLT <xsl:preserve-space> 和 <xsl:strip-space> 元素 | 菜鸟教程
+
+XSLT <xsl:preserve-space> 和 <xsl:strip-space> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:param> 元素 
+
+XSLT <xsl:processing-instruction> 元素 
+
+XSLT <xsl:preserve-space> 和 <xsl:strip-space> 元素 
+
+定义和用法 
+
+<xsl:preserve-space> 元素用于定义保留空白的元素。 
+
+<xsl:strip-space> 元素用于定义删除空白的元素。 
+
+注释： 保留空白是默认的设置，所以只有当使用 <xsl:strip-space> 元素时才有必要使用 <xsl:preserve-space> 元素。 
+
+注释： <xsl:preserve-space> 元素和 <xsl:strip-space> 元素都是顶层元素（top-level element）。 
+
+语法 
+
+<xsl:preserve-space elements="list-of-element-names"/> 
+
+<xsl:strip-space elements="list-of-element-names"/> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+elements 
+
+list-of-element-names 
+
+必需。一个空格分隔的元素列表，规定了保留/删除空白的元素。 
+
+注意： 列表中可包含 "*" 和 "prefix:*"，这样就可以加入所有元素或来自特定命名空间的所有元素。 
+
+实例 1 
+
+在本例中，我们为 title 和 artist 元素预留了空白节点，并从 country、company、price 以及 year 元素删除了空白节点： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:strip-space elements="country company price year" /> 
+<xsl:preserve-space elements="title artist" /> 
+
+<xsl:template match="/"> 
+<html> 
+<body> 
+<xsl:for-each select="catalog/cd"> 
+<p> 
+<xsl:value-of select="title" /><br /> 
+<xsl:value-of select="artist" /><br /> 
+<xsl:value-of select="country" /><br /> 
+<xsl:value-of select="company" /><br /> 
+<xsl:value-of select="price" /><br /> 
+<xsl:value-of select="year" /> 
+</p> 
+</xsl:for-each> 
+</body> 
+</html> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+AI 思考中... 
+
+XSLT <xsl:param> 元素 
+
+XSLT <xsl:processing-instruction> 元素

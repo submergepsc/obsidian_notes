@@ -1,0 +1,121 @@
+URL: https://www.runoob.com/cssref/pr-background-image.html
+Title: CSS background-image 属性 | 菜鸟教程
+
+CSS background-image 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS background-color 属性 
+
+CSS background-position 属性 
+
+CSS background-image 属性 
+
+实例 
+
+设置body元素的背景图像： 
+
+body { background-image: url (' paper . gif ') ; background-color: #cccccc ; } 
+
+尝试一下 » 
+
+标签定义及使用说明 
+
+background-image 属性设置一个元素的背景图像。 
+
+元素的背景是元素的总大小，包括填充和边界（但不包括边距）。 
+
+默认情况下，background-image放置在元素的左上角，并重复垂直和水平方向。 
+
+提示： 请设置一种可用的背景颜色，这样的话，假如背景图像不可用，可以使用背景色带代替。 
+
+默认值: 
+
+none 
+
+继承: 
+
+no 
+
+版本: 
+
+CSS1 
+
+JavaScript 语法: 
+
+object object.style.backgroundImage="url(stars.gif)" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+紧跟在 -webkit-, -ms- 或 -moz- 前的数字为支持该前缀属性的第一个浏览器版本号。 
+
+属性 
+
+background-image 
+
+1.0 
+
+4.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+注意: IE8 及其更早版本不支持一个元素上设置多个背景图片。 
+
+属性值 
+
+值 
+
+说明 
+
+url( 'URL' ) 
+
+图像的URL 
+
+none 
+
+无图像背景会显示。这是默认 
+
+linear-gradient() 
+
+创建一个线性渐变的 "图像"(从上到下) 
+
+radial-gradient() 
+
+用径向渐变创建 "图像"。 (center to edges) 
+
+repeating-linear-gradient() 
+
+创建重复的线性渐变 "图像"。 
+
+repeating-radial-gradient() 
+
+创建重复的径向渐变 "图像" 
+
+inherit 
+
+指定背景图像应该从父元素继承 
+
+在线实例 
+
+多个背景图片 
+本实例演示了文档中多个背景图像。 
+
+相关文章 
+
+CSS 教程: CSS 背景 
+
+CSS3 教程: CSS3 背景 
+
+AI 思考中... 
+
+CSS background-color 属性 
+
+CSS background-position 属性

@@ -1,0 +1,75 @@
+URL: https://www.runoob.com/ionic/ionic-range.html
+Title: ionic range | 菜鸟教程
+
+ionic range | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+ionic 教程 
+
+ionic 单选框 
+
+ionic select 
+
+ionic Range 
+
+ionic Range 是一个滑块控件，ionic 为 Range 提供了很多种默认的样式。而且你可以在许多种元素里使用它比如列表或者 Card 。 
+
+实例 
+
+<div class="range">
+ <i class="icon ion-volume-low"></i>
+ <input type="range" name="volume">
+ <i class="icon ion-volume-high"></i>
+</div>
+
+<div class="list" style="margin-top: 13px">
+ <div class="item item-divider">
+ Ranges In A List
+ </div>
+ <div class="item range range-positive">
+ <i class="icon ion-ios-sunny-outline"></i>
+ <input type="range" name="volume" min="0" max="100" value="12">
+ <i class="icon ion-ios-sunny"></i>
+ </div>
+ <div class="item range range-calm">
+ <i class="icon ion-ios-lightbulb-outline"></i>
+ <input type="range" name="volume" min="0" max="100" value="25">
+ <i class="icon ion-ios-lightbulb"></i>
+ </div>
+ <div class="item range range-balanced">
+ <i class="icon ion-ios-bolt-outline"></i>
+ <input type="range" name="volume" min="0" max="100" value="38">
+ <i class="icon ion-ios-bolt"></i>
+ </div>
+ <div class="item range range-energized">
+ <i class="icon ion-ios-moon-outline"></i>
+ <input type="range" name="volume" min="0" max="100" value="50">
+ <i class="icon ion-ios-moon"></i>
+ </div>
+ <div class="item range range-assertive">
+ <i class="icon ion-ios-partlysunny-outline"></i>
+ <input type="range" name="volume" min="0" max="100" value="63">
+ <i class="icon ion-ios-partlysunny"></i>
+ </div>
+ <div class="item range range-royal">
+ <i class="icon ion-ios-rainy-outline"></i>
+ <input type="range" name="volume" min="0" max="100" value="75">
+ <i class="icon ion-ios-rainy"></i>
+ </div>
+ <div class="item range range-dark">
+ <i class="icon ion-ios-lightbulb-outline"></i>
+ <input type="range" name="volume" min="0" max="100" value="88">
+ <i class="icon ion-ios-lightbulb"></i>
+ </div>
+</div> 
+
+尝试一下 » 
+
+运行效果如下： 
+
+AI 思考中... 
+
+ionic 单选框 
+
+ionic select

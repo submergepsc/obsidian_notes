@@ -1,0 +1,53 @@
+URL: https://www.runoob.com/vbscript/func-trim.html
+Title: VBScript Trim 函数 | 菜鸟教程
+
+VBScript Trim 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript RTrim 函数 
+
+VBScript Mid 函数 
+
+VBScript Trim 函数 
+
+Trim 函数删除字符串两边的空格。 
+
+提示： 请参阅 LTrim 和 RTrim 函数。 
+
+语法 
+
+Trim(string) 
+
+参数 
+
+描述 
+
+string 
+
+必需。字符串表达式。 
+
+实例 
+
+实例 
+
+<script type="text/vbscript"> 
+
+fname=" Jack " 
+document.write("Hello" & Trim(fname) & "and welcome.") 
+
+</script> 
+
+以上实例输出结果： 
+
+HelloJackand welcome. 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript RTrim 函数 
+
+VBScript Mid 函数

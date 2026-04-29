@@ -1,0 +1,94 @@
+URL: https://www.runoob.com/cssref/pr-margin-left.html
+Title: CSS margin-left 属性 | 菜鸟教程
+
+CSS margin-left 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS margin-bottom 属性 
+
+CSS margin-right 属性 
+
+CSS margin-left 属性 
+
+实例 
+
+设置一个p元素的左边距： 
+
+p { margin-left: 2 cm ; } 
+
+尝试一下 » 
+
+属性定义及使用说明 
+
+margin-left属性设置元素的左边距。 
+
+注意： 负值是允许的。 
+
+默认值： 
+
+0 
+
+继承： 
+
+no 
+
+版本： 
+
+CSS1 
+
+JavaScript 语法： 
+
+object .style.marginLeft="10px" 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+属性 
+
+margin-left 
+
+1.0 
+
+6.0 
+
+1.0 
+
+1.0 
+
+3.5 
+
+属性值 
+
+值 
+
+描述 
+
+auto 
+
+浏览器设置的左外边距。 
+
+length 
+
+定义固定的左外边距。默认值是0。 
+
+% 
+
+定义基于父对象总宽度的百分比左外边距。 
+
+inherit 
+
+规定应该从父元素继承左外边距。 
+
+相关文章 
+
+CSS 教程: CSS Margin 
+
+AI 思考中... 
+
+CSS margin-bottom 属性 
+
+CSS margin-right 属性

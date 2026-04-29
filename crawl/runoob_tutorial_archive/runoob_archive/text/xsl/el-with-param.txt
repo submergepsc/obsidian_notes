@@ -1,0 +1,85 @@
+URL: https://www.runoob.com/xsl/el-with-param.html
+Title: XSLT <xsl:with-param> 元素 | 菜鸟教程
+
+XSLT <xsl:with-param> 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XSLT 教程 
+
+XSLT <xsl:when> 元素 
+
+XSLT 元素参考手册 
+
+XSLT <xsl:with-param> 元素 
+
+定义和用法 
+
+<xsl:with-param> 元素定义了传递给模板的参数的值。 
+
+注意： <xsl:with-param> 元素的 name 属性的值必须与 <xsl:param> 元素中的 name 相匹配，否则将忽略 <xsl:with-param> 元素。 
+
+注意： <xsl:apply-templates> 和 <xsl:call-template> 中均允许使用 <xsl:with-param> 元素。 
+
+提示： 您可以通过 <xsl:with-param> 元素的内容或通过 select 属性，来为参数赋值！ 
+
+语法 
+
+<xsl:with-param 
+name="name" 
+select="expression"> 
+
+<!-- Content:template --> 
+
+</xsl:with-param> 
+
+属性 
+
+属性 
+
+值 
+
+描述 
+
+name 
+
+name 
+
+必需。规定参数的名称。 
+
+select 
+
+expression 
+
+可选。定义参数的值的 XPath 表达式。 
+
+实例 1 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<xsl:stylesheet version="1.0" 
+xmlns:xsl="http://www.w3.org/1999/XSL/Transform"> 
+
+<xsl:variable name="xx"> 
+<html> 
+<body> 
+<xsl:call-template name="show_title"> 
+<xsl:with-param name="title" /> 
+</xsl:call-template> 
+</body> 
+</html> 
+</xsl:variable> 
+
+<xsl:template name="show_title" match="/"> 
+<xsl:param name="title" /> 
+<xsl:for-each select="catalog/cd"> 
+<p>Title: <xsl:value-of select="$title" /></p> 
+</xsl:for-each> 
+</xsl:template> 
+
+</xsl:stylesheet> 
+
+AI 思考中... 
+
+XSLT <xsl:when> 元素 
+
+XSLT 元素参考手册

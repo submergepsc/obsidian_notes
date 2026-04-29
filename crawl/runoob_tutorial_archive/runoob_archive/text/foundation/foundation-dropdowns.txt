@@ -1,0 +1,179 @@
+URL: https://www.runoob.com/foundation/foundation-dropdowns.html
+Title: Foundation 下拉菜单 | 菜鸟教程
+
+Foundation 下拉菜单 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Foundation 教程 
+
+Foundation 图片 
+
+Foundation 折叠列表 
+
+Foundation 下拉菜单 
+
+Foundation 下拉菜单允许用户从预定义的下拉列表中选取一个值： 
+
+实例 
+
+<!-- Trigger the Dropdown --> 
+< a href= "#" data-dropdown= "id01" class= "button dropdown" > Dropdown Button < /a > 
+
+<!-- Dropdown content --> 
+< ul id= "id01" data-dropdown-content class= "f-dropdown" > 
+< li > < a href= "#" > Link 1 < /a > < /li > 
+< li > < a href= "#" > Link 2 < /a > < /li > 
+< li > < a href= "#" > Link 3 < /a > < /li > 
+< /ul > 
+
+<!-- Initialize Foundation JS --> 
+< script > 
+$(document).ready(function() { 
+$(document).foundation(); 
+}) 
+< /script > 
+
+尝试一下 » 
+
+实例解析 
+
+.dropdown 类为按钮添加一个向下的箭头符号"图标。 
+
+使用按钮或链接的 data-dropdown=" id " 属性来打开下拉菜单。 
+
+id 值需要与下拉菜单的内容 (id01) 匹配。 
+
+在 <div>, <nav>, <ul> 中添加 .f-dropdown 类和 data-dropdown-content 属性来创建下拉菜单的内容。 
+
+最后初始化 Foundation JS。 
+
+注意: 在小屏幕上，所有的下拉菜单的宽度是100%。 
+
+下拉菜单尺寸 
+
+使用 .tiny , .small , .medium , .large 或 .mega 来修改下拉菜单的宽度。 
+
+注意: 在小屏幕上，所有的下拉菜单的宽度是100%。 
+
+实例 
+
+<!-- Tiny Dropdown: 
+ max-width is 200px --> 
+< ul id= "id01" data-dropdown-content class= "f-dropdown 
+ tiny" > .. 
+
+<!-- Small Dropdown: max-width is 300px --> 
+< ul id= "id02" data-dropdown-content class= "f-dropdown 
+ small" > .. 
+
+<!-- Medium Dropdown: max-width is 500px --> 
+< ul id= "id03" data-dropdown-content class= "f-dropdown 
+ medium" > 
+
+<!-- Large Dropdown: max-width is 800px --> 
+< ul id= "id04" data-dropdown-content class= "f-dropdown 
+ large" > .. 
+
+<!-- 
+ Mega Dropdown: 100% width --> 
+< ul id= "id04" data-dropdown-content class= "f-dropdown 
+ mega" > .. 
+
+尝试一下 » 
+
+下拉菜单边距 
+
+可以使用 .content 类为下拉菜单添加内边距： 
+
+实例 
+
+<!-- Default Dropdown --> 
+< ul id= "id01" data-dropdown-content class= "f-dropdown" > .. 
+
+<!-- Dropdown with padding --> 
+< ul id= "id02" data-dropdown-content class= "f-dropdown 
+ content" > .. 
+
+尝试一下 » 
+
+其他实例 
+
+<div> 下拉菜单中添加多媒体元素： 
+
+实例 
+
+< a href= "#" data-dropdown= "id01" class= "button dropdown" > Dropdown Button < /a > 
+< div id= "id01" data-dropdown-content class= "f-dropdown medium content" > 
+< h4 > Paris Title < /h4 > 
+< p > Some text.. some text.. < /p > 
+< img src= "paris.jpg" alt= "Paris" width= "400" height= "300" > 
+< p > Paris, je 
+ t'aime. < /p > 
+< /div > 
+
+尝试一下 » 
+
+下拉菜单方向 
+
+默认情况下下拉菜单在底部，可以通过添加 data-options="align:left|right|top" 来修改其方向： 
+
+实例 
+
+< a href= "#" data-dropdown= "id01" data-options= "align:right" class= "button 
+ dropdown" > Right < /a > 
+< a href= "#" data-dropdown= "id02" data-options= "align:top" class= "button dropdown" > Top < /a > 
+< a href= "#" data-dropdown= "id03" data-options= "align:bottom" class= "button dropdown" > Bottom < /a > 
+< a href= "#" data-dropdown= "id04" data-options= "align:left" class= "button 
+ dropdown" > Left < /a > 
+
+尝试一下 » 
+
+下拉菜单触发条件 
+
+默认情况下，下拉菜单在点击按钮后显示。如果你需要在鼠标移动上去后显示，可以在按钮上使用 data-options="is_hover:true" 属性: 
+
+实例 
+
+< a href= "#" data-dropdown= "id01" data-options= "is_hover:true" class= "button dropdown" > Hover 
+ over me < /a > 
+< ul id= "id01" data-dropdown-content class= "f-dropdown" > 
+< li > < a href= "#" > Link 1 < /a > < /li > 
+< li > < a href= "#" > Link 2 < /a > < /li > 
+< li > < a href= "#" > Link 3 < /a > < /li > 
+< /ul > 
+
+尝试一下 » 
+
+分割按钮 
+
+我们可以在按钮上添加 .split 类来设置一个分割效果的按钮，分割后会在
+<span> 元素上生成一个方向向下的图标按钮: 
+
+实例 
+
+< button class= "button split" > Split Button 
+< span data-dropdown= "id01" > < /span > 
+< /button > 
+
+< ul id= "id01" data-dropdown-content 
+ class= "f-dropdown" > 
+< li > < a href= "#" > Link 1 < /a > < /li > 
+< li > < a href= "#" > Link 2 < /a > < /li > 
+< li > < a href= "#" > Link 3 < /a > < /li > 
+< /ul > 
+
+<!-- Initialize Foundation JS --> 
+< script > 
+$(document).ready(function() { 
+$(document).foundation(); 
+}) 
+< /script > 
+
+尝试一下 » 
+
+AI 思考中... 
+
+Foundation 图片 
+
+Foundation 折叠列表

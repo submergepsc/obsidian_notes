@@ -1,0 +1,72 @@
+URL: https://www.runoob.com/vbscript/func-monthname.html
+Title: VBScript MonthName 函数 | 菜鸟教程
+
+VBScript MonthName 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript Month 函数 
+
+VBScript Now 函数 
+
+VBScript MonthName 函数 
+
+MonthName 函数返回指定的月份的名称。 
+
+语法 
+
+MonthName(month[,abbreviate]) 
+
+参数 
+
+描述 
+
+month 
+
+必需。规定月的数字。（比如一月是 1，二月是 2，依此类推。） 
+
+abbreviate 
+
+可选。一个布尔值，指示是否缩写月份名称。默认是 False。 
+
+实例 
+
+实例 1 
+
+获取第 8 个月份的名称： 
+
+<script type="text/vbscript"> 
+
+document.write(MonthName(8)) 
+
+</script> 
+
+以上实例输出结果： 
+
+August 
+
+尝试一下 » 
+
+实例 2 
+
+获取第 8 个月份的简称： 
+
+<script type="text/vbscript"> 
+
+document.write(MonthName(8,True)) 
+
+</script> 
+
+以上实例输出结果： 
+
+Aug 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript Month 函数 
+
+VBScript Now 函数

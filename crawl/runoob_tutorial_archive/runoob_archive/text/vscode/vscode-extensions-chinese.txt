@@ -1,0 +1,32 @@
+URL: https://www.runoob.com/vscode/vscode-extensions-chinese.html
+Title: VSCode 中文设置 | 菜鸟教程
+
+VSCode 中文设置 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VSCode 教程 
+
+VSCode 界面说明 
+
+VSCode 打开目录 
+
+VSCode 中文设置 
+
+默认 VS Code 的界面上英文的，我们可以通过VS Code 的扩展市场安装中文包。 
+
+VS Code 有一个内置的扩展市场，提供了数千个由社区和微软官方提供的扩展。 
+
+接下来我们就在扩展市场中查找中文包，并安装。 
+
+VScode 安装汉化包很简单，打开 VScode，点击左侧安装扩展图标，在搜索框输入 Chinese ： 
+
+然后点击第一个搜索出来选项【Chinese (Simplified) (简体中文)】的 Install 按钮就可以： 
+
+安装完成后，重启 VSCode，界面显示的就是中文了。 
+
+AI 思考中... 
+
+VSCode 界面说明 
+
+VSCode 打开目录

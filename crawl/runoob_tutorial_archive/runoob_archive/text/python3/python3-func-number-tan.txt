@@ -1,0 +1,61 @@
+URL: https://www.runoob.com/python3/python3-func-number-tan.html
+Title: Python3 tan() 函数 | 菜鸟教程
+
+Python3 tan() 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 sin() 函数 
+
+Python3 degrees() 函数 
+
+Python3 tan() 函数 
+
+描述 
+
+tan() 函数是 math 模块中的一个函数，用于计算一个角的正切值。 
+
+要使用 tan() 函数，首先需要导入 math 模块，然后调用 math.tan() 函数，传递一个角度（以弧度为单位）作为参数。 
+
+语法 
+
+以下是 tan() 方法的语法: 
+
+import math
+
+math.tan(x) 
+
+注意： tan()是不能直接访问的，需要导入 math 模块，然后通过 math 静态对象调用该方法。 
+
+参数 
+
+x -- 一个数值，是一个角。 
+
+返回值 
+
+返回 x 弧度的正切值，结果范围在 -math.pi/2 到 math.pi/2 之间。 
+
+实例 
+
+以下展示了使用 tan() 方法的实例： 
+
+实例(Python 3.0+) 
+
+import math print ( " (tan(3) : " , math . tan ( 3 ) ) print ( " tan(-3) : " , math . tan ( - 3 ) ) print ( " tan(0) : " , math . tan ( 0 ) ) print ( " tan(math.pi) : " , math . tan ( math . pi ) ) print ( " tan(math.pi/2) : " , math . tan ( math . pi / 2 ) ) print ( " tan(math.pi/4) : " , math . tan ( math . pi / 4 ) ) 
+
+以上实例运行后输出结果为： 
+
+(tan(3) : -0.1425465430742778
+tan(-3) : 0.1425465430742778
+tan(0) : 0.0
+tan(math.pi) : -1.2246467991473532e-16
+tan(math.pi/2) : 1.633123935319537e+16
+tan(math.pi/4) : 0.9999999999999999 
+
+AI 思考中... 
+
+Python3 sin() 函数 
+
+Python3 degrees() 函数

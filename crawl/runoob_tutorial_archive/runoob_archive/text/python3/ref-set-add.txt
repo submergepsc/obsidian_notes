@@ -1,0 +1,60 @@
+URL: https://www.runoob.com/python3/ref-set-add.html
+Title: Python Set add()方法 | 菜鸟教程
+
+Python Set add()方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Python 3 教程 
+
+Python3 open() 函数 
+
+Python Set clear()方法 
+
+Python Set add()方法 
+
+描述 
+
+add() 方法用于给集合添加元素，如果添加的元素在集合中已存在，则不执行任何操作。 
+
+语法 
+
+add()方法语法： 
+
+set.add(elmnt) 
+
+参数 
+
+elmnt -- 必需，要添加的元素。 
+
+返回值 
+
+无。 
+
+实例 
+
+以下实例展示了 add() 方法的使用： 
+
+实例 1 
+
+fruits = { " apple " , " banana " , " cherry " } fruits . add ( " orange " ) print ( fruits ) 
+
+输出结果为： 
+
+{'apple', 'banana', 'orange', 'cherry'} 
+
+已存在的元素，则不执行添加操作： 
+
+实例 2 
+
+fruits = { " apple " , " banana " , " cherry " } fruits . add ( " apple " ) print ( fruits ) 
+
+输出结果为： 
+
+{'apple', 'banana', 'cherry'} 
+
+AI 思考中... 
+
+Python3 open() 函数 
+
+Python Set clear()方法

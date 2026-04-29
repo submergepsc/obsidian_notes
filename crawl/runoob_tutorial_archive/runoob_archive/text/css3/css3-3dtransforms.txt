@@ -1,0 +1,266 @@
+URL: https://www.runoob.com/css3/css3-3dtransforms.html
+Title: CSS3 3D 转换 | 菜鸟教程
+
+CSS3 3D 转换 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS3 教程 
+
+CSS3 2D 转换 
+
+CSS3 过渡 
+
+CSS3 3D 转换 
+
+3D 转换 
+
+CSS3 允许您使用 3D 转换来对元素进行格式化。 
+
+在本章中，您将学到其中的一些 3D 转换方法： 
+
+rotateX() 
+
+rotateY() 
+
+点击下面的元素，来查看 2D 转换与 3D 转换之间的不同之处： 
+
+2D rotate 
+
+3D rotate 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+紧跟在 -webkit-, -ms- 或 -moz- 前的数字为支持该前缀属性的第一个浏览器版本号。 
+
+属性 
+
+transform 
+
+36.0 
+12.0 -webkit- 
+
+10.0 
+
+16.0 
+10.0 -moz- 
+
+4.0 -webkit- 
+
+23.0 
+15.0 -webkit- 
+
+transform-origin 
+(three-value syntax) 
+
+36.0 
+12.0 -webkit- 
+
+10.0 
+
+16.0 
+10.0 -moz- 
+
+4.0 -webkit- 
+
+23.0 
+15.0 -webkit- 
+
+transform-style 
+
+36.0 
+12.0 -webkit- 
+
+11.0 
+
+16.0 
+10.0 -moz- 
+
+4.0 -webkit- 
+
+23.0 
+15.0 -webkit- 
+
+perspective 
+
+36.0 
+12.0 -webkit- 
+
+10.0 
+
+16.0 
+10.0 -moz- 
+
+4.0 -webkit- 
+
+23.0 
+15.0 -webkit- 
+
+perspective-origin 
+
+36.0 
+12.0 -webkit- 
+
+10.0 
+
+16.0 
+10.0 -moz- 
+
+4.0 -webkit- 
+
+23.0 
+15.0 -webkit- 
+
+backface-visibility 
+
+36.0 
+12.0 -webkit- 
+
+10.0 
+
+16.0 
+10.0 -moz- 
+
+4.0 -webkit- 
+
+23.0 
+15.0 -webkit- 
+
+rotateX() 方法 
+
+rotateX()方法，围绕其在一个给定度数X轴旋转的元素。 
+
+实例 
+
+div { transform: rotateX ( 120 deg ) ;
+ - webkit-transform: rotateX ( 120 deg ) ; } 
+
+尝试一下 » 
+
+rotateY() 方法 
+
+rotateY()方法，围绕其在一个给定度数Y轴旋转的元素。 
+
+实例 
+
+div { transform: rotateY ( 130 deg ) ;
+ - webkit-transform: rotateY ( 130 deg ) ; } 
+
+尝试一下 » 
+
+转换属性 
+
+下表列出了所有的转换属性： 
+
+属性 
+
+描述 
+
+CSS 
+
+transform 
+
+向元素应用 2D 或 3D 转换。 
+
+3 
+
+transform-origin 
+
+允许你改变被转换元素的位置。 
+
+3 
+
+transform-style 
+
+规定被嵌套元素如何在 3D 空间中显示。 
+
+3 
+
+perspective 
+
+规定 3D 元素的透视效果。 
+
+3 
+
+perspective-origin 
+
+规定 3D 元素的底部位置。 
+
+3 
+
+backface-visibility 
+
+定义元素在不面对屏幕时是否可见。 
+
+3 
+
+3D 转换方法 
+
+函数 
+
+描述 
+
+matrix3d( n , n , n , n , n , n , 
+n , n , n , n , n , n , n , n , n , n ) 
+
+定义 3D 转换，使用 16 个值的 4x4 矩阵。 
+
+translate3d( x , y , z ) 
+
+定义 3D 转化。 
+
+translateX( x ) 
+
+定义 3D 转化，仅使用用于 X 轴的值。 
+
+translateY( y ) 
+
+定义 3D 转化，仅使用用于 Y 轴的值。 
+
+translateZ( z ) 
+
+定义 3D 转化，仅使用用于 Z 轴的值。 
+
+scale3d( x , y , z ) 
+
+定义 3D 缩放转换。 
+
+scaleX( x ) 
+
+定义 3D 缩放转换，通过给定一个 X 轴的值。 
+
+scaleY( y ) 
+
+定义 3D 缩放转换，通过给定一个 Y 轴的值。 
+
+scaleZ( z ) 
+
+定义 3D 缩放转换，通过给定一个 Z 轴的值。 
+
+rotate3d( x , y , z , angle ) 
+
+定义 3D 旋转。 
+
+rotateX( angle ) 
+
+定义沿 X 轴的 3D 旋转。 
+
+rotateY( angle ) 
+
+定义沿 Y 轴的 3D 旋转。 
+
+rotateZ( angle ) 
+
+定义沿 Z 轴的 3D 旋转。 
+
+perspective( n ) 
+
+定义 3D 转换元素的透视视图。 
+
+AI 思考中... 
+
+CSS3 2D 转换 
+
+CSS3 过渡

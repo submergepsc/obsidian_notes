@@ -1,0 +1,262 @@
+URL: https://www.runoob.com/react/react-install.html
+Title: React 安装(NPM) | 菜鸟教程
+
+React 安装(NPM) | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+React 教程 
+
+React 教程 
+
+React JSX 
+
+React 安装(NPM) 
+
+在开始之前，确保你已经安装了 Node.js 和 npm，你可以通过以下命令检查它们是否已经安装： 
+
+node -v
+npm -v 
+
+如果你的系统还不支持 Node.js 及 NPM 可以参考我们的 Node.js 教程 。 
+
+我们建议在 React 中使用 CommonJS 模块系统，比如 browserify 或 webpack，本教程使用 webpack。 
+
+国内使用 npm 速度很慢，你可以使用淘宝定制的 cnpm (gzip 压缩支持) 命令行工具代替默认的 npm: 
+
+$ npm install -g cnpm --registry=https://registry.npmmirror.com
+$ npm config set registry https://registry.npmmirror.com 
+
+这样就可以使用 cnpm 命令来安装模块了： 
+
+$ cnpm install [name] 
+
+更多信息可以查阅： http://npm.taobao.org/ 。 
+
+使用 create-react-app 快速构建 React 开发环境 
+
+React 提供了一个官方工具 Create React App，用于快速搭建 React 项目。 
+
+create-react-app 是来自于 Facebook，通过该命令我们无需配置就能快速构建 React 开发环境。 
+
+create-react-app 自动创建的项目是基于 Webpack + ES6 。 
+
+执行以下命令创建项目： 
+
+$ cnpm install -g create-react-app
+$ create-react-app my-app
+$ cd my-app/
+$ npm start 
+
+也可以使用 npx 命令来创建，npx 是 npm 5.2.0 及更高版本中包含的一个工具，用于执行本地或远程的 npm 包： 
+
+npx create-react-app my-app 
+
+在浏览器中打开 http://localhost:3000/ ，结果如下图所示： 
+
+项目的目录结构如下： 
+
+my-first-react-app/
+├── node_modules/
+├── public/
+│ ├── favicon.ico
+│ ├── index.html
+│ ├── logo192.png
+│ ├── logo512.png
+│ ├── manifest.json
+│ └── robots.txt
+├── src/
+│ ├── App.css
+│ ├── App.js
+│ ├── App.test.js
+│ ├── index.css
+│ ├── index.js
+│ ├── logo.svg
+│ ├── reportWebVitals.js
+│ └── setupTests.js
+├── .gitignore
+├── package.json
+├── README.md
+└── yarn.lock (或 package-lock.json) 
+
+目录和文件说明 
+
+node_modules/ 
+
+存放所有项目的依赖包。这个目录由 npm 或 yarn 自动生成，包含了项目运行所需的所有第三方库和模块。 
+
+public/ 
+
+存放静态文件，Webpack 不会对这个目录中的文件进行处理。 public 目录下的文件会被直接复制到构建目录。 
+
+favicon.ico ：浏览器标签页上的小图标。 
+
+index.html ：HTML 模板文件，React 组件将被挂载到这个文件中的 div 元素中。 
+
+logo192.png 和 logo512.png ：不同尺寸的 React logo 图标。 
+
+manifest.json ：Web 应用清单文件，用于定义应用的名称、图标等元数据。 
+
+robots.txt ：用于告诉搜索引擎哪些页面可以被抓取。 
+
+src/ 
+
+存放应用的源代码。这里是你主要进行开发的地方。 
+
+App.css ： App 组件的样式文件。 
+
+App.js ：主组件文件，定义了一个基础的 React 组件。 
+
+App.test.js ： App 组件的测试文件。 
+
+index.css ：全局样式文件。 
+
+index.js ：应用的入口文件，负责渲染 React 组件到 DOM 中。 
+
+logo.svg ：React logo 的 SVG 文件。 
+
+reportWebVitals.js ：用于性能监测的文件，可以帮助你了解和分析应用的性能。 
+
+setupTests.js ：用于设置测试环境的文件。 
+
+.gitignore 
+
+列出 Git 应该忽略的文件和目录，例如 node_modules/ 和构建输出的目录。 
+
+package.json 
+
+项目的配置文件，包含项目信息、脚本、依赖项等。 
+
+README.md 
+
+项目的自述文件，包含项目的基本信息和使用说明。 
+
+yarn.lock 或 package-lock.json 
+
+锁定文件，记录了确切的依赖版本，确保在不同环境中安装的依赖一致。 
+
+尝试修改 src/App.js 文件代码： 
+
+src/App.js 
+
+import React , { Component } from ' react ' ; import logo from ' ./logo.svg ' ; import ' ./App.css ' ; class App extends Component { render ( ) { return ( < div className = " App " >
+ < div className = " App-header " >
+ < img src = { logo } className = " App-logo " alt = " logo " />
+ < h2 >欢迎来到菜鸟教程</ h2 >
+ </ div >
+ < p className = " App-intro " >
+ 你可以在 < code > src / App . js </ code > 文件中修改。
+ </ p >
+ </ div > ) ; } } export default App ; 
+
+修改后，打开 http://localhost:3000/ （一般自动刷新），输出结果如下： 
+
+src/index.js 是一个入口文件，我们可以尝试直接修改 src/index.js 文件代码： 
+
+注意： React 18 中，ReactDOM.render 被废弃。 
+
+实例 
+
+import React from 'react' ; 
+
+import ReactDOM from 'react-dom' ; 
+
+function Hello ( props ) { 
+
+return < h1 > Hello { props. name } !</ h1 >; 
+
+} 
+
+const root = ReactDOM. createRoot ( document. getElementById ( "root" ) ) ; 
+
+// 渲染 Hello 组件，并传递 name 属性 
+
+root. render ( < Hello name = "World" /> ) ; 
+
+这时候浏览器打开 http://localhost:3000/ 就会输出： 
+
+Hello World! 
+
+创建第一个组件 
+
+你可以编辑 App.js 文件，创建自己的第一个组件。下面是一个简单的示例，将 App 组件修改为显示 "Hello, React!"： 
+
+实例 
+
+import React from 'react' ; 
+
+import './App.css' ; 
+
+function App ( ) { 
+
+return ( 
+
+< div className = "App" > 
+
+< header className = "App-header" > 
+
+< h1 > Hello , React !</ h1 > 
+
+</ header > 
+
+</ div > 
+
+) ; 
+
+} 
+
+export default App ; 
+
+保存文件后，浏览器会自动刷新，你应该会看到页面上显示 "Hello, React!"。 
+
+你可以在 src 目录中创建更多的组件文件，例如创建一个 Hello.js 文件： 
+
+Hello.js 文件代码： 
+
+import React from 'react' ; 
+
+function Hello ( ) { 
+
+return < h1 > Hello from a new component !</ h1 >; 
+
+} 
+
+export default Hello ; 
+
+然后在 App.js 中导入并使用这个新组件： 
+
+实例 
+
+import React from 'react'; 
+
+import './App.css'; 
+
+import Hello from './Hello'; 
+
+function App() { 
+
+return ( 
+
+< div className = "App" > 
+
+< header className = "App-header" > 
+
+<Hello / > 
+
+< / header > 
+
+< / div > 
+
+); 
+
+} 
+
+export default App; 
+
+保存文件后，浏览器会自动刷新，你会看到新组件的内容。 
+
+AI 思考中... 
+
+React 教程 
+
+React JSX

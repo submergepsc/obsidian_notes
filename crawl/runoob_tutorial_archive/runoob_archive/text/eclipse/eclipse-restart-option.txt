@@ -1,0 +1,28 @@
+URL: https://www.runoob.com/eclipse/eclipse-restart-option.html
+Title: Eclipse 重启选项 | 菜鸟教程
+
+Eclipse 重启选项 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Eclipse 教程 
+
+Eclipse 快捷键 
+
+Eclipse 内置浏览器 
+
+Eclipse 重启选项 
+
+重启 Eclipse 
+
+重启选项允许用户重启 Eclipse。 
+
+我们可以通过点击 File 菜单选择 Restart 菜单项来重启 Eclipse。 
+
+在安装插件后，用户一般都会被提醒要重启 Eclipse。如果用户当时没有重启 Eclipse，可以通过该选项来重启。 
+
+AI 思考中... 
+
+Eclipse 快捷键 
+
+Eclipse 内置浏览器

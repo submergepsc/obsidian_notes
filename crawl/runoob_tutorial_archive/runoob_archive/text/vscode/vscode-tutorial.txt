@@ -1,0 +1,72 @@
+URL: https://www.runoob.com/vscode/vscode-tutorial.html
+Title: VSCode 教程 | 菜鸟教程
+
+VSCode 教程 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VSCode 教程 
+
+VSCode 简介 
+
+VSCode 教程 
+
+VS Code（全称 Visual Studio Code）是一款由微软推出的免费、开源、跨平台的代码编辑器。 
+
+VS Code 支持 Windows、macOS 和 Linux，拥有强大的功能和灵活的扩展性。 
+
+VS Code 首次发布时间为 2015 年 4 月 29 日。 
+
+在 2019 年的 Stack Overflow 组织的开发者调查中，Visual Studio Code 被认为是最受开发者欢迎的开发环境。 
+
+许可证 
+
+VS Code 的源代码在 GitHub 上以 MIT 许可证发布，这意味着源代码是开源的，用户可以自由使用、复制、修改和分发源代码，只要遵循 MIT 许可证的条款。 
+
+VS Code 产品本身使用的是微软的软件许可证条款。这些条款规定了用户可以如何安装和使用 VS Code，包括用于开发和测试应用程序、在内部企业网络中部署、演示应用程序等。 
+
+发行版 
+
+2015 年 4 月 29 日，在 Build 2015 大会上公布开发计划并发布预览版本。 
+
+2015 年 11 月 18 日，开源并在 GitHub 上宣布支持扩展功能。 
+
+2016 年 4 月 14 日，发布正式版。 
+
+... 
+
+2024 年 11 月，版本号 1.96，可以免费使用 GitHub Copilot。 
+
+... 
+
+功能特点 
+
+多语言支持：默认支持 JS/TS/CSS/HTML，可安装扩展支持 Python、C/C++、Java、Go 等 
+
+核心编辑功能：语法高亮、括号补全、代码折叠、代码片段、IntelliSense 
+
+调试能力：内置 Node.js 调试器 
+
+跨平台：基于 Electron，Windows/macOS/Linux 体验一致 
+
+工作区：可同时打开多个目录，保存与复用项目设置 
+
+灵活配置：可切换文件编码、换行符、语言模式，适配不同环境 
+
+相关链接 
+
+VS Code 下载地址： https://code.visualstudio.com/ 
+
+VS Code 开源地址： https://github.com/microsoft/vscode 
+
+VS Code 扩展： https://marketplace.visualstudio.com/vscode 
+
+另外国内阿里与字节也有基于 VS Code 开发的 IDE： 
+
+阿里 Qoder： https://qoder.com/ 
+
+字节 Trae： https://www.trae.com.cn/ 
+
+AI 思考中... 
+
+VSCode 简介

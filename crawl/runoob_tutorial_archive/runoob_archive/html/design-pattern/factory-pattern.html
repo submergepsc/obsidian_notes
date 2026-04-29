@@ -1,0 +1,2294 @@
+<!DOCTYPE html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工厂模式 | 菜鸟教程</title>
+<script>
+window.RUNOOB_CONFIG = {
+  darkCssUrl: "https://www.runoob.com/wp-content/themes/runoob/dark-mode.css?v=1.125"
+};
+
+(function () {
+  var t = localStorage.getItem('runoob-theme') || 'light';
+
+  document.documentElement.setAttribute('data-theme', t);
+
+  if (t === 'dark') {
+    loadDarkCss();
+  }
+
+  function loadDarkCss() {
+    if (document.getElementById('dark-theme-css')) return;
+
+    var link = document.createElement('link');
+    link.id = 'dark-theme-css';
+    link.rel = 'stylesheet';
+    link.href = window.RUNOOB_CONFIG.darkCssUrl;
+
+    document.head.appendChild(link);
+  }
+})();
+</script>
+
+  
+
+  <!-- 图标 -->
+  <link rel="shortcut icon" href="https://static.char123.com/images/favicon.ico">
+  <link rel="apple-touch-icon" href="https://static.char123.com/images/icon/mobile-icon.png">
+  <meta name="apple-mobile-web-app-title" content="菜鸟教程">
+
+  <!-- 样式 -->
+  <link rel="stylesheet" href="https://www.runoob.com/wp-content/themes/runoob/style.css?v=1.125" media="all">
+  <link rel="stylesheet" href="https://static.jyshare.com/assets/font-awesome-4.7.0/css/font-awesome.min.css" media="all">
+
+  <!-- jQuery（IE 条件注释已无意义，现代浏览器直接加载） -->
+  <script src="https://static.char123.com/assets/libs/jquery.min.js"></script>
+
+  <!-- WordPress head 钩子，必须紧贴 </head> 前 -->
+  <meta name="robots" content="max-image-preview:large" />
+<style id="wp-img-auto-sizes-contain-inline-css" type="text/css">
+img:is([sizes=auto i],[sizes^="auto," i]){contain-intrinsic-size:3000px 1500px}
+/*# sourceURL=wp-img-auto-sizes-contain-inline-css */
+</style>
+<link rel="canonical" href="factory-pattern.html" />
+<meta name="keywords" content="工厂模式">
+<meta name="description" content="工厂模式  工厂模式（Factory Pattern）是 Java 中最常用的设计模式之一，它提供了一种创建对象的方式，使得创建对象的过程与使用对象的过程分离。   工厂模式提供了一种创建对象的方式，而无需指定要创建的具体类。 通过使用工厂模式，可以将对象的创建逻辑封装在一个工厂类中，而不是在客户端代码中直接实例化对象，这样可以提高代码的可维护性和可扩展性。 工厂模式的类型 1、简单工厂模式（Simple Factory Pattern..">
+</head>
+<body>
+
+<!-- 头部 -->
+<div class="container logo-search">
+
+  <div class="col search row-search-mobile">
+    <form action="../index/index.html">
+      <input class="placeholder" placeholder="搜索……" name="s" autocomplete="off">
+    </form>
+  </div>
+
+  <div class="row">
+    <div class="col logo">
+      <h1><a href="../index/index.html">菜鸟教程 -- 学的不仅是技术，更是梦想！</a></h1>
+    </div>
+
+        <div class="col right-list">
+      <button class="btn btn-responsive-nav btn-inverse" id="pull">
+        <i class="fa fa-navicon"></i>
+      </button>
+    </div>
+    
+    <div class="col search search-desktop last">
+      <div class="search-input">
+        <form action="../index/index.html" target="_blank">
+          <input class="placeholder" id="s" name="s" placeholder="搜索……" autocomplete="off" style="height:44px;">
+        </form>
+      </div>
+    </div>
+  </div>
+
+</div><!-- 导航栏 -->
+<style>
+/* 主题切换按钮 */
+/* ===== 主题变量（核心）===== */
+:root {
+  --theme-bg: #ffffff;
+  --theme-border: #e5e7eb;
+  --theme-icon: #333;
+  --theme-hover: #f3f4f6;
+}
+
+.dark {
+  --theme-bg: #1f2937;
+  --theme-border: #374151;
+  --theme-icon: #e5e7eb;
+  --theme-hover: #374151;
+}
+
+/* ===== 按钮容器 ===== */
+.nav-theme-toggle {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* ===== 按钮本体 ===== */
+.nav-theme-toggle button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 6px;
+  border: 1px solid var(--theme-border);
+
+  background: var(--theme-bg);
+  color: var(--theme-icon);
+
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+/* ===== 图标大小 ===== */
+.nav-theme-toggle i {
+  font-size: 14px;
+}
+
+/* ===== hover 效果 ===== */
+.nav-theme-toggle button:hover {
+  background: var(--theme-hover);
+  transform: translateY(-1px);
+}
+
+/* ===== 点击反馈 ===== */
+.nav-theme-toggle button:active {
+  transform: scale(0.95);
+}
+
+/* ===== 当前激活态（可选）===== */
+.nav-theme-toggle button.active {
+  border-color: #3b82f6;
+  color: #3b82f6;
+}
+</style>
+<!-- 导航栏 -->
+<nav class="container navigation" aria-label="主导航">
+  <div class="row">
+    <div class="col nav">
+
+      <!-- PC 导航 -->
+      <ul class="pc-nav" id="runoob-detail-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../js/js-tutorial.html">JavaScript</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="javascript:void(0);" data-id="vue">Vue</a></li>
+        <li><a href="../react/react-tutorial.html">React</a></li>
+        <li><a href="../python3/python3-tutorial.html">Python3</a></li>
+        <li><a href="../java/java-tutorial.html">Java</a></li>
+        <li><a href="../cprogramming/c-tutorial.html">C</a></li>
+        <li><a href="../cplusplus/cpp-tutorial.html">C++</a></li>
+        <li><a href="../csharp/csharp-tutorial.html">C#</a></li>
+        <li><a href="javascript:void(0);" data-id="aiNav">AI</a></li>
+        <li><a href="../go/go-tutorial.html">Go</a></li>
+        <li><a href="../sql/sql-tutorial.html">SQL</a></li>
+        <li><a href="../linux/linux-tutorial.html">Linux</a></li>
+        <li><a href="../vscode/vscode-tutorial.html">VS Code</a></li>
+        <li><a href="javascript:void(0);" data-id="bootstrap">Bootstrap</a></li>
+        <li><a href="../git/git-tutorial.html">Git</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+
+        <!-- 主题切换按钮，固定在最右侧 -->
+        <li class="nav-theme-toggle">
+          <button id="moon" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+      <!-- 移动端导航 -->
+      <ul class="mobile-nav">
+        <li><a href="../index/index.html">首页</a></li>
+        <li><a href="../html/html-tutorial.html">HTML</a></li>
+        <li><a href="../css/css-tutorial.html">CSS</a></li>
+        <li><a href="../js/js-tutorial.html">JS</a></li>
+        <li><a href="../browser-history/index.html">本地书签</a></li>
+        <li><a href="javascript:void(0)" class="search-reveal">搜索</a></li>
+
+        <!-- 移动端主题切换 -->
+        <li class="nav-theme-toggle">
+          <button id="moon-mobile" title="切换暗色模式" aria-label="切换暗色模式" style="display:none">
+            <i class="fa fa-moon-o"></i>
+          </button>
+          <button id="sun-mobile" title="切换亮色模式" aria-label="切换亮色模式" style="display:none">
+            <i class="fa fa-sun-o"></i>
+          </button>
+        </li>
+      </ul>
+
+    </div>
+  </div>
+</nav>
+
+<!-- 二级导航 -->
+<div class="container sub-navigation sub-navigation-articles" style="display:none">
+  <div class="row">
+    <div class="col nav-sub">
+
+      <ul id="vue">
+        <li class="cat-item"><a href="../vue3/vue3-tutorial.html">Vue3 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../vue/vue-tutorial.html">Vue2 教程 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="bootstrap">
+        <li class="cat-item"><a href="../bootstrap/bootstrap-tutorial.html">Bootstrap3 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+      <ul id="aiNav">
+        <li class="cat-item"><a href="../ml/ml-tutorial.html">机器学习 <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../pytorch/pytorch-tutorial.html">PyTorch <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../tensorflow/tensorflow-tutorial.html">TensorFlow <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../sklearn/sklearn-tutorial.html">Sklearn <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../nlp/nlp-tutorial.html">NLP <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ai-agent/ai-agent-tutorial.html">AI Agent <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+        <li class="cat-item"><a href="../ollama/ollama-tutorial.html">Ollama <i class="fa fa-external-link" aria-hidden="true"></i></a></li>
+      </ul>
+
+    </div>
+  </div>
+</div><!--  内容  -->
+<div class="container main">
+	<!-- 中间 -->
+	<div class="row">
+	
+<div class="runoob-col-md2">
+<div class="left-column">
+	<div class="tab" style="overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">
+	<i class="fa fa-list" aria-hidden="true"></i> 
+	<span>设计模式</span>
+
+	</div>
+	<div class="sidebar-box gallery-list">
+		<div class="design" id="leftcolumn">
+						<a target="_top" data-p="par" title="设计模式" href="design-pattern-tutorial.html">
+			设计模式			</a>
+						<a target="_top" data-p="par" title="设计模式简介" href="design-pattern-intro.html">
+			设计模式简介			</a>
+						<a target="_top" data-p="par" title="工厂模式" href="factory-pattern.html">
+			工厂模式			</a>
+						<a target="_top" data-p="par" title="抽象工厂模式" href="abstract-factory-pattern.html">
+			抽象工厂模式			</a>
+						<a target="_top" data-p="par" title="单例模式" href="singleton-pattern.html">
+			单例模式			</a>
+						<a target="_top" data-p="par" title="建造者模式" href="builder-pattern.html">
+			建造者模式			</a>
+						<a target="_top" data-p="par" title="原型模式" href="prototype-pattern.html">
+			原型模式			</a>
+						<a target="_top" data-p="par" title="适配器模式" href="adapter-pattern.html">
+			适配器模式			</a>
+						<a target="_top" data-p="par" title="桥接模式" href="bridge-pattern.html">
+			桥接模式			</a>
+						<a target="_top" data-p="par" title="过滤器模式" href="filter-pattern.html">
+			过滤器模式			</a>
+						<a target="_top" data-p="par" title="组合模式" href="composite-pattern.html">
+			组合模式			</a>
+						<a target="_top" data-p="par" title="装饰器模式" href="decorator-pattern.html">
+			装饰器模式			</a>
+						<a target="_top" data-p="par" title="外观模式" href="facade-pattern.html">
+			外观模式			</a>
+						<a target="_top" data-p="par" title="享元模式" href="flyweight-pattern.html">
+			享元模式			</a>
+						<a target="_top" data-p="par" title="代理模式" href="proxy-pattern.html">
+			代理模式			</a>
+						<a target="_top" data-p="par" title="责任链模式" href="chain-of-responsibility-pattern.html">
+			责任链模式			</a>
+						<a target="_top" data-p="par" title="命令模式" href="command-pattern.html">
+			命令模式			</a>
+						<a target="_top" data-p="par" title="解释器模式" href="interpreter-pattern.html">
+			解释器模式			</a>
+						<a target="_top" data-p="par" title="迭代器模式" href="iterator-pattern.html">
+			迭代器模式			</a>
+						<a target="_top" data-p="par" title="中介者模式" href="mediator-pattern.html">
+			中介者模式			</a>
+						<a target="_top" data-p="par" title="备忘录模式" href="memento-pattern.html">
+			备忘录模式			</a>
+						<a target="_top" data-p="par" title="观察者模式" href="observer-pattern.html">
+			观察者模式			</a>
+						<a target="_top" data-p="par" title="状态模式" href="state-pattern.html">
+			状态模式			</a>
+						<a target="_top" data-p="par" title="空对象模式" href="null-object-pattern.html">
+			空对象模式			</a>
+						<a target="_top" data-p="par" title="策略模式" href="strategy-pattern.html">
+			策略模式			</a>
+						<a target="_top" data-p="par" title="模板模式" href="template-pattern.html">
+			模板模式			</a>
+						<a target="_top" data-p="par" title="访问者模式" href="visitor-pattern.html">
+			访问者模式			</a>
+						<a target="_top" data-p="par" title="MVC 模式" href="mvc-pattern.html">
+			MVC 模式			</a>
+						<a target="_top" data-p="par" title="业务代表模式" href="business-delegate-pattern.html">
+			业务代表模式			</a>
+						<a target="_top" data-p="par" title="组合实体模式" href="composite-entity-pattern.html">
+			组合实体模式			</a>
+						<a target="_top" data-p="par" title="数据访问对象模式" href="data-access-object-pattern.html">
+			数据访问对象模式			</a>
+						<a target="_top" data-p="par" title="前端控制器模式" href="front-controller-pattern.html">
+			前端控制器模式			</a>
+						<a target="_top" data-p="par" title="拦截过滤器模式" href="intercepting-filter-pattern.html">
+			拦截过滤器模式			</a>
+						<a target="_top" data-p="par" title="服务定位器模式" href="service-locator-pattern.html">
+			服务定位器模式			</a>
+						<a target="_top" data-p="par" title="传输对象模式" href="transfer-object-pattern.html">
+			传输对象模式			</a>
+			<br><h2 class="left">设计模式<span class="left_h2">其他</span></h2>			<a target="_top" data-p="par" title="设计模式资源" href="design-pattern-resources.html">
+			设计模式资源			</a>
+				
+		</div>
+	</div>	
+</div>
+</div>	<div class="col middle-column">
+		
+	
+	<div class="article">
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="design-pattern-intro.html" rel="prev"> 设计模式简介</a> </div>
+			<div class="next-design-link"><a href="abstract-factory-pattern.html" rel="next"> 抽象工厂模式</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+<div class="article-heading-ad" style="display: block;">
+
+<style>
+  /* 隐藏移动端广告 */
+  @media (max-width: 768px) {
+    .adsbygoogle {
+      display: none !important;
+    }
+  }
+  
+</style>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 728*90 固定 -->
+<ins class="adsbygoogle" style="display:inline-block;width:728px;height:90px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="2147566827"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+		<div class="article-body">
+		
+			<div class="article-intro" id="content">
+			
+			<h1>工厂模式</h1>
+
+<p>工厂模式（Factory Pattern）是 Java 中最常用的设计模式之一，它提供了一种创建对象的方式，使得创建对象的过程与使用对象的过程分离。</p>
+
+<p>
+工厂模式提供了一种创建对象的方式，而无需指定要创建的具体类。</p><p>
+通过使用工厂模式，可以将对象的创建逻辑封装在一个工厂类中，而不是在客户端代码中直接实例化对象，这样可以提高代码的可维护性和可扩展性。</p>
+<h3>工厂模式的类型</h3>
+<p><strong>1、简单工厂模式（Simple Factory Pattern）</strong>：</p><ul><li>简单工厂模式不是一个正式的设计模式，但它是工厂模式的基础。它使用一个单独的工厂类来创建不同的对象，根据传入的参数决定创建哪种类型的对象。</li></ul>
+<p><strong>2、工厂方法模式（Factory Method Pattern）</strong>：</p><ul><li>工厂方法模式定义了一个创建对象的接口，但由子类决定实例化哪个类。工厂方法将对象的创建延迟到子类。</li></ul>
+<p><strong>3、抽象工厂模式（Abstract Factory Pattern）</strong>：</p><ul><li>抽象工厂模式提供一个创建一系列相关或互相依赖对象的接口，而无需指定它们具体的类。</li></ul>
+<hr><h2>概要</h2><h3>
+意图</h3><p>定义一个创建对象的接口，让其子类决定实例化哪一个具体的类。工厂模式使对象的创建过程延迟到子类。</p><h3>主要解决</h3><p>接口选择的问题。</p><h3>何时使用</h3><p>当我们需要在不同条件下创建不同实例时。</p><h3>如何解决</h3><p>通过让子类实现工厂接口，返回一个抽象的产品。</p><h3>关键代码</h3><p>对象的创建过程在子类中实现。</p><h3>应用实例</h3><ol><li><strong>汽车制造</strong>：你需要一辆汽车，只需从工厂提货，而不需要关心汽车的制造过程及其内部实现。</li><li><strong>Hibernate</strong>：更换数据库时，只需更改方言（Dialect）和数据库驱动（Driver），即可实现对不同数据库的切换。</li></ol><h3>优点</h3><ol><li>调用者只需要知道对象的名称即可创建对象。</li><li>扩展性高，如果需要增加新产品，只需扩展一个工厂类即可。</li><li>屏蔽了产品的具体实现，调用者只关心产品的接口。</li></ol><h3>缺点</h3><p>每次增加一个产品时，都需要增加一个具体类和对应的工厂，使系统中类的数量成倍增加，增加了系统的复杂度和具体类的依赖。</p><h3>使用场景</h3><ol><li><strong>日志记录</strong>：日志可能记录到本地硬盘、系统事件、远程服务器等，用户可以选择记录日志的位置。</li><li><strong>数据库访问</strong>：当用户不知道最终系统使用哪种数据库，或者数据库可能变化时。</li><li><strong>连接服务器的框架设计</strong>：需要支持 "POP3"、"IMAP"、"HTTP" 三种协议，可以将这三种协议作为产品类，共同实现一个接口。</li></ol><h3>注意事项</h3><p>工厂模式适用于生成复杂对象的场景。如果对象较为简单，通过 new 即可完成创建，则不必使用工厂模式。使用工厂模式会引入一个工厂类，增加系统复杂度。</p>
+
+<h3>结构</h3>
+<p>工厂模式包含以下几个主要角色：</p>
+
+<ul><li>抽象产品（Abstract Product）：定义了产品的共同接口或抽象类。它可以是具体产品类的父类或接口，规定了产品对象的共同方法。</li><li>具体产品（Concrete Product）：实现了抽象产品接口，定义了具体产品的特定行为和属性。</li><li>抽象工厂（Abstract Factory）：声明了创建产品的抽象方法，可以是接口或抽象类。它可以有多个方法用于创建不同类型的产品。</li><li>具体工厂（Concrete Factory）：实现了抽象工厂接口，负责实际创建具体产品的对象。</li></ul>
+<h2 class="tutheader">实现</h2>
+<p>我们将创建一个 <i>Shape</i> 接口和实现 <i>Shape</i> 接口的实体类。下一步是定义工厂类 <i>ShapeFactory</i>。</p>
+<p><i>FactoryPatternDemo</i> 类使用 <i>ShapeFactory</i> 来获取 <i>Shape</i> 对象。它将向 <i>ShapeFactory</i> 传递信息（<i>CIRCLE / RECTANGLE / SQUARE</i>），以便获取它所需对象的类型。</p>
+<p><img decoding="async" src="https://www.runoob.com/wp-content/uploads/2014/08/AB6B814A-0B09-4863-93D6-1E22D6B07FF8.jpg" alt="工厂模式的 UML 图" /></p>
+<h3>步骤 1</h3>
+<p>创建一个接口:</p>
+
+<div class="example"> 
+<h2 class="example">Shape.java</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">interface</span><span class="hl-code"> </span><span class="hl-identifier">Shape</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+   </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">draw</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+</span><span class="hl-brackets">}</span></div>
+</div></div>
+<h3>步骤 2</h3>
+<p>创建实现接口的实体类。</p>
+
+<div class="example"> 
+<h2 class="example">Rectangle.java</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">Rectangle</span><span class="hl-code"> </span><span class="hl-reserved">implements</span><span class="hl-code"> </span><span class="hl-identifier">Shape</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+ 
+   @</span><span class="hl-identifier">Override</span><span class="hl-code">
+   </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">draw</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">Inside Rectangle::draw() method.</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;
+   </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div></div>
+
+<div class="example"> 
+<h2 class="example">Square.java</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">Square</span><span class="hl-code"> </span><span class="hl-reserved">implements</span><span class="hl-code"> </span><span class="hl-identifier">Shape</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+ 
+   @</span><span class="hl-identifier">Override</span><span class="hl-code">
+   </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">draw</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">Inside Square::draw() method.</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;
+   </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div></div>
+
+<div class="example"> 
+<h2 class="example">Circle.java</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">Circle</span><span class="hl-code"> </span><span class="hl-reserved">implements</span><span class="hl-code"> </span><span class="hl-identifier">Shape</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+ 
+   @</span><span class="hl-identifier">Override</span><span class="hl-code">
+   </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">draw</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-identifier">System</span><span class="hl-code">.</span><span class="hl-identifier">out</span><span class="hl-code">.</span><span class="hl-identifier">println</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">Inside Circle::draw() method.</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;
+   </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div></div>
+<h3>步骤 3</h3>
+<p>创建一个工厂，生成基于给定信息的实体类的对象。</p>
+
+<div class="example"> 
+<h2 class="example">ShapeFactory.java</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">ShapeFactory</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+    
+   </span><span class="hl-comment">//</span><span class="hl-comment">使用 getShape 方法获取形状类型的对象</span><span class="hl-comment"></span><span class="hl-code">
+   </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-identifier">Shape</span><span class="hl-code"> </span><span class="hl-identifier">getShape</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-code"> </span><span class="hl-identifier">shapeType</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-reserved">if</span><span class="hl-brackets">(</span><span class="hl-identifier">shapeType</span><span class="hl-code"> == </span><span class="hl-reserved">null</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+         </span><span class="hl-reserved">return</span><span class="hl-code"> </span><span class="hl-reserved">null</span><span class="hl-code">;
+      </span><span class="hl-brackets">}</span><span class="hl-code">        
+      </span><span class="hl-reserved">if</span><span class="hl-brackets">(</span><span class="hl-identifier">shapeType</span><span class="hl-code">.</span><span class="hl-identifier">equalsIgnoreCase</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">CIRCLE</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+         </span><span class="hl-reserved">return</span><span class="hl-code"> </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">Circle</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+      </span><span class="hl-brackets">}</span><span class="hl-code"> </span><span class="hl-reserved">else</span><span class="hl-code"> </span><span class="hl-reserved">if</span><span class="hl-brackets">(</span><span class="hl-identifier">shapeType</span><span class="hl-code">.</span><span class="hl-identifier">equalsIgnoreCase</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">RECTANGLE</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+         </span><span class="hl-reserved">return</span><span class="hl-code"> </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">Rectangle</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+      </span><span class="hl-brackets">}</span><span class="hl-code"> </span><span class="hl-reserved">else</span><span class="hl-code"> </span><span class="hl-reserved">if</span><span class="hl-brackets">(</span><span class="hl-identifier">shapeType</span><span class="hl-code">.</span><span class="hl-identifier">equalsIgnoreCase</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">SQUARE</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-brackets">)</span><span class="hl-brackets">{</span><span class="hl-code">
+         </span><span class="hl-reserved">return</span><span class="hl-code"> </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">Square</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+      </span><span class="hl-brackets">}</span><span class="hl-code">
+      </span><span class="hl-reserved">return</span><span class="hl-code"> </span><span class="hl-reserved">null</span><span class="hl-code">;
+   </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div></div>
+<h3>步骤 4</h3>
+<p>使用该工厂，通过传递类型信息来获取实体类的对象。</p>
+
+<div class="example"> 
+<h2 class="example">FactoryPatternDemo.java</h2> 
+<div class="example_code">
+<div class="hl-main"><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-reserved">class</span><span class="hl-code"> </span><span class="hl-identifier">FactoryPatternDemo</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+ 
+   </span><span class="hl-reserved">public</span><span class="hl-code"> </span><span class="hl-types">static</span><span class="hl-code"> </span><span class="hl-types">void</span><span class="hl-code"> </span><span class="hl-identifier">main</span><span class="hl-brackets">(</span><span class="hl-identifier">String</span><span class="hl-brackets">[</span><span class="hl-brackets">]</span><span class="hl-code"> </span><span class="hl-identifier">args</span><span class="hl-brackets">)</span><span class="hl-code"> </span><span class="hl-brackets">{</span><span class="hl-code">
+      </span><span class="hl-identifier">ShapeFactory</span><span class="hl-code"> </span><span class="hl-identifier">shapeFactory</span><span class="hl-code"> = </span><span class="hl-reserved">new</span><span class="hl-code"> </span><span class="hl-identifier">ShapeFactory</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+      </span><span class="hl-comment">//</span><span class="hl-comment">获取 Circle 的对象，并调用它的 draw 方法</span><span class="hl-comment"></span><span class="hl-code">
+      </span><span class="hl-identifier">Shape</span><span class="hl-code"> </span><span class="hl-identifier">shape1</span><span class="hl-code"> = </span><span class="hl-identifier">shapeFactory</span><span class="hl-code">.</span><span class="hl-identifier">getShape</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">CIRCLE</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+      </span><span class="hl-comment">//</span><span class="hl-comment">调用 Circle 的 draw 方法</span><span class="hl-comment"></span><span class="hl-code">
+      </span><span class="hl-identifier">shape1</span><span class="hl-code">.</span><span class="hl-identifier">draw</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+      </span><span class="hl-comment">//</span><span class="hl-comment">获取 Rectangle 的对象，并调用它的 draw 方法</span><span class="hl-comment"></span><span class="hl-code">
+      </span><span class="hl-identifier">Shape</span><span class="hl-code"> </span><span class="hl-identifier">shape2</span><span class="hl-code"> = </span><span class="hl-identifier">shapeFactory</span><span class="hl-code">.</span><span class="hl-identifier">getShape</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">RECTANGLE</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+      </span><span class="hl-comment">//</span><span class="hl-comment">调用 Rectangle 的 draw 方法</span><span class="hl-comment"></span><span class="hl-code">
+      </span><span class="hl-identifier">shape2</span><span class="hl-code">.</span><span class="hl-identifier">draw</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+      </span><span class="hl-comment">//</span><span class="hl-comment">获取 Square 的对象，并调用它的 draw 方法</span><span class="hl-comment"></span><span class="hl-code">
+      </span><span class="hl-identifier">Shape</span><span class="hl-code"> </span><span class="hl-identifier">shape3</span><span class="hl-code"> = </span><span class="hl-identifier">shapeFactory</span><span class="hl-code">.</span><span class="hl-identifier">getShape</span><span class="hl-brackets">(</span><span class="hl-quotes">&quot;</span><span class="hl-string">SQUARE</span><span class="hl-quotes">&quot;</span><span class="hl-brackets">)</span><span class="hl-code">;
+ 
+      </span><span class="hl-comment">//</span><span class="hl-comment">调用 Square 的 draw 方法</span><span class="hl-comment"></span><span class="hl-code">
+      </span><span class="hl-identifier">shape3</span><span class="hl-code">.</span><span class="hl-identifier">draw</span><span class="hl-brackets">(</span><span class="hl-brackets">)</span><span class="hl-code">;
+   </span><span class="hl-brackets">}</span><span class="hl-code">
+</span><span class="hl-brackets">}</span></div>
+</div></div>
+<h3>步骤 5</h3>
+<p>执行程序，输出结果：</p>
+<pre>
+Inside Circle::draw() method.
+Inside Rectangle::draw() method.
+Inside Square::draw() method.
+</pre>
+
+
+<h3>其他相关文章</h3>
+
+
+<blockquote><ul><li>
+<p><a href="//www.runoob.com/w3cnote/factory-pattern.html" rel="noopener noreferrer" target="_blank">设计模式 – 工厂模式</a></p>
+</li></ul></blockquote>
+
+			<!-- 其他扩展 -->
+						
+			</div>
+			
+		</div>
+
+
+<div class="archive-list" style="display:none;font-size: 14px;line-height: 1.8;margin-top: 20px;padding: 10px;">
+<div class="archive-list-item">
+    <div class="post-intro" style="width: 100%;" id="ai-info">
+	  AI 思考中...
+    </div>
+</div>
+</div>
+		
+		<div class="previous-next-links">
+			<div class="previous-design-link"><i style="font-size:16px;" class="fa fa-arrow-left" aria-hidden="true"></i> <a href="design-pattern-intro.html" rel="prev"> 设计模式简介</a> </div>
+			<div class="next-design-link"><a href="abstract-factory-pattern.html" rel="next"> 抽象工厂模式</a> <i style="font-size:16px;" class="fa fa-arrow-right" aria-hidden="true"></i></div>
+		</div>
+
+
+		
+		<div class="sidebar-box ">
+				
+
+<style>	
+.responsive_ad1 { display:none; }
+@media(min-width: 800px) { .responsive_ad1 {  display:block;margin:0 auto;} }
+</style>
+<div id="ad-336280" class="responsive_ad1">
+<!-- 336*280 固定 -->		
+
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-5751451760833794" crossorigin="anonymous"></script>
+<!-- 移动版 自动调整 -->
+<ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-5751451760833794" data-ad-slot="1691338467" data-ad-format="auto" data-full-width-responsive="true"></ins>
+<script>
+     (adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		</div>
+				</div>
+		<!-- 笔记列表 -->
+		<style>
+.wrapper {
+  /*text-transform: uppercase; */
+  background: #ececec;
+  color: #555;
+  cursor: pointer;
+  font-family: "Gill Sans", Impact, sans-serif;
+  font-size: 20px;
+  position: relative;
+  text-align: center;
+  width: 200px;
+  -webkit-transform: translateZ(0); /* webkit flicker fix */
+  -webkit-font-smoothing: antialiased; /* webkit text rendering fix */
+}
+
+.wrapper .tooltip {
+  white-space: nowrap;
+  font-size: 14px;
+  text-align: left;
+  background: #96b97d;
+  bottom: 100%;
+  color: #fff;
+  display: block;
+  left: -25px;
+  margin-bottom: 15px;
+  opacity: 0;
+  padding: 14px;
+  pointer-events: none;
+  position: absolute;
+  
+  -webkit-transform: translateY(10px);
+     -moz-transform: translateY(10px);
+      -ms-transform: translateY(10px);
+       -o-transform: translateY(10px);
+          transform: translateY(10px);
+  -webkit-transition: all .25s ease-out;
+     -moz-transition: all .25s ease-out;
+      -ms-transition: all .25s ease-out;
+       -o-transition: all .25s ease-out;
+          transition: all .25s ease-out;
+  -webkit-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+     -moz-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+      -ms-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+       -o-box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+          box-shadow: 2px 2px 6px rgba(0, 0, 0, 0.28);
+}
+.tooltip a {
+	color:#fff;
+}
+/* This bridges the gap so you can mouse into the tooltip without it disappearing */
+.wrapper .tooltip:before {
+  bottom: -20px;
+  content: " ";
+  display: block;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  width: 100%;
+}  
+
+/* CSS Triangles - see Trevor's post */
+.wrapper .tooltip:after {
+  border-left: solid transparent 10px;
+  border-right: solid transparent 10px;
+  border-top: solid #96b97d 10px;
+  bottom: -10px;
+  content: " ";
+  height: 0;
+  left: 20%;
+  margin-left: -13px;
+  position: absolute;
+  width: 0;
+}
+.wrapper .tooltip1 {
+	margin-left: 50px;
+	padding-top: 0px;
+}
+/*
+.wrapper:hover .tooltip {
+  opacity: 1;
+  pointer-events: auto;
+  -webkit-transform: translateY(0px);
+     -moz-transform: translateY(0px);
+      -ms-transform: translateY(0px);
+       -o-transform: translateY(0px);
+          transform: translateY(0px);
+}
+*/
+/* IE can just show/hide with no transition */
+.lte8 .wrapper .tooltip {
+  display: none;
+}
+
+.lte8 .wrapper:hover .tooltip {
+  display: block;
+}
+
+</style>
+
+<link rel="stylesheet" href="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.css">
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.vanilla.js"></script>
+<script src="https://static.char123.com/assets/upvotejs/dist/upvotejs/upvotejs.jquery.js"></script>
+<div class="title" id="comments">
+	<h2 class="">
+    <div class="altblock">
+				<i style="font-size:28px;margin-top: 8px;" class="fa fa-plus-square" aria-hidden="true"></i>
+		    </div>
+    <span class="mw-headline" id="qa_headline">24  篇笔记</span>
+	<span class="mw-headline" id="user_add_note" style="float:right;line-height: 62px;padding-right: 14px;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i>  写笔记</span>
+    </h2>
+</div>
+
+<div id="postcomments" style="display:none;">
+	<ol class="commentlist">
+		<li class="comment even thread-even depth-1" id="comment-16603"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;冷锋SJ记忆</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;son***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="4a2f15323f2b240a7b787c64292527">[email&#160;protected]</a></p></div><div id="runoobvote-id-16603" data-commid="16603" class="upvotejs"><a class="upvote"></a> <span class="count">152</span></div></div><div class="comt-main" id="div-comment-16603"><p>使用反射机制可以解决每次增加一个产品时，都需要增加一个对象实现工厂的缺点</p>
+
+<pre>public class ShapeFactory {
+    public static Object getClass(Class&lt;?extends Shape&gt; clazz) {
+        Object obj = null;
+
+        try {
+            obj = Class.forName(clazz.getName()).newInstance();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return obj;
+    }
+}</pre>
+
+<p>使用的使用采用强制转换</p>
+
+<pre>Rectangle rect = (Rectangle) ShapeFactory.getClass(Rectangle.class);
+rect.draw();
+Square square = (Square) ShapeFactory.getClass(Square.class);
+square.draw();</pre>
+<p>这样就只需要一个对象实现工厂</p><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">冷锋SJ记忆</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;冷锋SJ记忆</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;son***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="d3b68caba6b2bd93e2e1e5fdb0bcbe">[email&#160;protected]</a></p></div></span>9年前 (2017-08-20)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-23624"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;tongyu</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;tyy***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="36040e7645595e431855595b">[email&#160;protected]</a></p></div><div id="runoobvote-id-23624" data-commid="23624" class="upvotejs"><a class="upvote"></a> <span class="count">101</span></div></div><div class="comt-main" id="div-comment-23624"><pre>public class ShapeFactory {
+    public static &lt;T&gt; T getClass(Class&lt;? extends T&gt; clazz) {
+        T obj = null;
+
+        try {
+            obj = (T) Class.forName(clazz.getName()).newInstance();
+        } catch (ClassNotFoundException e) {
+            e.printStackTrace();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        }
+
+        return obj;
+    }
+}</pre>
+<p>省略类型强制转换，支持多态</p>
+
+<pre>Rectangle rect = ShapeFactory.getClass(Rectangle.class);
+rect.draw();
+
+Shape square = ShapeFactory.getClass(Square.class);
+square.draw();</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">tongyu</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;tongyu</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;tyy***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="71434931021e19045f121e1c">[email&#160;protected]</a></p></div></span>8年前 (2018-01-29)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-25312"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;dugw</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;630***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="ad959b9feddcdc83cec2c0">[email&#160;protected]</a></p></div><div id="runoobvote-id-25312" data-commid="25312" class="upvotejs"><a class="upvote"></a> <span class="count">37</span></div></div><div class="comt-main" id="div-comment-25312"><p>在上面的基础上进一步扩展，针对多个接口实现一个公共的工厂类：</p>
+
+<pre>public class ObjectFactory {
+    public &lt;T&gt; Object getObject(Class&lt;T&gt; clazz) {
+       if (clazz == null ) {
+           return null;
+    }    
+        Object obj  = null;
+        try {
+            obj = Class.forName(clazz.getName()).newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return obj;
+    }
+}</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">dugw</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;dugw</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;630***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="132b25215362623d707c7e">[email&#160;protected]</a></p></div></span>8年前 (2018-03-21)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-25634"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;佐手</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;476***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="5e6b66681e2f2f703d3133">[email&#160;protected]</a></p></div><div id="runoobvote-id-25634" data-commid="25634" class="upvotejs"><a class="upvote"></a> <span class="count">32</span></div></div><div class="comt-main" id="div-comment-25634"><p>在jdk9中直接使用泛型的newInstance方法已经过时。重写的getClass()方法如下：</p>
+<pre>public &lt;T&gt; T getClass(Class&lt;? extends T&gt; clazz) {
+    T obj = null;
+    try {
+        obj = clazz.getDeclaredConstructor().newInstance();
+    } 
+        catch (ReflectiveOperationException e) {
+        e.printStackTrace();  
+    }
+    return obj;
+}</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">佐手</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;佐手</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;476***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="cffaf7f98fbebee1aca0a2">[email&#160;protected]</a></p></div></span>8年前 (2018-03-28)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-25866"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="e3d2d0d2d3d0d0d4d0dbd1a39292cd808c8e">[email&#160;protected]</a></p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;131***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="01363239334170702f626e6c">[email&#160;protected]</a></p></div><div id="runoobvote-id-25866" data-commid="25866" class="upvotejs"><a class="upvote"></a> <span class="count">28</span></div></div><div class="comt-main" id="div-comment-25866"><pre>public class ShapeFactory {
+    
+   //使用 getShape 方法获取形状类型的对象
+   public Shape getShape(String shapeType){
+      if(shapeType == null){
+         return null;
+      }        
+      if(shapeType.equalsIgnoreCase("CIRCLE")){
+         return new Circle();
+      } else if(shapeType.equalsIgnoreCase("RECTANGLE")){
+         return new Rectangle();
+      } else if(shapeType.equalsIgnoreCase("SQUARE")){
+         return new Square();
+      }
+      return null;
+   }
+}</pre>
+<p>创建的这个工厂，这个创建函数，没能看出有什么特别的，还特别繁琐，如果IShape类太多，那么if else语句也将增加太多，不好维护，与其这样写，还不如改成如下：</p>
+
+<pre>public class ShapeFactory {
+    
+   //使用 getShape 方法获取形状类型的对象
+  public Shape getShape(Class&lt;?&gt; clazz){
+        try {
+            return (IShape) clazz.getConstructor().newInstance();
+        } catch (InstantiationException e) {
+            e.printStackTrace();
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
+        } catch (IllegalArgumentException e) {
+            e.printStackTrace();
+        } catch (InvocationTargetException e) {
+            e.printStackTrace();
+        } catch (NoSuchMethodException e) {
+            e.printStackTrace();
+        } catch (SecurityException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+}</pre>
+<p>这样写在创建时也不用知道具体的类别，易于管理维护。</p><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;"><span class="__cf_email__" data-cfemail="e2d3d1d3d2d1d1d5d1dad0a29393cc818d8f">[email&#160;protected]</span></a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="6253515352515155515a502213134c010d0f">[email&#160;protected]</a></p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;131***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="f7c0c4cfc5b78686d994989a">[email&#160;protected]</a></p></div></span>8年前 (2018-04-03)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-28475"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;kusirp21</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;hoo***@hotmail.com</p></div><div id="runoobvote-id-28475" data-commid="28475" class="upvotejs"><a class="upvote"></a> <span class="count">791</span></div></div><div class="comt-main" id="div-comment-28475"><p>楼上几位真心会开玩笑！</p><p>其实使用反射是一种不错的办法，但反射也是从类名反射而不能从类反射！</p><p>先看一下工厂模式是用来干什么的——属于创建模式，解决子类创建问题的。换句话来说，调用者并不知道运行时真正的类名，只知道从“Circle"可以创建出一个shape接口的类，至于类的名称是否叫'Circle"，调用者并不知情。所以真正的对工厂进行扩展的方式（防止程序员调用出错）可以考虑使用一个枚举类（防止传入参数时，把circle拼写错误）。</p><p></p><p>如果调用者参肯定类型是Circle的话，那么其工厂没有存在的意义了！</p><p>比如 IShape shape = new Circle();这样不是更好？也就是说调用者有了Circle这个知识是可以直接调用的，根据DP（迪米特法则）其实调用者并不知道有一个Circle类的存在，他只需要知道这个IShape接口可以计算圆面积，而不需要知道；圆这个类到底是什么类名——他只知道给定一个”circle"字符串的参数,IShape接口可以自动计算圆的面积就可以了！</p><p></p><p>其实在.net类库中存在这个模式的的一个典型的。但他引入的另一个概念“可插入编程协议”。</p><p>那个就是WebRequest req = WebRequest.Create("<a href="http://ccc......" rel="nofollow">http://ccc......</a>");可以自动创建一个HttpWebRequest的对象，当然，如果你给定的是一个ftp地址，他会自动创建一个FtpWebRequest对象。工厂模式中着重介绍的是这种通过某个特定的参数，让你一个接口去干对应不同的事而已！而不是调用者知道了类！</p><p></p><p>比如如果圆的那个类名叫"CircleShape“呢？不管是反射还是泛型都干扰了你们具体类的生成！其实这个要说明的问题就是这个，调用者（clinet)只知道IShape的存在，在创建时给IShape一个参数"Circle",它可以计算圆的面积之类的工作，但是为什么会执行这些工作，根据迪米特法则，client是不用知道的。</p><p></p><p>我想问一下那些写笔记的哥们，如果你们知道了泛型，那么为什么不直接使用呢？干吗还需要经过工厂这个类呢？不觉得多余了吗？</p><p></p><p>如果，我只是说如果，如果所有从IShape继承的类都是Internal类型的呢？而client肯定不会与IShape一个空间！这时，你会了现你根本无法拿到这个类名！</p><p></p><p>Create时使用注册机制是一种简单的办法，比如使用一个枚举类，把功能总结到一处。而反射也是一种最简单的办法，调用者输入的名称恰是类名称或某种规则时使用，比如调用者输入的是Circle，而类恰是CircleShape，那么可以通过输入+”Shape"字符串形成新的类名，然后从字符串将运行类反射出来！</p><p></p><p>工厂的创建行为，就这些作用，还被你们用反射或泛型转嫁给了调用者（clinet)，那么，这种情况下，要工厂类何用？！</p><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">kusirp21</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;kusirp21</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;hoo***@hotmail.com</p></div></span>8年前 (2018-06-17)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-28986"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;罗</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;107***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="6e565f5b5d2e1f1f400d0103">[email&#160;protected]</a></p><p><i class="fa fa-external-link" aria-hidden="true"></i> <a rel="nofollow" target="_blank" href="https://blog.csdn.net/m0_37924754/article/details/80859213">&nbsp;&nbsp;参考地址</a></p></div><div id="runoobvote-id-28986" data-commid="28986" class="upvotejs"><a class="upvote"></a> <span class="count">32</span></div></div><div class="comt-main" id="div-comment-28986"><p>使用枚举优化</p>
+
+<pre>public enum Factory {
+    CIRCLE(new Circle(),"CIRCLE"),
+    RECTANGLE(new Rectangle(),"RECTANGLE"),
+    SQUARE(new Square(),"SQUARE");
+    
+    // 成员变量  
+    private Shape shape;  
+    private String name;  
+    
+    // 普通方法  
+    public static Shape getShape(String name) {  
+        for (Factory c : Factory.values()) {  
+            if (c.name == name) {  
+                return c.shape;  
+            }  
+        }  
+        return null;  
+    } 
+    // 构造方法  
+    private Factory(Shape shape, String name) {  
+        this.shape = shape;  
+        this.name = name;  
+    } 
+    public String getName() {
+        return name;
+    }
+    public Shape getShape() {
+        return shape;
+    }
+
+
+    public void setShape(Shape shape) {
+        this.shape = shape;
+    }
+
+
+    public void setName(String name) {
+        this.name = name;
+    } 
+    
+}
+
+
+/*使用枚举类*/
+Factory.getShape("CIRCLE").draw();
+Factory.getShape("RECTANGLE").draw();
+Factory.getShape("SQUARE").draw();</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">罗</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;罗</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;107***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="81b9b0b4b2c1f0f0afe2eeec">[email&#160;protected]</a></p><p><i class="fa fa-external-link" aria-hidden="true"></i> <a rel="nofollow" target="_blank" href="https://blog.csdn.net/m0_37924754/article/details/80859213">&nbsp;&nbsp;参考地址</a></p></div></span>8年前 (2018-07-02)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-29310"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;往生在世</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;493***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="8fb6bbbdcffefea1ece0e2">[email&#160;protected]</a></p></div><div id="runoobvote-id-29310" data-commid="29310" class="upvotejs"><a class="upvote"></a> <span class="count">25</span></div></div><div class="comt-main" id="div-comment-29310"><p>使用类名增加耦合性，那就需要使用常量或者枚举类解耦合。</p>
+
+<pre>// 接口 增加常量或枚举
+public interface Shape {
+    static String SHAPE_YUAN = Yuan.class.getName();
+    static String SHAPE_FANG = Fang.class.getName();
+    static String SHAPE_CHANG = Chang.class.getName();
+    void draw();
+}
+
+// 工厂方法
+public class Factory {
+    public static Shape getShape2(String type) {
+    try {
+        return (Shape) Class.forName(type).getDeclaredConstructor().newInstance();
+    } catch (InstantiationException e) {
+        e.printStackTrace();
+    } catch (IllegalAccessException e) {
+        e.printStackTrace();
+    } catch (IllegalArgumentException e) {
+        e.printStackTrace();
+    } catch (InvocationTargetException e) {
+        e.printStackTrace();
+    } catch (NoSuchMethodException e) {
+        e.printStackTrace();
+    } catch (SecurityException e) {
+        e.printStackTrace();
+    } catch (ClassNotFoundException e) {
+        e.printStackTrace();
+    }
+        return null;
+    }
+}
+
+// 调用
+
+Shape s21 = Factory.getShape2(Shape.SHAPE_CHANG);
+s21.draw();
+
+Shape s22 = Factory.getShape2(Shape.SHAPE_FANG);
+s22.draw();
+
+Shape s23 = Factory.getShape2(Shape.SHAPE_YUAN);
+s23.draw();</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">往生在世</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;往生在世</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;493***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="2f161b1d6f5e5e014c4042">[email&#160;protected]</a></p></div></span>8年前 (2018-07-09)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-30226"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;牟春平</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;muc***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="f98990979eb99e94989095d79a9694">[email&#160;protected]</a></p></div><div id="runoobvote-id-30226" data-commid="30226" class="upvotejs"><a class="upvote"></a> <span class="count">28</span></div></div><div class="comt-main" id="div-comment-30226"><p><a href="#div-comment-28475" rel="nofollow"><span class="marked">@kusirp21</span></a> 讲得很好，使用枚举类优化。</p>
+
+<p><strong>增加枚举类</strong></p>
+
+<pre>public enum ShapeType{
+    CIRCLE,
+    RECTANGLE,
+    SQUARE
+}</pre>
+<p>修改工厂类的工厂方法，个人建议工厂方法应该是静态方法或者采用单例模式：</p>
+
+<pre>public class ShapeFactory{
+    public static Shape getShape(ShapeType type){
+        switch(type){
+            case CIRCLE:
+                return new Circle();
+            case RECTANGLE:
+                return new Rectangle();
+            case SQUARE:
+                return new Square();
+            default:
+                throw new UnknownTypeException();
+        }
+    }
+}</pre>
+<p>上面用到的类和接口与课程中的一样。</p>
+
+<p>最后是使用示例：</p>
+
+<pre>public class FactoryPatternDemo {
+    public static void main(String[] args) {
+        //获取 Circle 的对象，并调用它的 draw 方法
+        Shape shape1 = ShapeFactory.getShape(ShapeType.CIRCLE);
+
+        //调用 Circle 的 draw 方法
+        shape1.draw();
+
+        //获取 Rectangle 的对象，并调用它的 draw 方法
+        Shape shape2 = ShapeFactory.getShape(ShapeType.RECTANGLE);
+
+        //调用 Rectangle 的 draw 方法
+        shape2.draw();
+
+        //获取 Square 的对象，并调用它的 draw 方法
+        Shape shape3 = ShapeFactory.getShape(ShapeType.SQUARE);
+
+        //调用 Square 的 draw 方法
+        shape3.draw();
+    }
+}</pre>
+<div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">牟春平</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;牟春平</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;muc***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="0a7a63646d4a6d676b636624696567">[email&#160;protected]</a></p></div></span>8年前 (2018-07-26)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-36089"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;msyms</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;934***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="bd888e8cfdcccc93ded2d0">[email&#160;protected]</a></p><p><i class="fa fa-external-link" aria-hidden="true"></i> <a rel="nofollow" target="_blank" href="https://blog.csdn.net/xdrt81y/article/details/81100527">&nbsp;&nbsp;参考地址</a></p></div><div id="runoobvote-id-36089" data-commid="36089" class="upvotejs"><a class="upvote"></a> <span class="count">104</span></div></div><div class="comt-main" id="div-comment-36089"><p><strong>一、一句话概括工厂模式</strong></p>
+<ul><li>
+<strong>简单工厂</strong>：一个工厂类，一个产品抽象类。</li><li>
+<strong>工厂方法</strong>：多个工厂类，一个产品抽象类。</li><li>
+<strong>抽象工厂</strong>：多个工厂类，多个产品抽象类。</li></ul>
+
+<p><strong>二、生活中的工厂模式</strong></p>
+<ul><li>
+简单工厂类：一个麦当劳店，可以生产多种汉堡。</li><li>
+工厂方法类：一个麦当劳店，可以生产多种汉堡。一个肯德基店，也可以生产多种汉堡。</li><li>
+抽象工厂类：百胜餐饮集团下有肯德基和百事公司，肯德基生产汉堡，百事公司生成百事可乐。
+</li></ul><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">msyms</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;msyms</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;934***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="edd8dedcad9c9cc38e8280">[email&#160;protected]</a></p><p><i class="fa fa-external-link" aria-hidden="true"></i> <a rel="nofollow" target="_blank" href="https://blog.csdn.net/xdrt81y/article/details/81100527">&nbsp;&nbsp;参考地址</a></p></div></span>8年前 (2018-10-20)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-36110"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;李金晨</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;231***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="c6fef1f0f586b7b7e8a5a9ab">[email&#160;protected]</a></p></div><div id="runoobvote-id-36110" data-commid="36110" class="upvotejs"><a class="upvote"></a> <span class="count">18</span></div></div><div class="comt-main" id="div-comment-36110"><p>工厂模式实例：</p>
+
+<pre>
+package 工厂设计模式;
+
+public class Factory_pattern {
+    public static void main(String[] args) {
+        Factory facortoy = new Factory();
+        Person zgr = facortoy.getInstance("zgr");
+        zgr.eat();
+    }
+}
+
+//人类都具有吃方法
+interface  Person{
+    public void eat();
+}
+
+//中国人
+class zgr implements Person{
+
+    @Override
+        public void eat() {
+        System.out.println("中国人吃饭用筷子");
+    }
+}
+
+//印度人
+class ydr implements Person{
+
+    @Override
+    public void eat() {
+        System.out.println("印度人用手吃饭");
+    }
+}
+
+//美国人
+class mgr implements Person{
+
+    @Override
+    public void eat() {
+        System.out.println("美国人用刀和叉子吃饭");
+    }
+}
+
+interface Instance{
+    public Person getInstance(String str);
+}
+
+class Factory implements Instance{
+    @Override
+    public Person getInstance(String str) {
+        if(str.equals("zgr")) {
+            return new zgr();
+        }else if(str.equals("ydr")) {
+            return new ydr();
+        }else if(str.equals("mgr")) {
+            return new mgr();
+        }else {
+            return null;
+        }
+    }
+}
+</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">李金晨</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;李金晨</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;231***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="08303f3e3b487979266b6765">[email&#160;protected]</a></p></div></span>8年前 (2018-10-21)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-36950"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Robbie</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;g00***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="754545354447435b161a18">[email&#160;protected]</a></p></div><div id="runoobvote-id-36950" data-commid="36950" class="upvotejs"><a class="upvote"></a> <span class="count">10</span></div></div><div class="comt-main" id="div-comment-36950"><p>根据上面 <a href="#div-comment-28475" rel="nofollow"><span class="marked">@kusirp21</span></a> 枚举的思路实现的工厂模式:
+</p>
+<pre>public enum ShapeType {
+    CIRCLE(new Circle()), RECTANGLE(new Rectangle()), SQUARE(new Square());
+    private Shape shape;
+    private ShapeType(Shape shape) {
+        this.shape = shape;
+    }
+
+    public Shape getShape() {
+        return shape;
+    }
+}
+
+public class Test {
+    public static void main(String[] args) {
+        ShapeType.CIRCLE.getShape().draw();
+    }
+}</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">Robbie</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Robbie</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;g00***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="477777077675716924282a">[email&#160;protected]</a></p></div></span>8年前 (2018-11-14)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-38265"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;阿燃</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;357***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="1e2c2f2f5e6f6f307d7173">[email&#160;protected]</a></p></div><div id="runoobvote-id-38265" data-commid="38265" class="upvotejs"><a class="upvote"></a> <span class="count">7</span></div></div><div class="comt-main" id="div-comment-38265"><p>接口定义实现类的规范，通过反射工厂类进行生产，完整的一个过程就是。</p>
+
+<p><strong>接口类：</strong></p>
+
+<pre>public interface Shape {
+   void draw();
+}</pre>
+<p><strong>实现类：</strong></p>
+
+<pre>public class Rectangle implements Shape{
+   @Override   public void draw() {
+      System.out.println("Rectangle");  
+   }
+}
+
+public class Square implements Shape{
+   @Override   public void draw() {
+      System.out.println("Square");  
+   }
+}</pre>
+<p><strong>工厂类:</strong></p>
+
+<pre>public class ShapeFactory{
+   public static Shape getClass(Class&lt;?extends Shape&gt; clazz) {
+       Shape o = null;     
+        try {
+          o = (Shape) Class.forName(clazz.getName()).newInstance();       
+        } catch (InstantiationException e) {
+          e.printStackTrace();       
+        } catch (IllegalAccessException e) {
+          e.printStackTrace();       
+        } catch (ClassNotFoundException e) {
+          e.printStackTrace();       
+        }
+       return o;    
+     }
+  }
+}</pre>
+<p><strong>给定条件产出：</strong></p>
+
+<pre>public class FactoryModeImpl {
+   public static void main(String[] args) {
+      Shape shape = ShapeFactory.getClass(Square.class);      
+      shape.draw();  
+   }
+}</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">阿燃</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;阿燃</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;357***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="c3f1f2f283b2b2eda0acae">[email&#160;protected]</a></p></div></span>7年前 (2018-12-22)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-45574"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;杨轻帆</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;294***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="8cb8b8bdbeccfdfda2efe3e1">[email&#160;protected]</a></p></div><div id="runoobvote-id-45574" data-commid="45574" class="upvotejs"><a class="upvote"></a> <span class="count">5</span></div></div><div class="comt-main" id="div-comment-45574"><p>在工厂模式中，我们在创建对象时不会对客户端暴露创建逻辑，并且是通过使用一个共同的接口来指向新创建的对象。</p>
+
+<p>此练习中我写的工厂是通过一个方法（买狗）来调用相应对象创建语句去创建不同的（狗）对象；用子对象中的重写方法验证父对象被赋值后调用的方法是属于谁的。</p>
+<p>具体的解释在代码中已经标明:</p>
+
+
+<pre>import java.util.Scanner;
+//多态
+public class Test2 {
+    public static void main(String[] args) {
+        Factory no1=new Factory();//创建工厂对象
+        no1.maigou();//调用工厂的方法（买狗）
+    }
+}
+class Factory{
+    public void maigou(){
+        Dog1 dog=new Dog1();
+        System.out.println("要买什么狗？");
+        Scanner sc=new Scanner(System.in);
+        String str=sc.nextLine();
+        switch(str){
+            default:
+                System.out.println("没有这玩意儿");
+                break;
+            case "金毛" :
+                dog=new Jinmao();
+                dog.show(); 
+                break;//将子类赋值给父类并调用重写后的方法
+            case "二哈" :
+                dog=new Erha();
+                dog.show();//将子类赋值给父类并调用重写后的方法
+        }
+    }
+}
+class Dog1{    //这里因为Dog类在其他包里建过了，为了避免冲突，取名Dog1
+    public void show(){
+        System.out.println("这是一只狗");
+    }
+}
+class Erha extends Dog1{
+    public void show(){
+        System.out.println("这是一只二哈");//通过重写函数show验证dog对象调用的方法是谁的
+    }
+}
+class Jinmao extends Dog1{
+    public void show(){
+        System.out.println("这是一只金毛");//通过重写函数show验证dog对象调用的方法是谁的
+    }
+}</pre>
+<div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">杨轻帆</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;杨轻帆</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;294***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="facececbc8ba8b8bd4999597">[email&#160;protected]</a></p></div></span>7年前 (2019-08-08)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-46087"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;BertYY</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;zge***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="4829260820273c25292124662b2725">[email&#160;protected]</a></p></div><div id="runoobvote-id-46087" data-commid="46087" class="upvotejs"><a class="upvote"></a> <span class="count">7</span></div></div><div class="comt-main" id="div-comment-46087"><p data-title="Python 工厂模式实例代码">python 代码实现示例：</p>
+
+<pre>class Shape(object):
+    def draw(self):
+        pass
+    
+class RectangleImplementsShape(Shape):
+    def __init__(self):
+        print("this relalize Interface")
+    def draw(self):
+        print("Inside Rectangle::draw() method.")
+        
+class SquareImplementsShape(Shape):
+    def __init__(self):
+        print("this relalize Interface")
+    def draw(self):
+        print("Inside Square::draw() method.")
+        
+        
+class CircleImplementsShape(Shape):
+    def __init__(self):
+        print("this relalize Interface")
+    def draw(self):
+        print("Inside Circle::draw() method.")
+        
+class ShapeFactory(object):
+    def __init__(self):
+        print("ShapeFactory init")
+    def getShape(self,method):
+        if method.lower() == 'rectangle':
+            return RectangleImplementsShape()
+        if method.lower() == 'square':
+            return SquareImplementsShape()
+        if method.lower() == 'circle':
+            return CircleImplementsShape()
+
+            
+        
+shapeFactory = ShapeFactory()        
+        
+shap1 = shapeFactory.getShape('Rectangle')
+shap2 = shapeFactory.getShape('Square')
+shap3 = shapeFactory.getShape('Circle')
+
+shap1.draw()
+shap2.draw()
+shap3.draw()</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="/note/46087">BertYY</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;BertYY</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;zge***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="7a1b143a12150e171b131654191517">[email&#160;protected]</a></p></div></span>7年前 (2019-08-24)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-51059"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Siskin.xu</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;sis***@sohu.com</p></div><div id="runoobvote-id-51059" data-commid="51059" class="upvotejs"><a class="upvote"></a> <span class="count">6</span></div></div><div class="comt-main" id="div-comment-51059"><p>Python 方式：</p>
+
+<pre># Python原生默认不支持接口，默认多继承，所有的方法都必须不能实现
+from abc import  abstractmethod,ABCMeta
+# 声明一个抽象接口
+class Shape(metaclass=ABCMeta):
+    @abstractmethod
+    def draw(self):
+        pass
+
+# 三个形状继承实现 Shape 接口
+class Rectangle(Shape):
+    def draw(self):
+        print("Inside Ractangle.draw method")
+
+class Square(Shape):
+    def draw(self):
+        print("Inside Square.draw method")
+
+class Circle(Shape):
+    def draw(self):
+        print("Inside Circle.draw method")
+
+# 创建一个工厂
+class ShapeFactory():
+    def getShape(self,shapeType):
+        if shapeType == None :
+            return None
+        elif shapeType.upper() == "CIRCLE":
+            return Circle()
+        elif shapeType.upper() == "RECTANGLE":
+            return Rectangle()
+        elif shapeType.upper() == "SQUARE":
+            return Square()
+        return None
+
+# 输出
+if __name__ == '__main__':
+    shapeFactory = ShapeFactory()
+    shape1 = shapeFactory.getShape("CIRCLE")
+    shape1.draw()
+    shape2 = shapeFactory.getShape("RECTANGLE")
+    shape2.draw()
+    shape3 = shapeFactory.getShape("SQUARE")
+    shape3.draw()</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">Siskin.xu</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;Siskin.xu</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;sis***@sohu.com</p></div></span>6年前 (2020-02-28)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-53585"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;清露凝尘</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;575***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="a69e9495e6d7d788c5c9cb">[email&#160;protected]</a></p></div><div id="runoobvote-id-53585" data-commid="53585" class="upvotejs"><a class="upvote"></a> <span class="count">22</span></div></div><div class="comt-main" id="div-comment-53585"><p>看了大家的笔记，差点误入歧途，感谢 <span class="marked"><a href="#comment-28475" rel="nofollow ugc"> @kusirp21</a></span> 的当头棒喝。取长补短，将工厂方法中的判断，提取到枚举中， 工厂方法使用反射创建对象。</p>
+
+<p>以下是代码：</p>
+
+<pre>public interface Shape {    void draw();}
+public class Circle implements Shape {
+    @Override    public void draw() {
+        System.out.println("圆形");
+    }
+}
+public class Rectangle implements Shape {
+    @Override    public void draw() {
+        System.out.println("矩形");
+    }
+}
+public class Square implements Shape {
+    @Override    public void draw() {
+        System.out.println("正方形");
+    }
+}
+public enum ShapeTypeEnum {
+    CIRCLE("com.example.factorymethods.Circle"),
+    SQUARE("com.example.factorymethods.Square"),
+    RECTANGLE("com.example.factorymethods.Rectangle");
+    private String className;
+    ShapeTypeEnum(String className) {
+        this.className = className;
+    }
+    public String getClassName() {
+        return className;
+    }
+}
+public class ShapeFactory {
+    private ShapeFactory(){}
+    /**     
+     * 
+     * 创建不同的图形实例     
+     * @param shapeTypeEnum     
+     * @return     
+     */
+    public static Shape createShape(ShapeTypeEnum shapeTypeEnum){
+        Shape shape = null;
+        String className = shapeTypeEnum.getClassName();
+        try {
+            Class clazz = Class.forName(className);
+            shape = (Shape)clazz.newInstance();
+        } catch (InstantiationException | IllegalAccessException | ClassNotFoundException e) {
+            e.printStackTrace();
+        }
+        return shape;
+    }
+}
+public class FactoryMethodsDemo {
+    public static void main(String[] args) {
+        ShapeFactory.createShape(ShapeTypeEnum.CIRCLE).draw();
+        ShapeFactory.createShape(ShapeTypeEnum.SQUARE).draw();
+        ShapeFactory.createShape(ShapeTypeEnum.RECTANGLE).draw();
+    }
+}</pre>
+
+
+
+
+
+
+
+<div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">清露凝尘</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;清露凝尘</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;575***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="29111b1a695858074a4644">[email&#160;protected]</a></p></div></span>6年前 (2020-05-13)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-55472"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;不在窝里</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;yzq***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="f282b2c3c4c1dc919d9f">[email&#160;protected]</a></p></div><div id="runoobvote-id-55472" data-commid="55472" class="upvotejs"><a class="upvote"></a> <span class="count">5</span></div></div><div class="comt-main" id="div-comment-55472"><p><span class="marked"><a href="#comment-53585" rel="nofollow ugc">清露凝尘</a></span>的做法非常好，我借鉴之后，减少了一下代码量，个人觉得效果达到，编码也少，这样挺好。</p>
+
+<p>以下修改了异常抛出结果，简单做了下拼接。</p>
+
+<pre>public interface shape {
+    //绘画接口
+    void draw();
+}    
+
+public class Rectangle implements shape{
+
+    @Override
+    public void draw() {
+        // TODO Auto-generated method stub
+        System.out.println("restangle中的绘画");
+    }
+
+}
+
+public class Square implements shape{
+
+    @Override
+    public void draw() {
+        // TODO Auto-generated method stub
+        System.out.println("Square中的绘画");
+    }
+
+}
+
+
+package com.yzq.pattren.createPattern.factoryPattern;
+public class ShapeFactory {
+    //优化getShape
+    public shape getPlusShape(String shapeType) {
+        // TODO Auto-generated method stub
+        try {
+            //forName返回与给定的字符串名称相关联类或接口的Class对象
+            Class clazz = Class.forName(shapeType);
+            return (com.yzq.pattren.createPattern.factoryPattern.shape) clazz.newInstance();
+        } catch (Exception e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return null;
+    }
+}</pre>
+<p>测试类：</p>
+
+<pre>public class TestCreatePattern {
+    public static void main(String[] args) {
+    //工厂模式
+        ShapeFactory shapeFactory = new ShapeFactory();
+        //配置一个BaseFactory，指定范围查找类名。
+        String BaseFactory = "com.yzq.pattren.createPattern.factoryPattern.";
+        //Square，Rectangle代表用户提交的选择框的信息
+        shapeFactory.getPlusShape(BaseFactory+"Square").draw();
+        shapeFactory.getPlusShape(BaseFactory+"Rectangle").draw();
+        
+    }
+}</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">不在窝里</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;不在窝里</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;yzq***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="c4b484f5f2f7eaa7aba9">[email&#160;protected]</a></p></div></span>6年前 (2020-07-20)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-59888"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;蘑菇力</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;168***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="192e2a2d21596868377a7674">[email&#160;protected]</a></p></div><div id="runoobvote-id-59888" data-commid="59888" class="upvotejs"><a class="upvote"></a> <span class="count">5</span></div></div><div class="comt-main" id="div-comment-59888"><p>反射很方便。</p>
+
+<pre>//示例：
+//创建一个Car服务接口
+interface CarService{  
+  //比如为Car创建一个run()方法
+  void run();
+}
+//创建一个工厂类
+public class CarFactory{
+    public static void main(String []args){
+      try{
+          //创建Properties对象      
+          Properties properties = new Properties();
+          //类加载器读取配置文件
+          InputStream is = CarFactory.class.getClassLoader().getResourceAsStream("car.properties");
+          properties.load(is);
+          is.close();
+          //通过Entry遍历&lt;迭代Entry&gt;
+          for (Entry&lt;Object, Object&gt; entry : properties.entrySet()) {      
+         //动态创建实现类对象,只要在配置文件中的类，都会创建并运行
+         CarService cs = (CarService) Class.forName((String) entry.getValue()).newInstance();
+         //接口回调
+         cs.run();
+       }
+      }catch(Exception e){
+          e.printStackTrace();
+      }
+  }
+}
+
+//创建类实现CarService接口
+class BMW implements CarService{
+    String name = "BMW";
+    public void run(){
+      System.out.println(name+"正在路上飞驰。。。");
+    }
+}
+public class Benz implements CarService {
+    String name = "Benz";
+    public void run(){
+    System.out.println(name+"正在路上飞驰。。。");
+    }
+}
+
+//创建car.properties文件,将实现类的全限定名放在配置文件中
+BMW=com.runoob.car.BMW
+Bean=com.runoob.Benz</pre><p>
+以上这种方法，便于维护，创建对象时，只需要该类实现Service接口，并在配置文件中添加该类的全限定名即可。类似于插件开发。</p><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">蘑菇力</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;蘑菇力</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;168***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="6a5d595e522a1b1b44090507">[email&#160;protected]</a></p></div></span>5年前 (2020-12-26)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-61555"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;fanjinzhao</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;165***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="6553535d532514144b060a08">[email&#160;protected]</a></p></div><div id="runoobvote-id-61555" data-commid="61555" class="upvotejs"><a class="upvote"></a> <span class="count">11</span></div></div><div class="comt-main" id="div-comment-61555"><p>在逻辑代码中应避免出现"魔法值"。</p>
+<p>
+结合之前几位的逻辑，我将反射和枚举类结合一起并完善，写出下面代码：</p>
+
+<pre>public class SimpleFactory {
+   public static void main(String[] args) {
+      Animal dog = factory("Dog");      
+          assert dog != null;      
+          dog.run();      
+          Animal cat = factory("Cat");      
+          assert cat != null;      
+          cat.run();   
+    }
+
+   public static Animal factory(String simpleName){
+      //获取枚举类中对应的全类名      
+      simpleName = AnimalEnum.getName(simpleName);      
+      if(simpleName == null || simpleName.length() &lt;= 0){
+         return null;      
+      }
+      try {
+         return (Animal) Class.forName(simpleName).getConstructor().newInstance();      
+      } catch (Exception e) {
+         e.printStackTrace();      
+      }
+      return null;   
+   }
+}
+//动物接口
+interface Animal{
+    void run();
+}
+//狗实现类
+class Dog implements Animal{
+    public Dog() {}
+    @Override   
+    public void run() {
+      System.out.println("小狗跑");   
+    }
+}
+//猫实现类
+class Cat implements Animal{
+    public Cat() {}
+    @Override   
+    public void run() {
+      System.out.println("小猫跑");   
+    }
+}
+//动物枚举
+enum AnimalEnum{   
+    DOG("Dog",Dog.class.getName()),   
+    CAT("Cat",Cat.class.getName());   
+    private final String simpleName;   
+    private final String name;   
+    AnimalEnum(String simpleName, String name) {      
+      this.simpleName = simpleName;      
+      this.name = name;   
+    }   
+    public String getSimpleName() {      
+      return simpleName;   
+    }   
+    public String getName() {      
+      return name;   }   
+    //获通过动物简易名获取动物全类名   
+    public static String getName(String simpleName){      
+       for( AnimalEnum animalEnum : AnimalEnum.values()){         
+          if(animalEnum.getSimpleName().equalsIgnoreCase(simpleName)){            
+             return animalEnum.getName();         
+          }      
+        }      
+        return null;   
+     }
+}</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">fanjinzhao</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;fanjinzhao</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;165***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="a294949a94e2d3d38cc1cdcf">[email&#160;protected]</a></p></div></span>5年前 (2021-02-22)</div></div></li><!-- #comment-## -->
+<li class="comment even thread-even depth-1" id="comment-62725"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;mm</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;mfx***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="4a7a0a26233c2f642924">[email&#160;protected]</a></p></div><div id="runoobvote-id-62725" data-commid="62725" class="upvotejs"><a class="upvote"></a> <span class="count">4</span></div></div><div class="comt-main" id="div-comment-62725"><p>C++ 的实现方法：</p>
+
+<pre>#include &lt;iostream&gt;
+using std::string;
+using std::cout;
+using std::endl;
+
+class Shape{
+    public:
+        virtual void draw() {
+            cout&lt;&lt;"this is virtual fun,cannot do something."&lt;&lt;endl;
+        };
+        static Shape* getShape(string shapeType);
+};
+class Rectangle : public Shape{
+    public:
+        void draw(){
+            cout&lt;&lt;"Inside Rectangle::draw() method."&lt;&lt;endl;
+        }
+};
+class Square  : public Shape{
+    public:
+        void draw(){
+            cout&lt;&lt;"Inside Square::draw() method."&lt;&lt;endl;
+        }
+};
+class Circle : public Shape{
+    public:
+        void draw(){
+            cout&lt;&lt;"Inside Circle::draw() method."&lt;&lt;endl;
+        }
+};
+Shape* Shape::getShape(string shapeType){   
+      if(shapeType == "CIRCLE"){
+         return new Circle();
+      } else if(shapeType == "RECTANGLE"){
+         return new Rectangle();
+      } else if(shapeType == "SQUARE" ){
+         return new Square();
+      }
+      return new Shape();
+} 
+int main(){
+    Shape* shape1=NULL;
+    shape1 = Shape::getShape("CIRCLE");
+    shape1-&gt;draw();
+    shape1 = Shape::getShape("RECTANGLE");
+    shape1-&gt;draw();
+    shape1 = Shape::getShape("SQUARE");
+    shape1-&gt;draw();
+    return 0;
+}</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">mm</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;mm</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;mfx***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="8bbbcbe7e2fdeea5e8e5">[email&#160;protected]</a></p></div></span>5年前 (2021-04-03)</div></div></li><!-- #comment-## -->
+<li class="comment odd alt thread-odd thread-alt depth-1" id="comment-64233"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;squid233</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;513***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="caf8f8fa8abbbbe4a9a5a7">[email&#160;protected]</a></p></div><div id="runoobvote-id-64233" data-commid="64233" class="upvotejs"><a class="upvote"></a> <span class="count">2</span></div></div><div class="comt-main" id="div-comment-64233"><p>改良版 C++ 方式：</p>
+
+<pre>#include &lt;iostream&gt;
+#include &lt;algorithm&gt;
+
+using namespace std;
+
+class Shape {
+public:
+    virtual void draw() = 0;
+};
+class Rectangle : public Shape {
+public:
+    void draw() {
+        cout &lt;&lt; "Inside Rectangle::draw() method." &lt;&lt; endl;
+    }
+};
+class Square : public Shape {
+public:
+    void draw() {
+        cout &lt;&lt; "Inside Square::draw() method." &lt;&lt; endl;
+    }
+};
+class Circle : public Shape {
+public:
+    void draw() {
+        cout &lt;&lt; "Inside Circle::draw() method." &lt;&lt; endl;
+    }
+};
+class ShapeFactory {
+public:
+    void getShape(string shapeType, Shape** shape) {
+        string type = shapeType;
+        #ifdef __GNUC__
+        transform(type.begin(), type.end(), type.begin(), ::toupper);
+        #else
+        transform(type.begin(), type.end(), type.begin(), toupper);
+        #endif
+        if (type == "CIRCLE") {
+            *shape = new Circle();
+        } else if (type == "RECTANGLE") {
+            *shape = new Rectangle();
+        } else if (type == "SQUARE") {
+            *shape = new Square();
+        }
+    }
+};
+
+int main() {
+    ShapeFactory shapeFactory;
+    //获取 Circle 的对象，并调用它的 draw 方法
+    Shape* shape1;
+    shapeFactory.getShape("CIRCLE", &amp;shape1);
+ 
+    //调用 Circle 的 draw 方法
+    shape1-&gt;draw();
+
+    delete shape1;
+ 
+    //获取 Rectangle 的对象，并调用它的 draw 方法
+    Shape* shape2;
+    shapeFactory.getShape("RECTANGLE", &amp;shape2);
+ 
+    //调用 Rectangle 的 draw 方法
+    shape2-&gt;draw();
+
+    delete shape2;
+ 
+    //获取 Square 的对象，并调用它的 draw 方法
+    Shape* shape3;
+    shapeFactory.getShape("SQUARE", &amp;shape3);
+ 
+    //调用 Square 的 draw 方法
+    shape3-&gt;draw();
+
+    delete shape3;
+}</pre><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">squid233</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;squid233</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;513***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="467474760637376825292b">[email&#160;protected]</a></p></div></span>5年前 (2021-06-05)</div></div></li><!-- #comment-## -->
+<li class="comment byuser comment-author-tianqixin even thread-even depth-1" id="comment-76754"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;MJ123</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;MJ1***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="142224252d242623542526223a777b79">[email&#160;protected]</a></p></div><div id="runoobvote-id-76754" data-commid="76754" class="upvotejs"><a class="upvote"></a> <span class="count">5</span></div></div><div class="comt-main" id="div-comment-76754"><p>C# 入门版：</p>
+
+<pre>namespace FactoryPattern
+{
+    /// &lt;summary&gt;
+    /// 方式1：接口作为父类
+    /// &lt;/summary&gt;
+    public interface ISayHello
+    {
+        void SayHello();
+    }
+    /// &lt;summary&gt;
+    /// 汉语
+    /// &lt;/summary&gt;
+    public class Chinese : ISayHello
+    {
+        private string _name;
+        public Chinese()
+        {
+
+        }
+        public Chinese(string name)
+        {
+            _name = name;
+        }
+        public void SayHello()
+        {
+            Console.WriteLine("大家好，我是 " + _name);
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// 英语
+    /// &lt;/summary&gt;
+    public class American : ISayHello
+    {
+        private string _name;
+        public American()
+        {
+
+        }
+        public American(string name)
+        {
+            _name = name;
+        }
+        public void SayHello()
+        {
+            Console.WriteLine("Hello Everyone, I'm " + this._name);
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// 日语
+    /// &lt;/summary&gt;
+    public class Japanese : ISayHello
+    {
+        public void SayHello()
+        {
+            Console.WriteLine("こんにちは、我是小日子过的不错的日本人");
+        }
+    }
+
+    public enum LanguageType
+    {
+        Chinese,
+        English,
+        Janpanese
+    }
+    /// &lt;summary&gt;
+    /// 工厂类
+    /// &lt;/summary&gt;
+    public class LanguageFactory
+    {
+        public static ISayHello GetLanguage(LanguageType type)
+        {
+            switch (type)
+            {
+                case LanguageType.Chinese:
+                    return new Chinese("小明");
+                case LanguageType.English:
+                    return new American("MJ");
+                case LanguageType.Janpanese:
+                    return new Japanese();
+                default:
+                    return null;
+            }
+        }
+    }
+
+    /// &lt;summary&gt;
+    /// 
+    /// &lt;/summary&gt;
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            LanguageFactory.GetLanguage(LanguageType.Chinese).SayHello();
+            LanguageFactory.GetLanguage(LanguageType.English).SayHello();
+            LanguageFactory.GetLanguage(LanguageType.Janpanese).SayHello();
+            Console.ReadKey();
+        }
+    }
+}</pre>
+<div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">MJ123</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;MJ123</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;MJ1***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="625452535b525055225350544c010d0f">[email&#160;protected]</a></p></div></span>3年前 (2022-12-05)</div></div></li><!-- #comment-## -->
+<li class="comment byuser comment-author-tianqixin odd alt thread-odd thread-alt depth-1" id="comment-79911"><span class="comt-f">#0</span><div class="comt-avatar wrapper"><i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i><div class="tooltip"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;RUNOOB</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;429***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="1c252a2b5c6d6d327f7371">[email&#160;protected]</a></p></div><div id="runoobvote-id-79911" data-commid="79911" class="upvotejs"><a class="upvote"></a> <span class="count">5</span></div></div><div class="comt-main" id="div-comment-79911"><p>
+工厂模式可以帮助我们封装对象的创建逻辑，提供统一的接口来创建不同类型的对象，从而使得客户端代码更加灵活和可维护。同时，工厂模式也支持扩展，可以方便地引入新的产品类型，而无需修改现有的客户端代码。</p>
+<p>工厂模式有多种变体，其中最常见的是简单工厂模式、工厂方法模式和抽象工厂模式。</p>
+<ul><li>简单工厂模式（Simple Factory Pattern）：由一个具体工厂类负责创建所有产品的实例。客户端通过向工厂传递不同的参数来请求创建不同类型的产品。简单工厂模式通常只有一个具体工厂类，适用于创建对象较少且创建逻辑相对简单的情况。</li><li>工厂方法模式（Factory Method Pattern）：定义了一个创建产品的抽象方法，由具体子类工厂来实现创建具体产品的过程。每个具体工厂类负责创建一种具体产品。工厂方法模式可以实现客户端与具体产品的解耦，允许系统在不修改客户端代码的情况下引入新产品。</li><li>抽象工厂模式（Abstract Factory Pattern）：提供了一组相关或相互依赖的产品对象的创建接口。每个具体工厂类负责创建一组具体产品。抽象工厂模式可以用于创建一族产品，而不仅仅是单个产品。</li></ul>
+<p>
+下面是一个简单工厂模式的示例：</p>
+
+<pre>// 抽象产品
+interface Product {
+    void operation();
+}
+
+// 具体产品
+class ConcreteProductA implements Product {
+    public void operation() {
+        System.out.println("ConcreteProductA operation");
+    }
+}
+
+class ConcreteProductB implements Product {
+    public void operation() {
+        System.out.println("ConcreteProductB operation");
+    }
+}
+
+// 简单工厂
+class SimpleFactory {
+    public Product createProduct(String type) {
+        if (type.equals("A")) {
+            return new ConcreteProductA();
+        } else if (type.equals("B")) {
+            return new ConcreteProductB();
+        }
+        return null;
+    }
+}
+
+// 使用示例
+public class Main {
+    public static void main(String[] args) {
+        SimpleFactory factory = new SimpleFactory();
+        Product productA = factory.createProduct("A");
+        productA.operation();  // Output: ConcreteProductA operation
+
+        Product productB = factory.createProduct("B");
+        productB.operation();  // Output: ConcreteProductB operation
+    }
+}</pre>
+
+<p>在上面的示例中，我们定义了抽象产品接口 Product 和具体产品类 ConcreteProductA 和 ConcreteProductB。通过简单工厂类 SimpleFactory 的 createProduct 方法，根据传入的参数类型来创建不同的具体产品实例。</p><div class="comt-meta wrapper"><span class="comt-author"><a target="_blank" href="javascript:;">RUNOOB</a><div class="tooltip tooltip1"><p><i class="fa fa-user" aria-hidden="true"></i>&nbsp;&nbsp;&nbsp;RUNOOB</p><p><i class="fa fa-envelope" aria-hidden="true"></i>&nbsp;&nbsp;429***<a href="../cdn-cgi/l/email-protection/index.html" class="__cf_email__" data-cfemail="f3cac5c4b38282dd909c9e">[email&#160;protected]</a></p></div></span>3年前 (2023-07-11)</div></div></li><!-- #comment-## -->
+	</ol>
+	<div class="pagenav">
+			</div>
+</div>
+<div id="respond" class="no_webshot"> 
+		<div class="comment-signarea" style="display:none; padding: 20px 20px;"> 
+	<h3 class="text-muted" id="share_code" style="color: #799961;"><i class="fa fa-pencil-square-o" aria-hidden="true"></i> 点我分享笔记</h3>
+	<!--
+	<p style="font-size:14px;">笔记需要是本篇文章的内容扩展！</p><br>
+	<p style="font-size:12px;"><a href="//www.runoob.com/tougao" target="_blank">文章投稿，可点击这里</a></p>
+	<p style="font-size:14px;"><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>
+		<h3 class="text-muted"><i class="fa fa-info-circle" aria-hidden="true"></i> 分享笔记前必须<a href="javascript:;" class="runoob-pop">登录</a>！</h3>
+		<p><a href="/w3cnote/runoob-user-test-intro.html#invite" target="_blank">注册邀请码获取方式</a></p>-->
+	</div>
+		
+	<form action="/wp-content/themes/runoob/option/addnote.php" method="post" id="commentform" style="display:none;">
+		<div class="comt">
+			<div class="comt-title">
+				<i style="font-size:36px;" class="fa fa-user-circle" aria-hidden="true"></i>				<p><a id="cancel-comment-reply-link" href="javascript:;">取消</a></p>
+			</div>
+			<div class="comt-box">
+			<div id="mded"></div>
+			
+				<div class="comt-ctrl">
+					<div class="comt-tips"><input type="hidden" name="comment_post_ID" value="8904" id="comment_post_ID" />
+<input type="hidden" name="comment_parent" id="comment_parent" value="0" />
+</div>
+					<button type="submit" name="submit" id="submit" tabindex="5"><i class="fa fa-pencil" aria-hidden="true"></i> 分享笔记</button>
+				</div>
+			</div>
+		
+				
+					<div class="comt-comterinfo"> 
+						<ul id="comment-author-info">
+							<li class="form-inline"><label class="hide" for="author">昵称</label><input class="ipt" type="text" name="author" id="author" value="" tabindex="2" placeholder="昵称"><span class="text-muted">昵称 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="email">邮箱</label><input class="ipt" type="text" name="email" id="email" value="" tabindex="3" placeholder="邮箱"><span class="text-muted">邮箱 (必填)</span></li>
+							<li class="form-inline"><label class="hide" for="url">引用地址</label><input class="ipt" type="text" name="url" id="url" value="" tabindex="4" placeholder="引用地址"><span class="text-muted">引用地址</span></li>
+						</ul>
+					</div>
+				
+			
+		</div>
+
+	</form>
+	</div>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/javascript">
+$(function() {
+	//初始化编辑器
+	
+	var editor = new Simditor({
+	  textarea: $('#mded'),
+	  placeholder: '写笔记...',
+	  upload:false,
+	 // upload: {url:'/api/comment_upload_file.php',params: null,fileKey: 'upload_file',connectionCount: 1,leaveConfirm: '文件正在上传，您确定离开?'},
+	  defaultImage: 'https://www.runoob.com/images/logo.png',
+	  codeLanguages: '',
+	  autosave: 'editor-content',
+	  toolbar: [  'bold','code','ul','ol','image' ]
+	});
+	editor.on('selectionchanged', function() {
+		$(".code-popover").hide();
+	});
+
+	// 提交数据
+	$("#share_code").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		
+	});
+	$("#user_add_note").click(function() {
+		$(".comment-signarea").hide();
+		$("#commentform").show();
+		$('html, body').animate({
+       	    scrollTop: $("#respond").offset().top
+    	}, 200);
+	});
+
+	// 提交笔记
+	var commentform=$('#commentform');
+	commentform.prepend('<div id="comment-status" style="display:none;" ></div>');
+	var statusdiv=$('#comment-status');
+	
+	commentform.submit(function(e){
+		e.preventDefault();
+		var noteContent = editor.getValue();
+		// console.log(noteContent);
+		noteContent = noteContent.replace(/<pre><code>/g,"<pre>");
+		noteContent = noteContent.replace(/<\/code><\/pre>/g,"</pre>");
+		
+		// 系列化表单数据
+		var comment_parent = 0;
+		var is_user_logged_in = $("#is_user_logged_in").val();
+		var comment_post_ID =  8904;
+		var _wp_unfiltered_html_comment = $("#_wp_unfiltered_html_comment").val();
+		var comment = noteContent;
+		var author = $("#author").val();
+		var url = $("#url").val();
+		var email = $("#email").val();
+		if(isBlank(author) && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入昵称！</p>').show();
+		} else if(isBlank(email)  && is_user_logged_in==0) {
+			statusdiv.html('<p  class="ajax-error">请输入邮箱！</p>').show();
+		} else {
+			// var formdata=commentform.serialize() + "&comment=" + noteContent ;
+			// 添加状态信息
+			statusdiv.html('<p>Processing...</p>').show();
+			// 获取表单提交地址
+			var formurl=commentform.attr('action');
+			
+			// 异步提交
+			$.ajax({
+					type: 'post',
+					url: formurl,
+					dataType:'json',
+					data: {"comment_parent":comment_parent,"comment_post_ID":comment_post_ID, "_wp_unfiltered_html_comment":_wp_unfiltered_html_comment,"comment":comment,"url":url, "email":email,"author":author},
+					error: function(XMLHttpRequest, textStatus, errorThrown){
+					statusdiv.html('<p class="ajax-error" >数据不完整或表单提交太快了！</p>').show();
+				},
+				success: function(data, textStatus){
+					if(data.errorno=="0") {
+						$("#submit").prop('disabled', true);
+						statusdiv.html('<p class="ajax-success" >笔记已提交审核，感谢分享笔记！</p>').show();
+						alert('笔记已提交审核，感谢分享笔记！');
+					}else{
+						statusdiv.html('<p class="ajax-error" >'+data.msg+'</p>').show();
+					}
+					commentform.find('textarea[name=comment]').val('');
+				}
+			});
+			setTimeout(function(){
+		        $("#submit").prop('disabled', false);
+		    }, 10*1000);
+		}
+		return false;
+
+	});
+	$(".comt-author").click(function() {
+		href = $(this).children("a").attr("href");
+		if(href.indexOf("/note/")!=-1) {
+			var win = window.open(href, '_blank');
+  			win.focus();
+		}
+	});
+	$(".comt-meta span").hover(function(){
+		$(this).children(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).children(".tooltip").removeAttr("style");
+	});
+	/*
+	$(".wrapper i").hover(function(){
+		$(this).siblings(".tooltip").css({ "opacity": 1, "pointer-events": "auto"});
+	},function(){
+		$(this).siblings(".tooltip").css({ "opacity": 0, "pointer-events": "auto"});
+	});
+	*/
+	//Upvote.create('runoobvote-id', {callback: vote_callback});
+	var ajaxurl = 'https://www.runoob.com/wp-admin/admin-ajax.php';
+	var callback = function(data) {
+		//console.log($('#runoobvote-id').upvote('upvoted'));
+		//console.log($('#runoobvote-id').upvote('downvoted'));
+		//console.log(data);
+		_vote_action = data.action;
+		id_arr = data.id.split('-');
+		um_id= id_arr[2];
+		//console.log(um_id);
+		
+		var re = /^[1-9]+/;
+		if (re.test(um_id)) { 
+			var ajax_data = {
+				_vote_action: _vote_action,
+				action: "pinglun_zan",
+				um_id: um_id,
+				um_action: "ding"
+			};
+			//console.log(ajax_data);
+			$.post(ajaxurl,ajax_data,function(status){
+				//if(status.vote_num>999) {
+				//	_voteHtml = '<span style="display: block; text-align: center;font-size: 20px; color: #6a737c; margin: 8px 0;">'+kFormatter(status.vote_num) +'</span>';
+				//	$("#runoobvote-id-" + um_id + " .count").hide().after(_voteHtml);
+				//}
+				
+			});
+		}
+	};
+	if($('#comments').length && $('.upvotejs').length){
+		$('.upvotejs').upvote({id: 8904, callback: callback});
+	
+		$.post(ajaxurl,{"action":"pinglun_zan","postid":8904},function(data){  
+			$(data).each(function(key,value) {
+				$("#runoobvote-id-" + value.commid + " .upvote").addClass(value.upvotejs_class);
+				$("#runoobvote-id-" + value.commid + " .downvote").addClass(value.downvote_class);
+				$("#runoobvote-id-" + value.commid + " .count").text(value.upvote_count);
+			})
+		},'json');
+		
+	}
+	
+	
+});
+function isBlank(str) {
+    return (!str || /^\s*$/.test(str));
+}
+function kFormatter(num) {
+	// return num;
+    return Math.abs(num) > 999 ? Math.sign(num)*((Math.abs(num)/1000).toFixed(1)) + 'k' : Math.sign(num)*Math.abs(num)
+}
+
+</script>
+
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/css/qa.css?1.45">
+<link rel="stylesheet" type="text/css" href="https://static.char123.com/assets/simditor/2.3.6/styles/simditor.min.css" />
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/module.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/hotkeys.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/uploader.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor.min.js"></script>
+<script type="text/javascript" src="https://static.char123.com/assets/simditor/2.3.6/scripts/simditor-autosave.js"></script>
+	</div>
+</div>
+	
+
+<!-- 右边栏 -->
+<div class="fivecol last right-column">
+
+<style>
+.sidebar-tree .double-li {
+    width:300px;
+}
+.sidebar-tree .double-li li {
+    width: 44%;
+    line-height: 1.5em;
+    border-bottom: 1px solid #ccc;
+    float: left;
+    display: inline;
+}
+</style>
+
+    
+        <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here" style="margin: 0 auto;">
+            <a href="javascript:void(0);" style="font-size: 16px; color:#64854c;font-weight:bold;"> <i class="fa fa-list" aria-hidden="true"></i> 分类导航</a>
+        </div>
+    <div class="sidebar-box sidebar-cate">
+        
+        <div class="sidebar-tree">
+            <ul><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> HTML / CSS</a><ul class="double-li"><li><a title="HTML 教程" href="../html/html-tutorial.html">HTML 教程</a></li><li><a title="HTML5 教程" href="../html/html5-intro.html">HTML5 教程</a></li><li><a title="CSS 教程" href="../css/css-tutorial.html">CSS 教程</a></li><li><a title="CSS3 教程" href="../css3/css3-tutorial.html">CSS3 教程</a></li><li><a title="Tailwind CSS 教程" href="../tailwindcss/tailwindcss-tutorial.html">Tailwind CSS 教程</a></li><li><a title="Bootstrap4 教程" href="../bootstrap4/bootstrap4-tutorial.html">Bootstrap4 教程</a></li><li><a title="Bootstrap5 教程" href="../bootstrap5/bootstrap5-tutorial.html">Bootstrap5 教程</a></li><li><a title="Font Awesome 教程" href="../font-awesome/fontawesome-tutorial.html">Font Awesome 教程</a></li><li><a title="Foundation 教程" href="../foundation/foundation-tutorial.html">Foundation 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> JavaScript</a><ul class="double-li"><li><a title="JavaScript 教程" href="../js/js-tutorial.html">JavaScript 教程</a></li><li><a title="HTML DOM 教程" href="../htmldom/htmldom-tutorial.html">HTML DOM 教程</a></li><li><a title="jQuery 教程" href="../jquery/jquery-tutorial.html">jQuery 教程</a></li><li><a title="AngularJS 教程" href="../angularjs/angularjs-tutorial.html">AngularJS 教程</a></li><li><a title="AngularJS2 教程" href="../angularjs2/angularjs2-tutorial.html">AngularJS2 教程</a></li><li><a title="Vue.js 教程" href="../vue2/vue-tutorial.html">Vue.js 教程</a></li><li><a title="Vue3 教程" href="../vue3/vue3-tutorial.html">Vue3 教程</a></li><li><a title="React 教程" href="../react/react-tutorial.html">React 教程</a></li><li><a title="Next.js 教程" href="../nextjs/nextjs-tutorial.html">Next.js 教程</a></li><li><a title="TypeScript 教程" href="../typescript/ts-tutorial.html">TypeScript 教程</a></li><li><a title="jQuery UI 教程" href="../jqueryui/jqueryui-tutorial.html">jQuery UI 教程</a></li><li><a title="jQuery EasyUI 教程" href="../jeasyui/jqueryeasyui-tutorial.html">jQuery EasyUI 教程</a></li><li><a title="Node.js 教程" href="../nodejs/nodejs-tutorial.html">Node.js 教程</a></li><li><a title="Electron 教程" href="../electron/electron-tutorial.html">Electron 教程</a></li><li><a title="Playwright 教程" href="../playwright/playwright-tutorial.html">Playwright 教程</a></li><li><a title="AJAX 教程" href="../ajax/ajax-tutorial.html">AJAX 教程</a></li><li><a title="JSON 教程" href="../json/json-tutorial.html">JSON 教程</a></li><li><a title="Echarts 教程" href="../echarts/echarts-tutorial.html">Echarts 教程</a></li><li><a title="Chart.js 教程" href="../chartjs/chartjs-tutorial.html">Chart.js 教程</a></li><li><a title="Highcharts 教程" href="../highcharts/highcharts-tutorial.html">Highcharts 教程</a></li><li><a title="Google 地图 教程" href="../googleapi/google-maps-basic.html">Google 地图 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 服务端</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="Python2.x 教程" href="../python/python-tutorial.html">Python2.x 教程</a></li><li><a title="Linux 教程" href="../linux/linux-tutorial.html">Linux 教程</a></li><li><a title="Docker 教程" href="../docker/docker-tutorial.html">Docker 教程</a></li><li><a title="Ruby 教程" href="../ruby/ruby-tutorial.html">Ruby 教程</a></li><li><a title="Java 教程" href="../java/java-tutorial.html">Java 教程</a></li><li><a title="C 教程" href="../c/c-tutorial.html">C 教程</a></li><li><a title="C++ 教程" href="../cplusplus/cpp-tutorial.html">C++ 教程</a></li><li><a title="Perl 教程" href="../perl/perl-tutorial.html">Perl 教程</a></li><li><a title="Servlet 教程" href="../servlet/servlet-tutorial.html">Servlet 教程</a></li><li><a title="JSP 教程" href="../jsp/jsp-tutorial.html">JSP 教程</a></li><li><a title="Lua 教程" href="../lua/lua-tutorial.html">Lua 教程</a></li><li><a title="Rust 教程" href="../rust/rust-tutorial.html">Rust 教程</a></li><li><a title="Zig 教程" href="../zig/zig-tutorial.html">Zig 教程</a></li><li><a title="Scala 教程" href="../scala/scala-tutorial.html">Scala 教程</a></li><li><a title="Go 教程" href="../go/go-tutorial.html">Go 教程</a></li><li><a title="PHP 教程" href="../php/php-tutorial.html">PHP 教程</a></li><li><a title="数据结构与算法" href="../data-structures/data-structures-tutorial.html">数据结构与算法</a></li><li><a title="Django 教程" href="../django/django-tutorial.html">Django 教程</a></li><li><a title="FastAPI 教程" href="../fastapi/fastapi-tutorial.html">FastAPI 教程</a></li><li><a title="Flask 教程" href="../flask/flask-tutorial.html">Flask 教程</a></li><li><a title="Pillow 教程" href="../pillow/pillow-tutorial.html">Pillow 教程</a></li><li><a title="Zookeeper 教程" href="//www.runoob.com/w3cnote/zookeeper-tutorial.html">Zookeeper 教程</a></li><li><a title="设计模式" href="design-pattern-tutorial.html">设计模式</a></li><li><a title="Python 设计模式" href="../python-design-pattern/python-design-pattern-tutorial.html">Python 设计模式</a></li><li><a title="正则表达式" href="../regexp/regexp-tutorial.html">正则表达式</a></li><li><a title="Maven 教程" href="../maven/maven-tutorial.html">Maven 教程</a></li><li><a title="CMake 教程" href="../cmake/cmake-tutorial.html">CMake 教程</a></li><li><a title="Verilog 教程" href="//www.runoob.com/w3cnote/verilog-tutorial.html">Verilog 教程</a></li><li><a title="ASP 教程" href="../asp/asp-tutorial.html">ASP 教程</a></li><li><a title="AppML 教程" href="../appml/appml-tutorial.html">AppML 教程</a></li><li><a title="VBScript 教程" href="../vbscript/vbscript-tutorial.html">VBScript 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 数据库</a><ul class="double-li"><li><a title="SQL 教程" href="../sql/sql-tutorial.html">SQL 教程</a></li><li><a title="MySQL 教程" href="../mysql/mysql-tutorial.html">MySQL 教程</a></li><li><a title="PostgreSQL 教程" href="../postgresql/postgresql-tutorial.html">PostgreSQL 教程</a></li><li><a title="SQLite 教程" href="../sqlite/sqlite-tutorial.html">SQLite 教程</a></li><li><a title="MongoDB 教程" href="../mongodb/mongodb-tutorial.html">MongoDB 教程</a></li><li><a title="Redis 教程" href="../redis/redis-tutorial.html">Redis 教程</a></li><li><a title="Memcached 教程" href="../Memcached/Memcached-tutorial.html">Memcached 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit">  AI & 数据分析</a><ul class="double-li"><li><a title="Python 教程" href="../python3/python3-tutorial.html">Python 教程</a></li><li><a title="NumPy 教程" href="../numpy/numpy-tutorial.html">NumPy 教程</a></li><li><a title="Pandas 教程" href="../pandas/pandas-tutorial.html">Pandas 教程</a></li><li><a title="Matplotlib 教程" href="../matplotlib/matplotlib-tutorial.html">Matplotlib 教程</a></li><li><a title="Scipy 教程" href="../scipy/scipy-tutorial.html">Scipy 教程</a></li><li><a title="Pytorch 教程" href="../pytorch/pytorch-tutorial.html">Pytorch 教程</a></li><li><a title="TensorFlow 教程" href="../tensorflow/tensorflow-tutorial.html">TensorFlow 教程</a></li><li><a title="Ollama 教程" href="../ollama/ollama-tutorial.html">Ollama 教程</a></li><li><a title="机器 教程" href="../ml/ml-tutorial.html">机器 教程</a></li><li><a title="Jupyter Notebook 教程" href="../jupyter-notebook/jupyter-notebook-tutorial.html">Jupyter Notebook 教程</a></li><li><a title="AI Agent(智能体)" href="../ai-agent/ai-agent-tutorial.html">AI Agent(智能体)</a></li><li><a title="Skills(技能)" href="../skills/skills-tutorial.html">Skills(技能)</a></li><li><a title="Claude Code" href="../claude-code/claude-code-tutorial.html">Claude Code</a></li><li><a title="OpenCode" href="../opencode/opencode-tutorial.html">OpenCode</a></li><li><a title="Codex 教程" href="../codex/codex-tutorial.html">Codex 教程</a></li><li><a title="scikit-learn 教程" href="../sklearn/sklearn-tutorial.html">scikit-learn 教程</a></li><li><a title="R 教程" href="../r/r-tutorial.html">R 教程</a></li><li><a title="OpenCV 教程" href="../opencv/opencv-tutorial.html">OpenCV 教程</a></li><li><a title="NLP 教程" href="../nlp/nlp-tutorial.html">NLP 教程</a></li><li><a title="Selenium 教程" href="../selenium/selenium-tutorial.html">Selenium 教程</a></li><li><a title="Julia 教程" href="../julia/julia-tutorial.html">Julia 教程</a></li><li><a title="量化交易" href="../qt/qt-tutorial.html">量化交易</a></li><li><a title="Dash 教程" href="../dash/dash-tutorial.html">Dash 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 移动端</a><ul class="double-li"><li><a title="Android 教程" href="//www.runoob.com/w3cnote/android-tutorial-intro.html">Android 教程</a></li><li><a title="Swift 教程" href="../swift/swift-tutorial.html">Swift 教程</a></li><li><a title="jQuery Mobile 教程" href="../jquerymobile/jquerymobile-tutorial.html">jQuery Mobile 教程</a></li><li><a title="ionic 教程" href="../ionic/ionic-tutorial.html">ionic 教程</a></li><li><a title="Flutter 教程" href="../flutter/flutter-tutorial.html">Flutter 教程</a></li><li><a title="Kotlin 教程" href="../kotlin/kotlin-tutorial.html">Kotlin 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 开发工具</a><ul class="double-li"><li><a title="VS Code 教程" href="../vscode/vscode-tutorial.html">VS Code 教程</a></li><li><a title="PyCharm 教程" href="../pycharm/pycharm-tutorial.html">PyCharm 教程</a></li><li><a title="Swagger 教程" href="../swagger/swagger-tutorial.html">Swagger 教程</a></li><li><a title="RESTful API 教程" href="../restfulapi/restful-api-tutorial.html">RESTful API 教程</a></li><li><a title="Eclipse 教程" href="../eclipse/eclipse-tutorial.html">Eclipse 教程</a></li><li><a title="Git 教程" href="../git/git-tutorial.html">Git 教程</a></li><li><a title="Svn 教程" href="../svn/svn-tutorial.html">Svn 教程</a></li><li><a title="Markdown 教程" href="../markdown/md-tutorial.html">Markdown 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> XML 教程</a><ul class="double-li"><li><a title="XML 教程" href="../xml/xml-tutorial.html">XML 教程</a></li><li><a title="DTD 教程" href="../dtd/dtd-tutorial.html">DTD 教程</a></li><li><a title="XML DOM 教程" href="../dom/dom-tutorial.html">XML DOM 教程</a></li><li><a title="XSLT 教程" href="../xsl/xsl-tutorial.html">XSLT 教程</a></li><li><a title="XPath 教程" href="../xpath/xpath-tutorial.html">XPath 教程</a></li><li><a title="XQuery 教程" href="../xquery/xquery-tutorial.html">XQuery 教程</a></li><li><a title="XLink 教程" href="../xlink/xlink-tutorial.html">XLink 教程</a></li><li><a title="XPointer 教程" href="../xlink/xlink-tutorial.html">XPointer 教程</a></li><li><a title="XML Schema 教程" href="../schema/schema-tutorial.html">XML Schema 教程</a></li><li><a title="XSL-FO 教程" href="../xslfo/xslfo-tutorial.html">XSL-FO 教程</a></li><li><a title="SVG 教程" href="../svg/svg-tutorial.html">SVG 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> ASP.NET</a><ul class="double-li"><li><a title="ASP.NET 教程" href="../aspnet/aspnet-tutorial.html">ASP.NET 教程</a></li><li><a title="C# 教程" href="../csharp/csharp-tutorial.html">C# 教程</a></li><li><a title="PowerShell 教程" href="../powershell/powershell-tutorial.html">PowerShell 教程</a></li><li><a title="Web Pages 教程" href="../aspnet/webpages-intro.html">Web Pages 教程</a></li><li><a title="Razor 教程" href="../aspnet/razor-intro.html">Razor 教程</a></li><li><a title="MVC 教程" href="../aspnet/mvc-intro.html">MVC 教程</a></li><li><a title="Web Forms 教程" href="../aspnet/aspnet-intro.html">Web Forms 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> Web Service</a><ul class="double-li"><li><a title="Web Service 教程" href="../webservices/webservices-tutorial.html">Web Service 教程</a></li><li><a title="WSDL 教程" href="../wsdl/wsdl-tutorial.html">WSDL 教程</a></li><li><a title="SOAP 教程" href="../soap/soap-tutorial.html">SOAP 教程</a></li><li><a title="RSS 教程" href="../rss/rss-tutorial.html">RSS 教程</a></li><li><a title="RDF 教程" href="../rdf/rdf-tutorial.html">RDF 教程</a></li></ul></li><li style="margin: 0;"><a href="javascript:void(0);" class="tit"> 网站建设</a><ul class="double-li"><li><a title="HTTP 教程" href="../http/http-tutorial.html">HTTP 教程</a></li><li><a title="网站建设指南" href="../web/web-buildingprimer.html">网站建设指南</a></li><li><a title="浏览器信息" href="../browsers/browser-information.html">浏览器信息</a></li><li><a title="网络协议" href="../np/np-tutorial.html">网络协议</a></li><li><a title="网站主机教程" href="../hosting/hosting-tutorial.html">网站主机教程</a></li><li><a title="TCP/IP 教程" href="../tcpip/tcpip-tutorial.html">TCP/IP 教程</a></li><li><a title="W3C 教程" href="../w3c/w3c-tutorial.html">W3C 教程</a></li><li><a title="网站品质" href="../quality/quality-tutorial.html">网站品质</a></li></ul></li></ul>            </div>
+    
+    </div>
+    </div>
+    <br>
+    
+    <div class="sidebar-box re-box re-box-large">
+        <div class="sidebar-box recommend-here">
+            <a href="javascript:void(0);">Advertisement</a>
+        </div>
+        <div class="re-600160" id="sidebar-right-re">
+                <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+        <!-- 侧栏1 -->
+        <ins class="adsbygoogle" style="display:inline-block;width:160px;height:600px" data-ad-client="ca-pub-5751451760833794" data-ad-slot="4106274865"></ins>
+        <script>
+        (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+                </div>
+    </div>
+</div></div>
+
+</div>
+
+<script>
+var aid = 8904;
+function coll() {
+	$.post( '/wp-content/themes/runoob/option/user/userinfo.php', {aid:aid, action:"collarticle", opt:'add'},function( data ) {
+		if(data.error==0) {
+			$("#content").find("h1:first").find("a").attr("href","javascript:void(0);");
+			$("#content").find("h1:first").find("img").attr("src","http://www.runoob.com/wp-content/themes/runoob/assets/img/coll2.png").css({width:32+"px",height:32+"px"});
+		}
+		alert(data.msg);
+	},'json');
+}
+
+(function () {
+    // 1. 仅 HTML 页面
+    if (!document.contentType || !document.contentType.includes('text/html')) return;
+
+    // 2. 容器判断
+    var container = document.querySelector('.article-intro');
+    if (!container) return;
+
+    var h1 = container.querySelector('h1');
+    if (!h1) return;
+
+    // 3. URL 判断
+    var url = window.location.href.toLowerCase();
+    var version = null;
+
+    if (url.includes('/python3/')) {
+        version = 'Python3.x';
+    } else if (url.includes('/python/')) {
+        version = 'Python2.x';
+    }
+
+    if (!version) return;
+
+    // 4. 防重复
+    if (h1.querySelector('.py-version-badge')) return;
+
+    // 5. 创建标签
+    var badge = document.createElement('span');
+    badge.className = 'py-version-badge';
+    badge.innerText = version;
+
+    // 6. 样式（核心：float 实现右上角）
+    badge.style.float = 'right';
+    badge.style.fontSize = '12px';
+    badge.style.padding = '2px 8px';
+    badge.style.borderRadius = '999px';
+
+   // 自适应亮/暗色 + 渐变背景（增强版）
+	badge.style.color = 'inherit';
+
+	// 渐变背景（低透明度，不影响暗黑模式）
+	if (version.includes('3')) {
+		badge.style.background = 'linear-gradient(90deg, rgba(79,172,254,0.15), rgba(0,242,254,0.15))';
+	} else {
+		badge.style.background = 'linear-gradient(90deg, rgba(161,140,209,0.15), rgba(251,194,235,0.15))';
+	}
+
+	// 边框弱化（更精致）
+	badge.style.border = '1px solid rgba(127,127,127,0.3)';
+
+	// 提升可读性
+	badge.style.opacity = '0.95';
+
+    // 微调位置（更贴近“右上角”）
+    badge.style.marginTop = '4px';
+    badge.style.marginLeft = '10px';
+
+    // 7. 插入到 h1 最前面（让 float 生效更稳定）
+    h1.insertBefore(badge, h1.firstChild);
+
+})();
+</script>
+
+
+<!-- 反馈对话框开始 -->
+<script src="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.js?1.0"></script>
+<link rel="stylesheet" href="/wp-content/themes/runoob/assets/feedback/stable/2.0/feedback.css?1.0" />
+<script type="text/javascript">
+
+$(document).ready(function() {
+    // 获取窗口宽度
+    var windowWidth = $(window).width();
+
+    // 设置一个阈值，例如 768px，根据实际需要调整
+    var mobileThreshold = 768;
+
+    // 判断是否为移动端
+    if (windowWidth < mobileThreshold) {
+        // 在移动端执行的代码
+        $(".article-heading-ad").show();
+    } else {
+        // 在非移动端执行的代码
+		$(".article-heading-ad").show();
+    }
+	
+});
+</script>
+<script src="/wp-content/themes/runoob/assets/js/runoob-article-dir.min.js"></script>
+<!-- 底部 -->
+<div id="footer" class="mar-t50">
+   <div class="runoob-block">
+    <div class="runoob cf">
+     <dl>
+      <dt>
+       在线实例
+      </dt>
+      <dd>
+       &middot;<a target="_blank" href="../html/html-examples.html">HTML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../css/css-examples.html">CSS 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../js/js-examples.html">JavaScript 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../ajx/ajax-examples.html">Ajax 实例</a>
+      </dd>
+       <dd>
+       &middot;<a target="_blank" href="../jquery/jquery-examples.html">jQuery 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../xml/xml-examples.html">XML 实例</a>
+      </dd>
+      <dd>
+       &middot;<a target="_blank" href="../java/java-examples.html">Java 实例</a>
+      </dd>
+     
+     </dl>
+     <dl>
+      <dt>
+      字符集&工具
+      </dt>
+      <dd>
+       &middot; <a target="_blank" href="../charsets/html-charsets.html">HTML 字符集设置</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-ascii.html">HTML ASCII 字符集</a>
+      </dd>
+     <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6939/">JS 混淆/加密</a>
+      </dd> 
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6232/">PNG/JPEG 图片压缩</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="../tags/html-colorpicker.html">HTML 拾色器</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/53">JSON 格式化工具</a>
+      </dd>
+      <dd>
+       &middot; <a target="_blank" href="https://www.jyshare.com/front-end/6680/">随机数生成器</a>
+      </dd>
+     </dl>
+     <dl>
+      <dt>
+       最新更新
+      </dt>
+                  <dd>
+              &middot;
+              <a href="../skills/vs-code-skill.html" title="VS Code 创建与使用  Skill">
+                VS Code 创建与...              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-scripts.html" title="Skills 脚本扩展">
+                Skills 脚本扩展              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-description.html" title="Skills 描述">
+                Skills 描述              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skill-md-file.html" title="SKILL.md 文件">
+                SKILL.md 文件              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/use-existing-skills.html" title="使用现有 Skills">
+                使用现有 Skills              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/how-skills-work.html" title="Skills 工作原理">
+                Skills 工作原理              </a>
+            </dd>
+                      <dd>
+              &middot;
+              <a href="../skills/skills-first.html" title="第一个 Skill">
+                第一个 Skill              </a>
+            </dd>
+               </dl>
+     <dl>
+      <dt>
+       站点信息
+      </dt>
+      <dd>
+       &middot;
+       <a href="../cdn-cgi/l/email-protection/index.html" target="_blank" rel="external nofollow">意见反馈</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../disclaimer/index.html">免责声明</a>
+       </dd>
+      <dd>
+       &middot;
+       <a target="_blank" href="../aboutus/index.html">关于我们</a>
+       </dd>
+      <dd>
+       &middot;
+      <a target="_blank" href="../archives/index.html">文章归档</a>
+      </dd>
+    
+     </dl>
+    
+     <div class="search-share">
+      <div class="app-download">
+        <div>
+         <strong>关注微信</strong>
+        </div>
+      </div>
+      <div class="share">
+      <img width="128" height="128" src="/wp-content/themes/runoob/assets/images/qrcode.png" />
+       </div>
+     </div>
+     
+    </div>
+   </div>
+   <div class="w-1000 copyright">
+     Copyright &copy; 2013-2026    <strong><a href="../index/index.html" target="_blank">菜鸟教程</a></strong>&nbsp;
+    <strong><a href="../index/index.html" target="_blank">runoob.com</a></strong> All Rights Reserved. 备案号：<a target="_blank" rel="nofollow" href="https://beian.miit.gov.cn/">闽ICP备15012807号-1</a>
+   </div>
+  </div>
+  <div class="fixed-btn">
+    <a class="go-top" href="javascript:void(0)" title="返回顶部">
+      <i class="fa fa-chevron-up"></i>
+    </a>
+    <a class="bm-opener" href="javascript:void(0)" title="收藏与历史">
+      <i class="fa fa-history"></i>
+    </a>
+    <a class="writer" href="javascript:void(0)" title="标记/收藏" style="display:none">
+      <i class="fa fa-bookmark-o"></i>
+      <span class="bm-badge"></span>
+    </a>
+  </div>
+
+<div style="display:none;">
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script async src="https://www.googletagmanager.com/gtag/js?id=UA-84264393-2"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-84264393-2');
+</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?3eec0b7da6548cf07db3bc477ea905ee";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</div>
+
+<script>
+window.jsui={
+    www: 'https://www.runoob.com',
+    uri: 'https://www.runoob.com/wp-content/themes/runoob'
+};
+</script>
+
+<script src="https://static.char123.com/assets/libs/clipboard.min.js"></script>
+<script src="https://static.char123.com/assets/libs/hl/run_prettify.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/main.min.js?v=1.181"></script>
+<script src="/wp-content/themes/runoob/assets/js/bookmark.js?v=1.181"></script>
+<script src="https://static.char123.com/assets/libs/marked.umd.js"></script>
+</body>
+</html>

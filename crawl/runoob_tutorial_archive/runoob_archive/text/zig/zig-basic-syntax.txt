@@ -1,0 +1,403 @@
+URL: https://www.runoob.com/zig/zig-basic-syntax.html
+Title: Zig 基本语法 | 菜鸟教程
+
+Zig 基本语法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Zig 教程 
+
+Zig 环境安装 
+
+Zig 注释 
+
+Zig 基本语法 
+
+Zig 是一种新的编程语言，设计简单、高效，并且直接与 C 语言兼容。 
+
+下面是一些 Zig 的基本语法介绍，帮助你快速上手。 
+
+Zig 代码文件的后缀名为 .zig 。 
+
+第一个 Zig 程序 
+
+我们先来看看 Zig 的 "Hello, World!" 程序。 
+
+我们先来初始化一个 zig 项目： 
+
+mkdir hello-world
+cd hello-world
+zig init 
+
+然后在该项目下创建 hello.zig 文件，代码如下： 
+
+实例（hello.zig 文件） 
+
+const std = @import ( "std" ) ; 
+
+pub fn main ( ) void { 
+
+const stdout = std. io . getStdOut ( ) . writer ( ) ; 
+
+stdout . print ( "Hello, World! \n " , . { } ) catch { } ; 
+
+} 
+
+代码解析： 
+
+1、导入标准库: 
+
+const std = @import("std"); 
+
+这行代码导入了 Zig 的标准库，类似于 C 语言中的 #include <stdio.h>。 
+
+2、定义 main 函数: 
+
+pub fn main() void { 
+
+这是程序的入口点。 
+
+pub 关键字表示这个函数是公开的，fn 关键字用于定义函数，main 是函数名，() void 表示这个函数不接受任何参数，并且返回类型是 void（无返回值）。 
+
+3、获取标准输出: 
+
+const stdout = std.io.getStdOut().writer(); 
+
+这行代码获取标准输出（通常是终端），并将其转换为一个写入器（writer()）。 
+
+4、打印 "Hello, World!": 
+
+stdout.print("Hello, World!\n", .{}) catch {}; 
+
+使用 print 方法将字符串 "Hello, World!\n" 写入标准输出。 
+
+.{} 是一个空的关联数组，用于传递可选参数。 
+
+catch 关键字用于捕获并处理可能发生的异常，这里简单地将其忽略。 
+
+5、错误处理: 
+
+catch {}; 
+
+catch 关键字用于捕获并处理可能发生的异常。 
+
+在这里，我们只是简单地捕获它，但没有做任何处理（{} 表示空的代码块）。 
+
+这个程序非常简单，但它展示了 Zig 语言的一些基本特性，比如函数定义、标准库的使用、异常处理等。要运行这个程序，你需要安装 Zig 编译器，然后使用以下命令： 
+
+zig build-exe hello.zig 
+
+这会生成一个可执行文件（通常是 hello），你可以通过运行它来查看输出。 
+
+在终端中运行编译后的脚本： 
+
+./hello 
+
+这将输出 "Hello, World!"。 
+
+标识符 
+
+在 Zig 语言中，标识符是用来命名变量、函数、类型等的名称。 
+
+以下是一些关于 Zig 标识符的规则和特性： 
+
+字母和数字 ：标识符可以包含字母（A-Z 和 a-z）、数字（0-9）和下划线（_）。 
+
+开头字符 ：标识符必须以字母或下划线开头，不能以数字开头。 
+
+大小写敏感 ：Zig 是一种区分大小写的语言，这意味着 Variable 和 variable 是两个不同的标识符。 
+
+关键字和保留字 ：一些特定的单词在 Zig 中是保留的，不能用作标识符。例如 fn （函数）、 struct （结构体）、 if （条件语句）等。 
+
+命名约定 ： 
+
+驼峰命名法 ：通常使用驼峰命名法来命名标识符。例如，函数名 calculateSum ，类型名 Person 。 
+
+下划线命名法 ：在一些情况下，尤其是在与 C 语言交互时，可能需要使用下划线命名法。例如 calculate_sum 。 
+
+可选类型 ：Zig 语言中有一个特殊的类型 ?T ，表示一个类型为 T 的可选值。这在处理可能为空的值时非常有用。 
+
+编译时常量 ：在标识符前使用 comptime 关键字，可以表示该标识符是一个编译时常量。 
+
+错误类型 ：使用 error 关键字可以定义错误类型，例如： 
+
+pub fn openFile(path: []const u8) !void {
+ // ...
+} 
+
+类型后缀 ：在类型名称后使用 _t 后缀是 C 语言的习惯，在 Zig 中也可以这样做，但不是必需的。 
+
+保留关键词 
+
+以下是 Zig 语言的一些保留关键词： 
+
+Keywords 
+
+Description 
+
+align 
+
+指定变量或类型对齐字节数 
+
+allowzero 
+
+允许指针指向空值 
+
+and 
+
+逻辑与操作 
+
+asm 
+
+内联汇编块 
+
+async 
+
+异步函数声明 
+
+await 
+
+等待异步操作完成 
+
+break 
+
+跳出最近的循环或作用域 
+
+callconv 
+
+调用约定 
+
+const 
+
+定义常量 
+
+continue 
+
+继续下一次循环迭代 
+
+defer 
+
+延迟执行语句，直到作用域退出 
+
+else 
+
+条件语句的否定分支 
+
+enum 
+
+枚举类型 
+
+errdefer 
+
+错误发生时的延迟执行语句 
+
+error 
+
+错误类型定义 
+
+export 
+
+导出符号 
+
+fn 
+
+函数定义 
+
+for 
+
+遍历循环 
+
+if 
+
+条件语句 
+
+inline 
+
+内联函数 
+
+linksection 
+
+指定链接器的节 
+
+noalias 
+
+指针不能被其他指针别名 
+
+noasync 
+
+禁止函数内使用 await 
+
+noinline 
+
+阻止函数内联 
+
+null 
+
+空值 
+
+or 
+
+逻辑或操作 
+
+packed 
+
+取消结构体填充 
+
+pub 
+
+公开（public）访问级别 
+
+return 
+
+从函数返回 
+
+struct 
+
+结构体类型定义 
+
+suspend 
+
+异步函数的挂起点 
+
+switch 
+
+多路分支选择语句 
+
+test 
+
+测试代码块 
+
+threadlocal 
+
+线程局部变量 
+
+try 
+
+尝试执行表达式，可能产生错误 
+
+union 
+
+联合体类型定义 
+
+usingnamespace 
+
+使用指定的命名空间 
+
+var 
+
+定义变量 
+
+void 
+
+无类型，常用于函数无返回值 
+
+while 
+
+循环语句 
+
+基本语法 
+
+1. 变量与常量 
+
+在 Zig 中，变量使用 var 关键字定义，常量使用 const 关键字定义。 
+
+const x: i32 = 10; // 定义一个整数常量 x，值为 10
+var y: f64 = 3.14; // 定义一个浮点数变量 y，值为 3.14 
+
+2. 函数 
+
+函数使用 fn 关键字定义，并指定返回类型。 
+
+const std = @import("std");
+
+fn add(a: i32, b: i32) i32 {
+ return a + b;
+}
+
+pub fn main() void {
+ const result = add(3, 4);
+ std.debug.print("Result: {}\n", .{result});
+} 
+
+3. 条件语句 
+
+使用 if 和 else 来实现条件逻辑。 
+
+const std = @import("std");
+
+pub fn main() void {
+ const number = 10;
+ if (number > 0) {
+ std.debug.print("Number is positive\n", .{});
+ } else {
+ std.debug.print("Number is not positive\n", .{});
+ }
+} 
+
+4. 循环 
+
+Zig 支持 while 和 for 循环。 
+
+const std = @import("std");
+
+pub fn main() void {
+ var i: i32 = 0;
+ while (i < 5) : (i += 1) {
+ std.debug.print("i: {}\n", .{i});
+ }
+
+ const array = [5]i32{1, 2, 3, 4, 5};
+ for (array) |item| {
+ std.debug.print("item: {}\n", .{item});
+ }
+} 
+
+5. 结构体 
+
+Zig 使用 struct 来定义结构体。 
+
+const std = @import("std");
+
+const Point = struct {
+ x: i32,
+ y: i32,
+};
+
+pub fn main() void {
+ const p = Point{ .x = 10, .y = 20 };
+ std.debug.print("Point: ({}, {})\n", .{p.x, p.y});
+} 
+
+6. 错误处理 
+
+Zig 使用错误枚举类型和 try 关键字进行错误处理。 
+
+const std = @import("std");
+
+const Error = error{
+ FileNotFound,
+};
+
+fn readFile(path: []const u8) !void {
+ // 模拟一个可能失败的操作
+ if (path == "invalid") {
+ return Error.FileNotFound;
+ }
+ // 其他操作
+}
+
+pub fn main() void {
+ if (readFile("invalid") catch |err| switch (err) {
+ Error.FileNotFound => {
+ std.debug.print("Error: File not found\n", .{});
+ },
+ }) | _ | {
+ std.debug.print("File read successfully\n", .{});
+ }
+} 
+
+AI 思考中... 
+
+Zig 环境安装 
+
+Zig 注释

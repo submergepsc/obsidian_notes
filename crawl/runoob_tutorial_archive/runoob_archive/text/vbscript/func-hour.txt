@@ -1,0 +1,64 @@
+URL: https://www.runoob.com/vbscript/func-hour.html
+Title: VBScript Hour 函数 | 菜鸟教程
+
+VBScript Hour 函数 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+VBScript 教程 
+
+VBScript FormatDateTime 函数 
+
+VBScript IsDate 函数 
+
+VBScript Hour 函数 
+
+Hour 函数返回一个 0 到 23 之间的代表天的小时数的数字。 
+
+语法 
+
+Hour(time) 
+
+参数 
+
+描述 
+
+time 
+
+必需。任何可表示时间的表达式。 
+
+实例 
+
+实例 1 
+
+<script type="text/vbscript"> 
+
+document.write(Hour("13:45")) 
+
+</script> 
+
+以上实例输出结果： 
+
+13 
+
+尝试一下 » 
+
+实例 2 
+
+<script type="text/vbscript"> 
+
+document.write(Hour(Now())) 
+
+</script> 
+
+以上实例输出结果： 
+
+document.write(Hour(Now())) 
+
+尝试一下 » 
+
+AI 思考中... 
+
+VBScript FormatDateTime 函数 
+
+VBScript IsDate 函数

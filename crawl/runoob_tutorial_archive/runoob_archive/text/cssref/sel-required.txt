@@ -1,0 +1,68 @@
+URL: https://www.runoob.com/cssref/sel-required.html
+Title: CSS :required选择器 | 菜鸟教程
+
+CSS :required选择器 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS 参考手册 
+
+CSS :optional选择器 
+
+CSS :valid 选择器 
+
+CSS :required 选择器 
+
+实例 
+
+如果 input 元素设置了 "required" 属性，设置其为黄色: 
+
+input:required 
+{ 
+background-color: yellow; 
+} 
+
+尝试一下 » 
+
+定义和使用 
+
+:required 选择器在表单元素是必填项时设置指定样式。 
+
+表单元素可以使用 required 属性来设置必填项。 
+
+注意： :required 选择器只适用于表单元素: input, select 和 textarea。 
+
+浏览器支持 
+
+表格中的数字表示支持该属性的第一个浏览器版本号。 
+
+选择器 
+
+:required 
+
+10.0 
+
+10.0 
+
+4.0 
+
+5.0 
+
+10.0 
+
+CSS 语法 
+
+:required 
+{ 
+css 声明 ; 
+} 
+
+相关页面 
+
+CSS 选择器 :optional 
+
+AI 思考中... 
+
+CSS :optional选择器 
+
+CSS :valid 选择器

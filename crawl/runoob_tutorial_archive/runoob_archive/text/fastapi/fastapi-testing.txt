@@ -1,0 +1,326 @@
+URL: https://www.runoob.com/fastapi/fastapi-testing.html
+Title: FastAPI 测试 | 菜鸟教程
+
+FastAPI 测试 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+FastAPI 教程 
+
+FastAPI 安全认证 
+
+FastAPI 数据库集成 
+
+FastAPI 测试 
+
+FastAPI 基于 Starlette 的 TestClient 提供了便捷的测试支持，可以在不启动服务器的情况下测试 API 的请求和响应。 
+
+安装依赖 
+
+TestClient 基于 httpx ，需要安装： 
+
+pip install httpx 
+
+基本测试 
+
+使用 TestClient 创建测试客户端，然后像使用 httpx 一样发送请求： 
+
+实例 
+
+from fastapi import FastAPI 
+
+from fastapi. testclient import TestClient 
+
+app = FastAPI ( ) 
+
+@ app. get ( "/" ) 
+
+async def root ( ) : 
+
+return { "message" : "Hello World" } 
+
+# 创建测试客户端 
+
+client = TestClient ( app ) 
+
+# 测试函数 
+
+def test_root ( ) : 
+
+response = client. get ( "/" ) 
+
+assert response. status_code == 200 
+
+assert response. json ( ) == { "message" : "Hello World" } 
+
+TestClient 直接调用 FastAPI 应用，不经过网络层，因此测试速度非常快。你不需要启动 Uvicorn 服务器。 
+
+测试各种请求类型 
+
+实例 
+
+from fastapi import FastAPI 
+
+from fastapi. testclient import TestClient 
+
+from pydantic import BaseModel 
+
+app = FastAPI ( ) 
+
+class Item ( BaseModel ) : 
+
+name: str 
+
+price: float 
+
+@ app. post ( "/items/" ) 
+
+async def create_item ( item: Item ) : 
+
+return { "name" : item. name , "price" : item. price } 
+
+@ app. get ( "/items/{item_id}" ) 
+
+async def read_item ( item_id: int ) : 
+
+return { "item_id" : item_id } 
+
+@ app. put ( "/items/{item_id}" ) 
+
+async def update_item ( item_id: int , item: Item ) : 
+
+return { "item_id" : item_id , "name" : item. name } 
+
+@ app. delete ( "/items/{item_id}" ) 
+
+async def delete_item ( item_id: int ) : 
+
+return { "deleted" : item_id } 
+
+client = TestClient ( app ) 
+
+# 测试 POST 请求 
+
+def test_create_item ( ) : 
+
+response = client. post ( 
+
+"/items/" , 
+
+json = { "name" : "Foo" , "price" : 42.0 } , # 发送 JSON 请求体 
+
+) 
+
+assert response. status_code == 200 
+
+assert response. json ( ) == { "name" : "Foo" , "price" : 42.0 } 
+
+# 测试 GET 请求 
+
+def test_read_item ( ) : 
+
+response = client. get ( "/items/1" ) 
+
+assert response. status_code == 200 
+
+assert response. json ( ) == { "item_id" : 1 } 
+
+# 测试 PUT 请求 
+
+def test_update_item ( ) : 
+
+response = client. put ( 
+
+"/items/1" , 
+
+json = { "name" : "Bar" , "price" : 50.0 } , 
+
+) 
+
+assert response. status_code == 200 
+
+# 测试 DELETE 请求 
+
+def test_delete_item ( ) : 
+
+response = client. delete ( "/items/1" ) 
+
+assert response. status_code == 200 
+
+assert response. json ( ) == { "deleted" : 1 } 
+
+测试查询参数和请求头 
+
+实例 
+
+from typing import Annotated 
+
+from fastapi import FastAPI , Header 
+
+from fastapi. testclient import TestClient 
+
+app = FastAPI ( ) 
+
+@ app. get ( "/items/" ) 
+
+async def read_items ( 
+
+skip: int = 0 , 
+
+limit: int = 10 , 
+
+x_token: Annotated [ str | None , Header ( ) ] = None , 
+
+) : 
+
+return { "skip" : skip , "limit" : limit , "x_token" : x_token } 
+
+client = TestClient ( app ) 
+
+# 测试查询参数 
+
+def test_read_items_with_params ( ) : 
+
+response = client. get ( "/items/?skip=5&limit=20" ) 
+
+assert response. status_code == 200 
+
+assert response. json ( ) == { "skip" : 5 , "limit" : 20 , "x_token" : None } 
+
+# 测试请求头 
+
+def test_read_items_with_header ( ) : 
+
+response = client. get ( 
+
+"/items/" , 
+
+headers = { "X-Token" : "fake-token" } , # 发送自定义请求头 
+
+) 
+
+assert response. status_code == 200 
+
+assert response. json ( ) [ "x_token" ] == "fake-token" 
+
+测试异常响应 
+
+实例 
+
+from fastapi import FastAPI , HTTPException 
+
+from fastapi. testclient import TestClient 
+
+app = FastAPI ( ) 
+
+@ app. get ( "/items/{item_id}" ) 
+
+async def read_item ( item_id: int ) : 
+
+if item_id == 0 : 
+
+raise HTTPException ( status_code = 404 , detail = "Item not found" ) 
+
+return { "item_id" : item_id } 
+
+client = TestClient ( app ) 
+
+# 测试正常响应 
+
+def test_read_item ( ) : 
+
+response = client. get ( "/items/1" ) 
+
+assert response. status_code == 200 
+
+# 测试错误响应 
+
+def test_read_item_not_found ( ) : 
+
+response = client. get ( "/items/0" ) 
+
+assert response. status_code == 404 
+
+assert response. json ( ) == { "detail" : "Item not found" } 
+
+# 测试校验错误 
+
+def test_read_item_invalid_id ( ) : 
+
+response = client. get ( "/items/foo" ) 
+
+assert response. status_code == 422 # 校验失败 
+
+使用 pytest 运行测试 
+
+将测试代码保存为 test_main.py ，然后运行： 
+
+$ pytest test_main.py
+
+# 显示详细输出
+$ pytest test_main.py -v
+
+# 显示 print 输出
+$ pytest test_main.py -s 
+
+pytest 会自动发现以 test_ 开头的文件和函数。 
+
+测试中覆盖依赖 
+
+在测试中，你可能需要覆盖某些依赖（如数据库连接、认证逻辑）： 
+
+实例 
+
+from fastapi import Depends , FastAPI 
+
+from fastapi. testclient import TestClient 
+
+app = FastAPI ( ) 
+
+# 实际的依赖函数 
+
+def get_query_param ( ) : 
+
+return "real_value" 
+
+@ app. get ( "/items/" ) 
+
+async def read_items ( query: str = Depends ( get_query_param ) ) : 
+
+return { "query" : query } 
+
+client = TestClient ( app ) 
+
+def test_with_override ( ) : 
+
+# 覆盖依赖 
+
+app. dependency_overrides [ get_query_param ] = lambda : "test_value" 
+
+response = client. get ( "/items/" ) 
+
+assert response. json ( ) == { "query" : "test_value" } 
+
+# 清除覆盖 
+
+app. dependency_overrides . clear ( ) 
+
+app.dependency_overrides 允许你在测试中替换任何依赖函数，非常适合模拟数据库连接、外部 API 调用等场景。测试完成后记得清除覆盖。 
+
+小结 
+
+使用 TestClient 直接测试 FastAPI 应用，无需启动服务器 
+
+支持 GET、POST、PUT、DELETE 等所有 HTTP 方法的测试 
+
+可以测试查询参数、请求头、请求体、异常响应等 
+
+使用 app.dependency_overrides 在测试中覆盖依赖 
+
+配合 pytest 可以方便地组织和运行测试 
+
+AI 思考中... 
+
+FastAPI 安全认证 
+
+FastAPI 数据库集成

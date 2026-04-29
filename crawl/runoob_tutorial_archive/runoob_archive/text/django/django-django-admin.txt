@@ -1,0 +1,402 @@
+URL: https://www.runoob.com/django/django-django-admin.html
+Title: Django django-admin 命令 | 菜鸟教程
+
+Django django-admin 命令 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Django 教程 
+
+Django 视图 – FBV 与 CBV 
+
+Django 项目结构解析 
+
+Django django-admin 命令详解 
+
+django-admin 是 Django 框架提供的一个命令行工具，它是管理 Django 项目的核心工具。 
+
+无论是创建新项目、运行开发服务器，还是执行数据库迁移，django-admin 都是不可或缺的工具。 
+
+要查看 django-admin 提供的所有命令，可以运行： 
+
+django-admin help 
+
+输出内容类似如下： 
+
+Type 'django-admin help <subcommand>' for help on a specific subcommand.
+
+Available subcommands:
+
+[django]
+ check
+ compilemessages
+ createcachetable
+ dbshell
+ diffsettings
+ dumpdata
+ flush
+ inspectdb
+ loaddata
+ makemessages
+ makemigrations
+ migrate
+ optimizemigration
+ runserver
+ sendtestemail
+ shell
+ showmigrations
+ sqlflush
+ sqlmigrate
+ sqlsequencereset
+ squashmigrations
+ startapp
+ startproject
+ test
+ testserver 
+
+常用 django-admin 命令详解 
+
+1. 创建新项目 
+
+django-admin startproject 项目名称 
+
+这个命令会在当前目录下创建一个新的 Django 项目，包含基本的项目结构： 
+
+manage.py ：项目管理脚本 
+
+项目名称/ ：项目主目录 
+
+__init__.py 
+
+settings.py ：项目设置文件 
+
+urls.py ：URL 路由配置 
+
+wsgi.py ：WSGI 应用入口 
+
+2. 创建新应用 
+
+虽然通常使用 manage.py 来创建应用，但也可以通过 django-admin： 
+
+django-admin startapp 应用名称 
+
+这会创建一个新的 Django 应用，包含： 
+
+migrations/ ：数据库迁移文件目录 
+
+__init__.py 
+
+admin.py ：管理后台配置 
+
+apps.py ：应用配置 
+
+models.py ：数据模型定义 
+
+tests.py ：测试代码 
+
+views.py ：视图函数 
+
+3. 检查项目配置 
+
+django-admin check 
+
+这个命令会检查你的 Django 项目是否有配置错误，包括： 
+
+模型定义是否正确 
+
+URL 配置是否有效 
+
+模板设置是否正确 
+
+静态文件配置等 
+
+4. 数据库迁移 
+
+Django 使用迁移系统来管理数据库模式变更： 
+
+django-admin makemigrations # 创建迁移文件
+django-admin migrate # 应用迁移到数据库 
+
+5. 创建超级用户 
+
+django-admin createsuperuser 
+
+这个命令会引导你创建一个可以访问 Django 管理后台的超级用户。 
+
+django-admin 常用命令 
+
+命令 
+
+作用 
+
+示例 
+
+startproject 
+
+创建一个新 Django 项目 
+
+django-admin startproject myproject 
+
+startapp 
+
+创建一个新 Django 应用 
+
+django-admin startapp myapp 
+
+runserver 
+
+启动开发服务器 
+
+python manage.py runserver 
+
+makemigrations 
+
+生成数据库迁移文件 
+
+python manage.py makemigrations 
+
+migrate 
+
+执行数据库迁移 
+
+python manage.py migrate 
+
+createsuperuser 
+
+创建管理员账号 
+
+python manage.py createsuperuser 
+
+shell 
+
+启动 Django 交互式 Shell 
+
+python manage.py shell 
+
+collectstatic 
+
+收集静态文件（用于生产环境） 
+
+python manage.py collectstatic 
+
+test 
+
+运行单元测试 
+
+python manage.py test 
+
+django-admin startproject（创建项目） 
+
+基本语法: 
+
+django-admin startproject <项目名称> [目标目录] 
+
+参数说明: 
+
+参数 
+
+作用 
+
+示例 
+
+<项目名称> 
+
+必填，项目名称（会生成同名目录） 
+
+django-admin startproject mysite 
+
+[目标目录] 
+
+可选，指定项目存放目录 
+
+django-admin startproject mysite /opt/myproject 
+
+--template 
+
+使用自定义项目模板 
+
+django-admin startproject --template=my_template.zip mysite 
+
+--extension 
+
+指定文件扩展名（如 .py , .txt ） 
+
+django-admin startproject --extension=py,txt mysite 
+
+--name 
+
+指定文件名模式（如 Dockerfile , README.md ） 
+
+django-admin startproject --name=Dockerfile mysite 
+
+实例 
+
+django-admin startproject mysite # 创建默认项目 
+
+django-admin startproject mysite / opt / code # 指定目录 
+
+django-admin startproject --template =https: // example.com / my_template.zip mysite # 使用远程模板 
+
+django-admin startapp（创建应用） 
+
+基本语法: 
+
+django-admin startapp <应用名称> [目标目录] 
+
+参数说明: 
+
+参数 
+
+作用 
+
+示例 
+
+<应用名称> 
+
+必填，应用名称（会生成 models.py , views.py 等） 
+
+django-admin startapp blog 
+
+[目标目录] 
+
+可选，指定应用存放目录 
+
+django-admin startapp blog /opt/myapp 
+
+--template 
+
+使用自定义应用模板 
+
+django-admin startapp --template=my_app_template.zip blog 
+
+实例 
+
+django-admin startapp blog # 创建默认应用 
+
+django-admin startapp blog / opt / myapp # 指定目录 
+
+django-admin startapp --template =my_template.zip blog # 使用模板 
+
+django-admin runserver（启动开发服务器） 
+
+基本语法: 
+
+python manage.py runserver [IP:端口] 
+
+参数说明: 
+
+参数 
+
+作用 
+
+示例 
+
+[IP:端口] 
+
+可选，指定监听的 IP 和端口（默认 127.0.0.1:8000 ） 
+
+python manage.py runserver 0.0.0.0:8080 
+
+--noreload 
+
+禁用自动重载（调试时使用） 
+
+python manage.py runserver --noreload 
+
+--insecure 
+
+强制静态文件服务（非 DEBUG 模式） 
+
+python manage.py runserver --insecure 
+
+实例 
+
+python manage.py runserver # 默认启动（127.0.0.1:8000） 
+
+python manage.py runserver 0.0.0.0: 8000 # 允许外部访问 
+
+python manage.py runserver 8080 # 仅修改端口 
+
+django-admin migrate（数据库迁移） 
+
+基本语法: 
+
+python manage.py migrate [应用名] [迁移版本] 
+
+参数说明: 
+
+参数 
+
+作用 
+
+示例 
+
+[应用名] 
+
+可选，指定要迁移的应用 
+
+python manage.py migrate blog 
+
+[迁移版本] 
+
+可选，指定迁移版本号 
+
+python manage.py migrate blog 0002 
+
+--fake 
+
+标记迁移为已执行（不实际修改数据库） 
+
+python manage.py migrate --fake 
+
+--fake-initial 
+
+仅当表已存在时标记为已执行 
+
+python manage.py migrate --fake-initial 
+
+实例 
+
+python manage.py migrate # 执行所有未应用的迁移 
+
+python manage.py migrate blog # 仅迁移 blog 应用 
+
+python manage.py migrate blog 0002 # 迁移到特定版本 
+
+其他常用命令 
+
+命令 
+
+作用 
+
+示例 
+
+createsuperuser 
+
+创建管理员用户 
+
+python manage.py createsuperuser 
+
+shell 
+
+进入 Django Shell（带 ORM 支持） 
+
+python manage.py shell 
+
+test 
+
+运行测试用例 
+
+python manage.py test blog 
+
+collectstatic 
+
+收集静态文件（生产环境部署） 
+
+python manage.py collectstatic 
+
+AI 思考中... 
+
+Django 视图 – FBV 与 CBV 
+
+Django 项目结构解析

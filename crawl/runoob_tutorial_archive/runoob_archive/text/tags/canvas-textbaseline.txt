@@ -1,0 +1,106 @@
+URL: https://www.runoob.com/tags/canvas-textbaseline.html
+Title: HTML canvas textBaseline 属性 | 菜鸟教程
+
+HTML canvas textBaseline 属性 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas textAlign 属性 
+
+HTML canvas fillText() 方法 
+
+HTML canvas textBaseline 属性 
+
+实例 
+
+在 y=100 处绘制一条红线，然后在 y=100 处用不同的 textBaseline 值放置每个单词： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+
+//Draw a red line at y=100 
+ctx.strokeStyle="red"; 
+ctx.moveTo(5,100); 
+ctx.lineTo(395,100); 
+ctx.stroke(); 
+
+ctx.font="20px Arial" 
+
+//Place each word at y=100 with different textBaseline values 
+ctx.textBaseline="top"; 
+ctx.fillText("Top",5,100); 
+ctx.textBaseline="bottom"; 
+ctx.fillText("Bottom",50,100); 
+ctx.textBaseline="middle"; 
+ctx.fillText("Middle",120,100); 
+ctx.textBaseline="alphabetic"; 
+ctx.fillText("Alphabetic",190,100); 
+ctx.textBaseline="hanging"; 
+ctx.fillText("Hanging",290,100); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 textBaseline 
+属性。 
+
+注意： textBaseline 属性在不同的浏览器上效果不同，特别是使用 "hanging" 或 "ideographic" 时。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+textBaseline 属性设置或返回在绘制文本时的当前文本基线。 
+
+下面的图示演示了 textBaseline 属性支持的各种基线： 
+
+注意： fillText() 和 strokeText() 方法在画布上定位文本时，将使用指定的 textBaseline 值。 
+
+默认值： 
+
+alphabetic 
+
+JavaScript 语法： 
+
+context .textBaseline="alphabetic|top|hanging|middle|ideographic|bottom"; 
+
+属性值 
+
+值 
+
+描述 
+
+alphabetic 
+
+默认。文本基线是普通的字母基线。 
+
+top 
+
+文本基线是 em 方框的顶端。 
+
+hanging 
+
+文本基线是悬挂基线。 
+
+middle 
+
+文本基线是 em 方框的正中。 
+
+ideographic 
+
+文本基线是表意基线。 
+
+bottom 
+
+文本基线是 em 方框的底端。 
+
+AI 思考中... 
+
+HTML canvas textAlign 属性 
+
+HTML canvas fillText() 方法

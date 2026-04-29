@@ -1,0 +1,105 @@
+URL: https://www.runoob.com/chartjs/chartjs-pie.html
+Title: Chart.js 饼图 | 菜鸟教程
+
+Chart.js 饼图 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+Chart.js 教程 
+
+Chart.js 环形图 
+
+Chart.js 折线图 
+
+Chart.js 饼图 
+
+饼图，或称饼状图，是一个划分为几个扇形的圆形统计图表，用于描述量、频率或百分比之间的相对关系。在饼图中，每个扇区的弧长（以及圆心角和面积）大小为其所表示的数量的比例。这些扇区合在一起刚好是一个完全的圆形。顾名思义，这些扇区拼成了一个切开的饼形图案。 
+
+饼图 type 属性为 pie ，type 描述了图表类型。 
+
+const config = {
+ type: 'pie',
+ data: data,
+}; 
+
+接下来我们创建一个简单的饼图： 
+
+实例 
+
+const ctx = document. getElementById ( 'myChart' ) ; 
+
+const data = { 
+
+labels : [ 
+
+'Red' , 
+
+'Blue' , 
+
+'Yellow' 
+
+] , 
+
+datasets : [ { 
+
+label : '饼图实例' , 
+
+data : [ 300 , 50 , 100 ] , 
+
+backgroundColor : [ 
+
+'rgb(255, 99, 132)' , 
+
+'rgb(54, 162, 235)' , 
+
+'rgb(255, 205, 86)' 
+
+] , 
+
+hoverOffset : 4 
+
+} ] 
+
+} ; 
+
+const config = { 
+
+type : 'pie' , 
+
+data : data , 
+
+options : { 
+
+responsive : true , // 设置图表为响应式，根据屏幕窗口变化而变化 
+
+maintainAspectRatio : false , // 保持图表原有比例 
+
+scales : { 
+
+yAxes : [ { 
+
+ticks : { 
+
+beginAtZero : true 
+
+} 
+
+} ] 
+
+} 
+
+} 
+
+} ; 
+
+const myChart = new Chart ( ctx , config ) ; 
+
+尝试一下 » 
+
+以上实例输出结果为： 
+
+AI 思考中... 
+
+Chart.js 环形图 
+
+Chart.js 折线图

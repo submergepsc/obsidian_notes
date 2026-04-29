@@ -1,0 +1,64 @@
+URL: https://www.runoob.com/schema/el-field.html
+Title: XML Schema field 元素 | 菜鸟教程
+
+XML Schema field 元素 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML Schema 教程 
+
+XML Schema extension 元素 
+
+XML Schema group 元素 
+
+XML Schema field 元素 
+
+定义和用法 
+
+field 元素规定 XPath 表达式，该表达式指定用来定义标识约束（unique、key 和 keyref 元素）的值（或其中一个值）。 
+
+Element Information 
+
+父元素： key, keyref, unique 
+
+语法 
+
+<field 
+id=ID 
+xpath=XPath expression 
+any attributes 
+> 
+
+(annotation?) 
+
+</field> 
+
+（? 符号声明在 field 元素内，该元素可出现零次或一次。） 
+
+属性 
+
+描述 
+
+id 
+
+可选。规定该元素的唯一的 ID。 
+
+xpath 
+
+必需。标识其内容或值用于约束的单个元素或属性。如果该表达式标识一个元素，则该元素必须是简单类型。 
+
+xml:lang 
+
+可选。规定内容中使用的语言。 
+
+实例 1 
+
+下面的例子展示了一个 field 元素，该元素把 "userID" 属性定义为用于标识约束的字段： 
+
+<xs:field xpath="@userID"/> 
+
+AI 思考中... 
+
+XML Schema extension 元素 
+
+XML Schema group 元素

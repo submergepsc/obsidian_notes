@@ -1,0 +1,345 @@
+URL: https://www.runoob.com/css3/css3-pagination.html
+Title: CSS 分页实例 | 菜鸟教程
+
+CSS 分页实例 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+CSS3 教程 
+
+CSS 按钮 
+
+CSS3 框大小 
+
+CSS 分页实例 
+
+本章节我们将为大家介绍如何通过使用 CSS 来创建分页的实例。 
+
+简单分页 
+
+如果你的网站有很多个页面，你就需要使用分页来为每个页面做导航。 
+
+以下实例演示了如何使用 HTML 和 CSS 来创建分页： 
+
+CSS 实例 
+
+ul.pagination { 
+display: inline-block; 
+padding: 0; 
+margin: 0; 
+} 
+
+ul.pagination li { display: inline; } 
+
+ul.pagination li a { 
+color: black; 
+float: left; 
+padding: 8px 
+ 16px; 
+text-decoration: none; 
+} 
+
+尝试一下 » 
+
+点击及鼠标悬停分页样式 
+
+« 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+» 
+
+如果点击当前页，可以使用 .active 来设置当前页样式，鼠标悬停可以使用 :hover 选择器来修改样式： 
+
+CSS 实例 
+
+ul.pagination li a.active { 
+background-color: #4CAF50; 
+color: white; 
+} 
+
+ul.pagination li 
+ a:hover:not(.active) { background-color: #ddd; } 
+
+尝试一下 » 
+
+CSS 实例 
+
+ul.pagination li a.active { 
+background-color: 
+ #4CAF50; 
+color: white; 
+} 
+
+ul.pagination li 
+ a:hover:not(.active) {background-color: #ddd;} 
+
+尝试一下 » 
+
+圆角样式 
+
+« 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+» 
+
+可以使用 border-radius 属性为选中的页码来添加圆角样式: 
+
+CSS 实例 
+
+ul.pagination li a { 
+border-radius: 5px; 
+} 
+
+ul.pagination li a.active { 
+border-radius: 5px; 
+} 
+
+尝试一下 » 
+
+鼠标悬停过渡效果 
+
+« 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+» 
+
+我们可以通过添加 transition 属性来为鼠标移动到页码上时添加过渡效果: 
+
+CSS 实例 
+
+ul.pagination li a { 
+transition: background-color .3s; 
+} 
+
+尝试一下 » 
+
+带边框分页 
+
+« 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+» 
+
+我们可以使用 border 属性来添加带边框分页: 
+
+CSS 实例 
+
+ul.pagination li a { 
+border: 1px solid #ddd; /* Gray 
+ */ 
+} 
+
+尝试一下 » 
+
+圆角边框 
+
+提示: 在第一个分页链接和最后一个分页链接添加圆角： 
+
+« 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+» 
+
+CSS 实例 
+
+.pagination li:first-child a { 
+border-top-left-radius: 
+ 5px; 
+border-bottom-left-radius: 5px; 
+} 
+
+.pagination li:last-child a { 
+border-top-right-radius: 5px; 
+border-bottom-right-radius: 5px; 
+} 
+
+尝试一下 » 
+
+分页间隔 
+
+提示: 你可以使用 margin 属性来为每个页码直接添加空格： 
+
+« 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+» 
+
+CSS 实例 
+
+ul.pagination li a { 
+margin: 0 4px; /* 0 对应的是头部与底部，可以修改它看看效果 */ 
+} 
+
+尝试一下 » 
+
+分页字体大小 
+
+« 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+» 
+
+我们可以使用 font-size 属性来设置分页的字体大小: 
+
+CSS 实例 
+
+ul.pagination li a { 
+font-size: 22px; 
+} 
+
+尝试一下 » 
+
+居中分页 
+
+« 
+
+1 
+
+2 
+
+3 
+
+4 
+
+5 
+
+6 
+
+7 
+
+» 
+
+如果要让分页居中，可以在容器元素上 (如 <div>) 添加 text-align:center 样式： 
+
+CSS 实例 
+
+div.center { 
+text-align: center; 
+} 
+
+尝试一下 » 
+
+更多实例 
+
+CSS 实例 
+
+尝试一下 » 
+
+面包屑导航 
+
+另外一种导航为面包屑导航，实例如下： 
+
+CSS 实例 
+
+ul.breadcrumb { 
+padding: 8px 16px; 
+list-style: none; 
+background-color: #eee; 
+} 
+
+ul.breadcrumb li {display: inline;} 
+
+ul.breadcrumb li+li:before { 
+padding: 8px; 
+color: black; 
+content: "/\00a0"; 
+} 
+
+尝试一下 » 
+
+AI 思考中... 
+
+CSS 按钮 
+
+CSS3 框大小

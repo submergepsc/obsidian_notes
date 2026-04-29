@@ -1,0 +1,63 @@
+URL: https://www.runoob.com/tags/canvas-rotate.html
+Title: HTML canvas rotate() 方法 | 菜鸟教程
+
+HTML canvas rotate() 方法 | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+HTML 参考手册 
+
+HTML canvas scale() 方法 
+
+HTML canvas translate() 方法 
+
+HTML canvas rotate() 方法 
+
+实例 
+
+将矩形旋转 20 度： 
+
+JavaScript： 
+
+var c=document.getElementById("myCanvas"); 
+var ctx=c.getContext("2d"); 
+ctx.rotate(20*Math.PI/180); 
+ctx.fillRect(50,20,100,50); 
+
+尝试一下 » 
+
+浏览器支持 
+
+Internet Explorer 9、Firefox、Opera、Chrome 和 Safari 支持 rotate() 
+方法。 
+
+注意： Internet Explorer 8 及之前的版本不支持 <canvas> 元素。 
+
+定义和用法 
+
+rotate() 方法旋转当前的绘图。 
+
+注意： 旋转只会影响到旋转完成后的绘图。 
+
+JavaScript 语法： 
+
+context .rotate( angle ); 
+
+参数值 
+
+参数 
+
+描述 
+
+angle 
+
+旋转角度，以弧度计。 
+
+如需将角度转换为弧度，请使用 degrees *Math.PI/180 公式进行计算。 
+实例：如需旋转 5 度，可规定下面的公式：5*Math.PI/180。 
+
+AI 思考中... 
+
+HTML canvas scale() 方法 
+
+HTML canvas translate() 方法

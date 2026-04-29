@@ -1,0 +1,64 @@
+URL: https://www.runoob.com/xml/xml-display.html
+Title: XML 和 CSS | 菜鸟教程
+
+XML 和 CSS | 菜鸟教程 
+
+菜鸟教程 -- 学的不仅是技术，更是梦想！ 
+
+XML 教程 
+
+查看 XML 文件 
+
+XML 和 XSLT 
+
+使用 CSS 显示 XML 
+
+通过使用 CSS（Cascading Style Sheets 层叠样式表），您可以添加显示信息到 XML 文档中。 
+
+使用 CSS 显示您的 XML？ 
+
+使用 CSS 来格式化 XML 文档是有可能的。 
+
+下面的实例就是关于如何使用 CSS 样式表来格式化 XML 文档： 
+
+请看这个 XML 文件： CD 目录 
+
+然后看这个样式表： CSS 文件 
+
+最后，请查看： 使用 CSS 文件格式化的 CD 目录 
+
+下面是 XML 文件的一小部分。第二行把 XML 文件链接到 CSS 文件： 
+
+<?xml version="1.0" encoding="ISO-8859-1"?> 
+<?xml-stylesheet type="text/css" href="cd_catalog.css"?> 
+<CATALOG> 
+<CD> 
+<TITLE>Empire Burlesque</TITLE> 
+<ARTIST>Bob Dylan</ARTIST> 
+<COUNTRY>USA</COUNTRY> 
+<COMPANY>Columbia</COMPANY> 
+<PRICE>10.90</PRICE> 
+<YEAR>1985</YEAR> 
+</CD> 
+<CD> 
+<TITLE>Hide your heart</TITLE> 
+<ARTIST>Bonnie Tyler</ARTIST> 
+<COUNTRY>UK</COUNTRY> 
+<COMPANY>CBS Records</COMPANY> 
+<PRICE>9.90</PRICE> 
+<YEAR>1988</YEAR> 
+</CD> 
+. 
+. 
+. 
+</CATALOG> 
+
+使用 CSS 格式化 XML 不是常用的方法。 
+
+W3C 推荐使用 XSLT，请看下一章。 
+
+AI 思考中... 
+
+查看 XML 文件 
+
+XML 和 XSLT
