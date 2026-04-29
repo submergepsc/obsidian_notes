@@ -1,0 +1,56 @@
+﻿# 字节顺序 - OI Wiki
+
+- Source: https://oi-wiki.org/misc/endianness/
+
+# 字节顺序
+
+本页面将简要介绍字节顺序的概念和分类．
+
+## 简介
+
+字节顺序是跨越多字节的程序对象的存储规则，表示一个对象的字节的排列方法．
+
+## 分类
+
+字节顺序有两种，分为小端序（little endian）和大端序（big endian）．
+
+为方便介绍，接下来以一个位于 `0x100` 处，类型为 `int`，十六进制值为 `0x01234567` 的变量为例．其中 `0x01` 是最高位有效字节，`0x67` 是最低位有效字节．
+
+### 小端序
+
+小端序是指机器选择在内存中按照从 **最低** 有效字节到 **最高** 有效字节的顺序存储对象．
+
+上文提到的变量表示如下：
+
+....| 0x100| 0x101| 0x102| 0x103| ....  
+---|---|---|---|---|---  
+....| 67| 45| 23| 01| ....  
+  
+### 大端序
+
+大端序是指机器选择在内存中按照从 **最高** 有效字节到 **最低** 有效字节的顺序存储对象．
+
+上文提到的变量表示如下：
+
+....| 0x100| 0x101| 0x102| 0x103| ....  
+---|---|---|---|---|---  
+....| 01| 23| 45| 67| ....  
+  
+### 两种顺序的区别
+
+事实上，这两种字节顺序没有孰优孰劣之分．这两种顺序的名字「小端」和「大端」，正是出自《格列佛游记》一书．书中，小人国里两个派别交战不休的原因是无法就从小端还是大端剥鸡蛋达成一致．就和剥鸡蛋的争论一样，选择何种字节顺序的争论是非技术性的．
+
+当然，字节顺序的不一致会导致二进制数据在不同类型的机器之间进行传输时被反序．为了避免这件事情，网络应用程序建立了一套标准，保证发送过程中是使用约定好的网络标准，而不是不同机器的内部表示．
+
+## 顺序选择惯例
+
+  * 小端序：x86, ARM processors running Android, iOS, and Windows
+
+  * 大端序：Sun, PPC Mac, Internet
+
+* * *
+
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/misc/endianness.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/misc/endianness.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [Enter-tainer](https://github.com/Enter-tainer), [NachtgeistW](https://github.com/NachtgeistW), [Tiphereth-A](https://github.com/Tiphereth-A)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

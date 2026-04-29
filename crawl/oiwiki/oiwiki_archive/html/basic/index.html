@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>基础知识 - OI Wiki</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f8;
+      --panel: #ffffff;
+      --ink: #17202a;
+      --muted: #5f6c7b;
+      --line: #d9e1e8;
+      --accent: #0f766e;
+      --accent-soft: #d9f3ef;
+      --code-bg: #111827;
+      --code-ink: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "Source Han Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 20px 56px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    header, section, article, .sidebar-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    header {
+      padding: 20px 22px;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 1.75rem;
+      line-height: 1.25;
+    }
+    header p, p {
+      color: var(--muted);
+    }
+    aside {
+      position: sticky;
+      top: 16px;
+    }
+    .sidebar-card {
+      padding: 16px;
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+    }
+    .sidebar-card h2, section h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .sidebar-list, .sidebar-sublist {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      margin-top: 8px;
+      padding-left: 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 9px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line);
+    }
+    .sidebar-sublist li {
+      border: 0;
+      padding-bottom: 0;
+      margin-bottom: 7px;
+    }
+    .sidebar-list span, .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .sidebar-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .sidebar-row a {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .sidebar-row span {
+      flex: 0 0 auto;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .content > section, article {
+      padding: 20px 22px;
+      margin-bottom: 18px;
+    }
+    article {
+      max-width: 980px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .group-card {
+      min-width: 0;
+    }
+    .page-list li, .group-card li, .search-results li {
+      margin: 7px 0;
+    }
+    .article-nav {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+    .article-nav a {
+      display: block;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow-wrap: anywhere;
+    }
+    .article-nav a:last-child {
+      text-align: right;
+    }
+    .search-controls {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: end;
+    }
+    .search-controls label {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    input, select, button {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 8px 10px;
+    }
+    button {
+      background: var(--accent-soft);
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    mark {
+      background: #f5d76e;
+      color: #17202a;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    article h1, article h2, article h3, article h4 {
+      line-height: 1.35;
+      scroll-margin-top: 20px;
+    }
+    article img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+    .table-scroll {
+      overflow: auto;
+      margin: 1em 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      background: var(--panel);
+    }
+    th, td {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #eef7f6;
+      color: #123c39;
+      font-weight: 700;
+    }
+    pre {
+      overflow: auto;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--code-bg);
+      color: var(--code-ink);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      word-break: break-word;
+    }
+    p code, li code {
+      background: #eef2f7;
+      color: #1f2937;
+      border-radius: 4px;
+      padding: 0.1em 0.3em;
+    }
+    blockquote {
+      margin: 1em 0;
+      padding: 0.2em 1em;
+      border-left: 4px solid var(--accent);
+      background: #f0fdfa;
+      color: #334155;
+    }
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        grid-template-columns: 1fr;
+      }
+      .article-nav {
+        grid-template-columns: 1fr;
+      }
+      .article-nav a:last-child {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>基础知识 - OI Wiki</h1>
+      <p>26 个页面。</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页内导航</h2><ul class="sidebar-list"><li><a href="../../index.html">归档首页</a></li><li><a href="../all-pages.html">全部页面</a></li><li><details open><summary>本栏目页面 <span>26</span></summary><ul class="sidebar-sublist"><li><a href="amortized-analysis.html">均摊复杂度</a></li><li><a href="binary.html">二分</a></li><li><a href="binary-lifting.html">倍增</a></li><li><a href="bubble-sort.html">冒泡排序</a></li><li><a href="bucket-sort.html">桶排序</a></li><li><a href="complexity.html">复杂度简介</a></li><li><a href="construction.html">构造</a></li><li><a href="counting-sort.html">计数排序</a></li><li><a href="divide-and-conquer.html">递归 &amp; 分治</a></li><li><a href="enumerate.html">枚举</a></li><li><a href="greedy.html">贪心</a></li><li><a href="heap-sort.html">堆排序</a></li><li><a href="insertion-sort.html">插入排序</a></li><li><a href="merge-sort.html">归并排序</a></li><li><a href="prefix-sum.html">前缀和 &amp; 差分</a></li><li><a href="quick-sort.html">快速排序</a></li><li><a href="radix-sort.html">基数排序</a></li><li><a href="selection-sort.html">选择排序</a></li><li><a href="shell-sort.html">希尔排序</a></li><li><a href="simulate.html">模拟</a></li><li><a href="sort-intro.html">排序简介</a></li><li><a href="stl-sort.html">排序相关 STL</a></li><li><a href="tim-sort.html">Tim 排序</a></li><li><a href="tournament-sort.html">锦标赛排序</a></li><li><a href="use-of-sort.html">排序应用</a></li><li><a href="overview.html">算法基础简介</a></li></ul></details></li></ul></nav></aside>
+      <div class="content"><section class="search-panel"><h2>栏目搜索</h2><div class="search-controls"><label><span>栏目</span><select id="archive-search-group"><option value="">全部栏目</option></select></label><input id="archive-search-input" type="search" placeholder="搜索 基础知识 下的页面" autocomplete="off"><button id="archive-search-clear" type="button">清空</button></div><p id="archive-search-status" class="search-status">输入标题、栏目或分类关键词。</p><ol id="archive-search-results" class="search-results" hidden></ol></section><section><h2>基础知识 (26)</h2><ol class="page-list"><li><a href="amortized-analysis.html">均摊复杂度</a></li><li><a href="binary.html">二分</a></li><li><a href="binary-lifting.html">倍增</a></li><li><a href="bubble-sort.html">冒泡排序</a></li><li><a href="bucket-sort.html">桶排序</a></li><li><a href="complexity.html">复杂度简介</a></li><li><a href="construction.html">构造</a></li><li><a href="counting-sort.html">计数排序</a></li><li><a href="divide-and-conquer.html">递归 &amp; 分治</a></li><li><a href="enumerate.html">枚举</a></li><li><a href="greedy.html">贪心</a></li><li><a href="heap-sort.html">堆排序</a></li><li><a href="insertion-sort.html">插入排序</a></li><li><a href="merge-sort.html">归并排序</a></li><li><a href="prefix-sum.html">前缀和 &amp; 差分</a></li><li><a href="quick-sort.html">快速排序</a></li><li><a href="radix-sort.html">基数排序</a></li><li><a href="selection-sort.html">选择排序</a></li><li><a href="shell-sort.html">希尔排序</a></li><li><a href="simulate.html">模拟</a></li><li><a href="sort-intro.html">排序简介</a></li><li><a href="stl-sort.html">排序相关 STL</a></li><li><a href="tim-sort.html">Tim 排序</a></li><li><a href="tournament-sort.html">锦标赛排序</a></li><li><a href="use-of-sort.html">排序应用</a></li><li><a href="overview.html">算法基础简介</a></li></ol></section></div>
+    </div>
+  </main>
+  <script id="archive-search-data" type="application/json">[{"title": "均摊复杂度", "group": "基础知识", "subgroup": "amortized-analysis", "href": "amortized-analysis.html"}, {"title": "二分", "group": "基础知识", "subgroup": "binary", "href": "binary.html"}, {"title": "倍增", "group": "基础知识", "subgroup": "binary-lifting", "href": "binary-lifting.html"}, {"title": "冒泡排序", "group": "基础知识", "subgroup": "bubble-sort", "href": "bubble-sort.html"}, {"title": "桶排序", "group": "基础知识", "subgroup": "bucket-sort", "href": "bucket-sort.html"}, {"title": "复杂度简介", "group": "基础知识", "subgroup": "complexity", "href": "complexity.html"}, {"title": "构造", "group": "基础知识", "subgroup": "construction", "href": "construction.html"}, {"title": "计数排序", "group": "基础知识", "subgroup": "counting-sort", "href": "counting-sort.html"}, {"title": "递归 & 分治", "group": "基础知识", "subgroup": "divide-and-conquer", "href": "divide-and-conquer.html"}, {"title": "枚举", "group": "基础知识", "subgroup": "enumerate", "href": "enumerate.html"}, {"title": "贪心", "group": "基础知识", "subgroup": "greedy", "href": "greedy.html"}, {"title": "堆排序", "group": "基础知识", "subgroup": "heap-sort", "href": "heap-sort.html"}, {"title": "插入排序", "group": "基础知识", "subgroup": "insertion-sort", "href": "insertion-sort.html"}, {"title": "归并排序", "group": "基础知识", "subgroup": "merge-sort", "href": "merge-sort.html"}, {"title": "算法基础简介", "group": "基础知识", "subgroup": "概览", "href": "overview.html"}, {"title": "前缀和 & 差分", "group": "基础知识", "subgroup": "prefix-sum", "href": "prefix-sum.html"}, {"title": "快速排序", "group": "基础知识", "subgroup": "quick-sort", "href": "quick-sort.html"}, {"title": "基数排序", "group": "基础知识", "subgroup": "radix-sort", "href": "radix-sort.html"}, {"title": "选择排序", "group": "基础知识", "subgroup": "selection-sort", "href": "selection-sort.html"}, {"title": "希尔排序", "group": "基础知识", "subgroup": "shell-sort", "href": "shell-sort.html"}, {"title": "模拟", "group": "基础知识", "subgroup": "simulate", "href": "simulate.html"}, {"title": "排序简介", "group": "基础知识", "subgroup": "sort-intro", "href": "sort-intro.html"}, {"title": "排序相关 STL", "group": "基础知识", "subgroup": "stl-sort", "href": "stl-sort.html"}, {"title": "Tim 排序", "group": "基础知识", "subgroup": "tim-sort", "href": "tim-sort.html"}, {"title": "锦标赛排序", "group": "基础知识", "subgroup": "tournament-sort", "href": "tournament-sort.html"}, {"title": "排序应用", "group": "基础知识", "subgroup": "use-of-sort", "href": "use-of-sort.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) return;
+      let items = [];
+      try { items = JSON.parse(dataNode.textContent || "[]"); } catch (_error) { return; }
+      const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+      const highlight = (value, query) => {
+        if (!query) return escapeHtml(value);
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+      const groups = [...new Set(items.map((item) => item.group))].sort((a, b) => a.localeCompare(b, "zh-CN"));
+      for (const group of groups) {
+        const option = document.createElement("option");
+        option.value = group;
+        option.textContent = group;
+        groupSelect.append(option);
+      }
+      const render = () => {
+        const query = input.value.trim().toLowerCase();
+        const tokens = query.split(/\s+/).filter(Boolean);
+        const selectedGroup = groupSelect.value;
+        const scoped = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup ? `${selectedGroup} 下可搜索 ${scoped.length} 个页面。` : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+        const matches = scoped
+          .filter((item) => {
+            const haystack = [item.title, item.group, item.subgroup].join(" ").toLowerCase();
+            return tokens.every((token) => haystack.includes(token));
+          })
+          .sort((a, b) => a.title.localeCompare(b.title, "zh-CN"));
+        results.hidden = matches.length === 0;
+        results.innerHTML = matches.slice(0, 100).map((item) =>
+          `<li><a href="${item.href}">${highlight(item.title, query)}</a><div class="meta">${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</div></li>`
+        ).join("");
+        status.textContent = matches.length ? `匹配 ${matches.length} 个页面，显示前 ${Math.min(matches.length, 100)} 个。` : "没有匹配结果。";
+      };
+      input.addEventListener("input", render);
+      groupSelect.addEventListener("change", render);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        render();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          render();
+        }
+      });
+      const params = new URLSearchParams(window.location.search);
+      const initialQuery = params.get("q");
+      if (initialQuery) input.value = initialQuery;
+      render();
+    })();
+  </script>
+</body>
+</html>

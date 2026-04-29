@@ -1,0 +1,693 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>单纯形法</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f8;
+      --panel: #ffffff;
+      --ink: #17202a;
+      --muted: #5f6c7b;
+      --line: #d9e1e8;
+      --accent: #0f766e;
+      --accent-soft: #d9f3ef;
+      --code-bg: #111827;
+      --code-ink: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "Source Han Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 20px 56px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    header, section, article, .sidebar-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    header {
+      padding: 20px 22px;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 1.75rem;
+      line-height: 1.25;
+    }
+    header p, p {
+      color: var(--muted);
+    }
+    aside {
+      position: sticky;
+      top: 16px;
+    }
+    .sidebar-card {
+      padding: 16px;
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+    }
+    .sidebar-card h2, section h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .sidebar-list, .sidebar-sublist {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      margin-top: 8px;
+      padding-left: 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 9px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line);
+    }
+    .sidebar-sublist li {
+      border: 0;
+      padding-bottom: 0;
+      margin-bottom: 7px;
+    }
+    .sidebar-list span, .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .sidebar-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .sidebar-row a {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .sidebar-row span {
+      flex: 0 0 auto;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .content > section, article {
+      padding: 20px 22px;
+      margin-bottom: 18px;
+    }
+    article {
+      max-width: 980px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .group-card {
+      min-width: 0;
+    }
+    .page-list li, .group-card li, .search-results li {
+      margin: 7px 0;
+    }
+    .article-nav {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+    .article-nav a {
+      display: block;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow-wrap: anywhere;
+    }
+    .article-nav a:last-child {
+      text-align: right;
+    }
+    .search-controls {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: end;
+    }
+    .search-controls label {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    input, select, button {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 8px 10px;
+    }
+    button {
+      background: var(--accent-soft);
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    mark {
+      background: #f5d76e;
+      color: #17202a;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    article h1, article h2, article h3, article h4 {
+      line-height: 1.35;
+      scroll-margin-top: 20px;
+    }
+    article img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+    .table-scroll {
+      overflow: auto;
+      margin: 1em 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      background: var(--panel);
+    }
+    th, td {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #eef7f6;
+      color: #123c39;
+      font-weight: 700;
+    }
+    pre {
+      overflow: auto;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--code-bg);
+      color: var(--code-ink);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      word-break: break-word;
+    }
+    p code, li code {
+      background: #eef2f7;
+      color: #1f2937;
+      border-radius: 4px;
+      padding: 0.1em 0.3em;
+    }
+    blockquote {
+      margin: 1em 0;
+      padding: 0.2em 1em;
+      border-left: 4px solid var(--accent);
+      background: #f0fdfa;
+      color: #334155;
+    }
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        grid-template-columns: 1fr;
+      }
+      .article-nav {
+        grid-template-columns: 1fr;
+      }
+      .article-nav a:last-child {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>单纯形法</h1>
+      <p>数学 / simplex</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页面导航</h2><ul class="sidebar-list"><li><a href="../../index.html">归档首页</a></li><li><a href="index.html">数学 索引</a></li><li><details open><summary>本文目录</summary><ul class="sidebar-sublist"><li><a href="#53557eaf5f626cd5">单纯形法</a></li><li><a href="#5f155165">引入</a></li><li><a href="#57fa672c69825ff5">基本概念</a></li><li><a href="#4e004e2a4f8b5b50">一个例子</a></li><li><a href="#57fa672c53ef884c89e3">基本可行解</a></li><li><a href="#8f6c8f74">转轴</a></li><li><a href="#7ec86b6267614ef6">终止条件</a></li><li><a href="#53557eaf5f628868">单纯形表</a></li><li><a href="#4f8b9898">例题</a></li></ul></details></li><li><details><summary>同栏目页面</summary><ul class="sidebar-sublist"><li><a href="berlekamp-massey.html">Berlekamp–Massey 算法</a></li><li><a href="poly-czt.html">Chirp Z 变换</a></li><li><a href="combinatorics-entringer.html">Entringer Number</a></li><li><a href="combinatorics-eulerian.html">Eulerian Number</a></li><li><a href="linear-algebra-jordan.html">Jordan标准型</a></li><li><a href="poly-lagrange-inversion.html">Lagrange 反演</a></li><li><a href="number-theory-meissel-lehmer.html">Meissel–Lehmer 算法</a></li><li><a href="number-theory-min-25.html">Min_25 筛</a></li><li><a href="number-theory-pell-equation.html">Pell 方程</a></li><li><a href="number-theory-powerful-number.html">Powerful Number 筛</a></li><li><a href="combinatorics-polya.html">Pólya 计数</a></li><li><a href="algebra-schreier-sims.html">Schreier–Sims 算法</a></li><li><a href="number-theory-stern-brocot.html">Stern–Brocot 树与 Farey 序列</a></li><li><a href="number-theory-crt.html">中国剩余定理</a></li><li><a href="number-theory-quad-residue.html">二次剩余</a></li><li><a href="number-theory-quadratic.html">二次域</a></li><li><a href="binary-set.html">二进制集合操作</a></li><li><a href="poly-fundamental.html">代数基本定理</a></li><li><a href="combinatorics-bernoulli.html">伯努利数</a></li><li><a href="bit.html">位操作</a></li><li><a href="game-theory-impartial-game.html">公平组合游戏</a></li><li><a href="linear-algebra-product.html">内积和外积</a></li><li><a href="combinatorics-partition.html">分拆数</a></li><li><a href="number-theory-pollard-rho.html">分解质因数</a></li><li><a href="linear-algebra-elementary-operations.html">初等变换</a></li><li><a href="number-theory-lift-the-exponent.html">升幂引理</a></li><li><a href="simplex.html">单纯形法</a></li><li><a href="game-theory-intro.html">博弈论简介</a></li><li><a href="combinatorics-catalan.html">卡特兰数</a></li><li><a href="number-theory-lucas.html">卢卡斯定理</a></li><li><a href="number-theory-congruence-equation.html">同余方程</a></li><li><a href="linear-algebra-vector.html">向量</a></li><li><a href="combinatorics-graph-enumeration.html">图论计数</a></li><li><a href="algebra-field-theory.html">域论</a></li><li><a href="algebra-basic.html">基本概念</a></li><li><a href="probability-basic-conception.html">基本概念</a></li><li><a href="complex.html">复数</a></li><li><a href="poly-intro.html">多项式与生成函数简介</a></li><li><a href="poly-elementary-func.html">多项式初等函数</a></li><li><a href="poly-multipoint-eval-interpolation.html">多项式多点求值|快速插值</a></li><li><a href="poly-shift.html">多项式平移|连续点值平移</a></li><li><a href="poly-newton.html">多项式牛顿迭代</a></li><li><a href="combinatorics-inclusion-exclusion-principle.html">容斥原理</a></li><li><a href="linear-algebra-diagonalization.html">对角化</a></li><li><a href="boolean-algebra.html">布尔代数</a></li><li><a href="poly-linear-recurrence.html">常系数齐次线性递推</a></li><li><a href="numeral-sys-balanced-ternary.html">平衡三进制</a></li><li><a href="order-theory.html">序理论</a></li><li><a href="coordinate.html">弧度制与坐标系</a></li><li><a href="poly-comp-rev.html">形式幂级数复合|复合逆</a></li><li><a href="poly-fft.html">快速傅里叶变换</a></li><li><a href="binary-exponentiation.html">快速幂</a></li><li><a href="poly-ntt.html">快速数论变换</a></li><li><a href="poly-fwt.html">快速沃尔什变换</a></li><li><a href="combinatorics-drawer-principle.html">抽屉原理</a></li><li><a href="matroid.html">拟阵</a></li><li><a href="poly-egf.html">指数生成函数</a></li><li><a href="combinatorics-combination.html">排列组合</a></li><li><a href="numerical-interp.html">插值</a></li><li><a href="numerical-integral.html">数值积分</a></li><li><a href="numeral-sys-intro.html">数字系统简介</a></li><li><a href="overview.html">数学部分简介</a></li><li><a href="number-theory-sqrt-decomposition.html">数论分块</a></li><li><a href="number-theory-basic.html">数论基础</a></li><li><a href="combinatorics-fibonacci.html">斐波那契数列</a></li><li><a href="combinatorics-stirling.html">斯特林数</a></li><li><a href="poly-ogf.html">普通生成函数</a></li><li><a href="number-theory-gcd.html">最大公约数</a></li><li><a href="number-theory-du.html">杜教筛</a></li><li><a href="probability-conditional-probability.html">条件概率与独立性</a></li><li><a href="young-tableau.html">杨氏矩阵</a></li><li><a href="numeral-sys-gray-code.html">格雷码</a></li><li><a href="probability-concentration-inequality.html">概率不等式</a></li><li><a href="number-theory-mod-arithmetic.html">模算术简介</a></li><li><a href="number-theory-inverse.html">模逆元</a></li><li><a href="number-theory-euler-totient.html">欧拉函数</a></li><li><a href="number-theory-zhou.html">洲阁筛</a></li><li><a href="numerical-newton.html">牛顿迭代法</a></li><li><a href="linear-algebra-char-poly.html">特征多项式</a></li><li><a href="number-theory-dirichlet.html">狄利克雷卷积</a></li><li><a href="algebra-ring-theory.html">环论</a></li><li><a href="linear-algebra-matrix.html">矩阵</a></li><li><a href="number-theory-discrete-logarithm.html">离散对数</a></li><li><a href="poly-symbolic-method.html">符号化方法</a></li><li><a href="number-theory-sieve.html">筛法</a></li><li><a href="number-theory-euclidean.html">类欧几里德算法</a></li><li><a href="number-theory-prime.html">素数</a></li><li><a href="linear-algebra.html">线性代数简介</a></li><li><a href="number-theory-linear-equation.html">线性同余方程</a></li><li><a href="linear-algebra-basis.html">线性基</a></li><li><a href="linear-algebra-linear-mapping.html">线性映射</a></li><li><a href="linear-algebra-vector-space.html">线性空间</a></li><li><a href="linear-programming.html">线性规划基础</a></li><li><a href="permutation.html">置换和排列</a></li><li><a href="algebra-group-theory.html">群论</a></li><li><a href="combinatorics-vandermonde-convolution.html">范德蒙德卷积</a></li><li><a href="number-theory-mobius.html">莫比乌斯反演</a></li><li><a href="linear-algebra-determinant.html">行列式</a></li><li><a href="number-theory-bezouts.html">裴蜀定理 &amp; 一次不定方程</a></li><li><a href="combinatorics-bell.html">贝尔数</a></li><li><a href="number-theory-fermat.html">费马小定理 &amp; 欧拉定理</a></li><li><a href="numeral-sys-base.html">进位制</a></li><li><a href="number-theory-continued-fraction.html">连分数</a></li><li><a href="combinatorics-derangement.html">错位排列</a></li><li><a href="number-theory-primitive-root.html">阶 &amp; 原根</a></li><li><a href="number-theory-factorial.html">阶乘取模</a></li><li><a href="probability-random-variable.html">随机变量</a></li><li><a href="probability-exp-var.html">随机变量的数字特征</a></li><li><a href="game-theory-zero-sum-game.html">零和游戏</a></li><li><a href="game-theory-partizan-game.html">非公平组合游戏</a></li><li><a href="numerical-gauss.html">高斯消元</a></li><li><a href="number-theory-residue.html">高次剩余 &amp; 单位根</a></li><li><a href="bignum.html">高精度计算</a></li></ul></details></li></ul></nav></aside>
+      <div class="content"><nav class="article-nav"><a href="number-theory-lift-the-exponent.html"><span class="meta">上一篇</span><br>升幂引理</a><a href="game-theory-intro.html"><span class="meta">下一篇</span><br>博弈论简介</a></nav><article><p class="meta">本地源文件：<code>docs/math__simplex.md</code></p><h1 id="53557eaf5f626cd5">单纯形法</h1>
+<p>前置知识：<a href="linear-programming.html">线性规划基础</a></p>
+<h2 id="5f155165">引入</h2>
+<p>算法竞赛中，经常使用单纯形法解决线性规划问题．但是，由于算法竞赛中遇到的线性规划问题大多有着更特殊的结构，常常可以转化为网络流问题，因此，单纯形法并不常用，效率也不如专门为网络流问题设计的算法．</p>
+<h2 id="57fa672c69825ff5">基本概念</h2>
+<p>假设要求解如下一个有 𝑛n<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个决策变量和 𝑚 +𝑛m+n<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个约束的 <a href="linear-programming.html">标准形式</a> 线性规划问题：</p>
+<p>min𝑥𝑧=𝑐𝑇𝑥subject to 𝐴𝑥=𝑏,𝑥≥0.minxz=cTxsubject to Ax=b,x≥0.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>不妨假设这 𝑚m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个等式约束确定的线性方程组有解，且 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 满秩，则 rank⁡𝐴 =𝑚 ≤𝑛rank⁡A=m≤n<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<h3 id="4e004e2a4f8b5b50">一个例子</h3>
+<p>在严格叙述单纯形法的步骤之前，本节首先考察一个具体的例子，以方便理解．</p>
+<p>例子</p>
+<p>考虑线性规划问题</p>
+<p>max10𝑥1+12𝑥2+12𝑥3subject to 𝑥1+2𝑥2+2𝑥3≤20,2𝑥1+𝑥2+2𝑥3≤20,2𝑥1+2𝑥2+𝑥3≤20,𝑥1,𝑥2,𝑥3≥0.max10x1+12x2+12x3subject to x1+2x2+2x3≤20,2x1+x2+2x3≤20,2x1+2x2+x3≤20,x1,x2,x3≥0.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>通过添加松弛变量，就得到它的标准形式：</p>
+<p>min−10𝑥1−12𝑥2−12𝑥3subject to 𝑥1+2𝑥2+2𝑥3+𝑥4=20,2𝑥1+𝑥2+2𝑥3+𝑥5=20,2𝑥1+2𝑥2+𝑥3+𝑥6=20,𝑥1,𝑥2,𝑥3,𝑥4,𝑥5,𝑥6≥0.min−10x1−12x2−12x3subject to x1+2x2+2x3+x4=20,2x1+x2+2x3+x5=20,2x1+2x2+x3+x6=20,x1,x2,x3,x4,x5,x6≥0.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>观察该问题的等式约束，它们其实相当于将变量 𝑥4,𝑥5,𝑥6x4,x5,x6<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 由变量 𝑥1,𝑥2,𝑥3x1,x2,x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 表示．将原问题稍微整理一下，就有</p>
+<p>min𝑥𝑖≥0𝑧=0−10𝑥1−12𝑥2−12𝑥3subject to𝑥4=20−𝑥1−2𝑥2−2𝑥3,𝑥5=20−2𝑥1−𝑥2−2𝑥3,𝑥6=20−2𝑥1−2𝑥2−𝑥3.minxi≥0z=0−10x1−12x2−12x3subject tox4=20−x1−2x2−2x3,x5=20−2x1−x2−2x3,x6=20−2x1−2x2−x3.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>从这个形式中，可以清楚地看到，如果令 𝑥1 =𝑥2 =𝑥3 =0x1=x2=x3=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，就可以得到原问题的一组可行解</p>
+<p>𝑥=(0,0,0,20,20,20)𝑇.x=(0,0,0,20,20,20)T.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>且它对应的价值为 𝑧 =0z=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．为方便叙述，称那些设为零的变量 𝑥1,𝑥2,𝑥3x1,x2,x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为非基变量，剩下的变量 𝑥4,𝑥5,𝑥6x4,x5,x6<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为基变量．</p>
+<p>这组可行解显然不是最优解．只要适当地增加 𝑥1,𝑥2,𝑥3x1,x2,x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的值，使得 𝑥4,𝑥5,𝑥6x4,x5,x6<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 仍然是非负数，就可以保持解仍然可行．而且，因为目标函数中，𝑥1,𝑥2,𝑥3x1,x2,x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的系数都是严格的负数，所以，增加它们的值一定会降低目标函数的值．比如说，可以选择增加 𝑥1x1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的值．为了尽可能多地降低目标函数的值，需要尽可能多地增加 𝑥1x1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的值．但是，为了保证解仍然是可行的，就需要保证 𝑥4,𝑥5,𝑥6 ≥0x4,x5,x6≥0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．因此，𝑥1x1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 最多可以增加到</p>
+<p>min{201,202,202}=10.min{201,202,202}=10.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>此时，可行解变为</p>
+<p>𝑥=(10,0,0,10,0,0)𝑇.x=(10,0,0,10,0,0)T.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>因为 𝑥1x1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 成为了基变量，为了回到最初的情形（即三个基变量由三个非基变量表示），需要选择一个新的非基变量．因为 𝑥5,𝑥6x5,x6<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 都是零，所以，可以选择它们其中的任何一个作为非基变量，设为零．不妨选择 𝑥5x5<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 作为非基变量．而且，将</p>
+<p>𝑥1=10−0.5𝑥5−0.5𝑥2−𝑥3x1=10−0.5x5−0.5x2−x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>代入到原来的问题中，就可以将原问题改写作</p>
+<p>min𝑥𝑖≥0𝑧=−100+5𝑥5−7𝑥2−2𝑥3subject to𝑥4=10+0.5𝑥5−1.5𝑥2−𝑥3,𝑥1=10−0.5𝑥5−0.5𝑥2−𝑥3,𝑥6=0+𝑥5−𝑥2+𝑥3.minxi≥0z=−100+5x5−7x2−2x3subject tox4=10+0.5x5−1.5x2−x3,x1=10−0.5x5−0.5x2−x3,x6=0+x5−x2+x3.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>这就回到了初始的情形．</p>
+<p>继续观察当前的目标函数．非基变量 𝑥3x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的系数仍然是负数．可以考虑增加 𝑥3x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的值．为了保证 𝑥4,𝑥1,𝑥6 ≥0x4,x1,x6≥0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，变量 𝑥3x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 最多只能增加到</p>
+<p>min{101,101}=10.min{101,101}=10.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>注意到，因为 𝑥6x6<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的表达式中，𝑥3x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的系数是正数，所以，无论怎么增加 𝑥3x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的值，都不会使得 𝑥6x6<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 变为负数．这就是这次大括号中只有两项的原因．因为 𝑥3x3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 增加到 1010<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的时候，𝑥1,𝑥4x1,x4<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 都变为零，所以，可以任选其中一个作为新的非基变量．不妨选择 𝑥4x4<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．就可以将</p>
+<p>𝑥3=10+0.5𝑥5−1.5𝑥2−𝑥4x3=10+0.5x5−1.5x2−x4<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>代入上述问题中，问题变形为</p>
+<p>min𝑥𝑖≥0𝑧=−120+4𝑥5−4𝑥2+2𝑥4subject to𝑥3=10+0.5𝑥5−1.5𝑥2−𝑥4,𝑥1=0−𝑥5+𝑥2+𝑥4,𝑥6=10+1.5𝑥5−2.5𝑥2−𝑥4.minxi≥0z=−120+4x5−4x2+2x4subject tox3=10+0.5x5−1.5x2−x4,x1=0−x5+x2+x4,x6=10+1.5x5−2.5x2−x4.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>只需要代入 𝑥5 =𝑥2 =𝑥4 =0x5=x2=x4=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，就能从这个形式中读出当前的可行解是</p>
+<p>𝑥=(0,0,10,0,0,10)𝑇,x=(0,0,10,0,0,10)T,<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>以及它对应的价值为 𝑧 = −120z=−120<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>重复之前的操作．因为 𝑥2x2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的系数是负数，可以增加它的值；但为了保持 𝑥3,𝑥6x3,x6<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 仍然是非负数，只能增加到</p>
+<p>min{101.5,102.5}=4.min{101.5,102.5}=4.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>因为大括号中的最小值出现在变量 𝑥6x6<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的表达式中，所以，它将在 𝑥2 =4x2=4<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 时变为零．将表达式</p>
+<p>𝑥2=4+0.6𝑥5−0.4𝑥6−0.4𝑥4x2=4+0.6x5−0.4x6−0.4x4<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>代入上述问题，就可以将原问题改写为</p>
+<p>min𝑥𝑖≥0𝑧=−136+1.6𝑥5+1.6𝑥6+3.6𝑥4subject to𝑥3=4−0.4𝑥5+0.6𝑥6−0.4𝑥4,𝑥1=4−0.4𝑥5−0.4𝑥6+0.6𝑥4,𝑥2=4+1.5𝑥5−2.5𝑥6−𝑥4.minxi≥0z=−136+1.6x5+1.6x6+3.6x4subject tox3=4−0.4x5+0.6x6−0.4x4,x1=4−0.4x5−0.4x6+0.6x4,x2=4+1.5x5−2.5x6−x4.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>仍然令非基变量 𝑥5,𝑥6,𝑥4x5,x6,x4<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为零，就可以得到当前的可行解为</p>
+<p>𝑥=(4,4,4,0,0,0)𝑇.x=(4,4,4,0,0,0)T.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>对应的价值为 𝑧 = −136z=−136<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>因为目标函数中所有非基变量的系数都是正数，无法继续前文所述过程以改进目标函数，所以，当前的可行解就是最优解．算法终止．</p>
+<p>这个例子中，算法从一组可行解出发，不断地改进目标函数，直到无法继续改进．这就是单纯形法的基本思想．</p>
+<h3 id="57fa672c53ef884c89e3">基本可行解</h3>
+<p>由于 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是满秩的，所以，总是可以选取大小为 𝑚m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的子集 𝐵 ⊆{1,2,⋯,𝑛}B⊆{1,2,⋯,n}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 使得 𝐴𝐵AB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是可逆方阵．由此，可以将 𝑥𝐵xB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 由剩下的变量 𝑥𝑁xN<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 表示：</p>
+<p>𝑥𝐵=𝐴−1𝐵𝑏−𝐴−1𝐵𝐴𝑁𝑥𝑁.xB=AB−1b−AB−1ANxN.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>其中，𝑁 ={1,2,⋯,𝑛} ∖𝐵N={1,2,⋯,n}∖B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，矩阵 𝐴𝐵,𝐴𝑁AB,AN<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 分别为矩阵 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中标号 𝑖 ∈𝐵i∈B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和标号 𝑖 ∈𝑁i∈N<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的列组成的子矩阵，向量 𝑥𝐵,𝑥𝑁xB,xN<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 分别为向量 𝑥x<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中标号 𝑖 ∈𝐵i∈B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和标号 𝑖 ∈𝑁i∈N<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的分量组成的子向量．如果 𝑖 ∈𝐵i∈B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，那么，称 𝑥𝑖xi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 <strong>基变量</strong> （basic variable）；否则，称 𝑥𝑖xi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 <strong>非基变量</strong> （non-basic variable）．基变量的全体称为一组 <strong>基</strong> （basis），本文用对应的标号集合 𝐵B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 表示一组基．</p>
+<p>「基」</p>
+<p>「基」这个名称，可以从线性代数的角度理解．设 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的全体列向量张成的线性空间为 𝑉V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．那么，基 𝐵B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 对应的列向量就是空间 𝑉V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的一组基．</p>
+<p>在基变量 𝑥𝐵xB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的表达式中，令 𝑥𝑁 =0xN=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，就得到全体等式约束的一组解1</p>
+<p>𝑥=(𝑥𝐵,𝑥𝑁)=(𝐴−1𝐵𝑏,0).x=(xB,xN)=(AB−1b,0).<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>这样得到的解称为线性规划问题的一个 <strong>基本解</strong> （basic solution）．如果它还满足所有非负约束，即 𝑥 ≥0x≥0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，那么，它也是原问题的一个可行解，也称为 <strong>基本可行解</strong> （basic feasible solution, BFS）．在单纯形法的迭代过程中，需要始终保持当前的解为一组基本可行解．</p>
+<h3 id="8f6c8f74">转轴</h3>
+<p>单纯形法的每次迭代就称为一次 <strong>转轴</strong> （pivoting）．从结果上看，每次转轴总是移除一个旧的基变量，再添加一个新的基变量，进而改进目标函数的值．</p>
+<p>「转轴」</p>
+<p>「转轴」这个名称，同样可以从线性代数的角度理解．如上文所述，基 𝐵B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 对应的列向量是空间 𝑉V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的一组基，它们也就对应着对应基的表示下空间 𝑉V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的一组坐标轴．因此，转轴的过程，就是将某条坐标轴旋转到新的位置的过程．</p>
+<p>为了确定需要添加的基变量，可以将目标函数利用非基变量表示为</p>
+<p>𝑐𝑇𝑥=𝑐𝑇𝐵𝑥𝐵+𝑐𝑇𝑁𝑥𝑁=𝑐𝑇𝐵𝐴−1𝐵𝑏+(𝑐𝑇𝑁−𝑐𝑇𝐵𝐴−1𝐵𝐴𝑁)𝑥𝑁.cTx=cBTxB+cNTxN=cBTAB−1b+(cNT−cBTAB−1AN)xN.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>令 𝑥𝑁 =0xN=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，就得到目标函数在当前基本可行解处的价值 𝑧 =𝑐𝑇𝐵𝐴−1𝐵𝑏z=cBTAB−1b<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．表达式中的第二项的系数则表示 𝑥𝑁xN<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 改变时，目标函数的改变为</p>
+<p>˜𝑐𝑁=𝜕𝑧𝜕𝑥𝑁=𝑐𝑁−𝐴𝑇𝑁(𝐴−1𝐵)𝑇𝑐𝐵.c~N=∂z∂xN=cN−ANT(AB−1)TcB.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>注意到 𝑐𝐵 −𝐴𝑇𝐵(𝐴−1𝐵)𝑇𝑐𝐵 =0cB−ABT(AB−1)TcB=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以，可以记向量</p>
+<p>˜𝑐=(˜𝑐𝑇𝐵,˜𝑐𝑇𝑁)𝑇=𝑐−𝐴𝑇(𝐴−1𝐵)𝑇𝑐𝐵c~=(c~BT,c~NT)T=c−AT(AB−1)TcB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>为线性规划问题在可行基本解 𝑥x<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 处的 <strong>约化成本</strong> （reduced cost）．分量 ˜𝑐𝑖 &lt;0c~i&lt;0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 说明增加变量 𝑥𝑖xi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的值可以改进原问题的目标函数．这样的变量只能是一个非基变量，它称为本次转轴的 <strong>入基变量</strong> （entering variable）．因为在转轴后，𝑥𝑖xi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 将变为基变量，不再恒设为零（但依然有可能等于零）．</p>
+<p>选择完入基变量后，还需要选择需要移除的旧的基变量．为此，只需要确定，在增加 𝑥𝑖xi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的过程中，哪个现有的基变量最先变为零．将 𝑥𝑁 =(𝑥𝑖,𝑥𝑁∖{𝑖}) =(𝑥𝑖,0)xN=(xi,xN∖{i})=(xi,0)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 代入 𝑥𝐵xB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的表达式，就有</p>
+<p>𝑥𝐵=𝐴−1𝐵𝑏−𝐴−1𝐵𝐴𝑖𝑥𝑖.xB=AB−1b−AB−1Aixi.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>因此，𝑥𝑖xi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 可以增加的最大量就等于</p>
+<p>𝜃=min{(𝐴−1𝐵𝑏)𝑗(𝐴−1𝐵𝐴𝑖)𝑗:(𝐴−1𝐵𝐴𝑖)𝑗&gt;0}.θ=min{(AB−1b)j(AB−1Ai)j:(AB−1Ai)j&gt;0}.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>最先变为零的变量就是使得该表达式取得最小值的下标 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 对应的基变量 𝑥𝐵𝑗xBj<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．它也是增加 𝑥𝑖xi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的过程中的「瓶颈」——继续增加 𝑥𝑖xi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 将使得 𝑥𝐵𝑗xBj<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 成为负值．这一变量就是本次转轴的 <strong>出基变量</strong> （leaving variable）．确定出基变量的方法称为 <strong>最小比值检验</strong> （minimum ratio test）．</p>
+<p>设入基变量为 𝑥𝑖xi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，出基变量为 𝑥𝑖′xi′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．转轴之后，基变量就是 𝑥𝐵∖{𝑖}∪{𝑖′}xB∖{i}∪{i′}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，非基变量就是 𝑥𝑁∖{𝑖′}∪{𝑖}xN∖{i′}∪{i}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<h3 id="7ec86b6267614ef6">终止条件</h3>
+<p>单纯形法，就是从一组基本可行解出发，不断进行转轴的过程．上一节对转轴的讨论并不是完整的，它忽略了一些特殊的情形．有些特殊情形对应着算法的终止，有些则需要额外的处理．</p>
+<p>首先，入基变量未必存在，即 ˜𝑐 ≥0c~≥0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．此时，没有进一步改进最优价值的方法，这说明当前基本可行解就是最优解，算法终止．要严格地证明这一点，需要用到 <a href="linear-programming.html">互补松弛条件</a>．令 𝑦 =(𝐴−1𝐵)𝑇𝑐𝐵y=(AB−1)TcB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．注意到，在算法的整个过程中，始终保持 𝑥x<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是可行解，且互补松弛条件成立，即</p>
+<p>𝑥𝑇(𝑐−𝐴𝑇𝑦)=˜𝑐𝑇𝑥=˜𝑐𝑇𝐵𝑥𝐵+˜𝑐𝑇𝑁𝑥𝑁=0.xT(c−ATy)=c~Tx=c~BTxB+c~NTxN=0.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>因此，只需要 𝑦y<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是对偶问题的可行解，即 𝐴𝑇𝑦 ≤𝑐ATy≤c<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，就能得到 𝑥x<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和 𝑦y<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 分别是原问题和对偶问题的最优解这一结论．这个条件就是 ˜𝑐 ≥0c~≥0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即不存在入基变量．</p>
+<p>「影子价格」</p>
+<p>向量 𝑦 =(𝐴−1𝐵)𝑇𝑐𝐵y=(AB−1)TcB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 常称为 <strong>对偶向量</strong> （dual vector）．当 𝐵B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 对应的基本可行解是原问题的最优解时，向量 𝑦y<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是对偶问题的最优解．因此，利用单纯形法求解原问题的最优解时，也会获得对偶问题的最优解．因为向量 𝑦y<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是当前价值关于约束常量的偏导数，即</p>
+<p>𝜕(𝑐𝑇𝑥)𝜕𝑏=(𝐴−1𝐵)𝑇𝑐𝐵=𝑦,∂(cTx)∂b=(AB−1)TcB=y,<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>它也称为 <strong>影子价格</strong> （shadow price）．</p>
+<p>其次，出基变量未必存在，即 𝐴−1𝐵𝐴𝑖 ≤0AB−1Ai≤0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．此时，转轴的过程不存在任何「瓶颈」，也就是说，可以不断地通过增加 𝑥𝑖xi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的值来改进目标函数，直到它等于 −∞−∞<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．这说明给定的线性规划问题是无界的，算法终止．</p>
+<p>最后，入基变量和出基变量的选择可能并非是唯一的．不恰当的选择方式可能会导致过多地转轴，甚至使得算法陷入循环，无法正常终止．这类情形的处理稍微复杂，需要应用一些 转轴规则 以防止陷入循环并减少转轴次数．</p>
+<h3 id="53557eaf5f628868">单纯形表</h3>
+<p>具体实现转轴过程时，只需要维护每次转轴之后，线性规划问题的系数矩阵：</p>
+<p>˜𝑇𝐵=(−𝑧𝐵˜𝑐𝑇𝑁𝑥𝐴−1𝐵𝐴𝑁)=(−𝑐𝑇𝐵𝐴−1𝐵𝑏𝑐𝑇−𝑐𝑇𝐵𝐴−1𝐵𝐴𝑁𝐴−1𝐵𝑏𝐴−1𝐵𝐴𝑁).T~B=(−zBc~NTxAB−1AN)=(−cBTAB−1bcT−cBTAB−1ANAB−1bAB−1AN).<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>它对应着线性规划问题：</p>
+<p>min𝑥≥0𝑐𝑇𝐵𝐴−1𝐵𝑏+˜𝑐𝑇𝑁𝑥𝑁subject to𝑥𝐵=𝐴−1𝐵𝑏−𝐴−1𝐵𝐴𝑁𝑥𝑁.minx≥0cBTAB−1b+c~NTxNsubject toxB=AB−1b−AB−1ANxN.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>矩阵 ˜𝑇𝐵T~B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 称为该线性规划问题相对于基 𝐵B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的 <strong>压缩单纯形表</strong> （condensed simplex tableau）．表的左上角 (˜𝑇𝐵)00(T~B)00<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为当前解的价值（的相反数），第 00<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 行、第 𝑖i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 列的量 (˜𝑇𝐵)0𝑖(T~B)0i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为第 𝑖i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个非基变量 𝑥𝑁𝑖xNi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的约化成本，第 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 行、第 𝑖i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 列的量 (˜𝑇𝐵)𝑗0(T~B)j0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为第 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个基变量 𝑥𝐵𝑗xBj<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的值，而 𝐴−1𝐵𝐴𝑁AB−1AN<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 就是用非基变量 𝑥𝑁xN<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 表示基变量 𝑥𝐵xB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 得到的表达式中的系数．</p>
+<p>容易看出，转轴需要的所有信息都可以从压缩单纯形表中直接获得．具体地，利用压缩单纯形表，单次转轴包括如下操作：</p>
+<ol>
+<li>选取列 𝑖 =1,⋯,𝑛 −𝑚i=1,⋯,n−m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，使得 (˜𝑇𝐵)0𝑖 &lt;0(T~B)0i&lt;0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．如果不存在这样的 𝑖i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，那么当前解就是最优解，量 −(˜𝑇𝐵)00−(T~B)00<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 就是最优价值．</li>
+<li>选取行 𝑗 =1,⋯,𝑚j=1,⋯,m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，使得 (˜𝑇𝐵)𝑗𝑖 &gt;0(T~B)ji&gt;0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 且 (˜𝑇𝐵)𝑗0/(˜𝑇𝐵)𝑗𝑖(T~B)j0/(T~B)ji<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 最小．如果不存在这样的 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，那么原问题无界．</li>
+<li>令变量 𝑥𝑁𝑖xNi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 入基，变量 𝑥𝐵𝑗xBj<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 出基，并更新单纯形表．</li>
+</ol>
+<p>现在，具体地讨论一下如何更新单纯形表．在更新单纯形表之前，第 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 行表示等式</p>
+<p>𝑥𝐵𝑗=(˜𝑇𝐵)𝑗0−𝑛−𝑚∑𝑖=1(˜𝑇𝐵)𝑗𝑖𝑥𝑁𝑖.xBj=(T~B)j0−∑i=1n−m(T~B)jixNi.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>为了更新单纯形表，需要用 𝑥𝑁∖{𝑁𝑖}∪{𝐵𝑗}xN∖{Ni}∪{Bj}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 表示 𝑥𝑁𝑖xNi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，也就是：</p>
+<p>𝑥𝑁𝑖=(˜𝑇𝐵)𝑗0(˜𝑇𝐵)𝑗𝑖−1(˜𝑇𝐵)𝑗𝑖𝑥𝐵𝑗−∑𝑖′≠𝑖(˜𝑇𝐵)𝑗𝑖′(˜𝑇𝐵)𝑗𝑖𝑥𝑁𝑖′.xNi=(T~B)j0(T~B)ji−1(T~B)jixBj−∑i′≠i(T~B)ji′(T~B)jixNi′.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>将它代入其余的式子中，就得到</p>
+<p>𝑥𝐵𝑗′=((˜𝑇𝐵)𝑗′0−(˜𝑇𝐵)𝑗′𝑖(˜𝑇𝐵)𝑗0(˜𝑇𝐵)𝑗𝑖)+(˜𝑇𝐵)𝑗′𝑖(˜𝑇𝐵)𝑗𝑖𝑥𝐵𝑗−∑𝑖′≠𝑖((˜𝑇𝐵)𝑗′𝑖′−(˜𝑇𝐵)𝑗′𝑖(˜𝑇𝐵)𝑗𝑖′(˜𝑇𝐵)𝑗𝑖)𝑥𝑁𝑖.xBj′=((T~B)j′0−(T~B)j′i(T~B)j0(T~B)ji)+(T~B)j′i(T~B)jixBj−∑i′≠i((T~B)j′i′−(T~B)j′i(T~B)ji′(T~B)ji)xNi.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>第 00<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 行类似，只是等式左侧变为 −𝑧−z<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．虽然式子看起来复杂，但是实现时，只需要分两步：</p>
+<ol>
+<li>更新第 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 行，即令 𝛼 =(˜𝑇𝐵)𝑗𝑖α=(T~B)ji<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，再令第 𝑖i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 列数字为 11<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，然后将整行所有数字同除以 𝛼α<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</li>
+<li>更新第 𝑗′ ≠𝑗j′≠j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 行，即令 𝛽 =(˜𝑇𝐵)𝑗′𝑖β=(T~B)j′i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，再令第 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 列数字为 00<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，然后将整行数字同时减去 𝛽β<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 倍的第 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 行数字．</li>
+</ol>
+<p>「单纯形表」</p>
+<p><strong>单纯形表</strong> （simplex tableau）指矩阵</p>
+<p>𝑇𝐵=(−𝑧˜𝑐𝑇𝑥𝐴−1𝐵𝐴)=(−𝑐𝑇𝐵𝐴−1𝐵𝑏𝑐𝑇−𝑐𝑇𝐵𝐴−1𝐵𝐴𝐴−1𝐵𝑏𝐴−1𝐵𝐴).TB=(−zc~TxAB−1A)=(−cBTAB−1bcT−cBTAB−1AAB−1bAB−1A).<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>相较于压缩单纯形表，它多了 𝑚m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 列，分别对应 𝑚m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个基变量；而且，对应着第 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个基变量的列一定是 𝑒𝑗ej<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即该向量只在第 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 行处取值为 11<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其余行均为 00<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．因为这些列并没有提供多余的信息，所以在实现单纯形法时，常常省略这些列，这就得到了压缩单纯形表．</p>
+<p>利用单纯形表可以更方便地理解更新单纯形表的步骤．因为所有的单纯形表 𝑇𝐵TB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 都可以由同一个矩阵 𝑇0T0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 左乘一个与基有关的可逆矩阵 𝐿𝐵LB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 得到，即</p>
+<p>𝑇𝐵=(−𝑐𝑇𝐵𝐴−1𝐵𝑏𝑐𝑇−𝑐𝑇𝐵𝐴−1𝐵𝐴𝐴−1𝐵𝑏𝐴−1𝐵𝐴)=(1−𝑐𝑇𝐵𝐴−1𝐵𝑂𝐴−1𝐵)(0𝑐𝑇𝑏𝐴)=𝐿𝐵𝑇0,TB=(−cBTAB−1bcT−cBTAB−1AAB−1bAB−1A)=(1−cBTAB−1OAB−1)(0cTbA)=LBT0,<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>所以，这些单纯形表和 𝑇0T0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之间可以通过若干次 <a href="linear-algebra-elementary-operations.html">初等行变换</a> 相互转化．因此，在更新单纯形表时，只需要施行初等行变换，使得入基变量对应列变为 𝑒𝑗ej<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 即可．由此，所需要的操作迁移到压缩单纯形表上，就是上文给出的步骤．</p>
+<p>更新压缩单纯形表的参考实现如下：</p>
+<p>参考实现</p>
+<pre><code class="language-text">---|---
+
+由该实现可知，单次更新单纯形表的时间复杂度为 𝑂(𝑚𝑛)O(mn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．稍后讨论 转轴规则 时会说明，确定出基变量和入基变量的复杂度同样不会超过 𝑂(𝑚𝑛)O(mn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此，单次转轴的时间复杂度就是 𝑂(𝑚𝑛)O(mn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
+
+为方便理解，此处列出前文所示例子中，利用压缩单纯形表计算的详细步骤．
+
+例子（续）
+
+初始时，压缩单纯形表如下所示：
+
+𝑥1𝑥2𝑥30−10−12−12𝑥4=20122𝑥5=20212𝑥6=20221x1x2x30−10−12−12x4=20122x5=20212x6=20221![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+根据第 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行的约化成本，可以选择 𝑥1,𝑥2,𝑥3x1,x2,x3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 入基．令 𝑥1x1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 入基．再根据根据最小比值检验，可以选择 𝑥5,𝑥6x5,x6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出基．令 𝑥5x5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出基．相应地，更新压缩单纯形表如下：
+
+𝑥5𝑥2𝑥31005−7−2𝑥4=10−0.51.51𝑥1=100.50.51𝑥6=0−11−1x5x2x31005−7−2x4=10−0.51.51x1=100.50.51x6=0−11−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+根据第 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行的约化成本，可以选择 𝑥2,𝑥3x2,x3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 入基．令 𝑥3x3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 入基．再根据根据最小比值检验，可以选择 𝑥4,𝑥1x4,x1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出基．令 𝑥4x4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出基．相应地，更新压缩单纯形表如下：
+
+𝑥5𝑥2𝑥41204−42𝑥3=10−0.51.51𝑥1=01−1−1𝑥6=10−1.52.51x5x2x41204−42x3=10−0.51.51x1=01−1−1x6=10−1.52.51![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+根据第 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行的约化成本，只能选择 𝑥2x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 入基．令 𝑥2x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 入基．再根据根据最小比值检验，只能选择 𝑥6x6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出基．令 𝑥6x6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出基．利用前述初等行变换更新单纯形表如下：
+
+𝑥5𝑥4𝑥61361.63.61.6𝑥3=40.40.4−0.6𝑥1=40.4−0.60.4𝑥2=4−0.60.40.4x5x4x61361.63.61.6x3=40.40.4−0.6x1=40.4−0.60.4x2=4−0.60.40.4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+根据第 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行的约化成本，不存在入基变量．因此，当前解
+
+𝑥=(4,4,4,0,0,0)𝑇x=(4,4,4,0,0,0)T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+就是最优解，（最小化问题的）最优价值为 −136−136![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+除了利用单纯形表实现单纯形法之外，还可以使用修正单纯形法（revised simplex method），它进一步改进了算法的时空复杂度，将单次更新的复杂度进一步降低到了 𝑂(𝑚2)O(m2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，在 𝑚 ≪𝑛m≪n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是稀疏矩阵的情形下尤为高效．
+
+## 几何背景
+
+本节介绍单纯形法的几何背景．
+
+对线性规划问题的可行域
+
+D={𝑥∈𝐑𝑛:𝐴𝑥=𝑏, 𝑥≥0}D={x∈Rn:Ax=b, x≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+的 [分析](../linear-programming/#可行域与问题的解) 指出：
+
+  * 线性规划问题的最优解（如果存在）必然可以选取为可行域 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的顶点．求解线性规划问题，就转化于在所有顶点解里找到价值函数最优的那个．
+  * 每一个顶点的坐标，都可以通过 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个紧约束联立得到的方程组求解得到．对于标准形式的约束，所有 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个等式约束一定是紧的，剩下的 𝑛 −𝑚n−m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个约束只能从非负约束中选取．选取这些非负约束作为紧约束，就相当于将相应的决策变量 𝑥𝑁xN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 设为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；相应地，方程组 𝐴𝑥 =𝑏Ax=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 退化为关于剩余 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个决策变量 𝑥𝐵xB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的线性方程组 𝐴𝐵𝑥𝐵 =𝑏ABxB=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．只要 𝐴𝐵AB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可逆，就可以解得 𝑥𝐵 =𝐴−1𝐵𝑏xB=AB−1b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这就得到了一个解 (𝑥𝐵,𝑥𝑁) =(𝐴−1𝐵𝑏,0)(xB,xN)=(AB−1b,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；如果 𝑥𝐵 ≥0xB≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这就是 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个顶点坐标．
+
+容易看出，顶点解的概念，和前文定义的基本可行解是一致的．因此，只要在所有基本可行解内找到最优的那个，就能获得原问题的最优解．虽然这大幅简化了问题，但是，可行域的顶点的个数是指数级的，穷举并不现实．
+
+为了解决这一困难，可以考虑沿着可行域的 [边](../linear-programming/#可行域与问题的解) 移动，从一个顶点移动到与之相邻的顶点．因为相邻的顶点必定位于同一条边上，所以，它们至少满足 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 条相同的紧约束．也就是说，相邻的顶点对应的紧约束能且仅能相差一个．因此，对于一个基本可行解 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，只要将它的一个基变量换成一个非基变量，就能得到一个 **相邻的** （adjacent）的基本可行解 𝑥′x′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这正是转轴操作．
+
+因此，单纯形法从一个基本可行解出发，不断进行转轴，改进目标函数的过程，其实就是在相应的可行域上，从一个顶点出发，不断向相邻顶点移动，进而改进目标函数的过程．
+
+例子（续）
+
+本文讨论的例子中，可行域是一个有五个顶点的三维多面体，如下图所示：
+
+![](./images/simplex-geo.svg)
+
+前述求解过程，从几何直观上看，就对应着多面体的顶点间的如下路径：
+
+(0,0,0)→(0,0,10)→(10,0,0)→(4,4,4).(0,0,0)→(0,0,10)→(10,0,0)→(4,4,4).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+## 实现细节
+
+利用单纯形表，已经能够求解许多线性规划问题．然而，对于最一般的情形，单纯形法中仍有许多细节值得深入探讨．
+
+### 松弛形式
+
+将一般形式的线性规划问题转化为标准形式的 [方法](../linear-programming/#标准形式) 已经讨论过了．但是，为了方便利用单纯形法求解，还需要保证系数矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满秩．虽然先转换为标准形式再消去线性相关的约束的方法是可行的，但是为了求解简便，通常采用如下策略：
+
+  1. 将线性规划问题转化为 **不等式形式** （inequality form），即 min{𝑐𝑇𝑥 :𝐴𝑥 ≤𝑏, 𝑥 ≥0}min{cTx:Ax≤b, x≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式；
+  2. 通过添加松弛变量 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，将问题转化为标准形式：min{𝑐𝑇𝑥 :𝐴𝑥 +𝑠 =𝑏, 𝑥 ≥0, 𝑠 ≥0}min{cTx:Ax+s=b, x≥0, s≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+这样做的好处是，最终得到的标准形式的系数矩阵 (𝐴,𝐼)(A,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 总是满秩的，且总是存在（未必可行的）基本解 (𝑥,𝑠) =(0,𝑏)(x,s)=(0,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这种特殊的标准形式也称为 **松弛形式** （slack form）．
+
+### 初始基本可行解
+
+前文描述的单纯形法总是假定已知一组基本可行解．有些时候，很容易找到一组基本可行解．例如，如果上述松弛形式中 𝑏 ≥0b≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，(𝑥,𝑠) =(0,𝑏)(x,s)=(0,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是一组基本可行解．这就是前文的数值例子里遇到的情形．
+
+对于一般的情形，可以采用 **两阶段法** （two-phase method）．两阶段法中，需要做两次单纯形法．第一阶段求解一个可行性线性规划问题，获得原问题的一个基本可行解．第二阶段从这个基本可行解出发，应用单纯形法求解原问题．
+
+假设有标准形式的问题 min{𝑐𝑇𝑥 :𝐴𝑥 =𝑏 ≥0, 𝑥 ≥0}min{cTx:Ax=b≥0, x≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．在第一阶段中，需要求解问题
+
+min{1𝑇𝑥𝑎:𝐴𝑥+𝑥𝑎=𝑏, 𝑥≥0, 𝑠≥0}.min{1Txa:Ax+xa=b, x≥0, s≥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+这本质是可行性线性规划问题，其中，新添加的变量 𝑥𝑎xa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也称为 **人工变量** （artificial variable）．它一定有基本可行解 (𝑥,𝑥𝑎) =(0,𝑏)(x,xa)=(0,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以可以直接用单纯形法求解．如果该问题的最优价值严格大于 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，就不存在 𝑥 ≥0x≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝐴𝑥 =𝑏Ax=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，也就是说，原问题不可行．如果该问题的最优价值等于 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，它的最优解中人工变量只能是零．如果仍有一些人工变量是基变量，可以通过若干次转轴将它们出基．最后，当所有人工变量都是非基变量时，第一阶段得到的基本解就可以用作第二阶段的初始基本可行解．
+
+不显式引入人工变量的第一阶段实现
+
+实现第一阶段时，没有必要显式地引入人工变量．对于任意选取的初始基 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
+
+𝑥𝐵+𝐴−1𝐵𝐴𝑁𝑥𝑁=𝐴−1𝐵𝑏.xB+AB−1ANxN=AB−1b.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+如果 (𝐴−1𝐵𝑏)𝑗 ≥0(AB−1b)j≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么无需引入人工变量；否则，需要额外引入人工变量 𝑥−𝐵𝑗xBj−![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即
+
+𝑥𝐵𝑗−𝑥−𝐵𝑗+(𝐴−1𝐵𝐴𝑁)(𝑗)𝑥𝑁=(𝐴−1𝐵𝑏)𝑗.xBj−xBj−+(AB−1AN)(j)xN=(AB−1b)j.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+记下标集合 𝐿 :={𝑗 :(𝐴−1𝐵𝑏)𝑗 &lt;0}L:={j:(AB−1b)j&lt;0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么一阶段的单纯形表都是如下单纯形表经过若干初等行变换得到的：
+
+𝑥𝑁𝑥𝐵∼𝐿𝑥𝐵𝐿𝑥−𝐵𝐿00𝑇0𝑇0𝑇1𝑇𝑥𝐵∼𝐿=(𝐴−1𝐵𝑏)∼𝐿(𝐴−1𝐵𝐴𝑁)(∼𝐿)𝐼𝑂𝑂𝑥−𝐵𝐿=(𝐴−1𝐵𝑏)𝐿(𝐴−1𝐵𝐴𝑁)(𝐿)𝑂𝐼−𝐼xNxB∼LxBLxBL−00T0T0T1TxB∼L=(AB−1b)∼L(AB−1AN)(∼L)IOOxBL−=(AB−1b)L(AB−1AN)(L)OI−I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+类似于将单纯形表简化为压缩单纯形表，可以将其适当地简化：（将 𝑥−𝐵𝐿xBL−![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行左乘以 1𝑇1T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 然后加到第 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行上，然后略去后三列）
+
+𝑥𝑁1𝑇𝑏𝐿1𝑇(𝐴−1𝐵𝐴𝑁)𝐿𝑥𝐵∼𝐿=(𝐴−1𝐵𝑏)∼𝐿(𝐴−1𝐵𝐴𝑁)(∼𝐿)−𝑥𝐵𝐿=(𝐴−1𝐵𝑏)𝐿(𝐴−1𝐵𝐴𝑁)𝐿xN1TbL1T(AB−1AN)LxB∼L=(AB−1b)∼L(AB−1AN)(∼L)−xBL=(AB−1b)L(AB−1AN)L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+这与正常的压缩单纯形表大体一致，只是最后一行的变量上标记了负号，表示该行仍然含有人工变量，即原来的松弛变量仍然不可行．利用该表，转轴过程如下：
+
+  1. 如果 𝐿 =∅L=∅![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，算法终止．
+  2. 否则，根据第 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行的约化成本为负这一条件选取入基变量 𝑥𝑁𝑖xNi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如果不存在，则原问题不可行，算法终止．
+  3. 再根据第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 列选取出基变量 𝑥𝐵𝑗xBj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．仍然利用最小比值检验，但是要求同时保证当前的可行变量可行和当前的不可行变量不可行，即选取
+
+arg⁡min𝑗{(˜𝑇𝐵)𝑗0(˜𝑇𝐵)𝑗𝑖:(𝑗∉𝐿∧(˜𝑇𝐵)𝑗𝑖&gt;0)∨(𝑗∈𝐿∧(˜𝑇𝐵)𝑗𝑖&lt;0)}arg⁡minj{(T~B)j0(T~B)ji:(j∉L∧(T~B)ji&gt;0)∨(j∈L∧(T~B)ji&lt;0)}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+作为出基变量所在行．如果存在多个这样的出基变量，优先选取不可行的出基变量．
+
+  4. 令 𝑥𝑁𝑖xNi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 入基，𝑥𝐵𝑗xBj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出基，并更新单纯形表．
+
+  5. 如果 𝑗 ∈𝐿j∈L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么将 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 移出 𝐿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（即取消该行的负号标记），并且将 (˜𝑇𝐵)0𝑖(T~B)0i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 加一．
+
+之所以可以略去人工变量所在列，是因为如果它们仍然是基变量，那么它们对应的列就是 𝑒𝑗ej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，无需记录，而如果它们不再是基变量，那么它们就不会再次入基，也无需记录．人工变量出基时，需要替换成相应的非人工变量，这正是上述过程中最后一步的目的．
+
+参考实现如下：
+
+参考实现
+</code></pre>
+<p>---|---</p>
+<p>在一阶段开始前，额外添加一行用于记录一阶段的目标函数．转轴时，对整个表进行转轴，包括第二阶段的目标函数．这样，在第一阶段完成时，第二阶段的目标函数也一并相应地更新，可以直接开始二阶段的单纯形法．</p>
+<p>两阶段法也可以通过一次单纯形法实现．只需要取充分大的正数 𝑀M<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，就可以通过直接求解问题</p>
+<p>min{𝑐𝑇𝑥+𝑀1𝑇𝑥𝑎:𝐴𝑥+𝑥𝑎=𝑏, 𝑥≥0, 𝑠≥0}min{cTx+M1Txa:Ax+xa=b, x≥0, s≥0}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>得到原问题的最优解．实现时，并不会赋予 𝑀M<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 具体的数值，而是将它视为一个未知的充分大的正数进行运算．这种方法称为 <strong>大 𝑀M<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 法</strong>（big 𝑀M<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> method）．</p>
+<p>朴素算法的实际效率是指数级的</p>
+<p>因为松弛形式总是存在初始基本解，只是未必是可行的，所以，一种简单的寻找初始基本可行解的想法是，从一个不可行的基本解出发，反复利用转轴操作，将不可行的基变量出基，并选择对应行中同样为负的数字对应列的非基变量入基，直到所有基变量都是非负数为止．参考实现如下：</p>
+<p>参考实现</p>
+<pre><code class="language-text">---|---
+
+这样做虽然简单，但是相较于二阶段法，它没有一个描述当前基的不可行程度的目标函数，所以缺乏明确的改进方向．实际测试可以发现，相较于通常只需要 𝑂(𝑚)O(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的转轴次数的二阶段法或大 𝑀M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 法，这一朴素算法通常需要 𝑂(2𝑚)O(2m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的转轴次数，且当 𝑛,𝑚n,m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 较大时容易陷入循环．虽然朴素算法的转轴次数中的常数很小，但是仅仅适用于 𝑛,𝑚 &lt;50n,m&lt;50![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形．
+
+### 转轴规则
+
+转轴时，如果出现多个可选的入基变量或出基变量，就需要用到 **转轴规则** （pivot rule）来决定选择哪个变量入基或出基．利用单纯形表，本节讨论的所有规则都能够在 𝑂(𝑚𝑛)O(mn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时间内找到入基和出基变量，因此，单次转轴的时间复杂度仍然是 𝑂(𝑚𝑛)O(mn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
+
+入基变量的选择往往决定了算法终止前转轴的次数．常见的规则如下：
+
+  * 选择最先找到的入基变量；
+  * 选择标号最小的入基变量；（Bland 规则的一部分）
+  * 选择约化成本绝对值（即 |𝑐𝑖||ci|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）最大的入基变量；（Dantzig 规则）
+  * 选择单次转轴价值函数改进（即 |𝑐𝑖|𝜃𝑖|ci|θi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）最大的入基变量；
+  * 选择对应着最陡的边的入基变量，即沿着边移动单位长度引起的价值函数改进（即 |𝑐𝑖|/‖𝐴−1𝐵𝐴𝑖‖|ci|/‖AB−1Ai‖![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）最大；
+  * 随机选择一个入基变量．
+
+实践中，最陡边规则的效率最高2．通常认为，适当的转轴规则可以在大致 2𝑚2m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次转轴内得到大多数问题的最优解．但是，对于目前所有已知的转轴规则，都存在特殊构造的例子3，能够将转轴次数卡到指数级．这也正是单纯形法实践中运行效率相当优秀，但是理论最差复杂度是指数级的原因．
+
+出基变量的选择往往决定了算法是否会陷入循环．如果存在多个最优价值相同的基本可行解，那么，算法就有可能一直在这些基本可行解之间循环．这些情形并不常见，因此很多单纯形法的实现并不会指定出基变量的选择规则．常见的避免循环的规则有两种：
+
+  * Bland 规则：总是选择标号最小的入基变量和出基变量．
+  * 字典序规则：总是选择 (𝐴−1𝐵𝐴𝑖)𝑗 &gt;0(AB−1Ai)j&gt;0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且
+
+((𝐴−1𝐵𝑏)𝑗(𝐴−1𝐵𝐴𝑖)𝑗,(𝐴−1𝐵)𝑗1(𝐴−1𝐵𝐴𝑖)𝑗,⋯,(𝐴−1𝐵)𝑗𝑚(𝐴−1𝐵𝐴𝑖)𝑗)((AB−1b)j(AB−1Ai)j,(AB−1)j1(AB−1Ai)j,⋯,(AB−1)jm(AB−1Ai)j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+字典序最小的行号 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对应的出基变量 𝑥𝐵𝑗xBj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．入基变量的选择不重要．
+
+注意，如果线性规划问题是松弛形式的，那么这些量都可以从前文所述形式的单纯形表 𝑇𝐵TB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中直接找到；否则，可以在找到一组初始基本解（未必可行）后，利用这些初始基中的基变量对应列（顺序保持固定）的系数作为 𝐴−1𝐵AB−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的系数．
+
+Bland 规则效率很低，因为规则本身对入基和出基变量的选择方法是一样的，这很容易造成同一个变量反复入基再出基．相对来说，字典序规则更为实用．字典序规则相当于对线性规划问题中的参数进行微扰4，使得不存在最优价值相同的基本可行解，也就不存在循环的可能性．
+
+## 参考实现
+
+本节提供一个基于压缩单纯形表的二阶段单纯形法的参考实现．
+
+[Luogu P13337【模板】线性规划](https://www.luogu.com.cn/problem/P13337)
+</code></pre>
+<p>---|---</p>
+<h2 id="4f8b9898">例题</h2>
+<p><a href="https://www.luogu.com.cn/problem/P3980">「NOI2008」志愿者招募</a></p>
+<p>总共 𝑛n<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 天活动需要招募志愿者，其中，第 𝑖i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 天至少需要 𝑏𝑖bi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 位志愿者．总有 𝑚m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 类志愿者，其中，第 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 类志愿者可以服务的日期为连续区间 [𝑙𝑗,𝑟𝑗][lj,rj]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，且单位招募成本为 𝑐𝑖ci<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．求最优的招募方案，使得招募志愿者的成本最低．</p>
+<p>解答</p>
+<p>设第 𝑗j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 类志愿者招募 𝑥𝑗xj<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 位．那么，可以列出线性规划问题为</p>
+<p>max𝑥𝑚∑𝑗=1𝑐𝑗𝑥𝑗subject to 𝑛∑𝑖=1𝑎𝑖𝑗𝑥𝑗≥𝑏𝑖, 𝑖=1,⋯,𝑛,𝑥𝑗≥0, 𝑗=1,⋯,𝑚.maxx∑j=1mcjxjsubject to ∑i=1naijxj≥bi, i=1,⋯,n,xj≥0, j=1,⋯,m.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>其中，系数</p>
+<p>𝑎𝑖𝑗={1,𝑙𝑗≤𝑖≤𝑟𝑗,0,otherwise.aij={1,lj≤i≤rj,0,otherwise.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>原问题没有显然的初始可行解．因此，不妨考虑其 <a href="linear-programming.html">对偶问题</a>：</p>
+<p>min𝑦𝑛∑𝑖=1𝑏𝑖𝑦𝑖subject to 𝑛∑𝑗=1𝑎𝑖𝑗𝑦𝑖≤𝑐𝑗, 𝑗=1,⋯,𝑚,𝑦𝑖≥0, 𝑖=1,⋯,𝑛.miny∑i=1nbiyisubject to ∑j=1naijyi≤cj, j=1,⋯,m,yi≥0, i=1,⋯,n.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>通过添加松弛变量，容易得到一组初始可行解，可以直接略过一阶段，通过单纯形法求解．根据对偶原理，得到的解就是原问题的解．</p>
+<pre><code>---|---
+
+## 习题
+
+  * [Luogu P13337【模板】线性规划](https://www.luogu.com.cn/problem/P13337)
+  * [UOJ#179. 线性规划](https://uoj.ac/problem/179)
+  * [Luogu P4232 无意识之外的捉迷藏](https://www.luogu.com.cn/problem/P4232)
+  * [Codeforces 1430 G. Yet Another DAG Problem](https://codeforces.com/problemset/problem/1430/G)
+  * [AtCoder Beginner Contest 231 H - Minimum Coloring](https://atcoder.jp/contests/abc231/tasks/abc231_h)
+
+## 参考资料
+
+  * [线性规划之单纯形法【超详解 + 图解】](https://www.cnblogs.com/ECJTUACM-873284962/p/7097864.html)
+  * [2016 国家集训队论文](https://github.com/OI-wiki/libs/blob/master/%E9%9B%86%E8%AE%AD%E9%98%9F%E5%8E%86%E5%B9%B4%E8%AE%BA%E6%96%87/%E5%9B%BD%E5%AE%B6%E9%9B%86%E8%AE%AD%E9%98%9F2016%E8%AE%BA%E6%96%87%E9%9B%86.pdf)
+  * 算法导论
+  * Matoušek, Jiří, and Bernd Gärtner. Understanding and using linear programming. Vol. 1. Berlin: Springer, 2007.
+  * Inayatullah, Syed, Nasir Touheed, and Muhammad Imtiaz. &quot;A streamlined artificial variable free version of simplex method.&quot; PloS one 10, no. 3 (2015): e0116156.
+  * Floudas, Christodoulos A., and Panos M. Pardalos, eds. Encyclopedia of optimization. Springer Science &amp; Business Media, 2008.
+
+* * *
+
+  1. 原则上，因为所有向量默认为列向量，(𝑥𝐵,𝑥𝑁)(xB,xN)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 应该写作 (𝑥𝑇𝐵,𝑥𝑇𝑁)𝑇(xBT,xNT)T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．但是为了简化记号，本文所有类似的情形都直接写作 (𝑥𝐵,𝑥𝑁)(xB,xN)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而省略转置符号． ↩
+
+  2. 测试结果参见 Forrest, John J., and Donald Goldfarb. &quot;Steepest-edge simplex algorithms for linear programming.&quot; Mathematical programming 57, no. 1 (1992): 341-374． ↩
+
+  3. 一个经典的反例可以参见 Klee, Victor, and George J. Minty. &quot;How good is the simplex algorithm.&quot; Inequalities 3, no. 3 (1972): 159-175． ↩
+
+  4. 详细的解释可以看 [这份讲义](https://facultyweb.kennesaw.edu/mlavrov/courses/lp/lecture8.pdf)． ↩
+
+* * *
+
+&gt;  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/simplex.md)
+&gt;  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/simplex.md &quot;edit.link.title&quot;)
+&gt;  __本页面贡献者：[StudyingFather](https://github.com/StudyingFather), [H-J-Granger](https://github.com/H-J-Granger), [Ir1d](https://github.com/Ir1d), [Tiphereth-A](https://github.com/Tiphereth-A), [countercurrent-time](https://github.com/countercurrent-time), [Enter-tainer](https://github.com/Enter-tainer), [NachtgeistW](https://github.com/NachtgeistW), [AngelKitty](https://github.com/AngelKitty), [CCXXXI](https://github.com/CCXXXI), [Early0v0](https://github.com/Early0v0), [MegaOwIer](https://github.com/MegaOwIer), [sshwy](https://github.com/sshwy), [Xeonacid](https://github.com/Xeonacid), [ZnPdCo](https://github.com/ZnPdCo), [c-forrest](https://github.com/c-forrest), [cjsoft](https://github.com/cjsoft), [diauweb](https://github.com/diauweb), [ezoixx130](https://github.com/ezoixx130), [GekkaSaori](https://github.com/GekkaSaori), [Gesrua](https://github.com/Gesrua), [Henry-ZHR](https://github.com/Henry-ZHR), [Konano](https://github.com/Konano), [ksyx](https://github.com/ksyx), [LovelyBuggies](https://github.com/LovelyBuggies), [lychees](https://github.com/lychees), [Makkiy](https://github.com/Makkiy), [mgt](mailto:i@margatroid.xyz), [minghu6](https://github.com/minghu6), [orzzzjq](https://github.com/orzzzjq), [P-Y-Y](https://github.com/P-Y-Y), [PotassiumWings](https://github.com/PotassiumWings), [SamZhangQingChuan](https://github.com/SamZhangQingChuan), [Suyun514](mailto:suyun514@qq.com), [weiyong1024](https://github.com/weiyong1024), [Backl1ght](https://github.com/Backl1ght), [baker221](https://github.com/baker221), [Chrogeek](https://github.com/Chrogeek), [FFjet](https://github.com/FFjet), [GavinZhengOI](https://github.com/GavinZhengOI), [Han-Yu-Meng](https://github.com/Han-Yu-Meng), [HeRaNO](https://github.com/HeRaNO), [HomuraCat](https://github.com/HomuraCat), [iamtwz](https://github.com/iamtwz), [ImpleLee](https://github.com/ImpleLee), [kenlig](https://github.com/kenlig), [kxccc](https://github.com/kxccc), [Marcythm](https://github.com/Marcythm), [Molmin](https://github.com/Molmin), [opsiff](https://github.com/opsiff), [ouuan](https://github.com/ouuan), [Peanut-Tang](https://github.com/Peanut-Tang), [Raisetsu41](https://github.com/Raisetsu41), [SukkaW](https://github.com/SukkaW), [yusancky](https://github.com/yusancky)
+&gt;  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用</code></pre></article><nav class="article-nav"><a href="number-theory-lift-the-exponent.html"><span class="meta">上一篇</span><br>升幂引理</a><a href="game-theory-intro.html"><span class="meta">下一篇</span><br>博弈论简介</a></nav></div>
+    </div>
+  </main>
+  <script id="archive-search-data" type="application/json">[{"title": "均摊复杂度", "group": "基础知识", "subgroup": "amortized-analysis", "href": "../basic/amortized-analysis.html"}, {"title": "二分", "group": "基础知识", "subgroup": "binary", "href": "../basic/binary.html"}, {"title": "倍增", "group": "基础知识", "subgroup": "binary-lifting", "href": "../basic/binary-lifting.html"}, {"title": "冒泡排序", "group": "基础知识", "subgroup": "bubble-sort", "href": "../basic/bubble-sort.html"}, {"title": "桶排序", "group": "基础知识", "subgroup": "bucket-sort", "href": "../basic/bucket-sort.html"}, {"title": "复杂度简介", "group": "基础知识", "subgroup": "complexity", "href": "../basic/complexity.html"}, {"title": "构造", "group": "基础知识", "subgroup": "construction", "href": "../basic/construction.html"}, {"title": "计数排序", "group": "基础知识", "subgroup": "counting-sort", "href": "../basic/counting-sort.html"}, {"title": "递归 & 分治", "group": "基础知识", "subgroup": "divide-and-conquer", "href": "../basic/divide-and-conquer.html"}, {"title": "枚举", "group": "基础知识", "subgroup": "enumerate", "href": "../basic/enumerate.html"}, {"title": "贪心", "group": "基础知识", "subgroup": "greedy", "href": "../basic/greedy.html"}, {"title": "堆排序", "group": "基础知识", "subgroup": "heap-sort", "href": "../basic/heap-sort.html"}, {"title": "插入排序", "group": "基础知识", "subgroup": "insertion-sort", "href": "../basic/insertion-sort.html"}, {"title": "归并排序", "group": "基础知识", "subgroup": "merge-sort", "href": "../basic/merge-sort.html"}, {"title": "算法基础简介", "group": "基础知识", "subgroup": "概览", "href": "../basic/overview.html"}, {"title": "前缀和 & 差分", "group": "基础知识", "subgroup": "prefix-sum", "href": "../basic/prefix-sum.html"}, {"title": "快速排序", "group": "基础知识", "subgroup": "quick-sort", "href": "../basic/quick-sort.html"}, {"title": "基数排序", "group": "基础知识", "subgroup": "radix-sort", "href": "../basic/radix-sort.html"}, {"title": "选择排序", "group": "基础知识", "subgroup": "selection-sort", "href": "../basic/selection-sort.html"}, {"title": "希尔排序", "group": "基础知识", "subgroup": "shell-sort", "href": "../basic/shell-sort.html"}, {"title": "模拟", "group": "基础知识", "subgroup": "simulate", "href": "../basic/simulate.html"}, {"title": "排序简介", "group": "基础知识", "subgroup": "sort-intro", "href": "../basic/sort-intro.html"}, {"title": "排序相关 STL", "group": "基础知识", "subgroup": "stl-sort", "href": "../basic/stl-sort.html"}, {"title": "Tim 排序", "group": "基础知识", "subgroup": "tim-sort", "href": "../basic/tim-sort.html"}, {"title": "锦标赛排序", "group": "基础知识", "subgroup": "tournament-sort", "href": "../basic/tournament-sort.html"}, {"title": "排序应用", "group": "基础知识", "subgroup": "use-of-sort", "href": "../basic/use-of-sort.html"}, {"title": "常见错误", "group": "赛事与实践", "subgroup": "common-mistakes", "href": "../contest/common-mistakes.html"}, {"title": "常见技巧", "group": "赛事与实践", "subgroup": "common-tricks", "href": "../contest/common-tricks.html"}, {"title": "分段打表", "group": "赛事与实践", "subgroup": "dictionary", "href": "../contest/dictionary.html"}, {"title": "ICPC/CCPC 赛事与赛制", "group": "赛事与实践", "subgroup": "icpc", "href": "../contest/icpc.html"}, {"title": "交互题", "group": "赛事与实践", "subgroup": "interaction", "href": "../contest/interaction.html"}, {"title": "读入、输出优化", "group": "赛事与实践", "subgroup": "io", "href": "../contest/io.html"}, {"title": "OI 赛事与赛制", "group": "赛事与实践", "subgroup": "oi", "href": "../contest/oi.html"}, {"title": "比赛相关简介", "group": "赛事与实践", "subgroup": "概览", "href": "../contest/overview.html"}, {"title": "题型概述", "group": "赛事与实践", "subgroup": "problems", "href": "../contest/problems.html"}, {"title": "出题", "group": "赛事与实践", "subgroup": "problemsetting", "href": "../contest/problemsetting.html"}, {"title": "学习资源", "group": "赛事与实践", "subgroup": "resources", "href": "../contest/resources.html"}, {"title": "学习路线", "group": "赛事与实践", "subgroup": "roadmap", "href": "../contest/roadmap.html"}, {"title": "动态规划基础", "group": "动态规划", "subgroup": "basic", "href": "../dp/basic.html"}, {"title": "计数 DP", "group": "动态规划", "subgroup": "count", "href": "../dp/count.html"}, {"title": "DAG 上的 DP", "group": "动态规划", "subgroup": "dag", "href": "../dp/dag.html"}, {"title": "DP 套 DP", "group": "动态规划", "subgroup": "dp-of-dp", "href": "../dp/dp-of-dp.html"}, {"title": "动态 DP", "group": "动态规划", "subgroup": "dynamic", "href": "../dp/dynamic.html"}, {"title": "区间 DP", "group": "动态规划", "subgroup": "interval", "href": "../dp/interval.html"}, {"title": "背包 DP", "group": "动态规划", "subgroup": "knapsack", "href": "../dp/knapsack.html"}, {"title": "记忆化搜索", "group": "动态规划", "subgroup": "memo", "href": "../dp/memo.html"}, {"title": "其它 DP 方法", "group": "动态规划", "subgroup": "misc", "href": "../dp/misc.html"}, {"title": "数位 DP", "group": "动态规划", "subgroup": "number", "href": "../dp/number.html"}, {"title": "DP 优化简介", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-dp-opt.html"}, {"title": "Slope Trick 优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-slope-trick.html"}, {"title": "WQS 二分", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-wqs-binary-search.html"}, {"title": "单调队列/单调栈优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-monotonous-queue-stack.html"}, {"title": "四边形不等式优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-quadrangle.html"}, {"title": "斜率优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-slope.html"}, {"title": "状态设计优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-state.html"}, {"title": "动态规划部分简介", "group": "动态规划", "subgroup": "概览", "href": "../dp/overview.html"}, {"title": "插头 DP", "group": "动态规划", "subgroup": "plug", "href": "../dp/plug.html"}, {"title": "概率 DP", "group": "动态规划", "subgroup": "概率", "href": "../dp/probability.html"}, {"title": "状压 DP", "group": "动态规划", "subgroup": "state", "href": "../dp/state.html"}, {"title": "树形 DP", "group": "动态规划", "subgroup": "树相关", "href": "../dp/tree.html"}, {"title": "AA 树", "group": "数据结构", "subgroup": "aa-tree", "href": "../ds/aa-tree.html"}, {"title": "AVL 树", "group": "数据结构", "subgroup": "avl", "href": "../ds/avl.html"}, {"title": "线段树套平衡树", "group": "数据结构", "subgroup": "balanced-in-seg", "href": "../ds/balanced-in-seg.html"}, {"title": "二叉堆", "group": "数据结构", "subgroup": "binary-heap", "href": "../ds/binary-heap.html"}, {"title": "分块套树状数组", "group": "数据结构", "subgroup": "bit-in-block-array", "href": "../ds/bit-in-block-array.html"}, {"title": "块状数组", "group": "数据结构", "subgroup": "block-array", "href": "../ds/block-array.html"}, {"title": "块状链表", "group": "数据结构", "subgroup": "block-list", "href": "../ds/block-list.html"}, {"title": "二叉搜索树 & 平衡树", "group": "数据结构", "subgroup": "bst", "href": "../ds/bst.html"}, {"title": "笛卡尔树", "group": "数据结构", "subgroup": "cartesian-tree", "href": "../ds/cartesian-tree.html"}, {"title": "猫树", "group": "数据结构", "subgroup": "cat-tree", "href": "../ds/cat-tree.html"}, {"title": "分块思想", "group": "数据结构", "subgroup": "decompose", "href": "../ds/decompose.html"}, {"title": "析合树", "group": "数据结构", "subgroup": "divide-combine", "href": "../ds/divide-combine.html"}, {"title": "划分树", "group": "数据结构", "subgroup": "dividing", "href": "../ds/dividing.html"}, {"title": "并查集", "group": "数据结构", "subgroup": "dsu", "href": "../ds/dsu.html"}, {"title": "并查集复杂度", "group": "数据结构", "subgroup": "dsu-complexity", "href": "../ds/dsu-complexity.html"}, {"title": "Euler Tour Tree", "group": "数据结构", "subgroup": "ett", "href": "../ds/ett.html"}, {"title": "树状数组", "group": "数据结构", "subgroup": "fenwick", "href": "../ds/fenwick.html"}, {"title": "手指树", "group": "数据结构", "subgroup": "finger-tree", "href": "../ds/finger-tree.html"}, {"title": "全局平衡二叉树", "group": "数据结构", "subgroup": "global-bst", "href": "../ds/global-bst.html"}, {"title": "哈希表", "group": "数据结构", "subgroup": "hash", "href": "../ds/hash.html"}, {"title": "堆简介", "group": "数据结构", "subgroup": "heap", "href": "../ds/heap.html"}, {"title": "霍夫曼树", "group": "数据结构", "subgroup": "huffman-tree", "href": "../ds/huffman-tree.html"}, {"title": "K-D Tree", "group": "数据结构", "subgroup": "kdt", "href": "../ds/kdt.html"}, {"title": "Kinetic Tournament Tree", "group": "数据结构", "subgroup": "kinetic-tournament-tree", "href": "../ds/kinetic-tournament-tree.html"}, {"title": "Link Cut Tree", "group": "数据结构", "subgroup": "lct", "href": "../ds/lct.html"}, {"title": "左偏树", "group": "数据结构", "subgroup": "leftist-tree", "href": "../ds/leftist-tree.html"}, {"title": "李超线段树", "group": "数据结构", "subgroup": "li-chao-tree", "href": "../ds/li-chao-tree.html"}, {"title": "链表", "group": "数据结构", "subgroup": "linked-list", "href": "../ds/linked-list.html"}, {"title": "左偏红黑树", "group": "数据结构", "subgroup": "llrbt", "href": "../ds/llrbt.html"}, {"title": "单调队列", "group": "数据结构", "subgroup": "monotonous-queue", "href": "../ds/monotonous-queue.html"}, {"title": "单调栈", "group": "数据结构", "subgroup": "monotonous-stack", "href": "../ds/monotonous-stack.html"}, {"title": "数据结构部分简介", "group": "数据结构", "subgroup": "概览", "href": "../ds/overview.html"}, {"title": "配对堆", "group": "数据结构", "subgroup": "pairing-heap", "href": "../ds/pairing-heap.html"}, {"title": "可持久化数据结构简介", "group": "数据结构", "subgroup": "persistent", "href": "../ds/persistent.html"}, {"title": "可持久化平衡树", "group": "数据结构", "subgroup": "persistent-balanced", "href": "../ds/persistent-balanced.html"}, {"title": "可持久化块状数组", "group": "数据结构", "subgroup": "persistent-block-array", "href": "../ds/persistent-block-array.html"}, {"title": "可持久化可并堆", "group": "数据结构", "subgroup": "persistent-heap", "href": "../ds/persistent-heap.html"}, {"title": "可持久化线段树", "group": "数据结构", "subgroup": "persistent-seg", "href": "../ds/persistent-seg.html"}, {"title": "可持久化字典树", "group": "数据结构", "subgroup": "persistent-trie", "href": "../ds/persistent-trie.html"}, {"title": "PQ 树", "group": "数据结构", "subgroup": "pq-tree", "href": "../ds/pq-tree.html"}, {"title": "队列", "group": "数据结构", "subgroup": "queue", "href": "../ds/queue.html"}, {"title": "红黑树", "group": "数据结构", "subgroup": "rbtree", "href": "../ds/rbtree.html"}, {"title": "Size Balanced Tree", "group": "数据结构", "subgroup": "sbt", "href": "../ds/sbt.html"}, {"title": "线段树基础", "group": "数据结构", "subgroup": "seg", "href": "../ds/seg.html"}, {"title": "区间最值操作 & 区间历史最值", "group": "数据结构", "subgroup": "seg-beats", "href": "../ds/seg-beats.html"}, {"title": "平衡树套线段树", "group": "数据结构", "subgroup": "seg-in-balanced", "href": "../ds/seg-in-balanced.html"}, {"title": "树状数组套权值线段树", "group": "数据结构", "subgroup": "seg-in-bit", "href": "../ds/seg-in-bit.html"}, {"title": "线段树套线段树", "group": "数据结构", "subgroup": "seg-in-seg", "href": "../ds/seg-in-seg.html"}, {"title": "线段树合并 & 分裂", "group": "数据结构", "subgroup": "seg-merge-split", "href": "../ds/seg-merge-split.html"}, {"title": "替罪羊树", "group": "数据结构", "subgroup": "sgt", "href": "../ds/sgt.html"}, {"title": "跳表", "group": "数据结构", "subgroup": "skiplist", "href": "../ds/skiplist.html"}, {"title": "ST 表", "group": "数据结构", "subgroup": "sparse-table", "href": "../ds/sparse-table.html"}, {"title": "Splay 树", "group": "数据结构", "subgroup": "splay", "href": "../ds/splay.html"}, {"title": "Sqrt Tree", "group": "数据结构", "subgroup": "sqrt-tree", "href": "../ds/sqrt-tree.html"}, {"title": "栈", "group": "数据结构", "subgroup": "stack", "href": "../ds/stack.html"}, {"title": "Top Tree", "group": "数据结构", "subgroup": "top-tree", "href": "../ds/top-tree.html"}, {"title": "Treap", "group": "数据结构", "subgroup": "treap", "href": "../ds/treap.html"}, {"title": "树分块", "group": "数据结构", "subgroup": "tree-decompose", "href": "../ds/tree-decompose.html"}, {"title": "WBLT", "group": "数据结构", "subgroup": "wblt", "href": "../ds/wblt.html"}, {"title": "Edit landing", "group": "编辑说明", "subgroup": "概览", "href": "../edit-landing/overview.html"}, {"title": "二维计算几何基础", "group": "计算几何", "subgroup": "2d", "href": "../geometry/2d.html"}, {"title": "三维计算几何基础", "group": "计算几何", "subgroup": "3d", "href": "../geometry/3d.html"}, {"title": "凸包", "group": "计算几何", "subgroup": "convex-hull", "href": "../geometry/convex-hull.html"}, {"title": "距离", "group": "计算几何", "subgroup": "distance", "href": "../geometry/distance.html"}, {"title": "半平面交", "group": "计算几何", "subgroup": "half-plane", "href": "../geometry/half-plane.html"}, {"title": "反演变换", "group": "计算几何", "subgroup": "inverse", "href": "../geometry/inverse.html"}, {"title": "计算几何杂项", "group": "计算几何", "subgroup": "misc", "href": "../geometry/misc.html"}, {"title": "平面最近点对", "group": "计算几何", "subgroup": "nearest-points", "href": "../geometry/nearest-points.html"}, {"title": "计算几何部分简介", "group": "计算几何", "subgroup": "概览", "href": "../geometry/overview.html"}, {"title": "Pick 定理", "group": "计算几何", "subgroup": "pick", "href": "../geometry/pick.html"}, {"title": "随机增量法", "group": "计算几何", "subgroup": "random-incremental", "href": "../geometry/random-incremental.html"}, {"title": "旋转卡壳", "group": "计算几何", "subgroup": "rotating-calipers", "href": "../geometry/rotating-calipers.html"}, {"title": "扫描线", "group": "计算几何", "subgroup": "scanning", "href": "../geometry/scanning.html"}, {"title": "三角剖分", "group": "计算几何", "subgroup": "triangulation", "href": "../geometry/triangulation.html"}, {"title": "2-SAT", "group": "图论", "subgroup": "2-sat", "href": "../graph/2-sat.html"}, {"title": "双连通分量", "group": "图论", "subgroup": "bcc", "href": "../graph/bcc.html"}, {"title": "BFS（图论）", "group": "图论", "subgroup": "bfs", "href": "../graph/bfs.html"}, {"title": "二分图", "group": "图论", "subgroup": "bi-graph", "href": "../graph/bi-graph.html"}, {"title": "圆方树", "group": "图论", "subgroup": "block-forest", "href": "../graph/block-forest.html"}, {"title": "弦图", "group": "图论", "subgroup": "chord", "href": "../graph/chord.html"}, {"title": "图的着色", "group": "图论", "subgroup": "color", "href": "../graph/color.html"}, {"title": "图论相关概念", "group": "图论", "subgroup": "concept", "href": "../graph/concept.html"}, {"title": "点/边连通度", "group": "图论", "subgroup": "connectivity", "href": "../graph/connectivity.html"}, {"title": "割点和桥", "group": "图论", "subgroup": "cut", "href": "../graph/cut.html"}, {"title": "有向无环图", "group": "图论", "subgroup": "dag", "href": "../graph/dag.html"}, {"title": "DFS（图论）", "group": "图论", "subgroup": "dfs", "href": "../graph/dfs.html"}, {"title": "差分约束", "group": "图论", "subgroup": "diff-constraints", "href": "../graph/diff-constraints.html"}, {"title": "最小树形图", "group": "图论", "subgroup": "dmst", "href": "../graph/dmst.html"}, {"title": "支配树", "group": "图论", "subgroup": "dominator-tree", "href": "../graph/dominator-tree.html"}, {"title": "树上启发式合并", "group": "图论", "subgroup": "dsu-on-tree", "href": "../graph/dsu-on-tree.html"}, {"title": "动态树分治", "group": "图论", "subgroup": "dynamic-tree-divide", "href": "../graph/dynamic-tree-divide.html"}, {"title": "欧拉图", "group": "图论", "subgroup": "euler", "href": "../graph/euler.html"}, {"title": "上下界网络流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-bound.html"}, {"title": "最大流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-max-flow.html"}, {"title": "最小割", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-min-cut.html"}, {"title": "网络流简介", "group": "图论", "subgroup": "网络流", "href": "../graph/flow.html"}, {"title": "费用流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-min-cost.html"}, {"title": "一般图最大匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-general-match.html"}, {"title": "一般图最大权匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-general-weight-match.html"}, {"title": "二分图最大匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-bigraph-match.html"}, {"title": "二分图最大权匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-bigraph-weight-match.html"}, {"title": "图匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-graph-match.html"}, {"title": "稳定匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-stable-match.html"}, {"title": "图上随机游走", "group": "图论", "subgroup": "graph-random-walk", "href": "../graph/graph-random-walk.html"}, {"title": "哈密顿图", "group": "图论", "subgroup": "hamilton", "href": "../graph/hamilton.html"}, {"title": "树链剖分", "group": "图论", "subgroup": "hld", "href": "../graph/hld.html"}, {"title": "k 短路", "group": "图论", "subgroup": "kth-path", "href": "../graph/kth-path.html"}, {"title": "最近公共祖先", "group": "图论", "subgroup": "lca", "href": "../graph/lca.html"}, {"title": "LGV 引理", "group": "图论", "subgroup": "lgv", "href": "../graph/lgv.html"}, {"title": "矩阵树定理", "group": "图论", "subgroup": "matrix-tree", "href": "../graph/matrix-tree.html"}, {"title": "最大团搜索算法", "group": "图论", "subgroup": "max-clique", "href": "../graph/max-clique.html"}, {"title": "最小直径生成树", "group": "图论", "subgroup": "mdst", "href": "../graph/mdst.html"}, {"title": "最小环", "group": "图论", "subgroup": "min-cycle", "href": "../graph/min-cycle.html"}, {"title": "同余最短路", "group": "图论", "subgroup": "mod-shortest-path", "href": "../graph/mod-shortest-path.html"}, {"title": "最小生成树", "group": "图论", "subgroup": "mst", "href": "../graph/mst.html"}, {"title": "拆点", "group": "图论", "subgroup": "node", "href": "../graph/node.html"}, {"title": "图论部分简介", "group": "图论", "subgroup": "概览", "href": "../graph/overview.html"}, {"title": "平面图", "group": "图论", "subgroup": "planar", "href": "../graph/planar.html"}, {"title": "Prüfer 序列", "group": "图论", "subgroup": "prufer", "href": "../graph/prufer.html"}, {"title": "环计数问题", "group": "图论", "subgroup": "rings-count", "href": "../graph/rings-count.html"}, {"title": "图的存储", "group": "图论", "subgroup": "save", "href": "../graph/save.html"}, {"title": "强连通分量", "group": "图论", "subgroup": "scc", "href": "../graph/scc.html"}, {"title": "最短路", "group": "图论", "subgroup": "shortest-path", "href": "../graph/shortest-path.html"}, {"title": "斯坦纳树", "group": "图论", "subgroup": "steiner-tree", "href": "../graph/steiner-tree.html"}, {"title": "Stoer–Wagner 算法", "group": "图论", "subgroup": "stoer-wagner", "href": "../graph/stoer-wagner.html"}, {"title": "拓扑排序", "group": "图论", "subgroup": "topo", "href": "../graph/topo.html"}, {"title": "AHU 算法", "group": "图论", "subgroup": "tree-ahu", "href": "../graph/tree-ahu.html"}, {"title": "树基础", "group": "图论", "subgroup": "tree-basic", "href": "../graph/tree-basic.html"}, {"title": "树的中心", "group": "图论", "subgroup": "tree-center", "href": "../graph/tree-center.html"}, {"title": "树的重心", "group": "图论", "subgroup": "tree-centroid", "href": "../graph/tree-centroid.html"}, {"title": "树的直径", "group": "图论", "subgroup": "tree-diameter", "href": "../graph/tree-diameter.html"}, {"title": "树分治", "group": "图论", "subgroup": "tree-divide", "href": "../graph/tree-divide.html"}, {"title": "树哈希", "group": "图论", "subgroup": "tree-hash", "href": "../graph/tree-hash.html"}, {"title": "树上随机游走", "group": "图论", "subgroup": "tree-random-walk", "href": "../graph/tree-random-walk.html"}, {"title": "虚树", "group": "图论", "subgroup": "virtual-tree", "href": "../graph/virtual-tree.html"}, {"title": "OI Wiki", "group": "首页", "subgroup": "概览", "href": "../home/home.html"}, {"title": "关于本项目", "group": "OI Wiki 介绍", "subgroup": "about", "href": "../intro/about.html"}, {"title": "Docker deploy", "group": "OI Wiki 介绍", "subgroup": "docker-deploy", "href": "../intro/docker-deploy.html"}, {"title": "F.A.Q.", "group": "OI Wiki 介绍", "subgroup": "faq", "href": "../intro/faq.html"}, {"title": "格式手册", "group": "OI Wiki 介绍", "subgroup": "format", "href": "../intro/format.html"}, {"title": "如何参与", "group": "OI Wiki 介绍", "subgroup": "htc", "href": "../intro/htc.html"}, {"title": "镜像站列表", "group": "OI Wiki 介绍", "subgroup": "mirrors", "href": "../intro/mirrors.html"}, {"title": "数学符号表", "group": "OI Wiki 介绍", "subgroup": "symbol", "href": "../intro/symbol.html"}, {"title": "致谢", "group": "OI Wiki 介绍", "subgroup": "thanks", "href": "../intro/thanks.html"}, {"title": "OI Wiki 不是什么", "group": "OI Wiki 介绍", "subgroup": "what-oi-wiki-is-not", "href": "../intro/what-oi-wiki-is-not.html"}, {"title": "数组", "group": "编程语言", "subgroup": "array", "href": "../lang/array.html"}, {"title": "C++ 语法基础", "group": "编程语言", "subgroup": "basic", "href": "../lang/basic.html"}, {"title": "分支", "group": "编程语言", "subgroup": "branch", "href": "../lang/branch.html"}, {"title": "类", "group": "编程语言", "subgroup": "class", "href": "../lang/class.html"}, {"title": "常量", "group": "编程语言", "subgroup": "const", "href": "../lang/const.html"}, {"title": "C++ 与其他常用语言的区别", "group": "编程语言", "subgroup": "cpp-other-langs", "href": "../lang/cpp-other-langs.html"}, {"title": "bitset", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-bitset.html"}, {"title": "C++ 标准库简介", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl.html"}, {"title": "pair", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-pair.html"}, {"title": "STL 容器简介", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-container.html"}, {"title": "STL 算法", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-algorithm.html"}, {"title": "string", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-string.html"}, {"title": "关联式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-associative-container.html"}, {"title": "容器适配器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-container-adapter.html"}, {"title": "序列式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-sequence-container.html"}, {"title": "无序关联式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-unordered-container.html"}, {"title": "迭代器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-iterator.html"}, {"title": "文件操作", "group": "编程语言", "subgroup": "file-op", "href": "../lang/file-op.html"}, {"title": "函数", "group": "编程语言", "subgroup": "func", "href": "../lang/func.html"}, {"title": "Hello, World!", "group": "编程语言", "subgroup": "helloworld", "href": "../lang/helloworld.html"}, {"title": "Java 速成", "group": "编程语言", "subgroup": "java", "href": "../lang/java.html"}, {"title": "Java 进阶", "group": "编程语言", "subgroup": "java-pro", "href": "../lang/java-pro.html"}, {"title": "Lambda 表达式", "group": "编程语言", "subgroup": "lambda", "href": "../lang/lambda.html"}, {"title": "循环", "group": "编程语言", "subgroup": "loop", "href": "../lang/loop.html"}, {"title": "命名空间", "group": "编程语言", "subgroup": "namespace", "href": "../lang/namespace.html"}, {"title": "新版 C++ 特性", "group": "编程语言", "subgroup": "new", "href": "../lang/new.html"}, {"title": "运算", "group": "编程语言", "subgroup": "op", "href": "../lang/op.html"}, {"title": "重载运算符", "group": "编程语言", "subgroup": "op-overload", "href": "../lang/op-overload.html"}, {"title": "编译优化", "group": "编程语言", "subgroup": "optimizations", "href": "../lang/optimizations.html"}, {"title": "语言基础简介", "group": "编程语言", "subgroup": "概览", "href": "../lang/overview.html"}, {"title": "Pascal 转 C++ 急救", "group": "编程语言", "subgroup": "pas-cpp", "href": "../lang/pas-cpp.html"}, {"title": "pb_ds 简介", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds.html"}, {"title": "堆", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds-pq.html"}, {"title": "平衡树", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds-tree.html"}, {"title": "指针", "group": "编程语言", "subgroup": "pointer", "href": "../lang/pointer.html"}, {"title": "Python 速成", "group": "编程语言", "subgroup": "python", "href": "../lang/python.html"}, {"title": "引用", "group": "编程语言", "subgroup": "reference", "href": "../lang/reference.html"}, {"title": "结构体", "group": "编程语言", "subgroup": "struct", "href": "../lang/struct.html"}, {"title": "联合体", "group": "编程语言", "subgroup": "union", "href": "../lang/union.html"}, {"title": "值类别", "group": "编程语言", "subgroup": "value-category", "href": "../lang/value-category.html"}, {"title": "变量", "group": "编程语言", "subgroup": "var", "href": "../lang/var.html"}, {"title": "Schreier–Sims 算法", "group": "数学", "subgroup": "algebra", "href": "algebra-schreier-sims.html"}, {"title": "域论", "group": "数学", "subgroup": "algebra", "href": "algebra-field-theory.html"}, {"title": "基本概念", "group": "数学", "subgroup": "algebra", "href": "algebra-basic.html"}, {"title": "环论", "group": "数学", "subgroup": "algebra", "href": "algebra-ring-theory.html"}, {"title": "群论", "group": "数学", "subgroup": "algebra", "href": "algebra-group-theory.html"}, {"title": "Berlekamp–Massey 算法", "group": "数学", "subgroup": "berlekamp-massey", "href": "berlekamp-massey.html"}, {"title": "高精度计算", "group": "数学", "subgroup": "bignum", "href": "bignum.html"}, {"title": "快速幂", "group": "数学", "subgroup": "binary-exponentiation", "href": "binary-exponentiation.html"}, {"title": "二进制集合操作", "group": "数学", "subgroup": "binary-set", "href": "binary-set.html"}, {"title": "位操作", "group": "数学", "subgroup": "bit", "href": "bit.html"}, {"title": "布尔代数", "group": "数学", "subgroup": "boolean-algebra", "href": "boolean-algebra.html"}, {"title": "Entringer Number", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-entringer.html"}, {"title": "Eulerian Number", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-eulerian.html"}, {"title": "Pólya 计数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-polya.html"}, {"title": "伯努利数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-bernoulli.html"}, {"title": "分拆数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-partition.html"}, {"title": "卡特兰数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-catalan.html"}, {"title": "图论计数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-graph-enumeration.html"}, {"title": "容斥原理", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-inclusion-exclusion-principle.html"}, {"title": "抽屉原理", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-drawer-principle.html"}, {"title": "排列组合", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-combination.html"}, {"title": "斐波那契数列", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-fibonacci.html"}, {"title": "斯特林数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-stirling.html"}, {"title": "范德蒙德卷积", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-vandermonde-convolution.html"}, {"title": "贝尔数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-bell.html"}, {"title": "错位排列", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-derangement.html"}, {"title": "复数", "group": "数学", "subgroup": "complex", "href": "complex.html"}, {"title": "弧度制与坐标系", "group": "数学", "subgroup": "coordinate", "href": "coordinate.html"}, {"title": "公平组合游戏", "group": "数学", "subgroup": "博弈论", "href": "game-theory-impartial-game.html"}, {"title": "博弈论简介", "group": "数学", "subgroup": "博弈论", "href": "game-theory-intro.html"}, {"title": "零和游戏", "group": "数学", "subgroup": "博弈论", "href": "game-theory-zero-sum-game.html"}, {"title": "非公平组合游戏", "group": "数学", "subgroup": "博弈论", "href": "game-theory-partizan-game.html"}, {"title": "Jordan标准型", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-jordan.html"}, {"title": "内积和外积", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-product.html"}, {"title": "初等变换", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-elementary-operations.html"}, {"title": "向量", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-vector.html"}, {"title": "对角化", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-diagonalization.html"}, {"title": "特征多项式", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-char-poly.html"}, {"title": "矩阵", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-matrix.html"}, {"title": "线性代数简介", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra.html"}, {"title": "线性基", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-basis.html"}, {"title": "线性映射", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-linear-mapping.html"}, {"title": "线性空间", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-vector-space.html"}, {"title": "行列式", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-determinant.html"}, {"title": "线性规划基础", "group": "数学", "subgroup": "linear-programming", "href": "linear-programming.html"}, {"title": "拟阵", "group": "数学", "subgroup": "matroid", "href": "matroid.html"}, {"title": "Meissel–Lehmer 算法", "group": "数学", "subgroup": "数论", "href": "number-theory-meissel-lehmer.html"}, {"title": "Min_25 筛", "group": "数学", "subgroup": "数论", "href": "number-theory-min-25.html"}, {"title": "Pell 方程", "group": "数学", "subgroup": "数论", "href": "number-theory-pell-equation.html"}, {"title": "Powerful Number 筛", "group": "数学", "subgroup": "数论", "href": "number-theory-powerful-number.html"}, {"title": "Stern–Brocot 树与 Farey 序列", "group": "数学", "subgroup": "数论", "href": "number-theory-stern-brocot.html"}, {"title": "中国剩余定理", "group": "数学", "subgroup": "数论", "href": "number-theory-crt.html"}, {"title": "二次剩余", "group": "数学", "subgroup": "数论", "href": "number-theory-quad-residue.html"}, {"title": "二次域", "group": "数学", "subgroup": "数论", "href": "number-theory-quadratic.html"}, {"title": "分解质因数", "group": "数学", "subgroup": "数论", "href": "number-theory-pollard-rho.html"}, {"title": "升幂引理", "group": "数学", "subgroup": "数论", "href": "number-theory-lift-the-exponent.html"}, {"title": "卢卡斯定理", "group": "数学", "subgroup": "数论", "href": "number-theory-lucas.html"}, {"title": "同余方程", "group": "数学", "subgroup": "数论", "href": "number-theory-congruence-equation.html"}, {"title": "数论分块", "group": "数学", "subgroup": "数论", "href": "number-theory-sqrt-decomposition.html"}, {"title": "数论基础", "group": "数学", "subgroup": "数论", "href": "number-theory-basic.html"}, {"title": "最大公约数", "group": "数学", "subgroup": "数论", "href": "number-theory-gcd.html"}, {"title": "杜教筛", "group": "数学", "subgroup": "数论", "href": "number-theory-du.html"}, {"title": "模算术简介", "group": "数学", "subgroup": "数论", "href": "number-theory-mod-arithmetic.html"}, {"title": "模逆元", "group": "数学", "subgroup": "数论", "href": "number-theory-inverse.html"}, {"title": "欧拉函数", "group": "数学", "subgroup": "数论", "href": "number-theory-euler-totient.html"}, {"title": "洲阁筛", "group": "数学", "subgroup": "数论", "href": "number-theory-zhou.html"}, {"title": "狄利克雷卷积", "group": "数学", "subgroup": "数论", "href": "number-theory-dirichlet.html"}, {"title": "离散对数", "group": "数学", "subgroup": "数论", "href": "number-theory-discrete-logarithm.html"}, {"title": "筛法", "group": "数学", "subgroup": "数论", "href": "number-theory-sieve.html"}, {"title": "类欧几里德算法", "group": "数学", "subgroup": "数论", "href": "number-theory-euclidean.html"}, {"title": "素数", "group": "数学", "subgroup": "数论", "href": "number-theory-prime.html"}, {"title": "线性同余方程", "group": "数学", "subgroup": "数论", "href": "number-theory-linear-equation.html"}, {"title": "莫比乌斯反演", "group": "数学", "subgroup": "数论", "href": "number-theory-mobius.html"}, {"title": "裴蜀定理 & 一次不定方程", "group": "数学", "subgroup": "数论", "href": "number-theory-bezouts.html"}, {"title": "费马小定理 & 欧拉定理", "group": "数学", "subgroup": "数论", "href": "number-theory-fermat.html"}, {"title": "连分数", "group": "数学", "subgroup": "数论", "href": "number-theory-continued-fraction.html"}, {"title": "阶 & 原根", "group": "数学", "subgroup": "数论", "href": "number-theory-primitive-root.html"}, {"title": "阶乘取模", "group": "数学", "subgroup": "数论", "href": "number-theory-factorial.html"}, {"title": "高次剩余 & 单位根", "group": "数学", "subgroup": "数论", "href": "number-theory-residue.html"}, {"title": "平衡三进制", "group": "数学", "subgroup": "numeral-sys", "href": "numeral-sys-balanced-ternary.html"}, {"title": "数字系统简介", "group": "数学", "subgroup": "numeral-sys", "href": "numeral-sys-intro.html"}, {"title": "格雷码", "group": "数学", "subgroup": "numeral-sys", "href": "numeral-sys-gray-code.html"}, {"title": "进位制", "group": "数学", "subgroup": "numeral-sys", "href": "numeral-sys-base.html"}, {"title": "插值", "group": "数学", "subgroup": "数值算法", "href": "numerical-interp.html"}, {"title": "数值积分", "group": "数学", "subgroup": "数值算法", "href": "numerical-integral.html"}, {"title": "牛顿迭代法", "group": "数学", "subgroup": "数值算法", "href": "numerical-newton.html"}, {"title": "高斯消元", "group": "数学", "subgroup": "数值算法", "href": "numerical-gauss.html"}, {"title": "序理论", "group": "数学", "subgroup": "order-theory", "href": "order-theory.html"}, {"title": "数学部分简介", "group": "数学", "subgroup": "概览", "href": "overview.html"}, {"title": "置换和排列", "group": "数学", "subgroup": "permutation", "href": "permutation.html"}, {"title": "Chirp Z 变换", "group": "数学", "subgroup": "多项式", "href": "poly-czt.html"}, {"title": "Lagrange 反演", "group": "数学", "subgroup": "多项式", "href": "poly-lagrange-inversion.html"}, {"title": "代数基本定理", "group": "数学", "subgroup": "多项式", "href": "poly-fundamental.html"}, {"title": "多项式与生成函数简介", "group": "数学", "subgroup": "多项式", "href": "poly-intro.html"}, {"title": "多项式初等函数", "group": "数学", "subgroup": "多项式", "href": "poly-elementary-func.html"}, {"title": "多项式多点求值|快速插值", "group": "数学", "subgroup": "多项式", "href": "poly-multipoint-eval-interpolation.html"}, {"title": "多项式平移|连续点值平移", "group": "数学", "subgroup": "多项式", "href": "poly-shift.html"}, {"title": "多项式牛顿迭代", "group": "数学", "subgroup": "多项式", "href": "poly-newton.html"}, {"title": "常系数齐次线性递推", "group": "数学", "subgroup": "多项式", "href": "poly-linear-recurrence.html"}, {"title": "形式幂级数复合|复合逆", "group": "数学", "subgroup": "多项式", "href": "poly-comp-rev.html"}, {"title": "快速傅里叶变换", "group": "数学", "subgroup": "多项式", "href": "poly-fft.html"}, {"title": "快速数论变换", "group": "数学", "subgroup": "多项式", "href": "poly-ntt.html"}, {"title": "快速沃尔什变换", "group": "数学", "subgroup": "多项式", "href": "poly-fwt.html"}, {"title": "指数生成函数", "group": "数学", "subgroup": "多项式", "href": "poly-egf.html"}, {"title": "普通生成函数", "group": "数学", "subgroup": "多项式", "href": "poly-ogf.html"}, {"title": "符号化方法", "group": "数学", "subgroup": "多项式", "href": "poly-symbolic-method.html"}, {"title": "基本概念", "group": "数学", "subgroup": "概率", "href": "probability-basic-conception.html"}, {"title": "条件概率与独立性", "group": "数学", "subgroup": "概率", "href": "probability-conditional-probability.html"}, {"title": "概率不等式", "group": "数学", "subgroup": "概率", "href": "probability-concentration-inequality.html"}, {"title": "随机变量", "group": "数学", "subgroup": "概率", "href": "probability-random-variable.html"}, {"title": "随机变量的数字特征", "group": "数学", "subgroup": "概率", "href": "probability-exp-var.html"}, {"title": "单纯形法", "group": "数学", "subgroup": "simplex", "href": "simplex.html"}, {"title": "杨氏矩阵", "group": "数学", "subgroup": "young-tableau", "href": "young-tableau.html"}, {"title": "15-puzzle", "group": "杂项", "subgroup": "15-puzzle", "href": "../misc/15-puzzle.html"}, {"title": "计算理论基础", "group": "杂项", "subgroup": "cc-basic", "href": "../misc/cc-basic.html"}, {"title": "CDQ 分治", "group": "杂项", "subgroup": "cdq-divide", "href": "../misc/cdq-divide.html"}, {"title": "离散化", "group": "杂项", "subgroup": "discrete", "href": "../misc/discrete.html"}, {"title": "字节顺序", "group": "杂项", "subgroup": "endianness", "href": "../misc/endianness.html"}, {"title": "表达式求值", "group": "杂项", "subgroup": "expression", "href": "../misc/expression.html"}, {"title": "分数规划", "group": "杂项", "subgroup": "frac-programming", "href": "../misc/frac-programming.html"}, {"title": "有限状态自动机", "group": "杂项", "subgroup": "fsm", "href": "../misc/fsm.html"}, {"title": "Garsia–Wachs 算法", "group": "杂项", "subgroup": "garsia-wachs", "href": "../misc/garsia-wachs.html"}, {"title": "爬山算法", "group": "杂项", "subgroup": "hill-climbing", "href": "../misc/hill-climbing.html"}, {"title": "悬线法", "group": "杂项", "subgroup": "hoverline", "href": "../misc/hoverline.html"}, {"title": "在一台机器上规划任务", "group": "杂项", "subgroup": "job-order", "href": "../misc/job-order.html"}, {"title": "约瑟夫问题", "group": "杂项", "subgroup": "josephus", "href": "../misc/josephus.html"}, {"title": "Kahan 求和", "group": "杂项", "subgroup": "kahan-summation", "href": "../misc/kahan-summation.html"}, {"title": "主元素问题", "group": "杂项", "subgroup": "main-element", "href": "../misc/main-element.html"}, {"title": "普通莫队算法", "group": "杂项", "subgroup": "mo-algo", "href": "../misc/mo-algo.html"}, {"title": "二维莫队", "group": "杂项", "subgroup": "mo-algo-2dimen", "href": "../misc/mo-algo-2dimen.html"}, {"title": "莫队算法简介", "group": "杂项", "subgroup": "mo-algo-intro", "href": "../misc/mo-algo-intro.html"}, {"title": "树上莫队", "group": "杂项", "subgroup": "mo-algo-on-tree", "href": "../misc/mo-algo-on-tree.html"}, {"title": "莫队二次离线", "group": "杂项", "subgroup": "mo-algo-secondary-offline", "href": "../misc/mo-algo-secondary-offline.html"}, {"title": "莫队配合 bitset", "group": "杂项", "subgroup": "mo-algo-with-bitset", "href": "../misc/mo-algo-with-bitset.html"}, {"title": "带修改莫队", "group": "杂项", "subgroup": "modifiable-mo-algo", "href": "../misc/modifiable-mo-algo.html"}, {"title": "珂朵莉树/颜色段均摊", "group": "杂项", "subgroup": "odt", "href": "../misc/odt.html"}, {"title": "离线算法简介", "group": "杂项", "subgroup": "offline", "href": "../misc/offline.html"}, {"title": "杂项简介", "group": "杂项", "subgroup": "概览", "href": "../misc/overview.html"}, {"title": "整体二分", "group": "杂项", "subgroup": "parallel-binsearch", "href": "../misc/parallel-binsearch.html"}, {"title": "随机化技巧", "group": "杂项", "subgroup": "rand-technique", "href": "../misc/rand-technique.html"}, {"title": "随机函数", "group": "杂项", "subgroup": "random", "href": "../misc/random.html"}, {"title": "回滚莫队", "group": "杂项", "subgroup": "rollback-mo-algo", "href": "../misc/rollback-mo-algo.html"}, {"title": "模拟退火", "group": "杂项", "subgroup": "simulated-annealing", "href": "../misc/simulated-annealing.html"}, {"title": "空间优化简介", "group": "杂项", "subgroup": "space-optimization", "href": "../misc/space-optimization.html"}, {"title": "双指针", "group": "杂项", "subgroup": "two-pointer", "href": "../misc/two-pointer.html"}, {"title": "Alpha–Beta 剪枝", "group": "搜索", "subgroup": "alpha-beta", "href": "../search/alpha-beta.html"}, {"title": "A*", "group": "搜索", "subgroup": "astar", "href": "../search/astar.html"}, {"title": "回溯法", "group": "搜索", "subgroup": "backtracking", "href": "../search/backtracking.html"}, {"title": "BFS（搜索）", "group": "搜索", "subgroup": "bfs", "href": "../search/bfs.html"}, {"title": "双向搜索", "group": "搜索", "subgroup": "bidirectional", "href": "../search/bidirectional.html"}, {"title": "DFS（搜索）", "group": "搜索", "subgroup": "dfs", "href": "../search/dfs.html"}, {"title": "Dancing Links", "group": "搜索", "subgroup": "dlx", "href": "../search/dlx.html"}, {"title": "启发式搜索", "group": "搜索", "subgroup": "heuristic", "href": "../search/heuristic.html"}, {"title": "IDA*", "group": "搜索", "subgroup": "idastar", "href": "../search/idastar.html"}, {"title": "迭代加深搜索", "group": "搜索", "subgroup": "iterative", "href": "../search/iterative.html"}, {"title": "优化", "group": "搜索", "subgroup": "优化", "href": "../search/opt.html"}, {"title": "搜索部分简介", "group": "搜索", "subgroup": "概览", "href": "../search/overview.html"}, {"title": "AC 自动机", "group": "字符串", "subgroup": "ac-automaton", "href": "../string/ac-automaton.html"}, {"title": "字符串基础", "group": "字符串", "subgroup": "basic", "href": "../string/basic.html"}, {"title": "Boyer–Moore 算法", "group": "字符串", "subgroup": "bm", "href": "../string/bm.html"}, {"title": "广义后缀自动机", "group": "字符串", "subgroup": "general-sam", "href": "../string/general-sam.html"}, {"title": "字符串哈希", "group": "字符串", "subgroup": "hash", "href": "../string/hash.html"}, {"title": "前缀函数与 KMP 算法", "group": "字符串", "subgroup": "kmp", "href": "../string/kmp.html"}, {"title": "标准库", "group": "字符串", "subgroup": "lib-func", "href": "../string/lib-func.html"}, {"title": "Lyndon 分解", "group": "字符串", "subgroup": "lyndon", "href": "../string/lyndon.html"}, {"title": "Main–Lorentz 算法", "group": "字符串", "subgroup": "main-lorentz", "href": "../string/main-lorentz.html"}, {"title": "Manacher", "group": "字符串", "subgroup": "manacher", "href": "../string/manacher.html"}, {"title": "字符串匹配", "group": "字符串", "subgroup": "match", "href": "../string/match.html"}, {"title": "最小表示法", "group": "字符串", "subgroup": "minimal-string", "href": "../string/minimal-string.html"}, {"title": "字符串部分简介", "group": "字符串", "subgroup": "概览", "href": "../string/overview.html"}, {"title": "回文树", "group": "字符串", "subgroup": "pam", "href": "../string/pam.html"}, {"title": "后缀数组简介", "group": "字符串", "subgroup": "sa", "href": "../string/sa.html"}, {"title": "最优原地后缀排序算法", "group": "字符串", "subgroup": "sa-optimal-inplace", "href": "../string/sa-optimal-inplace.html"}, {"title": "后缀自动机 (SAM)", "group": "字符串", "subgroup": "sam", "href": "../string/sam.html"}, {"title": "序列自动机", "group": "字符串", "subgroup": "seq-automaton", "href": "../string/seq-automaton.html"}, {"title": "后缀平衡树", "group": "字符串", "subgroup": "suffix-bst", "href": "../string/suffix-bst.html"}, {"title": "后缀树", "group": "字符串", "subgroup": "suffix-tree", "href": "../string/suffix-tree.html"}, {"title": "字典树 (Trie)", "group": "字符串", "subgroup": "trie", "href": "../string/trie.html"}, {"title": "Z 函数（扩展 KMP）", "group": "字符串", "subgroup": "z-func", "href": "../string/z-func.html"}, {"title": "命令行", "group": "工具", "subgroup": "cmd", "href": "../tools/cmd.html"}, {"title": "命令行编译与调试", "group": "工具", "subgroup": "compile-debug", "href": "../tools/compile-debug.html"}, {"title": "编译器", "group": "工具", "subgroup": "compiler", "href": "../tools/compiler.html"}, {"title": "Atom", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-atom.html"}, {"title": "CLion", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-clion.html"}, {"title": "Code::Blocks", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-codeblocks.html"}, {"title": "CP Editor", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-cpeditor.html"}, {"title": "Dev-C++", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-devcpp.html"}, {"title": "Eclipse", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-eclipse.html"}, {"title": "Emacs", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-emacs.html"}, {"title": "Geany", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-geany.html"}, {"title": "GUIDE", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-guide.html"}, {"title": "Kate", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-kate.html"}, {"title": "Notepad++", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-npp.html"}, {"title": "Sublime Text", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-sublime.html"}, {"title": "Vim", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-vim.html"}, {"title": "VS Code", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-vscode.html"}, {"title": "Xcode", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-xcode.html"}, {"title": "Git", "group": "工具", "subgroup": "git", "href": "../tools/git.html"}, {"title": "Arbiter", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-arbiter.html"}, {"title": "CCR Plus", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-ccr-plus.html"}, {"title": "Cena", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-cena.html"}, {"title": "Lemon", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-lemon.html"}, {"title": "评测工具简介", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger.html"}, {"title": "LaTeX 入门", "group": "工具", "subgroup": "latex", "href": "../tools/latex.html"}, {"title": "OJ 工具", "group": "工具", "subgroup": "oj-tool", "href": "../tools/oj-tool.html"}, {"title": "工具软件简介", "group": "工具", "subgroup": "概览", "href": "../tools/overview.html"}, {"title": "Polygon", "group": "工具", "subgroup": "polygon", "href": "../tools/polygon.html"}, {"title": "Special Judge", "group": "工具", "subgroup": "special-judge", "href": "../tools/special-judge.html"}, {"title": "Checker", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-checker.html"}, {"title": "Generator", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-generator.html"}, {"title": "Interactor", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-interactor.html"}, {"title": "Testlib 简介", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib.html"}, {"title": "Validator", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-validator.html"}, {"title": "通用", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-general.html"}, {"title": "WSL (Windows 10)", "group": "工具", "subgroup": "wsl", "href": "../tools/wsl.html"}, {"title": "括号序列", "group": "专题", "subgroup": "bracket", "href": "../topic/bracket.html"}, {"title": "并查集应用", "group": "专题", "subgroup": "dsu-app", "href": "../topic/dsu-app.html"}, {"title": "RMQ", "group": "专题", "subgroup": "rmq", "href": "../topic/rmq.html"}, {"title": "线段树与离线询问", "group": "专题", "subgroup": "segment-tree-offline", "href": "../topic/segment-tree-offline.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) return;
+      let items = [];
+      try { items = JSON.parse(dataNode.textContent || "[]"); } catch (_error) { return; }
+      const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+      const highlight = (value, query) => {
+        if (!query) return escapeHtml(value);
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+      const groups = [...new Set(items.map((item) => item.group))].sort((a, b) => a.localeCompare(b, "zh-CN"));
+      for (const group of groups) {
+        const option = document.createElement("option");
+        option.value = group;
+        option.textContent = group;
+        groupSelect.append(option);
+      }
+      const render = () => {
+        const query = input.value.trim().toLowerCase();
+        const tokens = query.split(/\s+/).filter(Boolean);
+        const selectedGroup = groupSelect.value;
+        const scoped = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup ? `${selectedGroup} 下可搜索 ${scoped.length} 个页面。` : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+        const matches = scoped
+          .filter((item) => {
+            const haystack = [item.title, item.group, item.subgroup].join(" ").toLowerCase();
+            return tokens.every((token) => haystack.includes(token));
+          })
+          .sort((a, b) => a.title.localeCompare(b.title, "zh-CN"));
+        results.hidden = matches.length === 0;
+        results.innerHTML = matches.slice(0, 100).map((item) =>
+          `<li><a href="${item.href}">${highlight(item.title, query)}</a><div class="meta">${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</div></li>`
+        ).join("");
+        status.textContent = matches.length ? `匹配 ${matches.length} 个页面，显示前 ${Math.min(matches.length, 100)} 个。` : "没有匹配结果。";
+      };
+      input.addEventListener("input", render);
+      groupSelect.addEventListener("change", render);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        render();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          render();
+        }
+      });
+      const params = new URLSearchParams(window.location.search);
+      const initialQuery = params.get("q");
+      if (initialQuery) input.value = initialQuery;
+      render();
+    })();
+  </script>
+</body>
+</html>

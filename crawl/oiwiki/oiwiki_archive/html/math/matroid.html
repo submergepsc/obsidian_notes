@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>拟阵</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f8;
+      --panel: #ffffff;
+      --ink: #17202a;
+      --muted: #5f6c7b;
+      --line: #d9e1e8;
+      --accent: #0f766e;
+      --accent-soft: #d9f3ef;
+      --code-bg: #111827;
+      --code-ink: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "Source Han Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 20px 56px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    header, section, article, .sidebar-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    header {
+      padding: 20px 22px;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 1.75rem;
+      line-height: 1.25;
+    }
+    header p, p {
+      color: var(--muted);
+    }
+    aside {
+      position: sticky;
+      top: 16px;
+    }
+    .sidebar-card {
+      padding: 16px;
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+    }
+    .sidebar-card h2, section h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .sidebar-list, .sidebar-sublist {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      margin-top: 8px;
+      padding-left: 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 9px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line);
+    }
+    .sidebar-sublist li {
+      border: 0;
+      padding-bottom: 0;
+      margin-bottom: 7px;
+    }
+    .sidebar-list span, .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .sidebar-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .sidebar-row a {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .sidebar-row span {
+      flex: 0 0 auto;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .content > section, article {
+      padding: 20px 22px;
+      margin-bottom: 18px;
+    }
+    article {
+      max-width: 980px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .group-card {
+      min-width: 0;
+    }
+    .page-list li, .group-card li, .search-results li {
+      margin: 7px 0;
+    }
+    .article-nav {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+    .article-nav a {
+      display: block;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow-wrap: anywhere;
+    }
+    .article-nav a:last-child {
+      text-align: right;
+    }
+    .search-controls {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: end;
+    }
+    .search-controls label {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    input, select, button {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 8px 10px;
+    }
+    button {
+      background: var(--accent-soft);
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    mark {
+      background: #f5d76e;
+      color: #17202a;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    article h1, article h2, article h3, article h4 {
+      line-height: 1.35;
+      scroll-margin-top: 20px;
+    }
+    article img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+    .table-scroll {
+      overflow: auto;
+      margin: 1em 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      background: var(--panel);
+    }
+    th, td {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #eef7f6;
+      color: #123c39;
+      font-weight: 700;
+    }
+    pre {
+      overflow: auto;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--code-bg);
+      color: var(--code-ink);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      word-break: break-word;
+    }
+    p code, li code {
+      background: #eef2f7;
+      color: #1f2937;
+      border-radius: 4px;
+      padding: 0.1em 0.3em;
+    }
+    blockquote {
+      margin: 1em 0;
+      padding: 0.2em 1em;
+      border-left: 4px solid var(--accent);
+      background: #f0fdfa;
+      color: #334155;
+    }
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        grid-template-columns: 1fr;
+      }
+      .article-nav {
+        grid-template-columns: 1fr;
+      }
+      .article-nav a:last-child {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>拟阵</h1>
+      <p>数学 / matroid</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页面导航</h2><ul class="sidebar-list"><li><a href="../../index.html">归档首页</a></li><li><a href="index.html">数学 索引</a></li><li><details open><summary>本文目录</summary><ul class="sidebar-sublist"><li><a href="#62df9635">拟阵</a></li><li><a href="#5f158a00">引言</a></li><li><a href="#5b9a4e49">定义</a></li><li><a href="#62df9635-2">拟阵</a></li><li><a href="#57fa">基</a></li><li><a href="#5708">圈</a></li><li><a href="#79e9">秩</a></li><li><a href="#5178578b793a4f8b">典型示例</a></li><li><a href="#15c-5747530062df9635ff08uniform-matroidff09">1\. 均匀拟阵（Uniform Matroid）</a></li><li><a href="#25c-56fe62df9635ff08graphical-matroidff09">2\. 图拟阵（Graphical Matroid）</a></li><li><a href="#35c-7ebf602762df9635ff08linear-matroidff09">3\. 线性拟阵（Linear Matroid）</a></li><li><a href="#45c-5212520662df9635ff08partition-matroidff09">4\. 划分拟阵（Partition Matroid）</a></li><li><a href="#55c-6709827262df9635ff08colored-matroidff09">5\. 有色拟阵（Colored Matroid）</a></li><li><a href="#67849020548c8fd07b97">构造和运算</a></li><li><a href="#5bf95076">对偶</a></li><li><a href="#52209664548c65367f29">删除和收缩</a></li><li><a href="#62df9635548c8d2a5fc3">拟阵和贪心</a></li><li><a href="#6b659aa4">步骤</a></li><li><a href="#793a4f8b">示例</a></li><li><a href="#62df96354ea4">拟阵交</a></li><li><a href="#95ee989863cf8ff0">问题描述</a></li><li><a href="#7b976cd5">算法</a></li><li><a href="#4f8b9898">例题</a></li><li><a href="#53c280038d4465994e0e6ce891ca">参考资料与注释</a></li></ul></details></li><li><details><summary>同栏目页面</summary><ul class="sidebar-sublist"><li><a href="berlekamp-massey.html">Berlekamp–Massey 算法</a></li><li><a href="poly-czt.html">Chirp Z 变换</a></li><li><a href="combinatorics-entringer.html">Entringer Number</a></li><li><a href="combinatorics-eulerian.html">Eulerian Number</a></li><li><a href="linear-algebra-jordan.html">Jordan标准型</a></li><li><a href="poly-lagrange-inversion.html">Lagrange 反演</a></li><li><a href="number-theory-meissel-lehmer.html">Meissel–Lehmer 算法</a></li><li><a href="number-theory-min-25.html">Min_25 筛</a></li><li><a href="number-theory-pell-equation.html">Pell 方程</a></li><li><a href="number-theory-powerful-number.html">Powerful Number 筛</a></li><li><a href="combinatorics-polya.html">Pólya 计数</a></li><li><a href="algebra-schreier-sims.html">Schreier–Sims 算法</a></li><li><a href="number-theory-stern-brocot.html">Stern–Brocot 树与 Farey 序列</a></li><li><a href="number-theory-crt.html">中国剩余定理</a></li><li><a href="number-theory-quad-residue.html">二次剩余</a></li><li><a href="number-theory-quadratic.html">二次域</a></li><li><a href="binary-set.html">二进制集合操作</a></li><li><a href="poly-fundamental.html">代数基本定理</a></li><li><a href="combinatorics-bernoulli.html">伯努利数</a></li><li><a href="bit.html">位操作</a></li><li><a href="game-theory-impartial-game.html">公平组合游戏</a></li><li><a href="linear-algebra-product.html">内积和外积</a></li><li><a href="combinatorics-partition.html">分拆数</a></li><li><a href="number-theory-pollard-rho.html">分解质因数</a></li><li><a href="linear-algebra-elementary-operations.html">初等变换</a></li><li><a href="number-theory-lift-the-exponent.html">升幂引理</a></li><li><a href="simplex.html">单纯形法</a></li><li><a href="game-theory-intro.html">博弈论简介</a></li><li><a href="combinatorics-catalan.html">卡特兰数</a></li><li><a href="number-theory-lucas.html">卢卡斯定理</a></li><li><a href="number-theory-congruence-equation.html">同余方程</a></li><li><a href="linear-algebra-vector.html">向量</a></li><li><a href="combinatorics-graph-enumeration.html">图论计数</a></li><li><a href="algebra-field-theory.html">域论</a></li><li><a href="algebra-basic.html">基本概念</a></li><li><a href="probability-basic-conception.html">基本概念</a></li><li><a href="complex.html">复数</a></li><li><a href="poly-intro.html">多项式与生成函数简介</a></li><li><a href="poly-elementary-func.html">多项式初等函数</a></li><li><a href="poly-multipoint-eval-interpolation.html">多项式多点求值|快速插值</a></li><li><a href="poly-shift.html">多项式平移|连续点值平移</a></li><li><a href="poly-newton.html">多项式牛顿迭代</a></li><li><a href="combinatorics-inclusion-exclusion-principle.html">容斥原理</a></li><li><a href="linear-algebra-diagonalization.html">对角化</a></li><li><a href="boolean-algebra.html">布尔代数</a></li><li><a href="poly-linear-recurrence.html">常系数齐次线性递推</a></li><li><a href="numeral-sys-balanced-ternary.html">平衡三进制</a></li><li><a href="order-theory.html">序理论</a></li><li><a href="coordinate.html">弧度制与坐标系</a></li><li><a href="poly-comp-rev.html">形式幂级数复合|复合逆</a></li><li><a href="poly-fft.html">快速傅里叶变换</a></li><li><a href="binary-exponentiation.html">快速幂</a></li><li><a href="poly-ntt.html">快速数论变换</a></li><li><a href="poly-fwt.html">快速沃尔什变换</a></li><li><a href="combinatorics-drawer-principle.html">抽屉原理</a></li><li><a href="matroid.html">拟阵</a></li><li><a href="poly-egf.html">指数生成函数</a></li><li><a href="combinatorics-combination.html">排列组合</a></li><li><a href="numerical-interp.html">插值</a></li><li><a href="numerical-integral.html">数值积分</a></li><li><a href="numeral-sys-intro.html">数字系统简介</a></li><li><a href="overview.html">数学部分简介</a></li><li><a href="number-theory-sqrt-decomposition.html">数论分块</a></li><li><a href="number-theory-basic.html">数论基础</a></li><li><a href="combinatorics-fibonacci.html">斐波那契数列</a></li><li><a href="combinatorics-stirling.html">斯特林数</a></li><li><a href="poly-ogf.html">普通生成函数</a></li><li><a href="number-theory-gcd.html">最大公约数</a></li><li><a href="number-theory-du.html">杜教筛</a></li><li><a href="probability-conditional-probability.html">条件概率与独立性</a></li><li><a href="young-tableau.html">杨氏矩阵</a></li><li><a href="numeral-sys-gray-code.html">格雷码</a></li><li><a href="probability-concentration-inequality.html">概率不等式</a></li><li><a href="number-theory-mod-arithmetic.html">模算术简介</a></li><li><a href="number-theory-inverse.html">模逆元</a></li><li><a href="number-theory-euler-totient.html">欧拉函数</a></li><li><a href="number-theory-zhou.html">洲阁筛</a></li><li><a href="numerical-newton.html">牛顿迭代法</a></li><li><a href="linear-algebra-char-poly.html">特征多项式</a></li><li><a href="number-theory-dirichlet.html">狄利克雷卷积</a></li><li><a href="algebra-ring-theory.html">环论</a></li><li><a href="linear-algebra-matrix.html">矩阵</a></li><li><a href="number-theory-discrete-logarithm.html">离散对数</a></li><li><a href="poly-symbolic-method.html">符号化方法</a></li><li><a href="number-theory-sieve.html">筛法</a></li><li><a href="number-theory-euclidean.html">类欧几里德算法</a></li><li><a href="number-theory-prime.html">素数</a></li><li><a href="linear-algebra.html">线性代数简介</a></li><li><a href="number-theory-linear-equation.html">线性同余方程</a></li><li><a href="linear-algebra-basis.html">线性基</a></li><li><a href="linear-algebra-linear-mapping.html">线性映射</a></li><li><a href="linear-algebra-vector-space.html">线性空间</a></li><li><a href="linear-programming.html">线性规划基础</a></li><li><a href="permutation.html">置换和排列</a></li><li><a href="algebra-group-theory.html">群论</a></li><li><a href="combinatorics-vandermonde-convolution.html">范德蒙德卷积</a></li><li><a href="number-theory-mobius.html">莫比乌斯反演</a></li><li><a href="linear-algebra-determinant.html">行列式</a></li><li><a href="number-theory-bezouts.html">裴蜀定理 &amp; 一次不定方程</a></li><li><a href="combinatorics-bell.html">贝尔数</a></li><li><a href="number-theory-fermat.html">费马小定理 &amp; 欧拉定理</a></li><li><a href="numeral-sys-base.html">进位制</a></li><li><a href="number-theory-continued-fraction.html">连分数</a></li><li><a href="combinatorics-derangement.html">错位排列</a></li><li><a href="number-theory-primitive-root.html">阶 &amp; 原根</a></li><li><a href="number-theory-factorial.html">阶乘取模</a></li><li><a href="probability-random-variable.html">随机变量</a></li><li><a href="probability-exp-var.html">随机变量的数字特征</a></li><li><a href="game-theory-zero-sum-game.html">零和游戏</a></li><li><a href="game-theory-partizan-game.html">非公平组合游戏</a></li><li><a href="numerical-gauss.html">高斯消元</a></li><li><a href="number-theory-residue.html">高次剩余 &amp; 单位根</a></li><li><a href="bignum.html">高精度计算</a></li></ul></details></li></ul></nav></aside>
+      <div class="content"><nav class="article-nav"><a href="combinatorics-drawer-principle.html"><span class="meta">上一篇</span><br>抽屉原理</a><a href="poly-egf.html"><span class="meta">下一篇</span><br>指数生成函数</a></nav><article><p class="meta">本地源文件：<code>docs/math__matroid.md</code></p><h1 id="62df9635">拟阵</h1>
+<h2 id="5f158a00">引言</h2>
+<p><strong>拟阵（Matroid）</strong> 是哈斯勒·惠特尼（Hassler Whitney）于 1935 年提出的一种抽象代数结构，旨在统一和推广关于独立性的概念，例如线性代数中的线性无关性和图论中的无环性．</p>
+<p>拟阵为处理与独立性相关的优化问题提供了强大的理论工具，广泛应用于组合数学、图论、算法设计等领域，尤其在为贪心算法等优化方法提供数学理论支持方面发挥了重要作用．</p>
+<h2 id="5b9a4e49">定义</h2>
+<h3 id="62df9635-2">拟阵</h3>
+<p>一个 <strong>拟阵（Matroid）</strong> 可以表示为 𝑀 =(𝐸,I)M=(E,I)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其中：</p>
+<ul>
+<li>𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是一个有限集，称为 <strong>基础集（Ground Set）</strong> ．</li>
+<li>II<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的子集族，称为 <strong>独立集族（Family of Independent Sets）</strong> ，其中的集合称为 <strong>独立集（Independent Set）</strong> ．有以下三个性质：</li>
+</ul>
+<ul>
+<li><strong>非空性</strong> ：空集是独立的，即 ∅ ∈I∅∈I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ul>
+<ul>
+<li><strong>遗传性</strong> ：独立集的任意子集也是独立集．若 𝐼 ∈II∈I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则对于任意 𝐼′ ⊆𝐼I′⊆I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，都有 𝐼′ ∈II′∈I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ul>
+<ul>
+<li><strong>扩张性</strong> ：若 𝐼,𝐽 ∈II,J∈I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 且 |𝐼| &lt;|𝐽||I|&lt;|J|<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则存在 𝑗 ∈𝐽 ∖𝐼j∈J∖I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，使得 𝐼 ∪{𝑗} ∈II∪{j}∈I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ul>
+<p>如果一个形如 (𝐸,I)(E,I)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的结构满足上述三个性质，则称其为一个拟阵．</p>
+<h3 id="57fa">基</h3>
+<p><strong>基（Basis）</strong> 是拟阵中极大的独立集，即无法再添加元素而保持独立性的独立集．所有基的集合称为 <strong>基集族</strong> ，记为 BB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p><strong>性质</strong> ：</p>
+<ol>
+<li><strong>等基数性</strong> ：所有基的大小都相同，称为拟阵的 <strong>秩（Rank）</strong> ．</li>
+</ol>
+<ol>
+<li><strong>扩张性</strong> ：任何独立集通过添加基中的元素都可以扩张为一个基．</li>
+</ol>
+<h3 id="5708">圈</h3>
+<p><strong>圈（Circuit）</strong> 是拟阵中最小的依赖集，即其所有真子集都是独立的，但自身不是独立集，任意两个圈之间不存在包含关系．</p>
+<h3 id="79e9">秩</h3>
+<p><strong>秩函数（Rank Function）</strong> 𝑟 :2𝐸 →ℤ≥0r:2E→Z≥0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 将基础集 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的子集映射到非负整数．对于任意 𝑆 ⊆𝐸S⊆E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑟(𝑆)r(S)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 定义为 𝑆S<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中最大独立集的大小，即</p>
+<p>𝑟(𝑆)=max{|𝐼|∣𝐼⊆𝑆∧𝐼∈I}.r(S)=max{|I|∣I⊆S∧I∈I}.<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p><strong>性质</strong> ：</p>
+<ol>
+<li><strong>非负性</strong> ：对于任意 𝑆 ⊆𝐸S⊆E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，有 0 ≤𝑟(𝑆) ≤|𝑆|0≤r(S)≤|S|<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ol>
+<ol>
+<li><strong>单调性</strong> ：若 𝐴 ⊆𝐵 ⊆𝐸A⊆B⊆E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则 𝑟(𝐴) ≤𝑟(𝐵)r(A)≤r(B)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ol>
+<ol>
+<li><strong>次模性</strong> ：对于任意 𝐴,𝐵 ⊆𝐸A,B⊆E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，有 𝑟(𝐴 ∪𝐵) +𝑟(𝐴 ∩𝐵) ≤𝑟(𝐴) +𝑟(𝐵)r(A∪B)+r(A∩B)≤r(A)+r(B)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ol>
+<h2 id="5178578b793a4f8b">典型示例</h2>
+<h3 id="15c-5747530062df9635ff08uniform-matroidff09">1\. 均匀拟阵（Uniform Matroid）</h3>
+<p><strong>定义</strong> ：给定基础集 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和非负整数 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，均匀拟阵 𝑈𝑘,𝐸Uk,E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的独立集族是所有大小不超过 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的子集，表示为：</p>
+<p>I={𝐼⊆𝐸∣|𝐼|≤𝑘}．I={I⊆E∣|I|≤k}．<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<ul>
+<li><strong>基（Bases）</strong> ：所有大小为 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的子集．</li>
+</ul>
+<ul>
+<li><strong>圈（Circuits）</strong> ：所有大小为 𝑘 +1k+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的子集．</li>
+</ul>
+<ul>
+<li><strong>秩（Rank）</strong> ：𝑟(𝐸) =min(𝑘,|𝐸|)r(E)=min(k,|E|)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即独立集中最多能有 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个元素．</li>
+</ul>
+<h3 id="25c-56fe62df9635ff08graphical-matroidff09">2\. 图拟阵（Graphical Matroid）</h3>
+<p><strong>定义</strong> ：给定一个无向图 𝐺 =(𝑉,𝐸)G=(V,E)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，图拟阵 𝑀(𝐺)M(G)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基础集是边集 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其独立集族是所有不包含环的边集，即所有的森林．</p>
+<ul>
+<li><strong>基</strong> ：图中的生成树（在连通图的情况下）．生成树是极大的独立集，无法再增加边而不形成环．</li>
+</ul>
+<ul>
+<li><strong>圈</strong> ：图中的简单环，去掉环中的任意一条边，剩余部分都为独立集．</li>
+</ul>
+<ul>
+<li><strong>秩</strong> ：𝑟(𝐸) =|𝑉| −𝑐r(E)=|V|−c<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其中 𝑐c<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是图的连通分支数．对于一个连通的无向图，其秩等于顶点数减一，即 |𝑉| −1|V|−1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ul>
+<h3 id="35c-7ebf602762df9635ff08linear-matroidff09">3\. 线性拟阵（Linear Matroid）</h3>
+<p><strong>定义</strong> ：线性拟阵基于向量空间．给定向量空间 𝑉V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，基础集 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是 𝑉V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的一组有限向量，其独立集族是 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中所有线性无关的向量子集．</p>
+<ul>
+<li><strong>基</strong> ：极大的线性无关向量集，其大小等于向量空间的维数．</li>
+</ul>
+<ul>
+<li><strong>圈</strong> ：最小的线性相关向量集合，其任意真子集都是独立的，而自身是线性相关的．</li>
+</ul>
+<ul>
+<li><strong>秩</strong> ：线性拟阵的秩 𝑟(𝐸) =dim⁡(𝑉)r(E)=dim⁡(V)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即向量空间的维数．独立集的大小不能超过向量空间的维数．</li>
+</ul>
+<h3 id="45c-5212520662df9635ff08partition-matroidff09">4\. 划分拟阵（Partition Matroid）</h3>
+<p><strong>定义</strong> ：将基础集 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 划分为不相交的子集 𝐸1,𝐸2,…,𝐸𝑚E1,E2,…,Em<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，并为每个子集 𝐸𝑖Ei<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 指定一个非负整数 𝑘𝑖ki<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．划分拟阵的独立集族由满足每个部分选取元素数量不超过 𝑘𝑖ki<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的子集组成，表示为：</p>
+<p>I={𝐼⊆𝐸∣∀𝑖,|𝐼∩𝐸𝑖|≤𝑘𝑖}．I={I⊆E∣∀i,|I∩Ei|≤ki}．<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<ul>
+<li><strong>基</strong> ：满足 |𝐼 ∩𝐸𝑖| =𝑘𝑖|I∩Ei|=ki<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的独立集是划分拟阵的基．每个基在每个子集中选取了恰好 𝑘𝑖ki<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个元素．</li>
+</ul>
+<ul>
+<li><strong>圈</strong> ：划分拟阵的圈是最小的依赖集，即包含至少一个元素数量超过 𝑘𝑖ki<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的子集．</li>
+</ul>
+<ul>
+<li><strong>秩</strong> ：划分拟阵的秩为 𝑟(𝐸) =∑𝑚𝑖=1𝑘𝑖r(E)=∑i=1mki<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即最大独立集的大小等于每个子集中允许选取的最大元素数的总和．</li>
+</ul>
+<h3 id="55c-6709827262df9635ff08colored-matroidff09">5\. 有色拟阵（Colored Matroid）</h3>
+<p><strong>定义</strong> ：有色拟阵是划分拟阵的一种特殊形式，其中每个元素都赋予了颜色．给定基础集 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和颜色集 𝐶C<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，每个元素 𝑒 ∈𝐸e∈E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 都与某个颜色 𝑐 ∈𝐶c∈C<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 相关联．有色拟阵的独立集不仅需要满足普通拟阵的独立性条件，还必须遵守颜色上指定的限制，例如同一种颜色的元素在独立集中最多选取一定数量．</p>
+<ul>
+<li><strong>基</strong> ：有色拟阵的基是符合颜色限制和独立性条件的极大独立集．</li>
+</ul>
+<ul>
+<li><strong>圈</strong> ：圈是最小的依赖集，包含至少一个违反独立性或颜色限制的元素集合．</li>
+</ul>
+<ul>
+<li><strong>秩</strong> ：有色拟阵的秩是满足颜色限制条件下的最大独立集大小．它既依赖于拟阵的结构，也依赖于颜色限制的具体规定．</li>
+</ul>
+<h2 id="67849020548c8fd07b97">构造和运算</h2>
+<h3 id="5bf95076">对偶</h3>
+<p>给定拟阵 𝑀 =(𝐸,I)M=(E,I)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其 <strong>对偶拟阵</strong> 𝑀∗ =(𝐸,I∗)M∗=(E,I∗)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 定义为：</p>
+<p>I∗={𝐼∗⊆𝐸∣∃𝐵∈I,|𝐵|=𝑟(𝐸),𝐵⊆𝐸∖𝐼∗}．I∗={I∗⊆E∣∃B∈I,|B|=r(E),B⊆E∖I∗}．<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p><strong>性质</strong> ：</p>
+<ul>
+<li><strong>基</strong> ：对偶拟阵 𝑀∗M∗<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基是 𝑀M<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基在基础集 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的补集．换句话说，如果 𝐵B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是 𝑀M<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基，那么 𝐸 ∖𝐵E∖B<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 就是 𝑀∗M∗<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基．</li>
+</ul>
+<ul>
+<li><strong>秩函数</strong> ：对偶拟阵的秩函数为 𝑟∗(𝑆) =|𝑆| −𝑟(𝐸) +𝑟(𝐸 ∖𝑆)r∗(S)=|S|−r(E)+r(E∖S)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其中 𝑆S<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的子集．这意味着对偶拟阵的秩可以通过基础集的大小、原拟阵的秩以及从基础集中移除 𝑆S<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 后的秩来计算．</li>
+</ul>
+<ul>
+<li><strong>自反性</strong> ：对偶拟阵的对偶仍是原拟阵，即 (𝑀∗)∗ =𝑀(M∗)∗=M<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ul>
+<p><strong>示例</strong> ：</p>
+<p>对于一个无向图 𝐺 =(𝑉,𝐸)G=(V,E)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，图拟阵 𝑀(𝐺)M(G)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的对偶 𝑀(𝐺)∗M(G)∗<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是由图的割集组成的拟阵．图拟阵 𝑀(𝐺)M(G)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基是图中的生成树，而其对偶 𝑀(𝐺)∗M(G)∗<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基是这些生成树的补集，对偶 𝑀(𝐺)∗M(G)∗<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的圈则是图的最小割集，即将图分成两个不连通部分的最小边集．</p>
+<p>例如，考虑一个简单的三角形图 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其边集为 𝐸 ={𝑒1,𝑒2,𝑒3}E={e1,e2,e3}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．图拟阵 𝑀(𝐺)M(G)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基是两条边的集合（如 {𝑒1,𝑒2}{e1,e2}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">），而对偶拟阵 𝑀(𝐺)∗M(G)∗<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基是单条边的集合（如 {𝑒3}{e3}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">），𝑀(𝐺)∗M(G)∗<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的圈是两条边的集合（即最小割集，如 {𝑒2,𝑒3}{e2,e3}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">），因为移除其中的一条边就会将图分割为两个连通分支．</p>
+<h3 id="52209664548c65367f29">删除和收缩</h3>
+<p><strong>删除（Deletion）</strong> ：</p>
+<p>对于 𝐴 ⊆𝐸A⊆E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，拟阵 𝑀M<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 删除 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 后得到新的拟阵 𝑀 ∖𝐴M∖A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其独立集族 I′I′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 定义为：</p>
+<p>I′={𝐼⊆𝐸∖𝐴∣𝐼∈I}．I′={I⊆E∖A∣I∈I}．<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>可以看出，删除操作就是从拟阵中移除某些元素，并保留剩余元素形成的独立集，其保持原独立集不变，只是移除了元素．</p>
+<p><strong>收缩（Contraction）</strong> ：</p>
+<p>对于 𝐴 ⊆𝐸A⊆E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，拟阵 𝑀M<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 收缩 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 后得到拟阵 𝑀/𝐴M/A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其独立集族 I″I″<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 定义为：</p>
+<p>I″={𝐼⊆𝐸∖𝐴∣∃𝐵⊆𝐴,𝐵∈I,𝑟(𝐵)=𝑟(𝐴),𝐼∪𝐵∈I}I″={I⊆E∖A|∃B⊆A,B∈I,r(B)=r(A),I∪B∈I}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>收缩操作可以理解为将集合 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的元素缩约，并考虑剩下的元素与 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基一起形成的独立集．收缩的结果依赖于集合 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的基，缩约后的独立集实际上是对原拟阵中更高秩的子集进行约简后得到的独立集．</p>
+<p><strong>示例 - 图拟阵</strong> ：</p>
+<ul>
+<li><strong>删除</strong> ：在图拟阵中，删除操作即从图中删除一些边．一个图 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 删除某条边后，考虑的是剩余边所形成的独立集，即那些不包含环的边集．例如，如果从一个三角形图中删除一条边，剩下的两个边仍然是一个森林．</li>
+</ul>
+<ul>
+<li><strong>收缩</strong> ：收缩操作则是将某条边收缩为一个顶点．对于图拟阵，收缩一条边相当于将这条边的两个顶点合并成一个顶点，并删除该边，合并顶点后，图中的其他边仍然可以形成独立集．例如，在一个三角形图中，收缩任意一条边将把两个顶点合并成一个，剩下的两条边将构成一个新的拟阵．</li>
+</ul>
+<h2 id="62df9635548c8d2a5fc3">拟阵和贪心</h2>
+<p><strong>问题描述</strong> ：</p>
+<p>拟阵的应用之一是解决贪心算法中的最优化问题．具体而言，给定一个拟阵 𝑀 =(𝑆,I)M=(S,I)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其中 𝑆S<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是基础集，II<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是独立集族．对于每个元素 𝑥 ∈𝑆x∈S<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，赋予一个正整数权值 𝑤(𝑥)w(x)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，目标是找到权值最大的独立集，形式化为：</p>
+<p>max𝐴∈I𝑤(𝐴)=max𝐴∈I∑𝑥∈𝐴𝑤(𝑥)maxA∈Iw(A)=maxA∈I∑x∈Aw(x)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>显然，权值最大独立集必须是极大独立集．如果一个独立集 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不是极大独立集，则存在一个可以加入 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的元素 𝑥x<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，且由于 𝑤(𝑥) &gt;0w(x)&gt;0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，加入该元素后权值会增加，说明 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不是权值最大的独立集．</p>
+<h3 id="6b659aa4">步骤</h3>
+<p>贪心算法求解权值最大独立集的步骤如下：</p>
+<ol>
+<li><strong>元素排序</strong> ：将基础集 𝑆S<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 按照权值从大到小排序，记为序列 𝑒1,𝑒2,…,𝑒𝑛e1,e2,…,en<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+<li><strong>初始化</strong> ：设独立集 𝐴 =∅A=∅<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+<li><strong>构建独立集</strong> ：依次考虑排序后的元素 𝑒𝑖ei<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，如果 𝐴 ∪{𝑒𝑖} ∈IA∪{ei}∈I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则更新 𝐴 =𝐴 ∪{𝑒𝑖}A=A∪{ei}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+<li><strong>输出结果</strong> ：最终的集合 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 即为权值最大的独立集．</li>
+</ol>
+<p><strong>复杂度分析</strong> ：</p>
+<p>设 𝑛 =|𝑆|n=|S|<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为基础集的大小，𝑓(𝑛)f(n)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 表示判断一个集合是否为独立集的复杂度．贪心算法的时间复杂度为：</p>
+<p>𝑂(𝑛log⁡𝑛+𝑛𝑓(𝑛))O(nlog⁡n+nf(n))<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>其中，𝑂(𝑛log⁡𝑛)O(nlog⁡n)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是排序的复杂度，𝑂(𝑛𝑓(𝑛))O(nf(n))<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是逐一判断独立性的复杂度．</p>
+<p>备注</p>
+<ul>
+<li>在图拟阵中，可以使用 <a href="../ds/dsu.html">并查集</a> 来高效检测是否形成环，从而使 𝑓(𝑛)f(n)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 接近常数时间．</li>
+<li>在线性拟阵中，独立性检测通常涉及矩阵运算，其复杂度依赖于具体实现方式．</li>
+</ul>
+<p><strong>正确性证明</strong> ：</p>
+<p>设 𝑀 =(𝑆,I)M=(S,I)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是一个拟阵，𝐴 ∈IA∈I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是一个独立集，且 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是某个权值最大独立集 𝑇T<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的子集．定义集合 𝑃 ={𝑥 ∈𝑆 ∖𝐴 ∣𝐴 ∪{𝑥} ∈I}P={x∈S∖A∣A∪{x}∈I}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即所有加入 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 后，仍然使 𝐴A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 保持独立性的元素所构成的集合．</p>
+<p>设 𝑦y<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中权值最大的元素，则 𝐴′ =𝐴 ∪{𝑦}A′=A∪{y}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 也是某个权值最大独立集的子集，证明如下：</p>
+<p>假设 𝐴′ =𝐴 ∪{𝑦}A′=A∪{y}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不是任何权值最大独立集的子集，则存在一个权值最大的独立集 𝑇T<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，且 |𝐴′| &lt;|𝑇||A′|&lt;|T|<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>由于 |𝐴′| &lt;|𝑇||A′|&lt;|T|<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，根据拟阵的 <strong>扩张性</strong> ，存在 𝑥 ∈𝑇 ∖𝐴′x∈T∖A′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 使得 𝐴′ ∪{𝑥} ∈IA′∪{x}∈I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>利用 <strong>扩张性</strong> ，不断将 𝑥x<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 加入 𝐴′A′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，最终构造出一个新的独立集 𝐴″A″<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，使得 |𝐴″| =|𝑇||A″|=|T|<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>设 𝐾 =𝐴″ ∩𝑇K=A″∩T<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，此时有 𝑥 =𝑇 ∖𝐾x=T∖K<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑦 =𝐴″ ∖𝐾y=A″∖K<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．由于 𝑦y<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中权值最大的元素，有 𝑤(𝑥) ≤𝑤(𝑦)w(x)≤w(y)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>因此，𝑤(𝐴″) =𝑤(𝐾) +𝑤(𝑦) ≥𝑤(𝐾) +𝑤(𝑥) =𝑤(𝑇)w(A″)=w(K)+w(y)≥w(K)+w(x)=w(T)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，此时：</p>
+<ul>
+<li>若 𝑤(𝐴″) &gt;𝑤(𝑇)w(A″)&gt;w(T)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则 𝑇T<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不是权值最大独立集，与假设矛盾．</li>
+<li>若 𝑤(𝐴″) =𝑤(𝑇)w(A″)=w(T)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则 𝐴″A″<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为权值最大独立集，且 𝐴′A′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为其子集，与假设 𝐴′A′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不是任何权值最大独立集的子集矛盾．</li>
+</ul>
+<p>综上，假设不成立，即 𝐴′ =𝐴 ∪{𝑦}A′=A∪{y}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 必须是某个权值最大独立集的子集，因此通过不断使用贪心策略，最终可以找到权值最大的独立集．</p>
+<h3 id="793a4f8b">示例</h3>
+<p><strong>最小生成树</strong> ：</p>
+<p>给定一个连通无向图 𝐺 =(𝑉,𝐸)G=(V,E)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，每条边 𝑒 ∈𝐸e∈E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 都具有权值 𝑤(𝑒)w(e)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．目标为找到一棵生成树，使其包含所有顶点且总权值最小．</p>
+<p><strong>拟阵的构建</strong> ：</p>
+<p>为了将最小生成树问题形式化为拟阵问题，可以构建图拟阵 𝑀(𝐺)M(G)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：</p>
+<ul>
+<li><strong>基础集</strong> ：𝑆 =𝐸S=E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即图中的所有边．</li>
+<li><strong>独立集族</strong> ：II<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为所有不包含环的边集（即所有森林）．</li>
+</ul>
+<p><strong>贪心算法</strong> ：</p>
+<p>在图拟阵的框架下，<a href="../graph/mst.html">Kruskal 算法</a> 是一个典型的基于拟阵理论的贪心算法，可以用于构建最小生成树．虽然 <a href="../graph/mst.html">Prim 算法</a> 也是一种有效的贪心算法，同样能够找到最小生成树，但它并不严格依赖于拟阵的贪心．因此，在拟阵理论的讨论中，Kruskal 算法是主要的贪心算法实例．</p>
+<ul>
+<li><strong>Kruskal 算法</strong> ：</li>
+</ul>
+<ol>
+<li><strong>边排序</strong> ：将所有边按权值从小到大排序．</li>
+<li><strong>逐步选择</strong> ：依次选择权值最小的边，若加入后不形成环，则将其加入生成树．</li>
+<li><strong>终止条件</strong> ：重复上述过程，直到生成树包含 |𝑉| −1|V|−1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 条边．</li>
+</ol>
+<ul>
+<li><strong>Prim 算法</strong> ：</li>
+</ul>
+<ul>
+<li><strong>原理</strong> ：Prim 算法通过从一个起始顶点开始，逐步扩展生成树，每次选择连接树内与树外的最小权值边．</li>
+<li>虽然 Prim 算法也是贪心的，但其选择策略不同于其他基于拟阵扩张性质的贪心算法．因此，在拟阵理论的严格意义下，Prim 算法不被视为典型的拟阵贪心算法．</li>
+</ul>
+<h2 id="62df96354ea4">拟阵交</h2>
+<p>对于定义在同一基础集 𝑆S<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上的两个拟阵 𝑀1 =(𝑆,I1)M1=(S,I1)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和 𝑀2 =(𝑆,I2)M2=(S,I2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，若 I =I1 ∩I2I=I1∩I2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 满足拟阵独立集族的三条性质，则称 𝑀 =(𝑆,I)M=(S,I)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝑀1M1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和 𝑀2M2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的 <strong>交</strong> ．</p>
+<p><strong>注意</strong> ：并非任意两个拟阵的交都是一个拟阵，只有当其独立集族的交集满足拟阵独立集族定义中的三条性质时，其交才构成一个拟阵．</p>
+<h3 id="95ee989863cf8ff0">问题描述</h3>
+<ol>
+<li><strong>最大独立集</strong> ：在 I1 ∩I2I1∩I2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中找到最大的独立集（即具有最大基数的独立集）．</li>
+<li><strong>加权最大独立集</strong> ：给定权值函数 𝑤 :𝑆 →ℝw:S→R<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 I1 ∩I2I1∩I2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中找到权值和最大的独立集．</li>
+</ol>
+<h3 id="7b976cd5">算法</h3>
+<p><strong>无权版本</strong> ：</p>
+<ol>
+<li><strong>初始化</strong> ：选择一个初始独立集 𝐼 ∈I1 ∩I2I∈I1∩I2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，通常设定 𝐼 =∅I=∅<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+<li><strong>迭代</strong> ：</li>
+</ol>
+<ul>
+<li><strong>构建交换图</strong> ：根据当前独立集 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 构建交换图 𝐷𝑀1,𝑀2(𝐼)DM1,M2(I)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+<li><strong>路径选择</strong> ：在交换图中，寻找从源点 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到汇点 𝑡t<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的增广路径 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+<li><strong>增广</strong> ：沿路径 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 从 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到 𝑡t<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 遍历每一个节点：</li>
+<li>如果节点属于左部顶点（即 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的元素），则将该元素从 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中移除．</li>
+<li>如果节点属于右部顶点（即 𝑆 ∖𝐼S∖I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的元素），则将该元素加入 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中．</li>
+<li><strong>重复</strong> ：更新独立集 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 后，重复上述步骤，直到无法找到新的增广路径为止．</li>
+</ul>
+<ol>
+<li><strong>结果</strong> ：最终得到的独立集 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 即为拟阵交 𝑀 =𝑀1 ∩𝑀2M=M1∩M2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的一个最大独立集．</li>
+</ol>
+<p><strong>加权版本</strong> ：</p>
+<p>为了找到权值和最大的独立集，算法需要在增广路径的选择上进行优化．</p>
+<ol>
+<li><strong>权值设置</strong> ：对于每个元素 𝑒 ∈𝑆e∈S<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，定义其在交换图中的权值 𝑤′(𝑒)w′(e)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：</li>
+</ol>
+<ul>
+<li><strong>左部顶点</strong> （𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的元素）：𝑤′(𝑒) = −𝑤(𝑒)w′(e)=−w(e)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+<li><strong>右部顶点</strong> （𝑆 ∖𝐼S∖I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的元素）：𝑤′(𝑒) =𝑤(𝑒)w′(e)=w(e)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ul>
+<ol>
+<li><strong>路径选择</strong> ：在交换图 𝐷𝑀1,𝑀2(𝐼)DM1,M2(I)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中，寻找一条从源点 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到汇点 𝑡t<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的 <strong>增广路径</strong> 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，使得沿路径进行增广操作后，独立集 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的总权值增加最大．</li>
+</ol>
+<ul>
+<li><strong>增广条件</strong> ：路径 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上加入的元素的权值总和大于移除的元素的权值总和，即 ∑𝑦∈加入的元素𝑤(𝑦) &gt;∑𝑥∈移除的元素𝑤(𝑥)∑y∈加入的元素w(y)&gt;∑x∈移除的元素w(x)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></li>
+</ul>
+<ol>
+<li><strong>增广操作</strong> ：沿路径 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 从 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到 𝑡t<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 遍历每一个节点：</li>
+</ol>
+<ul>
+<li>如果节点属于左部顶点（即 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的元素），则将该元素从 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中移除．</li>
+<li>如果节点属于右部顶点（即 𝑆 ∖𝐼S∖I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的元素），则将该元素加入 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中．</li>
+</ul>
+<ol>
+<li><strong>迭代</strong> ：重复步骤 1 至 3，不断构建交换图并寻找增广路径，逐步优化独立集 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的总权值．</li>
+<li><strong>终止条件</strong> ：当无法在交换图中找到满足增广条件的路径时，算法终止．</li>
+<li><strong>结果</strong> ：最终得到的独立集 𝐼I<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 即为拟阵交 𝑀 =𝑀1 ∩𝑀2M=M1∩M2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的一个 <strong>权值最大独立集</strong> ．</li>
+</ol>
+<p><strong>复杂度</strong> ：</p>
+<ul>
+<li><strong>增广次数</strong> ：设两个拟阵的最大秩分别为 𝑟1r1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和 𝑟2r2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则最大增广次数为 min(𝑟1,𝑟2)min(r1,r2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ul>
+<ul>
+<li><strong>每次增广的复杂度</strong> ：</li>
+</ul>
+<ul>
+<li>构建交换图的复杂度为 𝑂(𝑛2)O(n2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其中 𝑛 =|𝑆|n=|S|<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+<li>寻找增广路径的复杂度取决于路径搜索策略，通常为 𝑂(𝑛2)O(n2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，例如使用广度优先搜索．</li>
+<li><strong>总时间复杂度</strong> ：总体的时间复杂度为 𝑂(𝑟 ⋅𝑛2)O(r⋅n2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其中 𝑟 =min(𝑟1,𝑟2)r=min(r1,r2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ul>
+<h2 id="4f8b9898">例题</h2>
+<p><strong>最小生成树</strong> ：</p>
+<p>给定一个无向图 𝐺 =(𝑉,𝐸)G=(V,E)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，每条边 𝑒 ∈𝐸e∈E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 都有一个权值 𝑤(𝑒)w(e)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．寻找一棵生成树，使其包含所有顶点且总权值最小．</p>
+<ul>
+<li>详细介绍：<a href="../graph/mst.html">最小生成树</a>．</li>
+<li>题目模板：<a href="https://www.luogu.com.cn/problem/P3366">洛谷 P3366【模板】最小生成树</a>．</li>
+</ul>
+<p>解题思路</p>
+<p>使用 Kruskal 算法，将所有边按权值从小到大排序，然后逐步选择边，若加入后不形成环，则将其加入生成树，最终得到的生成树即为最小生成树．</p>
+<p><strong>Colorful Graph</strong> ：</p>
+<p>给定一张带有多种颜色的无向图 𝐺 =(𝑉,𝐸)G=(V,E)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，每条边有一个颜色属性．寻找一个最大的边集，使得：</p>
+<ol>
+<li>所选边不形成任何环．</li>
+<li>每种颜色的边数不超过 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 条（𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为给定的正整数）．</li>
+</ol>
+<p>解题思路</p>
+<ol>
+<li><strong>拟阵建模</strong> ：</li>
+</ol>
+<ul>
+<li><strong>图拟阵 ( 𝑀1M1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">)</strong>：定义为所有不形成环的边集，即独立集族 I1I1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 包含所有不构成环的边集合．</li>
+<li><strong>颜色拟阵 ( 𝑀2M2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">)</strong>：定义为每种颜色的边数不超过 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的边集，即独立集族 I2I2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 包含所有满足每种颜色边数 ≤𝑘≤k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的边集合．</li>
+</ul>
+<ol>
+<li><strong>求解拟阵交</strong> ：通过求解 𝑀 =𝑀1 ∩𝑀2M=M1∩M2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，找到既不形成环又满足每种颜色边数不超过 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的最大边集．</li>
+</ol>
+<p><strong>约束的资源分配问题</strong> :</p>
+<p>在一个资源分配问题中，有一组资源 𝑅 ={𝑟1,𝑟2,…,𝑟𝑛}R={r1,r2,…,rn}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和一组项目 𝑃 ={𝑝1,𝑝2,…,𝑝𝑚}P={p1,p2,…,pm}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．每个项目 𝑝𝑖pi<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 需要分配一定数量的资源，且每种资源的总分配量不能超过其供应量．</p>
+<p><strong>目标</strong> ：寻找一个资源分配方案，使其满足所有项目需求且不超过资源供应量．</p>
+<p>解题思路</p>
+<ol>
+<li><strong>拟阵建模</strong> ：</li>
+</ol>
+<ul>
+<li><strong>需求拟阵 ( 𝑀1M1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">)</strong>：定义为满足各项目资源需求的分配方案，即独立集族 I1I1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 包含所有满足项目需求的资源分配集合．</li>
+<li><strong>供应拟阵 ( 𝑀2M2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">)</strong>：定义为不超过每种资源供应量的分配方案，即独立集族 I2I2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 包含所有满足资源供应限制的资源分配集合．</li>
+</ul>
+<ol>
+<li><strong>求解拟阵交</strong> ：通过求解 𝑀 =𝑀1 ∩𝑀2M=M1∩M2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，找到既满足所有项目需求又不超过资源供应量的资源分配方案．</li>
+</ol>
+<h2 id="53c280038d4465994e0e6ce891ca">参考资料与注释</h2>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/Matroid">Wikipedia - Matroid</a></li>
+<li><a href="https://baike.baidu.com/item/%E6%8B%9F%E9%98%B5">百度百科 - 拟阵</a></li>
+<li><a href="https://www.luogu.com.cn/article/87d02q9f">洛谷 - 拟阵与最优化问题</a></li>
+<li><a href="https://www.luogu.com.cn/article/fuj3x886">洛谷 - 从拟阵基础到 Shannon 开关游戏</a></li>
+</ol>
+<ul>
+<li><em> </em></li>
+</ul>
+<blockquote><strong>本页面最近更新： 2026/1/7 08:56:54，<a href="https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/matroid.md">更新历史</a> </strong>发现错误？想一起完善？<a href="../edit-landing/overview.html" title="edit.link.title">在 GitHub 上编辑此页！</a> <strong>本页面贡献者：<a href="https://github.com/c-forrest">c-forrest</a>, <a href="https://github.com/Tiphereth-A">Tiphereth-A</a>, <a href="https://github.com/yyyu-star">yyyu-star</a> </strong>本页面的全部内容在<strong><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a></strong> 协议之条款下提供，附加条款亦可能应用</blockquote></article><nav class="article-nav"><a href="combinatorics-drawer-principle.html"><span class="meta">上一篇</span><br>抽屉原理</a><a href="poly-egf.html"><span class="meta">下一篇</span><br>指数生成函数</a></nav></div>
+    </div>
+  </main>
+  <script id="archive-search-data" type="application/json">[{"title": "均摊复杂度", "group": "基础知识", "subgroup": "amortized-analysis", "href": "../basic/amortized-analysis.html"}, {"title": "二分", "group": "基础知识", "subgroup": "binary", "href": "../basic/binary.html"}, {"title": "倍增", "group": "基础知识", "subgroup": "binary-lifting", "href": "../basic/binary-lifting.html"}, {"title": "冒泡排序", "group": "基础知识", "subgroup": "bubble-sort", "href": "../basic/bubble-sort.html"}, {"title": "桶排序", "group": "基础知识", "subgroup": "bucket-sort", "href": "../basic/bucket-sort.html"}, {"title": "复杂度简介", "group": "基础知识", "subgroup": "complexity", "href": "../basic/complexity.html"}, {"title": "构造", "group": "基础知识", "subgroup": "construction", "href": "../basic/construction.html"}, {"title": "计数排序", "group": "基础知识", "subgroup": "counting-sort", "href": "../basic/counting-sort.html"}, {"title": "递归 & 分治", "group": "基础知识", "subgroup": "divide-and-conquer", "href": "../basic/divide-and-conquer.html"}, {"title": "枚举", "group": "基础知识", "subgroup": "enumerate", "href": "../basic/enumerate.html"}, {"title": "贪心", "group": "基础知识", "subgroup": "greedy", "href": "../basic/greedy.html"}, {"title": "堆排序", "group": "基础知识", "subgroup": "heap-sort", "href": "../basic/heap-sort.html"}, {"title": "插入排序", "group": "基础知识", "subgroup": "insertion-sort", "href": "../basic/insertion-sort.html"}, {"title": "归并排序", "group": "基础知识", "subgroup": "merge-sort", "href": "../basic/merge-sort.html"}, {"title": "算法基础简介", "group": "基础知识", "subgroup": "概览", "href": "../basic/overview.html"}, {"title": "前缀和 & 差分", "group": "基础知识", "subgroup": "prefix-sum", "href": "../basic/prefix-sum.html"}, {"title": "快速排序", "group": "基础知识", "subgroup": "quick-sort", "href": "../basic/quick-sort.html"}, {"title": "基数排序", "group": "基础知识", "subgroup": "radix-sort", "href": "../basic/radix-sort.html"}, {"title": "选择排序", "group": "基础知识", "subgroup": "selection-sort", "href": "../basic/selection-sort.html"}, {"title": "希尔排序", "group": "基础知识", "subgroup": "shell-sort", "href": "../basic/shell-sort.html"}, {"title": "模拟", "group": "基础知识", "subgroup": "simulate", "href": "../basic/simulate.html"}, {"title": "排序简介", "group": "基础知识", "subgroup": "sort-intro", "href": "../basic/sort-intro.html"}, {"title": "排序相关 STL", "group": "基础知识", "subgroup": "stl-sort", "href": "../basic/stl-sort.html"}, {"title": "Tim 排序", "group": "基础知识", "subgroup": "tim-sort", "href": "../basic/tim-sort.html"}, {"title": "锦标赛排序", "group": "基础知识", "subgroup": "tournament-sort", "href": "../basic/tournament-sort.html"}, {"title": "排序应用", "group": "基础知识", "subgroup": "use-of-sort", "href": "../basic/use-of-sort.html"}, {"title": "常见错误", "group": "赛事与实践", "subgroup": "common-mistakes", "href": "../contest/common-mistakes.html"}, {"title": "常见技巧", "group": "赛事与实践", "subgroup": "common-tricks", "href": "../contest/common-tricks.html"}, {"title": "分段打表", "group": "赛事与实践", "subgroup": "dictionary", "href": "../contest/dictionary.html"}, {"title": "ICPC/CCPC 赛事与赛制", "group": "赛事与实践", "subgroup": "icpc", "href": "../contest/icpc.html"}, {"title": "交互题", "group": "赛事与实践", "subgroup": "interaction", "href": "../contest/interaction.html"}, {"title": "读入、输出优化", "group": "赛事与实践", "subgroup": "io", "href": "../contest/io.html"}, {"title": "OI 赛事与赛制", "group": "赛事与实践", "subgroup": "oi", "href": "../contest/oi.html"}, {"title": "比赛相关简介", "group": "赛事与实践", "subgroup": "概览", "href": "../contest/overview.html"}, {"title": "题型概述", "group": "赛事与实践", "subgroup": "problems", "href": "../contest/problems.html"}, {"title": "出题", "group": "赛事与实践", "subgroup": "problemsetting", "href": "../contest/problemsetting.html"}, {"title": "学习资源", "group": "赛事与实践", "subgroup": "resources", "href": "../contest/resources.html"}, {"title": "学习路线", "group": "赛事与实践", "subgroup": "roadmap", "href": "../contest/roadmap.html"}, {"title": "动态规划基础", "group": "动态规划", "subgroup": "basic", "href": "../dp/basic.html"}, {"title": "计数 DP", "group": "动态规划", "subgroup": "count", "href": "../dp/count.html"}, {"title": "DAG 上的 DP", "group": "动态规划", "subgroup": "dag", "href": "../dp/dag.html"}, {"title": "DP 套 DP", "group": "动态规划", "subgroup": "dp-of-dp", "href": "../dp/dp-of-dp.html"}, {"title": "动态 DP", "group": "动态规划", "subgroup": "dynamic", "href": "../dp/dynamic.html"}, {"title": "区间 DP", "group": "动态规划", "subgroup": "interval", "href": "../dp/interval.html"}, {"title": "背包 DP", "group": "动态规划", "subgroup": "knapsack", "href": "../dp/knapsack.html"}, {"title": "记忆化搜索", "group": "动态规划", "subgroup": "memo", "href": "../dp/memo.html"}, {"title": "其它 DP 方法", "group": "动态规划", "subgroup": "misc", "href": "../dp/misc.html"}, {"title": "数位 DP", "group": "动态规划", "subgroup": "number", "href": "../dp/number.html"}, {"title": "DP 优化简介", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-dp-opt.html"}, {"title": "Slope Trick 优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-slope-trick.html"}, {"title": "WQS 二分", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-wqs-binary-search.html"}, {"title": "单调队列/单调栈优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-monotonous-queue-stack.html"}, {"title": "四边形不等式优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-quadrangle.html"}, {"title": "斜率优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-slope.html"}, {"title": "状态设计优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-state.html"}, {"title": "动态规划部分简介", "group": "动态规划", "subgroup": "概览", "href": "../dp/overview.html"}, {"title": "插头 DP", "group": "动态规划", "subgroup": "plug", "href": "../dp/plug.html"}, {"title": "概率 DP", "group": "动态规划", "subgroup": "概率", "href": "../dp/probability.html"}, {"title": "状压 DP", "group": "动态规划", "subgroup": "state", "href": "../dp/state.html"}, {"title": "树形 DP", "group": "动态规划", "subgroup": "树相关", "href": "../dp/tree.html"}, {"title": "AA 树", "group": "数据结构", "subgroup": "aa-tree", "href": "../ds/aa-tree.html"}, {"title": "AVL 树", "group": "数据结构", "subgroup": "avl", "href": "../ds/avl.html"}, {"title": "线段树套平衡树", "group": "数据结构", "subgroup": "balanced-in-seg", "href": "../ds/balanced-in-seg.html"}, {"title": "二叉堆", "group": "数据结构", "subgroup": "binary-heap", "href": "../ds/binary-heap.html"}, {"title": "分块套树状数组", "group": "数据结构", "subgroup": "bit-in-block-array", "href": "../ds/bit-in-block-array.html"}, {"title": "块状数组", "group": "数据结构", "subgroup": "block-array", "href": "../ds/block-array.html"}, {"title": "块状链表", "group": "数据结构", "subgroup": "block-list", "href": "../ds/block-list.html"}, {"title": "二叉搜索树 & 平衡树", "group": "数据结构", "subgroup": "bst", "href": "../ds/bst.html"}, {"title": "笛卡尔树", "group": "数据结构", "subgroup": "cartesian-tree", "href": "../ds/cartesian-tree.html"}, {"title": "猫树", "group": "数据结构", "subgroup": "cat-tree", "href": "../ds/cat-tree.html"}, {"title": "分块思想", "group": "数据结构", "subgroup": "decompose", "href": "../ds/decompose.html"}, {"title": "析合树", "group": "数据结构", "subgroup": "divide-combine", "href": "../ds/divide-combine.html"}, {"title": "划分树", "group": "数据结构", "subgroup": "dividing", "href": "../ds/dividing.html"}, {"title": "并查集", "group": "数据结构", "subgroup": "dsu", "href": "../ds/dsu.html"}, {"title": "并查集复杂度", "group": "数据结构", "subgroup": "dsu-complexity", "href": "../ds/dsu-complexity.html"}, {"title": "Euler Tour Tree", "group": "数据结构", "subgroup": "ett", "href": "../ds/ett.html"}, {"title": "树状数组", "group": "数据结构", "subgroup": "fenwick", "href": "../ds/fenwick.html"}, {"title": "手指树", "group": "数据结构", "subgroup": "finger-tree", "href": "../ds/finger-tree.html"}, {"title": "全局平衡二叉树", "group": "数据结构", "subgroup": "global-bst", "href": "../ds/global-bst.html"}, {"title": "哈希表", "group": "数据结构", "subgroup": "hash", "href": "../ds/hash.html"}, {"title": "堆简介", "group": "数据结构", "subgroup": "heap", "href": "../ds/heap.html"}, {"title": "霍夫曼树", "group": "数据结构", "subgroup": "huffman-tree", "href": "../ds/huffman-tree.html"}, {"title": "K-D Tree", "group": "数据结构", "subgroup": "kdt", "href": "../ds/kdt.html"}, {"title": "Kinetic Tournament Tree", "group": "数据结构", "subgroup": "kinetic-tournament-tree", "href": "../ds/kinetic-tournament-tree.html"}, {"title": "Link Cut Tree", "group": "数据结构", "subgroup": "lct", "href": "../ds/lct.html"}, {"title": "左偏树", "group": "数据结构", "subgroup": "leftist-tree", "href": "../ds/leftist-tree.html"}, {"title": "李超线段树", "group": "数据结构", "subgroup": "li-chao-tree", "href": "../ds/li-chao-tree.html"}, {"title": "链表", "group": "数据结构", "subgroup": "linked-list", "href": "../ds/linked-list.html"}, {"title": "左偏红黑树", "group": "数据结构", "subgroup": "llrbt", "href": "../ds/llrbt.html"}, {"title": "单调队列", "group": "数据结构", "subgroup": "monotonous-queue", "href": "../ds/monotonous-queue.html"}, {"title": "单调栈", "group": "数据结构", "subgroup": "monotonous-stack", "href": "../ds/monotonous-stack.html"}, {"title": "数据结构部分简介", "group": "数据结构", "subgroup": "概览", "href": "../ds/overview.html"}, {"title": "配对堆", "group": "数据结构", "subgroup": "pairing-heap", "href": "../ds/pairing-heap.html"}, {"title": "可持久化数据结构简介", "group": "数据结构", "subgroup": "persistent", "href": "../ds/persistent.html"}, {"title": "可持久化平衡树", "group": "数据结构", "subgroup": "persistent-balanced", "href": "../ds/persistent-balanced.html"}, {"title": "可持久化块状数组", "group": "数据结构", "subgroup": "persistent-block-array", "href": "../ds/persistent-block-array.html"}, {"title": "可持久化可并堆", "group": "数据结构", "subgroup": "persistent-heap", "href": "../ds/persistent-heap.html"}, {"title": "可持久化线段树", "group": "数据结构", "subgroup": "persistent-seg", "href": "../ds/persistent-seg.html"}, {"title": "可持久化字典树", "group": "数据结构", "subgroup": "persistent-trie", "href": "../ds/persistent-trie.html"}, {"title": "PQ 树", "group": "数据结构", "subgroup": "pq-tree", "href": "../ds/pq-tree.html"}, {"title": "队列", "group": "数据结构", "subgroup": "queue", "href": "../ds/queue.html"}, {"title": "红黑树", "group": "数据结构", "subgroup": "rbtree", "href": "../ds/rbtree.html"}, {"title": "Size Balanced Tree", "group": "数据结构", "subgroup": "sbt", "href": "../ds/sbt.html"}, {"title": "线段树基础", "group": "数据结构", "subgroup": "seg", "href": "../ds/seg.html"}, {"title": "区间最值操作 & 区间历史最值", "group": "数据结构", "subgroup": "seg-beats", "href": "../ds/seg-beats.html"}, {"title": "平衡树套线段树", "group": "数据结构", "subgroup": "seg-in-balanced", "href": "../ds/seg-in-balanced.html"}, {"title": "树状数组套权值线段树", "group": "数据结构", "subgroup": "seg-in-bit", "href": "../ds/seg-in-bit.html"}, {"title": "线段树套线段树", "group": "数据结构", "subgroup": "seg-in-seg", "href": "../ds/seg-in-seg.html"}, {"title": "线段树合并 & 分裂", "group": "数据结构", "subgroup": "seg-merge-split", "href": "../ds/seg-merge-split.html"}, {"title": "替罪羊树", "group": "数据结构", "subgroup": "sgt", "href": "../ds/sgt.html"}, {"title": "跳表", "group": "数据结构", "subgroup": "skiplist", "href": "../ds/skiplist.html"}, {"title": "ST 表", "group": "数据结构", "subgroup": "sparse-table", "href": "../ds/sparse-table.html"}, {"title": "Splay 树", "group": "数据结构", "subgroup": "splay", "href": "../ds/splay.html"}, {"title": "Sqrt Tree", "group": "数据结构", "subgroup": "sqrt-tree", "href": "../ds/sqrt-tree.html"}, {"title": "栈", "group": "数据结构", "subgroup": "stack", "href": "../ds/stack.html"}, {"title": "Top Tree", "group": "数据结构", "subgroup": "top-tree", "href": "../ds/top-tree.html"}, {"title": "Treap", "group": "数据结构", "subgroup": "treap", "href": "../ds/treap.html"}, {"title": "树分块", "group": "数据结构", "subgroup": "tree-decompose", "href": "../ds/tree-decompose.html"}, {"title": "WBLT", "group": "数据结构", "subgroup": "wblt", "href": "../ds/wblt.html"}, {"title": "Edit landing", "group": "编辑说明", "subgroup": "概览", "href": "../edit-landing/overview.html"}, {"title": "二维计算几何基础", "group": "计算几何", "subgroup": "2d", "href": "../geometry/2d.html"}, {"title": "三维计算几何基础", "group": "计算几何", "subgroup": "3d", "href": "../geometry/3d.html"}, {"title": "凸包", "group": "计算几何", "subgroup": "convex-hull", "href": "../geometry/convex-hull.html"}, {"title": "距离", "group": "计算几何", "subgroup": "distance", "href": "../geometry/distance.html"}, {"title": "半平面交", "group": "计算几何", "subgroup": "half-plane", "href": "../geometry/half-plane.html"}, {"title": "反演变换", "group": "计算几何", "subgroup": "inverse", "href": "../geometry/inverse.html"}, {"title": "计算几何杂项", "group": "计算几何", "subgroup": "misc", "href": "../geometry/misc.html"}, {"title": "平面最近点对", "group": "计算几何", "subgroup": "nearest-points", "href": "../geometry/nearest-points.html"}, {"title": "计算几何部分简介", "group": "计算几何", "subgroup": "概览", "href": "../geometry/overview.html"}, {"title": "Pick 定理", "group": "计算几何", "subgroup": "pick", "href": "../geometry/pick.html"}, {"title": "随机增量法", "group": "计算几何", "subgroup": "random-incremental", "href": "../geometry/random-incremental.html"}, {"title": "旋转卡壳", "group": "计算几何", "subgroup": "rotating-calipers", "href": "../geometry/rotating-calipers.html"}, {"title": "扫描线", "group": "计算几何", "subgroup": "scanning", "href": "../geometry/scanning.html"}, {"title": "三角剖分", "group": "计算几何", "subgroup": "triangulation", "href": "../geometry/triangulation.html"}, {"title": "2-SAT", "group": "图论", "subgroup": "2-sat", "href": "../graph/2-sat.html"}, {"title": "双连通分量", "group": "图论", "subgroup": "bcc", "href": "../graph/bcc.html"}, {"title": "BFS（图论）", "group": "图论", "subgroup": "bfs", "href": "../graph/bfs.html"}, {"title": "二分图", "group": "图论", "subgroup": "bi-graph", "href": "../graph/bi-graph.html"}, {"title": "圆方树", "group": "图论", "subgroup": "block-forest", "href": "../graph/block-forest.html"}, {"title": "弦图", "group": "图论", "subgroup": "chord", "href": "../graph/chord.html"}, {"title": "图的着色", "group": "图论", "subgroup": "color", "href": "../graph/color.html"}, {"title": "图论相关概念", "group": "图论", "subgroup": "concept", "href": "../graph/concept.html"}, {"title": "点/边连通度", "group": "图论", "subgroup": "connectivity", "href": "../graph/connectivity.html"}, {"title": "割点和桥", "group": "图论", "subgroup": "cut", "href": "../graph/cut.html"}, {"title": "有向无环图", "group": "图论", "subgroup": "dag", "href": "../graph/dag.html"}, {"title": "DFS（图论）", "group": "图论", "subgroup": "dfs", "href": "../graph/dfs.html"}, {"title": "差分约束", "group": "图论", "subgroup": "diff-constraints", "href": "../graph/diff-constraints.html"}, {"title": "最小树形图", "group": "图论", "subgroup": "dmst", "href": "../graph/dmst.html"}, {"title": "支配树", "group": "图论", "subgroup": "dominator-tree", "href": "../graph/dominator-tree.html"}, {"title": "树上启发式合并", "group": "图论", "subgroup": "dsu-on-tree", "href": "../graph/dsu-on-tree.html"}, {"title": "动态树分治", "group": "图论", "subgroup": "dynamic-tree-divide", "href": "../graph/dynamic-tree-divide.html"}, {"title": "欧拉图", "group": "图论", "subgroup": "euler", "href": "../graph/euler.html"}, {"title": "上下界网络流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-bound.html"}, {"title": "最大流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-max-flow.html"}, {"title": "最小割", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-min-cut.html"}, {"title": "网络流简介", "group": "图论", "subgroup": "网络流", "href": "../graph/flow.html"}, {"title": "费用流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-min-cost.html"}, {"title": "一般图最大匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-general-match.html"}, {"title": "一般图最大权匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-general-weight-match.html"}, {"title": "二分图最大匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-bigraph-match.html"}, {"title": "二分图最大权匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-bigraph-weight-match.html"}, {"title": "图匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-graph-match.html"}, {"title": "稳定匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-stable-match.html"}, {"title": "图上随机游走", "group": "图论", "subgroup": "graph-random-walk", "href": "../graph/graph-random-walk.html"}, {"title": "哈密顿图", "group": "图论", "subgroup": "hamilton", "href": "../graph/hamilton.html"}, {"title": "树链剖分", "group": "图论", "subgroup": "hld", "href": "../graph/hld.html"}, {"title": "k 短路", "group": "图论", "subgroup": "kth-path", "href": "../graph/kth-path.html"}, {"title": "最近公共祖先", "group": "图论", "subgroup": "lca", "href": "../graph/lca.html"}, {"title": "LGV 引理", "group": "图论", "subgroup": "lgv", "href": "../graph/lgv.html"}, {"title": "矩阵树定理", "group": "图论", "subgroup": "matrix-tree", "href": "../graph/matrix-tree.html"}, {"title": "最大团搜索算法", "group": "图论", "subgroup": "max-clique", "href": "../graph/max-clique.html"}, {"title": "最小直径生成树", "group": "图论", "subgroup": "mdst", "href": "../graph/mdst.html"}, {"title": "最小环", "group": "图论", "subgroup": "min-cycle", "href": "../graph/min-cycle.html"}, {"title": "同余最短路", "group": "图论", "subgroup": "mod-shortest-path", "href": "../graph/mod-shortest-path.html"}, {"title": "最小生成树", "group": "图论", "subgroup": "mst", "href": "../graph/mst.html"}, {"title": "拆点", "group": "图论", "subgroup": "node", "href": "../graph/node.html"}, {"title": "图论部分简介", "group": "图论", "subgroup": "概览", "href": "../graph/overview.html"}, {"title": "平面图", "group": "图论", "subgroup": "planar", "href": "../graph/planar.html"}, {"title": "Prüfer 序列", "group": "图论", "subgroup": "prufer", "href": "../graph/prufer.html"}, {"title": "环计数问题", "group": "图论", "subgroup": "rings-count", "href": "../graph/rings-count.html"}, {"title": "图的存储", "group": "图论", "subgroup": "save", "href": "../graph/save.html"}, {"title": "强连通分量", "group": "图论", "subgroup": "scc", "href": "../graph/scc.html"}, {"title": "最短路", "group": "图论", "subgroup": "shortest-path", "href": "../graph/shortest-path.html"}, {"title": "斯坦纳树", "group": "图论", "subgroup": "steiner-tree", "href": "../graph/steiner-tree.html"}, {"title": "Stoer–Wagner 算法", "group": "图论", "subgroup": "stoer-wagner", "href": "../graph/stoer-wagner.html"}, {"title": "拓扑排序", "group": "图论", "subgroup": "topo", "href": "../graph/topo.html"}, {"title": "AHU 算法", "group": "图论", "subgroup": "tree-ahu", "href": "../graph/tree-ahu.html"}, {"title": "树基础", "group": "图论", "subgroup": "tree-basic", "href": "../graph/tree-basic.html"}, {"title": "树的中心", "group": "图论", "subgroup": "tree-center", "href": "../graph/tree-center.html"}, {"title": "树的重心", "group": "图论", "subgroup": "tree-centroid", "href": "../graph/tree-centroid.html"}, {"title": "树的直径", "group": "图论", "subgroup": "tree-diameter", "href": "../graph/tree-diameter.html"}, {"title": "树分治", "group": "图论", "subgroup": "tree-divide", "href": "../graph/tree-divide.html"}, {"title": "树哈希", "group": "图论", "subgroup": "tree-hash", "href": "../graph/tree-hash.html"}, {"title": "树上随机游走", "group": "图论", "subgroup": "tree-random-walk", "href": "../graph/tree-random-walk.html"}, {"title": "虚树", "group": "图论", "subgroup": "virtual-tree", "href": "../graph/virtual-tree.html"}, {"title": "OI Wiki", "group": "首页", "subgroup": "概览", "href": "../home/home.html"}, {"title": "关于本项目", "group": "OI Wiki 介绍", "subgroup": "about", "href": "../intro/about.html"}, {"title": "Docker deploy", "group": "OI Wiki 介绍", "subgroup": "docker-deploy", "href": "../intro/docker-deploy.html"}, {"title": "F.A.Q.", "group": "OI Wiki 介绍", "subgroup": "faq", "href": "../intro/faq.html"}, {"title": "格式手册", "group": "OI Wiki 介绍", "subgroup": "format", "href": "../intro/format.html"}, {"title": "如何参与", "group": "OI Wiki 介绍", "subgroup": "htc", "href": "../intro/htc.html"}, {"title": "镜像站列表", "group": "OI Wiki 介绍", "subgroup": "mirrors", "href": "../intro/mirrors.html"}, {"title": "数学符号表", "group": "OI Wiki 介绍", "subgroup": "symbol", "href": "../intro/symbol.html"}, {"title": "致谢", "group": "OI Wiki 介绍", "subgroup": "thanks", "href": "../intro/thanks.html"}, {"title": "OI Wiki 不是什么", "group": "OI Wiki 介绍", "subgroup": "what-oi-wiki-is-not", "href": "../intro/what-oi-wiki-is-not.html"}, {"title": "数组", "group": "编程语言", "subgroup": "array", "href": "../lang/array.html"}, {"title": "C++ 语法基础", "group": "编程语言", "subgroup": "basic", "href": "../lang/basic.html"}, {"title": "分支", "group": "编程语言", "subgroup": "branch", "href": "../lang/branch.html"}, {"title": "类", "group": "编程语言", "subgroup": "class", "href": "../lang/class.html"}, {"title": "常量", "group": "编程语言", "subgroup": "const", "href": "../lang/const.html"}, {"title": "C++ 与其他常用语言的区别", "group": "编程语言", "subgroup": "cpp-other-langs", "href": "../lang/cpp-other-langs.html"}, {"title": "bitset", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-bitset.html"}, {"title": "C++ 标准库简介", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl.html"}, {"title": "pair", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-pair.html"}, {"title": "STL 容器简介", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-container.html"}, {"title": "STL 算法", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-algorithm.html"}, {"title": "string", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-string.html"}, {"title": "关联式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-associative-container.html"}, {"title": "容器适配器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-container-adapter.html"}, {"title": "序列式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-sequence-container.html"}, {"title": "无序关联式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-unordered-container.html"}, {"title": "迭代器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-iterator.html"}, {"title": "文件操作", "group": "编程语言", "subgroup": "file-op", "href": "../lang/file-op.html"}, {"title": "函数", "group": "编程语言", "subgroup": "func", "href": "../lang/func.html"}, {"title": "Hello, World!", "group": "编程语言", "subgroup": "helloworld", "href": "../lang/helloworld.html"}, {"title": "Java 速成", "group": "编程语言", "subgroup": "java", "href": "../lang/java.html"}, {"title": "Java 进阶", "group": "编程语言", "subgroup": "java-pro", "href": "../lang/java-pro.html"}, {"title": "Lambda 表达式", "group": "编程语言", "subgroup": "lambda", "href": "../lang/lambda.html"}, {"title": "循环", "group": "编程语言", "subgroup": "loop", "href": "../lang/loop.html"}, {"title": "命名空间", "group": "编程语言", "subgroup": "namespace", "href": "../lang/namespace.html"}, {"title": "新版 C++ 特性", "group": "编程语言", "subgroup": "new", "href": "../lang/new.html"}, {"title": "运算", "group": "编程语言", "subgroup": "op", "href": "../lang/op.html"}, {"title": "重载运算符", "group": "编程语言", "subgroup": "op-overload", "href": "../lang/op-overload.html"}, {"title": "编译优化", "group": "编程语言", "subgroup": "optimizations", "href": "../lang/optimizations.html"}, {"title": "语言基础简介", "group": "编程语言", "subgroup": "概览", "href": "../lang/overview.html"}, {"title": "Pascal 转 C++ 急救", "group": "编程语言", "subgroup": "pas-cpp", "href": "../lang/pas-cpp.html"}, {"title": "pb_ds 简介", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds.html"}, {"title": "堆", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds-pq.html"}, {"title": "平衡树", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds-tree.html"}, {"title": "指针", "group": "编程语言", "subgroup": "pointer", "href": "../lang/pointer.html"}, {"title": "Python 速成", "group": "编程语言", "subgroup": "python", "href": "../lang/python.html"}, {"title": "引用", "group": "编程语言", "subgroup": "reference", "href": "../lang/reference.html"}, {"title": "结构体", "group": "编程语言", "subgroup": "struct", "href": "../lang/struct.html"}, {"title": "联合体", "group": "编程语言", "subgroup": "union", "href": "../lang/union.html"}, {"title": "值类别", "group": "编程语言", "subgroup": "value-category", "href": "../lang/value-category.html"}, {"title": "变量", "group": "编程语言", "subgroup": "var", "href": "../lang/var.html"}, {"title": "Schreier–Sims 算法", "group": "数学", "subgroup": "algebra", "href": "algebra-schreier-sims.html"}, {"title": "域论", "group": "数学", "subgroup": "algebra", "href": "algebra-field-theory.html"}, {"title": "基本概念", "group": "数学", "subgroup": "algebra", "href": "algebra-basic.html"}, {"title": "环论", "group": "数学", "subgroup": "algebra", "href": "algebra-ring-theory.html"}, {"title": "群论", "group": "数学", "subgroup": "algebra", "href": "algebra-group-theory.html"}, {"title": "Berlekamp–Massey 算法", "group": "数学", "subgroup": "berlekamp-massey", "href": "berlekamp-massey.html"}, {"title": "高精度计算", "group": "数学", "subgroup": "bignum", "href": "bignum.html"}, {"title": "快速幂", "group": "数学", "subgroup": "binary-exponentiation", "href": "binary-exponentiation.html"}, {"title": "二进制集合操作", "group": "数学", "subgroup": "binary-set", "href": "binary-set.html"}, {"title": "位操作", "group": "数学", "subgroup": "bit", "href": "bit.html"}, {"title": "布尔代数", "group": "数学", "subgroup": "boolean-algebra", "href": "boolean-algebra.html"}, {"title": "Entringer Number", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-entringer.html"}, {"title": "Eulerian Number", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-eulerian.html"}, {"title": "Pólya 计数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-polya.html"}, {"title": "伯努利数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-bernoulli.html"}, {"title": "分拆数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-partition.html"}, {"title": "卡特兰数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-catalan.html"}, {"title": "图论计数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-graph-enumeration.html"}, {"title": "容斥原理", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-inclusion-exclusion-principle.html"}, {"title": "抽屉原理", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-drawer-principle.html"}, {"title": "排列组合", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-combination.html"}, {"title": "斐波那契数列", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-fibonacci.html"}, {"title": "斯特林数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-stirling.html"}, {"title": "范德蒙德卷积", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-vandermonde-convolution.html"}, {"title": "贝尔数", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-bell.html"}, {"title": "错位排列", "group": "数学", "subgroup": "组合数学", "href": "combinatorics-derangement.html"}, {"title": "复数", "group": "数学", "subgroup": "complex", "href": "complex.html"}, {"title": "弧度制与坐标系", "group": "数学", "subgroup": "coordinate", "href": "coordinate.html"}, {"title": "公平组合游戏", "group": "数学", "subgroup": "博弈论", "href": "game-theory-impartial-game.html"}, {"title": "博弈论简介", "group": "数学", "subgroup": "博弈论", "href": "game-theory-intro.html"}, {"title": "零和游戏", "group": "数学", "subgroup": "博弈论", "href": "game-theory-zero-sum-game.html"}, {"title": "非公平组合游戏", "group": "数学", "subgroup": "博弈论", "href": "game-theory-partizan-game.html"}, {"title": "Jordan标准型", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-jordan.html"}, {"title": "内积和外积", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-product.html"}, {"title": "初等变换", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-elementary-operations.html"}, {"title": "向量", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-vector.html"}, {"title": "对角化", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-diagonalization.html"}, {"title": "特征多项式", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-char-poly.html"}, {"title": "矩阵", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-matrix.html"}, {"title": "线性代数简介", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra.html"}, {"title": "线性基", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-basis.html"}, {"title": "线性映射", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-linear-mapping.html"}, {"title": "线性空间", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-vector-space.html"}, {"title": "行列式", "group": "数学", "subgroup": "线性代数", "href": "linear-algebra-determinant.html"}, {"title": "线性规划基础", "group": "数学", "subgroup": "linear-programming", "href": "linear-programming.html"}, {"title": "拟阵", "group": "数学", "subgroup": "matroid", "href": "matroid.html"}, {"title": "Meissel–Lehmer 算法", "group": "数学", "subgroup": "数论", "href": "number-theory-meissel-lehmer.html"}, {"title": "Min_25 筛", "group": "数学", "subgroup": "数论", "href": "number-theory-min-25.html"}, {"title": "Pell 方程", "group": "数学", "subgroup": "数论", "href": "number-theory-pell-equation.html"}, {"title": "Powerful Number 筛", "group": "数学", "subgroup": "数论", "href": "number-theory-powerful-number.html"}, {"title": "Stern–Brocot 树与 Farey 序列", "group": "数学", "subgroup": "数论", "href": "number-theory-stern-brocot.html"}, {"title": "中国剩余定理", "group": "数学", "subgroup": "数论", "href": "number-theory-crt.html"}, {"title": "二次剩余", "group": "数学", "subgroup": "数论", "href": "number-theory-quad-residue.html"}, {"title": "二次域", "group": "数学", "subgroup": "数论", "href": "number-theory-quadratic.html"}, {"title": "分解质因数", "group": "数学", "subgroup": "数论", "href": "number-theory-pollard-rho.html"}, {"title": "升幂引理", "group": "数学", "subgroup": "数论", "href": "number-theory-lift-the-exponent.html"}, {"title": "卢卡斯定理", "group": "数学", "subgroup": "数论", "href": "number-theory-lucas.html"}, {"title": "同余方程", "group": "数学", "subgroup": "数论", "href": "number-theory-congruence-equation.html"}, {"title": "数论分块", "group": "数学", "subgroup": "数论", "href": "number-theory-sqrt-decomposition.html"}, {"title": "数论基础", "group": "数学", "subgroup": "数论", "href": "number-theory-basic.html"}, {"title": "最大公约数", "group": "数学", "subgroup": "数论", "href": "number-theory-gcd.html"}, {"title": "杜教筛", "group": "数学", "subgroup": "数论", "href": "number-theory-du.html"}, {"title": "模算术简介", "group": "数学", "subgroup": "数论", "href": "number-theory-mod-arithmetic.html"}, {"title": "模逆元", "group": "数学", "subgroup": "数论", "href": "number-theory-inverse.html"}, {"title": "欧拉函数", "group": "数学", "subgroup": "数论", "href": "number-theory-euler-totient.html"}, {"title": "洲阁筛", "group": "数学", "subgroup": "数论", "href": "number-theory-zhou.html"}, {"title": "狄利克雷卷积", "group": "数学", "subgroup": "数论", "href": "number-theory-dirichlet.html"}, {"title": "离散对数", "group": "数学", "subgroup": "数论", "href": "number-theory-discrete-logarithm.html"}, {"title": "筛法", "group": "数学", "subgroup": "数论", "href": "number-theory-sieve.html"}, {"title": "类欧几里德算法", "group": "数学", "subgroup": "数论", "href": "number-theory-euclidean.html"}, {"title": "素数", "group": "数学", "subgroup": "数论", "href": "number-theory-prime.html"}, {"title": "线性同余方程", "group": "数学", "subgroup": "数论", "href": "number-theory-linear-equation.html"}, {"title": "莫比乌斯反演", "group": "数学", "subgroup": "数论", "href": "number-theory-mobius.html"}, {"title": "裴蜀定理 & 一次不定方程", "group": "数学", "subgroup": "数论", "href": "number-theory-bezouts.html"}, {"title": "费马小定理 & 欧拉定理", "group": "数学", "subgroup": "数论", "href": "number-theory-fermat.html"}, {"title": "连分数", "group": "数学", "subgroup": "数论", "href": "number-theory-continued-fraction.html"}, {"title": "阶 & 原根", "group": "数学", "subgroup": "数论", "href": "number-theory-primitive-root.html"}, {"title": "阶乘取模", "group": "数学", "subgroup": "数论", "href": "number-theory-factorial.html"}, {"title": "高次剩余 & 单位根", "group": "数学", "subgroup": "数论", "href": "number-theory-residue.html"}, {"title": "平衡三进制", "group": "数学", "subgroup": "numeral-sys", "href": "numeral-sys-balanced-ternary.html"}, {"title": "数字系统简介", "group": "数学", "subgroup": "numeral-sys", "href": "numeral-sys-intro.html"}, {"title": "格雷码", "group": "数学", "subgroup": "numeral-sys", "href": "numeral-sys-gray-code.html"}, {"title": "进位制", "group": "数学", "subgroup": "numeral-sys", "href": "numeral-sys-base.html"}, {"title": "插值", "group": "数学", "subgroup": "数值算法", "href": "numerical-interp.html"}, {"title": "数值积分", "group": "数学", "subgroup": "数值算法", "href": "numerical-integral.html"}, {"title": "牛顿迭代法", "group": "数学", "subgroup": "数值算法", "href": "numerical-newton.html"}, {"title": "高斯消元", "group": "数学", "subgroup": "数值算法", "href": "numerical-gauss.html"}, {"title": "序理论", "group": "数学", "subgroup": "order-theory", "href": "order-theory.html"}, {"title": "数学部分简介", "group": "数学", "subgroup": "概览", "href": "overview.html"}, {"title": "置换和排列", "group": "数学", "subgroup": "permutation", "href": "permutation.html"}, {"title": "Chirp Z 变换", "group": "数学", "subgroup": "多项式", "href": "poly-czt.html"}, {"title": "Lagrange 反演", "group": "数学", "subgroup": "多项式", "href": "poly-lagrange-inversion.html"}, {"title": "代数基本定理", "group": "数学", "subgroup": "多项式", "href": "poly-fundamental.html"}, {"title": "多项式与生成函数简介", "group": "数学", "subgroup": "多项式", "href": "poly-intro.html"}, {"title": "多项式初等函数", "group": "数学", "subgroup": "多项式", "href": "poly-elementary-func.html"}, {"title": "多项式多点求值|快速插值", "group": "数学", "subgroup": "多项式", "href": "poly-multipoint-eval-interpolation.html"}, {"title": "多项式平移|连续点值平移", "group": "数学", "subgroup": "多项式", "href": "poly-shift.html"}, {"title": "多项式牛顿迭代", "group": "数学", "subgroup": "多项式", "href": "poly-newton.html"}, {"title": "常系数齐次线性递推", "group": "数学", "subgroup": "多项式", "href": "poly-linear-recurrence.html"}, {"title": "形式幂级数复合|复合逆", "group": "数学", "subgroup": "多项式", "href": "poly-comp-rev.html"}, {"title": "快速傅里叶变换", "group": "数学", "subgroup": "多项式", "href": "poly-fft.html"}, {"title": "快速数论变换", "group": "数学", "subgroup": "多项式", "href": "poly-ntt.html"}, {"title": "快速沃尔什变换", "group": "数学", "subgroup": "多项式", "href": "poly-fwt.html"}, {"title": "指数生成函数", "group": "数学", "subgroup": "多项式", "href": "poly-egf.html"}, {"title": "普通生成函数", "group": "数学", "subgroup": "多项式", "href": "poly-ogf.html"}, {"title": "符号化方法", "group": "数学", "subgroup": "多项式", "href": "poly-symbolic-method.html"}, {"title": "基本概念", "group": "数学", "subgroup": "概率", "href": "probability-basic-conception.html"}, {"title": "条件概率与独立性", "group": "数学", "subgroup": "概率", "href": "probability-conditional-probability.html"}, {"title": "概率不等式", "group": "数学", "subgroup": "概率", "href": "probability-concentration-inequality.html"}, {"title": "随机变量", "group": "数学", "subgroup": "概率", "href": "probability-random-variable.html"}, {"title": "随机变量的数字特征", "group": "数学", "subgroup": "概率", "href": "probability-exp-var.html"}, {"title": "单纯形法", "group": "数学", "subgroup": "simplex", "href": "simplex.html"}, {"title": "杨氏矩阵", "group": "数学", "subgroup": "young-tableau", "href": "young-tableau.html"}, {"title": "15-puzzle", "group": "杂项", "subgroup": "15-puzzle", "href": "../misc/15-puzzle.html"}, {"title": "计算理论基础", "group": "杂项", "subgroup": "cc-basic", "href": "../misc/cc-basic.html"}, {"title": "CDQ 分治", "group": "杂项", "subgroup": "cdq-divide", "href": "../misc/cdq-divide.html"}, {"title": "离散化", "group": "杂项", "subgroup": "discrete", "href": "../misc/discrete.html"}, {"title": "字节顺序", "group": "杂项", "subgroup": "endianness", "href": "../misc/endianness.html"}, {"title": "表达式求值", "group": "杂项", "subgroup": "expression", "href": "../misc/expression.html"}, {"title": "分数规划", "group": "杂项", "subgroup": "frac-programming", "href": "../misc/frac-programming.html"}, {"title": "有限状态自动机", "group": "杂项", "subgroup": "fsm", "href": "../misc/fsm.html"}, {"title": "Garsia–Wachs 算法", "group": "杂项", "subgroup": "garsia-wachs", "href": "../misc/garsia-wachs.html"}, {"title": "爬山算法", "group": "杂项", "subgroup": "hill-climbing", "href": "../misc/hill-climbing.html"}, {"title": "悬线法", "group": "杂项", "subgroup": "hoverline", "href": "../misc/hoverline.html"}, {"title": "在一台机器上规划任务", "group": "杂项", "subgroup": "job-order", "href": "../misc/job-order.html"}, {"title": "约瑟夫问题", "group": "杂项", "subgroup": "josephus", "href": "../misc/josephus.html"}, {"title": "Kahan 求和", "group": "杂项", "subgroup": "kahan-summation", "href": "../misc/kahan-summation.html"}, {"title": "主元素问题", "group": "杂项", "subgroup": "main-element", "href": "../misc/main-element.html"}, {"title": "普通莫队算法", "group": "杂项", "subgroup": "mo-algo", "href": "../misc/mo-algo.html"}, {"title": "二维莫队", "group": "杂项", "subgroup": "mo-algo-2dimen", "href": "../misc/mo-algo-2dimen.html"}, {"title": "莫队算法简介", "group": "杂项", "subgroup": "mo-algo-intro", "href": "../misc/mo-algo-intro.html"}, {"title": "树上莫队", "group": "杂项", "subgroup": "mo-algo-on-tree", "href": "../misc/mo-algo-on-tree.html"}, {"title": "莫队二次离线", "group": "杂项", "subgroup": "mo-algo-secondary-offline", "href": "../misc/mo-algo-secondary-offline.html"}, {"title": "莫队配合 bitset", "group": "杂项", "subgroup": "mo-algo-with-bitset", "href": "../misc/mo-algo-with-bitset.html"}, {"title": "带修改莫队", "group": "杂项", "subgroup": "modifiable-mo-algo", "href": "../misc/modifiable-mo-algo.html"}, {"title": "珂朵莉树/颜色段均摊", "group": "杂项", "subgroup": "odt", "href": "../misc/odt.html"}, {"title": "离线算法简介", "group": "杂项", "subgroup": "offline", "href": "../misc/offline.html"}, {"title": "杂项简介", "group": "杂项", "subgroup": "概览", "href": "../misc/overview.html"}, {"title": "整体二分", "group": "杂项", "subgroup": "parallel-binsearch", "href": "../misc/parallel-binsearch.html"}, {"title": "随机化技巧", "group": "杂项", "subgroup": "rand-technique", "href": "../misc/rand-technique.html"}, {"title": "随机函数", "group": "杂项", "subgroup": "random", "href": "../misc/random.html"}, {"title": "回滚莫队", "group": "杂项", "subgroup": "rollback-mo-algo", "href": "../misc/rollback-mo-algo.html"}, {"title": "模拟退火", "group": "杂项", "subgroup": "simulated-annealing", "href": "../misc/simulated-annealing.html"}, {"title": "空间优化简介", "group": "杂项", "subgroup": "space-optimization", "href": "../misc/space-optimization.html"}, {"title": "双指针", "group": "杂项", "subgroup": "two-pointer", "href": "../misc/two-pointer.html"}, {"title": "Alpha–Beta 剪枝", "group": "搜索", "subgroup": "alpha-beta", "href": "../search/alpha-beta.html"}, {"title": "A*", "group": "搜索", "subgroup": "astar", "href": "../search/astar.html"}, {"title": "回溯法", "group": "搜索", "subgroup": "backtracking", "href": "../search/backtracking.html"}, {"title": "BFS（搜索）", "group": "搜索", "subgroup": "bfs", "href": "../search/bfs.html"}, {"title": "双向搜索", "group": "搜索", "subgroup": "bidirectional", "href": "../search/bidirectional.html"}, {"title": "DFS（搜索）", "group": "搜索", "subgroup": "dfs", "href": "../search/dfs.html"}, {"title": "Dancing Links", "group": "搜索", "subgroup": "dlx", "href": "../search/dlx.html"}, {"title": "启发式搜索", "group": "搜索", "subgroup": "heuristic", "href": "../search/heuristic.html"}, {"title": "IDA*", "group": "搜索", "subgroup": "idastar", "href": "../search/idastar.html"}, {"title": "迭代加深搜索", "group": "搜索", "subgroup": "iterative", "href": "../search/iterative.html"}, {"title": "优化", "group": "搜索", "subgroup": "优化", "href": "../search/opt.html"}, {"title": "搜索部分简介", "group": "搜索", "subgroup": "概览", "href": "../search/overview.html"}, {"title": "AC 自动机", "group": "字符串", "subgroup": "ac-automaton", "href": "../string/ac-automaton.html"}, {"title": "字符串基础", "group": "字符串", "subgroup": "basic", "href": "../string/basic.html"}, {"title": "Boyer–Moore 算法", "group": "字符串", "subgroup": "bm", "href": "../string/bm.html"}, {"title": "广义后缀自动机", "group": "字符串", "subgroup": "general-sam", "href": "../string/general-sam.html"}, {"title": "字符串哈希", "group": "字符串", "subgroup": "hash", "href": "../string/hash.html"}, {"title": "前缀函数与 KMP 算法", "group": "字符串", "subgroup": "kmp", "href": "../string/kmp.html"}, {"title": "标准库", "group": "字符串", "subgroup": "lib-func", "href": "../string/lib-func.html"}, {"title": "Lyndon 分解", "group": "字符串", "subgroup": "lyndon", "href": "../string/lyndon.html"}, {"title": "Main–Lorentz 算法", "group": "字符串", "subgroup": "main-lorentz", "href": "../string/main-lorentz.html"}, {"title": "Manacher", "group": "字符串", "subgroup": "manacher", "href": "../string/manacher.html"}, {"title": "字符串匹配", "group": "字符串", "subgroup": "match", "href": "../string/match.html"}, {"title": "最小表示法", "group": "字符串", "subgroup": "minimal-string", "href": "../string/minimal-string.html"}, {"title": "字符串部分简介", "group": "字符串", "subgroup": "概览", "href": "../string/overview.html"}, {"title": "回文树", "group": "字符串", "subgroup": "pam", "href": "../string/pam.html"}, {"title": "后缀数组简介", "group": "字符串", "subgroup": "sa", "href": "../string/sa.html"}, {"title": "最优原地后缀排序算法", "group": "字符串", "subgroup": "sa-optimal-inplace", "href": "../string/sa-optimal-inplace.html"}, {"title": "后缀自动机 (SAM)", "group": "字符串", "subgroup": "sam", "href": "../string/sam.html"}, {"title": "序列自动机", "group": "字符串", "subgroup": "seq-automaton", "href": "../string/seq-automaton.html"}, {"title": "后缀平衡树", "group": "字符串", "subgroup": "suffix-bst", "href": "../string/suffix-bst.html"}, {"title": "后缀树", "group": "字符串", "subgroup": "suffix-tree", "href": "../string/suffix-tree.html"}, {"title": "字典树 (Trie)", "group": "字符串", "subgroup": "trie", "href": "../string/trie.html"}, {"title": "Z 函数（扩展 KMP）", "group": "字符串", "subgroup": "z-func", "href": "../string/z-func.html"}, {"title": "命令行", "group": "工具", "subgroup": "cmd", "href": "../tools/cmd.html"}, {"title": "命令行编译与调试", "group": "工具", "subgroup": "compile-debug", "href": "../tools/compile-debug.html"}, {"title": "编译器", "group": "工具", "subgroup": "compiler", "href": "../tools/compiler.html"}, {"title": "Atom", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-atom.html"}, {"title": "CLion", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-clion.html"}, {"title": "Code::Blocks", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-codeblocks.html"}, {"title": "CP Editor", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-cpeditor.html"}, {"title": "Dev-C++", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-devcpp.html"}, {"title": "Eclipse", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-eclipse.html"}, {"title": "Emacs", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-emacs.html"}, {"title": "Geany", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-geany.html"}, {"title": "GUIDE", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-guide.html"}, {"title": "Kate", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-kate.html"}, {"title": "Notepad++", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-npp.html"}, {"title": "Sublime Text", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-sublime.html"}, {"title": "Vim", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-vim.html"}, {"title": "VS Code", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-vscode.html"}, {"title": "Xcode", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-xcode.html"}, {"title": "Git", "group": "工具", "subgroup": "git", "href": "../tools/git.html"}, {"title": "Arbiter", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-arbiter.html"}, {"title": "CCR Plus", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-ccr-plus.html"}, {"title": "Cena", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-cena.html"}, {"title": "Lemon", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-lemon.html"}, {"title": "评测工具简介", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger.html"}, {"title": "LaTeX 入门", "group": "工具", "subgroup": "latex", "href": "../tools/latex.html"}, {"title": "OJ 工具", "group": "工具", "subgroup": "oj-tool", "href": "../tools/oj-tool.html"}, {"title": "工具软件简介", "group": "工具", "subgroup": "概览", "href": "../tools/overview.html"}, {"title": "Polygon", "group": "工具", "subgroup": "polygon", "href": "../tools/polygon.html"}, {"title": "Special Judge", "group": "工具", "subgroup": "special-judge", "href": "../tools/special-judge.html"}, {"title": "Checker", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-checker.html"}, {"title": "Generator", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-generator.html"}, {"title": "Interactor", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-interactor.html"}, {"title": "Testlib 简介", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib.html"}, {"title": "Validator", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-validator.html"}, {"title": "通用", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-general.html"}, {"title": "WSL (Windows 10)", "group": "工具", "subgroup": "wsl", "href": "../tools/wsl.html"}, {"title": "括号序列", "group": "专题", "subgroup": "bracket", "href": "../topic/bracket.html"}, {"title": "并查集应用", "group": "专题", "subgroup": "dsu-app", "href": "../topic/dsu-app.html"}, {"title": "RMQ", "group": "专题", "subgroup": "rmq", "href": "../topic/rmq.html"}, {"title": "线段树与离线询问", "group": "专题", "subgroup": "segment-tree-offline", "href": "../topic/segment-tree-offline.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) return;
+      let items = [];
+      try { items = JSON.parse(dataNode.textContent || "[]"); } catch (_error) { return; }
+      const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+      const highlight = (value, query) => {
+        if (!query) return escapeHtml(value);
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+      const groups = [...new Set(items.map((item) => item.group))].sort((a, b) => a.localeCompare(b, "zh-CN"));
+      for (const group of groups) {
+        const option = document.createElement("option");
+        option.value = group;
+        option.textContent = group;
+        groupSelect.append(option);
+      }
+      const render = () => {
+        const query = input.value.trim().toLowerCase();
+        const tokens = query.split(/\s+/).filter(Boolean);
+        const selectedGroup = groupSelect.value;
+        const scoped = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup ? `${selectedGroup} 下可搜索 ${scoped.length} 个页面。` : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+        const matches = scoped
+          .filter((item) => {
+            const haystack = [item.title, item.group, item.subgroup].join(" ").toLowerCase();
+            return tokens.every((token) => haystack.includes(token));
+          })
+          .sort((a, b) => a.title.localeCompare(b.title, "zh-CN"));
+        results.hidden = matches.length === 0;
+        results.innerHTML = matches.slice(0, 100).map((item) =>
+          `<li><a href="${item.href}">${highlight(item.title, query)}</a><div class="meta">${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</div></li>`
+        ).join("");
+        status.textContent = matches.length ? `匹配 ${matches.length} 个页面，显示前 ${Math.min(matches.length, 100)} 个。` : "没有匹配结果。";
+      };
+      input.addEventListener("input", render);
+      groupSelect.addEventListener("change", render);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        render();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          render();
+        }
+      });
+      const params = new URLSearchParams(window.location.search);
+      const initialQuery = params.get("q");
+      if (initialQuery) input.value = initialQuery;
+      render();
+    })();
+  </script>
+</body>
+</html>

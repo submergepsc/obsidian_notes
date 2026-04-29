@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>最大流</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f8;
+      --panel: #ffffff;
+      --ink: #17202a;
+      --muted: #5f6c7b;
+      --line: #d9e1e8;
+      --accent: #0f766e;
+      --accent-soft: #d9f3ef;
+      --code-bg: #111827;
+      --code-ink: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "Source Han Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 20px 56px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    header, section, article, .sidebar-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    header {
+      padding: 20px 22px;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 1.75rem;
+      line-height: 1.25;
+    }
+    header p, p {
+      color: var(--muted);
+    }
+    aside {
+      position: sticky;
+      top: 16px;
+    }
+    .sidebar-card {
+      padding: 16px;
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+    }
+    .sidebar-card h2, section h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .sidebar-list, .sidebar-sublist {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      margin-top: 8px;
+      padding-left: 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 9px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line);
+    }
+    .sidebar-sublist li {
+      border: 0;
+      padding-bottom: 0;
+      margin-bottom: 7px;
+    }
+    .sidebar-list span, .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .sidebar-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .sidebar-row a {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .sidebar-row span {
+      flex: 0 0 auto;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .content > section, article {
+      padding: 20px 22px;
+      margin-bottom: 18px;
+    }
+    article {
+      max-width: 980px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .group-card {
+      min-width: 0;
+    }
+    .page-list li, .group-card li, .search-results li {
+      margin: 7px 0;
+    }
+    .article-nav {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+    .article-nav a {
+      display: block;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow-wrap: anywhere;
+    }
+    .article-nav a:last-child {
+      text-align: right;
+    }
+    .search-controls {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: end;
+    }
+    .search-controls label {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    input, select, button {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 8px 10px;
+    }
+    button {
+      background: var(--accent-soft);
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    mark {
+      background: #f5d76e;
+      color: #17202a;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    article h1, article h2, article h3, article h4 {
+      line-height: 1.35;
+      scroll-margin-top: 20px;
+    }
+    article img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+    .table-scroll {
+      overflow: auto;
+      margin: 1em 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      background: var(--panel);
+    }
+    th, td {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #eef7f6;
+      color: #123c39;
+      font-weight: 700;
+    }
+    pre {
+      overflow: auto;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--code-bg);
+      color: var(--code-ink);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      word-break: break-word;
+    }
+    p code, li code {
+      background: #eef2f7;
+      color: #1f2937;
+      border-radius: 4px;
+      padding: 0.1em 0.3em;
+    }
+    blockquote {
+      margin: 1em 0;
+      padding: 0.2em 1em;
+      border-left: 4px solid var(--accent);
+      background: #f0fdfa;
+      color: #334155;
+    }
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        grid-template-columns: 1fr;
+      }
+      .article-nav {
+        grid-template-columns: 1fr;
+      }
+      .article-nav a:last-child {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>最大流</h1>
+      <p>图论 / 网络流</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页面导航</h2><ul class="sidebar-list"><li><a href="../../index.html">归档首页</a></li><li><a href="index.html">图论 索引</a></li><li><details open><summary>本文目录</summary><ul class="sidebar-sublist"><li><a href="#670059276d41">最大流</a></li><li><a href="#69828ff0">概述</a></li><li><a href="#ford2013fulkerson-589e5e7f">Ford–Fulkerson 增广</a></li><li><a href="#69828ff0-2">概述</a></li><li><a href="#670059276d4167005c0f52725b9a7406">最大流最小割定理</a></li><li><a href="#65f695f4590d67425ea652066790">时间复杂度分析</a></li><li><a href="#edmonds2013karp-7b976cd5">Edmonds–Karp 算法</a></li><li><a href="#mpm-7b976cd5">MPM 算法</a></li><li><a href="#push-relabel-98846d4163a88fdb7b976cd5">Push-Relabel 预流推进算法</a></li><li><a href="#901a7528768498846d4163a88fdb7b976cd5">通用的预流推进算法</a></li><li><a href="#811a6ce8">脚注</a></li></ul></details></li><li><details><summary>同栏目页面</summary><ul class="sidebar-sublist"><li><a href="2-sat.html">2-SAT</a></li><li><a href="tree-ahu.html">AHU 算法</a></li><li><a href="bfs.html">BFS（图论）</a></li><li><a href="dfs.html">DFS（图论）</a></li><li><a href="kth-path.html">k 短路</a></li><li><a href="lgv.html">LGV 引理</a></li><li><a href="prufer.html">Prüfer 序列</a></li><li><a href="stoer-wagner.html">Stoer–Wagner 算法</a></li><li><a href="graph-matching-general-match.html">一般图最大匹配</a></li><li><a href="graph-matching-general-weight-match.html">一般图最大权匹配</a></li><li><a href="flow-bound.html">上下界网络流</a></li><li><a href="bi-graph.html">二分图</a></li><li><a href="graph-matching-bigraph-match.html">二分图最大匹配</a></li><li><a href="graph-matching-bigraph-weight-match.html">二分图最大权匹配</a></li><li><a href="cut.html">割点和桥</a></li><li><a href="dynamic-tree-divide.html">动态树分治</a></li><li><a href="bcc.html">双连通分量</a></li><li><a href="mod-shortest-path.html">同余最短路</a></li><li><a href="hamilton.html">哈密顿图</a></li><li><a href="graph-random-walk.html">图上随机游走</a></li><li><a href="graph-matching-graph-match.html">图匹配</a></li><li><a href="save.html">图的存储</a></li><li><a href="color.html">图的着色</a></li><li><a href="concept.html">图论相关概念</a></li><li><a href="overview.html">图论部分简介</a></li><li><a href="block-forest.html">圆方树</a></li><li><a href="diff-constraints.html">差分约束</a></li><li><a href="planar.html">平面图</a></li><li><a href="chord.html">弦图</a></li><li><a href="scc.html">强连通分量</a></li><li><a href="node.html">拆点</a></li><li><a href="topo.html">拓扑排序</a></li><li><a href="dominator-tree.html">支配树</a></li><li><a href="steiner-tree.html">斯坦纳树</a></li><li><a href="max-clique.html">最大团搜索算法</a></li><li><a href="flow-max-flow.html">最大流</a></li><li><a href="flow-min-cut.html">最小割</a></li><li><a href="dmst.html">最小树形图</a></li><li><a href="min-cycle.html">最小环</a></li><li><a href="mst.html">最小生成树</a></li><li><a href="mdst.html">最小直径生成树</a></li><li><a href="shortest-path.html">最短路</a></li><li><a href="lca.html">最近公共祖先</a></li><li><a href="dag.html">有向无环图</a></li><li><a href="dsu-on-tree.html">树上启发式合并</a></li><li><a href="tree-random-walk.html">树上随机游走</a></li><li><a href="tree-divide.html">树分治</a></li><li><a href="tree-hash.html">树哈希</a></li><li><a href="tree-basic.html">树基础</a></li><li><a href="tree-center.html">树的中心</a></li><li><a href="tree-diameter.html">树的直径</a></li><li><a href="tree-centroid.html">树的重心</a></li><li><a href="hld.html">树链剖分</a></li><li><a href="euler.html">欧拉图</a></li><li><a href="connectivity.html">点/边连通度</a></li><li><a href="rings-count.html">环计数问题</a></li><li><a href="matrix-tree.html">矩阵树定理</a></li><li><a href="graph-matching-stable-match.html">稳定匹配</a></li><li><a href="flow.html">网络流简介</a></li><li><a href="virtual-tree.html">虚树</a></li><li><a href="flow-min-cost.html">费用流</a></li></ul></details></li></ul></nav></aside>
+      <div class="content"><nav class="article-nav"><a href="max-clique.html"><span class="meta">上一篇</span><br>最大团搜索算法</a><a href="flow-min-cut.html"><span class="meta">下一篇</span><br>最小割</a></nav><article><p class="meta">本地源文件：<code>docs/graph__flow__max-flow.md</code></p><h1 id="670059276d41">最大流</h1>
+<p>本页面主要介绍最大流问题相关的算法知识．</p>
+<h2 id="69828ff0">概述</h2>
+<p>网络流基本概念参见 <a href="flow.html">网络流简介</a>．</p>
+<p>令 𝐺 =(𝑉,𝐸)G=(V,E)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是一个有源汇点的网络，我们希望在 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上指定合适的流 𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，以最大化整个网络的流量 |𝑓||f|<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">（即 ∑𝑥∈𝑉𝑓(𝑠,𝑥) −∑𝑥∈𝑉𝑓(𝑥,𝑠)∑x∈Vf(s,x)−∑x∈Vf(x,s)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">），这一问题被称作最大流问题（Maximum flow problem）．</p>
+<h2 id="ford2013fulkerson-589e5e7f">Ford–Fulkerson 增广</h2>
+<p>Ford–Fulkerson 增广是计算最大流的一类算法的总称．该方法运用贪心的思想，通过寻找增广路来更新并求解最大流．</p>
+<h3 id="69828ff0-2">概述</h3>
+<p>给定网络 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 及 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上的流 𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，我们做如下定义．</p>
+<p>对于边 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，我们将其容量与流量之差称为剩余容量 𝑐𝑓(𝑢,𝑣)cf(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">（Residual Capacity），即 𝑐𝑓(𝑢,𝑣) =𝑐(𝑢,𝑣) −𝑓(𝑢,𝑣)cf(u,v)=c(u,v)−f(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>我们将 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中所有结点和剩余容量大于 00<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的边构成的子图称为残量网络 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">（Residual Network），即 𝐺𝑓 =(𝑉,𝐸𝑓)Gf=(V,Ef)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其中 𝐸𝑓 ={(𝑢,𝑣)∣𝑐𝑓(𝑢,𝑣)&gt;0}Ef={(u,v)∣cf(u,v)&gt;0}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>Warning</p>
+<p>正如我们马上要提到的，流量可能是负值，因此，𝐸𝑓Ef<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的边有可能并不在 𝐸E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中．引入增广的概念后，下文将具体解释这一点．</p>
+<p>我们将 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上一条从源点 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到汇点 𝑡t<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的路径称为增广路（Augmenting Path）．对于一条增广路，我们给每一条边 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 都加上等量的流量，以令整个网络的流量增加，这一过程被称为增广（Augment）．由此，最大流的求解可以被视为若干次增广分别得到的流的叠加．</p>
+<p>此外，在 Ford–Fulkerson 增广的过程中，对于每条边 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，我们都新建一条反向边 (𝑣,𝑢)(v,u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．我们约定 𝑓(𝑢,𝑣) = −𝑓(𝑣,𝑢)f(u,v)=−f(v,u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，这一性质可以通过在每次增广时引入退流操作来保证，即 𝑓(𝑢,𝑣)f(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 增加时 𝑓(𝑣,𝑢)f(v,u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 应当减少同等的量．</p>
+<p>Tip</p>
+<p>在最大流算法的代码实现中，我们往往需要支持快速访问反向边的操作．在邻接矩阵中，这一操作是 trivial 的（𝑔𝑢,𝑣 ↔𝑔𝑣,𝑢gu,v↔gv,u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">）．但主流的实现是更加优秀的链式前向星．其中，一个常用的技巧是，我们令边从偶数（通常为 00<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">）开始编号，并在加边时总是紧接着加入其反向边使得它们的编号相邻．由此，我们可以令编号为 𝑖i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的边和编号为 𝑖 ⊕1i⊕1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的边始终保持互为反向边的关系．</p>
+<p>初次接触这一方法的读者可能察觉到一个违反直觉的情形——反向边的流量 𝑓(𝑣,𝑢)f(v,u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 可能是一个负值．实际上我们可以注意到，在 Ford–Fulkerson 增广的过程中，真正有意义的是剩余容量 𝑐𝑓cf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，而 𝑓(𝑣,𝑢)f(v,u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的绝对值是无关紧要的，我们可以将反向边流量的减少视为反向边剩余容量 𝑐𝑓(𝑣,𝑢)cf(v,u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的增加——这也与退流的意义相吻合——反向边剩余容量的增加意味着我们接下来可能通过走反向边来和原先正向的增广抵消，代表一种「反悔」的操作．</p>
+<p>以下案例有可能帮助你理解这一过程．假设 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是一个单位容量的网络，我们考虑以下过程：</p>
+<ul>
+<li>𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上有多条增广路，其中，我们选择进行一次先后经过 𝑢,𝑣u,v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的增广（如左图所示），流量增加 11<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+<li>我们注意到，如果进行中图上的增广，这个局部的最大流量不是 11<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 而是 22<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．但由于指向 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的边和从 𝑣v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 出发的边在第一次增广中耗尽了容量，此时我们无法进行中图上的增广．这意味着我们当前的流是不够优的，但局部可能已经没有其他（只经过原图中的边而不经过反向边的）增广路了．</li>
+<li>现在引入退流操作．第一次增广后，退流意味着 𝑐𝑓(𝑣,𝑢)cf(v,u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 增加了 11<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 剩余容量，即相当于新增 (𝑣,𝑢)(v,u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 这条边，因此我们可以再进行一次先后经过 𝑝,𝑣,𝑢,𝑞p,v,u,q<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的增广（如右图橙色路径所示）．无向边 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上的流量在两次增广中抵消，我们惊奇地发现两次增广叠加得到的结果实际上和中图是等价的．</li>
+</ul>
+<p><img src="../../assets/images/flow2.png" alt=""></p>
+<p>以上案例告诉我们，退流操作带来的「抵消」效果使得我们无需担心我们按照「错误」的顺序选择了增广路．</p>
+<p>容易发现，只要 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上存在增广路，那么对其增广就可以令总流量增加；否则说明总流量已经达到最大可能值，求解过程完成．这就是 Ford–Fulkerson 增广的过程．</p>
+<h3 id="670059276d4167005c0f52725b9a7406">最大流最小割定理</h3>
+<p>我们大致了解了 Ford–Fulkerson 增广的思想，可是如何证明这一方法的正确性呢？为什么增广结束后的流 𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是一个最大流？</p>
+<p>实际上，Ford–Fulkerson 增广的正确性和最大流最小割定理（The Maxflow-Mincut Theorem）等价．这一定理指出，对于任意网络 𝐺 =(𝑉,𝐸)G=(V,E)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其上的最大流 𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和最小割 {𝑆,𝑇}{S,T}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 总是满足 |𝑓| =||𝑆,𝑇|||f|=||S,T||<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>为了证明最大流最小割定理，我们先从一个引理出发：对于网络 𝐺 =(𝑉,𝐸)G=(V,E)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，任取一个流 𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和一个割 {𝑆,𝑇}{S,T}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，总是有 |𝑓| ≤||𝑆,𝑇|||f|≤||S,T||<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其中等号成立当且仅当 {(𝑢,𝑣)|𝑢 ∈𝑆,𝑣 ∈𝑇}{(u,v)|u∈S,v∈T}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的所有边均满流，且 {(𝑢,𝑣)|𝑢 ∈𝑇,𝑣 ∈𝑆}{(u,v)|u∈T,v∈S}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的所有边均空流．</p>
+<p>证明 |𝑓|=𝑓(𝑠)=∑𝑢∈𝑆𝑓(𝑢)=∑𝑢∈𝑆(∑𝑣∈𝑉𝑓(𝑢,𝑣)−∑𝑣∈𝑉𝑓(𝑣,𝑢))=∑𝑢∈𝑆(∑𝑣∈𝑇𝑓(𝑢,𝑣)+∑𝑣∈𝑆𝑓(𝑢,𝑣)−∑𝑣∈𝑇𝑓(𝑣,𝑢)−∑𝑣∈𝑆𝑓(𝑣,𝑢))=∑𝑢∈𝑆(∑𝑣∈𝑇𝑓(𝑢,𝑣)−∑𝑣∈𝑇𝑓(𝑣,𝑢))+∑𝑢∈𝑆∑𝑣∈𝑆𝑓(𝑢,𝑣)−∑𝑢∈𝑆∑𝑣∈𝑆𝑓(𝑣,𝑢)=∑𝑢∈𝑆(∑𝑣∈𝑇𝑓(𝑢,𝑣)−∑𝑣∈𝑇𝑓(𝑣,𝑢))≤∑𝑢∈𝑆∑𝑣∈𝑇𝑓(𝑢,𝑣)≤∑𝑢∈𝑆∑𝑣∈𝑇𝑐(𝑢,𝑣)=||𝑆,𝑇|||f|=f(s)=∑u∈Sf(u)=∑u∈S(∑v∈Vf(u,v)−∑v∈Vf(v,u))=∑u∈S(∑v∈Tf(u,v)+∑v∈Sf(u,v)−∑v∈Tf(v,u)−∑v∈Sf(v,u))=∑u∈S(∑v∈Tf(u,v)−∑v∈Tf(v,u))+∑u∈S∑v∈Sf(u,v)−∑u∈S∑v∈Sf(v,u)=∑u∈S(∑v∈Tf(u,v)−∑v∈Tf(v,u))≤∑u∈S∑v∈Tf(u,v)≤∑u∈S∑v∈Tc(u,v)=||S,T||<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>为了取等，第一个不等号需要 {(𝑢,𝑣) ∣𝑢 ∈𝑇,𝑣 ∈𝑆}{(u,v)∣u∈T,v∈S}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的所有边均空流，第二个不等号需要 {(𝑢,𝑣) ∣𝑢 ∈𝑆,𝑣 ∈𝑇}{(u,v)∣u∈S,v∈T}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的所有边均满流．原引理得证．</p>
+<p>那么，对于任意网络，以上取等条件是否总是能被满足呢？如果答案是肯定的，则最大流最小割定理得证．以下我们尝试证明．</p>
+<p>证明</p>
+<p>假设某一轮增广后，我们得到流 𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 使得 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上不存在增广路，即 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上不存在 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到 𝑡t<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的路径．此时我们记从 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 出发可以到达的结点组成的点集为 𝑆S<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，并记 𝑇 =𝑉 ∖𝑆T=V∖S<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>显然，{𝑆,𝑇}{S,T}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的一个割，且 ||𝑆,𝑇|| =∑𝑢∈𝑆∑𝑣∈𝑇𝑐𝑓(𝑢,𝑣) =0||S,T||=∑u∈S∑v∈Tcf(u,v)=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．由于剩余容量是非负的，这也意味着对于任意 𝑢 ∈𝑆,𝑣 ∈𝑇,(𝑢,𝑣) ∈𝐸𝑓u∈S,v∈T,(u,v)∈Ef<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，均有 𝑐𝑓(𝑢,𝑣) =0cf(u,v)=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．以下我们将这些边分为存在于原图中的边和反向边两种情况讨论：</p>
+<ul>
+<li>(𝑢,𝑣) ∈𝐸(u,v)∈E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：此时，𝑐𝑓(𝑢,𝑣) =𝑐(𝑢,𝑣) −𝑓(𝑢,𝑣) =0cf(u,v)=c(u,v)−f(u,v)=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，因此有 𝑐(𝑢,𝑣) =𝑓(𝑢,𝑣)c(u,v)=f(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即 {(𝑢,𝑣) ∣𝑢 ∈𝑆,𝑣 ∈𝑇}{(u,v)∣u∈S,v∈T}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的所有边均满流；</li>
+<li>(𝑣,𝑢) ∈𝐸(v,u)∈E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：此时，𝑐𝑓(𝑢,𝑣) =𝑐(𝑢,𝑣) −𝑓(𝑢,𝑣) =0 −𝑓(𝑢,𝑣) =𝑓(𝑣,𝑢) =0cf(u,v)=c(u,v)−f(u,v)=0−f(u,v)=f(v,u)=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即 {(𝑣,𝑢) ∣𝑢 ∈𝑆,𝑣 ∈𝑇}{(v,u)∣u∈S,v∈T}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的所有边均空流．</li>
+</ul>
+<p>因此，增广停止后，上述流 𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 满足取等条件．根据引理指出的大小关系，自然地，𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的一个最大流，{𝑆,𝑇}{S,T}<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的一个最小割．</p>
+<p>容易看出，Kőnig 定理是最大流最小割定理的特殊情形．实际上，它们都和线性规划中的对偶有关．</p>
+<h3 id="65f695f4590d67425ea652066790">时间复杂度分析</h3>
+<p>在整数流量的网络 𝐺 =(𝑉,𝐸)G=(V,E)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上，平凡地，我们假设每次增广的流量都是整数，则 Ford–Fulkerson 增广的时间复杂度的一个上界是 𝑂(|𝐸||𝑓|)O(|E||f|)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其中 𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上的最大流．这是因为单轮增广的时间复杂度是 𝑂(|𝐸|)O(|E|)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，而增广会导致总流量增加，故增广轮数不可能超过 |𝑓||f|<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>对于 Ford–Fulkerson 增广的不同实现，时间复杂度也各不相同．其中较主流的实现有 Edmonds–Karp, Dinic, SAP, ISAP 等算法，我们将在下文中分别介绍．</p>
+<h3 id="edmonds2013karp-7b976cd5">Edmonds–Karp 算法</h3>
+<h4 id="7b976cd5601d60f3">算法思想</h4>
+<p>如何在 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中寻找增广路呢？当我们考虑 Ford–Fulkerson 增广的具体实现时，最自然的方案就是使用 BFS．此时，Ford–Fulkerson 增广表现为 Edmonds–Karp 算法．其具体流程如下：</p>
+<ul>
+<li>如果在 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上我们可以从 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 出发 BFS 到 𝑡t<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则我们找到了新的增广路．</li>
+</ul>
+<ul>
+<li>对于增广路 𝑝p<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，我们计算出 𝑝p<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 经过的边的剩余容量的最小值 Δ =min(𝑢,𝑣)∈𝑝𝑐𝑓(𝑢,𝑣)Δ=min(u,v)∈pcf(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．我们给 𝑝p<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上的每条边都加上 ΔΔ<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 流量，并给它们的反向边都退掉 ΔΔ<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 流量，令最大流增加了 ΔΔ<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ul>
+<ul>
+<li>因为我们修改了流量，所以我们得到新的 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，我们在新的 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上重复上述过程，直至增广路不存在，则流量不再增加．</li>
+</ul>
+<p>以上算法即 Edmonds–Karp 算法．</p>
+<h4 id="65f695f4590d67425ea652066790-2">时间复杂度分析</h4>
+<p>接下来让我们尝试分析 Edmonds–Karp 算法的时间复杂度．</p>
+<p>显然，单轮 BFS 增广的时间复杂度是 𝑂(|𝐸|)O(|E|)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>增广总轮数的上界是 𝑂(|𝑉||𝐸|)O(|V||E|)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．这一论断在网络资料中常被伪证（或被含糊其辞略过）．以下我们尝试给出一个较正式的证明1．</p>
+<p>增广总轮数的上界的证明</p>
+<p>首先，我们引入一个引理——最短路非递减引理．具体地，我们记 𝑑𝑓(𝑢)df(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上结点 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到源点 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的距离（即最短路长度，下同）．对于某一轮增广，我们用 𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和 𝑓′f′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 分别表示增广前的流和增广后的流，我们断言，对于任意结点 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，增广总是使得 𝑑𝑓′(𝑢) ≥𝑑𝑓(𝑢)df′(u)≥df(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．我们将在稍后证明这一引理．</p>
+<p>不妨称增广路上剩余容量最小的边是饱和边（存在多条边同时最小则取任一）．如果一条有向边 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 被选为饱和边，增广会清空其剩余容量导致饱和边的消失，并且退流导致反向边的新增（如果原先反向边不存在），即 (𝑢,𝑣) ∉𝐸𝑓′(u,v)∉Ef′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 且 (𝑣,𝑢) ∈𝐸𝑓′(v,u)∈Ef′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．以上分析使我们知道，对于无向边 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，其被增广的两种方向总是交替出现．</p>
+<p>在 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上沿 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 增广时，𝑑𝑓(𝑢) +1 =𝑑𝑓(𝑣)df(u)+1=df(v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，此后残量网络变为 𝐺𝑓′Gf′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．在 𝐺𝑓′Gf′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上沿 (𝑣,𝑢)(v,u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 增广时，𝑑𝑓′(𝑣) +1 =𝑑𝑓′(𝑢)df′(v)+1=df′(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．根据最短路非递减引理又有 𝑑𝑓′(𝑣) ≥𝑑𝑓(𝑣)df′(v)≥df(v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，我们连接所有式子，得到 𝑑𝑓′(𝑢) ≥𝑑𝑓(𝑢) +2df′(u)≥df(u)+2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．换言之，如果有向边 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 被选为饱和边，那么与其上一次被选为饱和边时相比，𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的距离至少增加 22<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到任意结点的距离不可能超过 |𝑉||V|<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，结合上述性质，我们发现每条边被选为饱和边的次数是 𝑂(|𝑉|)O(|V|)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的，与边数相乘后得到增广总轮数的上界 𝑂(|𝑉||𝐸|)O(|V||E|)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>接下来我们证明最短路非递减引理，即 𝑑𝑓′(𝑢) ≥𝑑𝑓(𝑢)df′(u)≥df(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．这一证明并不难，但可能稍显绕口，读者可以停下来认真思考片刻．</p>
+<p>最短路非递减引理的证明</p>
+<p>考虑反证．对于某一轮增广，我们假设存在若干结点，它们在该轮增广后到 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的距离较增广前减小．我们记 𝑣v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为其中到 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的距离最小的一者（即 𝑣 =arg⁡min𝑥∈𝑉,𝑑𝑓′(𝑥)&lt;𝑑𝑓(𝑥)𝑑𝑓′(𝑥)v=arg⁡minx∈V,df′(x)&lt;df(x)df′(x)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">）．注意，根据反证假设，此时 𝑑𝑓′(𝑣) &lt;𝑑𝑓(𝑣)df′(v)&lt;df(v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是已知条件．</p>
+<p>在 𝐺𝑓′Gf′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到 𝑣v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的最短路上，我们记 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是 𝑣v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的上一个结点，即 𝑑𝑓′(𝑢) +1 =𝑑𝑓′(𝑣)df′(u)+1=df′(v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>为了不让 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 破坏 𝑣v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的「距离最小」这一性质，𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 必须满足 𝑑𝑓′(𝑢) ≥𝑑𝑓(𝑢)df′(u)≥df(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>对于上式，我们令不等号两侧同加，得 𝑑𝑓′(𝑣) ≥𝑑𝑓(𝑢) +1df′(v)≥df(u)+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．根据反证假设进行放缩，我们得到 𝑑𝑓(𝑣) &gt;𝑑𝑓(𝑢) +1df(v)&gt;df(u)+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>以下我们尝试讨论 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上的增广方向．</p>
+<ul>
+<li>假设有向边 (𝑢,𝑣) ∈𝐸𝑓(u,v)∈Ef<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．根据 BFS「广度优先」的性质，我们有 𝑑𝑓(𝑢) +1 ≥𝑑𝑓(𝑣)df(u)+1≥df(v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．该式与放缩结果冲突，导出矛盾．</li>
+<li>假设有向边 (𝑢,𝑣) ∉𝐸𝑓(u,v)∉Ef<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．根据 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的定义我们已知 (𝑢,𝑣) ∈𝐸𝑓′(u,v)∈Ef′<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，因此这条边的存在必须是当前轮次的增广经过了 (𝑣,𝑢)(v,u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 并退流产生反向边的结果，也即 𝑑𝑓(𝑣) +1 =𝑑𝑓(𝑢)df(v)+1=df(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．该式与放缩结果冲突，导出矛盾．</li>
+</ul>
+<p>由于 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 沿任何方向增广都会导出矛盾，我们知道反证假设不成立，最短路非递减引理得证．</p>
+<p>将单轮 BFS 增广的复杂度与增广轮数的上界相乘，我们得到 Edmonds–Karp 算法的时间复杂度是 𝑂(|𝑉||𝐸|2)O(|V||E|2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<h4 id="4ee378015b9e73b0">代码实现</h4>
+<p>Edmonds–Karp 算法的可能实现如下．</p>
+<p>参考代码</p>
+<pre><code class="language-text">---|---
+
+### Dinic 算法
+
+#### 算法思想
+
+考虑在增广前先对 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 做 BFS 分层，即根据结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到源点 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的距离 𝑑(𝑢)d(u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 把结点分成若干层．令经过 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的流量只能流向下一层的结点 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即删除 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 向层数标号相等或更小的结点的出边，我们称 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 剩下的部分为层次图（Level Graph）．形式化地，我们称 𝐺𝐿 =(𝑉,𝐸𝐿)GL=(V,EL)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝐺𝑓 =(𝑉,𝐸𝑓)Gf=(V,Ef)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的层次图，其中 𝐸𝐿 ={(𝑢,𝑣)∣(𝑢,𝑣)∈𝐸𝑓,𝑑(𝑢)+1=𝑑(𝑣)}EL={(u,v)∣(u,v)∈Ef,d(u)+1=d(v)}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+如果我们在层次图 𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上找到一个极大的增广流 𝑓𝑏fb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得仅在 𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上是不可能进一步扩大流 𝑓𝑏fb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的，则我们称 𝑓𝑏fb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的阻塞流（Blocking Flow）．
+
+Warning
+
+尽管在上文中我们仅在单条增广路上定义了增广/增广流，广义地，「增广」一词不仅可以用于单条路径上的增广流，也可以用于若干增广流的并——后者才是我们定义阻塞流时使用的意义．
+
+定义层次图和阻塞流后，Dinic 算法的流程如下．
+
+  1. 在 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上 BFS 出层次图 𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  2. 在 𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上 DFS 出阻塞流 𝑓𝑏fb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  3. 将 𝑓𝑏fb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 并到原先的流 𝑓f![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中，即 𝑓 ←𝑓 +𝑓𝑏f←f+fb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  4. 重复以上过程直到不存在从 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的路径．
+
+此时的 𝑓f![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即为最大流．
+
+在分析这一算法的复杂度之前，我们需要特别说明「在 𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上 DFS 出阻塞流 𝑓𝑏fb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)」的过程．尽管 BFS 层次图对于本页面的读者应当是 trivial 的，但 DFS 阻塞流的过程则稍需技巧——我们需要引入当前弧优化．
+
+注意到在 𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上 DFS 的过程中，如果结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同时具有大量入边和出边，并且 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 每次接受来自入边的流量时都遍历出边表来决定将流量传递给哪条出边，则 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这个局部的时间复杂度最坏可达 𝑂(|𝐸|2)O(|E|2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．为避免这一缺陷，如果某一时刻我们已经知道边 (𝑢,𝑣)(u,v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 已经增广到极限（边 (𝑢,𝑣)(u,v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 已无剩余容量或 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的后侧已增广至阻塞），则 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的流量没有必要再尝试流向出边 (𝑢,𝑣)(u,v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．据此，对于每个结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，我们维护 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的出边表中第一条还有必要尝试的出边．习惯上，我们称维护的这个指针为当前弧，称这个做法为当前弧优化．
+
+多路增广
+
+多路增广是 Dinic 算法的一个常数优化——如果我们在层次图上找到了一条从 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的增广路 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则接下来我们未必需要重新从 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出发找下一条增广路，而可能从 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上最后一个仍有剩余容量的位置出发寻找一条岔路进行增广．考虑到其与回溯形式的一致性，这一优化在 DFS 的代码实现中也是自然的．
+
+常见误区
+
+可能是由于大量网络资料的错误表述引发以讹传讹的情形，相当数量的选手喜欢将当前弧优化和多路增广并列称为 Dinic 算法的两种优化．实际上，当前弧优化是用于保证 Dinic 时间复杂度正确性的一部分，而多路增广只是一个不影响复杂度的常数优化．
+
+#### 时间复杂度分析
+
+应用当前弧优化后，对 Dinic 算法的时间复杂度分析如下．
+
+首先，我们尝试证明单轮增广中 DFS 求阻塞流的时间复杂度是 𝑂(|𝑉||𝐸|)O(|V||E|)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+单轮增广的时间复杂度的证明
+
+考虑阻塞流 𝑓𝑏fb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的每条增广路，它们都是在 𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上每次沿当前弧跳转而得到的结果，其中每条增广路经历的跳转次数不可能多于 |𝑉||V|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+每找到一条增广路就有一条饱和边消失（剩余容量清零）．考虑阻塞流 𝑓𝑏fb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的每条增广路，我们将被它们清零的饱和边形成的边集记作 𝐸1E1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．考虑到 𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分层的性质，饱和边消失后其反向边不可能在同一轮增广内被其他增广路经过，因此，𝐸1E1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝐸𝐿EL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集．
+
+此外，对于沿当前弧跳转但由于某个位置阻塞所以没有成功得到增广路的情形，我们将这些不完整的路径上的最后一条边形成的边集记作 𝐸2E2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．𝐸2E2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的成员不饱和，所以 𝐸1E1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝐸2E2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不交，且 𝐸1 ∪𝐸2E1∪E2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 仍是 𝐸𝐿EL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集．
+
+由于 𝐸1 ∪𝐸2E1∪E2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的每个成员都没有花费超过 |𝑉||V|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次跳转（且在使用多路增广优化后一些跳转将被重复计数），因此，综上所述，DFS 过程中的总跳转次数不可能多于 |𝑉||𝐸𝐿||V||EL|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+常见伪证一则
+
+对于每个结点，我们维护下一条可以增广的边，而当前弧最多变化 |𝐸||E|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次，从而单轮增广的最坏时间复杂度为 𝑂(|𝑉||𝐸|)O(|V||E|)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+Bug
+
+「当前弧最多变化 |𝐸||E|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次」并不能推得「每个结点最多访问其出边 |𝐸||E|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次」．这是因为，访问当前弧并不一定耗尽上面的剩余容量，结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可能多次访问同一条当前弧．
+
+注意到层次图的层数显然不可能超过 |𝑉||V|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果我们可以证明层次图的层数在增广过程中严格单增，则 Dinic 算法的增广轮数是 𝑂(|𝑉|)O(|V|)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．接下来我们尝试证明这一结论2．
+
+层次图层数单调性的证明
+
+我们需要引入预流推进类算法（另一类最大流算法）中的一个概念——高度标号．为了更方便地结合高度标号表述我们的证明，在证明过程中，我们令 𝑑𝑓(𝑢)df(u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 **汇点** 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的距离，从 **汇点** 而非源点出发进行分层（这并没有本质上的区别）．对于某一轮增广，我们用 𝑓f![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑓′f′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别表示增广前的流和增广后的流．在该轮增广中求解并加入阻塞流后，记层次图由 𝐺𝐿 =(𝑉,𝐸𝐿)GL=(V,EL)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变为 𝐺′𝐿 =(𝑉,𝐸′𝐿)GL′=(V,EL′)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+我们给高度标号一个不严格的临时定义——在网络 𝐺 =(𝑉,𝐸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上，令 ℎh![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是点集 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到整数集 𝑁N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的函数，ℎh![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上合法的高度标号当且仅当 ℎ(𝑢) ≤ℎ(𝑣) +1h(u)≤h(v)+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对于 (𝑢,𝑣) ∈𝐸(u,v)∈E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 恒成立．
+
+考察所有 𝐸𝑓′Ef′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的成员 (𝑢,𝑣)(u,v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，我们发现 (𝑢,𝑣) ∈𝐸𝑓′(u,v)∈Ef′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的原因是以下二者之一．
+
+  * (𝑢,𝑣) ∈𝐸𝑓(u,v)∈Ef![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且剩余容量在该轮增广过程中未耗尽——根据最短路的定义，此时我们有 𝑑𝑓(𝑢) ≤𝑑𝑓(𝑣) +1df(u)≤df(v)+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * (𝑢,𝑣) ∉𝐸𝑓(u,v)∉Ef![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，但在该轮增广过程中阻塞流经过 (𝑣,𝑢)(v,u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 并退流产生反向边——根据层次图和阻塞流的定义，此时我们有 𝑑𝑓(𝑢) +1 =𝑑𝑓(𝑣)df(u)+1=df(v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+以上观察让我们得出一个结论——𝑑𝑓df![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在 𝐺𝑓′Gf′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上是一个合法的高度标号．当然，在 𝐺𝑓′Gf′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子图 𝐺′𝐿GL′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上也是．
+
+现在，对于一条 𝐺′𝐿GL′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的增广路 𝑝 =(𝑠,…,𝑢,𝑣,…,𝑡)p=(s,…,u,v,…,t)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，按照 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上结点的反序（从 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的顺序）考虑从空路径开始每次添加一个结点的过程．假设结点 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 已加入，结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 正在加入，我们发现，加入结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后，根据层次图的定义，𝑑𝑓′(𝑢)df′(u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值较 𝑑𝑓′(𝑣)df′(v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 增加 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；与此同时，由于 𝑑𝑓df![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝐺′𝐿GL′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的高度标号，𝑑𝑓(𝑢)df(u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值既可能较 𝑑𝑓(𝑣)df(v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 增加 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，也可能保持不变或减少．因此，在整条路径被添加完成后，我们得到 𝑑𝑓′(𝑠) ≥𝑑𝑓(𝑠)df′(s)≥df(s)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中取等的充要条件是 𝑑𝑓(𝑢) =𝑑𝑓(𝑣) +1df(u)=df(v)+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对于 (𝑢,𝑣) ∈𝑝(u,v)∈p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 恒成立．如果该不等式不能取等，则有 𝑑𝑓′(𝑠) &gt;𝑑𝑓(𝑠)df′(s)&gt;df(s)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)——即我们想要的结论「层次图的层数在增广过程中严格单增」．以下我们尝试证明该不等式不能取等．
+
+考虑反证，我们假设 𝑑𝑓′(𝑠) =𝑑𝑓(𝑠)df′(s)=df(s)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立，并尝试导出矛盾．现在我们断言，在 𝐺′𝐿GL′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上，𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 至少包含一条边 (𝑢,𝑣)(u,v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 (𝑢,𝑣)(u,v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在 𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上不存在．如果没有这样的边，考虑到 𝑑𝑓(𝑠) =𝑑𝑓′(𝑠)df(s)=df′(s)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，结合层次图和阻塞流的定义，𝐺𝐿GL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的增广应尚未完成．为了不产生以上矛盾，我们的断言只好是正确的．
+
+令 (𝑢,𝑣)(u,v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是满足断言条件的那条边，其满足断言的原因只能是以下二者之一．
+
+  * (𝑢,𝑣) ∈𝐸𝑓(u,v)∈Ef![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 但 𝑑𝑓(𝑢) ≤𝑑𝑓(𝑣) +1df(u)≤df(v)+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 未取等，故根据层次图的定义可知 (𝑢,𝑣) ∉𝐸𝐿(u,v)∉EL![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并在增广后新一轮重分层中被加入到 𝐸′𝐿EL′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中；
+  * (𝑢,𝑣) ∉𝐸𝑓(u,v)∉Ef![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这意味着 (𝑢,𝑣)(u,v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这条边的产生是当前轮次增广中阻塞流经过 (𝑣,𝑢)(v,u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 并退流产生反向边的结果，也即 𝑑𝑓(𝑢) =𝑑𝑓(𝑣) −1df(u)=df(v)−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+由于我们无论以何种方式满足断言均得到 𝑑𝑓(𝑢) ≠𝑑𝑓(𝑣) +1df(u)≠df(v)+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，也即 𝑑𝑓′(𝑠) ≥𝑑𝑓(𝑠)df′(s)≥df(s)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取等的充要条件无法被满足，这与反证假设 𝑑𝑓′(𝑠) =𝑑𝑓(𝑠)df′(s)=df(s)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 冲突，原命题得证．
+
+常见伪证另一则
+
+考虑反证．假设层次图的层数在一轮增广结束后较原先相等，则层次图上应仍存在至少一条从 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的增广路满足相邻两点间的层数差为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这条增广路未被增广说明该轮增广尚未结束．为了不产生上述矛盾，原命题成立．
+
+Bug
+
+「一轮增广结束后新的层次图上 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)-𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 最短路较原先相等」并不能推得「旧的层次图上该轮增广尚未结束」．这是因为，没有理由表明两张层次图的边集相同，新的层次图上的 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)-𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 最短路有可能经过旧的层次图上不存在的边．
+
+将单轮增广的时间复杂度 𝑂(|𝑉||𝐸|)O(|V||E|)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与增广轮数 𝑂(|𝑉|)O(|V|)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相乘，Dinic 算法的时间复杂度是 𝑂(|𝑉|2|𝐸|)O(|V|2|E|)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+如果需要令 Dinic 算法的实际运行时间接近其理论上界，我们需要构造有特殊性质的网络作为输入．由于在算法竞赛实践中，对于网络流知识相关的考察常侧重于将原问题建模为网络流问题的技巧．此时，我们的建模通常不包含令 Dinic 算法执行缓慢的特殊性质；恰恰相反，Dinic 算法在大部分图上效率非常优秀．因此，网络流问题的数据范围通常较大，「将 |𝑉|,|𝐸||V|,|E|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值代入 |𝑉|2|𝐸||V|2|E|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 以估计运行时间」这一方式并不适用．实际上，进行准确的估计需要选手对 Dinic 算法的实际效率有一定的经验，读者可以多加练习．
+
+#### 特殊情形下的时间复杂度分析
+
+在一些性质良好的图上，Dinic 算法有更好的时间复杂度．
+
+对于网络 𝐺 =(𝑉,𝐸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果其所有边容量均为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即 𝑐(𝑢,𝑣) ∈{0,1}c(u,v)∈{0,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对于 (𝑢,𝑣) ∈𝐸(u,v)∈E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 恒成立，则我们称 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是单位容量（Unit Capacity）的．
+
+在单位容量的网络中，Dinic 算法的单轮增广的时间复杂度为 𝑂(|𝐸|)O(|E|)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+证明
+
+这是因为，每次增广都会导致增广路上的所有边均饱和并消失，故单轮增广中每条边只能被增广一次．
+
+在单位容量的网络中，Dinic 算法的增广轮数是 𝑂(|𝐸|12)O(|E|12)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
+
+证明
+
+以源点 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为中心分层，记 𝑑𝑓(𝑢)df(u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到源点 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的距离．另外，我们定义将点集 {𝑢∣𝑢∈𝑉,𝑑𝑓(𝑢)=𝑘}{u∣u∈V,df(u)=k}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 定义为编号为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的层次 𝐷𝑘Dk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并记 𝑆𝑘 = ∪𝑖≤𝑘𝐷𝑖Sk=∪i≤kDi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+假设我们已经进行了 |𝐸|12|E|12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 轮增广．根据鸽巢原理，至少存在一个 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足边集 {(𝑢,𝑣)∣𝑢∈𝐷𝑘,𝑣∈𝐷𝑘+1,(𝑢,𝑣)∈𝐸𝑓}{(u,v)∣u∈Dk,v∈Dk+1,(u,v)∈Ef}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的大小不超过 |𝐸||𝐸|12 ≈|𝐸|12|E||E|12≈|E|12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．显然，{𝑆𝑘,𝑉 −𝑆𝑘}{Sk,V−Sk}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)-𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 割，且其割容量不超过 |𝐸|12|E|12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．根据最大流最小割定理，𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的最大流不超过 |𝐸|12|E|12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，也即 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上最多还能执行 |𝐸|12|E|12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 轮增广．因此，总增广轮数是 𝑂(|𝐸|12)O(|E|12)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
+
+在单位容量的网络中，Dinic 算法的增广轮数是 𝑂(|𝑉|23)O(|V|23)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
+
+证明
+
+假设我们已经进行了 2|𝑉|232|V|23![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 轮增广．由于至多有半数的（|𝑉|23|V|23![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个）层次包含多于 |𝑉|13|V|13![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个点，故无论我们如何分配所有层次的大小，至少存在一个 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足相邻两个层次同时包含不多于 |𝑉|13|V|13![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个点，即 |𝐷𝑘| ≤|𝑉|13|Dk|≤|V|13![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 |𝐷𝑘+1| ≤|𝑉|13|Dk+1|≤|V|13![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+为最大化 𝐷𝑘Dk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐷𝑘+1Dk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间的边数，我们假定这是一个完全二分图，此时边集 {(𝑢,𝑣)∣𝑢∈𝐷𝑘,𝑣∈𝐷𝑘+1,(𝑢,𝑣)∈𝐸𝑓}{(u,v)∣u∈Dk,v∈Dk+1,(u,v)∈Ef}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的大小不超过 |𝑉|23|V|23![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．显然，{𝑆𝑘,𝑉 −𝑆𝑘}{Sk,V−Sk}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)-𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 割，且其割容量不超过 |𝑉|23|V|23![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．根据最大流最小割定理，𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的最大流不超过 |𝑉|23|V|23![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，也即 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上最多还能执行 |𝑉|23|V|23![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 轮增广．因此，总增广轮数是 𝑂(|𝑉|23)O(|V|23)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
+
+在单位容量的网络中，如果除源汇点外每个结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都满足 degin(𝑢) =1degin(u)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 degout(𝑢) =1degout(u)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 Dinic 算法的增广轮数是 𝑂(|𝑉|12)O(|V|12)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．其中，degin(𝑢)degin(u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 degout(𝑢)degout(u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别代表结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的入度和出度．
+
+证明
+
+我们引入以下引理——对于这一形式的网络，其上的任意流总是可以分解成若干条单位流量的、**点不交** 的增广路．
+
+假设我们已经进行了 |𝑉|12|V|12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 轮增广．根据层次图的定义，此时任意新的增广路的长度至少为 |𝑉|12|V|12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+考虑 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的最大流的增广路分解，我们得到的增广路的数量不能多于 |𝑉||𝑉|12 ≈|𝑉|12|V||V|12≈|V|12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这意味着 𝐺𝑓Gf![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上最多还能执行 |𝑉|12|V|12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 轮增广．因此，总增广轮数是 𝑂(|𝑉|12)O(|V|12)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
+
+综上，我们得出一些推论．
+
+  * 在单位容量的网络上，Dinic 算法的总时间复杂度是 𝑂(|𝐸|min(|𝐸|12,|𝑉|23))O(|E|min(|E|12,|V|23))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  * 在单位容量的网络上，如果除源汇点外每个结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都满足 degin(𝑢) =1degin(u)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 degout(𝑢) =1degout(u)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，Dinic 算法的总时间复杂度是 𝑂(|𝐸||𝑉|12)O(|E||V|12)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于二分图最大匹配问题，我们常使用 Hopcroft–Karp 算法解决，而这一算法实际上是 Dinic 算法在满足上述度数限制的单位容量网络上的特例．
+
+#### 代码实现
+
+参考代码
+</code></pre>
+<p>---|---</p>
+<h3 id="mpm-7b976cd5">MPM 算法</h3>
+<p><strong>MPM</strong>(Malhotra, Pramodh-Kumar and Maheshwari) 算法得到最大流的方式有两种：使用基于堆的优先队列，时间复杂度为 𝑂(𝑛3log⁡𝑛)O(n3log⁡n)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；常用 BFS 解法，时间复杂度为 𝑂(𝑛3)O(n3)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．注意，本章节只专注于分析更优也更简洁的 𝑂(𝑛3)O(n3)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 算法．</p>
+<p>MPM 算法的整体结构和 Dinic 算法类似，也是分阶段运行的．在每个阶段，在 𝐺G<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的残量网络的分层网络中找到增广路．它与 Dinic 算法的主要区别在于寻找增广路的方式不同：MPM 算法中寻找增广路的部分的只花了 𝑂(𝑛2)O(n2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">, 时间复杂度要优于 Dinic 算法．</p>
+<p>MPM 算法需要考虑顶点而不是边的容量．在分层网络 𝐿L<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中，如果定义点 𝑣v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的容量 𝑝(𝑣)p(v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为其传入残量和传出残量的最小值，则有：</p>
+<p>𝑝𝑖𝑛(𝑣)=∑(𝑢,𝑣)∈𝐿(𝑐(𝑢,𝑣)−𝑓(𝑢,𝑣))𝑝𝑜𝑢𝑡(𝑣)=∑(𝑣,𝑢)∈𝐿(𝑐(𝑣,𝑢)−𝑓(𝑣,𝑢))𝑝(𝑣)=min(𝑝𝑖𝑛(𝑣),𝑝𝑜𝑢𝑡(𝑣))pin(v)=∑(u,v)∈L(c(u,v)−f(u,v))pout(v)=∑(v,u)∈L(c(v,u)−f(v,u))p(v)=min(pin(v),pout(v))<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>我们称节点 𝑟r<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是参考节点当且仅当 𝑝(𝑟) =min𝑝(𝑣)p(r)=minp(v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．对于一个参考节点 𝑟r<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，我们一定可以让经过 𝑟r<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的流量增加 𝑝(𝑟)p(r)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 以使其容量变为 00<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．这是因为 𝐿L<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是有向无环图且 𝐿L<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中节点容量至少为 𝑝(𝑟)p(r)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以我们一定能找到一条从 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 经过 𝑟r<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到达 𝑡t<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的有向路径．那么我们让这条路上的边流量都增加 𝑝(𝑟)p(r)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 即可．这条路即为这一阶段的增广路．寻找增广路可以用 BFS．增广完之后所有满流边都可以从 𝐿L<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中删除，因为它们不会在此阶段后被使用．同样，所有与 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和 𝑡t<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不同且没有出边或入边的节点都可以删除．</p>
+<h4 id="65f695f4590d67425ea652066790-3">时间复杂度分析</h4>
+<p>MPM 算法的每个阶段都需要 𝑂(𝑉2)O(V2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，因为最多有 𝑉V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 次迭代（因为至少删除了所选的参考节点），并且在每次迭代中，我们删除除最多 𝑉V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之外经过的所有边．求和，我们得到 𝑂(𝑉2 +𝐸) =𝑂(𝑉2)O(V2+E)=O(V2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．由于阶段总数少于 𝑉V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，因此 MPM 算法的总运行时间为 𝑂(𝑉3)O(V3)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>阶段总数小于 V 的证明</p>
+<p>MPM 算法在少于 𝑉V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个阶段内结束．为了证明这一点，我们必须首先证明两个引理．</p>
+<p><strong>引理 1</strong> ：每次迭代后，从 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到每个点的距离不会减少，也就是说，𝑙𝑒𝑣𝑒𝑙𝑖+1[𝑣] ≥𝑙𝑒𝑣𝑒𝑙𝑖[𝑣]leveli+1[v]≥leveli[v]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p><strong>证明</strong> ：固定一个阶段 𝑖i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和点 𝑣v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．考虑 𝐺𝑅𝑖GiR<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中从 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 到 𝑣v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的任意最短路径 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的长度等于 𝑙𝑒𝑣𝑒𝑙𝑖[𝑣]leveli[v]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．注意 𝐺𝑅𝑖GiR<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 只能包含 𝐺𝑅𝑖GiR<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的后向边和前向边．如果 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 没有 𝐺𝑅𝑖GiR<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的后边，那么 𝑙𝑒𝑣𝑒𝑙𝑖+1[𝑣] ≥𝑙𝑒𝑣𝑒𝑙𝑖[𝑣]leveli+1[v]≥leveli[v]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．因为 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 也是 𝐺𝑅𝑖GiR<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的一条路径．现在，假设 𝑃P<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 至少有一个后向边且第一个这样的边是 (𝑢,𝑤)(u,w)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，那么 𝑙𝑒𝑣𝑒𝑙𝑖+1[𝑢] ≥𝑙𝑒𝑣𝑒𝑙𝑖[𝑢]leveli+1[u]≥leveli[u]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">（因为第一种情况）．边 (𝑢,𝑤)(u,w)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不属于 𝐺𝑅𝑖GiR<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，因此 (𝑢,𝑤)(u,w)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 受到前一次迭代的增广路的影响．这意味着 𝑙𝑒𝑣𝑒𝑙𝑖[𝑢] =𝑙𝑒𝑣𝑒𝑙𝑖[𝑤] +1leveli[u]=leveli[w]+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．此外，𝑙𝑒𝑣𝑒𝑙𝑖+1[𝑤] =𝑙𝑒𝑣𝑒𝑙𝑖+1[𝑢] +1leveli+1[w]=leveli+1[u]+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．从这两个方程和 𝑙𝑒𝑣𝑒𝑙𝑖+1[𝑢] ≥𝑙𝑒𝑣𝑒𝑙𝑖[𝑢]leveli+1[u]≥leveli[u]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 我们得到 𝑙𝑒𝑣𝑒𝑙𝑖+1[𝑤] ≥𝑙𝑒𝑣𝑒𝑙𝑖[𝑤] +2leveli+1[w]≥leveli[w]+2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．路径的剩余部分也可以使用相同思想．</p>
+<p><strong>引理 2</strong> ：𝑙𝑒𝑣𝑒𝑙𝑖+1[𝑡] &gt;𝑙𝑒𝑣𝑒𝑙𝑖[𝑡]leveli+1[t]&gt;leveli[t]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p><strong>证明</strong> ：从引理一我们得出，𝑙𝑒𝑣𝑒𝑙𝑖+1[𝑡] ≥𝑙𝑒𝑣𝑒𝑙𝑖[𝑡]leveli+1[t]≥leveli[t]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．假设 𝑙𝑒𝑣𝑒𝑙𝑖+1[𝑡] =𝑙𝑒𝑣𝑒𝑙𝑖[𝑡]leveli+1[t]=leveli[t]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，注意 𝐺𝑅𝑖GiR<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 只能包含 𝐺𝑅𝑖GiR<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的后向边和前向边．这意味着 𝐺𝑅𝑖GiR<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中有一条最短路径未被增广路阻塞．这就形成了矛盾．</p>
+<h4 id="5b9e73b0">实现</h4>
+<p>参考代码</p>
+<pre><code class="language-text">---|---
+
+### ISAP
+
+在 Dinic 算法中，我们每次求完增广路后都要跑 BFS 来分层，有没有更高效的方法呢？
+
+答案就是下面要介绍的 ISAP 算法．
+
+#### 过程
+
+和 Dinic 算法一样，我们还是先跑 BFS 对图上的点进行分层，不过与 Dinic 略有不同的是，我们选择在反图上，从 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 点向 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 点进行 BFS．
+
+执行完分层过程后，我们通过 DFS 来找增广路．
+
+增广的过程和 Dinic 类似，我们只选择比当前点层数少 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的点来增广．
+
+与 Dinic 不同的是，我们并不会重跑 BFS 来对图上的点重新分层，而是在增广的过程中就完成重分层过程．
+
+具体来说，设 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 号点的层为 𝑑𝑖di![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，当我们结束在 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 号点的增广过程后，我们遍历残量网络上 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的所有出边，找到层最小的出点 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，随后令 𝑑𝑖 ←𝑑𝑗 +1di←dj+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．特别地，若残量网络上 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 无出边，则 𝑑𝑖 ←𝑛di←n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+容易发现，当 𝑑𝑠 ≥𝑛ds≥n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，图上不存在增广路，此时即可终止算法．
+
+和 Dinic 类似，ISAP 中也存在 **当前弧优化** ．
+
+而 ISAP 还存在另外一个优化，我们记录层数为 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的点的数量 𝑛𝑢𝑚𝑖numi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，每当将一个点的层数从 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 更新到 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，同时更新 𝑛𝑢𝑚num![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 数组的值，若在更新后 𝑛𝑢𝑚𝑥 =0numx=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则意味着图上出现了断层，无法再找到增广路，此时可以直接终止算法（实现时直接将 𝑑𝑠ds![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 标为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），该优化被称为 **GAP 优化** ．
+
+#### 实现
+
+参考代码
+</code></pre>
+<p>---|---</p>
+<h2 id="push-relabel-98846d4163a88fdb7b976cd5">Push-Relabel 预流推进算法</h2>
+<p>该方法在求解过程中忽略流守恒性，并每次对一个结点更新信息，以求解最大流．</p>
+<h3 id="901a7528768498846d4163a88fdb7b976cd5">通用的预流推进算法</h3>
+<p>首先我们介绍预流推进算法的主要思想，以及一个可行的暴力实现算法．</p>
+<p>预流推进算法通过对单个结点的更新操作，直到没有结点需要更新来求解最大流．</p>
+<p>算法过程维护的流函数不一定保持流守恒性，对于一个结点，我们允许进入结点的流超过流出结点的流，超过的部分被称为结点 𝑢(𝑢 ∈𝑉 −{𝑠,𝑡})u(u∈V−{s,t})<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的 <strong>超额流</strong> 𝑒(𝑢)e(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：</p>
+<p>𝑒(𝑢)=∑(𝑥,𝑢)∈𝐸𝑓(𝑥,𝑢)−∑(𝑢,𝑦)∈𝐸𝑓(𝑢,𝑦)e(u)=∑(x,u)∈Ef(x,u)−∑(u,y)∈Ef(u,y)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>若 𝑒(𝑢) &gt;0e(u)&gt;0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，称结点 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> <strong>溢出</strong>3，注意当我们提到溢出结点时，并不包括 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和 𝑡t<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>预流推进算法维护每个结点的高度 ℎ(𝑢)h(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，并且规定溢出的结点 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 如果要推送超额流，只能向高度小于 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的结点推送；如果 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 没有相邻的高度小于 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的结点，就修改 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的高度（重贴标签）．</p>
+<h4 id="9ad85ea651fd65704">高度函数4</h4>
+<p>准确地说，预流推进维护以下的一个映射 ℎ :𝑉 →𝐍h:V→N<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：</p>
+<ul>
+<li>ℎ(𝑠) =|𝑉|,ℎ(𝑡) =0h(s)=|V|,h(t)=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></li>
+<li>∀(𝑢,𝑣) ∈𝐸𝑓,ℎ(𝑢) ≤ℎ(𝑣) +1∀(u,v)∈Ef,h(u)≤h(v)+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></li>
+</ul>
+<p>称 ℎh<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是残量网络 𝐺𝑓 =(𝑉𝑓,𝐸𝑓)Gf=(Vf,Ef)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的高度函数．</p>
+<p>引理 1：设 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上的高度函数为 ℎh<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，对于任意两个结点 𝑢,𝑣 ∈𝑉u,v∈V<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，如果 ℎ(𝑢) &gt;ℎ(𝑣) +1h(u)&gt;h(v)+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不是 𝐺𝑓Gf<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的边．</p>
+<p>算法只会在 ℎ(𝑢) =ℎ(𝑣) +1h(u)=h(v)+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的边执行推送．</p>
+<h4 id="63a89001ff08pushff09">推送（Push）</h4>
+<p>适用条件：结点 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 溢出，且存在结点 𝑣((𝑢,𝑣) ∈𝐸𝑓,𝑐(𝑢,𝑣) −𝑓(𝑢,𝑣) &gt;0,ℎ(𝑢) =ℎ(𝑣) +1)v((u,v)∈Ef,c(u,v)−f(u,v)&gt;0,h(u)=h(v)+1)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则 push 操作适用于 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>于是，我们尽可能将超额流从 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 推送到 𝑣v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，推送过程中我们只关心超额流和 𝑐(𝑢,𝑣) −𝑓(𝑢,𝑣)c(u,v)−f(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的最小值，不关心 𝑣v<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是否溢出．</p>
+<p>如果 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 在推送完之后满流，将其从残量网络中删除．</p>
+<h4 id="91cd8d3468077b7eff08relabelff09">重贴标签（Relabel）</h4>
+<p>适用条件：如果结点 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 溢出，且 ∀(𝑢,𝑣) ∈𝐸𝑓,ℎ(𝑢) ≤ℎ(𝑣)∀(u,v)∈Ef,h(u)≤h(v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则 relabel 操作适用于 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>则将 ℎ(𝑢)h(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 更新为 min(𝑢,𝑣)∈𝐸𝑓ℎ(𝑣) +1min(u,v)∈Efh(v)+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 即可．</p>
+<h4 id="521d59cb5316">初始化</h4>
+<p>∀(𝑢,𝑣)∈𝐸, 𝑓(𝑢,𝑣)={𝑐(𝑢,𝑣),𝑢=𝑠0,𝑢≠𝑠∀(u,v)∈E, f(u,v)={c(u,v),u=s0,u≠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">∀𝑢∈𝑉, ℎ(𝑢)={|𝑉|,𝑢=𝑠0,𝑢≠𝑠∀u∈V, h(u)={|V|,u=s0,u≠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">𝑒(𝑢)=∑(𝑥,𝑢)∈𝐸𝑓(𝑥,𝑢)−∑(𝑢,𝑦)∈𝐸𝑓(𝑢,𝑦)e(u)=∑(x,u)∈Ef(x,u)−∑(u,y)∈Ef(u,y)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>上述将 (𝑠,𝑣) ∈𝐸(s,v)∈E<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 充满流，并将 ℎ(𝑠)h(s)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 抬高，使得 (𝑠,𝑣) ∉𝐸𝑓(s,v)∉Ef<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，因为 ℎ(𝑠) &gt;ℎ(𝑣)h(s)&gt;h(v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，而且 (𝑠,𝑣)(s,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 毕竟满流，没必要留在残量网络中；上述还将 𝑒(𝑠)e(s)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 初始化为 ∑(𝑠,𝑣)∈𝐸𝑓(𝑠,𝑣)∑(s,v)∈Ef(s,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的相反数．</p>
+<h4 id="8fc77a0b">过程</h4>
+<p>我们每次扫描整个图，只要存在结点 𝑢u<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 满足 push 或 relabel 操作的条件，就执行对应的操作．</p>
+<p>如图，每个结点中间表示编号，左下表示高度值 ℎ(𝑢)h(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，右下表示超额流 𝑒(𝑢)e(u)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，结点颜色的深度也表示结点的高度；边权表示 𝑐(𝑢,𝑣) −𝑓(𝑢,𝑣)c(u,v)−f(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，绿色的边表示满足 ℎ(𝑢) =ℎ(𝑣) +1h(u)=h(v)+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的边 (𝑢,𝑣)(u,v)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">（即残量网络的边 𝐸𝑓Ef<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">）：</p>
+<p><img src="../../assets/images/2148.png" alt="p1"></p>
+<p>整个算法我们大致浏览一下过程，这里笔者使用的是一个暴力算法，即暴力扫描是否有溢出的结点，有就更新</p>
+<p><img src="../../assets/images/2149.gif" alt="p2"></p>
+<p>最后的结果</p>
+<p><img src="../../assets/images/2150.png" alt="p3"></p>
+<p>可以发现，最后的超额流一部分回到了 𝑠s<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，且除了源点汇点，其他结点都没有溢出；这时的流函数 𝑓f<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 满足流守恒性，为最大流，流量即为 𝑒(𝑡)e(t)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>但是实际上论文5指出只处理高度小于 𝑛n<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的溢出节点也能获得正确的最大流值，不过这样一来算法结束的时候预流还不满足流函数性质，不能知道每条边上真实的流量．</p>
+<h4 id="5b9e73b0-2">实现</h4>
+<p>核心代码</p>
+<pre><code class="language-text">---|---
+
+### HLPP 算法
+
+最高标号预流推进算法（Highest Label Preflow Push）在上述通用的预流推送算法中，在每次选择结点时，都优先选择高度最高的溢出结点，其算法复杂度为 𝑂(𝑛2√𝑚)O(n2m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+#### 过程
+
+具体地说，HLPP 算法过程如下：
+
+  1. 初始化（基于预流推进算法）；
+  2. 选择溢出结点中高度最高的结点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并对它所有可以推送的边进行推送；
+  3. 如果 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 仍溢出，对它重贴标签，回到步骤 2；
+  4. 如果没有溢出的结点，算法结束．
+
+一篇对最大流算法实际表现进行测试的论文6表明，实际上基于预流的算法，有相当一部分时间都花在了重贴标签这一步上．以下介绍两种来自论文7的能显著减少重贴标签次数的优化．
+
+#### BFS 优化
+
+HLPP 的上界为 𝑂(𝑛2√𝑚)O(n2m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，但在使用时卡得比较紧；我们可以在初始化高度的时候进行优化．具体来说，我们初始化 ℎ(𝑢)h(u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最短距离；特别地，ℎ(𝑠) =𝑛h(s)=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+在 BFS 的同时我们顺便检查图的连通性，排除无解的情况．
+
+#### GAP 优化
+
+HLPP 推送的条件是 ℎ(𝑢) =ℎ(𝑣) +1h(u)=h(v)+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而如果在算法的某一时刻，存在某个 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 ℎ(𝑢) =𝑘h(u)=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的结点个数为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么对于 ℎ(𝑢) &gt;𝑘h(u)&gt;k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的结点就永远无法推送超额流到 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此只能送回 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么我们就在这时直接让他们的高度变成至少 𝑛 +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，以尽快推送回 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，减少重贴标签的操作．
+
+以下的实现采取论文6中的实现方法，使用 𝑁 ∗2 −1N∗2−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个桶 `B`，其中 `B[i]` 中记录所有当前高度为 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的溢出节点．加入了以上提到的两种优化，并且只处理了高度小于 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的溢出节点．
+
+值得注意的是论文6中使用的桶是基于链表的栈，而 STL 中的 `stack` 默认的容器是 `deque`．经过简单的测试发现 `vector`，`deque`，`list` 在本题的实际运行过程中效率区别不大．
+
+#### 实现
+
+LuoguP4722【模板】最大流 加强版/预流推进
+</code></pre>
+<p>---|---</p>
+<p>感受一下运行过程</p>
+<p><img src="../../assets/images/1152.png" alt="HLPP"></p>
+<p>其中 pic13 到 pic14 执行了 Relabel(4)，并进行了 GAP 优化．</p>
+<h2 id="811a6ce8">脚注</h2>
+<ul>
+<li><em> </em></li>
+</ul>
+<ol>
+<li><a href="http://pisces.ck.tp.edu.tw/~peng/index.php?action=showfile&amp;file=f6cdf7ef750d7dc79c7d599b942acbaaee86a2e3e">http://pisces.ck.tp.edu.tw/~peng/index.php?action=showfile&amp;file=f6cdf7ef750d7dc79c7d599b942acbaaee86a2e3e</a> ↩</li>
+</ol>
+<ol>
+<li>&lt;https://people.orie.cornell.edu/dpw/orie633/LectureNotes/lecture9.pdf&gt; ↩</li>
+</ol>
+<ol>
+<li>英语文献中通常称为「active」． ↩</li>
+</ol>
+<ol>
+<li>在英语文献中，一个结点的高度通常被称为「distance label」．此处使用的「高度」这个术语源自算法导论中的相关章节．你可以在机械工业出版社算法导论（原书第 3 版）的 P432 脚注中找到这么做的理由． ↩</li>
+</ol>
+<ol>
+<li>Cherkassky B V, Goldberg A V. On implementing push-relabel method for the maximum flow problem[C]//International Conference on Integer Programming and Combinatorial Optimization. Springer, Berlin, Heidelberg, 1995: 157-171. ↩</li>
+</ol>
+<ol>
+<li>Ahuja R K, Kodialam M, Mishra A K, et al. Computational investigations of maximum flow algorithms[J]. European Journal of Operational Research, 1997, 97(3): 509-542. ↩↩↩</li>
+</ol>
+<ol>
+<li>Derigs U, Meier W. Implementing Goldberg&#x27;s max-flow-algorithm—A computational investigation[J]. Zeitschrift für Operations Research, 1989, 33(6): 383-403. ↩</li>
+</ol>
+<ul>
+<li><em> </em></li>
+</ul>
+<blockquote><strong>本页面最近更新： 2026/1/7 08:56:54，<a href="https://github.com/OI-wiki/OI-wiki/commits/master/docs/graph/flow/max-flow.md">更新历史</a> </strong>发现错误？想一起完善？<a href="../edit-landing/overview.html" title="edit.link.title">在 GitHub 上编辑此页！</a> <strong>本页面贡献者：<a href="https://github.com/sshwy">sshwy</a>, <a href="https://github.com/Tiphereth-A">Tiphereth-A</a>, <a href="https://github.com/StudyingFather">StudyingFather</a>, <a href="https://github.com/Ir1d">Ir1d</a>, <a href="https://github.com/Marcythm">Marcythm</a>, <a href="https://github.com/black-desk">black-desk</a>, <a href="https://github.com/Enter-tainer">Enter-tainer</a>, <a href="https://github.com/MegaOwIer">MegaOwIer</a>, <a href="https://github.com/Xeonacid">Xeonacid</a>, <a href="https://github.com/argvchs">argvchs</a>, <a href="https://github.com/c-forrest">c-forrest</a>, <a href="https://github.com/HeRaNO">HeRaNO</a>, <a href="https://github.com/ksyx">ksyx</a>, <a href="https://github.com/Nanarikom">Nanarikom</a>, <a href="https://github.com/aofall">aofall</a>, <a href="https://github.com/CCXXXI">CCXXXI</a>, <a href="https://github.com/Chrogeek">Chrogeek</a>, <a href="https://github.com/CoelacanthusHex">CoelacanthusHex</a>, <a href="https://github.com/frank-xjh">frank-xjh</a>, <a href="https://github.com/gavinliu266">gavinliu266</a>, <a href="https://github.com/iamtwz">iamtwz</a>, <a href="https://github.com/ImpleLee">ImpleLee</a>, <a href="https://github.com/isdanni">isdanni</a>, <a href="https://github.com/Kaiser-Yang">Kaiser-Yang</a>, <a href="https://github.com/Konano">Konano</a>, <a href="https://github.com/LeeLin2602">LeeLin2602</a>, <a href="https://github.com/liqwang">liqwang</a>, <a href="https://github.com/megakite">megakite</a>, <a href="https://github.com/ouuan">ouuan</a>, <a href="https://github.com/Persdre">Persdre</a>, <a href="https://github.com/PeterlitsZo">PeterlitsZo</a>, <a href="https://github.com/renbaoshuo">renbaoshuo</a>, <a href="https://github.com/shuzhouliu">shuzhouliu</a>, <a href="mailto:hwy1272918035@outlook.com">Sshwy</a>, <a href="https://github.com/Unnamed2964">Unnamed2964</a>, <a href="https://github.com/UserUnauthorized">UserUnauthorized</a>, <a href="https://github.com/VLTHellolin">VLTHellolin</a>, <a href="https://github.com/Wajov">Wajov</a>, <a href="https://github.com/wen999di">wen999di</a>, <a href="https://github.com/wlbksy">wlbksy</a>, <a href="https://github.com/zymooll">zymooll</a> </strong>本页面的全部内容在<strong><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a></strong> 协议之条款下提供，附加条款亦可能应用</blockquote></article><nav class="article-nav"><a href="max-clique.html"><span class="meta">上一篇</span><br>最大团搜索算法</a><a href="flow-min-cut.html"><span class="meta">下一篇</span><br>最小割</a></nav></div>
+    </div>
+  </main>
+  <script id="archive-search-data" type="application/json">[{"title": "均摊复杂度", "group": "基础知识", "subgroup": "amortized-analysis", "href": "../basic/amortized-analysis.html"}, {"title": "二分", "group": "基础知识", "subgroup": "binary", "href": "../basic/binary.html"}, {"title": "倍增", "group": "基础知识", "subgroup": "binary-lifting", "href": "../basic/binary-lifting.html"}, {"title": "冒泡排序", "group": "基础知识", "subgroup": "bubble-sort", "href": "../basic/bubble-sort.html"}, {"title": "桶排序", "group": "基础知识", "subgroup": "bucket-sort", "href": "../basic/bucket-sort.html"}, {"title": "复杂度简介", "group": "基础知识", "subgroup": "complexity", "href": "../basic/complexity.html"}, {"title": "构造", "group": "基础知识", "subgroup": "construction", "href": "../basic/construction.html"}, {"title": "计数排序", "group": "基础知识", "subgroup": "counting-sort", "href": "../basic/counting-sort.html"}, {"title": "递归 & 分治", "group": "基础知识", "subgroup": "divide-and-conquer", "href": "../basic/divide-and-conquer.html"}, {"title": "枚举", "group": "基础知识", "subgroup": "enumerate", "href": "../basic/enumerate.html"}, {"title": "贪心", "group": "基础知识", "subgroup": "greedy", "href": "../basic/greedy.html"}, {"title": "堆排序", "group": "基础知识", "subgroup": "heap-sort", "href": "../basic/heap-sort.html"}, {"title": "插入排序", "group": "基础知识", "subgroup": "insertion-sort", "href": "../basic/insertion-sort.html"}, {"title": "归并排序", "group": "基础知识", "subgroup": "merge-sort", "href": "../basic/merge-sort.html"}, {"title": "算法基础简介", "group": "基础知识", "subgroup": "概览", "href": "../basic/overview.html"}, {"title": "前缀和 & 差分", "group": "基础知识", "subgroup": "prefix-sum", "href": "../basic/prefix-sum.html"}, {"title": "快速排序", "group": "基础知识", "subgroup": "quick-sort", "href": "../basic/quick-sort.html"}, {"title": "基数排序", "group": "基础知识", "subgroup": "radix-sort", "href": "../basic/radix-sort.html"}, {"title": "选择排序", "group": "基础知识", "subgroup": "selection-sort", "href": "../basic/selection-sort.html"}, {"title": "希尔排序", "group": "基础知识", "subgroup": "shell-sort", "href": "../basic/shell-sort.html"}, {"title": "模拟", "group": "基础知识", "subgroup": "simulate", "href": "../basic/simulate.html"}, {"title": "排序简介", "group": "基础知识", "subgroup": "sort-intro", "href": "../basic/sort-intro.html"}, {"title": "排序相关 STL", "group": "基础知识", "subgroup": "stl-sort", "href": "../basic/stl-sort.html"}, {"title": "Tim 排序", "group": "基础知识", "subgroup": "tim-sort", "href": "../basic/tim-sort.html"}, {"title": "锦标赛排序", "group": "基础知识", "subgroup": "tournament-sort", "href": "../basic/tournament-sort.html"}, {"title": "排序应用", "group": "基础知识", "subgroup": "use-of-sort", "href": "../basic/use-of-sort.html"}, {"title": "常见错误", "group": "赛事与实践", "subgroup": "common-mistakes", "href": "../contest/common-mistakes.html"}, {"title": "常见技巧", "group": "赛事与实践", "subgroup": "common-tricks", "href": "../contest/common-tricks.html"}, {"title": "分段打表", "group": "赛事与实践", "subgroup": "dictionary", "href": "../contest/dictionary.html"}, {"title": "ICPC/CCPC 赛事与赛制", "group": "赛事与实践", "subgroup": "icpc", "href": "../contest/icpc.html"}, {"title": "交互题", "group": "赛事与实践", "subgroup": "interaction", "href": "../contest/interaction.html"}, {"title": "读入、输出优化", "group": "赛事与实践", "subgroup": "io", "href": "../contest/io.html"}, {"title": "OI 赛事与赛制", "group": "赛事与实践", "subgroup": "oi", "href": "../contest/oi.html"}, {"title": "比赛相关简介", "group": "赛事与实践", "subgroup": "概览", "href": "../contest/overview.html"}, {"title": "题型概述", "group": "赛事与实践", "subgroup": "problems", "href": "../contest/problems.html"}, {"title": "出题", "group": "赛事与实践", "subgroup": "problemsetting", "href": "../contest/problemsetting.html"}, {"title": "学习资源", "group": "赛事与实践", "subgroup": "resources", "href": "../contest/resources.html"}, {"title": "学习路线", "group": "赛事与实践", "subgroup": "roadmap", "href": "../contest/roadmap.html"}, {"title": "动态规划基础", "group": "动态规划", "subgroup": "basic", "href": "../dp/basic.html"}, {"title": "计数 DP", "group": "动态规划", "subgroup": "count", "href": "../dp/count.html"}, {"title": "DAG 上的 DP", "group": "动态规划", "subgroup": "dag", "href": "../dp/dag.html"}, {"title": "DP 套 DP", "group": "动态规划", "subgroup": "dp-of-dp", "href": "../dp/dp-of-dp.html"}, {"title": "动态 DP", "group": "动态规划", "subgroup": "dynamic", "href": "../dp/dynamic.html"}, {"title": "区间 DP", "group": "动态规划", "subgroup": "interval", "href": "../dp/interval.html"}, {"title": "背包 DP", "group": "动态规划", "subgroup": "knapsack", "href": "../dp/knapsack.html"}, {"title": "记忆化搜索", "group": "动态规划", "subgroup": "memo", "href": "../dp/memo.html"}, {"title": "其它 DP 方法", "group": "动态规划", "subgroup": "misc", "href": "../dp/misc.html"}, {"title": "数位 DP", "group": "动态规划", "subgroup": "number", "href": "../dp/number.html"}, {"title": "DP 优化简介", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-dp-opt.html"}, {"title": "Slope Trick 优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-slope-trick.html"}, {"title": "WQS 二分", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-wqs-binary-search.html"}, {"title": "单调队列/单调栈优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-monotonous-queue-stack.html"}, {"title": "四边形不等式优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-quadrangle.html"}, {"title": "斜率优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-slope.html"}, {"title": "状态设计优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-state.html"}, {"title": "动态规划部分简介", "group": "动态规划", "subgroup": "概览", "href": "../dp/overview.html"}, {"title": "插头 DP", "group": "动态规划", "subgroup": "plug", "href": "../dp/plug.html"}, {"title": "概率 DP", "group": "动态规划", "subgroup": "概率", "href": "../dp/probability.html"}, {"title": "状压 DP", "group": "动态规划", "subgroup": "state", "href": "../dp/state.html"}, {"title": "树形 DP", "group": "动态规划", "subgroup": "树相关", "href": "../dp/tree.html"}, {"title": "AA 树", "group": "数据结构", "subgroup": "aa-tree", "href": "../ds/aa-tree.html"}, {"title": "AVL 树", "group": "数据结构", "subgroup": "avl", "href": "../ds/avl.html"}, {"title": "线段树套平衡树", "group": "数据结构", "subgroup": "balanced-in-seg", "href": "../ds/balanced-in-seg.html"}, {"title": "二叉堆", "group": "数据结构", "subgroup": "binary-heap", "href": "../ds/binary-heap.html"}, {"title": "分块套树状数组", "group": "数据结构", "subgroup": "bit-in-block-array", "href": "../ds/bit-in-block-array.html"}, {"title": "块状数组", "group": "数据结构", "subgroup": "block-array", "href": "../ds/block-array.html"}, {"title": "块状链表", "group": "数据结构", "subgroup": "block-list", "href": "../ds/block-list.html"}, {"title": "二叉搜索树 & 平衡树", "group": "数据结构", "subgroup": "bst", "href": "../ds/bst.html"}, {"title": "笛卡尔树", "group": "数据结构", "subgroup": "cartesian-tree", "href": "../ds/cartesian-tree.html"}, {"title": "猫树", "group": "数据结构", "subgroup": "cat-tree", "href": "../ds/cat-tree.html"}, {"title": "分块思想", "group": "数据结构", "subgroup": "decompose", "href": "../ds/decompose.html"}, {"title": "析合树", "group": "数据结构", "subgroup": "divide-combine", "href": "../ds/divide-combine.html"}, {"title": "划分树", "group": "数据结构", "subgroup": "dividing", "href": "../ds/dividing.html"}, {"title": "并查集", "group": "数据结构", "subgroup": "dsu", "href": "../ds/dsu.html"}, {"title": "并查集复杂度", "group": "数据结构", "subgroup": "dsu-complexity", "href": "../ds/dsu-complexity.html"}, {"title": "Euler Tour Tree", "group": "数据结构", "subgroup": "ett", "href": "../ds/ett.html"}, {"title": "树状数组", "group": "数据结构", "subgroup": "fenwick", "href": "../ds/fenwick.html"}, {"title": "手指树", "group": "数据结构", "subgroup": "finger-tree", "href": "../ds/finger-tree.html"}, {"title": "全局平衡二叉树", "group": "数据结构", "subgroup": "global-bst", "href": "../ds/global-bst.html"}, {"title": "哈希表", "group": "数据结构", "subgroup": "hash", "href": "../ds/hash.html"}, {"title": "堆简介", "group": "数据结构", "subgroup": "heap", "href": "../ds/heap.html"}, {"title": "霍夫曼树", "group": "数据结构", "subgroup": "huffman-tree", "href": "../ds/huffman-tree.html"}, {"title": "K-D Tree", "group": "数据结构", "subgroup": "kdt", "href": "../ds/kdt.html"}, {"title": "Kinetic Tournament Tree", "group": "数据结构", "subgroup": "kinetic-tournament-tree", "href": "../ds/kinetic-tournament-tree.html"}, {"title": "Link Cut Tree", "group": "数据结构", "subgroup": "lct", "href": "../ds/lct.html"}, {"title": "左偏树", "group": "数据结构", "subgroup": "leftist-tree", "href": "../ds/leftist-tree.html"}, {"title": "李超线段树", "group": "数据结构", "subgroup": "li-chao-tree", "href": "../ds/li-chao-tree.html"}, {"title": "链表", "group": "数据结构", "subgroup": "linked-list", "href": "../ds/linked-list.html"}, {"title": "左偏红黑树", "group": "数据结构", "subgroup": "llrbt", "href": "../ds/llrbt.html"}, {"title": "单调队列", "group": "数据结构", "subgroup": "monotonous-queue", "href": "../ds/monotonous-queue.html"}, {"title": "单调栈", "group": "数据结构", "subgroup": "monotonous-stack", "href": "../ds/monotonous-stack.html"}, {"title": "数据结构部分简介", "group": "数据结构", "subgroup": "概览", "href": "../ds/overview.html"}, {"title": "配对堆", "group": "数据结构", "subgroup": "pairing-heap", "href": "../ds/pairing-heap.html"}, {"title": "可持久化数据结构简介", "group": "数据结构", "subgroup": "persistent", "href": "../ds/persistent.html"}, {"title": "可持久化平衡树", "group": "数据结构", "subgroup": "persistent-balanced", "href": "../ds/persistent-balanced.html"}, {"title": "可持久化块状数组", "group": "数据结构", "subgroup": "persistent-block-array", "href": "../ds/persistent-block-array.html"}, {"title": "可持久化可并堆", "group": "数据结构", "subgroup": "persistent-heap", "href": "../ds/persistent-heap.html"}, {"title": "可持久化线段树", "group": "数据结构", "subgroup": "persistent-seg", "href": "../ds/persistent-seg.html"}, {"title": "可持久化字典树", "group": "数据结构", "subgroup": "persistent-trie", "href": "../ds/persistent-trie.html"}, {"title": "PQ 树", "group": "数据结构", "subgroup": "pq-tree", "href": "../ds/pq-tree.html"}, {"title": "队列", "group": "数据结构", "subgroup": "queue", "href": "../ds/queue.html"}, {"title": "红黑树", "group": "数据结构", "subgroup": "rbtree", "href": "../ds/rbtree.html"}, {"title": "Size Balanced Tree", "group": "数据结构", "subgroup": "sbt", "href": "../ds/sbt.html"}, {"title": "线段树基础", "group": "数据结构", "subgroup": "seg", "href": "../ds/seg.html"}, {"title": "区间最值操作 & 区间历史最值", "group": "数据结构", "subgroup": "seg-beats", "href": "../ds/seg-beats.html"}, {"title": "平衡树套线段树", "group": "数据结构", "subgroup": "seg-in-balanced", "href": "../ds/seg-in-balanced.html"}, {"title": "树状数组套权值线段树", "group": "数据结构", "subgroup": "seg-in-bit", "href": "../ds/seg-in-bit.html"}, {"title": "线段树套线段树", "group": "数据结构", "subgroup": "seg-in-seg", "href": "../ds/seg-in-seg.html"}, {"title": "线段树合并 & 分裂", "group": "数据结构", "subgroup": "seg-merge-split", "href": "../ds/seg-merge-split.html"}, {"title": "替罪羊树", "group": "数据结构", "subgroup": "sgt", "href": "../ds/sgt.html"}, {"title": "跳表", "group": "数据结构", "subgroup": "skiplist", "href": "../ds/skiplist.html"}, {"title": "ST 表", "group": "数据结构", "subgroup": "sparse-table", "href": "../ds/sparse-table.html"}, {"title": "Splay 树", "group": "数据结构", "subgroup": "splay", "href": "../ds/splay.html"}, {"title": "Sqrt Tree", "group": "数据结构", "subgroup": "sqrt-tree", "href": "../ds/sqrt-tree.html"}, {"title": "栈", "group": "数据结构", "subgroup": "stack", "href": "../ds/stack.html"}, {"title": "Top Tree", "group": "数据结构", "subgroup": "top-tree", "href": "../ds/top-tree.html"}, {"title": "Treap", "group": "数据结构", "subgroup": "treap", "href": "../ds/treap.html"}, {"title": "树分块", "group": "数据结构", "subgroup": "tree-decompose", "href": "../ds/tree-decompose.html"}, {"title": "WBLT", "group": "数据结构", "subgroup": "wblt", "href": "../ds/wblt.html"}, {"title": "Edit landing", "group": "编辑说明", "subgroup": "概览", "href": "../edit-landing/overview.html"}, {"title": "二维计算几何基础", "group": "计算几何", "subgroup": "2d", "href": "../geometry/2d.html"}, {"title": "三维计算几何基础", "group": "计算几何", "subgroup": "3d", "href": "../geometry/3d.html"}, {"title": "凸包", "group": "计算几何", "subgroup": "convex-hull", "href": "../geometry/convex-hull.html"}, {"title": "距离", "group": "计算几何", "subgroup": "distance", "href": "../geometry/distance.html"}, {"title": "半平面交", "group": "计算几何", "subgroup": "half-plane", "href": "../geometry/half-plane.html"}, {"title": "反演变换", "group": "计算几何", "subgroup": "inverse", "href": "../geometry/inverse.html"}, {"title": "计算几何杂项", "group": "计算几何", "subgroup": "misc", "href": "../geometry/misc.html"}, {"title": "平面最近点对", "group": "计算几何", "subgroup": "nearest-points", "href": "../geometry/nearest-points.html"}, {"title": "计算几何部分简介", "group": "计算几何", "subgroup": "概览", "href": "../geometry/overview.html"}, {"title": "Pick 定理", "group": "计算几何", "subgroup": "pick", "href": "../geometry/pick.html"}, {"title": "随机增量法", "group": "计算几何", "subgroup": "random-incremental", "href": "../geometry/random-incremental.html"}, {"title": "旋转卡壳", "group": "计算几何", "subgroup": "rotating-calipers", "href": "../geometry/rotating-calipers.html"}, {"title": "扫描线", "group": "计算几何", "subgroup": "scanning", "href": "../geometry/scanning.html"}, {"title": "三角剖分", "group": "计算几何", "subgroup": "triangulation", "href": "../geometry/triangulation.html"}, {"title": "2-SAT", "group": "图论", "subgroup": "2-sat", "href": "2-sat.html"}, {"title": "双连通分量", "group": "图论", "subgroup": "bcc", "href": "bcc.html"}, {"title": "BFS（图论）", "group": "图论", "subgroup": "bfs", "href": "bfs.html"}, {"title": "二分图", "group": "图论", "subgroup": "bi-graph", "href": "bi-graph.html"}, {"title": "圆方树", "group": "图论", "subgroup": "block-forest", "href": "block-forest.html"}, {"title": "弦图", "group": "图论", "subgroup": "chord", "href": "chord.html"}, {"title": "图的着色", "group": "图论", "subgroup": "color", "href": "color.html"}, {"title": "图论相关概念", "group": "图论", "subgroup": "concept", "href": "concept.html"}, {"title": "点/边连通度", "group": "图论", "subgroup": "connectivity", "href": "connectivity.html"}, {"title": "割点和桥", "group": "图论", "subgroup": "cut", "href": "cut.html"}, {"title": "有向无环图", "group": "图论", "subgroup": "dag", "href": "dag.html"}, {"title": "DFS（图论）", "group": "图论", "subgroup": "dfs", "href": "dfs.html"}, {"title": "差分约束", "group": "图论", "subgroup": "diff-constraints", "href": "diff-constraints.html"}, {"title": "最小树形图", "group": "图论", "subgroup": "dmst", "href": "dmst.html"}, {"title": "支配树", "group": "图论", "subgroup": "dominator-tree", "href": "dominator-tree.html"}, {"title": "树上启发式合并", "group": "图论", "subgroup": "dsu-on-tree", "href": "dsu-on-tree.html"}, {"title": "动态树分治", "group": "图论", "subgroup": "dynamic-tree-divide", "href": "dynamic-tree-divide.html"}, {"title": "欧拉图", "group": "图论", "subgroup": "euler", "href": "euler.html"}, {"title": "上下界网络流", "group": "图论", "subgroup": "网络流", "href": "flow-bound.html"}, {"title": "最大流", "group": "图论", "subgroup": "网络流", "href": "flow-max-flow.html"}, {"title": "最小割", "group": "图论", "subgroup": "网络流", "href": "flow-min-cut.html"}, {"title": "网络流简介", "group": "图论", "subgroup": "网络流", "href": "flow.html"}, {"title": "费用流", "group": "图论", "subgroup": "网络流", "href": "flow-min-cost.html"}, {"title": "一般图最大匹配", "group": "图论", "subgroup": "图匹配", "href": "graph-matching-general-match.html"}, {"title": "一般图最大权匹配", "group": "图论", "subgroup": "图匹配", "href": "graph-matching-general-weight-match.html"}, {"title": "二分图最大匹配", "group": "图论", "subgroup": "图匹配", "href": "graph-matching-bigraph-match.html"}, {"title": "二分图最大权匹配", "group": "图论", "subgroup": "图匹配", "href": "graph-matching-bigraph-weight-match.html"}, {"title": "图匹配", "group": "图论", "subgroup": "图匹配", "href": "graph-matching-graph-match.html"}, {"title": "稳定匹配", "group": "图论", "subgroup": "图匹配", "href": "graph-matching-stable-match.html"}, {"title": "图上随机游走", "group": "图论", "subgroup": "graph-random-walk", "href": "graph-random-walk.html"}, {"title": "哈密顿图", "group": "图论", "subgroup": "hamilton", "href": "hamilton.html"}, {"title": "树链剖分", "group": "图论", "subgroup": "hld", "href": "hld.html"}, {"title": "k 短路", "group": "图论", "subgroup": "kth-path", "href": "kth-path.html"}, {"title": "最近公共祖先", "group": "图论", "subgroup": "lca", "href": "lca.html"}, {"title": "LGV 引理", "group": "图论", "subgroup": "lgv", "href": "lgv.html"}, {"title": "矩阵树定理", "group": "图论", "subgroup": "matrix-tree", "href": "matrix-tree.html"}, {"title": "最大团搜索算法", "group": "图论", "subgroup": "max-clique", "href": "max-clique.html"}, {"title": "最小直径生成树", "group": "图论", "subgroup": "mdst", "href": "mdst.html"}, {"title": "最小环", "group": "图论", "subgroup": "min-cycle", "href": "min-cycle.html"}, {"title": "同余最短路", "group": "图论", "subgroup": "mod-shortest-path", "href": "mod-shortest-path.html"}, {"title": "最小生成树", "group": "图论", "subgroup": "mst", "href": "mst.html"}, {"title": "拆点", "group": "图论", "subgroup": "node", "href": "node.html"}, {"title": "图论部分简介", "group": "图论", "subgroup": "概览", "href": "overview.html"}, {"title": "平面图", "group": "图论", "subgroup": "planar", "href": "planar.html"}, {"title": "Prüfer 序列", "group": "图论", "subgroup": "prufer", "href": "prufer.html"}, {"title": "环计数问题", "group": "图论", "subgroup": "rings-count", "href": "rings-count.html"}, {"title": "图的存储", "group": "图论", "subgroup": "save", "href": "save.html"}, {"title": "强连通分量", "group": "图论", "subgroup": "scc", "href": "scc.html"}, {"title": "最短路", "group": "图论", "subgroup": "shortest-path", "href": "shortest-path.html"}, {"title": "斯坦纳树", "group": "图论", "subgroup": "steiner-tree", "href": "steiner-tree.html"}, {"title": "Stoer–Wagner 算法", "group": "图论", "subgroup": "stoer-wagner", "href": "stoer-wagner.html"}, {"title": "拓扑排序", "group": "图论", "subgroup": "topo", "href": "topo.html"}, {"title": "AHU 算法", "group": "图论", "subgroup": "tree-ahu", "href": "tree-ahu.html"}, {"title": "树基础", "group": "图论", "subgroup": "tree-basic", "href": "tree-basic.html"}, {"title": "树的中心", "group": "图论", "subgroup": "tree-center", "href": "tree-center.html"}, {"title": "树的重心", "group": "图论", "subgroup": "tree-centroid", "href": "tree-centroid.html"}, {"title": "树的直径", "group": "图论", "subgroup": "tree-diameter", "href": "tree-diameter.html"}, {"title": "树分治", "group": "图论", "subgroup": "tree-divide", "href": "tree-divide.html"}, {"title": "树哈希", "group": "图论", "subgroup": "tree-hash", "href": "tree-hash.html"}, {"title": "树上随机游走", "group": "图论", "subgroup": "tree-random-walk", "href": "tree-random-walk.html"}, {"title": "虚树", "group": "图论", "subgroup": "virtual-tree", "href": "virtual-tree.html"}, {"title": "OI Wiki", "group": "首页", "subgroup": "概览", "href": "../home/home.html"}, {"title": "关于本项目", "group": "OI Wiki 介绍", "subgroup": "about", "href": "../intro/about.html"}, {"title": "Docker deploy", "group": "OI Wiki 介绍", "subgroup": "docker-deploy", "href": "../intro/docker-deploy.html"}, {"title": "F.A.Q.", "group": "OI Wiki 介绍", "subgroup": "faq", "href": "../intro/faq.html"}, {"title": "格式手册", "group": "OI Wiki 介绍", "subgroup": "format", "href": "../intro/format.html"}, {"title": "如何参与", "group": "OI Wiki 介绍", "subgroup": "htc", "href": "../intro/htc.html"}, {"title": "镜像站列表", "group": "OI Wiki 介绍", "subgroup": "mirrors", "href": "../intro/mirrors.html"}, {"title": "数学符号表", "group": "OI Wiki 介绍", "subgroup": "symbol", "href": "../intro/symbol.html"}, {"title": "致谢", "group": "OI Wiki 介绍", "subgroup": "thanks", "href": "../intro/thanks.html"}, {"title": "OI Wiki 不是什么", "group": "OI Wiki 介绍", "subgroup": "what-oi-wiki-is-not", "href": "../intro/what-oi-wiki-is-not.html"}, {"title": "数组", "group": "编程语言", "subgroup": "array", "href": "../lang/array.html"}, {"title": "C++ 语法基础", "group": "编程语言", "subgroup": "basic", "href": "../lang/basic.html"}, {"title": "分支", "group": "编程语言", "subgroup": "branch", "href": "../lang/branch.html"}, {"title": "类", "group": "编程语言", "subgroup": "class", "href": "../lang/class.html"}, {"title": "常量", "group": "编程语言", "subgroup": "const", "href": "../lang/const.html"}, {"title": "C++ 与其他常用语言的区别", "group": "编程语言", "subgroup": "cpp-other-langs", "href": "../lang/cpp-other-langs.html"}, {"title": "bitset", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-bitset.html"}, {"title": "C++ 标准库简介", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl.html"}, {"title": "pair", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-pair.html"}, {"title": "STL 容器简介", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-container.html"}, {"title": "STL 算法", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-algorithm.html"}, {"title": "string", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-string.html"}, {"title": "关联式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-associative-container.html"}, {"title": "容器适配器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-container-adapter.html"}, {"title": "序列式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-sequence-container.html"}, {"title": "无序关联式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-unordered-container.html"}, {"title": "迭代器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-iterator.html"}, {"title": "文件操作", "group": "编程语言", "subgroup": "file-op", "href": "../lang/file-op.html"}, {"title": "函数", "group": "编程语言", "subgroup": "func", "href": "../lang/func.html"}, {"title": "Hello, World!", "group": "编程语言", "subgroup": "helloworld", "href": "../lang/helloworld.html"}, {"title": "Java 速成", "group": "编程语言", "subgroup": "java", "href": "../lang/java.html"}, {"title": "Java 进阶", "group": "编程语言", "subgroup": "java-pro", "href": "../lang/java-pro.html"}, {"title": "Lambda 表达式", "group": "编程语言", "subgroup": "lambda", "href": "../lang/lambda.html"}, {"title": "循环", "group": "编程语言", "subgroup": "loop", "href": "../lang/loop.html"}, {"title": "命名空间", "group": "编程语言", "subgroup": "namespace", "href": "../lang/namespace.html"}, {"title": "新版 C++ 特性", "group": "编程语言", "subgroup": "new", "href": "../lang/new.html"}, {"title": "运算", "group": "编程语言", "subgroup": "op", "href": "../lang/op.html"}, {"title": "重载运算符", "group": "编程语言", "subgroup": "op-overload", "href": "../lang/op-overload.html"}, {"title": "编译优化", "group": "编程语言", "subgroup": "optimizations", "href": "../lang/optimizations.html"}, {"title": "语言基础简介", "group": "编程语言", "subgroup": "概览", "href": "../lang/overview.html"}, {"title": "Pascal 转 C++ 急救", "group": "编程语言", "subgroup": "pas-cpp", "href": "../lang/pas-cpp.html"}, {"title": "pb_ds 简介", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds.html"}, {"title": "堆", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds-pq.html"}, {"title": "平衡树", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds-tree.html"}, {"title": "指针", "group": "编程语言", "subgroup": "pointer", "href": "../lang/pointer.html"}, {"title": "Python 速成", "group": "编程语言", "subgroup": "python", "href": "../lang/python.html"}, {"title": "引用", "group": "编程语言", "subgroup": "reference", "href": "../lang/reference.html"}, {"title": "结构体", "group": "编程语言", "subgroup": "struct", "href": "../lang/struct.html"}, {"title": "联合体", "group": "编程语言", "subgroup": "union", "href": "../lang/union.html"}, {"title": "值类别", "group": "编程语言", "subgroup": "value-category", "href": "../lang/value-category.html"}, {"title": "变量", "group": "编程语言", "subgroup": "var", "href": "../lang/var.html"}, {"title": "Schreier–Sims 算法", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-schreier-sims.html"}, {"title": "域论", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-field-theory.html"}, {"title": "基本概念", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-basic.html"}, {"title": "环论", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-ring-theory.html"}, {"title": "群论", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-group-theory.html"}, {"title": "Berlekamp–Massey 算法", "group": "数学", "subgroup": "berlekamp-massey", "href": "../math/berlekamp-massey.html"}, {"title": "高精度计算", "group": "数学", "subgroup": "bignum", "href": "../math/bignum.html"}, {"title": "快速幂", "group": "数学", "subgroup": "binary-exponentiation", "href": "../math/binary-exponentiation.html"}, {"title": "二进制集合操作", "group": "数学", "subgroup": "binary-set", "href": "../math/binary-set.html"}, {"title": "位操作", "group": "数学", "subgroup": "bit", "href": "../math/bit.html"}, {"title": "布尔代数", "group": "数学", "subgroup": "boolean-algebra", "href": "../math/boolean-algebra.html"}, {"title": "Entringer Number", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-entringer.html"}, {"title": "Eulerian Number", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-eulerian.html"}, {"title": "Pólya 计数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-polya.html"}, {"title": "伯努利数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-bernoulli.html"}, {"title": "分拆数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-partition.html"}, {"title": "卡特兰数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-catalan.html"}, {"title": "图论计数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-graph-enumeration.html"}, {"title": "容斥原理", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-inclusion-exclusion-principle.html"}, {"title": "抽屉原理", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-drawer-principle.html"}, {"title": "排列组合", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-combination.html"}, {"title": "斐波那契数列", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-fibonacci.html"}, {"title": "斯特林数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-stirling.html"}, {"title": "范德蒙德卷积", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-vandermonde-convolution.html"}, {"title": "贝尔数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-bell.html"}, {"title": "错位排列", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-derangement.html"}, {"title": "复数", "group": "数学", "subgroup": "complex", "href": "../math/complex.html"}, {"title": "弧度制与坐标系", "group": "数学", "subgroup": "coordinate", "href": "../math/coordinate.html"}, {"title": "公平组合游戏", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-impartial-game.html"}, {"title": "博弈论简介", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-intro.html"}, {"title": "零和游戏", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-zero-sum-game.html"}, {"title": "非公平组合游戏", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-partizan-game.html"}, {"title": "Jordan标准型", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-jordan.html"}, {"title": "内积和外积", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-product.html"}, {"title": "初等变换", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-elementary-operations.html"}, {"title": "向量", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-vector.html"}, {"title": "对角化", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-diagonalization.html"}, {"title": "特征多项式", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-char-poly.html"}, {"title": "矩阵", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-matrix.html"}, {"title": "线性代数简介", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra.html"}, {"title": "线性基", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-basis.html"}, {"title": "线性映射", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-linear-mapping.html"}, {"title": "线性空间", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-vector-space.html"}, {"title": "行列式", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-determinant.html"}, {"title": "线性规划基础", "group": "数学", "subgroup": "linear-programming", "href": "../math/linear-programming.html"}, {"title": "拟阵", "group": "数学", "subgroup": "matroid", "href": "../math/matroid.html"}, {"title": "Meissel–Lehmer 算法", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-meissel-lehmer.html"}, {"title": "Min_25 筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-min-25.html"}, {"title": "Pell 方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-pell-equation.html"}, {"title": "Powerful Number 筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-powerful-number.html"}, {"title": "Stern–Brocot 树与 Farey 序列", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-stern-brocot.html"}, {"title": "中国剩余定理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-crt.html"}, {"title": "二次剩余", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-quad-residue.html"}, {"title": "二次域", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-quadratic.html"}, {"title": "分解质因数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-pollard-rho.html"}, {"title": "升幂引理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-lift-the-exponent.html"}, {"title": "卢卡斯定理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-lucas.html"}, {"title": "同余方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-congruence-equation.html"}, {"title": "数论分块", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-sqrt-decomposition.html"}, {"title": "数论基础", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-basic.html"}, {"title": "最大公约数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-gcd.html"}, {"title": "杜教筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-du.html"}, {"title": "模算术简介", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-mod-arithmetic.html"}, {"title": "模逆元", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-inverse.html"}, {"title": "欧拉函数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-euler-totient.html"}, {"title": "洲阁筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-zhou.html"}, {"title": "狄利克雷卷积", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-dirichlet.html"}, {"title": "离散对数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-discrete-logarithm.html"}, {"title": "筛法", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-sieve.html"}, {"title": "类欧几里德算法", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-euclidean.html"}, {"title": "素数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-prime.html"}, {"title": "线性同余方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-linear-equation.html"}, {"title": "莫比乌斯反演", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-mobius.html"}, {"title": "裴蜀定理 & 一次不定方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-bezouts.html"}, {"title": "费马小定理 & 欧拉定理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-fermat.html"}, {"title": "连分数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-continued-fraction.html"}, {"title": "阶 & 原根", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-primitive-root.html"}, {"title": "阶乘取模", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-factorial.html"}, {"title": "高次剩余 & 单位根", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-residue.html"}, {"title": "平衡三进制", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-balanced-ternary.html"}, {"title": "数字系统简介", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-intro.html"}, {"title": "格雷码", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-gray-code.html"}, {"title": "进位制", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-base.html"}, {"title": "插值", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-interp.html"}, {"title": "数值积分", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-integral.html"}, {"title": "牛顿迭代法", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-newton.html"}, {"title": "高斯消元", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-gauss.html"}, {"title": "序理论", "group": "数学", "subgroup": "order-theory", "href": "../math/order-theory.html"}, {"title": "数学部分简介", "group": "数学", "subgroup": "概览", "href": "../math/overview.html"}, {"title": "置换和排列", "group": "数学", "subgroup": "permutation", "href": "../math/permutation.html"}, {"title": "Chirp Z 变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-czt.html"}, {"title": "Lagrange 反演", "group": "数学", "subgroup": "多项式", "href": "../math/poly-lagrange-inversion.html"}, {"title": "代数基本定理", "group": "数学", "subgroup": "多项式", "href": "../math/poly-fundamental.html"}, {"title": "多项式与生成函数简介", "group": "数学", "subgroup": "多项式", "href": "../math/poly-intro.html"}, {"title": "多项式初等函数", "group": "数学", "subgroup": "多项式", "href": "../math/poly-elementary-func.html"}, {"title": "多项式多点求值|快速插值", "group": "数学", "subgroup": "多项式", "href": "../math/poly-multipoint-eval-interpolation.html"}, {"title": "多项式平移|连续点值平移", "group": "数学", "subgroup": "多项式", "href": "../math/poly-shift.html"}, {"title": "多项式牛顿迭代", "group": "数学", "subgroup": "多项式", "href": "../math/poly-newton.html"}, {"title": "常系数齐次线性递推", "group": "数学", "subgroup": "多项式", "href": "../math/poly-linear-recurrence.html"}, {"title": "形式幂级数复合|复合逆", "group": "数学", "subgroup": "多项式", "href": "../math/poly-comp-rev.html"}, {"title": "快速傅里叶变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-fft.html"}, {"title": "快速数论变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-ntt.html"}, {"title": "快速沃尔什变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-fwt.html"}, {"title": "指数生成函数", "group": "数学", "subgroup": "多项式", "href": "../math/poly-egf.html"}, {"title": "普通生成函数", "group": "数学", "subgroup": "多项式", "href": "../math/poly-ogf.html"}, {"title": "符号化方法", "group": "数学", "subgroup": "多项式", "href": "../math/poly-symbolic-method.html"}, {"title": "基本概念", "group": "数学", "subgroup": "概率", "href": "../math/probability-basic-conception.html"}, {"title": "条件概率与独立性", "group": "数学", "subgroup": "概率", "href": "../math/probability-conditional-probability.html"}, {"title": "概率不等式", "group": "数学", "subgroup": "概率", "href": "../math/probability-concentration-inequality.html"}, {"title": "随机变量", "group": "数学", "subgroup": "概率", "href": "../math/probability-random-variable.html"}, {"title": "随机变量的数字特征", "group": "数学", "subgroup": "概率", "href": "../math/probability-exp-var.html"}, {"title": "单纯形法", "group": "数学", "subgroup": "simplex", "href": "../math/simplex.html"}, {"title": "杨氏矩阵", "group": "数学", "subgroup": "young-tableau", "href": "../math/young-tableau.html"}, {"title": "15-puzzle", "group": "杂项", "subgroup": "15-puzzle", "href": "../misc/15-puzzle.html"}, {"title": "计算理论基础", "group": "杂项", "subgroup": "cc-basic", "href": "../misc/cc-basic.html"}, {"title": "CDQ 分治", "group": "杂项", "subgroup": "cdq-divide", "href": "../misc/cdq-divide.html"}, {"title": "离散化", "group": "杂项", "subgroup": "discrete", "href": "../misc/discrete.html"}, {"title": "字节顺序", "group": "杂项", "subgroup": "endianness", "href": "../misc/endianness.html"}, {"title": "表达式求值", "group": "杂项", "subgroup": "expression", "href": "../misc/expression.html"}, {"title": "分数规划", "group": "杂项", "subgroup": "frac-programming", "href": "../misc/frac-programming.html"}, {"title": "有限状态自动机", "group": "杂项", "subgroup": "fsm", "href": "../misc/fsm.html"}, {"title": "Garsia–Wachs 算法", "group": "杂项", "subgroup": "garsia-wachs", "href": "../misc/garsia-wachs.html"}, {"title": "爬山算法", "group": "杂项", "subgroup": "hill-climbing", "href": "../misc/hill-climbing.html"}, {"title": "悬线法", "group": "杂项", "subgroup": "hoverline", "href": "../misc/hoverline.html"}, {"title": "在一台机器上规划任务", "group": "杂项", "subgroup": "job-order", "href": "../misc/job-order.html"}, {"title": "约瑟夫问题", "group": "杂项", "subgroup": "josephus", "href": "../misc/josephus.html"}, {"title": "Kahan 求和", "group": "杂项", "subgroup": "kahan-summation", "href": "../misc/kahan-summation.html"}, {"title": "主元素问题", "group": "杂项", "subgroup": "main-element", "href": "../misc/main-element.html"}, {"title": "普通莫队算法", "group": "杂项", "subgroup": "mo-algo", "href": "../misc/mo-algo.html"}, {"title": "二维莫队", "group": "杂项", "subgroup": "mo-algo-2dimen", "href": "../misc/mo-algo-2dimen.html"}, {"title": "莫队算法简介", "group": "杂项", "subgroup": "mo-algo-intro", "href": "../misc/mo-algo-intro.html"}, {"title": "树上莫队", "group": "杂项", "subgroup": "mo-algo-on-tree", "href": "../misc/mo-algo-on-tree.html"}, {"title": "莫队二次离线", "group": "杂项", "subgroup": "mo-algo-secondary-offline", "href": "../misc/mo-algo-secondary-offline.html"}, {"title": "莫队配合 bitset", "group": "杂项", "subgroup": "mo-algo-with-bitset", "href": "../misc/mo-algo-with-bitset.html"}, {"title": "带修改莫队", "group": "杂项", "subgroup": "modifiable-mo-algo", "href": "../misc/modifiable-mo-algo.html"}, {"title": "珂朵莉树/颜色段均摊", "group": "杂项", "subgroup": "odt", "href": "../misc/odt.html"}, {"title": "离线算法简介", "group": "杂项", "subgroup": "offline", "href": "../misc/offline.html"}, {"title": "杂项简介", "group": "杂项", "subgroup": "概览", "href": "../misc/overview.html"}, {"title": "整体二分", "group": "杂项", "subgroup": "parallel-binsearch", "href": "../misc/parallel-binsearch.html"}, {"title": "随机化技巧", "group": "杂项", "subgroup": "rand-technique", "href": "../misc/rand-technique.html"}, {"title": "随机函数", "group": "杂项", "subgroup": "random", "href": "../misc/random.html"}, {"title": "回滚莫队", "group": "杂项", "subgroup": "rollback-mo-algo", "href": "../misc/rollback-mo-algo.html"}, {"title": "模拟退火", "group": "杂项", "subgroup": "simulated-annealing", "href": "../misc/simulated-annealing.html"}, {"title": "空间优化简介", "group": "杂项", "subgroup": "space-optimization", "href": "../misc/space-optimization.html"}, {"title": "双指针", "group": "杂项", "subgroup": "two-pointer", "href": "../misc/two-pointer.html"}, {"title": "Alpha–Beta 剪枝", "group": "搜索", "subgroup": "alpha-beta", "href": "../search/alpha-beta.html"}, {"title": "A*", "group": "搜索", "subgroup": "astar", "href": "../search/astar.html"}, {"title": "回溯法", "group": "搜索", "subgroup": "backtracking", "href": "../search/backtracking.html"}, {"title": "BFS（搜索）", "group": "搜索", "subgroup": "bfs", "href": "../search/bfs.html"}, {"title": "双向搜索", "group": "搜索", "subgroup": "bidirectional", "href": "../search/bidirectional.html"}, {"title": "DFS（搜索）", "group": "搜索", "subgroup": "dfs", "href": "../search/dfs.html"}, {"title": "Dancing Links", "group": "搜索", "subgroup": "dlx", "href": "../search/dlx.html"}, {"title": "启发式搜索", "group": "搜索", "subgroup": "heuristic", "href": "../search/heuristic.html"}, {"title": "IDA*", "group": "搜索", "subgroup": "idastar", "href": "../search/idastar.html"}, {"title": "迭代加深搜索", "group": "搜索", "subgroup": "iterative", "href": "../search/iterative.html"}, {"title": "优化", "group": "搜索", "subgroup": "优化", "href": "../search/opt.html"}, {"title": "搜索部分简介", "group": "搜索", "subgroup": "概览", "href": "../search/overview.html"}, {"title": "AC 自动机", "group": "字符串", "subgroup": "ac-automaton", "href": "../string/ac-automaton.html"}, {"title": "字符串基础", "group": "字符串", "subgroup": "basic", "href": "../string/basic.html"}, {"title": "Boyer–Moore 算法", "group": "字符串", "subgroup": "bm", "href": "../string/bm.html"}, {"title": "广义后缀自动机", "group": "字符串", "subgroup": "general-sam", "href": "../string/general-sam.html"}, {"title": "字符串哈希", "group": "字符串", "subgroup": "hash", "href": "../string/hash.html"}, {"title": "前缀函数与 KMP 算法", "group": "字符串", "subgroup": "kmp", "href": "../string/kmp.html"}, {"title": "标准库", "group": "字符串", "subgroup": "lib-func", "href": "../string/lib-func.html"}, {"title": "Lyndon 分解", "group": "字符串", "subgroup": "lyndon", "href": "../string/lyndon.html"}, {"title": "Main–Lorentz 算法", "group": "字符串", "subgroup": "main-lorentz", "href": "../string/main-lorentz.html"}, {"title": "Manacher", "group": "字符串", "subgroup": "manacher", "href": "../string/manacher.html"}, {"title": "字符串匹配", "group": "字符串", "subgroup": "match", "href": "../string/match.html"}, {"title": "最小表示法", "group": "字符串", "subgroup": "minimal-string", "href": "../string/minimal-string.html"}, {"title": "字符串部分简介", "group": "字符串", "subgroup": "概览", "href": "../string/overview.html"}, {"title": "回文树", "group": "字符串", "subgroup": "pam", "href": "../string/pam.html"}, {"title": "后缀数组简介", "group": "字符串", "subgroup": "sa", "href": "../string/sa.html"}, {"title": "最优原地后缀排序算法", "group": "字符串", "subgroup": "sa-optimal-inplace", "href": "../string/sa-optimal-inplace.html"}, {"title": "后缀自动机 (SAM)", "group": "字符串", "subgroup": "sam", "href": "../string/sam.html"}, {"title": "序列自动机", "group": "字符串", "subgroup": "seq-automaton", "href": "../string/seq-automaton.html"}, {"title": "后缀平衡树", "group": "字符串", "subgroup": "suffix-bst", "href": "../string/suffix-bst.html"}, {"title": "后缀树", "group": "字符串", "subgroup": "suffix-tree", "href": "../string/suffix-tree.html"}, {"title": "字典树 (Trie)", "group": "字符串", "subgroup": "trie", "href": "../string/trie.html"}, {"title": "Z 函数（扩展 KMP）", "group": "字符串", "subgroup": "z-func", "href": "../string/z-func.html"}, {"title": "命令行", "group": "工具", "subgroup": "cmd", "href": "../tools/cmd.html"}, {"title": "命令行编译与调试", "group": "工具", "subgroup": "compile-debug", "href": "../tools/compile-debug.html"}, {"title": "编译器", "group": "工具", "subgroup": "compiler", "href": "../tools/compiler.html"}, {"title": "Atom", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-atom.html"}, {"title": "CLion", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-clion.html"}, {"title": "Code::Blocks", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-codeblocks.html"}, {"title": "CP Editor", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-cpeditor.html"}, {"title": "Dev-C++", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-devcpp.html"}, {"title": "Eclipse", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-eclipse.html"}, {"title": "Emacs", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-emacs.html"}, {"title": "Geany", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-geany.html"}, {"title": "GUIDE", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-guide.html"}, {"title": "Kate", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-kate.html"}, {"title": "Notepad++", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-npp.html"}, {"title": "Sublime Text", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-sublime.html"}, {"title": "Vim", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-vim.html"}, {"title": "VS Code", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-vscode.html"}, {"title": "Xcode", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-xcode.html"}, {"title": "Git", "group": "工具", "subgroup": "git", "href": "../tools/git.html"}, {"title": "Arbiter", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-arbiter.html"}, {"title": "CCR Plus", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-ccr-plus.html"}, {"title": "Cena", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-cena.html"}, {"title": "Lemon", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-lemon.html"}, {"title": "评测工具简介", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger.html"}, {"title": "LaTeX 入门", "group": "工具", "subgroup": "latex", "href": "../tools/latex.html"}, {"title": "OJ 工具", "group": "工具", "subgroup": "oj-tool", "href": "../tools/oj-tool.html"}, {"title": "工具软件简介", "group": "工具", "subgroup": "概览", "href": "../tools/overview.html"}, {"title": "Polygon", "group": "工具", "subgroup": "polygon", "href": "../tools/polygon.html"}, {"title": "Special Judge", "group": "工具", "subgroup": "special-judge", "href": "../tools/special-judge.html"}, {"title": "Checker", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-checker.html"}, {"title": "Generator", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-generator.html"}, {"title": "Interactor", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-interactor.html"}, {"title": "Testlib 简介", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib.html"}, {"title": "Validator", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-validator.html"}, {"title": "通用", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-general.html"}, {"title": "WSL (Windows 10)", "group": "工具", "subgroup": "wsl", "href": "../tools/wsl.html"}, {"title": "括号序列", "group": "专题", "subgroup": "bracket", "href": "../topic/bracket.html"}, {"title": "并查集应用", "group": "专题", "subgroup": "dsu-app", "href": "../topic/dsu-app.html"}, {"title": "RMQ", "group": "专题", "subgroup": "rmq", "href": "../topic/rmq.html"}, {"title": "线段树与离线询问", "group": "专题", "subgroup": "segment-tree-offline", "href": "../topic/segment-tree-offline.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) return;
+      let items = [];
+      try { items = JSON.parse(dataNode.textContent || "[]"); } catch (_error) { return; }
+      const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+      const highlight = (value, query) => {
+        if (!query) return escapeHtml(value);
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+      const groups = [...new Set(items.map((item) => item.group))].sort((a, b) => a.localeCompare(b, "zh-CN"));
+      for (const group of groups) {
+        const option = document.createElement("option");
+        option.value = group;
+        option.textContent = group;
+        groupSelect.append(option);
+      }
+      const render = () => {
+        const query = input.value.trim().toLowerCase();
+        const tokens = query.split(/\s+/).filter(Boolean);
+        const selectedGroup = groupSelect.value;
+        const scoped = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup ? `${selectedGroup} 下可搜索 ${scoped.length} 个页面。` : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+        const matches = scoped
+          .filter((item) => {
+            const haystack = [item.title, item.group, item.subgroup].join(" ").toLowerCase();
+            return tokens.every((token) => haystack.includes(token));
+          })
+          .sort((a, b) => a.title.localeCompare(b.title, "zh-CN"));
+        results.hidden = matches.length === 0;
+        results.innerHTML = matches.slice(0, 100).map((item) =>
+          `<li><a href="${item.href}">${highlight(item.title, query)}</a><div class="meta">${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</div></li>`
+        ).join("");
+        status.textContent = matches.length ? `匹配 ${matches.length} 个页面，显示前 ${Math.min(matches.length, 100)} 个。` : "没有匹配结果。";
+      };
+      input.addEventListener("input", render);
+      groupSelect.addEventListener("change", render);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        render();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          render();
+        }
+      });
+      const params = new URLSearchParams(window.location.search);
+      const initialQuery = params.get("q");
+      if (initialQuery) input.value = initialQuery;
+      render();
+    })();
+  </script>
+</body>
+</html>

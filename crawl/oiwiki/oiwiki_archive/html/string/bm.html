@@ -1,0 +1,687 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Boyer–Moore 算法</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f8;
+      --panel: #ffffff;
+      --ink: #17202a;
+      --muted: #5f6c7b;
+      --line: #d9e1e8;
+      --accent: #0f766e;
+      --accent-soft: #d9f3ef;
+      --code-bg: #111827;
+      --code-ink: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "Source Han Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 20px 56px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    header, section, article, .sidebar-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    header {
+      padding: 20px 22px;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 1.75rem;
+      line-height: 1.25;
+    }
+    header p, p {
+      color: var(--muted);
+    }
+    aside {
+      position: sticky;
+      top: 16px;
+    }
+    .sidebar-card {
+      padding: 16px;
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+    }
+    .sidebar-card h2, section h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .sidebar-list, .sidebar-sublist {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      margin-top: 8px;
+      padding-left: 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 9px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line);
+    }
+    .sidebar-sublist li {
+      border: 0;
+      padding-bottom: 0;
+      margin-bottom: 7px;
+    }
+    .sidebar-list span, .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .sidebar-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .sidebar-row a {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .sidebar-row span {
+      flex: 0 0 auto;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .content > section, article {
+      padding: 20px 22px;
+      margin-bottom: 18px;
+    }
+    article {
+      max-width: 980px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .group-card {
+      min-width: 0;
+    }
+    .page-list li, .group-card li, .search-results li {
+      margin: 7px 0;
+    }
+    .article-nav {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+    .article-nav a {
+      display: block;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow-wrap: anywhere;
+    }
+    .article-nav a:last-child {
+      text-align: right;
+    }
+    .search-controls {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: end;
+    }
+    .search-controls label {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    input, select, button {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 8px 10px;
+    }
+    button {
+      background: var(--accent-soft);
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    mark {
+      background: #f5d76e;
+      color: #17202a;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    article h1, article h2, article h3, article h4 {
+      line-height: 1.35;
+      scroll-margin-top: 20px;
+    }
+    article img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+    .table-scroll {
+      overflow: auto;
+      margin: 1em 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      background: var(--panel);
+    }
+    th, td {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #eef7f6;
+      color: #123c39;
+      font-weight: 700;
+    }
+    pre {
+      overflow: auto;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--code-bg);
+      color: var(--code-ink);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      word-break: break-word;
+    }
+    p code, li code {
+      background: #eef2f7;
+      color: #1f2937;
+      border-radius: 4px;
+      padding: 0.1em 0.3em;
+    }
+    blockquote {
+      margin: 1em 0;
+      padding: 0.2em 1em;
+      border-left: 4px solid var(--accent);
+      background: #f0fdfa;
+      color: #334155;
+    }
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        grid-template-columns: 1fr;
+      }
+      .article-nav {
+        grid-template-columns: 1fr;
+      }
+      .article-nav a:last-child {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>Boyer–Moore 算法</h1>
+      <p>字符串 / bm</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页面导航</h2><ul class="sidebar-list"><li><a href="../../index.html">归档首页</a></li><li><a href="index.html">字符串 索引</a></li><li><details open><summary>本文目录</summary><ul class="sidebar-sublist"><li><a href="#boyer2013moore-7b976cd5">Boyer–Moore 算法</a></li><li><a href="#5f155165">引入</a></li><li><a href="#89c25bdf-1">观察 1</a></li><li><a href="#89c25bdf-2">观察 2</a></li><li><a href="#89c25bdf-328a29">观察 3(a)</a></li><li><a href="#89c25bdf-328b29">观察 3(b)</a></li><li><a href="#8fc77a0b">过程</a></li><li><a href="#7b976cd58bbe8ba1">算法设计</a></li><li><a href="#6700521d76845339914d7b976cd5">最初的匹配算法</a></li><li><a href="#5bf95339914d7b976cd576844e004e2a65398fdb">对匹配算法的一个改进</a></li><li><a href="#delta2-67845efa7ec68282">delta2 构建细节</a></li><li><a href="#5f155165-2">引入</a></li><li><a href="#67347d207b976cd5">朴素算法</a></li><li><a href="#galil-89c452195bf9591a6b215339914d65f66700574f60c551b5768465395584">Galil 规则对多次匹配时最坏情况的改善</a></li><li><a href="#51734e8e540e7f005339914d7b976cd57684591a6b215339914d95ee9898">关于后缀匹配算法的多次匹配问题</a></li><li><a href="#galil-89c45219">Galil 规则</a></li><li><a href="#boyer2013moore2013sunday-7b976cd5">Boyer–Moore–Sunday 算法</a></li><li><a href="#74068bba52066790">理论分析</a></li><li><a href="#53c280038d4465994e0e6ce891ca">参考资料与注释</a></li></ul></details></li><li><details><summary>同栏目页面</summary><ul class="sidebar-sublist"><li><a href="ac-automaton.html">AC 自动机</a></li><li><a href="bm.html">Boyer–Moore 算法</a></li><li><a href="lyndon.html">Lyndon 分解</a></li><li><a href="main-lorentz.html">Main–Lorentz 算法</a></li><li><a href="manacher.html">Manacher</a></li><li><a href="z-func.html">Z 函数（扩展 KMP）</a></li><li><a href="kmp.html">前缀函数与 KMP 算法</a></li><li><a href="suffix-bst.html">后缀平衡树</a></li><li><a href="sa.html">后缀数组简介</a></li><li><a href="suffix-tree.html">后缀树</a></li><li><a href="sam.html">后缀自动机 (SAM)</a></li><li><a href="pam.html">回文树</a></li><li><a href="trie.html">字典树 (Trie)</a></li><li><a href="match.html">字符串匹配</a></li><li><a href="hash.html">字符串哈希</a></li><li><a href="basic.html">字符串基础</a></li><li><a href="overview.html">字符串部分简介</a></li><li><a href="general-sam.html">广义后缀自动机</a></li><li><a href="seq-automaton.html">序列自动机</a></li><li><a href="sa-optimal-inplace.html">最优原地后缀排序算法</a></li><li><a href="minimal-string.html">最小表示法</a></li><li><a href="lib-func.html">标准库</a></li></ul></details></li></ul></nav></aside>
+      <div class="content"><nav class="article-nav"><a href="ac-automaton.html"><span class="meta">上一篇</span><br>AC 自动机</a><a href="lyndon.html"><span class="meta">下一篇</span><br>Lyndon 分解</a></nav><article><p class="meta">本地源文件：<code>docs/string__bm.md</code></p><h1 id="boyer2013moore-7b976cd5">Boyer–Moore 算法</h1>
+<p>前置知识：<a href="kmp.html">前缀函数与 KMP 算法</a>．</p>
+<p>KMP 算法将前缀匹配的信息用到了极致，</p>
+<p>而 BM 算法背后的基本思想是通过后缀匹配获得比前缀匹配更多的信息来实现更快的字符跳转．</p>
+<h2 id="5f155165">引入</h2>
+<p>想象一下，如果我们的模式字符串 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，被放在文本字符串 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的左手起头部，使它们的第一个字符对齐．</p>
+<p>𝑝𝑎𝑡:𝙴𝚇𝙰𝙼𝙿𝙻𝙴𝑠𝑡𝑟𝑖𝑛𝑔:𝙷𝙴𝚁𝙴 𝙸𝚂 𝙰 𝚂𝙸𝙼𝙿𝙻𝙴 𝙴𝚇𝙰𝙼𝙿𝙻𝙴… ⇑pat:EXAMPLEstring:HERE IS A SIMPLE EXAMPLE… ⇑<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>在这里做定义，往后不赘述：</p>
+<p>𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的长度为 𝑝𝑎𝑡𝑙𝑒𝑛patlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，特别地对于从 0 开始的串来说，规定 𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 =𝑝𝑎𝑡𝑙𝑒𝑛 −1patlastpos=patlen−1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 串最后一个字符的位置；</p>
+<p>𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的长度 𝑠𝑡𝑟𝑖𝑛𝑔𝑙𝑒𝑛stringlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑡𝑟𝑖𝑛𝑔𝑙𝑎𝑠𝑡𝑝𝑜𝑠 =𝑠𝑡𝑟𝑖𝑛𝑔𝑙𝑒𝑛 −1stringlastpos=stringlen−1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>假如我们知道了 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的第 𝑝𝑎𝑡𝑙𝑒𝑛patlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">（与 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的最后一个字符对齐）考虑我们能得到什么信息：</p>
+<h3 id="89c25bdf-1">观察 1</h3>
+<p>如果我们知道 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 这个字符不在 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中，我们就不用考虑 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 从 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的第 11<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个、第 22<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个……第 𝑝𝑎𝑡𝑙𝑒𝑛patlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符起出现的情况，，而可以直接将 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向下滑动 𝑝𝑎𝑡𝑙𝑒𝑛patlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符．</p>
+<h3 id="89c25bdf-2">观察 2</h3>
+<p>更一般地，<strong>如果出现在 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 最末尾（也就是最右边）的那一个 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 字符的位置是离末尾端差了 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符</strong>，</p>
+<p>那么就可以不用匹配，直接将 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向后滑动 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符：如果滑动距离少于 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，那么仅就 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 这个字符就无法被匹配，当然模式字符串 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 也就不会被匹配．</p>
+<p>因此除非 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 字符可以和 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 末尾的那个字符匹配，否则 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 要跳过 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符（相当于 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向后滑动了 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符）．并且我们可以得到一个计算 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的函数 𝑑𝑒𝑙𝑡𝑎1(𝑐ℎ𝑎𝑟)delta1(char)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：</p>
+<p>𝐢𝐧𝐭 𝑑𝑒𝑙𝑡𝑎1(𝐜𝐡𝐚𝐫 𝑐ℎ𝑎𝑟)𝐢𝐟 char不在pat中 || char是pat上最后一个字符𝐫𝐞𝐭𝐮𝐫𝐧 𝑝𝑎𝑡𝑙𝑒𝑛𝐞𝐥𝐬𝐞𝐫𝐞𝐭𝐮𝐫𝐧 𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠−𝑖// i为出现在pat最末尾的那一个char出现的位置，即pat[i]=charint delta1(char char)if char不在pat中 || char是pat上最后一个字符return patlenelsereturn patlastpos−i// i为出现在pat最末尾的那一个char出现的位置，即pat[i]=char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>需要注意，显然这个表只需计算到 𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 −1patlastpos−1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的位置．</p>
+<p>现在假设 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 最后一个字符匹配到了，那我们就看看 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 前一个字符和 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的倒数第二个字符是否匹配：</p>
+<p>如果是，就继续回退直到整个模式串 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 完成匹配（这时我们就在 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上成功得到了一个 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的匹配）；</p>
+<p>或者，我们也可能会在匹配完 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的倒数第 𝑚m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符后，在倒数第 𝑚 +1m+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符上失配，这时我们就希望把 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向后滑动到下一个可能会实现匹配的位置，当然我们希望滑动得越远越好．</p>
+<h3 id="89c25bdf-328a29">观察 3(a)</h3>
+<p>在 <strong>观察 2</strong> 中提到，当匹配完 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的倒数 𝑚m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符后，如果在倒数第 𝑚 +1m+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符失配，为了使得 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中的失配字符与 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上对应字符对齐，</p>
+<p>需要把 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向后滑动 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符，也就是说我们应该把注意力看向之后的 𝑘 +𝑚k+m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符（也就是看向 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 滑动 k 之后，末段与 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 对齐的那个字符）．</p>
+<p>而 𝑘 =𝑑𝑒𝑙𝑡𝑎1 −𝑚k=delta1−m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，</p>
+<p>所以我们的注意力应该沿着 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向后跳 𝑑𝑒𝑙𝑡𝑎1 −𝑚 +𝑚 =𝑑𝑒𝑙𝑡𝑎1delta1−m+m=delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符．</p>
+<p>然而，我们有机会跳过更多的字符，请继续看下去．</p>
+<h3 id="89c25bdf-328b29">观察 3(b)</h3>
+<p>如果我们知道 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 接下来的 𝑚m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符和 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的最后 𝑚m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符匹配，假设这个子串为 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，</p>
+<p>我们还知道在 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 失配字符 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 后面是与 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 相匹配的子串，而假如 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 对应失配字符前面存在 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，我们可以将 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向下滑动一段距离，</p>
+<p>使得失配字符 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 在 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上对应的字符前面出现的 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">（合理重现，plausible reoccurrence，以下也简称 pr）与 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 对齐．如果 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上有多个 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，按照从右到左的后缀匹配顺序，取第一个（rightmost plausible reoccurrence，以下也简称 rpr）．</p>
+<p>假设此时 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向下滑动的 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符（也即 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 末尾端的 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 与其最右边的合理重现的距离），这样我们的注意力应该沿着 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向后滑动 𝑘 +𝑚k+m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符，这段距离我们称之为 𝑑𝑒𝑙𝑡𝑎2(𝑗)delta2(j)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：</p>
+<p>假定 𝑟𝑝𝑟(𝑗)rpr(j)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝑠𝑢𝑏𝑝𝑎𝑡 =𝑝𝑎𝑡[𝑗 +1…𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠]subpat=pat[j+1…patlastpos]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 在 𝑝𝑎𝑡[𝑗]pat[j]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上失配时的最右边合理重现的位置，𝑟𝑝𝑟(𝑗) &lt;𝑗rpr(j)&lt;j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">（这里只给出简单定义，在下文的算法设计章节里会有更精确的讨论），那么显然 𝑘 =𝑗 −𝑟𝑝𝑟(𝑗), 𝑚 =𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 −𝑗k=j−rpr(j), m=patlastpos−j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>所以有：</p>
+<p>𝐢𝐧𝐭 𝑑𝑒𝑙𝑡𝑎2(𝐢𝐧𝐭 𝑗)// j为失配字符在pat上对应字符的位置𝐫𝐞𝐭𝐮𝐫𝐧 𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠−𝑟𝑝𝑟(𝑗)int delta2(int j)// j为失配字符在pat上对应字符的位置return patlastpos−rpr(j)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>于是我们在失配时，可以把把 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上的注意力往后跳过 max(𝑑𝑒𝑙𝑡𝑎1,𝑑𝑒𝑙𝑡𝑎2)max(delta1,delta2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符</p>
+<h2 id="8fc77a0b">过程</h2>
+<p>箭头指向失配字符 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：</p>
+<p>𝑝𝑎𝑡:𝙰𝚃-𝚃𝙷𝙰𝚃𝑠𝑡𝑟𝑖𝑛𝑔: … 𝚆𝙷𝙸𝙲𝙷-𝙵𝙸𝙽𝙰𝙻𝙻𝚈-𝙷𝙰𝙻𝚃𝚂.--𝙰𝚃-𝚃𝙷𝙰𝚃-𝙿𝙾𝙸𝙽𝚃… ⇑pat:AT-THATstring: … WHICH-FINALLY-HALTS.--AT-THAT-POINT… ⇑<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>𝙵F<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 没有出现 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中，根据 <strong>观察 1</strong> ，𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 直接向下移动 𝑝𝑎𝑡𝑙𝑒𝑛patlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符，也就是 7 个字符：</p>
+<p>𝑝𝑎𝑡: 𝙰𝚃-𝚃𝙷𝙰𝚃𝑠𝑡𝑟𝑖𝑛𝑔: … 𝚆𝙷𝙸𝙲𝙷-𝙵𝙸𝙽𝙰𝙻𝙻𝚈-𝙷𝙰𝙻𝚃𝚂.--𝙰𝚃-𝚃𝙷𝙰𝚃-𝙿𝙾𝙸𝙽𝚃… ⇑pat: AT-THATstring: … WHICH-FINALLY-HALTS.--AT-THAT-POINT… ⇑<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>根据 <strong>观察 2</strong> ，我们需要将 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向下移动 4 个字符使得短横线字符对齐：</p>
+<p>𝑝𝑎𝑡: 𝙰𝚃-𝚃𝙷𝙰𝚃𝑠𝑡𝑟𝑖𝑛𝑔: … 𝚆𝙷𝙸𝙲𝙷-𝙵𝙸𝙽𝙰𝙻𝙻𝚈-𝙷𝙰𝙻𝚃𝚂.--𝙰𝚃-𝚃𝙷𝙰𝚃-𝙿𝙾𝙸𝙽𝚃… ⇑pat: AT-THATstring: … WHICH-FINALLY-HALTS.--AT-THAT-POINT… ⇑<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>现在 _char_ :𝚃T<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 匹配了，把 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上的指针左移一步继续匹配：</p>
+<p>𝑝𝑎𝑡: 𝙰𝚃-𝚃𝙷𝙰𝚃𝑠𝑡𝑟𝑖𝑛𝑔: … 𝚆𝙷𝙸𝙲𝙷-𝙵𝙸𝙽𝙰𝙻𝙻𝚈-𝙷𝙰𝙻𝚃𝚂.--𝙰𝚃-𝚃𝙷𝙰𝚃-𝙿𝙾𝙸𝙽𝚃… ⇑pat: AT-THATstring: … WHICH-FINALLY-HALTS.--AT-THAT-POINT… ⇑<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>根据 <strong>观察 3(a)</strong> ，𝙻L<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 失配，因为 𝙻L<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不在 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中，所以 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向下移动 𝑘 =𝑑𝑒𝑙𝑡𝑎1 −𝑚 =7 −1 =6k=delta1−m=7−1=6<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符，而 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上指针向下移动 𝑑𝑒𝑙𝑡𝑎1 =7delta1=7<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符：</p>
+<p>𝑝𝑎𝑡: 𝙰𝚃-𝚃𝙷𝙰𝚃𝑠𝑡𝑟𝑖𝑛𝑔: … 𝚆𝙷𝙸𝙲𝙷-𝙵𝙸𝙽𝙰𝙻𝙻𝚈-𝙷𝙰𝙻𝚃𝚂.--𝙰𝚃-𝚃𝙷𝙰𝚃-𝙿𝙾𝙸𝙽𝚃… ⇑pat: AT-THATstring: … WHICH-FINALLY-HALTS.--AT-THAT-POINT… ⇑<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>这时 𝑐ℎ𝑎𝑟char<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 又一次匹配到了 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的最后一个字符 𝚃T<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上的指针向左匹配，匹配到了 𝙰A<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，继续向左匹配，发现在字符 --<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 失配：</p>
+<p>𝑝𝑎𝑡: 𝙰𝚃-𝚃𝙷𝙰𝚃𝑠𝑡𝑟𝑖𝑛𝑔: … 𝚆𝙷𝙸𝙲𝙷-𝙵𝙸𝙽𝙰𝙻𝙻𝚈-𝙷𝙰𝙻𝚃𝚂.--𝙰𝚃-𝚃𝙷𝙰𝚃-𝙿𝙾𝙸𝙽𝚃… ⇑pat: AT-THATstring: … WHICH-FINALLY-HALTS.--AT-THAT-POINT… ⇑<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>显然直观上看，此时根据 <strong>观察 3(b)</strong> ，将 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向下移动 𝑘 =5k=5<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符，使得后缀 𝙰𝚃AT<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 对齐，这种滑动可以获得 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 指针最大的滑动距离，此时 𝑑𝑒𝑙𝑡𝑎2 =𝑘 +𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 −𝑗 =5 +6 −4 =7delta2=k+patlastpos−j=5+6−4=7<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上指针向下滑动 7 个字符．</p>
+<p>而从形式化逻辑看，此时，𝑑𝑒𝑙𝑡𝑎1 =7 −1 −2 =4, 𝑑𝑒𝑙𝑡𝑎2 =7,max(𝑑𝑒𝑙𝑡𝑎1,𝑑𝑒𝑙𝑡𝑎2) =7delta1=7−1−2=4, delta2=7,max(delta1,delta2)=7<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">， 这样从形式逻辑上支持了进行 <strong>观察 3(b)</strong> 的跳转：</p>
+<p>𝑝𝑎𝑡:𝙰𝚃-𝚃𝙷𝙰𝚃𝑠𝑡𝑟𝑖𝑛𝑔: … 𝚆𝙷𝙸𝙲𝙷-𝙵𝙸𝙽𝙰𝙻𝙻𝚈-𝙷𝙰𝙻𝚃𝚂.--𝙰𝚃-𝚃𝙷𝙰𝚃-𝙿𝙾𝙸𝙽𝚃… ⇑pat:AT-THATstring: … WHICH-FINALLY-HALTS.--AT-THAT-POINT… ⇑<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>现在我们发现了 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上每一个字符都和 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上对应的字符相等，我们在 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上找到了一个 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的匹配．而只花费了 14 次对 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的引用，其中 7 次是完成一个成功的匹配所必需的比较次数（𝑝𝑎𝑡𝑙𝑒𝑛 =7patlen=7<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">），另外 7 次让我们跳过了 22 个字符．</p>
+<h2 id="7b976cd58bbe8ba1">算法设计</h2>
+<h3 id="6700521d76845339914d7b976cd5">最初的匹配算法</h3>
+<h4 id="89e391ca">解释</h4>
+<p>现在看这样一个利用 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 进行字符串匹配的算法：</p>
+<p>𝑖←𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠.𝑗←𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠.𝐥𝐨𝐨𝐩𝐢𝐟 𝑗&lt;0𝐫𝐞𝐭𝐮𝐫𝐧 𝑖+1𝐢𝐟 𝑠𝑡𝑟𝑖𝑛𝑔[𝑖]=𝑝𝑎𝑡[𝑗]𝑗←𝑗−1𝑖←𝑖−1𝐜𝐨𝐧𝐭𝐢𝐧𝐮𝐞𝑖←𝑖+𝑚𝑎𝑥(𝑑𝑒𝑙𝑡𝑎1(𝑠𝑡𝑟𝑖𝑛𝑔[𝑖]),𝑑𝑒𝑙𝑡𝑎2(𝑗))𝐢𝐟 𝑖&gt;𝑠𝑡𝑟𝑖𝑛𝑔𝑙𝑎𝑠𝑡𝑝𝑜𝑠𝐫𝐞𝐭𝐮𝐫𝐧 𝑓𝑎𝑙𝑠𝑒𝑗←𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠i←patlastpos.j←patlastpos.loopif j&lt;0return i+1if string[i]=pat[j]j←j−1i←i−1continuei←i+max(delta1(string[i]),delta2(j))if i&gt;stringlastposreturn falsej←patlastpos<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>如果上面的算法 𝐫𝐞𝐭𝐮𝐫𝐧 𝑓𝑎𝑙𝑠𝑒return false<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，表明 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不在 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中；如果返回一个数字，表示 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 在 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 左起第一次出现的位置．</p>
+<p>然后让我们更精细地描述下计算 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所依靠的 𝑟𝑝𝑟(𝑗)rpr(j)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 函数．</p>
+<p>根据前文定义，𝑟𝑝𝑟(𝑗)rpr(j)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 表示在 𝑝𝑎𝑡(𝑗)pat(j)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 失配时，子串 𝑠𝑢𝑏𝑝𝑎𝑡 =𝑝𝑎𝑡[𝑗 +1…𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠]subpat=pat[j+1…patlastpos]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 在 𝑝𝑎𝑡[𝑗]pat[j]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 最右边合理重现的位置．</p>
+<p>也就是说需要找到一个最好的 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">, 使得 𝑝𝑎𝑡[𝑘…𝑘 +𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 −𝑗 −1] =𝑝𝑎𝑡[𝑗 +1…𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠]pat[k…k+patlastpos−j−1]=pat[j+1…patlastpos]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，另外要考虑两种特殊情况：</p>
+<ol>
+<li>当 𝑘 &lt;0k&lt;0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 时，相当于在 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 前面补充了一段虚拟的前缀，实际上也符合 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 跳转的原理．</li>
+<li>当 𝑘 &gt;0k&gt;0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 时，如果 𝑝𝑎𝑡[𝑘 −1] =𝑝𝑎𝑡[𝑗]pat[k−1]=pat[j]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，则这个 𝑝𝑎𝑡[𝑘…𝑘 +𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 −𝑗 −1]pat[k…k+patlastpos−j−1]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不能作为 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的合理重现． 原因是 𝑝𝑎𝑡[𝑗]pat[j]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 本身是失配字符，所以 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向下滑动 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符后，在后缀匹配过程中仍然会在 𝑝𝑎𝑡[𝑘 −1]pat[k−1]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 处失配．</li>
+</ol>
+<p>还要注意两个限制条件：</p>
+<ol>
+<li>𝑘 &lt;𝑗k&lt;j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．因为当 𝑘 =𝑗k=j<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 时，有 𝑝𝑎𝑡[𝑘] =𝑝𝑎𝑡[𝑗]pat[k]=pat[j]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[𝑗]pat[j]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上失配的字符也会在 𝑝𝑎𝑡[𝑘]pat[k]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上失配．</li>
+<li>考虑到 𝑑𝑒𝑙𝑡𝑎2(𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠) =0delta2(patlastpos)=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以规定 𝑟𝑝𝑟(𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠) =𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠rpr(patlastpos)=patlastpos<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ol>
+<h4 id="8fc77a0b-2">过程</h4>
+<p>由于理解 𝑟𝑝𝑟(𝑗)rpr(j)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 是实现 BoyerMoore 算法的核心，所以我们使用如下两个例子进行详细说明：</p>
+<p>𝑗: 𝟶 𝟷 𝟸 𝟹 𝟺 𝟻 𝟼 𝟽 𝟾𝑝𝑎𝑡: 𝙰 𝙱 𝙲 𝚇 𝚇 𝚇 𝙰 𝙱 𝙲𝑟𝑝𝑟(𝑗): 𝟻 𝟺 𝟹 𝟸 𝟷 𝟶 𝟸 𝟷 𝟾𝑠𝑔𝑛: - - - - - - - - +j: 0 1 2 3 4 5 6 7 8pat: A B C X X X A B Crpr(j): 5 4 3 2 1 0 2 1 8sgn: \- - - - - - - - +<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>对于 𝑟𝑝𝑟(0)rpr(0)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝙱𝙲𝚇𝚇𝚇𝙰𝙱𝙲BCXXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[0]pat[0]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边合理重现只能是 [(𝙱𝙲𝚇𝚇𝚇)𝙰𝙱𝙲]𝚇𝚇𝚇𝙰𝙱𝙲[(BCXXX)ABC]XXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，也就是最右边合理重现位置为 -5，即 𝑟𝑝𝑟(𝑗) = −5rpr(j)=−5<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(1)rpr(1)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝙲𝚇𝚇𝚇𝙰𝙱𝙲CXXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[1]pat[1]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边的合理重现是 [(𝙲𝚇𝚇𝚇)𝙰𝙱𝙲]𝚇𝚇𝚇𝙰𝙱𝙲[(CXXX)ABC]XXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以 𝑟𝑝𝑟(𝑗) = −4rpr(j)=−4<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(2)rpr(2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝚇𝚇𝚇𝙰𝙱𝙲XXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[2]pat[2]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边的合理重现是 [(𝚇𝚇𝚇)𝙰𝙱𝙲]𝚇𝚇𝚇𝙰𝙱𝙲[(XXX)ABC]XXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以 𝑟𝑝𝑟(𝑗) = −3rpr(j)=−3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(3)rpr(3)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝚇𝚇𝙰𝙱𝙲XXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[3]pat[3]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边的合理重现是 [(𝚇𝚇)𝙰𝙱𝙲]𝚇𝚇𝚇𝙰𝙱𝙲[(XX)ABC]XXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以 𝑟𝑝𝑟(𝑗) = −2rpr(j)=−2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(4)rpr(4)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝚇𝙰𝙱𝙲XABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[4]pat[4]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边的合理重现是 [(𝚇)𝙰𝙱𝙲]𝚇𝚇𝚇𝙰𝙱𝙲[(X)ABC]XXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以 𝑟𝑝𝑟(𝑗) = −1rpr(j)=−1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(5)rpr(5)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝙰𝙱𝙲ABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[5]pat[5]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边的合理重现是 [𝙰𝙱𝙲]𝚇𝚇𝚇𝙰𝙱𝙲[ABC]XXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以 𝑟𝑝𝑟(𝑗) =0rpr(j)=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(6)rpr(6)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝙱𝙲BC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，又因为 𝑠𝑡𝑟𝑖𝑛𝑔[0] =𝑠𝑡𝑟𝑖𝑛𝑔[6]string[0]=string[6]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，即 𝑠𝑡𝑟𝑖𝑛𝑔[0]string[0]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 等于失配字符 𝑠𝑡𝑟𝑖𝑛𝑔[6]string[6]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以 𝑠𝑡𝑟𝑖𝑛𝑔[0…2]string[0…2]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 并不是符合条件的 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的合理重现，所以在最右边的合理重现是 [(𝙱𝙲)]𝙰𝙱𝙲𝚇𝚇𝚇𝙰𝙱𝙲[(BC)]ABCXXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以 𝑟𝑝𝑟(𝑗) = −2rpr(j)=−2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(7)rpr(7)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝙲C<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，同理又因为 𝑠𝑡𝑟𝑖𝑛𝑔[7] =𝑠𝑡𝑟𝑖𝑛𝑔[1]string[7]=string[1]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以 𝑠𝑡𝑟𝑖𝑛𝑔[1…2]string[1…2]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 并不是符合条件的 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的合理重现，在最右边的合理重现是 [(𝙲)]𝙰𝙱𝙲𝚇𝚇𝚇𝙰𝙱𝙲[(C)]ABCXXXABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以 𝑟𝑝𝑟(𝑗) = −1rpr(j)=−1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(8)rpr(8)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，根据 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 定义，𝑟𝑝𝑟(𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠) =𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠rpr(patlastpos)=patlastpos<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，得到 𝑟𝑝𝑟(8) =8rpr(8)=8<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>现在再看一下另一个例子：</p>
+<p>𝑗: 𝟶 𝟷 𝟸 𝟹 𝟺 𝟻 𝟼 𝟽 𝟾𝑝𝑎𝑡: 𝙰 𝙱 𝚈 𝚇 𝙲 𝙳 𝙴 𝚈 𝚇𝑟𝑝𝑟(𝑗): 𝟾 𝟽 𝟼 𝟻 𝟺 𝟹 𝟸 𝟷 𝟾𝑠𝑔𝑛: - - - - - - + - +j: 0 1 2 3 4 5 6 7 8pat: A B Y X C D E Y Xrpr(j): 8 7 6 5 4 3 2 1 8sgn: \- - - - - - + - +<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>对于 𝑟𝑝𝑟(0)rpr(0)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝙱𝚈𝚇𝙲𝙳𝙴𝚈𝚇BYXCDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[0]pat[0]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边合理重现只能是 [(𝙱𝚈𝚇𝙲𝙳𝙴𝚈𝚇)]𝙰𝙱𝚈𝚇𝙲𝙳𝙴𝚈𝚇[(BYXCDEYX)]ABYXCDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，也就是最右边合理重现位置为 -8，即 𝑟𝑝𝑟(𝑗) = −8rpr(j)=−8<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(1)rpr(1)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝚈𝚇𝙲𝙳𝙴𝚈𝚇YXCDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[1]pat[1]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边合理重现只能是 [(𝚈𝚇𝙲𝙳𝙴𝚈𝚇)]𝙰𝙱𝚈𝚇𝙲𝙳𝙴𝚈𝚇[(YXCDEYX)]ABYXCDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑟𝑝𝑟(𝑗) = −7rpr(j)=−7<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(2)rpr(2)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝚇𝙲𝙳𝙴𝚈𝚇XCDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[2]pat[2]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边合理重现只能是 [(𝚇𝙲𝙳𝙴𝚈𝚇)]𝙰𝙱𝚈𝚇𝙲𝙳𝙴𝚈𝚇[(XCDEYX)]ABYXCDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑟𝑝𝑟(𝑗) = −6rpr(j)=−6<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(3)rpr(3)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝙲𝙳𝙴𝚈𝚇CDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[3]pat[3]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边合理重现只能是 [(𝙲𝙳𝙴𝚈𝚇)]𝙰𝙱𝚈𝚇𝙲𝙳𝙴𝚈𝚇[(CDEYX)]ABYXCDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑟𝑝𝑟(𝑗) = −5rpr(j)=−5<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(4)rpr(4)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝙳𝙴𝚈𝚇DEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[4]pat[4]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边合理重现只能是 [(𝙳𝙴𝚈𝚇)]𝙰𝙱𝚈𝚇𝙲𝙳𝙴𝚈𝚇[(DEYX)]ABYXCDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑟𝑝𝑟(𝑗) = −4rpr(j)=−4<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(5)rpr(5)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝙴𝚈𝚇EYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，在 𝑝𝑎𝑡[5]pat[5]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边合理重现只能是 [(𝙴𝚈𝚇)]𝙰𝙱𝚈𝚇𝙲𝙳𝙴𝚈𝚇[(EYX)]ABYXCDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑟𝑝𝑟(𝑗) = −3rpr(j)=−3<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(6)rpr(6)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝚈𝚇YX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，因为 𝑠𝑡𝑟𝑖𝑛𝑔[2…3] =𝑠𝑡𝑟𝑖𝑛𝑔[7…8]string[2…3]=string[7…8]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 并且有 𝑠𝑡𝑟𝑖𝑛𝑔[6] ≠𝑠𝑡𝑟𝑖𝑛𝑔[1]string[6]≠string[1]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以在 𝑝𝑎𝑡[6]pat[6]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边的合理重现是 𝙰𝙱[𝚈𝚇]𝙲𝙳𝙴𝚈𝚇AB[YX]CDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑟𝑝𝑟(𝑗) =2rpr(j)=2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</p>
+<p>对于 𝑟𝑝𝑟(7)rpr(7)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝚇X<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，虽然 𝑠𝑡𝑟𝑖𝑛𝑔[3] =𝑠𝑡𝑟𝑖𝑛𝑔[8]string[3]=string[8]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 但是因为 𝑠𝑡𝑟𝑖𝑛𝑔[2] =𝑠𝑡𝑟𝑖𝑛𝑔[7]string[2]=string[7]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，所以在 𝑝𝑎𝑡[7]pat[7]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 之前的最右边的合理重现是 [𝚇]𝙰𝙱𝚈𝚇𝙲𝙳𝙴𝚈𝚇[X]ABYXCDEYX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑟𝑝𝑟(𝑗) = −1rpr(j)=−1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">;</p>
+<p>对于 𝑟𝑝𝑟(8)rpr(8)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，根据 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 定义，𝑟𝑝𝑟(𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠) =𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠rpr(patlastpos)=patlastpos<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，得到 𝑟𝑝𝑟(8) =8rpr(8)=8<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<h3 id="5bf95339914d7b976cd576844e004e2a65398fdb">对匹配算法的一个改进</h3>
+<p>最后，实践过程中考虑到搜索过程中估计有 80% 的时间用在了 <strong>观察 1</strong> 的跳转上，也就是 𝑠𝑡𝑟𝑖𝑛𝑔[𝑖]string[i]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 和 𝑝𝑎𝑡[𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠]pat[patlastpos]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 不匹配，然后跳跃整个 𝑝𝑎𝑡𝑙𝑒𝑛patlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 进行下一次匹配的过程．</p>
+<p>于是，可以为此进行特别的优化：</p>
+<p>我们定义一个 𝑑𝑒𝑙𝑡𝑎0delta0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：</p>
+<p>𝐢𝐧𝐭 𝑑𝑒𝑙𝑡𝑎0(𝐜𝐡𝐚𝐫 𝑐ℎ𝑎𝑟)𝐢𝐟 𝑐ℎ𝑎𝑟=𝑝𝑎𝑡[𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠]𝐫𝐞𝐭𝐮𝐫𝐧 𝑙𝑎𝑟𝑔𝑒 // large为一个整数，需要满足large&gt;stringlastpos+patlen𝐫𝐞𝐭𝐮𝐫𝐧 𝑑𝑒𝑙𝑡𝑎1(𝑐ℎ𝑎𝑟)int delta0(char char)if char=pat[patlastpos]return large // large为一个整数，需要满足large&gt;stringlastpos+patlenreturn delta1(char)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>用 𝑑𝑒𝑙𝑡𝑎0delta0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 代替 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，得到改进后的匹配算法：</p>
+<p>𝑖←𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠𝐥𝐨𝐨𝐩𝐢𝐟 𝑖&gt;𝑠𝑡𝑟𝑖𝑛𝑔𝑙𝑎𝑠𝑡𝑝𝑜𝑠𝐫𝐞𝐭𝐮𝐫𝐧 𝑓𝑎𝑙𝑠𝑒𝐰𝐡𝐢𝐥𝐞 𝑖&lt;𝑠𝑡𝑟𝑖𝑛𝑔𝑙𝑒𝑛𝑖←𝑖+𝑑𝑒𝑙𝑡𝑎0(𝑠𝑡𝑟𝑖𝑛𝑔(𝑖)) // 除非string[i]和pat末尾字符匹配，否则至多向下滑动patlen 𝐢𝐟 𝑖⩽ 𝑙𝑎𝑟𝑔𝑒//此时表示string上没有一个字符和pat末尾字符匹配 𝐫𝐞𝐭𝐮𝐫𝐧 𝑓𝑎𝑙𝑠𝑒𝑖←𝑖−𝑙𝑎𝑟𝑔𝑒𝑗←𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠.𝐰𝐡𝐢𝐥𝐞 𝑗⩾ 0 𝑎𝑛𝑑 𝑠𝑡𝑟𝑖𝑛𝑔[𝑖]=𝑝𝑎𝑡[𝑗]𝑗←𝑗−1𝑖←𝑖−1𝐢𝐟 𝑗&lt;0𝐫𝐞𝐭𝐮𝐫𝐧 𝑖+1𝑖←𝑖+𝑚𝑎𝑥(𝑑𝑒𝑙𝑡𝑎1(𝑠𝑡𝑟𝑖𝑛𝑔[𝑖]),𝑑𝑒𝑙𝑡𝑎2(𝑗))i←patlastposloopif i&gt;stringlastposreturn falsewhile i&lt;stringleni←i+delta0(string(i)) // 除非string[i]和pat末尾字符匹配，否则至多向下滑动patlen  if i⩽ large//此时表示string上没有一个字符和pat末尾字符匹配 return falsei←i−largej←patlastpos.while j⩾ 0 and string[i]=pat[j]j←j−1i←i−1if j&lt;0return i+1i←i+max(delta1(string[i]),delta2(j))<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></p>
+<p>其中 𝑙𝑎𝑟𝑔𝑒large<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 起到多重作用，一是类似后面介绍的 Horspool 算法进行快速的坏字符跳转，二是辅助检测字符串搜索是否完成．</p>
+<p>经过改进，比起原算法，在做 <strong>观察 1</strong> 跳转时不必每次进行 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的多余计算，使得在通常字符集下搜索字符串的性能有了明显的提升．</p>
+<h2 id="delta2-67845efa7ec68282">delta2 构建细节</h2>
+<h3 id="5f155165-2">引入</h3>
+<p>在 1977 年 10 月的 _Communications of the ACM_ 上，Boyer、Moor 的论文1中只描述了 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 静态表，</p>
+<p>构造 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的具体实现的讨论出现在 1977 年 6 月 Knuth、Morris、Pratt 在 _SIAM Journal on Computing_ 上正式联合发表的 KMP 算法的论文2．</p>
+<h3 id="67347d207b976cd5">朴素算法</h3>
+<p>在介绍 Knuth 的 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 构建算法之前，根据定义，我们会有一个适用于小规模问题的朴素算法：</p>
+<ol>
+<li>对于 <code>[0, patlen)</code> 区间的每一个位置 <code>i</code>，根据 <code>subpat</code> 的长度确定其重现位置的区间，也就是 <code>[-subpatlen, i]</code>；</li>
+<li>可能的重现位置按照从右到左进行逐字符比较，寻找符合 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 要求的最右边 𝑠𝑢𝑏𝑝𝑎𝑡subpat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的重现位置；</li>
+<li>最后别忘了令 𝑑𝑒𝑙𝑡𝑎2(𝑙𝑎𝑠𝑡𝑝𝑜𝑠) =0delta2(lastpos)=0<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</li>
+</ol>
+<p>实现</p>
+<pre><code class="language-text">---|---
+
+特别地，对 Rust 语言特性进行必要地解释，下不赘述：
+
+  * `usize` 和 `isize` 是和内存指针同字节数的无符号整数和有符号整数，在 32 位机上相当于 `u32` 和 `i32`，64 位机上相当于 `u64` 和 `i64`．
+  * 索引数组、向量、分片时使用 `usize` 类型的数字（因为在做内存上的随机访问并且下标不能为负值），所以如果需要处理负值要用 `isize`，而进行索引时又要用 `usize`，这就看到使用 `as` 关键字进行二者之间的显式转换．
+  * `impl PartialEq` 只是用作泛型，可以同时支持 `Unicode` 编码的 `char` 和二进制的 `u8`．
+
+显然，该暴力算法的时间复杂度为 𝑂(𝑛3)O(n3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+### 高效算法
+
+下面我们要介绍的是时间复杂度为 𝑂(𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，但是需要额外 𝑂(𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 空间复杂度的高效算法．
+
+虽然 1977 年 Knuth 提出了这个构建方法，然而他的原始版本的构建算法存在一个缺陷，实际上对于某些 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 产生不出符合定义的 𝑑𝑒𝑙𝑡𝑎2delta2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+Rytter 在 1980 年 _SIAM Journal on Computing_ 上发表的文章3对此提出了修正，以下是 𝑑𝑒𝑙𝑡𝑎2delta2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的构建算法：
+
+首先考虑到 𝑑𝑒𝑙𝑡𝑎2delta2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的定义比较复杂，我们按照 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的重现位置进行分类，每一类进行单独处理，这是高效实现的关键思路．
+
+按照重现位置由远到近，也就是偏移量由大到小，分成如下几类：
+
+  1. 整个 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 重现位置完全在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 左边的，比如 [(𝙴𝚈𝚇)]𝙰𝙱𝚈𝚇𝙲𝙳𝙴𝚈𝚇[(EYX)]ABYXCDEYX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，此时 𝑑𝑒𝑙𝑡𝑎2(𝑗) =𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 ×2 −𝑗delta2(j)=patlastpos×2−j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+
+  2. 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的重现有一部分在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 左边，有一部分是 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 头部，比如 [(𝚇𝚇)𝙰𝙱𝙲]𝚇𝚇𝚇𝙰𝙱𝙲[(XX)ABC]XXXABC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，此时 𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 &lt;𝑑𝑒𝑙𝑡𝑎2(𝑗) &lt;𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 ×2 −𝑗patlastpos&lt;delta2(j)&lt;patlastpos×2−j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)； 我们把 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 完全在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 头部的边际情况也归类在这里（当然根据实现也可以归类在下边），比如 [𝙰𝙱𝙲]𝚇𝚇𝚇𝙰𝙱𝙲[ABC]XXXABC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，此时 𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 =𝑑𝑒𝑙𝑡𝑎2(𝑗)patlastpos=delta2(j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+
+  3. 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的重现完全在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中，比如 𝙰𝙱[𝚈𝚇]𝙲𝙳𝙴𝚈𝚇AB[YX]CDEYX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，此时 𝑑𝑒𝑙𝑡𝑎2(𝑗) &lt;𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠delta2(j)&lt;patlastpos![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+现在来讨论如何高效地计算这三种情况：
+
+#### 第一种情况
+
+这是最简单的情况，只需一次遍历并且可以顺便将 𝑑𝑒𝑙𝑡𝑎2delta2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 初始化．
+
+#### 第二种情况
+
+我们观察什么时候会出现 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的重现一部分在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 左边，一部分是 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的头部的情况呢？应该是 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的某个后缀和 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的某个前缀相等，
+
+比如之前的例子：
+
+𝑗: 𝟶 𝟷 𝟸 𝟹 𝟺 𝟻 𝟼 𝟽 𝟾𝑝𝑎𝑡: 𝙰 𝙱 𝙲 𝚇 𝚇 𝚇 𝙰 𝙱 𝙲j: 0 1 2 3 4 5 6 7 8pat: A B C X X X A B C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+𝑑𝑒𝑙𝑡𝑎2(3)delta2(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的重现 [(𝚇𝚇)𝙰𝙱𝙲]𝚇𝚇𝚇𝙰𝙱𝙲[(XX)ABC]XXXABC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 𝚇𝚇𝙰𝙱𝙲XXABC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的后缀与 pat 前缀中，有相等的，是 𝙰𝙱𝙲ABC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+实际上，对第二种和第三种情况的计算的关键都需要前缀函数的计算和和应用．
+
+那么只要 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取值使得 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 包含这个相等的后缀，那么就可以得到第二种情况的 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的重现，对于例子，我们只需要使得 𝑗 ⩽5j⩽5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，
+
+而当 𝑗 =5j=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，就是 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 完全在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 头部的边际情况．
+
+可以计算此时的 𝑑𝑒𝑙𝑡𝑎2(𝑗)delta2(j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
+
+设此时这对相等的前后缀长度为 𝑝𝑟𝑒𝑓𝑖𝑥𝑙𝑒𝑛prefixlen![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可知 𝑠𝑢𝑏𝑝𝑎𝑡𝑙𝑒𝑛 =𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 −𝑗subpatlen=patlastpos−j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 左边的部分长度是 𝑠𝑢𝑏𝑝𝑎𝑡𝑙𝑒𝑛 −𝑝𝑟𝑒𝑓𝑖𝑥𝑙𝑒𝑛subpatlen−prefixlen![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，
+
+而 𝑟𝑝𝑟(𝑗) = −(𝑠𝑢𝑏𝑝𝑎𝑡𝑙𝑒𝑛 −𝑝𝑟𝑒𝑓𝑖𝑥𝑙𝑒𝑛)rpr(j)=−(subpatlen−prefixlen)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以得到 𝑑𝑒𝑙𝑡𝑎2(𝑗) =𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 −𝑟𝑝𝑟(𝑗) =𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 ×2 −𝑗 −𝑝𝑟𝑒𝑓𝑖𝑥𝑙𝑒𝑛delta2(j)=patlastpos−rpr(j)=patlastpos×2−j−prefixlen![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+其后面可能会有多对相等的前缀和后缀，比如：
+
+𝑗: 𝟶 𝟷 𝟸 𝟹 𝟺 𝟻 𝟼 𝟽 𝟾 𝟿𝑝𝑎𝑡: 𝙰 𝙱 𝙰 𝙰 𝙱 𝙰 𝙰 𝙱 𝙰 𝙰j: 0 1 2 3 4 5 6 7 8 9pat: A B A A B A A B A A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+在 𝑗 ≤2j≤2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处有 𝙰𝙱𝙰𝙰𝙱𝙰𝙰ABAABAA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，2 &lt;𝑗 ≤52&lt;j≤5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处有 𝙰𝙱𝙰𝙰ABAA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，在 5 &lt;𝑗 ≤85&lt;j≤8![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处有 𝙰A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+Knuth 算法的缺陷是只考虑了最长的那一对的情况，但实际上我们要考虑所有 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后缀与 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 前缀相等的情况，等同于计算 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所有真后缀和真前缀相等的情况，并按照长度从大到小，𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分区间计算不同的 𝑑𝑒𝑙𝑡𝑎2(𝑗)delta2(j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+利用前缀函数和逆向运用计算前缀函数的状态转移方程：𝑗(𝑛) =𝜋[𝑗(𝑛−1) −1]j(n)=π[j(n−1)−1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，以得到 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所有相等的真前缀和真后缀长度．从 𝜋[𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠]π[patlastpos]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始作为最长一对的长度，然后通过逆向运行状态转移方程，得到下一个次长相等真前缀和真后缀的长度．
+
+如此就完成了第二种情况的 𝑑𝑒𝑙𝑡𝑎2delta2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的计算．
+
+#### 第三种情况
+
+𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的重现恰好就在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中（不包括 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的头部），也就是按照从右到左的顺序，在 𝑝𝑎𝑡[0…𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 −1]pat[0…patlastpos−1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中寻找 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+如果用 BM 算法解决，我们就得到了一个 BM 的递归实现的第三种情况，结束条件是 𝑝𝑎𝑡𝑙𝑒𝑛 ⩽2patlen⩽2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+而且根据 𝑑𝑒𝑙𝑡𝑎2delta2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的定义，找到的 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的重现的下一个（也就是左边一个）字符和作为 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后缀的 𝑠𝑢𝑏𝑝𝑎𝑡subpat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的下一个字符不能一样．
+
+这就很好地启发了我们，可以使用类似于计算前缀函数的过程计算第三种情况，只不过是左右反过来的前缀函数：
+
+  * 两个指针分别指向子串的左端点和子串最长公共前后缀的「前缀」位置，从右向左移动，在发现指向的两个字符相等时继续移动，此时相当于「前缀」变大；
+  * 当两个字符不相等时，之前相等的部分就满足了 𝑑𝑒𝑙𝑡𝑎2delta2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对重现的要求，并且回退指向「前缀」位置的指针直到构成新的字符相等或者出界．
+
+同前缀函数一样，需要一个辅助数组，用于回退，可以使用之前计算第二种情况所生成的前缀数组的空间．
+
+### 实现
+
+上述实现
+</code></pre>
+<p>---|---</p>
+<h2 id="galil-89c452195bf9591a6b215339914d65f66700574f60c551b5768465395584">Galil 规则对多次匹配时最坏情况的改善</h2>
+<h3 id="51734e8e540e7f005339914d7b976cd57684591a6b215339914d95ee9898">关于后缀匹配算法的多次匹配问题</h3>
+<p>之前的搜索算法只涉及到在 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中寻找第一次 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 匹配的情况，而对与在 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 中寻找全部 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的匹配的情况有很多不同的算法思路，这个问题的核心关注点是：如何利用之前匹配成功的字符的信息，将最坏情况下的时间复杂度降为线性．</p>
+<p>在原始的成功匹配后，简单的 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的指针向后滑动 𝑝𝑎𝑡𝑙𝑒𝑛patlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 距离后重新开始后缀匹配，这会导致最坏情况下回到 𝑂(𝑚𝑛)O(mn)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的时间复杂度（按照惯例，𝑚m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝑝𝑎𝑡𝑙𝑒𝑛patlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑛n<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝑠𝑡𝑟𝑖𝑛𝑔𝑙𝑒𝑛stringlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，下同）．</p>
+<p>比如一个极端的例子：𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：𝙰𝙰𝙰AAA<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">：𝙰𝙰𝙰𝙰𝙰…AAAAA…<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>对此 Knuth 提出来的一个方法是用一个「数量有限」的状态的集合来记录 𝑝𝑎𝑡𝑙𝑒𝑛patlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 长度的字符，这种算法保证 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上每一个字符最多比较一次，但代价是这个「数量有限」的状态可能规模并不小，对于一个字符彼此不相等的 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，需要 12𝑚2 +𝑚12m2+m<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个状态．</p>
+<p>下面介绍的思路简单且不需要额外预处理开销的 Galil 算法4．</p>
+<h3 id="galil-89c45219">Galil 规则</h3>
+<p>假定一个 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，它是某个子串 𝑈U<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 重复 n 次构成的字符串 𝑈𝑈𝑈𝑈…UUUU…<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的前缀，那么我们称 𝑈U<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 为 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的一个周期．</p>
+<p>比如，𝑝𝑎𝑡 :𝙰𝙱𝙲𝙰𝙱𝙲𝙰𝙱pat:ABCABCAB<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，是 𝙰𝙱𝙲ABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的重复 𝙰𝙱𝙲𝙰𝙱𝙲𝙰𝙱𝙲ABCABCABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的前缀，所以 𝙰𝙱𝙲ABC<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的长度 33<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 就是这个 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的周期长度，也即 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 满足 𝑝𝑎𝑡[𝑖] =𝑝𝑎𝑡[𝑖 +3]pat[i]=pat[i+3]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 至少拥有一个长度为它自身的周期，我们规定最短的周期为 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑘 ≤𝑝𝑎𝑡𝑙𝑒𝑛k≤patlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．</p>
+<p>在搜索过程中，假如我们的 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 成功地完成了一次匹配，那么依照周期的特点，实际上只需将 𝑠𝑡𝑟𝑖𝑛𝑔string<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 向后滑动 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符，比较这 𝑘k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 个字符是否对应相等就可以直接判断是否存在 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的又一个匹配．</p>
+<p>为计算这个最短周期的长度，我们假设已知 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的相等的一对前缀 - 后缀，设它们的长度为 𝑝𝑟𝑒𝑓𝑖𝑥𝑙𝑒𝑛prefixlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，那么有 𝑝𝑎𝑡[𝑖] =𝑝𝑎𝑡[𝑖 +(𝑝𝑎𝑡𝑙𝑒𝑛 −𝑝𝑟𝑒𝑓𝑖𝑥𝑙𝑒𝑛)]pat[i]=pat[i+(patlen−prefixlen)]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">．从而得到长度为 𝑝𝑎𝑡𝑙𝑒𝑛 −𝑝𝑟𝑒𝑓𝑖𝑥𝑙𝑒𝑛patlen−prefixlen<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的周期，</p>
+<p>当我们知道 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 最长的那一对相等的前缀 - 后缀，我们就得到了 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 最短的周期．</p>
+<p>而最长相等的前后缀长度，𝜋[𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠]π[patlastpos]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，已经在我们在计算 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的过程中，所以实际不需要额外的预处理时间和空间，就能将后缀匹配算法最坏情况的时间复杂度改善成线性．</p>
+<p>结合上述优化的 BM 的搜索算法最终实现</p>
+<pre><code class="language-text">---|---
+
+### 最坏情况在实践中性能影响
+
+从实践的角度上说，理论上的最坏情况并不容易影响性能表现，哪怕是很小的只有 4 的字符集的随机文本测试下这种最坏情况的影响也小到难以观察．
+
+也因此如果没有很好地设计，使用 Galil 法则会拖累一点平均的性能表现，但对于一些极端特殊的 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑠𝑡𝑟𝑖𝑛𝑔string![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 比如例子中的：𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：𝙰𝙰𝙰AAA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑠𝑡𝑟𝑖𝑛𝑔string![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：𝙰𝙰𝙰𝙰𝙰…AAAAA…![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，Galil 规则的应用确实会使得性能表现提高数倍．
+
+## 改进算法
+
+### Simplified Boyer–Moore 算法
+
+BM 算法最复杂的地方就在于 𝑑𝑒𝑙𝑡𝑎2delta2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表（也就是好后缀表）的构建，而实践中发现，在一般的字符集上的匹配性能主要依靠 𝑑𝑒𝑙𝑡𝑎1delta1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表（也就是坏字符表），于是出现了仅仅使用 𝑑𝑒𝑙𝑡𝑎1delta1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表的简化版 BM 算法，通常性能和原版差距很小．
+
+### Boyer–Moore–Horspol 算法
+
+Horspol 算法同样是基于坏字符的规则，在与 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 尾部对齐的字符上应用 𝑑𝑒𝑙𝑡𝑎1delta1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．效果类似于对原版匹配算法的改进，通常性能优于原版本．
+
+实现
+</code></pre>
+<p>---|---</p>
+<h3 id="boyer2013moore2013sunday-7b976cd5">Boyer–Moore–Sunday 算法</h3>
+<p>Sunday 算法同样是利用坏字符规则，只不过相比 Horspool 它更进一步，直接关注 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 尾部对齐的那个字符的下一个字符．</p>
+<p>实现它只需要稍微修改 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 表，相当于在 𝑝𝑎𝑡𝑙𝑒𝑛 +1patlen+1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 长度的 𝑝𝑎𝑡pat<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 上进行构建．</p>
+<p>Sunday 算法通常用作一般情况下实现最简单而且平均表现最好之一的实用算法，通常性能比 Horspool 和 BM 要好一点．</p>
+<p>实现</p>
+<pre><code class="language-text">---|---
+
+### BMHBNFS 算法
+
+该算法结合了 Horspool 和 Sunday，是 CPython 实现 `stringlib` 模块时用到的 `find` 的算法5，以下简称 B5S．
+
+B5S 基本思路是：
+
+  1. 按照后缀匹配的思路，首先比较 𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠patlastpos![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位置对应的字符是否相等，如果相等就比较 0…𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠 −10…patlastpos−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对应位置的字符是否相等，如果仍然相等，那么就发现一个匹配；
+
+  2. 如果任何一个阶段发生不匹配，就进入跳转阶段；
+
+  3. 在跳转阶段，首先观察 𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠patlastpos![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位置的下一个字符是否在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中，如果不在，直接向右滑动 𝑝𝑎𝑡𝑙𝑒𝑛 +1patlen+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这是 Sunday 算法的最大利用；
+
+如果这个字符在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中，对 𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠patlastpos![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处的字符利用 𝑑𝑒𝑙𝑡𝑎1delta1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进行 Horspool 跳转．
+
+而根据时间节省还是空间节省为第一目标，算法会有差别巨大的不同实现．
+
+#### 时间节省版本
+
+实现
+</code></pre>
+<p>---|---</p>
+<p>该版本的 B5S 性能表现非常理想，在目前介绍的后缀匹配系列算法中是通常情况下是最快的．</p>
+<h4 id="7a7a95f4828277017248672c">空间节省版本</h4>
+<p>同样在 CPython <code>stringlib</code> 中实现，使用了两个整数近似取代了字符表和 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的作用，极大地节省了空间：</p>
+<ol>
+<li>用一个简单的 Bloom 过滤器取代字符表（alphabet）</li>
+</ol>
+<p>实现</p>
+<pre><code class="language-text">---|---
+
+Bloom 过滤器设设计通过牺牲准确率（实际还有运行时间）来极大地节省存储空间的 `Set` 类型的数据结构，它的特点是会将集合中不存在的项误判为存在（False Positives，简称 FP），但不会把集合中存在的项判断为不存在（False Negatives，简称 FN），因此使用它可能会因为 FP 而没有得到最大的字符跳转，但不会因为 FN 而跳过本应匹配的字符．
+
+理论上分析，上述「Bloom 过滤器」的实现在 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 长度在 50 个 Bytes 时，FP 概率约为 0.5，而 𝑝𝑎𝑡pat![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 长度在 10 个 Bytes 时，FP 概率约为 0.15．
+
+虽然这不是一个标准的 Bloom 过滤器，首先它实际上没有使用一个真正的哈希函数，实际上它只是一个字符映射，将 0-255 的字节映射为它的前六位构成的数．
+
+但考虑到我们在内存上的进行字符搜索，这种简化就非常重要，即使用目前已知最快的非加密哈希算法 [xxHash](https://cyan4973.github.io/xxHash/)，计算所需要的时间仍比它高一个数量级．
+
+另外当 pat 在 30 字节以下时，为了达到最佳的 FP 概率，需要不止一个哈希函数．但这么做意义不大，因为用装有两个 `u128` 数字的数组就已经可以构建字符表的全字符集．
+
+  2. 使用 𝑑𝑒𝑙𝑡𝑎1(𝑝𝑎𝑡[𝑝𝑎𝑡𝑙𝑎𝑠𝑡𝑝𝑜𝑠])delta1(pat[patlastpos])![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 代替整个 𝑑𝑒𝑙𝑡𝑎1delta1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+观察 𝑑𝑒𝑙𝑡𝑎1delta1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，最常使用处就是后缀匹配时第一个字符就不匹配是最常见的不匹配的情况，于是令 `skip = delta1(pat[patlastpos])`，
+
+在第一阶段不匹配时，直接向下滑动 `skip` 个字符；但当第二阶段不配时，因为缺乏整个 𝑑𝑒𝑙𝑡𝑎1delta1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的信息，只能向下滑动一个字符．
+
+实现
+</code></pre>
+<p>---|---</p>
+<p>这个版本的算法相较于前面的后缀匹配算法不够快，但差距不大，性能仍然优于 KMP，得益于它至多两个 <code>u64</code> 的整数的优秀空间复杂度．</p>
+<h2 id="74068bba52066790">理论分析</h2>
+<p>以下是一般字符集下各算法的表现，纵坐标类似于执行开销（cost 指匹配成功 m 个字符后失配时的代价，skip 指发生失配时向下滑动 k 个字符的概率），越小性能越好．横坐标为模式字符串 pat 的长度：</p>
+<p><img src="../../assets/images/plot256.svg" alt="字符串搜索算法性能对比图"></p>
+<p>在较小字符集（DNA {A, C, T, G} 碱基对序列）中的表现：</p>
+<p><img src="../../assets/images/plot4.svg" alt="小字符集下字符串搜索算法性能对比图"></p>
+<p>综上，在较大的字符集，比如日常搜索的过程中，BoyerMoore 系列算法的优越表现，其中主要依赖 𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 表实现字符跳转；</p>
+<p>另一方面，在较小的字符集里，𝑑𝑒𝑙𝑡𝑎1delta1<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的作用下降，而 𝑑𝑒𝑙𝑡𝑎2delta2<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的作用得到了体现．</p>
+<p>如果有一定富裕空间的情况下，完整的空间复杂度为 𝑂(𝑚)O(m)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的 BoyerMoore 算法更加通用，综合表现最优．</p>
+<h2 id="53c280038d4465994e0e6ce891ca">参考资料与注释</h2>
+<ul>
+<li><em> </em></li>
+</ul>
+<ol>
+<li><a href="https://dl.acm.org/doi/10.1145/359842.359859">1977 年 Boyer–Moore 算法论文</a> ↩</li>
+</ol>
+<ol>
+<li><a href="https://epubs.siam.org/doi/abs/10.1137/0206024">1977 年 KMP 算法论文</a> ↩</li>
+</ol>
+<ol>
+<li><a href="https://epubs.siam.org/doi/10.1137/0209037">1980 年 Rytter 纠正 Knuth 的论文</a> ↩</li>
+</ol>
+<ol>
+<li><a href="https://doi.org/10.1145%2F359146.359148">1979 年介绍 Galil 算法的论文</a> ↩</li>
+</ol>
+<ol>
+<li><a href="http://effbot.org/zone/stringlib.htm#BMHBNFS">B5S 算法的介绍</a> ↩</li>
+</ol>
+<ul>
+<li><em> </em></li>
+</ul>
+<blockquote><strong>本页面最近更新： 2026/4/23 03:45:48，<a href="https://github.com/OI-wiki/OI-wiki/commits/master/docs/string/bm.md">更新历史</a> </strong>发现错误？想一起完善？<a href="../edit-landing/overview.html" title="edit.link.title">在 GitHub 上编辑此页！</a> <strong>本页面贡献者：<a href="https://github.com/Enter-tainer">Enter-tainer</a>, <a href="https://github.com/Tiphereth-A">Tiphereth-A</a>, <a href="https://github.com/minghu6">minghu6</a>, <a href="https://github.com/HeRaNO">HeRaNO</a>, <a href="https://github.com/alphagocc">alphagocc</a>, <a href="https://github.com/c0nstexpr">c0nstexpr</a>, <a href="https://github.com/CCXXXI">CCXXXI</a>, <a href="https://github.com/Chrogeek">Chrogeek</a>, <a href="https://github.com/Early0v0">Early0v0</a>, <a href="https://github.com/githuu5y5u">githuu5y5u</a>, <a href="https://github.com/iamtwz">iamtwz</a>, <a href="https://github.com/ksyx">ksyx</a>, <a href="https://github.com/lailai0916">lailai0916</a>, <a href="https://github.com/megakite">megakite</a>, <a href="https://github.com/r-value">r-value</a>, <a href="https://github.com/wineee">wineee</a>, <a href="https://github.com/Xeonacid">Xeonacid</a>, <a href="https://github.com/ZnPdCo">ZnPdCo</a> </strong>本页面的全部内容在<strong><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a></strong> 协议之条款下提供，附加条款亦可能应用</blockquote></article><nav class="article-nav"><a href="ac-automaton.html"><span class="meta">上一篇</span><br>AC 自动机</a><a href="lyndon.html"><span class="meta">下一篇</span><br>Lyndon 分解</a></nav></div>
+    </div>
+  </main>
+  <script id="archive-search-data" type="application/json">[{"title": "均摊复杂度", "group": "基础知识", "subgroup": "amortized-analysis", "href": "../basic/amortized-analysis.html"}, {"title": "二分", "group": "基础知识", "subgroup": "binary", "href": "../basic/binary.html"}, {"title": "倍增", "group": "基础知识", "subgroup": "binary-lifting", "href": "../basic/binary-lifting.html"}, {"title": "冒泡排序", "group": "基础知识", "subgroup": "bubble-sort", "href": "../basic/bubble-sort.html"}, {"title": "桶排序", "group": "基础知识", "subgroup": "bucket-sort", "href": "../basic/bucket-sort.html"}, {"title": "复杂度简介", "group": "基础知识", "subgroup": "complexity", "href": "../basic/complexity.html"}, {"title": "构造", "group": "基础知识", "subgroup": "construction", "href": "../basic/construction.html"}, {"title": "计数排序", "group": "基础知识", "subgroup": "counting-sort", "href": "../basic/counting-sort.html"}, {"title": "递归 & 分治", "group": "基础知识", "subgroup": "divide-and-conquer", "href": "../basic/divide-and-conquer.html"}, {"title": "枚举", "group": "基础知识", "subgroup": "enumerate", "href": "../basic/enumerate.html"}, {"title": "贪心", "group": "基础知识", "subgroup": "greedy", "href": "../basic/greedy.html"}, {"title": "堆排序", "group": "基础知识", "subgroup": "heap-sort", "href": "../basic/heap-sort.html"}, {"title": "插入排序", "group": "基础知识", "subgroup": "insertion-sort", "href": "../basic/insertion-sort.html"}, {"title": "归并排序", "group": "基础知识", "subgroup": "merge-sort", "href": "../basic/merge-sort.html"}, {"title": "算法基础简介", "group": "基础知识", "subgroup": "概览", "href": "../basic/overview.html"}, {"title": "前缀和 & 差分", "group": "基础知识", "subgroup": "prefix-sum", "href": "../basic/prefix-sum.html"}, {"title": "快速排序", "group": "基础知识", "subgroup": "quick-sort", "href": "../basic/quick-sort.html"}, {"title": "基数排序", "group": "基础知识", "subgroup": "radix-sort", "href": "../basic/radix-sort.html"}, {"title": "选择排序", "group": "基础知识", "subgroup": "selection-sort", "href": "../basic/selection-sort.html"}, {"title": "希尔排序", "group": "基础知识", "subgroup": "shell-sort", "href": "../basic/shell-sort.html"}, {"title": "模拟", "group": "基础知识", "subgroup": "simulate", "href": "../basic/simulate.html"}, {"title": "排序简介", "group": "基础知识", "subgroup": "sort-intro", "href": "../basic/sort-intro.html"}, {"title": "排序相关 STL", "group": "基础知识", "subgroup": "stl-sort", "href": "../basic/stl-sort.html"}, {"title": "Tim 排序", "group": "基础知识", "subgroup": "tim-sort", "href": "../basic/tim-sort.html"}, {"title": "锦标赛排序", "group": "基础知识", "subgroup": "tournament-sort", "href": "../basic/tournament-sort.html"}, {"title": "排序应用", "group": "基础知识", "subgroup": "use-of-sort", "href": "../basic/use-of-sort.html"}, {"title": "常见错误", "group": "赛事与实践", "subgroup": "common-mistakes", "href": "../contest/common-mistakes.html"}, {"title": "常见技巧", "group": "赛事与实践", "subgroup": "common-tricks", "href": "../contest/common-tricks.html"}, {"title": "分段打表", "group": "赛事与实践", "subgroup": "dictionary", "href": "../contest/dictionary.html"}, {"title": "ICPC/CCPC 赛事与赛制", "group": "赛事与实践", "subgroup": "icpc", "href": "../contest/icpc.html"}, {"title": "交互题", "group": "赛事与实践", "subgroup": "interaction", "href": "../contest/interaction.html"}, {"title": "读入、输出优化", "group": "赛事与实践", "subgroup": "io", "href": "../contest/io.html"}, {"title": "OI 赛事与赛制", "group": "赛事与实践", "subgroup": "oi", "href": "../contest/oi.html"}, {"title": "比赛相关简介", "group": "赛事与实践", "subgroup": "概览", "href": "../contest/overview.html"}, {"title": "题型概述", "group": "赛事与实践", "subgroup": "problems", "href": "../contest/problems.html"}, {"title": "出题", "group": "赛事与实践", "subgroup": "problemsetting", "href": "../contest/problemsetting.html"}, {"title": "学习资源", "group": "赛事与实践", "subgroup": "resources", "href": "../contest/resources.html"}, {"title": "学习路线", "group": "赛事与实践", "subgroup": "roadmap", "href": "../contest/roadmap.html"}, {"title": "动态规划基础", "group": "动态规划", "subgroup": "basic", "href": "../dp/basic.html"}, {"title": "计数 DP", "group": "动态规划", "subgroup": "count", "href": "../dp/count.html"}, {"title": "DAG 上的 DP", "group": "动态规划", "subgroup": "dag", "href": "../dp/dag.html"}, {"title": "DP 套 DP", "group": "动态规划", "subgroup": "dp-of-dp", "href": "../dp/dp-of-dp.html"}, {"title": "动态 DP", "group": "动态规划", "subgroup": "dynamic", "href": "../dp/dynamic.html"}, {"title": "区间 DP", "group": "动态规划", "subgroup": "interval", "href": "../dp/interval.html"}, {"title": "背包 DP", "group": "动态规划", "subgroup": "knapsack", "href": "../dp/knapsack.html"}, {"title": "记忆化搜索", "group": "动态规划", "subgroup": "memo", "href": "../dp/memo.html"}, {"title": "其它 DP 方法", "group": "动态规划", "subgroup": "misc", "href": "../dp/misc.html"}, {"title": "数位 DP", "group": "动态规划", "subgroup": "number", "href": "../dp/number.html"}, {"title": "DP 优化简介", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-dp-opt.html"}, {"title": "Slope Trick 优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-slope-trick.html"}, {"title": "WQS 二分", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-wqs-binary-search.html"}, {"title": "单调队列/单调栈优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-monotonous-queue-stack.html"}, {"title": "四边形不等式优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-quadrangle.html"}, {"title": "斜率优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-slope.html"}, {"title": "状态设计优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-state.html"}, {"title": "动态规划部分简介", "group": "动态规划", "subgroup": "概览", "href": "../dp/overview.html"}, {"title": "插头 DP", "group": "动态规划", "subgroup": "plug", "href": "../dp/plug.html"}, {"title": "概率 DP", "group": "动态规划", "subgroup": "概率", "href": "../dp/probability.html"}, {"title": "状压 DP", "group": "动态规划", "subgroup": "state", "href": "../dp/state.html"}, {"title": "树形 DP", "group": "动态规划", "subgroup": "树相关", "href": "../dp/tree.html"}, {"title": "AA 树", "group": "数据结构", "subgroup": "aa-tree", "href": "../ds/aa-tree.html"}, {"title": "AVL 树", "group": "数据结构", "subgroup": "avl", "href": "../ds/avl.html"}, {"title": "线段树套平衡树", "group": "数据结构", "subgroup": "balanced-in-seg", "href": "../ds/balanced-in-seg.html"}, {"title": "二叉堆", "group": "数据结构", "subgroup": "binary-heap", "href": "../ds/binary-heap.html"}, {"title": "分块套树状数组", "group": "数据结构", "subgroup": "bit-in-block-array", "href": "../ds/bit-in-block-array.html"}, {"title": "块状数组", "group": "数据结构", "subgroup": "block-array", "href": "../ds/block-array.html"}, {"title": "块状链表", "group": "数据结构", "subgroup": "block-list", "href": "../ds/block-list.html"}, {"title": "二叉搜索树 & 平衡树", "group": "数据结构", "subgroup": "bst", "href": "../ds/bst.html"}, {"title": "笛卡尔树", "group": "数据结构", "subgroup": "cartesian-tree", "href": "../ds/cartesian-tree.html"}, {"title": "猫树", "group": "数据结构", "subgroup": "cat-tree", "href": "../ds/cat-tree.html"}, {"title": "分块思想", "group": "数据结构", "subgroup": "decompose", "href": "../ds/decompose.html"}, {"title": "析合树", "group": "数据结构", "subgroup": "divide-combine", "href": "../ds/divide-combine.html"}, {"title": "划分树", "group": "数据结构", "subgroup": "dividing", "href": "../ds/dividing.html"}, {"title": "并查集", "group": "数据结构", "subgroup": "dsu", "href": "../ds/dsu.html"}, {"title": "并查集复杂度", "group": "数据结构", "subgroup": "dsu-complexity", "href": "../ds/dsu-complexity.html"}, {"title": "Euler Tour Tree", "group": "数据结构", "subgroup": "ett", "href": "../ds/ett.html"}, {"title": "树状数组", "group": "数据结构", "subgroup": "fenwick", "href": "../ds/fenwick.html"}, {"title": "手指树", "group": "数据结构", "subgroup": "finger-tree", "href": "../ds/finger-tree.html"}, {"title": "全局平衡二叉树", "group": "数据结构", "subgroup": "global-bst", "href": "../ds/global-bst.html"}, {"title": "哈希表", "group": "数据结构", "subgroup": "hash", "href": "../ds/hash.html"}, {"title": "堆简介", "group": "数据结构", "subgroup": "heap", "href": "../ds/heap.html"}, {"title": "霍夫曼树", "group": "数据结构", "subgroup": "huffman-tree", "href": "../ds/huffman-tree.html"}, {"title": "K-D Tree", "group": "数据结构", "subgroup": "kdt", "href": "../ds/kdt.html"}, {"title": "Kinetic Tournament Tree", "group": "数据结构", "subgroup": "kinetic-tournament-tree", "href": "../ds/kinetic-tournament-tree.html"}, {"title": "Link Cut Tree", "group": "数据结构", "subgroup": "lct", "href": "../ds/lct.html"}, {"title": "左偏树", "group": "数据结构", "subgroup": "leftist-tree", "href": "../ds/leftist-tree.html"}, {"title": "李超线段树", "group": "数据结构", "subgroup": "li-chao-tree", "href": "../ds/li-chao-tree.html"}, {"title": "链表", "group": "数据结构", "subgroup": "linked-list", "href": "../ds/linked-list.html"}, {"title": "左偏红黑树", "group": "数据结构", "subgroup": "llrbt", "href": "../ds/llrbt.html"}, {"title": "单调队列", "group": "数据结构", "subgroup": "monotonous-queue", "href": "../ds/monotonous-queue.html"}, {"title": "单调栈", "group": "数据结构", "subgroup": "monotonous-stack", "href": "../ds/monotonous-stack.html"}, {"title": "数据结构部分简介", "group": "数据结构", "subgroup": "概览", "href": "../ds/overview.html"}, {"title": "配对堆", "group": "数据结构", "subgroup": "pairing-heap", "href": "../ds/pairing-heap.html"}, {"title": "可持久化数据结构简介", "group": "数据结构", "subgroup": "persistent", "href": "../ds/persistent.html"}, {"title": "可持久化平衡树", "group": "数据结构", "subgroup": "persistent-balanced", "href": "../ds/persistent-balanced.html"}, {"title": "可持久化块状数组", "group": "数据结构", "subgroup": "persistent-block-array", "href": "../ds/persistent-block-array.html"}, {"title": "可持久化可并堆", "group": "数据结构", "subgroup": "persistent-heap", "href": "../ds/persistent-heap.html"}, {"title": "可持久化线段树", "group": "数据结构", "subgroup": "persistent-seg", "href": "../ds/persistent-seg.html"}, {"title": "可持久化字典树", "group": "数据结构", "subgroup": "persistent-trie", "href": "../ds/persistent-trie.html"}, {"title": "PQ 树", "group": "数据结构", "subgroup": "pq-tree", "href": "../ds/pq-tree.html"}, {"title": "队列", "group": "数据结构", "subgroup": "queue", "href": "../ds/queue.html"}, {"title": "红黑树", "group": "数据结构", "subgroup": "rbtree", "href": "../ds/rbtree.html"}, {"title": "Size Balanced Tree", "group": "数据结构", "subgroup": "sbt", "href": "../ds/sbt.html"}, {"title": "线段树基础", "group": "数据结构", "subgroup": "seg", "href": "../ds/seg.html"}, {"title": "区间最值操作 & 区间历史最值", "group": "数据结构", "subgroup": "seg-beats", "href": "../ds/seg-beats.html"}, {"title": "平衡树套线段树", "group": "数据结构", "subgroup": "seg-in-balanced", "href": "../ds/seg-in-balanced.html"}, {"title": "树状数组套权值线段树", "group": "数据结构", "subgroup": "seg-in-bit", "href": "../ds/seg-in-bit.html"}, {"title": "线段树套线段树", "group": "数据结构", "subgroup": "seg-in-seg", "href": "../ds/seg-in-seg.html"}, {"title": "线段树合并 & 分裂", "group": "数据结构", "subgroup": "seg-merge-split", "href": "../ds/seg-merge-split.html"}, {"title": "替罪羊树", "group": "数据结构", "subgroup": "sgt", "href": "../ds/sgt.html"}, {"title": "跳表", "group": "数据结构", "subgroup": "skiplist", "href": "../ds/skiplist.html"}, {"title": "ST 表", "group": "数据结构", "subgroup": "sparse-table", "href": "../ds/sparse-table.html"}, {"title": "Splay 树", "group": "数据结构", "subgroup": "splay", "href": "../ds/splay.html"}, {"title": "Sqrt Tree", "group": "数据结构", "subgroup": "sqrt-tree", "href": "../ds/sqrt-tree.html"}, {"title": "栈", "group": "数据结构", "subgroup": "stack", "href": "../ds/stack.html"}, {"title": "Top Tree", "group": "数据结构", "subgroup": "top-tree", "href": "../ds/top-tree.html"}, {"title": "Treap", "group": "数据结构", "subgroup": "treap", "href": "../ds/treap.html"}, {"title": "树分块", "group": "数据结构", "subgroup": "tree-decompose", "href": "../ds/tree-decompose.html"}, {"title": "WBLT", "group": "数据结构", "subgroup": "wblt", "href": "../ds/wblt.html"}, {"title": "Edit landing", "group": "编辑说明", "subgroup": "概览", "href": "../edit-landing/overview.html"}, {"title": "二维计算几何基础", "group": "计算几何", "subgroup": "2d", "href": "../geometry/2d.html"}, {"title": "三维计算几何基础", "group": "计算几何", "subgroup": "3d", "href": "../geometry/3d.html"}, {"title": "凸包", "group": "计算几何", "subgroup": "convex-hull", "href": "../geometry/convex-hull.html"}, {"title": "距离", "group": "计算几何", "subgroup": "distance", "href": "../geometry/distance.html"}, {"title": "半平面交", "group": "计算几何", "subgroup": "half-plane", "href": "../geometry/half-plane.html"}, {"title": "反演变换", "group": "计算几何", "subgroup": "inverse", "href": "../geometry/inverse.html"}, {"title": "计算几何杂项", "group": "计算几何", "subgroup": "misc", "href": "../geometry/misc.html"}, {"title": "平面最近点对", "group": "计算几何", "subgroup": "nearest-points", "href": "../geometry/nearest-points.html"}, {"title": "计算几何部分简介", "group": "计算几何", "subgroup": "概览", "href": "../geometry/overview.html"}, {"title": "Pick 定理", "group": "计算几何", "subgroup": "pick", "href": "../geometry/pick.html"}, {"title": "随机增量法", "group": "计算几何", "subgroup": "random-incremental", "href": "../geometry/random-incremental.html"}, {"title": "旋转卡壳", "group": "计算几何", "subgroup": "rotating-calipers", "href": "../geometry/rotating-calipers.html"}, {"title": "扫描线", "group": "计算几何", "subgroup": "scanning", "href": "../geometry/scanning.html"}, {"title": "三角剖分", "group": "计算几何", "subgroup": "triangulation", "href": "../geometry/triangulation.html"}, {"title": "2-SAT", "group": "图论", "subgroup": "2-sat", "href": "../graph/2-sat.html"}, {"title": "双连通分量", "group": "图论", "subgroup": "bcc", "href": "../graph/bcc.html"}, {"title": "BFS（图论）", "group": "图论", "subgroup": "bfs", "href": "../graph/bfs.html"}, {"title": "二分图", "group": "图论", "subgroup": "bi-graph", "href": "../graph/bi-graph.html"}, {"title": "圆方树", "group": "图论", "subgroup": "block-forest", "href": "../graph/block-forest.html"}, {"title": "弦图", "group": "图论", "subgroup": "chord", "href": "../graph/chord.html"}, {"title": "图的着色", "group": "图论", "subgroup": "color", "href": "../graph/color.html"}, {"title": "图论相关概念", "group": "图论", "subgroup": "concept", "href": "../graph/concept.html"}, {"title": "点/边连通度", "group": "图论", "subgroup": "connectivity", "href": "../graph/connectivity.html"}, {"title": "割点和桥", "group": "图论", "subgroup": "cut", "href": "../graph/cut.html"}, {"title": "有向无环图", "group": "图论", "subgroup": "dag", "href": "../graph/dag.html"}, {"title": "DFS（图论）", "group": "图论", "subgroup": "dfs", "href": "../graph/dfs.html"}, {"title": "差分约束", "group": "图论", "subgroup": "diff-constraints", "href": "../graph/diff-constraints.html"}, {"title": "最小树形图", "group": "图论", "subgroup": "dmst", "href": "../graph/dmst.html"}, {"title": "支配树", "group": "图论", "subgroup": "dominator-tree", "href": "../graph/dominator-tree.html"}, {"title": "树上启发式合并", "group": "图论", "subgroup": "dsu-on-tree", "href": "../graph/dsu-on-tree.html"}, {"title": "动态树分治", "group": "图论", "subgroup": "dynamic-tree-divide", "href": "../graph/dynamic-tree-divide.html"}, {"title": "欧拉图", "group": "图论", "subgroup": "euler", "href": "../graph/euler.html"}, {"title": "上下界网络流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-bound.html"}, {"title": "最大流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-max-flow.html"}, {"title": "最小割", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-min-cut.html"}, {"title": "网络流简介", "group": "图论", "subgroup": "网络流", "href": "../graph/flow.html"}, {"title": "费用流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-min-cost.html"}, {"title": "一般图最大匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-general-match.html"}, {"title": "一般图最大权匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-general-weight-match.html"}, {"title": "二分图最大匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-bigraph-match.html"}, {"title": "二分图最大权匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-bigraph-weight-match.html"}, {"title": "图匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-graph-match.html"}, {"title": "稳定匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-stable-match.html"}, {"title": "图上随机游走", "group": "图论", "subgroup": "graph-random-walk", "href": "../graph/graph-random-walk.html"}, {"title": "哈密顿图", "group": "图论", "subgroup": "hamilton", "href": "../graph/hamilton.html"}, {"title": "树链剖分", "group": "图论", "subgroup": "hld", "href": "../graph/hld.html"}, {"title": "k 短路", "group": "图论", "subgroup": "kth-path", "href": "../graph/kth-path.html"}, {"title": "最近公共祖先", "group": "图论", "subgroup": "lca", "href": "../graph/lca.html"}, {"title": "LGV 引理", "group": "图论", "subgroup": "lgv", "href": "../graph/lgv.html"}, {"title": "矩阵树定理", "group": "图论", "subgroup": "matrix-tree", "href": "../graph/matrix-tree.html"}, {"title": "最大团搜索算法", "group": "图论", "subgroup": "max-clique", "href": "../graph/max-clique.html"}, {"title": "最小直径生成树", "group": "图论", "subgroup": "mdst", "href": "../graph/mdst.html"}, {"title": "最小环", "group": "图论", "subgroup": "min-cycle", "href": "../graph/min-cycle.html"}, {"title": "同余最短路", "group": "图论", "subgroup": "mod-shortest-path", "href": "../graph/mod-shortest-path.html"}, {"title": "最小生成树", "group": "图论", "subgroup": "mst", "href": "../graph/mst.html"}, {"title": "拆点", "group": "图论", "subgroup": "node", "href": "../graph/node.html"}, {"title": "图论部分简介", "group": "图论", "subgroup": "概览", "href": "../graph/overview.html"}, {"title": "平面图", "group": "图论", "subgroup": "planar", "href": "../graph/planar.html"}, {"title": "Prüfer 序列", "group": "图论", "subgroup": "prufer", "href": "../graph/prufer.html"}, {"title": "环计数问题", "group": "图论", "subgroup": "rings-count", "href": "../graph/rings-count.html"}, {"title": "图的存储", "group": "图论", "subgroup": "save", "href": "../graph/save.html"}, {"title": "强连通分量", "group": "图论", "subgroup": "scc", "href": "../graph/scc.html"}, {"title": "最短路", "group": "图论", "subgroup": "shortest-path", "href": "../graph/shortest-path.html"}, {"title": "斯坦纳树", "group": "图论", "subgroup": "steiner-tree", "href": "../graph/steiner-tree.html"}, {"title": "Stoer–Wagner 算法", "group": "图论", "subgroup": "stoer-wagner", "href": "../graph/stoer-wagner.html"}, {"title": "拓扑排序", "group": "图论", "subgroup": "topo", "href": "../graph/topo.html"}, {"title": "AHU 算法", "group": "图论", "subgroup": "tree-ahu", "href": "../graph/tree-ahu.html"}, {"title": "树基础", "group": "图论", "subgroup": "tree-basic", "href": "../graph/tree-basic.html"}, {"title": "树的中心", "group": "图论", "subgroup": "tree-center", "href": "../graph/tree-center.html"}, {"title": "树的重心", "group": "图论", "subgroup": "tree-centroid", "href": "../graph/tree-centroid.html"}, {"title": "树的直径", "group": "图论", "subgroup": "tree-diameter", "href": "../graph/tree-diameter.html"}, {"title": "树分治", "group": "图论", "subgroup": "tree-divide", "href": "../graph/tree-divide.html"}, {"title": "树哈希", "group": "图论", "subgroup": "tree-hash", "href": "../graph/tree-hash.html"}, {"title": "树上随机游走", "group": "图论", "subgroup": "tree-random-walk", "href": "../graph/tree-random-walk.html"}, {"title": "虚树", "group": "图论", "subgroup": "virtual-tree", "href": "../graph/virtual-tree.html"}, {"title": "OI Wiki", "group": "首页", "subgroup": "概览", "href": "../home/home.html"}, {"title": "关于本项目", "group": "OI Wiki 介绍", "subgroup": "about", "href": "../intro/about.html"}, {"title": "Docker deploy", "group": "OI Wiki 介绍", "subgroup": "docker-deploy", "href": "../intro/docker-deploy.html"}, {"title": "F.A.Q.", "group": "OI Wiki 介绍", "subgroup": "faq", "href": "../intro/faq.html"}, {"title": "格式手册", "group": "OI Wiki 介绍", "subgroup": "format", "href": "../intro/format.html"}, {"title": "如何参与", "group": "OI Wiki 介绍", "subgroup": "htc", "href": "../intro/htc.html"}, {"title": "镜像站列表", "group": "OI Wiki 介绍", "subgroup": "mirrors", "href": "../intro/mirrors.html"}, {"title": "数学符号表", "group": "OI Wiki 介绍", "subgroup": "symbol", "href": "../intro/symbol.html"}, {"title": "致谢", "group": "OI Wiki 介绍", "subgroup": "thanks", "href": "../intro/thanks.html"}, {"title": "OI Wiki 不是什么", "group": "OI Wiki 介绍", "subgroup": "what-oi-wiki-is-not", "href": "../intro/what-oi-wiki-is-not.html"}, {"title": "数组", "group": "编程语言", "subgroup": "array", "href": "../lang/array.html"}, {"title": "C++ 语法基础", "group": "编程语言", "subgroup": "basic", "href": "../lang/basic.html"}, {"title": "分支", "group": "编程语言", "subgroup": "branch", "href": "../lang/branch.html"}, {"title": "类", "group": "编程语言", "subgroup": "class", "href": "../lang/class.html"}, {"title": "常量", "group": "编程语言", "subgroup": "const", "href": "../lang/const.html"}, {"title": "C++ 与其他常用语言的区别", "group": "编程语言", "subgroup": "cpp-other-langs", "href": "../lang/cpp-other-langs.html"}, {"title": "bitset", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-bitset.html"}, {"title": "C++ 标准库简介", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl.html"}, {"title": "pair", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-pair.html"}, {"title": "STL 容器简介", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-container.html"}, {"title": "STL 算法", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-algorithm.html"}, {"title": "string", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-string.html"}, {"title": "关联式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-associative-container.html"}, {"title": "容器适配器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-container-adapter.html"}, {"title": "序列式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-sequence-container.html"}, {"title": "无序关联式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-unordered-container.html"}, {"title": "迭代器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-iterator.html"}, {"title": "文件操作", "group": "编程语言", "subgroup": "file-op", "href": "../lang/file-op.html"}, {"title": "函数", "group": "编程语言", "subgroup": "func", "href": "../lang/func.html"}, {"title": "Hello, World!", "group": "编程语言", "subgroup": "helloworld", "href": "../lang/helloworld.html"}, {"title": "Java 速成", "group": "编程语言", "subgroup": "java", "href": "../lang/java.html"}, {"title": "Java 进阶", "group": "编程语言", "subgroup": "java-pro", "href": "../lang/java-pro.html"}, {"title": "Lambda 表达式", "group": "编程语言", "subgroup": "lambda", "href": "../lang/lambda.html"}, {"title": "循环", "group": "编程语言", "subgroup": "loop", "href": "../lang/loop.html"}, {"title": "命名空间", "group": "编程语言", "subgroup": "namespace", "href": "../lang/namespace.html"}, {"title": "新版 C++ 特性", "group": "编程语言", "subgroup": "new", "href": "../lang/new.html"}, {"title": "运算", "group": "编程语言", "subgroup": "op", "href": "../lang/op.html"}, {"title": "重载运算符", "group": "编程语言", "subgroup": "op-overload", "href": "../lang/op-overload.html"}, {"title": "编译优化", "group": "编程语言", "subgroup": "optimizations", "href": "../lang/optimizations.html"}, {"title": "语言基础简介", "group": "编程语言", "subgroup": "概览", "href": "../lang/overview.html"}, {"title": "Pascal 转 C++ 急救", "group": "编程语言", "subgroup": "pas-cpp", "href": "../lang/pas-cpp.html"}, {"title": "pb_ds 简介", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds.html"}, {"title": "堆", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds-pq.html"}, {"title": "平衡树", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds-tree.html"}, {"title": "指针", "group": "编程语言", "subgroup": "pointer", "href": "../lang/pointer.html"}, {"title": "Python 速成", "group": "编程语言", "subgroup": "python", "href": "../lang/python.html"}, {"title": "引用", "group": "编程语言", "subgroup": "reference", "href": "../lang/reference.html"}, {"title": "结构体", "group": "编程语言", "subgroup": "struct", "href": "../lang/struct.html"}, {"title": "联合体", "group": "编程语言", "subgroup": "union", "href": "../lang/union.html"}, {"title": "值类别", "group": "编程语言", "subgroup": "value-category", "href": "../lang/value-category.html"}, {"title": "变量", "group": "编程语言", "subgroup": "var", "href": "../lang/var.html"}, {"title": "Schreier–Sims 算法", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-schreier-sims.html"}, {"title": "域论", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-field-theory.html"}, {"title": "基本概念", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-basic.html"}, {"title": "环论", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-ring-theory.html"}, {"title": "群论", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-group-theory.html"}, {"title": "Berlekamp–Massey 算法", "group": "数学", "subgroup": "berlekamp-massey", "href": "../math/berlekamp-massey.html"}, {"title": "高精度计算", "group": "数学", "subgroup": "bignum", "href": "../math/bignum.html"}, {"title": "快速幂", "group": "数学", "subgroup": "binary-exponentiation", "href": "../math/binary-exponentiation.html"}, {"title": "二进制集合操作", "group": "数学", "subgroup": "binary-set", "href": "../math/binary-set.html"}, {"title": "位操作", "group": "数学", "subgroup": "bit", "href": "../math/bit.html"}, {"title": "布尔代数", "group": "数学", "subgroup": "boolean-algebra", "href": "../math/boolean-algebra.html"}, {"title": "Entringer Number", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-entringer.html"}, {"title": "Eulerian Number", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-eulerian.html"}, {"title": "Pólya 计数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-polya.html"}, {"title": "伯努利数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-bernoulli.html"}, {"title": "分拆数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-partition.html"}, {"title": "卡特兰数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-catalan.html"}, {"title": "图论计数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-graph-enumeration.html"}, {"title": "容斥原理", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-inclusion-exclusion-principle.html"}, {"title": "抽屉原理", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-drawer-principle.html"}, {"title": "排列组合", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-combination.html"}, {"title": "斐波那契数列", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-fibonacci.html"}, {"title": "斯特林数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-stirling.html"}, {"title": "范德蒙德卷积", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-vandermonde-convolution.html"}, {"title": "贝尔数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-bell.html"}, {"title": "错位排列", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-derangement.html"}, {"title": "复数", "group": "数学", "subgroup": "complex", "href": "../math/complex.html"}, {"title": "弧度制与坐标系", "group": "数学", "subgroup": "coordinate", "href": "../math/coordinate.html"}, {"title": "公平组合游戏", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-impartial-game.html"}, {"title": "博弈论简介", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-intro.html"}, {"title": "零和游戏", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-zero-sum-game.html"}, {"title": "非公平组合游戏", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-partizan-game.html"}, {"title": "Jordan标准型", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-jordan.html"}, {"title": "内积和外积", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-product.html"}, {"title": "初等变换", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-elementary-operations.html"}, {"title": "向量", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-vector.html"}, {"title": "对角化", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-diagonalization.html"}, {"title": "特征多项式", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-char-poly.html"}, {"title": "矩阵", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-matrix.html"}, {"title": "线性代数简介", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra.html"}, {"title": "线性基", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-basis.html"}, {"title": "线性映射", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-linear-mapping.html"}, {"title": "线性空间", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-vector-space.html"}, {"title": "行列式", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-determinant.html"}, {"title": "线性规划基础", "group": "数学", "subgroup": "linear-programming", "href": "../math/linear-programming.html"}, {"title": "拟阵", "group": "数学", "subgroup": "matroid", "href": "../math/matroid.html"}, {"title": "Meissel–Lehmer 算法", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-meissel-lehmer.html"}, {"title": "Min_25 筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-min-25.html"}, {"title": "Pell 方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-pell-equation.html"}, {"title": "Powerful Number 筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-powerful-number.html"}, {"title": "Stern–Brocot 树与 Farey 序列", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-stern-brocot.html"}, {"title": "中国剩余定理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-crt.html"}, {"title": "二次剩余", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-quad-residue.html"}, {"title": "二次域", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-quadratic.html"}, {"title": "分解质因数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-pollard-rho.html"}, {"title": "升幂引理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-lift-the-exponent.html"}, {"title": "卢卡斯定理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-lucas.html"}, {"title": "同余方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-congruence-equation.html"}, {"title": "数论分块", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-sqrt-decomposition.html"}, {"title": "数论基础", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-basic.html"}, {"title": "最大公约数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-gcd.html"}, {"title": "杜教筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-du.html"}, {"title": "模算术简介", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-mod-arithmetic.html"}, {"title": "模逆元", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-inverse.html"}, {"title": "欧拉函数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-euler-totient.html"}, {"title": "洲阁筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-zhou.html"}, {"title": "狄利克雷卷积", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-dirichlet.html"}, {"title": "离散对数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-discrete-logarithm.html"}, {"title": "筛法", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-sieve.html"}, {"title": "类欧几里德算法", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-euclidean.html"}, {"title": "素数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-prime.html"}, {"title": "线性同余方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-linear-equation.html"}, {"title": "莫比乌斯反演", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-mobius.html"}, {"title": "裴蜀定理 & 一次不定方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-bezouts.html"}, {"title": "费马小定理 & 欧拉定理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-fermat.html"}, {"title": "连分数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-continued-fraction.html"}, {"title": "阶 & 原根", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-primitive-root.html"}, {"title": "阶乘取模", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-factorial.html"}, {"title": "高次剩余 & 单位根", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-residue.html"}, {"title": "平衡三进制", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-balanced-ternary.html"}, {"title": "数字系统简介", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-intro.html"}, {"title": "格雷码", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-gray-code.html"}, {"title": "进位制", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-base.html"}, {"title": "插值", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-interp.html"}, {"title": "数值积分", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-integral.html"}, {"title": "牛顿迭代法", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-newton.html"}, {"title": "高斯消元", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-gauss.html"}, {"title": "序理论", "group": "数学", "subgroup": "order-theory", "href": "../math/order-theory.html"}, {"title": "数学部分简介", "group": "数学", "subgroup": "概览", "href": "../math/overview.html"}, {"title": "置换和排列", "group": "数学", "subgroup": "permutation", "href": "../math/permutation.html"}, {"title": "Chirp Z 变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-czt.html"}, {"title": "Lagrange 反演", "group": "数学", "subgroup": "多项式", "href": "../math/poly-lagrange-inversion.html"}, {"title": "代数基本定理", "group": "数学", "subgroup": "多项式", "href": "../math/poly-fundamental.html"}, {"title": "多项式与生成函数简介", "group": "数学", "subgroup": "多项式", "href": "../math/poly-intro.html"}, {"title": "多项式初等函数", "group": "数学", "subgroup": "多项式", "href": "../math/poly-elementary-func.html"}, {"title": "多项式多点求值|快速插值", "group": "数学", "subgroup": "多项式", "href": "../math/poly-multipoint-eval-interpolation.html"}, {"title": "多项式平移|连续点值平移", "group": "数学", "subgroup": "多项式", "href": "../math/poly-shift.html"}, {"title": "多项式牛顿迭代", "group": "数学", "subgroup": "多项式", "href": "../math/poly-newton.html"}, {"title": "常系数齐次线性递推", "group": "数学", "subgroup": "多项式", "href": "../math/poly-linear-recurrence.html"}, {"title": "形式幂级数复合|复合逆", "group": "数学", "subgroup": "多项式", "href": "../math/poly-comp-rev.html"}, {"title": "快速傅里叶变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-fft.html"}, {"title": "快速数论变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-ntt.html"}, {"title": "快速沃尔什变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-fwt.html"}, {"title": "指数生成函数", "group": "数学", "subgroup": "多项式", "href": "../math/poly-egf.html"}, {"title": "普通生成函数", "group": "数学", "subgroup": "多项式", "href": "../math/poly-ogf.html"}, {"title": "符号化方法", "group": "数学", "subgroup": "多项式", "href": "../math/poly-symbolic-method.html"}, {"title": "基本概念", "group": "数学", "subgroup": "概率", "href": "../math/probability-basic-conception.html"}, {"title": "条件概率与独立性", "group": "数学", "subgroup": "概率", "href": "../math/probability-conditional-probability.html"}, {"title": "概率不等式", "group": "数学", "subgroup": "概率", "href": "../math/probability-concentration-inequality.html"}, {"title": "随机变量", "group": "数学", "subgroup": "概率", "href": "../math/probability-random-variable.html"}, {"title": "随机变量的数字特征", "group": "数学", "subgroup": "概率", "href": "../math/probability-exp-var.html"}, {"title": "单纯形法", "group": "数学", "subgroup": "simplex", "href": "../math/simplex.html"}, {"title": "杨氏矩阵", "group": "数学", "subgroup": "young-tableau", "href": "../math/young-tableau.html"}, {"title": "15-puzzle", "group": "杂项", "subgroup": "15-puzzle", "href": "../misc/15-puzzle.html"}, {"title": "计算理论基础", "group": "杂项", "subgroup": "cc-basic", "href": "../misc/cc-basic.html"}, {"title": "CDQ 分治", "group": "杂项", "subgroup": "cdq-divide", "href": "../misc/cdq-divide.html"}, {"title": "离散化", "group": "杂项", "subgroup": "discrete", "href": "../misc/discrete.html"}, {"title": "字节顺序", "group": "杂项", "subgroup": "endianness", "href": "../misc/endianness.html"}, {"title": "表达式求值", "group": "杂项", "subgroup": "expression", "href": "../misc/expression.html"}, {"title": "分数规划", "group": "杂项", "subgroup": "frac-programming", "href": "../misc/frac-programming.html"}, {"title": "有限状态自动机", "group": "杂项", "subgroup": "fsm", "href": "../misc/fsm.html"}, {"title": "Garsia–Wachs 算法", "group": "杂项", "subgroup": "garsia-wachs", "href": "../misc/garsia-wachs.html"}, {"title": "爬山算法", "group": "杂项", "subgroup": "hill-climbing", "href": "../misc/hill-climbing.html"}, {"title": "悬线法", "group": "杂项", "subgroup": "hoverline", "href": "../misc/hoverline.html"}, {"title": "在一台机器上规划任务", "group": "杂项", "subgroup": "job-order", "href": "../misc/job-order.html"}, {"title": "约瑟夫问题", "group": "杂项", "subgroup": "josephus", "href": "../misc/josephus.html"}, {"title": "Kahan 求和", "group": "杂项", "subgroup": "kahan-summation", "href": "../misc/kahan-summation.html"}, {"title": "主元素问题", "group": "杂项", "subgroup": "main-element", "href": "../misc/main-element.html"}, {"title": "普通莫队算法", "group": "杂项", "subgroup": "mo-algo", "href": "../misc/mo-algo.html"}, {"title": "二维莫队", "group": "杂项", "subgroup": "mo-algo-2dimen", "href": "../misc/mo-algo-2dimen.html"}, {"title": "莫队算法简介", "group": "杂项", "subgroup": "mo-algo-intro", "href": "../misc/mo-algo-intro.html"}, {"title": "树上莫队", "group": "杂项", "subgroup": "mo-algo-on-tree", "href": "../misc/mo-algo-on-tree.html"}, {"title": "莫队二次离线", "group": "杂项", "subgroup": "mo-algo-secondary-offline", "href": "../misc/mo-algo-secondary-offline.html"}, {"title": "莫队配合 bitset", "group": "杂项", "subgroup": "mo-algo-with-bitset", "href": "../misc/mo-algo-with-bitset.html"}, {"title": "带修改莫队", "group": "杂项", "subgroup": "modifiable-mo-algo", "href": "../misc/modifiable-mo-algo.html"}, {"title": "珂朵莉树/颜色段均摊", "group": "杂项", "subgroup": "odt", "href": "../misc/odt.html"}, {"title": "离线算法简介", "group": "杂项", "subgroup": "offline", "href": "../misc/offline.html"}, {"title": "杂项简介", "group": "杂项", "subgroup": "概览", "href": "../misc/overview.html"}, {"title": "整体二分", "group": "杂项", "subgroup": "parallel-binsearch", "href": "../misc/parallel-binsearch.html"}, {"title": "随机化技巧", "group": "杂项", "subgroup": "rand-technique", "href": "../misc/rand-technique.html"}, {"title": "随机函数", "group": "杂项", "subgroup": "random", "href": "../misc/random.html"}, {"title": "回滚莫队", "group": "杂项", "subgroup": "rollback-mo-algo", "href": "../misc/rollback-mo-algo.html"}, {"title": "模拟退火", "group": "杂项", "subgroup": "simulated-annealing", "href": "../misc/simulated-annealing.html"}, {"title": "空间优化简介", "group": "杂项", "subgroup": "space-optimization", "href": "../misc/space-optimization.html"}, {"title": "双指针", "group": "杂项", "subgroup": "two-pointer", "href": "../misc/two-pointer.html"}, {"title": "Alpha–Beta 剪枝", "group": "搜索", "subgroup": "alpha-beta", "href": "../search/alpha-beta.html"}, {"title": "A*", "group": "搜索", "subgroup": "astar", "href": "../search/astar.html"}, {"title": "回溯法", "group": "搜索", "subgroup": "backtracking", "href": "../search/backtracking.html"}, {"title": "BFS（搜索）", "group": "搜索", "subgroup": "bfs", "href": "../search/bfs.html"}, {"title": "双向搜索", "group": "搜索", "subgroup": "bidirectional", "href": "../search/bidirectional.html"}, {"title": "DFS（搜索）", "group": "搜索", "subgroup": "dfs", "href": "../search/dfs.html"}, {"title": "Dancing Links", "group": "搜索", "subgroup": "dlx", "href": "../search/dlx.html"}, {"title": "启发式搜索", "group": "搜索", "subgroup": "heuristic", "href": "../search/heuristic.html"}, {"title": "IDA*", "group": "搜索", "subgroup": "idastar", "href": "../search/idastar.html"}, {"title": "迭代加深搜索", "group": "搜索", "subgroup": "iterative", "href": "../search/iterative.html"}, {"title": "优化", "group": "搜索", "subgroup": "优化", "href": "../search/opt.html"}, {"title": "搜索部分简介", "group": "搜索", "subgroup": "概览", "href": "../search/overview.html"}, {"title": "AC 自动机", "group": "字符串", "subgroup": "ac-automaton", "href": "ac-automaton.html"}, {"title": "字符串基础", "group": "字符串", "subgroup": "basic", "href": "basic.html"}, {"title": "Boyer–Moore 算法", "group": "字符串", "subgroup": "bm", "href": "bm.html"}, {"title": "广义后缀自动机", "group": "字符串", "subgroup": "general-sam", "href": "general-sam.html"}, {"title": "字符串哈希", "group": "字符串", "subgroup": "hash", "href": "hash.html"}, {"title": "前缀函数与 KMP 算法", "group": "字符串", "subgroup": "kmp", "href": "kmp.html"}, {"title": "标准库", "group": "字符串", "subgroup": "lib-func", "href": "lib-func.html"}, {"title": "Lyndon 分解", "group": "字符串", "subgroup": "lyndon", "href": "lyndon.html"}, {"title": "Main–Lorentz 算法", "group": "字符串", "subgroup": "main-lorentz", "href": "main-lorentz.html"}, {"title": "Manacher", "group": "字符串", "subgroup": "manacher", "href": "manacher.html"}, {"title": "字符串匹配", "group": "字符串", "subgroup": "match", "href": "match.html"}, {"title": "最小表示法", "group": "字符串", "subgroup": "minimal-string", "href": "minimal-string.html"}, {"title": "字符串部分简介", "group": "字符串", "subgroup": "概览", "href": "overview.html"}, {"title": "回文树", "group": "字符串", "subgroup": "pam", "href": "pam.html"}, {"title": "后缀数组简介", "group": "字符串", "subgroup": "sa", "href": "sa.html"}, {"title": "最优原地后缀排序算法", "group": "字符串", "subgroup": "sa-optimal-inplace", "href": "sa-optimal-inplace.html"}, {"title": "后缀自动机 (SAM)", "group": "字符串", "subgroup": "sam", "href": "sam.html"}, {"title": "序列自动机", "group": "字符串", "subgroup": "seq-automaton", "href": "seq-automaton.html"}, {"title": "后缀平衡树", "group": "字符串", "subgroup": "suffix-bst", "href": "suffix-bst.html"}, {"title": "后缀树", "group": "字符串", "subgroup": "suffix-tree", "href": "suffix-tree.html"}, {"title": "字典树 (Trie)", "group": "字符串", "subgroup": "trie", "href": "trie.html"}, {"title": "Z 函数（扩展 KMP）", "group": "字符串", "subgroup": "z-func", "href": "z-func.html"}, {"title": "命令行", "group": "工具", "subgroup": "cmd", "href": "../tools/cmd.html"}, {"title": "命令行编译与调试", "group": "工具", "subgroup": "compile-debug", "href": "../tools/compile-debug.html"}, {"title": "编译器", "group": "工具", "subgroup": "compiler", "href": "../tools/compiler.html"}, {"title": "Atom", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-atom.html"}, {"title": "CLion", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-clion.html"}, {"title": "Code::Blocks", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-codeblocks.html"}, {"title": "CP Editor", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-cpeditor.html"}, {"title": "Dev-C++", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-devcpp.html"}, {"title": "Eclipse", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-eclipse.html"}, {"title": "Emacs", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-emacs.html"}, {"title": "Geany", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-geany.html"}, {"title": "GUIDE", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-guide.html"}, {"title": "Kate", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-kate.html"}, {"title": "Notepad++", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-npp.html"}, {"title": "Sublime Text", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-sublime.html"}, {"title": "Vim", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-vim.html"}, {"title": "VS Code", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-vscode.html"}, {"title": "Xcode", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-xcode.html"}, {"title": "Git", "group": "工具", "subgroup": "git", "href": "../tools/git.html"}, {"title": "Arbiter", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-arbiter.html"}, {"title": "CCR Plus", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-ccr-plus.html"}, {"title": "Cena", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-cena.html"}, {"title": "Lemon", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-lemon.html"}, {"title": "评测工具简介", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger.html"}, {"title": "LaTeX 入门", "group": "工具", "subgroup": "latex", "href": "../tools/latex.html"}, {"title": "OJ 工具", "group": "工具", "subgroup": "oj-tool", "href": "../tools/oj-tool.html"}, {"title": "工具软件简介", "group": "工具", "subgroup": "概览", "href": "../tools/overview.html"}, {"title": "Polygon", "group": "工具", "subgroup": "polygon", "href": "../tools/polygon.html"}, {"title": "Special Judge", "group": "工具", "subgroup": "special-judge", "href": "../tools/special-judge.html"}, {"title": "Checker", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-checker.html"}, {"title": "Generator", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-generator.html"}, {"title": "Interactor", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-interactor.html"}, {"title": "Testlib 简介", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib.html"}, {"title": "Validator", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-validator.html"}, {"title": "通用", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-general.html"}, {"title": "WSL (Windows 10)", "group": "工具", "subgroup": "wsl", "href": "../tools/wsl.html"}, {"title": "括号序列", "group": "专题", "subgroup": "bracket", "href": "../topic/bracket.html"}, {"title": "并查集应用", "group": "专题", "subgroup": "dsu-app", "href": "../topic/dsu-app.html"}, {"title": "RMQ", "group": "专题", "subgroup": "rmq", "href": "../topic/rmq.html"}, {"title": "线段树与离线询问", "group": "专题", "subgroup": "segment-tree-offline", "href": "../topic/segment-tree-offline.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) return;
+      let items = [];
+      try { items = JSON.parse(dataNode.textContent || "[]"); } catch (_error) { return; }
+      const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+      const highlight = (value, query) => {
+        if (!query) return escapeHtml(value);
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+      const groups = [...new Set(items.map((item) => item.group))].sort((a, b) => a.localeCompare(b, "zh-CN"));
+      for (const group of groups) {
+        const option = document.createElement("option");
+        option.value = group;
+        option.textContent = group;
+        groupSelect.append(option);
+      }
+      const render = () => {
+        const query = input.value.trim().toLowerCase();
+        const tokens = query.split(/\s+/).filter(Boolean);
+        const selectedGroup = groupSelect.value;
+        const scoped = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup ? `${selectedGroup} 下可搜索 ${scoped.length} 个页面。` : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+        const matches = scoped
+          .filter((item) => {
+            const haystack = [item.title, item.group, item.subgroup].join(" ").toLowerCase();
+            return tokens.every((token) => haystack.includes(token));
+          })
+          .sort((a, b) => a.title.localeCompare(b.title, "zh-CN"));
+        results.hidden = matches.length === 0;
+        results.innerHTML = matches.slice(0, 100).map((item) =>
+          `<li><a href="${item.href}">${highlight(item.title, query)}</a><div class="meta">${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</div></li>`
+        ).join("");
+        status.textContent = matches.length ? `匹配 ${matches.length} 个页面，显示前 ${Math.min(matches.length, 100)} 个。` : "没有匹配结果。";
+      };
+      input.addEventListener("input", render);
+      groupSelect.addEventListener("change", render);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        render();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          render();
+        }
+      });
+      const params = new URLSearchParams(window.location.search);
+      const initialQuery = params.get("q");
+      if (initialQuery) input.value = initialQuery;
+      render();
+    })();
+  </script>
+</body>
+</html>

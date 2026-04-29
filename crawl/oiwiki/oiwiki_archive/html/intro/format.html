@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>格式手册</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f7f8;
+      --panel: #ffffff;
+      --ink: #17202a;
+      --muted: #5f6c7b;
+      --line: #d9e1e8;
+      --accent: #0f766e;
+      --accent-soft: #d9f3ef;
+      --code-bg: #111827;
+      --code-ink: #e5e7eb;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Noto Sans SC", "Source Han Sans SC", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      line-height: 1.65;
+    }
+    main {
+      max-width: 1440px;
+      margin: 0 auto;
+      padding: 24px 20px 56px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 300px minmax(0, 1fr);
+      gap: 20px;
+      align-items: start;
+    }
+    header, section, article, .sidebar-card {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    header {
+      padding: 20px 22px;
+      margin-bottom: 20px;
+    }
+    header h1 {
+      margin: 0 0 6px;
+      font-size: 1.75rem;
+      line-height: 1.25;
+    }
+    header p, p {
+      color: var(--muted);
+    }
+    aside {
+      position: sticky;
+      top: 16px;
+    }
+    .sidebar-card {
+      padding: 16px;
+      max-height: calc(100vh - 32px);
+      overflow: auto;
+    }
+    .sidebar-card h2, section h2 {
+      margin: 0 0 10px;
+      font-size: 1.05rem;
+    }
+    a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    .sidebar-list, .sidebar-sublist {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+    .sidebar-sublist {
+      margin-top: 8px;
+      padding-left: 12px;
+      border-left: 1px dashed var(--line);
+    }
+    .sidebar-list li {
+      margin: 0 0 9px;
+      padding-bottom: 9px;
+      border-bottom: 1px solid var(--line);
+    }
+    .sidebar-sublist li {
+      border: 0;
+      padding-bottom: 0;
+      margin-bottom: 7px;
+    }
+    .sidebar-list span, .meta {
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .sidebar-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .sidebar-row a {
+      min-width: 0;
+      overflow-wrap: anywhere;
+    }
+    .sidebar-row span {
+      flex: 0 0 auto;
+    }
+    details summary {
+      cursor: pointer;
+      font-weight: 600;
+    }
+    .content > section, article {
+      padding: 20px 22px;
+      margin-bottom: 18px;
+    }
+    article {
+      max-width: 980px;
+    }
+    .group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 14px;
+    }
+    .group-card {
+      min-width: 0;
+    }
+    .page-list li, .group-card li, .search-results li {
+      margin: 7px 0;
+    }
+    .article-nav {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+      gap: 12px;
+      margin: 0 0 18px;
+    }
+    .article-nav a {
+      display: block;
+      min-width: 0;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: var(--panel);
+      overflow-wrap: anywhere;
+    }
+    .article-nav a:last-child {
+      text-align: right;
+    }
+    .search-controls {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: end;
+    }
+    .search-controls label {
+      display: grid;
+      gap: 4px;
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+    input, select, button {
+      min-height: 42px;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fff;
+      color: var(--ink);
+      font: inherit;
+      padding: 8px 10px;
+    }
+    button {
+      background: var(--accent-soft);
+      color: var(--accent);
+      cursor: pointer;
+      font-weight: 600;
+    }
+    mark {
+      background: #f5d76e;
+      color: #17202a;
+      border-radius: 3px;
+      padding: 0 2px;
+    }
+    article h1, article h2, article h3, article h4 {
+      line-height: 1.35;
+      scroll-margin-top: 20px;
+    }
+    article img {
+      max-width: 100%;
+      height: auto;
+      vertical-align: middle;
+    }
+    .table-scroll {
+      overflow: auto;
+      margin: 1em 0;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 680px;
+      background: var(--panel);
+    }
+    th, td {
+      padding: 8px 10px;
+      border: 1px solid var(--line);
+      vertical-align: top;
+      text-align: left;
+    }
+    th {
+      background: #eef7f6;
+      color: #123c39;
+      font-weight: 700;
+    }
+    pre {
+      overflow: auto;
+      padding: 14px;
+      border-radius: 8px;
+      background: var(--code-bg);
+      color: var(--code-ink);
+    }
+    code {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 0.92em;
+      word-break: break-word;
+    }
+    p code, li code {
+      background: #eef2f7;
+      color: #1f2937;
+      border-radius: 4px;
+      padding: 0.1em 0.3em;
+    }
+    blockquote {
+      margin: 1em 0;
+      padding: 0.2em 1em;
+      border-left: 4px solid var(--accent);
+      background: #f0fdfa;
+      color: #334155;
+    }
+    @media (max-width: 900px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+      aside {
+        position: static;
+      }
+      .search-controls {
+        grid-template-columns: 1fr;
+      }
+      .article-nav {
+        grid-template-columns: 1fr;
+      }
+      .article-nav a:last-child {
+        text-align: left;
+      }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <h1>格式手册</h1>
+      <p>OI Wiki 介绍 / format</p>
+    </header>
+    <div class="layout">
+      <aside><nav class="sidebar-card"><h2>页面导航</h2><ul class="sidebar-list"><li><a href="../../index.html">归档首页</a></li><li><a href="index.html">OI Wiki 介绍 索引</a></li><li><details open><summary>本文目录</summary><ul class="sidebar-sublist"><li><a href="#683c5f0f624b518c">格式手册</a></li><li><a href="#592a957f4e0d770b7248">太长不看版</a></li><li><a href="#56fe89e3">图解</a></li><li><a href="#4f8b-1">例 1</a></li><li><a href="#4f8b-2">例 2</a></li><li><a href="#4f8b-3">例 3</a></li><li><a href="#4f8b-4">例 4</a></li><li><a href="#4f8b-5">例 5</a></li><li><a href="#4f8b-6">例 6</a></li><li><a href="#4f8b-7">例 7</a></li><li><a href="#4f8b-8">例 8</a></li><li><a href="#591690e894fe63a5">外部链接</a></li><li><a href="#53c280038d4465994e0e6ce891ca">参考资料与注释</a></li></ul></details></li><li><details><summary>同栏目页面</summary><ul class="sidebar-sublist"><li><a href="docker-deploy.html">Docker deploy</a></li><li><a href="faq.html">F.A.Q.</a></li><li><a href="what-oi-wiki-is-not.html">OI Wiki 不是什么</a></li><li><a href="about.html">关于本项目</a></li><li><a href="htc.html">如何参与</a></li><li><a href="symbol.html">数学符号表</a></li><li><a href="format.html">格式手册</a></li><li><a href="thanks.html">致谢</a></li><li><a href="mirrors.html">镜像站列表</a></li></ul></details></li></ul></nav></aside>
+      <div class="content"><nav class="article-nav"><a href="symbol.html"><span class="meta">上一篇</span><br>数学符号表</a><a href="thanks.html"><span class="meta">下一篇</span><br>致谢</a></nav><article><p class="meta">本地源文件：<code>docs/intro__format.md</code></p><h1 id="683c5f0f624b518c">格式手册</h1>
+<p>在文章开始之前，<strong>OI Wiki</strong> 项目组全体成员十分欢迎您为本项目贡献页面．正因为有了上百位像您一样的人，才有了 <strong>OI Wiki</strong> 的今天！</p>
+<p>本页面将列出在 <strong>OI Wiki</strong> 编写过程时推荐使用的格式规范与编辑方针．请您在撰稿或者修正 Wiki 页面以前，仔细阅读以下内容，以帮助您完成更高质量的内容．</p>
+<p>如果您已迫不及待，想要快速上手，建议先阅读 太长不看版 与 图片举例 的章节．</p>
+<p>Changelog</p>
+<p><strong>注意</strong> ：只记录和写作、审阅等相关的改动，不记录格式修正等改动．</p>
+<div class="table-scroll"><table><thead><tr><th>时间</th><th>主要内容</th><th>相关 Issue/Pull Request 链接</th></tr></thead><tbody><tr><td>2026-02-22</td><td>完善引号使用的相关规定</td><td><a href="https://github.com/OI-wiki/OI-wiki/pull/6793">#6793</a></td></tr><tr><td>2026-01-07</td><td>要求使用全角句点替代中文句号</td><td><a href="https://github.com/OI-wiki/OI-wiki/pull/6746">#6746</a></td></tr></tbody></table></div>
+<p>2025-08-10| 添加格式手册的格式要求； 代码：补充片段代码相关要求| <a href="https://github.com/OI-wiki/OI-wiki/pull/6412">#6412</a> 2025-08-10| 添加 Changelog 与 TL;DR| <a href="https://github.com/OI-wiki/OI-wiki/pull/6409">#6409</a> 2024-10-08| 代码：为适应全平台测试完善了格式要求| <a href="https://github.com/OI-wiki/OI-wiki/pull/5912">#5912</a>，<a href="https://github.com/OI-wiki/OI-wiki/pull/5924">#5924</a> 2024-03-26| 引用 OJ 题目链接时使用原链接，而不是镜像链接| <a href="https://github.com/OI-wiki/OI-wiki/pull/5482">#5482</a> 2023-10-09| 主题插件：新增选项卡8的格式要求| <a href="https://github.com/OI-wiki/OI-wiki/pull/5152">#5152</a> 2023-07-23| 对于工具类内容的下载安装等内容，要求引用官方文档| <a href="https://github.com/OI-wiki/OI-wiki/pull/5023">#5023</a> 2023-04-15| 补充引号的使用规范| <a href="https://github.com/OI-wiki/OI-wiki/pull/4792">#4792</a> 2023-03-28| LaTeX：数学符号表| <a href="https://github.com/OI-wiki/OI-wiki/pull/4587">#4587</a> 2023-03-02| 补充全半角标点与连接号的使用规范| <a href="https://github.com/OI-wiki/OI-wiki/pull/4726">#4726</a> 2022-12-13| 主题插件：移除嵌套折叠框的阴影样式要求| <a href="https://github.com/OI-wiki/OI-wiki/pull/4500">#4500</a> 2022-08-09| 引用内链的某一节内容时，使用中文标题| <a href="https://github.com/OI-wiki/OI-wiki/pull/4057">#4057</a> 2022-06-12| 完善目录更改的相关要求9| <a href="https://github.com/OI-wiki/OI-wiki/pull/4043">#4043</a> 2021-09-09| 主题插件：补充折叠框相关要求| <a href="https://github.com/OI-wiki/OI-wiki/pull/3517">#3517</a> 2021-09-03| LaTeX：<code>\Leftrightarrow</code> →→<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> <code>\iff</code>| <a href="https://github.com/OI-wiki/OI-wiki/pull/3499">#3499</a> 2021-08-18| 代码：新增例题代码的格式要求| <a href="https://github.com/OI-wiki/OI-wiki/pull/3447">#3447</a> 2021-08-12| 图片：动图优先使用 APNG 格式| <a href="https://github.com/OI-wiki/OI-wiki/pull/3422">#3422</a> 2021-06-29| 图片：建议同时提交源文件| <a href="https://github.com/OI-wiki/OI-wiki/pull/3255">#3255</a> 2021-05-29| 代码：删除大括号不换行的要求，补充可读性要求| <a href="https://github.com/OI-wiki/OI-wiki/pull/3197">#3197</a> 2021-03-15| 站点维护：规范 Pull Request 的合并方式10| <a href="https://github.com/OI-wiki/OI-wiki/pull/3061">#3061</a> 2021-02-01| LaTeX：<code>\lt</code> →→<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> <code>&lt;</code>，<code>\gt</code> →→<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> <code>&gt;</code>| <a href="https://github.com/OI-wiki/OI-wiki/pull/2950">#2950</a> 2021-01-27| 建议在 <a href="https://web.archive.org/">互联网档案馆</a> 保存外链备份| <a href="https://github.com/OI-wiki/OI-wiki/pull/2918">#2918</a> 2020-09-19| 站点维护：Commit Message 与 Pull Request 标题的书写要求9| <a href="https://github.com/OI-wiki/OI-wiki/pull/2744">#2744</a> 2020-10-18| 图片：优先使用 SVG 格式| <a href="https://github.com/OI-wiki/OI-wiki/pull/2215">#2215</a> 2020-08-05| LaTeX：新增多字母变量的格式要求| <a href="https://github.com/OI-wiki/OI-wiki/pull/2502">#2502</a> 2020-07-28| LaTeX：<code>cases</code> 环境禁止超过两列| <a href="https://github.com/OI-wiki/OI-wiki/pull/2466">#2466</a> 2020-07-24| LaTeX：<code>{n \choose m}</code>→→<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> <code>\dbinom{n}{m}</code>| <a href="https://github.com/OI-wiki/OI-wiki/pull/2442">#2442</a> 2020-07-20| Markdown：禁用删除线语法| <a href="https://github.com/OI-wiki/OI-wiki/pull/2422">#2422</a> 2020-07-19| 主题插件：要求保留折叠框11中空行的缩进空格； LaTeX：追加对数学公式的格式要求| <a href="https://github.com/OI-wiki/OI-wiki/pull/2412">#2412</a> 2020-07-11| 最初版本| <a href="https://github.com/OI-wiki/OI-wiki/pull/2350">#2350</a></p>
+<h2 id="592a957f4e0d770b7248">太长不看版</h2>
+<p>为方便初次阅读本文档的用户，本节列举该手册中的若干重点事项：</p>
+<ul>
+<li>文件存储：</li>
+</ul>
+<ul>
+<li>使用小写文件名，以 <code>-</code> 代替空格．详见 SAVE-1．</li>
+</ul>
+<ul>
+<li>不要插入外链图片．详见 SAVE-2．</li>
+</ul>
+<ul>
+<li>图片尽可能使用 SVG 格式，只应使用 SVG 1.1 标准．详见 SAVE-3．</li>
+</ul>
+<ul>
+<li>动图应使用 SVG 或 APNG 格式．详见 SAVE-4．</li>
+</ul>
+<ul>
+<li>有源文件的图片建议同时提交源文件．详见 SAVE-5．</li>
+</ul>
+<ul>
+<li>插入外链时建议同时插入快照链接．详见 SAVE-6．</li>
+</ul>
+<ul>
+<li>不要以插入外链的方式插入内链．详见 SAVE-7．</li>
+</ul>
+<ul>
+<li>标点符号：</li>
+</ul>
+<ul>
+<li>规范使用标点符号．在每句话的末尾添加 <strong>句号</strong> ．详见 PUNC-1 至 PUNC-7．</li>
+</ul>
+<ul>
+<li>注意区分连接号（hyphen、en dash、em dash）．详见 PUNC-8．</li>
+</ul>
+<ul>
+<li>Markdown 语法与主题扩展语法：</li>
+</ul>
+<ul>
+<li>只应使用二级、三级、四级标题．不要使用标题替代加粗．不要在标题写 LaTeX 公式．详见 LINT-1、MDFM-1、CONT-4、CONT-9．</li>
+</ul>
+<ul>
+<li>使用折叠框11语法和选项卡8语法时，须保持内部缩进一致，<strong>对空行也是如此</strong> ．<strong>不要漏掉</strong> 空行的空格缩进．详见 LINT-6、MDFM-6．</li>
+</ul>
+<ul>
+<li>不要使用删除线 <code>~~foo~~</code> 语法．详见 LINT-3．</li>
+</ul>
+<ul>
+<li>行间公式应写作</li>
+</ul>
+<pre><code class="language-text">---|---
+
+而不是 `$$a^{2}=b^{2}+c^{2}$$`．详见 LINT-5．
+
+    * 使用折叠框而不是块引用（Blockquotes）．详见 MDFM-5．
+
+    * 代码块只应使用 ````` 语法，且须标注语言．详见 LINT-7、MDFM-3．
+
+  * LaTeX 公式：
+
+    * 不应与 [数学符号表](../symbol/) 相冲突．详见 MATH-1.1．
+
+    * 注意字体的使用，详见 MATH-1.2、MATH-1.15、MATH-2.6、MATH-2.7．
+
+    * 不要滥用 LaTeX 公式．详见 MATH-1.14．
+
+    * 不要 LaTeX 公式里使用程序设计语言的表示方式．（如：不要使用 𝑎 ==𝑏a==b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、𝑎 &lt;&lt;1a&lt;&lt;1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、𝑎%𝑏a%b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．）不要使用中括号连缀（𝑎[𝑖][𝑗]a[i][j]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）．详见 MATH-1.9、MATH-1.10．
+
+  * 代码：
+
+    * 尽可能简洁易懂，避免压行等不良习惯．尽可能保证可读性，突出算法思想．详见 CONT-10．
+
+    * 不推荐直接把代码插入 Markdown 文档中．详见 CODE-1.1、CODE-1.2．
+
+## 对本文档的格式要求
+
+  * FREQ-1：修订格式手册的条目时需同时补充 Changelog．若只是修正格式，则无需补充 Changelog．
+  * FREQ-2：除 太长不看版 一节外，格式手册的条目都需要有不重复的编号，编号需要匹配正则表达式 `(?&lt;category&gt;[A-Z]{4})-(?&lt;id&gt;[1-9][0-9]*(?:\.[1-9][0-9]*)*)`，其中 `category` 应具有直观的含义．说明文字不需要有编号．
+  * FREQ-3：太长不看版 的条目必须来自格式手册其他章节的内容，且需在末尾引用对应的条目编号．
+  * FREQ-4：条目的编号一旦确定就不应更改．如果确需更改（如删除、合并条目），则应用类似「已废止」、「迁移至 XXXX-id」的文字注明．
+
+## 贡献文档要求
+
+当你打算贡献某部分的内容时，你应该尽量熟悉以下三部分：
+
+  * 文档存储的格式
+  * 文档的合理性
+  * remark-lint 和 LATEXLATEX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 公式的格式要求
+
+### 文档引用与存储的格式
+
+  * SAVE-1：**文件名请务必都小写，以`-` 分割．** 例如：`file-name.md`．
+
+  * SAVE-2：请务必确保文档中引用的 **外链** 图片已经全部转存到了 **本库内** 对应的 `images` 文件夹中（防止触发某些网站的防盗链），建议处理成 `MD 文档名称 + 编号` 的形式（可参考已有文档中图片的处理方式）．例如：本篇文档的文件名称为 format，则文档中引用的第一张图片的名字为 `format1.png`．
+
+  * SAVE-3：推荐使用 SVG 格式的图片1，以获取较好的清晰度和缩放效果．由于 **OI Wiki** 各组件对 SVG 标准的兼容性不同，所以您的图片应基于 [SVG 1.1](http://www.w3.org/TR/SVG11/) 标准．
+
+  * SAVE-4：动图如果无法或者不会制作 SVG 格式的，则推荐使用 APNG 格式2的文件．Windows 用户可使用 [ScreenToGif](https://www.screentogif.com) 录制，Linux 用户可使用 [Peek](https://github.com/phw/peek) 录制，注意需要在设置里调整为录制 APNG．其他情况则推荐先制作为 MP4 等视频文件再转换为 APNG，如果使用 ffmpeg 则可以使用 `ffmpeg -i filename.mp4 -f apng filename.apng -plays 0` 转换．3
+
+  * SAVE-5：同时具有源文件和导出图像的图片（例如 JPG 文件与 PSD 文件或者 SVG 图像与 TikZ TeX 源代码），建议将源文件以与图片相同的文件名保存于同一目录下．
+
+  * SAVE-6：请确保您的文档中的引用链接的稳定性．**不推荐** 引用 **自建** 服务中的资源（如自建 OJ 里的题目）．建议在添加时同时将该外链存于互联网档案馆4，以防无法替代的链接失效．
+
+  * SAVE-7：站内链接请去掉网站域名，并且使用相对路径链接对应 `.md` 文件．例如，在本页面（`intro/format`）中链接杂项简介（`misc`），应使用 `[杂项简介](../misc/index.md)`．可以在链接中添加 hash 来链接到某一节，例如 [`[Pull Request 信息格式规范](./htc.md#pull-request-信息格式规范)`](../htc/#pull-request-信息格式规范)，hash 的值可以通过位于每个标题右侧的按钮或者位于网页右侧的目录中的链接得到．
+
+### 文档的合理性
+
+**合理性** ，指所编写的 **内容** 必须具有如下的特性：
+
+  * STRC-1：由浅入深，内容的难度应该具有渐进性．
+  * STRC-2：逻辑性．
+
+    * STRC-2.1：对于算法或数学概念类内容的撰写应该尽量包含以下的内容：
+
+      1. 原理：说明该内容对应的原理；
+      2. 例子：给出 1 ~ 2 个典型的例子；
+      3. 题目：在该标题下，**只需要给出题目名字和题目链接** ．对于算法类题目，题目链接 OJ 的优先级为：原 OJ（国外 OJ 要求国内可流畅访问）&gt; UOJ &gt; LOJ &gt; 洛谷．
+
+示例页面：[IDA*](../../search/idastar/)
+
+    * STRC-2.2：对于工具类内容的撰写应该尽量包含以下的内容：
+
+      1. 简介：阐明该工具的背景与用途．
+      2. 配置方式：详细给出配置环境与使用的过程，下载与安装方法建议尽量引用官方文档．
+
+示例页面：[WSL (Windows 10)](../../tools/wsl/)
+
+除现有内容质量较低的情况外，建议尽量从 **补充** 的角度来做贡献，而非采取直接覆盖的方式．如果拿不准主意，可以参考 [关于本项目的交流方式](../about/#交流方式) 一节，与 **OI Wiki** 项目组联系．
+
+### 文档的基本格式要求
+
+#### Remark-lint 的格式要求
+
+[remark-lint](https://github.com/remarkjs/remark-lint) 可以自动给项目内文件统一风格．**OI Wiki** 现在启用的配置文件托管在 [.remarkrc](https://github.com/OI-wiki/OI-wiki/blob/master/.remarkrc)．
+
+在配置过程中 **OI Wiki** 项目组也遇到了一些 remark-lint 不能很好处理的问题，所以请严格按照下列要求编辑文档：
+
+  * LINT-1：不要使用如 `&lt;h1&gt;` 或者 `# 标题` 的一级标题．
+
+  * LINT-2：标题要空一个英文半角空格，例如：`## 简介`．
+
+  * LINT-3：由于 remark-lint 不能很好地处理删除线，因此请不要使用删除线语法（不使用删除线语法的另外一个原因是，删除线划去的内容大多为「抖机灵」性质，对读者理解帮助不大，不符合下面的「文本内容的格式要求」中 对内容表述的要求）．
+
+  * LINT-4：列表：
+
+    * LINT-4.1：列表前要有空行，新开一段．
+    * LINT-4.2：使用有序列表（如 `1. 例子`）时，点号后要有空格．
+  * LINT-5：行间公式前后各要有一行空行，否则会被当做是行内公式．
+
+  * LINT-6：使用 `???` 或 `!!!` 开头的 Details 语法时，每一行要包括在 Details 语法的文本框的文本，开头必须至少有 4 个空格．
+
+**即使是空行，也必须保持与其他行一致的缩进．请不要使用编辑器的自动裁剪行末空格功能．**
+
+示例
+
+下面的代码中用 `␣` 表示空格 ``．
+</code></pre>
+<p>---|---</p>
+<p>Warning</p>
+<p>请记得在文本前面添加 4 个空格．其他的语法还是与 Markdown 语法一致．</p>
+<p>不添加 4 个空格的话，文本就不会出现在 Details 文本框里了．</p>
+<p>这个 <code>???</code> 是什么的问题会在 下文 解答．</p>
+<ul>
+<li>LINT-7：代码样式的纯文本块请使用 ```<code>text</code>．直接使用 ````` 而不指定纯文本块里的语言，可能会导致内容被错误地缩进．</li>
+</ul>
+<h4 id="680770b97b2653f776844f7f7528">标点符号的使用</h4>
+<ul>
+<li>PUNC-1：请在每句话的末尾添加 <strong>句号</strong> ．</li>
+</ul>
+<ul>
+<li>PUNC-2：请正确使用 <strong>全角</strong> 标点符号与 <strong>半角</strong> 标点符号．汉语请使用全角符号，英语请使用半角符号．中文中夹用英文时，请参考 <a href="https://www.nppa.gov.cn/xxgk/fdzdgknr/hybz/202210/t20221004_445147.html">中文出版物夹用英文的编辑规范</a>．特别地，请用全角句点「．」替代中文句号「。」．</li>
+</ul>
+<ul>
+<li>PUNC-3：由于 <code>“……”</code> 和 <code>‘……’</code> 未区分全半角，请使用 <code>「……」</code> 作为全角双引号，<code>&quot;...&quot;</code> 作为半角双引号，<code>『……』</code> 作为全角单引号，<code>&#x27;...&#x27;</code> 作为半角单引号．</li>
+</ul>
+<ul>
+<li>PUNC-4：注意区分 <strong>顿号</strong> 与 <strong>逗号</strong> 的使用．</li>
+<li>PUNC-5：注意 <strong>括号</strong> 的位置．句内括号与句外括号的位置不同．</li>
+<li>PUNC-6：通常使用 <strong>分号</strong> 来表示列表环境中各复句之间的关系．</li>
+<li>PUNC-7：对于有序列表，推荐在每一项的后面添加 <strong>分号</strong> ，在列表最后一项的后面添加 <strong>句号</strong> ；对于无序列表，推荐在每一项的后面添加 <strong>句号</strong> ．</li>
+<li>PUNC-8：注意区分各种不同的连接号，如 hyphen（一般使用 U+002D hyphen-minus（-），即键盘上的「减号」代替），U+2013 en dash（–）和 U+2014 em dash（—）．（英文中连接多个人名时，须用 en dash，但是极常误用为 hyphen．其他误用较为罕见，基本上只需记住这一点即可．）详见 <a href="https://zh.wikipedia.org/wiki/%E8%BF%9E%E6%8E%A5%E5%8F%B7">连接号 - 维基百科</a>．</li>
+</ul>
+<p>示例</p>
+<ul>
+<li>中学生学科竞赛主要包括信息学奥林匹克竞赛、信息学奥林匹克竞赛、信息学奥林匹克竞赛、信息学奥林匹克竞赛和信息学奥林匹克竞赛（谁写的这个示例，建议抬走）．</li>
+<li>「你吃了吗？」李四问张三．</li>
+<li>我想对你说：「我真是太喜欢你了．」</li>
+<li>「苟利国家生死以，岂因祸福避趋之！」</li>
+<li>张华考上了大学；李萍进了技校；我当了工人：我们都有美好的前途．12</li>
+<li>以下是这个算法的基本流程：</li>
+</ul>
+<ol>
+<li>初始化到各点的距离为无穷大，将所有点设置为未被访问过，初始化一个队列；</li>
+<li>将起点放入队列，将起点设置为已被访问过，更新到起点的距离为 00<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">；</li>
+<li>取出队首元素，将该元素设置为未被访问过；</li>
+<li>遍历所有与此元素相连的边，若到这个点存在更短的距离，则进行松弛操作；</li>
+<li>若这个点未被访问过，则将这个点放入队列，且设置这个点为已经访问过；</li>
+<li>回到第三步，直到队列为空．</li>
+</ol>
+<ul>
+<li>KMP 算法（Knuth–Morris–Pratt algorithm, KMP algorithm）由 Knuth、Pratt 和 Morris 在 1977 年共同发布．13</li>
+</ul>
+<h4 id="markdown-683c5f0f4e0e4e3b989862695c55683c5f0f89816c42">Markdown 格式与主题扩展格式要求</h4>
+<ul>
+<li>MDFM-1：表示强调时请使用 <code><strong>SOMETHING</strong></code> 和 <code>「」</code>，而非某级标题，因为使用标题会导致文章结构层次混乱和（或）目录出现问题．</li>
+</ul>
+<ul>
+<li>MDFM-2：当需要引用题目链接时，应尽可能使用原 OJ 题库中的链接而不是镜像链接．</li>
+</ul>
+<ul>
+<li>MDFM-3：请正确使用 Markdown 的区块功能．插入行内代码请使用一对反引号包围代码区块；行间代码请使用一对 ````<code> 包围代码区块，其中反引号就是键盘左上角波浪线下面那个符号，行间代码请在第一个 </code>```<code> 的后面加上语言名称（如：</code>``<code>cpp</code>）．</li>
+</ul>
+<p>示例</p>
+<pre><code class="language-text">---|---
+</code></pre>
+<p>---|---</p>
+<ul>
+<li>MDFM-4：「参考资料与注释」使用 Markdown 的脚注功能进行编写．格式为：</li>
+</ul>
+<pre><code class="language-text">---|---
+
+脚注名既可以使用数字也可以使用文本．脚注名摆放的位置与括号的用法一致．为美观起见，建议同一个页面内的脚注名遵循统一的命名规律，如：ref1、ref2、note1……
+
+脚注的内容统一放在 `## 参考资料与注释` 二级标题下．
+
+示例
+</code></pre>
+<p>---|---</p>
+<p>当 <code>#include &lt;cxxxx&gt;</code> 可以替代 <code>#include &lt;xxxx.h&gt;</code> 时，应使用前者．6</p>
+<p>2020 年 1 月 21 日，CCF 宣布恢复 NOIP．7</p>
+<ul>
+<li>MDFM-5：建议使用主题扩展的 <code>???+note</code> 格式（即 <a href="https://squidfunk.github.io/mkdocs-material/reference/admonitions/#collapsible-blocks">Collapsible Blocks</a>）来描述题面和参考代码．也可以用这种格式来展示其他需要补充介绍的内容．</li>
+</ul>
+<p>示例代码（下面的代码中用 <code>␣</code> 表示空格 ``）：</p>
+<pre><code class="language-text">---|---
+
+效果：
+
+标题
+
+这个文本框会被默认折叠．
+
+推荐将 **解题代码** 放在折叠文本框内．
+
+[HDOJ 的「A + B Problem」](https://acm.hdu.edu.cn/showproblem.php?pid=1000)
+
+标题也可以使用 Markdown 的超链接．这里的超链接是 HDOJ 的「A + B Problem」．
+
+而且推荐以这种方式 **标注原题链接** ．
+
+注意双引号的位置．
+
+两种格式的区别是，带 `+` 的会默认保持展开，而不带 `+` 的会默认保持折叠．
+
+折叠框的标题，即 `???+note` 中 `note` 后的内容应以 `&quot;` 包裹起来．其中的内容支持 Markdown 语法．详见 [Admonition - Changing the title](https://squidfunk.github.io/mkdocs-material/reference/admonitions/#changing-the-title)．（不具备折叠功能的为一般的 Admonitions，参考 [Admonitions - Material for MkDocs](https://squidfunk.github.io/mkdocs-material/reference/admonitions)）
+
+  * MDFM-6：当需要添加不同语言的代码时，推荐使用 Content tabs，可以实现不同语言代码的切换．Content tabs 还有其他的用法，详见 [Content tabs](https://squidfunk.github.io/mkdocs-material/reference/content-tabs/#usage)．其使用方法和效果如下．
+
+示例
+
+注意需要在文本前面添加 4 个空格（下面用 `␣` 表示）．其他的语法还是与 Markdown 语法一致．
+</code></pre>
+<p>---|---</p>
+<p>CC++</p>
+<pre><code class="language-text">---|---
+</code></pre>
+<p>---|---</p>
+<p>如果对 mkdocs-material（我们使用的这个主题）还有什么问题，还可以查阅 <a href="https://github.com/ctf-wiki/ctf-wiki/wiki/Mkdocs-%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E">MkDocs 使用说明</a>，其介绍了 mkdocs-material 主题的插件使用方式．</p>
+<h4 id="6587672c51855bb97684683c5f0f89816c42">文本内容的格式要求</h4>
+<ul>
+<li>CONT-1：所有的 <strong>OI Wiki</strong> 文本都应使用粗体标记．</li>
+</ul>
+<ul>
+<li>CONT-2：在页面的开头应有一段简短的文字（如「本页面将介绍……」），用于概述页面内容．</li>
+</ul>
+<p>示例</p>
+<p>本页面将列出在 <strong>OI Wiki</strong> 编写过程时推荐使用的格式规范与编辑方针．</p>
+<ul>
+<li>CONT-3：涉及到「前置知识」的页面，请在开头添加一行 <strong>前置知识：……</strong> ，放在页面概述前．格式如下：</li>
+</ul>
+<p><code>前置知识：<a href="url1">站内页面1</a>、<a href="url2">站内页面2</a>和<a href="url3">站内页面3</a></code></p>
+<p>示例</p>
+<p>前置知识：<a href="../basic/complexity.html">时间复杂度</a></p>
+<p>本页面将介绍基础的计算理论的知识．</p>
+<ul>
+<li>CONT-4：请注意文档结构．文档结构应当十分条理，层次清晰．请不要让诸如「五级标题」这种事情再次发生了，一篇正常的文章是用不到如此复杂的结构层次的．</li>
+</ul>
+<ul>
+<li>CONT-5：请注意内容的表述．作为一个百科网站，<strong>OI Wiki</strong> 使用的语言应该是书面的，客观的．诸如「抖机灵」性质的，对读者理解帮助不大的内容，不应该出现在 <strong>OI Wiki</strong> 当中．</li>
+</ul>
+<ul>
+<li>CONT-6：请尽量为链接提供完整的标题、或者可被识别的提示，避免使用裸地址和「这」、「此」之类的模糊不清的描述．每一个超链接都应尽量对其加以清楚明确的描述，方便读者明白该超链接将指向何处．</li>
+</ul>
+<p>建议使用源文章或者标签页的标题．</p>
+<p>不推荐的写法</p>
+<pre><code class="language-text">---|---
+
+请参考 [这个页面](https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork)
+
+请参考 &lt;https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork&gt;
+
+推荐的写法
+</code></pre>
+<p>---|---</p>
+<p>请参考 GitHub 官方的帮助页面 <a href="https://docs.github.com/en/github/collaborating-with-issues-and-pull-requests/syncing-a-fork">Syncing a fork - GitHub Docs</a></p>
+<ul>
+<li>CONT-7：受 Markdown 格式限制，<code>## 参考资料与注释</code> 二级标题必须放在文末．</li>
+</ul>
+<ul>
+<li>CONT-8：所有用作序号的数字建议使用中文．示例：</li>
+</ul>
+<ul>
+<li>数列的第一项．</li>
+<li>输入文件的第一行．</li>
+<li>CONT-9：请尽量避免在标题中使用 MathJax 公式，无论是几级标题．在标题中使用公式有可能会导致目录显示错误．5</li>
+</ul>
+<ul>
+<li>CONT-10：请注意代码的可读性．</li>
+</ul>
+<ul>
+<li>CONT-10.1.1：代码应拥有清晰的逻辑，尽可能简洁易懂．不要过度压行，不要引入过多无关代码．尽量避免与算法思想无关的内容．</li>
+<li>CONT-10.1.2：建议在参考代码中添加适当注释以方便读者理解．</li>
+</ul>
+<p>对 C/C++ 类语言：</p>
+<ul>
+<li>CONT-10.2.1：尽量避免出现影响阅读的预编译指令和宏定义．</li>
+</ul>
+<ul>
+<li>CONT-10.2.2：不要用 <code>0</code> 代替 <code>false</code>/<code>NULL</code>/<code>nullptr</code> 等，不要用 <code>1</code> 代替 <code>true</code> 等．</li>
+</ul>
+<ul>
+<li>CONT-10.2.3：在声明 <a href="https://en.cppreference.com/w/cpp/language/type_alias">类型别名</a> 时，不推荐使用 <code>typedef</code>，推荐使用 <code>using</code>．</li>
+</ul>
+<ul>
+<li>CONT-10.2.4：不推荐用宏定义定义常量，推荐直接使用 <code>constexpr</code>/<code>const</code> 等关键字定义常量．</li>
+</ul>
+<ul>
+<li>CONT-10.2.5：不推荐对函数使用 <code>inline</code> 关键字，详见 <a href="../lang/optimizations.html">编译优化</a>．</li>
+</ul>
+<ul>
+<li>CONT-10.2.6：尽量避免类型萃取、偏特化等复杂的模板元编程技巧．如确需使用，则需添加注释解释含义．</li>
+</ul>
+<p>不推荐的写法</p>
+<pre><code class="language-text">---|---
+
+该代码给出了一个求 [最大公约数](../../math/number-theory/gcd/) 的复杂实现，其中：
+
+      * 第一个 `gcd` 接受两个无符号整数 `x`，`y`，返回 `x`，`y` 的最大公约数，返回值类型的范围保证能同时包含 `x` 和 `y`．
+      * 第二个 `gcd` 接受两个整数 `x`，`y`，其中 `x`，`y` 至少有一个是有符号整数，返回 `x`，`y` 的最大公约数．
+      * 第三个 `gcd` 接受超过两个整数，返回这些整数的最大公约数．
+      * 第四个 `gcd` 接受一个容器，返回容器中所有数的最大公约数．
+
+对 **OI Wiki** 来说，我们只关注最大公约数这个算法的思想，这份代码涵盖了过多无关且复杂的技术细节，是需要避免的．
+
+推荐的写法
+</code></pre>
+<p>---|---</p>
+<p>诸如「添加类型检查」、「处理负数输入」、「让函数支持多参数」等更多是工程上关注的话题，我们的重点始终应该是算法的思想．</p>
+<h4 id="latex-516c5f0f7684683c5f0f89816c42">LaTeX 公式的格式要求</h4>
+<p>LaTeX 作为公式排版的首选，我们应当正确地使用它．因此对于 LaTeX 的使用我们有严格的要求．如果您想要快速上手，可以阅读本章节末给出的表格．</p>
+<ul>
+<li>MATH-1.1：您使用的符号不应与 <a href="symbol.html">数学符号表</a> 规定的符号冲突．</li>
+</ul>
+<ul>
+<li>MATH-1.2：使用 Roman 体表示数字、常量、算子和函数．使用 Italic 体表示变量、下标．LaTeX 已经预先定义好了一些常见的常量、函数、运算符等，我们可以直接调用，包括但不限于：</li>
+</ul>
+<pre><code class="language-text">---|---
+
+所以在输入常量、函数名、运算符等时，请先检查一下是否应该使用 Roman 体或其它字体．LaTeX 符号的书写可参考 [KaTeX 的 Supported Functions 页面](https://katex.org/docs/supported.html)（不是全部），也可以搜索求解．
+
+由于 LaTeX 书写 Roman 体小写希腊字母较为困难，故小写希腊字母常量、算子和函数可以使用 Italic 体，如 𝜋π![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 以及 𝛿𝑥δx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的 𝛿δ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7).
+
+如果遇到没有预先定义好的需要使用 Roman 体的 **函数名** ，我们可以使用 `$\operatorname{something}$` 来产生，如我们可以使用 `$\operatorname{lcm}$` 产生正体的最小公倍数（函数）符号．同理，产生 Roman 体的 **常量** 应用 `$\mathrm{}$`；产生 Roman 体粗体符号应用 `$\mathbf{}$`；产生 Italic 体粗体符号应用 `$\boldsymbol{}$`（如向量 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）．对于多字母的变量，应当使用 `$\textit{}$`．其他非数学内容，包括英文、特殊符号等，一律使用 `$\text{}$`．中文我们则建议不放在 LaTeX 公式中．
+
+  * MATH-1.3：如果表达式须折行（常见于较长的行间公式中），则应遵循如下换行规则：
+
+    * MATH-1.3.1：将换行符放在 ==![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，++![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，−−![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，±±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，∓∓![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之前，如果有必要，也可放在 ××![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，⋅⋅![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，//![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之前，如：
+
+e𝑥=∞∑𝑛=0𝑥𝑛𝑛!=+1+𝑥+𝑥22=+𝑥36+𝑥424+…ex=∑n=0∞xnn!=+1+x+x22=+x36+x424+…![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+    * MATH-1.3.2：同一运算符不应在换行符前后同时出现，
+
+    * MATH-1.3.3：换行符尽量不要出现在括号内的表达式中．
+
+  * MATH-1.4：在行内使用分数的时候，请使用 `$\dfrac{}{}$`．比如 `$\dfrac{1}{2}$`，效果 1212![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而不是 `$\frac{1}{2}$`，效果 1212![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+  * MATH-1.5：组合数请使用 `\dbinom{n}{m}`，效果 (𝑛𝑚)(nm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而不是 `{n \choose m}`（在 LaTeX 中这种写法已不推荐）；与上一条关于分数的约定相似，请不要使用 `\binom{n}{m}`，效果 (𝑛𝑚)(nm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+  * MATH-1.6：尽可能避免在行内使用巨运算符（如 ∑∑![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，∏∏![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，∫∫![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等）．
+
+  * MATH-1.7：在不会引起歧义的情况下，请用 `$\times$` 代替星号，叉乘请使用 `$\times$`，点乘请使用 `$\cdot$`．如 𝑎 ×𝑏a×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑎 ⋅𝑏a⋅b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而不是 𝑎 ∗𝑏a∗b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+  * MATH-1.8：请用 `$\cdots$`（居于排版基线与顶线中间），`$\ldots$`（居于排版基线的位置），`$\vdots$`（竖着的省略号）代替 `$...$`．如 𝑎1,𝑎2,⋯𝑎𝑛a1,a2,⋯an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而不是 𝑎1,𝑎2,...𝑎𝑛a1,a2,...an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+  * MATH-1.9：请注意，不要在非代码区域使用任何程序设计语言的表示方式，而是使用 LaTeX 公式．例如，使用 `$=$` 而不是 `$==$`（如 𝑎 =𝑏a=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而不是 𝑎 ==𝑏a==b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）、使用 ``a&lt;&lt;1`` 或者 `$a\times 2$` 而不是 `$a&lt;&lt;1$`、使用 `$a\bmod b$` 代替 `$a\%b$`（如 𝑎mod𝑏amodb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而不是 𝑎%𝑏a%b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）等．
+
+  * MATH-1.10：公式中不要使用中括号连缀（即 C++ 高维数组的表示方式）而多使用下标．即 𝑎𝑖,𝑗,𝑘ai,j,k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 而不是 𝑎[𝑖][𝑗][𝑘]a[i][j][k]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．在公式中下标较复杂的情况下建议改用多元函数（𝑓(𝑖,𝑗,𝑘)f(i,j,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）或内联代码格式．对于一元简单函数使用 `$f_i$`、`$f(i)$` 或 `$f[i]$` 均可．
+
+  * MATH-1.11：为了统一且书写方便，复杂度分析时大 𝑂O![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 记号请直接使用 `$O()$` 而不是 `$\mathcal O()$`．
+
+  * MATH-1.12：在表示等价关系时，请使用 `$\iff$`，效果  ⟺ ⟺![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而不是 `$\Leftrightarrow$`，效果 ⇔⇔![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+  * MATH-1.13：分段函数环境 `cases` **只能有两列** （即一个 `&amp;` 分隔符）．
+
+  * MATH-1.14：请不要滥用 LaTeX 公式．这不仅会造成页面加载缓慢（因为 MathJax 的效率低是出了名的），同时也会导致页面的排版混乱．我们通常使用 LaTeX 公式字体表示变量名称．我们的建议是，如非必要，尽量减少公式与普通正文字体的 **大量** 混合使用，如非必要，尽量不要使用公式，如：
+</code></pre>
+<p>---|---</p>
+<p>就是一个典型的 <strong>滥用公式字体</strong> 的例子．（在页面中使用斜体请用 <code><em>文本</em></code> 表示．）</p>
+<ul>
+<li>MATH-1.15：请正确使用对应的 LaTeX 符号，尤其是公式中的希腊字母等特殊符号．如欧拉函数请使用 <code>$\varphi$</code>，圆的直径请使用 <code>$\Phi$</code>，黄金分割请使用 <code>$\phi$</code>．这些符号虽然同样表示希腊字母 Phi，但是在不同的环境下有不同的含义．切记 <strong>不要使用输入法的插入特殊符号</strong> 来插入这种符号．</li>
+</ul>
+<p>另外，由于 LaTeX 历史原因，空集的符号应为 <code>$\varnothing$</code> 而不是 <code>$\emptyset$</code>；其他的符号应参照 <a href="symbol.html">数学符号表</a> 书写．</p>
+<p>我们可以使用一个表格来总结一下上述内容．注意本表格没有举出所有符号的用法，只给出常见的错误．类似的情况类比即可．</p>
+<div class="table-scroll"><table><thead><tr><th>不符合规定的用法</th><th>渲染效果</th><th>符合规定的用法</th><th>渲染效果</th></tr></thead><tbody><tr><td><code>$log, ln, lg$</code></td><td>𝑙𝑜𝑔,𝑙𝑛,𝑙𝑔log,ln,lg<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>$\log$, $\ln$, $\lg$</code></td><td>loglog<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，lnln<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，lglg<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$sin, cos, tan$</code></td><td>𝑠𝑖𝑛,𝑐𝑜𝑠,𝑡𝑎𝑛sin,cos,tan<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>$\sin$, $\cos$, $\tan$</code></td><td>sinsin<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，coscos<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，tantan<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$gcd, lcm$</code></td><td>𝑔𝑐𝑑,𝑙𝑐𝑚gcd,lcm<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>$\gcd$, $\operatorname{lcm}$</code></td><td>gcdgcd<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，lcmlcm<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$e$, $\text{e}$, e</code>（自然对数的底）</td><td>𝑒e<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，ee<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">, e</td><td><code>$\mathrm{e}$</code></td><td>ee<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$i$, $\text{i}$, i</code>（虚数单位）</td><td>𝑖i<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，ii<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">, i</td><td><code>$\mathrm{i}$</code></td><td>ii<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$ 小于 a 的质数 $</code></td><td>小于𝑎的质数小于a的质数<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>小于 $a$ 的质数</code></td><td>小于 𝑎a<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 的质数</td></tr><tr><td><code>$...$</code></td><td>......<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>$\cdots$, $\ldots$, $\vdots$, $\ddots$</code></td><td>⋯⋯<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，……<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，⋮⋮<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，⋱⋱<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$a*b$</code>（两个数相乘）</td><td>𝑎 ∗𝑏a∗b<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>$a\times b$, $a\cdot b$</code></td><td>𝑎 ×𝑏a×b<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑎 ⋅𝑏a⋅b<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$SPFA$</code>（英文名称）</td><td>𝑆𝑃𝐹𝐴SPFA<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>SPFA</code></td><td>SPFA</td></tr><tr><td><code>$a==b$</code></td><td>𝑎 ==𝑏a==b<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>$a=b$</code></td><td>𝑎 =𝑏a=b<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$f[i][j][k]$</code></td><td>𝑓[𝑖][𝑗][𝑘]f[i][j][k]<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>$f_{i,j,k}$, $f(i,j,k)$</code></td><td>𝑓𝑖,𝑗,𝑘fi,j,k<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝑓(𝑖,𝑗,𝑘)f(i,j,k)<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$R,N^*$</code>（集合）</td><td>𝑅,𝑁∗R,N∗<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>$\mathbf{R}$, $\mathbf{N}^*$</code></td><td>𝐑R<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，𝐍∗N∗<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$\emptyset$</code></td><td>∅∅<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>$\varnothing$</code></td><td>∅∅<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr><tr><td><code>$size$</code></td><td>𝑠𝑖𝑧𝑒size<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td><td><code>$\textit{size}$</code></td><td>𝑠𝑖𝑧𝑒size<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""></td></tr></tbody></table></div>
+<h4 id="5bf965705b66516c5f0f7684964452a0683c5f0f89816c42">对数学公式的附加格式要求</h4>
+<p>请注意，尽管上述输入公式的语法和真正的 LaTeX 排版系统非常相似，但 <strong>MathJax 和 LaTeX 是两个完全没有关系的东西</strong> ，MathJax 仅仅使用了一部分与 LaTeX 非常相似的语法而已．实际上，二者之间有不少细节差别，而这些差别经常导致写出来的公式在二者之间不通用．</p>
+<p>由于 <strong>OI Wiki</strong> 使用 LaTeX 排版引擎开发了 PDF 导出工具，因此有必要强调公式在 MathJax 和 LaTeX 之间的兼容性．<strong>请各位在 Wiki 中书写数学公式时注意以下几点．</strong></p>
+<p>这些规则已经向 MathJax 做了尽可能多的妥协．导出工具兼容了一部分原本仅能在 MathJax 中正常输出的写法．</p>
+<ul>
+<li>MATH-2.1：请使用 <code>\begin{aligned} ... \end{aligned}</code> 表示多行对齐的公式；</li>
+</ul>
+<ul>
+<li>MATH-2.2：如果这些多行对齐的公式需要 <strong>编号</strong> ，请用 <code>align</code> 或 <code>equation</code> 环境；</li>
+</ul>
+<ul>
+<li>MATH-2.3：不要使用 <code>split</code>、<code>eqnarray</code> 环境；</li>
+</ul>
+<ul>
+<li>MATH-2.4：不要使用 <code>\lt</code>,<code>\gt</code> 来表示大于号和小于号，请直接使用 <code>&lt;</code>，<code>&gt;</code>；</li>
+</ul>
+<ul>
+<li>MATH-2.5：不要直接用 <code>\\</code> 换行（需要换行的公式，请套在 <code>aligned</code> 或其他多行环境下）；</li>
+</ul>
+<ul>
+<li>MATH-2.6：若要输出 LaTeX 符号 LATEXLATEX<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，请用 <code>$\rm{\LaTeX}$</code>，而不是 <code>mathrm</code>；（<code>\LaTeX</code> 在 TeX 排版系统中是一个不能用于数学模式下的命令，而 <code>\mathrm</code> 又不能在普通模式下使用；另外，<code>\text</code> 命令虽然在 TeX 上正常输出，但是在 MathJax 中 <code>\text</code> 命令的参数会被原样输出，而不是按命令转义）；</li>
+</ul>
+<ul>
+<li>MATH-2.7：数学公式中的中文文字 <strong>必须置于<code>\text{}</code> 命令之中</strong>，而变量、数字、运算符、函数名称则必须置于 <code>\text{}</code> 命令之外．<strong>请不要在<code>\text{}</code> 命令中嵌套数学公式</strong>；</li>
+</ul>
+<ul>
+<li>MATH-2.8：使用 <code>array</code> 环境时请注意 <strong>实际列数与对齐符号的数量保持一致</strong> ．例如下面的公式中，数据实际有 3 列（<code>&amp;</code> 是列分隔符），因此需要 3 个对齐符号（<code>l</code>/<code>r</code>/<code>c</code> 分别表示左、右、居中对齐）．</li>
+</ul>
+<pre><code class="language-text">---|---
+
+
+#### 伪代码格式
+
+伪代码具体格式没有严格要求，请参考算法导论或学术论文．注意不要写成 Python．
+
+PCOD-1：Wiki 内使用 LaTeX 书写伪代码，整体处于 array 环境中，缩进使用 `$\qquad$`，文字描述使用 `$\text$`，关键字使用 `$\textbf$`，多字母变量使用 `$\textit$`，赋值使用 `$\gets$`．
+
+参考示例：
+
+𝐈𝐧𝐩𝐮𝐭. The edges of the graph 𝑒, where each element in 𝑒 is (𝑢,𝑣,𝑤) denoting that there is an edge between 𝑢 and 𝑣 weighted 𝑤.𝐎𝐮𝐭𝐩𝐮𝐭. The edges of the MST of the input graph.𝐌𝐞𝐭𝐡𝐨𝐝. 1𝑟𝑒𝑠𝑢𝑙𝑡←∅2sort 𝑒 into nondecreasing order by weight 𝑤3𝐟𝐨𝐫 each (𝑢,𝑣,𝑤) in the sorted 𝑒4𝐢𝐟 𝑢 and 𝑣 are not connected in the union-find set 5connect 𝑢 and 𝑣 in the union-find set6𝑟𝑒𝑠𝑢𝑙𝑡←𝑟𝑒𝑠𝑢𝑙𝑡⋃ {(𝑢,𝑣,𝑤)}7𝐫𝐞𝐭𝐮𝐫𝐧 𝑟𝑒𝑠𝑢𝑙𝑡Input. The edges of the graph e, where each element in e is (u,v,w) denoting that there is an edge between u and v weighted w.Output. The edges of the MST of the input graph.Method. 1result←∅2sort e into nondecreasing order by weight w3for each (u,v,w) in the sorted e4if u and v are not connected in the union-find set 5connect u and v in the union-find set6result←result⋃ {(u,v,w)}7return result![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+</code></pre>
+<p>---|---</p>
+<h4 id="4ee3780157577684683c5f0f89816c42">代码块的格式要求</h4>
+<p>代码块目前分为两种：片段和例题．</p>
+<p>关于片段代码：</p>
+<ul>
+<li>CODE-1.1：若代码片段足够短且没有必要测试，可以直接在 Markdown 文档中修改．</li>
+<li>CODE-1.2：由于 Markdown 文档中内嵌的代码难以实现自动化测试，所以推荐使用例题代码的格式插入片段代码．可以选择 <a href="https://github.com/OI-wiki/OI-wiki/pull/5729">多文件编译方案</a> 或 <a href="https://facelessuser.github.io/pymdown-extensions/extensions/snippets/#snippet-sections">Snippet Sections</a> 语法：</li>
+</ul>
+<p>多文件编译方案示例：<a href="https://github.com/OI-wiki/OI-wiki/blob/c35defebff6cea072d6cfeb359642f6fd84e66c7/docs/basic/bubble-sort.md?plain=1#L48">冒泡排序</a>．正文引用 <a href="https://github.com/OI-wiki/OI-wiki/blob/c35defebff6cea072d6cfeb359642f6fd84e66c7/docs/basic/code/bubble-sort/bubble-sort_1.cpp">bubble-sort_1.cpp</a>，测试代码放在 <a href="https://github.com/OI-wiki/OI-wiki/blob/c35defebff6cea072d6cfeb359642f6fd84e66c7/docs/basic/code/bubble-sort/bubble-sort_1.aux1.cpp">bubble-sort_1.aux1.cpp</a> 中．</p>
+<p>Snippet Sections 示例：<a href="https://github.com/OI-wiki/OI-wiki/blob/c7cf6d6de13b44757f1d0528e952349beb921f8a/docs/basic/prefix-sum.md?plain=1#L37">前缀和</a>．正文中不需要引用 <a href="https://github.com/OI-wiki/OI-wiki/blob/c7cf6d6de13b44757f1d0528e952349beb921f8a/docs/basic/code/prefix-sum/prefix-sum_1.cpp">prefix-sum_1.cpp</a> 中的测试部分，所以选择插入主要的代码片段．</p>
+<p><strong>注意</strong> ：不要使用 <a href="https://facelessuser.github.io/pymdown-extensions/extensions/snippets/#snippet-lines">Snippet Lines</a> 语法．</p>
+<p>为了提高代码复用率，您也可以将代码拆分成头文件，测试时在不同的测试代码里引用．如果正文中需要出现完整的测试代码作为例题的参考实现，那么正文中应该另外用 Snippet Sections 语法拼接成单文件代码，以便读者阅读．示例：<a href="https://github.com/OI-wiki/OI-wiki/blob/3b721e22ea60d59a2687a9b10555263de7bdc2f0/docs/ds/rbtree.md?plain=1#L218-L231">红黑树</a>．</p>
+<p>关于例题代码：</p>
+<ul>
+<li>CODE-2.1：例题代码的表示形式为 <code>--8&lt;-- &quot;path&quot;</code>，代码均存储在 <code>path</code> 中．路径通常为 <code>docs/主题/code/内容/内容_编号.cpp</code>．</li>
+</ul>
+<ul>
+<li>CODE-2.2：修改例题代码时，请保证你的代码是正确的．例题代码均拥有一组测试数据，存储在 <code>/docs/主题/examples/内容/内容_编号.in/ans</code> 中．</li>
+</ul>
+<p>如果你需要添加例题：</p>
+<ul>
+<li>请在 <code>docs/主题/code/内容</code> 中添加你的例题代码，并编号．通常，该 <code>内容</code> 文件夹中已经有了一个或者多个代码．例子：如果需要修改 <code>dag.md</code> 的代码，那么路径为 <code>docs/dp/code/dag</code>，其中 <code>dp</code> 为主题，而 <code>dag</code> 为内容．</li>
+</ul>
+<ul>
+<li>如果需要在所有例题的最后添加一个例题代码，请顺延目前的编号．比如已经存在了 <code>code/prefix-sum/prefix-sum_3.cpp</code>，如果需要在最后一个例题后继续添加一个例题，请将你的代码命名为 <code>prefix-sum_4.cpp</code> 并添加到 <code>docs/basic/code/prefix-sum</code> 中．</li>
+</ul>
+<ul>
+<li>如果需要在文章中间添加一个例题代码，请插入并改变原先的编号．比如已经存在了 <code>prefix-sum_2.cpp</code> 和 <code>prefix-sum_3.cpp</code>，如果你需要在第二个例题和第三个例题中间再添加一个例题，请将你的代码命名为 <code>prefix-sum_3.cpp</code> 并将原先的 <code>prefix-sum_3.cpp</code> 改名为 <code>prefix-sum_4.cpp</code> 同时 <strong>在 Markdown 文档和测试数据存放的文件夹中同步修改编号</strong> ．</li>
+</ul>
+<ul>
+<li><strong>别忘记，你还要对你的代码添加一组测试数据，以保证这个代码是可以成功运行的．</strong> 你需要在 <code>docs/主题/examples/内容</code> 文件夹中添加一组测试数据，将输入数据存储为 <code>内容_编号.in</code>，将标准答案存储为 <code>内容_编号.ans</code>．</li>
+</ul>
+<ul>
+<li>最后，可以将代码添加到文档中了．请直接在文档中用添加代码块的格式，并将代码块内部直接写成 <code>--8&lt;-- &quot;你的代码路径&quot;</code> 的格式就可以了．</li>
+</ul>
+<p><strong>OI Wiki</strong> 会对例题代码进行全平台测试，为保证您的代码能够顺利通过测试，请遵守如下规则：</p>
+<ul>
+<li>CODE-3.1：您的代码需要同时支持在 C++14、C++17、C++20 标准下编译和运行．</li>
+<li>CODE-3.2：不要使用 <code>&lt;bits/stdc++.h&gt;</code>、<code>&lt;bits/extc++.h&gt;</code> 等非标准头文件．</li>
+<li>CODE-3.3：标准答案文件不要有多余空格．</li>
+<li>CODE-3.4：不要使用 <a href="https://en.cppreference.com/w/cpp/language/operator_alternative#Alternative_tokens">代用记号</a>．</li>
+<li>CODE-3.5：使用 <a href="https://en.cppreference.com/w/cpp/language/aggregate_initialization">聚合初始化</a> 时，<code>object{args}</code> 不可写成 <code>(object){args}</code>．</li>
+<li>CODE-3.6：使用 <a href="https://en.cppreference.com/w/cpp/language/operators">运算符重载</a> 时注意格式，如重载比较运算符时，若使用成员函数写法，则不可省略 <code>const</code> 限定符．</li>
+<li>CODE-3.7：不要使用类似 <code>#define int long long</code> 的宏定义．</li>
+<li>CODE-3.8：若您需要使用 C 风格的 <a href="https://en.cppreference.com/w/cpp/io/c#Formatted_input.2Foutput">有格式输入/输出</a>，请特别留意格式指示符的写法：如 <code>size_t</code> 对应 <code>%zu</code>，<code>ptrdiff_t</code> 对应 <code>%td</code>．例如输出某 STL 容器的大小时，代码应类似 <code>printf(&quot;%zu&quot;, container.size());</code>．</li>
+<li>CODE-3.9：由于当前测试环境 libstdc++ 的 <code>&lt;chrono&gt;</code> 库有 <a href="https://github.com/actions/runner-images/issues/8659">BUG</a>，所以请避免使用 <code>&lt;chrono&gt;</code> 库．</li>
+<li>CODE-3.10：由于 <code>long</code> 与 <code>unsigned long</code> 在某些测试环境下为 32 位，而在另一些测试环境下为 64 位，为确保各平台代码行为一致，故不推荐使用这两种类型．推荐使用 <a href="../lang/var.html">定宽整数类型</a>．</li>
+<li>CODE-3.11：不建议使用 <code><strong>gcd</code>、<code></strong>int128</code>、<code>__builtin_</code> 系列函数等非标准内容．如果您需要使用，则需确保您的代码能通过全平台测试，如 <a href="https://github.com/OI-wiki/OI-wiki/blob/4af83d6db6017f4c36db6d4a7583bbc3f6257484/docs/ds/code/tree-decompose/tree-decompose_1.cpp#L24-L47">此代码</a> 提供了 libstdc++ 中 <a href="../lang/csl-bitset.html">std::bitset</a> 特有成员函数 <code>_Find_first()</code> 的全平台实现．</li>
+</ul>
+<p>此外，为了提高代码的可读性，建议遵守 CONT-10．</p>
+<h2 id="56fe89e3">图解</h2>
+<p>可能上述要求把握起来有些困难，接下来我们给出一些图片来具体分析哪种格式应该使用，哪种不该使用：</p>
+<h3 id="4f8b-1">例 1</h3>
+<p><img src="../../assets/images/format-1.png" alt=""></p>
+<p>将复杂的 LaTeX 公式使用行间格式，可以使得页面错落有致．但 <strong>OI Wiki</strong> 作为一个以中文为主体的站点，我们希望大部分纲领性的信息（如标题）尽量使用中文（除英文专有名词）．</p>
+<h3 id="4f8b-2">例 2</h3>
+<p><img src="../../assets/images/format-2.png" alt=""></p>
+<p>较复杂度的 LaTeX 公式请注意等号的对齐，同时可以适当引用 Wiki 的页面 <strong>链接</strong> 来完善内容．</p>
+<h3 id="4f8b-3">例 3</h3>
+<p><img src="../../assets/images/format-3.png" alt=""></p>
+<p>一般情况下，我们建议将引用的资料列在文末的 <code>##参考资料与注释</code> 一节，并在原句后面加上脚注，而不是直接给出链接．同时一定要避免使用 LaTeX 公式表达代码，上图中两个中括号就是不规范的写法．我们建议使用 <code>dp(i,j)</code> 或者 <code>dp_{i,j}</code>．</p>
+<h3 id="4f8b-4">例 4</h3>
+<p><img src="../../assets/images/format-4.png" alt=""></p>
+<p>注意我们描述 <strong>乘法</strong> 的时侯一般使用 <code>\times</code> 或者 <code>\cdot</code>，特殊情况（如卷积）下会使用 <code>*</code>（也可以写成 <code>\ast</code>）．标题是简洁的词组，但我们不希望正文部分由词组拼凑而成．上图中「两个要素」，建议更改为「动态规划的原理具有以下两个要素」，上下文保持连贯．可取的地方是，适当使用 <strong>有序</strong> 列表可以更有条理地表述内容．再次提醒，在使用列表的时侯，每一项如果是一句话，需要在末位添加 <strong>标点符号</strong> ．有序列表通常添加分号，在最后一项末位添加句号；无序列表统一添加句号．</p>
+<h3 id="4f8b-5">例 5</h3>
+<p><img src="../../assets/images/format-5.png" alt=""></p>
+<p>适当引用 <strong>图片</strong> 可以增强文章易读性．使用 <strong>伪代码</strong> 的方式表达算法过程可以方便又简洁地描述算法过程，相比于直接贴模板代码更加好懂．</p>
+<h3 id="4f8b-6">例 6</h3>
+<p><img src="../../assets/images/format-6.png" alt=""></p>
+<p>同样的问题，标题使用英文．并且在使用完括号后没有句号．另外，上图中的行间公式虽然没有使用括号，但是由于下标嵌套过多，使得最底层的下标字体很小，整个公式也并不美观．建议将 <code>son_{now,i}</code> 更换为 <code>son(now,i)</code>，或者把 <code>f_{now}</code> 替换为 <code>f(now)</code>．我们希望尽量控制上下标嵌套在两层以内（需要多次嵌套上标时建议使用 Knuth 箭头，如用 2 ↑(2 ↑(2 ↑(2 ↑⋯)))2↑(2↑(2↑(2↑⋯)))<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt=""> 代替 2222⋯2222⋯<img src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" alt="">，《上帝造题的七分钟》）．</p>
+<h3 id="4f8b-7">例 7</h3>
+<p><img src="../../assets/images/format-7.png" alt=""></p>
+<p>使用 MkDocs 扩展语法，让例题题面与算法描述区分开．将代码折叠，可以让文章更紧凑．（毕竟看 Wiki 的大多数是了解思路，除了模板代码需要阅读外，习题的代码大多可以折叠．）在描述函数操作时，使用行内代码和 LaTeX 公式都是不错的选择．</p>
+<h3 id="4f8b-8">例 8</h3>
+<p><img src="../../assets/images/format-8.png" alt=""></p>
+<p>在文末罗列出参考文献，可以使页面的内容更严谨，真实可信．</p>
+<h2 id="591690e894fe63a5">外部链接</h2>
+<ul>
+<li><a href="http://www.moe.gov.cn/jyb_sjzl/ziliao/A19/201001/W020190128580990138234.pdf">标点符号用法（GB/T 15834—2011）</a></li>
+<li><a href="https://zh.wikipedia.org/wiki/Wikipedia:%E6%A0%BC%E5%BC%8F%E6%89%8B%E5%86%8C/%E6%A0%87%E7%82%B9%E7%AC%A6%E5%8F%B7">维基百科：格式手册/标点符号</a></li>
+<li><a href="https://mazhuang.org/wiki/chinese-copywriting-guidelines/">中文文案排版指北（简体中文版）</a></li>
+<li><a href="https://pdfe.github.io/GUIDELINE/#/others/copywriter">中文文案风格指南 - PDFE GUIDELINE</a></li>
+<li><a href="https://github.com/CTeX-org/lshort-zh-cn/releases">一份（不太）简短的 LATEX2ε 介绍或 106 分钟了解 LATEX2ε</a></li>
+<li><a href="https://www.nppa.gov.cn/xxgk/fdzdgknr/hybz/202210/t20221004_445147.html">中文出版物夹用英文的编辑规范</a></li>
+</ul>
+<h2 id="53c280038d4465994e0e6ce891ca">参考资料与注释</h2>
+<ul>
+<li><em> </em></li>
+</ul>
+<ol>
+<li><a href="https://developer.mozilla.org/zh-CN/docs/Web/SVG">SVG|MDN</a> ↩</li>
+</ol>
+<ol>
+<li><a href="https://en.wikipedia.org/wiki/APNG">APNG</a> ↩</li>
+</ol>
+<ol>
+<li><a href="https://github.com/OI-wiki/OI-wiki/issues/3422">OI-wiki/OI-wiki#3422</a> ↩</li>
+</ol>
+<ol>
+<li><a href="https://web.archive.org/save/">Save Page in Internet Archive</a> ↩</li>
+</ol>
+<ol>
+<li><a href="faq.html">我的公式为什么在目录里没有正常显示？好像双倍了</a> ↩</li>
+</ol>
+<ol>
+<li><a href="https://stackoverflow.com/questions/10460250/cstdio-stdio-h-namespace">cstdio stdio.h namespace</a> ↩</li>
+</ol>
+<ol>
+<li><a href="https://www.ccf.org.cn/c/2020-01-21/694716.shtml">CCF 关于恢复 NOIP 竞赛的公告 - 中国计算机学会</a> ↩</li>
+</ol>
+<ol>
+<li>选项卡：参见 <a href="https://squidfunk.github.io/mkdocs-material/reference/content-tabs">Content tabs</a>． ↩↩</li>
+</ol>
+<ol>
+<li>移至 <a href="htc.html">如何贡献</a>． ↩↩</li>
+</ol>
+<ol>
+<li>该规范写入了 <a href="../edit-landing/overview.html">编辑前须知</a> 并发布了公告，并未写入本文档． ↩</li>
+</ol>
+<ol>
+<li>折叠框：参见 <a href="https://squidfunk.github.io/mkdocs-material/reference/admonitions/#collapsible-blocks">Collapsible Blocks</a>，有时我们也用「Details 语法」指代该语法，因其从功能上与 HTML 中的 <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/details"><code>&lt;details&gt;</code> 元素</a> 功能一致． ↩↩</li>
+</ol>
+<ol>
+<li>（冒号）表示总结上文． ↩</li>
+</ol>
+<ol>
+<li>科学技术名称的英文全称与其缩略形式间，应使用英文逗号．中文句子内夹用了用以注释、补充或说明的英文句子或语段，该英文句子或语段用中文圆括号标示． ↩</li>
+</ol>
+<ul>
+<li><em> </em></li>
+</ul>
+<blockquote><strong>本页面最近更新： 2026/2/26 03:56:39，<a href="https://github.com/OI-wiki/OI-wiki/commits/master/docs/intro/format.md">更新历史</a> </strong>发现错误？想一起完善？<a href="../edit-landing/overview.html" title="edit.link.title">在 GitHub 上编辑此页！</a> <strong>本页面贡献者：<a href="https://github.com/NachtgeistW">NachtgeistW</a>, <a href="https://github.com/Tiphereth-A">Tiphereth-A</a>, <a href="https://github.com/sshwy">sshwy</a>, <a href="https://github.com/StudyingFather">StudyingFather</a>, <a href="https://github.com/Enter-tainer">Enter-tainer</a>, <a href="https://github.com/Ir1d">Ir1d</a>, <a href="https://github.com/ouuan">ouuan</a>, <a href="https://github.com/Xeonacid">Xeonacid</a>, <a href="https://github.com/H-J-Granger">H-J-Granger</a>, <a href="https://github.com/Chrogeek">Chrogeek</a>, <a href="https://github.com/c-forrest">c-forrest</a>, <a href="https://github.com/CCXXXI">CCXXXI</a>, <a href="https://github.com/CoelacanthusHex">CoelacanthusHex</a>, <a href="https://github.com/countercurrent-time">countercurrent-time</a>, <a href="https://github.com/billchenchina">billchenchina</a>, <a href="https://github.com/diauweb">diauweb</a>, <a href="mailto:i@margatroid.xyz">mgt</a>, <a href="https://github.com/SukkaW">SukkaW</a>, <a href="mailto:suyun514@qq.com">Suyun514</a>, <a href="https://github.com/AngelKitty">AngelKitty</a>, <a href="https://github.com/cjsoft">cjsoft</a>, <a href="https://github.com/Early0v0">Early0v0</a>, <a href="https://github.com/ezoixx130">ezoixx130</a>, <a href="https://github.com/GekkaSaori">GekkaSaori</a>, <a href="https://github.com/Great-designer">Great-designer</a>, <a href="https://github.com/jifbt">jifbt</a>, <a href="https://github.com/Konano">Konano</a>, <a href="https://github.com/LovelyBuggies">LovelyBuggies</a>, <a href="https://github.com/Makkiy">Makkiy</a>, <a href="https://github.com/minghu6">minghu6</a>, <a href="mailto:1609483441@qq.com">ouuan</a>, <a href="https://github.com/P-Y-Y">P-Y-Y</a>, <a href="https://github.com/PotassiumWings">PotassiumWings</a>, <a href="https://github.com/SamZhangQingChuan">SamZhangQingChuan</a>, <a href="https://github.com/shuzhouliu">shuzhouliu</a>, <a href="https://github.com/weiyong1024">weiyong1024</a>, <a href="https://github.com/abc1763613206">abc1763613206</a>, <a href="https://github.com/Alisahhh">Alisahhh</a>, <a href="https://github.com/Backl1ght">Backl1ght</a>, <a href="https://github.com/BCFeather">BCFeather</a>, <a href="https://github.com/GavinZhengOI">GavinZhengOI</a>, <a href="https://github.com/Gesrua">Gesrua</a>, <a href="https://github.com/gi-b716">gi-b716</a>, <a href="https://github.com/greyqz">greyqz</a>, <a href="https://github.com/gtn1024">gtn1024</a>, <a href="https://github.com/hensier">hensier</a>, <a href="https://github.com/hsfzLZH1">hsfzLZH1</a>, <a href="https://github.com/ImpleLee">ImpleLee</a>, <a href="https://github.com/kenlig">kenlig</a>, <a href="https://github.com/kLiHz">kLiHz</a>, <a href="https://github.com/ksyx">ksyx</a>, <a href="https://github.com/kxccc">kxccc</a>, <a href="https://github.com/lychees">lychees</a>, <a href="https://github.com/megakite">megakite</a>, <a href="https://github.com/Peanut-Tang">Peanut-Tang</a>, <a href="https://github.com/yuhuoji">yuhuoji</a>, <a href="https://github.com/yusancky">yusancky</a>, <a href="https://github.com/ZnPdCo">ZnPdCo</a>, <a href="https://github.com/zwuis">zwuis</a> </strong>本页面的全部内容在<strong><a href="https://creativecommons.org/licenses/by-sa/4.0/deed.zh">CC BY-SA 4.0</a> 和 <a href="https://github.com/zTrix/sata-license">SATA</a></strong> 协议之条款下提供，附加条款亦可能应用</blockquote></article><nav class="article-nav"><a href="symbol.html"><span class="meta">上一篇</span><br>数学符号表</a><a href="thanks.html"><span class="meta">下一篇</span><br>致谢</a></nav></div>
+    </div>
+  </main>
+  <script id="archive-search-data" type="application/json">[{"title": "均摊复杂度", "group": "基础知识", "subgroup": "amortized-analysis", "href": "../basic/amortized-analysis.html"}, {"title": "二分", "group": "基础知识", "subgroup": "binary", "href": "../basic/binary.html"}, {"title": "倍增", "group": "基础知识", "subgroup": "binary-lifting", "href": "../basic/binary-lifting.html"}, {"title": "冒泡排序", "group": "基础知识", "subgroup": "bubble-sort", "href": "../basic/bubble-sort.html"}, {"title": "桶排序", "group": "基础知识", "subgroup": "bucket-sort", "href": "../basic/bucket-sort.html"}, {"title": "复杂度简介", "group": "基础知识", "subgroup": "complexity", "href": "../basic/complexity.html"}, {"title": "构造", "group": "基础知识", "subgroup": "construction", "href": "../basic/construction.html"}, {"title": "计数排序", "group": "基础知识", "subgroup": "counting-sort", "href": "../basic/counting-sort.html"}, {"title": "递归 & 分治", "group": "基础知识", "subgroup": "divide-and-conquer", "href": "../basic/divide-and-conquer.html"}, {"title": "枚举", "group": "基础知识", "subgroup": "enumerate", "href": "../basic/enumerate.html"}, {"title": "贪心", "group": "基础知识", "subgroup": "greedy", "href": "../basic/greedy.html"}, {"title": "堆排序", "group": "基础知识", "subgroup": "heap-sort", "href": "../basic/heap-sort.html"}, {"title": "插入排序", "group": "基础知识", "subgroup": "insertion-sort", "href": "../basic/insertion-sort.html"}, {"title": "归并排序", "group": "基础知识", "subgroup": "merge-sort", "href": "../basic/merge-sort.html"}, {"title": "算法基础简介", "group": "基础知识", "subgroup": "概览", "href": "../basic/overview.html"}, {"title": "前缀和 & 差分", "group": "基础知识", "subgroup": "prefix-sum", "href": "../basic/prefix-sum.html"}, {"title": "快速排序", "group": "基础知识", "subgroup": "quick-sort", "href": "../basic/quick-sort.html"}, {"title": "基数排序", "group": "基础知识", "subgroup": "radix-sort", "href": "../basic/radix-sort.html"}, {"title": "选择排序", "group": "基础知识", "subgroup": "selection-sort", "href": "../basic/selection-sort.html"}, {"title": "希尔排序", "group": "基础知识", "subgroup": "shell-sort", "href": "../basic/shell-sort.html"}, {"title": "模拟", "group": "基础知识", "subgroup": "simulate", "href": "../basic/simulate.html"}, {"title": "排序简介", "group": "基础知识", "subgroup": "sort-intro", "href": "../basic/sort-intro.html"}, {"title": "排序相关 STL", "group": "基础知识", "subgroup": "stl-sort", "href": "../basic/stl-sort.html"}, {"title": "Tim 排序", "group": "基础知识", "subgroup": "tim-sort", "href": "../basic/tim-sort.html"}, {"title": "锦标赛排序", "group": "基础知识", "subgroup": "tournament-sort", "href": "../basic/tournament-sort.html"}, {"title": "排序应用", "group": "基础知识", "subgroup": "use-of-sort", "href": "../basic/use-of-sort.html"}, {"title": "常见错误", "group": "赛事与实践", "subgroup": "common-mistakes", "href": "../contest/common-mistakes.html"}, {"title": "常见技巧", "group": "赛事与实践", "subgroup": "common-tricks", "href": "../contest/common-tricks.html"}, {"title": "分段打表", "group": "赛事与实践", "subgroup": "dictionary", "href": "../contest/dictionary.html"}, {"title": "ICPC/CCPC 赛事与赛制", "group": "赛事与实践", "subgroup": "icpc", "href": "../contest/icpc.html"}, {"title": "交互题", "group": "赛事与实践", "subgroup": "interaction", "href": "../contest/interaction.html"}, {"title": "读入、输出优化", "group": "赛事与实践", "subgroup": "io", "href": "../contest/io.html"}, {"title": "OI 赛事与赛制", "group": "赛事与实践", "subgroup": "oi", "href": "../contest/oi.html"}, {"title": "比赛相关简介", "group": "赛事与实践", "subgroup": "概览", "href": "../contest/overview.html"}, {"title": "题型概述", "group": "赛事与实践", "subgroup": "problems", "href": "../contest/problems.html"}, {"title": "出题", "group": "赛事与实践", "subgroup": "problemsetting", "href": "../contest/problemsetting.html"}, {"title": "学习资源", "group": "赛事与实践", "subgroup": "resources", "href": "../contest/resources.html"}, {"title": "学习路线", "group": "赛事与实践", "subgroup": "roadmap", "href": "../contest/roadmap.html"}, {"title": "动态规划基础", "group": "动态规划", "subgroup": "basic", "href": "../dp/basic.html"}, {"title": "计数 DP", "group": "动态规划", "subgroup": "count", "href": "../dp/count.html"}, {"title": "DAG 上的 DP", "group": "动态规划", "subgroup": "dag", "href": "../dp/dag.html"}, {"title": "DP 套 DP", "group": "动态规划", "subgroup": "dp-of-dp", "href": "../dp/dp-of-dp.html"}, {"title": "动态 DP", "group": "动态规划", "subgroup": "dynamic", "href": "../dp/dynamic.html"}, {"title": "区间 DP", "group": "动态规划", "subgroup": "interval", "href": "../dp/interval.html"}, {"title": "背包 DP", "group": "动态规划", "subgroup": "knapsack", "href": "../dp/knapsack.html"}, {"title": "记忆化搜索", "group": "动态规划", "subgroup": "memo", "href": "../dp/memo.html"}, {"title": "其它 DP 方法", "group": "动态规划", "subgroup": "misc", "href": "../dp/misc.html"}, {"title": "数位 DP", "group": "动态规划", "subgroup": "number", "href": "../dp/number.html"}, {"title": "DP 优化简介", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-dp-opt.html"}, {"title": "Slope Trick 优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-slope-trick.html"}, {"title": "WQS 二分", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-wqs-binary-search.html"}, {"title": "单调队列/单调栈优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-monotonous-queue-stack.html"}, {"title": "四边形不等式优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-quadrangle.html"}, {"title": "斜率优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-slope.html"}, {"title": "状态设计优化", "group": "动态规划", "subgroup": "优化", "href": "../dp/opt-state.html"}, {"title": "动态规划部分简介", "group": "动态规划", "subgroup": "概览", "href": "../dp/overview.html"}, {"title": "插头 DP", "group": "动态规划", "subgroup": "plug", "href": "../dp/plug.html"}, {"title": "概率 DP", "group": "动态规划", "subgroup": "概率", "href": "../dp/probability.html"}, {"title": "状压 DP", "group": "动态规划", "subgroup": "state", "href": "../dp/state.html"}, {"title": "树形 DP", "group": "动态规划", "subgroup": "树相关", "href": "../dp/tree.html"}, {"title": "AA 树", "group": "数据结构", "subgroup": "aa-tree", "href": "../ds/aa-tree.html"}, {"title": "AVL 树", "group": "数据结构", "subgroup": "avl", "href": "../ds/avl.html"}, {"title": "线段树套平衡树", "group": "数据结构", "subgroup": "balanced-in-seg", "href": "../ds/balanced-in-seg.html"}, {"title": "二叉堆", "group": "数据结构", "subgroup": "binary-heap", "href": "../ds/binary-heap.html"}, {"title": "分块套树状数组", "group": "数据结构", "subgroup": "bit-in-block-array", "href": "../ds/bit-in-block-array.html"}, {"title": "块状数组", "group": "数据结构", "subgroup": "block-array", "href": "../ds/block-array.html"}, {"title": "块状链表", "group": "数据结构", "subgroup": "block-list", "href": "../ds/block-list.html"}, {"title": "二叉搜索树 & 平衡树", "group": "数据结构", "subgroup": "bst", "href": "../ds/bst.html"}, {"title": "笛卡尔树", "group": "数据结构", "subgroup": "cartesian-tree", "href": "../ds/cartesian-tree.html"}, {"title": "猫树", "group": "数据结构", "subgroup": "cat-tree", "href": "../ds/cat-tree.html"}, {"title": "分块思想", "group": "数据结构", "subgroup": "decompose", "href": "../ds/decompose.html"}, {"title": "析合树", "group": "数据结构", "subgroup": "divide-combine", "href": "../ds/divide-combine.html"}, {"title": "划分树", "group": "数据结构", "subgroup": "dividing", "href": "../ds/dividing.html"}, {"title": "并查集", "group": "数据结构", "subgroup": "dsu", "href": "../ds/dsu.html"}, {"title": "并查集复杂度", "group": "数据结构", "subgroup": "dsu-complexity", "href": "../ds/dsu-complexity.html"}, {"title": "Euler Tour Tree", "group": "数据结构", "subgroup": "ett", "href": "../ds/ett.html"}, {"title": "树状数组", "group": "数据结构", "subgroup": "fenwick", "href": "../ds/fenwick.html"}, {"title": "手指树", "group": "数据结构", "subgroup": "finger-tree", "href": "../ds/finger-tree.html"}, {"title": "全局平衡二叉树", "group": "数据结构", "subgroup": "global-bst", "href": "../ds/global-bst.html"}, {"title": "哈希表", "group": "数据结构", "subgroup": "hash", "href": "../ds/hash.html"}, {"title": "堆简介", "group": "数据结构", "subgroup": "heap", "href": "../ds/heap.html"}, {"title": "霍夫曼树", "group": "数据结构", "subgroup": "huffman-tree", "href": "../ds/huffman-tree.html"}, {"title": "K-D Tree", "group": "数据结构", "subgroup": "kdt", "href": "../ds/kdt.html"}, {"title": "Kinetic Tournament Tree", "group": "数据结构", "subgroup": "kinetic-tournament-tree", "href": "../ds/kinetic-tournament-tree.html"}, {"title": "Link Cut Tree", "group": "数据结构", "subgroup": "lct", "href": "../ds/lct.html"}, {"title": "左偏树", "group": "数据结构", "subgroup": "leftist-tree", "href": "../ds/leftist-tree.html"}, {"title": "李超线段树", "group": "数据结构", "subgroup": "li-chao-tree", "href": "../ds/li-chao-tree.html"}, {"title": "链表", "group": "数据结构", "subgroup": "linked-list", "href": "../ds/linked-list.html"}, {"title": "左偏红黑树", "group": "数据结构", "subgroup": "llrbt", "href": "../ds/llrbt.html"}, {"title": "单调队列", "group": "数据结构", "subgroup": "monotonous-queue", "href": "../ds/monotonous-queue.html"}, {"title": "单调栈", "group": "数据结构", "subgroup": "monotonous-stack", "href": "../ds/monotonous-stack.html"}, {"title": "数据结构部分简介", "group": "数据结构", "subgroup": "概览", "href": "../ds/overview.html"}, {"title": "配对堆", "group": "数据结构", "subgroup": "pairing-heap", "href": "../ds/pairing-heap.html"}, {"title": "可持久化数据结构简介", "group": "数据结构", "subgroup": "persistent", "href": "../ds/persistent.html"}, {"title": "可持久化平衡树", "group": "数据结构", "subgroup": "persistent-balanced", "href": "../ds/persistent-balanced.html"}, {"title": "可持久化块状数组", "group": "数据结构", "subgroup": "persistent-block-array", "href": "../ds/persistent-block-array.html"}, {"title": "可持久化可并堆", "group": "数据结构", "subgroup": "persistent-heap", "href": "../ds/persistent-heap.html"}, {"title": "可持久化线段树", "group": "数据结构", "subgroup": "persistent-seg", "href": "../ds/persistent-seg.html"}, {"title": "可持久化字典树", "group": "数据结构", "subgroup": "persistent-trie", "href": "../ds/persistent-trie.html"}, {"title": "PQ 树", "group": "数据结构", "subgroup": "pq-tree", "href": "../ds/pq-tree.html"}, {"title": "队列", "group": "数据结构", "subgroup": "queue", "href": "../ds/queue.html"}, {"title": "红黑树", "group": "数据结构", "subgroup": "rbtree", "href": "../ds/rbtree.html"}, {"title": "Size Balanced Tree", "group": "数据结构", "subgroup": "sbt", "href": "../ds/sbt.html"}, {"title": "线段树基础", "group": "数据结构", "subgroup": "seg", "href": "../ds/seg.html"}, {"title": "区间最值操作 & 区间历史最值", "group": "数据结构", "subgroup": "seg-beats", "href": "../ds/seg-beats.html"}, {"title": "平衡树套线段树", "group": "数据结构", "subgroup": "seg-in-balanced", "href": "../ds/seg-in-balanced.html"}, {"title": "树状数组套权值线段树", "group": "数据结构", "subgroup": "seg-in-bit", "href": "../ds/seg-in-bit.html"}, {"title": "线段树套线段树", "group": "数据结构", "subgroup": "seg-in-seg", "href": "../ds/seg-in-seg.html"}, {"title": "线段树合并 & 分裂", "group": "数据结构", "subgroup": "seg-merge-split", "href": "../ds/seg-merge-split.html"}, {"title": "替罪羊树", "group": "数据结构", "subgroup": "sgt", "href": "../ds/sgt.html"}, {"title": "跳表", "group": "数据结构", "subgroup": "skiplist", "href": "../ds/skiplist.html"}, {"title": "ST 表", "group": "数据结构", "subgroup": "sparse-table", "href": "../ds/sparse-table.html"}, {"title": "Splay 树", "group": "数据结构", "subgroup": "splay", "href": "../ds/splay.html"}, {"title": "Sqrt Tree", "group": "数据结构", "subgroup": "sqrt-tree", "href": "../ds/sqrt-tree.html"}, {"title": "栈", "group": "数据结构", "subgroup": "stack", "href": "../ds/stack.html"}, {"title": "Top Tree", "group": "数据结构", "subgroup": "top-tree", "href": "../ds/top-tree.html"}, {"title": "Treap", "group": "数据结构", "subgroup": "treap", "href": "../ds/treap.html"}, {"title": "树分块", "group": "数据结构", "subgroup": "tree-decompose", "href": "../ds/tree-decompose.html"}, {"title": "WBLT", "group": "数据结构", "subgroup": "wblt", "href": "../ds/wblt.html"}, {"title": "Edit landing", "group": "编辑说明", "subgroup": "概览", "href": "../edit-landing/overview.html"}, {"title": "二维计算几何基础", "group": "计算几何", "subgroup": "2d", "href": "../geometry/2d.html"}, {"title": "三维计算几何基础", "group": "计算几何", "subgroup": "3d", "href": "../geometry/3d.html"}, {"title": "凸包", "group": "计算几何", "subgroup": "convex-hull", "href": "../geometry/convex-hull.html"}, {"title": "距离", "group": "计算几何", "subgroup": "distance", "href": "../geometry/distance.html"}, {"title": "半平面交", "group": "计算几何", "subgroup": "half-plane", "href": "../geometry/half-plane.html"}, {"title": "反演变换", "group": "计算几何", "subgroup": "inverse", "href": "../geometry/inverse.html"}, {"title": "计算几何杂项", "group": "计算几何", "subgroup": "misc", "href": "../geometry/misc.html"}, {"title": "平面最近点对", "group": "计算几何", "subgroup": "nearest-points", "href": "../geometry/nearest-points.html"}, {"title": "计算几何部分简介", "group": "计算几何", "subgroup": "概览", "href": "../geometry/overview.html"}, {"title": "Pick 定理", "group": "计算几何", "subgroup": "pick", "href": "../geometry/pick.html"}, {"title": "随机增量法", "group": "计算几何", "subgroup": "random-incremental", "href": "../geometry/random-incremental.html"}, {"title": "旋转卡壳", "group": "计算几何", "subgroup": "rotating-calipers", "href": "../geometry/rotating-calipers.html"}, {"title": "扫描线", "group": "计算几何", "subgroup": "scanning", "href": "../geometry/scanning.html"}, {"title": "三角剖分", "group": "计算几何", "subgroup": "triangulation", "href": "../geometry/triangulation.html"}, {"title": "2-SAT", "group": "图论", "subgroup": "2-sat", "href": "../graph/2-sat.html"}, {"title": "双连通分量", "group": "图论", "subgroup": "bcc", "href": "../graph/bcc.html"}, {"title": "BFS（图论）", "group": "图论", "subgroup": "bfs", "href": "../graph/bfs.html"}, {"title": "二分图", "group": "图论", "subgroup": "bi-graph", "href": "../graph/bi-graph.html"}, {"title": "圆方树", "group": "图论", "subgroup": "block-forest", "href": "../graph/block-forest.html"}, {"title": "弦图", "group": "图论", "subgroup": "chord", "href": "../graph/chord.html"}, {"title": "图的着色", "group": "图论", "subgroup": "color", "href": "../graph/color.html"}, {"title": "图论相关概念", "group": "图论", "subgroup": "concept", "href": "../graph/concept.html"}, {"title": "点/边连通度", "group": "图论", "subgroup": "connectivity", "href": "../graph/connectivity.html"}, {"title": "割点和桥", "group": "图论", "subgroup": "cut", "href": "../graph/cut.html"}, {"title": "有向无环图", "group": "图论", "subgroup": "dag", "href": "../graph/dag.html"}, {"title": "DFS（图论）", "group": "图论", "subgroup": "dfs", "href": "../graph/dfs.html"}, {"title": "差分约束", "group": "图论", "subgroup": "diff-constraints", "href": "../graph/diff-constraints.html"}, {"title": "最小树形图", "group": "图论", "subgroup": "dmst", "href": "../graph/dmst.html"}, {"title": "支配树", "group": "图论", "subgroup": "dominator-tree", "href": "../graph/dominator-tree.html"}, {"title": "树上启发式合并", "group": "图论", "subgroup": "dsu-on-tree", "href": "../graph/dsu-on-tree.html"}, {"title": "动态树分治", "group": "图论", "subgroup": "dynamic-tree-divide", "href": "../graph/dynamic-tree-divide.html"}, {"title": "欧拉图", "group": "图论", "subgroup": "euler", "href": "../graph/euler.html"}, {"title": "上下界网络流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-bound.html"}, {"title": "最大流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-max-flow.html"}, {"title": "最小割", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-min-cut.html"}, {"title": "网络流简介", "group": "图论", "subgroup": "网络流", "href": "../graph/flow.html"}, {"title": "费用流", "group": "图论", "subgroup": "网络流", "href": "../graph/flow-min-cost.html"}, {"title": "一般图最大匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-general-match.html"}, {"title": "一般图最大权匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-general-weight-match.html"}, {"title": "二分图最大匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-bigraph-match.html"}, {"title": "二分图最大权匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-bigraph-weight-match.html"}, {"title": "图匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-graph-match.html"}, {"title": "稳定匹配", "group": "图论", "subgroup": "图匹配", "href": "../graph/graph-matching-stable-match.html"}, {"title": "图上随机游走", "group": "图论", "subgroup": "graph-random-walk", "href": "../graph/graph-random-walk.html"}, {"title": "哈密顿图", "group": "图论", "subgroup": "hamilton", "href": "../graph/hamilton.html"}, {"title": "树链剖分", "group": "图论", "subgroup": "hld", "href": "../graph/hld.html"}, {"title": "k 短路", "group": "图论", "subgroup": "kth-path", "href": "../graph/kth-path.html"}, {"title": "最近公共祖先", "group": "图论", "subgroup": "lca", "href": "../graph/lca.html"}, {"title": "LGV 引理", "group": "图论", "subgroup": "lgv", "href": "../graph/lgv.html"}, {"title": "矩阵树定理", "group": "图论", "subgroup": "matrix-tree", "href": "../graph/matrix-tree.html"}, {"title": "最大团搜索算法", "group": "图论", "subgroup": "max-clique", "href": "../graph/max-clique.html"}, {"title": "最小直径生成树", "group": "图论", "subgroup": "mdst", "href": "../graph/mdst.html"}, {"title": "最小环", "group": "图论", "subgroup": "min-cycle", "href": "../graph/min-cycle.html"}, {"title": "同余最短路", "group": "图论", "subgroup": "mod-shortest-path", "href": "../graph/mod-shortest-path.html"}, {"title": "最小生成树", "group": "图论", "subgroup": "mst", "href": "../graph/mst.html"}, {"title": "拆点", "group": "图论", "subgroup": "node", "href": "../graph/node.html"}, {"title": "图论部分简介", "group": "图论", "subgroup": "概览", "href": "../graph/overview.html"}, {"title": "平面图", "group": "图论", "subgroup": "planar", "href": "../graph/planar.html"}, {"title": "Prüfer 序列", "group": "图论", "subgroup": "prufer", "href": "../graph/prufer.html"}, {"title": "环计数问题", "group": "图论", "subgroup": "rings-count", "href": "../graph/rings-count.html"}, {"title": "图的存储", "group": "图论", "subgroup": "save", "href": "../graph/save.html"}, {"title": "强连通分量", "group": "图论", "subgroup": "scc", "href": "../graph/scc.html"}, {"title": "最短路", "group": "图论", "subgroup": "shortest-path", "href": "../graph/shortest-path.html"}, {"title": "斯坦纳树", "group": "图论", "subgroup": "steiner-tree", "href": "../graph/steiner-tree.html"}, {"title": "Stoer–Wagner 算法", "group": "图论", "subgroup": "stoer-wagner", "href": "../graph/stoer-wagner.html"}, {"title": "拓扑排序", "group": "图论", "subgroup": "topo", "href": "../graph/topo.html"}, {"title": "AHU 算法", "group": "图论", "subgroup": "tree-ahu", "href": "../graph/tree-ahu.html"}, {"title": "树基础", "group": "图论", "subgroup": "tree-basic", "href": "../graph/tree-basic.html"}, {"title": "树的中心", "group": "图论", "subgroup": "tree-center", "href": "../graph/tree-center.html"}, {"title": "树的重心", "group": "图论", "subgroup": "tree-centroid", "href": "../graph/tree-centroid.html"}, {"title": "树的直径", "group": "图论", "subgroup": "tree-diameter", "href": "../graph/tree-diameter.html"}, {"title": "树分治", "group": "图论", "subgroup": "tree-divide", "href": "../graph/tree-divide.html"}, {"title": "树哈希", "group": "图论", "subgroup": "tree-hash", "href": "../graph/tree-hash.html"}, {"title": "树上随机游走", "group": "图论", "subgroup": "tree-random-walk", "href": "../graph/tree-random-walk.html"}, {"title": "虚树", "group": "图论", "subgroup": "virtual-tree", "href": "../graph/virtual-tree.html"}, {"title": "OI Wiki", "group": "首页", "subgroup": "概览", "href": "../home/home.html"}, {"title": "关于本项目", "group": "OI Wiki 介绍", "subgroup": "about", "href": "about.html"}, {"title": "Docker deploy", "group": "OI Wiki 介绍", "subgroup": "docker-deploy", "href": "docker-deploy.html"}, {"title": "F.A.Q.", "group": "OI Wiki 介绍", "subgroup": "faq", "href": "faq.html"}, {"title": "格式手册", "group": "OI Wiki 介绍", "subgroup": "format", "href": "format.html"}, {"title": "如何参与", "group": "OI Wiki 介绍", "subgroup": "htc", "href": "htc.html"}, {"title": "镜像站列表", "group": "OI Wiki 介绍", "subgroup": "mirrors", "href": "mirrors.html"}, {"title": "数学符号表", "group": "OI Wiki 介绍", "subgroup": "symbol", "href": "symbol.html"}, {"title": "致谢", "group": "OI Wiki 介绍", "subgroup": "thanks", "href": "thanks.html"}, {"title": "OI Wiki 不是什么", "group": "OI Wiki 介绍", "subgroup": "what-oi-wiki-is-not", "href": "what-oi-wiki-is-not.html"}, {"title": "数组", "group": "编程语言", "subgroup": "array", "href": "../lang/array.html"}, {"title": "C++ 语法基础", "group": "编程语言", "subgroup": "basic", "href": "../lang/basic.html"}, {"title": "分支", "group": "编程语言", "subgroup": "branch", "href": "../lang/branch.html"}, {"title": "类", "group": "编程语言", "subgroup": "class", "href": "../lang/class.html"}, {"title": "常量", "group": "编程语言", "subgroup": "const", "href": "../lang/const.html"}, {"title": "C++ 与其他常用语言的区别", "group": "编程语言", "subgroup": "cpp-other-langs", "href": "../lang/cpp-other-langs.html"}, {"title": "bitset", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-bitset.html"}, {"title": "C++ 标准库简介", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl.html"}, {"title": "pair", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-pair.html"}, {"title": "STL 容器简介", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-container.html"}, {"title": "STL 算法", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-algorithm.html"}, {"title": "string", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-string.html"}, {"title": "关联式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-associative-container.html"}, {"title": "容器适配器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-container-adapter.html"}, {"title": "序列式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-sequence-container.html"}, {"title": "无序关联式容器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-unordered-container.html"}, {"title": "迭代器", "group": "编程语言", "subgroup": "C++ 标准库", "href": "../lang/csl-iterator.html"}, {"title": "文件操作", "group": "编程语言", "subgroup": "file-op", "href": "../lang/file-op.html"}, {"title": "函数", "group": "编程语言", "subgroup": "func", "href": "../lang/func.html"}, {"title": "Hello, World!", "group": "编程语言", "subgroup": "helloworld", "href": "../lang/helloworld.html"}, {"title": "Java 速成", "group": "编程语言", "subgroup": "java", "href": "../lang/java.html"}, {"title": "Java 进阶", "group": "编程语言", "subgroup": "java-pro", "href": "../lang/java-pro.html"}, {"title": "Lambda 表达式", "group": "编程语言", "subgroup": "lambda", "href": "../lang/lambda.html"}, {"title": "循环", "group": "编程语言", "subgroup": "loop", "href": "../lang/loop.html"}, {"title": "命名空间", "group": "编程语言", "subgroup": "namespace", "href": "../lang/namespace.html"}, {"title": "新版 C++ 特性", "group": "编程语言", "subgroup": "new", "href": "../lang/new.html"}, {"title": "运算", "group": "编程语言", "subgroup": "op", "href": "../lang/op.html"}, {"title": "重载运算符", "group": "编程语言", "subgroup": "op-overload", "href": "../lang/op-overload.html"}, {"title": "编译优化", "group": "编程语言", "subgroup": "optimizations", "href": "../lang/optimizations.html"}, {"title": "语言基础简介", "group": "编程语言", "subgroup": "概览", "href": "../lang/overview.html"}, {"title": "Pascal 转 C++ 急救", "group": "编程语言", "subgroup": "pas-cpp", "href": "../lang/pas-cpp.html"}, {"title": "pb_ds 简介", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds.html"}, {"title": "堆", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds-pq.html"}, {"title": "平衡树", "group": "编程语言", "subgroup": "PBDS", "href": "../lang/pb-ds-tree.html"}, {"title": "指针", "group": "编程语言", "subgroup": "pointer", "href": "../lang/pointer.html"}, {"title": "Python 速成", "group": "编程语言", "subgroup": "python", "href": "../lang/python.html"}, {"title": "引用", "group": "编程语言", "subgroup": "reference", "href": "../lang/reference.html"}, {"title": "结构体", "group": "编程语言", "subgroup": "struct", "href": "../lang/struct.html"}, {"title": "联合体", "group": "编程语言", "subgroup": "union", "href": "../lang/union.html"}, {"title": "值类别", "group": "编程语言", "subgroup": "value-category", "href": "../lang/value-category.html"}, {"title": "变量", "group": "编程语言", "subgroup": "var", "href": "../lang/var.html"}, {"title": "Schreier–Sims 算法", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-schreier-sims.html"}, {"title": "域论", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-field-theory.html"}, {"title": "基本概念", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-basic.html"}, {"title": "环论", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-ring-theory.html"}, {"title": "群论", "group": "数学", "subgroup": "algebra", "href": "../math/algebra-group-theory.html"}, {"title": "Berlekamp–Massey 算法", "group": "数学", "subgroup": "berlekamp-massey", "href": "../math/berlekamp-massey.html"}, {"title": "高精度计算", "group": "数学", "subgroup": "bignum", "href": "../math/bignum.html"}, {"title": "快速幂", "group": "数学", "subgroup": "binary-exponentiation", "href": "../math/binary-exponentiation.html"}, {"title": "二进制集合操作", "group": "数学", "subgroup": "binary-set", "href": "../math/binary-set.html"}, {"title": "位操作", "group": "数学", "subgroup": "bit", "href": "../math/bit.html"}, {"title": "布尔代数", "group": "数学", "subgroup": "boolean-algebra", "href": "../math/boolean-algebra.html"}, {"title": "Entringer Number", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-entringer.html"}, {"title": "Eulerian Number", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-eulerian.html"}, {"title": "Pólya 计数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-polya.html"}, {"title": "伯努利数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-bernoulli.html"}, {"title": "分拆数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-partition.html"}, {"title": "卡特兰数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-catalan.html"}, {"title": "图论计数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-graph-enumeration.html"}, {"title": "容斥原理", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-inclusion-exclusion-principle.html"}, {"title": "抽屉原理", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-drawer-principle.html"}, {"title": "排列组合", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-combination.html"}, {"title": "斐波那契数列", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-fibonacci.html"}, {"title": "斯特林数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-stirling.html"}, {"title": "范德蒙德卷积", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-vandermonde-convolution.html"}, {"title": "贝尔数", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-bell.html"}, {"title": "错位排列", "group": "数学", "subgroup": "组合数学", "href": "../math/combinatorics-derangement.html"}, {"title": "复数", "group": "数学", "subgroup": "complex", "href": "../math/complex.html"}, {"title": "弧度制与坐标系", "group": "数学", "subgroup": "coordinate", "href": "../math/coordinate.html"}, {"title": "公平组合游戏", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-impartial-game.html"}, {"title": "博弈论简介", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-intro.html"}, {"title": "零和游戏", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-zero-sum-game.html"}, {"title": "非公平组合游戏", "group": "数学", "subgroup": "博弈论", "href": "../math/game-theory-partizan-game.html"}, {"title": "Jordan标准型", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-jordan.html"}, {"title": "内积和外积", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-product.html"}, {"title": "初等变换", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-elementary-operations.html"}, {"title": "向量", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-vector.html"}, {"title": "对角化", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-diagonalization.html"}, {"title": "特征多项式", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-char-poly.html"}, {"title": "矩阵", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-matrix.html"}, {"title": "线性代数简介", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra.html"}, {"title": "线性基", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-basis.html"}, {"title": "线性映射", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-linear-mapping.html"}, {"title": "线性空间", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-vector-space.html"}, {"title": "行列式", "group": "数学", "subgroup": "线性代数", "href": "../math/linear-algebra-determinant.html"}, {"title": "线性规划基础", "group": "数学", "subgroup": "linear-programming", "href": "../math/linear-programming.html"}, {"title": "拟阵", "group": "数学", "subgroup": "matroid", "href": "../math/matroid.html"}, {"title": "Meissel–Lehmer 算法", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-meissel-lehmer.html"}, {"title": "Min_25 筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-min-25.html"}, {"title": "Pell 方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-pell-equation.html"}, {"title": "Powerful Number 筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-powerful-number.html"}, {"title": "Stern–Brocot 树与 Farey 序列", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-stern-brocot.html"}, {"title": "中国剩余定理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-crt.html"}, {"title": "二次剩余", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-quad-residue.html"}, {"title": "二次域", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-quadratic.html"}, {"title": "分解质因数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-pollard-rho.html"}, {"title": "升幂引理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-lift-the-exponent.html"}, {"title": "卢卡斯定理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-lucas.html"}, {"title": "同余方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-congruence-equation.html"}, {"title": "数论分块", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-sqrt-decomposition.html"}, {"title": "数论基础", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-basic.html"}, {"title": "最大公约数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-gcd.html"}, {"title": "杜教筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-du.html"}, {"title": "模算术简介", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-mod-arithmetic.html"}, {"title": "模逆元", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-inverse.html"}, {"title": "欧拉函数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-euler-totient.html"}, {"title": "洲阁筛", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-zhou.html"}, {"title": "狄利克雷卷积", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-dirichlet.html"}, {"title": "离散对数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-discrete-logarithm.html"}, {"title": "筛法", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-sieve.html"}, {"title": "类欧几里德算法", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-euclidean.html"}, {"title": "素数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-prime.html"}, {"title": "线性同余方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-linear-equation.html"}, {"title": "莫比乌斯反演", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-mobius.html"}, {"title": "裴蜀定理 & 一次不定方程", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-bezouts.html"}, {"title": "费马小定理 & 欧拉定理", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-fermat.html"}, {"title": "连分数", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-continued-fraction.html"}, {"title": "阶 & 原根", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-primitive-root.html"}, {"title": "阶乘取模", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-factorial.html"}, {"title": "高次剩余 & 单位根", "group": "数学", "subgroup": "数论", "href": "../math/number-theory-residue.html"}, {"title": "平衡三进制", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-balanced-ternary.html"}, {"title": "数字系统简介", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-intro.html"}, {"title": "格雷码", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-gray-code.html"}, {"title": "进位制", "group": "数学", "subgroup": "numeral-sys", "href": "../math/numeral-sys-base.html"}, {"title": "插值", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-interp.html"}, {"title": "数值积分", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-integral.html"}, {"title": "牛顿迭代法", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-newton.html"}, {"title": "高斯消元", "group": "数学", "subgroup": "数值算法", "href": "../math/numerical-gauss.html"}, {"title": "序理论", "group": "数学", "subgroup": "order-theory", "href": "../math/order-theory.html"}, {"title": "数学部分简介", "group": "数学", "subgroup": "概览", "href": "../math/overview.html"}, {"title": "置换和排列", "group": "数学", "subgroup": "permutation", "href": "../math/permutation.html"}, {"title": "Chirp Z 变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-czt.html"}, {"title": "Lagrange 反演", "group": "数学", "subgroup": "多项式", "href": "../math/poly-lagrange-inversion.html"}, {"title": "代数基本定理", "group": "数学", "subgroup": "多项式", "href": "../math/poly-fundamental.html"}, {"title": "多项式与生成函数简介", "group": "数学", "subgroup": "多项式", "href": "../math/poly-intro.html"}, {"title": "多项式初等函数", "group": "数学", "subgroup": "多项式", "href": "../math/poly-elementary-func.html"}, {"title": "多项式多点求值|快速插值", "group": "数学", "subgroup": "多项式", "href": "../math/poly-multipoint-eval-interpolation.html"}, {"title": "多项式平移|连续点值平移", "group": "数学", "subgroup": "多项式", "href": "../math/poly-shift.html"}, {"title": "多项式牛顿迭代", "group": "数学", "subgroup": "多项式", "href": "../math/poly-newton.html"}, {"title": "常系数齐次线性递推", "group": "数学", "subgroup": "多项式", "href": "../math/poly-linear-recurrence.html"}, {"title": "形式幂级数复合|复合逆", "group": "数学", "subgroup": "多项式", "href": "../math/poly-comp-rev.html"}, {"title": "快速傅里叶变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-fft.html"}, {"title": "快速数论变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-ntt.html"}, {"title": "快速沃尔什变换", "group": "数学", "subgroup": "多项式", "href": "../math/poly-fwt.html"}, {"title": "指数生成函数", "group": "数学", "subgroup": "多项式", "href": "../math/poly-egf.html"}, {"title": "普通生成函数", "group": "数学", "subgroup": "多项式", "href": "../math/poly-ogf.html"}, {"title": "符号化方法", "group": "数学", "subgroup": "多项式", "href": "../math/poly-symbolic-method.html"}, {"title": "基本概念", "group": "数学", "subgroup": "概率", "href": "../math/probability-basic-conception.html"}, {"title": "条件概率与独立性", "group": "数学", "subgroup": "概率", "href": "../math/probability-conditional-probability.html"}, {"title": "概率不等式", "group": "数学", "subgroup": "概率", "href": "../math/probability-concentration-inequality.html"}, {"title": "随机变量", "group": "数学", "subgroup": "概率", "href": "../math/probability-random-variable.html"}, {"title": "随机变量的数字特征", "group": "数学", "subgroup": "概率", "href": "../math/probability-exp-var.html"}, {"title": "单纯形法", "group": "数学", "subgroup": "simplex", "href": "../math/simplex.html"}, {"title": "杨氏矩阵", "group": "数学", "subgroup": "young-tableau", "href": "../math/young-tableau.html"}, {"title": "15-puzzle", "group": "杂项", "subgroup": "15-puzzle", "href": "../misc/15-puzzle.html"}, {"title": "计算理论基础", "group": "杂项", "subgroup": "cc-basic", "href": "../misc/cc-basic.html"}, {"title": "CDQ 分治", "group": "杂项", "subgroup": "cdq-divide", "href": "../misc/cdq-divide.html"}, {"title": "离散化", "group": "杂项", "subgroup": "discrete", "href": "../misc/discrete.html"}, {"title": "字节顺序", "group": "杂项", "subgroup": "endianness", "href": "../misc/endianness.html"}, {"title": "表达式求值", "group": "杂项", "subgroup": "expression", "href": "../misc/expression.html"}, {"title": "分数规划", "group": "杂项", "subgroup": "frac-programming", "href": "../misc/frac-programming.html"}, {"title": "有限状态自动机", "group": "杂项", "subgroup": "fsm", "href": "../misc/fsm.html"}, {"title": "Garsia–Wachs 算法", "group": "杂项", "subgroup": "garsia-wachs", "href": "../misc/garsia-wachs.html"}, {"title": "爬山算法", "group": "杂项", "subgroup": "hill-climbing", "href": "../misc/hill-climbing.html"}, {"title": "悬线法", "group": "杂项", "subgroup": "hoverline", "href": "../misc/hoverline.html"}, {"title": "在一台机器上规划任务", "group": "杂项", "subgroup": "job-order", "href": "../misc/job-order.html"}, {"title": "约瑟夫问题", "group": "杂项", "subgroup": "josephus", "href": "../misc/josephus.html"}, {"title": "Kahan 求和", "group": "杂项", "subgroup": "kahan-summation", "href": "../misc/kahan-summation.html"}, {"title": "主元素问题", "group": "杂项", "subgroup": "main-element", "href": "../misc/main-element.html"}, {"title": "普通莫队算法", "group": "杂项", "subgroup": "mo-algo", "href": "../misc/mo-algo.html"}, {"title": "二维莫队", "group": "杂项", "subgroup": "mo-algo-2dimen", "href": "../misc/mo-algo-2dimen.html"}, {"title": "莫队算法简介", "group": "杂项", "subgroup": "mo-algo-intro", "href": "../misc/mo-algo-intro.html"}, {"title": "树上莫队", "group": "杂项", "subgroup": "mo-algo-on-tree", "href": "../misc/mo-algo-on-tree.html"}, {"title": "莫队二次离线", "group": "杂项", "subgroup": "mo-algo-secondary-offline", "href": "../misc/mo-algo-secondary-offline.html"}, {"title": "莫队配合 bitset", "group": "杂项", "subgroup": "mo-algo-with-bitset", "href": "../misc/mo-algo-with-bitset.html"}, {"title": "带修改莫队", "group": "杂项", "subgroup": "modifiable-mo-algo", "href": "../misc/modifiable-mo-algo.html"}, {"title": "珂朵莉树/颜色段均摊", "group": "杂项", "subgroup": "odt", "href": "../misc/odt.html"}, {"title": "离线算法简介", "group": "杂项", "subgroup": "offline", "href": "../misc/offline.html"}, {"title": "杂项简介", "group": "杂项", "subgroup": "概览", "href": "../misc/overview.html"}, {"title": "整体二分", "group": "杂项", "subgroup": "parallel-binsearch", "href": "../misc/parallel-binsearch.html"}, {"title": "随机化技巧", "group": "杂项", "subgroup": "rand-technique", "href": "../misc/rand-technique.html"}, {"title": "随机函数", "group": "杂项", "subgroup": "random", "href": "../misc/random.html"}, {"title": "回滚莫队", "group": "杂项", "subgroup": "rollback-mo-algo", "href": "../misc/rollback-mo-algo.html"}, {"title": "模拟退火", "group": "杂项", "subgroup": "simulated-annealing", "href": "../misc/simulated-annealing.html"}, {"title": "空间优化简介", "group": "杂项", "subgroup": "space-optimization", "href": "../misc/space-optimization.html"}, {"title": "双指针", "group": "杂项", "subgroup": "two-pointer", "href": "../misc/two-pointer.html"}, {"title": "Alpha–Beta 剪枝", "group": "搜索", "subgroup": "alpha-beta", "href": "../search/alpha-beta.html"}, {"title": "A*", "group": "搜索", "subgroup": "astar", "href": "../search/astar.html"}, {"title": "回溯法", "group": "搜索", "subgroup": "backtracking", "href": "../search/backtracking.html"}, {"title": "BFS（搜索）", "group": "搜索", "subgroup": "bfs", "href": "../search/bfs.html"}, {"title": "双向搜索", "group": "搜索", "subgroup": "bidirectional", "href": "../search/bidirectional.html"}, {"title": "DFS（搜索）", "group": "搜索", "subgroup": "dfs", "href": "../search/dfs.html"}, {"title": "Dancing Links", "group": "搜索", "subgroup": "dlx", "href": "../search/dlx.html"}, {"title": "启发式搜索", "group": "搜索", "subgroup": "heuristic", "href": "../search/heuristic.html"}, {"title": "IDA*", "group": "搜索", "subgroup": "idastar", "href": "../search/idastar.html"}, {"title": "迭代加深搜索", "group": "搜索", "subgroup": "iterative", "href": "../search/iterative.html"}, {"title": "优化", "group": "搜索", "subgroup": "优化", "href": "../search/opt.html"}, {"title": "搜索部分简介", "group": "搜索", "subgroup": "概览", "href": "../search/overview.html"}, {"title": "AC 自动机", "group": "字符串", "subgroup": "ac-automaton", "href": "../string/ac-automaton.html"}, {"title": "字符串基础", "group": "字符串", "subgroup": "basic", "href": "../string/basic.html"}, {"title": "Boyer–Moore 算法", "group": "字符串", "subgroup": "bm", "href": "../string/bm.html"}, {"title": "广义后缀自动机", "group": "字符串", "subgroup": "general-sam", "href": "../string/general-sam.html"}, {"title": "字符串哈希", "group": "字符串", "subgroup": "hash", "href": "../string/hash.html"}, {"title": "前缀函数与 KMP 算法", "group": "字符串", "subgroup": "kmp", "href": "../string/kmp.html"}, {"title": "标准库", "group": "字符串", "subgroup": "lib-func", "href": "../string/lib-func.html"}, {"title": "Lyndon 分解", "group": "字符串", "subgroup": "lyndon", "href": "../string/lyndon.html"}, {"title": "Main–Lorentz 算法", "group": "字符串", "subgroup": "main-lorentz", "href": "../string/main-lorentz.html"}, {"title": "Manacher", "group": "字符串", "subgroup": "manacher", "href": "../string/manacher.html"}, {"title": "字符串匹配", "group": "字符串", "subgroup": "match", "href": "../string/match.html"}, {"title": "最小表示法", "group": "字符串", "subgroup": "minimal-string", "href": "../string/minimal-string.html"}, {"title": "字符串部分简介", "group": "字符串", "subgroup": "概览", "href": "../string/overview.html"}, {"title": "回文树", "group": "字符串", "subgroup": "pam", "href": "../string/pam.html"}, {"title": "后缀数组简介", "group": "字符串", "subgroup": "sa", "href": "../string/sa.html"}, {"title": "最优原地后缀排序算法", "group": "字符串", "subgroup": "sa-optimal-inplace", "href": "../string/sa-optimal-inplace.html"}, {"title": "后缀自动机 (SAM)", "group": "字符串", "subgroup": "sam", "href": "../string/sam.html"}, {"title": "序列自动机", "group": "字符串", "subgroup": "seq-automaton", "href": "../string/seq-automaton.html"}, {"title": "后缀平衡树", "group": "字符串", "subgroup": "suffix-bst", "href": "../string/suffix-bst.html"}, {"title": "后缀树", "group": "字符串", "subgroup": "suffix-tree", "href": "../string/suffix-tree.html"}, {"title": "字典树 (Trie)", "group": "字符串", "subgroup": "trie", "href": "../string/trie.html"}, {"title": "Z 函数（扩展 KMP）", "group": "字符串", "subgroup": "z-func", "href": "../string/z-func.html"}, {"title": "命令行", "group": "工具", "subgroup": "cmd", "href": "../tools/cmd.html"}, {"title": "命令行编译与调试", "group": "工具", "subgroup": "compile-debug", "href": "../tools/compile-debug.html"}, {"title": "编译器", "group": "工具", "subgroup": "compiler", "href": "../tools/compiler.html"}, {"title": "Atom", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-atom.html"}, {"title": "CLion", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-clion.html"}, {"title": "Code::Blocks", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-codeblocks.html"}, {"title": "CP Editor", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-cpeditor.html"}, {"title": "Dev-C++", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-devcpp.html"}, {"title": "Eclipse", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-eclipse.html"}, {"title": "Emacs", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-emacs.html"}, {"title": "Geany", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-geany.html"}, {"title": "GUIDE", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-guide.html"}, {"title": "Kate", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-kate.html"}, {"title": "Notepad++", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-npp.html"}, {"title": "Sublime Text", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-sublime.html"}, {"title": "Vim", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-vim.html"}, {"title": "VS Code", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-vscode.html"}, {"title": "Xcode", "group": "工具", "subgroup": "编辑器", "href": "../tools/editor-xcode.html"}, {"title": "Git", "group": "工具", "subgroup": "git", "href": "../tools/git.html"}, {"title": "Arbiter", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-arbiter.html"}, {"title": "CCR Plus", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-ccr-plus.html"}, {"title": "Cena", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-cena.html"}, {"title": "Lemon", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger-lemon.html"}, {"title": "评测工具简介", "group": "工具", "subgroup": "评测工具", "href": "../tools/judger.html"}, {"title": "LaTeX 入门", "group": "工具", "subgroup": "latex", "href": "../tools/latex.html"}, {"title": "OJ 工具", "group": "工具", "subgroup": "oj-tool", "href": "../tools/oj-tool.html"}, {"title": "工具软件简介", "group": "工具", "subgroup": "概览", "href": "../tools/overview.html"}, {"title": "Polygon", "group": "工具", "subgroup": "polygon", "href": "../tools/polygon.html"}, {"title": "Special Judge", "group": "工具", "subgroup": "special-judge", "href": "../tools/special-judge.html"}, {"title": "Checker", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-checker.html"}, {"title": "Generator", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-generator.html"}, {"title": "Interactor", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-interactor.html"}, {"title": "Testlib 简介", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib.html"}, {"title": "Validator", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-validator.html"}, {"title": "通用", "group": "工具", "subgroup": "Testlib", "href": "../tools/testlib-general.html"}, {"title": "WSL (Windows 10)", "group": "工具", "subgroup": "wsl", "href": "../tools/wsl.html"}, {"title": "括号序列", "group": "专题", "subgroup": "bracket", "href": "../topic/bracket.html"}, {"title": "并查集应用", "group": "专题", "subgroup": "dsu-app", "href": "../topic/dsu-app.html"}, {"title": "RMQ", "group": "专题", "subgroup": "rmq", "href": "../topic/rmq.html"}, {"title": "线段树与离线询问", "group": "专题", "subgroup": "segment-tree-offline", "href": "../topic/segment-tree-offline.html"}]</script>
+  <script>
+    (() => {
+      const input = document.getElementById("archive-search-input");
+      const results = document.getElementById("archive-search-results");
+      const status = document.getElementById("archive-search-status");
+      const clearButton = document.getElementById("archive-search-clear");
+      const groupSelect = document.getElementById("archive-search-group");
+      const dataNode = document.getElementById("archive-search-data");
+      if (!input || !results || !status || !clearButton || !groupSelect || !dataNode) return;
+      let items = [];
+      try { items = JSON.parse(dataNode.textContent || "[]"); } catch (_error) { return; }
+      const escapeHtml = (value) => value.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+      const highlight = (value, query) => {
+        if (!query) return escapeHtml(value);
+        const source = value.toLowerCase();
+        const needle = query.toLowerCase();
+        let cursor = 0;
+        let html = "";
+        while (cursor < value.length) {
+          const index = source.indexOf(needle, cursor);
+          if (index === -1) {
+            html += escapeHtml(value.slice(cursor));
+            break;
+          }
+          html += escapeHtml(value.slice(cursor, index));
+          html += `<mark>${escapeHtml(value.slice(index, index + needle.length))}</mark>`;
+          cursor = index + needle.length;
+        }
+        return html;
+      };
+      const groups = [...new Set(items.map((item) => item.group))].sort((a, b) => a.localeCompare(b, "zh-CN"));
+      for (const group of groups) {
+        const option = document.createElement("option");
+        option.value = group;
+        option.textContent = group;
+        groupSelect.append(option);
+      }
+      const render = () => {
+        const query = input.value.trim().toLowerCase();
+        const tokens = query.split(/\s+/).filter(Boolean);
+        const selectedGroup = groupSelect.value;
+        const scoped = selectedGroup ? items.filter((item) => item.group === selectedGroup) : items;
+        if (!query) {
+          results.hidden = true;
+          results.innerHTML = "";
+          status.textContent = selectedGroup ? `${selectedGroup} 下可搜索 ${scoped.length} 个页面。` : `可搜索 ${items.length} 个页面。`;
+          return;
+        }
+        const matches = scoped
+          .filter((item) => {
+            const haystack = [item.title, item.group, item.subgroup].join(" ").toLowerCase();
+            return tokens.every((token) => haystack.includes(token));
+          })
+          .sort((a, b) => a.title.localeCompare(b.title, "zh-CN"));
+        results.hidden = matches.length === 0;
+        results.innerHTML = matches.slice(0, 100).map((item) =>
+          `<li><a href="${item.href}">${highlight(item.title, query)}</a><div class="meta">${highlight(item.group, query)} / ${highlight(item.subgroup, query)}</div></li>`
+        ).join("");
+        status.textContent = matches.length ? `匹配 ${matches.length} 个页面，显示前 ${Math.min(matches.length, 100)} 个。` : "没有匹配结果。";
+      };
+      input.addEventListener("input", render);
+      groupSelect.addEventListener("change", render);
+      clearButton.addEventListener("click", () => {
+        input.value = "";
+        groupSelect.value = "";
+        input.focus();
+        render();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "/" && event.target !== input) {
+          event.preventDefault();
+          input.focus();
+        }
+        if (event.key === "Escape" && document.activeElement === input) {
+          input.value = "";
+          render();
+        }
+      });
+      const params = new URLSearchParams(window.location.search);
+      const initialQuery = params.get("q");
+      if (initialQuery) input.value = initialQuery;
+      render();
+    })();
+  </script>
+</body>
+</html>

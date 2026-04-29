@@ -1,0 +1,4187 @@
+[
+  {
+    "title": "均摊复杂度",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "amortized-analysis",
+    "subgroup_label": "amortized-analysis",
+    "html": "html/basic/amortized-analysis.html",
+    "source": "docs/basic__amortized-analysis.md"
+  },
+  {
+    "title": "二分",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "binary",
+    "subgroup_label": "binary",
+    "html": "html/basic/binary.html",
+    "source": "docs/basic__binary.md"
+  },
+  {
+    "title": "倍增",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "binary-lifting",
+    "subgroup_label": "binary-lifting",
+    "html": "html/basic/binary-lifting.html",
+    "source": "docs/basic__binary-lifting.md"
+  },
+  {
+    "title": "冒泡排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "bubble-sort",
+    "subgroup_label": "bubble-sort",
+    "html": "html/basic/bubble-sort.html",
+    "source": "docs/basic__bubble-sort.md"
+  },
+  {
+    "title": "桶排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "bucket-sort",
+    "subgroup_label": "bucket-sort",
+    "html": "html/basic/bucket-sort.html",
+    "source": "docs/basic__bucket-sort.md"
+  },
+  {
+    "title": "复杂度简介",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "complexity",
+    "subgroup_label": "complexity",
+    "html": "html/basic/complexity.html",
+    "source": "docs/basic__complexity.md"
+  },
+  {
+    "title": "构造",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "construction",
+    "subgroup_label": "construction",
+    "html": "html/basic/construction.html",
+    "source": "docs/basic__construction.md"
+  },
+  {
+    "title": "计数排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "counting-sort",
+    "subgroup_label": "counting-sort",
+    "html": "html/basic/counting-sort.html",
+    "source": "docs/basic__counting-sort.md"
+  },
+  {
+    "title": "递归 & 分治",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "divide-and-conquer",
+    "subgroup_label": "divide-and-conquer",
+    "html": "html/basic/divide-and-conquer.html",
+    "source": "docs/basic__divide-and-conquer.md"
+  },
+  {
+    "title": "枚举",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "enumerate",
+    "subgroup_label": "enumerate",
+    "html": "html/basic/enumerate.html",
+    "source": "docs/basic__enumerate.md"
+  },
+  {
+    "title": "贪心",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "greedy",
+    "subgroup_label": "greedy",
+    "html": "html/basic/greedy.html",
+    "source": "docs/basic__greedy.md"
+  },
+  {
+    "title": "堆排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "heap-sort",
+    "subgroup_label": "heap-sort",
+    "html": "html/basic/heap-sort.html",
+    "source": "docs/basic__heap-sort.md"
+  },
+  {
+    "title": "插入排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "insertion-sort",
+    "subgroup_label": "insertion-sort",
+    "html": "html/basic/insertion-sort.html",
+    "source": "docs/basic__insertion-sort.md"
+  },
+  {
+    "title": "归并排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "merge-sort",
+    "subgroup_label": "merge-sort",
+    "html": "html/basic/merge-sort.html",
+    "source": "docs/basic__merge-sort.md"
+  },
+  {
+    "title": "算法基础简介",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/basic/overview.html",
+    "source": "docs/basic.md"
+  },
+  {
+    "title": "前缀和 & 差分",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "prefix-sum",
+    "subgroup_label": "prefix-sum",
+    "html": "html/basic/prefix-sum.html",
+    "source": "docs/basic__prefix-sum.md"
+  },
+  {
+    "title": "快速排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "quick-sort",
+    "subgroup_label": "quick-sort",
+    "html": "html/basic/quick-sort.html",
+    "source": "docs/basic__quick-sort.md"
+  },
+  {
+    "title": "基数排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "radix-sort",
+    "subgroup_label": "radix-sort",
+    "html": "html/basic/radix-sort.html",
+    "source": "docs/basic__radix-sort.md"
+  },
+  {
+    "title": "选择排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "selection-sort",
+    "subgroup_label": "selection-sort",
+    "html": "html/basic/selection-sort.html",
+    "source": "docs/basic__selection-sort.md"
+  },
+  {
+    "title": "希尔排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "shell-sort",
+    "subgroup_label": "shell-sort",
+    "html": "html/basic/shell-sort.html",
+    "source": "docs/basic__shell-sort.md"
+  },
+  {
+    "title": "模拟",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "simulate",
+    "subgroup_label": "simulate",
+    "html": "html/basic/simulate.html",
+    "source": "docs/basic__simulate.md"
+  },
+  {
+    "title": "排序简介",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "sort-intro",
+    "subgroup_label": "sort-intro",
+    "html": "html/basic/sort-intro.html",
+    "source": "docs/basic__sort-intro.md"
+  },
+  {
+    "title": "排序相关 STL",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "stl-sort",
+    "subgroup_label": "stl-sort",
+    "html": "html/basic/stl-sort.html",
+    "source": "docs/basic__stl-sort.md"
+  },
+  {
+    "title": "Tim 排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "tim-sort",
+    "subgroup_label": "tim-sort",
+    "html": "html/basic/tim-sort.html",
+    "source": "docs/basic__tim-sort.md"
+  },
+  {
+    "title": "锦标赛排序",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "tournament-sort",
+    "subgroup_label": "tournament-sort",
+    "html": "html/basic/tournament-sort.html",
+    "source": "docs/basic__tournament-sort.md"
+  },
+  {
+    "title": "排序应用",
+    "group": "basic",
+    "group_label": "基础知识",
+    "subgroup": "use-of-sort",
+    "subgroup_label": "use-of-sort",
+    "html": "html/basic/use-of-sort.html",
+    "source": "docs/basic__use-of-sort.md"
+  },
+  {
+    "title": "常见错误",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "common-mistakes",
+    "subgroup_label": "common-mistakes",
+    "html": "html/contest/common-mistakes.html",
+    "source": "docs/contest__common-mistakes.md"
+  },
+  {
+    "title": "常见技巧",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "common-tricks",
+    "subgroup_label": "common-tricks",
+    "html": "html/contest/common-tricks.html",
+    "source": "docs/contest__common-tricks.md"
+  },
+  {
+    "title": "分段打表",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "dictionary",
+    "subgroup_label": "dictionary",
+    "html": "html/contest/dictionary.html",
+    "source": "docs/contest__dictionary.md"
+  },
+  {
+    "title": "ICPC/CCPC 赛事与赛制",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "icpc",
+    "subgroup_label": "icpc",
+    "html": "html/contest/icpc.html",
+    "source": "docs/contest__icpc.md"
+  },
+  {
+    "title": "交互题",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "interaction",
+    "subgroup_label": "interaction",
+    "html": "html/contest/interaction.html",
+    "source": "docs/contest__interaction.md"
+  },
+  {
+    "title": "读入、输出优化",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "io",
+    "subgroup_label": "io",
+    "html": "html/contest/io.html",
+    "source": "docs/contest__io.md"
+  },
+  {
+    "title": "OI 赛事与赛制",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "oi",
+    "subgroup_label": "oi",
+    "html": "html/contest/oi.html",
+    "source": "docs/contest__oi.md"
+  },
+  {
+    "title": "比赛相关简介",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/contest/overview.html",
+    "source": "docs/contest.md"
+  },
+  {
+    "title": "题型概述",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "problems",
+    "subgroup_label": "problems",
+    "html": "html/contest/problems.html",
+    "source": "docs/contest__problems.md"
+  },
+  {
+    "title": "出题",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "problemsetting",
+    "subgroup_label": "problemsetting",
+    "html": "html/contest/problemsetting.html",
+    "source": "docs/contest__problemsetting.md"
+  },
+  {
+    "title": "学习资源",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "resources",
+    "subgroup_label": "resources",
+    "html": "html/contest/resources.html",
+    "source": "docs/contest__resources.md"
+  },
+  {
+    "title": "学习路线",
+    "group": "contest",
+    "group_label": "赛事与实践",
+    "subgroup": "roadmap",
+    "subgroup_label": "roadmap",
+    "html": "html/contest/roadmap.html",
+    "source": "docs/contest__roadmap.md"
+  },
+  {
+    "title": "动态规划基础",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "basic",
+    "subgroup_label": "basic",
+    "html": "html/dp/basic.html",
+    "source": "docs/dp__basic.md"
+  },
+  {
+    "title": "计数 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "count",
+    "subgroup_label": "count",
+    "html": "html/dp/count.html",
+    "source": "docs/dp__count.md"
+  },
+  {
+    "title": "DAG 上的 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "dag",
+    "subgroup_label": "dag",
+    "html": "html/dp/dag.html",
+    "source": "docs/dp__dag.md"
+  },
+  {
+    "title": "DP 套 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "dp-of-dp",
+    "subgroup_label": "dp-of-dp",
+    "html": "html/dp/dp-of-dp.html",
+    "source": "docs/dp__dp-of-dp.md"
+  },
+  {
+    "title": "动态 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "dynamic",
+    "subgroup_label": "dynamic",
+    "html": "html/dp/dynamic.html",
+    "source": "docs/dp__dynamic.md"
+  },
+  {
+    "title": "区间 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "interval",
+    "subgroup_label": "interval",
+    "html": "html/dp/interval.html",
+    "source": "docs/dp__interval.md"
+  },
+  {
+    "title": "背包 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "knapsack",
+    "subgroup_label": "knapsack",
+    "html": "html/dp/knapsack.html",
+    "source": "docs/dp__knapsack.md"
+  },
+  {
+    "title": "记忆化搜索",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "memo",
+    "subgroup_label": "memo",
+    "html": "html/dp/memo.html",
+    "source": "docs/dp__memo.md"
+  },
+  {
+    "title": "其它 DP 方法",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "misc",
+    "subgroup_label": "misc",
+    "html": "html/dp/misc.html",
+    "source": "docs/dp__misc.md"
+  },
+  {
+    "title": "数位 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "number",
+    "subgroup_label": "number",
+    "html": "html/dp/number.html",
+    "source": "docs/dp__number.md"
+  },
+  {
+    "title": "DP 优化简介",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "opt",
+    "subgroup_label": "优化",
+    "html": "html/dp/opt-dp-opt.html",
+    "source": "docs/dp__opt__dp-opt.md"
+  },
+  {
+    "title": "Slope Trick 优化",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "opt",
+    "subgroup_label": "优化",
+    "html": "html/dp/opt-slope-trick.html",
+    "source": "docs/dp__opt__slope-trick.md"
+  },
+  {
+    "title": "WQS 二分",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "opt",
+    "subgroup_label": "优化",
+    "html": "html/dp/opt-wqs-binary-search.html",
+    "source": "docs/dp__opt__wqs-binary-search.md"
+  },
+  {
+    "title": "单调队列/单调栈优化",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "opt",
+    "subgroup_label": "优化",
+    "html": "html/dp/opt-monotonous-queue-stack.html",
+    "source": "docs/dp__opt__monotonous-queue-stack.md"
+  },
+  {
+    "title": "四边形不等式优化",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "opt",
+    "subgroup_label": "优化",
+    "html": "html/dp/opt-quadrangle.html",
+    "source": "docs/dp__opt__quadrangle.md"
+  },
+  {
+    "title": "斜率优化",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "opt",
+    "subgroup_label": "优化",
+    "html": "html/dp/opt-slope.html",
+    "source": "docs/dp__opt__slope.md"
+  },
+  {
+    "title": "状态设计优化",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "opt",
+    "subgroup_label": "优化",
+    "html": "html/dp/opt-state.html",
+    "source": "docs/dp__opt__state.md"
+  },
+  {
+    "title": "动态规划部分简介",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/dp/overview.html",
+    "source": "docs/dp.md"
+  },
+  {
+    "title": "插头 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "plug",
+    "subgroup_label": "plug",
+    "html": "html/dp/plug.html",
+    "source": "docs/dp__plug.md"
+  },
+  {
+    "title": "概率 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "probability",
+    "subgroup_label": "概率",
+    "html": "html/dp/probability.html",
+    "source": "docs/dp__probability.md"
+  },
+  {
+    "title": "状压 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "state",
+    "subgroup_label": "state",
+    "html": "html/dp/state.html",
+    "source": "docs/dp__state.md"
+  },
+  {
+    "title": "树形 DP",
+    "group": "dp",
+    "group_label": "动态规划",
+    "subgroup": "tree",
+    "subgroup_label": "树相关",
+    "html": "html/dp/tree.html",
+    "source": "docs/dp__tree.md"
+  },
+  {
+    "title": "AA 树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "aa-tree",
+    "subgroup_label": "aa-tree",
+    "html": "html/ds/aa-tree.html",
+    "source": "docs/ds__aa-tree.md"
+  },
+  {
+    "title": "AVL 树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "avl",
+    "subgroup_label": "avl",
+    "html": "html/ds/avl.html",
+    "source": "docs/ds__avl.md"
+  },
+  {
+    "title": "线段树套平衡树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "balanced-in-seg",
+    "subgroup_label": "balanced-in-seg",
+    "html": "html/ds/balanced-in-seg.html",
+    "source": "docs/ds__balanced-in-seg.md"
+  },
+  {
+    "title": "二叉堆",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "binary-heap",
+    "subgroup_label": "binary-heap",
+    "html": "html/ds/binary-heap.html",
+    "source": "docs/ds__binary-heap.md"
+  },
+  {
+    "title": "分块套树状数组",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "bit-in-block-array",
+    "subgroup_label": "bit-in-block-array",
+    "html": "html/ds/bit-in-block-array.html",
+    "source": "docs/ds__bit-in-block-array.md"
+  },
+  {
+    "title": "块状数组",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "block-array",
+    "subgroup_label": "block-array",
+    "html": "html/ds/block-array.html",
+    "source": "docs/ds__block-array.md"
+  },
+  {
+    "title": "块状链表",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "block-list",
+    "subgroup_label": "block-list",
+    "html": "html/ds/block-list.html",
+    "source": "docs/ds__block-list.md"
+  },
+  {
+    "title": "二叉搜索树 & 平衡树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "bst",
+    "subgroup_label": "bst",
+    "html": "html/ds/bst.html",
+    "source": "docs/ds__bst.md"
+  },
+  {
+    "title": "笛卡尔树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "cartesian-tree",
+    "subgroup_label": "cartesian-tree",
+    "html": "html/ds/cartesian-tree.html",
+    "source": "docs/ds__cartesian-tree.md"
+  },
+  {
+    "title": "猫树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "cat-tree",
+    "subgroup_label": "cat-tree",
+    "html": "html/ds/cat-tree.html",
+    "source": "docs/ds__cat-tree.md"
+  },
+  {
+    "title": "分块思想",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "decompose",
+    "subgroup_label": "decompose",
+    "html": "html/ds/decompose.html",
+    "source": "docs/ds__decompose.md"
+  },
+  {
+    "title": "析合树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "divide-combine",
+    "subgroup_label": "divide-combine",
+    "html": "html/ds/divide-combine.html",
+    "source": "docs/ds__divide-combine.md"
+  },
+  {
+    "title": "划分树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "dividing",
+    "subgroup_label": "dividing",
+    "html": "html/ds/dividing.html",
+    "source": "docs/ds__dividing.md"
+  },
+  {
+    "title": "并查集",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "dsu",
+    "subgroup_label": "dsu",
+    "html": "html/ds/dsu.html",
+    "source": "docs/ds__dsu.md"
+  },
+  {
+    "title": "并查集复杂度",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "dsu-complexity",
+    "subgroup_label": "dsu-complexity",
+    "html": "html/ds/dsu-complexity.html",
+    "source": "docs/ds__dsu-complexity.md"
+  },
+  {
+    "title": "Euler Tour Tree",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "ett",
+    "subgroup_label": "ett",
+    "html": "html/ds/ett.html",
+    "source": "docs/ds__ett.md"
+  },
+  {
+    "title": "树状数组",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "fenwick",
+    "subgroup_label": "fenwick",
+    "html": "html/ds/fenwick.html",
+    "source": "docs/ds__fenwick.md"
+  },
+  {
+    "title": "手指树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "finger-tree",
+    "subgroup_label": "finger-tree",
+    "html": "html/ds/finger-tree.html",
+    "source": "docs/ds__finger-tree.md"
+  },
+  {
+    "title": "全局平衡二叉树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "global-bst",
+    "subgroup_label": "global-bst",
+    "html": "html/ds/global-bst.html",
+    "source": "docs/ds__global-bst.md"
+  },
+  {
+    "title": "哈希表",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "hash",
+    "subgroup_label": "hash",
+    "html": "html/ds/hash.html",
+    "source": "docs/ds__hash.md"
+  },
+  {
+    "title": "堆简介",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "heap",
+    "subgroup_label": "heap",
+    "html": "html/ds/heap.html",
+    "source": "docs/ds__heap.md"
+  },
+  {
+    "title": "霍夫曼树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "huffman-tree",
+    "subgroup_label": "huffman-tree",
+    "html": "html/ds/huffman-tree.html",
+    "source": "docs/ds__huffman-tree.md"
+  },
+  {
+    "title": "K-D Tree",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "kdt",
+    "subgroup_label": "kdt",
+    "html": "html/ds/kdt.html",
+    "source": "docs/ds__kdt.md"
+  },
+  {
+    "title": "Kinetic Tournament Tree",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "kinetic-tournament-tree",
+    "subgroup_label": "kinetic-tournament-tree",
+    "html": "html/ds/kinetic-tournament-tree.html",
+    "source": "docs/ds__kinetic-tournament-tree.md"
+  },
+  {
+    "title": "Link Cut Tree",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "lct",
+    "subgroup_label": "lct",
+    "html": "html/ds/lct.html",
+    "source": "docs/ds__lct.md"
+  },
+  {
+    "title": "左偏树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "leftist-tree",
+    "subgroup_label": "leftist-tree",
+    "html": "html/ds/leftist-tree.html",
+    "source": "docs/ds__leftist-tree.md"
+  },
+  {
+    "title": "李超线段树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "li-chao-tree",
+    "subgroup_label": "li-chao-tree",
+    "html": "html/ds/li-chao-tree.html",
+    "source": "docs/ds__li-chao-tree.md"
+  },
+  {
+    "title": "链表",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "linked-list",
+    "subgroup_label": "linked-list",
+    "html": "html/ds/linked-list.html",
+    "source": "docs/ds__linked-list.md"
+  },
+  {
+    "title": "左偏红黑树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "llrbt",
+    "subgroup_label": "llrbt",
+    "html": "html/ds/llrbt.html",
+    "source": "docs/ds__llrbt.md"
+  },
+  {
+    "title": "单调队列",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "monotonous-queue",
+    "subgroup_label": "monotonous-queue",
+    "html": "html/ds/monotonous-queue.html",
+    "source": "docs/ds__monotonous-queue.md"
+  },
+  {
+    "title": "单调栈",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "monotonous-stack",
+    "subgroup_label": "monotonous-stack",
+    "html": "html/ds/monotonous-stack.html",
+    "source": "docs/ds__monotonous-stack.md"
+  },
+  {
+    "title": "数据结构部分简介",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/ds/overview.html",
+    "source": "docs/ds.md"
+  },
+  {
+    "title": "配对堆",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "pairing-heap",
+    "subgroup_label": "pairing-heap",
+    "html": "html/ds/pairing-heap.html",
+    "source": "docs/ds__pairing-heap.md"
+  },
+  {
+    "title": "可持久化数据结构简介",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "persistent",
+    "subgroup_label": "persistent",
+    "html": "html/ds/persistent.html",
+    "source": "docs/ds__persistent.md"
+  },
+  {
+    "title": "可持久化平衡树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "persistent-balanced",
+    "subgroup_label": "persistent-balanced",
+    "html": "html/ds/persistent-balanced.html",
+    "source": "docs/ds__persistent-balanced.md"
+  },
+  {
+    "title": "可持久化块状数组",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "persistent-block-array",
+    "subgroup_label": "persistent-block-array",
+    "html": "html/ds/persistent-block-array.html",
+    "source": "docs/ds__persistent-block-array.md"
+  },
+  {
+    "title": "可持久化可并堆",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "persistent-heap",
+    "subgroup_label": "persistent-heap",
+    "html": "html/ds/persistent-heap.html",
+    "source": "docs/ds__persistent-heap.md"
+  },
+  {
+    "title": "可持久化线段树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "persistent-seg",
+    "subgroup_label": "persistent-seg",
+    "html": "html/ds/persistent-seg.html",
+    "source": "docs/ds__persistent-seg.md"
+  },
+  {
+    "title": "可持久化字典树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "persistent-trie",
+    "subgroup_label": "persistent-trie",
+    "html": "html/ds/persistent-trie.html",
+    "source": "docs/ds__persistent-trie.md"
+  },
+  {
+    "title": "PQ 树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "pq-tree",
+    "subgroup_label": "pq-tree",
+    "html": "html/ds/pq-tree.html",
+    "source": "docs/ds__pq-tree.md"
+  },
+  {
+    "title": "队列",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "queue",
+    "subgroup_label": "queue",
+    "html": "html/ds/queue.html",
+    "source": "docs/ds__queue.md"
+  },
+  {
+    "title": "红黑树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "rbtree",
+    "subgroup_label": "rbtree",
+    "html": "html/ds/rbtree.html",
+    "source": "docs/ds__rbtree.md"
+  },
+  {
+    "title": "Size Balanced Tree",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "sbt",
+    "subgroup_label": "sbt",
+    "html": "html/ds/sbt.html",
+    "source": "docs/ds__sbt.md"
+  },
+  {
+    "title": "线段树基础",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "seg",
+    "subgroup_label": "seg",
+    "html": "html/ds/seg.html",
+    "source": "docs/ds__seg.md"
+  },
+  {
+    "title": "区间最值操作 & 区间历史最值",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "seg-beats",
+    "subgroup_label": "seg-beats",
+    "html": "html/ds/seg-beats.html",
+    "source": "docs/ds__seg-beats.md"
+  },
+  {
+    "title": "平衡树套线段树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "seg-in-balanced",
+    "subgroup_label": "seg-in-balanced",
+    "html": "html/ds/seg-in-balanced.html",
+    "source": "docs/ds__seg-in-balanced.md"
+  },
+  {
+    "title": "树状数组套权值线段树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "seg-in-bit",
+    "subgroup_label": "seg-in-bit",
+    "html": "html/ds/seg-in-bit.html",
+    "source": "docs/ds__seg-in-bit.md"
+  },
+  {
+    "title": "线段树套线段树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "seg-in-seg",
+    "subgroup_label": "seg-in-seg",
+    "html": "html/ds/seg-in-seg.html",
+    "source": "docs/ds__seg-in-seg.md"
+  },
+  {
+    "title": "线段树合并 & 分裂",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "seg-merge-split",
+    "subgroup_label": "seg-merge-split",
+    "html": "html/ds/seg-merge-split.html",
+    "source": "docs/ds__seg-merge-split.md"
+  },
+  {
+    "title": "替罪羊树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "sgt",
+    "subgroup_label": "sgt",
+    "html": "html/ds/sgt.html",
+    "source": "docs/ds__sgt.md"
+  },
+  {
+    "title": "跳表",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "skiplist",
+    "subgroup_label": "skiplist",
+    "html": "html/ds/skiplist.html",
+    "source": "docs/ds__skiplist.md"
+  },
+  {
+    "title": "ST 表",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "sparse-table",
+    "subgroup_label": "sparse-table",
+    "html": "html/ds/sparse-table.html",
+    "source": "docs/ds__sparse-table.md"
+  },
+  {
+    "title": "Splay 树",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "splay",
+    "subgroup_label": "splay",
+    "html": "html/ds/splay.html",
+    "source": "docs/ds__splay.md"
+  },
+  {
+    "title": "Sqrt Tree",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "sqrt-tree",
+    "subgroup_label": "sqrt-tree",
+    "html": "html/ds/sqrt-tree.html",
+    "source": "docs/ds__sqrt-tree.md"
+  },
+  {
+    "title": "栈",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "stack",
+    "subgroup_label": "stack",
+    "html": "html/ds/stack.html",
+    "source": "docs/ds__stack.md"
+  },
+  {
+    "title": "Top Tree",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "top-tree",
+    "subgroup_label": "top-tree",
+    "html": "html/ds/top-tree.html",
+    "source": "docs/ds__top-tree.md"
+  },
+  {
+    "title": "Treap",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "treap",
+    "subgroup_label": "treap",
+    "html": "html/ds/treap.html",
+    "source": "docs/ds__treap.md"
+  },
+  {
+    "title": "树分块",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "tree-decompose",
+    "subgroup_label": "tree-decompose",
+    "html": "html/ds/tree-decompose.html",
+    "source": "docs/ds__tree-decompose.md"
+  },
+  {
+    "title": "WBLT",
+    "group": "ds",
+    "group_label": "数据结构",
+    "subgroup": "wblt",
+    "subgroup_label": "wblt",
+    "html": "html/ds/wblt.html",
+    "source": "docs/ds__wblt.md"
+  },
+  {
+    "title": "Edit landing",
+    "group": "edit-landing",
+    "group_label": "编辑说明",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/edit-landing/overview.html",
+    "source": "docs/edit-landing.md"
+  },
+  {
+    "title": "二维计算几何基础",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "2d",
+    "subgroup_label": "2d",
+    "html": "html/geometry/2d.html",
+    "source": "docs/geometry__2d.md"
+  },
+  {
+    "title": "三维计算几何基础",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "3d",
+    "subgroup_label": "3d",
+    "html": "html/geometry/3d.html",
+    "source": "docs/geometry__3d.md"
+  },
+  {
+    "title": "凸包",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "convex-hull",
+    "subgroup_label": "convex-hull",
+    "html": "html/geometry/convex-hull.html",
+    "source": "docs/geometry__convex-hull.md"
+  },
+  {
+    "title": "距离",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "distance",
+    "subgroup_label": "distance",
+    "html": "html/geometry/distance.html",
+    "source": "docs/geometry__distance.md"
+  },
+  {
+    "title": "半平面交",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "half-plane",
+    "subgroup_label": "half-plane",
+    "html": "html/geometry/half-plane.html",
+    "source": "docs/geometry__half-plane.md"
+  },
+  {
+    "title": "反演变换",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "inverse",
+    "subgroup_label": "inverse",
+    "html": "html/geometry/inverse.html",
+    "source": "docs/geometry__inverse.md"
+  },
+  {
+    "title": "计算几何杂项",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "misc",
+    "subgroup_label": "misc",
+    "html": "html/geometry/misc.html",
+    "source": "docs/geometry__misc.md"
+  },
+  {
+    "title": "平面最近点对",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "nearest-points",
+    "subgroup_label": "nearest-points",
+    "html": "html/geometry/nearest-points.html",
+    "source": "docs/geometry__nearest-points.md"
+  },
+  {
+    "title": "计算几何部分简介",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/geometry/overview.html",
+    "source": "docs/geometry.md"
+  },
+  {
+    "title": "Pick 定理",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "pick",
+    "subgroup_label": "pick",
+    "html": "html/geometry/pick.html",
+    "source": "docs/geometry__pick.md"
+  },
+  {
+    "title": "随机增量法",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "random-incremental",
+    "subgroup_label": "random-incremental",
+    "html": "html/geometry/random-incremental.html",
+    "source": "docs/geometry__random-incremental.md"
+  },
+  {
+    "title": "旋转卡壳",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "rotating-calipers",
+    "subgroup_label": "rotating-calipers",
+    "html": "html/geometry/rotating-calipers.html",
+    "source": "docs/geometry__rotating-calipers.md"
+  },
+  {
+    "title": "扫描线",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "scanning",
+    "subgroup_label": "scanning",
+    "html": "html/geometry/scanning.html",
+    "source": "docs/geometry__scanning.md"
+  },
+  {
+    "title": "三角剖分",
+    "group": "geometry",
+    "group_label": "计算几何",
+    "subgroup": "triangulation",
+    "subgroup_label": "triangulation",
+    "html": "html/geometry/triangulation.html",
+    "source": "docs/geometry__triangulation.md"
+  },
+  {
+    "title": "2-SAT",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "2-sat",
+    "subgroup_label": "2-sat",
+    "html": "html/graph/2-sat.html",
+    "source": "docs/graph__2-sat.md"
+  },
+  {
+    "title": "双连通分量",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "bcc",
+    "subgroup_label": "bcc",
+    "html": "html/graph/bcc.html",
+    "source": "docs/graph__bcc.md"
+  },
+  {
+    "title": "BFS（图论）",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "bfs",
+    "subgroup_label": "bfs",
+    "html": "html/graph/bfs.html",
+    "source": "docs/graph__bfs.md"
+  },
+  {
+    "title": "二分图",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "bi-graph",
+    "subgroup_label": "bi-graph",
+    "html": "html/graph/bi-graph.html",
+    "source": "docs/graph__bi-graph.md"
+  },
+  {
+    "title": "圆方树",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "block-forest",
+    "subgroup_label": "block-forest",
+    "html": "html/graph/block-forest.html",
+    "source": "docs/graph__block-forest.md"
+  },
+  {
+    "title": "弦图",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "chord",
+    "subgroup_label": "chord",
+    "html": "html/graph/chord.html",
+    "source": "docs/graph__chord.md"
+  },
+  {
+    "title": "图的着色",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "color",
+    "subgroup_label": "color",
+    "html": "html/graph/color.html",
+    "source": "docs/graph__color.md"
+  },
+  {
+    "title": "图论相关概念",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "concept",
+    "subgroup_label": "concept",
+    "html": "html/graph/concept.html",
+    "source": "docs/graph__concept.md"
+  },
+  {
+    "title": "点/边连通度",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "connectivity",
+    "subgroup_label": "connectivity",
+    "html": "html/graph/connectivity.html",
+    "source": "docs/graph__connectivity.md"
+  },
+  {
+    "title": "割点和桥",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "cut",
+    "subgroup_label": "cut",
+    "html": "html/graph/cut.html",
+    "source": "docs/graph__cut.md"
+  },
+  {
+    "title": "有向无环图",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "dag",
+    "subgroup_label": "dag",
+    "html": "html/graph/dag.html",
+    "source": "docs/graph__dag.md"
+  },
+  {
+    "title": "DFS（图论）",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "dfs",
+    "subgroup_label": "dfs",
+    "html": "html/graph/dfs.html",
+    "source": "docs/graph__dfs.md"
+  },
+  {
+    "title": "差分约束",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "diff-constraints",
+    "subgroup_label": "diff-constraints",
+    "html": "html/graph/diff-constraints.html",
+    "source": "docs/graph__diff-constraints.md"
+  },
+  {
+    "title": "最小树形图",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "dmst",
+    "subgroup_label": "dmst",
+    "html": "html/graph/dmst.html",
+    "source": "docs/graph__dmst.md"
+  },
+  {
+    "title": "支配树",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "dominator-tree",
+    "subgroup_label": "dominator-tree",
+    "html": "html/graph/dominator-tree.html",
+    "source": "docs/graph__dominator-tree.md"
+  },
+  {
+    "title": "树上启发式合并",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "dsu-on-tree",
+    "subgroup_label": "dsu-on-tree",
+    "html": "html/graph/dsu-on-tree.html",
+    "source": "docs/graph__dsu-on-tree.md"
+  },
+  {
+    "title": "动态树分治",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "dynamic-tree-divide",
+    "subgroup_label": "dynamic-tree-divide",
+    "html": "html/graph/dynamic-tree-divide.html",
+    "source": "docs/graph__dynamic-tree-divide.md"
+  },
+  {
+    "title": "欧拉图",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "euler",
+    "subgroup_label": "euler",
+    "html": "html/graph/euler.html",
+    "source": "docs/graph__euler.md"
+  },
+  {
+    "title": "上下界网络流",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "flow",
+    "subgroup_label": "网络流",
+    "html": "html/graph/flow-bound.html",
+    "source": "docs/graph__flow__bound.md"
+  },
+  {
+    "title": "最大流",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "flow",
+    "subgroup_label": "网络流",
+    "html": "html/graph/flow-max-flow.html",
+    "source": "docs/graph__flow__max-flow.md"
+  },
+  {
+    "title": "最小割",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "flow",
+    "subgroup_label": "网络流",
+    "html": "html/graph/flow-min-cut.html",
+    "source": "docs/graph__flow__min-cut.md"
+  },
+  {
+    "title": "网络流简介",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "flow",
+    "subgroup_label": "网络流",
+    "html": "html/graph/flow.html",
+    "source": "docs/graph__flow.md"
+  },
+  {
+    "title": "费用流",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "flow",
+    "subgroup_label": "网络流",
+    "html": "html/graph/flow-min-cost.html",
+    "source": "docs/graph__flow__min-cost.md"
+  },
+  {
+    "title": "一般图最大匹配",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "graph-matching",
+    "subgroup_label": "图匹配",
+    "html": "html/graph/graph-matching-general-match.html",
+    "source": "docs/graph__graph-matching__general-match.md"
+  },
+  {
+    "title": "一般图最大权匹配",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "graph-matching",
+    "subgroup_label": "图匹配",
+    "html": "html/graph/graph-matching-general-weight-match.html",
+    "source": "docs/graph__graph-matching__general-weight-match.md"
+  },
+  {
+    "title": "二分图最大匹配",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "graph-matching",
+    "subgroup_label": "图匹配",
+    "html": "html/graph/graph-matching-bigraph-match.html",
+    "source": "docs/graph__graph-matching__bigraph-match.md"
+  },
+  {
+    "title": "二分图最大权匹配",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "graph-matching",
+    "subgroup_label": "图匹配",
+    "html": "html/graph/graph-matching-bigraph-weight-match.html",
+    "source": "docs/graph__graph-matching__bigraph-weight-match.md"
+  },
+  {
+    "title": "图匹配",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "graph-matching",
+    "subgroup_label": "图匹配",
+    "html": "html/graph/graph-matching-graph-match.html",
+    "source": "docs/graph__graph-matching__graph-match.md"
+  },
+  {
+    "title": "稳定匹配",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "graph-matching",
+    "subgroup_label": "图匹配",
+    "html": "html/graph/graph-matching-stable-match.html",
+    "source": "docs/graph__graph-matching__stable-match.md"
+  },
+  {
+    "title": "图上随机游走",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "graph-random-walk",
+    "subgroup_label": "graph-random-walk",
+    "html": "html/graph/graph-random-walk.html",
+    "source": "docs/graph__graph-random-walk.md"
+  },
+  {
+    "title": "哈密顿图",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "hamilton",
+    "subgroup_label": "hamilton",
+    "html": "html/graph/hamilton.html",
+    "source": "docs/graph__hamilton.md"
+  },
+  {
+    "title": "树链剖分",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "hld",
+    "subgroup_label": "hld",
+    "html": "html/graph/hld.html",
+    "source": "docs/graph__hld.md"
+  },
+  {
+    "title": "k 短路",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "kth-path",
+    "subgroup_label": "kth-path",
+    "html": "html/graph/kth-path.html",
+    "source": "docs/graph__kth-path.md"
+  },
+  {
+    "title": "最近公共祖先",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "lca",
+    "subgroup_label": "lca",
+    "html": "html/graph/lca.html",
+    "source": "docs/graph__lca.md"
+  },
+  {
+    "title": "LGV 引理",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "lgv",
+    "subgroup_label": "lgv",
+    "html": "html/graph/lgv.html",
+    "source": "docs/graph__lgv.md"
+  },
+  {
+    "title": "矩阵树定理",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "matrix-tree",
+    "subgroup_label": "matrix-tree",
+    "html": "html/graph/matrix-tree.html",
+    "source": "docs/graph__matrix-tree.md"
+  },
+  {
+    "title": "最大团搜索算法",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "max-clique",
+    "subgroup_label": "max-clique",
+    "html": "html/graph/max-clique.html",
+    "source": "docs/graph__max-clique.md"
+  },
+  {
+    "title": "最小直径生成树",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "mdst",
+    "subgroup_label": "mdst",
+    "html": "html/graph/mdst.html",
+    "source": "docs/graph__mdst.md"
+  },
+  {
+    "title": "最小环",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "min-cycle",
+    "subgroup_label": "min-cycle",
+    "html": "html/graph/min-cycle.html",
+    "source": "docs/graph__min-cycle.md"
+  },
+  {
+    "title": "同余最短路",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "mod-shortest-path",
+    "subgroup_label": "mod-shortest-path",
+    "html": "html/graph/mod-shortest-path.html",
+    "source": "docs/graph__mod-shortest-path.md"
+  },
+  {
+    "title": "最小生成树",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "mst",
+    "subgroup_label": "mst",
+    "html": "html/graph/mst.html",
+    "source": "docs/graph__mst.md"
+  },
+  {
+    "title": "拆点",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "node",
+    "subgroup_label": "node",
+    "html": "html/graph/node.html",
+    "source": "docs/graph__node.md"
+  },
+  {
+    "title": "图论部分简介",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/graph/overview.html",
+    "source": "docs/graph.md"
+  },
+  {
+    "title": "平面图",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "planar",
+    "subgroup_label": "planar",
+    "html": "html/graph/planar.html",
+    "source": "docs/graph__planar.md"
+  },
+  {
+    "title": "Prüfer 序列",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "prufer",
+    "subgroup_label": "prufer",
+    "html": "html/graph/prufer.html",
+    "source": "docs/graph__prufer.md"
+  },
+  {
+    "title": "环计数问题",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "rings-count",
+    "subgroup_label": "rings-count",
+    "html": "html/graph/rings-count.html",
+    "source": "docs/graph__rings-count.md"
+  },
+  {
+    "title": "图的存储",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "save",
+    "subgroup_label": "save",
+    "html": "html/graph/save.html",
+    "source": "docs/graph__save.md"
+  },
+  {
+    "title": "强连通分量",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "scc",
+    "subgroup_label": "scc",
+    "html": "html/graph/scc.html",
+    "source": "docs/graph__scc.md"
+  },
+  {
+    "title": "最短路",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "shortest-path",
+    "subgroup_label": "shortest-path",
+    "html": "html/graph/shortest-path.html",
+    "source": "docs/graph__shortest-path.md"
+  },
+  {
+    "title": "斯坦纳树",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "steiner-tree",
+    "subgroup_label": "steiner-tree",
+    "html": "html/graph/steiner-tree.html",
+    "source": "docs/graph__steiner-tree.md"
+  },
+  {
+    "title": "Stoer–Wagner 算法",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "stoer-wagner",
+    "subgroup_label": "stoer-wagner",
+    "html": "html/graph/stoer-wagner.html",
+    "source": "docs/graph__stoer-wagner.md"
+  },
+  {
+    "title": "拓扑排序",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "topo",
+    "subgroup_label": "topo",
+    "html": "html/graph/topo.html",
+    "source": "docs/graph__topo.md"
+  },
+  {
+    "title": "AHU 算法",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "tree-ahu",
+    "subgroup_label": "tree-ahu",
+    "html": "html/graph/tree-ahu.html",
+    "source": "docs/graph__tree-ahu.md"
+  },
+  {
+    "title": "树基础",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "tree-basic",
+    "subgroup_label": "tree-basic",
+    "html": "html/graph/tree-basic.html",
+    "source": "docs/graph__tree-basic.md"
+  },
+  {
+    "title": "树的中心",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "tree-center",
+    "subgroup_label": "tree-center",
+    "html": "html/graph/tree-center.html",
+    "source": "docs/graph__tree-center.md"
+  },
+  {
+    "title": "树的重心",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "tree-centroid",
+    "subgroup_label": "tree-centroid",
+    "html": "html/graph/tree-centroid.html",
+    "source": "docs/graph__tree-centroid.md"
+  },
+  {
+    "title": "树的直径",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "tree-diameter",
+    "subgroup_label": "tree-diameter",
+    "html": "html/graph/tree-diameter.html",
+    "source": "docs/graph__tree-diameter.md"
+  },
+  {
+    "title": "树分治",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "tree-divide",
+    "subgroup_label": "tree-divide",
+    "html": "html/graph/tree-divide.html",
+    "source": "docs/graph__tree-divide.md"
+  },
+  {
+    "title": "树哈希",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "tree-hash",
+    "subgroup_label": "tree-hash",
+    "html": "html/graph/tree-hash.html",
+    "source": "docs/graph__tree-hash.md"
+  },
+  {
+    "title": "树上随机游走",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "tree-random-walk",
+    "subgroup_label": "tree-random-walk",
+    "html": "html/graph/tree-random-walk.html",
+    "source": "docs/graph__tree-random-walk.md"
+  },
+  {
+    "title": "虚树",
+    "group": "graph",
+    "group_label": "图论",
+    "subgroup": "virtual-tree",
+    "subgroup_label": "virtual-tree",
+    "html": "html/graph/virtual-tree.html",
+    "source": "docs/graph__virtual-tree.md"
+  },
+  {
+    "title": "OI Wiki",
+    "group": "home",
+    "group_label": "首页",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/home/home.html",
+    "source": "docs/index.md"
+  },
+  {
+    "title": "关于本项目",
+    "group": "intro",
+    "group_label": "OI Wiki 介绍",
+    "subgroup": "about",
+    "subgroup_label": "about",
+    "html": "html/intro/about.html",
+    "source": "docs/intro__about.md"
+  },
+  {
+    "title": "Docker deploy",
+    "group": "intro",
+    "group_label": "OI Wiki 介绍",
+    "subgroup": "docker-deploy",
+    "subgroup_label": "docker-deploy",
+    "html": "html/intro/docker-deploy.html",
+    "source": "docs/intro__docker-deploy.md"
+  },
+  {
+    "title": "F.A.Q.",
+    "group": "intro",
+    "group_label": "OI Wiki 介绍",
+    "subgroup": "faq",
+    "subgroup_label": "faq",
+    "html": "html/intro/faq.html",
+    "source": "docs/intro__faq.md"
+  },
+  {
+    "title": "格式手册",
+    "group": "intro",
+    "group_label": "OI Wiki 介绍",
+    "subgroup": "format",
+    "subgroup_label": "format",
+    "html": "html/intro/format.html",
+    "source": "docs/intro__format.md"
+  },
+  {
+    "title": "如何参与",
+    "group": "intro",
+    "group_label": "OI Wiki 介绍",
+    "subgroup": "htc",
+    "subgroup_label": "htc",
+    "html": "html/intro/htc.html",
+    "source": "docs/intro__htc.md"
+  },
+  {
+    "title": "镜像站列表",
+    "group": "intro",
+    "group_label": "OI Wiki 介绍",
+    "subgroup": "mirrors",
+    "subgroup_label": "mirrors",
+    "html": "html/intro/mirrors.html",
+    "source": "docs/intro__mirrors.md"
+  },
+  {
+    "title": "数学符号表",
+    "group": "intro",
+    "group_label": "OI Wiki 介绍",
+    "subgroup": "symbol",
+    "subgroup_label": "symbol",
+    "html": "html/intro/symbol.html",
+    "source": "docs/intro__symbol.md"
+  },
+  {
+    "title": "致谢",
+    "group": "intro",
+    "group_label": "OI Wiki 介绍",
+    "subgroup": "thanks",
+    "subgroup_label": "thanks",
+    "html": "html/intro/thanks.html",
+    "source": "docs/intro__thanks.md"
+  },
+  {
+    "title": "OI Wiki 不是什么",
+    "group": "intro",
+    "group_label": "OI Wiki 介绍",
+    "subgroup": "what-oi-wiki-is-not",
+    "subgroup_label": "what-oi-wiki-is-not",
+    "html": "html/intro/what-oi-wiki-is-not.html",
+    "source": "docs/intro__what-oi-wiki-is-not.md"
+  },
+  {
+    "title": "数组",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "array",
+    "subgroup_label": "array",
+    "html": "html/lang/array.html",
+    "source": "docs/lang__array.md"
+  },
+  {
+    "title": "C++ 语法基础",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "basic",
+    "subgroup_label": "basic",
+    "html": "html/lang/basic.html",
+    "source": "docs/lang__basic.md"
+  },
+  {
+    "title": "分支",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "branch",
+    "subgroup_label": "branch",
+    "html": "html/lang/branch.html",
+    "source": "docs/lang__branch.md"
+  },
+  {
+    "title": "类",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "class",
+    "subgroup_label": "class",
+    "html": "html/lang/class.html",
+    "source": "docs/lang__class.md"
+  },
+  {
+    "title": "常量",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "const",
+    "subgroup_label": "const",
+    "html": "html/lang/const.html",
+    "source": "docs/lang__const.md"
+  },
+  {
+    "title": "C++ 与其他常用语言的区别",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "cpp-other-langs",
+    "subgroup_label": "cpp-other-langs",
+    "html": "html/lang/cpp-other-langs.html",
+    "source": "docs/lang__cpp-other-langs.md"
+  },
+  {
+    "title": "bitset",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl-bitset.html",
+    "source": "docs/lang__csl__bitset.md"
+  },
+  {
+    "title": "C++ 标准库简介",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl.html",
+    "source": "docs/lang__csl.md"
+  },
+  {
+    "title": "pair",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl-pair.html",
+    "source": "docs/lang__csl__pair.md"
+  },
+  {
+    "title": "STL 容器简介",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl-container.html",
+    "source": "docs/lang__csl__container.md"
+  },
+  {
+    "title": "STL 算法",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl-algorithm.html",
+    "source": "docs/lang__csl__algorithm.md"
+  },
+  {
+    "title": "string",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl-string.html",
+    "source": "docs/lang__csl__string.md"
+  },
+  {
+    "title": "关联式容器",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl-associative-container.html",
+    "source": "docs/lang__csl__associative-container.md"
+  },
+  {
+    "title": "容器适配器",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl-container-adapter.html",
+    "source": "docs/lang__csl__container-adapter.md"
+  },
+  {
+    "title": "序列式容器",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl-sequence-container.html",
+    "source": "docs/lang__csl__sequence-container.md"
+  },
+  {
+    "title": "无序关联式容器",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl-unordered-container.html",
+    "source": "docs/lang__csl__unordered-container.md"
+  },
+  {
+    "title": "迭代器",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "csl",
+    "subgroup_label": "C++ 标准库",
+    "html": "html/lang/csl-iterator.html",
+    "source": "docs/lang__csl__iterator.md"
+  },
+  {
+    "title": "文件操作",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "file-op",
+    "subgroup_label": "file-op",
+    "html": "html/lang/file-op.html",
+    "source": "docs/lang__file-op.md"
+  },
+  {
+    "title": "函数",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "func",
+    "subgroup_label": "func",
+    "html": "html/lang/func.html",
+    "source": "docs/lang__func.md"
+  },
+  {
+    "title": "Hello, World!",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "helloworld",
+    "subgroup_label": "helloworld",
+    "html": "html/lang/helloworld.html",
+    "source": "docs/lang__helloworld.md"
+  },
+  {
+    "title": "Java 速成",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "java",
+    "subgroup_label": "java",
+    "html": "html/lang/java.html",
+    "source": "docs/lang__java.md"
+  },
+  {
+    "title": "Java 进阶",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "java-pro",
+    "subgroup_label": "java-pro",
+    "html": "html/lang/java-pro.html",
+    "source": "docs/lang__java-pro.md"
+  },
+  {
+    "title": "Lambda 表达式",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "lambda",
+    "subgroup_label": "lambda",
+    "html": "html/lang/lambda.html",
+    "source": "docs/lang__lambda.md"
+  },
+  {
+    "title": "循环",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "loop",
+    "subgroup_label": "loop",
+    "html": "html/lang/loop.html",
+    "source": "docs/lang__loop.md"
+  },
+  {
+    "title": "命名空间",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "namespace",
+    "subgroup_label": "namespace",
+    "html": "html/lang/namespace.html",
+    "source": "docs/lang__namespace.md"
+  },
+  {
+    "title": "新版 C++ 特性",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "new",
+    "subgroup_label": "new",
+    "html": "html/lang/new.html",
+    "source": "docs/lang__new.md"
+  },
+  {
+    "title": "运算",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "op",
+    "subgroup_label": "op",
+    "html": "html/lang/op.html",
+    "source": "docs/lang__op.md"
+  },
+  {
+    "title": "重载运算符",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "op-overload",
+    "subgroup_label": "op-overload",
+    "html": "html/lang/op-overload.html",
+    "source": "docs/lang__op-overload.md"
+  },
+  {
+    "title": "编译优化",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "optimizations",
+    "subgroup_label": "optimizations",
+    "html": "html/lang/optimizations.html",
+    "source": "docs/lang__optimizations.md"
+  },
+  {
+    "title": "语言基础简介",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/lang/overview.html",
+    "source": "docs/lang.md"
+  },
+  {
+    "title": "Pascal 转 C++ 急救",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "pas-cpp",
+    "subgroup_label": "pas-cpp",
+    "html": "html/lang/pas-cpp.html",
+    "source": "docs/lang__pas-cpp.md"
+  },
+  {
+    "title": "pb_ds 简介",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "pb-ds",
+    "subgroup_label": "PBDS",
+    "html": "html/lang/pb-ds.html",
+    "source": "docs/lang__pb-ds.md"
+  },
+  {
+    "title": "堆",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "pb-ds",
+    "subgroup_label": "PBDS",
+    "html": "html/lang/pb-ds-pq.html",
+    "source": "docs/lang__pb-ds__pq.md"
+  },
+  {
+    "title": "平衡树",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "pb-ds",
+    "subgroup_label": "PBDS",
+    "html": "html/lang/pb-ds-tree.html",
+    "source": "docs/lang__pb-ds__tree.md"
+  },
+  {
+    "title": "指针",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "pointer",
+    "subgroup_label": "pointer",
+    "html": "html/lang/pointer.html",
+    "source": "docs/lang__pointer.md"
+  },
+  {
+    "title": "Python 速成",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "python",
+    "subgroup_label": "python",
+    "html": "html/lang/python.html",
+    "source": "docs/lang__python.md"
+  },
+  {
+    "title": "引用",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "reference",
+    "subgroup_label": "reference",
+    "html": "html/lang/reference.html",
+    "source": "docs/lang__reference.md"
+  },
+  {
+    "title": "结构体",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "struct",
+    "subgroup_label": "struct",
+    "html": "html/lang/struct.html",
+    "source": "docs/lang__struct.md"
+  },
+  {
+    "title": "联合体",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "union",
+    "subgroup_label": "union",
+    "html": "html/lang/union.html",
+    "source": "docs/lang__union.md"
+  },
+  {
+    "title": "值类别",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "value-category",
+    "subgroup_label": "value-category",
+    "html": "html/lang/value-category.html",
+    "source": "docs/lang__value-category.md"
+  },
+  {
+    "title": "变量",
+    "group": "lang",
+    "group_label": "编程语言",
+    "subgroup": "var",
+    "subgroup_label": "var",
+    "html": "html/lang/var.html",
+    "source": "docs/lang__var.md"
+  },
+  {
+    "title": "Schreier–Sims 算法",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "algebra",
+    "subgroup_label": "algebra",
+    "html": "html/math/algebra-schreier-sims.html",
+    "source": "docs/math__algebra__schreier-sims.md"
+  },
+  {
+    "title": "域论",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "algebra",
+    "subgroup_label": "algebra",
+    "html": "html/math/algebra-field-theory.html",
+    "source": "docs/math__algebra__field-theory.md"
+  },
+  {
+    "title": "基本概念",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "algebra",
+    "subgroup_label": "algebra",
+    "html": "html/math/algebra-basic.html",
+    "source": "docs/math__algebra__basic.md"
+  },
+  {
+    "title": "环论",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "algebra",
+    "subgroup_label": "algebra",
+    "html": "html/math/algebra-ring-theory.html",
+    "source": "docs/math__algebra__ring-theory.md"
+  },
+  {
+    "title": "群论",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "algebra",
+    "subgroup_label": "algebra",
+    "html": "html/math/algebra-group-theory.html",
+    "source": "docs/math__algebra__group-theory.md"
+  },
+  {
+    "title": "Berlekamp–Massey 算法",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "berlekamp-massey",
+    "subgroup_label": "berlekamp-massey",
+    "html": "html/math/berlekamp-massey.html",
+    "source": "docs/math__berlekamp-massey.md"
+  },
+  {
+    "title": "高精度计算",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "bignum",
+    "subgroup_label": "bignum",
+    "html": "html/math/bignum.html",
+    "source": "docs/math__bignum.md"
+  },
+  {
+    "title": "快速幂",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "binary-exponentiation",
+    "subgroup_label": "binary-exponentiation",
+    "html": "html/math/binary-exponentiation.html",
+    "source": "docs/math__binary-exponentiation.md"
+  },
+  {
+    "title": "二进制集合操作",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "binary-set",
+    "subgroup_label": "binary-set",
+    "html": "html/math/binary-set.html",
+    "source": "docs/math__binary-set.md"
+  },
+  {
+    "title": "位操作",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "bit",
+    "subgroup_label": "bit",
+    "html": "html/math/bit.html",
+    "source": "docs/math__bit.md"
+  },
+  {
+    "title": "布尔代数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "boolean-algebra",
+    "subgroup_label": "boolean-algebra",
+    "html": "html/math/boolean-algebra.html",
+    "source": "docs/math__boolean-algebra.md"
+  },
+  {
+    "title": "Entringer Number",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-entringer.html",
+    "source": "docs/math__combinatorics__entringer.md"
+  },
+  {
+    "title": "Eulerian Number",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-eulerian.html",
+    "source": "docs/math__combinatorics__eulerian.md"
+  },
+  {
+    "title": "Pólya 计数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-polya.html",
+    "source": "docs/math__combinatorics__polya.md"
+  },
+  {
+    "title": "伯努利数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-bernoulli.html",
+    "source": "docs/math__combinatorics__bernoulli.md"
+  },
+  {
+    "title": "分拆数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-partition.html",
+    "source": "docs/math__combinatorics__partition.md"
+  },
+  {
+    "title": "卡特兰数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-catalan.html",
+    "source": "docs/math__combinatorics__catalan.md"
+  },
+  {
+    "title": "图论计数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-graph-enumeration.html",
+    "source": "docs/math__combinatorics__graph-enumeration.md"
+  },
+  {
+    "title": "容斥原理",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-inclusion-exclusion-principle.html",
+    "source": "docs/math__combinatorics__inclusion-exclusion-principle.md"
+  },
+  {
+    "title": "抽屉原理",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-drawer-principle.html",
+    "source": "docs/math__combinatorics__drawer-principle.md"
+  },
+  {
+    "title": "排列组合",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-combination.html",
+    "source": "docs/math__combinatorics__combination.md"
+  },
+  {
+    "title": "斐波那契数列",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-fibonacci.html",
+    "source": "docs/math__combinatorics__fibonacci.md"
+  },
+  {
+    "title": "斯特林数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-stirling.html",
+    "source": "docs/math__combinatorics__stirling.md"
+  },
+  {
+    "title": "范德蒙德卷积",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-vandermonde-convolution.html",
+    "source": "docs/math__combinatorics__vandermonde-convolution.md"
+  },
+  {
+    "title": "贝尔数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-bell.html",
+    "source": "docs/math__combinatorics__bell.md"
+  },
+  {
+    "title": "错位排列",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "combinatorics",
+    "subgroup_label": "组合数学",
+    "html": "html/math/combinatorics-derangement.html",
+    "source": "docs/math__combinatorics__derangement.md"
+  },
+  {
+    "title": "复数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "complex",
+    "subgroup_label": "complex",
+    "html": "html/math/complex.html",
+    "source": "docs/math__complex.md"
+  },
+  {
+    "title": "弧度制与坐标系",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "coordinate",
+    "subgroup_label": "coordinate",
+    "html": "html/math/coordinate.html",
+    "source": "docs/math__coordinate.md"
+  },
+  {
+    "title": "公平组合游戏",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "game-theory",
+    "subgroup_label": "博弈论",
+    "html": "html/math/game-theory-impartial-game.html",
+    "source": "docs/math__game-theory__impartial-game.md"
+  },
+  {
+    "title": "博弈论简介",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "game-theory",
+    "subgroup_label": "博弈论",
+    "html": "html/math/game-theory-intro.html",
+    "source": "docs/math__game-theory__intro.md"
+  },
+  {
+    "title": "零和游戏",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "game-theory",
+    "subgroup_label": "博弈论",
+    "html": "html/math/game-theory-zero-sum-game.html",
+    "source": "docs/math__game-theory__zero-sum-game.md"
+  },
+  {
+    "title": "非公平组合游戏",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "game-theory",
+    "subgroup_label": "博弈论",
+    "html": "html/math/game-theory-partizan-game.html",
+    "source": "docs/math__game-theory__partizan-game.md"
+  },
+  {
+    "title": "Jordan标准型",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-jordan.html",
+    "source": "docs/math__linear-algebra__jordan.md"
+  },
+  {
+    "title": "内积和外积",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-product.html",
+    "source": "docs/math__linear-algebra__product.md"
+  },
+  {
+    "title": "初等变换",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-elementary-operations.html",
+    "source": "docs/math__linear-algebra__elementary-operations.md"
+  },
+  {
+    "title": "向量",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-vector.html",
+    "source": "docs/math__linear-algebra__vector.md"
+  },
+  {
+    "title": "对角化",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-diagonalization.html",
+    "source": "docs/math__linear-algebra__diagonalization.md"
+  },
+  {
+    "title": "特征多项式",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-char-poly.html",
+    "source": "docs/math__linear-algebra__char-poly.md"
+  },
+  {
+    "title": "矩阵",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-matrix.html",
+    "source": "docs/math__linear-algebra__matrix.md"
+  },
+  {
+    "title": "线性代数简介",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra.html",
+    "source": "docs/math__linear-algebra.md"
+  },
+  {
+    "title": "线性基",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-basis.html",
+    "source": "docs/math__linear-algebra__basis.md"
+  },
+  {
+    "title": "线性映射",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-linear-mapping.html",
+    "source": "docs/math__linear-algebra__linear-mapping.md"
+  },
+  {
+    "title": "线性空间",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-vector-space.html",
+    "source": "docs/math__linear-algebra__vector-space.md"
+  },
+  {
+    "title": "行列式",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-algebra",
+    "subgroup_label": "线性代数",
+    "html": "html/math/linear-algebra-determinant.html",
+    "source": "docs/math__linear-algebra__determinant.md"
+  },
+  {
+    "title": "线性规划基础",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "linear-programming",
+    "subgroup_label": "linear-programming",
+    "html": "html/math/linear-programming.html",
+    "source": "docs/math__linear-programming.md"
+  },
+  {
+    "title": "拟阵",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "matroid",
+    "subgroup_label": "matroid",
+    "html": "html/math/matroid.html",
+    "source": "docs/math__matroid.md"
+  },
+  {
+    "title": "Meissel–Lehmer 算法",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-meissel-lehmer.html",
+    "source": "docs/math__number-theory__meissel-lehmer.md"
+  },
+  {
+    "title": "Min_25 筛",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-min-25.html",
+    "source": "docs/math__number-theory__min-25.md"
+  },
+  {
+    "title": "Pell 方程",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-pell-equation.html",
+    "source": "docs/math__number-theory__pell-equation.md"
+  },
+  {
+    "title": "Powerful Number 筛",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-powerful-number.html",
+    "source": "docs/math__number-theory__powerful-number.md"
+  },
+  {
+    "title": "Stern–Brocot 树与 Farey 序列",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-stern-brocot.html",
+    "source": "docs/math__number-theory__stern-brocot.md"
+  },
+  {
+    "title": "中国剩余定理",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-crt.html",
+    "source": "docs/math__number-theory__crt.md"
+  },
+  {
+    "title": "二次剩余",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-quad-residue.html",
+    "source": "docs/math__number-theory__quad-residue.md"
+  },
+  {
+    "title": "二次域",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-quadratic.html",
+    "source": "docs/math__number-theory__quadratic.md"
+  },
+  {
+    "title": "分解质因数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-pollard-rho.html",
+    "source": "docs/math__number-theory__pollard-rho.md"
+  },
+  {
+    "title": "升幂引理",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-lift-the-exponent.html",
+    "source": "docs/math__number-theory__lift-the-exponent.md"
+  },
+  {
+    "title": "卢卡斯定理",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-lucas.html",
+    "source": "docs/math__number-theory__lucas.md"
+  },
+  {
+    "title": "同余方程",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-congruence-equation.html",
+    "source": "docs/math__number-theory__congruence-equation.md"
+  },
+  {
+    "title": "数论分块",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-sqrt-decomposition.html",
+    "source": "docs/math__number-theory__sqrt-decomposition.md"
+  },
+  {
+    "title": "数论基础",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-basic.html",
+    "source": "docs/math__number-theory__basic.md"
+  },
+  {
+    "title": "最大公约数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-gcd.html",
+    "source": "docs/math__number-theory__gcd.md"
+  },
+  {
+    "title": "杜教筛",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-du.html",
+    "source": "docs/math__number-theory__du.md"
+  },
+  {
+    "title": "模算术简介",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-mod-arithmetic.html",
+    "source": "docs/math__number-theory__mod-arithmetic.md"
+  },
+  {
+    "title": "模逆元",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-inverse.html",
+    "source": "docs/math__number-theory__inverse.md"
+  },
+  {
+    "title": "欧拉函数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-euler-totient.html",
+    "source": "docs/math__number-theory__euler-totient.md"
+  },
+  {
+    "title": "洲阁筛",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-zhou.html",
+    "source": "docs/math__number-theory__zhou.md"
+  },
+  {
+    "title": "狄利克雷卷积",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-dirichlet.html",
+    "source": "docs/math__number-theory__dirichlet.md"
+  },
+  {
+    "title": "离散对数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-discrete-logarithm.html",
+    "source": "docs/math__number-theory__discrete-logarithm.md"
+  },
+  {
+    "title": "筛法",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-sieve.html",
+    "source": "docs/math__number-theory__sieve.md"
+  },
+  {
+    "title": "类欧几里德算法",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-euclidean.html",
+    "source": "docs/math__number-theory__euclidean.md"
+  },
+  {
+    "title": "素数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-prime.html",
+    "source": "docs/math__number-theory__prime.md"
+  },
+  {
+    "title": "线性同余方程",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-linear-equation.html",
+    "source": "docs/math__number-theory__linear-equation.md"
+  },
+  {
+    "title": "莫比乌斯反演",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-mobius.html",
+    "source": "docs/math__number-theory__mobius.md"
+  },
+  {
+    "title": "裴蜀定理 & 一次不定方程",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-bezouts.html",
+    "source": "docs/math__number-theory__bezouts.md"
+  },
+  {
+    "title": "费马小定理 & 欧拉定理",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-fermat.html",
+    "source": "docs/math__number-theory__fermat.md"
+  },
+  {
+    "title": "连分数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-continued-fraction.html",
+    "source": "docs/math__number-theory__continued-fraction.md"
+  },
+  {
+    "title": "阶 & 原根",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-primitive-root.html",
+    "source": "docs/math__number-theory__primitive-root.md"
+  },
+  {
+    "title": "阶乘取模",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-factorial.html",
+    "source": "docs/math__number-theory__factorial.md"
+  },
+  {
+    "title": "高次剩余 & 单位根",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "number-theory",
+    "subgroup_label": "数论",
+    "html": "html/math/number-theory-residue.html",
+    "source": "docs/math__number-theory__residue.md"
+  },
+  {
+    "title": "平衡三进制",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "numeral-sys",
+    "subgroup_label": "numeral-sys",
+    "html": "html/math/numeral-sys-balanced-ternary.html",
+    "source": "docs/math__numeral-sys__balanced-ternary.md"
+  },
+  {
+    "title": "数字系统简介",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "numeral-sys",
+    "subgroup_label": "numeral-sys",
+    "html": "html/math/numeral-sys-intro.html",
+    "source": "docs/math__numeral-sys__intro.md"
+  },
+  {
+    "title": "格雷码",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "numeral-sys",
+    "subgroup_label": "numeral-sys",
+    "html": "html/math/numeral-sys-gray-code.html",
+    "source": "docs/math__numeral-sys__gray-code.md"
+  },
+  {
+    "title": "进位制",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "numeral-sys",
+    "subgroup_label": "numeral-sys",
+    "html": "html/math/numeral-sys-base.html",
+    "source": "docs/math__numeral-sys__base.md"
+  },
+  {
+    "title": "插值",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "numerical",
+    "subgroup_label": "数值算法",
+    "html": "html/math/numerical-interp.html",
+    "source": "docs/math__numerical__interp.md"
+  },
+  {
+    "title": "数值积分",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "numerical",
+    "subgroup_label": "数值算法",
+    "html": "html/math/numerical-integral.html",
+    "source": "docs/math__numerical__integral.md"
+  },
+  {
+    "title": "牛顿迭代法",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "numerical",
+    "subgroup_label": "数值算法",
+    "html": "html/math/numerical-newton.html",
+    "source": "docs/math__numerical__newton.md"
+  },
+  {
+    "title": "高斯消元",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "numerical",
+    "subgroup_label": "数值算法",
+    "html": "html/math/numerical-gauss.html",
+    "source": "docs/math__numerical__gauss.md"
+  },
+  {
+    "title": "序理论",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "order-theory",
+    "subgroup_label": "order-theory",
+    "html": "html/math/order-theory.html",
+    "source": "docs/math__order-theory.md"
+  },
+  {
+    "title": "数学部分简介",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/math/overview.html",
+    "source": "docs/math.md"
+  },
+  {
+    "title": "置换和排列",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "permutation",
+    "subgroup_label": "permutation",
+    "html": "html/math/permutation.html",
+    "source": "docs/math__permutation.md"
+  },
+  {
+    "title": "Chirp Z 变换",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-czt.html",
+    "source": "docs/math__poly__czt.md"
+  },
+  {
+    "title": "Lagrange 反演",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-lagrange-inversion.html",
+    "source": "docs/math__poly__lagrange-inversion.md"
+  },
+  {
+    "title": "代数基本定理",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-fundamental.html",
+    "source": "docs/math__poly__fundamental.md"
+  },
+  {
+    "title": "多项式与生成函数简介",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-intro.html",
+    "source": "docs/math__poly__intro.md"
+  },
+  {
+    "title": "多项式初等函数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-elementary-func.html",
+    "source": "docs/math__poly__elementary-func.md"
+  },
+  {
+    "title": "多项式多点求值|快速插值",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-multipoint-eval-interpolation.html",
+    "source": "docs/math__poly__multipoint-eval-interpolation.md"
+  },
+  {
+    "title": "多项式平移|连续点值平移",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-shift.html",
+    "source": "docs/math__poly__shift.md"
+  },
+  {
+    "title": "多项式牛顿迭代",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-newton.html",
+    "source": "docs/math__poly__newton.md"
+  },
+  {
+    "title": "常系数齐次线性递推",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-linear-recurrence.html",
+    "source": "docs/math__poly__linear-recurrence.md"
+  },
+  {
+    "title": "形式幂级数复合|复合逆",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-comp-rev.html",
+    "source": "docs/math__poly__comp-rev.md"
+  },
+  {
+    "title": "快速傅里叶变换",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-fft.html",
+    "source": "docs/math__poly__fft.md"
+  },
+  {
+    "title": "快速数论变换",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-ntt.html",
+    "source": "docs/math__poly__ntt.md"
+  },
+  {
+    "title": "快速沃尔什变换",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-fwt.html",
+    "source": "docs/math__poly__fwt.md"
+  },
+  {
+    "title": "指数生成函数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-egf.html",
+    "source": "docs/math__poly__egf.md"
+  },
+  {
+    "title": "普通生成函数",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-ogf.html",
+    "source": "docs/math__poly__ogf.md"
+  },
+  {
+    "title": "符号化方法",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "poly",
+    "subgroup_label": "多项式",
+    "html": "html/math/poly-symbolic-method.html",
+    "source": "docs/math__poly__symbolic-method.md"
+  },
+  {
+    "title": "基本概念",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "probability",
+    "subgroup_label": "概率",
+    "html": "html/math/probability-basic-conception.html",
+    "source": "docs/math__probability__basic-conception.md"
+  },
+  {
+    "title": "条件概率与独立性",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "probability",
+    "subgroup_label": "概率",
+    "html": "html/math/probability-conditional-probability.html",
+    "source": "docs/math__probability__conditional-probability.md"
+  },
+  {
+    "title": "概率不等式",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "probability",
+    "subgroup_label": "概率",
+    "html": "html/math/probability-concentration-inequality.html",
+    "source": "docs/math__probability__concentration-inequality.md"
+  },
+  {
+    "title": "随机变量",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "probability",
+    "subgroup_label": "概率",
+    "html": "html/math/probability-random-variable.html",
+    "source": "docs/math__probability__random-variable.md"
+  },
+  {
+    "title": "随机变量的数字特征",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "probability",
+    "subgroup_label": "概率",
+    "html": "html/math/probability-exp-var.html",
+    "source": "docs/math__probability__exp-var.md"
+  },
+  {
+    "title": "单纯形法",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "simplex",
+    "subgroup_label": "simplex",
+    "html": "html/math/simplex.html",
+    "source": "docs/math__simplex.md"
+  },
+  {
+    "title": "杨氏矩阵",
+    "group": "math",
+    "group_label": "数学",
+    "subgroup": "young-tableau",
+    "subgroup_label": "young-tableau",
+    "html": "html/math/young-tableau.html",
+    "source": "docs/math__young-tableau.md"
+  },
+  {
+    "title": "15-puzzle",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "15-puzzle",
+    "subgroup_label": "15-puzzle",
+    "html": "html/misc/15-puzzle.html",
+    "source": "docs/misc__15-puzzle.md"
+  },
+  {
+    "title": "计算理论基础",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "cc-basic",
+    "subgroup_label": "cc-basic",
+    "html": "html/misc/cc-basic.html",
+    "source": "docs/misc__cc-basic.md"
+  },
+  {
+    "title": "CDQ 分治",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "cdq-divide",
+    "subgroup_label": "cdq-divide",
+    "html": "html/misc/cdq-divide.html",
+    "source": "docs/misc__cdq-divide.md"
+  },
+  {
+    "title": "离散化",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "discrete",
+    "subgroup_label": "discrete",
+    "html": "html/misc/discrete.html",
+    "source": "docs/misc__discrete.md"
+  },
+  {
+    "title": "字节顺序",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "endianness",
+    "subgroup_label": "endianness",
+    "html": "html/misc/endianness.html",
+    "source": "docs/misc__endianness.md"
+  },
+  {
+    "title": "表达式求值",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "expression",
+    "subgroup_label": "expression",
+    "html": "html/misc/expression.html",
+    "source": "docs/misc__expression.md"
+  },
+  {
+    "title": "分数规划",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "frac-programming",
+    "subgroup_label": "frac-programming",
+    "html": "html/misc/frac-programming.html",
+    "source": "docs/misc__frac-programming.md"
+  },
+  {
+    "title": "有限状态自动机",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "fsm",
+    "subgroup_label": "fsm",
+    "html": "html/misc/fsm.html",
+    "source": "docs/misc__fsm.md"
+  },
+  {
+    "title": "Garsia–Wachs 算法",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "garsia-wachs",
+    "subgroup_label": "garsia-wachs",
+    "html": "html/misc/garsia-wachs.html",
+    "source": "docs/misc__garsia-wachs.md"
+  },
+  {
+    "title": "爬山算法",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "hill-climbing",
+    "subgroup_label": "hill-climbing",
+    "html": "html/misc/hill-climbing.html",
+    "source": "docs/misc__hill-climbing.md"
+  },
+  {
+    "title": "悬线法",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "hoverline",
+    "subgroup_label": "hoverline",
+    "html": "html/misc/hoverline.html",
+    "source": "docs/misc__hoverline.md"
+  },
+  {
+    "title": "在一台机器上规划任务",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "job-order",
+    "subgroup_label": "job-order",
+    "html": "html/misc/job-order.html",
+    "source": "docs/misc__job-order.md"
+  },
+  {
+    "title": "约瑟夫问题",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "josephus",
+    "subgroup_label": "josephus",
+    "html": "html/misc/josephus.html",
+    "source": "docs/misc__josephus.md"
+  },
+  {
+    "title": "Kahan 求和",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "kahan-summation",
+    "subgroup_label": "kahan-summation",
+    "html": "html/misc/kahan-summation.html",
+    "source": "docs/misc__kahan-summation.md"
+  },
+  {
+    "title": "主元素问题",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "main-element",
+    "subgroup_label": "main-element",
+    "html": "html/misc/main-element.html",
+    "source": "docs/misc__main-element.md"
+  },
+  {
+    "title": "普通莫队算法",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "mo-algo",
+    "subgroup_label": "mo-algo",
+    "html": "html/misc/mo-algo.html",
+    "source": "docs/misc__mo-algo.md"
+  },
+  {
+    "title": "二维莫队",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "mo-algo-2dimen",
+    "subgroup_label": "mo-algo-2dimen",
+    "html": "html/misc/mo-algo-2dimen.html",
+    "source": "docs/misc__mo-algo-2dimen.md"
+  },
+  {
+    "title": "莫队算法简介",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "mo-algo-intro",
+    "subgroup_label": "mo-algo-intro",
+    "html": "html/misc/mo-algo-intro.html",
+    "source": "docs/misc__mo-algo-intro.md"
+  },
+  {
+    "title": "树上莫队",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "mo-algo-on-tree",
+    "subgroup_label": "mo-algo-on-tree",
+    "html": "html/misc/mo-algo-on-tree.html",
+    "source": "docs/misc__mo-algo-on-tree.md"
+  },
+  {
+    "title": "莫队二次离线",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "mo-algo-secondary-offline",
+    "subgroup_label": "mo-algo-secondary-offline",
+    "html": "html/misc/mo-algo-secondary-offline.html",
+    "source": "docs/misc__mo-algo-secondary-offline.md"
+  },
+  {
+    "title": "莫队配合 bitset",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "mo-algo-with-bitset",
+    "subgroup_label": "mo-algo-with-bitset",
+    "html": "html/misc/mo-algo-with-bitset.html",
+    "source": "docs/misc__mo-algo-with-bitset.md"
+  },
+  {
+    "title": "带修改莫队",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "modifiable-mo-algo",
+    "subgroup_label": "modifiable-mo-algo",
+    "html": "html/misc/modifiable-mo-algo.html",
+    "source": "docs/misc__modifiable-mo-algo.md"
+  },
+  {
+    "title": "珂朵莉树/颜色段均摊",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "odt",
+    "subgroup_label": "odt",
+    "html": "html/misc/odt.html",
+    "source": "docs/misc__odt.md"
+  },
+  {
+    "title": "离线算法简介",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "offline",
+    "subgroup_label": "offline",
+    "html": "html/misc/offline.html",
+    "source": "docs/misc__offline.md"
+  },
+  {
+    "title": "杂项简介",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/misc/overview.html",
+    "source": "docs/misc.md"
+  },
+  {
+    "title": "整体二分",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "parallel-binsearch",
+    "subgroup_label": "parallel-binsearch",
+    "html": "html/misc/parallel-binsearch.html",
+    "source": "docs/misc__parallel-binsearch.md"
+  },
+  {
+    "title": "随机化技巧",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "rand-technique",
+    "subgroup_label": "rand-technique",
+    "html": "html/misc/rand-technique.html",
+    "source": "docs/misc__rand-technique.md"
+  },
+  {
+    "title": "随机函数",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "random",
+    "subgroup_label": "random",
+    "html": "html/misc/random.html",
+    "source": "docs/misc__random.md"
+  },
+  {
+    "title": "回滚莫队",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "rollback-mo-algo",
+    "subgroup_label": "rollback-mo-algo",
+    "html": "html/misc/rollback-mo-algo.html",
+    "source": "docs/misc__rollback-mo-algo.md"
+  },
+  {
+    "title": "模拟退火",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "simulated-annealing",
+    "subgroup_label": "simulated-annealing",
+    "html": "html/misc/simulated-annealing.html",
+    "source": "docs/misc__simulated-annealing.md"
+  },
+  {
+    "title": "空间优化简介",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "space-optimization",
+    "subgroup_label": "space-optimization",
+    "html": "html/misc/space-optimization.html",
+    "source": "docs/misc__space-optimization.md"
+  },
+  {
+    "title": "双指针",
+    "group": "misc",
+    "group_label": "杂项",
+    "subgroup": "two-pointer",
+    "subgroup_label": "two-pointer",
+    "html": "html/misc/two-pointer.html",
+    "source": "docs/misc__two-pointer.md"
+  },
+  {
+    "title": "Alpha–Beta 剪枝",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "alpha-beta",
+    "subgroup_label": "alpha-beta",
+    "html": "html/search/alpha-beta.html",
+    "source": "docs/search__alpha-beta.md"
+  },
+  {
+    "title": "A*",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "astar",
+    "subgroup_label": "astar",
+    "html": "html/search/astar.html",
+    "source": "docs/search__astar.md"
+  },
+  {
+    "title": "回溯法",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "backtracking",
+    "subgroup_label": "backtracking",
+    "html": "html/search/backtracking.html",
+    "source": "docs/search__backtracking.md"
+  },
+  {
+    "title": "BFS（搜索）",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "bfs",
+    "subgroup_label": "bfs",
+    "html": "html/search/bfs.html",
+    "source": "docs/search__bfs.md"
+  },
+  {
+    "title": "双向搜索",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "bidirectional",
+    "subgroup_label": "bidirectional",
+    "html": "html/search/bidirectional.html",
+    "source": "docs/search__bidirectional.md"
+  },
+  {
+    "title": "DFS（搜索）",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "dfs",
+    "subgroup_label": "dfs",
+    "html": "html/search/dfs.html",
+    "source": "docs/search__dfs.md"
+  },
+  {
+    "title": "Dancing Links",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "dlx",
+    "subgroup_label": "dlx",
+    "html": "html/search/dlx.html",
+    "source": "docs/search__dlx.md"
+  },
+  {
+    "title": "启发式搜索",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "heuristic",
+    "subgroup_label": "heuristic",
+    "html": "html/search/heuristic.html",
+    "source": "docs/search__heuristic.md"
+  },
+  {
+    "title": "IDA*",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "idastar",
+    "subgroup_label": "idastar",
+    "html": "html/search/idastar.html",
+    "source": "docs/search__idastar.md"
+  },
+  {
+    "title": "迭代加深搜索",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "iterative",
+    "subgroup_label": "iterative",
+    "html": "html/search/iterative.html",
+    "source": "docs/search__iterative.md"
+  },
+  {
+    "title": "优化",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "opt",
+    "subgroup_label": "优化",
+    "html": "html/search/opt.html",
+    "source": "docs/search__opt.md"
+  },
+  {
+    "title": "搜索部分简介",
+    "group": "search",
+    "group_label": "搜索",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/search/overview.html",
+    "source": "docs/search.md"
+  },
+  {
+    "title": "AC 自动机",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "ac-automaton",
+    "subgroup_label": "ac-automaton",
+    "html": "html/string/ac-automaton.html",
+    "source": "docs/string__ac-automaton.md"
+  },
+  {
+    "title": "字符串基础",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "basic",
+    "subgroup_label": "basic",
+    "html": "html/string/basic.html",
+    "source": "docs/string__basic.md"
+  },
+  {
+    "title": "Boyer–Moore 算法",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "bm",
+    "subgroup_label": "bm",
+    "html": "html/string/bm.html",
+    "source": "docs/string__bm.md"
+  },
+  {
+    "title": "广义后缀自动机",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "general-sam",
+    "subgroup_label": "general-sam",
+    "html": "html/string/general-sam.html",
+    "source": "docs/string__general-sam.md"
+  },
+  {
+    "title": "字符串哈希",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "hash",
+    "subgroup_label": "hash",
+    "html": "html/string/hash.html",
+    "source": "docs/string__hash.md"
+  },
+  {
+    "title": "前缀函数与 KMP 算法",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "kmp",
+    "subgroup_label": "kmp",
+    "html": "html/string/kmp.html",
+    "source": "docs/string__kmp.md"
+  },
+  {
+    "title": "标准库",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "lib-func",
+    "subgroup_label": "lib-func",
+    "html": "html/string/lib-func.html",
+    "source": "docs/string__lib-func.md"
+  },
+  {
+    "title": "Lyndon 分解",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "lyndon",
+    "subgroup_label": "lyndon",
+    "html": "html/string/lyndon.html",
+    "source": "docs/string__lyndon.md"
+  },
+  {
+    "title": "Main–Lorentz 算法",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "main-lorentz",
+    "subgroup_label": "main-lorentz",
+    "html": "html/string/main-lorentz.html",
+    "source": "docs/string__main-lorentz.md"
+  },
+  {
+    "title": "Manacher",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "manacher",
+    "subgroup_label": "manacher",
+    "html": "html/string/manacher.html",
+    "source": "docs/string__manacher.md"
+  },
+  {
+    "title": "字符串匹配",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "match",
+    "subgroup_label": "match",
+    "html": "html/string/match.html",
+    "source": "docs/string__match.md"
+  },
+  {
+    "title": "最小表示法",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "minimal-string",
+    "subgroup_label": "minimal-string",
+    "html": "html/string/minimal-string.html",
+    "source": "docs/string__minimal-string.md"
+  },
+  {
+    "title": "字符串部分简介",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/string/overview.html",
+    "source": "docs/string.md"
+  },
+  {
+    "title": "回文树",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "pam",
+    "subgroup_label": "pam",
+    "html": "html/string/pam.html",
+    "source": "docs/string__pam.md"
+  },
+  {
+    "title": "后缀数组简介",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "sa",
+    "subgroup_label": "sa",
+    "html": "html/string/sa.html",
+    "source": "docs/string__sa.md"
+  },
+  {
+    "title": "最优原地后缀排序算法",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "sa-optimal-inplace",
+    "subgroup_label": "sa-optimal-inplace",
+    "html": "html/string/sa-optimal-inplace.html",
+    "source": "docs/string__sa-optimal-inplace.md"
+  },
+  {
+    "title": "后缀自动机 (SAM)",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "sam",
+    "subgroup_label": "sam",
+    "html": "html/string/sam.html",
+    "source": "docs/string__sam.md"
+  },
+  {
+    "title": "序列自动机",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "seq-automaton",
+    "subgroup_label": "seq-automaton",
+    "html": "html/string/seq-automaton.html",
+    "source": "docs/string__seq-automaton.md"
+  },
+  {
+    "title": "后缀平衡树",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "suffix-bst",
+    "subgroup_label": "suffix-bst",
+    "html": "html/string/suffix-bst.html",
+    "source": "docs/string__suffix-bst.md"
+  },
+  {
+    "title": "后缀树",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "suffix-tree",
+    "subgroup_label": "suffix-tree",
+    "html": "html/string/suffix-tree.html",
+    "source": "docs/string__suffix-tree.md"
+  },
+  {
+    "title": "字典树 (Trie)",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "trie",
+    "subgroup_label": "trie",
+    "html": "html/string/trie.html",
+    "source": "docs/string__trie.md"
+  },
+  {
+    "title": "Z 函数（扩展 KMP）",
+    "group": "string",
+    "group_label": "字符串",
+    "subgroup": "z-func",
+    "subgroup_label": "z-func",
+    "html": "html/string/z-func.html",
+    "source": "docs/string__z-func.md"
+  },
+  {
+    "title": "命令行",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "cmd",
+    "subgroup_label": "cmd",
+    "html": "html/tools/cmd.html",
+    "source": "docs/tools__cmd.md"
+  },
+  {
+    "title": "命令行编译与调试",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "compile-debug",
+    "subgroup_label": "compile-debug",
+    "html": "html/tools/compile-debug.html",
+    "source": "docs/tools__compile-debug.md"
+  },
+  {
+    "title": "编译器",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "compiler",
+    "subgroup_label": "compiler",
+    "html": "html/tools/compiler.html",
+    "source": "docs/tools__compiler.md"
+  },
+  {
+    "title": "Atom",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-atom.html",
+    "source": "docs/tools__editor__atom.md"
+  },
+  {
+    "title": "CLion",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-clion.html",
+    "source": "docs/tools__editor__clion.md"
+  },
+  {
+    "title": "Code::Blocks",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-codeblocks.html",
+    "source": "docs/tools__editor__codeblocks.md"
+  },
+  {
+    "title": "CP Editor",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-cpeditor.html",
+    "source": "docs/tools__editor__cpeditor.md"
+  },
+  {
+    "title": "Dev-C++",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-devcpp.html",
+    "source": "docs/tools__editor__devcpp.md"
+  },
+  {
+    "title": "Eclipse",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-eclipse.html",
+    "source": "docs/tools__editor__eclipse.md"
+  },
+  {
+    "title": "Emacs",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-emacs.html",
+    "source": "docs/tools__editor__emacs.md"
+  },
+  {
+    "title": "Geany",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-geany.html",
+    "source": "docs/tools__editor__geany.md"
+  },
+  {
+    "title": "GUIDE",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-guide.html",
+    "source": "docs/tools__editor__guide.md"
+  },
+  {
+    "title": "Kate",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-kate.html",
+    "source": "docs/tools__editor__kate.md"
+  },
+  {
+    "title": "Notepad++",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-npp.html",
+    "source": "docs/tools__editor__npp.md"
+  },
+  {
+    "title": "Sublime Text",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-sublime.html",
+    "source": "docs/tools__editor__sublime.md"
+  },
+  {
+    "title": "Vim",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-vim.html",
+    "source": "docs/tools__editor__vim.md"
+  },
+  {
+    "title": "VS Code",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-vscode.html",
+    "source": "docs/tools__editor__vscode.md"
+  },
+  {
+    "title": "Xcode",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "editor",
+    "subgroup_label": "编辑器",
+    "html": "html/tools/editor-xcode.html",
+    "source": "docs/tools__editor__xcode.md"
+  },
+  {
+    "title": "Git",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "git",
+    "subgroup_label": "git",
+    "html": "html/tools/git.html",
+    "source": "docs/tools__git.md"
+  },
+  {
+    "title": "Arbiter",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "judger",
+    "subgroup_label": "评测工具",
+    "html": "html/tools/judger-arbiter.html",
+    "source": "docs/tools__judger__arbiter.md"
+  },
+  {
+    "title": "CCR Plus",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "judger",
+    "subgroup_label": "评测工具",
+    "html": "html/tools/judger-ccr-plus.html",
+    "source": "docs/tools__judger__ccr-plus.md"
+  },
+  {
+    "title": "Cena",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "judger",
+    "subgroup_label": "评测工具",
+    "html": "html/tools/judger-cena.html",
+    "source": "docs/tools__judger__cena.md"
+  },
+  {
+    "title": "Lemon",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "judger",
+    "subgroup_label": "评测工具",
+    "html": "html/tools/judger-lemon.html",
+    "source": "docs/tools__judger__lemon.md"
+  },
+  {
+    "title": "评测工具简介",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "judger",
+    "subgroup_label": "评测工具",
+    "html": "html/tools/judger.html",
+    "source": "docs/tools__judger.md"
+  },
+  {
+    "title": "LaTeX 入门",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "latex",
+    "subgroup_label": "latex",
+    "html": "html/tools/latex.html",
+    "source": "docs/tools__latex.md"
+  },
+  {
+    "title": "OJ 工具",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "oj-tool",
+    "subgroup_label": "oj-tool",
+    "html": "html/tools/oj-tool.html",
+    "source": "docs/tools__oj-tool.md"
+  },
+  {
+    "title": "工具软件简介",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "overview",
+    "subgroup_label": "概览",
+    "html": "html/tools/overview.html",
+    "source": "docs/tools.md"
+  },
+  {
+    "title": "Polygon",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "polygon",
+    "subgroup_label": "polygon",
+    "html": "html/tools/polygon.html",
+    "source": "docs/tools__polygon.md"
+  },
+  {
+    "title": "Special Judge",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "special-judge",
+    "subgroup_label": "special-judge",
+    "html": "html/tools/special-judge.html",
+    "source": "docs/tools__special-judge.md"
+  },
+  {
+    "title": "Checker",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "testlib",
+    "subgroup_label": "Testlib",
+    "html": "html/tools/testlib-checker.html",
+    "source": "docs/tools__testlib__checker.md"
+  },
+  {
+    "title": "Generator",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "testlib",
+    "subgroup_label": "Testlib",
+    "html": "html/tools/testlib-generator.html",
+    "source": "docs/tools__testlib__generator.md"
+  },
+  {
+    "title": "Interactor",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "testlib",
+    "subgroup_label": "Testlib",
+    "html": "html/tools/testlib-interactor.html",
+    "source": "docs/tools__testlib__interactor.md"
+  },
+  {
+    "title": "Testlib 简介",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "testlib",
+    "subgroup_label": "Testlib",
+    "html": "html/tools/testlib.html",
+    "source": "docs/tools__testlib.md"
+  },
+  {
+    "title": "Validator",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "testlib",
+    "subgroup_label": "Testlib",
+    "html": "html/tools/testlib-validator.html",
+    "source": "docs/tools__testlib__validator.md"
+  },
+  {
+    "title": "通用",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "testlib",
+    "subgroup_label": "Testlib",
+    "html": "html/tools/testlib-general.html",
+    "source": "docs/tools__testlib__general.md"
+  },
+  {
+    "title": "WSL (Windows 10)",
+    "group": "tools",
+    "group_label": "工具",
+    "subgroup": "wsl",
+    "subgroup_label": "wsl",
+    "html": "html/tools/wsl.html",
+    "source": "docs/tools__wsl.md"
+  },
+  {
+    "title": "括号序列",
+    "group": "topic",
+    "group_label": "专题",
+    "subgroup": "bracket",
+    "subgroup_label": "bracket",
+    "html": "html/topic/bracket.html",
+    "source": "docs/topic__bracket.md"
+  },
+  {
+    "title": "并查集应用",
+    "group": "topic",
+    "group_label": "专题",
+    "subgroup": "dsu-app",
+    "subgroup_label": "dsu-app",
+    "html": "html/topic/dsu-app.html",
+    "source": "docs/topic__dsu-app.md"
+  },
+  {
+    "title": "RMQ",
+    "group": "topic",
+    "group_label": "专题",
+    "subgroup": "rmq",
+    "subgroup_label": "rmq",
+    "html": "html/topic/rmq.html",
+    "source": "docs/topic__rmq.md"
+  },
+  {
+    "title": "线段树与离线询问",
+    "group": "topic",
+    "group_label": "专题",
+    "subgroup": "segment-tree-offline",
+    "subgroup_label": "segment-tree-offline",
+    "html": "html/topic/segment-tree-offline.html",
+    "source": "docs/topic__segment-tree-offline.md"
+  }
+]
