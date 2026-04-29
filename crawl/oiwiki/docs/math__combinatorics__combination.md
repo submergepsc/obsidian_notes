@@ -1,301 +1,301 @@
-# æåç»å - OI Wiki
+﻿# 排列组合 - OI Wiki
 
 - Source: https://oi-wiki.org/math/combinatorics/combination/
 
-# æåç»å
+# 排列组合
 
-## å¼å ¥
+## 引入
 
-æåç»åæ¯ç»åæ°å­¦ä¸­çåºç¡ï¼æåå°±æ¯æä»ç»å®ä¸ªæ°çå ç´ ä¸­ååºæå®ä¸ªæ°çå ç´ è¿è¡æåºï¼ç»ååæ¯æä»ç»å®ä¸ªæ°çå ç´ ä¸­ä» ä» ååºæå®ä¸ªæ°çå ç´ ï¼ä¸èèæåºï¼æåç»åçä¸­å¿é®é¢æ¯ç ç©¶ç»å®è¦æ±çæååç»åå¯è½åºç°çæ åµæ»æ°ï¼æåç»åä¸å¤å ¸æ¦çè®ºå ³ç³»å¯åï¼
+排列组合是组合数学中的基础．排列就是指从给定个数的元素中取出指定个数的元素进行排序；组合则是指从给定个数的元素中仅仅取出指定个数的元素，不考虑排序．排列组合的中心问题是研究给定要求的排列和组合可能出现的情况总数．排列组合与古典概率论关系密切．
 
-å¨é«ä¸­åç­æ°å­¦ä¸­ï¼æåç»åå¤æ¯å©ç¨åè¡¨ãæä¸¾ç­æ¹æ³è§£é¢ï¼
+在高中初等数学中，排列组合多是利用列表、枚举等方法解题．
 
-## å æ³ & ä¹æ³åç
+## 加法 & 乘法原理
 
-### å æ³åç
+### 加法原理
 
-å®æä¸ä¸ªå·¥ç¨å¯ä»¥æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç±»åæ³ï¼ðð(1 â¤ð â¤ð)ai(1â¤iâ¤n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»£è¡¨ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç±»æ¹æ³çæ°ç®ï¼é£ä¹å®æè¿ä»¶äºå ±æ ð =ð1 +ð2 +â¯ +ððS=a1+a2+â¯+an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ä¸åçæ¹æ³ï¼
+完成一个工程可以有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 类办法，𝑎𝑖(1 ≤𝑖 ≤𝑛)ai(1≤i≤n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 代表第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 类方法的数目．那么完成这件事共有 𝑆 =𝑎1 +𝑎2 +⋯ +𝑎𝑛S=a1+a2+⋯+an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种不同的方法．
 
-### ä¹æ³åç
+### 乘法原理
 
-å®æä¸ä¸ªå·¥ç¨éè¦å ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ­¥éª¤ï¼ðð(1 â¤ð â¤ð)ai(1â¤iâ¤n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»£è¡¨ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ­¥éª¤çä¸åæ¹æ³æ°ç®ï¼é£ä¹å®æè¿ä»¶äºå ±æ ð =ð1 Ãð2 Ãâ¯ ÃððS=a1Ãa2Ãâ¯Ãan![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ä¸åçæ¹æ³ï¼
+完成一个工程需要分 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个步骤，𝑎𝑖(1 ≤𝑖 ≤𝑛)ai(1≤i≤n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 代表第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个步骤的不同方法数目．那么完成这件事共有 𝑆 =𝑎1 ×𝑎2 ×⋯ ×𝑎𝑛S=a1×a2×⋯×an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种不同的方法．
 
-## æåä¸ç»ååºç¡
+## 排列与组合基础
 
-### æåæ°
+### 排列数
 
-ä» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åå ç´ ä¸­ï¼ä»»å ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð â¤ðmâ¤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ºèªç¶æ°ï¼ä¸åï¼ä¸ªå ç´ æç §ä¸å®çé¡ºåºææä¸åï¼å«åä» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åå ç´ ä¸­ååº ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ çä¸ä¸ªæåï¼ä» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åå ç´ ä¸­ååº ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)(ð â¤ðmâ¤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)) ä¸ªå ç´ çæææåçä¸ªæ°ï¼å«åä» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åå ç´ ä¸­ååº ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ çæåæ°ï¼ç¨ç¬¦å· AððAnm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æè æ¯ PððPnm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¡¨ç¤ºï¼
+从 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同元素中，任取 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（𝑚 ≤𝑛m≤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 均为自然数，下同）个元素按照一定的顺序排成一列，叫做从 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同元素中取出 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素的一个排列；从 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同元素中取出 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)(𝑚 ≤𝑛m≤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)) 个元素的所有排列的个数，叫做从 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同元素中取出 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素的排列数，用符号 A𝑚𝑛Anm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（或者是 P𝑚𝑛Pnm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）表示．
 
-æåçè®¡ç®å ¬å¼å¦ä¸ï¼
+排列的计算公式如下：
 
-Aðð=ð(ðâ1)(ðâ2)â¯(ðâð+1)=ð!(ðâð)!Anm=n(nâ1)(nâ2)â¯(nâm+1)=n!(nâm)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+A𝑚𝑛=𝑛(𝑛−1)(𝑛−2)⋯(𝑛−𝑚+1)=𝑛!(𝑛−𝑚)!Anm=n(n−1)(n−2)⋯(n−m+1)=n!(n−m)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ð!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»£è¡¨ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¶ä¹ï¼å³ 6! =1 Ã2 Ã3 Ã4 Ã5 Ã66!=1Ã2Ã3Ã4Ã5Ã6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+𝑛!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 代表 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的阶乘，即 6! =1 ×2 ×3 ×4 ×5 ×66!=1×2×3×4×5×6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å ¬å¼å¯ä»¥è¿æ ·çè§£ï¼ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªäººé ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¥æé (ð â¤ðmâ¤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7))ï¼ç¬¬ä¸ä¸ªä½ç½®å¯ä»¥é ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼ç¬¬äºä½ç½®å¯ä»¥é ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼ä»¥æ­¤ç±»æ¨ï¼ç¬¬ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼æåä¸ä¸ªï¼å¯ä»¥é ð âð +1nâm+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼å¾ï¼
+公式可以这样理解：𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个人选 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个来排队 (𝑚 ≤𝑛m≤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7))．第一个位置可以选 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，第二位置可以选 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，以此类推，第 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个（最后一个）可以选 𝑛 −𝑚 +1n−m+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，得：
 
-Aðð=ð(ðâ1)(ðâ2)â¯(ðâð+1)=ð!(ðâð)!Anm=n(nâ1)(nâ2)â¯(nâm+1)=n!(nâm)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+A𝑚𝑛=𝑛(𝑛−1)(𝑛−2)⋯(𝑛−𝑚+1)=𝑛!(𝑛−𝑚)!Anm=n(n−1)(n−2)⋯(n−m+1)=n!(n−m)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¨æåï¼ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªäººå ¨é¨æ¥æéï¼éé¿ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¬¬ä¸ä¸ªä½ç½®å¯ä»¥é ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼ç¬¬äºä½ç½®å¯ä»¥é ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼ä»¥æ­¤ç±»æ¨å¾ï¼
+全排列：𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个人全部来排队，队长为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．第一个位置可以选 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，第二位置可以选 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，以此类推得：
 
-Aðð=ð(ðâ1)(ðâ2)â¯3Ã2Ã1=ð!Ann=n(nâ1)(nâ2)â¯3Ã2Ã1=n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+A𝑛𝑛=𝑛(𝑛−1)(𝑛−2)⋯3×2×1=𝑛!Ann=n(n−1)(n−2)⋯3×2×1=n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¨æåæ¯æåæ°çä¸ä¸ªç¹æ®æ åµï¼
+全排列是排列数的一个特殊情况．
 
-### ç»åæ°
+### 组合数
 
-ä» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åå ç´ ä¸­ï¼ä»»å ð â¤ðmâ¤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ç»æä¸ä¸ªéåï¼å«åä» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åå ç´ ä¸­ååº ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ çä¸ä¸ªç»åï¼ä» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åå ç´ ä¸­ååº ð â¤ðmâ¤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ çææç»åçä¸ªæ°ï¼å«åä» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åå ç´ ä¸­ååº ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ çç»åæ°ï¼ç¨ç¬¦å· (ðð)(nm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¥è¡¨ç¤ºï¼è¯»ä½ãðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ãï¼
+从 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同元素中，任取 𝑚 ≤𝑛m≤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素组成一个集合，叫做从 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同元素中取出 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素的一个组合；从 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同元素中取出 𝑚 ≤𝑛m≤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素的所有组合的个数，叫做从 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同元素中取出 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素的组合数，用符号 (𝑛𝑚)(nm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 来表示，读作「𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 选 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)」．
 
-ç»åæ°è®¡ç®å ¬å¼
+组合数计算公式
 
-(ðð)=Aððð!=ð!ð!(ðâð)!(nm)=Anmm!=n!m!(nâm)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛𝑚)=A𝑚𝑛𝑚!=𝑛!𝑚!(𝑛−𝑚)!(nm)=Anmm!=n!m!(n−m)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦ä½çè§£ä¸è¿°å ¬å¼ï¼æä»¬èè ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªäººé ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªåºæ¥ï¼ð â¤ðmâ¤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼ä¸æéï¼ä¸å¨ä¹é¡ºåºï¼å¦æå¨ä¹é¡ºåºé£ä¹å°±æ¯ AððAnm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æä¸å¨ä¹é£ä¹å°±è¦é¤æéå¤ï¼é£ä¹éå¤äºå¤å°ï¼åæ ·éåºæ¥ç ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªäººï¼ä»ä»¬è¿è¦ãå ¨æãå¾ ð!m!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥å¾ï¼
+如何理解上述公式？我们考虑 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个人选 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个出来（𝑚 ≤𝑛m≤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），不排队，不在乎顺序．如果在乎顺序那么就是 A𝑚𝑛Anm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果不在乎那么就要除掉重复，那么重复了多少？同样选出来的 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个人，他们还要「全排」得 𝑚!m!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以得：
 
-(ðð)Ãð!=Aðð(ðð)=Aððð!=ð!ð!(ðâð)!(nm)Ãm!=Anm(nm)=Anmm!=n!m!(nâm)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛𝑚)×𝑚!=A𝑚𝑛(𝑛𝑚)=A𝑚𝑛𝑚!=𝑛!𝑚!(𝑛−𝑚)!(nm)×m!=Anm(nm)=Anmm!=n!m!(n−m)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç»åæ°ä¹å¸¸ç¨ CððCnm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºï¼å³ Cðð =(ðð)Cnm=(nm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç°å¨æ°å­¦çæ®ééç¨ (ðð)(nm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè®°å·èé CððCnm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+组合数也常用 C𝑚𝑛Cnm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示，即 C𝑚𝑛 =(𝑛𝑚)Cnm=(nm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．现在数学界普遍采用 (𝑛𝑚)(nm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的记号而非 C𝑚𝑛Cnm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç»åæ°ä¹è¢«ç§°ä¸ºãäºé¡¹å¼ç³»æ°ãï¼ä¸æäºé¡¹å¼å®çå°ä¼éè¿°å ¶ä¸­çèç³»ï¼
+组合数也被称为「二项式系数」，下文二项式定理将会阐述其中的联系．
 
-ç¹å«å°ï¼è§å®å½ ð >ðm>n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼Aðð =(ðð) =0Anm=(nm)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+特别地，规定当 𝑚 >𝑛m>n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，A𝑚𝑛 =(𝑛𝑚) =0Anm=(nm)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## ææ¿æ³
+## 插板法
 
-ææ¿æ³ï¼Stars and barsï¼æ¯ç¨äºæ±ä¸ç±»ç»ç¸åå ç´ åç»çæ¹æ¡æ°çä¸ç§æå·§ï¼ä¹å¯ä»¥ç¨äºæ±ä¸ç±»çº¿æ§ä¸å®æ¹ç¨çè§£çç»æ°ï¼
+插板法（Stars and bars）是用于求一类给相同元素分组的方案数的一种技巧，也可以用于求一类线性不定方程的解的组数．
 
-### æ­£æ´æ°åçæ°ç®
+### 正整数和的数目
 
-é®é¢ä¸ï¼ç°æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª **å®å ¨ç¸å** çå ç´ ï¼è¦æ±å°å ¶åä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»ï¼ä¿è¯æ¯ç»è³å°æä¸ä¸ªå ç´ ï¼ä¸å ±æå¤å°ç§åæ³ï¼
+问题一：现有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 **完全相同** 的元素，要求将其分为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 组，保证每组至少有一个元素，一共有多少种分法？
 
-èèæ¿ ð â1kâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¿å­æå ¥å° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ä¸¤ä¸¤å½¢æç ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç©ºéé¢ï¼
+考虑拿 𝑘 −1k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 块板子插入到 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素两两形成的 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个空里面．
 
-å ä¸ºå ç´ æ¯å®å ¨ç¸åçï¼æä»¥ç­æ¡å°±æ¯ (ðâ1ðâ1)(nâ1kâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+因为元素是完全相同的，所以答案就是 (𝑛−1𝑘−1)(n−1k−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ¬è´¨æ¯æ± ð¥1 +ð¥2 +â¯ +ð¥ð =ðx1+x2+â¯+xk=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ­£æ´æ°è§£çç»æ°ï¼
+本质是求 𝑥1 +𝑥2 +⋯ +𝑥𝑘 =𝑛x1+x2+⋯+xk=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的正整数解的组数．
 
-### éè´æ´æ°åçæ°ç®
+### 非负整数和的数目
 
-é®é¢äºï¼å¦æé®é¢ååä¸ä¸ï¼æ¯ç»å è®¸ä¸ºç©ºå¢ï¼
+问题二：如果问题变化一下，每组允许为空呢？
 
-æ¾ç¶æ­¤æ¶æ²¡æ³ç´æ¥ææ¿äºï¼å ä¸ºæå¯è½åºç°å¾å¤åæ¿å­æå°ä¸ä¸ªç©ºéé¢çæ åµï¼éå¸¸ä¸å¥½è®¡ç®ï¼
+显然此时没法直接插板了，因为有可能出现很多块板子插到一个空里面的情况，非常不好计算．
 
-æä»¬èèåé æ¡ä»¶è½¬åææéå¶çé®é¢ä¸ï¼å å ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ è¿æ¥ï¼å¨è¿ ð +ðn+k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ å½¢æç ð +ð â1n+kâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç©ºéé¢ææ¿ï¼ç­æ¡ä¸º
+我们考虑创造条件转化成有限制的问题一，先借 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素过来，在这 𝑛 +𝑘n+k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素形成的 𝑛 +𝑘 −1n+k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个空里面插板，答案为
 
-(ð+ðâ1ðâ1)=(ð+ðâ1ð)(n+kâ1kâ1)=(n+kâ1n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛+𝑘−1𝑘−1)=(𝑛+𝑘−1𝑛)(n+k−1k−1)=(n+k−1n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è½ç¶ä¸æ¯ç´æ¥æ±çåé®é¢ï¼ä½è¿ä¸ªå¼å­å°±æ¯åé®é¢çç­æ¡ï¼å¯ä»¥è¿ä¹çè§£ï¼
+虽然不是直接求的原问题，但这个式子就是原问题的答案，可以这么理解：
 
-å¼å¤´æä»¬åæ¥äº ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ï¼ç¨äºä¿è¯æ¯ç»è³å°æä¸ä¸ªå ç´ ï¼æå®æ¿ä¹ååæè¿ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªåæ¥çå ç´ ä» ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»éé¢æ¿èµ°ï¼å ä¸ºå ç´ æ¯ç¸åçï¼æä»¥è½¬åè¿çæ åµåè½¬ååçæ åµå¯ä»¥ä¸ä¸å¯¹åºï¼ç­æ¡ä¹å°±æ¯ç¸ç­çï¼
+开头我们借来了 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素，用于保证每组至少有一个元素，插完板之后再把这 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个借来的元素从 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 组里面拿走．因为元素是相同的，所以转化过的情况和转化前的情况可以一一对应，答案也就是相等的．
 
-ç±æ­¤å¯ä»¥æ¨å¯¼åºææ¿æ³çå ¬å¼ï¼(ð+ðâ1ð)(n+kâ1n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+由此可以推导出插板法的公式：(𝑛+𝑘−1𝑛)(n+k−1n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ¬è´¨æ¯æ± ð¥1 +ð¥2 +â¯ +ð¥ð =ðx1+x2+â¯+xk=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéè´æ´æ°è§£çç»æ°ï¼å³è¦æ± ð¥ð â¥0xiâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼
+本质是求 𝑥1 +𝑥2 +⋯ +𝑥𝑘 =𝑛x1+x2+⋯+xk=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的非负整数解的组数（即要求 𝑥𝑖 ≥0xi≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）．
 
-### ä¸åä¸çæ´æ°åçæ°ç®
+### 不同下界整数和的数目
 
-é®é¢ä¸ï¼å¦æåæ©å±ä¸æ­¥ï¼è¦æ±å¯¹äºç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»ï¼è³å°è¦åå° ðð,âðð â¤ðai,âaiâ¤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ å¢ï¼
+问题三：如果再扩展一步，要求对于第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 组，至少要分到 𝑎𝑖,∑𝑎𝑖 ≤𝑛ai,∑ai≤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素呢？
 
-æ¬è´¨æ¯æ± ð¥1 +ð¥2 +â¯ +ð¥ð =ðx1+x2+â¯+xk=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£çæ°ç®ï¼å ¶ä¸­ ð¥ð â¥ððxiâ¥ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+本质是求 𝑥1 +𝑥2 +⋯ +𝑥𝑘 =𝑛x1+x2+⋯+xk=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解的数目，其中 𝑥𝑖 ≥𝑎𝑖xi≥ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç±»æ¯æ éå¶çæ åµï¼æä»¬å âððâai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ è¿æ¥ï¼ä¿è¯ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»è³å°è½åå° ððai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼ä¹å°±æ¯ä»¤
+类比无限制的情况，我们借 ∑𝑎𝑖∑ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素过来，保证第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 组至少能分到 𝑎𝑖ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个．也就是令
 
-ð¥â²ð=ð¥ðâððxiâ²=xiâai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥′𝑖=𝑥𝑖−𝑎𝑖xi′=xi−ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¾å°æ°æ¹ç¨ï¼
+得到新方程：
 
-(ð¥â²1+ð1)+(ð¥â²2+ð2)+â¯+(ð¥â²ð+ðð)=ðð¥â²1+ð¥â²2+â¯+ð¥â²ð=ðâð1âð2ââ¯âððð¥â²1+ð¥â²2+â¯+ð¥â²ð=ðââðð(x1â²+a1)+(x2â²+a2)+â¯+(xkâ²+ak)=nx1â²+x2â²+â¯+xkâ²=nâa1âa2ââ¯âakx1â²+x2â²+â¯+xkâ²=nââai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑥′1+𝑎1)+(𝑥′2+𝑎2)+⋯+(𝑥′𝑘+𝑎𝑘)=𝑛𝑥′1+𝑥′2+⋯+𝑥′𝑘=𝑛−𝑎1−𝑎2−⋯−𝑎𝑘𝑥′1+𝑥′2+⋯+𝑥′𝑘=𝑛−∑𝑎𝑖(x1′+a1)+(x2′+a2)+⋯+(xk′+ak)=nx1′+x2′+⋯+xk′=n−a1−a2−⋯−akx1′+x2′+⋯+xk′=n−∑ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­
+其中
 
-ð¥â²ðâ¥0xiâ²â¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥′𝑖≥0xi′≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç¶åé®é¢ä¸å°±è½¬åæäºé®é¢äºï¼ç´æ¥ç¨ææ¿æ³å ¬å¼å¾å°ç­æ¡ä¸º
+然后问题三就转化成了问题二，直接用插板法公式得到答案为
 
-(ðââðð+ðâ1ðââðð)(nââai+kâ1nââai)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛−∑𝑎𝑖+𝑘−1𝑛−∑𝑎𝑖)(n−∑ai+k−1n−∑ai)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### ä¸ç¸é»çæå
+### 不相邻的排列
 
-1 â¼ð1â¼n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªèªç¶æ°ä¸­é ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼è¿ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ°ä¸­ä»»ä½ä¸¤ä¸ªæ°é½ä¸ç¸é»çç»åæ (ðâð+1ð)(nâk+1k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ï¼
+1 ∼𝑛1∼n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个自然数中选 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，这 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数中任何两个数都不相邻的组合有 (𝑛−𝑘+1𝑘)(n−k+1k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种．
 
-## äºé¡¹å¼å®ç
+## 二项式定理
 
-å¨è¿å ¥æåç»åè¿é¶ç¯ä¹åï¼æä»¬å ä»ç»ä¸ä¸ªä¸ç»åæ°å¯åç¸å ³çå®çââäºé¡¹å¼å®çï¼
+在进入排列组合进阶篇之前，我们先介绍一个与组合数密切相关的定理——二项式定理．
 
-äºé¡¹å¼å®çéæäºä¸ä¸ªå±å¼å¼çç³»æ°ï¼
+二项式定理阐明了一个展开式的系数：
 
-(ð+ð)ð=ðâð=0(ðð)ððâððð(a+b)n=âi=0n(ni)anâibi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑎+𝑏)𝑛=𝑛∑𝑖=0(𝑛𝑖)𝑎𝑛−𝑖𝑏𝑖(a+b)n=∑i=0n(ni)an−ibi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æå¯ä»¥éç¨æ°å­¦å½çº³æ³ï¼å©ç¨ (ðð) +(ððâ1) =(ð+1ð)(nk)+(nkâ1)=(n+1k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå½çº³ï¼
+证明可以采用数学归纳法，利用 (𝑛𝑘) +(𝑛𝑘−1) =(𝑛+1𝑘)(nk)+(nk−1)=(n+1k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 做归纳．
 
-äºé¡¹å¼å®çä¹å¯ä»¥å¾å®¹ææ©å±ä¸ºå¤é¡¹å¼çå½¢å¼ï¼
+二项式定理也可以很容易扩展为多项式的形式：
 
-è®¾ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ­£æ´æ°ï¼ð¥ðxi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå®æ°ï¼
+设 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为正整数，𝑥𝑖xi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为实数，
 
-(ð¥1+ð¥2+â¯+ð¥ð¡)ð=âæ»¡è¶³ð1+â¯+ðð¡=ðçéè´æ´æ°è§£(ðð1,ð2,â¯,ðð¡)ð¥ð11ð¥ð22â¯ð¥ðð¡ð¡(x1+x2+â¯+xt)n=âæ»¡è¶³n1+â¯+nt=nçéè´æ´æ°è§£(nn1,n2,â¯,nt)x1n1x2n2â¯xtnt![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑥1+𝑥2+⋯+𝑥𝑡)𝑛=∑满足𝑛1+⋯+𝑛𝑡=𝑛的非负整数解(𝑛𝑛1,𝑛2,⋯,𝑛𝑡)𝑥𝑛11𝑥𝑛22⋯𝑥𝑛𝑡𝑡(x1+x2+⋯+xt)n=∑满足n1+⋯+nt=n的非负整数解(nn1,n2,⋯,nt)x1n1x2n2⋯xtnt![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ç (ðð1,ð2,â¯,ðð¡)(nn1,n2,â¯,nt)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¤é¡¹å¼ç³»æ°ï¼å®çæ§è´¨ä¹å¾ç¸ä¼¼ï¼
+其中的 (𝑛𝑛1,𝑛2,⋯,𝑛𝑡)(nn1,n2,⋯,nt)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是多项式系数，它的性质也很相似：
 
-â(ðð1,ð2,â¯,ðð¡)=ð¡ðâ(nn1,n2,â¯,nt)=tn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∑(𝑛𝑛1,𝑛2,⋯,𝑛𝑡)=𝑡𝑛∑(nn1,n2,⋯,nt)=tn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## æåä¸ç»åè¿é¶ç¯
+## 排列与组合进阶篇
 
-æ¥ä¸æ¥æä»¬ä»ç»ä¸äºæåç»åçåç§ï¼
+接下来我们介绍一些排列组合的变种．
 
-### å¤ééçæåæ° | å¤éç»åæ°
+### 多重集的排列数 | 多重组合数
 
-è¯·å¤§å®¶ä¸å®è¦åºå **å¤éç»åæ°** ä¸ **å¤ééçç»åæ°** ï¼ä¸¤è æ¯å®å ¨ä¸åçæ¦å¿µï¼
+请大家一定要区分 **多重组合数** 与 **多重集的组合数** ！两者是完全不同的概念！
 
-å¤ééæ¯æå å«éå¤å ç´ çå¹¿ä¹éåï¼è®¾ ð ={ð1 â ð1,ð2 â ð2,â¯,ðð â ðð}S={n1â a1,n2â a2,â¯,nkâ ak}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºç± ð1n1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ð1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð2n2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ð2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼â¦ï¼ððnk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ððak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»æçå¤ééï¼ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ¨æåä¸ªæ°ä¸º
+多重集是指包含重复元素的广义集合．设 𝑆 ={𝑛1 ⋅𝑎1,𝑛2 ⋅𝑎2,⋯,𝑛𝑘 ⋅𝑎𝑘}S={n1⋅a1,n2⋅a2,⋯,nk⋅ak}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示由 𝑛1n1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑎1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑛2n2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑎2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，…，𝑛𝑘nk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑎𝑘ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 组成的多重集，𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的全排列个数为
 
-ð!âðð=1ðð!=ð!ð1!ð2!â¯ðð!n!âi=1kni!=n!n1!n2!â¯nk!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛!∏𝑘𝑖=1𝑛𝑖!=𝑛!𝑛1!𝑛2!⋯𝑛𝑘!n!∏i=1kni!=n!n1!n2!⋯nk!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç¸å½äºæç¸åå ç´ çæåæ°é¤æäºï¼å ·ä½å°ï¼ä½ å¯ä»¥è®¤ä¸ºä½ æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ä¸ä¸æ ·ççï¼æ¯ç§ççä¸ªæ°åå«æ¯ ð1,ð2,â¯,ððn1,n2,â¯,nk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ ð =ð1 +ð2 +â¦ +ððn=n1+n2+â¦+nk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªççå ¨æåæ°å°±æ¯ **å¤ééçæåæ°** ï¼å¤ééçæåæ°å¸¸è¢«ç§°ä½ **å¤éç»åæ°** ï¼æä»¬å¯ä»¥ç¨å¤éç»åæ°çç¬¦å·è¡¨ç¤ºä¸å¼ï¼
+相当于把相同元素的排列数除掉了．具体地，你可以认为你有 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种不一样的球，每种球的个数分别是 𝑛1,𝑛2,⋯,𝑛𝑘n1,n2,⋯,nk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且 𝑛 =𝑛1 +𝑛2 +… +𝑛𝑘n=n1+n2+…+nk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个球的全排列数就是 **多重集的排列数** ．多重集的排列数常被称作 **多重组合数** ．我们可以用多重组合数的符号表示上式：
 
-(ðð1,ð2,â¯,ðð)=ð!âðð=1ðð!(nn1,n2,â¯,nk)=n!âi=1kni!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛𝑛1,𝑛2,⋯,𝑛𝑘)=𝑛!∏𝑘𝑖=1𝑛𝑖!(nn1,n2,⋯,nk)=n!∏i=1kni!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥çåºï¼(ðð)(nm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­ä»·äº (ðð,ðâð)(nm,nâm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åªä¸è¿åè è¾ä¸ºç¹çï¼å èä¸éç¨ï¼
+可以看出，(𝑛𝑚)(nm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等价于 (𝑛𝑚,𝑛−𝑚)(nm,n−m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，只不过后者较为繁琐，因而不采用．
 
-### å¤ééçç»åæ° 1
+### 多重集的组合数 1
 
-è®¾ ð ={ð1 â ð1,ð2 â ð2,â¯,ðð â ðð}S={n1â a1,n2â a2,â¯,nkâ ak}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºç± ð1n1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ð1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð2n2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ð2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼â¦ï¼ððnk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ððak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»æçå¤ééï¼é£ä¹å¯¹äºæ´æ° ð(ð <ðð,âð â[1,ð])r(r<ni,âiâ[1,k])![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä» ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­éæ© ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ç»æä¸ä¸ªå¤ééçæ¹æ¡æ°å°±æ¯ **å¤ééçç»åæ°** ï¼è¿ä¸ªé®é¢ç­ä»·äº ð¥1 +ð¥2 +â¯ +ð¥ð =ðx1+x2+â¯+xk=r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéè´æ´æ°è§£çæ°ç®ï¼å¯ä»¥ç¨ææ¿æ³è§£å³ï¼ç­æ¡ä¸º
+设 𝑆 ={𝑛1 ⋅𝑎1,𝑛2 ⋅𝑎2,⋯,𝑛𝑘 ⋅𝑎𝑘}S={n1⋅a1,n2⋅a2,⋯,nk⋅ak}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示由 𝑛1n1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑎1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑛2n2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑎2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，…，𝑛𝑘nk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑎𝑘ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 组成的多重集．那么对于整数 𝑟(𝑟 <𝑛𝑖,∀𝑖 ∈[1,𝑘])r(r<ni,∀i∈[1,k])![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，从 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中选择 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素组成一个多重集的方案数就是 **多重集的组合数** ．这个问题等价于 𝑥1 +𝑥2 +⋯ +𝑥𝑘 =𝑟x1+x2+⋯+xk=r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的非负整数解的数目，可以用插板法解决，答案为
 
-(ð+ðâ1ðâ1)(r+kâ1kâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑟+𝑘−1𝑘−1)(r+k−1k−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### å¤ééçç»åæ° 2
+### 多重集的组合数 2
 
-èèè¿ä¸ªé®é¢ï¼è®¾ ð ={ð1 â ð1,ð2 â ð2,â¯,ðð â ðð,}S={n1â a1,n2â a2,â¯,nkâ ak,}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºç± ð1n1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ð1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð2n2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ð2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼â¦ï¼ððnk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ððak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»æçå¤ééï¼é£ä¹å¯¹äºæ­£æ´æ° ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä» ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­éæ© ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ç»æä¸ä¸ªå¤ééçæ¹æ¡æ°ï¼
+考虑这个问题：设 𝑆 ={𝑛1 ⋅𝑎1,𝑛2 ⋅𝑎2,⋯,𝑛𝑘 ⋅𝑎𝑘,}S={n1⋅a1,n2⋅a2,⋯,nk⋅ak,}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示由 𝑛1n1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑎1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑛2n2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑎2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，…，𝑛𝑘nk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑎𝑘ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 组成的多重集．那么对于正整数 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，从 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中选择 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素组成一个多重集的方案数．
 
-è¿æ ·å°±éå¶äºæ¯ç§å ç´ çåçä¸ªæ°ï¼åæ ·çï¼æä»¬å¯ä»¥æè¿ä¸ªé®é¢è½¬åä¸ºå¸¦éå¶ççº¿æ§æ¹ç¨æ±è§£ï¼
+这样就限制了每种元素的取的个数．同样的，我们可以把这个问题转化为带限制的线性方程求解：
 
-âðâ[1,ð],Â ð¥ðâ¤ðð,Â ðâð=1ð¥ð=ðâiâ[1,k],Â xiâ¤ni,Â âi=1kxi=r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∀𝑖∈[1,𝑘], 𝑥𝑖≤𝑛𝑖, 𝑘∑𝑖=1𝑥𝑖=𝑟∀i∈[1,k], xi≤ni, ∑i=1kxi=r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-äºæ¯å¾èªç¶å°æ³å°äºå®¹æ¥åçï¼å®¹æ¥çæ¨¡åå¦ä¸ï¼
+于是很自然地想到了容斥原理．容斥的模型如下：
 
-  1. å ¨éï¼ðâð=1ð¥ð =ðâi=1kxi=r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéè´æ´æ°è§£ï¼
-  2. å±æ§ï¼ð¥ð â¤ððxiâ¤ni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. 全集：𝑘∑𝑖=1𝑥𝑖 =𝑟∑i=1kxi=r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的非负整数解．
+  2. 属性：𝑥𝑖 ≤𝑛𝑖xi≤ni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-äºæ¯è®¾æ»¡è¶³å±æ§ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåæ¯ ððSi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ââððSiâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºä¸æ»¡è¶³å±æ§ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåï¼å³æ»¡è¶³ ð¥ð â¥ðð +1xiâ¥ni+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåï¼è½¬åä¸ºä¸é¢ææ¿æ³çé®é¢ä¸ï¼ï¼é£ä¹ç­æ¡å³ä¸º
+于是设满足属性 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合是 𝑆𝑖Si![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，――𝑆𝑖Si―![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示不满足属性 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合，即满足 𝑥𝑖 ≥𝑛𝑖 +1xi≥ni+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合（转化为上面插板法的问题三）．那么答案即为
 
-â£ðâð=1ððâ£=|ð|ââ£ðâð=1ââððâ£|âi=1kSi|=|U|â|âi=1kSiâ|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑘⋂𝑖=1𝑆𝑖∣=|𝑈|−∣𝑘⋃𝑖=1――𝑆𝑖∣|⋂i=1kSi|=|U|−|⋃i=1kSi―|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®å®¹æ¥åçï¼æï¼
+根据容斥原理，有：
 
-â£ðâð=1ââððâ£=âðâ£ââððâ£ââð,ðâ£ââððâ©ââððâ£+âð,ð,ðâ£ââððâ©ââððâ©âââððâ£ââ¯+(â1)ðâ1â£ðâð=1ââððâ£=âð(ð+ðâððâ2ðâ1)ââð,ð(ð+ðâððâððâ3ðâ1)+âð,ð,ð(ð+ðâððâððâððâ4ðâ1)ââ¯+(â1)ðâ1(ð+ðââðð=1ððâðâ1ðâ1)|âi=1kSiâ|=âi|Siâ|ââi,j|Siââ©Sjâ|+âi,j,k|Siââ©Sjââ©Skâ|ââ¯+(â1)kâ1|âi=1kSiâ|=âi(k+râniâ2kâ1)ââi,j(k+râniânjâ3kâ1)+âi,j,k(k+râniânjânkâ4kâ1)ââ¯+(â1)kâ1(k+rââi=1kniâkâ1kâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑘⋃𝑖=1――𝑆𝑖∣=∑𝑖∣――𝑆𝑖∣−∑𝑖,𝑗∣――𝑆𝑖∩――𝑆𝑗∣+∑𝑖,𝑗,𝑘∣――𝑆𝑖∩――𝑆𝑗∩―――𝑆𝑘∣−⋯+(−1)𝑘−1∣𝑘⋂𝑖=1――𝑆𝑖∣=∑𝑖(𝑘+𝑟−𝑛𝑖−2𝑘−1)−∑𝑖,𝑗(𝑘+𝑟−𝑛𝑖−𝑛𝑗−3𝑘−1)+∑𝑖,𝑗,𝑘(𝑘+𝑟−𝑛𝑖−𝑛𝑗−𝑛𝑘−4𝑘−1)−⋯+(−1)𝑘−1(𝑘+𝑟−∑𝑘𝑖=1𝑛𝑖−𝑘−1𝑘−1)|⋃i=1kSi―|=∑i|Si―|−∑i,j|Si―∩Sj―|+∑i,j,k|Si―∩Sj―∩Sk―|−⋯+(−1)k−1|⋂i=1kSi―|=∑i(k+r−ni−2k−1)−∑i,j(k+r−ni−nj−3k−1)+∑i,j,k(k+r−ni−nj−nk−4k−1)−⋯+(−1)k−1(k+r−∑i=1kni−k−1k−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¿å ¨é |ð| =(ð+ðâ1ðâ1)|U|=(k+râ1kâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå»ä¸å¼ï¼å¾å°å¤ééçç»åæ°
+拿全集 |𝑈| =(𝑘+𝑟−1𝑘−1)|U|=(k+r−1k−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 减去上式，得到多重集的组合数
 
-ð´ðð =ðâð=0(â1)ðâð´(ð+ðâ1ââð´ðð´ðâððâ1)Ans=âp=0k(â1)pâA(k+râ1ââAnAiâpkâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴𝑛𝑠=𝑘∑𝑝=0(−1)𝑝∑𝐴(𝑘+𝑟−1−∑𝐴𝑛𝐴𝑖−𝑝𝑘−1)Ans=∑p=0k(−1)p∑A(k+r−1−∑AnAi−pk−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ A æ¯å å½æä¸¾å­éçä½ç¨ï¼æ»¡è¶³ |ð´| =ð,Â ð´ð <ð´ð+1|A|=p,Â Ai<Ai+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+其中 A 是充当枚举子集的作用，满足 |𝐴| =𝑝, 𝐴𝑖 <𝐴𝑖+1|A|=p, Ai<Ai+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### åæå
+### 圆排列
 
-ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªäººå ¨é¨æ¥å´æä¸åï¼ææçæåæ°è®°ä¸º QððQnn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èèå ¶ä¸­å·²ç»æå¥½çä¸åï¼ä»ä¸åä½ç½®æ­å¼ï¼ååæä¸åçéåï¼ æä»¥æ
+𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个人全部来围成一圈，所有的排列数记为 Q𝑛𝑛Qnn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．考虑其中已经排好的一圈，从不同位置断开，又变成不同的队列． 所以有
 
-QððÃð=Aððâ¹Qð=Aððð=(ðâ1)!QnnÃn=Annâ¹Qn=Annn=(nâ1)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+Q𝑛𝑛×𝑛=A𝑛𝑛⟹Q𝑛=A𝑛𝑛𝑛=(𝑛−1)!Qnn×n=Ann⟹Qn=Annn=(n−1)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±æ­¤å¯ç¥é¨ååæåçå ¬å¼ï¼
+由此可知部分圆排列的公式：
 
-Qðð=Aððð=ð!ðÃ(ðâð)!Qnr=Anrr=n!rÃ(nâr)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+Q𝑟𝑛=A𝑟𝑛𝑟=𝑛!𝑟×(𝑛−𝑟)!Qnr=Anrr=n!r×(n−r)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## ç»åæ°æ§è´¨ | äºé¡¹å¼æ¨è®º
+## 组合数性质 | 二项式推论
 
-ç±äºç»åæ°å¨ OI ä¸­ååéè¦ï¼å æ­¤å¨æ­¤ä»ç»ä¸äºç»åæ°çæ§è´¨ï¼
+由于组合数在 OI 中十分重要，因此在此介绍一些组合数的性质．
 
-(ðð)=(ððâð)(1)(1)(nm)=(nnâm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛𝑚)=(𝑛𝑛−𝑚)(1)(1)(nm)=(nn−m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç¸å½äºå°éåºçéåå¯¹å ¨éåè¡¥éï¼æ æ°å¼ä¸åï¼ï¼å¯¹ç§°æ§ï¼
+相当于将选出的集合对全集取补集，故数值不变．（对称性）
 
-(ðð)=ðð(ðâ1ðâ1)(2)(2)(nk)=nk(nâ1kâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛𝑘)=𝑛𝑘(𝑛−1𝑘−1)(2)(2)(nk)=nk(n−1k−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±å®ä¹å¯¼åºçéæ¨å¼ï¼
+由定义导出的递推式．
 
-(ðð)=(ðâ1ð)+(ðâ1ðâ1)(3)(3)(nm)=(nâ1m)+(nâ1mâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛𝑚)=(𝑛−1𝑚)+(𝑛−1𝑚−1)(3)(3)(nm)=(n−1m)+(n−1m−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç»åæ°çéæ¨å¼ï¼æ¨è¾ä¸è§çå ¬å¼è¡¨è¾¾ï¼ï¼æä»¬å¯ä»¥å©ç¨è¿ä¸ªå¼å­ï¼å¨ ð(ð2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤æåº¦ä¸æ¨å¯¼ç»åæ°ï¼
+组合数的递推式（杨辉三角的公式表达）．我们可以利用这个式子，在 𝑂(𝑛2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的复杂度下推导组合数．
 
-(ð0)+(ð1)+â¯+(ðð)=ðâð=0(ðð)=2ð(4)(4)(n0)+(n1)+â¯+(nn)=âi=0n(ni)=2n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛0)+(𝑛1)+⋯+(𝑛𝑛)=𝑛∑𝑖=0(𝑛𝑖)=2𝑛(4)(4)(n0)+(n1)+⋯+(nn)=∑i=0n(ni)=2n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¯äºé¡¹å¼å®ççç¹æ®æ åµï¼å ð =ð =1a=b=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±å¾å°ä¸å¼ï¼
+这是二项式定理的特殊情况．取 𝑎 =𝑏 =1a=b=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就得到上式．
 
-ðâð=0(â1)ð(ðð)=[ð=0](5)(5)âi=0n(â1)i(ni)=[n=0]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=0(−1)𝑖(𝑛𝑖)=[𝑛=0](5)(5)∑i=0n(−1)i(ni)=[n=0]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-äºé¡¹å¼å®ççå¦ä¸ç§ç¹æ®æ åµï¼å¯å ð =1,ð = â1a=1,b=â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¼å­çç¹æ®æ åµæ¯å ð =0n=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ç­æ¡ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+二项式定理的另一种特殊情况，可取 𝑎 =1,𝑏 = −1a=1,b=−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．式子的特殊情况是取 𝑛 =0n=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时答案为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ðâð=0(ðð)(ððâð)=(ð+ðð)(6)(6)âi=0k(ni)(mkâi)=(m+nk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑘∑𝑖=0(𝑛𝑖)(𝑚𝑘−𝑖)=(𝑚+𝑛𝑘)(6)(6)∑i=0k(ni)(mk−i)=(m+nk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æç»åæ°çå¼å­ï¼å¨å¤çæäºæ°æ®ç»æé¢æ¶ä¼ç¨å°ï¼è¢«ç§°ä¸º [èå¾·èæç­å¼](https://en.wikipedia.org/wiki/Vandermonde%27s_identity)ï¼
+拆组合数的式子，在处理某些数据结构题时会用到．被称为 [范德蒙恒等式](https://en.wikipedia.org/wiki/Vandermonde%27s_identity)．
 
-ðâð=0(ðð)2=(2ðð)(7)(7)âi=0n(ni)2=(2nn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=0(𝑛𝑖)2=(2𝑛𝑛)(7)(7)∑i=0n(ni)2=(2nn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¯ (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¹æ®æ åµï¼å ð =ð =ðn=k=m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³å¯ï¼
+这是 (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的特殊情况，取 𝑛 =𝑘 =𝑚n=k=m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即可．
 
-ðâð=0ð(ðð)=ð2ðâ1(8)(8)âi=0ni(ni)=n2nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=0𝑖(𝑛𝑖)=𝑛2𝑛−1(8)(8)∑i=0ni(ni)=n2n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¸¦æåçä¸ä¸ªå¼å­ï¼éè¿å¯¹ (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹åºçå¤é¡¹å¼å½æ°æ±å¯¼å¯ä»¥å¾è¯ï¼
+带权和的一个式子，通过对 (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对应的多项式函数求导可以得证．
 
-ðâð=0ð2(ðð)=ð(ð+1)2ðâ2(9)(9)âi=0ni2(ni)=n(n+1)2nâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=0𝑖2(𝑛𝑖)=𝑛(𝑛+1)2𝑛−2(9)(9)∑i=0ni2(ni)=n(n+1)2n−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸ä¸å¼ç±»ä¼¼ï¼å¯ä»¥éè¿å¯¹å¤é¡¹å¼å½æ°æ±å¯¼è¯æï¼
+与上式类似，可以通过对多项式函数求导证明．
 
-ðâð=0(ðð)=(ð+1ð+1)(10)(10)âl=0n(lk)=(n+1k+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑙=0(𝑙𝑘)=(𝑛+1𝑘+1)(10)(10)∑l=0n(lk)=(n+1k+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-éè¿ç»ååæä¸ä¸èè ð ={ð1,ð2,â¯,ðð+1}S={a1,a2,â¯,an+1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç ð +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å­éæ°å¯ä»¥å¾è¯ï¼å¨æç­å¼è¯æä¸­æ¯è¾å¸¸ç¨ï¼è¢«ç§°ä¸º [æ±ä¸æ°æç­å¼](https://en.wikipedia.org/wiki/Hockey-stick_identity)ï¼
+通过组合分析一一考虑 𝑆 ={𝑎1,𝑎2,⋯,𝑎𝑛+1}S={a1,a2,⋯,an+1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 𝑘 +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 子集数可以得证，在恒等式证明中比较常用．被称为 [朱世杰恒等式](https://en.wikipedia.org/wiki/Hockey-stick_identity)．
 
-(ðð)(ðð)=(ðð)(ðâððâð)(11)(11)(nr)(rk)=(nk)(nâkrâk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛𝑟)(𝑟𝑘)=(𝑛𝑘)(𝑛−𝑘𝑟−𝑘)(11)(11)(nr)(rk)=(nk)(n−kr−k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-éè¿å®ä¹å¯ä»¥è¯æï¼
+通过定义可以证明．
 
-ðâð=0(ðâðð)=ð¹ð+1(12)(12)âi=0n(nâii)=Fn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=0(𝑛−𝑖𝑖)=𝐹𝑛+1(12)(12)∑i=0n(n−ii)=Fn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ ð¹F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ææ³¢é£å¥æ°åï¼
+其中 𝐹F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是斐波那契数列．
 
-(ð+ðð)2=ðâð=0(ðð)2(ð+2ðâð2ð)(13)(13)(n+kk)2=âj=0k(kj)2(n+2kâj2k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛+𝑘𝑘)2=𝑘∑𝑗=0(𝑘𝑗)2(𝑛+2𝑘−𝑗2𝑘)(13)(13)(n+kk)2=∑j=0k(kj)2(n+2k−j2k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-éè¿ (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è¯æï¼è¢«ç§°ä¸º [æåå °æç­å¼](https://en.wikipedia.org/wiki/Li_Shanlan_identity)ï¼
+通过 (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以证明．被称为 [李善兰恒等式](https://en.wikipedia.org/wiki/Li_Shanlan_identity)．
 
-## äºé¡¹å¼åæ¼
+## 二项式反演
 
-è®° ððfn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºæ°å¥½ä½¿ç¨ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åå ç´ å½¢æç¹å®ç»æçæ¹æ¡æ°ï¼ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºä» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åå ç´ ä¸­éåº ð â¥0iâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ å½¢æç¹å®ç»æçæ»æ¹æ¡æ°ï¼
+记 𝑓𝑛fn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示恰好使用 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同元素形成特定结构的方案数，𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示从 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同元素中选出 𝑖 ≥0i≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素形成特定结构的总方案数．
 
-è¥å·²ç¥ ððfn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ± ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹æ¾ç¶æï¼
+若已知 𝑓𝑛fn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 求 𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么显然有：
 
-ðð=ðâð=0(ðð)ððgn=âi=0n(ni)fi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑔𝑛=𝑛∑𝑖=0(𝑛𝑖)𝑓𝑖gn=∑i=0n(ni)fi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¥å·²ç¥ ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ± ððfn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼
+若已知 𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 求 𝑓𝑛fn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么：
 
-ðð=ðâð=0(ðð)(â1)ðâðððfn=âi=0n(ni)(â1)nâigi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓𝑛=𝑛∑𝑖=0(𝑛𝑖)(−1)𝑛−𝑖𝑔𝑖fn=∑i=0n(ni)(−1)n−igi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸è¿°å·²ç¥ ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ± ððfn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿ç¨ï¼å°±ç§°ä¸º **äºé¡¹å¼åæ¼** ï¼
+上述已知 𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 求 𝑓𝑛fn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的过程，就称为 **二项式反演** ．
 
-### è¯æ
+### 证明
 
-å°åæ¼å ¬å¼ç ððgi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å±å¼å¾å°ï¼
+将反演公式的 𝑔𝑖gi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 展开得到：
 
-ðð=ðâð=0(ðð)(â1)ðâð[ðâð=0(ðð)ðð]=ðâð=0ðâð=0(ðð)(ðð)(â1)ðâðððfn=âi=0n(ni)(â1)nâi[âj=0i(ij)fj]=âi=0nâj=0i(ni)(ij)(â1)nâifj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓𝑛=𝑛∑𝑖=0(𝑛𝑖)(−1)𝑛−𝑖[𝑖∑𝑗=0(𝑖𝑗)𝑓𝑗]=𝑛∑𝑖=0𝑖∑𝑗=0(𝑛𝑖)(𝑖𝑗)(−1)𝑛−𝑖𝑓𝑗fn=∑i=0n(ni)(−1)n−i[∑j=0i(ij)fj]=∑i=0n∑j=0i(ni)(ij)(−1)n−ifj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æä¸¾ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæä¸¾ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¾å°ï¼
+先枚举 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，再枚举 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，得到：
 
-ðð=ðâð=0ðâð=ð(ðð)(ðð)(â1)ðâððð=ðâð=0ðððâð=ð(ðð)(ðð)(â1)ðâðfn=âj=0nâi=jn(ni)(ij)(â1)nâifj=âj=0nfjâi=jn(ni)(ij)(â1)nâi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓𝑛=𝑛∑𝑗=0𝑛∑𝑖=𝑗(𝑛𝑖)(𝑖𝑗)(−1)𝑛−𝑖𝑓𝑗=𝑛∑𝑗=0𝑓𝑗𝑛∑𝑖=𝑗(𝑛𝑖)(𝑖𝑗)(−1)𝑛−𝑖fn=∑j=0n∑i=jn(ni)(ij)(−1)n−ifj=∑j=0nfj∑i=jn(ni)(ij)(−1)n−i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä½¿ç¨ ãç»åæ°æ§è´¨ | äºé¡¹å¼æ¨è®ºã çå ¬å¼ (11) å¾å°ï¼
+使用 「组合数性质 | 二项式推论」 的公式 (11) 得到：
 
-ðð=ðâð=0ðððâð=ð(ðð)(ðâððâð)(â1)ðâð=ðâð=0(ðð)ðððâð=ð(ðâððâð)(â1)ðâðfn=âj=0nfjâi=jn(nj)(nâjiâj)(â1)nâi=âj=0n(nj)fjâi=jn(nâjiâj)(â1)nâi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓𝑛=𝑛∑𝑗=0𝑓𝑗𝑛∑𝑖=𝑗(𝑛𝑗)(𝑛−𝑗𝑖−𝑗)(−1)𝑛−𝑖=𝑛∑𝑗=0(𝑛𝑗)𝑓𝑗𝑛∑𝑖=𝑗(𝑛−𝑗𝑖−𝑗)(−1)𝑛−𝑖fn=∑j=0nfj∑i=jn(nj)(n−ji−j)(−1)n−i=∑j=0n(nj)fj∑i=jn(n−ji−j)(−1)n−i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»¤ ð =ð âðk=iâj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð =ð +ði=k+j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸å¼è½¬æ¢ä¸ºï¼
+令 𝑘 =𝑖 −𝑗k=i−j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．则 𝑖 =𝑘 +𝑗i=k+j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，上式转换为：
 
-ðð=ðâð=0(ðð)ðððâðâð=0(ðâðð)(â1)ðâðâð1ðfn=âj=0n(nj)fjâk=0nâj(nâjk)(â1)nâjâk1k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓𝑛=𝑛∑𝑗=0(𝑛𝑗)𝑓𝑗𝑛−𝑗∑𝑘=0(𝑛−𝑗𝑘)(−1)𝑛−𝑗−𝑘1𝑘fn=∑j=0n(nj)fj∑k=0n−j(n−jk)(−1)n−j−k1k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä½¿ç¨ ãç»åæ°æ§è´¨ | äºé¡¹å¼æ¨è®ºã çå ¬å¼ (5) å¾å°ï¼
+使用 「组合数性质 | 二项式推论」 的公式 (5) 得到：
 
-ðð=ðâð=0(ðð)ðð[ð=ð]=ððfn=âj=0n(nj)fj[n=j]=fn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓𝑛=𝑛∑𝑗=0(𝑛𝑗)𝑓𝑗[𝑛=𝑗]=𝑓𝑛fn=∑j=0n(nj)fj[n=j]=fn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æ¯ï¼
+证毕．
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/combination.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/combination.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Zhoier](https://github.com/Zhoier), [Ir1d](https://github.com/Ir1d), [sshwy](https://github.com/sshwy), [Tiphereth-A](https://github.com/Tiphereth-A), [Xeonacid](https://github.com/Xeonacid), [Great-designer](https://github.com/Great-designer), [cjsoft](https://github.com/cjsoft), [MegaOwIer](https://github.com/MegaOwIer), [Enter-tainer](https://github.com/Enter-tainer), [Marcythm](https://github.com/Marcythm), [renbaoshuo](https://github.com/renbaoshuo), [StudyingFather](https://github.com/StudyingFather), [untitledunrevised](https://github.com/untitledunrevised), [CCXXXI](https://github.com/CCXXXI), [Chrogeek](https://github.com/Chrogeek), [Early0v0](https://github.com/Early0v0), [Enonya](https://github.com/Enonya), [FFjet](https://github.com/FFjet), [Horrible120](https://github.com/Horrible120), [iamtwz](https://github.com/iamtwz), [IceySakura](https://github.com/IceySakura), [Menci](https://github.com/Menci), [opsiff](https://github.com/opsiff), [Tiger3018](https://github.com/Tiger3018), [wq-yang](https://github.com/wq-yang), [Xiaobin Ren](mailto:xbren@bupt.edu.cn), [XuYueming520](https://github.com/XuYueming520), [Yukimaikoriya](https://github.com/Yukimaikoriya), [ZXyaang](https://github.com/ZXyaang), [zyzzyh](https://github.com/zyzzyh)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/combination.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/combination.md "edit.link.title")  
+>  __本页面贡献者：[Zhoier](https://github.com/Zhoier), [Ir1d](https://github.com/Ir1d), [sshwy](https://github.com/sshwy), [Tiphereth-A](https://github.com/Tiphereth-A), [Xeonacid](https://github.com/Xeonacid), [Great-designer](https://github.com/Great-designer), [cjsoft](https://github.com/cjsoft), [MegaOwIer](https://github.com/MegaOwIer), [Enter-tainer](https://github.com/Enter-tainer), [Marcythm](https://github.com/Marcythm), [renbaoshuo](https://github.com/renbaoshuo), [StudyingFather](https://github.com/StudyingFather), [untitledunrevised](https://github.com/untitledunrevised), [CCXXXI](https://github.com/CCXXXI), [Chrogeek](https://github.com/Chrogeek), [Early0v0](https://github.com/Early0v0), [Enonya](https://github.com/Enonya), [FFjet](https://github.com/FFjet), [Horrible120](https://github.com/Horrible120), [iamtwz](https://github.com/iamtwz), [IceySakura](https://github.com/IceySakura), [Menci](https://github.com/Menci), [opsiff](https://github.com/opsiff), [Tiger3018](https://github.com/Tiger3018), [wq-yang](https://github.com/wq-yang), [Xiaobin Ren](mailto:xbren@bupt.edu.cn), [XuYueming520](https://github.com/XuYueming520), [Yukimaikoriya](https://github.com/Yukimaikoriya), [ZXyaang](https://github.com/ZXyaang), [zyzzyh](https://github.com/zyzzyh)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

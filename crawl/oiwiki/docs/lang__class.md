@@ -1,4 +1,4 @@
-# 类 - OI Wiki
+﻿# 类 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/class/
 

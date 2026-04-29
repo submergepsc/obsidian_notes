@@ -1,209 +1,209 @@
-# åé - OI Wiki
+﻿# 变量 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/var/
 
-# åé
+# 变量
 
-## æ°æ®ç±»å
+## 数据类型
 
-C++ çç±»åç³»ç»ç±å¦ä¸å é¨åç»æï¼
+C++ 的类型系统由如下几部分组成：
 
-  1. åºç¡ç±»åï¼æ¬å·å ä¸ºä»£è¡¨å ³é®è¯/ä»£è¡¨ç±»åï¼
-     1. æ ç±»å/`void` å (`void`)
-     2. ï¼C++11 èµ·ï¼ç©ºæéç±»å (`std::nullptr_t`)
-     3. ç®æ¯ç±»å
-        1. æ´æ°ç±»å (`int`)
-        2. å¸å°ç±»å/`bool` å (`bool`)
-        3. å­ç¬¦ç±»å (`char`)
-        4. æµ®ç¹ç±»å (`float`,`double`)
-  2. å¤åç±»å4
+  1. 基础类型（括号内为代表关键词/代表类型）
+     1. 无类型/`void` 型 (`void`)
+     2. （C++11 起）空指针类型 (`std::nullptr_t`)
+     3. 算术类型
+        1. 整数类型 (`int`)
+        2. 布尔类型/`bool` 型 (`bool`)
+        3. 字符类型 (`char`)
+        4. 浮点类型 (`float`,`double`)
+  2. 复合类型4
 
-### å¸å°ç±»å
+### 布尔类型
 
-ä¸ä¸ª `bool` ç±»åçåéåå¼åªå¯è½ä¸ºä¸¤ç§ï¼`true` å `false`ï¼
+一个 `bool` 类型的变量取值只可能为两种：`true` 和 `false`．
 
-ä¸è¬æ åµä¸ï¼ä¸ä¸ª `bool` ç±»ååéå æ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å­èï¼ä¸è¬æ åµä¸ï¼11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å­è =88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ï¼çç©ºé´ï¼
+一般情况下，一个 `bool` 类型变量占有 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 字节（一般情况下，11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 字节 =88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位）的空间．
 
 Tip
 
-å¯éè¿å¤´æä»¶ `<climits>`(C++)/`<limits.h>`(C) ä¸­çå®å¸¸é `CHAR_BIT` è·åå­èçä½æ°ï¼
+可通过头文件 `<climits>`(C++)/`<limits.h>`(C) 中的宏常量 `CHAR_BIT` 获取字节的位数．
 
-C è¯­è¨çå¸å°ç±»å
+C 语言的布尔类型
 
-å¦è¯·åé [C++ ä¸å ¶ä»å¸¸ç¨è¯­è¨çåºå« - bool](../cpp-other-langs/#bool)ï¼
+另请参阅 [C++ 与其他常用语言的区别 - bool](../cpp-other-langs/#bool)．
 
-C è¯­è¨æåæ¯æ²¡æå¸å°ç±»åçï¼ç´å° C99 æ¶æå¼å ¥ `_Bool` å ³é®è¯ä½ä¸ºå¸å°ç±»åï¼å ¶è¢«è§ä½æ ç¬¦å·æ´æ°ç±»åï¼
+C 语言最初是没有布尔类型的，直到 C99 时才引入 `_Bool` 关键词作为布尔类型，其被视作无符号整数类型．
 
 Note
 
-C è¯­è¨ç `bool` ç±»åä» C23 èµ·ä¸åä½¿ç¨æ´åçé¶ä¸éé¶å¼å®ä¹ï¼èæ¯å®ä¹ä¸ºè¶³å¤å¨å­ `true` å `false` ä¸¤ä¸ªå¸¸éçç±»åï¼
+C 语言的 `bool` 类型从 C23 起不再使用整型的零与非零值定义，而是定义为足够储存 `true` 和 `false` 两个常量的类型．
 
-ä¸ºæ¹ä¾¿ä½¿ç¨ï¼`stdbool.h` ä¸­æä¾äº `bool`,`true`,`false` ä¸ä¸ªå®ï¼å®ä¹å¦ä¸ï¼
+为方便使用，`stdbool.h` 中提供了 `bool`,`true`,`false` 三个宏，定义如下：
 
 ```text 1 2 3 ``` |  ```text #define bool _Bool #define true 1 #define false 0 ```   
 ---|---  
   
-è¿äºå®äº C23 ä¸­ç§»é¤ï¼å¹¶ä¸ C23 èµ·å¼å ¥ `true`,`false` å `bool` ä½ä¸ºå ³é®å­ï¼åæ¶ä¿ç `_Bool` ä½ä¸ºæ¿ä»£æ¼åå½¢å¼5ï¼
+这些宏于 C23 中移除，并且 C23 起引入 `true`,`false` 和 `bool` 作为关键字，同时保留 `_Bool` 作为替代拼写形式5．
 
-å¦å¤ï¼C23 èµ·è¿å¯ä»¥éè¿ `<limits.h>` ä¸­çå®å¸¸é `BOOL_WIDTH` è·åå¸å°ç±»åçä½å®½ï¼
+另外，C23 起还可以通过 `<limits.h>` 中的宏常量 `BOOL_WIDTH` 获取布尔类型的位宽．
 
-### æ´æ°ç±»å
+### 整数类型
 
-ç¨äºå­å¨æ´æ°ï¼æåºç¡çæ´æ°ç±»åæ¯ `int`.
+用于存储整数．最基础的整数类型是 `int`.
 
-æ³¨æ
+注意
 
-ç±äºåå²åå ï¼C++ ä¸­å¸å°ç±»ååå­ç¬¦ç±»åä¼è¢«è§ä½ç¹æ®çæ´åï¼
+由于历史原因，C++ 中布尔类型和字符类型会被视作特殊的整型．
 
-å¨å ä¹ææçæ åµä¸é½ **ä¸åºè¯¥** å°é¤ `signed char` å `unsigned char` ä¹å¤çå­ç¬¦ç±»åä½ä¸ºæ´åä½¿ç¨ï¼
+在几乎所有的情况下都 **不应该** 将除 `signed char` 和 `unsigned char` 之外的字符类型作为整型使用．
 
-æ´æ°ç±»åä¸è¬æä½å®½æ 5 ä¸ªæ¢¯åº¦ï¼`char`,`short`,`int`,`long`,`long long`.
+整数类型一般按位宽有 5 个梯度：`char`,`short`,`int`,`long`,`long long`.
 
-C++ æ åä¿è¯ `1 == sizeof(char) <= sizeof(short) <= sizeof(int) <= sizeof(long) <= sizeof(long long)`
+C++ 标准保证 `1 == sizeof(char) <= sizeof(short) <= sizeof(int) <= sizeof(long) <= sizeof(long long)`
 
-ç±äºåå²åå ï¼æ´æ°ç±»åçä½å®½æå¤ç§æµè¡æ¨¡åï¼ä¸ºè§£å³è¿ä¸é®é¢ï¼C99/C++11 å¼å ¥äº å®å®½æ´æ°ç±»åï¼
+由于历史原因，整数类型的位宽有多种流行模型，为解决这一问题，C99/C++11 引入了 定宽整数类型．
 
-`int` ç±»åçå¤§å°
+`int` 类型的大小
 
-å¨ C++ æ åä¸­ï¼è§å® `int` çä½æ° **è³å°** ä¸º 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ï¼
+在 C++ 标准中，规定 `int` 的位数 **至少** 为 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位．
 
-äºå®ä¸å¨ç°å¨çç»å¤§å¤æ°å¹³å°ï¼`int` çä½æ°åä¸º 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ï¼
+事实上在现在的绝大多数平台，`int` 的位数均为 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位．
 
-å¯¹äº `int` å ³é®å­ï¼å¯ä»¥ä½¿ç¨å¦ä¸ä¿®é¥°å ³é®å­è¿è¡ä¿®é¥°ï¼
+对于 `int` 关键字，可以使用如下修饰关键字进行修饰：
 
-ç¬¦å·æ§ï¼
+符号性：
 
-  * `signed`ï¼è¡¨ç¤ºå¸¦ç¬¦å·æ´æ°ï¼é»è®¤ï¼ï¼
-  * `unsigned`ï¼è¡¨ç¤ºæ ç¬¦å·æ´æ°ï¼
+  * `signed`：表示带符号整数（默认）；
+  * `unsigned`：表示无符号整数．
 
-å¤§å°ï¼
+大小：
 
-  * `short`ï¼è¡¨ç¤º **è³å°** 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½æ´æ°ï¼
-  * `long`ï¼è¡¨ç¤º **è³å°** 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½æ´æ°ï¼
-  * ï¼C++11 èµ·ï¼`long long`ï¼è¡¨ç¤º **è³å°** 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½æ´æ°ï¼
+  * `short`：表示 **至少** 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位整数；
+  * `long`：表示 **至少** 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位整数；
+  * （C++11 起）`long long`：表示 **至少** 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位整数．
 
-ä¸è¡¨ç»åºå¨ **ä¸è¬æ åµä¸** ï¼åæ´æ°ç±»åçä½å®½åè¡¨ç¤ºèå´å¤§å°ï¼å°æ°å¹³å°ä¸ä¸äºç±»åçè¡¨ç¤ºèå´å¯è½ä¸ä¸è¡¨ä¸åï¼ï¼
+下表给出在 **一般情况下** ，各整数类型的位宽和表示范围大小（少数平台上一些类型的表示范围可能与下表不同）：
 
-ç±»åå| ç­ä»·ç±»å| ä½å®½ï¼C++ æ åï¼| ä½å®½ï¼å¸¸è§ï¼| ä½å®½ï¼è¾ç½è§ï¼  
+类型名| 等价类型| 位宽（C++ 标准）| 位宽（常见）| 位宽（较罕见）  
 ---|---|---|---|---  
 `signed char`| `signed char`| 88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| -| -  
 `unsigned char`| `unsigned char`| 88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| -| -  
-`short`,`short int`,`signed short`,`signed short int`| `short int`| â¥16â¥16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| -  
-`unsigned short`,`unsigned short int`| `unsigned short int`| â¥16â¥16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| -  
-`int`,`signed`,`signed int`| `int`| â¥16â¥16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¸¸è§äº Win16 APIï¼  
-`unsigned`,`unsigned int`| `unsigned int`| â¥16â¥16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¸¸è§äº Win16 APIï¼  
-`long`,`long int`,`signed long`,`signed long int`| `long int`| â¥32â¥32![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¸¸è§äº 64 ä½ LinuxãmacOSï¼  
-`unsigned long`,`unsigned long int`| `unsigned long int`| â¥32â¥32![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¸¸è§äº 64 ä½ LinuxãmacOSï¼  
-`long long`,`long long int`,`signed long long`,`signed long long int`| `long long int`| â¥64â¥64![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| -  
-`unsigned long long`,`unsigned long long int`| `unsigned long long int`| â¥64â¥64![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| -  
+`short`,`short int`,`signed short`,`signed short int`| `short int`| ≥16≥16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| -  
+`unsigned short`,`unsigned short int`| `unsigned short int`| ≥16≥16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| -  
+`int`,`signed`,`signed int`| `int`| ≥16≥16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（常见于 Win16 API）  
+`unsigned`,`unsigned int`| `unsigned int`| ≥16≥16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（常见于 Win16 API）  
+`long`,`long int`,`signed long`,`signed long int`| `long int`| ≥32≥32![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（常见于 64 位 Linux、macOS）  
+`unsigned long`,`unsigned long int`| `unsigned long int`| ≥32≥32![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（常见于 64 位 Linux、macOS）  
+`long long`,`long long int`,`signed long long`,`signed long long int`| `long long int`| ≥64≥64![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| -  
+`unsigned long long`,`unsigned long long int`| `unsigned long long int`| ≥64≥64![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| -  
   
-å½ä½å®½ä¸º ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æç¬¦å·ç±»åçè¡¨ç¤ºèå´ä¸º â2ð¥â1 â¼2ð¥â1 â1â2xâ1â¼2xâ1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)1, æ ç¬¦å·ç±»åçè¡¨ç¤ºèå´ä¸º 0 â¼2ð¥ â10â¼2xâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7). å ·ä½èè¨ï¼æä¸è¡¨ï¼
+当位宽为 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，有符号类型的表示范围为 −2𝑥−1 ∼2𝑥−1 −1−2x−1∼2x−1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)1, 无符号类型的表示范围为 0 ∼2𝑥 −10∼2x−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7). 具体而言，有下表：
 
-ä½å®½| è¡¨ç¤ºèå´  
+位宽| 表示范围  
 ---|---  
-88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| æç¬¦å·ï¼â27 â¼27 â1â27â¼27â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), æ ç¬¦å·ï¼0 â¼28 â10â¼28â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| æç¬¦å·ï¼â215 â¼215 â1â215â¼215â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), æ ç¬¦å·ï¼0 â¼216 â10â¼216â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| æç¬¦å·ï¼â231 â¼231 â1â231â¼231â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), æ ç¬¦å·ï¼0 â¼232 â10â¼232â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| æç¬¦å·ï¼â263 â¼263 â1â263â¼263â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), æ ç¬¦å·ï¼0 â¼264 â10â¼264â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-ç­ä»·çç±»åè¡¨è¿°
+88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 有符号：−27 ∼27 −1−27∼27−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 无符号：0 ∼28 −10∼28−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+1616![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 有符号：−215 ∼215 −1−215∼215−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 无符号：0 ∼216 −10∼216−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 有符号：−231 ∼231 −1−231∼231−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 无符号：0 ∼232 −10∼232−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 有符号：−263 ∼263 −1−263∼263−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 无符号：0 ∼264 −10∼264−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+等价的类型表述
 
-å¨ä¸å¼åæ­§ä¹çæ åµä¸ï¼å è®¸çç¥é¨åä¿®é¥°å ³é®å­ï¼æè°æ´ä¿®é¥°å ³é®å­çé¡ºåºï¼è¿æå³çåä¸ç±»åä¼å­å¨å¤ç§ç­ä»·è¡¨è¿°ï¼
+在不引发歧义的情况下，允许省略部分修饰关键字，或调整修饰关键字的顺序．这意味着同一类型会存在多种等价表述．
 
-ä¾å¦ `int`ï¼`signed`ï¼`int signed`ï¼`signed int` è¡¨ç¤ºåä¸ç±»åï¼è `unsigned long` å `unsigned long int` è¡¨ç¤ºåä¸ç±»åï¼
+例如 `int`，`signed`，`int signed`，`signed int` 表示同一类型，而 `unsigned long` 和 `unsigned long int` 表示同一类型．
 
-å¦å¤ï¼ä¸äºç¼è¯å¨å®ç°äºæ©å±æ´æ°ç±»åï¼å¦ GCC å®ç°äº 128 ä½æ´æ°ï¼æç¬¦å·çç `__int128_t` åæ ç¬¦å·çç `__uint128_t`ï¼å¦ææ¨å¨æ¯èµæ¶æ³ä½¿ç¨è¿äºç±»åï¼**è¯·ä»ç»é è¯»æ¯èµè§å** ä»¥ç¡®å®æ¯å¦å è®¸ææ¯æä½¿ç¨æ©å±æ´æ°ç±»åï¼
+另外，一些编译器实现了扩展整数类型，如 GCC 实现了 128 位整数：有符号版的 `__int128_t` 和无符号版的 `__uint128_t`，如果您在比赛时想使用这些类型，**请仔细阅读比赛规则** 以确定是否允许或支持使用扩展整数类型．
 
-æ³¨æ
+注意
 
-STL ä¸ä¸å®å¯¹æ©å±æ´æ°ç±»åæè¶³å¤çæ¯æï¼æ ä½¿ç¨æ©å±æ´æ°ç±»åæ¶éæ ¼å¤å°å¿ï¼
+STL 不一定对扩展整数类型有足够的支持，故使用扩展整数类型时需格外小心．
 
-ç¤ºä¾ä»£ç 
+示例代码
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 ``` |  ```text #include <cmath> #include <iostream> int f1 ( int n ) { return abs ( n ); // Good } int f2 ( int n ) { return std :: abs ( n ); // Good } __int128_t f3 ( __int128_t n ) { return abs ( n ); // Bad } // Wrong // __int128_t f4(__int128_t n) { // return std::abs(n); // } int main () { std :: cout << "f1: " << f1 ( -42 ) << std :: endl ; std :: cout << "f2: " << f2 ( -42 ) << std :: endl ; // std::cout << "f3: " << f3(-42) << std::endl; // Wrong // std::cout << "f4: " << f4(-42) << std::endl; // Wrong return 0 ; } ```   
 ---|---  
   
-ä»¥ä¸ç¤ºä¾ä»£ç å­å¨å¦ä¸é®é¢ï¼
+以上示例代码存在如下问题：
 
-  1. `__int128_t f3(__int128_t)` ä¸­ä½¿ç¨çæ¯ C é£æ ¼çç»å¯¹å¼å½æ°ï¼å ¶ç­¾åä¸º `int abs(int)`ï¼æ `n` é¦å ä¼å¼ºå¶è½¬æ¢ä¸º `int`ï¼ç¶åæä¼è°ç¨ `abs` å½æ°ï¼
-  2. `__int128_t f4(__int128_t)` ä¸­ä½¿ç¨çæ¯ C++ é£æ ¼çç»å¯¹å¼å½æ°ï¼å ¶å¹¶æ²¡æç­¾åä¸º `__int128_t std::abs(__int128_t)` çå½æ°éè½½ï¼æä»¥æ æ³éè¿ç¼è¯ï¼
-  3. C++ çæµå¼è¾åºä¸æ¯æ `__int128_t` ä¸ `__uint128_t`ï¼
+  1. `__int128_t f3(__int128_t)` 中使用的是 C 风格的绝对值函数，其签名为 `int abs(int)`，故 `n` 首先会强制转换为 `int`，然后才会调用 `abs` 函数．
+  2. `__int128_t f4(__int128_t)` 中使用的是 C++ 风格的绝对值函数，其并没有签名为 `__int128_t std::abs(__int128_t)` 的函数重载，所以无法通过编译．
+  3. C++ 的流式输出不支持 `__int128_t` 与 `__uint128_t`．
 
-ä»¥ä¸æ¯ä¸ç§è§£å³æ¹æ¡ï¼
+以下是一种解决方案：
 
-ä¿®æ­£åçä»£ç 
+修正后的代码
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 ``` |  ```text #include <cmath> #include <iostream> __int128_t abs ( __int128_t n ) { return n < 0 ? \- n : n ; } std :: ostream & operator << ( std :: ostream & os , __uint128_t n ) { if ( n > 9 ) os << n / 10 ; os << ( int )( n % 10 ); return os ; } std :: ostream & operator << ( std :: ostream & os , __int128_t n ) { if ( n < 0 ) { os << '-' ; n = \- n ; } return os << ( __uint128_t ) n ; } int f1 ( int n ) { return abs ( n ); } int f2 ( int n ) { return std :: abs ( n ); } __int128_t f3 ( __int128_t n ) { return abs ( n ); } int main () { std :: cout << "f1: " << f1 ( -42 ) << std :: endl ; std :: cout << "f2: " << f2 ( -42 ) << std :: endl ; std :: cout << "f3: " << f3 ( -42 ) << std :: endl ; } ```   
 ---|---  
   
-### å­ç¬¦ç±»å
+### 字符类型
 
-åä¸ºãçªå­ç¬¦ç±»åãåãå®½å­ç¬¦ç±»åãï¼ç±äºç®æ³ç«èµå ä¹ä¸ä¼ç¨å°å®½å­ç¬¦ç±»åï¼æ æ­¤å¤ä» ä»ç»çªå­ç¬¦ç±»åï¼
+分为「窄字符类型」和「宽字符类型」，由于算法竞赛几乎不会用到宽字符类型，故此处仅介绍窄字符类型．
 
-çªå­ç¬¦åä½æ°ä¸è¬ä¸º 88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ï¼å®é ä¸åºå±å­å¨æ¹å¼ä»ç¶æ¯æ´æ°ï¼ä¸è¬éè¿ [ASCII ç¼ç ](http://www.asciitable.com/) å®ç°å­ç¬¦ä¸æ´æ°çä¸ä¸å¯¹åºï¼æå¦ä¸ä¸ç§ï¼
+窄字符型位数一般为 88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位，实际上底层存储方式仍然是整数，一般通过 [ASCII 编码](http://www.asciitable.com/) 实现字符与整数的一一对应，有如下三种：
 
-  * `signed char`ï¼æç¬¦å·å­ç¬¦è¡¨ç¤ºçç±»åï¼è¡¨ç¤ºèå´å¨ â128 â¼127â128â¼127![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼
-  * `unsigned char`ï¼æ ç¬¦å·å­ç¬¦è¡¨ç¤ºçç±»åï¼è¡¨ç¤ºèå´å¨ 0 â¼2550â¼255![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼
-  * `char` æ¥æä¸ `signed char` æ `unsigned char` ä¹ä¸ç¸åçè¡¨ç¤ºåå¯¹é½ï¼ä½å§ç»æ¯ç¬ç«çç±»åï¼
+  * `signed char`：有符号字符表示的类型，表示范围在 −128 ∼127−128∼127![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间．
+  * `unsigned char`：无符号字符表示的类型，表示范围在 0 ∼2550∼255![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间．
+  * `char` 拥有与 `signed char` 或 `unsigned char` 之一相同的表示和对齐，但始终是独立的类型．
 
-`char` çç¬¦å·æ§åå³äºç¼è¯å¨åç®æ å¹³å°ï¼ARM å PowerPC çé»è®¤è®¾ç½®éå¸¸æ²¡æç¬¦å·ï¼è x86 ä¸ x64 çé»è®¤è®¾ç½®éå¸¸æç¬¦å·ï¼
+`char` 的符号性取决于编译器和目标平台：ARM 和 PowerPC 的默认设置通常没有符号，而 x86 与 x64 的默认设置通常有符号．
 
-GCC å¯ä»¥å¨ç¼è¯åæ°ä¸­æ·»å `-fsigned-char` æ `-funsigned-char` æå®å° `char` è§ä½ `signed char` æ `unsigned char`ï¼å ¶ä»ç¼è¯å¨è¯·åç §ææ¡£ï¼éè¦æ³¨ææå®ä¸æ¶æé»è®¤å¼ä¸åçç¬¦å·æå¯è½ä¼ç ´å ABIï¼é æç¨åºæ æ³æ­£å¸¸å·¥ä½ï¼
+GCC 可以在编译参数中添加 `-fsigned-char` 或 `-funsigned-char` 指定将 `char` 视作 `signed char` 或 `unsigned char`，其他编译器请参照文档．需要注意指定与架构默认值不同的符号有可能会破坏 ABI，造成程序无法正常工作．
 
-æ³¨æ
+注意
 
-ä¸å ¶ä»æ´åä¸åï¼`char`ã`signed char`ã`unsigned char` æ¯ **ä¸ç§ä¸åçç±»å** ï¼
+与其他整型不同，`char`、`signed char`、`unsigned char` 是 **三种不同的类型** ．
 
-ä¸è¬æ¥è¯´ `signed char`,`unsigned char` ä¸åºç¨æ¥å­å¨å­ç¬¦ï¼ç»å¤§å¤æ°æ åµä¸ï¼è¿ä¸¤ç§ç±»ååè¢«è§ä½æ´æ°ç±»åï¼
+一般来说 `signed char`,`unsigned char` 不应用来存储字符，绝大多数情况下，这两种类型均被视作整数类型．
 
-### æµ®ç¹ç±»å
+### 浮点类型
 
-ç¨äºå­å¨ãå®æ°ãï¼æ³¨æå¹¶ä¸æ¯ä¸¥æ ¼æä¹ä¸çå®æ°ï¼èæ¯å®æ°å¨ä¸å®è§åä¸çè¿ä¼¼ï¼ï¼å æ¬ä»¥ä¸ä¸ç§ï¼
+用于存储「实数」（注意并不是严格意义上的实数，而是实数在一定规则下的近似），包括以下三种：
 
-  * `float`ï¼åç²¾åº¦æµ®ç¹ç±»åï¼å¦ææ¯æå°±ä¼å¹é  IEEE-754 binary32 æ ¼å¼ï¼
-  * `double`ï¼åç²¾åº¦æµ®ç¹ç±»åï¼å¦ææ¯æå°±ä¼å¹é  IEEE-754 binary64 æ ¼å¼ï¼
-  * `long double`ï¼æ©å±ç²¾åº¦æµ®ç¹ç±»åï¼å¦ææ¯æå°±ä¼å¹é  IEEE-754 binary128 æ ¼å¼ï¼å¦åå¦ææ¯æå°±ä¼å¹é  IEEE-754 binary64 æ©å±æ ¼å¼ï¼å¦åå¹é æç§ç²¾åº¦ä¼äº binary64 èå¼åè³å°å binary64 ä¸æ ·å¥½çé IEEE-754 æ©å±æµ®ç¹æ ¼å¼ï¼å¦åå¹é  IEEE-754 binary64 æ ¼å¼ï¼
+  * `float`：单精度浮点类型．如果支持就会匹配 IEEE-754 binary32 格式．
+  * `double`：双精度浮点类型．如果支持就会匹配 IEEE-754 binary64 格式．
+  * `long double`：扩展精度浮点类型．如果支持就会匹配 IEEE-754 binary128 格式，否则如果支持就会匹配 IEEE-754 binary64 扩展格式，否则匹配某种精度优于 binary64 而值域至少和 binary64 一样好的非 IEEE-754 扩展浮点格式，否则匹配 IEEE-754 binary64 格式．
 
-æµ®ç¹æ ¼å¼| ä½å®½| æå¤§æ­£æ°| ç²¾åº¦ä½æ°  
+浮点格式| 位宽| 最大正数| 精度位数  
 ---|---|---|---  
-IEEE-754 binary32 æ ¼å¼| 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 3.4 Ã10383.4Ã1038![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 6 â¼96â¼9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-IEEE-754 binary64 æ ¼å¼| 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1.8 Ã103081.8Ã10308![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 15 â¼1715â¼17![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-IEEE-754 binary64 æ©å±æ ¼å¼| â¥80â¥80![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| â¥1.2 Ã104932â¥1.2Ã104932![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| â¥18 â¼21â¥18â¼21![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-IEEE-754 binary128 æ ¼å¼| 128128![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1.2 Ã1049321.2Ã104932![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 33 â¼3633â¼36![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+IEEE-754 binary32 格式| 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 3.4 ×10383.4×1038![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 6 ∼96∼9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+IEEE-754 binary64 格式| 6464![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1.8 ×103081.8×10308![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 15 ∼1715∼17![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+IEEE-754 binary64 扩展格式| ≥80≥80![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| ≥1.2 ×104932≥1.2×104932![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| ≥18 ∼21≥18∼21![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+IEEE-754 binary128 格式| 128128![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1.2 ×1049321.2×104932![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 33 ∼3633∼36![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
   
-> IEEE-754 æµ®ç¹æ ¼å¼çæå°è´æ°æ¯æå¤§æ­£æ°çç¸åæ°ï¼
+> IEEE-754 浮点格式的最小负数是最大正数的相反数．
 
-å ä¸º `float` ç±»åè¡¨ç¤ºèå´è¾å°ï¼ä¸ç²¾åº¦ä¸é«ï¼å®é åºç¨ä¸­å¸¸ä½¿ç¨ `double` ç±»åè¡¨ç¤ºæµ®ç¹æ°ï¼
+因为 `float` 类型表示范围较小，且精度不高，实际应用中常使用 `double` 类型表示浮点数．
 
-å¦å¤ï¼æµ®ç¹ç±»åå¯ä»¥æ¯æä¸äºç¹æ®å¼ï¼
+另外，浮点类型可以支持一些特殊值：
 
-  * æ ç©·ï¼æ­£æè´ï¼ï¼`INFINITY`.
-  * è´é¶ï¼`-0.0`ï¼ä¾å¦ `1.0 / 0.0 == INFINITY`,`1.0 / -0.0 == -INFINITY`.
-  * éæ°ï¼NaNï¼ï¼`std::nan`,`NAN`ï¼ä¸è¬å¯ä»¥ç± `0.0 / 0.0` ä¹ç±»çè¿ç®äº§çï¼å®ä¸ä»»ä½å¼ï¼å æ¬èªèº«ï¼æ¯è¾é½ä¸ç¸ç­ï¼C++11 åå¯ä»¥ ä½¿ç¨ `std::isnan` å¤æ­ä¸ä¸ªæµ®ç¹æ°æ¯ä¸æ¯ NaN.
+  * 无穷（正或负）：`INFINITY`.
+  * 负零：`-0.0`，例如 `1.0 / 0.0 == INFINITY`,`1.0 / -0.0 == -INFINITY`.
+  * 非数（NaN）：`std::nan`,`NAN`，一般可以由 `0.0 / 0.0` 之类的运算产生．它与任何值（包括自身）比较都不相等，C++11 后可以 使用 `std::isnan` 判断一个浮点数是不是 NaN.
 
-### æ ç±»å
+### 无类型
 
-`void` ç±»åä¸ºæ ç±»åï¼ä¸ä¸é¢å ç§ç±»åä¸åçæ¯ï¼ä¸è½å°ä¸ä¸ªåéå£°æä¸º `void` ç±»åï¼ä½æ¯å½æ°çè¿åå¼å è®¸ä¸º `void` ç±»åï¼è¡¨ç¤ºè¯¥å½æ°æ è¿åå¼ï¼
+`void` 类型为无类型，与上面几种类型不同的是，不能将一个变量声明为 `void` 类型．但是函数的返回值允许为 `void` 类型，表示该函数无返回值．
 
-### ç©ºæéç±»å
+### 空指针类型
 
-è¯·åé æéç [å¯¹åºç« è](../pointer/#ç©ºæé)
+请参阅指针的 [对应章节](../pointer/#空指针)
 
-## å®å®½æ´æ°ç±»å
+## 定宽整数类型
 
-C++11 èµ·æä¾äºå®å®½æ´æ°çæ¯æï¼å ·ä½å¦ä¸ï¼
+C++11 起提供了定宽整数的支持，具体如下：
 
-  * `<cstdint>`ï¼æä¾äºè¥å¹²å®å®½æ´æ°çç±»åååå®å®½æ´æ°ç±»åæå¤§å¼ãæå°å¼ç­çå®å¸¸éï¼
-  * `<cinttypes>`ï¼ä¸ºå®å®½æ´æ°ç±»åæä¾äºç¨äº `std::fprintf` ç³»åå½æ°å `std::fscanf` ç³»åå½æ°çæ ¼å¼å®å¸¸éï¼
+  * `<cstdint>`：提供了若干定宽整数的类型和各定宽整数类型最大值、最小值等的宏常量．
+  * `<cinttypes>`：为定宽整数类型提供了用于 `std::fprintf` 系列函数和 `std::fscanf` 系列函数的格式宏常量．
 
-å®å®½æ´æ°æå¦ä¸å ç§ï¼
+定宽整数有如下几种：
 
-  * `intN_t`: å®½åº¦ **æ°ä¸º** ðN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½çæç¬¦å·æ´æ°ç±»åï¼å¦ `int32_t`.
-  * `int_fastN_t`: å®½åº¦ **è³å°** æ ðN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç **æå¿«ç** æç¬¦å·æ´æ°ç±»åï¼å¦ `int_fast32_t`.
-  * `int_leastN_t`: å®½åº¦ **è³å°** æ ðN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç **æå°ç** æç¬¦å·æ´æ°ç±»åï¼å¦ `int_least32_t`.
+  * `intN_t`: 宽度 **恰为** 𝑁N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位的有符号整数类型，如 `int32_t`.
+  * `int_fastN_t`: 宽度 **至少** 有 𝑁N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位的 **最快的** 有符号整数类型，如 `int_fast32_t`.
+  * `int_leastN_t`: 宽度 **至少** 有 𝑁N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位的 **最小的** 有符号整数类型，如 `int_least32_t`.
 
-æ ç¬¦å·çæ¬åªéå¨æç¬¦å·çæ¬åå ä¸ä¸ªå­æ¯ u å³å¯ï¼å¦ `uint32_t`,`uint_least8_t`.
+无符号版本只需在有符号版本前加一个字母 u 即可，如 `uint32_t`,`uint_least8_t`.
 
-æ åè§å®å¿ é¡»å®ç°å¦ä¸ 16 ç§ç±»åï¼
+标准规定必须实现如下 16 种类型：
 
 `int_fast8_t`,`int_fast16_t`,`int_fast32_t`,`int_fast64_t`,
 
@@ -213,222 +213,222 @@ C++11 èµ·æä¾äºå®å®½æ´æ°çæ¯æï¼å
 
 `uint_least8_t`,`uint_least16_t`,`uint_least32_t`,`uint_least64_t`.
 
-ç»å¤§å¤æ°ç¼è¯å¨å¨æ­¤åºç¡ä¸é½å®ç°äºå¦ä¸ 8 ç§ç±»åï¼
+绝大多数编译器在此基础上都实现了如下 8 种类型：
 
 `int8_t`,`int16_t`,`int32_t`,`int64_t`,
 
 `uint8_t`,`uint16_t`,`uint32_t`,`uint64_t`.
 
-å¨å®ç°äºå¯¹åºç±»åçæ åµä¸ï¼C++ æ åè§å®å¿ é¡»å®ç°è¡¨ç¤ºå¯¹åºç±»åçæå¤§å¼ãæå°å¼ãä½å®½çå®å¸¸éï¼æ ¼å¼ä¸ºå°ç±»ååæ«å°¾ç `_t` å»æåè½¬å¤§åå¹¶æ·»å åç¼ï¼
+在实现了对应类型的情况下，C++ 标准规定必须实现表示对应类型的最大值、最小值、位宽的宏常量，格式为将类型名末尾的 `_t` 去掉后转大写并添加后缀：
 
-  * `_MAX` è¡¨ç¤ºæå¤§å¼ï¼å¦ `INT32_MAX` å³ä¸º `int32_t` çæå¤§å¼ï¼
-  * `_MIN` è¡¨ç¤ºæå°å¼ï¼å¦ `INT32_MIN` å³ä¸º `int32_t` çæå°å¼ï¼
+  * `_MAX` 表示最大值，如 `INT32_MAX` 即为 `int32_t` 的最大值．
+  * `_MIN` 表示最小值，如 `INT32_MIN` 即为 `int32_t` 的最小值．
 
-æ³¨æ
+注意
 
-å®å®½æ´æ°ç±»åæ¬è´¨ä¸æ¯æ®éæ´æ°ç±»åçç±»åå«åï¼æä»¥æ··ç¨å®å®½æ´æ°ç±»ååæ®éæ´æ°ç±»åå¯è½ä¼å½±åè·¨å¹³å°ç¼è¯ï¼ä¾å¦ï¼
+定宽整数类型本质上是普通整数类型的类型别名，所以混用定宽整数类型和普通整数类型可能会影响跨平台编译，例如：
 
-ç¤ºä¾ä»£ç 
+示例代码
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 ``` |  ```text #include <algorithm> #include <cstdint> #include <iostream> int main () { long long a ; int64_t b ; std :: cin >> a >> b ; std :: cout << std :: max ( a , b ) << std :: endl ; return 0 ; } ```   
 ---|---  
   
-`int64_t` å¨ 64 ä½ Windows ä¸ä¸è¬ä¸º `long long int`, èå¨ 64 ä½ Linux ä¸ä¸è¬ä¸º `long int`, æä»¥è¿æ®µä»£ç å¨ä½¿ç¨ 64 ä½ Linux ä¸ç GCC æ¶ä¸è½éè¿ç¼è¯ï¼èä½¿ç¨ 64 ä½ Windows ä¸ç MSVC æ¶å¯ä»¥éè¿ç¼è¯ï¼å ä¸º `std::max` è¦æ±è¾å ¥çä¸¤ä¸ªåæ°ç±»åå¿ é¡»ç¸åï¼
+`int64_t` 在 64 位 Windows 下一般为 `long long int`, 而在 64 位 Linux 下一般为 `long int`, 所以这段代码在使用 64 位 Linux 下的 GCC 时不能通过编译，而使用 64 位 Windows 下的 MSVC 时可以通过编译，因为 `std::max` 要求输入的两个参数类型必须相同．
 
-æ­¤å¤ï¼C++17 èµ·å¨ `<limits>` ä¸­æä¾äº `std::numeric_limits` ç±»æ¨¡æ¿ï¼ç¨äºæ¥è¯¢åç§ç®æ°ç±»åçå±æ§ï¼å¦æå¤§å¼ãæå°å¼ãæ¯å¦æ¯æ´å½¢ãæ¯å¦æç¬¦å·ç­ï¼
+此外，C++17 起在 `<limits>` 中提供了 `std::numeric_limits` 类模板，用于查询各种算数类型的属性，如最大值、最小值、是否是整形、是否有符号等．
 
-```text 1 2 3 4 5 6 7 8 9 ``` |  ```text #include <cstdint> #include <limits> std :: numeric_limits < int32_t >:: max (); // int32_t çæå¤§å¼, 2'147'483'647 std :: numeric_limits < int32_t >:: min (); // int32_t çæå°å¼, -2'147'483'648 std :: numeric_limits < double >:: min (); // double çæå°å¼, çº¦ä¸º 2.22507e-308 std :: numeric_limits < double >:: epsilon (); // 1.0 ä¸ double çä¸ä¸ªå¯è¡¨ç¤ºå¼çå·®, // çº¦ä¸º 2.22045e-16 ```   
+```text 1 2 3 4 5 6 7 8 9 ``` |  ```text #include <cstdint> #include <limits> std :: numeric_limits < int32_t >:: max (); // int32_t 的最大值, 2'147'483'647 std :: numeric_limits < int32_t >:: min (); // int32_t 的最小值, -2'147'483'648 std :: numeric_limits < double >:: min (); // double 的最小值, 约为 2.22507e-308 std :: numeric_limits < double >:: epsilon (); // 1.0 与 double 的下个可表示值的差, // 约为 2.22045e-16 ```   
 ---|---  
   
-## ç±»åè½¬æ¢
+## 类型转换
 
-å¨ä¸äºæ¶åï¼æ¯å¦æä¸ªå½æ°æ¥å `int` ç±»åçåæ°ï¼ä½ä¼ å ¥äº `double` ç±»åçåéï¼ï¼æä»¬éè¦å°æç§ç±»åï¼è½¬æ¢æå¦å¤ä¸ç§ç±»åï¼
+在一些时候（比如某个函数接受 `int` 类型的参数，但传入了 `double` 类型的变量），我们需要将某种类型，转换成另外一种类型．
 
-C++ ä¸­ç±»åçè½¬æ¢æºå¶è¾ä¸ºå¤æï¼è¿éä¸»è¦ä»ç»å¯¹äºåºç¡æ°æ®ç±»åçä¸¤ç§è½¬æ¢ï¼æ°å¼æååæ°å¼è½¬æ¢ï¼
+C++ 中类型的转换机制较为复杂，这里主要介绍对于基础数据类型的两种转换：数值提升和数值转换．
 
-### æ°å¼æå
+### 数值提升
 
-æ°å¼æåè¿ç¨ä¸­ï¼å¼æ¬èº«ä¿æä¸åï¼
+数值提升过程中，值本身保持不变．
 
 Note
 
-C é£æ ¼çå¯ååæ°åå¨ä¼ å¼è¿ç¨ä¸­ä¼è¿è¡é»è®¤åæ°æåï¼å¦ï¼
+C 风格的可变参数域在传值过程中会进行默认参数提升．如：
 
-ç¤ºä¾ä»£ç 
+示例代码
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 ``` |  ```text #include <stdarg.h> #include <stdio.h> void test ( int tot , ...) { va_list valist ; int i ; // åå§åå¯ååæ°åè¡¨ va_start ( valist , tot ); for ( i = 0 ; i < tot ; ++ i ) { // è·åç¬¬ i ä¸ªåéçå¼ double xx = va_arg ( valist , double ); // Correct // float xx = va_arg(valist, float); // Wrong // è¾åºç¬¬ i ä¸ªåéçåºå±å­å¨å å®¹ printf ( "i = %d, value = 0x%016llx \n " , i , * ( long long * )( & xx )); } // æ¸ çå¯ååæ°åè¡¨çå å­ va_end ( valist ); } int main () { float f ; double fd , d ; f = 123\. ; // 0x42f60000 fd = 123\. ; // 0x405ec00000000000 d = 456\. ; // 0x407c800000000000 test ( 3 , f , fd , d ); } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 ``` |  ```text #include <stdarg.h> #include <stdio.h> void test ( int tot , ...) { va_list valist ; int i ; // 初始化可变参数列表 va_start ( valist , tot ); for ( i = 0 ; i < tot ; ++ i ) { // 获取第 i 个变量的值 double xx = va_arg ( valist , double ); // Correct // float xx = va_arg(valist, float); // Wrong // 输出第 i 个变量的底层存储内容 printf ( "i = %d, value = 0x%016llx \n " , i , * ( long long * )( & xx )); } // 清理可变参数列表的内存 va_end ( valist ); } int main () { float f ; double fd , d ; f = 123\. ; // 0x42f60000 fd = 123\. ; // 0x405ec00000000000 d = 456\. ; // 0x407c800000000000 test ( 3 , f , fd , d ); } ```   
 ---|---  
   
-å¨è°ç¨ `test` æ¶ï¼`f` æåä¸º `double`ï¼ä»èåºå±å­å¨å å®¹å `fd` ç¸åï¼è¾åºä¸º
+在调用 `test` 时，`f` 提升为 `double`，从而底层存储内容和 `fd` 相同，输出为
 
 ```text 1 2 3 ``` |  ```text i = 0, value = 0x405ec00000000000 i = 1, value = 0x405ec00000000000 i = 2, value = 0x407c800000000000 ```   
 ---|---  
   
-è¥å° `double xx = va_arg(valist, double);` æ¹ä¸º `float xx = va_arg(valist, float);`ï¼GCC åºè¯¥ç»åºä¸æ¡ç±»ä¼¼ä¸æçè­¦åï¼
+若将 `double xx = va_arg(valist, double);` 改为 `float xx = va_arg(valist, float);`，GCC 应该给出一条类似下文的警告：
 
 ```text 1 2 3 4 5 6 7 ``` |  ```text In file included from test.c:2: test.c: In function 'test': test.c:14:35: warning: 'float' is promoted to 'double' when passed through '...' 14 | float xx = va_arg(valist, float); | ^ test.c:14:35: note: (so you should pass 'double' not 'float' to 'va_arg') test.c:14:35: note: if this code is reached, the program will abort ```   
 ---|---  
   
-æ­¤æ¶çç¨åºå°ä¼å¨è¾åºåç»æ­¢ï¼
+此时的程序将会在输出前终止．
 
-è¿ä¸ç¹ä¹è½è§£éä¸ºä»ä¹ `printf` ç `%f` æ¢è½å¹é  `float` ä¹è½å¹é  `double`ï¼
+这一点也能解释为什么 `printf` 的 `%f` 既能匹配 `float` 也能匹配 `double`．
 
-#### æ´æ°æå
+#### 整数提升
 
-å°æ´æ°ç±»åï¼å¦ `char`ï¼ççº¯å³å¼å¯è½¬æ¢æè¾å¤§æ´æ°ç±»åï¼å¦ `int`ï¼ççº¯å³å¼ï¼
+小整数类型（如 `char`）的纯右值可转换成较大整数类型（如 `int`）的纯右值．
 
-å ·ä½èè¨ï¼ç®æ¯è¿ç®ç¬¦ä¸æ¥åå°äº `int` çç±»åä½ä¸ºå®çå®åï¼èå¨å·¦å¼å°å³å¼è½¬æ¢åï¼å¦æéç¨å°±ä¼èªå¨å®æ½æ´æ°æåï¼
+具体而言，算术运算符不接受小于 `int` 的类型作为它的实参，而在左值到右值转换后，如果适用就会自动实施整数提升．
 
-å ·ä½å°ï¼æå¦ä¸è§åï¼
+具体地，有如下规则：
 
-  * æºç±»åä¸º `signed char`ã`signed short / short` æ¶ï¼å¯æåä¸º `int`ï¼
-  * æºç±»åä¸º `unsigned char`ã`unsigned short` æ¶ï¼è¥ `int` è½ä¿ææºç±»åçå¼èå´ï¼åå¯æåä¸º `int`ï¼å¦åå¯æåä¸º `unsigned int`ï¼ï¼`C++20` èµ· `char8_t` ä¹éç¨æ¬è§åï¼
-  * `char` çæåè§ååå³äºå ¶åºå±ç±»åæ¯ `signed char` è¿æ¯ `unsigned char`ï¼
-  * `bool` ç±»åå¯è½¬æ¢å° `int`ï¼`false` åä¸º `0`ï¼`true` åä¸º `1`ï¼
-  * è¥ç®æ ç±»åçå¼èå´å å«æºç±»åï¼ä¸æºç±»åçå¼èå´ä¸è½è¢« `int` å `unsigned int` å å«ï¼åæºç±»åå¯æåä¸ºç®æ ç±»åï¼6
+  * 源类型为 `signed char`、`signed short / short` 时，可提升为 `int`．
+  * 源类型为 `unsigned char`、`unsigned short` 时，若 `int` 能保有源类型的值范围，则可提升为 `int`，否则可提升为 `unsigned int`．（`C++20` 起 `char8_t` 也适用本规则）
+  * `char` 的提升规则取决于其底层类型是 `signed char` 还是 `unsigned char`．
+  * `bool` 类型可转换到 `int`：`false` 变为 `0`，`true` 变为 `1`．
+  * 若目标类型的值范围包含源类型，且源类型的值范围不能被 `int` 和 `unsigned int` 包含，则源类型可提升为目标类型．6
 
-æ³¨æ
+注意
 
-`char`->`short` ä¸æ¯æ°å¼æåï¼å ä¸º `char` è¦ä¼å æåä¸º `int / unsigned int`ï¼ä¹åæ¯ `int / unsigned int`->`short`ï¼ä¸æ»¡è¶³æ°å¼æåçæ¡ä»¶ï¼
+`char`->`short` 不是数值提升，因为 `char` 要优先提升为 `int / unsigned int`，之后是 `int / unsigned int`->`short`，不满足数值提升的条件．
 
-å¦ï¼ä»¥ä¸åå® `int` ä¸º 32 ä½ï¼`unsigned short` ä¸º 16 ä½ï¼`signed char` å `unsigned char` ä¸º 8 ä½ï¼`bool` ä¸º 1 ä½ï¼
+如（以下假定 `int` 为 32 位，`unsigned short` 为 16 位，`signed char` 和 `unsigned char` 为 8 位，`bool` 为 1 位）
 
-  * `(signed char)'\0' - (signed char)'\xff'` ä¼å å° `(signed char)'\0'` æåä¸º `(int)0`ãå° `(signed char)'\xff'` æåä¸º `(int)-1`, åè¿è¡ `int` é´çè¿ç®ï¼æç»ç»æä¸º `(int)1`ï¼
-  * `(unsigned char)'\0' - (unsigned char)'\xff'` ä¼å å° `(unsigned char)'\0'` æåä¸º `(int)0`ãå° `(unsigned char)'\xff'` æåä¸º `(int)255`, åè¿è¡ `int` é´çè¿ç®ï¼æç»ç»æä¸º `(int)-255`ï¼
-  * `false - (unsigned short)12` ä¼å å° `false` æåä¸º `(int)0`ãå° `(unsigned short)12` æåä¸º `(int)12`, åè¿è¡ `int` é´çè¿ç®ï¼æç»ç»æä¸º `(int)-12`ï¼
+  * `(signed char)'\0' - (signed char)'\xff'` 会先将 `(signed char)'\0'` 提升为 `(int)0`、将 `(signed char)'\xff'` 提升为 `(int)-1`, 再进行 `int` 间的运算，最终结果为 `(int)1`．
+  * `(unsigned char)'\0' - (unsigned char)'\xff'` 会先将 `(unsigned char)'\0'` 提升为 `(int)0`、将 `(unsigned char)'\xff'` 提升为 `(int)255`, 再进行 `int` 间的运算，最终结果为 `(int)-255`．
+  * `false - (unsigned short)12` 会先将 `false` 提升为 `(int)0`、将 `(unsigned short)12` 提升为 `(int)12`, 再进行 `int` 间的运算，最终结果为 `(int)-12`．
 
-#### æµ®ç¹æå
+#### 浮点提升
 
-ä½å®½è¾å°çæµ®ç¹æ°å¯ä»¥æåä¸ºä½å®½è¾å¤§çæµ®ç¹æ°ï¼ä¾å¦ `float` ç±»åçåéå `double` ç±»åçåéè¿è¡ç®æ¯è¿ç®æ¶ï¼ä¼å° `float` ç±»ååéæåä¸º `double` ç±»ååéï¼ï¼å ¶å¼ä¸åï¼
+位宽较小的浮点数可以提升为位宽较大的浮点数（例如 `float` 类型的变量和 `double` 类型的变量进行算术运算时，会将 `float` 类型变量提升为 `double` 类型变量），其值不变．
 
-### æ°å¼è½¬æ¢
+### 数值转换
 
-æ°å¼è½¬æ¢è¿ç¨ä¸­ï¼å¼å¯è½ä¼åçæ¹åï¼
+数值转换过程中，值可能会发生改变．
 
-æ³¨æ
+注意
 
-æ°å¼æåä¼å äºæ°å¼è½¬æ¢ï¼å¦ `bool`->`int` æ¶æ¯æ°å¼æåèéæ°å¼è½¬æ¢ï¼
+数值提升优先于数值转换．如 `bool`->`int` 时是数值提升而非数值转换．
 
-#### æ´æ°è½¬æ¢
+#### 整数转换
 
-  * å¦æç®æ ç±»åä¸ºä½å®½ä¸º ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ ç¬¦å·æ´æ°ç±»åï¼åè½¬æ¢ç»ææ¯åå¼ mod2ð¥mod2x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åçç»æï¼
+  * 如果目标类型为位宽为 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的无符号整数类型，则转换结果是原值 mod2𝑥mod2x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后的结果．
 
-    * è¥ç®æ ç±»åä½å®½å¤§äºæºç±»åä½å®½ï¼
+    * 若目标类型位宽大于源类型位宽：
 
-      * è¥æºç±»åä¸ºæç¬¦å·ç±»åï¼ä¸è¬æ åµä¸éå è¿è¡ç¬¦å·ä½æ©å±åè½¬æ¢ï¼
+      * 若源类型为有符号类型，一般情况下需先进行符号位扩展再转换．
 
-å¦
+如
 
-        * å° `(short)-1`ï¼`(short)0b1111'1111'1111'1111`ï¼è½¬æ¢ä¸º `unsigned int` ç±»åæ¶ï¼å è¿è¡ç¬¦å·ä½æ©å±ï¼å¾å° `0b1111'1111'1111'1111'1111'1111'1111'1111`ï¼åè¿è¡æ´æ°è½¬æ¢ï¼ç»æä¸º `(unsigned int)4'294'967'295`ï¼`(unsigned int)0b1111'1111'1111'1111'1111'1111'1111'1111`ï¼ï¼
-        * å° `(short)32'767`ï¼`(short)0b0111'1111'1111'1111`ï¼è½¬æ¢ä¸º `unsigned int` ç±»åæ¶ï¼å è¿è¡ç¬¦å·ä½æ©å±ï¼å¾å° `0b0000'0000'0000'0000'0111'1111'1111'1111`ï¼åè¿è¡æ´æ°è½¬æ¢ï¼ç»æä¸º `(unsigned int)32'767`ï¼`(unsigned int)0b0000'0000'0000'0000'0111'1111'1111'1111`ï¼ï¼
-      * è¥æºç±»åä¸ºæ ç¬¦å·ç±»åï¼åéå è¿è¡é¶æ©å±åè½¬æ¢ï¼
+        * 将 `(short)-1`（`(short)0b1111'1111'1111'1111`）转换为 `unsigned int` 类型时，先进行符号位扩展，得到 `0b1111'1111'1111'1111'1111'1111'1111'1111`，再进行整数转换，结果为 `(unsigned int)4'294'967'295`（`(unsigned int)0b1111'1111'1111'1111'1111'1111'1111'1111`）．
+        * 将 `(short)32'767`（`(short)0b0111'1111'1111'1111`）转换为 `unsigned int` 类型时，先进行符号位扩展，得到 `0b0000'0000'0000'0000'0111'1111'1111'1111`，再进行整数转换，结果为 `(unsigned int)32'767`（`(unsigned int)0b0000'0000'0000'0000'0111'1111'1111'1111`）．
+      * 若源类型为无符号类型，则需先进行零扩展再转换．
 
-å¦å° `(unsigned short)65'535`ï¼`(unsigned short)0b1111'1111'1111'1111`ï¼è½¬æ¢ä¸º `unsigned int` ç±»åæ¶ï¼å è¿è¡é¶æ©å±ï¼å¾å° `0b0000'0000'0000'0000'1111'1111'1111'1111`ï¼åè¿è¡æ´æ°è½¬æ¢ï¼ç»æä¸º `(unsigned int)65'535`ï¼`(unsigned int)0b0000'0000'0000'0000'1111'1111'1111'1111`ï¼ï¼
+如将 `(unsigned short)65'535`（`(unsigned short)0b1111'1111'1111'1111`）转换为 `unsigned int` 类型时，先进行零扩展，得到 `0b0000'0000'0000'0000'1111'1111'1111'1111`，再进行整数转换，结果为 `(unsigned int)65'535`（`(unsigned int)0b0000'0000'0000'0000'1111'1111'1111'1111`）．
 
-    * è¥ç®æ ç±»åä½å®½ä¸å¤§äºæºç±»åä½å®½ï¼åéå æªæ­åè½¬æ¢ï¼
+    * 若目标类型位宽不大于源类型位宽，则需先截断再转换．
 
-å¦å° `(unsigned int)4'294'967'295`ï¼`(unsigned int)0b1111'1111'1111'1111'1111'1111'1111'1111`ï¼è½¬æ¢ä¸º `unsigned short` ç±»åæ¶ï¼å è¿è¡æªæ­ï¼å¾å° `0b1111'1111'1111'1111`ï¼åè¿è¡æ´æ°è½¬æ¢ï¼ç»æä¸º `(unsigned short)65'535`ï¼`(unsigned short)0b1111'1111'1111'1111`ï¼ï¼
+如将 `(unsigned int)4'294'967'295`（`(unsigned int)0b1111'1111'1111'1111'1111'1111'1111'1111`）转换为 `unsigned short` 类型时，先进行截断，得到 `0b1111'1111'1111'1111`，再进行整数转换，结果为 `(unsigned short)65'535`（`(unsigned short)0b1111'1111'1111'1111`）．
 
-  * å¦æç®æ ç±»åä¸ºä½å®½ä¸º ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¸¦ç¬¦å·æ´æ°ç±»åï¼å **ä¸è¬æ åµä¸** ï¼è½¬æ¢ç»æå¯ä»¥è®¤ä¸ºæ¯åå¼ mod2ð¥mod2x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åçç»æï¼7
+  * 如果目标类型为位宽为 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的带符号整数类型，则 **一般情况下** ，转换结果可以认为是原值 mod2𝑥mod2x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后的结果．7
 
-ä¾å¦å° `(unsigned int)4'294'967'295`ï¼`(unsigned int)0b1111'1111'1111'1111'1111'1111'1111'1111`ï¼è½¬æ¢ä¸º `short` ç±»åæ¶ï¼ç»æä¸º `(short)-1`ï¼`(short)0b1111'1111'1111'1111`ï¼ï¼
+例如将 `(unsigned int)4'294'967'295`（`(unsigned int)0b1111'1111'1111'1111'1111'1111'1111'1111`）转换为 `short` 类型时，结果为 `(short)-1`（`(short)0b1111'1111'1111'1111`）．
 
-  * å¦æç®æ ç±»åæ¯ `bool`ï¼åæ¯ å¸å°è½¬æ¢ï¼
+  * 如果目标类型是 `bool`，则是 布尔转换．
 
-  * å¦ææºç±»åæ¯ `bool`ï¼å `false` è½¬ä¸ºå¯¹åºç±»åç 0ï¼`true` è½¬ä¸ºå¯¹åºç±»åç 1ï¼
+  * 如果源类型是 `bool`，则 `false` 转为对应类型的 0，`true` 转为对应类型的 1．
 
-#### æµ®ç¹è½¬æ¢
+#### 浮点转换
 
-ä½å®½è¾å¤§çæµ®ç¹æ°è½¬æ¢ä¸ºä½å®½è¾å°çæµ®ç¹æ°ï¼ä¼å°è¯¥æ°èå ¥å°ç®æ ç±»åä¸ææ¥è¿çå¼ï¼
+位宽较大的浮点数转换为位宽较小的浮点数，会将该数舍入到目标类型下最接近的值．
 
-#### æµ®ç¹æ´æ°è½¬æ¢
+#### 浮点整数转换
 
-  * æµ®ç¹æ°è½¬æ¢ä¸ºæ´æ°æ¶ï¼ä¼èå¼æµ®ç¹æ°çå ¨é¨å°æ°é¨åï¼
+  * 浮点数转换为整数时，会舍弃浮点数的全部小数部分．
 
-å¦æç®æ ç±»åæ¯ `bool`ï¼åæ¯ å¸å°è½¬æ¢ï¼
+如果目标类型是 `bool`，则是 布尔转换．
 
-  * æ´æ°è½¬æ¢ä¸ºæµ®ç¹æ°æ¶ï¼ä¼èå ¥å°ç®æ ç±»åä¸ææ¥è¿çå¼ï¼
+  * 整数转换为浮点数时，会舍入到目标类型下最接近的值．
 
-å¦æè¯¥å¼ä¸è½éåºå°ç®æ ç±»åä¸­ï¼é£ä¹è¡ä¸ºæªå®ä¹ï¼
+如果该值不能适应到目标类型中，那么行为未定义．
 
-å¦ææºç±»åæ¯ `bool`ï¼é£ä¹ `false` è½¬æ¢ä¸ºé¶ï¼è `true` è½¬æ¢ä¸ºä¸ï¼
+如果源类型是 `bool`，那么 `false` 转换为零，而 `true` 转换为一．
 
-#### å¸å°è½¬æ¢
+#### 布尔转换
 
-å°å ¶ä»ç±»åè½¬æ¢ä¸º `bool` ç±»åæ¶ï¼é¶å¼è½¬æ¢ä¸º `false`ï¼éé¶å¼è½¬æ¢ä¸º `true`ï¼
+将其他类型转换为 `bool` 类型时，零值转换为 `false`，非零值转换为 `true`．
 
-## å®ä¹åé
+## 定义变量
 
-ç®åå°è¯´2ï¼å®ä¹ä¸ä¸ªåéï¼éè¦å å«ç±»åè¯´æç¬¦ï¼ææåéçç±»åï¼ï¼ä»¥åè¦å®ä¹çåéåï¼
+简单地说2，定义一个变量，需要包含类型说明符（指明变量的类型），以及要定义的变量名．
 
-ä¾å¦ï¼ä¸é¢è¿å æ¡è¯­å¥é½æ¯åéå®ä¹è¯­å¥ï¼
+例如，下面这几条语句都是变量定义语句．
 
 ```text 1 2 3 ``` |  ```text int oi ; double wiki ; char org = 'c' ; ```   
 ---|---  
   
-å¨ç®åæä»¬ææ¥è§¦å°çç¨åºæ®µä¸­ï¼å®ä¹å¨è±æ¬å·å è£¹çå°æ¹çåéæ¯å±é¨åéï¼èå®ä¹å¨æ²¡æè±æ¬å·å è£¹çå°æ¹çåéæ¯å ¨å±åéï¼å®é æä¾å¤ï¼ä½æ¯ç°å¨ä¸å¿ äºè§£ï¼
+在目前我们所接触到的程序段中，定义在花括号包裹的地方的变量是局部变量，而定义在没有花括号包裹的地方的变量是全局变量．实际有例外，但是现在不必了解．
 
-å®ä¹æ¶æ²¡æåå§åå¼çå ¨å±åéä¼è¢«åå§åä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èå±é¨åéæ²¡æè¿ç§ç¹æ§ï¼éè¦æå¨èµåå§å¼ï¼å¦åå¯è½å¼èµ·é¾ä»¥åç°ç bugï¼
+定义时没有初始化值的全局变量会被初始化为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．而局部变量没有这种特性，需要手动赋初始值，否则可能引起难以发现的 bug．
 
-## åéä½ç¨å
+## 变量作用域
 
-ä½ç¨åæ¯åéå¯ä»¥åæ¥ä½ç¨çä»£ç åï¼
+作用域是变量可以发挥作用的代码块．
 
-å ¨å±åéçä½ç¨åï¼èªå ¶å®ä¹ä¹å¤å¼å§3ï¼è³æä»¶ç»æä½ç½®ä¸ºæ­¢ï¼
+全局变量的作用域，自其定义之处开始3，至文件结束位置为止．
 
-å±é¨åéçä½ç¨åï¼èªå ¶å®ä¹ä¹å¤å¼å§ï¼è³ä»£ç åç»æä½ç½®ä¸ºæ­¢ï¼
+局部变量的作用域，自其定义之处开始，至代码块结束位置为止．
 
-ç±ä¸å¯¹å¤§æ¬å·æ¬èµ·æ¥çè¥å¹²è¯­å¥ææä¸ä¸ªä»£ç åï¼
+由一对大括号括起来的若干语句构成一个代码块．
 
-```text 1 2 3 4 5 6 7 ``` |  ```text int g = 20 ; // å®ä¹å ¨å±åé int main () { int g = 10 ; // å®ä¹å±é¨åé printf ( "%d \n " , g ); // è¾åº g return 0 ; } ```   
+```text 1 2 3 4 5 6 7 ``` |  ```text int g = 20 ; // 定义全局变量 int main () { int g = 10 ; // 定义局部变量 printf ( "%d \n " , g ); // 输出 g return 0 ; } ```   
 ---|---  
   
-å¦æä¸ä¸ªä»£ç åçå åµåä¸­å®ä¹äºç¸ååéåçåéï¼åå å±åä¸­å°æ æ³è®¿é®å¤å±åä¸­ç¸ååéåçåéï¼
+如果一个代码块的内嵌块中定义了相同变量名的变量，则内层块中将无法访问外层块中相同变量名的变量．
 
-ä¾å¦ä¸é¢çä»£ç ä¸­ï¼è¾åºç ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼å°æ¯ 1010![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ä¸ºäºé²æ­¢åºç°ææä¹å¤çéè¯¯ï¼è¯·å°½éé¿å å±é¨åéä¸å ¨å±åééåçæ åµï¼
+例如上面的代码中，输出的 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值将是 1010![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此为了防止出现意料之外的错误，请尽量避免局部变量与全局变量重名的情况．
 
-## å¸¸é
+## 常量
 
-å¸¸éæ¯åºå®å¼ï¼å¨ç¨åºæ§è¡æé´ä¸ä¼æ¹åï¼
+常量是固定值，在程序执行期间不会改变．
 
-å¸¸éçå¼å¨å®ä¹åä¸è½è¢«ä¿®æ¹ï¼å®ä¹æ¶å ä¸ä¸ª `const` å ³é®å­å³å¯ï¼
+常量的值在定义后不能被修改．定义时加一个 `const` 关键字即可．
 
 ```text 1 2 ``` |  ```text const int a = 2 ; a = 3 ; ```   
 ---|---  
   
-å¦æä¿®æ¹äºå¸¸éçå¼ï¼å¨ç¼è¯ç¯èå°±ä¼æ¥éï¼`error: assignment of read-only variable 'a'`ï¼
+如果修改了常量的值，在编译环节就会报错：`error: assignment of read-only variable 'a'`．
 
-## åèèµæä¸æ³¨é
+## 参考资料与注释
 
   1. [Working Draft, Standard for Programming Language C++](https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2022/n4917.pdf)
-  2. [ç±»å - cppreference.com](https://zh.cppreference.com/w/cpp/language/type)
-  3. C è¯­è¨ç [ç®æ¯ç±»å - cppreference.com](https://zh.cppreference.com/w/c/language/arithmetic_types)
-  4. [åºç¡ç±»å - cppreference.com](https://zh.cppreference.com/w/cpp/language/types)
-  5. [å®å®½æ´æ°ç±»åï¼C++11 èµ·ï¼- cppreference.com](https://zh.cppreference.com/w/cpp/types/integer)
+  2. [类型 - cppreference.com](https://zh.cppreference.com/w/cpp/language/type)
+  3. C 语言的 [算术类型 - cppreference.com](https://zh.cppreference.com/w/c/language/arithmetic_types)
+  4. [基础类型 - cppreference.com](https://zh.cppreference.com/w/cpp/language/types)
+  5. [定宽整数类型（C++11 起）- cppreference.com](https://zh.cppreference.com/w/cpp/types/integer)
   6. William Kahan (1 October 1997).["Lecture Notes on the Status of IEEE Standard 754 for Binary Floating-Point Arithmetic"](https://people.eecs.berkeley.edu/~wkahan/ieee754status/IEEE754.PDF).
-  7. [éå¼è½¬æ¢ - cppreference.com](https://zh.cppreference.com/w/cpp/language/implicit_conversion)
-  8. [å£°æ - cppreference](https://zh.cppreference.com/w/cpp/language/declarations)
-  9. [ä½ç¨å - cppreference.com](https://zh.cppreference.com/w/cpp/language/scope)
+  7. [隐式转换 - cppreference.com](https://zh.cppreference.com/w/cpp/language/implicit_conversion)
+  8. [声明 - cppreference](https://zh.cppreference.com/w/cpp/language/declarations)
+  9. [作用域 - cppreference.com](https://zh.cppreference.com/w/cpp/language/scope)
 
 * * *
 
-  1. C++20 åè§å®æç¬¦å·æ´æ°è³å°è¦è¦ç [åç ](../../math/bit/#æ´æ°ä¸ä½åºå) çè¡¨ç¤ºèå´ï¼å³ â2ð¥â1 +1 â¼2ð¥â1 â1â2xâ1+1â¼2xâ1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼ä½å®é ä¸ç»å¤§å¤æ°å®ç°ä¸­åéç¨ [è¡¥ç ](../../math/bit/#æ´æ°ä¸ä½åºå) å®ç°ï¼C++20 èµ·è¿ä¸æ­¥è§å®æç¬¦å·æ´æ°å¿ é¡»ä½¿ç¨è¡¥ç å®ç°ï¼è¯¦è§ [Range of values - cppreference](https://en.cppreference.com/w/cpp/language/types.html#Range_of_values)ï¼Â â©
+  1. C++20 前规定有符号整数至少要覆盖 [反码](../../math/bit/#整数与位序列) 的表示范围（即 −2𝑥−1 +1 ∼2𝑥−1 −1−2x−1+1∼2x−1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），但实际上绝大多数实现中均采用 [补码](../../math/bit/#整数与位序列) 实现；C++20 起进一步规定有符号整数必须使用补码实现．详见 [Range of values - cppreference](https://en.cppreference.com/w/cpp/language/types.html#Range_of_values)． ↩
 
-  2. å®ä¹ä¸ä¸ªåéæ¶ï¼é¤äºç±»åè¯´æç¬¦ä¹å¤ï¼è¿å¯ä»¥å å«å ¶ä»è¯´æç¬¦ï¼è¯¦è§ [å£°æ - cppreference](https://zh.cppreference.com/w/cpp/language/declarations)ï¼Â â©
+  2. 定义一个变量时，除了类型说明符之外，还可以包含其他说明符．详见 [声明 - cppreference](https://zh.cppreference.com/w/cpp/language/declarations)． ↩
 
-  3. æ´åç¡®çè¯´æ³æ¯ [å£°æç¹](https://zh.cppreference.com/w/cpp/language/scope#.E5.A3.B0.E6.98.8E.E7.82.B9)ï¼Â â©
+  3. 更准确的说法是 [声明点](https://zh.cppreference.com/w/cpp/language/scope#.E5.A3.B0.E6.98.8E.E7.82.B9)． ↩
 
-  4. å æ¬æ°ç»ç±»åãå¼ç¨ç±»åãæéç±»åãç±»ç±»åãå½æ°ç±»åç­ï¼ç±äºæ¬ç¯æç« æ¯é¢ååå­¦è çï¼æ ä¸å¨æ¬æåå ·ä½ä»ç»ï¼å ·ä½è¯·åé [ç±»å - cppreference.com](https://zh.cppreference.com/w/cpp/language/type)Â â©
+  4. 包括数组类型、引用类型、指针类型、类类型、函数类型等．由于本篇文章是面向初学者的，故不在本文做具体介绍．具体请参阅 [类型 - cppreference.com](https://zh.cppreference.com/w/cpp/language/type) ↩
 
-  5. åè§ <https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3054.pdf>Â â©
+  5. 参见 <https://www.open-std.org/jtc1/sc22/wg14/www/docs/n3054.pdf> ↩
 
-  6. ä¸å å«å®½å­ç¬¦ç±»åãä½ååæä¸¾ç±»åï¼è¯¦è§ [æ´åè½¬æ¢ - cppreference](https://zh.cppreference.com/w/cpp/language/implicit_conversion#.E6.95.B4.E5.9E.8B.E8.BD.AC.E6.8D.A2)ï¼Â â©
+  6. 不包含宽字符类型、位域和枚举类型，详见 [整型转换 - cppreference](https://zh.cppreference.com/w/cpp/language/implicit_conversion#.E6.95.B4.E5.9E.8B.E8.BD.AC.E6.8D.A2)． ↩
 
-  7. èª C++20 èµ·çæï¼C++20 åç»ææ¯å®ç°å®ä¹çï¼è¯¦è§ [æ´åè½¬æ¢ - cppreference](https://zh.cppreference.com/w/cpp/language/implicit_conversion#.E6.95.B4.E5.9E.8B.E8.BD.AC.E6.8D.A2)ï¼Â â©
+  7. 自 C++20 起生效．C++20 前结果是实现定义的．详见 [整型转换 - cppreference](https://zh.cppreference.com/w/cpp/language/implicit_conversion#.E6.95.B4.E5.9E.8B.E8.BD.AC.E6.8D.A2)． ↩
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/2/26 03:56:39ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/var.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/lang/var.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [StudyingFather](https://github.com/StudyingFather), [orzAtalod](https://github.com/orzAtalod), [Xeonacid](https://github.com/Xeonacid), [c-forrest](https://github.com/c-forrest), [Enter-tainer](https://github.com/Enter-tainer), [Ir1d](https://github.com/Ir1d), [shuzhouliu](https://github.com/shuzhouliu), [abc1763613206](https://github.com/abc1763613206), [CamberLoid](https://github.com/CamberLoid), [CCXXXI](https://github.com/CCXXXI), [CoelacanthusHex](https://github.com/CoelacanthusHex), [Friendseeker](https://github.com/Friendseeker), [Great-designer](https://github.com/Great-designer), [Haohu Shen](mailto:haohu.shen@ucalgary.ca), [hhc0001](https://github.com/hhc0001), [ksyx](https://github.com/ksyx), [mgt](mailto:i@margatroid.xyz), [TOMWT-qwq](https://github.com/TOMWT-qwq), [ZnPdCo](https://github.com/ZnPdCo)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/2/26 03:56:39，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/var.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/lang/var.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [StudyingFather](https://github.com/StudyingFather), [orzAtalod](https://github.com/orzAtalod), [Xeonacid](https://github.com/Xeonacid), [c-forrest](https://github.com/c-forrest), [Enter-tainer](https://github.com/Enter-tainer), [Ir1d](https://github.com/Ir1d), [shuzhouliu](https://github.com/shuzhouliu), [abc1763613206](https://github.com/abc1763613206), [CamberLoid](https://github.com/CamberLoid), [CCXXXI](https://github.com/CCXXXI), [CoelacanthusHex](https://github.com/CoelacanthusHex), [Friendseeker](https://github.com/Friendseeker), [Great-designer](https://github.com/Great-designer), [Haohu Shen](mailto:haohu.shen@ucalgary.ca), [hhc0001](https://github.com/hhc0001), [ksyx](https://github.com/ksyx), [mgt](mailto:i@margatroid.xyz), [TOMWT-qwq](https://github.com/TOMWT-qwq), [ZnPdCo](https://github.com/ZnPdCo)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

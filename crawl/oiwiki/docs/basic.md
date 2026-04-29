@@ -1,4 +1,4 @@
-# 算法基础简介 - OI Wiki
+﻿# 算法基础简介 - OI Wiki
 
 - Source: https://oi-wiki.org/basic/
 

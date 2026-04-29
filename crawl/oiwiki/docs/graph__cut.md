@@ -1,79 +1,79 @@
-# å²ç¹åæ¡¥ - OI Wiki
+﻿# 割点和桥 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/cut/
 
-# å²ç¹åæ¡¥
+# 割点和桥
 
-ç¸å ³é è¯»ï¼[åè¿éåé](../bcc/)
+相关阅读：[双连通分量](../bcc/)
 
-å²ç¹åæ¡¥æ´ä¸¥è°¨çå®ä¹åè§ [å¾è®ºç¸å ³æ¦å¿µ](../concept/)ï¼
+割点和桥更严谨的定义参见 [图论相关概念](../concept/)．
 
-## å²ç¹
+## 割点
 
-> å¯¹äºä¸ä¸ªæ åå¾ï¼å¦ææä¸ä¸ªç¹å é¤åè¿ä¸ªå¾çæå¤§è¿éåéæ°å¢å äºï¼é£ä¹è¿ä¸ªç¹å°±æ¯è¿ä¸ªå¾çå²ç¹ï¼åç§°å²é¡¶ï¼ï¼
+> 对于一个无向图，如果把一个点删除后这个图的极大连通分量数增加了，那么这个点就是这个图的割点（又称割顶）．
 
-### è¿ç¨
+### 过程
 
-å¦ææä»¬å°è¯å é¤æ¯ä¸ªç¹ï¼å¹¶ä¸å¤æ­è¿ä¸ªå¾çè¿éæ§ï¼é£ä¹å¤æåº¦ä¼ç¹å«çé«ï¼æä»¥è¦ä»ç»ä¸ä¸ªå¸¸ç¨çç®æ³ï¼Tarjanï¼
+如果我们尝试删除每个点，并且判断这个图的连通性，那么复杂度会特别的高．所以要介绍一个常用的算法：Tarjan．
 
-é¦å ï¼æä»¬ä¸ä¸ä¸ªå¾ï¼
+首先，我们上一个图：
 
 ![](./images/cut1.svg)
 
-å¾å®¹æççåºå²ç¹æ¯ 2ï¼èä¸è¿ä¸ªå¾ä» æè¿ä¸ä¸ªå²ç¹ï¼
+很容易的看出割点是 2，而且这个图仅有这一个割点．
 
-é¦å ï¼æä»¬æç § DFS åºç»ä»æä¸æ¶é´æ³ï¼è®¿é®çé¡ºåºï¼ï¼
+首先，我们按照 DFS 序给他打上时间戳（访问的顺序）．
 
 ![](./images/cut2.svg)
 
-è¿äºä¿¡æ¯è¢«æä»¬ä¿å­å¨ä¸ä¸ªå«å `dfn` çæ°ç»ä¸­ï¼
+这些信息被我们保存在一个叫做 `dfn` 的数组中．
 
-è¿éè¦å¦å¤ä¸ä¸ªæ°ç» `low`ï¼ç¨å®æ¥å­å¨ä¸ç»è¿å ¶ç¶äº²è½å°è¾¾çæå°çæ¶é´æ³ï¼
+还需要另外一个数组 `low`，用它来存储不经过其父亲能到达的最小的时间戳．
 
-ä¾å¦ `low[2]` æ¯ 1ï¼`low[5]` å `low[6]` æ¯ 3ï¼
+例如 `low[2]` 是 1，`low[5]` 和 `low[6]` 是 3．
 
-ç¶åæä»¬å¼å§ DFSï¼æä»¬å¤æ­æä¸ªç¹æ¯å¦æ¯å²ç¹çæ ¹æ®æ¯ï¼å¯¹äºæä¸ªé¡¶ç¹ ð¢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æå­å¨è³å°ä¸ä¸ªé¡¶ç¹ ð£v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð¢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¿å­ï¼ï¼ä½¿å¾ ððð¤ð£ â¥ðððð¢lowvâ¥dfnu![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ä¸è½åå°ç¥å ï¼é£ä¹ ð¢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¹ä¸ºå²ç¹ï¼
+然后我们开始 DFS，我们判断某个点是否是割点的根据是：对于某个顶点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果存在至少一个顶点 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的儿子），使得 𝑙𝑜𝑤𝑣 ≥𝑑𝑓𝑛𝑢lowv≥dfnu![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即不能回到祖先，那么 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 点为割点．
 
-æ­¤æ ¹æ®æç¬ä¸éç¨äºæç´¢çèµ·å§ç¹ï¼å ¶éè¦ç¹æ®èèï¼è¥è¯¥ç¹ä¸æ¯å²ç¹ï¼åå ¶ä»è·¯å¾äº¦è½å°è¾¾å ¨é¨ç»ç¹ï¼å æ­¤ä»èµ·å§ç¹åªãåä¸æäºä¸æ¬¡ãï¼å³å¨æç´¢æ å ä» æä¸ä¸ªå­ç»ç¹ï¼å¦æå¨æç´¢æ å æä¸¤ä¸ªåä»¥ä¸çå¿å­ï¼é£ä¹ä»ä¸å®æ¯å²ç¹äºï¼è®¾æ³ä¸å¾ä» 2 å¼å§æç´¢ï¼æç´¢æ å åºæä¸¤ä¸ªå­ç»ç¹ï¼3 æ 4 å 5 æ 6ï¼ï¼å¦æåªæä¸ä¸ªå¿å­ï¼é£ä¹æå®å æï¼ä¸ä¼æä»»ä½çå½±åï¼æ¯å¦ä¸é¢è¿ä¸ªå¾ï¼æ­¤å¤å½¢æäºä¸ä¸ªç¯ï¼
+此根据惟独不适用于搜索的起始点，其需要特殊考虑：若该点不是割点，则其他路径亦能到达全部结点，因此从起始点只「向下搜了一次」，即在搜索树内仅有一个子结点．如果在搜索树内有两个及以上的儿子，那么他一定是割点了（设想上图从 2 开始搜索，搜索树内应有两个子结点：3 或 4 及 5 或 6）．如果只有一个儿子，那么把它删掉，不会有任何的影响．比如下面这个图，此处形成了一个环．
 
 ![](./images/cut3.svg)
 
-æä»¬å¨è®¿é® 1 çå¿å­æ¶åï¼åè®¾å  DFS å°äº 2ï¼ç¶åæ è®°ç¨è¿ï¼ç¶åéå½å¾ä¸ï¼æ¥å°äº 4ï¼4 åæ¥å°äº 3ï¼å½éå½åæº¯çæ¶åï¼ä¼åç° 3 å·²ç»è¢«è®¿é®è¿äºï¼æä»¥ä¸æ¯å²ç¹ï¼
+我们在访问 1 的儿子时候，假设先 DFS 到了 2，然后标记用过，然后递归往下，来到了 4，4 又来到了 3，当递归回溯的时候，会发现 3 已经被访问过了，所以不是割点．
 
-æ´æ° `low` çä¼ªä»£ç å¦ä¸ï¼
+更新 `low` 的伪代码如下：
 
-1ð¢ðÂ ð£Â is a son ofÂ ð¢2lowð¢=min(lowð¢,lowð£)3ðð¥ð¬ð4lowð¢=min(lowð¢,dfnð£)1ifÂ vÂ is a son ofÂ u2lowu=min(lowu,lowv)3else4lowu=min(lowu,dfnv)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1𝐢𝐟 𝑣 is a son of 𝑢2low𝑢=min(low𝑢,low𝑣)3𝐞𝐥𝐬𝐞4low𝑢=min(low𝑢,dfn𝑣)1if v is a son of u2lowu=min(lowu,lowv)3else4lowu=min(lowu,dfnv)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### ä¾é¢
+### 例题
 
-[æ´è°· P3388ãæ¨¡æ¿ãå²ç¹ï¼å²é¡¶ï¼](https://www.luogu.com.cn/problem/P3388)
+[洛谷 P3388【模板】割点（割顶）](https://www.luogu.com.cn/problem/P3388)
 
-ä¾é¢ä»£ç 
+例题代码
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 ``` |  ```text /* æ´è°· P3388 ãæ¨¡æ¿ãå²ç¹ï¼å²é¡¶ï¼ */ #include <iostream> #include <vector> using namespace std ; int n , m ; // nï¼ç¹æ° mï¼è¾¹æ° int dfn [ 100001 ], low [ 100001 ], idx , res ; // dfnï¼è®°å½æ¯ä¸ªç¹çæ¶é´æ³ // lowï¼è½ä¸ç»è¿ç¶äº²å°è¾¾æå°çç¼å·ï¼idxï¼æ¶é´æ³ï¼resï¼ç­æ¡æ°é bool vis [ 100001 ], flag [ 100001 ]; // flag: ç­æ¡ visï¼æ è®°æ¯å¦éå¤ vector < int > edge [ 100001 ]; // å­å¾ç¨ç void Tarjan ( int u , int fa ) { // u å½åç¹çç¼å·ï¼fa èªå·±ç¸ç¸çç¼å· vis [ u ] = true ; // æ è®° low [ u ] = dfn [ u ] = ++ idx ; // æä¸æ¶é´æ³ int child = 0 ; // æ¯ä¸ä¸ªç¹å¿å­æ°é for ( const auto & v : edge [ u ]) { // è®¿é®è¿ä¸ªç¹çææé»å± ï¼C++11ï¼ if ( ! vis [ v ]) { child ++ ; // å¤äºä¸ä¸ªå¿å­ Tarjan ( v , u ); // ç»§ç»­ low [ u ] = min ( low [ u ], low [ v ]); // æ´æ°è½å°çæå°èç¹ç¼å· if ( fa != u && low [ v ] >= dfn [ u ] && ! flag [ u ]) { // ä¸»è¦ä»£ç  // å¦æä¸æ¯èªå·±ï¼ä¸ä¸éè¿ç¶äº²è¿åçæå°ç¹ç¬¦åå²ç¹çè¦æ±ï¼å¹¶ä¸æ²¡æè¢«æ è®°è¿ // è¦æ±å³ä¸ºï¼å äºç¶äº²è¿ä¸ä¸å»äºï¼å³ä¸ºæå¤è¿å°ç¶äº² flag [ u ] = true ; res ++ ; // è®°å½ç­æ¡ } } else if ( v != fa ) { // å¦æè¿ä¸ªç¹ä¸æ¯èªå·±çç¶äº²ï¼æ´æ°è½å°çæå°èç¹ç¼å· low [ u ] = min ( low [ u ], dfn [ v ]); } } // ä¸»è¦ä»£ç ï¼èªå·±çè¯éè¦ 2 ä¸ªå¿å­æå¯ä»¥ if ( fa == u && child >= 2 && ! flag [ u ]) { flag [ u ] = true ; res ++ ; // è®°å½ç­æ¡ } } int main () { cin >> n >> m ; // è¯»å ¥æ°æ® for ( int i = 1 ; i <= m ; i ++ ) { // æ³¨æç¹æ¯ä» 1 å¼å§ç int x , y ; cin >> x >> y ; edge [ x ]. push_back ( y ); edge [ y ]. push_back ( x ); } // ä½¿ç¨ vector å­å¾ for ( int i = 1 ; i <= n ; i ++ ) // å ä¸º Tarjan å¾ä¸ä¸å®è¿é if ( ! vis [ i ]) { idx = 0 ; // æ¶é´æ³åå§ä¸º 0 Tarjan ( i , i ); // ä»ç¬¬ i ä¸ªç¹å¼å§ï¼ç¶äº²ä¸ºèªå·± } cout << res << endl ; for ( int i = 1 ; i <= n ; i ++ ) if ( flag [ i ]) cout << i << " " ; // è¾åºç»æ return 0 ; } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 ``` |  ```text /* 洛谷 P3388 【模板】割点（割顶） */ #include <iostream> #include <vector> using namespace std ; int n , m ; // n：点数 m：边数 int dfn [ 100001 ], low [ 100001 ], idx , res ; // dfn：记录每个点的时间戳 // low：能不经过父亲到达最小的编号，idx：时间戳，res：答案数量 bool vis [ 100001 ], flag [ 100001 ]; // flag: 答案 vis：标记是否重复 vector < int > edge [ 100001 ]; // 存图用的 void Tarjan ( int u , int fa ) { // u 当前点的编号，fa 自己爸爸的编号 vis [ u ] = true ; // 标记 low [ u ] = dfn [ u ] = ++ idx ; // 打上时间戳 int child = 0 ; // 每一个点儿子数量 for ( const auto & v : edge [ u ]) { // 访问这个点的所有邻居 （C++11） if ( ! vis [ v ]) { child ++ ; // 多了一个儿子 Tarjan ( v , u ); // 继续 low [ u ] = min ( low [ u ], low [ v ]); // 更新能到的最小节点编号 if ( fa != u && low [ v ] >= dfn [ u ] && ! flag [ u ]) { // 主要代码 // 如果不是自己，且不通过父亲返回的最小点符合割点的要求，并且没有被标记过 // 要求即为：删了父亲连不上去了，即为最多连到父亲 flag [ u ] = true ; res ++ ; // 记录答案 } } else if ( v != fa ) { // 如果这个点不是自己的父亲，更新能到的最小节点编号 low [ u ] = min ( low [ u ], dfn [ v ]); } } // 主要代码，自己的话需要 2 个儿子才可以 if ( fa == u && child >= 2 && ! flag [ u ]) { flag [ u ] = true ; res ++ ; // 记录答案 } } int main () { cin >> n >> m ; // 读入数据 for ( int i = 1 ; i <= m ; i ++ ) { // 注意点是从 1 开始的 int x , y ; cin >> x >> y ; edge [ x ]. push_back ( y ); edge [ y ]. push_back ( x ); } // 使用 vector 存图 for ( int i = 1 ; i <= n ; i ++ ) // 因为 Tarjan 图不一定连通 if ( ! vis [ i ]) { idx = 0 ; // 时间戳初始为 0 Tarjan ( i , i ); // 从第 i 个点开始，父亲为自己 } cout << res << endl ; for ( int i = 1 ; i <= n ; i ++ ) if ( flag [ i ]) cout << i << " " ; // 输出结果 return 0 ; } ```   
 ---|---  
   
-## å²è¾¹ï¼æ éè¾¹æ¶ï¼
+## 割边（无重边时）
 
-åå²ç¹å·®ä¸å¤ï¼å«åæ¡¥ï¼
+和割点差不多，叫做桥．
 
-> å¯¹äºä¸ä¸ªæ åå¾ï¼å¦æå æä¸æ¡è¾¹åå¾ä¸­çè¿éåéæ°å¢å äºï¼åç§°è¿æ¡è¾¹ä¸ºæ¡¥æè å²è¾¹ï¼ä¸¥è°¨æ¥è¯´ï¼å°±æ¯ï¼åè®¾æè¿éå¾ ðº ={ð,ð¸}G={V,E}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å ¶ä¸­ä¸æ¡è¾¹ï¼å³ ð âð¸eâE![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼å¦æ ðº âðGâe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸è¿éçï¼åè¾¹ ðe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¾ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸æ¡å²è¾¹ï¼æ¡¥ï¼ï¼
+> 对于一个无向图，如果删掉一条边后图中的连通分量数增加了，则称这条边为桥或者割边．严谨来说，就是：假设有连通图 𝐺 ={𝑉,𝐸}G={V,E}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑒e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是其中一条边（即 𝑒 ∈𝐸e∈E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），如果 𝐺 −𝑒G−e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是不连通的，则边 𝑒e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是图 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一条割边（桥）．
 
-æ¯å¦è¯´ï¼ä¸å¾ä¸­ï¼
+比如说，下图中，
 
-![å²è¾¹ç¤ºä¾å¾](./images/bridge1.svg)
+![割边示例图](./images/bridge1.svg)
 
-çº¢è²çè¾¹å°±æ¯å²è¾¹ï¼
+红色的边就是割边．
 
-### è¿ç¨
+### 过程
 
-åå²ç¹å·®ä¸å¤ï¼åªè¦æ¹ä¸å¤ï¼ððð¤ð£ >ðððð¢lowv>dfnu![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±å¯ä»¥äºï¼èä¸ä¸éè¦èèæ ¹èç¹çé®é¢ï¼
+和割点差不多，只要改一处：𝑙𝑜𝑤𝑣 >𝑑𝑓𝑛𝑢lowv>dfnu![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就可以了，而且不需要考虑根节点的问题．
 
-å²è¾¹æ¯åæ¯ä¸æ¯æ ¹èç¹æ²¡å ³ç³»çï¼åæ¥æä»¬æ±å²ç¹çæ¶åæ¯æç¹ ð£v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸å¯è½ä¸ç»è¿ç¶èç¹ ð¢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºåå°ç¥å èç¹ï¼å æ¬ç¶èç¹ï¼ï¼æä»¥é¡¶ç¹ ð¢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å²ç¹ï¼å¦æ ððð¤ð£ =ðððð¢lowv=dfnu![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºè¿å¯ä»¥åå°ç¶èç¹ï¼å¦æé¡¶ç¹ ð£v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è½åå°ç¥å ä¹æ²¡æå¦å¤ä¸æ¡åå°ç¶äº²çè·¯ï¼é£ä¹ ð¢ âð£uâv![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿æ¡è¾¹å°±æ¯å²è¾¹ï¼
+割边是和是不是根节点没关系的，原来我们求割点的时候是指点 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是不可能不经过父节点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为回到祖先节点（包括父节点），所以顶点 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是割点．如果 𝑙𝑜𝑤𝑣 =𝑑𝑓𝑛𝑢lowv=dfnu![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示还可以回到父节点，如果顶点 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不能回到祖先也没有另外一条回到父亲的路，那么 𝑢 −𝑣u−v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这条边就是割边．
 
-### å®ç°
+### 实现
 
-ä¸é¢ä»£ç å®ç°äºå¯¹ **æ éè¾¹** çæ åå¾æ±å²è¾¹ï¼å ¶ä¸­ï¼å½ `isbridge[x]` ä¸ºçæ¶ï¼`(father[x],x)` ä¸ºä¸æ¡å²è¾¹ï¼
+下面代码实现了对 **无重边** 的无向图求割边，其中，当 `isbridge[x]` 为真时，`(father[x],x)` 为一条割边．
 
 C++Python
 
@@ -83,38 +83,38 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 ``` |  ```text low = [ 0 ] * MAXN dfn = [ 0 ] * MAXN idx = 0 isbridge = [ False ] * MAXN G = [[ 0 for i in range ( MAXN )] for j in range ( MAXN )] cnt_bridge = 0 father = [ 0 ] * MAXN def tarjan ( u , fa ): father [ u ] = fa idx = idx \+ 1 low [ u ] = dfn [ u ] = idx for i in range ( 0 , len ( G [ u ])): v = G [ u ][ i ] if dfn [ v ] == False : tarjan ( v , u ) low [ u ] = min ( low [ u ], low [ v ]) if low [ v ] > dfn [ u ]: isbridge [ v ] = True cnt_bridge = cnt_bridge \+ 1 elif v != fa : low [ u ] = min ( low [ u ], dfn [ v ]) ```   
 ---|---  
   
-## å²è¾¹ï¼æéè¾¹æ¶ï¼
+## 割边（有重边时）
 
-ç¶èï¼ä¸è¿°æ éè¾¹æ¶çåæ³å¨æéè¾¹çæ åå¾ä¸æ¯æé®é¢çï¼
+然而，上述无重边时的做法在有重边的无向图上是有问题的．
 
-å ä¸ºä¸¤èç¹é´å¯è½ä¸æ­¢æä¸æ¡è¾¹ï¼æ­¤æ¶å®ä»¬é½ä¸ä¼æ¯æ¡¥ï¼
+因为两节点间可能不止有一条边，此时它们都不会是桥．
 
-### è¿ç¨
+### 过程
 
-ä¸ç§æè·¯æ¯å°åæ° `fa` æ¹ä¸ºååèµ°è¿çè¾¹çç¼å·ï¼æ¯æ¡è¾¹çç¼å·ä¸è´ï¼å³å¯ï¼å³å°ãä¸ç¨ç¶èç¹æ´æ°ãæ¹ä¸ºãä¸ç¨æ¥æ¶çè¾¹æ´æ°ãï¼
+一种思路是将参数 `fa` 改为刚刚走过的边的编号（每条边的编号一致）即可，即将「不用父节点更新」改为「不用来时的边更新」．
 
-å¦ä¸ç§æ´ç®åçæè·¯æ¯è®¾ç«ä¸ä¸ªæ è®°å¤æ­æ¯å¦å·²æä¸æ¡è¾¹æµè¾¾ç¶èç¹ï¼æ è®°ååè®¿é®å°ç¶èç¹æ¶æ­£å¸¸æ´æ°ï¼
+另一种更简单的思路是设立一个标记判断是否已有一条边抵达父节点，标记后再访问到父节点时正常更新．
 
-ä¸é¢ä»£ç å®ç°äºå¯¹å¯è½ **æéè¾¹** çæ åå¾æ±å²è¾¹ï¼
+下面代码实现了对可能 **有重边** 的无向图求割边．
 
 C++
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 ``` |  ```text int low [ MAXN ], dfn [ MAXN ], idx ; bool isbridge [ MAXN ]; vector < int > G [ MAXN ]; int cnt_bridge ; int father [ MAXN ]; void tarjan ( int u , int fa ) { bool flag = false ; father [ u ] = fa ; low [ u ] = dfn [ u ] = ++ idx ; for ( const auto & v : G [ u ]) { if ( ! dfn [ v ]) { tarjan ( v , u ); low [ u ] = min ( low [ u ], low [ v ]); if ( low [ v ] > dfn [ u ]) { isbridge [ v ] = true ; ++ cnt_bridge ; } } else { if ( v != fa || flag ) low [ u ] = min ( low [ u ], dfn [ v ]); else flag = true ; } } } ```   
 ---|---  
   
-## ç»ä¹ 
+## 练习
 
-  * [P3388ãæ¨¡æ¿ãå²ç¹ï¼å²é¡¶ï¼](https://www.luogu.com.cn/problem/P3388)
+  * [P3388【模板】割点（割顶）](https://www.luogu.com.cn/problem/P3388)
   * [POJ2117 Electricity](http://poj.org/problem?id=2117)
   * [HDU4738 Caocao's Bridges](https://acm.hdu.edu.cn/showproblem.php?pid=4738)
   * [HDU2460 Network](https://acm.hdu.edu.cn/showproblem.php?pid=2460)
   * [POJ1523 SPF](http://poj.org/problem?id=1523)
 
-Tarjan ç®æ³è¿æè®¸å¤ç¨éï¼å¸¸ç¨çä¾å¦æ±å¼ºè¿éåéï¼ç¼©ç¹ï¼è¿ææ± 2-SAT çç¨éç­ï¼
+Tarjan 算法还有许多用途，常用的例如求强连通分量，缩点，还有求 2-SAT 的用途等．
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/graph/cut.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/graph/cut.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Ir1d](https://github.com/Ir1d), [sshwy](https://github.com/sshwy), [StudyingFather](https://github.com/StudyingFather), [H-J-Granger](https://github.com/H-J-Granger), [countercurrent-time](https://github.com/countercurrent-time), [Enter-tainer](https://github.com/Enter-tainer), [GavinZhengOI](https://github.com/GavinZhengOI), [NachtgeistW](https://github.com/NachtgeistW), [ouuan](https://github.com/ouuan), [Planet6174](https://github.com/Planet6174), [Tiphereth-A](https://github.com/Tiphereth-A), [0xis-cn](https://github.com/0xis-cn), [AngelKitty](https://github.com/AngelKitty), [CCXXXI](https://github.com/CCXXXI), [cjsoft](https://github.com/cjsoft), [diauweb](https://github.com/diauweb), [Early0v0](https://github.com/Early0v0), [ezoixx130](https://github.com/ezoixx130), [GekkaSaori](https://github.com/GekkaSaori), [Henry-ZHR](https://github.com/Henry-ZHR), [iamtwz](https://github.com/iamtwz), [Konano](https://github.com/Konano), [LovelyBuggies](https://github.com/LovelyBuggies), [Makkiy](https://github.com/Makkiy), [Marcythm](https://github.com/Marcythm), [mgt](mailto:i@margatroid.xyz), [minghu6](https://github.com/minghu6), [P-Y-Y](https://github.com/P-Y-Y), [PotassiumWings](https://github.com/PotassiumWings), [SamZhangQingChuan](https://github.com/SamZhangQingChuan), [Suyun514](mailto:suyun514@qq.com), [tder6](https://github.com/tder6), [weiyong1024](https://github.com/weiyong1024), [ylxmf2005](https://github.com/ylxmf2005), [c-forrest](https://github.com/c-forrest), [ChungZH](https://github.com/ChungZH), [CoelacanthusHex](https://github.com/CoelacanthusHex), [Error-Eric](https://github.com/Error-Eric), [Gesrua](https://github.com/Gesrua), [HeRaNO](https://github.com/HeRaNO), [ImpleLee](https://github.com/ImpleLee), [kenlig](https://github.com/kenlig), [ksyx](https://github.com/ksyx), [kxccc](https://github.com/kxccc), [lychees](https://github.com/lychees), [mcendu](https://github.com/mcendu), [Menci](https://github.com/Menci), [Peanut-Tang](https://github.com/Peanut-Tang), [Qiu-Quanzhi](https://github.com/Qiu-Quanzhi), [shawlleyw](https://github.com/shawlleyw), [SukkaW](https://github.com/SukkaW), [t123yh](https://github.com/t123yh), [Xeonacid](https://github.com/Xeonacid), [yiyangit](https://github.com/yiyangit), [yusancky](https://github.com/yusancky)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/graph/cut.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/graph/cut.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [sshwy](https://github.com/sshwy), [StudyingFather](https://github.com/StudyingFather), [H-J-Granger](https://github.com/H-J-Granger), [countercurrent-time](https://github.com/countercurrent-time), [Enter-tainer](https://github.com/Enter-tainer), [GavinZhengOI](https://github.com/GavinZhengOI), [NachtgeistW](https://github.com/NachtgeistW), [ouuan](https://github.com/ouuan), [Planet6174](https://github.com/Planet6174), [Tiphereth-A](https://github.com/Tiphereth-A), [0xis-cn](https://github.com/0xis-cn), [AngelKitty](https://github.com/AngelKitty), [CCXXXI](https://github.com/CCXXXI), [cjsoft](https://github.com/cjsoft), [diauweb](https://github.com/diauweb), [Early0v0](https://github.com/Early0v0), [ezoixx130](https://github.com/ezoixx130), [GekkaSaori](https://github.com/GekkaSaori), [Henry-ZHR](https://github.com/Henry-ZHR), [iamtwz](https://github.com/iamtwz), [Konano](https://github.com/Konano), [LovelyBuggies](https://github.com/LovelyBuggies), [Makkiy](https://github.com/Makkiy), [Marcythm](https://github.com/Marcythm), [mgt](mailto:i@margatroid.xyz), [minghu6](https://github.com/minghu6), [P-Y-Y](https://github.com/P-Y-Y), [PotassiumWings](https://github.com/PotassiumWings), [SamZhangQingChuan](https://github.com/SamZhangQingChuan), [Suyun514](mailto:suyun514@qq.com), [tder6](https://github.com/tder6), [weiyong1024](https://github.com/weiyong1024), [ylxmf2005](https://github.com/ylxmf2005), [c-forrest](https://github.com/c-forrest), [ChungZH](https://github.com/ChungZH), [CoelacanthusHex](https://github.com/CoelacanthusHex), [Error-Eric](https://github.com/Error-Eric), [Gesrua](https://github.com/Gesrua), [HeRaNO](https://github.com/HeRaNO), [ImpleLee](https://github.com/ImpleLee), [kenlig](https://github.com/kenlig), [ksyx](https://github.com/ksyx), [kxccc](https://github.com/kxccc), [lychees](https://github.com/lychees), [mcendu](https://github.com/mcendu), [Menci](https://github.com/Menci), [Peanut-Tang](https://github.com/Peanut-Tang), [Qiu-Quanzhi](https://github.com/Qiu-Quanzhi), [shawlleyw](https://github.com/shawlleyw), [SukkaW](https://github.com/SukkaW), [t123yh](https://github.com/t123yh), [Xeonacid](https://github.com/Xeonacid), [yiyangit](https://github.com/yiyangit), [yusancky](https://github.com/yusancky)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

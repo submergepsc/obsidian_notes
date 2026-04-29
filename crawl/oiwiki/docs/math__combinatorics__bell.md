@@ -1,58 +1,58 @@
-# è´å°æ° - OI Wiki
+﻿# 贝尔数 - OI Wiki
 
 - Source: https://oi-wiki.org/math/combinatorics/bell/
 
-# è´å°æ°
+# 贝尔数
 
-è´å°æ° ðµðBn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»¥åéå Â·å¦æ®å°Â·è´å°å½åï¼æ¯ç»åæ°å­¦ä¸­çä¸ç»æ´æ°æ°åï¼å¼é¦æ¯ï¼[OEIS A000110](https://oeis.org/A000110)ï¼ï¼
+贝尔数 𝐵𝑛Bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 以埃里克·坦普尔·贝尔命名，是组合数学中的一组整数数列，开首是（[OEIS A000110](https://oeis.org/A000110)）：
 
-ðµ0=1,ðµ1=1,ðµ2=2,ðµ3=5,ðµ4=15,ðµ5=52,ðµ6=203,â¦B0=1,B1=1,B2=2,B3=5,B4=15,B5=52,B6=203,â¦![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐵0=1,𝐵1=1,𝐵2=2,𝐵3=5,𝐵4=15,𝐵5=52,𝐵6=203,…B0=1,B1=1,B2=2,B3=5,B4=15,B5=52,B6=203,…![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ðµðBn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯åºæ°ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåçååæ¹æ³çæ°ç®ï¼éå ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªååæ¯å®ä¹ä¸º ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸¤ä¸¤ä¸ç¸äº¤çéç©ºå­éçæï¼å®ä»¬çå¹¶æ¯ ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¾å¦ ðµ3 =5B3=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ä¸º 3 ä¸ªå ç´ çéå ð,ð,ða,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ 5 ç§ä¸åçååæ¹æ³ï¼
+𝐵𝑛Bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是基数为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合的划分方法的数目．集合 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个划分是定义为 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的两两不相交的非空子集的族，它们的并是 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．例如 𝐵3 =5B3=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 因为 3 个元素的集合 𝑎,𝑏,𝑐a,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 5 种不同的划分方法：
 
-{{ð},{ð},{ð}}{{ð},{ð,ð}}{{ð},{ð,ð}}{{ð},{ð,ð}}{{ð,ð,ð}}{{a},{b},{c}}{{a},{b,c}}{{b},{a,c}}{{c},{a,b}}{{a,b,c}}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+{{𝑎},{𝑏},{𝑐}}{{𝑎},{𝑏,𝑐}}{{𝑏},{𝑎,𝑐}}{{𝑐},{𝑎,𝑏}}{{𝑎,𝑏,𝑐}}{{a},{b},{c}}{{a},{b,c}}{{b},{a,c}}{{c},{a,b}}{{a,b,c}}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ðµ0B0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ 1 å ä¸ºç©ºéæ­£å¥½æ 1 ç§ååæ¹æ³ï¼
+𝐵0B0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 1 因为空集正好有 1 种划分方法．
 
-## éæ¨å ¬å¼
+## 递推公式
 
-è´å°æ°éåéæ¨å ¬å¼ï¼
+贝尔数适合递推公式：
 
-ðµð+1=ðâð=0(ðð)ðµðBn+1=âk=0n(nk)Bk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐵𝑛+1=𝑛∑𝑘=0(𝑛𝑘)𝐵𝑘Bn+1=∑k=0n(nk)Bk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æï¼
+证明：
 
-ðµð+1Bn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å«æ ð +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ éåçååä¸ªæ°ï¼è®¾ ðµðBn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåä¸º {ð1,ð2,ð3,â¦,ðð}{b1,b2,b3,â¦,bn}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðµð+1Bn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåä¸º {ð1,ð2,ð3,â¦,ðð,ðð+1}{b1,b2,b3,â¦,bn,bn+1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹å¯ä»¥è®¤ä¸º ðµð+1Bn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ ðµðBn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¢æ·»äºä¸ä¸ª ðð+1bn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) èäº§ççï¼èèå ç´ ðð+1bn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+𝐵𝑛+1Bn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是含有 𝑛 +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素集合的划分个数，设 𝐵𝑛Bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合为 {𝑏1,𝑏2,𝑏3,…,𝑏𝑛}{b1,b2,b3,…,bn}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝐵𝑛+1Bn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合为 {𝑏1,𝑏2,𝑏3,…,𝑏𝑛,𝑏𝑛+1}{b1,b2,b3,…,bn,bn+1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么可以认为 𝐵𝑛+1Bn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是有 𝐵𝑛Bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 增添了一个 𝑏𝑛+1bn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 而产生的，考虑元素 𝑏𝑛+1bn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * åå¦å®è¢«åç¬åå°ä¸ç±»ï¼é£ä¹è¿å©ä¸ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ï¼è¿ç§æ åµä¸ååæ°ä¸º (ðð)ðµð(nn)Bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
+  * 假如它被单独分到一类，那么还剩下 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素，这种情况下划分数为 (𝑛𝑛)𝐵𝑛(nn)Bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7);
 
-  * åå¦å®åæ 1 ä¸ªå ç´ åå°ä¸ç±»ï¼é£ä¹è¿å©ä¸ ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ï¼è¿ç§æ åµä¸ååæ°ä¸º (ððâ1)ðµðâ1(nnâ1)Bnâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 假如它和某 1 个元素分到一类，那么还剩下 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素，这种情况下划分数为 (𝑛𝑛−1)𝐵𝑛−1(nn−1)Bn−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
 
-  * åå¦å®åæ 2 ä¸ªå ç´ åå°ä¸ç±»ï¼é£ä¹è¿å©ä¸ ð â2nâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ï¼è¿ç§æ åµä¸ååæ°ä¸º (ððâ2)ðµðâ2(nnâ2)Bnâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 假如它和某 2 个元素分到一类，那么还剩下 𝑛 −2n−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素，这种情况下划分数为 (𝑛𝑛−2)𝐵𝑛−2(nn−2)Bn−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
 
-  * â¦â¦
+  * ……
 
-ä»¥æ­¤ç±»æ¨å°±å¾å°äºä¸é¢çå ¬å¼ï¼
+以此类推就得到了上面的公式．
 
-æ¯ä¸ªè´å°æ°é½æ¯ç¸åºç [ç¬¬äºç±»æ¯ç¹ææ°](../stirling/#ç¬¬äºç±»æ¯ç¹ææ°stirling-number) çåï¼ å ä¸ºç¬¬äºç±»æ¯ç¹ææ°æ¯æåºæ°ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåååä¸ºæ­£å¥½ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªéç©ºéçæ¹æ³æ°ç®ï¼
+每个贝尔数都是相应的 [第二类斯特林数](../stirling/#第二类斯特林数stirling-number) 的和． 因为第二类斯特林数是把基数为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合划分为正好 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个非空集的方法数目．
 
-ðµð=ðâð=0{ðð}Bn=âk=0n{nk}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐵𝑛=𝑛∑𝑘=0{𝑛𝑘}Bn=∑k=0n{nk}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## è´å°ä¸è§å½¢
+## 贝尔三角形
 
-ç¨ä»¥ä¸æ¹æ³æé ä¸ä¸ªä¸è§ç©éµï¼å½¢å¼ç±»ä¼¼æ¨è¾ä¸è§å½¢ï¼ï¼
+用以下方法构造一个三角矩阵（形式类似杨辉三角形）：
 
-  * ð0,0 =1a0,0=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * å¯¹äº ð â¥1nâ¥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡é¦é¡¹ç­äºä¸ä¸è¡çæ«é¡¹ï¼å³ ðð,0 =ððâ1,ðâ1an,0=anâ1,nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * å¯¹äº ð,ð â¥1m,nâ¥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ç¬¬ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ç­äºå®å·¦è¾¹åå·¦ä¸è§ä¸¤ä¸ªæ°ä¹åï¼å³ ðð,ð =ðð,ðâ1 +ððâ1,ðâ1an,m=an,mâ1+anâ1,mâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 𝑎0,0 =1a0,0=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 对于 𝑛 ≥1n≥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行首项等于上一行的末项，即 𝑎𝑛,0 =𝑎𝑛−1,𝑛−1an,0=an−1,n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 对于 𝑚,𝑛 ≥1m,n≥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行第 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项等于它左边和左上角两个数之和，即 𝑎𝑛,𝑚 =𝑎𝑛,𝑚−1 +𝑎𝑛−1,𝑚−1an,m=an,m−1+an−1,m−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-é¨åç»æå¦ä¸ï¼
+部分结果如下：
 
 11223557101515202737525267871141512032032553224095236748771122355710151520273752526787114151203203255322409523674877![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¯è¡çé¦é¡¹æ¯è´å°æ°ï¼å¯ä»¥å©ç¨è¿ä¸ªä¸è§å½¢æ¥éæ¨æ±åºè´å°æ°ï¼
+每行的首项是贝尔数．可以利用这个三角形来递推求出贝尔数．
 
-åèå®ç°
+参考实现
 
 C++Python
 
@@ -62,37 +62,37 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 10 ``` |  ```text MAXN = 2000 \+ 5 bell = [[ 0 for i in range ( MAXN \+ 1 )] for j in range ( MAXN \+ 1 )] def f ( n ): bell [ 0 ][ 0 ] = 1 for i in range ( 1 , n \+ 1 ): bell [ i ][ 0 ] = bell [ i \- 1 ][ i \- 1 ] for j in range ( 1 , i \+ 1 ): bell [ i ][ j ] = bell [ i \- 1 ][ j \- 1 ] \+ bell [ i ][ j \- 1 ] ```   
 ---|---  
   
-## ææ°çæå½æ°
+## 指数生成函数
 
-èèè´å°æ°çææ°çæå½æ°åå ¶å¯¼å½æ°ï¼
+考虑贝尔数的指数生成函数及其导函数：
 
-Ëðµ(ð¥)=+ââð=0ðµðð!ð¥ð=1++ââð=0ðµð+1(ð+1)!ð¥ð+1Ëðµâ²(ð¥)=+ââð=0ðµð+1ð!ð¥ðB^(x)=ân=0+âBnn!xn=1+ân=0+âBn+1(n+1)!xn+1B^â²(x)=ân=0+âBn+1n!xn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+ˆ𝐵(𝑥)=+∞∑𝑛=0𝐵𝑛𝑛!𝑥𝑛=1++∞∑𝑛=0𝐵𝑛+1(𝑛+1)!𝑥𝑛+1ˆ𝐵′(𝑥)=+∞∑𝑛=0𝐵𝑛+1𝑛!𝑥𝑛B^(x)=∑n=0+∞Bnn!xn=1+∑n=0+∞Bn+1(n+1)!xn+1B^′(x)=∑n=0+∞Bn+1n!xn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®è´å°æ°çéæ¨å ¬å¼å¯ä»¥å¾å°ï¼
+根据贝尔数的递推公式可以得到：
 
-ðµð+1ð!=ðâð=01(ðâð)!ðµðð!Bn+1n!=âk=0n1(nâk)!Bkk!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐵𝑛+1𝑛!=𝑛∑𝑘=01(𝑛−𝑘)!𝐵𝑘𝑘!Bn+1n!=∑k=0n1(n−k)!Bkk!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¯ä¸ä¸ªå·ç§¯çå¼å­ï¼å æ­¤æï¼
+这是一个卷积的式子，因此有：
 
-Ëðµâ²(ð¥)=eð¥Ëðµ(ð¥)B^â²(x)=exB^(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+ˆ𝐵′(𝑥)=e𝑥ˆ𝐵(𝑥)B^′(x)=exB^(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¯ä¸ä¸ªå¾®åæ¹ç¨ï¼è§£å¾ï¼
+这是一个微分方程，解得：
 
-Ëðµ(ð¥)=expâ¡(eð¥+ð¶)B^(x)=expâ¡(ex+C)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+ˆ𝐵(𝑥)=exp⁡(e𝑥+𝐶)B^(x)=exp⁡(ex+C)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æåå½ ð¥ =0x=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ Ëðµ(ð¥) =1B^(x)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¸¦å ¥åè§£å¾ ð¶ = â1C=â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¾å°è´å°æ°ææ°çæå½æ°çå°é­å½¢å¼ï¼
+最后当 𝑥 =0x=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时 ˆ𝐵(𝑥) =1B^(x)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，带入后解得 𝐶 = −1C=−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，得到贝尔数指数生成函数的封闭形式：
 
-Ëðµ(ð¥)=expâ¡(eð¥â1)B^(x)=expâ¡(exâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+ˆ𝐵(𝑥)=exp⁡(e𝑥−1)B^(x)=exp⁡(ex−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é¢å¤çåº eð¥ â1exâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ååä¸æ¬¡ [å¤é¡¹å¼ exp](../../poly/elementary-func/#å¤é¡¹å¼å¯¹æ°å½æ°--ææ°å½æ°) å³å¯å¾åºè´å°æ°å ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ï¼æ¶é´å¤æåº¦ç¶é¢å¨å¤é¡¹å¼ expï¼å¯åå° ð(ðlogâ¡ð)O(nlogâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦ï¼
+预处理出 e𝑥 −1ex−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的前 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项后做一次 [多项式 exp](../../poly/elementary-func/#多项式对数函数--指数函数) 即可得出贝尔数前 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项，时间复杂度瓶颈在多项式 exp，可做到 𝑂(𝑛log⁡𝑛)O(nlog⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度．
 
-## åèæç®
+## 参考文献
 
 <https://en.wikipedia.org/wiki/Bell_number>
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/bell.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/bell.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [Enter-tainer](https://github.com/Enter-tainer), [Xeonacid](https://github.com/Xeonacid), [ksyx](https://github.com/ksyx), [Great-designer](https://github.com/Great-designer), [iamtwz](https://github.com/iamtwz), [Ir1d](https://github.com/Ir1d), [LDlornd](https://github.com/LDlornd), [Menci](https://github.com/Menci), [Running-Turtle1](https://github.com/Running-Turtle1), [ShaoChenHeng](https://github.com/ShaoChenHeng), [shawlleyw](https://github.com/shawlleyw), [StudyingFather](https://github.com/StudyingFather), [untitledunrevised](https://github.com/untitledunrevised), [ZnPdCo](https://github.com/ZnPdCo)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/bell.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/bell.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [Enter-tainer](https://github.com/Enter-tainer), [Xeonacid](https://github.com/Xeonacid), [ksyx](https://github.com/ksyx), [Great-designer](https://github.com/Great-designer), [iamtwz](https://github.com/iamtwz), [Ir1d](https://github.com/Ir1d), [LDlornd](https://github.com/LDlornd), [Menci](https://github.com/Menci), [Running-Turtle1](https://github.com/Running-Turtle1), [ShaoChenHeng](https://github.com/ShaoChenHeng), [shawlleyw](https://github.com/shawlleyw), [StudyingFather](https://github.com/StudyingFather), [untitledunrevised](https://github.com/untitledunrevised), [ZnPdCo](https://github.com/ZnPdCo)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

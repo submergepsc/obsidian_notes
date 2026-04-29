@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/cprogramming/c-input-output.html
-Title: C 输入 & 输出 | 菜鸟教程
-
-C 输入 & 输出 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-C 教程

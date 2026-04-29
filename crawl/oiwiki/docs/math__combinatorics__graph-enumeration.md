@@ -1,288 +1,288 @@
-# å¾è®ºè®¡æ° - OI Wiki
+﻿# 图论计数 - OI Wiki
 
 - Source: https://oi-wiki.org/math/combinatorics/graph-enumeration/
 
-# å¾è®ºè®¡æ°
+# 图论计数
 
-å¨ç»åæ°å­¦ä¸­ï¼å¾è®ºè®¡æ°ï¼Graph Enumerationï¼æ¯ç ç©¶æ»¡è¶³ç¹å®æ§è´¨çå¾çè®¡æ°é®é¢çåæ¯ï¼[çæå½æ°](../../poly/intro/)ã[æ³¢å©äºè®¡æ°å®ç](../polya/) ä¸ [ç¬¦å·åæ¹æ³](../../poly/symbolic-method/#%E9%9B%86%E5%90%88%E7%9A%84-cycle-%E6%9E%84%E9%80%A0) å [OEIS](https://oeis.org/) æ¯è§£å³è¿ç±»é®é¢æ¶æéè¦çæ°å­¦å·¥å ·ï¼å¾è®ºè®¡æ°å¯åä¸ºææ å·åæ æ å·ä¸¤å¤§ç±»é®é¢ï¼å¤§å¤æ°æ åµä¸1ææ å·çæ¬çé®é¢é½æ¯å ¶å¯¹åºçæ æ å·é®é¢æ´å ç®åï¼å æ­¤æä»¬å°å èå¯ææ å·é®é¢çè®¡æ°ï¼
+在组合数学中，图论计数（Graph Enumeration）是研究满足特定性质的图的计数问题的分支．[生成函数](../../poly/intro/)、[波利亚计数定理](../polya/) 与 [符号化方法](../../poly/symbolic-method/#%E9%9B%86%E5%90%88%E7%9A%84-cycle-%E6%9E%84%E9%80%A0) 和 [OEIS](https://oeis.org/) 是解决这类问题时最重要的数学工具．图论计数可分为有标号和无标号两大类问题，大多数情况下1有标号版本的问题都比其对应的无标号问题更加简单，因此我们将先考察有标号问题的计数．
 
-## ææ å·æ 
+## 有标号树
 
-å³ Cayley å ¬å¼ï¼åè§ [PrÃ¼fer åºå](../../../graph/prufer/) ä¸æï¼æä»¬ä¹å¯ä»¥ä½¿ç¨ [Kirchhoff ç©éµæ å®ç](../../../graph/matrix-tree/) æ [çæå½æ°](../../poly/intro/#çæå½æ°) å [ææ ¼ææ¥å®ç](https://codeforces.com/blog/entry/104184) å¾å°è¿ä¸ç»æï¼
+即 Cayley 公式，参见 [Prüfer 序列](../../../graph/prufer/) 一文，我们也可以使用 [Kirchhoff 矩阵树定理](../../../graph/matrix-tree/) 或 [生成函数](../../poly/intro/#生成函数) 和 [拉格朗日定理](https://codeforces.com/blog/entry/104184) 得到这一结果．
 
-### ä¹ é¢
+### 习题
 
   * [Hihocoder 1047. Random Tree](https://vjudge.net/problem/HihoCoder-1047)
 
-## ææ å·è¿éå¾
+## 有标号连通图
 
-### ä¾é¢ãPOJ 1737ãConnected Graph
+### 例题「POJ 1737」Connected Graph
 
-ä¾é¢ [ãPOJ 1737ãConnected Graph](http://poj.org/problem?id=1737)
+例题 [「POJ 1737」Connected Graph](http://poj.org/problem?id=1737)
 
-é¢ç®å¤§æï¼æ±æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç»ç¹çææ å·è¿éå¾çæ¹æ¡æ°ï¼ð â¤50nâ¤50![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼
+题目大意：求有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个结点的有标号连通图的方案数（𝑛 ≤50n≤50![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）．
 
-è¿ç±»é®é¢ææ©åºç°äºæ¥¼æä¸»çç·äººå «é¢ç³»åä¸­ï¼æä»¬è®¾ ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç¹ææ å·å¾çæ¹æ¡æ°ï¼ððcn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¾ æ±åºåï¼ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç¹çå¾è³å¤æ (ð2)(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¡è¾¹ï¼æ¯æ¡è¾¹æ ¹æ®å ¶åºç°ä¸å¦æä¸¤ç§ç¶æï¼æ¯ç§ç¶æä¹é´ç¬ç«ï¼å èæ ðð =2(ð2)gn=2(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¬åºå®å ¶ä¸­ä¸ä¸ªèç¹ï¼æä¸¾å ¶æå¨è¿éåçå¤§å°ï¼é£ä¹è¿éè¦ä»å©ä¸ç ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªèç¹ä¸­éæ© ð â1iâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªèç¹ç»æä¸ä¸ªè¿éåï¼è¿éåä¹å¤çèç¹å¯ä»¥ä»»æè¿è¾¹ï¼å èæå¦ä¸éæ¨å ³ç³»ï¼
+这类问题最早出现于楼教主的男人八题系列中，我们设 𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个点有标号图的方案数，𝑐𝑛cn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为待求序列．𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个点的图至多有 (𝑛2)(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 条边，每条边根据其出现与否有两种状态，每种状态之间独立，因而有 𝑔𝑛 =2(𝑛2)gn=2(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．我们固定其中一个节点，枚举其所在连通块的大小，那么还需要从剩下的 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个节点中选择 𝑖 −1i−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个节点组成一个连通块．连通块之外的节点可以任意连边，因而有如下递推关系：
 
-ðâð=1(ðâ1ðâ1)ððððâð=ðððð=ððâðâ1âð=1(ðâ1ðâ1)ððððâðâi=1n(nâ1iâ1)cignâi=gncn=gnââi=1nâ1(nâ1iâ1)cignâi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=1(𝑛−1𝑖−1)𝑐𝑖𝑔𝑛−𝑖=𝑔𝑛𝑐𝑛=𝑔𝑛−𝑛−1∑𝑖=1(𝑛−1𝑖−1)𝑐𝑖𝑔𝑛−𝑖∑i=1n(n−1i−1)cign−i=gncn=gn−∑i=1n−1(n−1i−1)cign−i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç§»é¡¹å¾å° ððcn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åºåç ð(ð2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éæ¨å ¬å¼ï¼å¯ä»¥éè¿æ­¤é¢ï¼
+移项得到 𝑐𝑛cn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 序列的 𝑂(𝑛2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 递推公式，可以通过此题．
 
-### ä¾é¢ãéè®­éä½ä¸ 2013ãåå¸è§å
+### 例题「集训队作业 2013」城市规划
 
-ä¾é¢ [ãéè®­éä½ä¸ 2013ãåå¸è§å](https://www.luogu.com.cn/problem/P4841)
+例题 [「集训队作业 2013」城市规划](https://www.luogu.com.cn/problem/P4841)
 
-é¢ç®å¤§æï¼æ±æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç»ç¹çææ å·è¿éå¾çæ¹æ¡æ°ï¼ð â¤130000nâ¤130000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼
+题目大意：求有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个结点的有标号连通图的方案数（𝑛 ≤130000n≤130000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）．
 
-å¯¹äºæ°æ®èå´æ´å¤§çåºåé®é¢ï¼å¾å¾æä»¬éè¦æé è¿äºåºåççæå½æ°ï¼ä»¥ä½¿ç¨é«æçå¤é¡¹å¼ç®æ³ï¼
+对于数据范围更大的序列问题，往往我们需要构造这些序列的生成函数，以使用高效的多项式算法．
 
-#### æ¹æ³ä¸ï¼åæ²» FFT
+#### 方法一：分治 FFT
 
-ä¸è¿°çéæ¨å¼å¯ä»¥çä½ä¸ç§èªå·ç§¯å½¢å¼ï¼å èå¯ä»¥ä½¿ç¨åæ²» FFT è¿è¡è®¡ç®ï¼å¤æåº¦ ð(ðlog2â¡ð)O(nlog2â¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+上述的递推式可以看作一种自卷积形式，因而可以使用分治 FFT 进行计算，复杂度 𝑂(𝑛log2⁡𝑛)O(nlog2⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-#### æ¹æ³äºï¼å¤é¡¹å¼æ±é
+#### 方法二：多项式求逆
 
-æä»¬å°ä¸è¿°éæ¨å¼ä¸­çç»åæ°å±å¼ï¼å¹¶è¿è¡åå½¢ï¼
+我们将上述递推式中的组合数展开，并进行变形：
 
-ðâð=1(ðâ1ðâ1)ððððâð=ðððâð=1ðð(ðâ1)!ððâð(ðâð)!=ðð(ðâ1)!âi=1n(nâ1iâ1)cignâi=gnâi=1nci(iâ1)!gnâi(nâi)!=gn(nâ1)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=1(𝑛−1𝑖−1)𝑐𝑖𝑔𝑛−𝑖=𝑔𝑛𝑛∑𝑖=1𝑐𝑖(𝑖−1)!𝑔𝑛−𝑖(𝑛−𝑖)!=𝑔𝑛(𝑛−1)!∑i=1n(n−1i−1)cign−i=gn∑i=1nci(i−1)!gn−i(n−i)!=gn(n−1)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æé å¤é¡¹å¼ï¼
+构造多项式：
 
-ð¶(ð¥)=âð=1ðð(ðâ1)!ð¥ððº(ð¥)=âð=0ððð!ð¥ðð»(ð¥)=âð=1ðð(ðâ1)!ð¥ðC(x)=ân=1cn(nâ1)!xnG(x)=ân=0gnn!xnH(x)=ân=1gn(nâ1)!xn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐶(𝑥)=∑𝑛=1𝑐𝑛(𝑛−1)!𝑥𝑛𝐺(𝑥)=∑𝑛=0𝑔𝑛𝑛!𝑥𝑛𝐻(𝑥)=∑𝑛=1𝑔𝑛(𝑛−1)!𝑥𝑛C(x)=∑n=1cn(n−1)!xnG(x)=∑n=0gnn!xnH(x)=∑n=1gn(n−1)!xn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»£æ¢è¿ä¸å¼å¾å° ð¶ðº =ð»CG=H![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿ç¨ [å¤é¡¹å¼æ±é](../../poly/elementary-func/#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%B1%82%E9%80%86) ååå·ç§¯è§£åº ð¶(ð¥)C(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³å¯ï¼
+代换进上式得到 𝐶𝐺 =𝐻CG=H![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使用 [多项式求逆](../../poly/elementary-func/#%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%B1%82%E9%80%86) 后再卷积解出 𝐶(𝑥)C(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即可．
 
-#### æ¹æ³ä¸ï¼å¤é¡¹å¼ exp
+#### 方法三：多项式 exp
 
-å¦ä¸ç§åæ³æ¯ä½¿ç¨ [EGF ä¸­å¤é¡¹å¼ exp çç»åæä¹](../../poly/egf/#egf-%E4%B8%AD%E5%A4%9A%E9%A1%B9%E5%BC%8F-exp-%E7%9A%84%E7%BB%84%E5%90%88%E6%84%8F%E4%B9%89)ï¼æä»¬è®¾ææ å·è¿éå¾åç®åå¾åºåç EGF åå«ä¸º ð¶(ð¥)C(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðº(ð¥)G(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹å®ä»¬å°æä¸åå ³ç³»ï¼
+另一种做法是使用 [EGF 中多项式 exp 的组合意义](../../poly/egf/#egf-%E4%B8%AD%E5%A4%9A%E9%A1%B9%E5%BC%8F-exp-%E7%9A%84%E7%BB%84%E5%90%88%E6%84%8F%E4%B9%89)，我们设有标号连通图和简单图序列的 EGF 分别为 𝐶(𝑥)C(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐺(𝑥)G(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么它们将有下列关系：
 
-expâ¡(ð¶(ð¥))=ðº(ð¥)ð¶(ð¥)=lnâ¡(ðº(ð¥))expâ¡(C(x))=G(x)C(x)=lnâ¡(G(x))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+exp⁡(𝐶(𝑥))=𝐺(𝑥)𝐶(𝑥)=ln⁡(𝐺(𝑥))exp⁡(C(x))=G(x)C(x)=ln⁡(G(x))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä½¿ç¨ [å¤é¡¹å¼ ln](../../poly/elementary-func/#å¤é¡¹å¼å¯¹æ°å½æ°--ææ°å½æ°) è§£åº ð¶(ð¥)C(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³å¯ï¼
+使用 [多项式 ln](../../poly/elementary-func/#多项式对数函数--指数函数) 解出 𝐶(𝑥)C(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即可．
 
-## ææ å·æ¬§æå¾ãäºåå¾
+## 有标号欧拉图、二分图
 
-### ä¾é¢ãSPOJ KPGRAPHSãCounting Graphs
+### 例题「SPOJ KPGRAPHS」Counting Graphs
 
-ä¾é¢ [ãSPOJ KPGRAPHSãCounting Graphs](http://www.spoj.com/problems/KPGRAPHS/)
+例题 [「SPOJ KPGRAPHS」Counting Graphs](http://www.spoj.com/problems/KPGRAPHS/)
 
-é¢ç®å¤§æï¼æ±æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç»ç¹çåå«æ»¡è¶³ä¸åæ§è´¨çææ å·å¾çæ¹æ¡æ°ï¼ð â¤1000nâ¤1000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼
+题目大意：求有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个结点的分别满足下列性质的有标号图的方案数（𝑛 ≤1000n≤1000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）．
 
-  * è¿éå¾ [A001187](https://oeis.org/A001187)ï¼
-  * æ¬§æå¾ [A033678](https://oeis.org/A033678)ï¼
-  * äºåå¾ [A047864](https://oeis.org/A047864)ï¼
+  * 连通图 [A001187](https://oeis.org/A001187)．
+  * 欧拉图 [A033678](https://oeis.org/A033678)．
+  * 二分图 [A047864](https://oeis.org/A047864)．
 
-æ¬é¢éå¶ä»£ç é¿åº¦ï¼å èæ æ³ç´æ¥ä½¿ç¨å¤é¡¹å¼æ¨¡æ¿ï¼ä½çæå½æ°ä¾ç¶å¯ä»¥å¸®å©æä»¬è¿è¡åæï¼
+本题限制代码长度，因而无法直接使用多项式模板，但生成函数依然可以帮助我们进行分析．
 
-è¿éå¾é®é¢å¨ä¹åçä¾é¢ä¸­å·²è¢«è§£å³ï¼èèæ¬§æå¾ï¼æ³¨æå°ä¸è¿°å¯¹è¿éå¾è®¡æ°çå ç§æ¹æ³ï¼åå¯ä»¥å¨æ»¡è¶³ä»»ææ§è´¨çææ å·è¿éå¾è¿è¡æ¨å¹¿ï¼ä¾å¦æä»¬å¯ä»¥å°è¿éå¾éæ¨å ¬å¼ä¸­ç ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»ä»»æå¾æ¿æ¢ææ»¡è¶³é¡¶ç¹åº¦æ°åä¸ºå¶æ°çå¾ï¼æ­¤æ¶å¾å°ç ððcn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³ä¸ºæ¬§æå¾ï¼
+连通图问题在之前的例题中已被解决，考虑欧拉图．注意到上述对连通图计数的几种方法，均可以在满足任意性质的有标号连通图进行推广．例如我们可以将连通图递推公式中的 𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，从任意图替换成满足顶点度数均为偶数的图，此时得到的 𝑐𝑛cn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即为欧拉图．
 
-æä»¬å° POJ 1737 çéæ¨è¿ç¨å°è£ æè¿éåå½æ°ï¼
+我们将 POJ 1737 的递推过程封装成连通化函数，
 
 ```text 1 2 3 4 5 6 7 ``` |  ```text void ln ( Int C [], Int G []) { for ( int i = 1 ; i <= n ; ++ i ) { C [ i ] = G [ i ]; for ( int j = 1 ; j <= i \- 1 ; ++ j ) C [ i ] -= binom [ i \- 1 ][ j \- 1 ] * C [ j ] * G [ i \- j ]; } } ```   
 ---|---  
   
-åä¸¤é®å³å¯è½»æ¾è§£å³ï¼
+前两问即可轻松解决：
 
 ```text 1 2 3 4 ``` |  ```text for ( int i = 1 ; i <= n ; ++ i ) G [ i ] = pow ( 2 , binom [ i ][ 2 ]); ln ( C , G ); for ( int i = 1 ; i <= n ; ++ i ) G [ i ] = pow ( 2 , binom [ i \- 1 ][ 2 ]); ln ( E , G ); ```   
 ---|---  
   
-æ³¨æå°è¿éçè¿éåéæ¨è¿ç¨å ¶å®ç­ä»·äºå¯¹å ¶ EGF æ±å¤é¡¹å¼ lnï¼åçæä»¬ä¹å¯ä»¥ååºéè¿éåå½æ°ï¼å®ç­ä»·äºå¯¹å ¶ EGF æ±å¤é¡¹å¼ expï¼
+注意到这里的连通化递推过程其实等价于对其 EGF 求多项式 ln，同理我们也可以写出逆连通化函数，它等价于对其 EGF 求多项式 exp．
 
 ```text 1 2 3 4 5 6 7 ``` |  ```text void exp ( Int G [], Int C []) { for ( int i = 1 ; i <= n ; ++ i ) { G [ i ] = C [ i ]; for ( int j = 1 ; j <= i \- 1 ; ++ j ) G [ i ] += binom [ i \- 1 ][ j \- 1 ] * C [ j ] * G [ i \- j ]; } } ```   
 ---|---  
   
-ä¸é¢è®¨è®ºææ å·äºåå¾è®¡æ°ï¼
+下面讨论有标号二分图计数，
 
-æä»¬è®¾ ððbn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤º n ä¸ªç»ç¹çäºåå¾æ¹æ¡æ°ï¼ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç»ç¹å¯¹ç»ç¹è¿è¡ 2 æè²ï¼æ»¡è¶³ç¸åé¢è²çç»ç¹ä¹é´ä¸å­å¨è¾¹çå¾çæ¹æ¡æ°ï¼æä¸¾å ¶ä¸­ä¸ç§é¢è²èç¹çæ°éï¼æ2ï¼
+我们设 𝑏𝑛bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示 n 个结点的二分图方案数，𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个结点对结点进行 2 染色，满足相同颜色的结点之间不存在边的图的方案数．枚举其中一种颜色节点的数量，有2：
 
-ðð=ðâð=0(ðð)2ð(ðâð)gn=âi=0n(ni)2i(nâi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑔𝑛=𝑛∑𝑖=0(𝑛𝑖)2𝑖(𝑛−𝑖)gn=∑i=0n(ni)2i(n−i)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¥ä¸æ¥æä»¬ç¨ä¸¤ç§ä¸åçæ¹æ³å»ºç« ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ððbn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´çå ³ç³»ï¼
+接下来我们用两种不同的方法建立 𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑏𝑛bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间的关系．
 
-#### æ¹æ³ä¸ï¼ç®ä¸¤æ¬¡
+#### 方法一：算两次
 
-æä»¬è®¾ ðð,ðcn,k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºæ k ä¸ªè¿éåéçäºåå¾æ¹æ¡æ°ï¼é£ä¹ä¸é¾å¾å°å¦ä¸å ³ç³»ï¼
+我们设 𝑐𝑛,𝑘cn,k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示有 k 个连通分量的二分图方案数，那么不难得到如下关系：
 
-ðð=ðâð=1ðð,ððð=ðâð=1ðð,ð2ðbn=âi=1ncn,ign=âi=1ncn,i2i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑏𝑛=𝑛∑𝑖=1𝑐𝑛,𝑖𝑔𝑛=𝑛∑𝑖=1𝑐𝑛,𝑖2𝑖bn=∑i=1ncn,ign=∑i=1ncn,i2i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¯è¾ä¸¤ç§ ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¡¨è¾¾å¼ï¼å±å¼å¾ï¼
+比较两种 𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的表达式，展开得：
 
-ðâð=0(ðð)2ð(ðâð)=ðâð=1ðð,ð2ððð,ð=âð=0ðâ1(ðâ1ðâ1)ðð,1ððâð,ðâ1âi=0n(ni)2i(nâi)=âi=1ncn,i2icn,i=âi=0nâ1(nâ1iâ1)cn,1cnâi,kâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=0(𝑛𝑖)2𝑖(𝑛−𝑖)=𝑛∑𝑖=1𝑐𝑛,𝑖2𝑖𝑐𝑛,𝑖=∑𝑖=0𝑛−1(𝑛−1𝑖−1)𝑐𝑛,1𝑐𝑛−𝑖,𝑘−1∑i=0n(ni)2i(n−i)=∑i=1ncn,i2icn,i=∑i=0n−1(n−1i−1)cn,1cn−i,k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸é¾å¾å° ððbn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéæ¨å ³ç³»ï¼å¤æåº¦ ð(ð3)O(n3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸æ­¥ä½¿ç¨å®¹æ¥åçï¼å¯ä»¥ä¼åå° ð(ð2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éè¿æ¬é¢ï¼
+不难得到 𝑏𝑛bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的递推关系，复杂度 𝑂(𝑛3)O(n3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，进一步使用容斥原理，可以优化到 𝑂(𝑛2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 通过本题．
 
-#### æ¹æ³äºï¼è¿éåéæ¨
+#### 方法二：连通化递推
 
-æ¹æ³äºåæ¹æ³ä¸åä½¿ç¨è¿éäºåå¾ ð1ðb1n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) [A001832](https://oeis.org/A001832) æ¥å»ºç« ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ððbn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´çæ¡¥æ¢ï¼
+方法二和方法三均使用连通二分图 𝑏1𝑛b1n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) [A001832](https://oeis.org/A001832) 来建立 𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑏𝑛bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间的桥梁．
 
-æ³¨æå°å¯¹äºæ¯ä¸ªè¿éäºåå¾ï¼æä»¬æ°å¥½æä¸¤ç§ä¸åçæè²æ¹æ³ï¼å¯¹åºå°ä¸¤ç»ä¸åçè¿é 2 æè²å¾ï¼ å èå¯¹ ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿è¡è¿éåï¼å¾å°çåºåæ°å¥½æ¯ ð1ðb1n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸¤åï¼è ððbn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åç± ð1ðb1n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿è¡éè¿éåå¾å°ï¼
+注意到对于每个连通二分图，我们恰好有两种不同的染色方法，对应到两组不同的连通 2 染色图， 因而对 𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进行连通化，得到的序列恰好是 𝑏1𝑛b1n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的两倍，而 𝑏𝑛bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 则由 𝑏1𝑛b1n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进行逆连通化得到．
 
-å æ­¤ï¼
+因此：
 
 ```text 1 2 3 4 5 6 7 ``` |  ```text for ( int i = 1 ; i <= n ; ++ i ) { G [ i ] = 0 ; for ( int j = 0 ; j < i \+ 1 ; ++ j ) G [ i ] += binom [ i ][ j ] * pow ( 2 , j * ( i \- j )); } ln ( B1 , G ); for ( int i = 1 ; i <= n ; ++ i ) B1 [ i ] /= 2 ; exp ( B , B1 ); ```   
 ---|---  
   
-ä¸¤ç§éæ¨çè¿ç¨å¤æåº¦åä¸º ð(ð2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥éè¿æ¬é¢ï¼
+两种递推的过程复杂度均为 𝑂(𝑛2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以通过本题．
 
-#### æ¹æ³ä¸ï¼å¤é¡¹å¼ exp
+#### 方法三：多项式 exp
 
-æä»¬æ³¨æå°ä¹å¯ä»¥ä½¿ç¨ EGF çè§£ä¸é¢çéæ¨è¿ç¨ï¼
+我们注意到也可以使用 EGF 理解上面的递推过程．
 
-è®¾ ðº(ð¥)G(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ððgn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç EGFï¼ðµ1(ð¥)B1(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ð1ðb1n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç EGFï¼ðµ(ð¥)B(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ððbn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç EGFï¼åºç¨åæ³äºçæ¹æ³ï¼æä»¬æï¼
+设 𝐺(𝑥)G(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑔𝑛gn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 EGF，𝐵1(𝑥)B1(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑏1𝑛b1n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 EGF，𝐵(𝑥)B(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑏𝑛bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 EGF，应用做法二的方法，我们有：
 
-ðº(ð¥)=expâ¡(2ðµ1(ð¥))ðµ(ð¥)=expâ¡(ðµ1(ð¥))=expâ¡(lnâ¡ðº(ð¥)2)=âðºG(x)=expâ¡(2B1(x))B(x)=expâ¡(B1(x))=expâ¡(lnâ¡G(x)2)=G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐺(𝑥)=exp⁡(2𝐵1(𝑥))𝐵(𝑥)=exp⁡(𝐵1(𝑥))=exp⁡(ln⁡𝐺(𝑥)2)=√𝐺G(x)=exp⁡(2B1(x))B(x)=exp⁡(B1(x))=exp⁡(ln⁡G(x)2)=G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¬å¯ä»¥å¯¹ç­å¼ä¸¤è¾¹åå«è¿è¡æ±å¯¼å¹¶æ¯è¾ä¸¤è¾¹ç³»æ°ï¼ä»¥å¾å°æäºç¼ç çéæ¨å ¬å¼ï¼éè¿æ­¤é¢ï¼ æ³¨æå°åæ³äºä¸åæ³ä¸æ¬è´¨ç¸åï¼ä¸ä¸è¬æ åµä¸åæ³ä¸å¯ä»¥å¾å°æ´ä¼çæ¶é´å¤æåº¦ï¼
+我们可以对等式两边分别进行求导并比较两边系数，以得到易于编码的递推公式，通过此题． 注意到做法二与做法三本质相同，且一般情况下做法三可以得到更优的时间复杂度．
 
-ðµ2ð=ðº2ðµððµâ²ð=ðºâ²Bn2=G2BnBnâ²=Gâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)åèä»£ç 
+𝐵2𝑛=𝐺2𝐵𝑛𝐵′𝑛=𝐺′Bn2=G2BnBn′=G′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)参考代码
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 ``` |  ```text #include <iostream> using namespace std ; using LL = long long ; constexpr int MOD = int ( 1e9 ) \+ 7 ; // <<= '2. Number Theory .,//{ namespace NT { void INC ( int & a , int b ) { a += b ; if ( a >= MOD ) a -= MOD ; } int sum ( int a , int b ) { a += b ; if ( a >= MOD ) a -= MOD ; return a ; } void DEC ( int & a , int b ) { a -= b ; if ( a < 0 ) a += MOD ; } int dff ( int a , int b ) { a -= b ; if ( a < 0 ) a += MOD ; return a ; } void MUL ( int & a , int b ) { a = ( LL ) a * b % MOD ; } int pdt ( int a , int b ) { return ( LL ) a * b % MOD ; } int _I ( int b ) { int a = MOD , x1 = 0 , x2 = 1 , q ; while ( 1 ) { q = a / b , a %= b ; if ( ! a ) return x2 ; DEC ( x1 , pdt ( q , x2 )); q = b / a , b %= a ; if ( ! b ) return x1 ; DEC ( x2 , pdt ( q , x1 )); } } void DIV ( int & a , int b ) { MUL ( a , _I ( b )); } int qtt ( int a , int b ) { return pdt ( a , _I ( b )); } int pow ( int a , LL b ) { int c ( 1 ); while ( b ) { if ( b & 1 ) MUL ( c , a ); MUL ( a , a ), b >>= 1 ; } return c ; } template < class T > T pow ( T a , LL b ) { T c ( 1 ); while ( b ) { if ( b & 1 ) c *= a ; a *= a , b >>= 1 ; } return c ; } template < class T > T pow ( T a , int b ) { return pow ( a , ( LL ) b ); } struct Int { int val ; operator int () const { return val ; } Int ( int _val = 0 ) : val ( _val ) { val %= MOD ; if ( val < 0 ) val += MOD ; } Int ( LL _val ) : val ( _val ) { _val %= MOD ; if ( _val < 0 ) _val += MOD ; val = _val ; } Int & operator += ( const int & rhs ) { INC ( val , rhs ); return * this ; } Int operator \+ ( const int & rhs ) const { return sum ( val , rhs ); } Int & operator -= ( const int & rhs ) { DEC ( val , rhs ); return * this ; } Int operator \- ( const int & rhs ) const { return dff ( val , rhs ); } Int & operator *= ( const int & rhs ) { MUL ( val , rhs ); return * this ; } Int operator * ( const int & rhs ) const { return pdt ( val , rhs ); } Int & operator /= ( const int & rhs ) { DIV ( val , rhs ); return * this ; } Int operator / ( const int & rhs ) const { return qtt ( val , rhs ); } Int operator \- () const { return MOD \- * this ; } }; } // namespace NT using namespace NT ; constexpr int N = int ( 1e3 ) \+ 9 ; Int binom [ N ][ N ], C [ N ], E [ N ], B [ N ], B1 [ N ], G [ N ]; int n ; void ln ( Int C [], Int G []) { for ( int i = 1 ; i <= n ; ++ i ) { C [ i ] = G [ i ]; for ( int j = 1 ; j <= i \- 1 ; ++ j ) C [ i ] -= binom [ i \- 1 ][ j \- 1 ] * C [ j ] * G [ i \- j ]; } } void exp ( Int G [], Int C []) { for ( int i = 1 ; i <= n ; ++ i ) { G [ i ] = C [ i ]; for ( int j = 1 ; j <= i \- 1 ; ++ j ) G [ i ] += binom [ i \- 1 ][ j \- 1 ] * C [ j ] * G [ i \- j ]; } } int main () { cin . tie ( nullptr ) -> sync_with_stdio ( false ); n = 1000 ; for ( int i = 0 ; i < n \+ 1 ; ++ i ) { binom [ i ][ 0 ] = 1 ; for ( int j = 0 ; j < i ; ++ j ) binom [ i ][ j \+ 1 ] = binom [ i \- 1 ][ j ] \+ binom [ i \- 1 ][ j \+ 1 ]; } for ( int i = 1 ; i <= n ; ++ i ) G [ i ] = pow ( 2 , binom [ i ][ 2 ]); ln ( C , G ); for ( int i = 1 ; i <= n ; ++ i ) G [ i ] = pow ( 2 , binom [ i \- 1 ][ 2 ]); ln ( E , G ); for ( int i = 1 ; i <= n ; ++ i ) { G [ i ] = 0 ; for ( int j = 0 ; j < i \+ 1 ; ++ j ) G [ i ] += binom [ i ][ j ] * pow ( 2 , j * ( i \- j )); } ln ( B1 , G ); for ( int i = 1 ; i <= n ; ++ i ) B1 [ i ] /= 2 ; exp ( B , B1 ); int T ; cin >> T ; while ( T \-- ) { cin >> n ; cout << "Connected: " << C [ n ] << '\n' << "Eulerian: " << E [ n ] << '\n' << "Bipartite: " << B [ n ] << " \n\n " ; } } ```   
 ---|---  
   
-### ä¹ é¢
+### 习题
 
-  * [UOJ Goodbye Jihai D. æ°å¹´çè¿½éæ](https://uoj.ac/contest/50/problem/498)
-  * [BZOJ 3864. å¤§æååå¤åæ ](https://hydro.ac/p/bzoj-P3864)
-  * [BZOJ 2863. æ¤æçå é¦](https://hydro.ac/p/bzoj-P2863)
-  * [Luogu P6295. ææ å· DAG è®¡æ°](https://www.luogu.com.cn/problem/P6295)
-  * [LOJ 6569. ä»äººæè®¡æ°](https://loj.ac/p/6569)
-  * [LOJ 6570. æ¯æ¯è«è®¡æ°](https://loj.ac/p/6570)
-  * [Luogu P5434. ææ å·èæ¼ è®¡æ°](https://www.luogu.com.cn/problem/P5434)
-  * [Luogu P3343. [ZJOI2015] å°éåçå¹»æ³ä¹¡](https://www.luogu.com.cn/problem/P3343)
+  * [UOJ Goodbye Jihai D. 新年的追逐战](https://uoj.ac/contest/50/problem/498)
+  * [BZOJ 3864. 大朋友和多叉树](https://hydro.ac/p/bzoj-P3864)
+  * [BZOJ 2863. 愤怒的元首](https://hydro.ac/p/bzoj-P2863)
+  * [Luogu P6295. 有标号 DAG 计数](https://www.luogu.com.cn/problem/P6295)
+  * [LOJ 6569. 仙人掌计数](https://loj.ac/p/6569)
+  * [LOJ 6570. 毛毛虫计数](https://loj.ac/p/6570)
+  * [Luogu P5434. 有标号荒漠计数](https://www.luogu.com.cn/problem/P5434)
+  * [Luogu P3343. [ZJOI2015] 地震后的幻想乡](https://www.luogu.com.cn/problem/P3343)
   * [HDU 5279. YJC plays Minecraft](https://acm.hdu.edu.cn/showproblem.php?pid=5279)
-  * [Luogu P7364. ææ å·äºåå¾è®¡æ°](https://www.luogu.com.cn/problem/P7364)
-  * [Luogu P5827. ç¹åè¿éå¾è®¡æ°](https://www.luogu.com.cn/problem/P5827)
-  * [Luogu P5827. è¾¹åè¿éå¾è®¡æ°](https://www.luogu.com.cn/problem/P5828)
+  * [Luogu P7364. 有标号二分图计数](https://www.luogu.com.cn/problem/P7364)
+  * [Luogu P5827. 点双连通图计数](https://www.luogu.com.cn/problem/P5827)
+  * [Luogu P5827. 边双连通图计数](https://www.luogu.com.cn/problem/P5828)
   * [Luogu P6596. How Many of Them](https://www.luogu.com.cn/problem/P6596)
-  * [Luogu U152448. ææ å·å¼ºè¿éå¾è®¡æ°](https://www.luogu.com.cn/problem/U152448)
+  * [Luogu U152448. 有标号强连通图计数](https://www.luogu.com.cn/problem/U152448)
   * [Project Euler 434. Rigid graphs](https://projecteuler.net/problem=434)
 
 ## Riddell's Formula
 
-ä¸è¿°å ³äº EGF ç exp çç¨æ³ï¼ææ¶åè¢«ç§°ä½ Riddell's formula for labeled graphsï¼çæå½æ°ç [æ¬§æåæ¢](../../poly/symbolic-method/#%E9%9B%86%E5%90%88%E7%9A%84-multiset-%E6%9E%84%E9%80%A0)ï¼ææ¶ä¹è¢«ç§°ä¸º Riddell's formula for unlabeled graphsï¼åè ææ©åºç°å¨æ¬§æå¯¹åææ°çç ç©¶ä¸­ï¼é¤äºè§£å³å¾è®ºè®¡æ°é®é¢ä¹å¤ï¼ä¹å¨å®å ¨èå é®é¢ä¸­åºç°ï¼
+上述关于 EGF 的 exp 的用法，有时又被称作 Riddell's formula for labeled graphs，生成函数的 [欧拉变换](../../poly/symbolic-method/#%E9%9B%86%E5%90%88%E7%9A%84-multiset-%E6%9E%84%E9%80%A0)，有时也被称为 Riddell's formula for unlabeled graphs，后者最早出现在欧拉对分拆数的研究中，除了解决图论计数问题之外，也在完全背包问题中出现．
 
-å¯¹äºç»å®åºå ððai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¯¹åºç OGF ð´(ð¥)A(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ä¹ ð´(ð¥)A(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¬§æåæ¢ä¸ºï¼
+对于给定序列 𝑎𝑖ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，和对应的 OGF 𝐴(𝑥)A(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，定义 𝐴(𝑥)A(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的欧拉变换为：
 
-E(ð´(ð¥))=âð(1âð¥ð)âðð=expâ¡(âðð´(ð¥ð)ð)E(A(x))=âi(1âxi)âai=expâ¡(âiA(xi)i)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+E(𝐴(𝑥))=∏𝑖(1−𝑥𝑖)−𝑎𝑖=exp⁡(∑𝑖𝐴(𝑥𝑖)𝑖)E(A(x))=∏i(1−xi)−ai=exp⁡(∑iA(xi)i)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¾ E(ð´(ð¥))E(A(x))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåé¡¹ç³»æ°ä¸º ððbi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ä¹è¾ å©æ°ç» ðð =âð|ððððci=âd|ndad![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæéæ¨å ¬å¼
+设 E(𝐴(𝑥))E(A(x))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的各项系数为 𝑏𝑖bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，定义辅助数组 𝑐𝑖 =∑𝑑|𝑛𝑑𝑎𝑑ci=∑d|ndad![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则有递推公式
 
-ððð=ðð+ðâ1âð=1ððððâðnbn=cn+âi=1nâ1cibnâi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛𝑏𝑛=𝑐𝑛+𝑛−1∑𝑖=1𝑐𝑖𝑏𝑛−𝑖nbn=cn+∑i=1n−1cibn−i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## æ æ å·æ 
+## 无标号树
 
-### ä¾é¢ãSPOJ PT07DãLet us count 1 2 3
+### 例题「SPOJ PT07D」Let us count 1 2 3
 
-ä¾é¢ [ãSPOJ PT07DãLet us count 1 2 3](https://www.spoj.com/problems/PT07D/)
+例题 [「SPOJ PT07D」Let us count 1 2 3](https://www.spoj.com/problems/PT07D/)
 
-é¢ç®å¤§æï¼æ±æ n ä¸ªç»ç¹çåå«æ»¡è¶³ä¸åæ§è´¨çæ çæ¹æ¡æ°ï¼
+题目大意：求有 n 个结点的分别满足下列性质的树的方案数．
 
-  * ææ å·ææ ¹æ  [A000169](https://oeis.org/A000169)ï¼
-  * ææ å·æ æ ¹æ  [A000272](https://oeis.org/A000272)ï¼
-  * æ æ å·ææ ¹æ  [A000081](https://oeis.org/A000081)ï¼
-  * æ æ å·æ æ ¹æ  [A000055](https://oeis.org/A000055)ï¼
+  * 有标号有根树 [A000169](https://oeis.org/A000169)．
+  * 有标号无根树 [A000272](https://oeis.org/A000272)．
+  * 无标号有根树 [A000081](https://oeis.org/A000081)．
+  * 无标号无根树 [A000055](https://oeis.org/A000055)．
 
-#### ææ ¹æ 
+#### 有根树
 
-ææ å·æ åµä»¥å¨åæä¸­è§£å³ï¼ä¸é¢èå¯æ æ å·ææ ¹æ ï¼è®¾å ¶ OGF ä¸º ð¹(ð¥)F(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åºç¨æ¬§æåæ¢ï¼å¯å¾ï¼
+有标号情况以在前文中解决，下面考察无标号有根树，设其 OGF 为 𝐹(𝑥)F(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，应用欧拉变换，可得：
 
-ð¹(ð¥)=ð¥E(ð¹(ð¥))F(x)=xE(F(x))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹(𝑥)=𝑥E(𝐹(𝑥))F(x)=xE(F(x))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ååºç³»æ°å³å¯ï¼
+取出系数即可．
 
-#### æ æ ¹æ 
+#### 无根树
 
-èèå®¹æ¥ï¼æä»¬ç¨ææ ¹æ çæ¹æ¡ä¸­åå»æ ¹ä¸æ¯éå¿çæ¹æ¡ï¼å¹¶å¯¹ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¥å¶æ§è¿è¡è®¨è®ºï¼
+考虑容斥，我们用有根树的方案中减去根不是重心的方案，并对 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的奇偶性进行讨论．
 
-å½ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¥æ°æ¶ï¼
+当 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是奇数时：
 
-å¿ ç¶å­å¨ä¸æ£µå­æ å¤§å° â¥âð2ââ¥ân2â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä¸¾è¿æ£µå­æ çå¤§å°æï¼
+必然存在一棵子树大小 ≥⌈𝑛2⌉≥⌈n2⌉![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，枚举这棵子树的大小有．
 
-ðð=ððâðâ1âð=âð2âððððâðgn=fnââi=ân2ânâ1fifnâi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑔𝑛=𝑓𝑛−𝑛−1∑𝑖=⌈𝑛2⌉𝑓𝑖𝑓𝑛−𝑖gn=fn−∑i=⌈n2⌉n−1fifn−i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å½ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¶æ°æ¶ï¼
+当 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是偶数时：
 
-æ³¨æå°å½æä¸¤ä¸ªéå¿çæ åµæ¶ï¼ä¸é¢çè¿ç¨åªä¼åå»ä¸æ¬¡ï¼å æ­¤è¿éè¦åå»
+注意到当有两个重心的情况时，上面的过程只会减去一次，因此还需要减去
 
-ðð=ððâðâ1âð=âð2âððððâðâ(ðð22)gn=fnââi=ân2ânâ1fifnâiâ(fn22)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑔𝑛=𝑓𝑛−𝑛−1∑𝑖=⌈𝑛2⌉𝑓𝑖𝑓𝑛−𝑖−(𝑓𝑛22)gn=fn−∑i=⌈n2⌉n−1fifn−i−(fn22)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### ä¾é¢ãLuogu P5900ãæ æ å·æ æ ¹æ è®¡æ°
+### 例题「Luogu P5900」无标号无根树计数
 
-ä¾é¢ [ãLuogu P5900ãæ æ å·æ æ ¹æ è®¡æ°](https://www.luogu.com.cn/problem/P5900)
+例题 [「Luogu P5900」无标号无根树计数](https://www.luogu.com.cn/problem/P5900)
 
-é¢ç®å¤§æï¼æ±æ n ä¸ªç»ç¹çæ æ å·æ æ ¹æ çæ¹æ¡æ°ï¼ð â¤200000nâ¤200000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼
+题目大意：求有 n 个结点的无标号无根树的方案数（𝑛 ≤200000n≤200000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）．
 
-å¯¹äºæ°æ®èå´æ´å¤§çæ åµï¼åæ³åçï¼æ¬§æåæ¢åä½¿ç¨å¤é¡¹å¼æ¨¡æ¿å³å¯ï¼
+对于数据范围更大的情况，做法同理，欧拉变换后使用多项式模板即可．
 
-## æ æ å·ç®åå¾
+## 无标号简单图
 
-### ä¾é¢ãSGU 282. IsomorphismãIsomorphism
+### 例题「SGU 282. Isomorphism」Isomorphism
 
-ä¾é¢ [ãSGU 282. IsomorphismãIsomorphism](https://codeforces.com/problemsets/acmsguru/problem/99999/282)
+例题 [「SGU 282. Isomorphism」Isomorphism](https://codeforces.com/problemsets/acmsguru/problem/99999/282)
 
-é¢ç®å¤§æï¼æ±æ n ä¸ªç»ç¹çæ æ å·å®å ¨å¾çè¾¹è¿è¡ m æè²çæ¹æ¡æ°ï¼
+题目大意：求有 n 个结点的无标号完全图的边进行 m 染色的方案数．
 
-æ³¨æå°å½ m = 2 æ¶ï¼ææ±å¯¹è±¡å°±æ¯æ æ å·ç®åå¾ [A000088](https://oeis.org/A000088)ï¼èå¯æ³¢å©äºè®¡æ°å®çï¼
+注意到当 m = 2 时，所求对象就是无标号简单图 [A000088](https://oeis.org/A000088)，考察波利亚计数定理，
 
-1|ðº|âðâðºðð(ð)1|G|âgâGmc(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1|𝐺|∑𝑔∈𝐺𝑚𝑐(𝑔)1|G|∑g∈Gmc(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¬é¢ä¸­ç½®æ¢ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºé¡¶ç¹ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¶å¯¹ç§°ç¾¤çæçè¾¹éç½®æ¢ç¾¤ï¼ä½æ´ååæ³çæä¸¾éä¸º ð(ð!)O(n!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ æ³éè¿æ­¤é¢ï¼
+本题中置换群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为顶点的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 阶对称群生成的边集置换群，但暴力做法的枚举量为 𝑂(𝑛!)O(n!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，无法通过此题．
 
-èèæ ¹æ®æç §ç½®æ¢çå¾ªç¯ç»æè¿è¡åç±»ï¼æ¯ç§å¾ªç¯ç»æå¯¹åºä¸ç§æ°çåæï¼æä»¬ç¨ dfs() çæåæï¼é£ä¹é®é¢å³è½¬åä¸ºæ±æ¯ä¸ç§åæ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¯¹åºçç½®æ¢æ°ç® ð¤(ð)w(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¯ä¸ç±»ç½®æ¢ä¸­çå¾ªç¯ä¸ªæ° ð(ð)c(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç­æ¡ä¸º
+考虑根据按照置换的循环结构进行分类，每种循环结构对应一种数的分拆，我们用 dfs() 生成分拆，那么问题即转化为求每一种分拆 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所对应的置换数目 𝑤(𝑝)w(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和每一类置换中的循环个数 𝑐(𝑝)c(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，答案为
 
-1|ðº|âðâðð¤(ð)ðð(ð)1|G|âpâPw(p)mc(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1|𝐺|∑𝑝∈𝑃𝑤(𝑝)𝑚𝑐(𝑝)1|G|∑p∈Pw(p)mc(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-èè ð¤(ð)w(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯ä¸ä¸ªåæå¯¹åºä¸ä¸ªå¾ªç¯æåï¼åæ¶åä¸ç§å¤§å°çåæä¹é´çé¡ºåºæ å ³ï¼å èæä»¬æï¼
+考虑 𝑤(𝑝)w(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，每一个分拆对应一个循环排列，同时同一种大小的分拆之间的顺序无关，因而我们有：
 
-ð¤(ð)=ð!âð(ðð)âð(ðð!)w(p)=n!âi(pi)âi(qi!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑤(𝑝)=𝑛!∏𝑖(𝑝𝑖)∏𝑖(𝑞𝑖!)w(p)=n!∏i(pi)∏i(qi!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿é ððqi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºå¤§å°ä¸º ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæå¨ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­åºç°çæ¬¡æ°ï¼
+这里 𝑞𝑖qi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示大小为 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分拆在 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中出现的次数．
 
-èè ð(ð)c(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå½±åçç¹éçå¾ªç¯å³ä¸º |ð||p|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½é¢ç®èå¯çæ¯è¾¹æè²ï¼æä»¥è¿éè¦èå¯ç¹ç½®æ¢æçæçè¾¹ç½®æ¢ï¼
+考虑 𝑐(𝑝)c(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所影响的点集的循环即为 |𝑝||p|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，但题目考察的是边染色，所以还需要考察点置换所生成的边置换，
 
-å¦æä¸æ¡è¾¹å ³èçé¡¶ç¹å¤å¨åä¸ä¸ªå¾ªç¯å ï¼è®¾è¯¥å¾ªç¯å¤§å°ä¸º ððpi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹è¾¹æçæçå¾ªç¯æ°æ°å¥½ä¸º âðð2ââpi2â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+如果一条边关联的顶点处在同一个循环内，设该循环大小为 𝑝𝑖pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么边所生成的循环数恰好为 ⌊𝑝𝑖2⌋⌊pi2⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¦æä¸æ¡è¾¹å ³èçé¡¶ç¹å¤å¨ä¸¤ä¸ªä¸åçå¾ªç¯ä¸­ï¼è®¾åå«ä¸º ððpi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),ððpj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯ä¸ªå¾ªç¯èçé¿åº¦åä¸º lcmâ¡(ðð,ðð)lcmâ¡(pi,pj)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å èè¾¹æçæçå¾ªç¯æ°æ°å¥½ä¸º ððððlcmâ¡(ðð,ðð) =gcd(ðð,ðð)pipjlcmâ¡(pi,pj)=gcd(pi,pj)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+如果一条边关联的顶点处在两个不同的循环中，设分别为 𝑝𝑖pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),𝑝𝑗pj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，每个循环节的长度均为 lcm⁡(𝑝𝑖,𝑝𝑗)lcm⁡(pi,pj)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因而边所生成的循环数恰好为 𝑝𝑖𝑝𝑗lcm⁡(𝑝𝑖,𝑝𝑗) =gcd(𝑝𝑖,𝑝𝑗)pipjlcm⁡(pi,pj)=gcd(pi,pj)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åèä»£ç 
+参考代码
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 126 127 128 129 130 131 132 133 134 135 136 137 138 139 140 141 142 143 144 145 146 147 148 149 150 151 152 153 154 155 156 157 158 159 160 161 162 163 164 165 166 167 168 169 170 171 172 173 174 175 176 177 178 179 180 181 182 183 184 185 186 187 ``` |  ```text #include <iostream> #include <vector> using namespace std ; using LL = long long ; int MOD = int ( 1e9 ) \+ 7 ; namespace NT { void INC ( int & a , int b ) { a += b ; if ( a >= MOD ) a -= MOD ; } int sum ( int a , int b ) { a += b ; if ( a >= MOD ) a -= MOD ; return a ; } void DEC ( int & a , int b ) { a -= b ; if ( a < 0 ) a += MOD ; } int dff ( int a , int b ) { a -= b ; if ( a < 0 ) a += MOD ; return a ; } void MUL ( int & a , int b ) { a = ( LL ) a * b % MOD ; } int pdt ( int a , int b ) { return ( LL ) a * b % MOD ; } int _I ( int b ) { int a = MOD , x1 = 0 , x2 = 1 , q ; while ( 1 ) { q = a / b , a %= b ; if ( ! a ) return x2 ; DEC ( x1 , pdt ( q , x2 )); q = b / a , b %= a ; if ( ! b ) return x1 ; DEC ( x2 , pdt ( q , x1 )); } } void DIV ( int & a , int b ) { MUL ( a , _I ( b )); } int qtt ( int a , int b ) { return pdt ( a , _I ( b )); } int pow ( int a , LL b ) { int c ( 1 ); while ( b ) { if ( b & 1 ) MUL ( c , a ); MUL ( a , a ), b >>= 1 ; } return c ; } template < class T > T pow ( T a , LL b ) { T c ( 1 ); while ( b ) { if ( b & 1 ) c *= a ; a *= a , b >>= 1 ; } return c ; } template < class T > T pow ( T a , int b ) { return pow ( a , ( LL ) b ); } struct Int { int val ; operator int () const { return val ; } Int ( int _val = 0 ) : val ( _val ) { val %= MOD ; if ( val < 0 ) val += MOD ; } Int ( LL _val ) : val ( _val ) { _val %= MOD ; if ( _val < 0 ) _val += MOD ; val = _val ; } Int & operator += ( const int & rhs ) { INC ( val , rhs ); return * this ; } Int operator \+ ( const int & rhs ) const { return sum ( val , rhs ); } Int & operator -= ( const int & rhs ) { DEC ( val , rhs ); return * this ; } Int operator \- ( const int & rhs ) const { return dff ( val , rhs ); } Int & operator *= ( const int & rhs ) { MUL ( val , rhs ); return * this ; } Int operator * ( const int & rhs ) const { return pdt ( val , rhs ); } Int & operator /= ( const int & rhs ) { DIV ( val , rhs ); return * this ; } Int operator / ( const int & rhs ) const { return qtt ( val , rhs ); } Int operator \- () const { return MOD \- * this ; } }; } // namespace NT using namespace NT ; constexpr int N = int ( 5e1 ) \+ 9 ; Int Fact [ N ]; vector < vector < int >> Partition ; vector < int > cur ; int n , m ; void gen ( int n = :: n , int s = 1 ) { if ( ! n ) { Partition . push_back ( cur ); } else if ( n >= s ) { cur . push_back ( s ); gen ( n \- s , s ); cur . pop_back (); gen ( n , s \+ 1 ); } } Int w ( const vector < int > P ) { Int z = Fact [ n ]; int c = 0 , l = P . front (); for ( auto p : P ) { z /= p ; if ( p != l ) { z /= Fact [ c ]; l = p ; c = 1 ; } else { ++ c ; } } z /= Fact [ c ]; return z ; } int gcd ( int x , int y ) { return y ? gcd ( y , x % y ) : x ; } int c ( const vector < int > P ) { int z = 0 ; for ( int i = 0 ; i < P . size (); ++ i ) { z += P [ i ] / 2 ; for ( int j = 0 ; j < i ; ++ j ) z += gcd ( P [ i ], P [ j ]); } return z ; } int main () { cin >> n >> m >> MOD ; Fact [ 0 ] = 1 ; for ( int i = 1 ; i <= n ; ++ i ) Fact [ i ] = Fact [ i \- 1 ] * i ; gen (); Int res = 0 ; for ( auto P : Partition ) { res += w ( P ) * pow ( m , c ( P )); } res /= Fact [ n ]; cout << res << endl ; } ```   
 ---|---  
   
-## ä¹ é¢
+## 习题
 
   * [CodeForces 438 E. The Child and Binary Tree](https://codeforces.com/problemset/problem/438/E)
-  * [Luogu P5448. [THUPC2018] å¥½å¾è®¡æ°](https://www.luogu.com.cn/problem/P5448)
-  * [Luogu P5818. [JSOI2011] ååå¼æä½è®¡æ°](https://www.luogu.com.cn/problem/P5818)
-  * [Luogu P6597. ç¯çè®¡æ°](https://www.luogu.com.cn/problem/P6597)
-  * [Luogu P6598. ç·çè®¡æ°](https://www.luogu.com.cn/problem/P6598)
-  * [Luogu P4128. [SHOI2006] æè²å¾](https://www.luogu.com.cn/problem/P4128)
-  * [Luogu P4727. [HNOI2009] å¾çåæè®¡æ°](https://www.luogu.com.cn/problem/P4727)
+  * [Luogu P5448. [THUPC2018] 好图计数](https://www.luogu.com.cn/problem/P5448)
+  * [Luogu P5818. [JSOI2011] 同分异构体计数](https://www.luogu.com.cn/problem/P5818)
+  * [Luogu P6597. 烯烃计数](https://www.luogu.com.cn/problem/P6597)
+  * [Luogu P6598. 烷烃计数](https://www.luogu.com.cn/problem/P6598)
+  * [Luogu P4128. [SHOI2006] 有色图](https://www.luogu.com.cn/problem/P4128)
+  * [Luogu P4727. [HNOI2009] 图的同构计数](https://www.luogu.com.cn/problem/P4727)
   * [AtCoder Beginner Contest 222 H. Binary Tree](https://atcoder.jp/contests/abc222/tasks/abc222_h)
   * [AtCoder Beginner Contest 284 Ex. Count Unlabeled Graphs](https://atcoder.jp/contests/abc284/tasks/abc284_h)
-  * [Luogu P4708. ç»ç»](https://www.luogu.com.cn/problem/P4708)
-  * [Luogu P7592. æ°æ ï¼2021 CoE-II Eï¼](https://www.luogu.com.cn/problem/P7592)
-  * [Luogu P5206. [WC2019] æ°æ ](https://www.luogu.com.cn/problem/P5206)
+  * [Luogu P4708. 画画](https://www.luogu.com.cn/problem/P4708)
+  * [Luogu P7592. 数树（2021 CoE-II E）](https://www.luogu.com.cn/problem/P7592)
+  * [Luogu P5206. [WC2019] 数树](https://www.luogu.com.cn/problem/P5206)
 
-## åèèµæä¸æ³¨é
+## 参考资料与注释
 
-  1. [WC2015, é¡¾æ±æ´²è¥åäº¤æµèµæ Graphical Enumeration](https://github.com/lychees/ACM-Training/blob/master/Note/%E5%86%AC%E4%BB%A4%E8%90%A5/2015/%E9%A1%BE%E6%98%B1%E6%B4%B2%E8%90%A5%E5%91%98%E4%BA%A4%E6%B5%81%E8%B5%84%E6%96%99%20Graphical%20Enumeration.pdf)
-  2. [WC2019, çæå½æ°ï¼å¤é¡¹å¼ç®æ³ä¸å¾çè®¡æ°](https://github.com/lychees/ACM-Training/tree/master/Note/%E5%86%AC%E4%BB%A4%E8%90%A5/2019/d4)
+  1. [WC2015, 顾昱洲营员交流资料 Graphical Enumeration](https://github.com/lychees/ACM-Training/blob/master/Note/%E5%86%AC%E4%BB%A4%E8%90%A5/2015/%E9%A1%BE%E6%98%B1%E6%B4%B2%E8%90%A5%E5%91%98%E4%BA%A4%E6%B5%81%E8%B5%84%E6%96%99%20Graphical%20Enumeration.pdf)
+  2. [WC2019, 生成函数，多项式算法与图的计数](https://github.com/lychees/ACM-Training/tree/master/Note/%E5%86%AC%E4%BB%A4%E8%90%A5/2019/d4)
   3. [Counting labeled graphs - Algorithms for Competitive Programming](https://cp-algorithms.com/combinatorics/counting_labeled_graphs.html)
   4. [Graphical Enumeration Paperback, Frank Harary, Edgar M. Palmer](https://github.com/lychees/ACM-Training/blob/master/Note/Book/)
   5. [The encyclopedia of integer sequences, N. J. A. Sloane, Simon Plouffe](https://github.com/lychees/ACM-Training/blob/master/Note/Book/The%20encyclopedia%20of%20integer%20sequences%20\\\\\(N.%20J.A.%20Sloane%2C%20Simon%20Plouffe\\\\\).pdf)
-  6. [Combinatorial Problems and Exercises, LÃ¡szlÃ³ LovÃ¡sz](https://github.com/lychees/ACM-Training/blob/master/Note/Book/Combinatorial%20Problems%20and%20Exercises_L%C3%A1szl%C3%B3%20Lov%C3%A1sz.pdf)
+  6. [Combinatorial Problems and Exercises, László Lovász](https://github.com/lychees/ACM-Training/blob/master/Note/Book/Combinatorial%20Problems%20and%20Exercises_L%C3%A1szl%C3%B3%20Lov%C3%A1sz.pdf)
   7. [Graph Theory and Additive Combinatorics](https://yufeizhao.com/gtacbook/)
 
 * * *
 
-  1. ä¹è®¸æ æ å·äºåæ æ¯ä¸ä¸ªåä¾ï¼å¨ç»æç®åçæ åµä¸ï¼å¯¹åºçç½®æ¢ç¾¤æ¯æç­ç¾¤ï¼Identity Groupï¼ï¼æ­¤æ¶ææ å·çæ¬å¯ä»¥ç´æ¥éè¿ä¹ä»¥ ð!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¾å°ï¼Â â©
+  1. 也许无标号二叉树是一个反例，在结构简单的情况下，对应的置换群是恒等群（Identity Group），此时有标号版本可以直接通过乘以 𝑛!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 得到． ↩
 
-  2. [ç²å ç blog](https://www.luogu.com.cn/blog/PinkRabbit/solution-sp4420) åè¯æä»¬ï¼è¿ä¸ªåºåä¹å¯ä»¥ä½¿ç¨ [Chirp Z-Transform](../../poly/czt/) ä¼åï¼Â â©
+  2. [粉兔的 blog](https://www.luogu.com.cn/blog/PinkRabbit/solution-sp4420) 告诉我们，这个序列也可以使用 [Chirp Z-Transform](../../poly/czt/) 优化． ↩
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/graph-enumeration.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/graph-enumeration.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [lychees](https://github.com/lychees), [c-forrest](https://github.com/c-forrest), [ComeIntoCalm](https://github.com/ComeIntoCalm), [GoodCoder666](https://github.com/GoodCoder666), [HeRaNO](https://github.com/HeRaNO), [megakite](https://github.com/megakite), [Molmin](https://github.com/Molmin)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/graph-enumeration.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/graph-enumeration.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [lychees](https://github.com/lychees), [c-forrest](https://github.com/c-forrest), [ComeIntoCalm](https://github.com/ComeIntoCalm), [GoodCoder666](https://github.com/GoodCoder666), [HeRaNO](https://github.com/HeRaNO), [megakite](https://github.com/megakite), [Molmin](https://github.com/Molmin)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

@@ -1,236 +1,236 @@
-# åé - OI Wiki
+﻿# 向量 - OI Wiki
 
 - Source: https://oi-wiki.org/math/linear-algebra/vector/
 
-# åé
+# 向量
 
-å¨æ¬æä¹åï¼ç¹å«è¯´æä¸ä¸ç¿»è¯çç¸å ³é®é¢ï¼ç±äºåå²åå ï¼æ°å­¦å­¦ç§åç©çå­¦ç§å ³äºãvectorãä¸è¯çç¿»è¯ä¸åï¼
+在本文之前，特别说明一下翻译的相关问题．由于历史原因，数学学科和物理学科关于「vector」一词的翻译不同．
 
-å¨ç©çå­¦ç§ï¼ä¸è¬ç¿»è¯æãç¢éãï¼å¹¶ä¸ä¸ãæ éãä¸è¯ç¸å¯¹ï¼å¨æ°å­¦å­¦ç§ï¼ä¸è¬ç¿»è¯æãåéãï¼è¿ç§ç¿»è¯çå·®å«è¿æãæ¬å¾ãä¸ãç¹å¾ãããå¹ºæ­£ãä¸ãé ãï¼ç­ç­ï¼
+在物理学科，一般翻译成「矢量」，并且与「标量」一词相对．在数学学科，一般翻译成「向量」．这种翻译的差别还有「本征」与「特征」、「幺正」与「酉」，等等．
 
-å¨ **OI Wiki** ï¼ä¸»è¦é¢åè®¡ç®æºç­å·¥ç¨ç±»ç¸å ³å­¦ç§ï¼ä¸æ°å­¦å­¦ç§å ³ç³»æ´è¿ä¸äºï¼å æ­¤éç¨ãåéãè¿ä¸ªè¯æ±ï¼
+在 **OI Wiki** ，主要面向计算机等工程类相关学科，与数学学科关系更近一些，因此采用「向量」这个词汇．
 
-## å®ä¹åç¸å ³æ¦å¿µ
+## 定义及相关概念
 
-**åé** ï¼æ¢æå¤§å°åææ¹åçéç§°ä¸ºåéï¼æ°å­¦ä¸ç ç©¶çåéä¸º **èªç±åé** ï¼å³åªè¦ä¸æ¹åå®çå¤§å°åæ¹åï¼èµ·ç¹åç»ç¹å¯ä»¥ä»»æå¹³è¡ç§»å¨çåéï¼è®°ä½ âðaâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+**向量** ：既有大小又有方向的量称为向量．数学上研究的向量为 **自由向量** ，即只要不改变它的大小和方向，起点和终点可以任意平行移动的向量．记作 ⃗𝑎a→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-**æåçº¿æ®µ** ï¼å¸¦ææ¹åççº¿æ®µç§°ä¸ºæåçº¿æ®µï¼æåçº¿æ®µæä¸è¦ç´ ï¼**èµ·ç¹ï¼æ¹åï¼é¿åº¦** ï¼ç¥éäºä¸è¦ç´ ï¼ç»ç¹å°±å¯ä¸ç¡®å®ï¼ä¸è¬ä½¿ç¨æåçº¿æ®µè¡¨ç¤ºåéï¼
+**有向线段** ：带有方向的线段称为有向线段．有向线段有三要素：**起点，方向，长度** ，知道了三要素，终点就唯一确定．一般使用有向线段表示向量．
 
-**åéçæ¨¡** ï¼æåçº¿æ®µ â¶ð´ðµABâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¿åº¦ç§°ä¸ºåéçæ¨¡ï¼å³ä¸ºè¿ä¸ªåéçå¤§å°ï¼è®°ä¸ºï¼|â¶ð´ðµ||ABâ|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ |ð||a|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+**向量的模** ：有向线段 ⟶𝐴𝐵AB→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的长度称为向量的模，即为这个向量的大小．记为：|⟶𝐴𝐵||AB→|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 |𝒂||a|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-**é¶åé** ï¼æ¨¡ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåéï¼é¶åéçæ¹åä»»æï¼è®°ä¸ºï¼â00â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ð0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+**零向量** ：模为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的向量．零向量的方向任意．记为：⃗00→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 𝟎0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-**åä½åé** ï¼æ¨¡ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåéç§°ä¸ºè¯¥æ¹åä¸çåä½åéï¼ä¸è¬è®°ä¸º âðeâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ðe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+**单位向量** ：模为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的向量称为该方向上的单位向量．一般记为 ⃗𝑒e→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 𝒆e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-**å¹³è¡åé** ï¼æ¹åç¸åæç¸åçä¸¤ä¸ª **éé¶** åéï¼è®°ä½ï¼ð â¥ðaâ¥b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºå¤ä¸ªäºç¸å¹³è¡çåéï¼å¯ä»¥ä»»ä½ä¸æ¡ç´çº¿ä¸è¿äºåéå¹³è¡ï¼é£ä¹ä»»ä¸ç»å¹³è¡åéé½å¯ä»¥å¹³ç§»å°åä¸ç´çº¿ä¸ï¼æä»¥å¹³è¡åéåå« **å ±çº¿åé** ï¼
+**平行向量** ：方向相同或相反的两个 **非零** 向量．记作：𝒂 ∥𝒃a∥b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于多个互相平行的向量，可以任作一条直线与这些向量平行，那么任一组平行向量都可以平移到同一直线上，所以平行向量又叫 **共线向量** ．
 
-**ç¸ç­åé** ï¼æ¨¡ç¸ç­ä¸æ¹åç¸åçåéï¼
+**相等向量** ：模相等且方向相同的向量．
 
-**ç¸ååé** ï¼æ¨¡ç¸ç­ä¸æ¹åç¸åçåéï¼
+**相反向量** ：模相等且方向相反的向量．
 
-**åéçå¤¹è§** ï¼å·²ç¥ä¸¤ä¸ªéé¶åé ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½ â¶ðð´ =ð,â¶ððµ =ðOAâ=a,OBâ=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ ð =â ð´ððµÎ¸=â AOB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯åé ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åé ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤¹è§ï¼è®°ä½ï¼â¨ð,ðâ©â¨a,bâ©![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¾ç¶å½ ð =0Î¸=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ä¸¤åéååï¼ð =ðÎ¸=Ï![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ä¸¤åéååï¼ð =ð2Î¸=Ï2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ä¸¤åéåç´ï¼è®°ä½ ð âðaâb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶ä¸è§å® ð â[0,ð]Î¸â[0,Ï]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+**向量的夹角** ：已知两个非零向量 𝒂,𝒃a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，作 ⟶𝑂𝐴 =𝒂,⟶𝑂𝐵 =𝒃OA→=a,OB→=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么 𝜃 =∠𝐴𝑂𝐵θ=∠AOB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是向量 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与向量 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的夹角．记作：⟨𝒂,𝒃⟩⟨a,b⟩![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．显然当 𝜃 =0θ=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时两向量同向，𝜃 =𝜋θ=π![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时两向量反向，𝜃 =𝜋2θ=π2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时两向量垂直，记作 𝒂 ⟂𝒃a⟂b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并且规定 𝜃 ∈[0,𝜋]θ∈[0,π]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ³¨æå°å¹³é¢åéå ·ææ¹åæ§ï¼ä¸¤ä¸ªåéä¸è½æ¯è¾å¤§å°ï¼ä½å¯ä»¥æ¯è¾ä¸¤åéçæ¨¡é¿ï¼ï¼ä½æ¯ä¸¤ä¸ªåéå¯ä»¥ç¸ç­ï¼
+注意到平面向量具有方向性，两个向量不能比较大小（但可以比较两向量的模长）．但是两个向量可以相等．
 
-## åéççº¿æ§è¿ç®
+## 向量的线性运算
 
-### åéçå åæ³
+### 向量的加减法
 
-å¨å®ä¹äºä¸ç§éä¹åï¼å°±å¸æè®©å®å ·æè¿ç®ï¼åéçè¿ç®å¯ä»¥ç±»æ¯æ°çè¿ç®ï¼ä»ç©çå­¦çè§åº¦åºåä¹å¯ä»¥ç ç©¶åéçè¿ç®ï¼
+在定义了一种量之后，就希望让它具有运算．向量的运算可以类比数的运算，从物理学的角度出发也可以研究向量的运算．
 
-ç±»æ¯ç©çå­¦ä¸­çä½ç§»æ¦å¿µï¼åå¦ä¸ä¸ªäººä» ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç» ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) èµ°å° ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ä»ç»è¿çä½ç§»ä¸º â¶ð´ðµ +â¶ðµð¶ABâ+BCâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿å ¶å®ç­ä»·äºè¿ä¸ªäººç´æ¥ä» ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) èµ°å° ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ â¶ð´ðµ +â¶ðµð¶ =â¶ð´ð¶ABâ+BCâ=ACâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+类比物理学中的位移概念，假如一个人从 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 经 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 走到 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么他经过的位移为 ⟶𝐴𝐵 +⟶𝐵𝐶AB→+BC→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这其实等价于这个人直接从 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 走到 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即 ⟶𝐴𝐵 +⟶𝐵𝐶 =⟶𝐴𝐶AB→+BC→=AC→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ³¨æå°åçåææ³åââå¹³è¡åè¾¹å½¢æ³åï¼åæ ·ä¹å¯ä»¥çåä¸äºåéç¸å ï¼
+注意到力的合成法则——平行四边形法则，同样也可以看做一些向量相加．
 
-æ´çä¸ä¸åéçå æ³æ³åï¼
+整理一下向量的加法法则：
 
-  1. **åéå æ³çä¸è§å½¢æ³å** ï¼è¥è¦æ±åçåéé¦å°¾é¡ºæ¬¡ç¸è¿ï¼é£ä¹è¿äºåéçåä¸ºç¬¬ä¸ä¸ªåéçèµ·ç¹æåæåä¸ä¸ªåéçç»ç¹ï¼
-  2. **åéå æ³çå¹³è¡åè¾¹å½¢æ³å** ï¼è¥è¦æ±åçä¸¤ä¸ªåé **å ±èµ·ç¹** ï¼é£ä¹å®ä»¬çååéä¸ºä»¥è¿ä¸¤ä¸ªåéä¸ºé»è¾¹çå¹³è¡åè¾¹å½¢çå¯¹è§çº¿ï¼èµ·ç¹ä¸ºä¸¤ä¸ªåéå ±æçèµ·ç¹ï¼æ¹åæ²¿å¹³è¡åè¾¹å½¢å¯¹è§çº¿æ¹åï¼
+  1. **向量加法的三角形法则** ：若要求和的向量首尾顺次相连，那么这些向量的和为第一个向量的起点指向最后一个向量的终点；
+  2. **向量加法的平行四边形法则** ：若要求和的两个向量 **共起点** ，那么它们的和向量为以这两个向量为邻边的平行四边形的对角线，起点为两个向量共有的起点，方向沿平行四边形对角线方向．
 
-è¿æ ·ï¼åéçå æ³å°±å ·æäºå ä½æä¹ï¼å¹¶ä¸å¯ä»¥éªè¯ï¼åéçå æ³æ»¡è¶³ **äº¤æ¢å¾ä¸ç»åå¾** ï¼
+这样，向量的加法就具有了几何意义．并且可以验证，向量的加法满足 **交换律与结合律** ．
 
-å ä¸ºå®æ°çåæ³å¯ä»¥åæå ä¸ç¸åæ°çå½¢å¼ï¼èèå¨åéååæ³æ¶ä¹è¿ä¹åï¼å³ï¼ð âð =ð +( âð)aâb=a+(âb)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+因为实数的减法可以写成加上相反数的形式，考虑在向量做减法时也这么写．即：𝒂 −𝒃 =𝒂 +( −𝒃)a−b=a+(−b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¿æ ·ï¼èèå ±èµ·ç¹çåéï¼æç §å¹³è¡åè¾¹å½¢æ³åååºå®ä»¬çå·®ï¼ç»è¿å¹³ç§»åå¯ä»¥åç° **ãå ±èµ·ç¹åéçå·®åéãæ¯ç±ãååéãæåãè¢«ååéãçæåçº¿æ®µ** ï¼è¿ä¹æ¯åéåæ³çå ä½æä¹ï¼
+这样，考虑共起点的向量，按照平行四边形法则做出它们的差，经过平移后可以发现 **「共起点向量的差向量」是由「减向量」指向「被减向量」的有向线段** ．这也是向量减法的几何意义．
 
-ææ¶åæä¸¤ç¹ ð´,ðµA,B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ³ç¥é â¶ð´ðµABâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥å©ç¨åæ³è¿ç® â¶ð´ðµ =â¶ððµ ââ¶ðð´ABâ=OBââOAâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è·å¾ï¼
+有时候有两点 𝐴,𝐵A,B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，想知道 ⟶𝐴𝐵AB→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以利用减法运算 ⟶𝐴𝐵 =⟶𝑂𝐵 −⟶𝑂𝐴AB→=OB→−OA→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 获得．
 
-### åéçæ°ä¹
+### 向量的数乘
 
-è§å®ãå®æ° ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åé ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç§¯ãä¸ºä¸ä¸ªåéï¼è¿ç§è¿ç®å°±æ¯åéç **æ°ä¹è¿ç®** ï¼è®°ä½ ððÎ»a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®çé¿åº¦ä¸æ¹åè§å®å¦ä¸ï¼
+规定「实数 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与向量 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的积」为一个向量，这种运算就是向量的 **数乘运算** ，记作 𝜆𝒂λa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，它的长度与方向规定如下：
 
-  1. |ðð| =|ð||ð||Î»a|=|Î»||a|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. å½ ð >0Î»>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼ððÎ»a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ååï¼å½ ð =0Î»=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼ðð =ðÎ»a=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å½ ð <0Î»<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼ððÎ»a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¹åç¸åï¼
+  1. |𝜆𝒂| =|𝜆||𝒂||λa|=|λ||a|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  2. 当 𝜆 >0λ>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，𝜆𝒂λa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同向，当 𝜆 =0λ=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，𝜆𝒂 =𝟎λa=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，当 𝜆 <0λ<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，𝜆𝒂λa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 方向相反．
 
-æ ¹æ®æ°ä¹çå®ä¹ï¼å¯ä»¥éªè¯æå¦ä¸è¿ç®å¾ï¼
+根据数乘的定义，可以验证有如下运算律：
 
-ð(ðð)=(ðð)ð(ð+ð)ð=ðð+ððð(ð+ð)=ðð+ððÎ»(Î¼a)=(Î»Î¼)a(Î»+Î¼)a=Î»a+Î¼aÎ»(a+b)=Î»a+Î»b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜆(𝜇𝒂)=(𝜆𝜇)𝒂(𝜆+𝜇)𝒂=𝜆𝒂+𝜇𝒂𝜆(𝒂+𝒃)=𝜆𝒂+𝜆𝒃λ(μa)=(λμ)a(λ+μ)a=λa+μaλ(a+b)=λa+λb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç¹å«å°ï¼
+特别地：
 
-(âð)ð=â(ðð)=âð(ð)ð(ðâð)=ððâðð(âÎ»)a=â(Î»a)=âÎ»(a)Î»(aâb)=Î»aâÎ»b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(−𝜆)𝒂=−(𝜆𝒂)=−𝜆(𝒂)𝜆(𝒂−𝒃)=𝜆𝒂−𝜆𝒃(−λ)a=−(λa)=−λ(a)λ(a−b)=λa−λb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### å¤å®ä¸¤åéå ±çº¿
+### 判定两向量共线
 
-ä¸¤ä¸ª **éé¶** åé ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ±çº¿  âº âº![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¯ä¸å®æ° ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ð =ððb=Î»a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+两个 **非零** 向量 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 共线  ⟺ ⟺![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有唯一实数 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝒃 =𝜆𝒂b=λa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æï¼ç±æ°ä¹çå®ä¹å¯ç¥ï¼å¯¹äº **éé¶** åé ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æå­å¨å®æ° ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ð =ððb=Î»a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ ð â¥ðaâ¥b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+证明：由数乘的定义可知，对于 **非零** 向量 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果存在实数 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝒃 =𝜆𝒂b=λa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么 𝒂 ∥𝒃a∥b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åè¿æ¥ï¼å¦æ ð â¥ðaâ¥b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð â ðaâ 0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ |ð| =ð|ð||b|=Î¼|a|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹å½ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ååæ¶ï¼ð =ððb=Î¼a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ååæ¶ ð = âððb=âÎ¼a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+反过来，如果 𝒂 ∥𝒃a∥b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝒂 ≠𝟎a≠0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且 |𝒃| =𝜇|𝒂||b|=μ|a|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么当 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同向时，𝒃 =𝜇𝒂b=μa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，反向时 𝒃 = −𝜇𝒂b=−μa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æåï¼åéçå ï¼åï¼æ°ä¹ç»ç§°ä¸ºåéççº¿æ§è¿ç®ï¼
+最后，向量的加，减，数乘统称为向量的线性运算．
 
-## å¹³é¢åéçåºæ¬å®çååæ è¡¨ç¤º
+## 平面向量的基本定理及坐标表示
 
-### å¹³é¢åéåºæ¬å®ç
+### 平面向量基本定理
 
-å®çå å®¹ï¼å¦æä¸¤ä¸ªåé ðð,ððe1,e2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å ±çº¿ï¼é£ä¹å­å¨å¯ä¸å®æ°å¯¹ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ä¸ ðð,ððe1,e2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ±é¢çä»»æåé ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ð© =ð¥ðð +ð¦ððp=xe1+ye2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+定理内容：如果两个向量 𝒆𝟏,𝒆𝟐e1,e2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不共线，那么存在唯一实数对 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得与 𝒆𝟏,𝒆𝟐e1,e2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 共面的任意向量 𝒑p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝐩 =𝑥𝒆𝟏 +𝑦𝒆𝟐p=xe1+ye2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¹³é¢åéé£ä¹å¤ï¼ææ ·ç¨å°½å¯è½å°çéè¡¨ç¤ºåºææå¹³é¢åéï¼
+平面向量那么多，怎样用尽可能少的量表示出所有平面向量？
 
-åªç¨ä¸ä¸ªåéè¡¨ç¤ºåºææåéæ¾ç¶æ¯ä¸å¯è½çï¼æå¤åªè½è¡¨ç¤ºåºææ¡ç´çº¿ä¸çåéï¼
+只用一个向量表示出所有向量显然是不可能的，最多只能表示出某条直线上的向量．
 
-åå å ¥ä¸ä¸ªåéï¼ç¨ä¸¤ä¸ª **ä¸å ±çº¿** åéè¡¨ç¤ºï¼ä¸¤ä¸ªå ±çº¿åéå¨æ­¤å¯ä»¥çæåä¸ä¸ªåéï¼ï¼è¿æ ·å¯ä»¥æä»»æä¸ä¸ªå¹³é¢åéåè§£å°è¿ä¸¤ä¸ªåéçæ¹åä¸äºï¼
+再加入一个向量，用两个 **不共线** 向量表示（两个共线向量在此可以看成同一个向量），这样可以把任意一个平面向量分解到这两个向量的方向上了．
 
-å¨åä¸å¹³é¢å çä¸¤ä¸ªä¸å ±çº¿çåéç§°ä¸º **åºåº** ï¼å¦æåºåºç¸äºåç´ï¼é£ä¹å¨åè§£çæ¶åå°±æ¯å¯¹åé **æ­£äº¤åè§£** ï¼
+在同一平面内的两个不共线的向量称为 **基底** ．如果基底相互垂直，那么在分解的时候就是对向量 **正交分解** ．
 
-### å¹³é¢åéçåæ è¡¨ç¤º
+### 平面向量的坐标表示
 
-å¦æåä¸æ¨ªè½´ä¸çºµè½´æ¹åç¸åçåä½åé ð,ði,j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ä¸ºä¸ç»åºåºï¼æ ¹æ®å¹³é¢åéåºæ¬å®çï¼å¹³é¢ä¸çææåéä¸æåºå®æ°å¯¹ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸å¯¹åºï¼
+如果取与横轴与纵轴方向相同的单位向量 𝑖,𝑗i,j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作为一组基底，根据平面向量基本定理，平面上的所有向量与有序实数对 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一一对应．
 
-èæåºå®æ°å¯¹ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¹³é¢ç´è§åæ ç³»ä¸çç¹ä¸ä¸å¯¹åºï¼äºæ¯ä½ â¶ðð =ðOPâ=p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ç»ç¹ ð(ð¥,ð¦)P(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹æ¯å¯ä¸ç¡®å®çï¼ç±äºç ç©¶çå¯¹è±¡æ¯èªç±åéï¼å¯ä»¥èªç±å¹³ç§»èµ·ç¹ï¼è¿æ ·ï¼å¨å¹³é¢ç´è§åæ ç³»éï¼æ¯ä¸ä¸ªåéé½å¯ä»¥ç¨æåºå®æ°å¯¹å¯ä¸è¡¨ç¤ºï¼
+而有序实数对 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与平面直角坐标系上的点一一对应，于是作 ⟶𝑂𝑃 =𝒑OP→=p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么终点 𝑃(𝑥,𝑦)P(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也是唯一确定的．由于研究的对象是自由向量，可以自由平移起点，这样，在平面直角坐标系里，每一个向量都可以用有序实数对唯一表示．
 
-## å¹³é¢åéçåæ è¿ç®
+## 平面向量的坐标运算
 
-### å¹³é¢åéçº¿æ§è¿ç®
+### 平面向量线性运算
 
-ç±å¹³é¢åéççº¿æ§è¿ç®å¯ä»¥æ¨å¯¼å ¶åæ è¿ç®ï¼ä¸»è¦æ¹æ³æ¯å°åæ å ¨é¨åä¸ºç¨åºåºè¡¨ç¤ºï¼ç¶åå©ç¨è¿ç®å¾è¿è¡åå¹¶ï¼ä¹åè¡¨ç¤ºåºè¿ç®ç»æçåæ å½¢å¼ï¼
+由平面向量的线性运算可以推导其坐标运算，主要方法是将坐标全部化为用基底表示，然后利用运算律进行合并，之后表示出运算结果的坐标形式．
 
-è¥ä¸¤åé ð =(ð,ð)a=(m,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð =(ð,ð)b=(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åï¼
+若两向量 𝒂 =(𝑚,𝑛)a=(m,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝒃 =(𝑝,𝑞)b=(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则：
 
-ð+ð=(ð+ð,ð+ð)ðâð=(ðâð,ðâð)ðð=(ðð,ðð)a+b=(m+p,n+q)aâb=(mâp,nâq)ka=(km,kn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒂+𝒃=(𝑚+𝑝,𝑛+𝑞)𝒂−𝒃=(𝑚−𝑝,𝑛−𝑞)𝑘𝒂=(𝑘𝑚,𝑘𝑛)a+b=(m+p,n+q)a−b=(m−p,n−q)ka=(km,kn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### æ±ä¸ä¸ªåéçåæ è¡¨ç¤º
+### 求一个向量的坐标表示
 
-å·²ç¥ä¸¤ç¹ ð´(ð,ð),ðµ(ð,ð)A(a,b),B(c,d)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æè¯ â¶ð´ðµ =(ð âð,ð âð)ABâ=(câa,dâb)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+已知两点 𝐴(𝑎,𝑏),𝐵(𝑐,𝑑)A(a,b),B(c,d)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，易证 ⟶𝐴𝐵 =(𝑐 −𝑎,𝑑 −𝑏)AB→=(c−a,d−b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### å¹³ç§»ä¸ç¹
+### 平移一点
 
-ææ¶éè¦å°ä¸ä¸ªç¹ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ²¿ä¸å®æ¹åå¹³ç§»æåä½é¿åº¦ï¼è¿æ ·æè¦å¹³ç§»çæ¹ååè·ç¦»ç»åæä¸ä¸ªåéï¼å©ç¨åéå æ³çä¸è§å½¢æ³åï¼å° â¶ððOPâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ä¸è¿ä¸ªåéï¼å¾å°çåéç»ç¹å³ä¸ºå¹³ç§»åçç¹ï¼
+有时需要将一个点 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 沿一定方向平移某单位长度，这样把要平移的方向和距离组合成一个向量，利用向量加法的三角形法则，将 ⟶𝑂𝑃OP→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 加上这个向量，得到的向量终点即为平移后的点．
 
-### ä¸ç¹å ±çº¿çå¤å®
+### 三点共线的判定
 
-è¥ ð´,ðµ,ð¶A,B,C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ç¹å ±çº¿ï¼å â¶ððµ =ðâ¶ðð´ +(1 âð)â¶ðð¶OBâ=Î»OAâ+(1âÎ»)OCâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+若 𝐴,𝐵,𝐶A,B,C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 三点共线，则 ⟶𝑂𝐵 =𝜆⟶𝑂𝐴 +(1 −𝜆)⟶𝑂𝐶OB→=λOA→+(1−λ)OC→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### ä¸ç¹å ±çº¿å¤å®çæå±
+### 三点共线判定的拓展
 
-å¨ä¸è§å½¢ ð´ðµð¶ABC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼è¥ ð·D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðµð¶BC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­åç¹ï¼ðÂ ðµð· =ðÂ ð·ð¶nÂ BD=kÂ DC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼åæï¼â¶ð´ð· =ðð+ðâ¶ð´ðµ +ðð+ðâ¶ð´ð¶ADâ=nk+nABâ+kk+nACâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+在三角形 𝐴𝐵𝐶ABC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中，若 𝐷D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝐵𝐶BC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等分点（𝑛 𝐵𝐷 =𝑘 𝐷𝐶n BD=k DC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），则有：⟶𝐴𝐷 =𝑛𝑘+𝑛⟶𝐴𝐵 +𝑘𝑘+𝑛⟶𝐴𝐶AD→=nk+nAB→+kk+nAC→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## å¨ä¸ç»´ç©ºé´ä¸­çæå±ï¼ç«ä½å ä½/ç©ºé´åéï¼
+## 在三维空间中的拓展（立体几何/空间向量）
 
-å¨ç©ºé´ä¸­ï¼ä»¥ä¸é¨åæè¿°çææå å®¹åæç«ï¼æ´æï¼
+在空间中，以上部分所述的所有内容均成立．更有：
 
-### ç©ºé´åéåºæ¬å®ç
+### 空间向量基本定理
 
-å®çå å®¹ï¼å¦æä¸ä¸ªåé ðð,ðð,ððe1,e2,e3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å ±é¢ï¼é£ä¹å­å¨å¯ä¸å®æ°å¯¹ (ð¥,ð¦,ð§)(x,y,z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ç©ºé´ä¸­ä»»æåé ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ð© =ð¥ðð +ð¦ðð +ð§ððp=xe1+ye2+ze3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ æ ¹æ®ç©ºé´åéåºæ¬å®çï¼æä»¬åæ ·å¯ä»¥ä½¿ç¨ä¸ä¸ªç¸äºåç´çåºåº ðð,ðð,ððe1,e2,e3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ä¸ºæ­£äº¤åºåºï¼å»ºç« **ç©ºé´ç´è§åæ ç³»** å¹¶ç¨ä¸ä¸ªä¸å ç» (ð¥,ð¦,ð§)(x,y,z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ä¸ºåæ è¡¨ç¤ºç©ºé´åéï¼
+定理内容：如果三个向量 𝒆𝟏,𝒆𝟐,𝒆𝟑e1,e2,e3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不共面，那么存在唯一实数对 (𝑥,𝑦,𝑧)(x,y,z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得空间中任意向量 𝒑p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝐩 =𝑥𝒆𝟏 +𝑦𝒆𝟐 +𝑧𝒆𝟑p=xe1+ye2+ze3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)． 根据空间向量基本定理，我们同样可以使用三个相互垂直的基底 𝒆𝟏,𝒆𝟐,𝒆𝟑e1,e2,e3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作为正交基底，建立 **空间直角坐标系** 并用一个三元组 (𝑥,𝑦,𝑧)(x,y,z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作为坐标表示空间向量．
 
-### å ±é¢åéåºæ¬å®ç
+### 共面向量基本定理
 
-å¦æå­å¨ä¸¤ä¸ªä¸å ±çº¿çåé ð,ðx,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), ååé ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð,ðx,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ±é¢çå è¦æ¡ä»¶æ¯å­å¨å¯ä¸å®æ°å¯¹ (ð,ð)(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð =ðð +ððp=ax+by![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+如果存在两个不共线的向量 𝒙,𝒚x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 则向量 𝒑p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝒙,𝒚x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 共面的充要条件是存在唯一实数对 (𝑎,𝑏)(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝒑 =𝑎𝒙 +𝑏𝒚p=ax+by![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### æ¹ååé
+### 方向向量
 
-ç©ºé´ç´çº¿çæ¹åç¨ä¸ä¸ªä¸è¯¥ç´çº¿å¹³è¡çéé¶åéæ¥è¡¨ç¤ºï¼è¯¥åéç§°ä¸ºè¿æ¡ç´çº¿çä¸ä¸ªæ¹ååéï¼ç´çº¿å¨ç©ºé´ä¸­çä½ç½®ï¼ç±å®ç»è¿çç©ºé´ä¸ç¹åå®çä¸ä¸ªæ¹ååé **å®å ¨ç¡®å®** ï¼
+空间直线的方向用一个与该直线平行的非零向量来表示，该向量称为这条直线的一个方向向量．直线在空间中的位置，由它经过的空间一点及它的一个方向向量 **完全确定** ．
 
-æ³¨æï¼å¹³é¢ä¸­çç´çº¿ä¹ææ¹ååéï¼
+注意，平面中的直线也有方向向量．
 
-å¯¹äº **ç©ºé´** ä¸­çç´çº¿ï¼å¯¹å ¶æ¹ååéæä»¥ä¸æ±æ³ï¼
+对于 **空间** 中的直线，对其方向向量有以下求法：
 
-  * è¥æ ð´(ð¥1,ð¦1,ð§1),ðµ(ð¥2,ð¦2,ð§2)A(x1,y1,z1),B(x2,y2,z2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð´ðµAB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨ç´çº¿çä¸ä¸ªæ¹ååéä¸º ð =(ð¥2 âð¥1,ð¦2 âð¦1,ð§2 âð§1)s=(x2âx1,y2ây1,z2âz1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 若有 𝐴(𝑥1,𝑦1,𝑧1),𝐵(𝑥2,𝑦2,𝑧2)A(x1,y1,z1),B(x2,y2,z2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝐴𝐵AB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在直线的一个方向向量为 𝒔 =(𝑥2 −𝑥1,𝑦2 −𝑦1,𝑧2 −𝑧1)s=(x2−x1,y2−y1,z2−z1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * è¥å·²ç¥ä¸ä¸ªä¸ææ±ç´çº¿ **åç´** çå¹³é¢ï¼è¯¥å¹³é¢ä¸è¬æ¹ç¨ä¸º ðð¥ +ðð¦ +ðð§ +ð =0ax+by+cz+d=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹åç´äºè¯¥å¹³é¢çç´çº¿çä¸ä¸ªæ¹ååéä¸º ð =(ð,ð,ð)s=(a,b,c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¯¥æ¹ååéä¹æ¯è¯¥å¹³é¢ç **ä¸ä¸ªæ³åé** ï¼
+  * 若已知一个与所求直线 **垂直** 的平面，该平面一般方程为 𝑎𝑥 +𝑏𝑦 +𝑐𝑧 +𝑑 =0ax+by+cz+d=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么垂直于该平面的直线的一个方向向量为 𝒔 =(𝑎,𝑏,𝑐)s=(a,b,c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，该方向向量也是该平面的 **一个法向量** ．
 
-### æ³åé
+### 法向量
 
-å¯¹äºä¸ä¸ªé¢ ð´ðµð¶ð·ABCD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶æ³åé ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è¿ä¸ªé¢åç´ï¼
+对于一个面 𝐴𝐵𝐶𝐷ABCD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其法向量 𝒏n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与这个面垂直．
 
-è®¡ç®æ¹æ³ï¼ä»»åä¸¤ä¸ªé¢å ç´çº¿ â¶ð´ðµ,â¶ð´ð·ABâ,ADâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ â¶ð´ðµ â ð =ðABââ n=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ â¶ð´ð· â ð =ðADââ n=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å©ç¨åæ æ³å³å¯è®¡ç®ï¼
+计算方法：任取两个面内直线 ⟶𝐴𝐵,⟶𝐴𝐷AB→,AD→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 ⟶𝐴𝐵 ⋅𝒏 =𝟎AB→⋅n=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 ⟶𝐴𝐷 ⋅𝒏 =𝟎AD→⋅n=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，利用坐标法即可计算．
 
-## åéä¸ç©éµ
+## 向量与矩阵
 
-çº¿æ§ä»£æ°ä¸­ï¼çº¿æ§åæ¢å¯ä»¥ç¨ç©éµè¡¨ç¤ºï¼ä»¤ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºä¸ä¸ªå° ððRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ å°å° ððRm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ççº¿æ§åæ¢ï¼ð±x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºä¸ä¸ª ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´ååéï¼åå­å¨ä¸ä¸ª ð ÃðmÃn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾
+线性代数中，线性变换可以用矩阵表示．令 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示一个将 𝐑𝑛Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 映射到 𝐑𝑚Rm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的线性变换，𝐱x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示一个 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维列向量，则存在一个 𝑚 ×𝑛m×n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得
 
-ð(ð±)=ð´ð±.T(x)=Ax.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑇(𝐱)=𝐴𝐱.T(x)=Ax.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºçº¿æ§åæ¢ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ¢ç©éµï¼å¨ç®æ³é®é¢ä¸­ï¼ä¸è¬æ åµä¸çº¿æ§åæ¢å¨ç¸åç»´åº¦ä¸è¿è¡ï¼å æ­¤ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ªæ¹éµï¼è¿æ ·ï¼å¯¹åéççº¿æ§åæ¢é®é¢å¯ä»¥è½¬åä¸ºç©éµä¹æ³é®é¢ï¼
+矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为线性变换 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的变换矩阵．在算法问题中，一般情况下线性变换在相同维度下进行，因此 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个方阵．这样，对向量的线性变换问题可以转化为矩阵乘法问题．
 
-æ¥ä¸æ¥æä»¬æ¢è®¨ä¸ç§ç«èµä¸­è¾ä¸ºå¸¸è§çåæ¢ä¸å ¶å¯¹åºçåæ¢ç©éµï¼æ¾ç¼©åæ¢ï¼åæ¢ç©éµç¨ ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºï¼ãæè½¬åæ¢ï¼åæ¢ç©éµç¨ ð R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºï¼åå¹³ç§»åæ¢ï¼åæ¢ç©éµç¨ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºï¼ï¼
+接下来我们探讨三种竞赛中较为常见的变换与其对应的变换矩阵：放缩变换（变换矩阵用 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示）、旋转变换（变换矩阵用 𝑅R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示）和平移变换（变换矩阵用 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示）．
 
-### æ¾ç¼©åæ¢
+### 放缩变换
 
-å¯¹äº ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´ååé ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°å ¶æ¯ä¸ç»´æ¾ç¼© ð£1,ð£2,â¦,ð£ðv1,v2,â¦,vn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åï¼å¾å®¹æåç°æ¾ç¼©æä½çåæ¢ç©éµ ð R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ð ÃðnÃn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯¹è§ç©éµï¼å³ ð =diagâ¡{ð£1,ð£2,â¦,ð£ð}S=diagâ¡{v1,v2,â¦,vn}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对于 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维列向量 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，将其每一维放缩 𝑣1,𝑣2,…,𝑣𝑛v1,v2,…,vn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 倍．很容易发现放缩操作的变换矩阵 𝑅R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑛 ×𝑛n×n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的对角矩阵，即 𝑆 =diag⁡{𝑣1,𝑣2,…,𝑣𝑛}S=diag⁡{v1,v2,…,vn}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### æè½¬åæ¢
+### 旋转变换
 
-åéçæè½¬æ¯ç¸å¯¹å¤æçæä½ï¼æä»¬ä» éäºè®¨è®ºäºç»´åä¸ç»´çæ åµï¼
+向量的旋转是相对复杂的操作，我们仅限于讨论二维和三维的情况．
 
-#### åéç»ç¹æè½¬
+#### 向量绕点旋转
 
-å¯¹äºåéç»ç¹æè½¬ï¼ä¸è¬æçæ¯åéç»åç¹æè½¬ï¼å¯¹äºæä¸ç¹ç»å¦ä¸ç¹ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè½¬ï¼å¯ä»¥å©ç¨å¹³ç§»åæ¢ä½¿å¾ç¹ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½äºåç¹ï¼è¿è¡åéæè½¬ååå°åæ ç³»å¹³ç§»ååä½ç½®å³å¯ï¼è®¾å¹³ç§»æä½çåæ¢ç©éµä¸º ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç»åç¹æè½¬æä½çåæ¢ç©éµä¸º ð R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ´ä¸ªè¿ç¨çåæ¢ç©éµä¸º ðð ðâ1TRTâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ¹æ®å ä½æä¹ï¼ðâ1Tâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®å­å¨ï¼
+对于向量绕点旋转，一般指的是向量绕原点旋转．对于某一点绕另一点 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 旋转，可以利用平移变换使得点 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位于原点，进行向量旋转后再将坐标系平移回原位置即可．设平移操作的变换矩阵为 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，绕原点旋转操作的变换矩阵为 𝑅R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则整个过程的变换矩阵为 𝑇𝑅𝑇−1TRT−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．根据几何意义，𝑇−1T−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一定存在．
 
-å¯¹äºäºç»´ç©ºé´ï¼è®¾ ð =(ð¥,ð¦)a=(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¾è§ä¸º ðÎ¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¿åº¦ä¸º ð =âð¥2+ð¦2l=x2+y2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð¥ =ðcosâ¡ð,ð¦ =ðsinâ¡ðx=lcosâ¡Î¸,y=lsinâ¡Î¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»¤å ¶ç»åç¹éæ¶éæè½¬ ð¼Î±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è§ï¼å¾å°åé ð =(ðcosâ¡(ð+ð¼),ðsinâ¡(ð+ð¼))b=(lcosâ¡(Î¸+Î±),lsinâ¡(Î¸+Î±))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对于二维空间，设 𝒂 =(𝑥,𝑦)a=(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，倾角为 𝜃θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，长度为 𝑙 =√𝑥2+𝑦2l=x2+y2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．则 𝑥 =𝑙cos⁡𝜃,𝑦 =𝑙sin⁡𝜃x=lcos⁡θ,y=lsin⁡θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．令其绕原点逆时针旋转 𝛼α![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 角，得到向量 𝒃 =(𝑙cos⁡(𝜃+𝛼),𝑙sin⁡(𝜃+𝛼))b=(lcos⁡(θ+α),lsin⁡(θ+α))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
 ![](./images/vector-rotation.svg)
 
-ç±ä¸è§æç­åæ¢å¾ï¼
+由三角恒等变换得，
 
-ð=(ð(cosâ¡ðcosâ¡ð¼âsinâ¡ðsinâ¡ð¼),ð(sinâ¡ðcosâ¡ð¼+cosâ¡ðsinâ¡ð¼))b=(l(cosâ¡Î¸cosâ¡Î±âsinâ¡Î¸sinâ¡Î±),l(sinâ¡Î¸cosâ¡Î±+cosâ¡Î¸sinâ¡Î±))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒃=(𝑙(cos⁡𝜃cos⁡𝛼−sin⁡𝜃sin⁡𝛼),𝑙(sin⁡𝜃cos⁡𝛼+cos⁡𝜃sin⁡𝛼))b=(l(cos⁡θcos⁡α−sin⁡θsin⁡α),l(sin⁡θcos⁡α+cos⁡θsin⁡α))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åç®ï¼
+化简，
 
-ð=(ðcosâ¡ðcosâ¡ð¼âðsinâ¡ðsinâ¡ð¼,ðsinâ¡ðcosâ¡ð¼+ðcosâ¡ðsinâ¡ð¼)b=(lcosâ¡Î¸cosâ¡Î±âlsinâ¡Î¸sinâ¡Î±,lsinâ¡Î¸cosâ¡Î±+lcosâ¡Î¸sinâ¡Î±)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒃=(𝑙cos⁡𝜃cos⁡𝛼−𝑙sin⁡𝜃sin⁡𝛼,𝑙sin⁡𝜃cos⁡𝛼+𝑙cos⁡𝜃sin⁡𝛼)b=(lcos⁡θcos⁡α−lsin⁡θsin⁡α,lsin⁡θcos⁡α+lcos⁡θsin⁡α)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä¸é¢ç ð¥,ð¦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»£åæ¥å¾
+把上面的 𝑥,𝑦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 代回来得
 
-ð=(ð¥cosâ¡ð¼âð¦sinâ¡ð¼,ð¦cosâ¡ð¼+ð¥sinâ¡ð¼)b=(xcosâ¡Î±âysinâ¡Î±,ycosâ¡Î±+xsinâ¡Î±)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒃=(𝑥cos⁡𝛼−𝑦sin⁡𝛼,𝑦cos⁡𝛼+𝑥sin⁡𝛼)b=(xcos⁡α−ysin⁡α,ycos⁡α+xsin⁡α)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤äºç»´ç©ºé´ä¸ï¼åæ¢ç©éµ ð R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º
+因此二维空间下，变换矩阵 𝑅R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为
 
-ð =[cosâ¡ð¼âsinâ¡ð¼sinâ¡ð¼cosâ¡ð¼].R=[cosâ¡Î±âsinâ¡Î±sinâ¡Î±cosâ¡Î±].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑅=[cos⁡𝛼−sin⁡𝛼sin⁡𝛼cos⁡𝛼].R=[cos⁡α−sin⁡αsin⁡αcos⁡α].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹äºä¸ç»´ç©ºé´ï¼åéæè½¬éè¦ä½¿ç¨ä¸¤ä¸ªè§åº¦åéï¼å³å¤©é¡¶è§æè½¬è§åº¦ä¸æ¹åè§æè½¬è§åº¦ï¼å¯ä»¥å©ç¨ [ç©ºé´çåæ ç³»](../../coordinate/#ç©ºé´çåæ) è¿è¡æè½¬æä½ï¼
+对于三维空间，向量旋转需要使用两个角度参量，即天顶角旋转角度与方向角旋转角度，可以利用 [空间球坐标系](../../coordinate/#空间球坐标系) 进行旋转操作．
 
-#### åéç»ç´çº¿æè½¬
+#### 向量绕直线旋转
 
-å¯¹äºä¸ç»´åéï¼æ´å¸¸è§ççæ¯ç»æç´çº¿æè½¬ï¼åæ ·ä¸ºäºæ¹ä¾¿ï¼æ­¤ç´çº¿æ¯è¿åç¹çï¼å¦æç´çº¿ä¸è¿åç¹ï¼æä»¬ä»å¯ä»¥å¹³ç§»åæ ç³»è¿è¡è½¬åï¼
+对于三维向量，更常见的是绕某直线旋转．同样为了方便，此直线是过原点的．如果直线不过原点，我们仍可以平移坐标系进行转化．
 
-åç´çº¿çæ¹ååé ð =(ð¢ð¥,ð¢ð¦,ð¢ð§)u=(ux,uy,uz)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®¾ä¸ç»´åéç»å ¶éæ¶éæè½¬ ðÎ¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è§ï¼åå¯¹åºçåæ¢ç©éµ ð R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º1
+取直线的方向向量 𝒖 =(𝑢𝑥,𝑢𝑦,𝑢𝑧)u=(ux,uy,uz)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，设三维向量绕其逆时针旋转 𝜃θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 角．则对应的变换矩阵 𝑅R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为1
 
-ð =â¡â¢ â¢ â¢â£ð¢2ð¥(1âcosâ¡ð)+cosâ¡ðð¢ð¥ð¢ð¦(1âcosâ¡ð)âð¢ð§sinâ¡ðð¢ð¥ð¢ð§(1âcosâ¡ð)+ð¢ð¦sinâ¡ðð¢ð¥ð¢ð¦(1âcosâ¡ð)+ð¢ð§sinâ¡ðð¢2ð¦(1âcosâ¡ð)+cosâ¡ðð¢ð¦ð¢ð§(1âcosâ¡ð)âð¢ð¥sinâ¡ðð¢ð¥ð¢ð§(1âcosâ¡ð)âð¢ð¦sinâ¡ðð¢ð¦ð¢ð§(1âcosâ¡ð)+ð¢ð¥sinâ¡ðð¢2ð§(1âcosâ¡ð)+cosâ¡ðâ¤â¥ â¥ â¥â¦.R=[ux2(1âcosâ¡Î¸)+cosâ¡Î¸uxuy(1âcosâ¡Î¸)âuzsinâ¡Î¸uxuz(1âcosâ¡Î¸)+uysinâ¡Î¸uxuy(1âcosâ¡Î¸)+uzsinâ¡Î¸uy2(1âcosâ¡Î¸)+cosâ¡Î¸uyuz(1âcosâ¡Î¸)âuxsinâ¡Î¸uxuz(1âcosâ¡Î¸)âuysinâ¡Î¸uyuz(1âcosâ¡Î¸)+uxsinâ¡Î¸uz2(1âcosâ¡Î¸)+cosâ¡Î¸].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑅=⎡⎢ ⎢ ⎢⎣𝑢2𝑥(1−cos⁡𝜃)+cos⁡𝜃𝑢𝑥𝑢𝑦(1−cos⁡𝜃)−𝑢𝑧sin⁡𝜃𝑢𝑥𝑢𝑧(1−cos⁡𝜃)+𝑢𝑦sin⁡𝜃𝑢𝑥𝑢𝑦(1−cos⁡𝜃)+𝑢𝑧sin⁡𝜃𝑢2𝑦(1−cos⁡𝜃)+cos⁡𝜃𝑢𝑦𝑢𝑧(1−cos⁡𝜃)−𝑢𝑥sin⁡𝜃𝑢𝑥𝑢𝑧(1−cos⁡𝜃)−𝑢𝑦sin⁡𝜃𝑢𝑦𝑢𝑧(1−cos⁡𝜃)+𝑢𝑥sin⁡𝜃𝑢2𝑧(1−cos⁡𝜃)+cos⁡𝜃⎤⎥ ⎥ ⎥⎦.R=[ux2(1−cos⁡θ)+cos⁡θuxuy(1−cos⁡θ)−uzsin⁡θuxuz(1−cos⁡θ)+uysin⁡θuxuy(1−cos⁡θ)+uzsin⁡θuy2(1−cos⁡θ)+cos⁡θuyuz(1−cos⁡θ)−uxsin⁡θuxuz(1−cos⁡θ)−uysin⁡θuyuz(1−cos⁡θ)+uxsin⁡θuz2(1−cos⁡θ)+cos⁡θ].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### å¹³ç§»åæ¢
+### 平移变换
 
-å¹³ç§»åæ¢å¹¶éçº¿æ§åæ¢ï¼èæ¯ä»¿å°åæ¢ï¼ä½ ððRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä»¿å°åæ¢ä»å¯ä»¥ç¨ ðð+1Rn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ççº¿æ§åæ¢è¡¨ç¤ºï¼
+平移变换并非线性变换，而是仿射变换．但 𝐑𝑛Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下的仿射变换仍可以用 𝐑𝑛+1Rn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下的线性变换表示．
 
-èè ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´åé ð =(ð1,ð2,â¦,ðð)a=(a1,a2,â¦,an)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç°å¨è¦å°å ¶æ²¿åé ð =(ð¡1,ð¡2,â¦,ð¡ð)t=(t1,t2,â¦,tn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¹³ç§»ï¼æä»¬å¯¹ååé ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ·»å ä¸ç»´å¹¶ç½®ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¾å°æ°ååé ðâ² =(ð1,ð2,â¦,ðð,1)aâ²=(a1,a2,â¦,an,1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ååæ¢ç©éµ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥åä½
+考虑 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维向量 𝒂 =(𝑎1,𝑎2,…,𝑎𝑛)a=(a1,a2,…,an)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，现在要将其沿向量 𝒕 =(𝑡1,𝑡2,…,𝑡𝑛)t=(t1,t2,…,tn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 平移．我们对列向量 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 添加一维并置为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，得到新列向量 𝒂′ =(𝑎1,𝑎2,…,𝑎𝑛,1)a′=(a1,a2,…,an,1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．则变换矩阵 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以写作
 
-ð=â¡â¢ â¢ â¢ â¢ â¢â£1ð¡11ð¡2â±â®1ð¡ð1â¤â¥ â¥ â¥ â¥ â¥â¦.T=[1t11t2â±â®1tn1].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑇=⎡⎢ ⎢ ⎢ ⎢ ⎢⎣1𝑡11𝑡2⋱⋮1𝑡𝑛1⎤⎥ ⎥ ⎥ ⎥ ⎥⎦.T=[1t11t2⋱⋮1tn1].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹äºå ¶ä»çº¿æ§åæ¢ç©éµï¼å¨ç©éµä¸­å¢å ä¸åä¸ä¸è¡ï¼é¤å³ä¸è§çå ç´ ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤å ¶å®é¨åå¡«å ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼éè¿è¿ç§æ¹æ³ï¼ææççº¿æ§åæ¢ç©éµé½å¯ä»¥è½¬æ¢ä¸ºä»¿å°åæ¢ç©éµï¼ä¾å¦ï¼å¯¹äºäºç»´åéæè½¬ï¼åæ¢ç©éµå¯ä»¥åä¸º
+对于其他线性变换矩阵，在矩阵中增加一列与一行，除右下角的元素为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 外其它部分填充为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，通过这种方法，所有的线性变换矩阵都可以转换为仿射变换矩阵．例如，对于二维向量旋转，变换矩阵可以变为
 
-ð â²=â¡â¢ â¢â£cosâ¡ð¼âsinâ¡ð¼0sinâ¡ð¼cosâ¡ð¼0001â¤â¥ â¥â¦.Râ²=[cosâ¡Î±âsinâ¡Î±0sinâ¡Î±cosâ¡Î±0001].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑅′=⎡⎢ ⎢⎣cos⁡𝛼−sin⁡𝛼0sin⁡𝛼cos⁡𝛼0001⎤⎥ ⎥⎦.R′=[cos⁡α−sin⁡α0sin⁡αcos⁡α0001].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## åéçæ´ä¸¥æ ¼å®ä¹
+## 向量的更严格定义
 
-ä¸æä¸­ï¼åéè¢«å®ä¹ä¸ºäºç©ºé´ä¸­çæåçº¿æ®µï¼ä½æ¯ä¸¥æ ¼æ¥è¯´ï¼åéä¸ä» æ¯æåçº¿æ®µï¼è¦ä½åºåéçæ´ä¸¥æ ¼å®ä¹ï¼éè¦å å®ä¹ [çº¿æ§ç©ºé´](../vector-space/)ï¼å ·ä½å å®¹åè§ [çº¿æ§ç©ºé´](../vector-space/) é¡µé¢çä»ç»ï¼
-
-* * *
-
-  1. åè§ [Rotation matrix from axis and angle - Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle)Â â©
+上文中，向量被定义为了空间中的有向线段．但是严格来说，向量不仅是有向线段．要作出向量的更严格定义，需要先定义 [线性空间](../vector-space/)，具体内容参见 [线性空间](../vector-space/) 页面的介绍．
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-algebra/vector.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/linear-algebra/vector.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Ir1d](https://github.com/Ir1d), [Tiphereth-A](https://github.com/Tiphereth-A), [Enter-tainer](https://github.com/Enter-tainer), [HeRaNO](https://github.com/HeRaNO), [Xeonacid](https://github.com/Xeonacid), [Great-designer](https://github.com/Great-designer), [MegaOwIer](https://github.com/MegaOwIer), [ouuan](https://github.com/ouuan), [aofall](https://github.com/aofall), [CCXXXI](https://github.com/CCXXXI), [chenmingwangOI](https://github.com/chenmingwangOI), [ChungZH](https://github.com/ChungZH), [CoelacanthusHex](https://github.com/CoelacanthusHex), [Early0v0](https://github.com/Early0v0), [iamtwz](https://github.com/iamtwz), [Marcythm](https://github.com/Marcythm), [mgt](mailto:i@margatroid.xyz), [Ohnmaches](mailto:qingdkj@outlook.com), [Persdre](https://github.com/Persdre), [shuzhouliu](https://github.com/shuzhouliu), [StudyingFather](https://github.com/StudyingFather), [wjy-yy](https://github.com/wjy-yy), [yusancky](https://github.com/yusancky), [2008verser](https://github.com/2008verser), [66Leo66](https://github.com/66Leo66), [abc1763613206](https://github.com/abc1763613206), [aberter0x3f](https://github.com/aberter0x3f), [Ayx03](https://github.com/Ayx03), [Backl1ght](https://github.com/Backl1ght), [chieh2lu2](https://github.com/chieh2lu2), [Chrogeek](https://github.com/Chrogeek), [codewasp942](https://github.com/codewasp942), [CSPNOIP](https://github.com/CSPNOIP), [DawnMagnet](https://github.com/DawnMagnet), [dong628](https://github.com/dong628), [EarthMessenger](https://github.com/EarthMessenger), [Enonya](https://github.com/Enonya), [F1shAndCat](https://github.com/F1shAndCat), [future-re](https://github.com/future-re), [fyulingi](https://github.com/fyulingi), [greyqz](https://github.com/greyqz), [HeliumOI](https://github.com/HeliumOI), [henrytbtrue](https://github.com/henrytbtrue), [hly1204](https://github.com/hly1204), [Junyan721113](https://github.com/Junyan721113), [kenlig](https://github.com/kenlig), [krn1pnc](https://github.com/krn1pnc), [ksyx](https://github.com/ksyx), [lrherqwq](https://github.com/lrherqwq), [LTHAndy](https://github.com/LTHAndy), [lychees](https://github.com/lychees), [Menci](https://github.com/Menci), [minghu6](https://github.com/minghu6), [Nanarikom](https://github.com/Nanarikom), [opsiff](https://github.com/opsiff), [panjd123](https://github.com/panjd123), [Pinghigh](https://github.com/Pinghigh), [Planet6174](https://github.com/Planet6174), [Polaris3003](https://github.com/Polaris3003), [purple-vine](https://github.com/purple-vine), [qiqistyle](https://github.com/qiqistyle), [ree-chee](https://github.com/ree-chee), [RuiYu2021](https://github.com/RuiYu2021), [SaisycJiang](https://github.com/SaisycJiang), [Sheng-Horizon](https://github.com/Sheng-Horizon), [tsawke](https://github.com/tsawke), [TSStudio](https://github.com/TSStudio), [WAAutoMaton](https://github.com/WAAutoMaton), [WillHouMoe](https://github.com/WillHouMoe), [YanWQ-monad](https://github.com/YanWQ-monad)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+  1. 参见 [Rotation matrix from axis and angle - Wikipedia](https://en.wikipedia.org/wiki/Rotation_matrix#Rotation_matrix_from_axis_and_angle) ↩
+
+* * *
+
+>  __本页面最近更新： 2026/4/23 03:45:48，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-algebra/vector.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/linear-algebra/vector.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [Tiphereth-A](https://github.com/Tiphereth-A), [Enter-tainer](https://github.com/Enter-tainer), [HeRaNO](https://github.com/HeRaNO), [Xeonacid](https://github.com/Xeonacid), [Great-designer](https://github.com/Great-designer), [MegaOwIer](https://github.com/MegaOwIer), [ouuan](https://github.com/ouuan), [aofall](https://github.com/aofall), [CCXXXI](https://github.com/CCXXXI), [chenmingwangOI](https://github.com/chenmingwangOI), [ChungZH](https://github.com/ChungZH), [CoelacanthusHex](https://github.com/CoelacanthusHex), [Early0v0](https://github.com/Early0v0), [iamtwz](https://github.com/iamtwz), [Marcythm](https://github.com/Marcythm), [mgt](mailto:i@margatroid.xyz), [Ohnmaches](mailto:qingdkj@outlook.com), [Persdre](https://github.com/Persdre), [shuzhouliu](https://github.com/shuzhouliu), [StudyingFather](https://github.com/StudyingFather), [wjy-yy](https://github.com/wjy-yy), [yusancky](https://github.com/yusancky), [2008verser](https://github.com/2008verser), [66Leo66](https://github.com/66Leo66), [abc1763613206](https://github.com/abc1763613206), [aberter0x3f](https://github.com/aberter0x3f), [Ayx03](https://github.com/Ayx03), [Backl1ght](https://github.com/Backl1ght), [chieh2lu2](https://github.com/chieh2lu2), [Chrogeek](https://github.com/Chrogeek), [codewasp942](https://github.com/codewasp942), [CSPNOIP](https://github.com/CSPNOIP), [DawnMagnet](https://github.com/DawnMagnet), [dong628](https://github.com/dong628), [EarthMessenger](https://github.com/EarthMessenger), [Enonya](https://github.com/Enonya), [F1shAndCat](https://github.com/F1shAndCat), [future-re](https://github.com/future-re), [fyulingi](https://github.com/fyulingi), [greyqz](https://github.com/greyqz), [HeliumOI](https://github.com/HeliumOI), [henrytbtrue](https://github.com/henrytbtrue), [hly1204](https://github.com/hly1204), [Junyan721113](https://github.com/Junyan721113), [kenlig](https://github.com/kenlig), [krn1pnc](https://github.com/krn1pnc), [ksyx](https://github.com/ksyx), [lailai0916](https://github.com/lailai0916), [lrherqwq](https://github.com/lrherqwq), [LTHAndy](https://github.com/LTHAndy), [lychees](https://github.com/lychees), [Menci](https://github.com/Menci), [minghu6](https://github.com/minghu6), [Nanarikom](https://github.com/Nanarikom), [opsiff](https://github.com/opsiff), [panjd123](https://github.com/panjd123), [Pinghigh](https://github.com/Pinghigh), [Planet6174](https://github.com/Planet6174), [Polaris3003](https://github.com/Polaris3003), [purple-vine](https://github.com/purple-vine), [qiqistyle](https://github.com/qiqistyle), [ree-chee](https://github.com/ree-chee), [RuiYu2021](https://github.com/RuiYu2021), [SaisycJiang](https://github.com/SaisycJiang), [Sheng-Horizon](https://github.com/Sheng-Horizon), [tsawke](https://github.com/tsawke), [TSStudio](https://github.com/TSStudio), [WAAutoMaton](https://github.com/WAAutoMaton), [WillHouMoe](https://github.com/WillHouMoe), [YanWQ-monad](https://github.com/YanWQ-monad)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

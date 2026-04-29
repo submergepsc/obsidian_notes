@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/js/js-errors.html
-Title: JavaScript 错误 – Throw、Try 和 Catch | 菜鸟教程
-
-JavaScript 错误 – Throw、Try 和 Catch | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-Javascript 教程

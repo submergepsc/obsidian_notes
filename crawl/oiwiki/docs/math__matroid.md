@@ -1,345 +1,345 @@
-# æéµ - OI Wiki
+﻿# 拟阵 - OI Wiki
 
 - Source: https://oi-wiki.org/math/matroid/
 
-# æéµ
+# 拟阵
 
-## å¼è¨
+## 引言
 
-**æéµï¼Matroidï¼** æ¯åæ¯åÂ·æ ç¹å°¼ï¼Hassler Whitneyï¼äº 1935 å¹´æåºçä¸ç§æ½è±¡ä»£æ°ç»æï¼æ¨å¨ç»ä¸åæ¨å¹¿å ³äºç¬ç«æ§çæ¦å¿µï¼ä¾å¦çº¿æ§ä»£æ°ä¸­ççº¿æ§æ å ³æ§åå¾è®ºä¸­çæ ç¯æ§ï¼
+**拟阵（Matroid）** 是哈斯勒·惠特尼（Hassler Whitney）于 1935 年提出的一种抽象代数结构，旨在统一和推广关于独立性的概念，例如线性代数中的线性无关性和图论中的无环性．
 
-æéµä¸ºå¤çä¸ç¬ç«æ§ç¸å ³çä¼åé®é¢æä¾äºå¼ºå¤§ççè®ºå·¥å ·ï¼å¹¿æ³åºç¨äºç»åæ°å­¦ãå¾è®ºãç®æ³è®¾è®¡ç­é¢åï¼å°¤å ¶å¨ä¸ºè´ªå¿ç®æ³ç­ä¼åæ¹æ³æä¾æ°å­¦çè®ºæ¯ææ¹é¢åæ¥äºéè¦ä½ç¨ï¼
+拟阵为处理与独立性相关的优化问题提供了强大的理论工具，广泛应用于组合数学、图论、算法设计等领域，尤其在为贪心算法等优化方法提供数学理论支持方面发挥了重要作用．
 
-## å®ä¹
+## 定义
 
-### æéµ
+### 拟阵
 
-ä¸ä¸ª **æéµï¼Matroidï¼** å¯ä»¥è¡¨ç¤ºä¸º ð =(ð¸,I)M=(E,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ï¼
+一个 **拟阵（Matroid）** 可以表示为 𝑀 =(𝐸,I)M=(E,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中：
 
-  * ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ªæééï¼ç§°ä¸º **åºç¡éï¼Ground Setï¼** ï¼
-  * II![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå­éæï¼ç§°ä¸º **ç¬ç«éæï¼Family of Independent Setsï¼** ï¼å ¶ä¸­çéåç§°ä¸º **ç¬ç«éï¼Independent Setï¼** ï¼æä»¥ä¸ä¸ä¸ªæ§è´¨ï¼
+  * 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个有限集，称为 **基础集（Ground Set）** ．
+  * II![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集族，称为 **独立集族（Family of Independent Sets）** ，其中的集合称为 **独立集（Independent Set）** ．有以下三个性质：
 
-    * **éç©ºæ§** ï¼ç©ºéæ¯ç¬ç«çï¼å³ â  âIâ âI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+    * **非空性** ：空集是独立的，即 ∅ ∈I∅∈I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-    * **éä¼ æ§** ï¼ç¬ç«éçä»»æå­éä¹æ¯ç¬ç«éï¼è¥ ð¼ âIIâI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¯¹äºä»»æ ð¼â² âð¼Iâ²âI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ ð¼â² âIIâ²âI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+    * **遗传性** ：独立集的任意子集也是独立集．若 𝐼 ∈II∈I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则对于任意 𝐼′ ⊆𝐼I′⊆I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有 𝐼′ ∈II′∈I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-    * **æ©å¼ æ§** ï¼è¥ ð¼,ð½ âII,JâI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ |ð¼| <|ð½||I|<|J|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå­å¨ ð âð½ âð¼jâJâI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ð¼ âª{ð} âIIâª{j}âI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+    * **扩张性** ：若 𝐼,𝐽 ∈II,J∈I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 |𝐼| <|𝐽||I|<|J|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则存在 𝑗 ∈𝐽 ∖𝐼j∈J∖I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝐼 ∪{𝑗} ∈II∪{j}∈I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¦æä¸ä¸ªå½¢å¦ (ð¸,I)(E,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç»ææ»¡è¶³ä¸è¿°ä¸ä¸ªæ§è´¨ï¼åç§°å ¶ä¸ºä¸ä¸ªæéµï¼
+如果一个形如 (𝐸,I)(E,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的结构满足上述三个性质，则称其为一个拟阵．
 
-### åº
+### 基
 
-**åºï¼Basisï¼** æ¯æéµä¸­æå¤§çç¬ç«éï¼å³æ æ³åæ·»å å ç´ èä¿æç¬ç«æ§çç¬ç«éï¼ææåºçéåç§°ä¸º **åºéæ** ï¼è®°ä¸º BB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+**基（Basis）** 是拟阵中极大的独立集，即无法再添加元素而保持独立性的独立集．所有基的集合称为 **基集族** ，记为 BB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-**æ§è´¨** ï¼
+**性质** ：
 
-  1. **ç­åºæ°æ§** ï¼ææåºçå¤§å°é½ç¸åï¼ç§°ä¸ºæéµç **ç§©ï¼Rankï¼** ï¼
+  1. **等基数性** ：所有基的大小都相同，称为拟阵的 **秩（Rank）** ．
 
-  2. **æ©å¼ æ§** ï¼ä»»ä½ç¬ç«ééè¿æ·»å åºä¸­çå ç´ é½å¯ä»¥æ©å¼ ä¸ºä¸ä¸ªåºï¼
+  2. **扩张性** ：任何独立集通过添加基中的元素都可以扩张为一个基．
 
-### å
+### 圈
 
-**åï¼Circuitï¼** æ¯æéµä¸­æå°çä¾èµéï¼å³å ¶ææçå­éé½æ¯ç¬ç«çï¼ä½èªèº«ä¸æ¯ç¬ç«éï¼ä»»æä¸¤ä¸ªåä¹é´ä¸å­å¨å å«å ³ç³»ï¼
+**圈（Circuit）** 是拟阵中最小的依赖集，即其所有真子集都是独立的，但自身不是独立集，任意两个圈之间不存在包含关系．
 
-### ç§©
+### 秩
 
-**ç§©å½æ°ï¼Rank Functionï¼** ð :2ð¸ ââ¤â¥0r:2EâZâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°åºç¡é ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå­éæ å°å°éè´æ´æ°ï¼å¯¹äºä»»æ ð âð¸SâE![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð(ð)r(S)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å®ä¹ä¸º ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­æå¤§ç¬ç«éçå¤§å°ï¼å³
+**秩函数（Rank Function）** 𝑟 :2𝐸 →ℤ≥0r:2E→Z≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 将基础集 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集映射到非负整数．对于任意 𝑆 ⊆𝐸S⊆E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑟(𝑆)r(S)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 定义为 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中最大独立集的大小，即
 
-ð(ð)=max{|ð¼|â£ð¼âðâ§ð¼âI}.r(S)=max{|I|â£IâSâ§IâI}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟(𝑆)=max{|𝐼|∣𝐼⊆𝑆∧𝐼∈I}.r(S)=max{|I|∣I⊆S∧I∈I}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-**æ§è´¨** ï¼
+**性质** ：
 
-  1. **éè´æ§** ï¼å¯¹äºä»»æ ð âð¸SâE![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ 0 â¤ð(ð) â¤|ð|0â¤r(S)â¤|S|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. **非负性** ：对于任意 𝑆 ⊆𝐸S⊆E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 0 ≤𝑟(𝑆) ≤|𝑆|0≤r(S)≤|S|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  2. **åè°æ§** ï¼è¥ ð´ âðµ âð¸AâBâE![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð(ð´) â¤ð(ðµ)r(A)â¤r(B)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  2. **单调性** ：若 𝐴 ⊆𝐵 ⊆𝐸A⊆B⊆E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝑟(𝐴) ≤𝑟(𝐵)r(A)≤r(B)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  3. **æ¬¡æ¨¡æ§** ï¼å¯¹äºä»»æ ð´,ðµ âð¸A,BâE![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð(ð´ âªðµ) +ð(ð´ â©ðµ) â¤ð(ð´) +ð(ðµ)r(AâªB)+r(Aâ©B)â¤r(A)+r(B)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  3. **次模性** ：对于任意 𝐴,𝐵 ⊆𝐸A,B⊆E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝑟(𝐴 ∪𝐵) +𝑟(𝐴 ∩𝐵) ≤𝑟(𝐴) +𝑟(𝐵)r(A∪B)+r(A∩B)≤r(A)+r(B)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## å ¸åç¤ºä¾
+## 典型示例
 
-### 1\. ååæéµï¼Uniform Matroidï¼
+### 1\. 均匀拟阵（Uniform Matroid）
 
-**å®ä¹** ï¼ç»å®åºç¡é ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åéè´æ´æ° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ååæéµ ðð,ð¸Uk,E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬ç«éææ¯ææå¤§å°ä¸è¶ è¿ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå­éï¼è¡¨ç¤ºä¸ºï¼
+**定义** ：给定基础集 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和非负整数 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，均匀拟阵 𝑈𝑘,𝐸Uk,E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的独立集族是所有大小不超过 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集，表示为：
 
-I={ð¼âð¸â£|ð¼|â¤ð}ï¼I={IâEâ£|I|â¤k}ï¼![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+I={𝐼⊆𝐸∣|𝐼|≤𝑘}．I={I⊆E∣|I|≤k}．![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-  * **åºï¼Basesï¼** ï¼ææå¤§å°ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå­éï¼
+  * **基（Bases）** ：所有大小为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集．
 
-  * **åï¼Circuitsï¼** ï¼ææå¤§å°ä¸º ð +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå­éï¼
+  * **圈（Circuits）** ：所有大小为 𝑘 +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集．
 
-  * **ç§©ï¼Rankï¼** ï¼ð(ð¸) =min(ð,|ð¸|)r(E)=min(k,|E|)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ç¬ç«éä¸­æå¤è½æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ï¼
+  * **秩（Rank）** ：𝑟(𝐸) =min(𝑘,|𝐸|)r(E)=min(k,|E|)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即独立集中最多能有 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素．
 
-### 2\. å¾æéµï¼Graphical Matroidï¼
+### 2\. 图拟阵（Graphical Matroid）
 
-**å®ä¹** ï¼ç»å®ä¸ä¸ªæ åå¾ ðº =(ð,ð¸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¾æéµ ð(ðº)M(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºç¡éæ¯è¾¹é ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ç¬ç«éææ¯ææä¸å å«ç¯çè¾¹éï¼å³ææçæ£®æï¼
+**定义** ：给定一个无向图 𝐺 =(𝑉,𝐸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，图拟阵 𝑀(𝐺)M(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基础集是边集 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其独立集族是所有不包含环的边集，即所有的森林．
 
-  * **åº** ï¼å¾ä¸­ççææ ï¼å¨è¿éå¾çæ åµä¸ï¼ï¼çææ æ¯æå¤§çç¬ç«éï¼æ æ³åå¢å è¾¹èä¸å½¢æç¯ï¼
+  * **基** ：图中的生成树（在连通图的情况下）．生成树是极大的独立集，无法再增加边而不形成环．
 
-  * **å** ï¼å¾ä¸­çç®åç¯ï¼å»æç¯ä¸­çä»»æä¸æ¡è¾¹ï¼å©ä½é¨åé½ä¸ºç¬ç«éï¼
+  * **圈** ：图中的简单环，去掉环中的任意一条边，剩余部分都为独立集．
 
-  * **ç§©** ï¼ð(ð¸) =|ð| âðr(E)=|V|âc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¾çè¿éåæ¯æ°ï¼å¯¹äºä¸ä¸ªè¿éçæ åå¾ï¼å ¶ç§©ç­äºé¡¶ç¹æ°åä¸ï¼å³ |ð| â1|V|â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * **秩** ：𝑟(𝐸) =|𝑉| −𝑐r(E)=|V|−c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑐c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是图的连通分支数．对于一个连通的无向图，其秩等于顶点数减一，即 |𝑉| −1|V|−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### 3\. çº¿æ§æéµï¼Linear Matroidï¼
+### 3\. 线性拟阵（Linear Matroid）
 
-**å®ä¹** ï¼çº¿æ§æéµåºäºåéç©ºé´ï¼ç»å®åéç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åºç¡é ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çä¸ç»æéåéï¼å ¶ç¬ç«éææ¯ ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ææçº¿æ§æ å ³çåéå­éï¼
+**定义** ：线性拟阵基于向量空间．给定向量空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，基础集 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的一组有限向量，其独立集族是 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中所有线性无关的向量子集．
 
-  * **åº** ï¼æå¤§ççº¿æ§æ å ³åééï¼å ¶å¤§å°ç­äºåéç©ºé´çç»´æ°ï¼
+  * **基** ：极大的线性无关向量集，其大小等于向量空间的维数．
 
-  * **å** ï¼æå°ççº¿æ§ç¸å ³åééåï¼å ¶ä»»æçå­éé½æ¯ç¬ç«çï¼èèªèº«æ¯çº¿æ§ç¸å ³çï¼
+  * **圈** ：最小的线性相关向量集合，其任意真子集都是独立的，而自身是线性相关的．
 
-  * **ç§©** ï¼çº¿æ§æéµçç§© ð(ð¸) =dimâ¡(ð)r(E)=dimâ¡(V)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³åéç©ºé´çç»´æ°ï¼ç¬ç«éçå¤§å°ä¸è½è¶ è¿åéç©ºé´çç»´æ°ï¼
+  * **秩** ：线性拟阵的秩 𝑟(𝐸) =dim⁡(𝑉)r(E)=dim⁡(V)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即向量空间的维数．独立集的大小不能超过向量空间的维数．
 
-### 4\. ååæéµï¼Partition Matroidï¼
+### 4\. 划分拟阵（Partition Matroid）
 
-**å®ä¹** ï¼å°åºç¡é ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ååä¸ºä¸ç¸äº¤çå­é ð¸1,ð¸2,â¦,ð¸ðE1,E2,â¦,Em![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶ä¸ºæ¯ä¸ªå­é ð¸ðEi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå®ä¸ä¸ªéè´æ´æ° ððki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ååæéµçç¬ç«éæç±æ»¡è¶³æ¯ä¸ªé¨åéåå ç´ æ°éä¸è¶ è¿ ððki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå­éç»æï¼è¡¨ç¤ºä¸ºï¼
+**定义** ：将基础集 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 划分为不相交的子集 𝐸1,𝐸2,…,𝐸𝑚E1,E2,…,Em![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并为每个子集 𝐸𝑖Ei![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 指定一个非负整数 𝑘𝑖ki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．划分拟阵的独立集族由满足每个部分选取元素数量不超过 𝑘𝑖ki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集组成，表示为：
 
-I={ð¼âð¸â£âð,|ð¼â©ð¸ð|â¤ðð}ï¼I={IâEâ£âi,|Iâ©Ei|â¤ki}ï¼![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+I={𝐼⊆𝐸∣∀𝑖,|𝐼∩𝐸𝑖|≤𝑘𝑖}．I={I⊆E∣∀i,|I∩Ei|≤ki}．![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-  * **åº** ï¼æ»¡è¶³ |ð¼ â©ð¸ð| =ðð|Iâ©Ei|=ki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬ç«éæ¯ååæéµçåºï¼æ¯ä¸ªåºå¨æ¯ä¸ªå­éä¸­éåäºæ°å¥½ ððki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ï¼
+  * **基** ：满足 |𝐼 ∩𝐸𝑖| =𝑘𝑖|I∩Ei|=ki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的独立集是划分拟阵的基．每个基在每个子集中选取了恰好 𝑘𝑖ki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素．
 
-  * **å** ï¼ååæéµçåæ¯æå°çä¾èµéï¼å³å å«è³å°ä¸ä¸ªå ç´ æ°éè¶ è¿ ððki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå­éï¼
+  * **圈** ：划分拟阵的圈是最小的依赖集，即包含至少一个元素数量超过 𝑘𝑖ki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集．
 
-  * **ç§©** ï¼ååæéµçç§©ä¸º ð(ð¸) =âðð=1ððr(E)=âi=1mki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³æå¤§ç¬ç«éçå¤§å°ç­äºæ¯ä¸ªå­éä¸­å è®¸éåçæå¤§å ç´ æ°çæ»åï¼
+  * **秩** ：划分拟阵的秩为 𝑟(𝐸) =∑𝑚𝑖=1𝑘𝑖r(E)=∑i=1mki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即最大独立集的大小等于每个子集中允许选取的最大元素数的总和．
 
-### 5\. æè²æéµï¼Colored Matroidï¼
+### 5\. 有色拟阵（Colored Matroid）
 
-**å®ä¹** ï¼æè²æéµæ¯ååæéµçä¸ç§ç¹æ®å½¢å¼ï¼å ¶ä¸­æ¯ä¸ªå ç´ é½èµäºäºé¢è²ï¼ç»å®åºç¡é ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åé¢è²é ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯ä¸ªå ç´ ð âð¸eâE![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½ä¸æä¸ªé¢è² ð âð¶câC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸å ³èï¼æè²æéµçç¬ç«éä¸ä» éè¦æ»¡è¶³æ®éæéµçç¬ç«æ§æ¡ä»¶ï¼è¿å¿ é¡»éµå®é¢è²ä¸æå®çéå¶ï¼ä¾å¦åä¸ç§é¢è²çå ç´ å¨ç¬ç«éä¸­æå¤éåä¸å®æ°éï¼
+**定义** ：有色拟阵是划分拟阵的一种特殊形式，其中每个元素都赋予了颜色．给定基础集 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和颜色集 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，每个元素 𝑒 ∈𝐸e∈E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都与某个颜色 𝑐 ∈𝐶c∈C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相关联．有色拟阵的独立集不仅需要满足普通拟阵的独立性条件，还必须遵守颜色上指定的限制，例如同一种颜色的元素在独立集中最多选取一定数量．
 
-  * **åº** ï¼æè²æéµçåºæ¯ç¬¦åé¢è²éå¶åç¬ç«æ§æ¡ä»¶çæå¤§ç¬ç«éï¼
+  * **基** ：有色拟阵的基是符合颜色限制和独立性条件的极大独立集．
 
-  * **å** ï¼åæ¯æå°çä¾èµéï¼å å«è³å°ä¸ä¸ªè¿åç¬ç«æ§æé¢è²éå¶çå ç´ éåï¼
+  * **圈** ：圈是最小的依赖集，包含至少一个违反独立性或颜色限制的元素集合．
 
-  * **ç§©** ï¼æè²æéµçç§©æ¯æ»¡è¶³é¢è²éå¶æ¡ä»¶ä¸çæå¤§ç¬ç«éå¤§å°ï¼å®æ¢ä¾èµäºæéµçç»æï¼ä¹ä¾èµäºé¢è²éå¶çå ·ä½è§å®ï¼
+  * **秩** ：有色拟阵的秩是满足颜色限制条件下的最大独立集大小．它既依赖于拟阵的结构，也依赖于颜色限制的具体规定．
 
-## æé åè¿ç®
+## 构造和运算
 
-### å¯¹å¶
+### 对偶
 
-ç»å®æéµ ð =(ð¸,I)M=(E,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ **å¯¹å¶æéµ** ðâ =(ð¸,Iâ)Mâ=(E,Iâ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å®ä¹ä¸ºï¼
+给定拟阵 𝑀 =(𝐸,I)M=(E,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其 **对偶拟阵** 𝑀∗ =(𝐸,I∗)M∗=(E,I∗)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 定义为：
 
-Iâ={ð¼ââð¸â£âðµâI,|ðµ|=ð(ð¸),ðµâð¸âð¼â}ï¼Iâ={IââEâ£âBâI,|B|=r(E),BâEâIâ}ï¼![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+I∗={𝐼∗⊆𝐸∣∃𝐵∈I,|𝐵|=𝑟(𝐸),𝐵⊆𝐸∖𝐼∗}．I∗={I∗⊆E∣∃B∈I,|B|=r(E),B⊆E∖I∗}．![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-**æ§è´¨** ï¼
+**性质** ：
 
-  * **åº** ï¼å¯¹å¶æéµ ðâMâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºæ¯ ðM![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºå¨åºç¡é ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çè¡¥éï¼æ¢å¥è¯è¯´ï¼å¦æ ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ðM![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºï¼é£ä¹ ð¸ âðµEâB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯ ðâMâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºï¼
+  * **基** ：对偶拟阵 𝑀∗M∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基是 𝑀M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基在基础集 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的补集．换句话说，如果 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑀M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基，那么 𝐸 ∖𝐵E∖B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是 𝑀∗M∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基．
 
-  * **ç§©å½æ°** ï¼å¯¹å¶æéµçç§©å½æ°ä¸º ðâ(ð) =|ð| âð(ð¸) +ð(ð¸ âð)râ(S)=|S|âr(E)+r(EâS)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ð¸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå­éï¼è¿æå³çå¯¹å¶æéµçç§©å¯ä»¥éè¿åºç¡éçå¤§å°ãåæéµçç§©ä»¥åä»åºç¡éä¸­ç§»é¤ ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åçç§©æ¥è®¡ç®ï¼
+  * **秩函数** ：对偶拟阵的秩函数为 𝑟∗(𝑆) =|𝑆| −𝑟(𝐸) +𝑟(𝐸 ∖𝑆)r∗(S)=|S|−r(E)+r(E∖S)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝐸E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集．这意味着对偶拟阵的秩可以通过基础集的大小、原拟阵的秩以及从基础集中移除 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后的秩来计算．
 
-  * **èªåæ§** ï¼å¯¹å¶æéµçå¯¹å¶ä»æ¯åæéµï¼å³ (ðâ)â =ð(Mâ)â=M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * **自反性** ：对偶拟阵的对偶仍是原拟阵，即 (𝑀∗)∗ =𝑀(M∗)∗=M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-**ç¤ºä¾** ï¼
+**示例** ：
 
-å¯¹äºä¸ä¸ªæ åå¾ ðº =(ð,ð¸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¾æéµ ð(ðº)M(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯¹å¶ ð(ðº)âM(G)â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç±å¾çå²éç»æçæéµï¼å¾æéµ ð(ðº)M(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºæ¯å¾ä¸­ççææ ï¼èå ¶å¯¹å¶ ð(ðº)âM(G)â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºæ¯è¿äºçææ çè¡¥éï¼å¯¹å¶ ð(ðº)âM(G)â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çååæ¯å¾çæå°å²éï¼å³å°å¾åæä¸¤ä¸ªä¸è¿éé¨åçæå°è¾¹éï¼
+对于一个无向图 𝐺 =(𝑉,𝐸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，图拟阵 𝑀(𝐺)M(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的对偶 𝑀(𝐺)∗M(G)∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是由图的割集组成的拟阵．图拟阵 𝑀(𝐺)M(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基是图中的生成树，而其对偶 𝑀(𝐺)∗M(G)∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基是这些生成树的补集，对偶 𝑀(𝐺)∗M(G)∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的圈则是图的最小割集，即将图分成两个不连通部分的最小边集．
 
-ä¾å¦ï¼èèä¸ä¸ªç®åçä¸è§å½¢å¾ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶è¾¹éä¸º ð¸ ={ð1,ð2,ð3}E={e1,e2,e3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¾æéµ ð(ðº)M(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºæ¯ä¸¤æ¡è¾¹çéåï¼å¦ {ð1,ð2}{e1,e2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼èå¯¹å¶æéµ ð(ðº)âM(G)â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºæ¯åæ¡è¾¹çéåï¼å¦ {ð3}{e3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼ð(ðº)âM(G)â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ¯ä¸¤æ¡è¾¹çéåï¼å³æå°å²éï¼å¦ {ð2,ð3}{e2,e3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼å ä¸ºç§»é¤å ¶ä¸­çä¸æ¡è¾¹å°±ä¼å°å¾åå²ä¸ºä¸¤ä¸ªè¿éåæ¯ï¼
+例如，考虑一个简单的三角形图 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其边集为 𝐸 ={𝑒1,𝑒2,𝑒3}E={e1,e2,e3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．图拟阵 𝑀(𝐺)M(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基是两条边的集合（如 {𝑒1,𝑒2}{e1,e2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），而对偶拟阵 𝑀(𝐺)∗M(G)∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基是单条边的集合（如 {𝑒3}{e3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），𝑀(𝐺)∗M(G)∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的圈是两条边的集合（即最小割集，如 {𝑒2,𝑒3}{e2,e3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），因为移除其中的一条边就会将图分割为两个连通分支．
 
-### å é¤åæ¶ç¼©
+### 删除和收缩
 
-**å é¤ï¼Deletionï¼** ï¼
+**删除（Deletion）** ：
 
-å¯¹äº ð´ âð¸AâE![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æéµ ðM![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å é¤ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¾å°æ°çæéµ ð âð´MâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ç¬ç«éæ Iâ²Iâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å®ä¹ä¸ºï¼
+对于 𝐴 ⊆𝐸A⊆E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，拟阵 𝑀M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 删除 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后得到新的拟阵 𝑀 ∖𝐴M∖A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其独立集族 I′I′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 定义为：
 
-Iâ²={ð¼âð¸âð´â£ð¼âI}ï¼Iâ²={IâEâAâ£IâI}ï¼![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+I′={𝐼⊆𝐸∖𝐴∣𝐼∈I}．I′={I⊆E∖A∣I∈I}．![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥çåºï¼å é¤æä½å°±æ¯ä»æéµä¸­ç§»é¤æäºå ç´ ï¼å¹¶ä¿çå©ä½å ç´ å½¢æçç¬ç«éï¼å ¶ä¿æåç¬ç«éä¸åï¼åªæ¯ç§»é¤äºå ç´ ï¼
+可以看出，删除操作就是从拟阵中移除某些元素，并保留剩余元素形成的独立集，其保持原独立集不变，只是移除了元素．
 
-**æ¶ç¼©ï¼Contractionï¼** ï¼
+**收缩（Contraction）** ：
 
-å¯¹äº ð´ âð¸AâE![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æéµ ðM![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ç¼© ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¾å°æéµ ð/ð´M/A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ç¬ç«éæ Iâ³Iâ³![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å®ä¹ä¸ºï¼
+对于 𝐴 ⊆𝐸A⊆E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，拟阵 𝑀M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 收缩 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后得到拟阵 𝑀/𝐴M/A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其独立集族 I″I″![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 定义为：
 
-Iâ³={ð¼âð¸âð´â£âðµâð´,ðµâI,ð(ðµ)=ð(ð´),ð¼âªðµâI}Iâ³={IâEâA|âBâA,BâI,r(B)=r(A),IâªBâI}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+I″={𝐼⊆𝐸∖𝐴∣∃𝐵⊆𝐴,𝐵∈I,𝑟(𝐵)=𝑟(𝐴),𝐼∪𝐵∈I}I″={I⊆E∖A|∃B⊆A,B∈I,r(B)=r(A),I∪B∈I}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¶ç¼©æä½å¯ä»¥çè§£ä¸ºå°éå ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ ç¼©çº¦ï¼å¹¶èèå©ä¸çå ç´ ä¸ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºä¸èµ·å½¢æçç¬ç«éï¼æ¶ç¼©çç»æä¾èµäºéå ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºï¼ç¼©çº¦åçç¬ç«éå®é ä¸æ¯å¯¹åæéµä¸­æ´é«ç§©çå­éè¿è¡çº¦ç®åå¾å°çç¬ç«éï¼
+收缩操作可以理解为将集合 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素缩约，并考虑剩下的元素与 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基一起形成的独立集．收缩的结果依赖于集合 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基，缩约后的独立集实际上是对原拟阵中更高秩的子集进行约简后得到的独立集．
 
-**ç¤ºä¾ - å¾æéµ** ï¼
+**示例 - 图拟阵** ：
 
-  * **å é¤** ï¼å¨å¾æéµä¸­ï¼å é¤æä½å³ä»å¾ä¸­å é¤ä¸äºè¾¹ï¼ä¸ä¸ªå¾ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å é¤ææ¡è¾¹åï¼èèçæ¯å©ä½è¾¹æå½¢æçç¬ç«éï¼å³é£äºä¸å å«ç¯çè¾¹éï¼ä¾å¦ï¼å¦æä»ä¸ä¸ªä¸è§å½¢å¾ä¸­å é¤ä¸æ¡è¾¹ï¼å©ä¸çä¸¤ä¸ªè¾¹ä»ç¶æ¯ä¸ä¸ªæ£®æï¼
+  * **删除** ：在图拟阵中，删除操作即从图中删除一些边．一个图 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 删除某条边后，考虑的是剩余边所形成的独立集，即那些不包含环的边集．例如，如果从一个三角形图中删除一条边，剩下的两个边仍然是一个森林．
 
-  * **æ¶ç¼©** ï¼æ¶ç¼©æä½åæ¯å°ææ¡è¾¹æ¶ç¼©ä¸ºä¸ä¸ªé¡¶ç¹ï¼å¯¹äºå¾æéµï¼æ¶ç¼©ä¸æ¡è¾¹ç¸å½äºå°è¿æ¡è¾¹çä¸¤ä¸ªé¡¶ç¹åå¹¶æä¸ä¸ªé¡¶ç¹ï¼å¹¶å é¤è¯¥è¾¹ï¼åå¹¶é¡¶ç¹åï¼å¾ä¸­çå ¶ä»è¾¹ä»ç¶å¯ä»¥å½¢æç¬ç«éï¼ä¾å¦ï¼å¨ä¸ä¸ªä¸è§å½¢å¾ä¸­ï¼æ¶ç¼©ä»»æä¸æ¡è¾¹å°æä¸¤ä¸ªé¡¶ç¹åå¹¶æä¸ä¸ªï¼å©ä¸çä¸¤æ¡è¾¹å°ææä¸ä¸ªæ°çæéµï¼
+  * **收缩** ：收缩操作则是将某条边收缩为一个顶点．对于图拟阵，收缩一条边相当于将这条边的两个顶点合并成一个顶点，并删除该边，合并顶点后，图中的其他边仍然可以形成独立集．例如，在一个三角形图中，收缩任意一条边将把两个顶点合并成一个，剩下的两条边将构成一个新的拟阵．
 
-## æéµåè´ªå¿
+## 拟阵和贪心
 
-**é®é¢æè¿°** ï¼
+**问题描述** ：
 
-æéµçåºç¨ä¹ä¸æ¯è§£å³è´ªå¿ç®æ³ä¸­çæä¼åé®é¢ï¼å ·ä½èè¨ï¼ç»å®ä¸ä¸ªæéµ ð =(ð,I)M=(S,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯åºç¡éï¼II![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç¬ç«éæï¼å¯¹äºæ¯ä¸ªå ç´ ð¥ âðxâS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èµäºä¸ä¸ªæ­£æ´æ°æå¼ ð¤(ð¥)w(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç®æ æ¯æ¾å°æå¼æå¤§çç¬ç«éï¼å½¢å¼åä¸ºï¼
+拟阵的应用之一是解决贪心算法中的最优化问题．具体而言，给定一个拟阵 𝑀 =(𝑆,I)M=(S,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是基础集，II![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是独立集族．对于每个元素 𝑥 ∈𝑆x∈S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，赋予一个正整数权值 𝑤(𝑥)w(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，目标是找到权值最大的独立集，形式化为：
 
-maxð´âIð¤(ð´)=maxð´âIâð¥âð´ð¤(ð¥)maxAâIw(A)=maxAâIâxâAw(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max𝐴∈I𝑤(𝐴)=max𝐴∈I∑𝑥∈𝐴𝑤(𝑥)maxA∈Iw(A)=maxA∈I∑x∈Aw(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¾ç¶ï¼æå¼æå¤§ç¬ç«éå¿ é¡»æ¯æå¤§ç¬ç«éï¼å¦æä¸ä¸ªç¬ç«é ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯æå¤§ç¬ç«éï¼åå­å¨ä¸ä¸ªå¯ä»¥å å ¥ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ç´ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ç±äº ð¤(ð¥) >0w(x)>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å å ¥è¯¥å ç´ åæå¼ä¼å¢å ï¼è¯´æ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯æå¼æå¤§çç¬ç«éï¼
+显然，权值最大独立集必须是极大独立集．如果一个独立集 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是极大独立集，则存在一个可以加入 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的元素 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且由于 𝑤(𝑥) >0w(x)>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，加入该元素后权值会增加，说明 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是权值最大的独立集．
 
-### æ­¥éª¤
+### 步骤
 
-è´ªå¿ç®æ³æ±è§£æå¼æå¤§ç¬ç«éçæ­¥éª¤å¦ä¸ï¼
+贪心算法求解权值最大独立集的步骤如下：
 
-  1. **å ç´ æåº** ï¼å°åºç¡é ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç §æå¼ä»å¤§å°å°æåºï¼è®°ä¸ºåºå ð1,ð2,â¦,ððe1,e2,â¦,en![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. **åå§å** ï¼è®¾ç¬ç«é ð´ =â A=â ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  3. **æå»ºç¬ç«é** ï¼ä¾æ¬¡èèæåºåçå ç´ ððei![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ð´ âª{ðð} âIAâª{ei}âI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ´æ° ð´ =ð´ âª{ðð}A=Aâª{ei}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  4. **è¾åºç»æ** ï¼æç»çéå ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³ä¸ºæå¼æå¤§çç¬ç«éï¼
+  1. **元素排序** ：将基础集 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 按照权值从大到小排序，记为序列 𝑒1,𝑒2,…,𝑒𝑛e1,e2,…,en![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  2. **初始化** ：设独立集 𝐴 =∅A=∅![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  3. **构建独立集** ：依次考虑排序后的元素 𝑒𝑖ei![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果 𝐴 ∪{𝑒𝑖} ∈IA∪{ei}∈I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则更新 𝐴 =𝐴 ∪{𝑒𝑖}A=A∪{ei}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  4. **输出结果** ：最终的集合 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即为权值最大的独立集．
 
-**å¤æåº¦åæ** ï¼
+**复杂度分析** ：
 
-è®¾ ð =|ð|n=|S|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºåºç¡éçå¤§å°ï¼ð(ð)f(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºå¤æ­ä¸ä¸ªéåæ¯å¦ä¸ºç¬ç«éçå¤æåº¦ï¼è´ªå¿ç®æ³çæ¶é´å¤æåº¦ä¸ºï¼
+设 𝑛 =|𝑆|n=|S|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为基础集的大小，𝑓(𝑛)f(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示判断一个集合是否为独立集的复杂度．贪心算法的时间复杂度为：
 
-ð(ðlogâ¡ð+ðð(ð))O(nlogâ¡n+nf(n))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑂(𝑛log⁡𝑛+𝑛𝑓(𝑛))O(nlog⁡n+nf(n))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ð(ðlogâ¡ð)O(nlogâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æåºçå¤æåº¦ï¼ð(ðð(ð))O(nf(n))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯éä¸å¤æ­ç¬ç«æ§çå¤æåº¦ï¼
+其中，𝑂(𝑛log⁡𝑛)O(nlog⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是排序的复杂度，𝑂(𝑛𝑓(𝑛))O(nf(n))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是逐一判断独立性的复杂度．
 
-å¤æ³¨
+备注
 
-  * å¨å¾æéµä¸­ï¼å¯ä»¥ä½¿ç¨ [å¹¶æ¥é](../../ds/dsu/) æ¥é«ææ£æµæ¯å¦å½¢æç¯ï¼ä»èä½¿ ð(ð)f(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¥è¿å¸¸æ°æ¶é´ï¼
-  * å¨çº¿æ§æéµä¸­ï¼ç¬ç«æ§æ£æµéå¸¸æ¶åç©éµè¿ç®ï¼å ¶å¤æåº¦ä¾èµäºå ·ä½å®ç°æ¹å¼ï¼
+  * 在图拟阵中，可以使用 [并查集](../../ds/dsu/) 来高效检测是否形成环，从而使 𝑓(𝑛)f(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 接近常数时间．
+  * 在线性拟阵中，独立性检测通常涉及矩阵运算，其复杂度依赖于具体实现方式．
 
-**æ­£ç¡®æ§è¯æ** ï¼
+**正确性证明** ：
 
-è®¾ ð =(ð,I)M=(S,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ªæéµï¼ð´ âIAâI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ªç¬ç«éï¼ä¸ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æä¸ªæå¼æå¤§ç¬ç«é ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå­éï¼å®ä¹éå ð ={ð¥ âð âð´ â£ð´ âª{ð¥} âI}P={xâSâAâ£Aâª{x}âI}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ææå å ¥ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åï¼ä»ç¶ä½¿ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¿æç¬ç«æ§çå ç´ æææçéåï¼
+设 𝑀 =(𝑆,I)M=(S,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个拟阵，𝐴 ∈IA∈I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个独立集，且 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是某个权值最大独立集 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子集．定义集合 𝑃 ={𝑥 ∈𝑆 ∖𝐴 ∣𝐴 ∪{𝑥} ∈I}P={x∈S∖A∣A∪{x}∈I}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即所有加入 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后，仍然使 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 保持独立性的元素所构成的集合．
 
-è®¾ ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­æå¼æå¤§çå ç´ ï¼å ð´â² =ð´ âª{ð¦}Aâ²=Aâª{y}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹æ¯æä¸ªæå¼æå¤§ç¬ç«éçå­éï¼è¯æå¦ä¸ï¼
+设 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中权值最大的元素，则 𝐴′ =𝐴 ∪{𝑦}A′=A∪{y}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也是某个权值最大独立集的子集，证明如下：
 
-åè®¾ ð´â² =ð´ âª{ð¦}Aâ²=Aâª{y}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯ä»»ä½æå¼æå¤§ç¬ç«éçå­éï¼åå­å¨ä¸ä¸ªæå¼æå¤§çç¬ç«é ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ |ð´â²| <|ð||Aâ²|<|T|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+假设 𝐴′ =𝐴 ∪{𝑦}A′=A∪{y}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是任何权值最大独立集的子集，则存在一个权值最大的独立集 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且 |𝐴′| <|𝑇||A′|<|T|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç±äº |ð´â²| <|ð||Aâ²|<|T|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ¹æ®æéµç **æ©å¼ æ§** ï¼å­å¨ ð¥ âð âð´â²xâTâAâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð´â² âª{ð¥} âIAâ²âª{x}âI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+由于 |𝐴′| <|𝑇||A′|<|T|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，根据拟阵的 **扩张性** ，存在 𝑥 ∈𝑇 ∖𝐴′x∈T∖A′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝐴′ ∪{𝑥} ∈IA′∪{x}∈I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å©ç¨ **æ©å¼ æ§** ï¼ä¸æ­å° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å å ¥ ð´â²Aâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æç»æé åºä¸ä¸ªæ°çç¬ç«é ð´â³Aâ³![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ |ð´â³| =|ð||Aâ³|=|T|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+利用 **扩张性** ，不断将 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 加入 𝐴′A′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，最终构造出一个新的独立集 𝐴″A″![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 |𝐴″| =|𝑇||A″|=|T|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è®¾ ð¾ =ð´â³ â©ðK=Aâ³â©T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶æ ð¥ =ð âð¾x=TâK![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð¦ =ð´â³ âð¾y=Aâ³âK![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±äº ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­æå¼æå¤§çå ç´ ï¼æ ð¤(ð¥) â¤ð¤(ð¦)w(x)â¤w(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+设 𝐾 =𝐴″ ∩𝑇K=A″∩T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，此时有 𝑥 =𝑇 ∖𝐾x=T∖K![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑦 =𝐴″ ∖𝐾y=A″∖K![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．由于 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中权值最大的元素，有 𝑤(𝑥) ≤𝑤(𝑦)w(x)≤w(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å æ­¤ï¼ð¤(ð´â³) =ð¤(ð¾) +ð¤(ð¦) â¥ð¤(ð¾) +ð¤(ð¥) =ð¤(ð)w(Aâ³)=w(K)+w(y)â¥w(K)+w(x)=w(T)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶ï¼
+因此，𝑤(𝐴″) =𝑤(𝐾) +𝑤(𝑦) ≥𝑤(𝐾) +𝑤(𝑥) =𝑤(𝑇)w(A″)=w(K)+w(y)≥w(K)+w(x)=w(T)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，此时：
 
-  * è¥ ð¤(ð´â³) >ð¤(ð)w(Aâ³)>w(T)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯æå¼æå¤§ç¬ç«éï¼ä¸åè®¾çç¾ï¼
-  * è¥ ð¤(ð´â³) =ð¤(ð)w(Aâ³)=w(T)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð´â³Aâ³![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæå¼æå¤§ç¬ç«éï¼ä¸ ð´â²Aâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå ¶å­éï¼ä¸åè®¾ ð´â²Aâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯ä»»ä½æå¼æå¤§ç¬ç«éçå­éçç¾ï¼
+  * 若 𝑤(𝐴″) >𝑤(𝑇)w(A″)>w(T)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是权值最大独立集，与假设矛盾．
+  * 若 𝑤(𝐴″) =𝑤(𝑇)w(A″)=w(T)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝐴″A″![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为权值最大独立集，且 𝐴′A′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为其子集，与假设 𝐴′A′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是任何权值最大独立集的子集矛盾．
 
-ç»¼ä¸ï¼åè®¾ä¸æç«ï¼å³ ð´â² =ð´ âª{ð¦}Aâ²=Aâª{y}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¿ é¡»æ¯æä¸ªæå¼æå¤§ç¬ç«éçå­éï¼å æ­¤éè¿ä¸æ­ä½¿ç¨è´ªå¿ç­ç¥ï¼æç»å¯ä»¥æ¾å°æå¼æå¤§çç¬ç«éï¼
+综上，假设不成立，即 𝐴′ =𝐴 ∪{𝑦}A′=A∪{y}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 必须是某个权值最大独立集的子集，因此通过不断使用贪心策略，最终可以找到权值最大的独立集．
 
-### ç¤ºä¾
+### 示例
 
-**æå°çææ ** ï¼
+**最小生成树** ：
 
-ç»å®ä¸ä¸ªè¿éæ åå¾ ðº =(ð,ð¸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯æ¡è¾¹ ð âð¸eâE![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½å ·ææå¼ ð¤(ð)w(e)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç®æ ä¸ºæ¾å°ä¸æ£µçææ ï¼ä½¿å ¶å å«ææé¡¶ç¹ä¸æ»æå¼æå°ï¼
+给定一个连通无向图 𝐺 =(𝑉,𝐸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，每条边 𝑒 ∈𝐸e∈E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都具有权值 𝑤(𝑒)w(e)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．目标为找到一棵生成树，使其包含所有顶点且总权值最小．
 
-**æéµçæå»º** ï¼
+**拟阵的构建** ：
 
-ä¸ºäºå°æå°çææ é®é¢å½¢å¼åä¸ºæéµé®é¢ï¼å¯ä»¥æå»ºå¾æéµ ð(ðº)M(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+为了将最小生成树问题形式化为拟阵问题，可以构建图拟阵 𝑀(𝐺)M(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-  * **åºç¡é** ï¼ð =ð¸S=E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³å¾ä¸­çææè¾¹ï¼
-  * **ç¬ç«éæ** ï¼II![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºææä¸å å«ç¯çè¾¹éï¼å³æææ£®æï¼ï¼
+  * **基础集** ：𝑆 =𝐸S=E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即图中的所有边．
+  * **独立集族** ：II![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为所有不包含环的边集（即所有森林）．
 
-**è´ªå¿ç®æ³** ï¼
+**贪心算法** ：
 
-å¨å¾æéµçæ¡æ¶ä¸ï¼[Kruskal ç®æ³](../../graph/mst/#kruskal-ç®æ³) æ¯ä¸ä¸ªå ¸åçåºäºæéµçè®ºçè´ªå¿ç®æ³ï¼å¯ä»¥ç¨äºæå»ºæå°çææ ï¼è½ç¶ [Prim ç®æ³](../../graph/mst/#prim-ç®æ³) ä¹æ¯ä¸ç§ææçè´ªå¿ç®æ³ï¼åæ ·è½å¤æ¾å°æå°çææ ï¼ä½å®å¹¶ä¸ä¸¥æ ¼ä¾èµäºæéµçè´ªå¿ï¼å æ­¤ï¼å¨æéµçè®ºçè®¨è®ºä¸­ï¼Kruskal ç®æ³æ¯ä¸»è¦çè´ªå¿ç®æ³å®ä¾ï¼
+在图拟阵的框架下，[Kruskal 算法](../../graph/mst/#kruskal-算法) 是一个典型的基于拟阵理论的贪心算法，可以用于构建最小生成树．虽然 [Prim 算法](../../graph/mst/#prim-算法) 也是一种有效的贪心算法，同样能够找到最小生成树，但它并不严格依赖于拟阵的贪心．因此，在拟阵理论的讨论中，Kruskal 算法是主要的贪心算法实例．
 
-  * **Kruskal ç®æ³** ï¼
+  * **Kruskal 算法** ：
 
-    1. **è¾¹æåº** ï¼å°ææè¾¹ææå¼ä»å°å°å¤§æåºï¼
-    2. **éæ­¥éæ©** ï¼ä¾æ¬¡éæ©æå¼æå°çè¾¹ï¼è¥å å ¥åä¸å½¢æç¯ï¼åå°å ¶å å ¥çææ ï¼
-    3. **ç»æ­¢æ¡ä»¶** ï¼éå¤ä¸è¿°è¿ç¨ï¼ç´å°çææ å å« |ð| â1|V|â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¡è¾¹ï¼
-  * **Prim ç®æ³** ï¼
+    1. **边排序** ：将所有边按权值从小到大排序．
+    2. **逐步选择** ：依次选择权值最小的边，若加入后不形成环，则将其加入生成树．
+    3. **终止条件** ：重复上述过程，直到生成树包含 |𝑉| −1|V|−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 条边．
+  * **Prim 算法** ：
 
-    * **åç** ï¼Prim ç®æ³éè¿ä»ä¸ä¸ªèµ·å§é¡¶ç¹å¼å§ï¼éæ­¥æ©å±çææ ï¼æ¯æ¬¡éæ©è¿æ¥æ å ä¸æ å¤çæå°æå¼è¾¹ï¼
-    * è½ç¶ Prim ç®æ³ä¹æ¯è´ªå¿çï¼ä½å ¶éæ©ç­ç¥ä¸åäºå ¶ä»åºäºæéµæ©å¼ æ§è´¨çè´ªå¿ç®æ³ï¼å æ­¤ï¼å¨æéµçè®ºçä¸¥æ ¼æä¹ä¸ï¼Prim ç®æ³ä¸è¢«è§ä¸ºå ¸åçæéµè´ªå¿ç®æ³ï¼
+    * **原理** ：Prim 算法通过从一个起始顶点开始，逐步扩展生成树，每次选择连接树内与树外的最小权值边．
+    * 虽然 Prim 算法也是贪心的，但其选择策略不同于其他基于拟阵扩张性质的贪心算法．因此，在拟阵理论的严格意义下，Prim 算法不被视为典型的拟阵贪心算法．
 
-## æéµäº¤
+## 拟阵交
 
-å¯¹äºå®ä¹å¨åä¸åºç¡é ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸¤ä¸ªæéµ ð1 =(ð,I1)M1=(S,I1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2 =(ð,I2)M2=(S,I2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¥ I =I1 â©I2I=I1â©I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³æéµç¬ç«éæçä¸æ¡æ§è´¨ï¼åç§° ð =(ð,I)M=(S,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ð1M1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **äº¤** ï¼
+对于定义在同一基础集 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的两个拟阵 𝑀1 =(𝑆,I1)M1=(S,I1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑀2 =(𝑆,I2)M2=(S,I2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，若 I =I1 ∩I2I=I1∩I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足拟阵独立集族的三条性质，则称 𝑀 =(𝑆,I)M=(S,I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑀1M1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑀2M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **交** ．
 
-**æ³¨æ** ï¼å¹¶éä»»æä¸¤ä¸ªæéµçäº¤é½æ¯ä¸ä¸ªæéµï¼åªæå½å ¶ç¬ç«éæçäº¤éæ»¡è¶³æéµç¬ç«éæå®ä¹ä¸­çä¸æ¡æ§è´¨æ¶ï¼å ¶äº¤æææä¸ä¸ªæéµï¼
+**注意** ：并非任意两个拟阵的交都是一个拟阵，只有当其独立集族的交集满足拟阵独立集族定义中的三条性质时，其交才构成一个拟阵．
 
-### é®é¢æè¿°
+### 问题描述
 
-  1. **æå¤§ç¬ç«é** ï¼å¨ I1 â©I2I1â©I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­æ¾å°æå¤§çç¬ç«éï¼å³å ·ææå¤§åºæ°çç¬ç«éï¼ï¼
-  2. **å ææå¤§ç¬ç«é** ï¼ç»å®æå¼å½æ° ð¤ :ð ââw:SâR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¨ I1 â©I2I1â©I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­æ¾å°æå¼åæå¤§çç¬ç«éï¼
+  1. **最大独立集** ：在 I1 ∩I2I1∩I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中找到最大的独立集（即具有最大基数的独立集）．
+  2. **加权最大独立集** ：给定权值函数 𝑤 :𝑆 →ℝw:S→R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，在 I1 ∩I2I1∩I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中找到权值和最大的独立集．
 
-### ç®æ³
+### 算法
 
-**æ æçæ¬** ï¼
+**无权版本** ：
 
-  1. **åå§å** ï¼éæ©ä¸ä¸ªåå§ç¬ç«é ð¼ âI1 â©I2IâI1â©I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼éå¸¸è®¾å® ð¼ =â I=â ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. **è¿­ä»£** ï¼
-     * **æå»ºäº¤æ¢å¾** ï¼æ ¹æ®å½åç¬ç«é ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå»ºäº¤æ¢å¾ ð·ð1,ð2(ð¼)DM1,M2(I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-     * **è·¯å¾éæ©** ï¼å¨äº¤æ¢å¾ä¸­ï¼å¯»æ¾ä»æºç¹ ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°æ±ç¹ ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¢å¹¿è·¯å¾ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-     * **å¢å¹¿** ï¼æ²¿è·¯å¾ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä» ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éåæ¯ä¸ä¸ªèç¹ï¼
-       * å¦æèç¹å±äºå·¦é¨é¡¶ç¹ï¼å³ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ ï¼ï¼åå°è¯¥å ç´ ä» ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ç§»é¤ï¼
-       * å¦æèç¹å±äºå³é¨é¡¶ç¹ï¼å³ ð âð¼SâI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ ï¼ï¼åå°è¯¥å ç´ å å ¥ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼
-     * **éå¤** ï¼æ´æ°ç¬ç«é ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åï¼éå¤ä¸è¿°æ­¥éª¤ï¼ç´å°æ æ³æ¾å°æ°çå¢å¹¿è·¯å¾ä¸ºæ­¢ï¼
-  3. **ç»æ** ï¼æç»å¾å°çç¬ç«é ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³ä¸ºæéµäº¤ ð =ð1 â©ð2M=M1â©M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çä¸ä¸ªæå¤§ç¬ç«éï¼
+  1. **初始化** ：选择一个初始独立集 𝐼 ∈I1 ∩I2I∈I1∩I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，通常设定 𝐼 =∅I=∅![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  2. **迭代** ：
+     * **构建交换图** ：根据当前独立集 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 构建交换图 𝐷𝑀1,𝑀2(𝐼)DM1,M2(I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+     * **路径选择** ：在交换图中，寻找从源点 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到汇点 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的增广路径 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+     * **增广** ：沿路径 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 从 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 遍历每一个节点：
+       * 如果节点属于左部顶点（即 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素），则将该元素从 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中移除．
+       * 如果节点属于右部顶点（即 𝑆 ∖𝐼S∖I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素），则将该元素加入 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中．
+     * **重复** ：更新独立集 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后，重复上述步骤，直到无法找到新的增广路径为止．
+  3. **结果** ：最终得到的独立集 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即为拟阵交 𝑀 =𝑀1 ∩𝑀2M=M1∩M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的一个最大独立集．
 
-**å æçæ¬** ï¼
+**加权版本** ：
 
-ä¸ºäºæ¾å°æå¼åæå¤§çç¬ç«éï¼ç®æ³éè¦å¨å¢å¹¿è·¯å¾çéæ©ä¸è¿è¡ä¼åï¼
+为了找到权值和最大的独立集，算法需要在增广路径的选择上进行优化．
 
-  1. **æå¼è®¾ç½®** ï¼å¯¹äºæ¯ä¸ªå ç´ ð âðeâS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ä¹å ¶å¨äº¤æ¢å¾ä¸­çæå¼ ð¤â²(ð)wâ²(e)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-     * **å·¦é¨é¡¶ç¹** ï¼ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ ï¼ï¼ð¤â²(ð) = âð¤(ð)wâ²(e)=âw(e)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-     * **å³é¨é¡¶ç¹** ï¼ð âð¼SâI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ ï¼ï¼ð¤â²(ð) =ð¤(ð)wâ²(e)=w(e)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. **è·¯å¾éæ©** ï¼å¨äº¤æ¢å¾ ð·ð1,ð2(ð¼)DM1,M2(I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼å¯»æ¾ä¸æ¡ä»æºç¹ ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°æ±ç¹ ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **å¢å¹¿è·¯å¾** ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾æ²¿è·¯å¾è¿è¡å¢å¹¿æä½åï¼ç¬ç«é ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ»æå¼å¢å æå¤§ï¼
-     * **å¢å¹¿æ¡ä»¶** ï¼è·¯å¾ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å å ¥çå ç´ çæå¼æ»åå¤§äºç§»é¤çå ç´ çæå¼æ»åï¼å³ âð¦âå å ¥çå ç´ ð¤(ð¦) >âð¥âç§»é¤çå ç´ ð¤(ð¥)âyâå å ¥çå ç´ w(y)>âxâç§»é¤çå ç´ w(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  3. **å¢å¹¿æä½** ï¼æ²¿è·¯å¾ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä» ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éåæ¯ä¸ä¸ªèç¹ï¼
-     * å¦æèç¹å±äºå·¦é¨é¡¶ç¹ï¼å³ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ ï¼ï¼åå°è¯¥å ç´ ä» ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ç§»é¤ï¼
-     * å¦æèç¹å±äºå³é¨é¡¶ç¹ï¼å³ ð âð¼SâI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ ï¼ï¼åå°è¯¥å ç´ å å ¥ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼
-  4. **è¿­ä»£** ï¼éå¤æ­¥éª¤ 1 è³ 3ï¼ä¸æ­æå»ºäº¤æ¢å¾å¹¶å¯»æ¾å¢å¹¿è·¯å¾ï¼éæ­¥ä¼åç¬ç«é ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ»æå¼ï¼
-  5. **ç»æ­¢æ¡ä»¶** ï¼å½æ æ³å¨äº¤æ¢å¾ä¸­æ¾å°æ»¡è¶³å¢å¹¿æ¡ä»¶çè·¯å¾æ¶ï¼ç®æ³ç»æ­¢ï¼
-  6. **ç»æ** ï¼æç»å¾å°çç¬ç«é ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³ä¸ºæéµäº¤ ð =ð1 â©ð2M=M1â©M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çä¸ä¸ª **æå¼æå¤§ç¬ç«é** ï¼
+  1. **权值设置** ：对于每个元素 𝑒 ∈𝑆e∈S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，定义其在交换图中的权值 𝑤′(𝑒)w′(e)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
+     * **左部顶点** （𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素）：𝑤′(𝑒) = −𝑤(𝑒)w′(e)=−w(e)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+     * **右部顶点** （𝑆 ∖𝐼S∖I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素）：𝑤′(𝑒) =𝑤(𝑒)w′(e)=w(e)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  2. **路径选择** ：在交换图 𝐷𝑀1,𝑀2(𝐼)DM1,M2(I)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中，寻找一条从源点 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到汇点 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **增广路径** 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得沿路径进行增广操作后，独立集 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的总权值增加最大．
+     * **增广条件** ：路径 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上加入的元素的权值总和大于移除的元素的权值总和，即 ∑𝑦∈加入的元素𝑤(𝑦) >∑𝑥∈移除的元素𝑤(𝑥)∑y∈加入的元素w(y)>∑x∈移除的元素w(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  3. **增广操作** ：沿路径 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 从 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 遍历每一个节点：
+     * 如果节点属于左部顶点（即 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素），则将该元素从 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中移除．
+     * 如果节点属于右部顶点（即 𝑆 ∖𝐼S∖I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素），则将该元素加入 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中．
+  4. **迭代** ：重复步骤 1 至 3，不断构建交换图并寻找增广路径，逐步优化独立集 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的总权值．
+  5. **终止条件** ：当无法在交换图中找到满足增广条件的路径时，算法终止．
+  6. **结果** ：最终得到的独立集 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即为拟阵交 𝑀 =𝑀1 ∩𝑀2M=M1∩M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的一个 **权值最大独立集** ．
 
-**å¤æåº¦** ï¼
+**复杂度** ：
 
-  * **å¢å¹¿æ¬¡æ°** ï¼è®¾ä¸¤ä¸ªæéµçæå¤§ç§©åå«ä¸º ð1r1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2r2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæå¤§å¢å¹¿æ¬¡æ°ä¸º min(ð1,ð2)min(r1,r2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * **增广次数** ：设两个拟阵的最大秩分别为 𝑟1r1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑟2r2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则最大增广次数为 min(𝑟1,𝑟2)min(r1,r2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * **æ¯æ¬¡å¢å¹¿çå¤æåº¦** ï¼
+  * **每次增广的复杂度** ：
 
-    * æå»ºäº¤æ¢å¾çå¤æåº¦ä¸º ð(ð2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð =|ð|n=|S|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * å¯»æ¾å¢å¹¿è·¯å¾çå¤æåº¦åå³äºè·¯å¾æç´¢ç­ç¥ï¼éå¸¸ä¸º ð(ð2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¾å¦ä½¿ç¨å¹¿åº¦ä¼å æç´¢ï¼
-  * **æ»æ¶é´å¤æåº¦** ï¼æ»ä½çæ¶é´å¤æåº¦ä¸º ð(ð â ð2)O(râ n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð =min(ð1,ð2)r=min(r1,r2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+    * 构建交换图的复杂度为 𝑂(𝑛2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑛 =|𝑆|n=|S|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+    * 寻找增广路径的复杂度取决于路径搜索策略，通常为 𝑂(𝑛2)O(n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，例如使用广度优先搜索．
+  * **总时间复杂度** ：总体的时间复杂度为 𝑂(𝑟 ⋅𝑛2)O(r⋅n2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑟 =min(𝑟1,𝑟2)r=min(r1,r2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## ä¾é¢
+## 例题
 
-**æå°çææ ** ï¼
+**最小生成树** ：
 
-ç»å®ä¸ä¸ªæ åå¾ ðº =(ð,ð¸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯æ¡è¾¹ ð âð¸eâE![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æä¸ä¸ªæå¼ ð¤(ð)w(e)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯»æ¾ä¸æ£µçææ ï¼ä½¿å ¶å å«ææé¡¶ç¹ä¸æ»æå¼æå°ï¼
+给定一个无向图 𝐺 =(𝑉,𝐸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，每条边 𝑒 ∈𝐸e∈E![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有一个权值 𝑤(𝑒)w(e)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．寻找一棵生成树，使其包含所有顶点且总权值最小．
 
-  * è¯¦ç»ä»ç»ï¼[æå°çææ ](../../graph/mst/)ï¼
-  * é¢ç®æ¨¡æ¿ï¼[æ´è°· P3366ãæ¨¡æ¿ãæå°çææ ](https://www.luogu.com.cn/problem/P3366)ï¼
+  * 详细介绍：[最小生成树](../../graph/mst/)．
+  * 题目模板：[洛谷 P3366【模板】最小生成树](https://www.luogu.com.cn/problem/P3366)．
 
-è§£é¢æè·¯
+解题思路
 
-ä½¿ç¨ Kruskal ç®æ³ï¼å°ææè¾¹ææå¼ä»å°å°å¤§æåºï¼ç¶åéæ­¥éæ©è¾¹ï¼è¥å å ¥åä¸å½¢æç¯ï¼åå°å ¶å å ¥çææ ï¼æç»å¾å°ççææ å³ä¸ºæå°çææ ï¼
+使用 Kruskal 算法，将所有边按权值从小到大排序，然后逐步选择边，若加入后不形成环，则将其加入生成树，最终得到的生成树即为最小生成树．
 
-**Colorful Graph** ï¼
+**Colorful Graph** ：
 
-ç»å®ä¸å¼ å¸¦æå¤ç§é¢è²çæ åå¾ ðº =(ð,ð¸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯æ¡è¾¹æä¸ä¸ªé¢è²å±æ§ï¼å¯»æ¾ä¸ä¸ªæå¤§çè¾¹éï¼ä½¿å¾ï¼
+给定一张带有多种颜色的无向图 𝐺 =(𝑉,𝐸)G=(V,E)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，每条边有一个颜色属性．寻找一个最大的边集，使得：
 
-  1. æéè¾¹ä¸å½¢æä»»ä½ç¯ï¼
-  2. æ¯ç§é¢è²çè¾¹æ°ä¸è¶ è¿ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¡ï¼ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºç»å®çæ­£æ´æ°ï¼ï¼
+  1. 所选边不形成任何环．
+  2. 每种颜色的边数不超过 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 条（𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为给定的正整数）．
 
-è§£é¢æè·¯
+解题思路
 
-  1. **æéµå»ºæ¨¡** ï¼
+  1. **拟阵建模** ：
 
-     * **å¾æéµ ( ð1M1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7))**ï¼å®ä¹ä¸ºææä¸å½¢æç¯çè¾¹éï¼å³ç¬ç«éæ I1I1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å å«ææä¸ææç¯çè¾¹éåï¼
-     * **é¢è²æéµ ( ð2M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7))**ï¼å®ä¹ä¸ºæ¯ç§é¢è²çè¾¹æ°ä¸è¶ è¿ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¾¹éï¼å³ç¬ç«éæ I2I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å å«æææ»¡è¶³æ¯ç§é¢è²è¾¹æ° â¤ðâ¤k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¾¹éåï¼
-  2. **æ±è§£æéµäº¤** ï¼éè¿æ±è§£ ð =ð1 â©ð2M=M1â©M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¾å°æ¢ä¸å½¢æç¯åæ»¡è¶³æ¯ç§é¢è²è¾¹æ°ä¸è¶ è¿ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå¤§è¾¹éï¼
+     * **图拟阵 ( 𝑀1M1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7))**：定义为所有不形成环的边集，即独立集族 I1I1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 包含所有不构成环的边集合．
+     * **颜色拟阵 ( 𝑀2M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7))**：定义为每种颜色的边数不超过 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的边集，即独立集族 I2I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 包含所有满足每种颜色边数 ≤𝑘≤k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的边集合．
+  2. **求解拟阵交** ：通过求解 𝑀 =𝑀1 ∩𝑀2M=M1∩M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，找到既不形成环又满足每种颜色边数不超过 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最大边集．
 
-**çº¦æçèµæºåé é®é¢** :
+**约束的资源分配问题** :
 
-å¨ä¸ä¸ªèµæºåé é®é¢ä¸­ï¼æä¸ç»èµæº ð  ={ð1,ð2,â¦,ðð}R={r1,r2,â¦,rn}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ç»é¡¹ç® ð ={ð1,ð2,â¦,ðð}P={p1,p2,â¦,pm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯ä¸ªé¡¹ç® ððpi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éè¦åé ä¸å®æ°éçèµæºï¼ä¸æ¯ç§èµæºçæ»åé éä¸è½è¶ è¿å ¶ä¾åºéï¼
+在一个资源分配问题中，有一组资源 𝑅 ={𝑟1,𝑟2,…,𝑟𝑛}R={r1,r2,…,rn}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和一组项目 𝑃 ={𝑝1,𝑝2,…,𝑝𝑚}P={p1,p2,…,pm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．每个项目 𝑝𝑖pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 需要分配一定数量的资源，且每种资源的总分配量不能超过其供应量．
 
-**ç®æ ** ï¼å¯»æ¾ä¸ä¸ªèµæºåé æ¹æ¡ï¼ä½¿å ¶æ»¡è¶³ææé¡¹ç®éæ±ä¸ä¸è¶ è¿èµæºä¾åºéï¼
+**目标** ：寻找一个资源分配方案，使其满足所有项目需求且不超过资源供应量．
 
-è§£é¢æè·¯
+解题思路
 
-  1. **æéµå»ºæ¨¡** ï¼
+  1. **拟阵建模** ：
 
-     * **éæ±æéµ ( ð1M1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7))**ï¼å®ä¹ä¸ºæ»¡è¶³åé¡¹ç®èµæºéæ±çåé æ¹æ¡ï¼å³ç¬ç«éæ I1I1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å å«æææ»¡è¶³é¡¹ç®éæ±çèµæºåé éåï¼
-     * **ä¾åºæéµ ( ð2M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7))**ï¼å®ä¹ä¸ºä¸è¶ è¿æ¯ç§èµæºä¾åºéçåé æ¹æ¡ï¼å³ç¬ç«éæ I2I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å å«æææ»¡è¶³èµæºä¾åºéå¶çèµæºåé éåï¼
-  2. **æ±è§£æéµäº¤** ï¼éè¿æ±è§£ ð =ð1 â©ð2M=M1â©M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¾å°æ¢æ»¡è¶³ææé¡¹ç®éæ±åä¸è¶ è¿èµæºä¾åºéçèµæºåé æ¹æ¡ï¼
+     * **需求拟阵 ( 𝑀1M1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7))**：定义为满足各项目资源需求的分配方案，即独立集族 I1I1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 包含所有满足项目需求的资源分配集合．
+     * **供应拟阵 ( 𝑀2M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7))**：定义为不超过每种资源供应量的分配方案，即独立集族 I2I2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 包含所有满足资源供应限制的资源分配集合．
+  2. **求解拟阵交** ：通过求解 𝑀 =𝑀1 ∩𝑀2M=M1∩M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，找到既满足所有项目需求又不超过资源供应量的资源分配方案．
 
-## åèèµæä¸æ³¨é
+## 参考资料与注释
 
   1. [Wikipedia - Matroid](https://en.wikipedia.org/wiki/Matroid)
-  2. [ç¾åº¦ç¾ç§ - æéµ](https://baike.baidu.com/item/%E6%8B%9F%E9%98%B5)
-  3. [æ´è°· - æéµä¸æä¼åé®é¢](https://www.luogu.com.cn/article/87d02q9f)
-  4. [æ´è°· - ä»æéµåºç¡å° Shannon å¼å ³æ¸¸æ](https://www.luogu.com.cn/article/fuj3x886)
+  2. [百度百科 - 拟阵](https://baike.baidu.com/item/%E6%8B%9F%E9%98%B5)
+  3. [洛谷 - 拟阵与最优化问题](https://www.luogu.com.cn/article/87d02q9f)
+  4. [洛谷 - 从拟阵基础到 Shannon 开关游戏](https://www.luogu.com.cn/article/fuj3x886)
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/matroid.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/matroid.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[c-forrest](https://github.com/c-forrest), [Tiphereth-A](https://github.com/Tiphereth-A), [yyyu-star](https://github.com/yyyu-star)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/matroid.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/matroid.md "edit.link.title")  
+>  __本页面贡献者：[c-forrest](https://github.com/c-forrest), [Tiphereth-A](https://github.com/Tiphereth-A), [yyyu-star](https://github.com/yyyu-star)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

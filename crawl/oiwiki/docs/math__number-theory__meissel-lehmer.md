@@ -1,304 +1,304 @@
-# MeisselâLehmer ç®æ³ - OI Wiki
+﻿# Meissel–Lehmer 算法 - OI Wiki
 
 - Source: https://oi-wiki.org/math/number-theory/meissel-lehmer/
 
-# MeisselâLehmer ç®æ³
+# Meissel–Lehmer 算法
 
-ãMeisselâLehmer ç®æ³ãæ¯ä¸ç§è½å¨äºçº¿æ§æ¶é´å¤æåº¦å æ±åº 1 â¼ð1â¼n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å è´¨æ°ä¸ªæ°çä¸ç§ç®æ³ï¼
+「Meissel–Lehmer 算法」是一种能在亚线性时间复杂度内求出 1 ∼𝑛1∼n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 内质数个数的一种算法．
 
-## è®°å·è§å®
+## 记号规定
 
-[ð¥][x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºå¯¹ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åæ´å¾å°çç»æï¼  
-ððpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè´¨æ°ï¼ð1 =2p1=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼  
-ð(ð¥)Ï(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤º 1 â¼ð¥1â¼x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) èå´å ç´ æ°çä¸ªæ°ï¼  
-ð(ð¥)Î¼(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºè«æ¯ä¹æ¯å½æ°ï¼  
-å¯¹äºéå ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼#ð#S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºéå ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤§å°ï¼  
-ð¿(ð¥)Î´(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤º ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå°çè´¨å å­ï¼  
-ð+(ð¥)P+(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤º ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¤§çè´¨å å­ï¼
+[𝑥][x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示对 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下取整得到的结果．  
+𝑝𝑘pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个质数，𝑝1 =2p1=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．  
+𝜋(𝑥)π(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示 1 ∼𝑥1∼x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 范围内素数的个数．  
+𝜇(𝑥)μ(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示莫比乌斯函数．  
+对于集合 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，#𝑆#S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示集合 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的大小．  
+𝛿(𝑥)δ(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 最小的质因子．  
+𝑃+(𝑥)P+(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 最大的质因子．
 
-## MeisselâLehmer ç®æ³æ± Ï(x)
+## Meissel–Lehmer 算法求 π(x)
 
-å®ä¹ ð(ð¥,ð)Ï(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºææå°äº ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ­£æ´æ°ä¸­æ»¡è¶³å ¶ææè´¨å å­é½å¤§äº ððpa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ°çä¸ªæ°ï¼å³ï¼
+定义 𝜙(𝑥,𝑎)ϕ(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为所有小于 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的正整数中满足其所有质因子都大于 𝑝𝑎pa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的数的个数，即：
 
-ð(ð¥,ð)=#{ðâ¤ð¥â£ðmodð=0â¹ð>ðð}(1)(1)Ï(x,a)=#{nâ¤xâ£nmodp=0â¹p>pa}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜙(𝑥,𝑎)=#{𝑛≤𝑥∣𝑛mod𝑝=0⟹𝑝>𝑝𝑎}(1)(1)ϕ(x,a)=#{n≤x∣nmodp=0⟹p>pa}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå®ä¹ ðð(ð¥,ð)Pk(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºä¸ºææå°äº ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ­£æ´æ°ä¸­æ»¡è¶³å¯éè´¨å å­æ°å¥½æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸ææè´¨å å­é½å¤§äº ððpa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ°çä¸ªæ°ï¼å³ï¼
+再定义 𝑃𝑘(𝑥,𝑎)Pk(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示为所有小于 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的正整数中满足可重质因子恰好有 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个且所有质因子都大于 𝑝𝑎pa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的数的个数，即：
 
-ðð(ð¥,ð)=#{ðâ¤ð¥â£ð=ð1ð2â¯ððâ¹âð,ðð>ðð}(2)(2)Pk(x,a)=#{nâ¤xâ£n=q1q2â¯qkâ¹âi,qi>pa}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑘(𝑥,𝑎)=#{𝑛≤𝑥∣𝑛=𝑞1𝑞2⋯𝑞𝑘⟹∀𝑖,𝑞𝑖>𝑝𝑎}(2)(2)Pk(x,a)=#{n≤x∣n=q1q2⋯qk⟹∀i,qi>pa}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç¹æ®çï¼æä»¬å®ä¹ï¼ð0(ð¥,ð) =1P0(x,a)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ­¤ä¾¿æï¼
+特殊的，我们定义：𝑃0(𝑥,𝑎) =1P0(x,a)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如此便有：
 
-ð(ð¥,ð)=ð0(ð¥,ð)+ð1(ð¥,ð)+â¯+ðð(ð¥,ð)+â¯Ï(x,a)=P0(x,a)+P1(x,a)+â¯+Pk(x,a)+â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜙(𝑥,𝑎)=𝑃0(𝑥,𝑎)+𝑃1(𝑥,𝑎)+⋯+𝑃𝑘(𝑥,𝑎)+⋯ϕ(x,a)=P0(x,a)+P1(x,a)+⋯+Pk(x,a)+⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¸ªæ éåå¼å®é ä¸æ¯å¯ä»¥è¡¨ç¤ºä¸ºæéåå¼çï¼å ä¸ºå¨ ððð >ð¥pak>x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æ ðð(ð¥,ð) =0Pk(x,a)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这个无限和式实际上是可以表示为有限和式的，因为在 𝑝𝑘𝑎 >𝑥pak>x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，有 𝑃𝑘(𝑥,𝑎) =0Pk(x,a)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è®¾ ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ»¡è¶³ ð¥1/3 â¤ð¦ â¤ð¥1/2x1/3â¤yâ¤x1/2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´æ°ï¼åè®° ð =ð(ð¦)a=Ï(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+设 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为满足 𝑥1/3 ≤𝑦 ≤𝑥1/2x1/3≤y≤x1/2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整数，再记 𝑎 =𝜋(𝑦)a=π(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¨ ð â¥3kâ¥3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æ ð1(ð¥,ð) =ð(ð¥) âðP1(x,a)=Ï(x)âa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðð(ð¥,ð) =0Pk(x,a)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±æ­¤æä»¬å¯ä»¥æ¨åºï¼
+在 𝑘 ≥3k≥3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，有 𝑃1(𝑥,𝑎) =𝜋(𝑥) −𝑎P1(x,a)=π(x)−a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑃𝑘(𝑥,𝑎) =0Pk(x,a)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，由此我们可以推出：
 
-ð(ð¥)=ð(ð¥,ð)+ðâ1âð2(ð¥,ð)(3)(3)Ï(x)=Ï(x,a)+aâ1âP2(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜋(𝑥)=𝜙(𝑥,𝑎)+𝑎−1−𝑃2(𝑥,𝑎)(3)(3)π(x)=ϕ(x,a)+a−1−P2(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ ·ï¼è®¡ç® ð(ð¥)Ï(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¾¿å¯ä»¥è½¬åä¸ºè®¡ç® ð(ð¥,ð)Ï(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð2(ð¥,ð)P2(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这样，计算 𝜋(𝑥)π(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 便可以转化为计算 𝜙(𝑥,𝑎)ϕ(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑃2(𝑥,𝑎)P2(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## è®¡ç® Pâ(x,a)
+## 计算 P₂(x,a)
 
-ç±ç­å¼ (2)(2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä»¬å¯ä»¥å¾åº ð2(ð¥,ð)P2(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­äºæ»¡è¶³ ð¦ <ð â¤ðy<pâ¤q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðð â¤ð¥pqâ¤x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè´¨æ°å¯¹ (ð,ð)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ªæ°ï¼
+由等式 (2)(2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 我们可以得出 𝑃2(𝑥,𝑎)P2(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等于满足 𝑦 <𝑝 ≤𝑞y<p≤q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑝𝑞 ≤𝑥pq≤x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的质数对 (𝑝,𝑞)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的个数．
 
-é¦å æä»¬æ³¨æå° ð â[ð¦+1,âð¥]pâ[y+1,x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤å¤ï¼å¯¹äºæ¯ä¸ª ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¬é½æ ð â[ð,ð¥/ð]qâ[p,x/p]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼
+首先我们注意到 𝑝 ∈[𝑦+1,√𝑥]p∈[y+1,x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此外，对于每个 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，我们都有 𝑞 ∈[𝑝,𝑥/𝑝]q∈[p,x/p]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此：
 
-ð2(ð¥,ð)=âð¦<ðâ¤âð¥(ð(ð¥ð)âð(ð)+1)(4)(4)P2(x,a)=ây<pâ¤x(Ï(xp)âÏ(p)+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃2(𝑥,𝑎)=∑𝑦<𝑝≤√𝑥(𝜋(𝑥𝑝)−𝜋(𝑝)+1)(4)(4)P2(x,a)=∑y<p≤x(π(xp)−π(p)+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å½ ð â[ð¦+1,âð¥]pâ[y+1,x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æä»¬æ ð¥ð â[1,ð¥ð¦]xpâ[1,xy]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼æä»¬å¯ä»¥ç­åºé´ [1,ð¥ð¦][1,xy]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¶åå¯¹äºææççè´¨æ° ð â[ð¦+1,âð¥]pâ[y+1,x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è®¡ç® ð(ð¥ð) âð(ð) +1Ï(xp)âÏ(p)+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ºäºåå°ä¸è¿°ç®æ³çç©ºé´å¤æåº¦ï¼æä»¬å¯ä»¥èèååï¼åé¿ä¸º ð¿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¥åé¿ ð¿ =ð¦L=y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæä»¬å¯ä»¥å¨ ð(ð¥ð¦logâ¡logâ¡ð¥)O(xylogâ¡logâ¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦ï¼ð(ð¦)O(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç©ºé´å¤æåº¦å è®¡ç® ð2(ð¥,ð)P2(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+当 𝑝 ∈[𝑦+1,√𝑥]p∈[y+1,x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，我们有 𝑥𝑝 ∈[1,𝑥𝑦]xp∈[1,xy]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，我们可以筛区间 [1,𝑥𝑦][1,xy]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，然后对于所有的质数 𝑝 ∈[𝑦+1,√𝑥]p∈[y+1,x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 计算 𝜋(𝑥𝑝) −𝜋(𝑝) +1π(xp)−π(p)+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．为了减少上述算法的空间复杂度，我们可以考虑分块，块长为 𝐿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．若块长 𝐿 =𝑦L=y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则我们可以在 𝑂(𝑥𝑦log⁡log⁡𝑥)O(xylog⁡log⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度，𝑂(𝑦)O(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的空间复杂度内计算 𝑃2(𝑥,𝑎)P2(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## è®¡ç® Ï(x,a)
+## 计算 ϕ(x,a)
 
-å¯¹äº ð â¤ðbâ¤a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èèææä¸è¶ è¿ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ­£æ´æ°ï¼æ»¡è¶³å®çææè´¨å å­é½å¤§äº ððâ1pbâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿äºæ°å¯ä»¥è¢«åä¸ºä¸¤ç±»ï¼
+对于 𝑏 ≤𝑎b≤a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，考虑所有不超过 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的正整数，满足它的所有质因子都大于 𝑝𝑏−1pb−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这些数可以被分为两类：
 
-  1. å¯ä»¥è¢« ððpb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´é¤çï¼
-  2. ä¸å¯ä»¥è¢« ððpb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´é¤çï¼
+  1. 可以被 𝑝𝑏pb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 整除的；
+  2. 不可以被 𝑝𝑏pb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 整除的．
 
-å±äºç¬¬ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç±»çæ°æ ð(ð¥ðð,ðâ1)Ï(xpb,bâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼å±äºç¬¬äºç±»çæ°æ ð(ð¥,ð)Ï(x,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼
+属于第 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 类的数有 𝜙(𝑥𝑝𝑏,𝑏−1)ϕ(xpb,b−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，属于第二类的数有 𝜙(𝑥,𝑏)ϕ(x,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个．
 
-å æ­¤æä»¬å¾åºç»è®ºï¼
+因此我们得出结论：
 
-> **å®ç 5.15.1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼** å½æ° ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ä¸åæ§è´¨
+> **定理 5.15.1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：** 函数 𝜙ϕ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足下列性质
 > 
-> ð(ð¢,0)=[ð¢](5)(5)Ï(u,0)=[u]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð(ð¥,ð)=ð(ð¥,ðâ1)âð(ð¥ðð,ðâ1)(6)(6)Ï(x,b)=Ï(x,bâ1)âÏ(xpb,bâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+> 𝜙(𝑢,0)=[𝑢](5)(5)ϕ(u,0)=[u]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝜙(𝑥,𝑏)=𝜙(𝑥,𝑏−1)−𝜙(𝑥𝑝𝑏,𝑏−1)(6)(6)ϕ(x,b)=ϕ(x,b−1)−ϕ(xpb,b−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¡ç® ð(ð¥,ð)Ï(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç®åæ¹æ³å¯ä»¥ä»è¿ä¸ªå®çæ¨å¯¼åºæ¥ï¼æä»¬éå¤ä½¿ç¨ç­å¼ (7)(7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¥éæåå¾å° ð(ð¢,0)Ï(u,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸ªè¿ç¨å¯ä»¥çä½ä»æ ¹èç¹ ð(ð¥,ð)Ï(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§åå»ºææ ¹äºåæ ï¼å¾ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»åºäºè¿ä¸è¿ç¨ï¼éè¿è¿ç§æ¹æ³ï¼æä»¬å¾å°å¦ä¸å ¬å¼ï¼
+计算 𝜙(𝑥,𝑎)ϕ(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的简单方法可以从这个定理推导出来：我们重复使用等式 (7)(7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，知道最后得到 𝜙(𝑢,0)ϕ(u,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这个过程可以看作从根节点 𝜙(𝑥,𝑎)ϕ(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始创建有根二叉树，图 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 画出了这一过程．通过这种方法，我们得到如下公式：
 
-ð(ð¥,ð)=â1â¤ðâ¤ð¥ð+(ð)â¤ð¦ð(ð)[ð¥/ð]Ï(x,a)=â1â¤nâ¤xP+(n)â¤yÎ¼(n)[x/n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð(ð¥,ð)ââð(ð¥,ðâ1)âð(ð¥ðð,ðâ1)ââââð(ð¥,ðâ2)ð(ð¥ððâ1,ðâ2)âð(ð¥ðð,ðâ2)ð(ð¥ððððâ1,ðâ2)â®Ï(x,a)ââÏ(x,aâ1)âÏ(xpa,aâ1)ââââÏ(x,aâ2)Ï(xpaâ1,aâ2)âÏ(xpa,aâ2)Ï(xpapaâ1,aâ2)â®![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜙(𝑥,𝑎)=∑1≤𝑛≤𝑥𝑃+(𝑛)≤𝑦𝜇(𝑛)[𝑥/𝑛]ϕ(x,a)=∑1≤n≤xP+(n)≤yμ(n)[x/n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝜙(𝑥,𝑎)↙↘𝜙(𝑥,𝑎−1)−𝜙(𝑥𝑝𝑎,𝑎−1)↙↓↓↘𝜙(𝑥,𝑎−2)𝜙(𝑥𝑝𝑎−1,𝑎−2)−𝜙(𝑥𝑝𝑎,𝑎−2)𝜙(𝑥𝑝𝑎𝑝𝑎−1,𝑎−2)⋮ϕ(x,a)↙↘ϕ(x,a−1)−ϕ(xpa,a−1)↙↓↓↘ϕ(x,a−2)ϕ(xpa−1,a−2)−ϕ(xpa,a−2)ϕ(xpapa−1,a−2)⋮![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸å¾è¡¨ç¤ºè®¡ç® ð(ð¥,ð)Ï(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿ç¨çäºåæ ï¼å¶å­èç¹æå¼ä¹åå°±æ¯ ð(ð¥,ð)Ï(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+上图表示计算 𝜙(𝑥,𝑎)ϕ(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 过程的二叉树：叶子节点权值之和就是 𝜙(𝑥,𝑎)ϕ(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä½æ¯ï¼è¿æ ·éè¦è®¡ç®å¤ªå¤ä¸è¥¿ï¼å ä¸º ð¦ â¥ð¥1/3yâ¥x1/3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä» ä» è®¡ç®ä¸º 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ä¸è¶ è¿ ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è´¨æ°çä¹ç§¯çæ°ï¼å¦ææç §è¿ä¸ªæ¹æ³è®¡ç®ï¼ä¼æè³å° ð¥log3â¡ð¥xlog3â¡x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¡¹ï¼æ²¡æåæ³æä»¬å¯¹å¤æåº¦çéæ±ï¼
+但是，这样需要计算太多东西．因为 𝑦 ≥𝑥1/3y≥x1/3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，仅仅计算为 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 不超过 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 质数的乘积的数，如果按照这个方法计算，会有至少 𝑥log3⁡𝑥xlog3⁡x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个项，没有办法我们对复杂度的需求．
 
-ä¸ºäºéå¶è¿ä¸ªäºåæ çãçé¿ãï¼æä»¬è¦æ¹ååæ¥çç»æ­¢æ¡ä»¶ï¼è¿æ¯åæ¥çç»æ­¢æ¡ä»¶ï¼
+为了限制这个二叉树的「生长」，我们要改变原来的终止条件．这是原来的终止条件．
 
-> **ç»æ­¢æ¡ä»¶ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼** å¦æ ð =0b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä¸è¦åå¯¹èç¹ ð(ð)ð(ð¥ð,ð)Î¼(n)Ï(xn,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è°ç¨ç­å¼ (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+> **终止条件 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：** 如果 𝑏 =0b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则不要再对节点 𝜇(𝑛)𝜙(𝑥𝑛,𝑏)μ(n)ϕ(xn,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 调用等式 (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æä»¬æå®æ¹ææ´å¼ºçç»æ­¢æ¡ä»¶ï¼
+我们把它改成更强的终止条件：
 
-> **ç»æ­¢æ¡ä»¶ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼** å¦ææ»¡è¶³ä¸é¢ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¡ä»¶ä¸­çä¸ä¸ªï¼ä¸è¦åå¯¹èç¹ ð(ð)ð(ð¥ð,ð)Î¼(n)Ï(xn,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è°ç¨ç­å¼ (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7):
+> **终止条件 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：** 如果满足下面 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个条件中的一个，不要再对节点 𝜇(𝑛)𝜙(𝑥𝑛,𝑏)μ(n)ϕ(xn,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 调用等式 (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7):
 > 
->   1. ð =0b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð â¤ð¦nâ¤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
->   2. ð >ð¦n>y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+>   1. 𝑏 =0b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑛 ≤𝑦n≤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+>   2. 𝑛 >𝑦n>y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 > 
 
-æä»¬æ ¹æ® **ç»æ­¢æ¡ä»¶ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)** å°åäºåæ ä¸çå¶å­åæä¸¤ç§ï¼
+我们根据 **终止条件 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)** 将原二叉树上的叶子分成两种：
 
-  1. å¦æå¶å­èç¹ ð(ð)ð(ð¥ð,ð)Î¼(n)Ï(xn,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ð â¤ð¦nâ¤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç§°è¿ç§å¶å­èç¹ä¸º **æ®éå¶å­** ï¼
-  2. å¦æå¶å­èç¹ ð(ð)ð(ð¥ð,ð)Î¼(n)Ï(xn,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ð >ð¦n>y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð =ððð(ðâ¤ð¦)n=mpb(mâ¤y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç§°è¿ç§èç¹ä¸º **ç¹æ®å¶å­** ï¼
+  1. 如果叶子节点 𝜇(𝑛)𝜙(𝑥𝑛,𝑏)μ(n)ϕ(xn,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝑛 ≤𝑦n≤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则称这种叶子节点为 **普通叶子** ；
+  2. 如果叶子节点 𝜇(𝑛)𝜙(𝑥𝑛,𝑏)μ(n)ϕ(xn,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝑛 >𝑦n>y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑛 =𝑚𝑝𝑏(𝑚≤𝑦)n=mpb(m≤y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则称这种节点为 **特殊叶子** ．
 
-ç±æ­¤æä»¬å¾åºï¼
+由此我们得出：
 
-> **å®ç 5.25.2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼** æä»¬æï¼
+> **定理 5.25.2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：** 我们有：
 > 
-> ð(ð¥,ð)=ð0+ð(7)(7)Ï(x,a)=S0+S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+> 𝜙(𝑥,𝑎)=𝑆0+𝑆(7)(7)ϕ(x,a)=S0+S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 > 
-> å ¶ä¸­ ð0S0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤º **æ®éå¶å­** çè´¡ç®ï¼
+> 其中 𝑆0S0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示 **普通叶子** 的贡献：
 > 
-> ð0=âðâ¤ð¦ð(ð)[ð¥ð](8)(8)S0=ânâ¤yÎ¼(n)[xn]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+> 𝑆0=∑𝑛≤𝑦𝜇(𝑛)[𝑥𝑛](8)(8)S0=∑n≤yμ(n)[xn]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 > 
-> ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤º **ç¹æ®å¶å­** çè´¡ç®ï¼
+> 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示 **特殊叶子** 的贡献：
 > 
-> ð=âð/ð¿(ð)â¤ð¦â¤ðð(ð)ð(ð¥ð,ð(ð¿(ð))â1)(9)(9)S=ân/Î´(n)â¤yâ¤nÎ¼(n)Ï(xn,Ï(Î´(n))â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+> 𝑆=∑𝑛/𝛿(𝑛)≤𝑦≤𝑛𝜇(𝑛)𝜙(𝑥𝑛,𝜋(𝛿(𝑛))−1)(9)(9)S=∑n/δ(n)≤y≤nμ(n)ϕ(xn,π(δ(n))−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¡ç® ð0S0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¾ç¶æ¯å¯ä»¥å¨ ð(ð¦logâ¡logâ¡ð¥)O(ylogâ¡logâ¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦å è§£å³çï¼ç°å¨æä»¬è¦èèå¦ä½è®¡ç® ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+计算 𝑆0S0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 显然是可以在 𝑂(𝑦log⁡log⁡𝑥)O(ylog⁡log⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度内解决的，现在我们要考虑如何计算 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## è®¡ç® S
+## 计算 S
 
-æä»¬æï¼
+我们有：
 
-ð=ââðâ¤ð¦Â âð¿(ð)>ððâ¤ð¦<ððð(ð)ð(ð¥ðð,ð(ð)â1)(10)(10)S=ââpâ¤yÂ âÎ´(m)>pmâ¤y<mpÎ¼(m)Ï(xmp,Ï(p)â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆=−∑𝑝≤𝑦 ∑𝛿(𝑚)>𝑝𝑚≤𝑦<𝑚𝑝𝜇(𝑚)𝜙(𝑥𝑚𝑝,𝜋(𝑝)−1)(10)(10)S=−∑p≤y ∑δ(m)>pm≤y<mpμ(m)ϕ(xmp,π(p)−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¬å°è¿ä¸ªç­å¼æ¹åä¸ºï¼
+我们将这个等式改写为：
 
-ð=ð1+ð2+ð3S=S1+S2+S3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆=𝑆1+𝑆2+𝑆3S=S1+S2+S3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼
+其中：
 
-ð1=ââð¥1/3<ðâ¤ð¦Â âð¿(ð)>ððâ¤ð¦<ððð(ð)ð(ð¥ðð,ð(ð)â1)S1=ââx1/3<pâ¤yÂ âÎ´(m)>pmâ¤y<mpÎ¼(m)Ï(xmp,Ï(p)â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð2=ââð¥1/4<ðâ¤ð¥1/3Â âð¿(ð)>ððâ¤ð¦<ððð(ð)ð(ð¥ðð,ð(ð)â1)S2=ââx1/4<pâ¤x1/3Â âÎ´(m)>pmâ¤y<mpÎ¼(m)Ï(xmp,Ï(p)â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð3=ââðâ¤ð¥1/4Â âð¿(ð)>ððâ¤ð¦<ððð(ð)ð(ð¥ðð,ð(ð)â1)S3=ââpâ¤x1/4Â âÎ´(m)>pmâ¤y<mpÎ¼(m)Ï(xmp,Ï(p)â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆1=−∑𝑥1/3<𝑝≤𝑦 ∑𝛿(𝑚)>𝑝𝑚≤𝑦<𝑚𝑝𝜇(𝑚)𝜙(𝑥𝑚𝑝,𝜋(𝑝)−1)S1=−∑x1/3<p≤y ∑δ(m)>pm≤y<mpμ(m)ϕ(xmp,π(p)−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑆2=−∑𝑥1/4<𝑝≤𝑥1/3 ∑𝛿(𝑚)>𝑝𝑚≤𝑦<𝑚𝑝𝜇(𝑚)𝜙(𝑥𝑚𝑝,𝜋(𝑝)−1)S2=−∑x1/4<p≤x1/3 ∑δ(m)>pm≤y<mpμ(m)ϕ(xmp,π(p)−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑆3=−∑𝑝≤𝑥1/4 ∑𝛿(𝑚)>𝑝𝑚≤𝑦<𝑚𝑝𝜇(𝑚)𝜙(𝑥𝑚𝑝,𝜋(𝑝)−1)S3=−∑p≤x1/4 ∑δ(m)>pm≤y<mpμ(m)ϕ(xmp,π(p)−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ³¨æå°è®¡ç® ð1,ð2S1,S2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå¼ä¸­æ¶åå°ç ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯è´¨æ°ï¼è¯æå¦ä¸ï¼
+注意到计算 𝑆1,𝑆2S1,S2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的和式中涉及到的 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是质数，证明如下：
 
-> å¦æä¸æ¯è¿æ ·ï¼å ä¸ºæ ð¿(ð) >ð >ð¥1/4Î´(m)>p>x1/4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥æ ð >ð2 >âð¥m>p2>x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸ ð â¤ð¦mâ¤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¾ï¼æä»¥åå½é¢æç«ï¼
+> 如果不是这样，因为有 𝛿(𝑚) >𝑝 >𝑥1/4δ(m)>p>x1/4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以有 𝑚 >𝑝2 >√𝑥m>p2>x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这与 𝑚 ≤𝑦m≤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矛盾，所以原命题成立．
 
-æ´å¤çï¼å½ ðð >ð¥1/2 â¥ð¦mp>x1/2â¥y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æ ð¦ â¤ððyâ¤mp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤æä»¬æï¼
+更多的，当 𝑚𝑝 >𝑥1/2 ≥𝑦mp>x1/2≥y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，有 𝑦 ≤𝑚𝑝y≤mp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此我们有：
 
-ð1=âð¥1/3<ðâ¤ð¦Â âð<ðâ¤ð¦ð(ð¥ðð,ð(ð)â1)S1=âx1/3<pâ¤yÂ âp<qâ¤yÏ(xpq,Ï(p)â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð2=âð¥1/4<ðâ¤ð¥1/3Â âð<ðâ¤ð¦ð(ð¥ðð,ð(ð)â1)S2=âx1/4<pâ¤x1/3Â âp<qâ¤yÏ(xpq,Ï(p)â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆1=∑𝑥1/3<𝑝≤𝑦 ∑𝑝<𝑞≤𝑦𝜙(𝑥𝑝𝑞,𝜋(𝑝)−1)S1=∑x1/3<p≤y ∑p<q≤yϕ(xpq,π(p)−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑆2=∑𝑥1/4<𝑝≤𝑥1/3 ∑𝑝<𝑞≤𝑦𝜙(𝑥𝑝𝑞,𝜋(𝑝)−1)S2=∑x1/4<p≤x1/3 ∑p<q≤yϕ(xpq,π(p)−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### è®¡ç® Sâ
+### 计算 S₁
 
-å ä¸ºï¼
+因为：
 
-ð¥ðð<ð¥1/3<ðxpq<x1/3<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑝𝑞<𝑥1/3<𝑝xpq<x1/3<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥ï¼
+所以：
 
-ð(ð¥ðð,ð(ð)â1)=1Ï(xpq,Ï(p)â1)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜙(𝑥𝑝𝑞,𝜋(𝑝)−1)=1ϕ(xpq,π(p)−1)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥è®¡ç® ð1S1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå¼ä¸­çé¡¹é½æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥æä»¬å®é ä¸è¦è®¡ç®è´¨æ°å¯¹ (ð,ð)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ªæ°ï¼æ»¡è¶³ï¼ð¥1/3 <ð <ð â¤ð¦x1/3<p<qâ¤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+所以计算 𝑆1S1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的和式中的项都是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．所以我们实际上要计算质数对 (𝑝,𝑞)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的个数，满足：𝑥1/3 <𝑝 <𝑞 ≤𝑦x1/3<p<q≤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å æ­¤ï¼
+因此：
 
-ð1=(ð(ð¦)âð(ð¥1/3))(ð(ð¦)âð(ð¥1/3)â1)2S1=(Ï(y)âÏ(x1/3))(Ï(y)âÏ(x1/3)â1)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆1=(𝜋(𝑦)−𝜋(𝑥1/3))(𝜋(𝑦)−𝜋(𝑥1/3)−1)2S1=(π(y)−π(x1/3))(π(y)−π(x1/3)−1)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æäºè¿ä¸ªç­å¼æä»¬ä¾¿å¯ä»¥å¨ ð(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å è®¡ç® ð1S1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+有了这个等式我们便可以在 𝑂(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间内计算 𝑆1S1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### è®¡ç® Sâ
+### 计算 S₂
 
-æä»¬æï¼
+我们有：
 
-ð2=âð¥1/4<ðâ¤ð¥1/3Â âð<ðâ¤ð¦ð(ð¥ðð,ð(ð)â1)S2=âx1/4<pâ¤x1/3Â âp<qâ¤yÏ(xpq,Ï(p)â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆2=∑𝑥1/4<𝑝≤𝑥1/3 ∑𝑝<𝑞≤𝑦𝜙(𝑥𝑝𝑞,𝜋(𝑝)−1)S2=∑x1/4<p≤x1/3 ∑p<q≤yϕ(xpq,π(p)−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¬å° ð2S2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ ð >ð¥ð2q>xp2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð â¤ð¥ð2qâ¤xp2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸¤é¨åï¼
+我们将 𝑆2S2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分成 𝑞 >𝑥𝑝2q>xp2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑞 ≤𝑥𝑝2q≤xp2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 两部分：
 
-ð2=ð+ðS2=U+V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆2=𝑈+𝑉S2=U+V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼
+其中：
 
-ð=âð¥1/4<ðâ¤ð¥1/3Â âð<ð<ð¦ð>ð¥/ð2ð(ð¥ðð,ð(ð)â1)U=âx1/4<pâ¤x1/3Â âp<q<yq>x/p2Ï(xpq,Ï(p)â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð=âð¥1/4<ðâ¤ð¥1/3Â âð<ð<ð¦ðâ¤ð¥/ð2ð(ð¥ðð,ð(ð)â1)V=âx1/4<pâ¤x1/3Â âp<q<yqâ¤x/p2Ï(xpq,Ï(p)â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑈=∑𝑥1/4<𝑝≤𝑥1/3 ∑𝑝<𝑞<𝑦𝑞>𝑥/𝑝2𝜙(𝑥𝑝𝑞,𝜋(𝑝)−1)U=∑x1/4<p≤x1/3 ∑p<q<yq>x/p2ϕ(xpq,π(p)−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑉=∑𝑥1/4<𝑝≤𝑥1/3 ∑𝑝<𝑞<𝑦𝑞≤𝑥/𝑝2𝜙(𝑥𝑝𝑞,𝜋(𝑝)−1)V=∑x1/4<p≤x1/3 ∑p<q<yq≤x/p2ϕ(xpq,π(p)−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### è®¡ç® U
+### 计算 U
 
-ç± ð >ð¥ð2q>xp2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯å¾ ð2 >ð¥ð â¤ð¥ð¦,ð >âð¥ð¦p2>xqâ¤xy,p>xy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼
+由 𝑞 >𝑥𝑝2q>xp2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可得 𝑝2 >𝑥𝑞 ≤𝑥𝑦,𝑝 >√𝑥𝑦p2>xq≤xy,p>xy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此：
 
-ð=ââð¥/ð¦<ðâ¤ð¥1/3Â âð<ðâ¤ð¦ð>ð¥/ð2ð(ð¥ðð,ð(ð)â1)U=âx/y<pâ¤x1/3Â âp<qâ¤yq>x/p2Ï(xpq,Ï(p)â1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑈=∑√𝑥/𝑦<𝑝≤𝑥1/3 ∑𝑝<𝑞≤𝑦𝑞>𝑥/𝑝2𝜙(𝑥𝑝𝑞,𝜋(𝑝)−1)U=∑x/y<p≤x1/3 ∑p<q≤yq>x/p2ϕ(xpq,π(p)−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼
+因此：
 
-ð=ââð¥/ð¦<ðâ¤ð¥1/3#{ðâ£ð¥ð2<ðâ¤ð¦}U=âx/y<pâ¤x1/3#{qâ£xp2<qâ¤y}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑈=∑√𝑥/𝑦<𝑝≤𝑥1/3#{𝑞∣𝑥𝑝2<𝑞≤𝑦}U=∑x/y<p≤x1/3#{q∣xp2<q≤y}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼
+因此：
 
-ð=ââð¥/ð¦<ðâ¤ð¥1/3(ð(ð¦)âð(ð¥ð2))U=âx/y<pâ¤x1/3(Ï(y)âÏ(xp2))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑈=∑√𝑥/𝑦<𝑝≤𝑥1/3(𝜋(𝑦)−𝜋(𝑥𝑝2))U=∑x/y<p≤x1/3(π(y)−π(xp2))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸ºæ ð¥ð2 <ð¦xp2<y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥æä»¬å¯ä»¥é¢å¤çåºææç ð(ð¡)(ð¡â¤ð¦)Ï(t)(tâ¤y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ ·æä»¬å°±å¯ä»¥å¨ ð(ð¦)O(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦å è®¡ç®åº ðU![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+因为有 𝑥𝑝2 <𝑦xp2<y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以我们可以预处理出所有的 𝜋(𝑡)(𝑡≤𝑦)π(t)(t≤y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这样我们就可以在 𝑂(𝑦)O(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度内计算出 𝑈U![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### è®¡ç® V
+### 计算 V
 
-å¯¹äºè®¡ç® ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå¼ä¸­çæ¯ä¸é¡¹ï¼æä»¬é½æ ð â¤ð¥ðð <ð¥1/2 <ð2pâ¤xpq<x1/2<p2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼
+对于计算 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的和式中的每一项，我们都有 𝑝 ≤𝑥𝑝𝑞 <𝑥1/2 <𝑝2p≤xpq<x1/2<p2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此：
 
-ð(ð¥ðð,ð(ð)â1)=1+ð(ð¥ðð)â(ð(ð)â1)=2âð(ð)+ð(ð¥ðð)Ï(xpq,Ï(p)â1)=1+Ï(xpq)â(Ï(p)â1)=2âÏ(p)+Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜙(𝑥𝑝𝑞,𝜋(𝑝)−1)=1+𝜋(𝑥𝑝𝑞)−(𝜋(𝑝)−1)=2−𝜋(𝑝)+𝜋(𝑥𝑝𝑞)ϕ(xpq,π(p)−1)=1+π(xpq)−(π(p)−1)=2−π(p)+π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è¢«è¡¨ç¤ºä¸ºï¼
+所以 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以被表示为：
 
-ð=ð1+ð2V=V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑉=𝑉1+𝑉2V=V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼
+其中：
 
-ð1=âð¥1/4<ðâ¤ð¥1/3Â âð<ðâ¤min(ð¥/ð2,ð¦)(2âð(ð))V1=âx1/4<pâ¤x1/3Â âp<qâ¤min(x/p2,y)(2âÏ(p))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð2=âð¥1/4<ðâ¤ð¥1/3Â âð<ðâ¤min(ð¥/ð2,ð¦)ð(ð¥ðð)V2=âx1/4<pâ¤x1/3Â âp<qâ¤min(x/p2,y)Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑉1=∑𝑥1/4<𝑝≤𝑥1/3 ∑𝑝<𝑞≤min(𝑥/𝑝2,𝑦)(2−𝜋(𝑝))V1=∑x1/4<p≤x1/3 ∑p<q≤min(x/p2,y)(2−π(p))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑉2=∑𝑥1/4<𝑝≤𝑥1/3 ∑𝑝<𝑞≤min(𝑥/𝑝2,𝑦)𝜋(𝑥𝑝𝑞)V2=∑x1/4<p≤x1/3 ∑p<q≤min(x/p2,y)π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é¢å¤çåº ð(ð¡)(ð¡â¤ð¦)Ï(t)(tâ¤y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä»¬å°±å¯ä»¥å¨ ð(ð¥1/3)O(x1/3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦å è®¡ç®åº ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+预处理出 𝜋(𝑡)(𝑡≤𝑦)π(t)(t≤y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 我们就可以在 𝑂(𝑥1/3)O(x1/3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度内计算出 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-èèæä»¬å¦ä½å éè®¡ç® ð2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿ç¨ï¼æä»¬å¯ä»¥æ ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè´¡ç®æåæè¥å¹²ä¸ª ð(ð¥ðð)Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå®å¼çåºé´ä¸ï¼è¿æ ·å°±åªéè¦è®¡ç®åºæ¯ä¸ä¸ªåºé´çé¿åº¦åä»ä¸ä¸ªåºé´å°ä¸ä¸ä¸ªåºé´ç ð(ð¥ðð)Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹åéï¼
+考虑我们如何加速计算 𝑉2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的过程．我们可以把 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的贡献拆分成若干个 𝜋(𝑥𝑝𝑞)π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为定值的区间上，这样就只需要计算出每一个区间的长度和从一个区间到下一个区间的 𝜋(𝑥𝑝𝑞)π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的改变量．
 
-æ´åç¡®çè¯´ï¼æä»¬é¦å å° ð2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæä¸¤ä¸ªé¨åï¼å° ð â¤min(ð¥ð2,ð¦)qâ¤min(xp2,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿ä¸ªå¤æçæ¡ä»¶ç®åï¼
+更准确的说，我们首先将 𝑉2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分成两个部分，将 𝑞 ≤min(𝑥𝑝2,𝑦)q≤min(xp2,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这个复杂的条件简化：
 
-ð2=âð¥1/4<ðâ¤âð¥/ð¦Â âð<ðâ¤ð¦ð(ð¥ðð)+ââð¥/ð¦<ðâ¤ð¥1/3Â âð<ðâ¤ð¥/ð2ð(ð¥ðð)V2=âx1/4<pâ¤x/yÂ âp<qâ¤yÏ(xpq)+âx/y<pâ¤x1/3Â âp<qâ¤x/p2Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑉2=∑𝑥1/4<𝑝≤√𝑥/𝑦 ∑𝑝<𝑞≤𝑦𝜋(𝑥𝑝𝑞)+∑√𝑥/𝑦<𝑝≤𝑥1/3 ∑𝑝<𝑞≤𝑥/𝑝2𝜋(𝑥𝑝𝑞)V2=∑x1/4<p≤x/y ∑p<q≤yπ(xpq)+∑x/y<p≤x1/3 ∑p<q≤x/p2π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¥çæä»¬æè¿ä¸ªå¼å­æ¹åä¸ºï¼
+接着我们把这个式子改写为：
 
-ð2=ð1+ð2+ð3+ð4+ð5V2=W1+W2+W3+W4+W5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑉2=𝑊1+𝑊2+𝑊3+𝑊4+𝑊5V2=W1+W2+W3+W4+W5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼
+其中：
 
-ð1=âð¥1/4<ðâ¤ð¥/ð¦2Â âð<ðâ¤ð¦ð(ð¥ðð)W1=âx1/4<pâ¤x/y2Â âp<qâ¤yÏ(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð2=âð¥/ð¦2<ðâ¤âð¥/ð¦Â âð<ðâ¤âð¥/ðð(ð¥ðð)W2=âx/y2<pâ¤x/yÂ âp<qâ¤x/pÏ(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð3=âð¥/ð¦2<ðâ¤âð¥/ð¦Â ââð¥/ð<ðâ¤ð¦ð(ð¥ðð)W3=âx/y2<pâ¤x/yÂ âx/p<qâ¤yÏ(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð4=ââð¥/ð¦<ðâ¤ð¥1/3Â âð<ðâ¤âð¥/ðð(ð¥ðð)W4=âx/y<pâ¤x1/3Â âp<qâ¤x/pÏ(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð5=ââð¥/ð¦<ðâ¤ð¥1/3Â ââð¥/ð<ðâ¤ð¥/ð2ð(ð¥ðð)W5=âx/y<pâ¤x1/3Â âx/p<qâ¤x/p2Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑊1=∑𝑥1/4<𝑝≤𝑥/𝑦2 ∑𝑝<𝑞≤𝑦𝜋(𝑥𝑝𝑞)W1=∑x1/4<p≤x/y2 ∑p<q≤yπ(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑊2=∑𝑥/𝑦2<𝑝≤√𝑥/𝑦 ∑𝑝<𝑞≤√𝑥/𝑝𝜋(𝑥𝑝𝑞)W2=∑x/y2<p≤x/y ∑p<q≤x/pπ(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑊3=∑𝑥/𝑦2<𝑝≤√𝑥/𝑦 ∑√𝑥/𝑝<𝑞≤𝑦𝜋(𝑥𝑝𝑞)W3=∑x/y2<p≤x/y ∑x/p<q≤yπ(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑊4=∑√𝑥/𝑦<𝑝≤𝑥1/3 ∑𝑝<𝑞≤√𝑥/𝑝𝜋(𝑥𝑝𝑞)W4=∑x/y<p≤x1/3 ∑p<q≤x/pπ(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑊5=∑√𝑥/𝑦<𝑝≤𝑥1/3 ∑√𝑥/𝑝<𝑞≤𝑥/𝑝2𝜋(𝑥𝑝𝑞)W5=∑x/y<p≤x1/3 ∑x/p<q≤x/p2π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-#### è®¡ç® Wâ ä¸ Wâ
+#### 计算 W₁ 与 W₂
 
-è®¡ç®è¿ä¸¤ä¸ªå¼éè¦è®¡ç®æ»¡è¶³ ð¦ <ð¥ðð <ð¥1/2y<xpq<x1/2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç ð(ð¥ðð)Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼å¯ä»¥å¨åºé´ [1,âð¥][1,x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ååç­åºï¼å¨æ¯ä¸ªåä¸­æä»¬å¯¹äºæææ»¡è¶³æ¡ä»¶ç (ð,ð)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½ç´¯å ð(ð¥ðð)Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+计算这两个值需要计算满足 𝑦 <𝑥𝑝𝑞 <𝑥1/2y<xpq<x1/2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 𝜋(𝑥𝑝𝑞)π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．可以在区间 [1,√𝑥][1,x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分块筛出．在每个块中我们对于所有满足条件的 (𝑝,𝑞)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都累加 𝜋(𝑥𝑝𝑞)π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-#### è®¡ç® Wâ
+#### 计算 W₃
 
-å¯¹äºæ¯ä¸ª ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¬æ ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæè¥å¹²ä¸ªåºé´ï¼æ¯ä¸ªåºé´é½æ»¡è¶³å®ä»¬ç ð(ð¥ðð)Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å®å¼ï¼æ¯ä¸ªåºé´æä»¬é½å¯ä»¥ ð(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è®¡ç®å®çè´¡ç®ï¼å½æä»¬è·å¾ä¸ä¸ªæ°ç ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æä»¬ç¨ ð(ð¡)Ï(t)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð¡ â¤ð¦tâ¤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼çå¼è¡¨è®¡ç® ð(ð¥ðð)Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»¥å çè´¨æ°è¡¨å¯ä»¥ç»åºä½¿å¾ ð(ð¡) <ð(ð¡ +1) =ð(ð¥ðð)Ï(t)<Ï(t+1)=Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ç ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»¥æ­¤ç±»æ¨ä½¿å¾ ð(ð¥ðð)Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ååçä¸ä¸ä¸ª ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼
+对于每个 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，我们把 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分成若干个区间，每个区间都满足它们的 𝜋(𝑥𝑝𝑞)π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是定值，每个区间我们都可以 𝑂(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 计算它的贡献．当我们获得一个新的 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，我们用 𝜋(𝑡)π(t)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（𝑡 ≤𝑦t≤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）的值表计算 𝜋(𝑥𝑝𝑞)π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 以内的质数表可以给出使得 𝜋(𝑡) <𝜋(𝑡 +1) =𝜋(𝑥𝑝𝑞)π(t)<π(t+1)=π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立的 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．以此类推使得 𝜋(𝑥𝑝𝑞)π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变化的下一个 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．
 
-#### è®¡ç® Wâ
+#### 计算 W₄
 
-ç¸æ¯äº ð3W3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð4W4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´å°ï¼æä»¥ ð(ð¥ðð)Ï(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¹åå¾æ´å¿«ï¼è¿æ¶ååæç §è®¡ç® ð3W3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹æ³è®¡ç® ð4W4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¾å¾æ²¡æä»»ä½ä¼å¿ï¼äºæ¯æä»¬ç´æ¥æ´åæä¸¾æ°å¯¹ (ð,ð)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¥è®¡ç® ð4W4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+相比于 𝑊3W3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑊4W4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 更小，所以 𝜋(𝑥𝑝𝑞)π(xpq)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 改变得更快．这时候再按照计算 𝑊3W3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方法计算 𝑊4W4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就显得没有任何优势．于是我们直接暴力枚举数对 (𝑝,𝑞)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 来计算 𝑊4W4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-#### è®¡ç® Wâ 
+#### 计算 W₅
 
-æä»¬åè®¡ç® ð3W3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é£æ ·æ¥è®¡ç® ð5W5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+我们像计算 𝑊3W3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 那样来计算 𝑊5W5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## è®¡ç® Sâ
+## 计算 S₃
 
-æä»¬ä½¿ç¨ææå°äº ð¥1/4x1/4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç´ æ°ä¸æ¬¡ç­åºåºé´ [1,ð¥ð¦][1,xy]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å½æä»¬çç­æ³è¿è¡å° ððpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶åï¼æä»¬ç®åºäºææ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³æ²¡æå¹³æ¹å å­å¹¶ä¸ ð¿(ð) >ððÎ´(m)>pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç âð(ð)ð(ð¥ððð,ðâ1)âÎ¼(m)Ï(xmpk,kâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼ï¼è¿ä¸ªç­æ³æ¯ååè¿è¡çï¼æä»¬å¨ç­éé´éä¸­ç»´æ¤ä¸ä¸ªäºåæ ï¼ä»¥å®æ¶ç»´æ¤ææç´ æ°ç­éå°ç»å®ç´ æ°åçä¸­é´ç»æï¼è¿æ ·æä»¬å°±å¯ä»¥åªç¨ ð(logâ¡ð¥)O(logâ¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦æ±åºå¨ç­æ³è¿è¡å°æä¸ä¸ªå¼çæ¶åæ²¡æè¢«ç­å°çæ°çæ°éï¼
+我们使用所有小于 𝑥1/4x1/4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的素数一次筛出区间 [1,𝑥𝑦][1,xy]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．当我们的筛法进行到 𝑝𝑘pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时候，我们算出了所有 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足没有平方因子并且 𝛿(𝑚) >𝑝𝑘δ(m)>pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 −𝜇(𝑚)𝜙(𝑥𝑚𝑝𝑘,𝑘−1)−μ(m)ϕ(xmpk,k−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 值．这个筛法是分块进行的，我们在筛选间隔中维护一个二叉树，以实时维护所有素数筛选到给定素数后的中间结果．这样我们就可以只用 𝑂(log⁡𝑥)O(log⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度求出在筛法进行到某一个值的时候没有被筛到的数的数量．
 
-## ç®æ³çæ¶ç©ºå¤æåº¦
+## 算法的时空复杂度
 
-æ¶ç©ºå¤æåº¦è¢«å¦ä¸ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè¿ç¨å½±åï¼
+时空复杂度被如下 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个过程影响：
 
-  1. è®¡ç® ð2(ð¥,ð)P2(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. è®¡ç® ð1,ð2,ð3,ð4,ð5W1,W2,W3,W4,W5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  3. è®¡ç® ð3S3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. 计算 𝑃2(𝑥,𝑎)P2(x,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  2. 计算 𝑊1,𝑊2,𝑊3,𝑊4,𝑊5W1,W2,W3,W4,W5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  3. 计算 𝑆3S3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### è®¡ç® Pâ(x,y) çå¤æåº¦
+### 计算 P₂(x,y) 的复杂度
 
-æä»¬å·²ç»ç¥éäºè¿ä¸ªè¿ç¨çæ¶é´å¤æåº¦ä¸º ð(ð¥ð¦logâ¡logâ¡ð¥)O(xylogâ¡logâ¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç©ºé´å¤æåº¦ä¸º ð(ð¦)O(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+我们已经知道了这个过程的时间复杂度为 𝑂(𝑥𝑦log⁡log⁡𝑥)O(xylog⁡log⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，空间复杂度为 𝑂(𝑦)O(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### è®¡ç® Wâ,Wâ,Wâ,Wâ,Wâ çå¤æåº¦
+### 计算 W₁,W₂,W₃,W₄,W₅ 的复杂度
 
-è®¡ç® ð1,ð2W1,W2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè¿è¡çåé¿åº¦ä¸º ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç­çæ¶é´æå¤æåº¦ä¸º ð(âð¥logâ¡logâ¡ð¥)O(xlogâ¡logâ¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç©ºé´å¤æåº¦ä¸º ð(ð¦)O(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+计算 𝑊1,𝑊2W1,W2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所进行的块长度为 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的筛的时间按复杂度为 𝑂(√𝑥log⁡log⁡𝑥)O(xlog⁡log⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，空间复杂度为 𝑂(𝑦)O(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è®¡ç® ð1W1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æéçæ¶é´å¤æåº¦ä¸ºï¼
+计算 𝑊1W1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所需的时间复杂度为：
 
-ð(ð¥ð¦2)ð(ð¦)=ð(ð¥ð¦log2â¡ð¥)Ï(xy2)Ï(y)=O(xylog2â¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜋(𝑥𝑦2)𝜋(𝑦)=𝑂(𝑥𝑦log2⁡𝑥)π(xy2)π(y)=O(xylog2⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¡ç® ð2W2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦ä¸ºï¼
+计算 𝑊2W2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度为：
 
-ðââ â âââð¥/ð¦2<ðâ¤âð¥/ð¦ð(âð¥ð)ââ â ââ =ð(ð¥3/4ð¦1/4log2â¡ð¥)O(âx/y2<pâ¤x/yÏ(xp))=O(x3/4y1/4log2â¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑂⎛⎜ ⎜ ⎜⎝∑𝑥/𝑦2<𝑝≤√𝑥/𝑦𝜋(√𝑥𝑝)⎞⎟ ⎟ ⎟⎠=𝑂(𝑥3/4𝑦1/4log2⁡𝑥)O(∑x/y2<p≤x/yπ(xp))=O(x3/4y1/4log2⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼è®¡ç® ð3W3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦ä¸ºï¼
+因此，计算 𝑊3W3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度为：
 
-ðââ â âââð¥/ð¦2<ðâ¤âð¥/ð¦ð(âð¥ð)ââ â ââ =ð(ð¥3/4ð¦1/4log2â¡ð¥)O(âx/y2<pâ¤x/yÏ(xp))=O(x3/4y1/4log2â¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑂⎛⎜ ⎜ ⎜⎝∑𝑥/𝑦2<𝑝≤√𝑥/𝑦𝜋(√𝑥𝑝)⎞⎟ ⎟ ⎟⎠=𝑂(𝑥3/4𝑦1/4log2⁡𝑥)O(∑x/y2<p≤x/yπ(xp))=O(x3/4y1/4log2⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¡ç® ð4W4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦ä¸ºï¼
+计算 𝑊4W4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度为：
 
-ðââ â ââââð¥/ð¦<ðâ¤ð¥1/3ð(âð¥ð)ââ â ââ =ð(ð¥2/3log2â¡ð¥)O(âx/y<pâ¤x1/3Ï(xp))=O(x2/3log2â¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑂⎛⎜ ⎜ ⎜⎝∑√𝑥/𝑦<𝑝≤𝑥1/3𝜋(√𝑥𝑝)⎞⎟ ⎟ ⎟⎠=𝑂(𝑥2/3log2⁡𝑥)O(∑x/y<p≤x1/3π(xp))=O(x2/3log2⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¡ç® ð5W5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦ä¸ºï¼
+计算 𝑊5W5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度为：
 
-ðââ â ââââð¥/ð¦<ðâ¤ð¥1/3ð(âð¥ð)ââ â ââ =ð(ð¥2/3log2â¡ð¥)O(âx/y<pâ¤x1/3Ï(xp))=O(x2/3log2â¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑂⎛⎜ ⎜ ⎜⎝∑√𝑥/𝑦<𝑝≤𝑥1/3𝜋(√𝑥𝑝)⎞⎟ ⎟ ⎟⎠=𝑂(𝑥2/3log2⁡𝑥)O(∑x/y<p≤x1/3π(xp))=O(x2/3log2⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### è®¡ç® Sâ çå¤æåº¦
+### 计算 S₃ 的复杂度
 
-å¯¹äºé¢å¤çï¼ç±äºè¦å¿«éæ¥è¯¢ ð(ð¢,ð)Ï(u,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼æä»¬æ²¡åæ³ç¨æ®éçç­æ³ ð(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ±åºï¼èæ¯è¦ç»´æ¤ä¸ä¸ªæ°æ®ç»æä½¿å¾æ¯æ¬¡æ¥è¯¢çæ¶é´å¤æåº¦æ¯ ð(logâ¡ð¥)O(logâ¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤æ¶é´å¤æåº¦ä¸º ð(ð¥ð¦logâ¡ð¥logâ¡logâ¡ð¥)O(xylogâ¡xlogâ¡logâ¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对于预处理：由于要快速查询 𝜙(𝑢,𝑏)ϕ(u,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值，我们没办法用普通的筛法 𝑂(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 求出，而是要维护一个数据结构使得每次查询的时间复杂度是 𝑂(log⁡𝑥)O(log⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此时间复杂度为 𝑂(𝑥𝑦log⁡𝑥log⁡log⁡𝑥)O(xylog⁡xlog⁡log⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¯¹äºæ±åï¼å¯¹äºè®¡ç® ð3S3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¼ä¸­çæ¯ä¸é¡¹ï¼æä»¬æ¥è¯¢ä¸è¿°æ°æ®ç»æï¼ä¸å ± ð(logâ¡ð¥)O(logâ¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡æ¥è¯¢ï¼æä»¬è¿éè¦è®¡ç®åå¼çé¡¹æ°ï¼å³äºåæ ä¸­å¶å­çä¸ªæ°ï¼ææå¶å­çå½¢å¼åä¸º Â±ð(ð¥ððð,ðâ1)Â±Ï(xmpb,bâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð â¤ð¦,ð <ð(ð¥1/4)mâ¤y,b<Ï(x1/4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼å¶å­çæ°ç®æ¯ ð(ð¦ð(ð¥1/4))O(yÏ(x1/4))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº§å«çï¼æä»¥è®¡ç® ð3S3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ»æ¶é´å¤æåº¦ä¸ºï¼
+对于求和：对于计算 𝑆3S3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和式中的每一项，我们查询上述数据结构，一共 𝑂(log⁡𝑥)O(log⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次查询．我们还需要计算和式的项数，即二叉树中叶子的个数．所有叶子的形式均为 ±𝜙(𝑥𝑚𝑝𝑏,𝑏−1)±ϕ(xmpb,b−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑚 ≤𝑦,𝑏 <𝜋(𝑥1/4)m≤y,b<π(x1/4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，叶子的数目是 𝑂(𝑦𝜋(𝑥1/4))O(yπ(x1/4))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 级别的．所以计算 𝑆3S3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的总时间复杂度为：
 
-ð(ð¥ð¦logâ¡ð¥logâ¡logâ¡ð¥+ð¦ð¥1/4)O(xylogâ¡xlogâ¡logâ¡x+yx1/4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑂(𝑥𝑦log⁡𝑥log⁡log⁡𝑥+𝑦𝑥1/4)O(xylog⁡xlog⁡log⁡x+yx1/4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### æ»å¤æåº¦
+### 总复杂度
 
-è¿ä¸ªç®æ³çç©ºé´å¤æåº¦ä¸º ð(ð¦)O(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¶é´å¤æåº¦ä¸ºï¼
+这个算法的空间复杂度为 𝑂(𝑦)O(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，时间复杂度为：
 
-ð(ð¥ð¦logâ¡logâ¡ð¥+ð¥ð¦logâ¡ð¥logâ¡logâ¡ð¥+ð¥1/4ð¦+ð¥2/3log2â¡ð¥)O(xylogâ¡logâ¡x+xylogâ¡xlogâ¡logâ¡x+x1/4y+x2/3log2â¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑂(𝑥𝑦log⁡log⁡𝑥+𝑥𝑦log⁡𝑥log⁡log⁡𝑥+𝑥1/4𝑦+𝑥2/3log2⁡𝑥)O(xylog⁡log⁡x+xylog⁡xlog⁡log⁡x+x1/4y+x2/3log2⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¬å ð¦ =ð¥1/3log3â¡ð¥logâ¡logâ¡ð¥y=x1/3log3â¡xlogâ¡logâ¡x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±ææä¼æ¶é´å¤æåº¦ä¸º ð(ð¥2/3log2â¡ð¥)O(x2/3log2â¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç©ºé´å¤æåº¦ä¸º ð(ð¥1/3log3â¡ð¥logâ¡logâ¡ð¥)O(x1/3log3â¡xlogâ¡logâ¡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+我们取 𝑦 =𝑥1/3log3⁡𝑥log⁡log⁡𝑥y=x1/3log3⁡xlog⁡log⁡x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就有最优时间复杂度为 𝑂(𝑥2/3log2⁡𝑥)O(x2/3log2⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，空间复杂度为 𝑂(𝑥1/3log3⁡𝑥log⁡log⁡𝑥)O(x1/3log3⁡xlog⁡log⁡x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## ä¸äºæ¹è¿
+## 一些改进
 
-æä»¬å¨è¿éç»åºæ¹è¿æ¹æ³ï¼ä»¥åå°ç®æ³çå¸¸æ°ï¼æé«å®çå®é æçï¼
+我们在这里给出改进方法，以减少算法的常数，提高它的实际效率．
 
-  * å¨ **ç»æ­¢æ¡ä»¶ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)** ä¸­ï¼æä»¬å¯ä»¥ç¨ä¸ä¸ª ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¥ä»£æ¿ ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ð§ >ð¦z>y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¬å¯ä»¥è¯æè¿æ ·å­è®¡ç® ð3S3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦å¯ä»¥ä¼åå°ï¼
+  * 在 **终止条件 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)** 中，我们可以用一个 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 来代替 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝑧 >𝑦z>y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．我们可以证明这样子计算 𝑆3S3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度可以优化到：
 
-ð(ð¥ð§logâ¡ð¥logâ¡logâ¡ð¥+ð¦ð¥1/4logâ¡ð¥+ð§3/2)O(xzlogâ¡xlogâ¡logâ¡x+yx1/4logâ¡x+z3/2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑂(𝑥𝑧log⁡𝑥log⁡log⁡𝑥+𝑦𝑥1/4log⁡𝑥+𝑧3/2)O(xzlog⁡xlog⁡log⁡x+yx1/4log⁡x+z3/2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¹ä¸ºéè¿æ¹å ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼æ¥æ£æ¥è®¡ç®æä¾äºä¸ä¸ªå¾å¥½çæ¹æ³ï¼
+这也为通过改变 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值来检查计算提供了一个很好的方法．
 
-  * ä¸ºäºæ¸ æ¥èµ·è§ï¼æä»¬å¨éè¿°ç®æ³çæ¶åéæ©å¨ ð¥1/4x1/4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤æåæ¥è®¡ç®æ»å ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½å®é ä¸æä»¬åªéè¦æ ð â¤ð¥ðð <ð2pâ¤xpq<p2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±å¯ä»¥è®¡ç®ï¼æä»¬å¯ä»¥å©ç¨è¿ä¸ç¹ï¼æ¸è¿å¤ææ§ä¿æä¸åï¼
+  * 为了清楚起见，我们在阐述算法的时候选择在 𝑥1/4x1/4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处拆分来计算总和 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，但实际上我们只需要有 𝑝 ≤𝑥𝑝𝑞 <𝑝2p≤xpq<p2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就可以计算．我们可以利用这一点，渐近复杂性保持不变．
 
-  * ç¨åå ä¸ªç´ æ° 2,3,52,3,5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¢å¤çè®¡ç®å¯ä»¥èçæ´å¤çæ¶é´ï¼
+  * 用前几个素数 2,3,52,3,5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 预处理计算可以节省更多的时间．
 
-## åèèµæä¸æå±é è¯»
+## 参考资料与拓展阅读
 
-æ¬æç¿»è¯èªï¼[Computing ð(ð¥)Ï(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7): the Meissel, Lehmer, Lagarias, Miller, Odlyzko method](https://dl.acm.org/doi/abs/10.1090/s0025-5718-96-00674-6)
+本文翻译自：[Computing 𝜋(𝑥)π(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7): the Meissel, Lehmer, Lagarias, Miller, Odlyzko method](https://dl.acm.org/doi/abs/10.1090/s0025-5718-96-00674-6)
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/meissel-lehmer.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/meissel-lehmer.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [Early0v0](https://github.com/Early0v0), [Enter-tainer](https://github.com/Enter-tainer), [Peanut-Tang](https://github.com/Peanut-Tang), [1196131597](https://github.com/1196131597), [Alpacabla](https://github.com/Alpacabla), [alphagocc](https://github.com/alphagocc), [CCXXXI](https://github.com/CCXXXI), [GHLinZhengyu](https://github.com/GHLinZhengyu), [Great-designer](https://github.com/Great-designer), [ljy2009](https://github.com/ljy2009), [megakite](https://github.com/megakite), [Menci](https://github.com/Menci), [r-value](https://github.com/r-value), [StudyingFather](https://github.com/StudyingFather), [Vxlimo](https://github.com/Vxlimo), [Xeonacid](https://github.com/Xeonacid)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/4/23 03:45:48，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/meissel-lehmer.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/meissel-lehmer.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [Early0v0](https://github.com/Early0v0), [Enter-tainer](https://github.com/Enter-tainer), [Peanut-Tang](https://github.com/Peanut-Tang), [1196131597](https://github.com/1196131597), [Alpacabla](https://github.com/Alpacabla), [alphagocc](https://github.com/alphagocc), [CCXXXI](https://github.com/CCXXXI), [GHLinZhengyu](https://github.com/GHLinZhengyu), [Great-designer](https://github.com/Great-designer), [lailai0916](https://github.com/lailai0916), [ljy2009](https://github.com/ljy2009), [megakite](https://github.com/megakite), [Menci](https://github.com/Menci), [r-value](https://github.com/r-value), [StudyingFather](https://github.com/StudyingFather), [Vxlimo](https://github.com/Vxlimo), [Xeonacid](https://github.com/Xeonacid)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

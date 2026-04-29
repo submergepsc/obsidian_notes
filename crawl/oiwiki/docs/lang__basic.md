@@ -1,4 +1,4 @@
-# C++ 语法基础 - OI Wiki
+﻿# C++ 语法基础 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/basic/
 

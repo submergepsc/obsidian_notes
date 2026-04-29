@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/js/js-obj-regexp.html
-Title: JavaScript RegExp 对象 | 菜鸟教程
-
-JavaScript RegExp 对象 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-Javascript 教程

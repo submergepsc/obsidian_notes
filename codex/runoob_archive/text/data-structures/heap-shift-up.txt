@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/data-structures/heap-shift-up.html
-Title: 堆的 shift up | 菜鸟教程
-
-堆的 shift up | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-数据结构

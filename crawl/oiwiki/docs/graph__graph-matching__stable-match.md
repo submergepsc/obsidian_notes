@@ -1,4 +1,4 @@
-# 稳定匹配 - OI Wiki
+﻿# 稳定匹配 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/graph-matching/stable-match/
 

@@ -1,4 +1,4 @@
-# 排序简介 - OI Wiki
+﻿# 排序简介 - OI Wiki
 
 - Source: https://oi-wiki.org/basic/sort-intro/
 

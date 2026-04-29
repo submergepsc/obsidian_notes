@@ -75,7 +75,6 @@ sudo apt autoremove --purge -y
 - 开机自启动和 GUI 环境变量问题，优先分清 `~/.profile` 和 `~/.bashrc`
 
 延伸：
-- [[notes_ubuntu/磁盘管理]]
 - [[notes_ubuntu/ubuntu应用_开机自启动]]
 
 ## 输入法 / Xorg / Wayland

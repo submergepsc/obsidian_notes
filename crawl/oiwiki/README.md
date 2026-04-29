@@ -30,6 +30,8 @@ python run_oiwiki.py --output-dir docs
 python run_oiwiki.py --output-dir docs
 ```
 
+如果断点队列已经为空，程序会重新读取 sitemap，并只把尚未访问过的新页面加入队列。
+
 如果你要彻底重跑，显式加上：
 
 ```powershell
@@ -42,3 +44,27 @@ python run_oiwiki.py --output-dir docs --fresh
 - `docs/images/*`：下载到本地的图片
 - `docs/_crawl_index.json`：抓取索引和统计信息
 - `docs/_crawl_state.json`：断点续爬状态文件
+
+## 生成离线 HTML
+
+```powershell
+python build_oiwiki_html.py
+```
+
+默认会读取 `docs/`，并把离线 HTML 归档生成到当前 crawl 项目内：
+
+```text
+oiwiki_archive/
+```
+
+主要入口：
+
+- `oiwiki_archive/index.html`：归档首页
+- `oiwiki_archive/html/index.html`：HTML 总索引
+- `oiwiki_archive/html/all-pages.html`：全部页面索引
+- `oiwiki_archive/html/<group>/index.html`：栏目索引
+- `oiwiki_archive/search_index.json`：搜索索引
+
+当前 HTML 归档包含全站搜索、栏目筛选、页内目录、同栏目导航、上一篇/下一篇文章导航，以及对 Markdown 表格的横向滚动渲染。首页左侧主题导航支持进入栏目索引或原地展开页面列表；栏目索引页使用扁平页面列表，不再为单页 subgroup 生成小节。
+
+OI Wiki 站内页面和图片应保持本地化：重建后不应出现指向 `oi-wiki.org` 的在线 `href` 或 `src`。外部参考链接、题库链接、GitHub 链接等仍保留原始 HTTP/HTTPS 链接。

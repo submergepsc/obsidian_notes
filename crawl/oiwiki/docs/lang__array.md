@@ -1,4 +1,4 @@
-# 数组 - OI Wiki
+﻿# 数组 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/array/
 

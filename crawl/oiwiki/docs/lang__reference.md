@@ -1,113 +1,113 @@
-# å¼ç¨ - OI Wiki
+﻿# 引用 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/reference/
 
-# å¼ç¨
+# 引用
 
-> å£°æå ·ååéä¸ºå¼ç¨ï¼å³æ¢å­å¯¹è±¡æå½æ°çå«åï¼
+> 声明具名变量为引用，即既存对象或函数的别名．
 
-å¼ç¨å¯ä»¥çææ¯ C++ å°è£ çéç©ºæéï¼å¯ä»¥ç¨æ¥ä¼ éå®ææåçå¯¹è±¡ï¼å¨å£°ææ¶å¿ é¡»æåå¯¹è±¡ï¼
+引用可以看成是 C++ 封装的非空指针，可以用来传递它所指向的对象，在声明时必须指向对象．
 
-å¼ç¨ä¸æ¯å¯¹è±¡ï¼å æ­¤ä¸å­å¨å¼ç¨çæ°ç»ãæ æ³è·åå¼ç¨çæéï¼ä¹ä¸å­å¨å¼ç¨çå¼ç¨ï¼
+引用不是对象，因此不存在引用的数组、无法获取引用的指针，也不存在引用的引用．
 
-å¼ç¨ç±»åä¸å±äºå¯¹è±¡ç±»å
+引用类型不属于对象类型
 
-å¦ææ³è®©å¼ç¨è½å®æä¸è¬çå¤å¶ãèµå¼ç­æä½ï¼æ¯å¦ä½ä¸ºå®¹å¨å ç´ ï¼åéè¦ [`reference_wrapper`](https://zh.cppreference.com/w/cpp/utility/functional/reference_wrapper)ï¼éå¸¸ç»´æ¤ä¸ä¸ªéç©ºæéå®ç°ï¼
+如果想让引用能完成一般的复制、赋值等操作，比如作为容器元素，则需要 [`reference_wrapper`](https://zh.cppreference.com/w/cpp/utility/functional/reference_wrapper)，通常维护一个非空指针实现．
 
-å¼ç¨ä¸»è¦åä¸ºä¸¤ç§ï¼å·¦å¼å¼ç¨åå³å¼å¼ç¨ï¼
+引用主要分为两种，左值引用和右值引用．
 
-å·¦å¼åå³å¼
+左值和右值
 
-å¯¹å·¦å¼åå³å¼çè®²è§£ï¼è¯·åè [å¼ç±»å«](../value-category/) é¡µé¢ï¼
+对左值和右值的讲解，请参考 [值类别](../value-category/) 页面．
 
-## å·¦å¼å¼ç¨ T&
+## 左值引用 T&
 
-éå¸¸æä»¬ä¼æ¥è§¦å°çå¼ç¨ä¸ºå·¦å¼å¼ç¨ï¼å³ç»å®å°å·¦å¼çå¼ç¨ï¼åæ¶ `const` éå®çå·¦å¼å¼ç¨å¯ä»¥ç»å®å³å¼ï¼ä»¥ä¸æ¯æ¥èª [åèæå](https://zh.cppreference.com/w/cpp/language/reference) çä¸æ®µç¤ºä¾ä»£ç ï¼
+通常我们会接触到的引用为左值引用，即绑定到左值的引用，同时 `const` 限定的左值引用可以绑定右值．以下是来自 [参考手册](https://zh.cppreference.com/w/cpp/language/reference) 的一段示例代码．
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 ``` |  ```text #include <iostream> #include <string> int main () { std :: string s = "Ex" ; std :: string & r1 = s ; const std :: string & r2 = s ; r1 += "ample" ; // ä¿®æ¹ r1ï¼å³ä¿®æ¹äº s // r2 += "!"; // éè¯¯ï¼ä¸è½éè¿å° const çå¼ç¨ä¿®æ¹ std :: cout << r2 << '\n' ; // æå° r2ï¼è®¿é®äºsï¼è¾åº "Example" } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 ``` |  ```text #include <iostream> #include <string> int main () { std :: string s = "Ex" ; std :: string & r1 = s ; const std :: string & r2 = s ; r1 += "ample" ; // 修改 r1，即修改了 s // r2 += "!"; // 错误：不能通过到 const 的引用修改 std :: cout << r2 << '\n' ; // 打印 r2，访问了s，输出 "Example" } ```   
 ---|---  
   
-å·¦å¼å¼ç¨æå¸¸ç¨çå°æ¹æ¯å½æ°åæ°ï¼ç¨äºé¿å ä¸éè¦çæ·è´ï¼
+左值引用最常用的地方是函数参数，用于避免不需要的拷贝．
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 ``` |  ```text #include <iostream> #include <string> // åæ°ä¸­ç s æ¯å¼ç¨ï¼å¨è°ç¨å½æ°æ¶ä¸ä¼åçæ·è´ char & char_number ( std :: string & s , std :: size_t n ) { s += s ; // 's' ä¸ main() ç 'str' // æ¯åä¸å¯¹è±¡ï¼æ­¤å¤è¿è¯´æå·¦å¼ä¹æ¯å¯ä»¥æ¾å¨ç­å·å³ä¾§ç return s . at ( n ); // string::at() è¿å char çå¼ç¨ } int main () { std :: string str = "Test" ; char_number ( str , 1 ) = 'a' ; // å½æ°è¿åæ¯å·¦å¼ï¼å¯è¢«èµå¼ std :: cout << str << '\n' ; // æ­¤å¤è¾åº "TastTest" } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 ``` |  ```text #include <iostream> #include <string> // 参数中的 s 是引用，在调用函数时不会发生拷贝 char & char_number ( std :: string & s , std :: size_t n ) { s += s ; // 's' 与 main() 的 'str' // 是同一对象，此处还说明左值也是可以放在等号右侧的 return s . at ( n ); // string::at() 返回 char 的引用 } int main () { std :: string str = "Test" ; char_number ( str , 1 ) = 'a' ; // 函数返回是左值，可被赋值 std :: cout << str << '\n' ; // 此处输出 "TastTest" } ```   
 ---|---  
   
-## å³å¼å¼ç¨ T&&ï¼C++ 11ï¼
+## 右值引用 T&&（C++ 11）
 
-å³å¼å¼ç¨æ¯ç»å®å°å³å¼çå¼ç¨ï¼ç¨äºç§»å¨å¯¹è±¡ï¼ä¹å¯ä»¥ç¨äº **å»¶é¿ä¸´æ¶å¯¹è±¡çå­æ** ï¼
+右值引用是绑定到右值的引用，用于移动对象，也可以用于 **延长临时对象生存期** ．
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 ``` |  ```text #include <iostream> #include <string> using namespace std ; int main () { string s1 = "Test" ; // string&& r1 = s1; // éè¯¯ï¼ä¸è½ç»å®å°å·¦å¼ï¼éè¦ std::move æè static_cast const string & r2 = s1 \+ s1 ; // å¯è¡ï¼å°å¸¸éçå·¦å¼å¼ç¨å»¶é¿çå­æ // r2 += "Test"; // éè¯¯ï¼ä¸è½éè¿å°å¸¸éçå¼ç¨ä¿®æ¹ cout << r2 << '\n' ; string && r3 = s1 \+ s1 ; // å¯è¡ï¼å³å¼å¼ç¨å»¶é¿çå­æ r3 += "Test" ; cout << r3 << '\n' ; const string & r4 = r3 ; // å³å¼å¼ç¨å¯ä»¥è½¬æ¢å° const éå®çå·¦å¼ cout << r4 << '\n' ; string & r5 = r3 ; // å³å¼å¼ç¨å¯ä»¥è½¬æ¢å°å·¦å¼ cout << r5 << '\n' ; } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 ``` |  ```text #include <iostream> #include <string> using namespace std ; int main () { string s1 = "Test" ; // string&& r1 = s1; // 错误：不能绑定到左值，需要 std::move 或者 static_cast const string & r2 = s1 \+ s1 ; // 可行：到常量的左值引用延长生存期 // r2 += "Test"; // 错误：不能通过到常量的引用修改 cout << r2 << '\n' ; string && r3 = s1 \+ s1 ; // 可行：右值引用延长生存期 r3 += "Test" ; cout << r3 << '\n' ; const string & r4 = r3 ; // 右值引用可以转换到 const 限定的左值 cout << r4 << '\n' ; string & r5 = r3 ; // 右值引用可以转换到左值 cout << r5 << '\n' ; } ```   
 ---|---  
   
-## æ¬åå¼ç¨
+## 悬垂引用
 
-å½å¼ç¨æä»£çå¯¹è±¡å·²ç»éæ¯ï¼å¼ç¨å°±ä¼åææ¬åå¼ç¨ï¼è®¿é®æ¬åå¼ç¨è¿æ¯ä¸ç§æªå®ä¹è¡ä¸ºï¼å¯è½ä¼å¯¼è´ç¨åºå´©æºï¼
+当引用指代的对象已经销毁，引用就会变成悬垂引用，访问悬垂引用这是一种未定义行为，可能会导致程序崩溃．
 
-ä»¥ä¸ä¸ºå¸¸è§çæ¬åå¼ç¨çä¾å­ï¼
+以下为常见的悬垂引用的例子：
 
-  * å¼ç¨å±é¨åé
+  * 引用局部变量
 
-```text 1 2 3 4 5 6 7 8 9 10 11 ``` |  ```text #include <iostream> int & foo () { int a = 1 ; return a ; } int main () { int & b = foo (); std :: cout << b << std :: endl ; // æªå®ä¹è¡ä¸º } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 ``` |  ```text #include <iostream> int & foo () { int a = 1 ; return a ; } int main () { int & b = foo (); std :: cout << b << std :: endl ; // 未定义行为 } ```   
 ---|---  
   
-  * è§£åé å¯¼è´çæ¬åå¼ç¨
+  * 解分配导致的悬垂引用
 
-```text 1 2 3 4 5 6 7 8 9 ``` |  ```text #include <iostream> int main () { int * ptr = new int ( 10 ); int & ref = * ptr ; delete ptr ; std :: cout << ref << std :: endl ; // æªå®ä¹è¡ä¸º } ```   
+```text 1 2 3 4 5 6 7 8 9 ``` |  ```text #include <iostream> int main () { int * ptr = new int ( 10 ); int & ref = * ptr ; delete ptr ; std :: cout << ref << std :: endl ; // 未定义行为 } ```   
 ---|---  
   
-  * å å­éåé å¯¼è´çæ¬åå¼ç¨
+  * 内存重分配导致的悬垂引用
 
-```text 1 2 3 4 5 6 7 8 9 10 11 ``` |  ```text #include <iostream> int main () { std :: string str = "hello" ; const char & ref = str . front (); str . append ( "world" ); // å¯è½ä¼éæ°åé å å­ï¼å¯¼è´ ref æåçå å­è¢«éæ¾ std :: cout << ref << std :: endl ; // æªå®ä¹è¡ä¸º } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 ``` |  ```text #include <iostream> int main () { std :: string str = "hello" ; const char & ref = str . front (); str . append ( "world" ); // 可能会重新分配内存，导致 ref 指向的内存被释放 std :: cout << ref << std :: endl ; // 未定义行为 } ```   
 ---|---  
   
-ç±»ä¼¼ `std::vector`ï¼`std::unordered_map` ç­å®¹å¨çæå ¥æä½ï¼åæå¯è½å¯¼è´å å­éæ°åé ï¼
+类似 `std::vector`，`std::unordered_map` 等容器的插入操作，均有可能导致内存重新分配．
 
-ä½¿ç¨å¼ç¨æ¶ï¼åºæ¶å»å ³æ³¨å¼ç¨æåçå¯¹è±¡ççå½å¨æï¼é¿å é ææ¬åå¼ç¨ï¼
+使用引用时，应时刻关注引用指向的对象的生命周期，避免造成悬垂引用．
 
-éå¸¸éææ£æ¥å·¥å ·åè¯å¥½çä»£ç ä¹ æ¯è½è®©æä»¬é¿å æ¬åå¼ç¨çé®é¢ï¼
+通常静态检查工具和良好的代码习惯能让我们避免悬垂引用的问题．
 
-## å¼ç¨ç¸å ³çä¼åæå·§
+## 引用相关的优化技巧
 
-### æ¶é¤éè½»éå¯¹è±¡å ¥åçæ·è´å¼é
+### 消除非轻量对象入参的拷贝开销
 
-å¸¸è§ç **éè½»éå¯¹è±¡** æï¼
+常见的 **非轻量对象** 有：
 
-  * å®¹å¨ `vector`ï¼`array`ï¼`map` ç­
+  * 容器 `vector`，`array`，`map` 等
   * `string`
-  * å ¶ä»å®ç°äºæç»§æ¿äºèªå®ä¹æ·è´æé ãç§»å¨æé ç­ç¹æ®å½æ°çç±»å
+  * 其他实现了或继承了自定义拷贝构造、移动构造等特殊函数的类型
 
-èå¯¹ **è½»éå¯¹è±¡** ä½¿ç¨å¼ç¨ä¸è½å¸¦æ¥ä»»ä½å¥½å¤ï¼å¼ç¨ç±»åä½ä¸ºåæ°çç©ºé´å ç¨å¤§å°ï¼çè³å¯è½ä¼æ¯ç±»åæ¬èº«è¿å¤§ï¼
+而对 **轻量对象** 使用引用不能带来任何好处，引用类型作为参数的空间占用大小，甚至可能会比类型本身还大．
 
-è¿å¯è½ä¼å¸¦æ¥äºçæ§è½è´æ ï¼åæ¶å¯è½ä¼é»æ­¢ç¼è¯å¨ä¼åï¼
+这可能会带来些的性能负担，同时可能会阻止编译器优化．
 
-ä»¥ä¸å±äº **è½»éå¯¹è±¡**
+以下属于 **轻量对象**
 
-  * åºæ¬ç±»å `int`ï¼`float` ç­
-  * è¾å°ç [èåä½ç±»å](https://zh.cppreference.com/w/cpp/language/aggregate_initialization)
-  * æ ååºå®¹å¨çè¿­ä»£å¨
+  * 基本类型 `int`，`float` 等
+  * 较小的 [聚合体类型](https://zh.cppreference.com/w/cpp/language/aggregate_initialization)
+  * 标准库容器的迭代器
 
-### å°å·¦å¼è½¬æ¢ä¸ºå³å¼
+### 将左值转换为右值
 
-ä½¿ç¨ `std::move` [è½¬ç§»](../value-category/#stdmove) å¯¹è±¡çæææï¼è¿éå¸¸è§äºå±é¨åéä¹é´ï¼æåæ°ä¸å±é¨åéä¹é´ï¼
+使用 `std::move` [转移](../value-category/#stdmove) 对象的所有权．这通常见于局部变量之间，或参数与局部变量之间：
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 ``` |  ```text #include <iostream> #include <string> #include <vector> using namespace std ; string world ( string str ) { return std :: move ( str ) += " world!" ; } int main () { // 1 cout << world ( "hello" ) << '\n' ; vector < string > vec0 ; // 2 { string && size = to_string ( vec0 . size ()); size += ", " \+ to_string ( size . size ()); vec0 . emplace_back ( std :: move ( size )); } cout << vec0 . front (); } ```   
 ---|---  
   
-ä½ä¸æ¯æææ¶åé½éè¦è¿ä¹åï¼æ¯å¦ [å½æ°è¿åå¼ä¼å](../value-category/#å¸¸è§è¯¯åº)ï¼
+但不是所有时候都需要这么做，比如 [函数返回值优化](../value-category/#常见误区)．
 
-### å³å¼å»¶é¿ä¸´æ¶éçå½æ
+### 右值延长临时量生命期
 
-ä»è¯­ä¹ä¸ï¼ä¸´æ¶éå¯è½ä¼å¸¦æ¥çé¢å¤çå¤å¶æç§»å¨ï¼å°½ç®¡å¤æ°æ åµä¸ç¼è¯å¨è½éè¿ [å¤å¶æ¶é¤](../value-category/#å¤å¶æ¶é¤) è¿è¡ä¼åï¼ä½å¼ç¨è½å¼ºå¶ç¼è¯å¨ä¸è¿è¡è¿äºå¤ä½æä½ï¼é¿å ä¸ç¡®å®æ§ï¼
+从语义上，临时量可能会带来的额外的复制或移动，尽管多数情况下编译器能通过 [复制消除](../value-category/#复制消除) 进行优化，但引用能强制编译器不进行这些多余操作，避免不确定性．
 
-## åèå å®¹
+## 参考内容
 
-  1. [C++ è¯­è¨ææ¡£ââå¼ç¨å£°æ](https://zh.cppreference.com/w/cpp/language/reference)
-  2. [C++ è¯­è¨ææ¡£ââå¼ç±»å«](https://zh.cppreference.com/w/cpp/language/value_category)
+  1. [C++ 语言文档——引用声明](https://zh.cppreference.com/w/cpp/language/reference)
+  2. [C++ 语言文档——值类别](https://zh.cppreference.com/w/cpp/language/value_category)
   3. [Does const ref lvalue to non-const func return value specifically reduce copies?](https://stackoverflow.com/questions/38909228/does-const-ref-lvalue-to-non-const-func-return-value-specifically-reduce-copies)
 
 * * *
 
-> __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/reference.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/lang/reference.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[cmpute](https://github.com/cmpute), [Ir1d](https://github.com/Ir1d), [CoderOJ](https://github.com/CoderOJ), [ksyx](https://github.com/ksyx), [Tiphereth-A](https://github.com/Tiphereth-A), [Xeonacid](https://github.com/Xeonacid), [c0nstexpr](https://github.com/c0nstexpr), [Duodenum87](https://github.com/Duodenum87), [Enter-tainer](https://github.com/Enter-tainer), [mgt](mailto:i@margatroid.xyz), [ouuan](https://github.com/ouuan)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+> __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/reference.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/lang/reference.md "edit.link.title")  
+>  __本页面贡献者：[cmpute](https://github.com/cmpute), [Ir1d](https://github.com/Ir1d), [CoderOJ](https://github.com/CoderOJ), [ksyx](https://github.com/ksyx), [Tiphereth-A](https://github.com/Tiphereth-A), [Xeonacid](https://github.com/Xeonacid), [c0nstexpr](https://github.com/c0nstexpr), [Duodenum87](https://github.com/Duodenum87), [Enter-tainer](https://github.com/Enter-tainer), [mgt](mailto:i@margatroid.xyz), [ouuan](https://github.com/ouuan)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

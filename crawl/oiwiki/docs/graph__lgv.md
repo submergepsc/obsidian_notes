@@ -1,4 +1,4 @@
-# LGV 引理 - OI Wiki
+﻿# LGV 引理 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/lgv/
 

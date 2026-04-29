@@ -1,4 +1,4 @@
-# OI 赛事与赛制 - OI Wiki
+﻿# OI 赛事与赛制 - OI Wiki
 
 - Source: https://oi-wiki.org/contest/oi/
 

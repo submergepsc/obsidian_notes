@@ -1,67 +1,67 @@
-# DFSï¼å¾è®ºï¼ - OI Wiki
+﻿# DFS（图论） - OI Wiki
 
 - Source: https://oi-wiki.org/graph/dfs/
 
-# DFSï¼å¾è®ºï¼
+# DFS（图论）
 
-## å¼å ¥
+## 引入
 
-DFS å ¨ç§°æ¯ [Depth First Search](https://en.wikipedia.org/wiki/Depth-first_search)ï¼ä¸­æåæ¯æ·±åº¦ä¼å æç´¢ï¼æ¯ä¸ç§ç¨äºéåææç´¢æ æå¾çç®æ³ï¼æè°æ·±åº¦ä¼å ï¼å°±æ¯è¯´æ¯æ¬¡é½å°è¯åæ´æ·±çèç¹èµ°ï¼
+DFS 全称是 [Depth First Search](https://en.wikipedia.org/wiki/Depth-first_search)，中文名是深度优先搜索，是一种用于遍历或搜索树或图的算法．所谓深度优先，就是说每次都尝试向更深的节点走．
 
-è¯¥ç®æ³è®²è§£æ¶å¸¸å¸¸ä¸ BFS å¹¶åï¼ä½ä¸¤è é¤äºé½è½éåå¾çè¿éåä»¥å¤ï¼ç¨éå®å ¨ä¸åï¼å¾å°æè½æ··ç¨ä¸¤ç§ç®æ³çæ åµï¼
+该算法讲解时常常与 BFS 并列，但两者除了都能遍历图的连通块以外，用途完全不同，很少有能混用两种算法的情况．
 
-DFS å¸¸å¸¸ç¨æ¥æä»£ç¨éå½å½æ°å®ç°çæç´¢ï¼ä½å®é ä¸ä¸¤è å¹¶ä¸ä¸æ ·ï¼æå ³è¯¥ç±»æç´¢ææ³è¯·åé [DFSï¼æç´¢ï¼](../../search/dfs/).
+DFS 常常用来指代用递归函数实现的搜索，但实际上两者并不一样．有关该类搜索思想请参阅 [DFS（搜索）](../../search/dfs/).
 
-## è¿ç¨
+## 过程
 
-DFS ææ¾èçç¹å¾å¨äºå ¶ **éå½è°ç¨èªèº«** ï¼åæ¶ä¸ BFS ç±»ä¼¼ï¼DFS ä¼å¯¹å ¶è®¿é®è¿çç¹æä¸è®¿é®æ è®°ï¼å¨éåå¾æ¶è·³è¿å·²æè¿æ è®°çç¹ï¼ä»¥ç¡®ä¿ **æ¯ä¸ªç¹ä» è®¿é®ä¸æ¬¡** ï¼ç¬¦åä»¥ä¸ä¸¤æ¡è§åçå½æ°ï¼ä¾¿æ¯å¹¿ä¹ä¸ç DFSï¼
+DFS 最显著的特征在于其 **递归调用自身** ．同时与 BFS 类似，DFS 会对其访问过的点打上访问标记，在遍历图时跳过已打过标记的点，以确保 **每个点仅访问一次** ．符合以上两条规则的函数，便是广义上的 DFS．
 
-å ·ä½å°è¯´ï¼DFS å¤§è´ç»æå¦ä¸ï¼
+具体地说，DFS 大致结构如下：
 
-```text 1 2 3 4 5 6 7 8 ``` |  ```text DFS(v) // v å¯ä»¥æ¯å¾ä¸­çä¸ä¸ªé¡¶ç¹ï¼ä¹å¯ä»¥æ¯æ½è±¡çæ¦å¿µï¼å¦ dp ç¶æç­ï¼ å¨ v ä¸æè®¿é®æ è®° for u in v çç¸é»èç¹ if u æ²¡ææè¿è®¿é®æ è®° then DFS(u) end end end ```   
+```text 1 2 3 4 5 6 7 8 ``` |  ```text DFS(v) // v 可以是图中的一个顶点，也可以是抽象的概念，如 dp 状态等． 在 v 上打访问标记 for u in v 的相邻节点 if u 没有打过访问标记 then DFS(u) end end end ```   
 ---|---  
   
-ä»¥ä¸ä»£ç åªå å«äº DFS å¿ éçä¸»è¦ç»æï¼å®é ç DFS ä¼å¨ä»¥ä¸ä»£ç åºç¡ä¸å å ¥ä¸äºä»£ç ï¼å©ç¨ DFS æ§è´¨è¿è¡å ¶ä»æä½ï¼
+以上代码只包含了 DFS 必需的主要结构．实际的 DFS 会在以上代码基础上加入一些代码，利用 DFS 性质进行其他操作．
 
-## æ§è´¨
+## 性质
 
-è¯¥ç®æ³éå¸¸çæ¶é´å¤æåº¦ä¸º ð(ð +ð)O(n+m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç©ºé´å¤æåº¦ä¸º ð(ð)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºç¹æ°ï¼ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºè¾¹æ°ï¼æ³¨æç©ºé´å¤æåº¦å å«äºæ ç©ºé´ï¼æ ç©ºé´çç©ºé´å¤æåº¦æ¯ ð(ð)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼å¨å¹³å ð(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éåä¸æ¡è¾¹çæ¡ä»¶ä¸æè½è¾¾å°æ­¤æ¶é´å¤æåº¦ï¼ä¾å¦ç¨ååææé»æ¥è¡¨å­å¨å¾ï¼å¦æç¨é»æ¥ç©éµåä¸ä¸å®è½è¾¾å°æ­¤å¤æåº¦ï¼
+该算法通常的时间复杂度为 𝑂(𝑛 +𝑚)O(n+m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，空间复杂度为 𝑂(𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示点数，𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示边数．注意空间复杂度包含了栈空间，栈空间的空间复杂度是 𝑂(𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．在平均 𝑂(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 遍历一条边的条件下才能达到此时间复杂度，例如用前向星或邻接表存储图；如果用邻接矩阵则不一定能达到此复杂度．
 
-> å¤æ³¨ï¼ç®åå¤§é¨åç®æ³ç«èµï¼å æ¬ NOIPãå¤§é¨åçéä»¥å CCF ä¸¾åçåé¡¹èµäºï¼é½æ¯æ **æ éæ ç©ºé´** ï¼å³ï¼æ ç©ºé´ä¸åç¬éå¶ï¼ä½æ»å å­ç©ºé´ä»ç¶åé¢é¢éå¶ï¼ä½å¤§é¨åæä½ç³»ç»ä¼å¯¹æ ç©ºé´åé¢å¤çéå¶ï¼å æ­¤å¨æ¬å°è°è¯æ¶éè¦ä¸äºæ¹å¼æ¥åæ¶æ ç©ºé´éå¶ï¼
+> 备注：目前大部分算法竞赛（包括 NOIP、大部分省选以及 CCF 举办的各项赛事）都支持 **无限栈空间** ，即：栈空间不单独限制，但总内存空间仍然受题面限制．但大部分操作系统会对栈空间做额外的限制，因此在本地调试时需要一些方式来取消栈空间限制．
 > 
->   * å¨ Windows ä¸ï¼éå¸¸çæ¹æ³æ¯å¨ **ç¼è¯éé¡¹** ä¸­å å ¥ `-Wl,--stack=1000000000`ï¼è¡¨ç¤ºå°æ ç©ºé´éå¶è®¾ç½®ä¸º 1000000000 å­èï¼
->   * å¨ Linux ä¸ï¼éå¸¸çæ¹æ³æ¯å¨è¿è¡ç¨åºå **å¨ç»ç«¯å** æ§è¡ `ulimit -s unlimited`ï¼è¡¨ç¤ºæ ç©ºé´æ éï¼æ¯ä¸ªç»ç«¯åªéæ§è¡ä¸æ¬¡ï¼å¯¹ä¹åæ¯æ¬¡ç¨åºè¿è¡é½ææï¼
+>   * 在 Windows 上，通常的方法是在 **编译选项** 中加入 `-Wl,--stack=1000000000`，表示将栈空间限制设置为 1000000000 字节．
+>   * 在 Linux 上，通常的方法是在运行程序前 **在终端内** 执行 `ulimit -s unlimited`，表示栈空间无限．每个终端只需执行一次，对之后每次程序运行都有效．
 > 
 
-## å®ç°
+## 实现
 
-### æ å®ç°
+### 栈实现
 
-DFS å¯ä»¥ä½¿ç¨ [æ ï¼Stackï¼](../../ds/stack/) ä¸ºéåä¸­èç¹çæå­å®¹å¨æ¥å®ç°ï¼è¿ä¸ç¨ [éåï¼Queueï¼](../../ds/queue/) å®ç°ç BFS å½¢æé«åº¦å¯¹åºï¼
+DFS 可以使用 [栈（Stack）](../../ds/stack/) 为遍历中节点的暂存容器来实现；这与用 [队列（Queue）](../../ds/queue/) 实现的 BFS 形成高度对应．
 
 C++Python
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ``` |  ```text vector < vector < int >> adj ; // é»æ¥è¡¨ vector < bool > vis ; // è®°å½èç¹æ¯å¦å·²ç»éå void dfs ( int s ) { stack < int > st ; st . push ( s ); vis [ s ] = true ; while ( ! st . empty ()) { int u = st . top (); st . pop (); for ( int v : adj [ u ]) { if ( ! vis [ v ]) { vis [ v ] = true ; // ç¡®ä¿æ éæ²¡æéå¤å ç´ st . push ( v ); } } } } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ``` |  ```text vector < vector < int >> adj ; // 邻接表 vector < bool > vis ; // 记录节点是否已经遍历 void dfs ( int s ) { stack < int > st ; st . push ( s ); vis [ s ] = true ; while ( ! st . empty ()) { int u = st . top (); st . pop (); for ( int v : adj [ u ]) { if ( ! vis [ v ]) { vis [ v ] = true ; // 确保栈里没有重复元素 st . push ( v ); } } } } ```   
 ---|---  
   
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 ``` |  ```text # adj : List[List[int]] é»æ¥è¡¨ # vis : List[bool] è®°å½èç¹æ¯å¦å·²ç»éå def dfs ( s : int ) -> None : stack = [ s ] # ç¨åè¡¨æ¥æ¨¡ææ ï¼æèµ·ç¹å å ¥æ ä¸­ vis [ s ] = True # èµ·ç¹è¢«éå while stack : # å½æ éç©ºæ¶ç»§ç»­æ§è¡ u = ( stack . pop () ) # æ¿åå¹¶ä¸¢å¼ææåä¸ä¸ªå ç´ ï¼æ é¡¶çå ç´ ï¼ï¼å¯ä»¥çè§£ä¸ºèµ°å°uè¿ä¸ªå ç´ for v in adj [ u ]: # å¯¹äºä¸uç¸é»çæ¯ä¸ªå ç´ v if not vis [ v ]: # å¦ævå¨æ­¤åæ²¡æèµ°è¿ vis [ v ] = True # ç¡®ä¿æ éæ²¡æéå¤å ç´ stack . append ( v ) # ævå å ¥æ ä¸­ ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 ``` |  ```text # adj : List[List[int]] 邻接表 # vis : List[bool] 记录节点是否已经遍历 def dfs ( s : int ) -> None : stack = [ s ] # 用列表来模拟栈，把起点加入栈中 vis [ s ] = True # 起点被遍历 while stack : # 当栈非空时继续执行 u = ( stack . pop () ) # 拿取并丢弃掉最后一个元素（栈顶的元素），可以理解为走到u这个元素 for v in adj [ u ]: # 对于与u相邻的每个元素v if not vis [ v ]: # 如果v在此前没有走过 vis [ v ] = True # 确保栈里没有重复元素 stack . append ( v ) # 把v加入栈中 ```   
 ---|---  
   
-### éå½å®ç°
+### 递归实现
 
-å½æ°å¨éå½è°ç¨æ¶çæ±å¼å¦åå¯¹æ çæ·»å åå é¤å ç´ çé¡ºåºï¼æ å½æ°è°ç¨æå æ®çèæå°åè¢«ç§°ä¸ºå½æ°è°ç¨æ ï¼Call Stackï¼ï¼DFS å¯ç¨éå½çæ¹å¼å®ç°ï¼
+函数在递归调用时的求值如同对栈的添加和删除元素的顺序，故函数调用所占据的虚拟地址被称为函数调用栈（Call Stack），DFS 可用递归的方式实现．
 
-ä»¥ [é»æ¥è¡¨ï¼Adjacency Listï¼](../save/#é»æ¥è¡¨) ä½ä¸ºå¾çå­å¨æ¹å¼ï¼
+以 [邻接表（Adjacency List）](../save/#邻接表) 作为图的存储方式：
 
 C++Python
 
-```text 1 2 3 4 5 6 7 8 ``` |  ```text vector < vector < int >> adj ; // é»æ¥è¡¨ vector < bool > vis ; // è®°å½èç¹æ¯å¦å·²ç»éå void dfs ( const int u ) { vis [ u ] = true ; for ( int v : adj [ u ]) if ( ! vis [ v ]) dfs ( v ) } ```   
+```text 1 2 3 4 5 6 7 8 ``` |  ```text vector < vector < int >> adj ; // 邻接表 vector < bool > vis ; // 记录节点是否已经遍历 void dfs ( const int u ) { vis [ u ] = true ; for ( int v : adj [ u ]) if ( ! vis [ v ]) dfs ( v ) } ```   
 ---|---  
   
-```text 1 2 3 4 5 6 7 8 9 ``` |  ```text # adj : List[List[int]] é»æ¥è¡¨ # vis : List[bool] è®°å½èç¹æ¯å¦å·²ç»éå def dfs ( u : int ) -> None : vis [ u ] = True for v in adj [ u ]: if not vis [ v ]: dfs ( v ) ```   
+```text 1 2 3 4 5 6 7 8 9 ``` |  ```text # adj : List[List[int]] 邻接表 # vis : List[bool] 记录节点是否已经遍历 def dfs ( u : int ) -> None : vis [ u ] = True for v in adj [ u ]: if not vis [ v ]: dfs ( v ) ```   
 ---|---  
   
-ä»¥ [é¾å¼ååæ](../save/#é¾å¼ååæ) ä¸ºä¾ï¼
+以 [链式前向星](../save/#链式前向星) 为例：
 
 C++JavaPython
 
@@ -74,33 +74,33 @@ C++JavaPython
 ```text 1 2 3 4 5 6 7 ``` |  ```text def dfs ( u ): vis [ u ] = True i = head [ u ] while i : if vis [ e [ i ] . t ] == False : dfs ( v ) i = e [ i ] . x ```   
 ---|---  
   
-### DFS åºå
+### DFS 序列
 
-DFS åºåæ¯æ DFS è°ç¨è¿ç¨ä¸­è®¿é®çèç¹ç¼å·çåºåï¼
+DFS 序列是指 DFS 调用过程中访问的节点编号的序列．
 
-æä»¬åç°ï¼æ¯ä¸ªå­æ é½å¯¹åº DFS åºåä¸­çè¿ç»­ä¸æ®µï¼ä¸æ®µåºé´ï¼ï¼
+我们发现，每个子树都对应 DFS 序列中的连续一段（一段区间）．
 
-### æ¬å·åºå
+### 括号序列
 
-DFS è¿å ¥æä¸ªèç¹çæ¶åè®°å½ä¸ä¸ªå·¦æ¬å· `(`ï¼éåºæä¸ªèç¹çæ¶åè®°å½ä¸ä¸ªå³æ¬å· `)`ï¼
+DFS 进入某个节点的时候记录一个左括号 `(`，退出某个节点的时候记录一个右括号 `)`．
 
-æ¯ä¸ªèç¹ä¼åºç°ä¸¤æ¬¡ï¼ç¸é»ä¸¤ä¸ªèç¹çæ·±åº¦ç¸å·® 1ï¼
+每个节点会出现两次．相邻两个节点的深度相差 1．
 
-### ä¸è¬å¾ä¸ DFS
+### 一般图上 DFS
 
-å¯¹äºéè¿éå¾ï¼åªè½è®¿é®å°èµ·ç¹æå¨çè¿éåéï¼
+对于非连通图，只能访问到起点所在的连通分量．
 
-å¯¹äºè¿éå¾ï¼DFS åºåéå¸¸ä¸å¯ä¸ï¼
+对于连通图，DFS 序列通常不唯一．
 
-æ³¨ï¼æ ç DFS åºåä¹æ¯ä¸å¯ä¸çï¼
+注：树的 DFS 序列也是不唯一的．
 
-å¨ DFS è¿ç¨ä¸­ï¼éè¿è®°å½æ¯ä¸ªèç¹ä»åªä¸ªç¹è®¿é®èæ¥ï¼å¯ä»¥å»ºç«ä¸ä¸ªæ ç»æï¼ç§°ä¸º DFS æ ï¼DFS æ æ¯åå¾çä¸ä¸ªçææ ï¼
+在 DFS 过程中，通过记录每个节点从哪个点访问而来，可以建立一个树结构，称为 DFS 树．DFS 树是原图的一个生成树．
 
-[DFS æ ](../scc/#dfs-çææ) æå¾å¤æ§è´¨ï¼æ¯å¦å¯ä»¥ç¨æ¥æ± [å¼ºè¿éåé](../scc/)ï¼
+[DFS 树](../scc/#dfs-生成树) 有很多性质，比如可以用来求 [强连通分量](../scc/)．
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/graph/dfs.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/graph/dfs.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Enter-tainer](https://github.com/Enter-tainer), [ouuan](https://github.com/ouuan), [Tiphereth-A](https://github.com/Tiphereth-A), [Craneplayz](https://github.com/Craneplayz), [iamtwz](https://github.com/iamtwz), [Ir1d](https://github.com/Ir1d), [shenshuaijie](https://github.com/shenshuaijie), [sshwy](https://github.com/sshwy), [vincent-163](https://github.com/vincent-163), [Acfboy](https://github.com/Acfboy), [billchenchina](https://github.com/billchenchina), [ChungZH](https://github.com/ChungZH), [greyqz](https://github.com/greyqz), [Haohu Shen](mailto:haohu.shen@ucalgary.ca), [HeRaNO](https://github.com/HeRaNO), [ksyx](https://github.com/ksyx), [LLLgoyour](https://github.com/LLLgoyour), [Marcythm](https://github.com/Marcythm), [Menci](https://github.com/Menci), [partychicken](https://github.com/partychicken), [qq1010903229](https://github.com/qq1010903229), [shawlleyw](https://github.com/shawlleyw), [StudyingFather](https://github.com/StudyingFather), [Xeonacid](https://github.com/Xeonacid), [yjl9903](https://github.com/yjl9903), [zychen20](https://github.com/zychen20)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/graph/dfs.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/graph/dfs.md "edit.link.title")  
+>  __本页面贡献者：[Enter-tainer](https://github.com/Enter-tainer), [ouuan](https://github.com/ouuan), [Tiphereth-A](https://github.com/Tiphereth-A), [Craneplayz](https://github.com/Craneplayz), [iamtwz](https://github.com/iamtwz), [Ir1d](https://github.com/Ir1d), [shenshuaijie](https://github.com/shenshuaijie), [sshwy](https://github.com/sshwy), [vincent-163](https://github.com/vincent-163), [Acfboy](https://github.com/Acfboy), [billchenchina](https://github.com/billchenchina), [ChungZH](https://github.com/ChungZH), [greyqz](https://github.com/greyqz), [Haohu Shen](mailto:haohu.shen@ucalgary.ca), [HeRaNO](https://github.com/HeRaNO), [ksyx](https://github.com/ksyx), [LLLgoyour](https://github.com/LLLgoyour), [Marcythm](https://github.com/Marcythm), [Menci](https://github.com/Menci), [partychicken](https://github.com/partychicken), [qq1010903229](https://github.com/qq1010903229), [shawlleyw](https://github.com/shawlleyw), [StudyingFather](https://github.com/StudyingFather), [Xeonacid](https://github.com/Xeonacid), [yjl9903](https://github.com/yjl9903), [zychen20](https://github.com/zychen20)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

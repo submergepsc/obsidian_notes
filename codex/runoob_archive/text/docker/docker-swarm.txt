@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/docker/docker-swarm.html
-Title: Swarm 集群管理 | 菜鸟教程
-
-Swarm 集群管理 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-Docker 教程

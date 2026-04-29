@@ -1,4 +1,4 @@
-# 镜像站列表 - OI Wiki
+﻿# 镜像站列表 - OI Wiki
 
 - Source: https://oi-wiki.org/intro/mirrors/
 

@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/data-structures/insertion-sort.html
-Title: 插入排序 | 菜鸟教程
-
-插入排序 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-数据结构

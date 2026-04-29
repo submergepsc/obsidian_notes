@@ -1,4 +1,4 @@
-# 弦图 - OI Wiki
+﻿# 弦图 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/chord/
 

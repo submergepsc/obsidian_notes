@@ -2,7 +2,7 @@
 
 # this file is going to provide some  tips for better using experience
 
-[[little_tips]]
+[[tips/little_tips 1]]
 
 
  [带有复杂文件名文件的批量删除](tips/带有复杂文件名文件的批量删除.md)

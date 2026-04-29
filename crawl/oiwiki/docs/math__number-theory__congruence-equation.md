@@ -1,270 +1,270 @@
-# åä½æ¹ç¨ - OI Wiki
+﻿# 同余方程 - OI Wiki
 
 - Source: https://oi-wiki.org/math/number-theory/congruence-equation/
 
-# åä½æ¹ç¨
+# 同余方程
 
-## å®ä¹
+## 定义
 
-åä½æ¹ç¨
+同余方程
 
-å¯¹æ­£æ´æ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸å æ´ç³»æ°å¤é¡¹å¼ ð(ð¥) =âðð=0ððð¥ðf(x)=âi=0naixi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­æªç¥æ° ð¥ âððxâZm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç§°å½¢å¦
+对正整数 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和一元整系数多项式 𝑓(𝑥) =∑𝑛𝑖=0𝑎𝑖𝑥𝑖f(x)=∑i=0naixi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中未知数 𝑥 ∈𝐙𝑚x∈Zm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，称形如
 
-ð(ð¥)â¡0(modð)(1)(1)f(x)â¡0(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥)≡0(mod𝑚)(1)(1)f(x)≡0(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çæ¹ç¨ä¸ºå ³äºæªç¥æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸å  **åä½æ¹ç¨** ï¼Congruence Equationï¼ï¼
+的方程为关于未知数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一元 **同余方程** （Congruence Equation）．
 
-è¥ ðð â¢0(modð)anâ¢0(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç§°ä¸å¼ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ¹ç¨ï¼
+若 𝑎𝑛 ≢0(mod𝑚)an≢0(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则称上式为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次同余方程．
 
-ç±»ä¼¼å¯å®ä¹åä½æ¹ç¨ç»ï¼
+类似可定义同余方程组．
 
-å ³äºä¸æ¬¡åä½æ¹ç¨ä¸æ¹ç¨ç»çç¸å ³å å®¹è¯·åè§ [çº¿æ§åä½æ¹ç¨](../linear-equation/) ä¸ [ä¸­å½å©ä½å®ç](../crt/)ï¼
+关于一次同余方程与方程组的相关内容请参见 [线性同余方程](../linear-equation/) 与 [中国剩余定理](../crt/)．
 
-æ¬æé¦å ç ç©¶åä½æ¹ç¨çå¯è§£æ§åè§£éç»æï¼ä¹åä¼ç®è¦ä»ç»é«æ¬¡åä½æ¹ç¨çè§£æ³ï¼
+本文首先研究同余方程的可解性和解集结构，之后会简要介绍高次同余方程的解法．
 
-ç± [ä¸­å½å©ä½å®ç](../crt/) å¯ç¥ï¼æ±è§£å ³äºæ¨¡åæ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåä½æ¹ç¨å¯è½¬åä¸ºæ±è§£æ¨¡ç´ æ°å¹æ¬¡çæ åµï¼æ ä»¥ä¸åªä»ç»ç´ æ°å¹æ¨¡åä½æ¹ç¨åç´ æ°æ¨¡åä½æ¹ç¨çç¸å ³çè®ºï¼
+由 [中国剩余定理](../crt/) 可知，求解关于模合数 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的同余方程可转化为求解模素数幂次的情况．故以下只介绍素数幂模同余方程和素数模同余方程的相关理论．
 
-## ç´ æ°å¹æ¨¡åä½æ¹ç¨
+## 素数幂模同余方程
 
-ä»¥ä¸åè®¾æ¨¡æ° ð =ððÂ (ð âð,Â ð âð>1)m=peÂ (pâP,Â eâZ>1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+以下假设模数 𝑚 =𝑝𝑒 (𝑝 ∈𝐏, 𝑒 ∈𝐙>1)m=pe (p∈P, e∈Z>1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ³¨æå°ï¼è¥ ð¥0x0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¹ç¨
+注意到，若 𝑥0x0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是方程
 
-ð(ð¥)â¡0(modðð)f(x)â¡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥)≡0(mod𝑝𝑒)f(x)≡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çè§£ï¼å ð¥0x0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¹ç¨
+的解，则 𝑥0x0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是方程
 
-ð(ð¥)â¡0(modððâ1)f(x)â¡0(modpeâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥)≡0(mod𝑝𝑒−1)f(x)≡0(modpe−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çè§£ï¼è¿å¯åæä»¬å°è¯éè¿è¾ä½çæ¨¡å¹æ¬¡çè§£å»æé è¾é«çæ¨¡å¹æ¬¡çè§£ï¼æä»¬æå¦ä¸å®çï¼
+的解．这启发我们尝试通过较低的模幂次的解去构造较高的模幂次的解．我们有如下定理：
 
-å®ç 1ï¼Hensel å¼çï¼
+定理 1（Hensel 引理）
 
-å¯¹ç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ´æ° ð >1e>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ´ç³»æ°å¤é¡¹å¼ ð(ð¥) =âðð=0ððð¥ðÂ (ðð â¤ðð)f(x)=âi=0naixiÂ (peâ¤an)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»¤ ðâ²(ð¥) =âðð=1ðððð¥ðâ1fâ²(x)=âi=1niaixiâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå ¶å¯¼æ°ï¼ä»¤ ð¥0x0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ¹ç¨
+对素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和整数 𝑒 >1e>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，取整系数多项式 𝑓(𝑥) =∑𝑛𝑖=0𝑎𝑖𝑥𝑖 (𝑝𝑒 ∤𝑎𝑛)f(x)=∑i=0naixi (pe∤an)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，令 𝑓′(𝑥) =∑𝑛𝑖=1𝑖𝑎𝑖𝑥𝑖−1f′(x)=∑i=1niaixi−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为其导数．令 𝑥0x0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为方程
 
-ð(ð¥)â¡0(modððâ1)(2)(2)f(x)â¡0(modpeâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥)≡0(mod𝑝𝑒−1)(2)(2)f(x)≡0(modpe−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çè§£ï¼åï¼
+的解，则：
 
-  1. è¥ ðâ²(ð¥0) â¢0(modð)fâ²(x0)â¢0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå­å¨æ´æ° ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾
+  1. 若 𝑓′(𝑥0) ≢0(mod𝑝)f′(x0)≢0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则存在整数 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得
 
-ð¥=ð¥0+ððâ1ð¡(3)(3)x=x0+peâ1t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝑥0+𝑝𝑒−1𝑡(3)(3)x=x0+pe−1t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¯æ¹ç¨
+是方程
 
-ð(ð¥)â¡0(modðð)(4)(4)f(x)â¡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥)≡0(mod𝑝𝑒)(4)(4)f(x)≡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çè§£ï¼
+的解．
 
-  2. è¥ ðâ²(ð¥0) â¡0(modð)fâ²(x0)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð(ð¥0) â¡0(modðð)f(x0)â¡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¯¹ ð¡ =0,1,â¦,ð â1t=0,1,â¦,pâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±å¼ (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¡®å®ç ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ºæ¹ç¨ (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼
+  2. 若 𝑓′(𝑥0) ≡0(mod𝑝)f′(x0)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑓(𝑥0) ≡0(mod𝑝𝑒)f(x0)≡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则对 𝑡 =0,1,…,𝑝 −1t=0,1,…,p−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，由式 (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 确定的 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 均为方程 (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解．
 
-  3. è¥ ðâ²(ð¥0) â¡0(modð)fâ²(x0)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð(ð¥0) â¢0(modðð)f(x0)â¢0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä¸è½ç±å¼ (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æé æ¹ç¨ (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼
+  3. 若 𝑓′(𝑥0) ≡0(mod𝑝)f′(x0)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑓(𝑥0) ≢0(mod𝑝𝑒)f(x0)≢0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则不能由式 (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 构造方程 (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解．
 
-è¯æ
+证明
 
-æä»¬åè®¾å¼ (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¹ç¨ (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼å³
+我们假设式 (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是方程 (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解，即
 
-ð(ð¥0+ððâ1ð¡)â¡0(modðð)f(x0+peâ1t)â¡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥0+𝑝𝑒−1𝑡)≡0(mod𝑝𝑒)f(x0+pe−1t)≡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ´çåå¯å¾
+整理后可得
 
-ð(ð¥0)+ððâ1ð¡ðâ²(ð¥0)â¡0(modðð)f(x0)+peâ1tfâ²(x0)â¡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥0)+𝑝𝑒−1𝑡𝑓′(𝑥0)≡0(mod𝑝𝑒)f(x0)+pe−1tf′(x0)≡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-äºæ¯
+于是
 
-ð¡ðâ²(ð¥0)â¡âð(ð¥0)ððâ1(modð)(5)(5)tfâ²(x0)â¡âf(x0)peâ1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑡𝑓′(𝑥0)≡−𝑓(𝑥0)𝑝𝑒−1(mod𝑝)(5)(5)tf′(x0)≡−f(x0)pe−1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-  1. è¥ ðâ²(ð¥0) â¢0(modð)fâ²(x0)â¢0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå ³äº ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹ç¨ (5)(5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¯ä¸è§£ ð¡0t0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»£å ¥å¼ (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯éªè¯å ¶ä¸ºæ¹ç¨ (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼
-  2. è¥ ðâ²(ð¥0) â¡0(modð)fâ²(x0)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð(ð¥0) â¡0(modðð)f(x0)â¡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä»»æ ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè½ä½¿æ¹ç¨ (5)(5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼ä»£å ¥å¼ (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯éªè¯å ¶åä¸ºæ¹ç¨ (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼
-  3. è¥ ðâ²(ð¥0) â¡0(modð)fâ²(x0)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð(ð¥0) â¢0(modðð)f(x0)â¢0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ¹ç¨ (5)(5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ è§£ï¼ä»èä¸è½ç±å¼ (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æé æ¹ç¨ (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼
+  1. 若 𝑓′(𝑥0) ≢0(mod𝑝)f′(x0)≢0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则关于 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方程 (5)(5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有唯一解 𝑡0t0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，代入式 (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可验证其为方程 (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解．
+  2. 若 𝑓′(𝑥0) ≡0(mod𝑝)f′(x0)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑓(𝑥0) ≡0(mod𝑝𝑒)f(x0)≡0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则任意 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 均能使方程 (5)(5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立，代入式 (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可验证其均为方程 (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解．
+  3. 若 𝑓′(𝑥0) ≡0(mod𝑝)f′(x0)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑓(𝑥0) ≢0(mod𝑝𝑒)f(x0)≢0(modpe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则方程 (5)(5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 无解，从而不能由式 (3)(3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 构造方程 (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解．
 
-è¿èæä»¬ææ¨è®ºï¼
+进而我们有推论：
 
-æ¨è®º 1
+推论 1
 
-å¯¹ å®ç 1 ç ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð(ð¥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð¥0x0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对 定理 1 的 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑒e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑓(𝑥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑥0x0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，
 
-  1. è¥ ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¹ç¨ ð(ð¥) â¡0(modð)f(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼ä¸ ðâ²(ð ) â¢0(modð)fâ²(s)â¢0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå­å¨ ð¥ð  âðððxsâZpe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð¥ð  â¡ð (modð)xsâ¡s(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð¥ð xs![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¹ç¨ (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼
-  2. è¥æ¹ç¨ ð(ð¥) â¡0(modð)f(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðâ²(ð¥) â¡0(modð)fâ²(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ å ¬å ±è§£ï¼åæ¹ç¨ (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¹ç¨ ð(ð¥) â¡0(modð)f(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£æ°ç¸åï¼
+  1. 若 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是方程 𝑓(𝑥) ≡0(mod𝑝)f(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解，且 𝑓′(𝑠) ≢0(mod𝑝)f′(s)≢0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则存在 𝑥𝑠 ∈𝐙𝑝𝑒xs∈Zpe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑥𝑠 ≡𝑠(mod𝑝)xs≡s(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑥𝑠xs![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是方程 (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解．
+  2. 若方程 𝑓(𝑥) ≡0(mod𝑝)f(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑓′(𝑥) ≡0(mod𝑝)f′(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 无公共解，则方程 (4)(4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和方程 𝑓(𝑥) ≡0(mod𝑝)f(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解数相同．
 
-ä»èæä»¬å¯ä»¥å°ç´ æ°å¹æ¨¡åä½æ¹ç¨åå½å°ç´ æ°æ¨¡åä½æ¹ç¨çæ åµï¼
+从而我们可以将素数幂模同余方程化归到素数模同余方程的情况．
 
-## ç´ æ°æ¨¡åä½æ¹ç¨
+## 素数模同余方程
 
-ä»¥ä¸ä»¤ ð âðpâP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ´ç³»æ°å¤é¡¹å¼ ð(ð¥) =âðð=0ððð¥ðf(x)=âi=0naixi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð â¤ððpâ¤an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð¥ âððxâZp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+以下令 𝑝 ∈𝐏p∈P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，整系数多项式 𝑓(𝑥) =∑𝑛𝑖=0𝑎𝑖𝑥𝑖f(x)=∑i=0naixi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑝 ∤𝑎𝑛p∤an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑥 ∈𝐙𝑝x∈Zp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å®ç 2
+定理 2
 
-è¥æ¹ç¨
+若方程
 
-ð(ð¥)â¡0(modð)(6)(6)f(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥)≡0(mod𝑝)(6)(6)f(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åçè§£ ð¥1,ð¥2,â¦,ð¥ðÂ (ð â¤ð)x1,x2,â¦,xkÂ (kâ¤n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å
+有 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同的解 𝑥1,𝑥2,…,𝑥𝑘 (𝑘 ≤𝑛)x1,x2,…,xk (k≤n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则
 
-ð(ð¥)â¡ð(ð¥)ðâð=1(ð¥âð¥ð)(modð),f(x)â¡g(x)âi=1k(xâxi)(modp),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥)≡𝑔(𝑥)𝑘∏𝑖=1(𝑥−𝑥𝑖)(mod𝑝),f(x)≡g(x)∏i=1k(x−xi)(modp),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ degâ¡ð =ð âðdegâ¡g=nâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ [ð¥ðâð]ð(ð¥) =ðð[xnâk]g(x)=an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+其中 deg⁡𝑔 =𝑛 −𝑘deg⁡g=n−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 [𝑥𝑛−𝑘]𝑔(𝑥) =𝑎𝑛[xn−k]g(x)=an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-å¯¹ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åºç¨æ°å­¦å½çº³æ³ï¼
+对 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 应用数学归纳法．
 
-  * å½ ð =1k=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼åå¤é¡¹å¼å¸¦ä½é¤æ³ï¼æ ð(ð¥) =(ð¥ âð¥1)ð(ð¥) +ðf(x)=(xâx1)g(x)+r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð âðrâZ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 当 𝑘 =1k=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，做多项式带余除法，有 𝑓(𝑥) =(𝑥 −𝑥1)𝑔(𝑥) +𝑟f(x)=(x−x1)g(x)+r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑟 ∈𝐙r∈Z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç± ð(ð¥1) â¡0(modð)f(x1)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ç¥ ð â¡0(modð)râ¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»è ð(ð¥) â¡(ð¥ âð¥1)ð(ð¥)(modð)f(x)â¡(xâx1)g(x)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+由 𝑓(𝑥1) ≡0(mod𝑝)f(x1)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可知 𝑟 ≡0(mod𝑝)r≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，从而 𝑓(𝑥) ≡(𝑥 −𝑥1)𝑔(𝑥)(mod𝑝)f(x)≡(x−x1)g(x)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * åè®¾å½é¢å¯¹ ð â1kâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)(ð >1k>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)) æ¶çæ åµæç«ï¼ç°å¨è®¾ ð(ð¥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åçè§£ ð¥1,ð¥2,â¦,ð¥ðx1,x2,â¦,xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð(ð¥) â¡(ð¥ âð¥1)â(ð¥)(modð)f(x)â¡(xâx1)h(x)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿èæ
+  * 假设命题对 𝑘 −1k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)(𝑘 >1k>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)) 时的情况成立，现在设 𝑓(𝑥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同的解 𝑥1,𝑥2,…,𝑥𝑘x1,x2,…,xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝑓(𝑥) ≡(𝑥 −𝑥1)ℎ(𝑥)(mod𝑝)f(x)≡(x−x1)h(x)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，进而有
 
-(âð=2,3,â¦,ð),Â Â 0â¡ð(ð¥ð)â¡(ð¥ðâð¥1)â(ð¥ð)(modð)(âi=2,3,â¦,k),Â Â 0â¡f(xi)â¡(xiâx1)h(xi)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(∀𝑖=2,3,…,𝑘), 0≡𝑓(𝑥𝑖)≡(𝑥𝑖−𝑥1)ℎ(𝑥𝑖)(mod𝑝)(∀i=2,3,…,k), 0≡f(xi)≡(xi−x1)h(xi)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»è â(ð¥)h(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ð â1kâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åçè§£ ð¥2,ð¥3,â¦,ð¥ðx2,x3,â¦,xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±å½çº³åè®¾æ
+从而 ℎ(𝑥)h(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 𝑘 −1k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同的解 𝑥2,𝑥3,…,𝑥𝑘x2,x3,…,xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，由归纳假设有
 
-â(ð¥)â¡ð(ð¥)ðâð=2(ð¥âð¥ð)(modð)h(x)â¡g(x)âi=2k(xâxi)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+ℎ(𝑥)≡𝑔(𝑥)𝑘∏𝑖=2(𝑥−𝑥𝑖)(mod𝑝)h(x)≡g(x)∏i=2k(x−xi)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ degâ¡ð =ð âðdegâ¡g=nâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ [ð¥ðâð]ð(ð¥) =ðð[xnâk]g(x)=an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+其中 deg⁡𝑔 =𝑛 −𝑘deg⁡g=n−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 [𝑥𝑛−𝑘]𝑔(𝑥) =𝑎𝑛[xn−k]g(x)=an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å æ­¤å½é¢å¾è¯ï¼
+因此命题得证．
 
-æ¨è®º 2
+推论 2
 
-å¯¹ç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，
 
-  * (âð¥ âð),Â Â ð¥ðâ1 â1 â¡âðâ1ð=1(ð¥ âð)(modð)(âxâZ),Â Â xpâ1â1â¡âi=1pâ1(xâi)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * ï¼[Wilson å®ç](../factorial/#wilson-å®ç)ï¼(ð â1)! â¡ â1(modð)(pâ1)!â¡â1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * (∀𝑥 ∈𝐙), 𝑥𝑝−1 −1 ≡∏𝑝−1𝑖=1(𝑥 −𝑖)(mod𝑝)(∀x∈Z), xp−1−1≡∏i=1p−1(x−i)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  * （[Wilson 定理](../factorial/#wilson-定理)）(𝑝 −1)! ≡ −1(mod𝑝)(p−1)!≡−1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å®ç 3ï¼Lagrange å®çï¼
+定理 3（Lagrange 定理）
 
-æ¹ç¨ (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è³å¤æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åè§£ï¼
+方程 (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 至多有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同解．
 
-è¯æ
+证明
 
-åè®¾ ð(ð¥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ð +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åè§£ ð¥1,ð¥2,â¦,ð¥ð+1x1,x2,â¦,xn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç± å®ç 2ï¼å¯¹ ð¥1,ð¥2,â¦,ð¥ðx1,x2,â¦,xn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ
+假设 𝑓(𝑥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 𝑛 +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同解 𝑥1,𝑥2,…,𝑥𝑛+1x1,x2,…,xn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则由 定理 2，对 𝑥1,𝑥2,…,𝑥𝑛x1,x2,…,xn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有
 
-ð(ð¥)â¡ðððâð=1(ð¥âð¥ð)(modð)f(x)â¡anâi=1n(xâxi)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥)≡𝑎𝑛𝑛∏𝑖=1(𝑥−𝑥𝑖)(mod𝑝)f(x)≡an∏i=1n(x−xi)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»¤ ð¥ =ð¥ð+1x=xn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å
+令 𝑥 =𝑥𝑛+1x=xn+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则
 
-0â¡ð(ð¥ð+1)â¡ðððâð=1(ð¥ð+1âð¥ð)(modð)0â¡f(xn+1)â¡anâi=1n(xn+1âxi)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+0≡𝑓(𝑥𝑛+1)≡𝑎𝑛𝑛∏𝑖=1(𝑥𝑛+1−𝑥𝑖)(mod𝑝)0≡f(xn+1)≡an∏i=1n(xn+1−xi)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-èå³ä¾§æ¾ç¶ä¸æ¯ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°ï¼å æ­¤åè®¾çç¾ï¼
+而右侧显然不是 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的倍数，因此假设矛盾．
 
-æ¨è®º 3
+推论 3
 
-è¥åä½æ¹ç¨ âðð=0ððð¥ð â¡0(modð)âi=0nbixiâ¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£æ°å¤§äº ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å
+若同余方程 ∑𝑛𝑖=0𝑏𝑖𝑥𝑖 ≡0(mod𝑝)∑i=0nbixi≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解数大于 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则
 
-(âð=0,1,â¦,ð),Â Â ðâ£ðð.(âi=0,1,â¦,n),Â Â pâ£bi.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(∀𝑖=0,1,…,𝑛), 𝑝∣𝑏𝑖.(∀i=0,1,…,n), p∣bi.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®ç 4
+定理 4
 
-æ¹ç¨ (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¥è§£çä¸ªæ°ä¸ä¸º ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¿ å­å¨æ»¡è¶³ degâ¡ð <ðdegâ¡r<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´ç³»æ°å¤é¡¹å¼ ð(ð¥)r(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð(ð¥) â¡0(modð)f(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð(ð¥) â¡0(modð)r(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£éç¸åï¼
+方程 (6)(6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 若解的个数不为 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则必存在满足 deg⁡𝑟 <𝑝deg⁡r<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整系数多项式 𝑟(𝑥)r(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑓(𝑥) ≡0(mod𝑝)f(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑟(𝑥) ≡0(mod𝑝)r(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解集相同．
 
-è¯æ
+证明
 
-ä¸å¦¨è®¾ ð â¥ðnâ¥p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹ ð(ð¥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¤é¡¹å¼å¸¦ä½é¤æ³
+不妨设 𝑛 ≥𝑝n≥p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，对 𝑓(𝑥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 做多项式带余除法
 
-ð(ð¥)=ð(ð¥)(ð¥ðâð¥)+ð(ð¥)f(x)=g(x)(xpâx)+r(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥)=𝑔(𝑥)(𝑥𝑝−𝑥)+𝑟(𝑥)f(x)=g(x)(xp−x)+r(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ degâ¡ð <ðdegâ¡r<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+其中 deg⁡𝑟 <𝑝deg⁡r<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç± [Fermat å°å®ç](../fermat/) ç¥å¯¹ä»»ææ´æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ð¥ð â¡ð¥(modð)xpâ¡x(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»è
+由 [Fermat 小定理](../fermat/) 知对任意整数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 𝑥𝑝 ≡𝑥(mod𝑝)xp≡x(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，从而
 
-  * è¥ ð(ð¥) â¡0(modð)r(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç± æ¨è®º 2 å¯ç¥ ð(ð¥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åçè§£ï¼
-  * è¥ ð(ð¥) â¢0(modð)r(x)â¢0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç± ð(ð¥) â¡ð(ð¥)(modð)f(x)â¡r(x)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ç¥ ð(ð¥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð(ð¥)r(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£éç¸åï¼
+  * 若 𝑟(𝑥) ≡0(mod𝑝)r(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则由 推论 2 可知 𝑓(𝑥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同的解．
+  * 若 𝑟(𝑥) ≢0(mod𝑝)r(x)≢0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则由 𝑓(𝑥) ≡𝑟(𝑥)(mod𝑝)f(x)≡r(x)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可知 𝑓(𝑥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑟(𝑥)r(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解集相同．
 
-æä»¬å¯ä»¥éè¿è¿ä¸ªå®çå¯¹åä½æ¹ç¨éæ¬¡ï¼
+我们可以通过这个定理对同余方程降次．
 
-å®ç 5
+定理 5
 
-è®¾ ð â¤ðnâ¤p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ¹ç¨
+设 𝑛 ≤𝑝n≤p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则方程
 
-ð¥ð+ðâ1âð=0ððð¥ðâ¡0(modð)(7)(7)xn+âi=0nâ1aixiâ¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑛+𝑛−1∑𝑖=0𝑎𝑖𝑥𝑖≡0(mod𝑝)(7)(7)xn+∑i=0n−1aixi≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè§£å½ä¸ä» å½å­å¨æ´ç³»æ°å¤é¡¹å¼ ð(ð¥)q(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð(ð¥)Â (degâ¡ð <ð)r(x)Â (degâ¡r<n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾
+有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个解当且仅当存在整系数多项式 𝑞(𝑥)q(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑟(𝑥) (deg⁡𝑟 <𝑛)r(x) (deg⁡r<n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得
 
-ð¥ðâð¥=ð(ð¥)ð(ð¥)+ðð(ð¥).(8)(8)xpâx=f(x)q(x)+pr(x).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)è¯æ
+𝑥𝑝−𝑥=𝑓(𝑥)𝑞(𝑥)+𝑝𝑟(𝑥).(8)(8)xp−x=f(x)q(x)+pr(x).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)证明
 
-  * å¿ è¦æ§ï¼ç±å¤é¡¹å¼é¤æ³ç¥å­å¨æ´ç³»æ°å¤é¡¹å¼ ð(ð¥)q(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð1(ð¥)Â (degâ¡ð1 <ð)r1(x)Â (degâ¡r1<n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾
+  * 必要性：由多项式除法知存在整系数多项式 𝑞(𝑥)q(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑟1(𝑥) (deg⁡𝑟1 <𝑛)r1(x) (deg⁡r1<n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得
 
-ð¥ðâð¥=ð(ð¥)ð(ð¥)+ð1(ð¥).xpâx=f(x)q(x)+r1(x).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑝−𝑥=𝑓(𝑥)𝑞(𝑥)+𝑟1(𝑥).xp−x=f(x)q(x)+r1(x).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¥æ¹ç¨ (7)(7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè§£ï¼å ð1 â¡0(modð)r1â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç¸åçè§£ï¼è¿èç± æ¨è®º 3 å¯ç¥å­å¨æ´ç³»æ°å¤é¡¹å¼ ð(ð¥)r(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ð1(ð¥) =ðð(ð¥)r1(x)=pr(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»èå½é¢å¾è¯ï¼
+若方程 (7)(7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个解，则 𝑟1 ≡0(mod𝑝)r1≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个相同的解，进而由 推论 3 可知存在整系数多项式 𝑟(𝑥)r(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝑟1(𝑥) =𝑝𝑟(𝑥)r1(x)=pr(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，从而命题得证．
 
-  * å åæ§ï¼è¥å¼ (8)(8)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼åç± [Fermat å°å®ç](../fermat/) å¯ç¥ï¼å¯¹ä»»ææ´æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),
+  * 充分性：若式 (8)(8)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立，则由 [Fermat 小定理](../fermat/) 可知，对任意整数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),
 
-0â¡ð¥ðâð¥â¡ð(ð¥)ð(ð¥)(modð).0â¡xpâxâ¡f(x)q(x)(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+0≡𝑥𝑝−𝑥≡𝑓(𝑥)𝑞(𝑥)(mod𝑝).0≡xp−x≡f(x)q(x)(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å³æ¹ç¨ ð(ð¥)ð(ð¥) â¡0(modð)f(x)q(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè§£ï¼
+即方程 𝑓(𝑥)𝑞(𝑥) ≡0(mod𝑝)f(x)q(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个解．
 
-è®¾æ¹ç¨ (7)(7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£æ°ä¸º ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç± Lagrange å®ç å¯ç¥ ð  â¤ðsâ¤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+设方程 (7)(7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解数为 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则由 Lagrange 定理 可知 𝑠 ≤𝑛s≤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åç±äº degâ¡ð =ð âðdegâ¡q=pân![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç± Lagrange å®ç å¯ç¥ ð(ð¥) â¡0(modð)q(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£æ°ä¸è¶ è¿ ð âðpân![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èæ¹ç¨ ð(ð¥)ð(ð¥) â¡0(modð)f(x)q(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£éæ¯ ð(ð¥) â¡0(modð)f(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è§£éå ð(ð¥) â¡0(modð)q(x)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è§£éçå¹¶éï¼æ ð  +(ð âð) â¥ðs+(pân)â¥p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð  â¥ðsâ¥n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+又由于 deg⁡𝑞 =𝑝 −𝑛deg⁡q=p−n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则由 Lagrange 定理 可知 𝑞(𝑥) ≡0(mod𝑝)q(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解数不超过 𝑝 −𝑛p−n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而方程 𝑓(𝑥)𝑞(𝑥) ≡0(mod𝑝)f(x)q(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解集是 𝑓(𝑥) ≡0(mod𝑝)f(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 解集和 𝑞(𝑥) ≡0(mod𝑝)q(x)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 解集的并集，故 𝑠 +(𝑝 −𝑛) ≥𝑝s+(p−n)≥p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝑠 ≥𝑛s≥n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å æ­¤ ð  =ðs=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+因此 𝑠 =𝑛s=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¯¹äºéé¦ä¸å¤é¡¹å¼ï¼ç±äº ððZp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯åï¼æ å¯ä»¥å°å ¶åä¸ºé¦ä¸å¤é¡¹å¼ï¼ä»èéç¨è¯¥å®çï¼
+对于非首一多项式，由于 𝐙𝑝Zp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是域，故可以将其化为首一多项式，从而适用该定理．
 
-å®ç 6
+定理 6
 
-è®¾ ð â£ð â1nâ£pâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð â¤ðpâ¤a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ¹ç¨
+设 𝑛 ∣𝑝 −1n∣p−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑝 ∤𝑎p∤a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则方程
 
-ð¥ðâ¡ð(modð)(9)(9)xnâ¡a(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑛≡𝑎(mod𝑝)(9)(9)xn≡a(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æè§£å½ä¸ä» å½
+有解当且仅当
 
-ððâ1ðâ¡1(modð).apâ1nâ¡1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑝−1𝑛≡1(mod𝑝).ap−1n≡1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-èä¸ï¼è¥ (9)(9)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè§£ï¼åè§£æ°ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+而且，若 (9)(9)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有解，则解数为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
 Note
 
-æ¹ç¨ (9)(9)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è§£éçå ·ä½ç»æå¯åè§ [k æ¬¡å©ä½](../residue/)ï¼
+方程 (9)(9)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 解集的具体结构可参见 [k 次剩余](../residue/)．
 
-è¯æ
+证明
 
-  * å¿ è¦æ§ï¼è¥æ¹ç¨ (9)(9)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè§£ ð¥0x0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å
+  * 必要性：若方程 (9)(9)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有解 𝑥0x0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则
 
-ððâ1ðâ¡(ð¥ð0)ðâ1ðâ¡1(modð)apâ1nâ¡(x0n)pâ1nâ¡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * å åæ§ï¼è¥ ððâ1ð â¡1(modð)apâ1nâ¡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å
+𝑎𝑝−1𝑛≡(𝑥𝑛0)𝑝−1𝑛≡1(mod𝑝)ap−1n≡(x0n)p−1n≡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 充分性：若 𝑎𝑝−1𝑛 ≡1(mod𝑝)ap−1n≡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则
 
-ð¥ðâð¥=ð¥(ð¥ðâ1â1)=ð¥((ð¥ð)ðâ1ðâððâ1ð+ððâ1ðâ1)=(ð¥ðâð)ð(ð¥)+ð¥(ððâ1ðâ1)xpâx=x(xpâ1â1)=x((xn)pâ1nâapâ1n+apâ1nâ1)=(xnâa)P(x)+x(apâ1nâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑝−𝑥=𝑥(𝑥𝑝−1−1)=𝑥((𝑥𝑛)𝑝−1𝑛−𝑎𝑝−1𝑛+𝑎𝑝−1𝑛−1)=(𝑥𝑛−𝑎)𝑃(𝑥)+𝑥(𝑎𝑝−1𝑛−1)xp−x=x(xp−1−1)=x((xn)p−1n−ap−1n+ap−1n−1)=(xn−a)P(x)+x(ap−1n−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ ð(ð¥)P(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æä¸ªæ´ç³»æ°å¤é¡¹å¼ï¼å æ­¤ç± å®ç 5 å¯ç¥æ¹ç¨ (9)(9)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè§£ï¼
+其中 𝑃(𝑥)P(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是某个整系数多项式，因此由 定理 5 可知方程 (9)(9)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个解．
 
-## é«æ¬¡åä½æ¹ç¨ï¼ç»ï¼çæ±è§£æ¹æ³
+## 高次同余方程（组）的求解方法
 
-é¦å æä»¬å¯ä»¥åå© [ä¸­å½å©ä½å®ç](../crt/) å°æ±è§£ **åä½æ¹ç¨ç»** è½¬ä¸ºæ±è§£ **åä½æ¹ç¨** ï¼ä»¥åå°æ±è§£æ¨¡ **åæ°** ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåä½æ¹ç¨è½¬åä¸ºæ±è§£æ¨¡ **ç´ æ°å¹æ¬¡** çåä½æ¹ç¨ï¼ä¹åæä»¬åå© å®ç 1 å°æ±è§£æ¨¡ **ç´ æ°å¹æ¬¡** çåä½æ¹ç¨è½¬åä¸ºæ±è§£æ¨¡ **ç´ æ°** çåä½æ¹ç¨ï¼
+首先我们可以借助 [中国剩余定理](../crt/) 将求解 **同余方程组** 转为求解 **同余方程** ，以及将求解模 **合数** 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的同余方程转化为求解模 **素数幂次** 的同余方程．之后我们借助 定理 1 将求解模 **素数幂次** 的同余方程转化为求解模 **素数** 的同余方程．
 
-ç»åæ¨¡ç´ æ°åä½æ¹ç¨çè¥å¹²å®çï¼æä»¬åªéèèæ¹ç¨
+结合模素数同余方程的若干定理，我们只需考虑方程
 
-ð¥ð+ðâ1âð=0ððð¥ðâ¡0(modð)xn+âi=0nâ1aixiâ¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑛+𝑛−1∑𝑖=0𝑎𝑖𝑥𝑖≡0(mod𝑝)xn+∑i=0n−1aixi≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çæ±æ³ï¼å ¶ä¸­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç´ æ°ï¼ð <ðn<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+的求法，其中 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是素数，𝑛 <𝑝n<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æä»¬å¯ä»¥éè¿å° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»£æ¢ä¸º ð¥ âððâ1ðxâanâ1n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¥æ¶å» ð¥ðâ1xnâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ï¼ä»èæä»¬åªéèèæ¹ç¨
+我们可以通过将 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 代换为 𝑥 −𝑎𝑛−1𝑛x−an−1n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 来消去 𝑥𝑛−1xn−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项，从而我们只需考虑方程
 
-ð¥ð+ðâ2âð=0ððð¥ðâ¡0(modð)(10)(10)xn+âi=0nâ2aixiâ¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑛+𝑛−2∑𝑖=0𝑎𝑖𝑥𝑖≡0(mod𝑝)(10)(10)xn+∑i=0n−2aixi≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çæ±æ³ï¼å ¶ä¸­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç´ æ°ï¼ð <ðn<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+的求法，其中 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是素数，𝑛 <𝑝n<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * è¥ ð =1n=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ±æ³åè§ [çº¿æ§åä½æ¹ç¨](../linear-equation/)ï¼
-  * è¥ ð =2n=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ±æ³åè§ [äºæ¬¡å©ä½](../quad-residue/)ï¼
-  * è¥æ¹ç¨ (10)(10)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯åä¸º
+  * 若 𝑛 =1n=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则求法参见 [线性同余方程](../linear-equation/)．
+  * 若 𝑛 =2n=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则求法参见 [二次剩余](../quad-residue/)．
+  * 若方程 (10)(10)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可化为
 
-ð¥ðâ¡ð(modð),xnâ¡a(modp),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑛≡𝑎(mod𝑝),xn≡a(modp),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åæ±æ³åè§ [k æ¬¡å©ä½](../residue/)ï¼
+则求法参见 [k 次剩余](../residue/)．
 
-## åèèµæ
+## 参考资料
 
   1. [Congruence Equation -- from Wolfram MathWorld](https://mathworld.wolfram.com/CongruenceEquation.html)
   2. [Lagrange's theorem (number theory) - Wikipedia](https://en.wikipedia.org/wiki/Lagrange%27s_theorem_%28number_theory%29)
-  3. æ½æ¿æ´ï¼æ½æ¿å½ªï¼åç­æ°è®ºï¼
-  4. å¯å å¤ï¼åç­æ°è®ºåå ¶åºç¨ï¼
-  5. éµå£é¹¤ï¼ä¸¥å£«å¥ï¼åç­æ°è®ºï¼
+  3. 潘承洞，潘承彪．初等数论．
+  4. 冯克勤．初等数论及其应用．
+  5. 闵嗣鹤，严士健．初等数论．
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2025/10/17 00:19:19ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/congruence-equation.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/congruence-equation.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [c-forrest](https://github.com/c-forrest), [aofall](https://github.com/aofall), [CCXXXI](https://github.com/CCXXXI), [CoelacanthusHex](https://github.com/CoelacanthusHex), [Great-designer](https://github.com/Great-designer), [iamtwz](https://github.com/iamtwz), [Marcythm](https://github.com/Marcythm), [Persdre](https://github.com/Persdre), [shuzhouliu](https://github.com/shuzhouliu), [Xeonacid](https://github.com/Xeonacid)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2025/10/17 00:19:19，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/congruence-equation.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/congruence-equation.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [c-forrest](https://github.com/c-forrest), [aofall](https://github.com/aofall), [CCXXXI](https://github.com/CCXXXI), [CoelacanthusHex](https://github.com/CoelacanthusHex), [Great-designer](https://github.com/Great-designer), [iamtwz](https://github.com/iamtwz), [Marcythm](https://github.com/Marcythm), [Persdre](https://github.com/Persdre), [shuzhouliu](https://github.com/shuzhouliu), [Xeonacid](https://github.com/Xeonacid)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

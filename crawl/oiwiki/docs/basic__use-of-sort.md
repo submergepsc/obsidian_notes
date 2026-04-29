@@ -1,4 +1,4 @@
-# 排序应用 - OI Wiki
+﻿# 排序应用 - OI Wiki
 
 - Source: https://oi-wiki.org/basic/use-of-sort/
 

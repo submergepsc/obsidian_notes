@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/data-structures/dsa-dynamic-programming.html
-Title: 动态规划 | 菜鸟教程
-
-动态规划 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-数据结构

@@ -1,276 +1,276 @@
-# Jordanæ åå - OI Wiki
+﻿# Jordan标准型 - OI Wiki
 
 - Source: https://oi-wiki.org/math/linear-algebra/jordan/
 
-# Jordanæ åå
+# Jordan标准型
 
-## Jordan åè§£
+## Jordan 分解
 
-è®¾ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸ä¸ªçº¿æ§åæ¢ï¼å¦æ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå°å¤é¡¹å¼ä¸ºï¼
+设 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的一个线性变换．如果 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最小多项式为：
 
-ðð´(ð)=(ðâð1)ð1(ðâð2)ð2â¯(ðâðð)ððmA(Î»)=(Î»âÎ»1)r1(Î»âÎ»2)r2â¯(Î»âÎ»k)rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑚𝐴(𝜆)=(𝜆−𝜆1)𝑟1(𝜆−𝜆2)𝑟2⋯(𝜆−𝜆𝑘)𝑟𝑘mA(λ)=(λ−λ1)r1(λ−λ2)r2⋯(λ−λk)rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é£ä¹ç±åç´ åè§£å¯ç¥ï¼ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥åè§£ä¸ºå­ç©ºé´çç´åï¼
+那么由准素分解可知，空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以分解为子空间的直和：
 
-ð=ð1âð2ââ¯âððV=V1âV2ââ¯âVk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑉=𝑉1⊕𝑉2⊕⋯⊕𝑉𝑘V=V1⊕V2⊕⋯⊕Vk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ ðð =ð((ð´âððð¼)ðð)Vi=N((AâÎ»iI)ri)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¼ä¸­ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹åºçç©éµï¼è¿äºå­ç©ºé´é½å¨ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç¨ä¸ä¸åï¼
+其中 𝑉𝑖 =𝑁((𝐴−𝜆𝑖𝐼)𝑟𝑖)Vi=N((A−λiI)ri)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，式中 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对应的矩阵，这些子空间都在 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作用下不变．
 
-ä»¤åæ¢ ððTi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨å­ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çå°å½±ï¼å³æé å¤é¡¹å¼ ð¢ð(ð)ui(T)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ï¼
+令变换 𝑇𝑖Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在子空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的射影，即构造多项式 𝑢𝑖(𝑇)ui(T)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得：
 
-  * ðð=ð¢ð(ð)ðð´(ð)(ðâðððð)ððTi=ui(T)mA(T)(TâÎ»iTe)ri![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ð1+ð2+â¯+ðð=ððT1+T2+â¯+Tk=Te![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑇𝑖=𝑢𝑖(𝑇)𝑚𝐴(𝑇)(𝑇−𝜆𝑖𝑇𝑒)𝑟𝑖Ti=ui(T)mA(T)(T−λiTe)ri![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑇1+𝑇2+⋯+𝑇𝑘=𝑇𝑒T1+T2+⋯+Tk=Te![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¼ä¸­ ððTe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæç­åæ¢ï¼äºæ¯ææ§è´¨ï¼
+式中 𝑇𝑒Te![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的恒等变换．于是有性质：
 
-  * åæ¢ ððTi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çéå¶ ðð|ððTi|Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæç­åæ¢ï¼
-  * å¦æ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ç¸ç­ï¼åæ¢ ððTi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ç©ºé´ ððVj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çéå¶ ðð|ððTi|Vj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºç©ºé´ ððVj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¶åæ¢ï¼
+  * 变换 𝑇𝑖Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的限制 𝑇𝑖|𝑉𝑖Ti|Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的恒等变换．
+  * 如果 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不相等，变换 𝑇𝑖Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在空间 𝑉𝑗Vj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的限制 𝑇𝑖|𝑉𝑗Ti|Vj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为空间 𝑉𝑗Vj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的零变换．
 
-äºæ¯åæ¢ ððTi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¯ä¸ä¸ªåé ðÎ¾![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ å°ä¸ºå®å¨ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çåé ððÎ¾i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+于是变换 𝑇𝑖Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 将空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的每一个向量 𝜉ξ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 映射为它在空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的分量 𝜉𝑖ξi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æé åæ¢ï¼
+构造变换：
 
-ðð·=ð1ð1+ð2ð2+â¯+ððððTD=Î»1T1+Î»2T2+â¯+Î»kTk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑇𝐷=𝜆1𝑇1+𝜆2𝑇2+⋯+𝜆𝑘𝑇𝑘TD=λ1T1+λ2T2+⋯+λkTk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±äºæ¯ä¸ä¸ªåæ¢ ððTi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯åæ¢ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªå¤é¡¹å¼ï¼æä»¥åæ¢ ðð·TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹æ¯åæ¢ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªå¤é¡¹å¼ï¼äºæ¯æ¯ä¸ä¸ªå­ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨åæ¢ ðð·TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸åï¼
+由于每一个变换 𝑇𝑖Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是变换 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个多项式，所以变换 𝑇𝐷TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也是变换 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个多项式，于是每一个子空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在变换 𝑇𝐷TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下不变．
 
-ç±ä¸è¿°ç­å¼å¯ç¥ï¼åæ¢ ðð·TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨å­ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çéå¶ ðð·|ððTD|Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å­ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªä½ä¼¼ï¼ä½ä¼¼ç³»æ°ä¸º ððÎ»i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼åæ¢ ðð·TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥å¯¹è§åï¼
+由上述等式可知，变换 𝑇𝐷TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在子空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的限制 𝑇𝐷|𝑉𝑖TD|Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是子空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个位似，位似系数为 𝜆𝑖λi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，变换 𝑇𝐷TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以对角化．
 
-æé ï¼
+构造：
 
-ðð=ðâðð·TN=TâTD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑇𝑁=𝑇−𝑇𝐷TN=T−TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-äºæ¯åæ¢ ððTN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹æ¯åæ¢ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªå¤é¡¹å¼ï¼æä»¥æ¯ä¸ä¸ªå­ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨åæ¢ ððTN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸åï¼å¯¹äºå­ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çä»»æåé ððÎ¾i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æï¼
+于是变换 𝑇𝑁TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也是变换 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个多项式，所以每一个子空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在变换 𝑇𝑁TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下不变．对于子空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的任意向量 𝜉𝑖ξi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有：
 
-ðððð(ðð)=ðâðð·ðð(ðð)=ðâðððððð(ðð)=0TNri(Î¾i)=TâTDri(Î¾i)=TâÎ»iTiri(Î¾i)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑇𝑁𝑟𝑖(𝜉𝑖)=𝑇−𝑇𝐷𝑟𝑖(𝜉𝑖)=𝑇−𝜆𝑖𝑇𝑖𝑟𝑖(𝜉𝑖)=0TNri(ξi)=T−TDri(ξi)=T−λiTiri(ξi)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»¤ ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå ¨ä½ ððri![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå¤§å¼ï¼é£ä¹å¯¹äºç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çä»»æåé ðÎ¾![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ¢ ððTN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡æ¹å°åé ðÎ¾![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ å°è³é¶åéï¼å æ­¤åæ¢ ððTN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ªå¹é¶åæ¢ï¼
+令 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为全体 𝑟𝑖ri![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最大值，那么对于空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的任意向量 𝜉ξ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，变换 𝑇𝑁TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次方将向量 𝜉ξ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 映射至零向量．因此变换 𝑇𝑁TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个幂零变换．
 
-è¿æ ·ï¼ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¯ä¸ä¸ªåæ¢ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½å¯ä»¥åæï¼
+这样，空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的每一个变换 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都可以写成：
 
-ð=ðð·+ððT=TD+TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑇=𝑇𝐷+𝑇𝑁T=TD+TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ ðð·TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥å¯¹è§åï¼è ððTN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ªå¹é¶åæ¢ï¼å ä¸º ðð·TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððTN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯åæ¢ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤é¡¹å¼ï¼æä»¥å®ä»¬çä¹ç§¯å¯äº¤æ¢ï¼
+其中 𝑇𝐷TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以对角化，而 𝑇𝑁TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个幂零变换．因为 𝑇𝐷TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑇𝑁TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是变换 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的多项式，所以它们的乘积可交换：
 
-ðð·ðð=ðððð·TDTN=TNTD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑇𝐷𝑇𝑁=𝑇𝑁𝑇𝐷TDTN=TNTD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®çï¼è®¾ ð1T1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2T2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸¤ä¸ªå¯å¯¹è§ååæ¢ï¼ä¸ ð1ð2 =ð2ð1T1T2=T2T1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹å­å¨ä¸ä¸ªåºï¼ä½¿å¾ ð1T1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2T2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ³äºè¿åä¸ä¸ªåºçç©éµæ¯å¯¹è§å½¢å¼ï¼
+定理：设 𝑇1T1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑇2T2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的两个可对角化变换，且 𝑇1𝑇2 =𝑇2𝑇1T1T2=T2T1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么存在一个基，使得 𝑇1T1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑇2T2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 关于这同一个基的矩阵是对角形式．
 
-å®çï¼è®¾ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸ä¸ªçº¿æ§åæ¢ï¼é£ä¹å­å¨ä¸ä¸ªå¯å¯¹è§ååæ¢ ðð·TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ä¸ªå¹é¶åæ¢ ððTN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ï¼
+定理：设 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的一个线性变换，那么存在一个可对角化变换 𝑇𝐷TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和一个幂零变换 𝑇𝑁TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得：
 
-  * ð=ðð·+ððT=TD+TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ðð·ðð=ðððð·TDTN=TNTD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑇=𝑇𝐷+𝑇𝑁T=TD+TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑇𝐷𝑇𝑁=𝑇𝑁𝑇𝐷TDTN=TNTD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®ä»¬é½æ¯åæ¢ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤é¡¹å¼ï¼å¹¶ä¸å®ä»¬ç±åæ¢ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä¸ç¡®å®ï¼
+它们都是变换 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的多项式，并且它们由变换 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 唯一确定．
 
-è¯¥å®çç»åºå ³äºåæ¢ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåè§£ï¼ç§°ä¸º ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¥å°å½ï¼Jordanï¼åè§£ï¼ðð·TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å«å ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯å¯¹è§åé¨åï¼ððTN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å«å ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹é¶é¨åï¼
+该定理给出关于变换 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分解，称为 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的若尔当（Jordan）分解，𝑇𝐷TD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 叫做 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的可对角化部分，𝑇𝑁TN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 叫做 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂零部分．
 
-åæ ·å°ï¼æç©éµç Jordan åè§£ï¼
+同样地，有矩阵的 Jordan 分解：
 
-å®çï¼è®¾ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ª ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¶ç©éµï¼é£ä¹å­å¨ä¸ä¸ªå¯å¯¹è§åç©éµ ð·D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ä¸ªå¹é¶ç©éµ ðN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ï¼
+定理：设 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 阶矩阵，那么存在一个可对角化矩阵 𝐷D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和一个幂零矩阵 𝑁N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得：
 
-  * ð´=ð·+ðA=D+N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ð·ð=ðð·DN=ND![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝐴=𝐷+𝑁A=D+N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝐷𝑁=𝑁𝐷DN=ND![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®ä»¬é½æ¯ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤é¡¹å¼ï¼å¹¶ä¸å®ä»¬ç±ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä¸ç¡®å®ï¼
+它们都是矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的多项式，并且它们由矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 唯一确定．
 
-è¯¥å®çç»åºå ³äºç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåè§£ï¼ç§°ä¸º ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¥å°å½ï¼Jordanï¼åè§£ï¼ð·D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å«å ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯å¯¹è§åé¨åï¼ðN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å«å ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹é¶é¨åï¼
+该定理给出关于矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分解，称为 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的若尔当（Jordan）分解，𝐷D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 叫做 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的可对角化部分，𝑁N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 叫做 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂零部分．
 
-## lambda ç©éµ
+## lambda 矩阵
 
-æ¥ä¸æ¥å¼å ¥çé¨åæ¯å«æåå åé ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´å¹¿ä¹çç©éµï¼ä¸ä» ä» æ¯ä¸ä¸ªæ°è¡¨ï¼è¿é¨åè®¨è®ºç¸è¾åçº¯ç±æ°ææçç©éµèè¨ï¼æ´å å¹¿æ³ä¸äºï¼
+接下来引入的部分是含有变元参量 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的更广义的矩阵，不仅仅是一个数表．这部分讨论相较单纯由数构成的矩阵而言，更加广泛一些．
 
-å¯¹äº ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµï¼å¯¹åºç©ºé´ç¸åºçåï¼åä¸ºå«æä¸ä¸ªåå  ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæçå¼åï¼
+对于 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵，对应空间相应的域，变为含有一个变元 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的有理式域．
 
-ä»¥ ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤é¡¹å¼ä¸ºå ç´ çç©éµç§°ä¸º ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµï¼è®°ä¸º ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+以 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的多项式为元素的矩阵称为 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵，记为 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç±äºå¤é¡¹å¼åå å«æ°åï¼æ°å­ç©éµæ¯ç¹æ®ç ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµï¼æ°å­ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ç§ ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµï¼
+由于多项式域包含数域，数字矩阵是特殊的 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵，数字矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一种 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵．
 
-### lambda ç©éµçåç­åæ¢
+### lambda 矩阵的初等变换
 
-å¯¹äº ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµï¼åæ ·å¯ä»¥å®ä¹å åæ³ãä¹æ³ãåç­åæ¢ãç§©ï¼å¯¹äº ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¹éµï¼åæ ·å¯ä»¥å®ä¹è¡åå¼ãä½å­å¼ãä»£æ°ä½å­å¼ï¼
+对于 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵，同样可以定义加减法、乘法、初等变换、秩．对于 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 方阵，同样可以定义行列式、余子式、代数余子式．
 
-å¯¹äº ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµï¼åç­åæ¢ä¸æ°éµå¤§å¤ç¸åï¼ä» å°åå åæ¢æ¹ä¸ºï¼è¿éä»¥è¡åæ¢ä¸ºä¾ï¼ï¼
+对于 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵，初等变换与数阵大多相同，仅将倍加变换改为（这里以行变换为例）：
 
-  * ç¨ ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤é¡¹å¼ ð(ð)Ï(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹æè¡å¹¶å å°å¦ä¸è¡ä¸ï¼
+  * 用 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的多项式 𝜑(𝜆)φ(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 乘某行并加到另一行上．
 
-æ³¨æåä¹åæ¢ä¸è¿è¡ä¿®æ¹ï¼è¿æ¯å ä¸ºåå åæ¢ä¸æ¹åè¡åå¼ï¼èåä¹åæ¢æ¹åè¡åå¼ï¼ä¸ºäºä¿æå¤é¡¹å¼åçç§©çæ§è´¨ï¼è¡åå¼åªè½å¨æ°åä¸è¿è¡æ¹åï¼
+注意倍乘变换不进行修改．这是因为倍加变换不改变行列式，而倍乘变换改变行列式．为了保持多项式域的秩的性质，行列式只能在数域上进行改变．
 
-ç¸åºçåç­ç©éµä¹ä¸å¹¶è¿è¡ä¿®æ¹ï¼
+相应的初等矩阵也一并进行修改．
 
-æè§ä¸ç§åç­éµçè¡åå¼åä¸ºéé¶å¸¸æ°ï¼å æ­¤åä¸ºæ»¡ç§©ï¼æä»¥å®ä»¬å·¦ä¹æå³ä¹ï¼ä¸æ¹å ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµçç§©ï¼
+易见三种初等阵的行列式均为非零常数，因此均为满秩．所以它们左乘或右乘，不改变 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵的秩．
 
-è¥ ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»è¿æéæ¬¡åç­åæ¢åä¸º ðµ(ð)B(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç§° ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðµ(ð)B(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­ä»·ï¼
+若 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 经过有限次初等变换变为 𝐵(𝜆)B(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则称 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐵(𝜆)B(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等价．
 
-å¯¹äº ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµï¼å¦æç­ä»·ï¼åç§©ç¸åï¼åä¹åä¸ç¶ï¼è¿ä¸æ°å­ç©éµæåºå«ï¼
+对于 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵，如果等价，则秩相同．反之则不然，这与数字矩阵有区别．
 
-## Smith æ åå
+## Smith 标准型
 
-å®çï¼è®¾ ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµçç§©æ¯ ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®ç­ä»·äºï¼
+定理：设 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵的秩是 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一定等价于：
 
-(ð·(ð)000)(D(Î»)000)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝐷(𝜆)000)(D(λ)000)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼
+其中：
 
-ð·(ð)=ââ â ââð1(ð)â±ðð(ð)ââ â ââ D(Î»)=(d1(Î»)â±dr(Î»))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐷(𝜆)=⎛⎜ ⎜ ⎜⎝𝑑1(𝜆)⋱𝑑𝑟(𝜆)⎞⎟ ⎟ ⎟⎠D(λ)=(d1(λ)⋱dr(λ))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¯ä¸ä¸ª ðð(ð)di(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ªé¦ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤é¡¹å¼ï¼å¹¶ä¸ç¸é»ä¸¤ä¸ªå¤é¡¹å¼ææ´é¤å ³ç³» ðð(ð)|ðð+1(ð)di(Î»)|di+1(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+每一个 𝑑𝑖(𝜆)di(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个首 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 多项式，并且相邻两个多项式有整除关系 𝑑𝑖(𝜆)|𝑑𝑖+1(𝜆)di(λ)|di+1(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç§°æ­¤æ ååä¸º Smith æ ååï¼ç§° ðð(ð)di(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºä¸åå å­ï¼
+称此标准型为 Smith 标准型，称 𝑑𝑖(𝜆)di(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为不变因子．
 
-å ·ä½æ±è§£ Smith æ ååçåæ³æ¯ï¼ä»å·¦ä¸è§å°å³ä¸è§è¿è¡æ¶å ï¼æ¯æ¬¡å·¦ä¸è§çå ç´ æ¯å³ä¸æ¹å©ä½çå ¨ä½å¤é¡¹å¼çæå¤§å ¬å å¼ï¼å¹¶åå©å·¦ä¸è§çå ç´ å°è¯¥è¡è¯¥åå ¨é¨æ¶ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+具体求解 Smith 标准型的办法是，从左上角到右下角进行消元，每次左上角的元素是右下方剩余的全体多项式的最大公因式，并借助左上角的元素将该行该列全部消为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å®çï¼æ¡ä»¶ ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðµ(ð)B(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­ä»·ï¼ç­ä»·äºæ¡ä»¶ ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðµ(ð)B(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¥æå®å ¨ä¸æ ·çä¸åå å­ï¼
+定理：条件 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐵(𝜆)B(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等价，等价于条件 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐵(𝜆)B(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 拥有完全一样的不变因子．
 
-### åç­å å­
+### 初等因子
 
-ç±ä»£æ°åºæ¬å®çï¼è®¾ ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸åå å­ ð1(ð),ð2(ð),â¯,ðð(ð)d1(Î»),d2(Î»),â¯,dm(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåè§£ä¸ºï¼
+由代数基本定理，设 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的不变因子 𝑑1(𝜆),𝑑2(𝜆),⋯,𝑑𝑚(𝜆)d1(λ),d2(λ),⋯,dm(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分解为：
 
-ðð(ð)=(ðâð1)ðð1(ðâð2)ðð2â¯(ðâðð)ðððdi(Î»)=(Î»âÎ»1)ei1(Î»âÎ»2)ei2â¯(Î»âÎ»S)eiS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑑𝑖(𝜆)=(𝜆−𝜆1)𝑒𝑖1(𝜆−𝜆2)𝑒𝑖2⋯(𝜆−𝜆𝑆)𝑒𝑖𝑆di(λ)=(λ−λ1)ei1(λ−λ2)ei2⋯(λ−λS)eiS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ ð1,â¯,ððÎ»1,â¯,Î»S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºä¸ç¸åï¼ç±äºï¼
+其中 𝜆1,⋯,𝜆𝑆λ1,⋯,λS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互不相同．由于：
 
-ðð(ð)|ðð+1(ð)di(Î»)|di+1(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑑𝑖(𝜆)|𝑑𝑖+1(𝜆)di(λ)|di+1(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ææ° ð1ð,ð2ð,â¯,ðððe1j,e2j,â¯,emj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éå¢ï¼å¹¶ä¸æåä¸é¡¹ ðð(ð)dm(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåé¡¹ææ°åéé¶ï¼
+因此指数 𝑒1𝑗,𝑒2𝑗,⋯,𝑒𝑚𝑗e1j,e2j,⋯,emj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 递增，并且最后一项 𝑑𝑚(𝜆)dm(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的各项指数均非零．
 
-ä¸å¼ä¸­ææ°å¤§äºé¶çå ¨é¨å å­ï¼ç»ç§°ä¸º ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåç­å å­ï¼
+上式中指数大于零的全部因子，统称为 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的初等因子．
 
-æ³¨æï¼åç­å å­è®¡éæ°ï¼å¦æå¯¹äºæä¸ª ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ææ° ðððeij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åºç°äºè¥å¹²æ¬¡ï¼åå¯¹åºçåç­å å­ (ðâðð)ððð(Î»âÎ»j)eij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹åºå½åºç°ç¸åºæ¬¡æ°ï¼
+注意，初等因子计重数．如果对于某个 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，指数 𝑒𝑖𝑗eij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出现了若干次，则对应的初等因子 (𝜆−𝜆𝑗)𝑒𝑖𝑗(λ−λj)eij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也应当出现相应次数．
 
-ä¹åçå®çè¯´æï¼ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðµ(ð)B(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­ä»·ï¼ç­ä»·äºä»ä»¬ä¸¤ä¸ªæ¥æå®å ¨ä¸è´çä¸åå å­ï¼ä¸åå å­å®å ¨ç¸åï¼èªç¶åç­å å­ä¹å®å ¨ç¸åï¼ä½æ¯åä¹åä¸ç¶ï¼äºå®ä¸æç»è®ºï¼
+之前的定理说明，𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝐵(𝜆)B(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等价，等价于他们两个拥有完全一致的不变因子．不变因子完全相同，自然初等因子也完全相同，但是反之则不然．事实上有结论：
 
-å®çï¼ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðµ(ð)B(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åå å­å®å ¨ç¸åï¼ç­ä»·äºåç­å å­åç§©åå®å ¨ç¸åï¼
+定理：𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝐵(𝜆)B(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不变因子完全相同，等价于初等因子和秩均完全相同．
 
-äºæ¯ãåç­å å­åç§©åå®å ¨ç¸åãä¹æä¸ºå¤æ­ ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµç­ä»·æ§çæ¡ä»¶ï¼
+于是「初等因子和秩均完全相同」也成为判断 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵等价性的条件．
 
-å¨åç­åæ¢çæ¶åï¼ä¹å¯ä»¥å å° ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¢ä¸ºå¯¹è§éµï¼åæ±åºåç­å å­åç§©ï¼åæ±åºä¸åå å­å¾å°æ ååï¼æç»è®ºï¼
+在初等变换的时候，也可以先将 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变换为对角阵，再求出初等因子和秩，再求出不变因子得到标准型．有结论：
 
-å®çï¼è®¾ ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­ä»·äºå¯¹è§éµï¼
+定理：设 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等价于对角阵：
 
-diagâ¡{ð1(ð),ð2(ð),â¯,ðð(ð),0,â¯,0}diagâ¡{f1(Î»),f2(Î»),â¯,fr(Î»),0,â¯,0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+diag⁡{𝑓1(𝜆),𝑓2(𝜆),⋯,𝑓𝑟(𝜆),0,⋯,0}diag⁡{f1(λ),f2(λ),⋯,fr(λ),0,⋯,0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é£ä¹æ ð1(ð),ð2(ð),â¯,ðð(ð)f1(Î»),f2(Î»),â¯,fr(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ¨ä½ä¸æ¬¡å å­çå¹ (ðâðð)ððð(Î»âÎ»j)eij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ææ ð´(ð)A(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåç­å å­ï¼
+那么有 𝑓1(𝜆),𝑓2(𝜆),⋯,𝑓𝑟(𝜆)f1(λ),f2(λ),⋯,fr(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的全体一次因子的幂 (𝜆−𝜆𝑗)𝑒𝑖𝑗(λ−λj)eij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，构成 𝐴(𝜆)A(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的初等因子．
 
-ç±åç­å å­åç§©æé ä¸åå å­çå ·ä½æ¹æ³ä¸ºï¼å å°åç­å å­æç §å å¼åç±»ï¼ææè¡¨æ ¼ï¼æåç±»å å¼è¿è¡éå¹æåæ¾å°åä¸è¡ï¼åç±»å å¼çæé«æ¬¡å¹æ¾å°ä¸åï¼æåæ°ç¨ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¥é½è³ç§© ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹æ¯ä¸åçä¹ç§¯ææä¸ä¸ªä¸åå å­ï¼
+由初等因子和秩构造不变因子的具体方法为：先将初等因子按照因式分类，排成表格，把同类因式进行降幂排列放到同一行，各类因式的最高次幂放到一列，把列数用 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 补齐至秩 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么每一列的乘积构成一个不变因子．
 
-### å¨ç¹å¾ç©éµä¸­çåºç¨
+### 在特征矩阵中的应用
 
-å¦æ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ°éµï¼é£ä¹å®ä»¬çç¹å¾ç©éµæ¯ ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµï¼æç»è®ºï¼
+如果 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是数阵，那么它们的特征矩阵是 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵．有结论：
 
-å®çï¼æ¡ä»¶æ°éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸ä¼¼ï¼ç­ä»·äºæ¡ä»¶ç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðð¼ âðµÎ»IâB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­ä»·ï¼
+定理：条件数阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相似，等价于条件特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝜆𝐼 −𝐵λI−B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等价．
 
-ç±äºç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åªå¨ä¸»å¯¹è§çº¿å«æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ç§©ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±ä¸è¿°æ¨çï¼ååçæ°éµçç¹å¾ç©éµçç§©å§ç»ç¸ç­ï¼äºæ¯æç­ä»·æ§ï¼
+由于特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 只在主对角线含有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以秩为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．由上述推理，同型的数阵的特征矩阵的秩始终相等，于是有等价性：
 
-æ°éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸ä¼¼ï¼ç­ä»·äºç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðð¼ âðµÎ»IâB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå®å ¨ç¸åçåç­å å­ï¼
+数阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相似，等价于特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝜆𝐼 −𝐵λI−B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有完全相同的初等因子．
 
-å¯¹äºç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç­åæ¢ä¿æç­ä»·æ§ï¼æä»¥ä¸æ¹åç§©ï¼
+对于特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，初等变换保持等价性，所以不改变秩．
 
-è§å¯ä¸ç§åç­åæ¢ï¼ç±äºå¯ä¸è¢«æ¹åçåå åæ¢ä¸æ¹åè¡åå¼ï¼äºå®ä¸ä¸ç§åç­åæ¢ä» å¯¹è¡åå¼çç»æå¤é¡¹å¼æ¹åå¸¸æ°åï¼å æ­¤ä¸æ¹åè¡åå¼çç»æå¤é¡¹å¼çå å¼åè§£ä¸æ¬¡æ°ï¼
+观察三种初等变换，由于唯一被改写的倍加变换不改变行列式，事实上三种初等变换仅对行列式的结果多项式改变常数倍，因此不改变行列式的结果多项式的因式分解与次数．
 
-å æ­¤ç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¡åå¼ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å¤é¡¹å¼ï¼åç­åæ¢åä¸º Smith æ åååï¼ç±äºç§©ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¡åå¼å°±æ¯ä¸»å¯¹è§çº¿å ¨ä½ä¸åå å­çä¹ç§¯ï¼ä¹ç­äºå ¨ä½åç­å å­çä¹ç§¯ï¼å æ­¤ï¼ç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ¨ä½åç­å å­çæ¬¡æ°ä¹åç­äº ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+因此特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的行列式为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次多项式，初等变换化为 Smith 标准型后，由于秩为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，行列式就是主对角线全体不变因子的乘积，也等于全体初等因子的乘积．因此，特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的全体初等因子的次数之和等于 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## Jordan æ åå
+## Jordan 标准型
 
-ç©éµ
+矩阵
 
-ââ â â â â â â â â â â â ââð10â¯000ð1â¯0000ðâ¯00â®â®â®â®â®000â¯ð1000â¯0ðââ â â â â â â â â â â â ââ (Î»10â¯000Î»1â¯0000Î»â¯00â®â®â®â®â®000â¯Î»1000â¯0Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝜆10⋯000𝜆1⋯0000𝜆⋯00⋮⋮⋮⋮⋮000⋯𝜆1000⋯0𝜆⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠(λ10⋯000λ1⋯0000λ⋯00⋮⋮⋮⋮⋮000⋯λ1000⋯0λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸»å¯¹è§çº¿ä¸çå ç´ é½æ¯ ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç´§é»ä¸»å¯¹è§çº¿ä¸æ¹çå ç´ é½æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä½ä½ç½®é½æ¯ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å«åå±äº ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ª Jordan ç©éµï¼æç§° Jordan åï¼
+主对角线上的元素都是 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，紧邻主对角线上方的元素都是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其余位置都是 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，叫做属于 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个 Jordan 矩阵，或称 Jordan 块．
 
-æ¾ç¶ï¼å¹é¶ Jordan ç©éµæ¯ Jordan ç©éµçç¹ä¾ï¼å³ ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼
+显然，幂零 Jordan 矩阵是 Jordan 矩阵的特例，即 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形．
 
-å®çï¼è®¾ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªåæ¢ï¼ð1,â¯,ððÎ»1,â¯,Î»k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸åäºä¸ç¸åçç¹å¾å¼ï¼é£ä¹å­å¨ä¸ä¸ªåºï¼ä½¿å¾ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ³äºè¿ä¸ªåºçç©éµæå½¢ç¶ï¼
+定理：设 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个变换，𝜆1,⋯,𝜆𝑘λ1,⋯,λk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一切互不相同的特征值，那么存在一个基，使得 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 关于这个基的矩阵有形状：
 
-ââ â â â â ââðµ10ðµ2â±0ðµðââ â â â â ââ (B10B2â±0Bk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝐵10𝐵2⋱0𝐵𝑘⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠(B10B2⋱0Bk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­
+其中
 
-ðµð=ââ â â â â ââð½ð10ð½ð2â±0ð½ðð ðââ â â â â ââ Bi=(Ji10Ji2â±0Jisi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐵𝑖=⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝐽𝑖10𝐽𝑖2⋱0𝐽𝑖𝑠𝑖⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠Bi=(Ji10Ji2⋱0Jisi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ ð½ð1,â¯,ð½ðð ðJi1,â¯,Jisi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯å±äº ððÎ»i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Jordan åï¼
+其中 𝐽𝑖1,⋯,𝐽𝑖𝑠𝑖Ji1,⋯,Jisi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是属于 𝜆𝑖λi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Jordan 块．
 
-è¿æ¯å ä¸ºï¼é¦å æ ¹æ®æå°å¤é¡¹å¼ï¼
+这是因为，首先根据最小多项式：
 
-ðð´(ð)=(ðâð1)ð1(ðâð2)ð2â¯(ðâðð)ððmA(Î»)=(Î»âÎ»1)r1(Î»âÎ»2)r2â¯(Î»âÎ»k)rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑚𝐴(𝜆)=(𝜆−𝜆1)𝑟1(𝜆−𝜆2)𝑟2⋯(𝜆−𝜆𝑘)𝑟𝑘mA(λ)=(λ−λ1)r1(λ−λ2)r2⋯(λ−λk)rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æåç´ åè§£ï¼
+有准素分解：
 
-ð=ð1âð2ââ¯âððV=V1âV2ââ¯âVk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑉=𝑉1⊕𝑉2⊕⋯⊕𝑉𝑘V=V1⊕V2⊕⋯⊕Vk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼
+其中：
 
-ðð=ð((ð´âððð¼)ðð)Vi=N((AâÎ»iI)ri)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑉𝑖=𝑁((𝐴−𝜆𝑖𝐼)𝑟𝑖)Vi=N((A−λiI)ri)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¼ä¸­ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹åºçç©éµï¼
+式中 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对应的矩阵．
 
-ä»¤åæ¢ ððSi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çéå¶ ð|ððT|Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¥ä¸æ¥è¯å¾å¯¹æ¯ä¸ä¸ª ððSi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿è¡ Jordan åè§£ï¼
+令变换 𝑆𝑖Si![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的限制 𝑇|𝑉𝑖T|Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，接下来试图对每一个 𝑆𝑖Si![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进行 Jordan 分解．
 
-è®° ððTe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çæç­åæ¢ï¼ä¸åæç Jordan åè§£ä¸åï¼è®° ððTi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ððSi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Jordan åè§£ä¸­çå¹é¶é¨åï¼
+记 𝑇𝑒Te![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的恒等变换．与前文的 Jordan 分解不同，记 𝑇𝑖Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑆𝑖Si![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Jordan 分解中的幂零部分：
 
-ðð=ðððð+ððSi=Î»iTe+Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆𝑖=𝜆𝑖𝑇𝑒+𝑇𝑖Si=λiTe+Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-äºæ¯ ððTi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå­ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªå¹é¶åæ¢ï¼äºå®ä¸ä¹æ¯ ð âððððTâÎ»iTe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çéå¶ (ðâðððð)|ðð(TâÎ»iTe)|Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+于是 𝑇𝑖Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为子空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个幂零变换，事实上也是 𝑇 −𝜆𝑖𝑇𝑒T−λiTe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的限制 (𝑇−𝜆𝑖𝑇𝑒)|𝑉𝑖(T−λiTe)|Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å­ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥åè§£ä¸ºå¹é¶åæ¢ ððTi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¾ªç¯å­ç©ºé´çç´åï¼
+子空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以分解为幂零变换 𝑇𝑖Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 循环子空间的直和：
 
-ðð=ðð1âðð2ââ¯âððð ðVi=Wi1âWi2ââ¯âWisi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑉𝑖=𝑊𝑖1⊕𝑊𝑖2⊕⋯⊕𝑊𝑖𝑠𝑖Vi=Wi1⊕Wi2⊕⋯⊕Wisi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¨æ¯ä¸ä¸ªå¾ªç¯å­ç©ºé´ ðððWij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éï¼åä¸ä¸ªå¾ªç¯åºå¹¶ååºæåï¼åæ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªåºï¼äºæ¯ ððTi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ³äºè¿ä¸ªåºçç©éµæå½¢ç¶ï¼
+在每一个循环子空间 𝑊𝑖𝑗Wij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 里，取一个循环基并倒序排列，凑成 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个基，于是 𝑇𝑖Ti![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 关于这个基的矩阵有形状：
 
-ðð=ââ â â â â ââðð10ðð2â±0ððð ðââ â â â â ââ Ni=(Ni10Ni2â±0Nisi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑁𝑖=⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝑁𝑖10𝑁𝑖2⋱0𝑁𝑖𝑠𝑖⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠Ni=(Ni10Ni2⋱0Nisi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¨ä½ ðððNij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ºå¹é¶ Jordan åï¼äºæ¯å¯¹äº ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è¿°éåçåºï¼ððSi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹åºçç©éµæ¯ï¼
+全体 𝑁𝑖𝑗Nij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 均为幂零 Jordan 块．于是对于 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上述选取的基，𝑆𝑖Si![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对应的矩阵是：
 
-ðµð=ââ â â â â ââðð0ððâ±0ððââ â â â â ââ +ââ â â â â ââðð10ðð2â±0ððð ðââ â â â â ââ =ââ â â â â ââð½ð10ð½ð2â±0ð½ðð ðââ â â â â ââ Bi=(Î»i0Î»iâ±0Î»i)+(Ni10Ni2â±0Nisi)=(Ji10Ji2â±0Jisi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐵𝑖=⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝜆𝑖0𝜆𝑖⋱0𝜆𝑖⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠+⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝑁𝑖10𝑁𝑖2⋱0𝑁𝑖𝑠𝑖⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠=⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝐽𝑖10𝐽𝑖2⋱0𝐽𝑖𝑠𝑖⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠Bi=(λi0λi⋱0λi)+(Ni10Ni2⋱0Nisi)=(Ji10Ji2⋱0Jisi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿é ð½ð1,ð½ð2,â¯,ð½ðð ðJi1,Ji2,â¯,Jisi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯å±äº ððÎ»i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Jordan åï¼
+这里 𝐽𝑖1,𝐽𝑖2,⋯,𝐽𝑖𝑠𝑖Ji1,Ji2,⋯,Jisi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是属于 𝜆𝑖λi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Jordan 块．
 
-å¯¹äºæ¯ä¸ä¸ªå­ç©ºé´ ððVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æç §ä»¥ä¸æ¹å¼éåä¸ä¸ªåºï¼åèµ·æ¥æä¸º ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºï¼é£ä¹ ðT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ³äºè¿ä¸ªåºçç©éµå³ææå®çè§å®çå½¢å¼ï¼
+对于每一个子空间 𝑉𝑖Vi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，按照以上方式选取一个基，凑起来成为 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基，那么 𝑇T![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 关于这个基的矩阵即构成定理规定的形式．
 
-å½¢å¦ï¼
+形如：
 
-ââ â â â â ââð½10ð½2â±0ð½ðââ â â â â ââ (J10J2â±0Jm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝐽10𝐽2⋱0𝐽𝑚⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠(J10J2⋱0Jm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¶ç©éµï¼å ¶ä¸­æ¯ä¸ä¸ª ð½ðJi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯ä¸ä¸ª Jordan åï¼å«åä¸ä¸ª Jordan æ ååï¼
+的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 阶矩阵，其中每一个 𝐽𝑖Ji![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是一个 Jordan 块，叫做一个 Jordan 标准型．
 
-å®çï¼æ¯ä¸ä¸ª ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¶ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½ä¸ä¸ä¸ª Jordan æ ååç¸ä¼¼ï¼é¤äºåä¸ª Jordan åæåçæ¬¡åºä»¥å¤ï¼ä¸ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸ä¼¼ç Jordan æ ååæ¯ç± ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä¸ç¡®å®çï¼
+定理：每一个 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 阶矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都与一个 Jordan 标准型相似．除了各个 Jordan 块排列的次序以外，与 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相似的 Jordan 标准型是由 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 唯一确定的．
 
-æ³¨æå¨ä¸è¿°æé çç©éµ ðµðBi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼ç¬¬ä¸é¡¹æ¯ä¸ä¸ªåä½éµçè¥å¹²åï¼èªç¶å¯ä»¥åç¬¬äºé¡¹äº¤æ¢ï¼å æ­¤ï¼ç¬¬ä¸é¡¹å°±æ¯ ðµðBi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Jordan åè§£çå¯å¯¹è§åé¨åï¼ç¬¬äºé¡¹å°±æ¯ ðµðBi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Jordan åè§£çå¹é¶é¨åï¼
+注意在上述构造的矩阵 𝐵𝑖Bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中，第一项是一个单位阵的若干倍，自然可以和第二项交换．因此，第一项就是 𝐵𝑖Bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Jordan 分解的可对角化部分，第二项就是 𝐵𝑖Bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Jordan 分解的幂零部分．
 
-å¨ä¸ä¸ªç©éµå¯¹åºç Jordan æ ååéé¢ï¼ä¸»å¯¹è§çº¿ä¸çå ç´ ææçå¯¹è§éµæ¯è¿ä¸ªç©éµå¯¹åºç Jordan æ ååçå¯å¯¹è§åé¨åï¼æä¸»å¯¹è§çº¿ä¸çå ç´ æ¢æ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±å¾å°è¿ä¸ªç©éµå¯¹åºç Jordan æ ååçå¹é¶é¨åï¼
+在一个矩阵对应的 Jordan 标准型里面，主对角线上的元素构成的对角阵是这个矩阵对应的 Jordan 标准型的可对角化部分，把主对角线上的元素换成 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就得到这个矩阵对应的 Jordan 标准型的幂零部分．
 
-å®çï¼å¯¹äºç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Jordan æ ååä¸­ï¼æ¯ä¸ä¸ª Jordan åï¼
+定理：对于矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Jordan 标准型中，每一个 Jordan 块：
 
-ð½ð=ââ â â â â â â â â ââðð1ðð1â±â±â±1ððââ â â â â â â â â ââ Ji=(Î»i1Î»i1â±â±â±1Î»i)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐽𝑖=⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝜆𝑖1𝜆𝑖1⋱⋱⋱1𝜆𝑖⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠Ji=(λi1λi1⋱⋱⋱1λi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹åºäºç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªåç­å å­ (ðâðð)ðð(Î»âÎ»i)ni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ¨ä½åç­å å­å¯¹åºäºç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Jordan æ ååä¸­çå ¨ä½ Jordan åï¼
+对应于特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个初等因子 (𝜆−𝜆𝑖)𝑛𝑖(λ−λi)ni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的全体初等因子对应于矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Jordan 标准型中的全体 Jordan 块．
 
-è¿æ¯å ä¸ºï¼ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸ä¼¼äºå®ç Jordan æ ååï¼å æ­¤ä¸¤è çç¹å¾ç©éµä¹ç­ä»·ï¼å° Jordan æ ååçç¹å¾ç©éµåä¸º Smith æ ååå³å¯çåºï¼
+这是因为，矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相似于它的 Jordan 标准型，因此两者的特征矩阵也等价，将 Jordan 标准型的特征矩阵化为 Smith 标准型即可看出．
 
-ç±è¿ä¸ªå®çï¼åå©ç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåç­å å­ï¼å¯ä»¥ååºç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Jordan æ ååï¼
+由这个定理，借助特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的初等因子，可以写出矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Jordan 标准型．
 
-ä¸ä¸ªæ¨è®ºæ¯ï¼ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯å¯¹è§åï¼ç­ä»·äºç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåç­å å­åä¸ºä¸æ¬¡çï¼
+一个推论是，矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可对角化，等价于特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的初等因子均为一次的．
 
-## å¼ç½è´å°¼ä¹æ¯ï¼Forbeniousï¼å®ç
+## 弗罗贝尼乌斯（Forbenious）定理
 
-ä¸ææåºï¼ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¶ç¹å¾ç©éµç Smith æ åå½¢çç§©ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+上文指出，𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 阶特征矩阵的 Smith 标准形的秩为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å®çï¼è®¾ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Smith æ åå½¢ä¸ºï¼
+定理：设矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Smith 标准形为：
 
-diagâ¡{ð1(ð),ð2(ð),â¯,ðð(ð)}diagâ¡{d1(Î»),d2(Î»),â¯,dn(Î»)}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+diag⁡{𝑑1(𝜆),𝑑2(𝜆),⋯,𝑑𝑛(𝜆)}diag⁡{d1(λ),d2(λ),⋯,dn(λ)}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åæåä¸ä¸ªä¸åå å­ ðð(ð)dn(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ°å¥½ä¸ºç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå°å¤é¡¹å¼ ðð´(ð)mA(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+则最后一个不变因子 𝑑𝑛(𝜆)dn(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 恰好为矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最小多项式 𝑚𝐴(𝜆)mA(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ¨è®ºï¼ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯å¯¹è§åçç­ä»·æ¡ä»¶ä¸ºï¼
+推论：矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可对角化的等价条件为：
 
-  * æå°å¤é¡¹å¼ ðð´(ð)mA(Î»)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ éæ ¹ï¼
-  * ç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸åå å­æ éæ ¹ï¼
-  * ç¹å¾ç©éµ ðð¼ âð´Î»IâA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåç­å å­åä¸ºä¸æ¬¡çï¼
+  * 最小多项式 𝑚𝐴(𝜆)mA(λ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 无重根．
+  * 特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的不变因子无重根．
+  * 特征矩阵 𝜆𝐼 −𝐴λI−A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的初等因子均为一次的．
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-algebra/jordan.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/linear-algebra/jordan.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [CCXXXI](https://github.com/CCXXXI), [Great-designer](https://github.com/Great-designer)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-algebra/jordan.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/linear-algebra/jordan.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [CCXXXI](https://github.com/CCXXXI), [Great-designer](https://github.com/Great-designer)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

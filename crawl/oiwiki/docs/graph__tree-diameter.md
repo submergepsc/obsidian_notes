@@ -1,4 +1,4 @@
-# 树的直径 - OI Wiki
+﻿# 树的直径 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/tree-diameter/
 

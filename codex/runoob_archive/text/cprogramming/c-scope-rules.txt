@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/cprogramming/c-scope-rules.html
-Title: C 作用域规则 | 菜鸟教程
-
-C 作用域规则 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-C 教程

@@ -1,4 +1,4 @@
-# OI Wiki 不是什么 - OI Wiki
+﻿# OI Wiki 不是什么 - OI Wiki
 
 - Source: https://oi-wiki.org/intro/what-oi-wiki-is-not/
 

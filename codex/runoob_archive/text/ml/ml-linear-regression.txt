@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/ml/ml-linear-regression.html
-Title: 线性回归 (Linear Regression) | 菜鸟教程
-
-线性回归 (Linear Regression) | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-机器学习

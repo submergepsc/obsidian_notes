@@ -1,288 +1,288 @@
-# åç§¯åå¤ç§¯ - OI Wiki
+﻿# 内积和外积 - OI Wiki
 
 - Source: https://oi-wiki.org/math/linear-algebra/product/
 
-# å ç§¯åå¤ç§¯
+# 内积和外积
 
-æ¬æä»ç»åéä¹é´çç®åè¿ç®ï¼
+本文介绍向量之间的简单运算．
 
-å¨æ¬æä¹åï¼ç¹å«è¯´æä¸ä¸ç¿»è¯çç¸å ³é®é¢ï¼ç±äºåå²åå ï¼æ°å­¦å­¦ç§åç©çå­¦ç§å ³äºãinner productãåãouter productãä¸¤ä¸ªè¯æ±æçäºè±å «é¨çç¿»è¯ï¼
+在本文之前，特别说明一下翻译的相关问题．由于历史原因，数学学科和物理学科关于「inner product」和「outer product」两个词汇有着五花八门的翻译．
 
-å¨ç©çå­¦ç§ï¼ä¸è¬ç¿»è¯æãæ ç§¯ãåãç¢ç§¯ãï¼è¡¨ç¤ºè¿ç®çç»æä¸ºæ éåç¢éï¼é«ä¸­æ°å­¦è¯¾æ¬ä¸ãæ°éç§¯ãåãåéç§¯ãä¹éç¨äºè¿ç§æè¯çåæ³ï¼
+在物理学科，一般翻译成「标积」和「矢积」，表示运算的结果为标量和矢量．高中数学课本上「数量积」和「向量积」也采用了这种意译的办法．
 
-å¨æ°å­¦å­¦ç§ï¼éå¸¸ä¹å¯ä»¥ç¿»è¯æãå ç§¯ãåãå¤ç§¯ãï¼æ¯ä¸¤ä¸ªåè¯çç´è¯ï¼ãç¹ä¹ãåãåä¹ãæ¯æ ¹æ®è¿ç®ç¬¦å·å¾æ¥çä¿ç§°ï¼è¿ç§ä¿ç§°ä¹å¾å¸¸è§ï¼
+在数学学科，通常也可以翻译成「内积」和「外积」，是两个名词的直译．「点乘」和「叉乘」是根据运算符号得来的俗称，这种俗称也很常见．
 
-å¨ãç¹ä¹ãè¿ç®ä¸­ï¼ç»å¸¸çç¥è¿ç®çç¹ç¬¦å·ï¼å¨çº¿æ§ä»£æ°ä¸­æ´æ¯ä¼ç´æ¥çä½ç©éµä¹æ³ï¼ä¸åç¹ç¬¦å·ï¼
+在「点乘」运算中，经常省略运算的点符号，在线性代数中更是会直接看作矩阵乘法，不写点符号．
 
-## å ç§¯
+## 内积
 
-å ç§¯çæ¦å¿µ **å¯¹äºä»»æç»´æ°çåéé½éç¨** ï¼
+内积的概念 **对于任意维数的向量都适用** ．
 
-### å®ä¹
+### 定义
 
-å ç§¯æä¸åä½ç­ä»·çå®ä¹æ¹æ³ï¼ä¸é¢ä»ç»å ¶ä¸­ä¸äºï¼
+内积有不同但等价的定义方法，下面介绍其中一些．
 
-#### å ä½å®ä¹
+#### 几何定义
 
-å¨ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´æ¬§æ°ç©ºé´ ððRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ï¼å·²ç¥ä¸¤ä¸ªåé ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ä»¬çå¤¹è§ä¸º ðÎ¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼
+在 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维欧氏空间 𝐑𝑛Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下，已知两个向量 𝒂,𝒃a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，它们的夹角为 𝜃θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么：
 
-ðâ ð=|ð||ð|cosâ¡ðaâ b=|a||b|cosâ¡Î¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒂⋅𝒃=|𝒂||𝒃|cos⁡𝜃a⋅b=|a||b|cos⁡θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°±æ¯è¿ä¸¤ä¸ªåéç **å ç§¯** ï¼ä¹å« **ç¹ç§¯** æ **æ°éç§¯** ï¼å ¶ä¸­ç§° |ð|cosâ¡ð|b|cosâ¡Î¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¹åä¸çæå½±ï¼å ç§¯çå ä½æä¹å³ä¸ºï¼å ç§¯ ð â ðaâ b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­äº ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¨¡ä¸ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¹åä¸çæå½±çä¹ç§¯ï¼
+就是这两个向量的 **内积** ，也叫 **点积** 或 **数量积** ．其中称 |𝒃|cos⁡𝜃|b|cos⁡θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 方向上的投影．内积的几何意义即为：内积 𝒂 ⋅𝒃a⋅b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等于 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的模与 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 方向上的投影的乘积．
 
-#### ä»£æ°å®ä¹
+#### 代数定义
 
-å¨ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´æ¬§æ°ç©ºé´ ððRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ï¼å·²ç¥ä¸¤ä¸ªåé ð =(ð1,ð2,â¦,ðð),ð =(ð1,ð2,â¦,ðð)a=(a1,a2,â¦,an),b=(b1,b2,â¦,bn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼
+在 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维欧氏空间 𝐑𝑛Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下，已知两个向量 𝒂 =(𝑎1,𝑎2,…,𝑎𝑛),𝒃 =(𝑏1,𝑏2,…,𝑏𝑛)a=(a1,a2,…,an),b=(b1,b2,…,bn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么：
 
-ðâ ð=ðâð=1ððððaâ b=âi=1naibi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒂⋅𝒃=𝑛∑𝑖=1𝑎𝑖𝑏𝑖a⋅b=∑i=1naibi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°±æ¯è¿ä¸¤ä¸ªåéç **å ç§¯** ï¼ä¹å« **ç¹ç§¯** æ **æ°éç§¯** ï¼å ç§¯çå ä½å®ä¹ä¸ä»£æ°å®ä¹å¨æ¬§æ°ç©ºé´ä¸æ¯ç­ä»·çï¼èåè æ´æ¹ä¾¿ä½¿ç¨ï¼
+就是这两个向量的 **内积** ，也叫 **点积** 或 **数量积** ．内积的几何定义与代数定义在欧氏空间下是等价的，而后者更方便使用．
 
-å¨ä¸å¼èµ·æ··æ·çæ åµä¸ï¼å ç§¯çç¹å·å¯ä»¥çç¥ä¸åï¼å¦æå¨åéçå³ä¸è§æä¸è§æ  22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¡¨ç¤ºåéä¸èªèº«å ç§¯çç®åï¼å³ **åéæ¨¡é¿çå¹³æ¹** ï¼çç¥æ¨¡é¿è®°å·ï¼è¯¥ä¸è§æ  22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯ä»¥çè§£ä¸ºåéçå¹³æ¹ï¼è¿æ¯å ä¸ºï¼åéå ç§¯çç»æä¸ºæ éï¼ä¸å­å¨é¤äº 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»¥å¤ä»»ä½ä¸ªæ°çåéçå ç§¯ï¼åçï¼åéæ¨¡é¿å¹³æ¹çå¹³æ¹ï¼ä¸å¯ä»¥ç®åä¸ºä¸è§æ  44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èæ¯å¿ é¡»å°ä¸è§æ  22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç»æè§ä¸ºä¸ä¸ªæ´ä½ï¼ä»¥æ­¤ç±»æ¨ï¼
+在不引起混淆的情况下，内积的点号可以省略不写．如果在向量的右上角有上角标 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，表示向量与自身内积的简写，即 **向量模长的平方** ，省略模长记号．该上角标 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不可以理解为向量的平方，这是因为，向量内积的结果为标量，不存在除了 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 以外任何个数的向量的内积．同理，向量模长平方的平方，不可以简写为上角标 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而是必须将上角标 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的结果视为一个整体，以此类推．
 
-### æ§è´¨
+### 性质
 
-å¯ä»¥åç°ï¼å ç§¯å¾å°çç»ææ¯ä¸ä¸ªæ éï¼å ¶ç¹å«ä¹å¤å¨äºï¼å®æ¯å ³äºä¸¤ä¸ªåéåå«é½çº¿æ§çåçº¿æ§è¿ç®ï¼å ·ä½èè¨ï¼å ç§¯æ»¡è¶³ï¼
+可以发现，内积得到的结果是一个标量，其特别之处在于，它是关于两个向量分别都线性的双线性运算．具体而言，内积满足：
 
-(ð+ð)â ð=ðâ ð+ðâ ððâ (ð+ð)=ðâ ð+ðâ ð(ðð)â ð=ð(ðâ ð)ðâ (ðð)=ð(ðâ ð)(a+b)â c=aâ c+bâ caâ (b+c)=aâ b+aâ c(Î»a)â b=Î»(aâ b)aâ (Î»b)=Î»(aâ b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂+𝒃)⋅𝒄=𝒂⋅𝒄+𝒃⋅𝒄𝒂⋅(𝒃+𝒄)=𝒂⋅𝒃+𝒂⋅𝒄(𝜆𝒂)⋅𝒃=𝜆(𝒂⋅𝒃)𝒂⋅(𝜆𝒃)=𝜆(𝒂⋅𝒃)(a+b)⋅c=a⋅c+b⋅ca⋅(b+c)=a⋅b+a⋅c(λa)⋅b=λ(a⋅b)a⋅(λb)=λ(a⋅b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ç§¯è¿æ»¡è¶³äº¤æ¢å¾ï¼å³ï¼
+内积还满足交换律，即：
 
-ðâ ð=ðâ ðaâ b=bâ a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒂⋅𝒃=𝒃⋅𝒂a⋅b=b⋅a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### åºç¨
+### 应用
 
-ä¸é¢ä»ç»å ç§¯è¿ç®çä¸äºå¸¸è§åºç¨ï¼
+下面介绍内积运算的一些常见应用．
 
-  1. å¤å®ä¸¤åéåç´ï¼
+  1. 判定两向量垂直：
 
-ðâðâºðâ ð=0aâbâºaâ b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒂⟂𝒃⟺𝒂⋅𝒃=0a⟂b⟺a⋅b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å³äºç¸åç´çä¸¤ä¸ªåéçå ç§¯ï¼ç»æä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åéä¸é¶åéå ç§¯ï¼ç»æä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æä½¿ç¨å ç§¯ä¸ºé¶ä½ä¸ºåç´çå®ä¹ï¼åå¯ä»¥å¾åºé¶åéä¸ä»»ä½åéé½åç´ï¼
+即互相垂直的两个向量的内积，结果为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；向量与零向量内积，结果为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如果使用内积为零作为垂直的定义，则可以得出零向量与任何向量都垂直．
 
-  2. å¤å®ä¸¤åéå ±çº¿ï¼
+  2. 判定两向量共线：
 
-âðâð(ð=ðð)âº|ðâ ð|=|ð||ð|âÎ»âR(a=Î»b)âº|aâ b|=|a||b|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  3. è®¡ç®åéçæ¨¡ï¼
+∃𝜆∈𝐑(𝒂=𝜆𝒃)⟺|𝒂⋅𝒃|=|𝒂||𝒃|∃λ∈R(a=λb)⟺|a⋅b|=|a||b|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  3. 计算向量的模：
 
-|ð|=âðâ ð|a|=aâ a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  4. è®¡ç®ä¸¤åéçå¤¹è§ï¼
+|𝒂|=√𝒂⋅𝒂|a|=a⋅a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  4. 计算两向量的夹角：
 
-ð=arccosâ¡ðâ ð|ð||ð|Î¸=arccosâ¡aâ b|a||b|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜃=arccos⁡𝒂⋅𝒃|𝒂||𝒃|θ=arccos⁡a⋅b|a||b|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## äºé¶ä¸ä¸é¶è¡åå¼
+## 二阶与三阶行列式
 
-äºé¶ä¸ä¸é¶è¡åå¼ï¼å¯ä»¥ä½ä¸ºè¡åå¼çè¾ä¸ºç®åçæ å½¢ç¹æ®å®ä¹ï¼å¨å¾®ç§¯åçæåä¸ä¸ªé¨ååºè®ºé¨åï¼æ ¼æå ¬å¼ç¨å°äºäºé¶è¡åå¼ï¼é«æ¯å ¬å¼ç¨å°äºç¹ä¹ï¼æ¯æå æ¯å ¬å¼ç¨å°äºä¸é¶è¡åå¼ï¼
+二阶与三阶行列式，可以作为行列式的较为简单的情形特殊定义．在微积分的最后一个部分场论部分，格林公式用到了二阶行列式，高斯公式用到了点乘，斯托克斯公式用到了三阶行列式．
 
-äºé¶è¡åå¼å¯ä»¥è§ä¸ºåå å½æ°ï¼å ¶å®ä¹ä¸ºï¼
+二阶行列式可以视为四元函数，其定义为：
 
-â£ððððâ£=ððâðð|abcd|=adâbc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑎𝑏𝑐𝑑∣=𝑎𝑑−𝑏𝑐|abcd|=ad−bc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸é¶è¡åå¼å¯ä»¥è§ä¸ºä¹å å½æ°ï¼å ¶å®ä¹ä¸ºï¼
+三阶行列式可以视为九元函数，其定义为：
 
-â£ðððððððâðâ£=ððð+ðâð+ðððâðâðâðððâððð|abcdefghi|=aei+dhc+gbfâahfâdbiâgec![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑎𝑏𝑐𝑑𝑒𝑓𝑔ℎ𝑖∣=𝑎𝑒𝑖+𝑑ℎ𝑐+𝑔𝑏𝑓−𝑎ℎ𝑓−𝑑𝑏𝑖−𝑔𝑒𝑐|abcdefghi|=aei+dhc+gbf−ahf−dbi−gec![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸ç§ç¹æ®çè®°å¿æ¹æ³æ¯éç¨ãå¯¹è§çº¿æ³åãï¼å¯¹è§çº¿æ³ååªéç¨äºäºé¶ä¸ä¸é¶è¡åå¼ï¼
+一种特殊的记忆方法是采用「对角线法则」，对角线法则只适用于二阶与三阶行列式．
 
-ç¹å«æ³¨æï¼åé¶è¡åå¼å±å¼åå ±æ 24 é¡¹ï¼å¹¶ä¸å¯å¯¹è§çº¿ä¸é¡¹çç¬¦å·ä¸ºæ­£ï¼å¦æå¼ºè¡åºç¨ä¸é¶è¡åå¼çãå¯¹è§çº¿æ³åãï¼ä¸ä» é¡¹æ°ä¸å¤ï¼å¯å¯¹è§çº¿ä¸é¡¹çç¬¦å·ä¹ä¸æ­£ç¡®ï¼å æ­¤ä¸é¶è¡åå¼çãå¯¹è§çº¿æ³åãä¸éç¨äºæ´é«é¶çè¡åå¼ï¼æ´é«é¶çè¡åå¼ä¹ä¸éåä½¿ç¨ç´æ¥å±å¼æ³è®¡ç®ï¼
+特别注意：四阶行列式展开后共有 24 项，并且副对角线一项的符号为正．如果强行应用三阶行列式的「对角线法则」，不仅项数不够，副对角线一项的符号也不正确，因此三阶行列式的「对角线法则」不适用于更高阶的行列式，更高阶的行列式也不适合使用直接展开法计算．
 
-## å¤ç§¯
+## 外积
 
-å¤ç§¯æ¯ **ä¸ç»´åéç¹æçè¿ç®** ï¼
+外积是 **三维向量特有的运算** ．
 
-å¨ç©çå­¦ä¸­ï¼ä¸ç»´åéä¸ºé»è®¤ä¸ç©ºé´ä½ç½®ç¸å ³çåéï¼ä¸å¾éç¨ç²ä½è¡¨ç¤ºï¼ç¶èï¼ç©çå­¦ä¸­ä¸ç¸å¯¹è®ºç¸å ³çåç»´åéä¸ä¼éç¨ç²ä½ï¼èæ¯ä½¿ç¨ç¹æ®çè®°å·ä¸ä¸æ ï¼
+在物理学中，三维向量为默认与空间位置相关的向量，一律采用粗体表示．然而，物理学中与相对论相关的四维向量不会采用粗体，而是使用特殊的记号与下标．
 
-å¨çº¿æ§ä»£æ°ä¸­ï¼ææçåéé½ä¼ç¨ç²ä½è¡¨ç¤ºï¼å¹¶ä¸ç±äºéº»ç¦ï¼å¹¶ä¸çº¿æ§ä»£æ°ä¸­å¤§å¤ä¸ºåéä¸ç©éµçè¿ç®ï¼å¾é¾é ææ­§ä¹ï¼å¨æåæ¶å¯ä»¥çç¥åéè®°å·ä¸åï¼
+在线性代数中，所有的向量都会用粗体表示，并且由于麻烦，并且线性代数中大多为向量与矩阵的运算，很难造成歧义，在手写时可以省略向量记号不写．
 
-### å®ä¹
+### 定义
 
-å¤ç§¯æä¸åä½ç­ä»·çå®ä¹æ¹æ³ï¼ä¸é¢ä»ç»å ¶ä¸­ä¸äºï¼
+外积有不同但等价的定义方法，下面介绍其中一些．
 
-#### å ä½å®ä¹
+#### 几何定义
 
-å¨ä¸ç»´æ¬§æ°ç©ºé´ ð3R3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ï¼å®ä¹åé ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤ç§¯ä¸ºä¸ä¸ªåéï¼è®°ä¸º ð ÃðaÃb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶æ¨¡ä¸æ¹åå®ä¹å¦ä¸ï¼
+在三维欧氏空间 𝐑3R3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下，定义向量 𝒂,𝒃a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的外积为一个向量，记为 𝒂 ×𝒃a×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其模与方向定义如下：
 
-  1. |ð Ãð| =|ð||ð|sinâ¡â¨ð,ðâ©|aÃb|=|a||b|sinâ¡â¨a,bâ©![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. ð ÃðaÃb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½åç´ï¼ä¸ ð,ð,ð Ãða,b,aÃb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹åç¬¦åå³ææ³åï¼
+  1. |𝒂 ×𝒃| =|𝒂||𝒃|sin⁡⟨𝒂,𝒃⟩|a×b|=|a||b|sin⁡⟨a,b⟩![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  2. 𝒂 ×𝒃a×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝒂,𝒃a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都垂直，且 𝒂,𝒃,𝒂 ×𝒃a,b,a×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方向符合右手法则．
 
-æ³¨æå°å¤ç§¯çæ¨¡ï¼èæ³å°ä¸è§å½¢é¢ç§¯è®¡ç®å ¬å¼ ð =12ððsinâ¡ð¶S=12absinâ¡C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥åç°å¤ç§¯çå ä½æä¹æ¯ï¼**| ð Ãð||aÃb|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä»¥ ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºé»è¾¹çå¹³è¡åè¾¹å½¢çé¢ç§¯**ï¼
+注意到外积的模，联想到三角形面积计算公式 𝑆 =12𝑎𝑏sin⁡𝐶S=12absin⁡C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以发现外积的几何意义是：**| 𝒂 ×𝒃||a×b|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是以 𝒂,𝒃a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为邻边的平行四边形的面积**．
 
-#### ä»£æ°å®ä¹
+#### 代数定义
 
-å¨ä¸ç»´æ¬§æ°ç©ºé´ ð3R3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ï¼å®ä¹åé ð =(ð¥1,ð¦1,ð§1),ð =(ð¥2,ð¦2,ð§2)a=(x1,y1,z1),b=(x2,y2,z2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤ç§¯ä¸ºä¸ä¸ªåé ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®°ä½ ð =ð Ãðc=aÃb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ç»æå¯ä»¥ä½¿ç¨ä¸é¶è¡åå¼è¡¨ç¤ºï¼
+在三维欧氏空间 𝐑3R3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下，定义向量 𝒂 =(𝑥1,𝑦1,𝑧1),𝒃 =(𝑥2,𝑦2,𝑧2)a=(x1,y1,z1),b=(x2,y2,z2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的外积为一个向量 𝒄c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，记作 𝒄 =𝒂 ×𝒃c=a×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其结果可以使用三阶行列式表示：
 
-â£ðððð¥1ð¦1ð§1ð¥2ð¦2ð§2â£|ijkx1y1z1x2y2z2|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝒊𝒋𝒌𝑥1𝑦1𝑧1𝑥2𝑦2𝑧2∣|ijkx1y1z1x2y2z2|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ ð,ð,ði,j,k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºæåä¸ºåæ è½´ ð¥,ð¦,ð§x,y,z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåä½åéï¼å¹¶åå¨å¯¹åºåæ å¤ï¼å±å¼å¾
+其中 𝒊,𝒋,𝒌i,j,k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示朝向为坐标轴 𝑥,𝑦,𝑧x,y,z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的单位向量，并写在对应坐标处．展开得
 
-ð=ðÃð=(ð¦1ð§2âð¦2ð§1)ð+(ð§1ð¥2âð§2ð¥1)ð+(ð¥1ð¦2âð¥2ð¦1)ð=(ð¦1ð§2âð¦2ð§1,ð§1ð¥2âð§2ð¥1,ð¥1ð¦2âð¥2ð¦1)c=aÃb=(y1z2ây2z1)i+(z1x2âz2x1)j+(x1y2âx2y1)k=(y1z2ây2z1,z1x2âz2x1,x1y2âx2y1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒄=𝒂×𝒃=(𝑦1𝑧2−𝑦2𝑧1)𝒊+(𝑧1𝑥2−𝑧2𝑥1)𝒋+(𝑥1𝑦2−𝑥2𝑦1)𝒌=(𝑦1𝑧2−𝑦2𝑧1,𝑧1𝑥2−𝑧2𝑥1,𝑥1𝑦2−𝑥2𝑦1)c=a×b=(y1z2−y2z1)i+(z1x2−z2x1)j+(x1y2−x2y1)k=(y1z2−y2z1,z1x2−z2x1,x1y2−x2y1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### æ§è´¨
+### 性质
 
-  1. å¤ç§¯æ¯å ³äºä¸¤ä¸ªåéåå«é½çº¿æ§çåçº¿æ§è¿ç®ï¼å ·ä½èè¨ï¼å¤ç§¯æ»¡è¶³ï¼
+  1. 外积是关于两个向量分别都线性的双线性运算．具体而言，外积满足：
 
-(ð+ð)Ãð=ðÃð+ðÃððÃ(ð+ð)=ðÃð+ðÃð(ðð)Ãð=ð(ðÃð)ðÃ(ðð)=ð(ðÃð)(a+b)Ãc=aÃc+bÃcaÃ(b+c)=aÃb+aÃc(Î»a)Ãb=Î»(aÃb)aÃ(Î»b)=Î»(aÃb)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂+𝒃)×𝒄=𝒂×𝒄+𝒃×𝒄𝒂×(𝒃+𝒄)=𝒂×𝒃+𝒂×𝒄(𝜆𝒂)×𝒃=𝜆(𝒂×𝒃)𝒂×(𝜆𝒃)=𝜆(𝒂×𝒃)(a+b)×c=a×c+b×ca×(b+c)=a×b+a×c(λa)×b=λ(a×b)a×(λb)=λ(a×b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åä¸¤è¡æ§è´¨äº¦å¯ç§°ä¸ºåé å¾ï¼å³å¤ç§¯å¯¹äºåéå æ³æ»¡è¶³ä¹æ³åé å¾ï¼
+前两行性质亦可称为分配律，即外积对于向量加法满足乘法分配律．
 
-  2. å¤ç§¯æ»¡è¶³åäº¤æ¢å¾ï¼å³ï¼
+  2. 外积满足反交换律，即：
 
-ðÃð=âðÃðaÃb=âbÃa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  3. æ ¹æ®ä¸æå ç§¯ä¸å¤ç§¯çå ä½å®ä¹ï¼
+𝒂×𝒃=−𝒃×𝒂a×b=−b×a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  3. 根据上文内积与外积的几何定义：
 
-|ðÃð|=|ð||ð|sinâ¡â¨ð,ðâ©ðâ ð=|ð||ð|cosâ¡ð=|ð||ð|cosâ¡â¨ð,ðâ©|aÃb|=|a||b|sinâ¡â¨a,bâ©aâ b=|a||b|cosâ¡Î¸=|a||b|cosâ¡â¨a,bâ©![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝒂×𝒃|=|𝒂||𝒃|sin⁡⟨𝒂,𝒃⟩𝒂⋅𝒃=|𝒂||𝒃|cos⁡𝜃=|𝒂||𝒃|cos⁡⟨𝒂,𝒃⟩|a×b|=|a||b|sin⁡⟨a,b⟩a⋅b=|a||b|cos⁡θ=|a||b|cos⁡⟨a,b⟩![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥ååºæç­å¼ï¼
+可以写出恒等式：
 
-(ðÃð)â (ðÃð)=|ð|2|ð|2â(ðâ ð)2(aÃb)â (aÃb)=|a|2|b|2â(aâ b)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  4. å¤ç§¯æ»¡è¶³ Jacobi æç­å¼ï¼
+(𝒂×𝒃)⋅(𝒂×𝒃)=|𝒂|2|𝒃|2−(𝒂⋅𝒃)2(a×b)⋅(a×b)=|a|2|b|2−(a⋅b)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  4. 外积满足 Jacobi 恒等式：
 
-ðÃ(ðÃð)+ðÃ(ðÃð)+ðÃ(ðÃð)=ðaÃ(bÃc)+bÃ(cÃa)+cÃ(aÃb)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒂×(𝒃×𝒄)+𝒃×(𝒄×𝒂)+𝒄×(𝒂×𝒃)=𝟎a×(b×c)+b×(c×a)+c×(a×b)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### åºç¨
+### 应用
 
-ä¸é¢ä»ç»å¤ç§¯è¿ç®çä¸äºå¸¸è§åºç¨ï¼
+下面介绍外积运算的一些常见应用．
 
-  1. å¤å®ä¸¤åéæ¯å¦å ±çº¿ï¼
+  1. 判定两向量是否共线：
 
-âðâð(ð=ðð)âºðÃð=ðâÎ»âR(a=Î»b)âºaÃb=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∃𝜆∈𝐑(𝒂=𝜆𝒃)⟺𝒂×𝒃=𝟎∃λ∈R(a=λb)⟺a×b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å³å ±çº¿çä¸¤ä¸ªä¸ç»´åéçå¤ç§¯ï¼ç»æä¸º ð0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ç»´åéä¸èªèº«å¤ç§¯ï¼ç»æä¸º ð0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ç»´åéä¸é¶åéå¤ç§¯ï¼ç»æä¸º ð0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¥ä½¿ç¨å¤ç§¯ä¸ºé¶ä½ä¸ºä¸¤åéå ±çº¿çå®ä¹ï¼åå¯ä»¥å¾åºé¶åéä¸ä»»ä½åéé½å ±çº¿ï¼
+即共线的两个三维向量的外积，结果为 𝟎0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；三维向量与自身外积，结果为 𝟎0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；三维向量与零向量外积，结果为 𝟎0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．若使用外积为零作为两向量共线的定义，则可以得出零向量与任何向量都共线．
 
-  2. è®¡ç®ä¸¤åéå¼ æçå¹³è¡åè¾¹å½¢é¢ç§¯ï¼
+  2. 计算两向量张成的平行四边形面积：
 
-ðâ¨ð,ðâ©=|ðÃð|Sâ¨a,bâ©=|aÃb|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆⟨𝒂,𝒃⟩=|𝒂×𝒃|S⟨a,b⟩=|a×b|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-#### äºç»´åéçæ å½¢
+#### 二维向量的情形
 
-å¯¹äºäºç»´åéï¼æ æ³è®¡ç®å¤ç§¯ï¼ä½æ¯ä»ç¶å¯ä»¥è®¡ç®ä¸¤åéå¼ æçå¹³è¡åè¾¹å½¢é¢ç§¯ï¼
+对于二维向量，无法计算外积，但是仍然可以计算两向量张成的平行四边形面积：
 
-è®° ð =(ð,ð),ð =(ð,ð)a=(m,n),b=(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°å¹³é¢ç´è§åæ ç³»æ©å ä¸ºç©ºé´ç´è§åæ ç³»ï¼åå¹³é¢ä½äºæ°åæ ç³»ç ð¥ðð¦xOy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¹³é¢ï¼åæ¬çåæ  (ð,ð)(m,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å (ð,ð)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸º (ð,ð,0)(m,n,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å (ð,ð,0)(p,q,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+记 𝒂 =(𝑚,𝑛),𝒃 =(𝑝,𝑞)a=(m,n),b=(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，将平面直角坐标系扩充为空间直角坐标系，原平面位于新坐标系的 𝑥𝑂𝑦xOy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 平面，原本的坐标 (𝑚,𝑛)(m,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 (𝑝,𝑞)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变为 (𝑚,𝑛,0)(m,n,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 (𝑝,𝑞,0)(p,q,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-é£ä¹ä¸¤ä¸ªåéçå¤ç§¯ä¸º (0,0,ðð âðð)(0,0,mqânp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤å¹³è¡åè¾¹å½¢çé¢ç§¯ä¸º |ðð âðð||mqânp|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥è§ä¸ºäºé¶è¡åå¼è¿ç®ç»æçç»å¯¹å¼ï¼
+那么两个向量的外积为 (0,0,𝑚𝑞 −𝑛𝑝)(0,0,mq−np)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此平行四边形的面积为 |𝑚𝑞 −𝑛𝑝||mq−np|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以视为二阶行列式运算结果的绝对值．
 
-æ­¤æ¶ï¼æ ¹æ®å³ææ³åå ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ çç¬¦å·ï¼å¯ä»¥æ¨æ­åº ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸å¯¹äº ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹åï¼è¥å¨éæ¶éæ¹åå ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ ä¸ºæ­£å¼ï¼åä¹ä¸ºè´å¼ï¼ç®è®°ä¸º **é¡ºè´éæ­£** ï¼
+此时，根据右手法则和 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 坐标的符号，可以推断出 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相对于 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方向，若在逆时针方向则 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 坐标为正值，反之为负值，简记为 **顺负逆正** ．
 
-## æ··åç§¯
+## 混合积
 
-ä¸å¤ç§¯ä¸æ ·ï¼åéçæ··åç§¯æ¯ **ä¸ç»´åéç¹æçè¿ç®** ï¼
+与外积一样，向量的混合积是 **三维向量特有的运算** ．
 
-### å®ä¹
+### 定义
 
-è®¾ ð,ð,ða,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ç»´ç©ºé´ä¸­çä¸ä¸ªåéï¼å (ð Ãð) â ð(aÃb)â c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºä¸ä¸ªåé ð,ð,ða,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ··åç§¯ï¼è®°ä½ [ððð][abc]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ (ð,ð,ð)(a,b,c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ (ððð)(abc)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ detâ¡(ð,ð,ð)detâ¡(a,b,c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ··åç§¯çç»å¯¹å¼ |(ð Ãð) â ð||(aÃb)â c|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ä½æä¹è¡¨ç¤ºä»¥ ð,ð,ða,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ£±çå¹³è¡å ­é¢ä½çä½ç§¯ï¼
+设 𝒂,𝒃,𝒄a,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是三维空间中的三个向量，则 (𝒂 ×𝒃) ⋅𝒄(a×b)⋅c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为三个向量 𝒂,𝒃,𝒄a,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的混合积，记作 [𝒂𝒃𝒄][abc]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 (𝒂,𝒃,𝒄)(a,b,c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 (𝒂𝒃𝒄)(abc)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 det⁡(𝒂,𝒃,𝒄)det⁡(a,b,c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．混合积的绝对值 |(𝒂 ×𝒃) ⋅𝒄||(a×b)⋅c|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的几何意义表示以 𝒂,𝒃,𝒄a,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为棱的平行六面体的体积．
 
-åéçæ··åç§¯å¯ä»¥ä½¿ç¨ä¸é¶è¡åå¼è¡¨ç¤ºï¼
+向量的混合积可以使用三阶行列式表示：
 
-(ðÃð)â ð=detâ¡(ð,ð,ð)=â£ðð¥ðð¥ðð¥ðð¦ðð¦ðð¦ðð§ðð§ðð§â£=ðð¥ðð¦ðð§+ðð¦ðð§ðð¥+ðð§ðð¥ðð¦âðð§ðð¦ðð¥âðð¦ðð¥ðð§âðð¥ðð§ðð¦(aÃb)â c=detâ¡(a,b,c)=|axbxcxaybycyazbzcz|=axbycz+aybzcx+azbxcyâazbycxâaybxczâaxbzcy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)⋅𝒄=det⁡(𝒂,𝒃,𝒄)=∣𝑎𝑥𝑏𝑥𝑐𝑥𝑎𝑦𝑏𝑦𝑐𝑦𝑎𝑧𝑏𝑧𝑐𝑧∣=𝑎𝑥𝑏𝑦𝑐𝑧+𝑎𝑦𝑏𝑧𝑐𝑥+𝑎𝑧𝑏𝑥𝑐𝑦−𝑎𝑧𝑏𝑦𝑐𝑥−𝑎𝑦𝑏𝑥𝑐𝑧−𝑎𝑥𝑏𝑧𝑐𝑦(a×b)⋅c=det⁡(a,b,c)=|axbxcxaybycyazbzcz|=axbycz+aybzcx+azbxcy−azbycx−aybxcz−axbzcy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### æ§è´¨
+### 性质
 
-  1. æ··åç§¯å ³äºä¸ä¸ªåéé½åå«çº¿æ§ï¼å ·ä½èè¨ï¼æï¼
+  1. 混合积关于三个向量都分别线性，具体而言，有：
 
-detâ¡(ðð+ðð,ð,ð)=ðdetâ¡(ð,ð,ð)+ðdetâ¡(ð,ð,ð)detâ¡(ð,ðð+ðð,ð)=ðdetâ¡(ð,ð,ð)+ðdetâ¡(ð,ð,ð)detâ¡(ð,ð,ðð+ðð)=ðdetâ¡(ð,ð,ð)+ðdetâ¡(ð,ð,ð)detâ¡(Î»u+Î¼v,b,c)=Î»detâ¡(u,b,c)+Î¼detâ¡(v,b,c)detâ¡(a,Î»u+Î¼v,c)=Î»detâ¡(a,u,c)+Î¼detâ¡(a,v,c)detâ¡(a,b,Î»u+Î¼v)=Î»detâ¡(a,b,u)+Î¼detâ¡(a,b,v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. æ··åç§¯å ·æåå¯¹ç§°æ§ï¼äº¤æ¢ä¸¤ä¸ªåéçä½ç½®ä¼ä½¿æ··åç§¯åæå ¶ç¸åæ°ï¼å æ­¤æï¼
+det⁡(𝜆𝒖+𝜇𝒗,𝒃,𝒄)=𝜆det⁡(𝒖,𝒃,𝒄)+𝜇det⁡(𝒗,𝒃,𝒄)det⁡(𝒂,𝜆𝒖+𝜇𝒗,𝒄)=𝜆det⁡(𝒂,𝒖,𝒄)+𝜇det⁡(𝒂,𝒗,𝒄)det⁡(𝒂,𝒃,𝜆𝒖+𝜇𝒗)=𝜆det⁡(𝒂,𝒃,𝒖)+𝜇det⁡(𝒂,𝒃,𝒗)det⁡(λu+μv,b,c)=λdet⁡(u,b,c)+μdet⁡(v,b,c)det⁡(a,λu+μv,c)=λdet⁡(a,u,c)+μdet⁡(a,v,c)det⁡(a,b,λu+μv)=λdet⁡(a,b,u)+μdet⁡(a,b,v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. 混合积具有反对称性，交换两个向量的位置会使混合积变成其相反数，因此有：
 
-detâ¡(ð,ð,ð)=detâ¡(ð,ð,ð)=detâ¡(ð,ð,ð)=âdetâ¡(ð,ð,ð)=âdetâ¡(ð,ð,ð)=âdetâ¡(ð,ð,ð)detâ¡(a,b,c)=detâ¡(b,c,a)=detâ¡(c,a,b)=âdetâ¡(b,a,c)=âdetâ¡(a,c,b)=âdetâ¡(c,b,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+det⁡(𝒂,𝒃,𝒄)=det⁡(𝒃,𝒄,𝒂)=det⁡(𝒄,𝒂,𝒃)=−det⁡(𝒃,𝒂,𝒄)=−det⁡(𝒂,𝒄,𝒃)=−det⁡(𝒄,𝒃,𝒂)det⁡(a,b,c)=det⁡(b,c,a)=det⁡(c,a,b)=−det⁡(b,a,c)=−det⁡(a,c,b)=−det⁡(c,b,a)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ®æ­¤è¿å¯ä»¥å¾å°å ç§¯ä¸å¤ç§¯æå¦ä¸å ³ç³»ï¼
+据此还可以得到内积与外积有如下关系：
 
-(ðÃð)â ð=ðâ (ðÃð)(aÃb)â c=aâ (bÃc)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)⋅𝒄=𝒂⋅(𝒃×𝒄)(a×b)⋅c=a⋅(b×c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### åºç¨
+### 应用
 
-åéçæ··åç§¯æå¦ä¸å¸¸è§åºç¨ï¼
+向量的混合积有如下常见应用．
 
-  1. è®¡ç®åé¢ä½ ð´ðµð¶ð·ABCD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½ç§¯ï¼
+  1. 计算四面体 𝐴𝐵𝐶𝐷ABCD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的体积：
 
-ð=16â£detâ¡(â¶ð´ðµ,â¶ð´ð¶,â¶ð´ð·)â£V=16|detâ¡(ABâ,ACâ,ADâ)|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. å¤å® ð,ð,ða,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¦å ±é¢ï¼
+𝑉=16∣det⁡(⟶𝐴𝐵,⟶𝐴𝐶,⟶𝐴𝐷)∣V=16|det⁡(AB→,AC→,AD→)|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. 判定 𝒂,𝒃,𝒄a,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是否共面；
 
-ä¸ä¸ªä¸ç»´åé ð,ð,ða,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ±é¢çå åå¿ è¦æ¡ä»¶æ¯ detâ¡(ð,ð,ð) =0detâ¡(a,b,c)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+三个三维向量 𝒂,𝒃,𝒄a,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 共面的充分必要条件是 det⁡(𝒂,𝒃,𝒄) =0det⁡(a,b,c)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  3. å¤å® ð,ð,ða,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ææçåæ ç³»çææ§ï¼
+  3. 判定 𝒂,𝒃,𝒄a,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 构成的坐标系的手性；
 
-æ··åç§¯ detâ¡(ð,ð,ð)detâ¡(a,b,c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¦å·æ¯æ­£è¿æ¯è´ï¼åå³äº ð ÃðaÃb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å½¢æçå¤¹è§æ¯éè§è¿æ¯éè§ï¼å³æå ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼ æå¹³é¢çåä¾§è¿æ¯å¼ä¾§ï¼è¿ç¸å½äº ð,ð,ða,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸ªåéä¾åºææå³æç³»è¿æ¯å·¦æç³»ï¼å ·ä½èè¨ï¼
+混合积 det⁡(𝒂,𝒃,𝒄)det⁡(a,b,c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的符号是正还是负，取决于 𝒂 ×𝒃a×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝒄c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 形成的夹角是锐角还是钝角，即指向 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 张成平面的同侧还是异侧，这相当于 𝒂,𝒃,𝒄a,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 三个向量依序构成右手系还是左手系．具体而言：
 
-     * detâ¡(ð,ð,ð) <0detâ¡(a,b,c)<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­ä»·äº ð,ð,ða,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¾åºææå·¦æç³»ï¼
-     * detâ¡(ð,ð,ð) >0detâ¡(a,b,c)>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­ä»·äº ð,ð,ða,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¾åºææå³æç³»ï¼
+     * det⁡(𝒂,𝒃,𝒄) <0det⁡(a,b,c)<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等价于 𝒂,𝒃,𝒄a,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 依序构成左手系；
+     * det⁡(𝒂,𝒃,𝒄) >0det⁡(a,b,c)>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等价于 𝒂,𝒃,𝒄a,b,c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 依序构成右手系．
 
-## äºéå¤ç§¯
+## 二重外积
 
-ä¸ç»´åéçæ··åç§¯æ¯å ç§¯ä¸å¤ç§¯çæ··æ­ï¼å ·æè½®æ¢å¯¹ç§°æ§ï¼ä¸ç»´åéåä¸ç»´åéçå¤ç§¯è¿æ¯ä¸ç»´åéï¼é£ä¹å¤ç§¯çå¤ç§¯æ¯å¦å­å¨ç¸å ³ç»è®ºï¼
+三维向量的混合积是内积与外积的混搭，具有轮换对称性．三维向量和三维向量的外积还是三维向量，那么外积的外积是否存在相关结论？
 
-å è¯æä¸ä¸ªå¼çï¼
+先证明一个引理．
 
-(ðÃð)Ãð=(ðâ ð)ðâ(ðâ ð)ð(aÃb)Ãa=(aâ a)bâ(aâ b)a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)×𝒂=(𝒂⋅𝒂)𝒃−(𝒂⋅𝒃)𝒂(a×b)×a=(a⋅a)b−(a⋅b)a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æï¼ç±å³æå®åï¼ð ÃðaÃb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½åç´ï¼å¾ è¯ç­å¼å·¦ç«¯ä¸ ð ÃðaÃb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åç´ï¼å æ­¤å¾ è¯ç­å¼å·¦ç«¯ä¸ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ±é¢ï¼
+证明：由右手定则，𝒂 ×𝒃a×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都垂直，待证等式左端与 𝒂 ×𝒃a×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 垂直，因此待证等式左端与 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 共面．
 
-å æ­¤å¯ä»¥åè®¾ï¼
+因此可以假设：
 
-(ðÃð)Ãð=ðð+ðð(aÃb)Ãa=Î»a+Î¼b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)×𝒂=𝜆𝒂+𝜇𝒃(a×b)×a=λa+μb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®æ··åç§¯çç¸å ³ç»è®ºï¼ä¸å¼ä¸¤ç«¯åæ¶å¯¹äº ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå«åå ç§¯ï¼æï¼
+根据混合积的相关结论，上式两端同时对于 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别做内积，有：
 
-ð(ðâ ð)+ð(ðâ ð)=0ð(ðâ ð)+ð(ðâ ð)=detâ¡(ð,ðÃð,ð)=(ðÃð)â (ðÃð)Î»(aâ a)+Î¼(aâ b)=0Î»(aâ b)+Î¼(bâ b)=detâ¡(b,aÃb,a)=(aÃb)â (aÃb)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜆(𝒂⋅𝒂)+𝜇(𝒂⋅𝒃)=0𝜆(𝒂⋅𝒃)+𝜇(𝒃⋅𝒃)=det⁡(𝒃,𝒂×𝒃,𝒂)=(𝒂×𝒃)⋅(𝒂×𝒃)λ(a⋅a)+μ(a⋅b)=0λ(a⋅b)+μ(b⋅b)=det⁡(b,a×b,a)=(a×b)⋅(a×b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±åææ¨åºçæç­å¼ï¼
+由前文推出的恒等式：
 
-(ðÃð)â (ðÃð)=|ð|2|ð|2â(ðâ ð)2(aÃb)â (aÃb)=|a|2|b|2â(aâ b)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)⋅(𝒂×𝒃)=|𝒂|2|𝒃|2−(𝒂⋅𝒃)2(a×b)⋅(a×b)=|a|2|b|2−(a⋅b)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥è§£å¾ï¼
+可以解得：
 
-ð=âðâ ðð=ðâ ðÎ»=âaâ bÎ¼=aâ a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜆=−𝒂⋅𝒃𝜇=𝒂⋅𝒂λ=−a⋅bμ=a⋅a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æ¯ï¼
+证毕．
 
-å¨ä¸æçè¯æä¸­æå°ï¼ð ÃðaÃb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä»»æåéåä¹ï¼å¾å°çåéä¸ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ±é¢ï¼æ¥ä¸æ¥è¯æ **äºéå¤ç§¯** çç»è®ºï¼
+在上文的证明中提到，𝒂 ×𝒃a×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与任意向量叉乘，得到的向量与 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 共面．接下来证明 **二重外积** 的结论：
 
-(ðÃð)Ãð=(ðâ ð)ðâ(ðâ ð)ð(aÃb)Ãc=(aâ c)bâ(bâ c)a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)×𝒄=(𝒂⋅𝒄)𝒃−(𝒃⋅𝒄)𝒂(a×b)×c=(a⋅c)b−(b⋅c)a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸è¿°å ±é¢æ§æå©äºäºéå¤ç§¯ç»è®ºçè®°å¿ï¼å¯è§ï¼ä¸æçå¼çä¸ºäºéå¤ç§¯çç¹æ®æ åµï¼
+上述共面性有助于二重外积结论的记忆．可见，上文的引理为二重外积的特殊情况．
 
-è¯æï¼è¿éåªéèèä¸ä¸ªåéåä¸ºéé¶ä¸ä¸å ±çº¿çæ åµï¼å ¶ä»ç¹ä¾ä¸ºæ¾ç¶çï¼
+证明：这里只需考虑三个向量均为非零且不共线的情况，其他特例为显然的．
 
-ä¸ç»´åé ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð ÃðaÃb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å ±é¢ï¼å æ­¤å¯ä»¥åè®¾ï¼
+三维向量 𝒂a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝒃b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝒂 ×𝒃a×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不共面，因此可以假设：
 
-ð=ð¼ð+ð½ð+ð¾(ðÃð)c=Î±a+Î²b+Î³(aÃb)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝒄=𝛼𝒂+𝛽𝒃+𝛾(𝒂×𝒃)c=αa+βb+γ(a×b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥æï¼
+所以有：
 
-(ðÃð)Ãð=(ðÃð)Ã(ð¼ð+ð½ð+ð¾(ðÃð))=ð¼(ðÃð)Ãð+ð½(ðÃð)Ãð(aÃb)Ãc=(aÃb)Ã(Î±a+Î²b+Î³(aÃb))=Î±(aÃb)Ãa+Î²(aÃb)Ãb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)×𝒄=(𝒂×𝒃)×(𝛼𝒂+𝛽𝒃+𝛾(𝒂×𝒃))=𝛼(𝒂×𝒃)×𝒂+𝛽(𝒂×𝒃)×𝒃(a×b)×c=(a×b)×(αa+βb+γ(a×b))=α(a×b)×a+β(a×b)×b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®ä¸æçå¼çæï¼
+根据上文的引理有：
 
-(ðÃð)Ãð=(ðâ ð)ðâ(ðâ ð)ð(ðÃð)Ãð=â(ðÃð)Ãð=â(ðâ ð)ð+(ðâ ð)ð(aÃb)Ãa=(aâ a)bâ(aâ b)a(aÃb)Ãb=â(bÃa)Ãb=â(bâ b)a+(aâ b)b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)×𝒂=(𝒂⋅𝒂)𝒃−(𝒂⋅𝒃)𝒂(𝒂×𝒃)×𝒃=−(𝒃×𝒂)×𝒃=−(𝒃⋅𝒃)𝒂+(𝒂⋅𝒃)𝒃(a×b)×a=(a⋅a)b−(a⋅b)a(a×b)×b=−(b×a)×b=−(b⋅b)a+(a⋅b)b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤æï¼
+因此有：
 
-(ðÃð)Ãð=ð¼((ðâ ð)ðâ(ðâ ð)ð)+ð½((ðâ ð)ðâ(ðâ ð)ð)=(ð¼(âðâ ð)+ð½(âðâ ð))ð+(ð¼ðâ ð+ð½ðâ ð)ð=(ðâ ð)ðâ(ðâ ð)ð(aÃb)Ãc=Î±((aâ a)bâ(aâ b)a)+Î²((aâ b)bâ(bâ b)a)=(Î±(âaâ b)+Î²(âbâ b))a+(Î±aâ a+Î²aâ b)b=(aâ c)bâ(bâ c)a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)×𝒄=𝛼((𝒂⋅𝒂)𝒃−(𝒂⋅𝒃)𝒂)+𝛽((𝒂⋅𝒃)𝒃−(𝒃⋅𝒃)𝒂)=(𝛼(−𝒂⋅𝒃)+𝛽(−𝒃⋅𝒃))𝒂+(𝛼𝒂⋅𝒂+𝛽𝒂⋅𝒃)𝒃=(𝒂⋅𝒄)𝒃−(𝒃⋅𝒄)𝒂(a×b)×c=α((a⋅a)b−(a⋅b)a)+β((a⋅b)b−(b⋅b)a)=(α(−a⋅b)+β(−b⋅b))a+(αa⋅a+βa⋅b)b=(a⋅c)b−(b⋅c)a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æ¯ï¼
+证毕．
 
-æ ¹æ®å¤ç§¯çåäº¤æ¢æ§ï¼å¯ä»¥å¾å°äºéå¤ç§¯çä¸¤ä¸ªå ¬å¼ï¼
+根据外积的反交换性，可以得到二重外积的两个公式：
 
-(ðÃð)Ãð=(ðâ ð)ðâ(ðâ ð)ððÃ(ðÃð)=(ðâ ð)ðâ(ðâ ð)ð(aÃb)Ãc=(aâ c)bâ(bâ c)aaÃ(bÃc)=(aâ c)bâ(aâ b)c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)×𝒄=(𝒂⋅𝒄)𝒃−(𝒃⋅𝒄)𝒂𝒂×(𝒃×𝒄)=(𝒂⋅𝒄)𝒃−(𝒂⋅𝒃)𝒄(a×b)×c=(a⋅c)b−(b⋅c)aa×(b×c)=(a⋅c)b−(a⋅b)c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯è§ï¼äºéå¤ç§¯å¯¹äºè¿ç®é¡ºåºæçä¸¥æ ¼çè¦æ±ï¼
+可见，二重外积对于运算顺序有着严格的要求．
 
-åå©æ··åç§¯ä¸äºéå¤ç§¯ï¼è¿å¯ä»¥è¯æææ ¼ææ¥çæç­å¼ï¼
+借助混合积与二重外积，还可以证明拉格朗日的恒等式．
 
-(ðÃð)â (ðÃð )=(ðâ ð)(ðâ ð )â(ðâ ð )(ðâ ð)(aÃb)â (cÃd)=(aâ c)(bâ d)â(aâ d)(bâ c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)⋅(𝒄×𝒅)=(𝒂⋅𝒄)(𝒃⋅𝒅)−(𝒂⋅𝒅)(𝒃⋅𝒄)(a×b)⋅(c×d)=(a⋅c)(b⋅d)−(a⋅d)(b⋅c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æï¼
+证明：
 
-(ðÃð)â (ðÃð )=detâ¡(ð,ð ,ðÃð)=detâ¡(ðÃð,ð,ð )=((ðÃð)Ãð)â ð =(ð(ðâ ð)âð(ðâ ð))â ð =(ðâ ð)(ðâ ð )â(ðâ ð )(ðâ ð)(aÃb)â (cÃd)=detâ¡(c,d,aÃb)=detâ¡(aÃb,c,d)=((aÃb)Ãc)â d=(b(aâ c)âa(bâ c))â d=(aâ c)(bâ d)â(aâ d)(bâ c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)⋅(𝒄×𝒅)=det⁡(𝒄,𝒅,𝒂×𝒃)=det⁡(𝒂×𝒃,𝒄,𝒅)=((𝒂×𝒃)×𝒄)⋅𝒅=(𝒃(𝒂⋅𝒄)−𝒂(𝒃⋅𝒄))⋅𝒅=(𝒂⋅𝒄)(𝒃⋅𝒅)−(𝒂⋅𝒅)(𝒃⋅𝒄)(a×b)⋅(c×d)=det⁡(c,d,a×b)=det⁡(a×b,c,d)=((a×b)×c)⋅d=(b(a⋅c)−a(b⋅c))⋅d=(a⋅c)(b⋅d)−(a⋅d)(b⋅c)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯è§ï¼åæçæç­å¼
+可见，前文的恒等式
 
-(ðÃð)â (ðÃð)=|ð|2|ð|2â(ðâ ð)2(aÃb)â (aÃb)=|a|2|b|2â(aâ b)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝒂×𝒃)⋅(𝒂×𝒃)=|𝒂|2|𝒃|2−(𝒂⋅𝒃)2(a×b)⋅(a×b)=|a|2|b|2−(a⋅b)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¯ææ ¼ææ¥çæç­å¼çç¹æ®æ å½¢ï¼
+是拉格朗日的恒等式的特殊情形．
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-algebra/product.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/linear-algebra/product.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [Great-designer](https://github.com/Great-designer), [CCXXXI](https://github.com/CCXXXI), [Nanarikom](https://github.com/Nanarikom), [untitledunrevised](https://github.com/untitledunrevised)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-algebra/product.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/linear-algebra/product.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [Great-designer](https://github.com/Great-designer), [CCXXXI](https://github.com/CCXXXI), [Nanarikom](https://github.com/Nanarikom), [untitledunrevised](https://github.com/untitledunrevised)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

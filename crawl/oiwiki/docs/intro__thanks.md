@@ -1,4 +1,4 @@
-# 致谢 - OI Wiki
+﻿# 致谢 - OI Wiki
 
 - Source: https://oi-wiki.org/intro/thanks/
 

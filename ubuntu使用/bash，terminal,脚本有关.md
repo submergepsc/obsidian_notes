@@ -8,6 +8,7 @@ lsblk
 
 # bash脚本解读
 [[bash，terminal,脚本有关/bash知识全景]]
+[[bash，terminal,脚本有关/启动项bios设置有关]]
 
 
 
@@ -103,7 +104,6 @@ sudo pkill -9 mihomo; ps -ef | grep -i clash ; resolvectl status  # 检查dns情
 3️⃣ 变量展开
 4️⃣ 命令执行
 ```
-
 
 
 

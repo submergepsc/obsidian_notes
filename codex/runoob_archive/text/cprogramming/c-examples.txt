@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/cprogramming/c-examples.html
-Title: C 语言实例 | 菜鸟教程
-
-C 语言实例 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-C 教程

@@ -1,79 +1,79 @@
-# éä½æå - OI Wiki
+﻿# 错位排列 - OI Wiki
 
 - Source: https://oi-wiki.org/math/combinatorics/derangement/
 
-# éä½æå
+# 错位排列
 
-## éä½æå
+## 错位排列
 
-### å®ä¹
+### 定义
 
-éä½æåï¼derangementï¼æ¯æ²¡æä»»ä½å ç´ åºç°å¨å ¶æåºä½ç½®çæåï¼å³ï¼å¯¹äº 1 â¼ð1â¼n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦ææ»¡è¶³ ðð â ðPiâ i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç§° ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéä½æåï¼
+错位排列（derangement）是没有任何元素出现在其有序位置的排列．即，对于 1 ∼𝑛1∼n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的排列 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果满足 𝑃𝑖 ≠𝑖Pi≠i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则称 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的错位排列．
 
-ä¾å¦ï¼ä¸å éä½æåæ {2,3,1}{2,3,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å {3,1,2}{3,1,2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå éä½æåæ {2,1,4,3}{2,1,4,3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã{2,3,4,1}{2,3,4,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã{2,4,1,3}{2,4,1,3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã{3,1,4,2}{3,1,4,2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã{3,4,1,2}{3,4,1,2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã{3,4,2,1}{3,4,2,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã{4,1,2,3}{4,1,2,3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã{4,3,1,2}{4,3,1,2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å {4,3,2,1}{4,3,2,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼éä½æåæ¯æ²¡æä¸å¨ç¹çæåï¼å³æ²¡æé¿åº¦ä¸º 1 çå¾ªç¯ï¼
+例如，三元错位排列有 {2,3,1}{2,3,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 {3,1,2}{3,1,2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．四元错位排列有 {2,1,4,3}{2,1,4,3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、{2,3,4,1}{2,3,4,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、{2,4,1,3}{2,4,1,3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、{3,1,4,2}{3,1,4,2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、{3,4,1,2}{3,4,1,2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、{3,4,2,1}{3,4,2,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、{4,1,2,3}{4,1,2,3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、{4,3,1,2}{4,3,1,2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 {4,3,2,1}{4,3,2,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．错位排列是没有不动点的排列，即没有长度为 1 的循环．
 
-### å®¹æ¥åççè®¡ç®
+### 容斥原理的计算
 
-å ¨é ðU![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³ä¸º 1 â¼ð1â¼n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæåï¼|ð| =ð!|U|=n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»¤ ððSi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å ¶ä¸­æ»¡è¶³ ðð â ðPiâ i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæåï¼è¿ç¨è¡¥éå [å®¹æ¥åç](../inclusion-exclusion-principle/) çç¥è¯ï¼é®é¢åææ±ï¼
+全集 𝑈U![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即为 1 ∼𝑛1∼n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的排列，|𝑈| =𝑛!|U|=n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；令 𝑆𝑖Si![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是其中满足 𝑃𝑖 ≠𝑖Pi≠i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的排列．运用补集和 [容斥原理](../inclusion-exclusion-principle/) 的知识，问题变成求：
 
-â£ðâð=1ððâ£=|ð|ââ£ðâð=1ââððâ£=ð!âðâð=1(â1)ðâ1âðð<ðð+1â£ðâð=1âââðððâ£|âi=1nSi|=|U|â|âi=1nSiâ|=n!ââk=1n(â1)kâ1âai<ai+1|âi=1kSaiâ|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑛⋂𝑖=1𝑆𝑖∣=|𝑈|−∣𝑛⋃𝑖=1――𝑆𝑖∣=𝑛!−𝑛∑𝑘=1(−1)𝑘−1∑𝑎𝑖<𝑎𝑖+1∣𝑘⋂𝑖=1―――𝑆𝑎𝑖∣|⋂i=1nSi|=|U|−|⋃i=1nSi―|=n!−∑k=1n(−1)k−1∑ai<ai+1|⋂i=1kSai―|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­æ±åçå«ä¹æ¯ 1,2,â¯,ð1,2,â¯,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­å ð1,ð2,â¯,ðða1,a2,â¯,ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ»¡è¶³ ðð <ðð+1ai<ai+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼äºæ¯
+其中求和的含义是 1,2,⋯,𝑛1,2,⋯,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中取 𝑎1,𝑎2,⋯,𝑎𝑘a1,a2,⋯,ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且满足 𝑎𝑖 <𝑎𝑖+1ai<ai+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．于是
 
-â£ðâð=1âââðððâ£|âi=1kSaiâ|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑘⋂𝑖=1―――𝑆𝑎𝑖∣|⋂i=1kSai―|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¡¨ç¤ºæ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ° ð1,ð2,â¯,ðða1,a2,â¯,ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ððð =ððPai=ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èå©ä¸ ð âðnâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ°çä½ç½®ä»»æçæåæ°ï¼å æ­¤ï¼
+表示有 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数 𝑎1,𝑎2,⋯,𝑎𝑘a1,a2,⋯,ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝑃𝑎𝑖 =𝑎𝑖Pai=ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而剩下 𝑛 −𝑘n−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数的位置任意的排列数，因此：
 
-â£ðâð=1âââðððâ£=(ðâð)!|âi=1kSaiâ|=(nâk)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑘⋂𝑖=1―――𝑆𝑎𝑖∣=(𝑛−𝑘)!|⋂i=1kSai―|=(n−k)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ°çéæ©æ åµå ± (ðð)(nk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ï¼å¯¹å ¶æ±åæï¼
+这 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数的选择情况共 (𝑛𝑘)(nk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种，对其求和有：
 
-ðâð=1(â1)ðâ1âðð<ðð+1â£ðâð=1âââðððâ£=ðâð=1(â1)ðâ1(ðð)(ðâð)!=ðâð=1(â1)ðâ1ð!ð!=ð!ðâð=1(â1)ðâ1ð!âk=1n(â1)kâ1âai<ai+1|âi=1kSaiâ|=âk=1n(â1)kâ1(nk)(nâk)!=âk=1n(â1)kâ1n!k!=n!âk=1n(â1)kâ1k!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑘=1(−1)𝑘−1∑𝑎𝑖<𝑎𝑖+1∣𝑘⋂𝑖=1―――𝑆𝑎𝑖∣=𝑛∑𝑘=1(−1)𝑘−1(𝑛𝑘)(𝑛−𝑘)!=𝑛∑𝑘=1(−1)𝑘−1𝑛!𝑘!=𝑛!𝑛∑𝑘=1(−1)𝑘−1𝑘!∑k=1n(−1)k−1∑ai<ai+1|⋂i=1kSai―|=∑k=1n(−1)k−1(nk)(n−k)!=∑k=1n(−1)k−1n!k!=n!∑k=1n(−1)k−1k!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ çéä½æåæ°ä¸ºï¼
+因此 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素的错位排列数为：
 
-ð·ð=ð!âð!ðâð=1(â1)ðâ1ð!=ð!ðâð=0(â1)ðð!Dn=n!ân!âk=1n(â1)kâ1k!=n!âk=0n(â1)kk!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐷𝑛=𝑛!−𝑛!𝑛∑𝑘=1(−1)𝑘−1𝑘!=𝑛!𝑛∑𝑘=0(−1)𝑘𝑘!Dn=n!−n!∑k=1n(−1)k−1k!=n!∑k=0n(−1)kk!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-éä½æåæ°åçåå é¡¹ä¸º 0,1,2,9,44,2650,1,2,9,44,265![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼[OEIS A000166](http://oeis.org/A000166)ï¼ï¼
+错位排列数列的前几项为 0,1,2,9,44,2650,1,2,9,44,265![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（[OEIS A000166](http://oeis.org/A000166)）．
 
-### éæ¨çè®¡ç®
+### 递推的计算
 
-æéä½æåé®é¢å ·ä½åï¼èèè¿æ ·ä¸ä¸ªé®é¢ï¼
+把错位排列问题具体化，考虑这样一个问题：
 
-ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°ä¸åçä¿¡ï¼ç¼å·åå«æ¯ 1,2,3,4,51,2,3,4,5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç°å¨è¦æè¿äºå°ä¿¡æ¾å¨ç¼å· 1,2,3,4,51,2,3,4,5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¿¡å°ä¸­ï¼è¦æ±ä¿¡å°çç¼å·ä¸ä¿¡çç¼å·ä¸ä¸æ ·ï¼é®æå¤å°ç§ä¸åçæ¾ç½®æ¹æ³ï¼
+𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 封不同的信，编号分别是 1,2,3,4,51,2,3,4,5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，现在要把这五封信放在编号 1,2,3,4,51,2,3,4,5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的信封中，要求信封的编号与信的编号不一样．问有多少种不同的放置方法？
 
-åè®¾èèå°ç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¿¡å°ï¼åå§æ¶ææ¶æç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°ä¿¡æ¾å¨ç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¿¡å°ä¸­ï¼ç¶åèèä¸¤ç§æ åµçéæ¨ï¼
+假设考虑到第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个信封，初始时暂时把第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 封信放在第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个信封中，然后考虑两种情况的递推：
 
-  * åé¢ ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¿¡å°å ¨é¨è£ éï¼
-  * åé¢ ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¿¡å°æä¸ä¸ªæ²¡æè£ éå ¶ä½å ¨é¨è£ éï¼
+  * 前面 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个信封全部装错；
+  * 前面 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个信封有一个没有装错其余全部装错．
 
-å¯¹äºç¬¬ä¸ç§æ åµï¼åé¢ ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¿¡å°å ¨é¨è£ éï¼å ä¸ºåé¢ ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå·²ç»å ¨é¨è£ éäºï¼æä»¥ç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°åªéè¦ä¸åé¢ä»»ä¸ä¸ä¸ªä½ç½®äº¤æ¢å³å¯ï¼æ»å ±æ ð·ðâ1 Ã(ð â1)Dnâ1Ã(nâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§æ åµï¼
+对于第一种情况，前面 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个信封全部装错：因为前面 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个已经全部装错了，所以第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 封只需要与前面任一一个位置交换即可，总共有 𝐷𝑛−1 ×(𝑛 −1)Dn−1×(n−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种情况．
 
-å¯¹äºç¬¬äºç§æ åµï¼åé¢ ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¿¡å°æä¸ä¸ªæ²¡æè£ éå ¶ä½å ¨é¨è£ éï¼èèè¿ç§æ åµçç®çå¨äºï¼è¥ ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¿¡å°ä¸­å¦ææä¸ä¸ªæ²¡è£ éï¼é£ä¹æé£ä¸ªæ²¡è£ éçä¸ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äº¤æ¢ï¼å³å¯å¾å°ä¸ä¸ªå ¨éä½æåæ åµï¼
+对于第二种情况，前面 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个信封有一个没有装错其余全部装错：考虑这种情况的目的在于，若 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个信封中如果有一个没装错，那么把那个没装错的与 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 交换，即可得到一个全错位排列情况．
 
-å ¶ä»æ åµï¼ä¸å¯è½éè¿ä¸æ¬¡æä½æ¥æå®åæä¸ä¸ªé¿åº¦ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéæï¼
+其他情况，不可能通过一次操作来把它变成一个长度为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的错排．
 
-äºæ¯å¯å¾ï¼éä½æåæ°æ»¡è¶³éæ¨å ³ç³»ï¼
+于是可得，错位排列数满足递推关系：
 
-ð·ð=(ðâ1)(ð·ðâ1+ð·ðâ2)Dn=(nâ1)(Dnâ1+Dnâ2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐷𝑛=(𝑛−1)(𝐷𝑛−1+𝐷𝑛−2)Dn=(n−1)(Dn−1+Dn−2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éä¹ç»åºå¦ä¸ä¸ªéæ¨å ³ç³»ï¼
+这里也给出另一个递推关系：
 
-ð·ð=ðð·ðâ1+(â1)ðDn=nDnâ1+(â1)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐷𝑛=𝑛𝐷𝑛−1+(−1)𝑛Dn=nDn−1+(−1)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### å ¶ä»å ³ç³»
+### 其他关系
 
-éä½æåæ°æä¸ä¸ªç®åçåæ´è¡¨è¾¾å¼ï¼å¢é¿éåº¦ä¸é¶ä¹ä» ç¸å·®å¸¸æ°ï¼
+错位排列数有一个简单的取整表达式，增长速度与阶乘仅相差常数：
 
-ð·ð=âð!e+12âDn=ân!e+12â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐷𝑛=⌊𝑛!e+12⌋Dn=⌊n!e+12⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-éçå ç´ æ°éçå¢å ï¼å½¢æéä½æåçæ¦ç P æ¥è¿ï¼
+随着元素数量的增加，形成错位排列的概率 P 接近：
 
-ð=limðââð·ðð!=1eP=limnââDnn!=1e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃=lim𝑛→∞𝐷𝑛𝑛!=1eP=limn→∞Dnn!=1e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/3/25 06:20:21ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/derangement.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/derangement.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [Great-designer](https://github.com/Great-designer), [amlhdsan](https://github.com/amlhdsan), [BeiChenStanly](https://github.com/BeiChenStanly), [Enter-tainer](https://github.com/Enter-tainer), [untitledunrevised](https://github.com/untitledunrevised), [xzdeyg](https://github.com/xzdeyg)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/3/25 06:20:21，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/derangement.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/derangement.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [Great-designer](https://github.com/Great-designer), [amlhdsan](https://github.com/amlhdsan), [BeiChenStanly](https://github.com/BeiChenStanly), [Enter-tainer](https://github.com/Enter-tainer), [untitledunrevised](https://github.com/untitledunrevised), [xzdeyg](https://github.com/xzdeyg)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

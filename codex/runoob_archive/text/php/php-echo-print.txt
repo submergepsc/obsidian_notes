@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/php/php-echo-print.html
-Title: PHP 5 echo/print 语句 | 菜鸟教程
-
-PHP 5 echo/print 语句 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-PHP 教程

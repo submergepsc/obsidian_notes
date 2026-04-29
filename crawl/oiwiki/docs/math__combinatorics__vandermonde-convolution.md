@@ -1,82 +1,82 @@
-# èå¾·èå¾·å·ç§¯ - OI Wiki
+﻿# 范德蒙德卷积 - OI Wiki
 
 - Source: https://oi-wiki.org/math/combinatorics/vandermonde-convolution/
 
-# èå¾·èå¾·å·ç§¯
+# 范德蒙德卷积
 
-## å¼å ¥
+## 引入
 
-èå¾·èå¾·å·ç§¯æ¯ä¸ç§åå¹¶ç»åæ°çå¼å­ï¼ä¸»è¦åºç¨äºç»åæ°å­¦çå ¬å¼æ¨å¯¼ï¼
+范德蒙德卷积是一种合并组合数的式子，主要应用于组合数学的公式推导．
 
-## èå¾·èå¾·å·ç§¯å ¬å¼
+## 范德蒙德卷积公式
 
-ðâð=0(ðð)(ððâð)=(ð+ðð)âi=0k(ni)(mkâi)=(n+mk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑘∑𝑖=0(𝑛𝑖)(𝑚𝑘−𝑖)=(𝑛+𝑚𝑘)∑i=0k(ni)(mk−i)=(n+mk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### è¯æ
+### 证明
 
-èèç¨äºé¡¹å¼å®çè¯æï¼
+考虑用二项式定理证明：
 
-ð+ðâð=0(ð+ðð)ð¥ð=(ð¥+1)ð+ð=(ð¥+1)ð(ð¥+1)ð=ðâð=0(ðð)ð¥ððâð =0(ðð )ð¥ð =ð+ðâð=0ðâð=0(ðð)(ððâð)ð¥ðâk=0n+m(n+mk)xk=(x+1)n+m=(x+1)n(x+1)m=âr=0n(nr)xrâs=0m(ms)xs=âk=0n+mâr=0k(nr)(mkâr)xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛+𝑚∑𝑘=0(𝑛+𝑚𝑘)𝑥𝑘=(𝑥+1)𝑛+𝑚=(𝑥+1)𝑛(𝑥+1)𝑚=𝑛∑𝑟=0(𝑛𝑟)𝑥𝑟𝑚∑𝑠=0(𝑚𝑠)𝑥𝑠=𝑛+𝑚∑𝑘=0𝑘∑𝑟=0(𝑛𝑟)(𝑚𝑘−𝑟)𝑥𝑘∑k=0n+m(n+mk)xk=(x+1)n+m=(x+1)n(x+1)m=∑r=0n(nr)xr∑s=0m(ms)xs=∑k=0n+m∑r=0k(nr)(mk−r)xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å³æï¼
+即有：
 
-(ð+ðð)=ðâð=0(ðð)(ððâð)(n+mk)=âr=0k(nr)(mkâr)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛+𝑚𝑘)=𝑘∑𝑟=0(𝑛𝑟)(𝑚𝑘−𝑟)(n+mk)=∑r=0k(nr)(mk−r)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¥èèå ¶ç»åæä¹è¯æï¼
+若考虑其组合意义证明：
 
-å¨ä¸ä¸ªå¤§å°ä¸º ð +ðn+m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåä¸­ååº ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ°ï¼å¯ä»¥ç­äºæå¤§å°ä¸º ð +ðn+m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåææä¸¤ä¸ªéåï¼å¤§å°åå«ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¶åä» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ååº ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ°ï¼ä» ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ååº ð âðkâi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ°çæ¹æ¡æ°ï¼ç±äºæä»¬æäºå¯¹äº ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæä¸¾ï¼äºæ¯åªéè¦èèä¸ç§ææ³ï¼å ä¸ºä¸åçææ³ä¹é´æ¯ç­ä»·çï¼
+在一个大小为 𝑛 +𝑚n+m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合中取出 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数，可以等于把大小为 𝑛 +𝑚n+m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合拆成两个集合，大小分别为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，然后从 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中取出 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数，从 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中取出 𝑘 −𝑖k−i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数的方案数．由于我们有了对于 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的枚举，于是只需要考虑一种拆法，因为不同的拆法之间是等价的．
 
-## æ¨è®º
+## 推论
 
-### æ¨è®º 1 åè¯æ
+### 推论 1 及证明
 
-ð âð=âð(ðð+ð)(ðð âð)=(ð+ðð+ð )âi=ârs(nr+i)(msâi)=(n+mr+s)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑠∑𝑖=−𝑟(𝑛𝑟+𝑖)(𝑚𝑠−𝑖)=(𝑛+𝑚𝑟+𝑠)∑i=−rs(nr+i)(ms−i)=(n+mr+s)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æä¸åå ¬å¼è¯æç¸ä¼¼ï¼
+证明与原公式证明相似．
 
-### æ¨è®º 2 åè¯æ
+### 推论 2 及证明
 
-ðâð=1(ðð)(ððâ1)=(2ððâ1)âi=1n(ni)(niâ1)=(2nnâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=1(𝑛𝑖)(𝑛𝑖−1)=(2𝑛𝑛−1)∑i=1n(ni)(ni−1)=(2nn−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®åºç¡çç»åæ°å­¦ç¥è¯æ¨å¯¼ï¼æï¼
+根据基础的组合数学知识推导，有：
 
-ðâð=1(ðð)(ððâ1)=ðâ1âð=0(ðð+1)(ðð)=ðâ1âð=0(ððâ1âð)(ðð)=(2ððâ1)âi=1n(ni)(niâ1)=âi=0nâ1(ni+1)(ni)=âi=0nâ1(nnâ1âi)(ni)=(2nnâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=1(𝑛𝑖)(𝑛𝑖−1)=𝑛−1∑𝑖=0(𝑛𝑖+1)(𝑛𝑖)=𝑛−1∑𝑖=0(𝑛𝑛−1−𝑖)(𝑛𝑖)=(2𝑛𝑛−1)∑i=1n(ni)(ni−1)=∑i=0n−1(ni+1)(ni)=∑i=0n−1(nn−1−i)(ni)=(2nn−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### æ¨è®º 3 åè¯æ
+### 推论 3 及证明
 
-ðâð=0(ðð)2=(2ðð)âi=0n(ni)2=(2nn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=0(𝑛𝑖)2=(2𝑛𝑛)∑i=0n(ni)2=(2nn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®åºç¡çç»åæ°å­¦ç¥è¯æ¨å¯¼ï¼æï¼
+根据基础的组合数学知识推导，有：
 
-ðâð=0(ðð)2=ðâð=0(ðð)(ððâð)=(2ðð)âi=0n(ni)2=âi=0n(ni)(nnâi)=(2nn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=0(𝑛𝑖)2=𝑛∑𝑖=0(𝑛𝑖)(𝑛𝑛−𝑖)=(2𝑛𝑛)∑i=0n(ni)2=∑i=0n(ni)(nn−i)=(2nn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### æ¨è®º 4 åè¯æ
+### 推论 4 及证明
 
-ðâð=0(ðð)(ðð)=(ð+ðð)âi=0m(ni)(mi)=(n+mm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑚∑𝑖=0(𝑛𝑖)(𝑚𝑖)=(𝑛+𝑚𝑚)∑i=0m(ni)(mi)=(n+mm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®åºç¡çç»åæ°å­¦ç¥è¯æ¨å¯¼ï¼æï¼
+根据基础的组合数学知识推导，有：
 
-ðâð=0(ðð)(ðð)=ðâð=0(ðð)(ððâð)=(ð+ðð)âi=0m(ni)(mi)=âi=0m(ni)(mmâi)=(n+mm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑚∑𝑖=0(𝑛𝑖)(𝑚𝑖)=𝑚∑𝑖=0(𝑛𝑖)(𝑚𝑚−𝑖)=(𝑛+𝑚𝑚)∑i=0m(ni)(mi)=∑i=0m(ni)(mm−i)=(n+mm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ (ð+ðð)(n+mm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æä»¬è¾ä¸ºçæçç½æ ¼å¾è·¯å¾è®¡æ°çæ¹æ¡æ°ï¼æä»¥æä»¬å¯ä»¥èèå ¶ç»åæä¹çè¯æï¼
+其中 (𝑛+𝑚𝑚)(n+mm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是我们较为熟悉的网格图路径计数的方案数．所以我们可以考虑其组合意义的证明．
 
-å¨ä¸å¼ ç½æ ¼å¾ä¸­ï¼ä» (0,0)(0,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) èµ°å° (ð,ð)(n,m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ±èµ° ð +ðn+m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­¥ï¼è§å® (0,0)(0,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½äºç½æ ¼å¾å·¦ä¸è§ï¼å ¶ä¸­åä¸èµ°äº ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­¥ï¼åå³èµ°äº ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­¥ï¼æ¹æ¡æ°ä¸º (ð+ðð)(n+mm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+在一张网格图中，从 (0,0)(0,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 走到 (𝑛,𝑚)(n,m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 共走 𝑛 +𝑚n+m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 步．规定 (0,0)(0,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位于网格图左上角，其中向下走了 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 步，向右走了 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 步，方案数为 (𝑛+𝑚𝑚)(n+mm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ¢ä¸ªè§è§ï¼æä»¬å° ð +ðn+m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­¥ææä¸¤é¨åèµ°ï¼å èµ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­¥ï¼åèµ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­¥ï¼é£ä¹ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­¥ä¸­è¥æ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­¥åå³ï¼å ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­¥ä¸­å°±æ ð âðmâi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­¥åå³ï¼æ å¾è¯ï¼
+换个视角，我们将 𝑛 +𝑚n+m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 步拆成两部分走，先走 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 步，再走 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 步，那么 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 步中若有 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 步向右，则 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 步中就有 𝑚 −𝑖m−i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 步向右，故得证．
 
-## ä¹ é¢
+## 习题
 
   * [CF785D Anton and School - 2](https://codeforces.com/problemset/problem/785/D)
 
-  * [æ´è°· P2791 å¹¼å¿å­ç¯®çé¢](https://www.luogu.com.cn/problem/P2791)
+  * [洛谷 P2791 幼儿园篮球题](https://www.luogu.com.cn/problem/P2791)
 
-## åèèµæä¸æ³¨é
+## 参考资料与注释
 
   1. [Vandermonde's Convolution Formula](https://www.cut-the-knot.org/arithmetic/algebra/VandermondeConvolution.shtml)
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/vandermonde-convolution.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/vandermonde-convolution.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [ChungZH](https://github.com/ChungZH), [tidongCrazy](https://github.com/tidongCrazy)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/vandermonde-convolution.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/vandermonde-convolution.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [ChungZH](https://github.com/ChungZH), [tidongCrazy](https://github.com/tidongCrazy)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

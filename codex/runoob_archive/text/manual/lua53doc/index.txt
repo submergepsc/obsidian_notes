@@ -1,243 +1,0 @@
-URL: https://www.runoob.com/manual/lua53doc/index.html
-Title: Lua 5.3 åèæå
-
-Lua 5.3 åèæå 
-
-Lua 5.3 æ¬¢è¿ä½ 
-
-å³äº · å®è£ · åæ´ · è®¸å¯è¯ · åèæå · ä¸­è±æ¯è¯­å¯¹ç§è¡¨ 
-
-å³äº Lua 
-
-Lua æ¯ä¸é¨å¼ºå¤§ãå¿«éãè½»éçåµå¥å¼èæ¬è¯­è¨ãå®ç±å·´è¥¿éçº¦ç­åå¢ Pontifical Catholic å¤§å­¦ç PUC-Rio å¢é å¼åã
-Lua æ¯ä¸ä¸ª èªç±è½¯ä»¶ ï¼
-å¹¿æ³åºç¨äºä¸çä¸æ æ°äº§ååé¡¹ç®ã 
-
-Lua ç å®æ¹ç½ç« ä¸æä¾äºå³äº Lua çå®æ´ä¿¡æ¯ï¼
-åæ¬ ç»¼åæ¦è¦ åææ°ç ææ¡£ ï¼
-éè¦æ³¨æçæ¯ åèæå å¯è½å è¿éççæ¬ ææä¸åã 
-
-å®è£ Lua 
-
-Lua ä»¥ æºä»£ç  çå½¢å¼åå¸ï¼ä½¿ç¨ä¹åï¼ä½ éè¦æå»ºå®ã
-æå»º Lua éå¸¸ç®åï¼å ä¸º Lua æ¯ç¨çº¯ç²¹ç ANSI C å®ç°çï¼å¨ææå·å¤ ANSI C ç¼è¯å¨çå¹³å°é½å¯ä»¥ç´æ¥ç¼è¯ã
-åæ¶ï¼Lua ä¹å¯ä»¥ç´æ¥ä»¥ C++ å½¢å¼ç¼è¯ã
-ä¸é¢ä»ç»äºç±» Unix å¹³å°ä¸çæå»ºæµç¨ï¼å¦æ å¶å®ç³»ç»æå»ºä»ç» ä¸ éç½®éé¡¹ ä»¥ä½åèã 
-
-å¦æä½ æ²¡ææ¶é´æå´è¶£èªå·±ç¼è¯ Luaï¼
-å¯ä»¥ä» LuaBinaries è·åç¼è¯åçäºè¿å¶æä»¶
-æèä» LuaDist è¿éè·å Lua çå¤å¹³å°åå¸çï¼èªå¸¦çµæ± ï¼ã 
-
-æå»º Lua 
-
-å¨å¤§å¤æ°ç±» Unix å¹³å°ä¸ï¼è¾å¥ " make " å ä¸åéçå¹³å°åå³å¯ãæ­¥éª¤å¦ä¸ï¼ 
-
-æå¼ä¸ä¸ªæ§å¶å°çªå£ï¼åæ¢å° lua-5.3.0 ç®å½ã
-ç®å½ä¸ç Makefile æä»¶ååå«äºæå»ºä¸å®è£æµç¨ã 
-
-è¿è¡ " make " å¹¶æ¥çä½ çå¹³å°æ¯å¦åå¨å¶ä¸­ã
- å½åæ¯æçå¹³å°æï¼ 
-
-aix bsd c89 freebsd generic linux macosx mingw posix solaris 
-
-å¦æä½ çå¹³å°å¨å¶ä¸­ï¼è¿è¡ " make xxx " å³å¯ï¼xxx ä»£è¡¨ä½ çå¹³å°åã 
-
-å¦æä½ çå¹³å°ä¸å¨å¶ä¸­ï¼åå°è¯æç¸è¿çå¹³å°ï¼åæ posix generic c89 é¡ºåºä¾æ¬¡å°è¯ã 
-
-ç¼è¯è¿ç¨å¾ç­ï¼æç»å¨ src ç®å½ä¸çæä¸ä¸ªæä»¶ï¼
-lua (è§£éå¨),
-luac (ç¼è¯å¨)å liblua.a (éæåº) ã 
-
-æå»ºå®æåï¼å¯ä»¥è¿è¡ " make test " æ¥æ£æ¥æ¯å¦æåã
- å®ä¼è¿è¡è§£éå¨å¹¶æå°çæ¬å·ã 
-
-å¦æä½ æ¯ Linux ç³»ç»å¹¶åºç°äºç¼è¯éè¯¯ï¼è¯·ç¡®è®¤ä½ æ¯å¦å®è£äº readline ï¼ä¹å¯è½å« libreadline-dev æè readline-devel ï¼å¼ååã
-ä¹åï¼å¦æè¿æé¾æ¥éè¯¯ï¼å°è¯
-" make linux MYLIBS=-ltermcap " ã 
-
-å®è£ Lua 
-
-ä¸æ¦ä½ æå»ºå®æ¯ï¼å¯è½å¸ææ Lua å®è£å°ç³»ç»é»è®¤ä½ç½®ï¼
- é£ä¹æ§è¡ " make install " å³å¯ã
- ç³»ç»é»è®¤ä½ç½®ä»¥åå¦ä½å®è£é½å®ä¹å¨ Makefile ä¸­ã
- è¿ä¸ªè¿ç¨å¯è½éè¦æç¸å³çæéã 
-
-è¿è¡ " make xxx install " å¯ä»¥æå»ºåå®è£ä¸æ­¥å°ä½ï¼xxx æä½ çå¹³å°åã 
-
-å¦æä½ æ³æ Lua å®è£å¨æ¬å°ï¼è¿è¡ " make local "ã
- å®ä¼åå»ºä¸ä¸ª install ç®å½ï¼åæ bin , include , lib , man , share ,
- å­ç®å½ï¼å¹¶å°ä¸åæä»¶å®è£å¨å¶ä¸­ã
-
- å¦æä½ æ³å®è£å°æ¬å°å¶å®ç®å½ï¼
- è¿è¡ " make install INSTALL_TOP=xxx "ï¼xxx æä½ éæ©çç®å½ã
- ç±äºå®è£è¿ç¨ä¸­ä¼åæ¢å° src ä»¥å doc ç®å½è¿è¡ï¼
- æä»¥å½ INSTALL_TOP ä¸æ¯ç»å¯¹è·¯å¾æ¶å¡å¿å°å¿ã 
-
-bin: 
-
-lua luac 
-
-include: 
-
-lauxlib.h lua.h lua.hpp luaconf.h lualib.h 
-
-lib: 
-
-liblua.a 
-
-man/man1: 
-
-lua.1 luac.1 
-
-è¿äºæ¯å¼åæ¶éè¦çç®å½ã
- å¦æä½ ä»ä»æ³è¿è¡ä¸äº Lua ç¨åºï¼
- é£ä¹åªéè¦ bin å man ä¸çæä»¶ã include å lib ä¸çæä»¶ç¨äºå° Lua åµå¥
- C æ C++ ç¨åºã 
-
-å®å¶ 
-
-æä¸ç±»å®å¶ï¼å¯ä»¥éè¿ç¼è¾æä»¶å®æï¼ 
-
-ææ ·å®è£ Lua ä»¥åå®è£å°åªé — ç¼è¾ Makefile ã 
-
-ææ ·æå»º Lua — ç¼è¾ src/Makefile ã 
-
-Lua ç¹æ§ — ç¼è¾ src/luaconf.h ã 
-
-å¶å®ä½ ä¸å¿ç¼è¾ Makefile æä»¶ï¼make çæ¶åå¨å½ä»¤è¡æå®ç¸å³åéå³å¯ã
- å½ç¶ï¼ç¼è¾ä¿å­ Makefile å¯ä»¥ç»å®å¶çä¸ªè®°å½ã 
-
-å¦ä¸æ¹é¢ï¼å¦æä½ éè¦å®å¶ä¸äº Lua ç¹æ§ï¼é£å°±éè¦å¨æå»ºå®è£ Lua å
- ç¼è¾ src/luaconf.h ã
- ç¼è¾è¿çæä»¶å¿é¡»ç¡®ä¿ä¸è´æ§ï¼ä¹å°±æ¯åªå®è£å¨ä¸ä¸ªå°æ¹ï¼
- è®©ææä½ ç¼è¯åºæ¥çç¨å° Lua çç¨åºé½ä½¿ç¨è¿å¯ä¸çè¿ä¸ä»½ã
- ä¸å®¶å¯ä»¥éè¿ç¼è¾ Lua æºä»£ç æ¥å®å¶æ´å¤çä¸è¥¿ã 
-
-å¨å¶å®ç³»ç»ä¸æå»º Lua 
-
-å¦æä½ ä¸ä½¿ç¨å¸¸è§ç Unix å·¥å·ï¼é£ä¹æå»º Lua çæµç¨å°±åå³äºä½ ä½¿ç¨çç¼è¯å¨ã
- ä½ éè¦åå»ºè¥å¹²å·¥ç¨æ¥æå»ºåºï¼è§£éå¨ä»¥åç¼è¯å¨ç­ãè¯·æä¸åæºæä»¶å å¥ç¸å³å·¥ç¨ï¼ 
-
-åº: 
-
-lapi.c lcode.c lctype.c ldebug.c ldo.c ldump.c lfunc.c lgc.c llex.c
-lmem.c lobject.c lopcodes.c lparser.c lstate.c lstring.c ltable.c
-ltm.c lundump.c lvm.c lzio.c
-lauxlib.c lbaselib.c lbitlib.c lcorolib.c ldblib.c liolib.c
-lmathlib.c loslib.c lstrlib.c ltablib.c lutf8lib.c loadlib.c linit.c 
-
-è§£éå¨: 
-
-library, lua.c 
-
-ç¼è¯å¨: 
-
-library, luac.c 
-
-æ Lua ä»¥ä¸ä¸ªåºå½¢å¼ç¨äºä½ çç¨åºï¼ä½ éè¦ç¥éå¦ä½ç¨ä½ çç¼è¯å¨åå»ºåºåä½¿ç¨åºã
- æ¯å¦ï¼ä»¥å¨æå è½½ç C åºå½¢å¼ä½¿ç¨ Luaï¼ä½ éè¦äºè§£å¦ä½åå»ºå¨æåºå¹¶è®© Lua API å½æ°
- å¨å¨æåºä¸­å¯è§ — ä¸è¦ å° Lua åºé¾å¥æ¯ä¸ªå¨æåºã
- å¨ Unix ä¸ï¼æä»¬å»ºè®®æ Lua åºéæé¾å¥å®¿ä¸»ç¨åºï¼ç¶åå°ç¬¦å·å¯¼åºç¨äºå¨æé¾æ¥ï¼ src/Makefile å°±æ¯è¿æ ·å¤ç Lua è§£éå¨çã
- å¨ Windows ä¸ï¼æä»¬å»ºè®®æ Lua åºç¼è¯æä¸ä¸ª DLL ã
- æ è®ºææ ·ï¼ç¼è¯å¨ luac é½åºè¯¥éæé¾æ¥ã 
-
-æ­£å¦ä¸é¢æè¿°ï¼ä½ å¯ä»¥å¨æå»º Lua åç¼è¾ src/luaconf.h ä»¥å®å¶ä¸äºç¹æ§ã 
-
-èª Lua 5.2 ä»¥æ¥çåæ´ 
-
-è¿éååºäº Lua 5.3 å¼å¥çä¸»è¦åæ´ã åèæå ä¸­ååºäº ä¸å¼å®¹çå°æ¹ ã 
-
-ä¸»è¦åå 
-
-æ´æ° (é»è®¤ 64 ä½) 
-
-32 ä½æ´æ°çå®æ¹æ¯æ 
-
-ä½æä½ç¬¦ 
-
-åºæ¬ç utf-8 æ¯æ 
-
-å¼çæååè§£åå½æ° 
-
-è¿äºæ¯ Lua 5.3 å¼å¥çå¶å®åæ´ï¼ 
-
-è¯­è¨ 
-
-ç¨æ·æ°æ®å¯ä»¥æ¯ä»»æ Lua å¼ 
-
-æ´æ°é¤æ³ 
-
-æäºåæ¹æ³æäºæ´å çµæ´»çè§å 
-
-åº 
-
-ipairs ä»¥åè¡¨å¤çåºé½ä¼èèåæ¹æ³ 
-
-string.dump å¤äºè£åéé¡¹ 
-
-è¡¨å¤çåºèèäºåæ¹æ³ 
-
-æ°å½æ° table.move 
-
-æ°å½æ° string.pack 
-
-æ°å½æ° string.unpack 
-
-æ°å½æ° string.packsize 
-
-C API 
-
-ç®åäºå»¶ç»­ç¹ API 
-
-lua_gettable ä»¥åç±»ä¼¼å½æ°ä¼è¿åç»æçå¼ç±»å 
-
-lua_dump å¢å äºè£åéé¡¹ 
-
-æ°å½æ°ï¼ lua_geti 
-
-æ°å½æ°ï¼ lua_seti 
-
-æ°å½æ°ï¼ lua_isyieldable 
-
-æ°å½æ°ï¼ lua_numbertointeger 
-
-æ°å½æ°ï¼ lua_rotate 
-
-æ°å½æ°ï¼ lua_stringtonumber 
-
-Lua ç¬ç«è§£éå¨ 
-
-å¯ä»¥åè®¡ç®å¨ä½¿ç¨ï¼ä¸åéè¦åç½® '=' 
-
-arg è¡¨å¯¹ææä»£ç é½å¯ç¨ 
-
-License 
-
-Lua is free software distributed under the terms of the MIT license reproduced below;
-it may be used for any purpose, including commercial purposes,
-at absolutely no cost without having to ask us.
-
-The only requirement is that if you do use Lua,
-then you should give us credit by including the appropriate copyright notice somewhere in your product or its documentation.
-
-For details, see this . 
-
-Copyright © 1994–2015 Lua.org, PUC-Rio. 
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions: 
-
-The above copyright notice and this permission notice shall be included in
-all copies or substantial portions of the Software. 
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
-THE SOFTWARE.

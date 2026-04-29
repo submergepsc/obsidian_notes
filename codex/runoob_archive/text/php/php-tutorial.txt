@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/php/php-tutorial.html
-Title: PHP 教程 | 菜鸟教程
-
-PHP 教程 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-PHP 教程

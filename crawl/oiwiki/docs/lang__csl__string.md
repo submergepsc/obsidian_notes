@@ -1,4 +1,4 @@
-# string - OI Wiki
+﻿# string - OI Wiki
 
 - Source: https://oi-wiki.org/lang/csl/string/
 

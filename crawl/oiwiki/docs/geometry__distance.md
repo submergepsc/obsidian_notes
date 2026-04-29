@@ -1,4 +1,4 @@
-# 距离 - OI Wiki
+﻿# 距离 - OI Wiki
 
 - Source: https://oi-wiki.org/geometry/distance/
 

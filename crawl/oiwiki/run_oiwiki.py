@@ -45,7 +45,6 @@ SKIP_PATH_PREFIXES = (
     "/javascripts/",
     "/stylesheets/",
     "/images/",
-    "/search/",
     "/tags/",
 )
 
@@ -419,6 +418,18 @@ def crawl_site(
             f"检测到断点状态，继续抓取: visited={len(visited)}, "
             f"queued={len(queue)}, saved={len(saved_files)}"
         )
+        if not queue:
+            sitemap_urls = load_sitemap_urls(session, timeout)
+            new_urls = [url for url in sitemap_urls if url not in visited]
+            queue.extend(new_urls)
+            if new_urls:
+                print(f"从 sitemap 发现新页面: {len(new_urls)}")
+                save_progress(state_path, start_url, queue, visited, saved_files, skipped)
+                write_index(index_path, start_url, queue, visited, saved_files, skipped)
+            elif sitemap_urls:
+                print("sitemap 中没有发现新页面。")
+            else:
+                print("未能读取 sitemap，按现有断点继续。")
     else:
         sitemap_urls = load_sitemap_urls(session, timeout)
         queue = deque(sitemap_urls or [normalize_url(start_url)])

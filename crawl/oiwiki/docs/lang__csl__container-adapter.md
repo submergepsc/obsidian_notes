@@ -1,4 +1,4 @@
-# 容器适配器 - OI Wiki
+﻿# 容器适配器 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/csl/container-adapter/
 

@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/quiz/sql-quiz.html
-Title: SQL 测验 | 菜鸟教程
-
-SQL 测验 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-测验

@@ -1,4 +1,4 @@
-# 最小直径生成树 - OI Wiki
+﻿# 最小直径生成树 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/mdst/
 

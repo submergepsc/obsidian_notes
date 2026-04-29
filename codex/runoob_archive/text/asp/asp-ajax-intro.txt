@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/asp/asp-ajax-intro.html
-Title: AJAX 简介 | 菜鸟教程
-
-AJAX 简介 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-ASP 教程

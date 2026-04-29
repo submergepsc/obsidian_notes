@@ -1,4 +1,4 @@
-# 格式手册 - OI Wiki
+﻿# 格式手册 - OI Wiki
 
 - Source: https://oi-wiki.org/intro/format/
 

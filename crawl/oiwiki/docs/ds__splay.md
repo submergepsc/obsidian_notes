@@ -1,4 +1,4 @@
-# Splay 树 - OI Wiki
+﻿# Splay 树 - OI Wiki
 
 - Source: https://oi-wiki.org/ds/splay/
 

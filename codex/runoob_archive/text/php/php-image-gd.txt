@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/php/php-image-gd.html
-Title: PHP 图像处理 | 菜鸟教程
-
-PHP 图像处理 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-PHP 教程

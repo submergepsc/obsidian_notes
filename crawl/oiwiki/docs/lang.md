@@ -1,4 +1,4 @@
-# 语言基础简介 - OI Wiki
+﻿# 语言基础简介 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/
 

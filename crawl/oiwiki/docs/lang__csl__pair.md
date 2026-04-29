@@ -1,4 +1,4 @@
-# pair - OI Wiki
+﻿# pair - OI Wiki
 
 - Source: https://oi-wiki.org/lang/csl/pair/
 

@@ -1,97 +1,97 @@
-# è¿åæ° - OI Wiki
+﻿# 连分数 - OI Wiki
 
 - Source: https://oi-wiki.org/math/number-theory/continued-fraction/
 
-# è¿åæ°
+# 连分数
 
-## å¼å ¥
+## 引入
 
-è¿åæ°å¯ä»¥å°å®æ°è¡¨ç¤ºä¸ºä¸ä¸ªæ¶æçæçæ°æ°åçæéï¼è¿ä¸ªæ°åä¸­çæçæ°æäºè®¡ç®ï¼èä¸æä¾äºè¿ä¸ªå®æ°çæä½³é¼è¿ï¼å èå¨ç®æ³ç«èµä¸­å¸¸å¸¸ä¼ç¨å°è¿åæ°ï¼é¤æ­¤ä¹å¤ï¼è¿åæ°è¿åæ¬§å éå¾ç®æ³å¯åç¸å ³ï¼å èå¯ä»¥åºç¨å°ä¸ç³»åæ°è®ºé®é¢ä¸­ï¼
+连分数可以将实数表示为一个收敛的有理数数列的极限．这个数列中的有理数易于计算，而且提供了这个实数的最佳逼近，因而在算法竞赛中常常会用到连分数．除此之外，连分数还和欧几里得算法密切相关，因而可以应用到一系列数论问题中．
 
-å ³äºè¿åæ°ç¸å ³çç®æ³å®ç°
+关于连分数相关的算法实现
 
-æ¬æä¼æä¾ä¸ç³»åçè¿åæ°çç®æ³å®ç°ï¼å ¶ä¸­é¨åç®æ³å¯è½æ æ³ä¿è¯è®¡ç®ä¸­é´è¿ç¨ææ¶åçæ´æ°é½å¨ 32 ä½æ 64 ä½æ´ååéçåå¼èå´å ï¼å¯¹äºè¿ç§æ å½¢ï¼è¯·åèç¸åºç Python çå®ç°ï¼æå° C++ å®ç°ä¸­çæ´ååéæ¿æ¢ä¸º [é«ç²¾åº¦æ´æ°ç±»](../../bignum/)ï¼ä¸ºçªåºéç¹ï¼æ¬æè¡æè¿ç¨ä¸­çé¨åä»£ç å¯è½ä¼è°ç¨åæå®ç°è¿çå½æ°èä¸åéå¤ç»åºå®ç°ï¼
+本文会提供一系列的连分数的算法实现，其中部分算法可能无法保证计算中间过程所涉及的整数都在 32 位或 64 位整型变量的取值范围内．对于这种情形，请参考相应的 Python 的实现，或将 C++ 实现中的整型变量替换为 [高精度整数类](../../bignum/)．为突出重点，本文行文过程中的部分代码可能会调用前文实现过的函数而不再重复给出实现．
 
-## è¿åæ°
+## 连分数
 
-**è¿åæ°** ï¼continued fractionï¼æ¬èº«åªæ¯ä¸ç§å½¢å¼è®°å·ï¼
+**连分数** （continued fraction）本身只是一种形式记号．
 
-æéè¿åæ°
+有限连分数
 
-å¯¹äºæ°å {ðð}ðð=0{ak}i=0n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿åæ° [ð0,ð1,â¯,ðð][a0,a1,â¯,an]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºå±å¼å¼
+对于数列 {𝑎𝑘}𝑛𝑖=0{ak}i=0n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，连分数 [𝑎0,𝑎1,⋯,𝑎𝑛][a0,a1,⋯,an]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示展开式
 
-ð¥=ð0+1ð1+1ð2+1â¯+1ðð.x=a0+1a1+1a2+1â¯+1an.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝑎0+1𝑎1+1𝑎2+1⋯+1𝑎𝑛.x=a0+1a1+1a2+1⋯+1an.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿åæ°ææä¹ï¼å½ä¸ä» å½å¯¹åºçå±å¼å¼ææä¹ï¼è¿äº ððak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºè¿åæ°ç **é¡¹** ï¼termï¼æ **ç³»æ°** ï¼coefficientï¼ï¼
+连分数有意义，当且仅当对应的展开式有意义．这些 𝑎𝑘ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为连分数的 **项** （term）或 **系数** （coefficient）．
 
-è®°å·
+记号
 
-æ´ä¸è¬çè¿åæ°å è®¸å±å¼å¼ä¸­çåå­ä¸æä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¸åºçè¿åæ°è®°å·ä¹éè¦ä¿®æ¹ï¼è¿è¶ åºäºæ¬æçèç´ï¼å¦å¤ï¼æäºæç®ä¸­ä¼å°ç¬¬ä¸ä¸ªéå·ã,,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ãåä½åå·ã;;![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ãï¼è¿ä¸æ¬æçè®°å·å¨å«ä¹ä¸æ²¡æå·®å¼ï¼
+更一般的连分数允许展开式中的分子不恒为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，相应的连分数记号也需要修改，这超出了本文的范畴．另外，有些文献中会将第一个逗号「,,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)」写作分号「;;![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)」，这与本文的记号在含义上没有差异．
 
-å½ç¶ï¼è¿åæ°è¿å¯ä»¥æ¨å¹¿å°æ ç©·æ°åçæ å½¢ï¼
+当然，连分数还可以推广到无穷数列的情形．
 
-æ éè¿åæ°
+无限连分数
 
-å¯¹äºæ ç©·æ°å {ðð}âð=0{ak}i=0â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿åæ° [ð0,ð1,â¯][a0,a1,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºæé
+对于无穷数列 {𝑎𝑘}∞𝑖=0{ak}i=0∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，连分数 [𝑎0,𝑎1,⋯][a0,a1,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示极限
 
-ð¥=limðââð¥ð=limðââ[ð0,ð1,â¯,ðð].x=limkââxk=limkââ[a0,a1,â¯,ak].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=lim𝑘→∞𝑥𝑘=lim𝑘→∞[𝑎0,𝑎1,⋯,𝑎𝑘].x=limk→∞xk=limk→∞[a0,a1,⋯,ak].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿åæ°ææä¹ï¼å½ä¸ä» å½å¯¹åºçæéææä¹ï¼å ¶ä¸­ï¼ð¥ð =[ð0,ð1,â¯,ðð]xk=[a0,a1,â¯,ak]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸º ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª **æ¸è¿åæ°** ï¼convergentï¼æ **æ¶æå­** ï¼è ðð =[ðð,ðð+1,â¯]rk=[ak,ak+1,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸º ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª **ä½é¡¹** æ **å®å ¨å** ï¼complete quotientï¼ï¼ç¸åºå°ï¼é¡¹ ððak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ææ¶ä¹ç§°ä¸ºç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª **é¨åå** ï¼partial quotientï¼ï¼
+连分数有意义，当且仅当对应的极限有意义．其中，𝑥𝑘 =[𝑎0,𝑎1,⋯,𝑎𝑘]xk=[a0,a1,⋯,ak]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 **渐近分数** （convergent）或 **收敛子** ，而 𝑟𝑘 =[𝑎𝑘,𝑎𝑘+1,⋯]rk=[ak,ak+1,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 **余项** 或 **完全商** （complete quotient）．相应地，项 𝑎𝑘ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有时也称为第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 **部分商** （partial quotient）．
 
-### ç®åè¿åæ°
+### 简单连分数
 
-æ°è®ºä¸­ï¼ä¸»è¦èèè¿åæ°çé¡¹é½æ¯æ´æ°çæ å½¢ï¼
+数论中，主要考虑连分数的项都是整数的情形．
 
-ç®åè¿åæ°
+简单连分数
 
-å¯¹äºè¿åæ° [ð0,ð1,â¯][a0,a1,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ð0a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ´æ°ï¼ð1,ð2,â¯a1,a2,â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æ­£æ´æ°ï¼åç§°å®ä¸º **ç®åè¿åæ°** ï¼simple continued fractionï¼ï¼ä¹ç®ç§° **è¿åæ°** ï¼å¦ææ°å {ðð}{ai}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æéï¼åç§°ä¸º **æéï¼ç®åï¼è¿åæ°** ï¼å¦åç§°ä¸º **æ éï¼ç®åï¼è¿åæ°** ï¼èä¸ï¼ð0a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºå®ç **æ´æ°é¨å** ï¼integer partï¼ï¼
+对于连分数 [𝑎0,𝑎1,⋯][a0,a1,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果 𝑎0a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是整数，𝑎1,𝑎2,⋯a1,a2,⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是正整数，则称它为 **简单连分数** （simple continued fraction），也简称 **连分数** ．如果数列 {𝑎𝑖}{ai}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有限，则称为 **有限（简单）连分数** ；否则称为 **无限（简单）连分数** ．而且，𝑎0a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为它的 **整数部分** （integer part）．
 
-é¤éç¹å«è¯´æï¼æ¬ææå°çè¿åæ°é½æçæ¯ç®åè¿åæ°ï¼å¯ä»¥è¯æï¼æ éçç®åè¿åæ°å¿ ç¶æ¯æ¶æçï¼èä¸ç®åè¿åæ°çä½é¡¹ä¹ä¸å®æ¯æ­£çï¼
+除非特别说明，本文提到的连分数都指的是简单连分数．可以证明，无限的简单连分数必然是收敛的，而且简单连分数的余项也一定是正的．
 
-è¿åæ°æå¦ä¸åºæ¬æ§è´¨ï¼
+连分数有如下基本性质：
 
-æ§è´¨
+性质
 
-è®¾å®æ° ð¥ =[ð0,ð1,ð2,â¯]x=[a0,a1,a2,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼æç«å¦ä¸æ§è´¨ï¼
+设实数 𝑥 =[𝑎0,𝑎1,𝑎2,⋯]x=[a0,a1,a2,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．那么，成立如下性质：
 
-  1. å¯¹äºä»»æ ð âðkâZ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð¥ +ð =[ð0 +ð,ð1,ð2,â¯]x+k=[a0+k,a1,a2,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. å¯¹å®æ° ð¥ >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð0 >0a0>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸å®çåæ° ð¥â1 =[0,ð0,ð1,ð2,â¯]xâ1=[0,a0,a1,a2,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. 对于任意 𝑘 ∈𝐙k∈Z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝑥 +𝑘 =[𝑎0 +𝑘,𝑎1,𝑎2,⋯]x+k=[a0+k,a1,a2,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  2. 对实数 𝑥 >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝑎0 >0a0>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且它的倒数 𝑥−1 =[0,𝑎0,𝑎1,𝑎2,⋯]x−1=[0,a0,a1,a2,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æéè¿åæ°å¯¹åºçæ¯æçæ°ï¼æ¯ä¸ªæçæ°é½æä¸ä» æä¸¤ç§æ¹å¼å¯ä»¥è¡¨ç¤ºæè¿åæ°ï¼é¿åº¦å¿ ç¶ä¸å¥ä¸å¶ï¼è¿ä¸¤ç§æ¹å¼å¯ä¸çåºå«å¨äºæåä¸é¡¹æ¯å¦ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³
+有限连分数对应的是有理数．每个有理数都有且仅有两种方式可以表示成连分数，长度必然一奇一偶．这两种方式唯一的区别在于最后一项是否为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即
 
-ð¥=[ð0,ð1,â¯,ðð]=[ð0,ð1,â¯,ððâ1,1].x=[a0,a1,â¯,an]=[a0,a1,â¯,anâ1,1].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=[𝑎0,𝑎1,⋯,𝑎𝑛]=[𝑎0,𝑎1,⋯,𝑎𝑛−1,1].x=[a0,a1,⋯,an]=[a0,a1,⋯,an−1,1].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¸¤ä¸ªè¿åæ°ç§°ä¸ºæçæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **è¿åæ°è¡¨ç¤º** ï¼continued fraction representationï¼ï¼å ¶ä¸­ï¼æ«é¡¹ä¸ä¸ºä¸çç§°ä¸ºæ åè¡¨ç¤ºï¼æ«é¡¹ä¸ºä¸çç§°ä¸ºéæ åè¡¨ç¤ºï¼1
+这两个连分数称为有理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **连分数表示** （continued fraction representation）．其中，末项不为一的称为标准表示，末项为一的称为非标准表示．1
 
-ä¾å­
+例子
 
-æçæ° ð¥ =53x=53![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°è¡¨ç¤ºä¸º
+有理数 𝑥 =53x=53![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数表示为
 
-ð¥=[1,1,1,1]=1+11+11+11,ð¥=[1,1,2]=1+11+12.x=[1,1,1,1]=1+11+11+11,x=[1,1,2]=1+11+12.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=[1,1,1,1]=1+11+11+11,𝑥=[1,1,2]=1+11+12.x=[1,1,1,1]=1+11+11+11,x=[1,1,2]=1+11+12.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ éè¿åæ°å¯¹åºçæ¯æ çæ°ï¼èä¸ï¼æ¯ä¸ªæ çæ°ä» æå¯ä¸çæ¹å¼è¡¨ç¤ºä¸ºè¿åæ°ï¼ç§°ä¸ºæ çæ°çè¿åæ°è¡¨ç¤ºï¼
+无限连分数对应的是无理数．而且，每个无理数仅有唯一的方式表示为连分数，称为无理数的连分数表示．
 
-### è¿åæ°è¡¨ç¤ºçæ±æ³
+### 连分数表示的求法
 
-è¦æ±æä¸ªå®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°è¡¨ç¤ºï¼åªéè¦æ³¨æå°å®çä½é¡¹ ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¦æä¸æ¯æ´æ°ï¼å°±ä¸å®æ»¡è¶³
+要求某个实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数表示，只需要注意到它的余项 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 如果不是整数，就一定满足
 
-ðð=[ðð,ðð+1,â¯]=[ðð,ðð+1]=ðð+1ðð+1.rk=[ak,ak+1,â¯]=[ak,rk+1]=ak+1rk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘=[𝑎𝑘,𝑎𝑘+1,⋯]=[𝑎𝑘,𝑟𝑘+1]=𝑎𝑘+1𝑟𝑘+1.rk=[ak,ak+1,⋯]=[ak,rk+1]=ak+1rk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-èä¸ï¼ðð+1 >1rk+1>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼å¯ä»¥ä» ð0 =ð¥r0=x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§éå½å°è®¡ç®
+而且，𝑟𝑘+1 >1rk+1>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，可以从 𝑟0 =𝑥r0=x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始递归地计算
 
-ðð=âððâ,Â ðð+1=1ððâðð.ak=ârkâ,Â rk+1=1rkâak.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑘=⌊𝑟𝑘⌋, 𝑟𝑘+1=1𝑟𝑘−𝑎𝑘.ak=⌊rk⌋, rk+1=1rk−ak.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¸ªè¿ç¨äº§ççæ°å {ðð}{ak}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»æ¯å¯ä¸ç¡®å®çï¼é¤éæä¸ªä½é¡¹ ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¸ºæ´æ°ï¼å¦æåºç°äº ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ´æ°ï¼åè¯´æè¿ç¨åºå½ç»æ­¢ï¼å¯ä»¥éæ©è¾åºç¸åºçæ åè¡¨ç¤ºæè éæ åè¡¨ç¤ºï¼
+这个过程产生的数列 {𝑎𝑘}{ak}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 总是唯一确定的，除非某个余项 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成为整数．如果出现了 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是整数，则说明过程应当终止，可以选择输出相应的标准表示或者非标准表示．
 
-å¨ç®æ³ç«èµä¸­ï¼å¾å¾å¤ççé½æ¯æçæ° ð¥ =ððx=pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼æ­¤æ¶ï¼æ¯ä¸ªä½é¡¹ ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æçæ° ððððpkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èä¸å¯¹äº ð >0k>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸º ðð >1rk>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±æ»æ ðð >ððpk>qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ·ä½è®¡ç®ä¸è¿°éæ¨å ³ç³»ï¼å¯ä»¥åç°
+在算法竞赛中，往往处理的都是有理数 𝑥 =𝑝𝑞x=pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形．此时，每个余项 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是有理数 𝑝𝑘𝑞𝑘pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而且对于 𝑘 >0k>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因为 𝑟𝑘 >1rk>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就总有 𝑝𝑘 >𝑞𝑘pk>qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．具体计算上述递推关系，可以发现
 
-ðð=âððððâ,Â ðð+1=1ððâðð=ððððâðððð=ððððmodðð.ak=âpkqkâ,Â rk+1=1rkâak=qkpkâakqk=qkpkmodqk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑘=⌊𝑝𝑘𝑞𝑘⌋, 𝑟𝑘+1=1𝑟𝑘−𝑎𝑘=𝑞𝑘𝑝𝑘−𝑎𝑘𝑞𝑘=𝑞𝑘𝑝𝑘mod𝑞𝑘.ak=⌊pkqk⌋, rk+1=1rk−ak=qkpk−akqk=qkpkmodqk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ­¤æ¶çè®¡ç®è¿ç¨å®é ä¸æ¯å¯¹ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å [è¾è½¬ç¸é¤æ³](../gcd/#æ¬§å)ï¼è¿ä¹è¯´æï¼å¯¹äºæçæ° ð =ððr=pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿åæ°è¡¨ç¤ºçé¿åº¦æ¯ ð(logâ¡min{ð,ð})O(logâ¡min{p,q})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼è®¡ç®æçæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤æåº¦ä¹æ¯ ð(logâ¡min{ð,ð})O(logâ¡min{p,q})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼
+此时的计算过程实际上是对 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 做 [辗转相除法](../gcd/#欧几里得算法)．这也说明，对于有理数 𝑟 =𝑝𝑞r=pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，连分数表示的长度是 𝑂(log⁡min{𝑝,𝑞})O(log⁡min{p,q})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．计算有理数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的复杂度也是 𝑂(log⁡min{𝑝,𝑞})O(log⁡min{p,q})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
 
-åèå®ç°
+参考实现
 
-ç»å®åæ°çåå­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ååæ¯ ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¾åºè¿åæ°çç³»æ°åºå [ð0,ð1,â¯,ðð][a0,a1,â¯,an]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+给定分数的分子 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和分母 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，输出连分数的系数序列 [𝑎0,𝑎1,⋯,𝑎𝑛][a0,a1,⋯,an]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
 C++Python
 
@@ -101,131 +101,131 @@ C++Python
 ```text 1 2 3 4 5 6 7 ``` |  ```text # Find the continued fraction representation of P/Q. def fraction ( p , q ): a = [] while q : a . append ( p // q ) p , q = q , p % q return a ```   
 ---|---  
   
-## æ¸è¿åæ°
+## 渐近分数
 
-å¨è¿åæ°çå®ä¹ä¸­ä»ç»äºæ¸è¿åæ°çæ¦å¿µï¼å®æ°çæ¸è¿åæ°å°±æ¯å®çè¿åæ°è¡¨ç¤ºçæ¸è¿åæ°ï¼å¨å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°è¡¨ç¤ºä¸­ï¼åªä¿çå ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¡¹ï¼å¾å°çè¿åæ° ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±ç§°ä¸ºå®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¸è¿åæ°ï¼å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¸è¿åæ° ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æçæ°ï¼èä¸åºå {ð¥ð}{xk}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶æäºå®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+在连分数的定义中介绍了渐近分数的概念．实数的渐近分数就是它的连分数表示的渐近分数：在实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数表示中，只保留前 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个项，得到的连分数 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就称为实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个渐近分数．实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的渐近分数 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是有理数，而且序列 {𝑥𝑘}{xk}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 收敛于实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä¾å­ï¼é»éåå²æ¯çæ¸è¿åæ°
+例子：黄金分割比的渐近分数
 
-è¿åæ° ð¥ =[1,1,1,1,â¯]x=[1,1,1,1,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå ä¸ªæ¸è¿åæ°åå«æ¯
+连分数 𝑥 =[1,1,1,1,⋯]x=[1,1,1,1,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的前几个渐近分数分别是
 
-ð¥0=[1]=1,ð¥1=[1,1]=2,ð¥2=[1,1,1]=32,ð¥3=[1,1,1,1]=53,ð¥4=[1,1,1,1,1]=85.x0=[1]=1,x1=[1,1]=2,x2=[1,1,1]=32,x3=[1,1,1,1]=53,x4=[1,1,1,1,1]=85.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥0=[1]=1,𝑥1=[1,1]=2,𝑥2=[1,1,1]=32,𝑥3=[1,1,1,1]=53,𝑥4=[1,1,1,1,1]=85.x0=[1]=1,x1=[1,1]=2,x2=[1,1,1]=32,x3=[1,1,1,1]=53,x4=[1,1,1,1,1]=85.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥å½çº³å°è¯æ
+可以归纳地证明
 
-ð¥ð=ð¹ð+2ð¹ð+1,xk=Fk+2Fk+1,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑘=𝐹𝑘+2𝐹𝑘+1,xk=Fk+2Fk+1,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼{ð¹ð}{Fk}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ [ææ³¢é£å¥æ°å](../../combinatorics/fibonacci/)ï¼æ ¹æ®å®çéé¡¹å ¬å¼å¯ç¥ï¼
+其中，{𝐹𝑘}{Fk}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 [斐波那契数列](../../combinatorics/fibonacci/)．根据它的通项公式可知，
 
-ð¥ð=ðð+2â(âð)â(ð+2)ðð+1â(âð)â(ð+1),xk=Ïk+2â(âÏ)â(k+2)Ïk+1â(âÏ)â(k+1),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑘=𝜙𝑘+2−(−𝜙)−(𝑘+2)𝜙𝑘+1−(−𝜙)−(𝑘+1),xk=ϕk+2−(−ϕ)−(k+2)ϕk+1−(−ϕ)−(k+1),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ç ð =1+â52Ï=1+52![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯é»éåå²æ¯ï¼å½ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¶äºæ ç©·æ¶ï¼æ
+其中的 𝜙 =1+√52ϕ=1+52![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是黄金分割比．当 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 趋于无穷时，有
 
-ð¥=limðââð¥ð=ð.x=limkââxk=Ï.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=lim𝑘→∞𝑥𝑘=𝜙.x=limk→∞xk=ϕ.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å èï¼è¿åæ° ð¥ =[1,1,1,1,â¯]x=[1,1,1,1,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºçæ¯é»éåå²æ¯ ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+因而，连分数 𝑥 =[1,1,1,1,⋯]x=[1,1,1,1,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示的是黄金分割比 𝜙ϕ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¿äºæ¸è¿åæ°è¶è¿äºç¸åºçå®æ°ï¼æä»¥å¯ä»¥ç¨äºé¼è¿è¯¥å®æ°ï¼ä¸ºæ­¤ï¼æå¿ è¦äºè§£æ¸è¿åæ°çæ§è´¨ï¼
+这些渐近分数趋近于相应的实数，所以可以用于逼近该实数．为此，有必要了解渐近分数的性质．
 
-### éæ¨å ³ç³»
+### 递推关系
 
-é¦å ï¼è¦è§£å³è¿äºæ¸è¿åæ°çè®¡ç®é®é¢ï¼è½ç¶æ¸è¿åæ°æ»æ¯å¨è¿åæ°çåé¢æ·»å ä¸é¡¹ï¼ä½æ¯å¹¶ä¸éè¦æ¯æ¬¡é½éæ°è®¡ç®å®çå¼ï¼å ¶å®ï¼æ¸è¿åæ°æå¦ä¸éæ¨å ³ç³»ï¼
+首先，要解决这些渐近分数的计算问题．虽然渐近分数总是在连分数的后面添加一项，但是并不需要每次都重新计算它的值．其实，渐近分数有如下递推关系：
 
-éæ¨å ¬å¼
+递推公式
 
-å¯¹äºè¿åæ° ð¥ =[ð0,ð1,ð2,â¯]x=[a0,a1,a2,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®¾å®çç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¸è¿åæ° ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥åæåæ° ððððpkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼æ
+对于连分数 𝑥 =[𝑎0,𝑎1,𝑎2,⋯]x=[a0,a1,a2,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，设它的第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个渐近分数 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以写成分数 𝑝𝑘𝑞𝑘pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．那么，有
 
-ðð=ððððâ1+ððâ2,ðð=ððððâ1+ððâ2.pk=akpkâ1+pkâ2,qk=akqkâ1+qkâ2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝𝑘=𝑎𝑘𝑝𝑘−1+𝑝𝑘−2,𝑞𝑘=𝑎𝑘𝑞𝑘−1+𝑞𝑘−2.pk=akpk−1+pk−2,qk=akqk−1+qk−2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-éæ¨çèµ·ç¹æ¯ï¼å½¢å¼ï¼åæ°
+递推的起点是（形式）分数
 
-ð¥â1=ðâ1ðâ1=10,Â ð¥â2=ðâ2ðâ2=01.xâ1=pâ1qâ1=10,Â xâ2=pâ2qâ2=01.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)è¯æ
+𝑥−1=𝑝−1𝑞−1=10, 𝑥−2=𝑝−2𝑞−2=01.x−1=p−1q−1=10, x−2=p−2q−2=01.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)证明
 
-æ¸è¿åæ° ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå­ååæ¯å¯ä»¥çä½ ð0,ð1,â¯,ðða0,a1,â¯,ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤å å¤é¡¹å¼ï¼
+渐近分数 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分子和分母可以看作 𝑎0,𝑎1,⋯,𝑎𝑘a0,a1,⋯,ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的多元多项式：
 
-ðð=ðð(ð0,ð1,â¯,ðð)ðð(ð0,ð1,â¯,ðð).rk=Pk(a0,a1,â¯,ak)Qk(a0,a1,â¯,ak).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘=𝑃𝑘(𝑎0,𝑎1,⋯,𝑎𝑘)𝑄𝑘(𝑎0,𝑎1,⋯,𝑎𝑘).rk=Pk(a0,a1,⋯,ak)Qk(a0,a1,⋯,ak).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®æ¸è¿åæ°çå®ä¹ï¼æ
+根据渐近分数的定义，有
 
-ðð=ð0+1[ð1,ð2,â¯,ðð]=ð0+ððâ1(ð1,â¯,ðð)ððâ1(ð1,â¯,ðð)=ð0ððâ1(ð1,â¦,ðð)+ððâ1(ð1,â¯,ðð)ððâ1(ð1,â¯,ðð).rk=a0+1[a1,a2,â¯,ak]=a0+Qkâ1(a1,â¯,ak)Pkâ1(a1,â¯,ak)=a0Pkâ1(a1,â¦,ak)+Qkâ1(a1,â¯,ak)Pkâ1(a1,â¯,ak).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘=𝑎0+1[𝑎1,𝑎2,⋯,𝑎𝑘]=𝑎0+𝑄𝑘−1(𝑎1,⋯,𝑎𝑘)𝑃𝑘−1(𝑎1,⋯,𝑎𝑘)=𝑎0𝑃𝑘−1(𝑎1,…,𝑎𝑘)+𝑄𝑘−1(𝑎1,⋯,𝑎𝑘)𝑃𝑘−1(𝑎1,⋯,𝑎𝑘).rk=a0+1[a1,a2,⋯,ak]=a0+Qk−1(a1,⋯,ak)Pk−1(a1,⋯,ak)=a0Pk−1(a1,…,ak)+Qk−1(a1,⋯,ak)Pk−1(a1,⋯,ak).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åä¸å¼æ¯è¾ï¼ä¸å¦¨è®¾ ðð(ð0,â¯,ðð) =ððâ1(ð1,â¯,ðð)Qk(a0,â¯,ak)=Pkâ1(a1,â¯,ak)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±å¯ä»¥å°æ¸è¿åæ°åä½
+和上式比较，不妨设 𝑄𝑘(𝑎0,⋯,𝑎𝑘) =𝑃𝑘−1(𝑎1,⋯,𝑎𝑘)Qk(a0,⋯,ak)=Pk−1(a1,⋯,ak)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就可以将渐近分数写作
 
-ðð=ðð(ð0,ð1,â¯,ðð)ððâ1(ð1,â¯,ðð)rk=Pk(a0,a1,â¯,ak)Pkâ1(a1,â¯,ak)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘=𝑃𝑘(𝑎0,𝑎1,⋯,𝑎𝑘)𝑃𝑘−1(𝑎1,⋯,𝑎𝑘)rk=Pk(a0,a1,⋯,ak)Pk−1(a1,⋯,ak)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸å¤é¡¹å¼ ððPk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æéæ¨å ³ç³»
+且多项式 𝑃𝑘Pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有递推关系
 
-ðð(ð0,â¯,ðð)=ð0ððâ1(ð1,â¯,ðð)+ððâ2(ð2,â¯,ðð).Pk(a0,â¯,ak)=a0Pkâ1(a1,â¯,ak)+Pkâ2(a2,â¯,ak).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑘(𝑎0,⋯,𝑎𝑘)=𝑎0𝑃𝑘−1(𝑎1,⋯,𝑎𝑘)+𝑃𝑘−2(𝑎2,⋯,𝑎𝑘).Pk(a0,⋯,ak)=a0Pk−1(a1,⋯,ak)+Pk−2(a2,⋯,ak).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸º
+因为
 
-ð0=ð0,Â ð1=ð0+1ð1=ð0ð1+1ð1,r0=a0,Â r1=a0+1a1=a0a1+1a1,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟0=𝑎0, 𝑟1=𝑎0+1𝑎1=𝑎0𝑎1+1𝑎1,r0=a0, r1=a0+1a1=a0a1+1a1,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥ï¼éæ¨çèµ·ç¹æ¯
+所以，递推的起点是
 
-ð0(ð0)=ð0,Â ð1(ð0,ð1)=ð0ð1+1.P0(a0)=a0,Â P1(a0,a1)=a0a1+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃0(𝑎0)=𝑎0, 𝑃1(𝑎0,𝑎1)=𝑎0𝑎1+1.P0(a0)=a0, P1(a0,a1)=a0a1+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦æè®¾
+如果设
 
-ðâ1=1,Â ðâ2=0,Pâ1=1,Â Pâ2=0,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃−1=1, 𝑃−2=0,P−1=1, P−2=0,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥éªè¯å¯¹äº ð =0,1k=0,1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹æç«ä¸è¿°éæ¨å ³ç³»ï¼è¿ç¸å½äºè§å®äºå½¢å¼åæ° ðâ1 =10râ1=10![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðâ2 =01râ2=01![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+可以验证对于 𝑘 =0,1k=0,1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也成立上述递推关系．这相当于规定了形式分数 𝑟−1 =10r−1=10![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑟−2 =01r−2=01![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ»¡è¶³ä¸è¿°éæ¨å ³ç³»çå¤é¡¹å¼å ððPk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸º **è¿é¡¹å¼**3ï¼continuantï¼ï¼å®å¯ä»¥åä½è¡åå¼çå½¢å¼ï¼
+满足上述递推关系的多项式列 𝑃𝑘Pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为 **连项式**3（continuant）．它可以写作行列式的形式：
 
-ðð(ð0,â¯,ðð)=detâ¡ââ â â â â â â â â ââð010â¯0â1ð11â±â®0â1ð2â±0â®â±â±â±10â¯0â1ððââ â â â â â â â â ââ .Pk(a0,â¯,ak)=detâ¡(a010â¯0â1a11â±â®0â1a2â±0â®â±â±â±10â¯0â1ak).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑘(𝑎0,⋯,𝑎𝑘)=det⁡⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝑎010⋯0−1𝑎11⋱⋮0−1𝑎2⋱0⋮⋱⋱⋱10⋯0−1𝑎𝑘⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠.Pk(a0,⋯,ak)=det⁡(a010⋯0−1a11⋱⋮0−1a2⋱0⋮⋱⋱⋱10⋯0−1ak).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¯ä¸ä¸ª [ä¸å¯¹è§ç©éµ](https://en.wikipedia.org/wiki/Tridiagonal_matrix) çè¡åå¼ï¼ä»å·¦ä¸è§å¼å§å±å¼ï¼å¯ä»¥éªè¯å®å ·æä¸é¢çéæ¨å ³ç³»ååå¼æ¡ä»¶ï¼åè¿æ¥ï¼ä»å³ä¸è§å¼å§å±å¼ï¼ååè½å¾å°éæ¨å ³ç³»
+这是一个 [三对角矩阵](https://en.wikipedia.org/wiki/Tridiagonal_matrix) 的行列式，从左上角开始展开，可以验证它具有上面的递推关系和初值条件．反过来，从右下角开始展开，则又能得到递推关系
 
-ðð(ð0,â¯,ðð)=ððððâ1(ð0,â¯,ððâ1)+ððâ2(ð0,â¯,ððâ2),Pk(a0,â¯,ak)=akPkâ1(a0,â¯,akâ1)+Pkâ2(a0,â¯,akâ2),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑘(𝑎0,⋯,𝑎𝑘)=𝑎𝑘𝑃𝑘−1(𝑎0,⋯,𝑎𝑘−1)+𝑃𝑘−2(𝑎0,⋯,𝑎𝑘−2),Pk(a0,⋯,ak)=akPk−1(a0,⋯,ak−1)+Pk−2(a0,⋯,ak−2),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±æ¯æè¦æ±è¯çï¼
+这就是所要求证的．
 
-è®°å·
+记号
 
-æ¬æå°æ¸è¿åæ° ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è®°ä½ ððððpkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æ»æ¯é»è®¤åå­ ððpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç±ä¸é¢çéæ¨å ³ç³»ç»åºï¼ä¸æè¿è¦è¯´æï¼è¿æ ·æ»è½å¾å°æ¸è¿åæ°çæ¢çº¦è¡¨ç¤ºï¼
+本文将渐近分数 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 记作 𝑝𝑘𝑞𝑘pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，总是默认分子 𝑝𝑘pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑞𝑘qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 由上面的递推关系给出．下文还要说明，这样总能得到渐近分数的既约表示．
 
-è¿ä¸ªéæ¨å¼è¯´æ
+这个递推式说明
 
-ð¥ð=ððððâ1+ððâ2ððððâ1+ððâ2xk=akpkâ1+pkâ2akqkâ1+qkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑘=𝑎𝑘𝑝𝑘−1+𝑝𝑘−2𝑎𝑘𝑞𝑘−1+𝑞𝑘−2xk=akpk−1+pk−2akqk−1+qk−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»äº ð¥ðâ1xkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥ðâ2xkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼
+介于 𝑥𝑘−1xk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥𝑘−2xk−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间．
 
-ä½ä¸ºæ¸è¿åæ°çéæ¨å ³ç³»çæ¨è®ºï¼æç«å¦ä¸çååºå®çååæ°å®çï¼
+作为渐近分数的递推关系的推论，成立如下的反序定理和倒数定理：
 
-ååºå®ç
+反序定理
 
-è®¾å®æ° ð¥ =[ð0,ð1,ð2,â¯]x=[a0,a1,a2,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¸è¿åæ°æ¯ ððððpkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç¸é»ä¸¤ä¸ªæ¸è¿åæ°çåå­ååæ¯çæ¯å¼åå«ä¸º
+设实数 𝑥 =[𝑎0,𝑎1,𝑎2,⋯]x=[a0,a1,a2,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个渐近分数是 𝑝𝑘𝑞𝑘pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则相邻两个渐近分数的分子和分母的比值分别为
 
-ððððâ1=[ðð,ððâ1,â¯,ð1,ð0],ððððâ1=[ðð,ððâ1,â¯,ð1].pkpkâ1=[ak,akâ1,â¯,a1,a0],qkqkâ1=[ak,akâ1,â¯,a1].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝𝑘𝑝𝑘−1=[𝑎𝑘,𝑎𝑘−1,⋯,𝑎1,𝑎0],𝑞𝑘𝑞𝑘−1=[𝑎𝑘,𝑎𝑘−1,⋯,𝑎1].pkpk−1=[ak,ak−1,⋯,a1,a0],qkqk−1=[ak,ak−1,⋯,a1].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦æ ð0 =0a0=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç¬¬ä¸ä¸ªè¿åæ°åºå½çè§£ä¸ºå¨åæ°ç¬¬äºé¡¹å¤æªæ­ï¼å³ [ðð,ððâ1,â¯,ð2][ak,akâ1,â¯,a2]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+如果 𝑎0 =0a0=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则第一个连分数应当理解为在倒数第二项处截断，即 [𝑎𝑘,𝑎𝑘−1,⋯,𝑎2][ak,ak−1,⋯,a2]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-å¨ ððpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéæ¨å ³ç³»ä¸­ï¼å·¦å³ä¸¤ä¾§åå«åé¤ä»¥ ððâ1pkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððâ1qkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±å¾å°
+在 𝑝𝑘pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑞𝑘qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的递推关系中，左右两侧分别同除以 𝑝𝑘−1pk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑞𝑘−1qk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就得到
 
-ððððâ1=ðð+ððâ2ððâ1,ððððâ1=ðð+ððâ2ððâ1.pkpkâ1=ak+pkâ2pkâ1,qkqkâ1=ak+qkâ2qkâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝𝑘𝑝𝑘−1=𝑎𝑘+𝑝𝑘−2𝑝𝑘−1,𝑞𝑘𝑞𝑘−1=𝑎𝑘+𝑞𝑘−2𝑞𝑘−1.pkpk−1=ak+pk−2pk−1,qkqk−1=ak+qk−2qk−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿­ä»£è¿ä¸¤ä¸ªå¼å­ï¼å°±å¯ä»¥å¾å°ä¸¤ä¸ªè¿åæ°ï¼åä»£å ¥åå§å¼ ð0ðâ1 =ð0p0pâ1=a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð1ð0 =ð1q1q0=a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³å¯ï¼è³äº ð0 =0a0=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼å°å¾å°çè¿åæ°çè§£ä¸ºå½¢å¼è¡¨è¾¾å¼ï¼åå®çä½é¡¹
+迭代这两个式子，就可以得到两个连分数．再代入初始值 𝑝0𝑝−1 =𝑎0p0p−1=a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑞1𝑞0 =𝑎1q1q0=a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即可．至于 𝑎0 =0a0=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形，将得到的连分数理解为形式表达式，则它的余项
 
-[ð2,ð1,0]=ð2+1ð1+10=ð2+00ð1+1=ð2.[a2,a1,0]=a2+1a1+10=a2+00a1+1=a2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+[𝑎2,𝑎1,0]=𝑎2+1𝑎1+10=𝑎2+00𝑎1+1=𝑎2.[a2,a1,0]=a2+1a1+10=a2+00a1+1=a2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å èå¯ä»¥ç´æ¥ç¥å»æåä¸¤é¡¹ï¼å¦æéè¦ä¸¥æ ¼çè¯æï¼åªè¦æ³¨æå°è¿ä¸ªå¼å­å¯ä»¥çä½ ð0 â0a0â0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæéå³å¯ï¼
+因而可以直接略去最后两项．如果需要严格的证明，只要注意到这个式子可以看作 𝑎0 →0a0→0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的极限即可．
 
-åæ°å®ç
+倒数定理
 
-å®æ° ð¥ >0x>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¸è¿åæ°çåæ°æ¯ ð¥â1xâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¸è¿åæ°ï¼
+实数 𝑥 >0x>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的渐近分数的倒数是 𝑥−1x−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的渐近分数．
 
-è¯æ
+证明
 
-ä¸å¦¨è®¾ ð¥ >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æè¿åæ°è¡¨ç¤º [ð0,ð1,ð2,â¯][a0,a1,a2,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð¥â1xâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°è¡¨ç¤ºæ¯ [0,ð0,ð1,ð2,â¯][0,a0,a1,a2,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ä»¬çæ¸è¿åæ°å¯ä»¥ä»éæ¨å ³ç³»ä¸­æ±å¾ï¼èä¸ï¼å¯¹äº ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æåå¼æ¡ä»¶ ð¥â2 =01xâ2=01![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥â1 =10xâ1=10![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äº ð¦ =ð¥â1y=xâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æåå¼æ¡ä»¶ ð¦â1 =10yâ1=10![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦0 =01y0=01![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼æ ð¥â2 =(ð¦â1)â1xâ2=(yâ1)â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥â1 =(ð¦0)â1xâ1=(y0)â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ¹æ®éæ¨å ³ç³»ï¼å¯ä»¥å¾å° ð¥ð =ð¦â1ð+1xk=yk+1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿å°±è¯´æï¼ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¸è¿åæ°çåæ°æ¯ ð¦ =ð¥â1y=xâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¸è¿åæ°ï¼å¯¹äº 0 <ð¥ â¤10<xâ¤1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼ä¹å¯ä»¥åç±»ä¼¼è®¨è®ºï¼
+不妨设 𝑥 >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且有连分数表示 [𝑎0,𝑎1,𝑎2,⋯][a0,a1,a2,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝑥−1x−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数表示是 [0,𝑎0,𝑎1,𝑎2,⋯][0,a0,a1,a2,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．它们的渐近分数可以从递推关系中求得．而且，对于 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有初值条件 𝑥−2 =01x−2=01![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥−1 =10x−1=10![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；对于 𝑦 =𝑥−1y=x−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有初值条件 𝑦−1 =10y−1=10![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦0 =01y0=01![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，有 𝑥−2 =(𝑦−1)−1x−2=(y−1)−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥−1 =(𝑦0)−1x−1=(y0)−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．根据递推关系，可以得到 𝑥𝑘 =𝑦−1𝑘+1xk=yk+1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这就说明，𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的渐近分数的倒数是 𝑦 =𝑥−1y=x−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的渐近分数．对于 0 <𝑥 ≤10<x≤1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形，也可以做类似讨论．
 
-å©ç¨æ¬èå¾å°çéæ¨å ³ç³»ï¼å¯ä»¥å¾å°è®¡ç®æ¸è¿åæ°çç®æ³å¦ä¸ï¼
+利用本节得到的递推关系，可以得到计算渐近分数的算法如下：
 
-åèå®ç°
+参考实现
 
-ç»å®è¿åæ°çç³»æ° ð0,ð1,â¯,ðða0,a1,â¯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ±æ¸è¿åæ°çåå­ååæ¯åºå (ð0,ð0),(ð1,ð1),â¯,(ðð,ðð)(p0,q0),(p1,q1),â¯,(pn,qn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+给定连分数的系数 𝑎0,𝑎1,⋯,𝑎𝑛a0,a1,⋯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求渐近分数的分子和分母序列 (𝑝0,𝑞0),(𝑝1,𝑞1),⋯,(𝑝𝑛,𝑞𝑛)(p0,q0),(p1,q1),⋯,(pn,qn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
 C++Python
 
@@ -235,107 +235,107 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 ``` |  ```text # Find the convergents of a continued fraction A. # Numerators and denominators stored separately in P and Q. def convergents ( a ): p = [ 0 , 1 ] q = [ 1 , 0 ] for it in a : p . append ( p [ \- 1 ] * it \+ p [ \- 2 ]) q . append ( q [ \- 1 ] * it \+ q [ \- 2 ]) return p , q ```   
 ---|---  
   
-### è¯¯å·®ä¼°è®¡
+### 误差估计
 
-å©ç¨æ¸è¿åæ°çéæ¨å ¬å¼ï¼å¯ä»¥ä¼°è®¡ç¨æ¸è¿åæ°é¼è¿å®æ°äº§ççè¯¯å·®ï¼
+利用渐近分数的递推公式，可以估计用渐近分数逼近实数产生的误差．
 
-é¦å ï¼å¯ä»¥è®¡ç®ç¸é»çæ¸è¿åæ°çå·®å¼ï¼
+首先，可以计算相邻的渐近分数的差值：
 
-æ¸è¿åæ°çå·®å
+渐近分数的差分
 
-è®¾ ð¥ð =ððððxk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¸è¿åæ°ï¼é£ä¹ï¼æ
+设 𝑥𝑘 =𝑝𝑘𝑞𝑘xk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个渐近分数．那么，有
 
-ðð+1ððâðððð+1=(â1)ð.pk+1qkâpkqk+1=(â1)k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝𝑘+1𝑞𝑘−𝑝𝑘𝑞𝑘+1=(−1)𝑘.pk+1qk−pkqk+1=(−1)k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼ç¸é»ä¸¤é¡¹çæ¸è¿åæ°çå·®åæ¯
+因此，相邻两项的渐近分数的差分是
 
-ð¥ð+1âð¥ð=(â1)ððð+1ðð.xk+1âxk=(â1)kqk+1qk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)è¯æ
+𝑥𝑘+1−𝑥𝑘=(−1)𝑘𝑞𝑘+1𝑞𝑘.xk+1−xk=(−1)kqk+1qk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)证明
 
-æ ¹æ®éæ¨å ³ç³»ï¼æ
+根据递推关系，有
 
-detâ¡(ðð+1ðððð+1ðð)=detâ¡(ðð+1ðð+ððâ1ðððð+1ðð+ððâ1ðð)=detâ¡(ððâ1ððððâ1ðð)=âdetâ¡(ððððâ1ððððâ1)=(â1)ð+2detâ¡(1001)=(â1)ð.detâ¡(pk+1pkqk+1qk)=detâ¡(ak+1pk+pkâ1pkak+1qk+qkâ1qk)=detâ¡(pkâ1pkqkâ1qk)=âdetâ¡(pkpkâ1qkqkâ1)=(â1)k+2detâ¡(1001)=(â1)k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+det⁡(𝑝𝑘+1𝑝𝑘𝑞𝑘+1𝑞𝑘)=det⁡(𝑎𝑘+1𝑝𝑘+𝑝𝑘−1𝑝𝑘𝑎𝑘+1𝑞𝑘+𝑞𝑘−1𝑞𝑘)=det⁡(𝑝𝑘−1𝑝𝑘𝑞𝑘−1𝑞𝑘)=−det⁡(𝑝𝑘𝑝𝑘−1𝑞𝑘𝑞𝑘−1)=(−1)𝑘+2det⁡(1001)=(−1)𝑘.det⁡(pk+1pkqk+1qk)=det⁡(ak+1pk+pk−1pkak+1qk+qk−1qk)=det⁡(pk−1pkqk−1qk)=−det⁡(pkpk−1qkqk−1)=(−1)k+2det⁡(1001)=(−1)k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±æ¯ ðð+1ðð âðððð+1 =( â1)ðpk+1qkâpkqk+1=(â1)k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹ä¸¤è¾¹åé¤ä»¥ ðð+1ððqk+1qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±å¾å°å ³äº ð¥ð+1 âð¥ðxk+1âxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç»è®ºï¼
+这就是 𝑝𝑘+1𝑞𝑘 −𝑝𝑘𝑞𝑘+1 =( −1)𝑘pk+1qk−pkqk+1=(−1)k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对两边同除以 𝑞𝑘+1𝑞𝑘qk+1qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就得到关于 𝑥𝑘+1 −𝑥𝑘xk+1−xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的结论．
 
-å èï¼å¥æ°é¡¹æ¸è¿åæ°æ»æ¯å¤§äºç¸é»ä¸¤é¡¹ï¼å¶æ°é¡¹æ¸è¿åæ°æ»æ¯å°äºç¸é»ä¸¤é¡¹ï¼æ¸è¿åæ°æ¯äº¤éååçï¼
+因而，奇数项渐近分数总是大于相邻两项，偶数项渐近分数总是小于相邻两项：渐近分数是交错变化的．
 
-å¦æåªçå¶æ°é¡¹ï¼å¥æ°é¡¹ï¼æ¸è¿åæ°ï¼åºåä¹æ¯åè°éå¢ï¼éåï¼çï¼è¿æ¯å ä¸º
+如果只看偶数项（奇数项）渐近分数，序列也是单调递增（递减）的．这是因为
 
-ð¥ð+2âð¥ð=(â1)ð+1ðð+2ðð+1+(â1)ððð+1ðð=(â1)ð(ðð+2âðð)ðð+2ðð+1ðð=(â1)ððð+2ðð+2ððxk+2âxk=(â1)k+1qk+2qk+1+(â1)kqk+1qk=(â1)k(qk+2âqk)qk+2qk+1qk=(â1)kak+2qk+2qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑘+2−𝑥𝑘=(−1)𝑘+1𝑞𝑘+2𝑞𝑘+1+(−1)𝑘𝑞𝑘+1𝑞𝑘=(−1)𝑘(𝑞𝑘+2−𝑞𝑘)𝑞𝑘+2𝑞𝑘+1𝑞𝑘=(−1)𝑘𝑎𝑘+2𝑞𝑘+2𝑞𝑘xk+2−xk=(−1)k+1qk+2qk+1+(−1)kqk+1qk=(−1)k(qk+2−qk)qk+2qk+1qk=(−1)kak+2qk+2qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å½ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¶æ°ï¼å¥æ°ï¼æ¶ä¸ºæ­£ï¼è´ï¼ï¼åæ¶ï¼å ä¸ºæç«éæ¨å ³ç³» ðð =ððððâ1 +ððâ2qk=akqkâ1+qkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ¯ ððqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¢é¿éåº¦ä¸ä¼æ ¢äºææ³¢é£å¥æ°åçéåº¦ï¼æä»¥ï¼ç¸é»ä¸¤é¡¹çå·®ä¸å®è¶è¿äºé¶ï¼è¿å°±è¯´æï¼å¶æ°é¡¹åå¥æ°é¡¹æ¸è¿åæ°åå«èªä¸èä¸åèªä¸èä¸å°é¼è¿åä¸æéï¼è¿å°±è¯æäºæ éç®åè¿åæ°ä¸å®æ¶æï¼æ¸è¿åæ°è¶è¿äºç¸åºå®æ°çå¨æå¯ä»¥è§ä¸å¾ï¼
+当 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为偶数（奇数）时为正（负）．同时，因为成立递推关系 𝑞𝑘 =𝑎𝑘𝑞𝑘−1 +𝑞𝑘−2qk=akqk−1+qk−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，分母 𝑞𝑘qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的增长速度不会慢于斐波那契数列的速度．所以，相邻两项的差一定趋近于零．这就说明，偶数项和奇数项渐近分数分别自下而上和自上而下地逼近同一极限．这就证明了无限简单连分数一定收敛．渐近分数趋近于相应实数的动态可以见下图：
 
 ![](./images/golden-ratio-convergents.svg)
 
-ä¸ï¼ä¸ï¼æ¸è¿åæ°
+上（下）渐近分数
 
-å¯¹äºå®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå®çæ¸è¿åæ° ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ð¥ð >ð¥xk>x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð¥ð <ð¥xk<x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼å°±ç§° ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **ä¸ï¼ä¸ï¼æ¸è¿åæ°** ï¼upper (lower) convergentï¼ï¼
+对于实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和它的渐近分数 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果 𝑥𝑘 >𝑥xk>x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（𝑥𝑘 <𝑥xk<x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），就称 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **上（下）渐近分数** （upper (lower) convergent）．
 
-åé¢å·²ç»è¯´æï¼ä¸æ¸è¿åæ°å°±æ¯å¥æ°é¡¹æ¸è¿åæ°ï¼ä¸æ¸è¿åæ°å°±æ¯å¶æ°é¡¹æ¸è¿åæ°ï¼
+前面已经说明，上渐近分数就是奇数项渐近分数，下渐近分数就是偶数项渐近分数．
 
-å©ç¨å·®åå ¬å¼ï¼å¯ä»¥å°å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæäº¤éçº§æ°çå½¢å¼ï¼
+利用差分公式，可以将实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 写成交错级数的形式：
 
-ð¥=ð0+ââð=0(â1)ððð+1ðð.x=a0+âk=0â(â1)kqk+1qk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝑎0+∞∑𝑘=0(−1)𝑘𝑞𝑘+1𝑞𝑘.x=a0+∑k=0∞(−1)kqk+1qk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿åæ°å®ä¹ä¸­çæ¸è¿åæ°åä½é¡¹å°±æ¯è¯¥çº§æ°çé¨åååä½é¡¹ï¼
+连分数定义中的渐近分数和余项就是该级数的部分和和余项．
 
-å©ç¨å·®åå ¬å¼ï¼è¿å¯ä»¥ç´æ¥å¯¹æ¸è¿åæ°é¼è¿å®æ°äº§ççè¯¯å·®ååºä¼°è®¡ï¼
+利用差分公式，还可以直接对渐近分数逼近实数产生的误差做出估计：
 
-è¯¯å·®
+误差
 
-è®¾ ð¥ð =ðððð â ð¥xk=pkqkâ x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¸è¿åæ°ï¼é£ä¹ï¼æ
+设 𝑥𝑘 =𝑝𝑘𝑞𝑘 ≠𝑥xk=pkqk≠x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个渐近分数．那么，有
 
-ð¥ðâð¥=(â1)ððð(ðð+1ðð+ððâ1),xkâx=(â1)kqk(rk+1qk+qkâ1),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑘−𝑥=(−1)𝑘𝑞𝑘(𝑟𝑘+1𝑞𝑘+𝑞𝑘−1),xk−x=(−1)kqk(rk+1qk+qk−1),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ðð+1rk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ ð +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä½é¡¹ï¼è¿èï¼æ
+其中，𝑟𝑘+1rk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第 𝑘 +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个余项．进而，有
 
-12ð2ð+1â¤1ðð(ðð+ðð+1)â¤â£ð¥âððððâ£â¤1ðððð+1â¤1ð2ð.12qk+12â¤1qk(qk+qk+1)â¤|xâpkqk|â¤1qkqk+1â¤1qk2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)è¯æ
+12𝑞2𝑘+1≤1𝑞𝑘(𝑞𝑘+𝑞𝑘+1)≤∣𝑥−𝑝𝑘𝑞𝑘∣≤1𝑞𝑘𝑞𝑘+1≤1𝑞2𝑘.12qk+12≤1qk(qk+qk+1)≤|x−pkqk|≤1qkqk+1≤1qk2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)证明
 
-å ä¸º ð¥ =[ð0,ð1,â¯,ðð,ðð+1]x=[a0,a1,â¯,ak,rk+1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èä¸å¯¹å½¢å¼è¿åæ°ä¹æç«æ¸è¿åæ°çå·®åå ¬å¼ï¼æä»¥æ
+因为 𝑥 =[𝑎0,𝑎1,⋯,𝑎𝑘,𝑟𝑘+1]x=[a0,a1,⋯,ak,rk+1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而且对形式连分数也成立渐近分数的差分公式，所以有
 
-ð¥âð¥ð=(â1)ððð(ðð+1ðð+ððâ1),xâxk=(â1)kqk(rk+1qk+qkâ1),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥−𝑥𝑘=(−1)𝑘𝑞𝑘(𝑟𝑘+1𝑞𝑘+𝑞𝑘−1),x−xk=(−1)kqk(rk+1qk+qk−1),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ðð+1ðð +ððâ1rk+1qk+qkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯æç §éæ¨å ¬å¼å¾å°çè¿ä¸ªå½¢å¼è¿åæ°çç¬¬ ð +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¸è¿åæ°çåæ¯ï¼
+其中，𝑟𝑘+1𝑞𝑘 +𝑞𝑘−1rk+1qk+qk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是按照递推公式得到的这个形式连分数的第 𝑘 +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个渐近分数的分母．
 
-è¦å®æéåçä¸ç­å¼ä¼°è®¡ï¼åªéè¦æ³¨æå°å½ ð¥ð â ð¥xkâ x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æ»æç«
+要完成随后的不等式估计，只需要注意到当 𝑥𝑘 ≠𝑥xk≠x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，总成立
 
-1â¤ðð+1â¤ðð+1â¤ðð+1+1,1â¤ak+1â¤rk+1â¤ak+1+1,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1≤𝑎𝑘+1≤𝑟𝑘+1≤𝑎𝑘+1+1,1≤ak+1≤rk+1≤ak+1+1,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥æ
+所以有
 
-ðð+1=ðð+1ðð+ððâ1â¤ðð+1ðð+ððâ1â¤ðð+(ðð+1ðð+ððâ1)=ðð+ðð+1.qk+1=ak+1qk+qkâ1â¤rk+1qk+qkâ1â¤qk+(ak+1qk+qkâ1)=qk+qk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑞𝑘+1=𝑎𝑘+1𝑞𝑘+𝑞𝑘−1≤𝑟𝑘+1𝑞𝑘+𝑞𝑘−1≤𝑞𝑘+(𝑎𝑘+1𝑞𝑘+𝑞𝑘−1)=𝑞𝑘+𝑞𝑘+1.qk+1=ak+1qk+qk−1≤rk+1qk+qk−1≤qk+(ak+1qk+qk−1)=qk+qk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼æä¸ç­å¼
+因此，有不等式
 
-1ðð(ðð+ðð+1)â¤â£ð¥âððððâ£=1ðð(ðð+1ðð+ððâ1)â¤1ðððð+1.1qk(qk+qk+1)â¤|xâpkqk|=1qk(rk+1qk+qkâ1)â¤1qkqk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1𝑞𝑘(𝑞𝑘+𝑞𝑘+1)≤∣𝑥−𝑝𝑘𝑞𝑘∣=1𝑞𝑘(𝑟𝑘+1𝑞𝑘+𝑞𝑘−1)≤1𝑞𝑘𝑞𝑘+1.1qk(qk+qk+1)≤|x−pkqk|=1qk(rk+1qk+qk−1)≤1qkqk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¦å¾å°å¤ä¾§çæ¾ç¼©ï¼åæ³¨æå° ðð â¤ðð+1qkâ¤qk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±å¯ä»¥äºï¼
+要得到外侧的放缩，再注意到 𝑞𝑘 ≤𝑞𝑘+1qk≤qk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就可以了．
 
-æ¬èçå·®åå ¬å¼è¿æä¸ä¸ªç®åæ¨è®ºï¼æ¸è¿åæ° ððððpkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æ¢çº¦çï¼
+本节的差分公式还有一个简单推论：渐近分数 𝑝𝑘𝑞𝑘pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是既约的．
 
-æ¨è®º
+推论
 
-å¯¹äºä»»ä½å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸æ¸è¿åæ° ð¥ð =ððððxk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå­ååæ¯ç±éæ¨å ¬å¼ç»åºï¼å ððððpkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¢çº¦åæ°ï¼å³ gcd(ðð,ðð) =1gcd(pk,qk)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对于任何实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且渐近分数 𝑥𝑘 =𝑝𝑘𝑞𝑘xk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分子和分母由递推公式给出，则 𝑝𝑘𝑞𝑘pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是既约分数，即 gcd(𝑝𝑘,𝑞𝑘) =1gcd(pk,qk)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-å¯¹å·®åå ¬å¼åºç¨ [è£´èå®ç](../bezouts/) å³å¯ï¼
+对差分公式应用 [裴蜀定理](../bezouts/) 即可．
 
-å ¶å®ï¼äºå ä¸æ¬¡ä¸å®æ¹ç¨çè§£å¯ä»¥éè¿è¿åæ°çæ¹æ³æ±è§£ï¼
+其实，二元一次不定方程的解可以通过连分数的方法求解．
 
-äºå ä¸æ¬¡ä¸å®æ¹ç¨çæ±è§£
+二元一次不定方程的求解
 
-ç»å® ð´,ðµ,ð¶ âðA,B,CâZ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¥æ¾ ð¥,ð¦ âðx,yâZ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ð´ð¥ +ðµð¦ =ð¶Ax+By=C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼
+给定 𝐴,𝐵,𝐶 ∈𝐙A,B,C∈Z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．查找 𝑥,𝑦 ∈𝐙x,y∈Z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝐴𝑥 +𝐵𝑦 =𝐶Ax+By=C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．
 
-è§£ç­
+解答
 
-è½ç¶è¿ä¸ªé®é¢éå¸¸æ¯ç¨ [æ©å±æ¬§å éå¾ç®æ³](../bezouts/#ä¸¤ä¸ªåéçæ) è§£å³çï¼ä½æ¯åæ ·å¯ä»¥éè¿è¿åæ°æ±è§£ï¼
+虽然这个问题通常是用 [扩展欧几里得算法](../bezouts/#两个变量的情形) 解决的，但是同样可以通过连分数求解．
 
-è®¾ ð´ðµ =[ð0,ð1,â¯,ðð]AB=[a0,a1,â¯,ak]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸é¢è¯æäº ððððâ1 âððâ1ðð =( â1)ðâ1pkqkâ1âpkâ1qk=(â1)kâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å° ððpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¿æ¢ä¸º ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¾å°
+设 𝐴𝐵 =[𝑎0,𝑎1,⋯,𝑎𝑘]AB=[a0,a1,⋯,ak]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．上面证明了 𝑝𝑘𝑞𝑘−1 −𝑝𝑘−1𝑞𝑘 =( −1)𝑘−1pkqk−1−pk−1qk=(−1)k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．将 𝑝𝑘pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑞𝑘qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 替换为 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，得到
 
-ð´ððâ1âðµððâ1=(â1)ðâ1ð,Aqkâ1âBpkâ1=(â1)kâ1g,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴𝑞𝑘−1−𝐵𝑝𝑘−1=(−1)𝑘−1𝑔,Aqk−1−Bpk−1=(−1)k−1g,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ð =gcd(ð´,ðµ)g=gcd(A,B)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´é¤ ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä¸ç»è§£ä¸º ð¥ =( â1)ðâ1ð¶ðððâ1x=(â1)kâ1Cgqkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦ =( â1)ðð¶ðððâ1y=(â1)kCgpkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦åæ è§£ï¼
+其中，𝑔 =gcd(𝐴,𝐵)g=gcd(A,B)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如果 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 整除 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则一组解为 𝑥 =( −1)𝑘−1𝐶𝑔𝑞𝑘−1x=(−1)k−1Cgqk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦 =( −1)𝑘𝐶𝑔𝑝𝑘−1y=(−1)kCgpk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；否则无解．
 
 C++Python
 
@@ -345,404 +345,404 @@ C++Python
 ```text 1 2 3 4 5 6 7 ``` |  ```text # Return (x, y) such that Ax+By=C. # Assume that such (x, y) exists. def dio ( A , B , C ): p , q = convergents ( fraction ( A , B )) C //= A // p [ \- 1 ] # divide by gcd(A, B) t = ( \- 1 ) if len ( p ) % 2 else 1 return t * C * q [ \- 2 ], \- t * C * p [ \- 2 ] ```   
 ---|---  
   
-## ä¸¢çªå¾é¼è¿
+## 丢番图逼近
 
-è¿åæ°çè®ºçä¸ä¸ªéè¦åºç¨å°±æ¯ä¸¢çªå¾é¼è¿çè®ºï¼ä¸¢çªå¾é¼è¿ï¼Diophantine approximationï¼æ¯æç¨æçæ°é¼è¿å®æ°ï¼å½ç¶ï¼ç±äºæçæ°çç¨ å¯æ§ï¼å¦æä¸å ä»¥éå¶ï¼å¯ä»¥å¾å°è¯¯å·®ä»»æå°çé¼è¿ï¼å æ­¤ï¼éè¦å¯¹å¯ä»¥ä½¿ç¨çæçæ°ååºéå¶ï¼æ¯å¦åªè½éæ©åæ¯å°äºæä¸ªå¼çæçæ°ï¼æ¬èå°±è®¨è®ºäºè¿ç§éå¶ä¸çæä½³é¼è¿åè¿åæ°çå ³ç³»ï¼
+连分数理论的一个重要应用就是丢番图逼近理论．丢番图逼近（Diophantine approximation）是指用有理数逼近实数．当然，由于有理数的稠密性，如果不加以限制，可以得到误差任意小的逼近．因此，需要对可以使用的有理数做出限制，比如只能选择分母小于某个值的有理数．本节就讨论了这种限制下的最佳逼近和连分数的关系．
 
-### ç¨æ¸è¿åæ°é¼è¿å®æ°
+### 用渐近分数逼近实数
 
-é¦å ï¼å©ç¨æ¸è¿åæ°çè¯¯å·®ä¼°è®¡ï¼ç«å»å¾å°å¦ä¸ç»æï¼
+首先，利用渐近分数的误差估计，立刻得到如下结果：
 
-å®çï¼Dirichletï¼
+定理（Dirichlet）
 
-å¯¹äºæ çæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å­å¨æ ç©·å¤ä¸ªæ¢çº¦åæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾
+对于无理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，存在无穷多个既约分数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得
 
-â£ð¥âððâ£<1ð2|xâpq|<1q2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑞∣<1𝑞2|x−pq|<1q2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æç«ï¼
+成立．
 
-è¯æ
+证明
 
-æ ¹æ®æ¸è¿åæ°çè¯¯å·®ä¼°è®¡ï¼å¯¹äºæ çæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¸è¿åæ° ð¥ð =ððððxk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ
+根据渐近分数的误差估计，对于无理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个渐近分数 𝑥𝑘 =𝑝𝑘𝑞𝑘xk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
 
-â£ð¥âððððâ£â¤1ð2ð.|xâpkqk|â¤1qk2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑘𝑞𝑘∣≤1𝑞2𝑘.|x−pkqk|≤1qk2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ£æ¥è¯¯å·®å ¬å¼çè¯æå³å¯ç¥ï¼å¯¹äºä»»ä¸æ çæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç­æ¡ä»¶å¹¶ä¸æç«ï¼å æ­¤ï¼å®çæææ¸è¿åæ°çåå­ååæ¯é½æ»¡è¶³è¦æ±ï¼
+检查误差公式的证明即可知，对于任一无理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，取等条件并不成立．因此，它的所有渐近分数的分子和分母都满足要求．
 
-è¿ä¸ªå®çä¹å¯ä»¥çä½æ¯ [Dirichlet é¼è¿å®ç](https://en.wikipedia.org/wiki/Dirichlet%27s_approximation_theorem) çæ¨è®ºï¼è¿å ä¹å·²ç»æ¯æå¥½çç»æäºï¼ä¸ç­å¼å³ä¾§åæ¯ä¸­çææ° 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å·²ç»ä¸è½åæ¹è¿ï¼ä½æ¯å¸¸æ°ä¸å¯ä»¥åå¾æ´å¥½ï¼Hurwitz å®çè¯´æï¼ä¸ç­å¼å³ä¾§å¯ä»¥ç¼©å°å° 1â5ð215q2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸è¿æ¯æå¥½ççï¼
+这个定理也可以看作是 [Dirichlet 逼近定理](https://en.wikipedia.org/wiki/Dirichlet%27s_approximation_theorem) 的推论．这几乎已经是最好的结果了．不等式右侧分母中的指数 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 已经不能再改进，但是常数上可以做得更好．Hurwitz 定理说明，不等式右侧可以缩小到 1√5𝑞215q2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且这是最好的界．
 
-Hurwitz å®ç
+Hurwitz 定理
 
-å¯¹äºæ çæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å­å¨æ ç©·å¤ä¸ªæ¢çº¦åæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾
+对于无理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，存在无穷多个既约分数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得
 
-â£ð¥âððâ£<1â5ð2|xâpq|<15q2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑞∣<1√5𝑞2|x−pq|<15q2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æç«ï¼èä¸ä¸ç­å¼å³ä¾§ç â55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è½æ¢ææ´å¤§çå®æ°ï¼
+成立，而且不等式右侧的 √55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不能换成更大的实数．
 
-è¯æï¼Borelï¼
+证明（Borel）
 
-Borel å®é ä¸è¯æäºï¼æ çæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿ç»­ä¸ä¸ªæ¸è¿åæ°ä¸­ï¼å¿ ç¶æè³å°ä¸ä¸ªæ»¡è¶³ä¸è¿°æ¡ä»¶ï¼å ä¸ºæ¸è¿åæ°æ ç©·å¤ï¼ä¸é½æ¯æ¢çº¦åæ°ï¼é£ä¹ Hurwitz å®ççç¬¬ä¸é¨åå°±å¿ ç¶æç«ï¼
+Borel 实际上证明了，无理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连续三个渐近分数中，必然有至少一个满足上述条件．因为渐近分数无穷多，且都是既约分数，那么 Hurwitz 定理的第一部分就必然成立．
 
-åè¯æ³ï¼ä¸å¦¨è®¾å­å¨æ çæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå®çæ¸è¿åæ° ð¥ðâ1,ð¥ð,ð¥ð+1xkâ1,xk,xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾
+反证法．不妨设存在无理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和它的渐近分数 𝑥𝑘−1,𝑥𝑘,𝑥𝑘+1xk−1,xk,xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得
 
-â£ð¥âððâ1ððâ1â£â¥1â5ð2ðâ1,Â â£ð¥âððððâ£â¥1â5ð2ð,Â â£ð¥âðð+1ðð+1â£â¥1â5ð2ð+1|xâpkâ1qkâ1|â¥15qkâ12,Â |xâpkqk|â¥15qk2,Â |xâpk+1qk+1|â¥15qk+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑘−1𝑞𝑘−1∣≥1√5𝑞2𝑘−1, ∣𝑥−𝑝𝑘𝑞𝑘∣≥1√5𝑞2𝑘, ∣𝑥−𝑝𝑘+1𝑞𝑘+1∣≥1√5𝑞2𝑘+1|x−pk−1qk−1|≥15qk−12, |x−pkqk|≥15qk2, |x−pk+1qk+1|≥15qk+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æç«ï¼å ä¸ºç¸é»çæ¸è¿åæ°å¿ ç¶ä½äº ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸¤ä¾§ï¼æä»¥ç±å·®åå ¬å¼ç¥
+成立．因为相邻的渐近分数必然位于 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 两侧，所以由差分公式知
 
-1ððâ1ðð=â£ððâ1ððâ1âððððâ£=â£ð¥âððâ1ððâ1â£+â£ð¥âððððâ£â¥1â5ð2ðâ1+1â5ð2ð.1qkâ1qk=|pkâ1qkâ1âpkqk|=|xâpkâ1qkâ1|+|xâpkqk|â¥15qkâ12+15qk2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1𝑞𝑘−1𝑞𝑘=∣𝑝𝑘−1𝑞𝑘−1−𝑝𝑘𝑞𝑘∣=∣𝑥−𝑝𝑘−1𝑞𝑘−1∣+∣𝑥−𝑝𝑘𝑞𝑘∣≥1√5𝑞2𝑘−1+1√5𝑞2𝑘.1qk−1qk=|pk−1qk−1−pkqk|=|x−pk−1qk−1|+|x−pkqk|≥15qk−12+15qk2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®å¯ä»¥åæå ³äºå ððððâ1qkqkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ç­å¼
+它可以写成关于商 𝑞𝑘𝑞𝑘−1qkqk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的不等式
 
-ððððâ1+ððâ1ððâ¤â5.qkqkâ1+qkâ1qkâ¤5.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑞𝑘𝑞𝑘−1+𝑞𝑘−1𝑞𝑘≤√5.qkqk−1+qk−1qk≤5.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸ºå·¦ä¾§æ¯æçæ°ï¼å³ä¾§æ¯æ çæ°ï¼ç­å·å¿ ç¶æ æ³åå¾ï¼åå ä¸º ðð â¥ððâ1qkâ¥qkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥å¯ä»¥è§£å¾
+因为左侧是有理数，右侧是无理数，等号必然无法取得．又因为 𝑞𝑘 ≥𝑞𝑘−1qk≥qk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以可以解得
 
-1â¤ððððâ1<â5+12.1â¤qkqkâ1<5+12.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1≤𝑞𝑘𝑞𝑘−1<√5+12.1≤qkqk−1<5+12.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åçï¼å¯ä»¥è¯æ
+同理，可以证明
 
-1â¤ðð+1ðð<â5+12.1â¤qk+1qk<5+12.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1≤𝑞𝑘+1𝑞𝑘<√5+12.1≤qk+1qk<5+12.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä½æ¯æ ¹æ®éæ¨å ¬å¼ï¼å¹¶ç»åä¸¤å¼å¯ç¥ï¼
+但是根据递推公式，并结合两式可知，
 
-ðð+1=ðð+1ððâððâ1ðð<â5+12ââ5â12=1ak+1=qk+1qkâqkâ1qk<5+12â5â12=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑘+1=𝑞𝑘+1𝑞𝑘−𝑞𝑘−1𝑞𝑘<√5+12−√5−12=1ak+1=qk+1qk−qk−1qk<5+12−5−12=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¸ç®åè¿åæ°çå®ä¹çç¾ï¼æä»¥ï¼Borel çç»è®ºæç«ï¼
+这与简单连分数的定义矛盾．所以，Borel 的结论成立．
 
-è¦è¯´æè¿æ ·å¾å°ççæ¯æå¥½çï¼åªéè¦æ¾å° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾å¯¹äºä»»ä½ ð¶ >â5C>5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½åªå­å¨æéå¤ä¸ªæ¢çº¦åæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ä¸ç­å¼
+要说明这样得到的界是最好的，只需要找到 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得对于任何 𝐶 >√5C>5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都只存在有限多个既约分数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得不等式
 
-â£ð¥âððâ£<1ð¶ð2|xâpq|<1Cq2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑞∣<1𝐶𝑞2|x−pq|<1Cq2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æç«ï¼ä¸é¢è¯æ ð =â5+12Ï=5+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯è¿æ ·ç ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼4
+成立．下面证明 𝜙 =√5+12ϕ=5+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是这样的 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．4
 
-è®¾ ðâ² =ââ5+12Ïâ²=â5+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ±è½­æ ¹ï¼å®ä»¬é½æ¯æ¹ç¨ ð¥2 âð¥ â1 =0x2âxâ1=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ ¹ï¼å èï¼å¯¹ä»»æå®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ
+设 𝜙′ =−√5+12ϕ′=−5+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝜙ϕ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的共轭根．它们都是方程 𝑥2 −𝑥 −1 =0x2−x−1=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的根．因而，对任意实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有
 
-ð¥2âð¥â1=(ð¥âð)(ð¥âðâ²).x2âxâ1=(xâÏ)(xâÏâ²).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥2−𝑥−1=(𝑥−𝜙)(𝑥−𝜙′).x2−x−1=(x−ϕ)(x−ϕ′).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»£å ¥æ¢çº¦åæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±å¾å°
+代入既约分数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就得到
 
-1ð2â¤|ð2âððâð2|ð2=â£ððâðâ£â£ððâðâ²â£â¤â£ððâðâ£(â£ððâðâ£+|ðâðâ²|)<1ð¶ð2(1ð¶ð2+â5).1q2â¤|p2âpqâq2|q2=|pqâÏ||pqâÏâ²|â¤|pqâÏ|(|pqâÏ|+|ÏâÏâ²|)<1Cq2(1Cq2+5).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1𝑞2≤|𝑝2−𝑝𝑞−𝑞2|𝑞2=∣𝑝𝑞−𝜙∣∣𝑝𝑞−𝜙′∣≤∣𝑝𝑞−𝜙∣(∣𝑝𝑞−𝜙∣+|𝜙−𝜙′|)<1𝐶𝑞2(1𝐶𝑞2+√5).1q2≤|p2−pq−q2|q2=|pq−ϕ||pq−ϕ′|≤|pq−ϕ|(|pq−ϕ|+|ϕ−ϕ′|)<1Cq2(1Cq2+5).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹äº ð¶ >â5C>5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥ç´æ¥è§£åº ð <âð¶(ð¶ââ5)q<C(Câ5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å èä¸å¯è½å­å¨æ ç©·å¤ç»è§£æ»¡è¶³ä¸è¿°ä¸ç­å¼ï¼
+对于 𝐶 >√5C>5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以直接解出 𝑞 <√𝐶(𝐶−√5)q<C(C−5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因而不可能存在无穷多组解满足上述不等式．
 
-è¿äºå®ççè¯æè¯´æï¼æ¸è¿åæ°æä¾äºç¸å½å¥½çä¸¢çªå¾é¼è¿ï¼ä½æ¯ï¼è¿æªå¿ æ¯æä½³é¼è¿ï¼è¦è®¨è®ºæä½³é¼è¿ï¼éè¦è¯´æé¼è¿ç¨åº¦çåº¦éï¼è¿å¸¸å¸¸æä¸¤ç§éæ©ï¼
+这些定理的证明说明，渐近分数提供了相当好的丢番图逼近．但是，这未必是最佳逼近．要讨论最佳逼近，需要说明逼近程度的度量．这常常有两种选择．
 
-å¯è½å­å¨æä½³é¼è¿ç¸å ³ç»è®ºä¸æç«çæ å½¢
+可能存在最佳逼近相关结论不成立的情形
 
-æ¥ä¸æ¥çä¸¤èï¼ä¼åè¿°ä¸äºå ³äºæä½³é¼è¿çç»æï¼è¿äºç»æå¯è½å¯¹ä¸ªå«æ è¶£çæ å½¢å¹¶ä¸æç«ï¼æ¯å¦ï¼æä½³é¼è¿çä¸¤ç±»å®ä¹é½è¦æ±ä¸¥æ ¼ä¸ç­å·ï¼ä½æ¯å¯¹äºåå¥æ° ð¥ =ð +12x=n+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð âðnâZ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®çè¿åæ°çå½¢å¼å¯ä»¥æ¯ [ð,1,1][n,1,1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶ï¼å®çåä¸¤ä¸ªæ¸è¿åæ° ð¥0 =ðx0=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥1 =ð +1x1=n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ¯é½æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èä¸å° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè·ç¦»æ¯ä¸æ ·çï¼è¿è¯´æï¼å®ä»¬é½ä¸æ¯æä½³é¼è¿ï¼å¯¹äºæ¬èçç»è®ºçåè¿°ï¼è¯»è åºå½é»è®¤è¿æ ·çæ å½¢å·²ç»æé¤å¨å¤ï¼å¦æè¯»è ä¸å ³å¿ææ«å°¾çå ä¸ªæ¸è¿åæ°ï¼æææ¯åªå ³å¿æ çæ°çé¼è¿ï¼é£ä¹ä¸å¿ çä¼è¿äºé¢å¤çå¤ææ å½¢ï¼
+接下来的两节，会叙述一些关于最佳逼近的结果．这些结果可能对个别无趣的情形并不成立．比如，最佳逼近的两类定义都要求严格不等号，但是对于半奇数 𝑥 =𝑛 +12x=n+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑛 ∈𝐙n∈Z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，它的连分数的形式可以是 [𝑛,1,1][n,1,1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此时，它的前两个渐近分数 𝑥0 =𝑛x0=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥1 =𝑛 +1x1=n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分母都是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而且到 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的距离是一样的．这说明，它们都不是最佳逼近．对于本节的结论的叙述，读者应当默认这样的情形已经排除在外．如果读者不关心最末尾的几个渐近分数，抑或是只关心无理数的逼近，那么不必理会这些额外的复杂情形．
 
-### ç¬¬ä¸ç±»æä½³é¼è¿ï¼ä¸­é´åæ°
+### 第一类最佳逼近：中间分数
 
-ç¬¬ä¸ç±»æä½³é¼è¿ä½¿ç¨
+第一类最佳逼近使用
 
-â£ð¥âððâ£|xâpq|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑞∣|x−pq|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¡¡éé¼è¿çç¨åº¦ï¼
+衡量逼近的程度．
 
-ç¬¬ä¸ç±»æä½³é¼è¿
+第一类最佳逼近
 
-å¯¹äºå®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæçæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æå¯¹äºä»»æç ðâ²ðâ² â ððpâ²qâ²â pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ 0 <ðâ² â¤ð0<qâ²â¤q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ
+对于实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和有理数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果对于任意的 𝑝′𝑞′ ≠𝑝𝑞p′q′≠pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 0 <𝑞′ ≤𝑞0<q′≤q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有
 
-â£ð¥âððâ£<â£ð¥âðâ²ðâ²â£,|xâpq|<|xâpâ²qâ²|,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑞∣<∣𝑥−𝑝′𝑞′∣,|x−pq|<|x−p′q′|,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°±ç§°æçæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **ç¬¬ä¸ç±»æä½³é¼è¿** ï¼best approximation of the first kindï¼ï¼
+就称有理数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **第一类最佳逼近** （best approximation of the first kind）．
 
-ç¬¬ä¸ç±»æä½³é¼è¿æªå¿ æ¯æ¸è¿åæ°ï¼èæ¯ä¸ç±»æ´å®½æ³çåæ°ï¼
+第一类最佳逼近未必是渐近分数，而是一类更宽泛的分数．
 
-ä¸­é´åæ°
+中间分数
 
-è®¾å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ææ¸è¿åæ° ð¥ð+1 =[ð0,ð1,â¯,ðð,ðð+1]xk+1=[a0,a1,â¯,ak,ak+1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸æ´æ° ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ 0 â¤ð¡ â¤ðð+10â¤tâ¤ak+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)5ï¼ååæ° ð¥ð,ð¡ =[ð0,ð1,â¯,ðð,ð¡]xk,t=[a0,a1,â¯,ak,t]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸º ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **ä¸­é´åæ°** ï¼intermediate fractionï¼ã**åæ¶æå­** ï¼semiconvergentï¼æ **æ¬¡æ¸è¿åæ°** ï¼secondary convergentï¼ï¼6
+设实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有渐近分数 𝑥𝑘+1 =[𝑎0,𝑎1,⋯,𝑎𝑘,𝑎𝑘+1]xk+1=[a0,a1,⋯,ak,ak+1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且整数 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 0 ≤𝑡 ≤𝑎𝑘+10≤t≤ak+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)5，则分数 𝑥𝑘,𝑡 =[𝑎0,𝑎1,⋯,𝑎𝑘,𝑡]xk,t=[a0,a1,⋯,ak,t]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **中间分数** （intermediate fraction）、**半收敛子** （semiconvergent）或 **次渐近分数** （secondary convergent）．6
 
-ç±»ä¼¼äºæ¸è¿åæ°çæ å½¢ï¼å¤§äºï¼å°äºï¼ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸­é´åæ°ç§°ä¸º **ä¸ï¼ä¸ï¼ä¸­é´åæ°** ï¼upper (lower) semiconvergentï¼ï¼
+类似于渐近分数的情形，大于（小于）𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的中间分数称为 **上（下）中间分数** （upper (lower) semiconvergent）．
 
-æ ¹æ®éæ¨å ¬å¼ï¼ä¸­é´åæ°å¯ä»¥åæ
+根据递推公式，中间分数可以写成
 
-ð¥ð,ð¡=ð¡ðð+ððâ1ð¡ðð+ððâ1.xk,t=tpk+pkâ1tqk+qkâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑘,𝑡=𝑡𝑝𝑘+𝑝𝑘−1𝑡𝑞𝑘+𝑞𝑘−1.xk,t=tpk+pk−1tqk+qk−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®å¿ ç¶æ¯æ¢çº¦åæ°ï¼èä¸ä½äºæ¸è¿åæ° ð¥ðâ1xkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥ð+1xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼éç ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¢å¤§ï¼å®ä¹éæ¸å ð¥ð+1xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é æ¢ï¼ï¼ä»¥ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¶æ°çæ å½¢ä¸ºä¾ï¼
+它必然是既约分数，而且位于渐近分数 𝑥𝑘−1xk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥𝑘+1xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间．随着 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 增大，它也逐渐向 𝑥𝑘+1xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 靠拢：（以 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为偶数的情形为例）
 
-ð¥ðâ1=ð¥ð,0<ð¥ð,1<ð¥ð,2<â¯<ð¥ð,ðð+1=ð¥ð+1.xkâ1=xk,0<xk,1<xk,2<â¯<xk,ak+1=xk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑘−1=𝑥𝑘,0<𝑥𝑘,1<𝑥𝑘,2<⋯<𝑥𝑘,𝑎𝑘+1=𝑥𝑘+1.xk−1=xk,0<xk,1<xk,2<⋯<xk,ak+1=xk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸ºæ¸è¿åæ°çåå­ååæ¯é½æ¯éå¢çï¼ä¸­é´åæ° ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð¡ â 0tâ 0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼çåå­ååæ¯è½å¨äº ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥ð+1xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼å¦æå°è¿äºåæ°æç §åæ¯å¤§å°æåï¼ä¸­é´åæ°å°±æ¯ä½äºç¸é»çæ¸è¿åæ°ä¸­é´çä¸äºåæ°ï¼
+因为渐近分数的分子和分母都是递增的，中间分数 𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（𝑡 ≠0t≠0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）的分子和分母落在了 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥𝑘+1xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间．如果将这些分数按照分母大小排列，中间分数就是位于相邻的渐近分数中间的一些分数．
 
-ææçç¬¬ä¸ç±»æä½³é¼è¿é½æ¯ä¸­é´åæ°ï¼ä½æ¯å¹¶ä¸æ¯ææçä¸­é´åæ°é½æ¯ç¬¬ä¸ç±»æä½³é¼è¿ï¼
+所有的第一类最佳逼近都是中间分数，但是并不是所有的中间分数都是第一类最佳逼近．
 
-å®ç
+定理
 
-ææçç¬¬ä¸ç±»æä½³é¼è¿é½æ¯ä¸­é´åæ°ï¼
+所有的第一类最佳逼近都是中间分数．
 
-è¯æ
+证明
 
-å ä¸º ð0 â¤ð¥ â¤ð0 +1a0â¤xâ¤a0+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ç¬¬ä¸ç±»æä½³é¼è¿å¿ ç¶ä½äº ð¥1,0 =ð0x1,0=a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð¥0,1 =ð0 +1x0,1=a0+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼ææä¸­é´åæ°ä»å°å°å¤§å¯ä»¥æåæ
+因为 𝑎0 ≤𝑥 ≤𝑎0 +1a0≤x≤a0+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以第一类最佳逼近必然位于 𝑥1,0 =𝑎0x1,0=a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑥0,1 =𝑎0 +1x0,1=a0+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间．所有中间分数从小到大可以排列成
 
-ð¥1,0<ð¥1,1<â¯<ð¥1,ð2=ð¥3,0<â¦<ð¥<â¦<ð¥2,0=ð¥0,ð1<â¯<ð¥0,1.x1,0<x1,1<â¯<x1,a2=x3,0<â¦<x<â¦<x2,0=x0,a1<â¯<x0,1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥1,0<𝑥1,1<⋯<𝑥1,𝑎2=𝑥3,0<…<𝑥<…<𝑥2,0=𝑥0,𝑎1<⋯<𝑥0,1.x1,0<x1,1<⋯<x1,a2=x3,0<…<x<…<x2,0=x0,a1<⋯<x0,1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åé¶çä¸­é´åæ°æ¯è¿ç»­åºç°çï¼èä¸åé¶çä¸­é´åæ°ä¹é´åæ²¡æé´éï¼è¿æå³çï¼ä»»ä½ä½äº ð¥1,0 =ð0x1,0=a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð¥0,1 =ð0 +1x0,1=a0+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´çæçæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¿ ç¶è½å¨ä¸¤ä¸ªåé¶çä¸­é´åæ° ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥ð,ð¡+1xk,t+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼ä¸å¦¨è®¾å®ä¸æ¯ä¸­é´åæ°ä¸å°äº ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å èæ
+同阶的中间分数是连续出现的，而不同阶的中间分数之间又没有间隔．这意味着，任何位于 𝑥1,0 =𝑎0x1,0=a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑥0,1 =𝑎0 +1x0,1=a0+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间的有理数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 必然落在两个同阶的中间分数 𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥𝑘,𝑡+1xk,t+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间．不妨设它不是中间分数且小于 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因而有
 
-ð¥ð,ð¡<ðð<ð¥ð,ð¡+1<ð¥.xk,t<pq<xk,t+1<x.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑘,𝑡<𝑝𝑞<𝑥𝑘,𝑡+1<𝑥.xk,t<pq<xk,t+1<x.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ­¤æ¶ï¼ä¸æ¹é¢æ
+此时，一方面有
 
-â£ð¥ð,ð¡âððâ£â¤|ð¥ð,ð¡âð¥ð,ð¡+1|=1((ð¡+1)ðð+ððâ1)(ð¡ðð+ððâ1).|xk,tâpq|â¤|xk,tâxk,t+1|=1((t+1)qk+qkâ1)(tqk+qkâ1).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥𝑘,𝑡−𝑝𝑞∣≤|𝑥𝑘,𝑡−𝑥𝑘,𝑡+1|=1((𝑡+1)𝑞𝑘+𝑞𝑘−1)(𝑡𝑞𝑘+𝑞𝑘−1).|xk,t−pq|≤|xk,t−xk,t+1|=1((t+1)qk+qk−1)(tqk+qk−1).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦ä¸æ¹é¢æ
+另一方面有
 
-â£ð¥ð,ð¡âððâ£=|ð(ð¡ðð+ððâ1)âð((ð¡+1)ðð+ððâ1)|ð(ð¡ðð+ððâ1)â¥1ð(ð¡ðð+ððâ1).|xk,tâpq|=|q(tpk+pkâ1)âp((t+1)qk+qkâ1)|q(tqk+qkâ1)â¥1q(tqk+qkâ1).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥𝑘,𝑡−𝑝𝑞∣=|𝑞(𝑡𝑝𝑘+𝑝𝑘−1)−𝑝((𝑡+1)𝑞𝑘+𝑞𝑘−1)|𝑞(𝑡𝑞𝑘+𝑞𝑘−1)≥1𝑞(𝑡𝑞𝑘+𝑞𝑘−1).|xk,t−pq|=|q(tpk+pk−1)−p((t+1)qk+qk−1)|q(tqk+qk−1)≥1q(tqk+qk−1).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼å¿ ç¶æ
+因此，必然有
 
-ð>(ð¡+1)ðð+ððâ1.q>(t+1)qk+qkâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑞>(𝑡+1)𝑞𝑘+𝑞𝑘−1.q>(t+1)qk+qk−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¹å°±æ¯è¯´ï¼æçæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ¯ä¸å®å¤§äº ð¥ð,ð¡+1xk,t+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ¯ï¼ä½æ¯å®å¹¶ä¸æ¯æ´å¥½çé¼è¿ï¼
+也就是说，有理数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分母一定大于 𝑥𝑘,𝑡+1xk,t+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分母，但是它并不是更好的逼近：
 
-â£ð¥âððâ£>|ð¥âð¥ð,ð¡+1||xâpq|>|xâxk,t+1|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑞∣>|𝑥−𝑥𝑘,𝑡+1||x−pq|>|x−xk,t+1|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼å®ä¸å¯è½æ¯ç¬¬ä¸ç±»æä½³é¼è¿ï¼è¿å°±è¯´æï¼ä¸æ¯ä¸­é´åæ°ï¼å°±ä¸æ¯ç¬¬ä¸ç±»æä½³é¼è¿ï¼äº¦å³ææç¬¬ä¸ç±»æä½³é¼è¿é½æ¯ä¸­é´åæ°ï¼
+因此，它不可能是第一类最佳逼近．这就说明，不是中间分数，就不是第一类最佳逼近；亦即所有第一类最佳逼近都是中间分数．
 
-åè¿æ¥ï¼å¹¶ä¸è½æ­è¨ææçä¸­é´åæ°é½æ¯ç¬¬ä¸ç±»æä½³é¼è¿ï¼ä½æ¯ï¼çç¡®å¯ä»¥ç»åºä¸­é´åæ°æä¸ºç¬¬ä¸ç±»æä½³é¼è¿çæ¡ä»¶ï¼
+反过来，并不能断言所有的中间分数都是第一类最佳逼近．但是，的确可以给出中间分数成为第一类最佳逼近的条件．
 
-å®ç
+定理
 
-æææ¸è¿åæ°é½æ¯ç¬¬ä¸ç±»æä½³é¼è¿ï¼é¤æ­¤ä¹å¤ï¼è®¾ 0 <ð¡ <ðð+10<t<ak+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä¸­é´åæ° ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç¬¬ä¸ç±»æä½³é¼è¿ï¼å½ä¸ä» å½ ð¡ >ðð+12t>ak+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè ð¡ =ðð+12t=ak+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðð+2 >ððððâ1rk+2>qkqkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+所有渐近分数都是第一类最佳逼近．除此之外，设 0 <𝑡 <𝑎𝑘+10<t<ak+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则中间分数 𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是第一类最佳逼近，当且仅当 𝑡 >𝑎𝑘+12t>ak+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或者 𝑡 =𝑎𝑘+12t=ak+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑟𝑘+2 >𝑞𝑘𝑞𝑘−1rk+2>qkqk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-ä¸é¢ä¼è¯æï¼æ¸è¿åæ°é½æ¯ç¬¬äºç±»æä½³é¼è¿ï¼å èå¿ ç¶æ¯ç¬¬ä¸ç±»æä½³é¼è¿ï¼å ³é®å¨äºé£äºä¸æ¯æ¸è¿åæ°çä¸­é´åæ°ï¼
+下面会证明，渐近分数都是第二类最佳逼近，因而必然是第一类最佳逼近．关键在于那些不是渐近分数的中间分数．
 
-åæå·²ç»è¯´è¿ï¼ä¸­é´åæ° ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ¯ä½äº ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥ð+1xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼ä¸éç ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¢å éæ¸å¢å¤§ï¼ä½æ¯ ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å´éæ¸æ¥è¿ ð¥ð+1xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å èæ´æ¥è¿ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»¥ ð¥ð,ð¡ <ð¥xk,t<x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºä¾ï¼å®ä¸ç¸é»çä¸­é´åæ°çç¸å¯¹ä½ç½®å ³ç³»æ»¡è¶³ï¼
+前文已经说过，中间分数 𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分母位于 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥𝑘+1xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间，且随着 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的增加逐渐增大，但是 𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 却逐渐接近 𝑥𝑘+1xk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因而更接近 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．以 𝑥𝑘,𝑡 <𝑥xk,t<x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为例，它与相邻的中间分数的相对位置关系满足：
 
-ð¥ðâ1<ð¥ð,ð¡<ð¥ð+1<ð¥<ð¥ð.xkâ1<xk,t<xk+1<x<xk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑘−1<𝑥𝑘,𝑡<𝑥𝑘+1<𝑥<𝑥𝑘.xk−1<xk,t<xk+1<x<xk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸º ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ¯å°äº ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¸ºç¬¬ä¸ç±»æä½³é¼è¿çå¿ è¦æ¡ä»¶å°±æ¯ï¼å®æ¯ ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´æ¥è¿ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¹æ¯å åæ¡ä»¶ï¼å ä¸ºä½ä¸ºæ¸è¿åæ°ï¼æ²¡ææ¯ ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¯æ´å°ä½æ¯è·ç¦»æ´è¿çäºï¼èé£äºæ¯ ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¯è¿è¦å¤§çä¸­é´åæ°ï¼å¿ ç¶ä¸ ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åé¶ï¼ä½æ¯åæ¯æ´å°ï¼å°±å¿ ç¶è·ç¦» ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´è¿ï¼å¯¹äºæ¸è¿åæ°åä¸­é´åæ°çè¯¯å·®ï¼ç»è®¡ç®å¯ç¥
+因为 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分母小于 𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以 𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成为第一类最佳逼近的必要条件就是，它比 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 更接近 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这也是充分条件，因为作为渐近分数，没有比 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分母更小但是距离更近的了，而那些比 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分母还要大的中间分数，必然与 𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同阶，但是分母更小，就必然距离 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 更远．对于渐近分数和中间分数的误差，经计算可知
 
-|ð¥ðâð¥|=1ðð(ðð+1ðð+ððâ1),|ð¥ð,ð¡âð¥|=â£ð¡ðð+ððâ1ð¡ðð+ððâ1âðð+1ðð+ððâ1ðð+1ðð+ððâ1â£=ðð+1âð¡(ð¡ðð+ððâ1)(ðð+1ðð+ððâ1).|xkâx|=1qk(rk+1qk+qkâ1),|xk,tâx|=|tpk+pkâ1tqk+qkâ1ârk+1pk+pkâ1rk+1qk+qkâ1|=rk+1ât(tqk+qkâ1)(rk+1qk+qkâ1).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝑥𝑘−𝑥|=1𝑞𝑘(𝑟𝑘+1𝑞𝑘+𝑞𝑘−1),|𝑥𝑘,𝑡−𝑥|=∣𝑡𝑝𝑘+𝑝𝑘−1𝑡𝑞𝑘+𝑞𝑘−1−𝑟𝑘+1𝑝𝑘+𝑝𝑘−1𝑟𝑘+1𝑞𝑘+𝑞𝑘−1∣=𝑟𝑘+1−𝑡(𝑡𝑞𝑘+𝑞𝑘−1)(𝑟𝑘+1𝑞𝑘+𝑞𝑘−1).|xk−x|=1qk(rk+1qk+qk−1),|xk,t−x|=|tpk+pk−1tqk+qk−1−rk+1pk+pk−1rk+1qk+qk−1|=rk+1−t(tqk+qk−1)(rk+1qk+qk−1).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ç¨å°äº ðð+1 â¥ðð+1 >ð¡rk+1â¥ak+1>t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´æ¥è¿ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä¸ºç¬¬ä¸ç±»æä½³é¼è¿ï¼å½ä¸ä» å½
+其中用到了 𝑟𝑘+1 ≥𝑎𝑘+1 >𝑡rk+1≥ak+1>t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 比 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 更接近 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，成为第一类最佳逼近，当且仅当
 
-ðð+1âð¡ð¡ðð+ððâ1<1ððâºðð+1<2ð¡+ððâ1ðð.rk+1âttqk+qkâ1<1qkâºrk+1<2t+qkâ1qk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘+1−𝑡𝑡𝑞𝑘+𝑞𝑘−1<1𝑞𝑘⟺𝑟𝑘+1<2𝑡+𝑞𝑘−1𝑞𝑘.rk+1−ttqk+qk−1<1qk⟺rk+1<2t+qk−1qk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ­¤æ¶ï¼æä¸ç§å¯è½çæ åµï¼
+此时，有三种可能的情况：
 
-  1. å¦æ ð¡ <ðð¡+12t<at+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ 2ð¡ <ðð¡+12t<at+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸ºä¸¤ä¾§é½æ¯æ´æ°ï¼æä»¥ 2ð¡ â¤ðð+1 â12tâ¤ak+1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ è 2ð¡ +ððâ1ðð â¤2ð¡ +1 â¤ðð+1 â¤ðð¡+12t+qkâ1qkâ¤2t+1â¤ak+1â¤rt+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶ï¼ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯ç¬¬ä¸ç±»æä½³é¼è¿ï¼
-  2. å¦æ ð¡ >ðð¡+12t>at+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ 2ð¡ >ðð¡+12t>at+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸ºä¸¤ä¾§é½æ¯æ´æ°ï¼æä»¥ 2ð¡ â¥ðð¡+1 +1 >ðð¡+12tâ¥at+1+1>rt+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶ï¼ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç¬¬ä¸ç±»æä½³é¼è¿ï¼
-  3. å¦æ ðð¡+1at+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¶æ°ï¼è¿æç¬¬ä¸ç§æ åµï¼å³ ð¡ =ðð¡+12t=at+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸è¿°æ¡ä»¶ç­ä»·äº 1ðð+1 =ðð+1 âðð+1 <ððâ1ðð1rk+1=rk+1âak+1<qkâ1qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼äº¦å³ ðð+2 >ððððâ1rk+2>qkqkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. 如果 𝑡 <𝑎𝑡+12t<at+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么 2𝑡 <𝑎𝑡+12t<at+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因为两侧都是整数，所以 2𝑡 ≤𝑎𝑘+1 −12t≤ak+1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故而 2𝑡 +𝑞𝑘−1𝑞𝑘 ≤2𝑡 +1 ≤𝑎𝑘+1 ≤𝑟𝑡+12t+qk−1qk≤2t+1≤ak+1≤rt+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此时，𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是第一类最佳逼近；
+  2. 如果 𝑡 >𝑎𝑡+12t>at+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么 2𝑡 >𝑎𝑡+12t>at+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因为两侧都是整数，所以 2𝑡 ≥𝑎𝑡+1 +1 >𝑟𝑡+12t≥at+1+1>rt+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此时，𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是第一类最佳逼近；
+  3. 如果 𝑎𝑡+1at+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是偶数，还有第三种情况，即 𝑡 =𝑎𝑡+12t=at+12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．上述条件等价于 1𝑟𝑘+1 =𝑟𝑘+1 −𝑎𝑘+1 <𝑞𝑘−1𝑞𝑘1rk+1=rk+1−ak+1<qk−1qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，亦即 𝑟𝑘+2 >𝑞𝑘𝑞𝑘−1rk+2>qkqk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æä»¥ï¼å¦æå°å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çææç¬¬ä¸ç±»æä½³é¼è¿æç §åæ¯èªå°å°å¤§çé¡ºåºæåï¼é£ä¹å®ä¼æ ¹æ®ä¸ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤§å°å ³ç³»åæè¥å¹²æ®µï¼æ¯ä¸æ®µæ»æ¯ç±è¥å¹²ä¸ªï¼å¯ä»¥æ¯é¶ä¸ªï¼è¿ç»­çåé¶çä¸­é´åæ°ç»æï¼ä¸æ»ä»¥æ¸è¿åæ°ç»å°¾ï¼æ®µå æ»è½ä¿æå¨å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¾§ï¼æ®µä¸æ®µä¹é´åäº¤éæåå¨ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸¤ä¾§ï¼
+所以，如果将实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的所有第一类最佳逼近按照分母自小到大的顺序排列，那么它会根据与 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的大小关系分成若干段．每一段总是由若干个（可以是零个）连续的同阶的中间分数组成，且总以渐近分数结尾．段内总能保持在实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一侧，段与段之间则交错排列在 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 两侧．
 
-ä¾å­ï¼åå¨ç ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ä¸ç±»æä½³é¼è¿
+例子：圆周率 𝜋π![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第一类最佳逼近
 
-åå¨ç ð =[3,7,15,1,292,â¯]Ï=[3,7,15,1,292,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å èå®åæ¯æå°çå 15 ä¸ªç¬¬ä¸ç±»æä½³é¼è¿æ¯ï¼
+圆周率 𝜋 =[3,7,15,1,292,⋯]π=[3,7,15,1,292,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因而它分母最小的前 15 个第一类最佳逼近是：
 
-ð¥0=31,Â ð¥0,4=134,Â ð¥0,5=165,Â ð¥0,6=196,Â ð¥1=227,ð¥1,8=17957,Â ð¥1,9=20164,Â ð¥1,10=22371,Â ð¥1,11=24578,Â ð¥1,12=26785,ð¥1,13=28992,ð¥1,14=31199,Â ð¥2=333106,Â ð¥3=355113,Â ð¥3,146=5216316604.x0=31,Â x0,4=134,Â x0,5=165,Â x0,6=196,Â x1=227,x1,8=17957,Â x1,9=20164,Â x1,10=22371,Â x1,11=24578,Â x1,12=26785,x1,13=28992,x1,14=31199,Â x2=333106,Â x3=355113,Â x3,146=5216316604.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥0=31, 𝑥0,4=134, 𝑥0,5=165, 𝑥0,6=196, 𝑥1=227,𝑥1,8=17957, 𝑥1,9=20164, 𝑥1,10=22371, 𝑥1,11=24578, 𝑥1,12=26785,𝑥1,13=28992,𝑥1,14=31199, 𝑥2=333106, 𝑥3=355113, 𝑥3,146=5216316604.x0=31, x0,4=134, x0,5=165, x0,6=196, x1=227,x1,8=17957, x1,9=20164, x1,10=22371, x1,11=24578, x1,12=26785,x1,13=28992,x1,14=31199, x2=333106, x3=355113, x3,146=5216316604.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### ç¬¬äºç±»æä½³é¼è¿
+### 第二类最佳逼近
 
-ç¬¬äºç±»æä½³é¼è¿ä½¿ç¨ |ðð¥ âð||qxâp|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¥è¡¡éé¼è¿çç¨åº¦ï¼
+第二类最佳逼近使用 |𝑞𝑥 −𝑝||qx−p|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 来衡量逼近的程度．
 
-ç¬¬äºç±»æä½³é¼è¿
+第二类最佳逼近
 
-å¯¹äºå®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæçæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æå¯¹äºä»»æç ðâ²ðâ² â ððpâ²qâ²â pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ 0 <ðâ² â¤ð0<qâ²â¤q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ
+对于实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和有理数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果对于任意的 𝑝′𝑞′ ≠𝑝𝑞p′q′≠pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 0 <𝑞′ ≤𝑞0<q′≤q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有
 
-|ðð¥âð|<|ðâ²ð¥âðâ²|,|qxâp|<|qâ²xâpâ²|,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝑞𝑥−𝑝|<|𝑞′𝑥−𝑝′|,|qx−p|<|q′x−p′|,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°±ç§°æçæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **ç¬¬äºç±»æä½³é¼è¿** ï¼best approximation of the second kindï¼ï¼
+就称有理数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **第二类最佳逼近** （best approximation of the second kind）．
 
-ç¬¬äºç±»æä½³é¼è¿çæ¡ä»¶ç­ä»·äº
+第二类最佳逼近的条件等价于
 
-â£ð¥âððâ£<ðâ²ðâ£ð¥âðâ²ðâ²â£.|xâpq|<qâ²q|xâpâ²qâ²|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑞∣<𝑞′𝑞∣𝑥−𝑝′𝑞′∣.|x−pq|<q′q|x−p′q′|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸º ðâ² â¤ðqâ²â¤q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ç¬¬äºç±»æä½³é¼è¿çæ¡ä»¶æ¯ç¬¬ä¸ç±»æä½³é¼è¿æ´ä¸ºä¸¥èï¼
+因为 𝑞′ ≤𝑞q′≤q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以第二类最佳逼近的条件比第一类最佳逼近更为严苛．
 
-ç¬¬äºç±»æä½³é¼è¿è½ä¸ä» è½æ¯æ¸è¿åæ°ï¼
+第二类最佳逼近能且仅能是渐近分数．
 
-å®ç
+定理
 
-ææçç¬¬äºç±»æä½³é¼è¿ä¸å®æ¯æ¸è¿åæ°ï¼ææçæ¸è¿åæ°ä¹ä¸å®æ¯ç¬¬äºç±»æä½³é¼è¿ï¼
+所有的第二类最佳逼近一定是渐近分数，所有的渐近分数也一定是第二类最佳逼近．
 
-è¯æ
+证明
 
-è¦è¯æç¬¬ä¸é¨åï¼å ä¸ºç¬¬äºç±»æä½³é¼è¿ä¹ä¸å®æ¯ç¬¬ä¸ç±»æä½³é¼è¿ï¼æä»¥åªéè¦è¯æä¸æ¯æ¸è¿åæ°çä¸­é´åæ°ä¸è½æä¸ºç¬¬äºç±»æä½³é¼è¿å°±å¯ä»¥äºï¼ä¸ºæ­¤ï¼è®¾ ð¥ð,ð¡ =ððxk,t=pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸­é´åæ°ä½æ¯ä¸æ¯æ¸è¿åæ°ï¼é£ä¹ï¼è®¾ ð¥ð,ð¡ <ð¥xk,t<x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ
+要证明第一部分，因为第二类最佳逼近也一定是第一类最佳逼近，所以只需要证明不是渐近分数的中间分数不能成为第二类最佳逼近就可以了．为此，设 𝑥𝑘,𝑡 =𝑝𝑞xk,t=pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是中间分数但是不是渐近分数，那么，设 𝑥𝑘,𝑡 <𝑥xk,t<x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
 
-ð¥ðâ1<ð¥ð,ð¡<ð¥ð+1<ð¥<ð¥ð.xkâ1<xk,t<xk+1<x<xk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑘−1<𝑥𝑘,𝑡<𝑥𝑘+1<𝑥<𝑥𝑘.xk−1<xk,t<xk+1<x<xk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸º ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´çè¯¯å·®
+因为 𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间的误差
 
-|ð¥ð,ð¡âð¥|â¥|ð¥ð,ð¡âð¥ð+1|=â£ððâðð+1ðð+1â£=|ððð+1âðð+1ð|ððð+1â¥1ððð+1,|xk,tâx|â¥|xk,tâxk+1|=|pqâpk+1qk+1|=|pqk+1âpk+1q|qqk+1â¥1qqk+1,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝑥𝑘,𝑡−𝑥|≥|𝑥𝑘,𝑡−𝑥𝑘+1|=∣𝑝𝑞−𝑝𝑘+1𝑞𝑘+1∣=|𝑝𝑞𝑘+1−𝑝𝑘+1𝑞|𝑞𝑞𝑘+1≥1𝑞𝑞𝑘+1,|xk,t−x|≥|xk,t−xk+1|=|pq−pk+1qk+1|=|pqk+1−pk+1q|qqk+1≥1qqk+1,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¹¶å©ç¨æ¸è¿åæ°çè¯¯å·®ä¼°è®¡ï¼æä»¥æ»æ¯æ
+并利用渐近分数的误差估计，所以总是有
 
-|ðð¥ð,ð¡âð|â¥1ðð+1â¥|ððð¥ðâðð|,|qxk,tâp|â¥1qk+1â¥|qkxkâpk|,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝑞𝑥𝑘,𝑡−𝑝|≥1𝑞𝑘+1≥|𝑞𝑘𝑥𝑘−𝑝𝑘|,|qxk,t−p|≥1qk+1≥|qkxk−pk|,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å³ ð¥ð,ð¡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¼è¿ç¨åº¦ä¸ä¼äºåæ¯æ´å°ç ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¼è¿ç¨åº¦ï¼æä»¥ä¸å¯è½æ¯ç¬¬äºç±»æä½³é¼è¿ï¼
+即 𝑥𝑘,𝑡xk,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逼近程度不优于分母更小的 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 逼近程度，所以不可能是第二类最佳逼近．
 
-åè¿æ¥ï¼è¦è¯æç¬¬äºé¨åï¼å³æ¯ä¸ªæ¸è¿åæ° ð¥ð =ððððxk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯ç¬¬äºç±»æä½³é¼è¿ï¼è¿å°±æ¯è¦è¯´æï¼å¯¹äºææåæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð â¤ððqâ¤qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ |ððð¥ âðð| <|ðð¥ âð||qkxâpk|<|qxâp|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸èèåå¥æ°çæ å½¢ï¼åå¯ä»¥åå® ð >0k>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¦å ï¼æ ¹æ®æ¸è¿åæ°é¼è¿å®æ°çè¯¯å·®ä¼°è®¡ï¼æ
+反过来，要证明第二部分，即每个渐近分数 𝑥𝑘 =𝑝𝑘𝑞𝑘xk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是第二类最佳逼近．这就是要说明，对于所有分数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑞 ≤𝑞𝑘q≤qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有 |𝑞𝑘𝑥 −𝑝𝑘| <|𝑞𝑥 −𝑝||qkx−pk|<|qx−p|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．不考虑半奇数的情形，则可以假定 𝑘 >0k>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．首先，根据渐近分数逼近实数的误差估计，有
 
-|ððâ1ð¥âððâ1|â¥1ððâ1+ððâ¥1ðð+1â¥|ððð¥âðð|.|qkâ1xâpkâ1|â¥1qkâ1+qkâ¥1qk+1â¥|qkxâpk|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝑞𝑘−1𝑥−𝑝𝑘−1|≥1𝑞𝑘−1+𝑞𝑘≥1𝑞𝑘+1≥|𝑞𝑘𝑥−𝑝𝑘|.|qk−1x−pk−1|≥1qk−1+qk≥1qk+1≥|qkx−pk|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸ç­å¼å ¨é¨æç«ç­å·ï¼å½ä¸ä» å½ ðð+1 =1ak+1=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯è¿åæ°çæ«é¡¹ï¼ä¸èèè¿æ ·çæ å½¢ï¼é£ä¹ ð¥ðâ1 =ððâ1ððâ1xkâ1=pkâ1qkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸¥æ ¼å£äº ð¥ð =ððððxk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+不等式全部成立等号，当且仅当 𝑎𝑘+1 =1ak+1=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且是连分数的末项．不考虑这样的情形，那么 𝑥𝑘−1 =𝑝𝑘−1𝑞𝑘−1xk−1=pk−1qk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 严格劣于 𝑥𝑘 =𝑝𝑘𝑞𝑘xk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä»»åä¸åæ° ðð â ð¥ðpqâ xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ 0 <ð â¤ðð0<qâ¤qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸ºæå·®åå ¬å¼ ððððâ1 âððâ1ðð =( â1)ðâ1pkqkâ1âpkâ1qk=(â1)kâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ç± Cramer æ³åå¯ç¥ï¼çº¿æ§æ¹ç¨ç»
+任取一分数 𝑝𝑞 ≠𝑥𝑘pq≠xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 0 <𝑞 ≤𝑞𝑘0<q≤qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因为有差分公式 𝑝𝑘𝑞𝑘−1 −𝑝𝑘−1𝑞𝑘 =( −1)𝑘−1pkqk−1−pk−1qk=(−1)k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以由 Cramer 法则可知，线性方程组
 
-{ððð+ðððâ1=ð,ððð+ðððâ1=ð{Î»pk+Î¼pkâ1=p,Î»qk+Î¼qkâ1=q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+{𝜆𝑝𝑘+𝜇𝑝𝑘−1=𝑝,𝜆𝑞𝑘+𝜇𝑞𝑘−1=𝑞{λpk+μpk−1=p,λqk+μqk−1=q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¿ ç¶å­å¨å¯ä¸çæ´æ°è§£ (ð,ð)(Î»,Î¼)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ðð >0Î»Î¼>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ ð >|ð|ðð â¥ððq>|Î»|qkâ¥qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼çç¾ï¼å¦åï¼ðð â¤0Î»Î¼â¤0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ ðÎ»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðÎ¼![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å·ï¼é£ä¹å ä¸º ððâ1ð¥ âððâ1qkâ1xâpkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððð¥ âððqkxâpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹å¼å·ï¼å°±æ ð(ððâ1ð¥ âððâ1)Î»(qkâ1xâpkâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð(ððð¥ âðð)Î¼(qkxâpk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå·ï¼æ è
+必然存在唯一的整数解 (𝜆,𝜇)(λ,μ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如果 𝜆𝜇 >0λμ>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么 𝑞 >|𝜆|𝑞𝑘 ≥𝑞𝑘q>|λ|qk≥qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，矛盾．否则，𝜆𝜇 ≤0λμ≤0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即 𝜆λ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝜇μ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 异号，那么因为 𝑞𝑘−1𝑥 −𝑝𝑘−1qk−1x−pk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑞𝑘𝑥 −𝑝𝑘qkx−pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也异号，就有 𝜆(𝑞𝑘−1𝑥 −𝑝𝑘−1)λ(qk−1x−pk−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝜇(𝑞𝑘𝑥 −𝑝𝑘)μ(qkx−pk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同号，故而
 
-|ðð¥âð|=|ð||ððð¥âðð|+|ð||ððâ1ð¥âððâ1|>|ððð¥âðð|.|qxâp|=|Î»||qkxâpk|+|Î¼||qkâ1xâpkâ1|>|qkxâpk|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝑞𝑥−𝑝|=|𝜆||𝑞𝑘𝑥−𝑝𝑘|+|𝜇||𝑞𝑘−1𝑥−𝑝𝑘−1|>|𝑞𝑘𝑥−𝑝𝑘|.|qx−p|=|λ||qkx−pk|+|μ||qk−1x−pk−1|>|qkx−pk|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æåçä¸ç­å·æ¯ä¸¥æ ¼çï¼å ä¸º ð¥ðâ1xkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸¥æ ¼å£äº ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ ðð â ð¥ðpqâ xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿å°±è¯´æï¼ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç¬¬äºç±»æä½³é¼è¿ï¼
+最后的不等号是严格的，因为 𝑥𝑘−1xk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 严格劣于 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且 𝑝𝑞 ≠𝑥𝑘pq≠xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这就说明，𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是第二类最佳逼近．
 
-è¿ä¸ªæ§è´¨è¡¨æï¼æ¸è¿åæ°ç¡®å®æ¯ç¸å½å¥½çä¸¢çªå¾é¼è¿ï¼
+这个性质表明，渐近分数确实是相当好的丢番图逼近．
 
-### æ¸è¿åæ°çå¤å®
+### 渐近分数的判定
 
-ç¬¬äºç±»æä½³é¼è¿æä¾äºå¤æ­æä¸ªåæ°æ¯å¦æ¯æ¸è¿åæ°çå åå¿ è¦æ¡ä»¶ï¼è¿è¯´æï¼å¯ä»¥éè¿æ£æ¥æä¸ªåæ°é¼è¿çç¸å¯¹ç¨åº¦æ¥å¤æ­å®æ¯å¦æ¯æ¸è¿åæ°ï¼Legendre å¤å«æ³åæä¾äºæ ¹æ®é¼è¿çç»å¯¹ç¨åº¦æ¥å¤æ­æ¸è¿åæ°çæ¹æ³ï¼Legendre å¤å«æ³çåå§è¡¨è¿°æä¾äºå åå¿ è¦æ¡ä»¶ï¼ä½æ¯å®çå½¢å¼å¹¶ä¸å®ç¨ï¼æ¬èæä¾äº Legendre å¤å«æ³çç®åçæ¬ï¼å¹¶è¯´æå®å¹¶æ²¡ææ¼æå¤ªå¤çæ¸è¿åæ°ï¼
+第二类最佳逼近提供了判断某个分数是否是渐近分数的充分必要条件．这说明，可以通过检查某个分数逼近的相对程度来判断它是否是渐近分数．Legendre 判别法则提供了根据逼近的绝对程度来判断渐近分数的方法．Legendre 判别法的原始表述提供了充分必要条件，但是它的形式并不实用．本节提供了 Legendre 判别法的简化版本，并说明它并没有漏掉太多的渐近分数．
 
-å®çï¼Legendreï¼
+定理（Legendre）
 
-å¯¹äºå®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦ææ
+对于实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与分数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果有
 
-â£ð¥âððâ£<12ð2|xâpq|<12q2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑞∣<12𝑞2|x−pq|<12q2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é£ä¹ ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®æ¯ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¸è¿åæ°ï¼
+那么 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一定是 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的渐近分数．
 
-è¯æ
+证明
 
-è®¾ ð â{ â1,1}Ïµâ{â1,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð â(0,1/2)Î¸â(0,1/2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä½¿å¾
+设 𝜖 ∈{ −1,1}ϵ∈{−1,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝜃 ∈(0,1/2)θ∈(0,1/2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是使得
 
-ð¥âðð=ððð2xâpq=ÏµÎ¸q2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥−𝑝𝑞=𝜖𝜃𝑞2x−pq=ϵθq2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æç«çå¸¸æ°ï¼å°æçæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å±å¼æè¿åæ° [ð0,ð1,â¯,ðð][a0,a1,â¯,an]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤å¤ï¼æçæ°æä¸¤ç§è¿åæ°è¡¨ç¤ºï¼å ¶ä¸­ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ°å¥½ç¸å·®ä¸ï¼æä»¥å¯ä»¥åè¿åæ°è¡¨ç¤ºä½¿å¾ ( â1)ð =ð(â1)n=Ïµ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶è®°è¿ä¸ªè¿åæ°è¡¨ç¤ºçæ¸è¿åæ°ä¸º ððððpkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®¾å®æ° ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³
+成立的常数．将有理数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 展开成连分数 [𝑎0,𝑎1,⋯,𝑎𝑛][a0,a1,⋯,an]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此处，有理数有两种连分数表示，其中的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 恰好相差一，所以可以取连分数表示使得 ( −1)𝑛 =𝜖(−1)n=ϵ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并记这个连分数表示的渐近分数为 𝑝𝑘𝑞𝑘pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．设实数 𝜔ω![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足
 
-ð¥=ððð+ððâ1ððð+ððâ1.x=Ïpn+pnâ1Ïqn+qnâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝜔𝑝𝑛+𝑝𝑛−1𝜔𝑞𝑛+𝑞𝑛−1.x=ωpn+pn−1ωqn+qn−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é£ä¹ï¼å¿ ç¶æ
+那么，必然有
 
-ððð2=ð¥âðð=ð¥âðððð=ððâ1ððâððððâ1(ððð+ððâ1)ðð=(â1)ð(ððð+ððâ1)ðð.ÏµÎ¸q2=xâpq=xâpnqn=pnâ1qnâpnqnâ1(Ïqn+qnâ1)qn=(â1)n(Ïqn+qnâ1)qn.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜖𝜃𝑞2=𝑥−𝑝𝑞=𝑥−𝑝𝑛𝑞𝑛=𝑝𝑛−1𝑞𝑛−𝑝𝑛𝑞𝑛−1(𝜔𝑞𝑛+𝑞𝑛−1)𝑞𝑛=(−1)𝑛(𝜔𝑞𝑛+𝑞𝑛−1)𝑞𝑛.ϵθq2=x−pq=x−pnqn=pn−1qn−pnqn−1(ωqn+qn−1)qn=(−1)n(ωqn+qn−1)qn.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ èï¼æ
+故而，有
 
-ð=ððððð+ððâ1.Î¸=qnÏqn+qnâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜃=𝑞𝑛𝜔𝑞𝑛+𝑞𝑛−1.θ=qnωqn+qn−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿è¯´æ
+这说明
 
-ð=1ðâððâ1ðð>1.Ï=1Î¸âqnâ1qn>1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜔=1𝜃−𝑞𝑛−1𝑞𝑛>1.ω=1θ−qn−1qn>1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å° ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹å±æè¿åæ° [ð0,ð1,â¯][b0,b1,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å
+将 𝜔ω![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也展成连分数 [𝑏0,𝑏1,⋯][b0,b1,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则
 
-ð¥=ððð+ððâ1ððð+ððâ1=[ð0,ð1,â¯,ðð,ð]=[ð0,ð1,â¯,ðð,ð0,ð1,â¯].x=Ïpn+pnâ1Ïqn+qnâ1=[a0,a1,â¯,an,Ï]=[a0,a1,â¯,an,b0,b1,â¯].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝜔𝑝𝑛+𝑝𝑛−1𝜔𝑞𝑛+𝑞𝑛−1=[𝑎0,𝑎1,⋯,𝑎𝑛,𝜔]=[𝑎0,𝑎1,⋯,𝑎𝑛,𝑏0,𝑏1,⋯].x=ωpn+pn−1ωqn+qn−1=[a0,a1,⋯,an,ω]=[a0,a1,⋯,an,b0,b1,⋯].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¯åæ³çç®åè¿åæ°ï¼æä»¥ ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¸è¿åæ°ï¼
+这是合法的简单连分数，所以 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的渐近分数．
 
-è¿ä¸ªè¯æå®é è¯´æ ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¸ºæ¸è¿åæ°çå åå¿ è¦æ¡ä»¶æ¯ä¸è¿°è¯æä¸­ç ð >1Ï>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ­£æ¯ Legendre å¤å«æ³çåå§å½¢å¼ï¼
+这个证明实际说明 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成为渐近分数的充分必要条件是上述证明中的 𝜔 >1ω>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这正是 Legendre 判别法的原始形式．
 
-è¿ä¸ªå¤å«æ³è¯´æï¼åªè¦é¼è¿çç¨åº¦è¶³å¤å¥½ï¼å°±ä¸å®æ¯æ¸è¿åæ°ï¼ä¸ä¸ä¸ªå®çè¯´æï¼è¿æ ·å¥½çæ¸è¿åæ°è¶³å¤å¤ï¼è³å°æä¸åçæ¸è¿åæ°é½ç¬¦åè¿ä¸ªæ¡ä»¶ï¼
+这个判别法说明，只要逼近的程度足够好，就一定是渐近分数．下一个定理说明，这样好的渐近分数足够多：至少有一半的渐近分数都符合这个条件．
 
-å®çï¼Valhenï¼
+定理（Valhen）
 
-å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¸é»ä¸¤ä¸ªæ¸è¿åæ°ä¸­è³å°æä¸ä¸ªæ»¡è¶³
+实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的相邻两个渐近分数中至少有一个满足
 
-â£ð¥âððâ£<12ð2.|xâpq|<12q2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)è¯æ
+∣𝑥−𝑝𝑞∣<12𝑞2.|x−pq|<12q2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)证明
 
-åè®¾ä¸ç¶ï¼å­å¨å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¸¤ä¸ªç¸é»çæ¸è¿åæ° ð¥ðâ1xkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³
+假设不然．存在实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有两个相邻的渐近分数 𝑥𝑘−1xk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足
 
-â£ð¥âððððâ£â¥12ð2ð,Â â£ð¥âðð+1ðð+1â£â¥12ð2ð+1.|xâpkqk|â¥12qk2,Â |xâpk+1qk+1|â¥12qk+12.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∣𝑥−𝑝𝑘𝑞𝑘∣≥12𝑞2𝑘, ∣𝑥−𝑝𝑘+1𝑞𝑘+1∣≥12𝑞2𝑘+1.|x−pkqk|≥12qk2, |x−pk+1qk+1|≥12qk+12.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸º ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½äº ð¥ðâ1xkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼æä»¥
+因为 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位于 𝑥𝑘−1xk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间，所以
 
-12ð2ð+12ð2ð+1â¤â£ð¥âððððâ£+â£ð¥âðð+1ðð+1â£=â£ððððâðð+1ðð+1â£=1ðððð+1.12qk2+12qk+12â¤|xâpkqk|+|xâpk+1qk+1|=|pkqkâpk+1qk+1|=1qkqk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+12𝑞2𝑘+12𝑞2𝑘+1≤∣𝑥−𝑝𝑘𝑞𝑘∣+∣𝑥−𝑝𝑘+1𝑞𝑘+1∣=∣𝑝𝑘𝑞𝑘−𝑝𝑘+1𝑞𝑘+1∣=1𝑞𝑘𝑞𝑘+1.12qk2+12qk+12≤|x−pkqk|+|x−pk+1qk+1|=|pkqk−pk+1qk+1|=1qkqk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿è¯´æ ðð =ðð+1qk=qk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ èå¿ ç¶æ ð =0k=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð1 =1a1=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶åä¸¤ä¸ªæ¸è¿åæ°æ¯ ð¥0 =ð0x0=a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥1 =ð0 +1x1=a0+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ èå½é¢çå¯ä¸åä¾æ¯åå¥æ°ï¼æç §åæçè¯´æï¼æ¬æä¸èèè¿ç§æ å½¢ï¼
+这说明 𝑞𝑘 =𝑞𝑘+1qk=qk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．故而必然有 𝑘 =0k=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑎1 =1a1=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此时前两个渐近分数是 𝑥0 =𝑎0x0=a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥1 =𝑎0 +1x1=a0+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．故而命题的唯一反例是半奇数，按照前文的说明，本文不考虑这种情形．
 
-## å ä½è§£é
+## 几何解释
 
-è¿åæ°çè®ºæçä¼ç¾çå ä½è§£éï¼
+连分数理论有着优美的几何解释．
 
 ![](./images/continued-convergents-geometry.svg)
 
-å¦å¾æç¤ºï¼å¯¹äºå®æ° ð >0Î¾>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç´çº¿ ð¦ =ðð¥y=Î¾x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°ç¬¬ä¸è±¡éï¼å æ¬ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ è½´ä¸çç¹ä½ä¸å æ¬åç¹ï¼ä¸åï¼ä¸çæ´ç¹ï¼lattice pointï¼åæä¸ä¸ä¸¤é¨åï¼å¯¹äºæçæ° ðÎ¾![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼ç´çº¿ ð¦ =ðð¥y=Î¾x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çç¹æ¢ç®ä½ç´çº¿ä¸æ¹çç¹ï¼åç®ä½ç´çº¿ä¸æ¹çç¹ï¼èèè¿ä¸¤é¨åçç¹çå¸å ï¼é£ä¹ï¼å¥æ°é¡¹æ¸è¿åæ°æ¯ä¸åé¨åçå¸å çé¡¶ç¹ï¼å¶æ°é¡¹æ¸è¿åæ°æ¯ä¸åé¨åçå¸å çé¡¶ç¹ï¼å¸å ä¸ä¸¤ä¸ªç¸é»é¡¶ç¹ä¹é´çè¿çº¿ä¸çæ´ç¹å°±æ¯ä¸­é´åæ°ï¼å¾ä¸­å±ç¤ºäº ð =97Î¾=97![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¸è¿åæ°åä¸­é´åæ°ï¼ç°ç¹ï¼ï¼
+如图所示，对于实数 𝜉 >0ξ>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，直线 𝑦 =𝜉𝑥y=ξx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 将第一象限（包括 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 坐标轴上的点但不包括原点，下同）上的整点（lattice point）分成上下两部分．对于有理数 𝜉ξ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形，直线 𝑦 =𝜉𝑥y=ξx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的点既算作直线上方的点，又算作直线下方的点．考虑这两部分的点的凸包．那么，奇数项渐近分数是上半部分的凸包的顶点，偶数项渐近分数是下半部分的凸包的顶点．凸包上两个相邻顶点之间的连线上的整点就是中间分数．图中展示了 𝜉 =97ξ=97![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的渐近分数和中间分数（灰点）．
 
-åæå ³äºè¿åæ°çå¤§é¨åç»è®ºé½æç¸åºçå ä½è§£éï¼
+前文关于连分数的大部分结论都有相应的几何解释：
 
-å ä½è§£é
+几何解释
 
-  * æ¯ä¸ªåæ° ð =ððÎ½=pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½å¯¹åºçç¬¬ä¸è±¡éå çä¸ä¸ªæ´ç¹ âð =(ð,ð)Î½â=(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ°çå¤§å°å¯¹åºçä¸åç¹è¿çº¿çæçï¼
-  * ç´çº¿ ð¦ =ðð¥y=Î¾x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹ååéæ¯ âð =(1,ð)Î¾â=(1,Î¾)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å©ç¨ [åç§¯](../../linear-algebra/product/#äºç»´åéçæ) (ð¥1,ð¦1) Ã(ð¥2,ð¦2) =ð¥1ð¦2 âð¥2ð¦1(x1,y1)Ã(x2,y2)=x1y2âx2y1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¦å¿µï¼å¯ä»¥éè¿ âð Ãâð =ð âððÎ¾âÃÎ½â=pâqÎ¾![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ­£è´å¤æ­ç¹å¨ç´çº¿ä¸æ¹è¿æ¯ä¸æ¹ï¼å èï¼å¨ç´çº¿ä¸æ¹çç¹å°±å¯¹åºçå¤§äºç­äº ðÎ¾![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°ï¼å¨ç´çº¿ä¸æ¹çç¹å°±å¯¹åºçå°äºç­äº ðÎ¾![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°ï¼åç§¯çç»å¯¹å¼ |âð Ãâð||Î¾âÃÎ½â|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ­£æ¯äºç¹ âðÎ½â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ç´çº¿ ð¦ =ðð¥y=Î¾x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè·ç¦»
+  * 每个分数 𝜈 =𝑝𝑞ν=pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都对应着第一象限内的一个整点 ⃗𝜈 =(𝑞,𝑝)ν→=(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，分数的大小对应着与原点连线的斜率．
+  * 直线 𝑦 =𝜉𝑥y=ξx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方向向量是 ⃗𝜉 =(1,𝜉)ξ→=(1,ξ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．利用 [叉积](../../linear-algebra/product/#二维向量的情形) (𝑥1,𝑦1) ×(𝑥2,𝑦2) =𝑥1𝑦2 −𝑥2𝑦1(x1,y1)×(x2,y2)=x1y2−x2y1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的概念，可以通过 ⃗𝜉 ×⃗𝜈 =𝑝 −𝑞𝜉ξ→×ν→=p−qξ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的正负判断点在直线上方还是下方．因而，在直线上方的点就对应着大于等于 𝜉ξ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分数，在直线下方的点就对应着小于等于 𝜉ξ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分数．叉积的绝对值 |⃗𝜉 ×⃗𝜈||ξ→×ν→|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 正比于点 ⃗𝜈ν→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与直线 𝑦 =𝜉𝑥y=ξx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的距离
 
-|ðâðð¥|â1+ð2,|pâqx|1+Î¾2,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝑝−𝑞𝑥|√1+𝜉2,|p−qx|1+ξ2,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹åºçåæ° ðÎ½![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹å®æ° ðÎ¾![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¼è¿ç¨åº¦ï¼
+对应着分数 𝜈ν![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对实数 𝜉ξ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逼近程度．
 
-  * å°æ¸è¿åæ° ðð =ððððÎ¾k=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹åºçç¹è®°ä½ âðð =(ðð,ðð)Î¾âk=(pk,qk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åéæ¨å ¬å¼å°±å¯ä»¥åä½
+  * 将渐近分数 𝜉𝑘 =𝑝𝑘𝑞𝑘ξk=pkqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对应的点记作 ⃗𝜉𝑘 =(𝑝𝑘,𝑞𝑘)ξ→k=(pk,qk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则递推公式就可以写作
 
-âðð=ððâððâ1+âððâ2.Î¾âk=akÎ¾âkâ1+Î¾âkâ2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⃗𝜉𝑘=𝑎𝑘⃗𝜉𝑘−1+⃗𝜉𝑘−2.ξ→k=akξ→k−1+ξ→k−2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-éå½çèµ·ç¹æ¯ ðâ2 =(1,0)Î¾â2=(1,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðâ1 =(0,1)Î¾â1=(0,1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+递归的起点是 𝜉−2 =(1,0)ξ−2=(1,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝜉−1 =(0,1)ξ−1=(0,1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * å¯¹äºæ´æ° ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ 0 â¤ð¡ â¤ðð0â¤tâ¤ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ç¹
+  * 对于整数 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果 0 ≤𝑡 ≤𝑎𝑘0≤t≤ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么点
 
-âððâ1,ð¡=ð¡âððâ1+âððâ2Î¾âkâ1,t=tÎ¾âkâ1+Î¾âkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⃗𝜉𝑘−1,𝑡=𝑡⃗𝜉𝑘−1+⃗𝜉𝑘−2ξ→k−1,t=tξ→k−1+ξ→k−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°±è½å¨è¿ç»ç¹ âððâ2Î¾âkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åç¹ âððÎ¾âk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ççº¿æ®µä¸ï¼å®ä»¬å¯¹åºçä¸­é´åæ° ððâ1,ð¡Î¾kâ1,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+就落在连结点 ⃗𝜉𝑘−2ξ→k−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和点 ⃗𝜉𝑘ξ→k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的线段上．它们对应着中间分数 𝜉𝑘−1,𝑡ξk−1,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * å©ç¨å ä½çæ¹æ³å¯ä»¥æé åºææçæ¸è¿åæ°åä¸­é´åæ°ï¼ä»ç¹ âðâ2 =(1,0)Î¾ââ2=(1,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åç¹ âðâ1 =(0,1)Î¾ââ1=(0,1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§ï¼ä¸¤ä¸ªç¹ä½äºç´çº¿ ð¦ =ðð¥y=Î¾x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸¤ä¾§ï¼è¿æå³ç âð Ãâðâ2Î¾âÃÎ¾ââ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å âð Ãâðâ1Î¾âÃÎ¾ââ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¬¦å·ç¸åï¼å° âðâ1Î¾ââ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç §åéçå æ³æ·»å å° âðâ2Î¾ââ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ï¼ç´å°æ æ³ç»§ç»­æ·»å èä¸ç©¿è¿ç´çº¿ ð¦ =ðð¥y=Î¾x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ­¢ï¼å°ç»æè®°ä½ âð0Î¾â0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶ä»ä¸ âðâ1Î¾ââ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åä¾§ï¼åå° âð0Î¾â0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ·»å å° âðâ1Î¾ââ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ï¼ç´å°æ æ³ç»§ç»­æ·»å èä¸ç©¿è¿ç´çº¿ ð¦ =ðð¥y=Î¾x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ­¢ï¼å°ç»æè®°ä½ âð1Î¾â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶ä»ä¸ âð0Î¾â0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åä¾§ï¼è¿ä¸ªè¿ç¨å¯ä»¥ä¸ç´æç»­å°æ ç©·ï¼é¤éå¨æéæ­¥å æä¸ª âððÎ¾ân![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ°å¥½è½å¨ç´çº¿ ð¦ =ðð¥y=Î¾x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ï¼åè æå³çåé âðÎ¾â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ âððÎ¾ân![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ±çº¿ï¼å³ ð =ððððÎ¾=pnqn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæçç¹ï¼è¿ä¸ªè¿ç¨å°±å¯ä»¥å¾å°åé¢ç¤ºæå¾ä¸­çå¾å½¢ï¼Boris Delaunay å°è¿ä¸ªè¿ç¨å½¢è±¡å°ç§°ä¸ºé¼»å­æä¼¸ç®æ³ï¼nose-streching algorithmï¼9ï¼
+  * 利用几何的方法可以构造出所有的渐近分数和中间分数．从点 ⃗𝜉−2 =(1,0)ξ→−2=(1,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和点 ⃗𝜉−1 =(0,1)ξ→−1=(0,1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始，两个点位于直线 𝑦 =𝜉𝑥y=ξx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 两侧，这意味着 ⃗𝜉 ×⃗𝜉−2ξ→×ξ→−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 ⃗𝜉 ×⃗𝜉−1ξ→×ξ→−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 符号相反．将 ⃗𝜉−1ξ→−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 按照向量的加法添加到 ⃗𝜉−2ξ→−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上，直到无法继续添加而不穿过直线 𝑦 =𝜉𝑥y=ξx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为止，将结果记作 ⃗𝜉0ξ→0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，此时仍与 ⃗𝜉−1ξ→−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不同侧．再将 ⃗𝜉0ξ→0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 添加到 ⃗𝜉−1ξ→−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上，直到无法继续添加而不穿过直线 𝑦 =𝜉𝑥y=ξx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为止，将结果记作 ⃗𝜉1ξ→1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，此时仍与 ⃗𝜉0ξ→0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不同侧．这个过程可以一直持续到无穷，除非在有限步内某个 ⃗𝜉𝑛ξ→n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就恰好落在直线 𝑦 =𝜉𝑥y=ξx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上．后者意味着向量 ⃗𝜉ξ→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 ⃗𝜉𝑛ξ→n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 共线，即 𝜉 =𝑝𝑛𝑞𝑛ξ=pnqn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为有理点．这个过程就可以得到前面示意图中的图形．Boris Delaunay 将这个过程形象地称为鼻子拉伸算法（nose-streching algorithm）9．
 
-  * å¦æéè¦å¿«éè®¡ç®æ¯ä¸æ­¥å° âððâ1Î¾âkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ·»å å° âððâ2Î¾âkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éè¦çæ¬¡æ°ï¼å¯ä»¥åå©åç§¯ï¼å ä¸º âð Ãâððâ1Î¾âÃÎ¾âkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ âð Ãâððâ2Î¾âÃÎ¾âkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¬¦å·ç¸åï¼æä»¥å¦æè®° âððâ1,ð¡ =ð¡âððâ1 +âððâ2Î¾âkâ1,t=tÎ¾âkâ1+Î¾âkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå âððâ2Î¾âkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ·»å ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ âððâ1Î¾âkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¾å°çç»æï¼å âð Ãâððâ1,ð¡ =ð¡(âð Ãâððâ1) +(âð Ãâððâ2)Î¾âÃÎ¾âkâ1,t=t(Î¾âÃÎ¾âkâ1)+(Î¾âÃÎ¾âkâ2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¹åç¬¦å·ï¼å°±æå³çæ²¡æç©¿è¿ç´çº¿ï¼å¨ä¸åå·ä¹åï¼âð Ãâððâ1,ð¡Î¾âÃÎ¾âkâ1,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç»å¯¹å¼ä¼éæ¸ä¸éï¼è®°
+  * 如果需要快速计算每一步将 ⃗𝜉𝑘−1ξ→k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 添加到 ⃗𝜉𝑘−2ξ→k−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 需要的次数，可以借助叉积．因为 ⃗𝜉 ×⃗𝜉𝑘−1ξ→×ξ→k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 ⃗𝜉 ×⃗𝜉𝑘−2ξ→×ξ→k−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 符号相反，所以如果记 ⃗𝜉𝑘−1,𝑡 =𝑡⃗𝜉𝑘−1 +⃗𝜉𝑘−2ξ→k−1,t=tξ→k−1+ξ→k−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为向 ⃗𝜉𝑘−2ξ→k−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 添加 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次 ⃗𝜉𝑘−1ξ→k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 得到的结果，则 ⃗𝜉 ×⃗𝜉𝑘−1,𝑡 =𝑡(⃗𝜉 ×⃗𝜉𝑘−1) +(⃗𝜉 ×⃗𝜉𝑘−2)ξ→×ξ→k−1,t=t(ξ→×ξ→k−1)+(ξ→×ξ→k−2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不改变符号，就意味着没有穿过直线．在不变号之前，⃗𝜉 ×⃗𝜉𝑘−1,𝑡ξ→×ξ→k−1,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的绝对值会逐渐下降．记
 
-ðð=â£âðÃâððâ2âðÃâððâ1â£=ââðÃâððâ2âðÃâððâ1.rk=|Î¾âÃÎ¾âkâ2Î¾âÃÎ¾âkâ1|=âÎ¾âÃÎ¾âkâ2Î¾âÃÎ¾âkâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘=∣⃗𝜉×⃗𝜉𝑘−2⃗𝜉×⃗𝜉𝑘−1∣=−⃗𝜉×⃗𝜉𝑘−2⃗𝜉×⃗𝜉𝑘−1.rk=|ξ→×ξ→k−2ξ→×ξ→k−1|=−ξ→×ξ→k−2ξ→×ξ→k−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é£ä¹ï¼æå¤§å¯ä»¥ä¸éçæ¬¡æ°å°±æ¯
+那么，最大可以下降的次数就是
 
-ðð=âððâ=ââ£ððâ1ðâððâ1ððâ2ðâððâ2â£â.ak=ârkâ=â|qkâ1Î¾âpkâ1qkâ2Î¾âpkâ2|â.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑘=⌊𝑟𝑘⌋=⌊∣𝑞𝑘−1𝜉−𝑝𝑘−1𝑞𝑘−2𝜉−𝑝𝑘−2∣⌋.ak=⌊rk⌋=⌊|qk−1ξ−pk−1qk−2ξ−pk−2|⌋.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±æ¯è¿åæ°å±å¼çç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ï¼èä¸ï¼ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯è¿åæ°å±å¼çä½é¡¹ï¼å®æ»¡è¶³å ³ç³»å¼ï¼
+这就是连分数展开的第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项．而且，𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是连分数展开的余项，它满足关系式：
 
-ðð=âððâ1ðâððâ1ððâ2ðâððâ2âºð=ððâ1ðð+ððâ2ððâ1ðð+ððâ2.rk=âqkâ1Î¾âpkâ1qkâ2Î¾âpkâ2âºÎ¾=pkâ1rk+pkâ2qkâ1rk+qkâ2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘=−𝑞𝑘−1𝜉−𝑝𝑘−1𝑞𝑘−2𝜉−𝑝𝑘−2⟺𝜉=𝑝𝑘−1𝑟𝑘+𝑝𝑘−2𝑞𝑘−1𝑟𝑘+𝑞𝑘−2.rk=−qk−1ξ−pk−1qk−2ξ−pk−2⟺ξ=pk−1rk+pk−2qk−1rk+qk−2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±æ¯è¿åæ°å ³ç³»å¼ ð =[ð0,ð1,â¯,ððâ1,ðð]Î¾=[a0,a1,â¯,akâ1,rk]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这就是连分数关系式 𝜉 =[𝑎0,𝑎1,⋯,𝑎𝑘−1,𝑟𝑘]ξ=[a0,a1,⋯,ak−1,rk]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * å ä¸ºæ¯æ¬¡æ·»å åéé æç âð Ãâððâ1,ð¡Î¾âÃÎ¾âkâ1,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çååçæ­¥é¿é½æ¯ |âð Ãâððâ1||Î¾âÃÎ¾âkâ1|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥æåå©ä½çè·ç¦» |âð Ãâðð||Î¾âÃÎ¾âk|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¿ ç¶ä¸¥æ ¼å°äº |âð Ãâððâ1||Î¾âÃÎ¾âkâ1|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿è¯´æï¼æ¸è¿åæ°çé¼è¿ç¨åº¦ï¼ç± |ðð¥ âð||qxâp|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¡éï¼æ¯éç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¢å ä¸¥æ ¼æ´ä¼çï¼
+  * 因为每次添加向量造成的 ⃗𝜉 ×⃗𝜉𝑘−1,𝑡ξ→×ξ→k−1,t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的变化的步长都是 |⃗𝜉 ×⃗𝜉𝑘−1||ξ→×ξ→k−1|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以最后剩余的距离 |⃗𝜉 ×⃗𝜉𝑘||ξ→×ξ→k|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 必然严格小于 |⃗𝜉 ×⃗𝜉𝑘−1||ξ→×ξ→k−1|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这说明，渐近分数的逼近程度（由 |𝑞𝑥 −𝑝||qx−p|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 衡量）是随着 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的增加严格更优的．
 
-  * å©ç¨åç§¯çè¿ç®æ³åï¼æ
+  * 利用叉积的运算法则，有
 
-âððÃâðð+1=âððÃ(ðð+1âðð+âððâ1)=âððÃâððâ1=ââððâ1Ãâðð.Î¾âkÃÎ¾âk+1=Î¾âkÃ(ak+1Î¾âk+Î¾âkâ1)=Î¾âkÃÎ¾âkâ1=âÎ¾âkâ1ÃÎ¾âk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⃗𝜉𝑘×⃗𝜉𝑘+1=⃗𝜉𝑘×(𝑎𝑘+1⃗𝜉𝑘+⃗𝜉𝑘−1)=⃗𝜉𝑘×⃗𝜉𝑘−1=−⃗𝜉𝑘−1×⃗𝜉𝑘.ξ→k×ξ→k+1=ξ→k×(ak+1ξ→k+ξ→k−1)=ξ→k×ξ→k−1=−ξ→k−1×ξ→k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å½çº³å¯ç¥
+归纳可知
 
-âððÃâðð+1=(â1)ð+2âððâ2Ãâððâ1=(â1)ð.Î¾âkÃÎ¾âk+1=(â1)k+2Î¾âkâ2ÃÎ¾âkâ1=(â1)k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⃗𝜉𝑘×⃗𝜉𝑘+1=(−1)𝑘+2⃗𝜉𝑘−2×⃗𝜉𝑘−1=(−1)𝑘.ξ→k×ξ→k+1=(−1)k+2ξ→k−2×ξ→k−1=(−1)k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±æ¯æ¸è¿åæ°çå·®åå ¬å¼ ðð+1ðð âðððð+1 =( â1)ðpk+1qkâpkqk+1=(â1)k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这就是渐近分数的差分公式 𝑝𝑘+1𝑞𝑘 −𝑝𝑘𝑞𝑘+1 =( −1)𝑘pk+1qk−pkqk+1=(−1)k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * ä¸ä¸ä¸¤ä¸ªå¸å ä¹é´çé¢ç§¯å¯ä»¥ååæè¥å¹²ä¸ªï¼å¯è½æ¯æ ç©·å¤ä¸ªï¼ä¸è§å½¢ï¼å ¶ä¸­æ¯ä¸ªä¸è§å½¢çé¡¶ç¹åå«æ¯ âððâ2Î¾âkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ãâððÎ¾âk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å â00â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ ·çä¸è§å½¢çé¢ç§¯æ¯
+  * 上下两个凸包之间的面积可以剖分成若干个（可能是无穷多个）三角形，其中每个三角形的顶点分别是 ⃗𝜉𝑘−2ξ→k−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、⃗𝜉𝑘ξ→k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 ⃗00→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这样的三角形的面积是
 
-12|âððâ2Ãâðð|=12|âððâ2Ã(ððâððâ1+âððâ2)|=ðð2|âððâ2Ãâððâ1|=ðð2.12|Î¾âkâ2ÃÎ¾âk|=12|Î¾âkâ2Ã(akÎ¾âkâ1+Î¾âkâ2)|=ak2|Î¾âkâ2ÃÎ¾âkâ1|=ak2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+12|⃗𝜉𝑘−2×⃗𝜉𝑘|=12|⃗𝜉𝑘−2×(𝑎𝑘⃗𝜉𝑘−1+⃗𝜉𝑘−2)|=𝑎𝑘2|⃗𝜉𝑘−2×⃗𝜉𝑘−1|=𝑎𝑘2.12|ξ→k−2×ξ→k|=12|ξ→k−2×(akξ→k−1+ξ→k−2)|=ak2|ξ→k−2×ξ→k−1|=ak2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ® [Pick å®ç](../../../geometry/pick/)ï¼è¿æå³çå¦æè®¾ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå«ä¸ºä¸è§å½¢å é¨åè¾¹çä¸çæ´ç¹ä¸ªæ°ï¼å
+根据 [Pick 定理](../../../geometry/pick/)，这意味着如果设 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别为三角形内部和边界上的整点个数，则
 
-ð¼+ðµ2â1=ðð2.I+B2â1=ak2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐼+𝐵2−1=𝑎𝑘2.I+B2−1=ak2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå·²ç¥ä¸è§å½¢è¾¹çä¸å·²ç»æäº {â0} âª{âððâ1,ð¡ :0 â¤ð¡ â¤ðð}{0â}âª{Î¾âkâ1,t:0â¤tâ¤ak}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿å ±è®¡ ðð +2ak+2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ´ç¹ï¼è¿è¯´æï¼å°±ä¸å®æ ð¼ =0I=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðµ =ðð +2B=ak+2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å èï¼ä¸è§å½¢çè¾¹ä¸æ²¡ææ´å¤çæ´ç¹ï¼ä¸è§å½¢å é¨ä¹æ²¡ææ´ç¹ï¼ä¹å°±æ¯è¯´ï¼ððqk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¢çº¦çï¼ä¸­é´åæ°æ¯è¿ç» âððâ2Î¾âkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å âððÎ¾âk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¾¹ä¸çå ¨é¨æ´ç¹ï¼ä¸ç¬¬ä¸è±¡éçæææ´ç¹é½å¨ä¸ä¸ä¸¤ä¸ªå¸å å ï¼
+又已知三角形边界上已经有了 {⃗0} ∪{⃗𝜉𝑘−1,𝑡 :0 ≤𝑡 ≤𝑎𝑘}{0→}∪{ξ→k−1,t:0≤t≤ak}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这共计 𝑎𝑘 +2ak+2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个整点．这说明，就一定有 𝐼 =0I=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐵 =𝑎𝑘 +2B=ak+2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因而，三角形的边上没有更多的整点，三角形内部也没有整点．也就是说，𝑞𝑘qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑝𝑘pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是既约的，中间分数是连结 ⃗𝜉𝑘−2ξ→k−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 ⃗𝜉𝑘ξ→k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的边上的全部整点，且第一象限的所有整点都在上下两个凸包内．
 
-è¿æ ·å¾å°çä¸ä¸ä¸¤ä¸ªå¸å ç§°ä¸º Klein å¤è¾¹å½¢ï¼å¨é«ç»´ç©ºé´å ä¹å¯ä»¥åç±»ä¼¼å®ä¹ï¼å¾å° [Klein å¤é¢ä½](https://en.wikipedia.org/wiki/Klein_polyhedron)ï¼Klein polyhedronï¼ï¼å®å¯ä»¥å°è¿åæ°çæ¦å¿µæ¨å¹¿å°é«ç»´ç©ºé´å ï¼
+这样得到的上下两个凸包称为 Klein 多边形．在高维空间内也可以做类似定义，得到 [Klein 多面体](https://en.wikipedia.org/wiki/Klein_polyhedron)（Klein polyhedron），它可以将连分数的概念推广到高维空间内．
 
-## è¿åæ°çæ 
+## 连分数的树
 
-ä¸»æ¡ç®ï¼[SternâBrocot æ ä¸ Farey åºå](../stern-brocot/)
+主条目：[Stern–Brocot 树与 Farey 序列](../stern-brocot/)
 
-SternâBrocot æ æ¯å­å¨äºææä½äº [0,â][0,â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´çåæ°ç [äºåæç´¢æ ](../../../ds/bst/)ï¼æéè¿åæ°å®é ä¸ç¼ç äº SternâBrocot æ ä¸ä»æ ¹å°æä¸ªåæ°æå¨ä½ç½®çè·¯å¾ï¼ä¹å°±æ¯è¯´ï¼æçæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°è¡¨ç¤º [ð0,ð1,â¯,ððâ1,1][a0,a1,â¯,anâ1,1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå³çä»æ æ ¹ 1111![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§ï¼éè¦å åå³å­èç¹ç§»å¨ ð0a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ï¼ååå·¦å­èç¹ç§»å¨ ð1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ï¼äº¤æ¿æ¹åç§»å¨ï¼ç´å°åæä¸ªæ¹åç§»å¨äº ððâ1anâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ä¸ºæ­¢ï¼åºå½æ³¨æï¼æ­¤å¤åªè½ä½¿ç¨æ«å°¾ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°è¡¨ç¤ºï¼
+Stern–Brocot 树是存储了所有位于 [0,∞][0,∞]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间的分数的 [二叉搜索树](../../../ds/bst/)．有限连分数实际上编码了 Stern–Brocot 树上从根到某个分数所在位置的路径．也就是说，有理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数表示 [𝑎0,𝑎1,⋯,𝑎𝑛−1,1][a0,a1,⋯,an−1,1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 意味着从树根 1111![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始，需要先向右子节点移动 𝑎0a0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次，再向左子节点移动 𝑎1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次，交替方向移动，直到向某个方向移动了 𝑎𝑛−1an−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次为止．应当注意，此处只能使用末尾为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数表示．
 
-å°è¿åæ°è¡¨ç¤ºçè§£ä¸º SternâBrocot æ ä¸çè·¯å¾ï¼å¯ä»¥å¾å°æ¯è¾è¿åæ°å¤§å°çç®æ³ï¼
+将连分数表示理解为 Stern–Brocot 树上的路径，可以得到比较连分数大小的算法．
 
-è¿åæ°å¤§å°æ¯è¾
+连分数大小比较
 
-ç»å®è¿åæ° ð¼ =[ð¼0,ð¼1,â¯,ð¼ð]Î±=[Î±0,Î±1,â¯,Î±n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð½ =[ð½0,ð½1,â¯,ð½ð]Î²=[Î²0,Î²1,â¯,Î²m]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯è¾ä¸¤è å¤§å°ï¼
+给定连分数 𝛼 =[𝛼0,𝛼1,⋯,𝛼𝑛]α=[α0,α1,⋯,αn]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝛽 =[𝛽0,𝛽1,⋯,𝛽𝑚]β=[β0,β1,⋯,βm]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，比较两者大小．
 
-è§£ç­
+解答
 
-é¦å å°ä¸¤ä¸ªè¿åæ°è¡¨ç¤ºé½è½¬åææ«å°¾æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½¢å¼ï¼ä¸å¦¨è®¾é¢ç®æç»çå·²ç»æ¯è¿æ ·å½¢å¼çè¿åæ°ï¼å³ ð¼ð =ð½ð =1Î±n=Î²m=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸ºå¶æ°ä½ç½®ï¼ä¸æ ä» 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§ï¼æ¯åå³ç§»å¨çæ­¥æ°ï¼å¥æ°ä½ç½®æ¯åå·¦ç§»å¨çæ­¥æ°ï¼æä»¥ï¼ð¼ <ð½Î±<Î²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å½ä¸ä» å½æç § [å­å ¸åº](../../../string/basic/#å­å) æ¯è¾æ¶ï¼æ
+首先将两个连分数表示都转化成末尾是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式．不妨设题目所给的已经是这样形式的连分数，即 𝛼𝑛 =𝛽𝑚 =1αn=βm=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因为偶数位置（下标从 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始）是向右移动的步数，奇数位置是向左移动的步数，所以，𝛼 <𝛽α<β![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 当且仅当按照 [字典序](../../../string/basic/#字典序) 比较时，有
 
-(ð¼0,âð¼1,ð¼2,â¯,(â1)ðâ1ð¼ðâ1,0,â¯)<(ð½0,âð½1,ð½2,â¯,(â1)ðâ1ð½ðâ1,0,â¯).(Î±0,âÎ±1,Î±2,â¯,(â1)nâ1Î±nâ1,0,â¯)<(Î²0,âÎ²1,Î²2,â¯,(â1)mâ1Î²mâ1,0,â¯).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝛼0,−𝛼1,𝛼2,⋯,(−1)𝑛−1𝛼𝑛−1,0,⋯)<(𝛽0,−𝛽1,𝛽2,⋯,(−1)𝑚−1𝛽𝑚−1,0,⋯).(α0,−α1,α2,⋯,(−1)n−1αn−1,0,⋯)<(β0,−β1,β2,⋯,(−1)m−1βm−1,0,⋯).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç¸è¾äºè¿åæ°è¡¨ç¤ºï¼äº¤æ¿å°æ·»å æ­£è´å·ï¼å å»æ«å°¾ç 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶ä¸é¿åº¦ä¸è¶³çä½ç½®ç¨ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¥é½ï¼
+相较于连分数表示，交替地添加正负号，删去末尾的 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并且长度不足的位置用 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 补齐．
 
 C++Python
 
@@ -752,15 +752,15 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 ``` |  ```text # Expand [..., n] to [..., n-1, 1] if needed. def expand ( a ): if a [ \- 1 ] != 1 or len ( a ) == 1 : a [ \- 1 ] -= 1 a . append ( 1 ) return a # Check if a is smaller than b. def less_than ( a , b ): a = expand ( a ) b = expand ( b ) a = [( \- 1 ) ** i * a [ i ] for i in range ( len ( a ))] b = [( \- 1 ) ** i * b [ i ] for i in range ( len ( b ))] return a < b ```   
 ---|---  
   
-æä½³å ç¹
+最佳内点
 
-å¯¹äº 01 â¤ð0ð0 <ð1ð1 â¤1001â¤p0q0<p1q1â¤10![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ±ä½¿å¾ ð0ð0 <ðð <ð1ð1p0q0<pq<p1q1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ä¸ (ð,ð)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå°çæçæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对于 01 ≤𝑝0𝑞0 <𝑝1𝑞1 ≤1001≤p0q0<p1q1≤10![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求使得 𝑝0𝑞0 <𝑝𝑞 <𝑝1𝑞1p0q0<pq<p1q1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立且 (𝑞,𝑝)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 最小的有理数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è§£ç­
+解答
 
-å ä¸º SternâBrocot æ æ¢æ¯ [0,â][0,â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çåæ°çäºåæç´¢æ ï¼åæ¯äºå ç» (ð,ð)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç [ç¬å¡å°æ ](../../../ds/cartesian-tree/)ï¼æä»¥é¢æå ä¹å¯ä»¥è½¬åä¸ºæ± SternâBrocot æ ä¸ä¸¤ä¸ªç¹ç LCAï¼æè¿å ¬å ±ç¥å ï¼ï¼ä½æ¯ï¼LCA åªè½å¤çé­åºé´å çæ å½¢ï¼LCA å¯è½æ¯ç«¯ç¹æ¬èº«ï¼ä¸ºäºé¿å é¢å¤çè®¨è®ºï¼å¯ä»¥é¦å æé åº ð0ð0 +ðp0q0+Îµ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð1ð1 âðp1q1âÎµ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åè®¡ç® LCAï¼å¨å·²ç»éè¿è¿åæ°è®¡ç®åºæ ¹å°èç¹çè·¯å¾çæ åµä¸ï¼LCA åªè¦åæé¿çå ¬å ±è·¯å¾å³å¯ï¼
+因为 Stern–Brocot 树既是 [0,∞][0,∞]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的分数的二叉搜索树，又是二元组 (𝑞,𝑝)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 [笛卡尔树](../../../ds/cartesian-tree/)，所以题意几乎可以转化为求 Stern–Brocot 树上两个点的 LCA（最近公共祖先）．但是，LCA 只能处理闭区间内的情形，LCA 可能是端点本身．为了避免额外的讨论，可以首先构造出 𝑝0𝑞0 +𝜀p0q0+ε![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑝1𝑞1 −𝜀p1q1−ε![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，再计算 LCA．在已经通过连分数计算出根到节点的路径的情况下，LCA 只要取最长的公共路径即可．
 
-è¦æé åº ð¥ Â±ðxÂ±Îµ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åªéè¦å¨èç¹ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤é¦å åå³ï¼å·¦ï¼ç§»å¨ä¸æ¬¡ï¼ååå·¦ï¼å³ï¼ç§»å¨ ââ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å³å¯ï¼è½¬åæè¿åæ°çè¯­è¨ï¼å¯¹äºåæ° ð¥ =[ð0,ð1,â¯,ððâ1,1]x=[a0,a1,â¯,anâ1,1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥ç¥é ð¥ Â±ðxÂ±Îµ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¿ ç¶æ¯ [ð0,ð1,â¯,ððâ1 +1,â][a0,a1,â¯,anâ1+1,â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å [ð0,ð1,â¯,ððâ1,1,â][a0,a1,â¯,anâ1,1,â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å èåªéè¦æ¯è¾è¿ä¸¤ä¸ªè¿åæ°ï¼å°è¾å¤§ï¼å°ï¼çå®ä¹ä¸º ð¥ Â±ðxÂ±Îµ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+要构造出 𝑥 ±𝜀x±ε![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，只需要在节点 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处首先向右（左）移动一次，再向左（右）移动 ∞∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次即可．转化成连分数的语言，对于分数 𝑥 =[𝑎0,𝑎1,⋯,𝑎𝑛−1,1]x=[a0,a1,⋯,an−1,1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以知道 𝑥 ±𝜀x±ε![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 必然是 [𝑎0,𝑎1,⋯,𝑎𝑛−1 +1,∞][a0,a1,⋯,an−1+1,∞]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 [𝑎0,𝑎1,⋯,𝑎𝑛−1,1,∞][a0,a1,⋯,an−1,1,∞]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因而只需要比较这两个连分数，将较大（小）的定义为 𝑥 ±𝜀x±ε![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
 C++Python
 
@@ -772,18 +772,18 @@ C++Python
   
 [GCJ 2019, Round 2 - New Elements: Part 2](https://github.com/google/coding-competitions-archive/blob/main/codejam/2019/round_2/new_elements_part_2/statement.pdf)
 
-ç»å® ðN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ­£æ´æ°å¯¹ (ð¶ð,ð½ð)(Ci,Ji)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ±æ­£æ´æ°å¯¹ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ {ð¶ðð¥ +ð½ðð¦}{Cix+Jiy}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸¥æ ¼éå¢ï¼å¨ææç¬¦åè¦æ±çæ°å¯¹ä¸­ï¼è¾åºå­å ¸åºæå°çä¸å¯¹ï¼
+给定 𝑁N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个正整数对 (𝐶𝑖,𝐽𝑖)(Ci,Ji)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求正整数对 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 {𝐶𝑖𝑥 +𝐽𝑖𝑦}{Cix+Jiy}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 严格递增．在所有符合要求的数对中，输出字典序最小的一对．
 
-è§£ç­
+解答
 
-ä¸å¦¨è®¾ ð´ð =ð¶ð âð¶ðâ1Ai=CiâCiâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðµð =ð½ð âð½ðâ1Bi=JiâJiâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é®é¢è½¬åä¸ºæ± (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ææ ð´ðð¥ +ðµðð¦Aix+Biy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æ´æ°ï¼è¿äºæ°å¯¹å¯ä»¥åä¸ºåç§æ å½¢ï¼
+不妨设 𝐴𝑖 =𝐶𝑖 −𝐶𝑖−1Ai=Ci−Ci−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐵𝑖 =𝐽𝑖 −𝐽𝑖−1Bi=Ji−Ji−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．问题转化为求 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得所有 𝐴𝑖𝑥 +𝐵𝑖𝑦Aix+Biy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是整数．这些数对可以分为四种情形：
 
-  1. ð´ð,ðµð >0Ai,Bi>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢å¯ä»¥å¿½ç¥ï¼å ä¸ºå·²ç»åè®¾ (ð¥,ð¦) >0(x,y)>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. ð´ð,ðµð â¤0Ai,Biâ¤0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ç´æ¥è¾åºãIMPOSSIBLEãï¼
-  3. ð´ð >0,ðµð â¤0Ai>0,Biâ¤0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ç¸å½äºçº¦æ ð¦ð¥ <ð´ðâðµðyx<AiâBi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  4. ð´ð â¤0,ðµð >0Aiâ¤0,Bi>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ç¸å½äºçº¦æ ð¦ð¥ >âð´ððµðyx>âAiBi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. 𝐴𝑖,𝐵𝑖 >0Ai,Bi>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形可以忽略，因为已经假设 (𝑥,𝑦) >0(x,y)>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  2. 𝐴𝑖,𝐵𝑖 ≤0Ai,Bi≤0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形直接输出「IMPOSSIBLE」；
+  3. 𝐴𝑖 >0,𝐵𝑖 ≤0Ai>0,Bi≤0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形相当于约束 𝑦𝑥 <𝐴𝑖−𝐵𝑖yx<Ai−Bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  4. 𝐴𝑖 ≤0,𝐵𝑖 >0Ai≤0,Bi>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形相当于约束 𝑦𝑥 >−𝐴𝑖𝐵𝑖yx>−AiBi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å æ­¤ï¼å ð0ð0p0q0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç¬¬åç§æ å½¢ä¸­æå¤§ç âð´ððµðâAiBi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå ð1ð1p1q1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç¬¬ä¸ç§æ å½¢ä¸­æå°ç ð´ðâðµðAiâBi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åé®é¢å°±åæäºæ¾å°å­å ¸åºæå°ç (ð,ð)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð0ð0 <ðð <ð1ð1p0q0<pq<p1q1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼
+因此，取 𝑝0𝑞0p0q0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是第四种情形中最大的 −𝐴𝑖𝐵𝑖−AiBi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，再取 𝑝1𝑞1p1q1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是第三种情形中最小的 𝐴𝑖−𝐵𝑖Ai−Bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．原问题就变成了找到字典序最小的 (𝑞,𝑝)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑝0𝑞0 <𝑝𝑞 <𝑝1𝑞1p0q0<pq<p1q1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．
 
 C++Python
 
@@ -793,88 +793,88 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 ``` |  ```text def solve (): n = int ( input ()) C = [ 0 ] * n J = [ 0 ] * n # p0/q0 < y/x < p1/q1 p0 , q0 = 0 , 1 p1 , q1 = 1 , 0 fail = False for i in range ( n ): C [ i ], J [ i ] = map ( int , input () . split ()) if i > 0 : A = C [ i ] \- C [ i \- 1 ] B = J [ i ] \- J [ i \- 1 ] if A <= 0 and B <= 0 : fail = True break elif B > 0 and A < 0 : # y/x > (-A)/B if B > 0 if ( \- A ) * q0 > p0 * B : p0 , q0 = \- A , B elif B < 0 and A > 0 : # y/x < A/(-B) if B < 0 if A * q1 < p1 * ( \- B ): p1 , q1 = A , \- B if fail or p0 * q1 >= p1 * q0 : return "IMPOSSIBLE" p , q = middle ( p0 , q0 , p1 , q1 ) return str ( p ) \+ " " \+ str ( q ) ```   
 ---|---  
   
-æ³è¦äºè§£æ´å¤ SternâBrocot æ çæ§è´¨ååºç¨ï¼å¯ä»¥åèå ¶ä¸»æ¡ç®é¡µé¢ï¼
+想要了解更多 Stern–Brocot 树的性质和应用，可以参考其主条目页面．
 
-## åå¼çº¿æ§åæ¢
+## 分式线性变换
 
-åè¿åæ°ç¸å ³çå¦ä¸ä¸ªéè¦æ¦å¿µæ¯æè°çåå¼çº¿æ§åæ¢ï¼
+和连分数相关的另一个重要概念是所谓的分式线性变换．
 
-åå¼çº¿æ§åæ¢
+分式线性变换
 
-**åå¼çº¿æ§åæ¢** ï¼fractional linear transformationï¼æ¯æå½æ° ð¿ :ð âðL:RâR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾
+**分式线性变换** （fractional linear transformation）是指函数 𝐿 :𝐑 →𝐑L:R→R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得
 
-ð¿(ð¥)=ðð¥+ððð¥+ð,L(x)=ax+bcx+d,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿(𝑥)=𝑎𝑥+𝑏𝑐𝑥+𝑑,L(x)=ax+bcx+d,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ð,ð,ð,ð âða,b,c,dâR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðð âðð â 0adâbcâ 0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+其中，𝑎,𝑏,𝑐,𝑑 ∈𝐑a,b,c,d∈R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑎𝑑 −𝑏𝑐 ≠0ad−bc≠0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å ³äºæ¡ä»¶ ðð âðð â 0adâbcâ 0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+关于条件 𝑎𝑑 −𝑏𝑐 ≠0ad−bc≠0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®¹æéªè¯ï¼å½ ðð âðð =0adâbc=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼å½æ°å¯è½æ²¡æå®ä¹æè æ¯å¸¸å½æ°ï¼
+容易验证，当 𝑎𝑑 −𝑏𝑐 =0ad−bc=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，函数可能没有定义或者是常函数．
 
-åå¼çº¿æ§åæ¢æå¦ä¸æ§è´¨ï¼
+分式线性变换有如下性质：
 
-åå¼çº¿æ§åæ¢çæ§è´¨
+分式线性变换的性质
 
-è®¾ ð¿1,ð¿2,ð¿3L1,L2,L3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯åå¼çº¿æ§åæ¢ï¼å¹¶è®° ð¿ðLi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç³»æ°å½¢æçç©éµä¸º
+设 𝐿1,𝐿2,𝐿3L1,L2,L3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是分式线性变换，并记 𝐿𝑖Li![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的系数形成的矩阵为
 
-ðð=(ðððððððð)Mi=(aibicidi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑀𝑖=(𝑎𝑖𝑏𝑖𝑐𝑖𝑑𝑖)Mi=(aibicidi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå®ä»¬æå¦ä¸æ§è´¨ï¼7
+则它们有如下性质：7
 
-  1. åå¼çº¿æ§åæ¢çå¤å ð¿1 âð¿2L1âL2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åéåæ¢ ð¿â11L1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»ç¶æ¯åå¼çº¿æ§åæ¢ï¼å³å ¨ä½åå¼çº¿æ§åæ¢ææ [ç¾¤](../../algebra/basic/#ç¾¤)ï¼
-  2. åå¼çº¿æ§åæ¢å¨ç³»æ°åä¹ä»¥éé¶å¸¸æ°åä¿æä¸åï¼å³å¯¹äºä»»æ ð â 0Î»â 0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ð2 =ðð1M2=Î»M1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð¿2 =ð¿1L2=L1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  3. åå¼çº¿æ§åæ¢çå¤åçç³»æ°ç©éµï¼å¯¹åºçç³»æ°ç©éµçä¹ç§¯ï¼å³å¦æ ð1ð2 =ð3M1M2=M3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð¿1 âð¿2 =ð¿3L1âL2=L3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  4. åå¼çº¿æ§åæ¢çéåæ¢çç³»æ°ç©éµï¼å¯¹åºçç³»æ°ç©éµçéç©éµï¼å³å¦æ ðâ11 =ð2M1â1=M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð¿â11 =ð¿2L1â1=L2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. 分式线性变换的复合 𝐿1 ∘𝐿2L1∘L2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和逆变换 𝐿−11L1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 仍然是分式线性变换，即全体分式线性变换构成 [群](../../algebra/basic/#群)；
+  2. 分式线性变换在系数同乘以非零常数后保持不变，即对于任意 𝜆 ≠0λ≠0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果 𝑀2 =𝜆𝑀1M2=λM1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝐿2 =𝐿1L2=L1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  3. 分式线性变换的复合的系数矩阵，对应着系数矩阵的乘积，即如果 𝑀1𝑀2 =𝑀3M1M2=M3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝐿1 ∘𝐿2 =𝐿3L1∘L2=L3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  4. 分式线性变换的逆变换的系数矩阵，对应着系数矩阵的逆矩阵，即如果 𝑀−11 =𝑀2M1−1=M2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝐿−11 =𝐿2L1−1=L2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-æ­¤å¤ä» æä¾åå¼çº¿æ§åæ¢çå¤ååéåæ¢çå½¢å¼ï¼å¾å°è¿ä¸ªå½¢å¼åï¼æææ§è´¨é½æ¯å®¹æéªè¯çï¼
+此处仅提供分式线性变换的复合和逆变换的形式．得到这个形式后，所有性质都是容易验证的．
 
-åå¼çº¿æ§åæ¢ ð¿1L1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¿2L2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤åï¼
+分式线性变换 𝐿1L1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐿2L2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的复合：
 
-ð¿1âð¿2=ð1ð2ð¥+ð2ð2ð¥+ð2+ð1ð1ð2ð¥+ð2ð2ð¥+ð2+ð1=(ð1ð2+ð1ð2)ð¥+(ð1ð2+ð1ð2)(ð1ð2+ð1ð2)ð¥+(ð1ð2+ð1ð2).L1âL2=a1a2x+b2c2x+d2+b1c1a2x+b2c2x+d2+d1=(a1a2+b1c2)x+(a1b2+b1d2)(c1a2+d1c2)x+(c1b2+d1d2).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿1∘𝐿2=𝑎1𝑎2𝑥+𝑏2𝑐2𝑥+𝑑2+𝑏1𝑐1𝑎2𝑥+𝑏2𝑐2𝑥+𝑑2+𝑑1=(𝑎1𝑎2+𝑏1𝑐2)𝑥+(𝑎1𝑏2+𝑏1𝑑2)(𝑐1𝑎2+𝑑1𝑐2)𝑥+(𝑐1𝑏2+𝑑1𝑑2).L1∘L2=a1a2x+b2c2x+d2+b1c1a2x+b2c2x+d2+d1=(a1a2+b1c2)x+(a1b2+b1d2)(c1a2+d1c2)x+(c1b2+d1d2).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå¼çº¿æ§åæ¢ ð¿1(ð¥)L1(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåæ¢ï¼
+分式线性变换 𝐿1(𝑥)L1(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逆变换：
 
-ð¦=ð¿1(ð¥)=ð1ð¥+ð1ð1ð¥+ð1âºð¥=ð¿â11(ð¦)=ð1ð¦âð1âð1ð¦+ð1.y=L1(x)=a1x+b1c1x+d1âºx=L1â1(y)=d1yâb1âc1y+a1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑦=𝐿1(𝑥)=𝑎1𝑥+𝑏1𝑐1𝑥+𝑑1⟺𝑥=𝐿−11(𝑦)=𝑑1𝑦−𝑏1−𝑐1𝑦+𝑎1.y=L1(x)=a1x+b1c1x+d1⟺x=L1−1(y)=d1y−b1−c1y+a1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æéè¿åæ° [ð0,ð1,â¯,ðð][a0,a1,â¯,an]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥çåæ¯ä¸ç³»ååå¼çº¿æ§åæ¢å¤åçç»æï¼è®¾
+有限连分数 [𝑎0,𝑎1,⋯,𝑎𝑛][a0,a1,⋯,an]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以看做是一系列分式线性变换复合的结果．设
 
-ð¿ð(ð¥)=ððð¥+1ð¥=[ðð,ð¥].Li(x)=aix+1x=[ai,x].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿𝑖(𝑥)=𝑎𝑖𝑥+1𝑥=[𝑎𝑖,𝑥].Li(x)=aix+1x=[ai,x].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é£ä¹ï¼æéè¿åæ°
+那么，有限连分数
 
-[ð0,ð1,â¯,ðð]=ð¿0âð¿1ââ¯ð¿ð(â).[a0,a1,â¯,an]=L0âL1ââ¯Ln(â).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+[𝑎0,𝑎1,⋯,𝑎𝑛]=𝐿0∘𝐿1∘⋯𝐿𝑛(∞).[a0,a1,⋯,an]=L0∘L1∘⋯Ln(∞).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼åå¼çº¿æ§åæ¢ ð¿(ð¥) =ðð¥+ððð¥+ðL(x)=ax+bcx+d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¢å¨ ð¥ =âx=â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤çåå¼æ¯ ððac![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ¯å½æ°å¨ ð¥ â Â±âxâÂ±â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶çæéå¼ï¼
+其中，分式线性变换 𝐿(𝑥) =𝑎𝑥+𝑏𝑐𝑥+𝑑L(x)=ax+bcx+d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变换在 𝑥 =∞x=∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处的取值是 𝑎𝑐ac![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这是函数在 𝑥 → ±∞x→±∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时的极限值．
 
-å¯¹äºä¸è¬çè¿åæ°ï¼è®¾å®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½é¡¹ä¸º ðð+1rk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ ð¥ =[ð0,â¯,ðð,ðð+1]x=[a0,â¯,ak,rk+1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ
+对于一般的连分数，设实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的余项为 𝑟𝑘+1rk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即 𝑥 =[𝑎0,⋯,𝑎𝑘,𝑟𝑘+1]x=[a0,⋯,ak,rk+1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则有
 
-ð¥=ð¿0âð¿1ââ¯ð¿ð(ðð+1)=ðððð+1+ððâ1ðððð+1+ððâ1.x=L0âL1ââ¯Lk(rk+1)=pkrk+1+pkâ1qkrk+1+qkâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝐿0∘𝐿1∘⋯𝐿𝑘(𝑟𝑘+1)=𝑝𝑘𝑟𝑘+1+𝑝𝑘−1𝑞𝑘𝑟𝑘+1+𝑞𝑘−1.x=L0∘L1∘⋯Lk(rk+1)=pkrk+1+pk−1qkrk+1+qk−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿åæ¶ä¹ç»åºäºåå¼çº¿æ§åæ¢ ð¿0 âð¿1 ââ¯ âð¿ðL0âL1ââ¯âLk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½¢å¼ï¼
+这同时也给出了分式线性变换 𝐿0 ∘𝐿1 ∘⋯ ∘𝐿𝑘L0∘L1∘⋯∘Lk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式．
 
-å½ç¶ä¹å¯ä»¥ç´æ¥éªè¯è¿ä¸ªè¡¨è¾¾å¼ï¼æå¼å§çæ¶åæ¯
+当然也可以直接验证这个表达式．最开始的时候是
 
-ð¥=ð¥+00ð¥+1=ðâ1ð¥+ðâ2ðâ1ð¥+ðâ2.x=x+00x+1=pâ1x+pâ2qâ1x+qâ2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝑥+00𝑥+1=𝑝−1𝑥+𝑝−2𝑞−1𝑥+𝑞−2.x=x+00x+1=p−1x+p−2q−1x+q−2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-éåï¼å¦æ ð¿0 âð¿1 ââ¯ âð¿ðâ1L0âL1ââ¯âLkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ·æ
+随后，如果 𝐿0 ∘𝐿1 ∘⋯ ∘𝐿𝑘−1L0∘L1∘⋯∘Lk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 具有
 
-ððâ1ð¥+ððâ2ððâ1ð¥+ððâ2pkâ1x+pkâ2qkâ1x+qkâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝𝑘−1𝑥+𝑝𝑘−2𝑞𝑘−1𝑥+𝑞𝑘−2pk−1x+pk−2qk−1x+qk−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çå½¢å¼ï¼é£ä¹æ ¹æ®åå¼çº¿æ§åæ¢çå¤åå ¬å¼ï¼æ
+的形式，那么根据分式线性变换的复合公式，有
 
-ð¿0âð¿1ââ¯âð¿ðâ1âð¿ð=(ððâ1ðð+ððâ2)ð¥+ððâ1(ððâ1ðð+ððâ2)ð¥+ððâ1=ððð¥+ððâ1ððð¥+ððâ1.L0âL1ââ¯âLkâ1âLk=(pkâ1ak+pkâ2)x+pkâ1(qkâ1ak+qkâ2)x+qkâ1=pkx+pkâ1qkx+qkâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿0∘𝐿1∘⋯∘𝐿𝑘−1∘𝐿𝑘=(𝑝𝑘−1𝑎𝑘+𝑝𝑘−2)𝑥+𝑝𝑘−1(𝑞𝑘−1𝑎𝑘+𝑞𝑘−2)𝑥+𝑞𝑘−1=𝑝𝑘𝑥+𝑝𝑘−1𝑞𝑘𝑥+𝑞𝑘−1.L0∘L1∘⋯∘Lk−1∘Lk=(pk−1ak+pk−2)x+pk−1(qk−1ak+qk−2)x+qk−1=pkx+pk−1qkx+qk−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±å¯ä»¥å½çº³å°å¾å°äºä¸è¿°å½¢å¼ï¼åå¼çº¿æ§åæ¢ä¹æä¾äºéæ¨å ¬å¼ååå¼æ¡ä»¶çå¦ä¸ä¸ªè§åº¦ççè§£ï¼
+这就可以归纳地得到了上述形式．分式线性变换也提供了递推公式和初值条件的另一个角度的理解．
 
 [DMOPC '19 Contest 7 P4 - Bob and Continued Fractions](https://dmoj.ca/problem/dmopc19c7p4)
 
-ç»å®æ­£æ´æ°æ°ç» ð1,â¯,ðða1,â¯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»æ¥è¯¢ï¼æ¯æ¬¡æ¥è¯¢ç»å® ð â¤ðlâ¤r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶è¦æ±è®¡ç® [ðð,â¯,ðð][al,â¯,ar]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼
+给定正整数数组 𝑎1,⋯,𝑎𝑛a1,⋯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 组查询，每次查询给定 𝑙 ≤𝑟l≤r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并要求计算 [𝑎𝑙,⋯,𝑎𝑟][al,⋯,ar]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．
 
-è§£ç­
+解答
 
-å°è¿åæ°çè§£ä¸ºä¸ååå¼çº¿æ§åæ¢çå¤åå¨ ð¥ =âx=â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤åå¼çç»æï¼åªéè¦è½å¤å¤æ¬¡æ¥è¯¢ä¸æ®µåå¼çº¿æ§åæ¢çå¤åå³å¯ï¼å ä¸ºæ¯ä¸ªåå¼çº¿æ§åæ¢é½å¯ä»¥åéï¼æä»¥å¯ä»¥é¢å¤çåç¼ååç¨å·®åçæ¹æ³æ¥è¯¢ï¼å¤æåº¦ä¸º ð(ð +ð)O(n+m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼å¦æéè¦ä¿®æ¹ï¼ä¹å¯ä»¥ç¨çº¿æ®µæ ç­ç»æå­å¨ï¼
+将连分数理解为一列分式线性变换的复合在 𝑥 =∞x=∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处取值的结果，只需要能够多次查询一段分式线性变换的复合即可．因为每个分式线性变换都可以取逆，所以可以预处理前缀和再用差分的方法查询，复杂度为 𝑂(𝑛 +𝑚)O(n+m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的；如果需要修改，也可以用线段树等结构存储．
 
 C++Python
 
@@ -884,197 +884,197 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 ``` |  ```text # PYTHON IS TOO SLOW TO PASS THIS PROBLEM. # JUST FOR REFERENCE. M = 10 ** 9 \+ 7 def mul ( a , b ): return ( ( a [ 0 ] * b [ 0 ] \+ a [ 1 ] * b [ 2 ]) % M , ( a [ 0 ] * b [ 1 ] \+ a [ 1 ] * b [ 3 ]) % M , ( a [ 2 ] * b [ 0 ] \+ a [ 3 ] * b [ 2 ]) % M , ( a [ 2 ] * b [ 1 ] \+ a [ 3 ] * b [ 3 ]) % M , ) def inv ( a ): return ( a [ 3 ], M \- a [ 1 ], M \- a [ 2 ], a [ 0 ]) n , q = map ( int , input () . split ()) ps = [( 1 , 0 , 0 , 1 )] # Get presum. for a in map ( int , input () . split ()): ps . append ( mul ( ps [ \- 1 ], ( a , 1 , 1 , 0 ))) for _ in range ( q ): l , r = map ( int , input () . split ()) res = mul ( inv ( ps [ l \- 1 ]), ps [ r ]) u , d = res [ 0 ], res [ 2 ] if l % 2 == 0 : if u : u = M \- u if d : d = M \- d print ( u , d ) ```   
 ---|---  
   
-### è¿åæ°çååè¿ç®
+### 连分数的四则运算
 
-å©ç¨åå¼çº¿æ§åæ¢ï¼å¯ä»¥å®æè¿åæ°çååè¿ç®ï¼è¿ä¸ªç®æ³ææ©ç± Gosper æåºï¼
+利用分式线性变换，可以完成连分数的四则运算．这个算法最早由 Gosper 提出．
 
-ç®æ³çåºç³æ¯è®¡ç®è¿åæ°çåå¼çº¿æ§åæ¢ï¼æ¬èä»¥æéè¿åæ°ä¸ºä¾ï¼ä½æ¯å ä¸ºç®æ³æ¯è¾åºä¸ä½ï¼åªéè¦è¯»å ¥æéå¤ä¸ªè¿åæ°çé¡¹ï¼æä»¥å¯¹äºæ éè¿åæ°ä¹æ¯éç¨çï¼èä¸å¯ä»¥ç®å°ä»»æç²¾åº¦ï¼ç»ååæçè¿åæ°æ¯è¾ç®æ³ï¼å¯ä»¥ç²¾ç¡®å°æ¯è¾ä»»æç²¾åº¦çå®æ°å·®å¼ï¼
+算法的基石是计算连分数的分式线性变换．本节以有限连分数为例，但是因为算法每输出一位，只需要读入有限多个连分数的项，所以对于无限连分数也是适用的，而且可以算到任意精度．结合前文的连分数比较算法，可以精确地比较任意精度的实数差异．
 
-è¿åæ°çåå¼çº¿æ§åæ¢
+连分数的分式线性变换
 
-ç»å®åå¼çº¿æ§åæ¢ ð¿(ð¥) =ðð¥+ððð¥+ðL(x)=ax+bcx+d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè¿åæ° ð¼ =[ð¼0,ð¼1,â¯,ð¼ð]Î±=[Î±0,Î±1,â¯,Î±n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ± ð½ =ð¿(ð¼)Î²=L(Î±)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°è¡¨ç¤º [ð½0,ð½1,â¯,ð½ð][Î²0,Î²1,â¯,Î²m]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+给定分式线性变换 𝐿(𝑥) =𝑎𝑥+𝑏𝑐𝑥+𝑑L(x)=ax+bcx+d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和连分数 𝛼 =[𝛼0,𝛼1,⋯,𝛼𝑛]α=[α0,α1,⋯,αn]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求 𝛽 =𝐿(𝛼)β=L(α)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数表示 [𝛽0,𝛽1,⋯,𝛽𝑚][β0,β1,⋯,βm]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è§£ç­
+解答
 
-ç®æ³çåºæ¬æè·¯å°±æ¯éä¸ªç¡®å® ð½ðÎ²i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼è®°
+算法的基本思路就是逐个确定 𝛽𝑖βi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．记
 
-ð¿ð¾(ð¥)=ð¾+1ð¥=ð¾ð¥+1ð¥.LÎ³(x)=Î³+1x=Î³x+1x.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿𝛾(𝑥)=𝛾+1𝑥=𝛾𝑥+1𝑥.Lγ(x)=γ+1x=γx+1x.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸ºè¿åæ°
+因为连分数
 
-ð¿(ð¼)=ð¿âð¿ð¼0âð¿ð¼1ââ¯âð¿ð¼ð(â),L(Î±)=LâLÎ±0âLÎ±1ââ¯âLÎ±n(â),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿(𝛼)=𝐿∘𝐿𝛼0∘𝐿𝛼1∘⋯∘𝐿𝛼𝑛(∞),L(α)=L∘Lα0∘Lα1∘⋯∘Lαn(∞),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥ï¼å¯ä»¥å ð¿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éè¿éæ­¥å¤å ð¿ð¼ðLÎ±k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹å¼è®¡ç® ð¿(ð¼)L(Î±)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤§å°ï¼ä½æ¯ï¼å¦ææ¯å¸æå¾å° ð¿(ð¼)L(Î±)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°è¡¨ç¤ºï¼é£ä¹å¹¶ä¸éè¦å®å ¨è®¡ç® ð¿(ð¼)L(Î±)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼åæ±åºè¿åæ°è¡¨ç¤ºï¼å¯ä»¥å¨å¤å ð¿ð¼ðLÎ±i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿ç¨ä¸­å°±è½å¤æ­ ð½0,ð½1,â¯Î²0,Î²1,â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼
+所以，可以向 𝐿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 通过逐步复合 𝐿𝛼𝑘Lαk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方式计算 𝐿(𝛼)L(α)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的大小．但是，如果是希望得到 𝐿(𝛼)L(α)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数表示，那么并不需要完全计算 𝐿(𝛼)L(α)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值再求出连分数表示．可以在复合 𝐿𝛼𝑖Lαi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的过程中就能判断 𝛽0,𝛽1,⋯β0,β1,⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．
 
-æ¯å¦ï¼åè®¾å½åè®¡ç®å°
+比如，假设当前计算到
 
-ð¿âð¿ð¼0âð¿ð¼1ââ¯âð¿ð¼ð(ð¥)=ððð¥+ððððð¥+ððLâLÎ±0âLÎ±1ââ¯âLÎ±k(x)=akx+bkckx+dk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿∘𝐿𝛼0∘𝐿𝛼1∘⋯∘𝐿𝛼𝑘(𝑥)=𝑎𝑘𝑥+𝑏𝑘𝑐𝑘𝑥+𝑑𝑘L∘Lα0∘Lα1∘⋯∘Lαk(x)=akx+bkckx+dk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸ ðð,ððck,dk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå·ï¼é£ä¹ï¼ð¿ âð¿ð¼0 âð¿ð¼1 ââ¯ âð¿ð¼ð(ð¥)LâLÎ±0âLÎ±1ââ¯âLÎ±k(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ [0,â][0,â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åè°ï¼ä¸å¿ ç¶åå¼å¨ ððððakck![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððððbkdk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼æä»¥ï¼å¦æ
+且 𝑐𝑘,𝑑𝑘ck,dk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同号．那么，𝐿 ∘𝐿𝛼0 ∘𝐿𝛼1 ∘⋯ ∘𝐿𝛼𝑘(𝑥)L∘Lα0∘Lα1∘⋯∘Lαk(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在 [0,∞][0,∞]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上单调，且必然取值在 𝑎𝑘𝑐𝑘akck![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑏𝑘𝑑𝑘bkdk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间．所以，如果
 
-âððððâ=âððððâ,âakckâ=âbkdkâ,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⌊𝑎𝑘𝑐𝑘⌋=⌊𝑏𝑘𝑑𝑘⌋,⌊akck⌋=⌊bkdk⌋,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°±å¯ä»¥ç¡®å®å®å°±æ¯ ð¿ âð¿ð¼0 âð¿ð¼1 ââ¯ âð¿ð¼ð(ð¥)LâLÎ±0âLÎ±1ââ¯âLÎ±k(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´æ°é¨å ð½0Î²0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶ï¼å¨å·¦ä¾§å¤å ð¿â1ð½0LÎ²0â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±å¯ä»¥å¾å°
+就可以确定它就是 𝐿 ∘𝐿𝛼0 ∘𝐿𝛼1 ∘⋯ ∘𝐿𝛼𝑘(𝑥)L∘Lα0∘Lα1∘⋯∘Lαk(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整数部分 𝛽0β0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此时，在左侧复合 𝐿−1𝛽0Lβ0−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就可以得到
 
-ð¿â1ð½0âð¿âð¿ð¼0âð¿ð¼1ââ¯âð¿ð¼ð.LÎ²0â1âLâLÎ±0âLÎ±1ââ¯âLÎ±k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿−1𝛽0∘𝐿∘𝐿𝛼0∘𝐿𝛼1∘⋯∘𝐿𝛼𝑘.Lβ0−1∘L∘Lα0∘Lα1∘⋯∘Lαk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ­¤æ¶ï¼ç»§ç»­æ·»å ð¿ð¼ð+1,ð¿ð¼ð+2,â¯LÎ±k+1,LÎ±k+2,â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±å¯ä»¥ç¡®å®æ°çæ´æ°é¨åï¼å³ ð½1Î²1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ ·è®¡ç®ä¸å»ï¼ç´å°ç¡®å®åºææç ð½ðÎ²j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼
+此时，继续添加 𝐿𝛼𝑘+1,𝐿𝛼𝑘+2,⋯Lαk+1,Lαk+2,⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就可以确定新的整数部分，即 𝛽1β1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这样计算下去，直到确定出所有的 𝛽𝑗βj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．
 
-ç®æ³è¦æ± ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå·ï¼æ¯å ä¸ºè¦ä¿è¯å½æ°çä¸è¿ç»­ç¹ä¸å¨ [0,â][0,â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) èå´å ï¼è¿æ»æ¯å¯è½çï¼å ä¸ºç®åè¿åæ°çå®ä¹è¦æ±ï¼é¤äº ð¼0Î±0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤çï¼ç³»æ°é½æ¯æ­£æ´æ°ï¼ç±æ­¤å¯ä»¥è¯æï¼å¿ ç¶å¨æéæ­¥å æç« ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå·ï¼ä¸å°å¨ä¹åä¸ç´ä¿æåå·ï¼
+算法要求 𝑐c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同号，是因为要保证函数的不连续点不在 [0,∞][0,∞]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 范围内．这总是可能的，因为简单连分数的定义要求（除了 𝛼0α0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 外的）系数都是正整数．由此可以证明，必然在有限步内成立 𝑐c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同号，且将在之后一直保持同号．
 
-å ·ä½å®ç°æ¶ï¼åªéè¦ç»´æ¤å½åçåå¼çº¿æ§åæ¢çç³»æ°ç©éµ (ðððð)(abcd)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¹¶æ£æ¥ ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¦åå·ä»¥å ððac![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððbd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¦æç¸åçæ´æ°é¨åï¼å³å¤å ð¿ð¼ðLÎ±i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼å°±å¯ä»¥å¾å° (ðð¼ð+ðððð¼ð+ðð)(aÎ±i+bacÎ±i+dc)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æä¸¤è æ´æ°é¨åç¸åä¸º ð½ðÎ²j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¨ç»æçè¿åæ°å æ·»å ð½ðÎ²j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶ä¸å·¦å¤å ð¿â1ð½ðLÎ²jâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ç¸å½äºè®¡ç® (ðððmodððmodð)(cdamodcbmodd)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+具体实现时，只需要维护当前的分式线性变换的系数矩阵 (𝑎𝑏𝑐𝑑)(abcd)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 并检查 𝑐c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是否同号以及 𝑎𝑐ac![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑏𝑑bd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是否有相同的整数部分．右复合 𝐿𝛼𝑖Lαi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，就可以得到 (𝑎𝛼𝑖+𝑏𝑎𝑐𝛼𝑖+𝑑𝑐)(aαi+bacαi+dc)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如果两者整数部分相同为 𝛽𝑗βj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则在结果的连分数内添加 𝛽𝑗βj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并且左复合 𝐿−1𝛽𝑗Lβj−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这相当于计算 (𝑐𝑑𝑎mod𝑐𝑏mod𝑑)(cdamodcbmodd)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¿åæ°çåå¼çº¿æ§åæ¢å·²ç»å¯ä»¥ç¨äºè®¡ç®åæ°åè¿åæ°çååè¿ç®é®é¢ï¼
+连分数的分式线性变换已经可以用于计算分数和连分数的四则运算问题：
 
-ððÂ±ð¥=Â±ðð¥+ð0ð¥+ð,Â ððð¥=ðð¥+00ð¥+ð,Â ðð/ð¥=0ð¥+ððð¥+0.pqÂ±x=Â±qx+p0x+q,Â pqx=px+00x+q,Â pq/x=0x+pqx+0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝𝑞±𝑥=±𝑞𝑥+𝑝0𝑥+𝑞, 𝑝𝑞𝑥=𝑝𝑥+00𝑥+𝑞, 𝑝𝑞/𝑥=0𝑥+𝑝𝑞𝑥+0.pq±x=±qx+p0x+q, pqx=px+00x+q, pq/x=0x+pqx+0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹äºä¸è¬çè¿åæ°ä¹é´çååè¿ç®ï¼éè¦ç¨å°ååå¼çº¿æ§åæ¢ï¼
+对于一般的连分数之间的四则运算，需要用到双分式线性变换：
 
-ð¥+ð¦=0ð¥ð¦+ð¥+ð¦+00ð¥ð¦+0ð¥+0ð¦+1,Â ð¥ð¦=1ð¥ð¦+0ð¥+0ð¦+00ð¥ð¦+0ð¥+0ð¦+1,Â ð¥ð¦=0ð¥ð¦+ð¥+0ð¦+00ð¥ð¦+0ð¥+ð¦+0.x+y=0xy+x+y+00xy+0x+0y+1,Â xy=1xy+0x+0y+00xy+0x+0y+1,Â xy=0xy+x+0y+00xy+0x+y+0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)è¿åæ°çååå¼çº¿æ§åæ¢
+𝑥+𝑦=0𝑥𝑦+𝑥+𝑦+00𝑥𝑦+0𝑥+0𝑦+1, 𝑥𝑦=1𝑥𝑦+0𝑥+0𝑦+00𝑥𝑦+0𝑥+0𝑦+1, 𝑥𝑦=0𝑥𝑦+𝑥+0𝑦+00𝑥𝑦+0𝑥+𝑦+0.x+y=0xy+x+y+00xy+0x+0y+1, xy=1xy+0x+0y+00xy+0x+0y+1, xy=0xy+x+0y+00xy+0x+y+0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)连分数的双分式线性变换
 
-ç»å®ååå¼çº¿æ§åæ¢ ð¿(ð¥,ð¦) =ðð¥ð¦+ðð¥+ðð¦+ððð¥ð¦+ðð¥+ðð¦+âL(x,y)=axy+bx+cy+dexy+fx+gy+h![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè¿åæ° ð¼ =[ð¼0,ð¼1,â¯,ð¼ð]Î±=[Î±0,Î±1,â¯,Î±n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð½ =[ð½0,ð½1,â¯,ð½ð]Î²=[Î²0,Î²1,â¯,Î²m]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ± ð¾ =ð¿(ð¼,ð½)Î³=L(Î±,Î²)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°è¡¨ç¤º [ð¾0,ð¾1,â¯,ð¾â][Î³0,Î³1,â¯,Î³â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+给定双分式线性变换 𝐿(𝑥,𝑦) =𝑎𝑥𝑦+𝑏𝑥+𝑐𝑦+𝑑𝑒𝑥𝑦+𝑓𝑥+𝑔𝑦+ℎL(x,y)=axy+bx+cy+dexy+fx+gy+h![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和连分数 𝛼 =[𝛼0,𝛼1,⋯,𝛼𝑛]α=[α0,α1,⋯,αn]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝛽 =[𝛽0,𝛽1,⋯,𝛽𝑚]β=[β0,β1,⋯,βm]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求 𝛾 =𝐿(𝛼,𝛽)γ=L(α,β)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数表示 [𝛾0,𝛾1,⋯,𝛾ℓ][γ0,γ1,⋯,γℓ]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è§£ç­
+解答
 
-ä¸ååéçåå¼çº¿æ§åæ¢çæ å½¢ç±»ä¼¼ï¼è¦ç¡®å®æ´æ°é¨ååªéè¦ä¿è¯å½åçåå¼çº¿æ§åæ¢å¨ (ð¥,ð¦) â[0,â] Ã[0,â](x,y)â[0,â]Ã[0,â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å çæ´æ°é¨åä¿æä¸åï¼å³ ð,ð,ð,âe,f,g,h![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå·ï¼ä¸
+与单变量的分式线性变换的情形类似，要确定整数部分只需要保证当前的分式线性变换在 (𝑥,𝑦) ∈[0,∞] ×[0,∞](x,y)∈[0,∞]×[0,∞]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 内的整数部分保持不变，即 𝑒,𝑓,𝑔,ℎe,f,g,h![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 皆同号，且
 
-âððâ=âððâ=âððâ=âðââ.âaeâ=âbfâ=âcgâ=âdhâ.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⌊𝑎𝑒⌋=⌊𝑏𝑓⌋=⌊𝑐𝑔⌋=⌊𝑑ℎ⌋.⌊ae⌋=⌊bf⌋=⌊cg⌋=⌊dh⌋.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å³å¤åè¦æ¿æ¢æè®¡ç® ð¿(ð¥,ð¦) â¦ð¿(ð¿ð¼ð(ð¥),ð¦)L(x,y)â¦L(LÎ±i(x),y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¿(ð¥,ð¦) â¦ð¿(ð¥,ð¿ð½ð(ð¦))L(x,y)â¦L(x,LÎ²j(y))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿åæ ·è¡¨ç¤ºæç³»æ°ççº¿æ§åæ¢ï¼å·¦å¤åååååéçæ å½¢å®å ¨ä¸è´ï¼åªéè¦è®¡ç®åæ¨¡å°±å¯ä»¥äºï¼
+右复合要替换成计算 𝐿(𝑥,𝑦) ↦𝐿(𝐿𝛼𝑖(𝑥),𝑦)L(x,y)↦L(Lαi(x),y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐿(𝑥,𝑦) ↦𝐿(𝑥,𝐿𝛽𝑗(𝑦))L(x,y)↦L(x,Lβj(y))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这同样表示成系数的线性变换．左复合则和单变量的情形完全一致，只需要计算取模就可以了．
 
-ç¸è¾äºååéçæ å½¢ï¼ååéçæ å½¢éè¦å³å®è¦å å¤å ð¿ð¼ðLÎ±i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿æ¯ ð¿ð½ðLÎ²j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸ºå¤åçé¡ºåºä¸æåçç»ææ å ³ï¼æä»¥å¯ä»¥èªç±éæ©å¤åé¡ºåºï¼æ¯å¦äº¤æ¿å°å¤å ð¿ð¼ðLÎ±i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¿ð½ðLÎ²j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æè éç¨ç»éªæ³åï¼ä¼å å¤åæ¯å¼å·®è·æ´å¤§çç»´åº¦ï¼å¦æ â£ððâðââ£ >â£ððâðââ£|bfâdh|>|cgâdh|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹å°±å å¤å ð¿ð¼ðLÎ±i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦åï¼å°±å å¤å ð¿ð½ðLÎ²j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+相较于单变量的情形，双变量的情形需要决定要先复合 𝐿𝛼𝑖Lαi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 还是 𝐿𝛽𝑗Lβj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因为复合的顺序与最后的结果无关，所以可以自由选择复合顺序，比如交替地复合 𝐿𝛼𝑖Lαi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐿𝛽𝑗Lβj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．或者采用经验法则，优先复合比值差距更大的维度：如果 ∣𝑏𝑓−𝑑ℎ∣ >∣𝑐𝑔−𝑑ℎ∣|bf−dh|>|cg−dh|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么就先复合 𝐿𝛼𝑖Lαi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；否则，就先复合 𝐿𝛽𝑗Lβj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## å¾ªç¯è¿åæ°
+## 循环连分数
 
-ç±»ä¼¼äºå¾ªç¯å°æ°çæ¦å¿µï¼å¦æè¿åæ°çç³»æ°å½¢æäºå¾ªç¯ï¼å°±ç§°ä¸ºå¾ªç¯è¿åæ°ï¼
+类似于循环小数的概念，如果连分数的系数形成了循环，就称为循环连分数．
 
-å¾ªç¯è¿åæ°
+循环连分数
 
-è®¾è¿åæ° ð¥ =[ð0,ð1,ð2,â¯]x=[a0,a1,a2,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸å­å¨èªç¶æ° ð¾K![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ­£æ´æ° ð¿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾å¯¹äºä»»ä½ ð â¥ð¾kâ¥K![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ ðð =ðð+ð¿ak=ak+L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±ç§°è¿åæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º **å¾ªç¯è¿åæ°** ï¼periodic continued fractionï¼ï¼æ»¡è¶³è¿ä¸ªæ¡ä»¶çæå°ç ð¿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºå®çæå°æ­£å¨æï¼èå¨è¿åæ°ä¸­éå¤åºç°ç ðð,â¯,ðð+ð¿â1ak,â¯,ak+Lâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åºåå°±ç§°ä¸ºå®çå¾ªç¯èï¼å©ç¨å¾ªç¯èï¼å¾ªç¯è¿åæ°å¯ä»¥åä½ ð¥ =[ð0,â¯,ððâ1,âââââââðð,â¯,ðð+ð¿â1]x=[a0,â¯,akâ1,ak,â¯,ak+Lâ1â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ð¾K![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥åä½ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ ð¥ =[ââââââð0,â¯,ðð¿â1]x=[a0,â¯,aLâ1â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±ç§°å®ä¸º **çº¯å¾ªç¯è¿åæ°** ï¼purely periodic continued fractionï¼ï¼å¦åç§°å®ä¸º **æ··å¾ªç¯è¿åæ°** ï¼eventually periodic continued fractionï¼ï¼
+设连分数 𝑥 =[𝑎0,𝑎1,𝑎2,⋯]x=[a0,a1,a2,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且存在自然数 𝐾K![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和正整数 𝐿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得对于任何 𝑘 ≥𝐾k≥K![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有 𝑎𝑘 =𝑎𝑘+𝐿ak=ak+L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就称连分数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 **循环连分数** （periodic continued fraction）．满足这个条件的最小的 𝐿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为它的最小正周期，而在连分数中重复出现的 𝑎𝑘,⋯,𝑎𝑘+𝐿−1ak,⋯,ak+L−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 序列就称为它的循环节．利用循环节，循环连分数可以写作 𝑥 =[𝑎0,⋯,𝑎𝑘−1,―――――――𝑎𝑘,⋯,𝑎𝑘+𝐿−1]x=[a0,⋯,ak−1,ak,⋯,ak+L−1―]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如果 𝐾K![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以取作 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即 𝑥 =[――――――𝑎0,⋯,𝑎𝐿−1]x=[a0,⋯,aL−1―]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就称它为 **纯循环连分数** （purely periodic continued fraction），否则称它为 **混循环连分数** （eventually periodic continued fraction）．
 
-### äºæ¬¡æ çæ°
+### 二次无理数
 
-ä¸å¾ªç¯è¿åæ°å¯åç¸å ³çæ¦å¿µæ¯ [ï¼å®ï¼äºæ¬¡æ çæ°](../quadratic/)ï¼quadratic irrationalï¼ï¼å³æ´ç³»æ°äºæ¬¡æ¹ç¨çæ çæ°è§£ï¼ææçäºæ¬¡æ çæ°é½å¯ä»¥è¡¨ç¤ºæ
+与循环连分数密切相关的概念是 [（实）二次无理数](../quadratic/)（quadratic irrational），即整系数二次方程的无理数解．所有的二次无理数都可以表示成
 
-ð+ðâð·a+bD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎+𝑏√𝐷a+bD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çå½¢å¼ï¼å ¶ä¸­ï¼ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æçæ°ä¸ ð·D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ å¹³æ¹å å­çæ­£æ´æ°ï¼æ¬ææå°çäºæ¬¡æ çæ°é½é»è®¤æ¯å®æ°ï¼èä¸ï¼ð +ðâð·a+bD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ±è½­æ¯æ ð âðâð·aâbD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+的形式，其中，𝑎,𝑏a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是有理数且 𝐷D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是无平方因子的正整数．本文提到的二次无理数都默认是实数．而且，𝑎 +𝑏√𝐷a+bD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的共轭是指 𝑎 −𝑏√𝐷a−bD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-Euler çç»æè¯´æï¼ææå¾ªç¯è¿åæ°é½æ¯äºæ¬¡æ çæ°ï¼
+Euler 的结果说明，所有循环连分数都是二次无理数．
 
-å®çï¼Eulerï¼
+定理（Euler）
 
-å¾ªç¯è¿åæ°è¡¨ç¤ºçé½æ¯äºæ¬¡æ çæ°ï¼
+循环连分数表示的都是二次无理数．
 
-è¯æ
+证明
 
-å¯¹äºä¸è¬çå¾ªç¯è¿åæ° ð¥ =[ð0,â¯,ððâ1,âââââââðð,â¯,ðð+ð¿â1]x=[a0,â¯,akâ1,ak,â¯,ak+Lâ1â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥è®¾ ð¦ =[âââââââðð,â¯,ðð+ð¿â1]y=[ak,â¯,ak+Lâ1â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å
+对于一般的循环连分数 𝑥 =[𝑎0,⋯,𝑎𝑘−1,―――――――𝑎𝑘,⋯,𝑎𝑘+𝐿−1]x=[a0,⋯,ak−1,ak,⋯,ak+L−1―]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以设 𝑦 =[―――――――𝑎𝑘,⋯,𝑎𝑘+𝐿−1]y=[ak,⋯,ak+L−1―]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则
 
-ð¥=[ð0,â¯,ððâ1,ð¦]=ð¿0(ð¦),ð¦=[ðð,â¯,ðð+ð¿â1,ð¦]=ð¿1(ð¦),x=[a0,â¯,akâ1,y]=L0(y),y=[ak,â¯,ak+Lâ1,y]=L1(y),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=[𝑎0,⋯,𝑎𝑘−1,𝑦]=𝐿0(𝑦),𝑦=[𝑎𝑘,⋯,𝑎𝑘+𝐿−1,𝑦]=𝐿1(𝑦),x=[a0,⋯,ak−1,y]=L0(y),y=[ak,⋯,ak+L−1,y]=L1(y),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ð¿0( â )L0(â )![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¿1( â )L1(â )![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯åå¼çº¿æ§åæ¢ï¼äºæ¯ï¼å¾å° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³çæ¹ç¨
+其中，𝐿0( ⋅)L0(⋅)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐿1( ⋅)L1(⋅)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是分式线性变换．于是，得到 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足的方程
 
-ð¥=ð¿0âð¿1âð¿â10(ð¥).x=L0âL1âL0â1(x).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝐿0∘𝐿1∘𝐿−10(𝑥).x=L0∘L1∘L0−1(x).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸å¦¨è®¾åå¼çº¿æ§åæ¢ ð¿0 âð¿1 âð¿â10(ð¥) =ðð¥+ððð¥+ðL0âL1âL0â1(x)=ax+bcx+d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¾å° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³çæ¹ç¨
+不妨设分式线性变换 𝐿0 ∘𝐿1 ∘𝐿−10(𝑥) =𝑎𝑥+𝑏𝑐𝑥+𝑑L0∘L1∘L0−1(x)=ax+bcx+d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则得到 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足的方程
 
-ðð¥2+(ðâð)ð¥âð=0.cx2+(dâa)xâb=0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑐𝑥2+(𝑑−𝑎)𝑥−𝑏=0.cx2+(d−a)x−b=0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å èï¼å¾ªç¯è¿åæ°é½æ¯æ´ç³»æ°äºæ¬¡æ¹ç¨çè§£ï¼åå ä¸ºæ éè¿åæ°é½æ¯æ çæ°ï¼æä»¥å¾ªç¯è¿åæ°é½è¡¨ç¤ºäºäºæ¬¡æ çæ°ï¼
+因而，循环连分数都是整系数二次方程的解．又因为无限连分数都是无理数，所以循环连分数都表示了二次无理数．
 
-Lagrange çç»æè¯´æåè¿æ¥ä¹æç«ï¼å èäºæ¬¡æ çæ°åå¾ªç¯è¿åæ°æ¯ç­ä»·çï¼
+Lagrange 的结果说明反过来也成立，因而二次无理数和循环连分数是等价的．
 
-å®çï¼Lagrangeï¼
+定理（Lagrange）
 
-äºæ¬¡æ çæ°å¯ä»¥è¡¨ç¤ºæå¾ªç¯è¿åæ°ï¼
+二次无理数可以表示成循环连分数．
 
-è¯æ
+证明
 
-æè·¯æ¯è¯æä½é¡¹ä¼éå¤åºç°ï¼è®¾äºæ¬¡æ çæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥åä½
+思路是证明余项会重复出现．设二次无理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以写作
 
-ð¥=ð0+âð·ð0x=P0+DQ0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝑃0+√𝐷𝑄0x=P0+DQ0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çå½¢å¼ï¼å ¶ä¸­ï¼ð0,ð0,ð·P0,Q0,D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æ´æ°ä¸ ð0 â£ð· âð20Q0â£DâP02![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ»æ¯å¯è½çï¼æ¯å¦äºæ¬¡æ çæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»å¯ä»¥åæ
+的形式，其中，𝑃0,𝑄0,𝐷P0,Q0,D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是整数且 𝑄0 ∣𝐷 −𝑃20Q0∣D−P02![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这总是可能的，比如二次无理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 总可以写成
 
-ð+ðâð·â²=ðððð+ððððâð·â²=ðððð+ððððâð·â²ðððð=ðððððððð+â(ðððð)2ð·â²(ðððð)2a+bDâ²=paqa+pbqbDâ²=paqb+pbqaDâ²qaqb=papbqaqb+(qaqb)2Dâ²(qaqb)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎+𝑏√𝐷′=𝑝𝑎𝑞𝑎+𝑝𝑏𝑞𝑏√𝐷′=𝑝𝑎𝑞𝑏+𝑝𝑏𝑞𝑎√𝐷′𝑞𝑎𝑞𝑏=𝑝𝑎𝑝𝑏𝑞𝑎𝑞𝑏+√(𝑞𝑎𝑞𝑏)2𝐷′(𝑞𝑎𝑞𝑏)2a+bD′=paqa+pbqbD′=paqb+pbqaD′qaqb=papbqaqb+(qaqb)2D′(qaqb)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åä»¤ ð =ððððððððP=papbqaqb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð =(ðððð)2Q=(qaqb)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð· =ðð·â²D=QDâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³å¯ï¼
+再令 𝑃 =𝑝𝑎𝑝𝑏𝑞𝑎𝑞𝑏P=papbqaqb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑄 =(𝑞𝑎𝑞𝑏)2Q=(qaqb)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐷 =𝑄𝐷′D=QD′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即可．
 
-å°å®åæè¿ç§å½¢å¼çå¥½å¤æ¯ï¼å¯ä»¥è¯æå®çææä½é¡¹é½å ·æç±»ä¼¼çå½¢å¼ï¼
+将它写成这种形式的好处是，可以证明它的所有余项都具有类似的形式：
 
-ðð=ðð+âð·ðð,rk=Pk+DQk,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘=𝑃𝑘+√𝐷𝑄𝑘,rk=Pk+DQk,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ðð,ððPk,Qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ´æ°ä¸ ðð â£ð· âð2ðQkâ£DâPk2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ï¼æ¡ä»¶ ðð â£ð· âð2ðQkâ£DâPk2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¿è¯äºææä½é¡¹çåå­ä¸­ï¼âð·D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åé¢çç³»æ°é½æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+其中，𝑃𝑘,𝑄𝑘Pk,Qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是整数且 𝑄𝑘 ∣𝐷 −𝑃2𝑘Qk∣D−Pk2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．其中，条件 𝑄𝑘 ∣𝐷 −𝑃2𝑘Qk∣D−Pk2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 保证了所有余项的分子中，√𝐷D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 前面的系数都是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä¸ºå¾å°ä½é¡¹çå½¢å¼ï¼å¯ä»¥ä½¿ç¨æ°å­¦å½çº³æ³ï¼å½ ð =0k=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æ¾ç¶ï¼åè®¾å·²ç»å¾å°äº ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½¢å¼ï¼å¹¶è®¾ ðð =âððâak=ârkâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±æ
+为得到余项的形式，可以使用数学归纳法．当 𝑘 =0k=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，显然．假设已经得到了 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式，并设 𝑎𝑘 =⌊𝑟𝑘⌋ak=⌊rk⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就有
 
-ðð=ðð+1ðð+1.rk=ak+1rk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘=𝑎𝑘+1𝑟𝑘+1.rk=ak+1rk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¾ ðð+1rk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹æç±»ä¼¼å½¢å¼ï¼å¹¶å ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸èµ·ä»£å ¥ä¸å¼ï¼æ
+设 𝑟𝑘+1rk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也有类似形式，并和 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一起代入上式，有
 
-ðð+âð·ðð=ðð+ðð+1ðð+1+âð·=ðð+ðð+1ðð+1âðð+1âð·ð2ð+1âð·.Pk+DQk=ak+Qk+1Pk+1+D=ak+Qk+1Pk+1âQk+1DPk+12âD.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑘+√𝐷𝑄𝑘=𝑎𝑘+𝑄𝑘+1𝑃𝑘+1+√𝐷=𝑎𝑘+𝑄𝑘+1𝑃𝑘+1−𝑄𝑘+1√𝐷𝑃2𝑘+1−𝐷.Pk+DQk=ak+Qk+1Pk+1+D=ak+Qk+1Pk+1−Qk+1DPk+12−D.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸ºäºæ¬¡æ çæ°è¡¨ç¤ºæ ð +ðâð·a+bD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹å¼æ¯å¯ä¸çï¼æä»¥æ¯è¾ä¸¤ä¾§ç³»æ°å¯ç¥
+因为二次无理数表示成 𝑎 +𝑏√𝐷a+bD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方式是唯一的，所以比较两侧系数可知
 
-ðððð=ðð+ðð+1ðð+1ð2ð+1âð·,Â 1ðð=âðð+1ð2ð+1âð·.PkQk=ak+Qk+1Pk+1Pk+12âD,Â 1Qk=âQk+1Pk+12âD.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑘𝑄𝑘=𝑎𝑘+𝑄𝑘+1𝑃𝑘+1𝑃2𝑘+1−𝐷, 1𝑄𝑘=−𝑄𝑘+1𝑃2𝑘+1−𝐷.PkQk=ak+Qk+1Pk+1Pk+12−D, 1Qk=−Qk+1Pk+12−D.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°ç¬¬äºä¸ªç­å¼ä»£å ¥ç¬¬ä¸ä¸ªç­å¼å¯ä»¥è§£åº ðð+1Pk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+将第二个等式代入第一个等式可以解出 𝑃𝑘+1Pk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-ðððð=ððâðð+1ððâºðð+1=ððððâðð.PkQk=akâPk+1QkâºPk+1=akQkâPk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑘𝑄𝑘=𝑎𝑘−𝑃𝑘+1𝑄𝑘⟺𝑃𝑘+1=𝑎𝑘𝑄𝑘−𝑃𝑘.PkQk=ak−Pk+1Qk⟺Pk+1=akQk−Pk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åä»£å ¥ç¬¬äºä¸ªç­å¼ï¼å°±å¯ä»¥è§£åº ðð+1Qk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+再代入第二个等式，就可以解出 𝑄𝑘+1Qk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-ðð+1=ð·âð2ð+1ðð=ð·â(ððððâðð)2ðð=âð2ððð+2ðððð+ð·âð2ððð.Qk+1=DâPk+12Qk=Dâ(akQkâPk)2Qk=âak2Qk+2akPk+DâPk2Qk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑄𝑘+1=𝐷−𝑃2𝑘+1𝑄𝑘=𝐷−(𝑎𝑘𝑄𝑘−𝑃𝑘)2𝑄𝑘=−𝑎2𝑘𝑄𝑘+2𝑎𝑘𝑃𝑘+𝐷−𝑃2𝑘𝑄𝑘.Qk+1=D−Pk+12Qk=D−(akQk−Pk)2Qk=−ak2Qk+2akPk+D−Pk2Qk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®å½çº³åè®¾ï¼ðð â£ð· âð2ðQkâ£DâPk2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ç¡®å® ðð+1Pk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðð+1Qk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æ´æ°ï¼å³ ðð+1rk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹å ·ææè¦æ±çå½¢å¼ï¼
+根据归纳假设，𝑄𝑘 ∣𝐷 −𝑃2𝑘Qk∣D−Pk2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以确实 𝑃𝑘+1Pk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑄𝑘+1Qk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是整数，即 𝑟𝑘+1rk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也具有所要求的形式．
 
-æåï¼è¯æä½é¡¹åªè½åå¾æéå¤ä¸ªå¼ï¼æ èå¿ ç¶éå¤ï¼åæå·²ç»æ±å¾ä½é¡¹
+最后，证明余项只能取得有限多个值，故而必然重复．前文已经求得余项
 
-ðð+âð·ðð=ðð=âððâ2ð¥âððâ2ððâ1ð¥âððâ1Pk+DQk=rk=âqkâ2xâpkâ2qkâ1xâpkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑘+√𝐷𝑄𝑘=𝑟𝑘=−𝑞𝑘−2𝑥−𝑝𝑘−2𝑞𝑘−1𝑥−𝑝𝑘−1Pk+DQk=rk=−qk−2x−pk−2qk−1x−pk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-èä¸å¯¹äºæ çæ°ï¼æ»æ ðð >1rk>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ¶ï¼å®çå ±è½­
+而且对于无理数，总有 𝑟𝑘 >1rk>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．同时，它的共轭
 
-ððââð·ðð=ðâð=âððâ2ð¥ââððâ2ððâ1ð¥ââððâ1=âððâ2ððâ1ð¥ââððâ2ððâ2ð¥ââððâ1ððâ1PkâDQk=rkâ=âqkâ2xââpkâ2qkâ1xââpkâ1=âqkâ2qkâ1xââpkâ2qkâ2xââpkâ1qkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑘−√𝐷𝑄𝑘=𝑟∗𝑘=−𝑞𝑘−2𝑥∗−𝑝𝑘−2𝑞𝑘−1𝑥∗−𝑝𝑘−1=−𝑞𝑘−2𝑞𝑘−1𝑥∗−𝑝𝑘−2𝑞𝑘−2𝑥∗−𝑝𝑘−1𝑞𝑘−1Pk−DQk=rk∗=−qk−2x∗−pk−2qk−1x∗−pk−1=−qk−2qk−1x∗−pk−2qk−2x∗−pk−1qk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹äºå åå¤§ç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¿ ç¶å°äº 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸º
+对于充分大的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 必然小于 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因为
 
-ððâ2ððâ1>0,Â limðââð¥ââððâ2ððâ2ð¥ââððâ1ððâ1=ð¥ââð¥ð¥ââð¥=1.qkâ2qkâ1>0,Â limkââxââpkâ2qkâ2xââpkâ1qkâ1=xââxxââx=1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑞𝑘−2𝑞𝑘−1>0, lim𝑘→∞𝑥∗−𝑝𝑘−2𝑞𝑘−2𝑥∗−𝑝𝑘−1𝑞𝑘−1=𝑥∗−𝑥𝑥∗−𝑥=1.qk−2qk−1>0, limk→∞x∗−pk−2qk−2x∗−pk−1qk−1=x∗−xx∗−x=1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±è¯´æ
+这就说明
 
-2âð·ðð=ððâðâð>1âº0<ððâ¤2âð·.2DQk=rkârkâ>1âº0<Qkâ¤2D.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+2√𝐷𝑄𝑘=𝑟𝑘−𝑟∗𝑘>1⟺0<𝑄𝑘≤2√𝐷.2DQk=rk−rk∗>1⟺0<Qk≤2D.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼ððQk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åªè½åæéå¤ä¸ªå¼ï¼è¿èï¼
+因此，𝑄𝑘Qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 只能取有限多个值．进而，
 
-ð·âð2ð=ððððâ1>0âº|ðð|<âð·,DâPk2=QkQkâ1>0âº|Pk|<D,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐷−𝑃2𝑘=𝑄𝑘𝑄𝑘−1>0⟺|𝑃𝑘|<√𝐷,D−Pk2=QkQk−1>0⟺|Pk|<D,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥ï¼ððPk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹åªè½åæéå¤ä¸ªå¼ï¼æ èï¼ä½é¡¹ ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åªææéå¤ä¸ªå¯è½çåå¼ï¼å¿ ç¶å¨æ éé¡¹å éå¤ï¼
+所以，𝑃𝑘Pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也只能取有限多个值．故而，余项 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 只有有限多个可能的取值，必然在无限项内重复．
 
-å®ççè¯æä¹æä¾äºä¸ä¸ªè®¡ç®äºæ¬¡æ çæ°çä½é¡¹çéæ¨å ¬å¼ï¼
+定理的证明也提供了一个计算二次无理数的余项的递推公式：
 
-äºæ¬¡æ çæ°çä½é¡¹éæ¨å ¬å¼
+二次无理数的余项递推公式
 
-äºæ¬¡æ çæ°æ»å¯ä»¥è¡¨ç¤ºæ
+二次无理数总可以表示成
 
-ð¥=ð0+âð·ð0x=P0+DQ0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝑃0+√𝐷𝑄0x=P0+DQ0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çå½¢å¼ï¼ä¸ ð0 â£ð· âð20Q0â£DâP02![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®çä½é¡¹
+的形式，且 𝑄0 ∣𝐷 −𝑃20Q0∣D−P02![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．它的余项
 
-ðð=ðð+âð·ððrk=Pk+DQk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘=𝑃𝑘+√𝐷𝑄𝑘rk=Pk+DQk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸­ï¼ðð,ððPk,Qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æ´æ°ï¼ä¸æ»¡è¶³éæ¨å ³ç³»
+中，𝑃𝑘,𝑄𝑘Pk,Qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是整数，且满足递推关系
 
-ðð+1=ððððâðð,ðð+1=ð·âð2ð+1ðð.Pk+1=akQkâPk,Qk+1=DâPk+12Qk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑘+1=𝑎𝑘𝑄𝑘−𝑃𝑘,𝑄𝑘+1=𝐷−𝑃2𝑘+1𝑄𝑘.Pk+1=akQk−Pk,Qk+1=D−Pk+12Qk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¸ªéæ¨å ¬å¼å¯ä»¥ç´æ¥ç¨äºäºæ¬¡æ çæ°çè¿åæ°çè®¡ç®ï¼èä¸æ ¹æ®å®ççè¯æï¼|ðð| <âð·|Pk|<D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðð â¤2âð·Qkâ¤2D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¯¥ç®æ³çå¤æåº¦åå³äºå¾ªç¯èçé¿åº¦ï¼èåè å¯ä»¥è¯ææ¯ ð(âð·logâ¡ð·)O(Dlogâ¡D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç2ï¼
+这个递推公式可以直接用于二次无理数的连分数的计算，而且根据定理的证明，|𝑃𝑘| <√𝐷|Pk|<D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑄𝑘 ≤2√𝐷Qk≤2D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．该算法的复杂度取决于循环节的长度，而后者可以证明是 𝑂(√𝐷log⁡𝐷)O(Dlog⁡D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的2．
 
-äºæ¬¡æ çæ°
+二次无理数
 
-ç»å®äºæ¬¡æ çæ° ð¼ =ð¥+ð¦âðð§Î±=x+ynz![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ±åºå ¶è¿åæ°çè¡¨ç¤ºï¼å ¶ä¸­ï¼ð¥,ð¦,ð§,ð âðx,y,z,nâZ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð >0n>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯å®å ¨å¹³æ¹ï¼
+给定二次无理数 𝛼 =𝑥+𝑦√𝑛𝑧α=x+ynz![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求出其连分数的表示．其中，𝑥,𝑦,𝑧,𝑛 ∈𝐙x,y,z,n∈Z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑛 >0n>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是完全平方．
 
-è§£ç­
+解答
 
-é¦å å°äºæ¬¡æ çæ°è¡¨ç¤ºæä¸è¿°å½¢å¼ï¼åå©ç¨éæ¨å ¬å¼è®¡ç®å³å¯ï¼è¿åæ°çé¡¹ç± ðð =âððâak=ârkâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»åºï¼ä¸ºäºæ±åºå¾ªç¯èï¼éè¦å­å¨ (ðð,ðð)(Pk,Qk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¦æ¬¡åºç°çä¸æ ï¼
+首先将二次无理数表示成上述形式，再利用递推公式计算即可．连分数的项由 𝑎𝑘 =⌊𝑟𝑘⌋ak=⌊rk⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 给出．为了求出循环节，需要存储 (𝑃𝑘,𝑄𝑘)(Pk,Qk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 首次出现的下标．
 
 C++Python
 
@@ -1086,11 +1086,11 @@ C++Python
   
 [Tavrida NU Akai Contest - Continued Fraction](https://timus.online/problem.aspx?space=1&num=1814)
 
-ç»å® ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯å®å ¨å¹³æ¹æ°ï¼0 â¤ð â¤1090â¤kâ¤109![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ±åº âð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¸è¿åæ° ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+给定 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是完全平方数，0 ≤𝑘 ≤1090≤k≤109![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．求出 √𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个渐近分数 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è§£ç­
+解答
 
-é¦å å©ç¨ä¸è¿°ç®æ³è§£åº âð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¨æï¼å°å¾ªç¯èè¡¨ç¤ºæåå¼çº¿æ§åæ¢ï¼å°±å¯ä»¥ç¨ [å¿«éå¹](../../binary-exponentiation/) è·å¾ ð¥ðxk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼å½ç¶ï¼å¯¹äºæ²¡æè¿å ¥å¾ªç¯èåä¸è¶³ä¸ä¸ªå¾ªç¯èçé¨åï¼éè¦åç¬å¤çï¼
+首先利用上述算法解出 √𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的周期，将循环节表示成分式线性变换，就可以用 [快速幂](../../binary-exponentiation/) 获得 𝑥𝑘xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．当然，对于没有进入循环节和不足一个循环节的部分，需要单独处理．
 
 C++Python
 
@@ -1100,161 +1100,161 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 ``` |  ```text from math import sqrt , floor # Return the continued fraction and minimal positive period # of a quadratic irrational (x + y * sqrt(n)) / z. def quadratic_irrational ( x , y , z , n ): p = x * z d = n * y * y * z * z q = z * z dd = floor ( sqrt ( n )) * y * z i = 0 a = [] used = dict () while ( p , q ) not in used : a . append (( p \+ dd ) // q ) used [ p , q ] = i p = a [ \- 1 ] * q \- p q = ( d \- p * p ) // q i += 1 return a , i \- used [ p , q ] # Compose (A[0]*x + A[1]) / (A[2]*x + A[3]) and (B[0]*x + B[1]) / (B[2]*x + B[3]) def combine ( A , B ): return [ t % mod for t in [ A [ 0 ] * B [ 0 ] \+ A [ 1 ] * B [ 2 ], A [ 0 ] * B [ 1 ] \+ A [ 1 ] * B [ 3 ], A [ 2 ] * B [ 0 ] \+ A [ 3 ] * B [ 2 ], A [ 2 ] * B [ 1 ] \+ A [ 3 ] * B [ 3 ], ] ] # Binary exponentiation. def bpow ( A , n ): return ( [ 1 , 0 , 0 , 1 ] if not n else combine ( A , bpow ( A , n \- 1 )) if n % 2 else bpow ( combine ( A , A ), n // 2 ) ) mod = 10 ** 9 \+ 7 x , k = map ( int , input () . split ()) a , T = quadratic_irrational ( 0 , 1 , 1 , x ) A = ( 1 , 0 , 0 , 1 ) # (x + 0) / (0*x + 1) = x # apply ak + 1/x = (ak*x+1)/(1x+0) to (Ax + B) / (Cx + D) for i in reversed ( range ( 1 , len ( a ))): A = combine ([ a [ i ], 1 , 1 , 0 ], A ) C = ( 0 , 1 , 0 , 0 ) # = 1 / 0 while k % T : i = k % T C = combine ([ a [ i ], 1 , 1 , 0 ], C ) k -= 1 C = combine ( bpow ( A , k // T ), C ) C = combine (( a [ 0 ], 1 , 1 , 0 ), C ) print ( str ( C [ 1 ]) \+ "/" \+ str ( C [ 3 ])) ```   
 ---|---  
   
-### çº¯å¾ªç¯è¿åæ°
+### 纯循环连分数
 
-äºæ¬¡æ çæ°æ¯æå¾ªç¯è¿åæ°è¡¨ç¤ºçå åå¿ è¦æ¡ä»¶ï¼æ¬èçè®¨è®ºåç»åºäºå®æ°å ·æçº¯å¾ªç¯è¿åæ°è¡¨ç¤ºçå åå¿ è¦æ¡ä»¶ï¼
+二次无理数是有循环连分数表示的充分必要条件，本节的讨论则给出了实数具有纯循环连分数表示的充分必要条件．
 
-é¦å ï¼å ä¸ºçº¯å¾ªç¯è¿åæ°å ·æç±»ä¼¼æéè¿åæ°çå½¢å¼ï¼æä»¥å¯ä»¥åãååºãæä½ï¼ç±»ä¼¼äºååºå®çï¼è¿æ ·å¾å°çè¿åæ°è¡¨ç¤ºååæ¥çè¿åæ°è¡¨ç¤ºä¹é´æç¡®å®çå ³ç³»ï¼
+首先，因为纯循环连分数具有类似有限连分数的形式，所以可以做「反序」操作．类似于反序定理，这样得到的连分数表示和原来的连分数表示之间有确定的关系．
 
-å®çï¼Galoisï¼
+定理（Galois）
 
-å¯¹äºçº¯å¾ªç¯è¿åæ°
+对于纯循环连分数
 
-ð¥=[ââââââð0,ð1,â¯,ðâ],x=[a0,a1,â¯,aââ],![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=[――――――𝑎0,𝑎1,⋯,𝑎ℓ],x=[a0,a1,⋯,aℓ―],![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®°
+记
 
-ð¥â²=[ââââââðâ,â¯,ð1,ð0].xâ²=[aâ,â¯,a1,a0â].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥′=[――――――𝑎ℓ,⋯,𝑎1,𝑎0].x′=[aℓ,⋯,a1,a0―].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥â²xâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºä¸ºãåæ°è´å ±è½­ãï¼å³ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ±è½­çåæ°çç¸åæ°æ¯ ð¥â²xâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+则 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥′x′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互为「倒数负共轭」，即 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的共轭的倒数的相反数是 𝑥′x′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-å ä¸ºä¸è¦æ± â +1â+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æå°æ­£å¨æï¼æä»¥ä¸å¦¨è®¾ â >0â>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å©ç¨ååºå®çå¯ç¥ï¼
+因为不要求 ℓ +1ℓ+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是最小正周期，所以不妨设 ℓ >0ℓ>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．利用反序定理可知，
 
-ðâðââ1=[ðâ,â¯,ð1,ð0]=ðâ²âðâ²â,ðâðââ1=[ðâ,â¯,ð1]=ðâ²ââ1ðâ²ââ1.pâpââ1=[aâ,â¯,a1,a0]=pââ²qââ²,qâqââ1=[aâ,â¯,a1]=pââ1â²qââ1â².![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝ℓ𝑝ℓ−1=[𝑎ℓ,⋯,𝑎1,𝑎0]=𝑝′ℓ𝑞′ℓ,𝑞ℓ𝑞ℓ−1=[𝑎ℓ,⋯,𝑎1]=𝑝′ℓ−1𝑞′ℓ−1.pℓpℓ−1=[aℓ,⋯,a1,a0]=pℓ′qℓ′,qℓqℓ−1=[aℓ,⋯,a1]=pℓ−1′qℓ−1′.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸ºç­å¼ä¸¤ä¾§é½æ¯æ¢çº¦åæ°ï¼æä»¥
+因为等式两侧都是既约分数，所以
 
-ðâ²â=ðâ,Â ðâ²â=ðââ1,Â ðâ²ââ1=ðâ,Â ðâ²ââ1=ðââ1.pââ²=pâ,Â qââ²=pââ1,Â pââ1â²=qâ,Â qââ1â²=qââ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝′ℓ=𝑝ℓ, 𝑞′ℓ=𝑝ℓ−1, 𝑝′ℓ−1=𝑞ℓ, 𝑞′ℓ−1=𝑞ℓ−1.pℓ′=pℓ, qℓ′=pℓ−1, pℓ−1′=qℓ, qℓ−1′=qℓ−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹äºçº¯å¾ªç¯è¿åæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®çç¬¬ â +1â+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä½é¡¹å°±æ¯ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼æ
+对于纯循环连分数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，它的第 ℓ +1ℓ+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个余项就是 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此，有
 
-ð¥=ð¥ðâ+ðââ1ð¥ðâ+ðââ1.x=xpâ+pââ1xqâ+qââ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=𝑥𝑝ℓ+𝑝ℓ−1𝑥𝑞ℓ+𝑞ℓ−1.x=xpℓ+pℓ−1xqℓ+qℓ−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥ï¼å®æ»¡è¶³äºæ¬¡æ¹ç¨
+所以，它满足二次方程
 
-ðâð¥2+(ðââ1âðâ)ð¥âðââ1=0.qâx2+(qââ1âpâ)xâpââ1=0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑞ℓ𝑥2+(𝑞ℓ−1−𝑝ℓ)𝑥−𝑝ℓ−1=0.qℓx2+(qℓ−1−pℓ)x−pℓ−1=0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åçï¼ð¥â²xâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³äºæ¬¡æ¹ç¨
+同理，𝑥′x′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足二次方程
 
-ðâ²â(ð¥â²)2+(ðâ²ââ1âðâ²â)ð¥â²âðâ²ââ1=0.qââ²(xâ²)2+(qââ1â²âpââ²)xâ²âpââ1â²=0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑞′ℓ(𝑥′)2+(𝑞′ℓ−1−𝑝′ℓ)𝑥′−𝑝′ℓ−1=0.qℓ′(x′)2+(qℓ−1′−pℓ′)x′−pℓ−1′=0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å©ç¨ç³»æ°çå ³ç³»å¯ç¥ï¼è¿ä¸ªæ¹ç¨å¯ä»¥åä½
+利用系数的关系可知，这个方程可以写作
 
-ðââ1(ð¥â²)2+(ðââ1âðâ)ð¥â²âðâ=0.pââ1(xâ²)2+(qââ1âpâ)xâ²âqâ=0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝ℓ−1(𝑥′)2+(𝑞ℓ−1−𝑝ℓ)𝑥′−𝑞ℓ=0.pℓ−1(x′)2+(qℓ−1−pℓ)x′−qℓ=0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»¤ ð¦ = â1ð¥â²y=â1xâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³åä¸ä¸ªæ¹ç¨ï¼ä½æ¯ï¼ð¥ >0 >ð¦x>0>y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤å®ä»¬å¹¶éåä¸ä¸ªæ ¹ï¼èæ¯äºä¸ºå ±è½­çå ³ç³»ï¼è¿å°±è¯æäºåå½é¢ï¼
+令 𝑦 = −1𝑥′y=−1x′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足同一个方程．但是，𝑥 >0 >𝑦x>0>y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此它们并非同一个根，而是互为共轭的关系，这就证明了原命题．
 
-Galois å©ç¨è¿ä¸ªè§å¯ï¼è¿ä¸æ­¥å°ç»åºäºäºæ¬¡æ çæ°æçº¯å¾ªç¯è¿åæ°è¡¨ç¤ºçå åå¿ è¦æ¡ä»¶ï¼
+Galois 利用这个观察，进一步地给出了二次无理数有纯循环连分数表示的充分必要条件．
 
-å®çï¼Galoisï¼
+定理（Galois）
 
-äºæ¬¡æ çæ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è¡¨ç¤ºä¸ºçº¯å¾ªç¯è¿åæ°ï¼å½ä¸ä» å½ ð¥ >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®çå ±è½­ â1 <ð¥â <0â1<xâ<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+二次无理数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以表示为纯循环连分数，当且仅当 𝑥 >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且它的共轭 −1 <𝑥∗ <0−1<x∗<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-å¦æ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯çº¯å¾ªç¯è¿åæ°ï¼é£ä¹å©ç¨åæçè®°å·ï¼æ ð0 =ðâ+1 â¥1a0=aâ+1â¥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ è ð¥ >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå ä¸ºå®çåæ°è´å ±è½­ä¹æ¯å¾ªç¯è¿åæ°ï¼æä»¥å®çå ±è½­ ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ â1ð¥â >1â1xâ>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼äº¦å³ â1 <ð¥â <0â1<xâ<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿å°±è¯æäºçº¯å¾ªç¯è¿åæ°é½æ»¡è¶³è¯¥æ¡ä»¶ï¼
+如果 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是纯循环连分数，那么利用前文的记号，有 𝑎0 =𝑎ℓ+1 ≥1a0=aℓ+1≥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故而 𝑥 >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．又因为它的倒数负共轭也是循环连分数，所以它的共轭 𝑥∗x∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 −1𝑥∗ >1−1x∗>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，亦即 −1 <𝑥∗ <0−1<x∗<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这就证明了纯循环连分数都满足该条件．
 
-åè¿æ¥ï¼è®¾äºæ¬¡æ çæ° ð¥ >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ â1 <ð¥â <0â1<xâ<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äº ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½é¡¹ ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æéæ¨å ³ç³»
+反过来，设二次无理数 𝑥 >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 −1 <𝑥∗ <0−1<x∗<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的余项 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有递推关系
 
-ðð=ðð+1ðð+1.rk=ak+1rk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘=𝑎𝑘+1𝑟𝑘+1.rk=ak+1rk+1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç­å¼ä¸¤è¾¹é½æ¯äºæ¬¡æ çæ°ï¼åå ±è½­å¯ç¥
+等式两边都是二次无理数，取共轭可知
 
-ðâð=ðð+1ðâð+1.rkâ=ak+1rk+1â.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟∗𝑘=𝑎𝑘+1𝑟∗𝑘+1.rk∗=ak+1rk+1∗.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å©ç¨è¿ä¸ªéæ¨å ³ç³»ï¼å¯ä»¥è¯æ â1 <ðâð <0â1<rkâ<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹ææ ð â¥0kâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æç«ï¼
+利用这个递推关系，可以证明 −1 <𝑟∗𝑘 <0−1<rk∗<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对所有 𝑘 ≥0k≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都成立．
 
-é¦å ï¼å¯¹äº ð =0k=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ â1 <ðâ0 =ð¥â0 <0â1<r0â=x0â<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¾ç¶ï¼å¯¹äº ð â¥0kâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±ç®åè¿åæ°å®ä¹å ð¥ >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ç¥ï¼ðð â¥1akâ¥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ èï¼åè®¾ â1 <ðâð <0â1<rkâ<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±æ
+首先，对于 𝑘 =0k=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 −1 <𝑟∗0 =𝑥∗0 <0−1<r0∗=x0∗<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，显然．对于 𝑘 ≥0k≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，由简单连分数定义和 𝑥 >1x>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可知，𝑎𝑘 ≥1ak≥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．故而，假设 −1 <𝑟∗𝑘 <0−1<rk∗<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就有
 
-â1<â1ðð<ðâð+1=1ðâðâðð<â11+ðð<0.â1<â1ak<rk+1â=1rkââak<â11+ak<0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+−1<−1𝑎𝑘<𝑟∗𝑘+1=1𝑟∗𝑘−𝑎𝑘<−11+𝑎𝑘<0.−1<−1ak<rk+1∗=1rk∗−ak<−11+ak<0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±å½çº³å°è¯æäº â1 <ðâð <0â1<rkâ<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹ææ ð â¥0kâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æç«ï¼å æ­¤ï¼æ
+这就归纳地证明了 −1 <𝑟∗𝑘 <0−1<rk∗<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对所有 𝑘 ≥0k≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都成立．因此，有
 
-ðð=â1ðâð+1+ðâð=ââ1ðâð+1â.ak=â1rk+1â+rkâ=ââ1rk+1ââ.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑘=−1𝑟∗𝑘+1+𝑟∗𝑘=⌊−1𝑟∗𝑘+1⌋.ak=−1rk+1∗+rk∗=⌊−1rk+1∗⌋.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸ºäºæ¬¡æ çæ°ä¸å®æ¯å¾ªç¯è¿åæ°ï¼æä»¥å­å¨æ­£æ´æ° ð¿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè³å°æä¸ªå åå¤§ç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ðð =ðð+ð¿rk=rk+L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½æ¯ï¼æ­¤æ¶å¿ ç¶ä¹æ
+因为二次无理数一定是循环连分数，所以存在正整数 𝐿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和至少某个充分大的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝑟𝑘 =𝑟𝑘+𝐿rk=rk+L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．但是，此时必然也有
 
-ððâ1=ââ1ðâðâ=ââ1ðâð+ð¿â=ðð+ð¿â1.akâ1=ââ1rkââ=ââ1rk+Lââ=ak+Lâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑘−1=⌊−1𝑟∗𝑘⌋=⌊−1𝑟∗𝑘+𝐿⌋=𝑎𝑘+𝐿−1.ak−1=⌊−1rk∗⌋=⌊−1rk+L∗⌋=ak+L−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ èï¼
+故而，
 
-ððâ1=ððâ1+1ðð=ðð+ð¿â1+1ðð+ð¿=ðð+ð¿â1.rkâ1=akâ1+1rk=ak+Lâ1+1rk+L=rk+Lâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑘−1=𝑎𝑘−1+1𝑟𝑘=𝑎𝑘+𝐿−1+1𝑟𝑘+𝐿=𝑟𝑘+𝐿−1.rk−1=ak−1+1rk=ak+L−1+1rk+L=rk+L−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æå³çæå°çè½å¤ä½¿å¾ ðð =ðð+ð¿rk=rk+L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¿ ç¶æ¯ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¹å°±æ¯è¯´ï¼ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è¡¨ç¤ºæçº¯å¾ªç¯è¿åæ°ï¼
+这意味着最小的能够使得 𝑟𝑘 =𝑟𝑘+𝐿rk=rk+L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 必然是 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．也就是说，𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以表示成纯循环连分数．
 
-Galois å®çæ­ç¤ºäºçº¯äºæ¬¡ä¸å°½æ ¹ï¼pure quadratic surdï¼ââå³å½¢å¦ âðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºæ¬¡æ çæ°ââçè¿åæ°è¡¨ç¤ºçè§å¾ï¼
+Galois 定理揭示了纯二次不尽根（pure quadratic surd）——即形如 √𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二次无理数——的连分数表示的规律．
 
-æ¨è®º
+推论
 
-å¯¹äºæçæ° ð >1r>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ âðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ çæ°ï¼é£ä¹
+对于有理数 𝑟 >1r>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果 √𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是无理数，那么
 
-âð=[ââðâ,ââââââââð1,â¯,ðâ,2ââðâ]r=[ârâ,a1,â¯,aâ,2ârââ]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+√𝑟=[⌊√𝑟⌋,――――――――𝑎1,⋯,𝑎ℓ,2⌊√𝑟⌋]r=[⌊r⌋,a1,⋯,aℓ,2⌊r⌋―]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸å¯¹äºä»»æ 1 â¤ð â¤â1â¤kâ¤â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ ðð =ðâ+1âðak=aâ+1âk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+且对于任意 1 ≤𝑘 ≤ℓ1≤k≤ℓ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有 𝑎𝑘 =𝑎ℓ+1−𝑘ak=aℓ+1−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-å¯¹äºäºæ¬¡æ çæ° âðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸º ââðâ +âð >1ârâ+r>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ â1 <ââðâ ââð <0â1<ârââr<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ ââðâ +âðârâ+r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯çº¯å¾ªç¯è¿åæ°ï¼
+对于二次无理数 √𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因为 ⌊√𝑟⌋ +√𝑟 >1⌊r⌋+r>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 −1 <⌊√𝑟⌋ −√𝑟 <0−1<⌊r⌋−r<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以 ⌊√𝑟⌋ +√𝑟⌊r⌋+r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是纯循环连分数：
 
-ââðâ+âð=[ââââââââ2ââðâ,ð1,â¯,ðâ].ârâ+r=[2ârâ,a1,â¯,aââ].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⌊√𝑟⌋+√𝑟=[――――――――2⌊√𝑟⌋,𝑎1,⋯,𝑎ℓ].⌊r⌋+r=[2⌊r⌋,a1,⋯,aℓ―].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®ä¸è¿°å®çï¼å®çåæ°è´å ±è½­å ·æå½¢å¼
+根据上述定理，它的倒数负共轭具有形式
 
-1âðâââðâ=[ââââââââðâ,â¯,ð1,2ââðâ].1râârâ=[aâ,â¯,a1,2ârââ].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1√𝑟−⌊√𝑟⌋=[――――――――𝑎ℓ,⋯,𝑎1,2⌊√𝑟⌋].1r−⌊r⌋=[aℓ,⋯,a1,2⌊r⌋―].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å©ç¨è¿åæ°çåºæ¬æ§è´¨å¯ç¥
+利用连分数的基本性质可知
 
-âð=ââðâ+11âðâââðâ=[ââðâ,ââââââââðâ,â¯,ð1,2ââðâ].r=ârâ+11râârâ=[ârâ,aâ,â¯,a1,2ârââ].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+√𝑟=⌊√𝑟⌋+11√𝑟−⌊√𝑟⌋=[⌊√𝑟⌋,――――――――𝑎ℓ,⋯,𝑎1,2⌊√𝑟⌋].r=⌊r⌋+11r−⌊r⌋=[⌊r⌋,aℓ,⋯,a1,2⌊r⌋―].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä½æ¯ï¼åç± ââðâ +âðârâ+r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°è¡¨ç¤ºå¯ç¥ï¼
+但是，又由 ⌊√𝑟⌋ +√𝑟⌊r⌋+r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数表示可知，
 
-âð=âââðâ+(ââðâ+âð)=[ââðâ,ââââââââð1,â¯,ðâ,2ââðâ].r=âârâ+(ârâ+r)=[ârâ,a1,â¯,aâ,2ârââ].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+√𝑟=−⌊√𝑟⌋+(⌊√𝑟⌋+√𝑟)=[⌊√𝑟⌋,――――――――𝑎1,⋯,𝑎ℓ,2⌊√𝑟⌋].r=−⌊r⌋+(⌊r⌋+r)=[⌊r⌋,a1,⋯,aℓ,2⌊r⌋―].![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸ºæ çæ°çè¿åæ°è¡¨ç¤ºæ¯å¯ä¸çï¼æä»¥æ¯è¾ä¸­é´çç³»æ°å°±ç¥éï¼ðð =ðâ+1âðak=aâ+1âk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹ææ 1 â¤ð â¤â1â¤kâ¤â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æç«ï¼
+因为无理数的连分数表示是唯一的，所以比较中间的系数就知道，𝑎𝑘 =𝑎ℓ+1−𝑘ak=aℓ+1−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对所有 1 ≤𝑘 ≤ℓ1≤k≤ℓ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都成立．
 
-ä¾å­ï¼â7474![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°å±å¼
+例子：√7474![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数展开
 
-â7474![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°å¯ä»¥è®¡ç®å¦ä¸ï¼ï¼æ­¤å¤ä» æ¯ä¸ºäºè¯´æï¼ç¼ç¨è®¡ç®åºä½¿ç¨åææå°çéå½ç®æ³ï¼
+√7474![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数可以计算如下：（此处仅是为了说明，编程计算应使用前文提到的递归算法）
 
-â74=8+(â8)+â74=[8,8+â7410]=[8,1+â2+â7410]=[8,1,2+â747]=[8,1,1+â5+â747]=[8,1,1,5+â747]=[8,1,1,1+â2+â747]=[8,1,1,1,2+â7410]=[8,1,1,1,1+â8+â7410]=[8,1,1,1,1,8+â74]=[8,1,1,1,1,16+(â8)+â74]=[8,ââââââ1,1,1,1,16]74=8+(â8)+74=[8,8+7410]=[8,1+â2+7410]=[8,1,2+747]=[8,1,1+â5+747]=[8,1,1,5+747]=[8,1,1,1+â2+747]=[8,1,1,1,2+7410]=[8,1,1,1,1+â8+7410]=[8,1,1,1,1,8+74]=[8,1,1,1,1,16+(â8)+74]=[8,1,1,1,1,16â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+√74=8+(−8)+√74=[8,8+√7410]=[8,1+−2+√7410]=[8,1,2+√747]=[8,1,1+−5+√747]=[8,1,1,5+√747]=[8,1,1,1+−2+√747]=[8,1,1,1,2+√7410]=[8,1,1,1,1+−8+√7410]=[8,1,1,1,1,8+√74]=[8,1,1,1,1,16+(−8)+√74]=[8,――――――1,1,1,1,16]74=8+(−8)+74=[8,8+7410]=[8,1+−2+7410]=[8,1,2+747]=[8,1,1+−5+747]=[8,1,1,5+747]=[8,1,1,1+−2+747]=[8,1,1,1,2+7410]=[8,1,1,1,1+−8+7410]=[8,1,1,1,1,8+74]=[8,1,1,1,1,16+(−8)+74]=[8,1,1,1,1,16―]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åä¸ªä½é¡¹åå«æ¯ï¼
+各个余项分别是：
 
-ð1=8+â7410=[ââââââ1,1,1,1,16]ð2=2+â747=[ââââââ1,1,1,16,1]ð3=5+â747=[ââââââ1,1,16,1,1]ð4=2+â7410=[ââââââ1,16,1,1,1]ð5=8+â74=[ââââââ16,1,1,1,1]r1=8+7410=[1,1,1,1,16â]r2=2+747=[1,1,1,16,1â]r3=5+747=[1,1,16,1,1â]r4=2+7410=[1,16,1,1,1â]r5=8+74=[16,1,1,1,1â]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟1=8+√7410=[――――――1,1,1,1,16]𝑟2=2+√747=[――――――1,1,1,16,1]𝑟3=5+√747=[――――――1,1,16,1,1]𝑟4=2+√7410=[――――――1,16,1,1,1]𝑟5=8+√74=[――――――16,1,1,1,1]r1=8+7410=[1,1,1,1,16―]r2=2+747=[1,1,1,16,1―]r3=5+747=[1,1,16,1,1―]r4=2+7410=[1,16,1,1,1―]r5=8+74=[16,1,1,1,1―]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ® Galois çç»è®ºï¼ä½é¡¹ ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðð¿+1âðrL+1âk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¾ªç¯é¨åæ°å¥½ç¸åï¼å æ­¤äºä¸ºåæ°è´å ±è½­ï¼å¦æ âð·D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¾ªç¯èé¿åº¦ ð¿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¥æ°ï¼é£ä¹ä¸­é´çä¸é¡¹å°±ä¸èªèº«äºä¸ºåæ°è´å ±è½­ï¼å¦æå¾ªç¯èé¿åº¦ ð¿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¶æ°ï¼å°±ä¸å­å¨è¿æ ·çé¡¹ï¼Pell æ¹ç¨ä¸èçè®¨è®ºä¼è¯´æï¼å¾ªç¯èé¿åº¦çå¥å¶æ§å°å³å®äºæ¹ç¨ ð¥2 âð·ð¦2 = â1x2âDy2=â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¦æè§£ï¼
+根据 Galois 的结论，余项 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑟𝐿+1−𝑘rL+1−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 循环部分恰好相反，因此互为倒数负共轭．如果 √𝐷D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的循环节长度 𝐿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为奇数，那么中间的一项就与自身互为倒数负共轭；如果循环节长度 𝐿L![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为偶数，就不存在这样的项．Pell 方程一节的讨论会说明，循环节长度的奇偶性将决定了方程 𝑥2 −𝐷𝑦2 = −1x2−Dy2=−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是否有解．
 
-äºæ¬¡æ çæ° âð·D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°å±å¼ä¸»è¦åºç¨å¨ [Pell æ¹ç¨](../pell-equation/) çæ±è§£ä¸­ï¼
+二次无理数 √𝐷D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数展开主要应用在 [Pell 方程](../pell-equation/) 的求解中．
 
-## ä¾é¢
+## 例题
 
-å¨ææ¡äºåºç¡æ¦å¿µåï¼éè¦ç ç©¶ä¸äºå ·ä½çä¾é¢æ¥çè§£å¦ä½å¨ç®æ³ç«èµä¸­åºç¨è¿åæ°çæ¹æ³ï¼
+在掌握了基础概念后，需要研究一些具体的例题来理解如何在算法竞赛中应用连分数的方法．
 
-çº¿ä¸å¸å 
+线下凸包
 
-ç»å® ð =[ð0,ð1,â¯,ðð]r=[a0,a1,â¯,an]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ±åºæ»¡è¶³ 0 â¤ð¥ â¤ð0â¤xâ¤N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å 0 â¤ð¦ â¤ðð¥0â¤yâ¤rx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´ç¹ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåçå¸å ï¼
+给定 𝑟 =[𝑎0,𝑎1,⋯,𝑎𝑛]r=[a0,a1,⋯,an]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求出满足 0 ≤𝑥 ≤𝑁0≤x≤N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 0 ≤𝑦 ≤𝑟𝑥0≤y≤rx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整点 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合的凸包．
 
-è§£ç­
+解答
 
-å¯¹äºæ çéå ð¥ â¥0xâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸å¸å£³å°±æ¯ç´çº¿ ð¦ =ðð¥y=rx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬èº«ï¼ç¶èï¼å¦ä¸å¾æç¤ºï¼å¦æè¿è¦æ± ð¥ â¤ðxâ¤N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ä¸å¸å£³æç»ä¼åç¦»ç´çº¿ï¼
+对于无界集合 𝑥 ≥0x≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，上凸壳就是直线 𝑦 =𝑟𝑥y=rx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 本身．然而，如下图所示，如果还要求 𝑥 ≤𝑁x≤N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么上凸壳最终会偏离直线．
 
 ![](./images/lattice-hull.svg)
 
-ä» (0,0)(0,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§ï¼å¯ä»¥èªå·¦åå³å°æ±åºä¸å¸å£³çæææ´ç¹ï¼åè®¾å½åå·²ç»æ±åºçä¸å¸å£³çæåä¸ä¸ªæ´ç¹æ¯ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç°å¨è¦æ±åºä¸ä¸ä¸ªæ´ç¹ (ð¥â²,ð¦â²)(xâ²,yâ²)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¡¶ç¹ (ð¥â²,ð¦â²)(xâ²,yâ²)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³ä¸æ¹ï¼è®° (Îð¥,Îð¦) =(ð¥â² âð¥,ð¦â² âð¦)(Îx,Îy)=(xâ²âx,yâ²ây)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºä¸¤è çå·®å¼ï¼é£ä¹ï¼å¿ ç¶æ
+从 (0,0)(0,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始，可以自左向右地求出上凸壳的所有整点．假设当前已经求出的上凸壳的最后一个整点是 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．现在要求出下一个整点 (𝑥′,𝑦′)(x′,y′)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．顶点 (𝑥′,𝑦′)(x′,y′)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 右上方，记 (Δ𝑥,Δ𝑦) =(𝑥′ −𝑥,𝑦′ −𝑦)(Δx,Δy)=(x′−x,y′−y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为两者的差值．那么，必然有
 
-0<Îð¥â¤ðâð¥,Â 0â¤Îð¦â¤ðÎð¥.0<Îxâ¤Nâx,Â 0â¤Îyâ¤rÎx.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+0<Δ𝑥≤𝑁−𝑥, 0≤Δ𝑦≤𝑟Δ𝑥.0<Δx≤N−x, 0≤Δy≤rΔx.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç¬¬äºä¸ªä¸ç­å¼æç«ï¼å ä¸ºæ¡ä»¶ Îð¦ >ðÎð¥Îy>rÎx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å·²ç»å¨ä¸å¸å£³ä¸è¿ä»¶äºçç¾ï¼è§å¯ (Îð¥,Îð¦)(Îx,Îy)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éè¦æ»¡è¶³çæ¡ä»¶ï¼å¯¹äºä¸åçç¹ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åªæ Îð¥Îx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸çå¨ååï¼æä»¥ï¼åªè¦è½è§£å³è¿ä¸ªå­é®é¢ï¼å°±å¯ä»¥éå½å°æ±åºåé®é¢çæææ´ç¹ï¼
+第二个不等式成立，因为条件 Δ𝑦 >𝑟Δ𝑥Δy>rΔx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 已经在上凸壳上这件事矛盾．观察 (Δ𝑥,Δ𝑦)(Δx,Δy)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 需要满足的条件，对于不同的点 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，只有 Δ𝑥Δx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的上界在变化．所以，只要能解决这个子问题，就可以递归地求出原问题的所有整点．
 
-è¿èï¼èèå­é®é¢çè§£æ³ï¼å¯¹æ¯äºåé®é¢ï¼å­é®é¢ç¸å½äºå° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸çä¿®æ¹ä¸º ðâ²Nâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶æ±åºä¸å¸å£³ä¸­ä¸åç¹ç¸é»çç¬¬ä¸ä¸ªæ´ç¹ï¼è®°å­é®é¢çè§£ä¸º (ð,ð)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¿ ç¶æ¯äºç´ çï¼å¦åä¸æ¯ç¬¬ä¸ä¸ªæ´ç¹ï¼ï¼ä¸ä¸åç¹è¿çº¿çæç ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ææä½äºç´çº¿ ð¦ =ðð¥y=rx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¹ä¸æ¨ªåæ ä¸è¶ è¿ ðâ²Nâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´ç¹ä¸­æå¤§çï¼å¦åä¸å¨å¸å ä¸ï¼ï¼ç»ååæç å ä½è§£é å¯ç¥ï¼è¿æ ·çç¹ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¿ ç¶å¯¹åºäº ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªä¸ä¸­é´åæ°ï¼å ä¸ºåæ¯è¶å¤§çä¸ä¸­é´åæ°ç¦» ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¶è¿ï¼æä»¥å­é®é¢çè§£ (ð,ð)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹åºçææåæ¯ä¸è¶ è¿ ðâ²Nâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸­é´åæ°ä¸­åæ¯æå¤§çé£ä¸ªï¼
+进而，考虑子问题的解法．对比于原问题，子问题相当于将 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的上界修改为 𝑁′N′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并求出上凸壳中与原点相邻的第一个整点．记子问题的解为 (𝑞,𝑝)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．那么，𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 必然是互素的（否则不是第一个整点），且与原点连线的斜率 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是所有位于直线 𝑦 =𝑟𝑥y=rx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下方且横坐标不超过 𝑁′N′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整点中最大的（否则不在凸包上）．结合前文的 几何解释 可知，这样的点 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 必然对应于 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个下中间分数．因为分母越大的下中间分数离 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 越近，所以子问题的解 (𝑞,𝑝)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对应着所有分母不超过 𝑁′N′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的下中间分数中分母最大的那个．
 
-å½ç¶ï¼å®é æ±è§£æ¶ï¼æ²¡å¿ è¦å¯¹æ¯ä¸ªå­é®é¢é½éæ°æ±åºè¿æ ·çä¸ä¸­é´åæ°ï¼åºè¯¥é¦å æ±åºææçæ¸è¿åæ°ï¼è¿ç¸å½äºæä¾äºéåææçä¸ä¸­é´åæ°çæ¹æ³ï¼ç¶ååæ¯ä»å¤§å°å°å°éåä¸ä¸­é´åæ°ï¼æ¯æ¬¡é½å°è¯å°å®å å°åä¸ä¸ªæ´ç¹ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ï¼ç´å°ä¸è½æ·»å ä¸ºæ­¢æç»§ç»­å°è¯ä¸ä¸ä¸ªä¸ä¸­é´åæ°ï¼
+当然，实际求解时，没必要对每个子问题都重新求出这样的下中间分数．应该首先求出所有的渐近分数，这相当于提供了遍历所有的下中间分数的方法．然后分母从大到小地遍历下中间分数，每次都尝试将它加到前一个整点 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上，直到不能添加为止才继续尝试下一个下中间分数．
 
-æ­¤å¤æä¸äºæ¾ç¶çä¼åï¼é¦å ï¼å¯¹äºä¸ä¸­é´åæ° (ð,ð)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¿ ç¶å­å¨å¥æ° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å 0 â¤ð¡ <ðð0â¤t<ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ (ð,ð) =(ððâ1,ððâ1) +ð¡(ðð,ðð)(q,p)=(qkâ1,pkâ1)+t(qk,pk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åªè¦æ¾å°æå¤§ç ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ððâ1 +ð¡ðð +ð¥ â¤ðqkâ1+tqk+xâ¤N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³å°±å¥½äºï¼äº¦å³ ð¡ =âðâððâ1âð¥ððât=âNâqkâ1âxqkâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ç¨æ å¿ ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¶çï¼å ä¸ºæ´å¤§çä¸æ¸è¿åæ° (ðð+2,ðð+2)(qk+2,pk+2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å·²ç»æ·»å å®äºï¼èæ¯æ¬¡ç¡®å®æ·»å çæ¬¡æ°çæ¶åï¼ç´æ¥è®¡ç® âðâð¥ðââNâxqâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³å¯ï¼ä¸å¿ éä¸ªå°è¯ï¼
+此处有一些显然的优化．首先，对于下中间分数 (𝑞,𝑝)(q,p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，必然存在奇数 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 0 ≤𝑡 <𝑎𝑘0≤t<ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 (𝑞,𝑝) =(𝑞𝑘−1,𝑝𝑘−1) +𝑡(𝑞𝑘,𝑝𝑘)(q,p)=(qk−1,pk−1)+t(qk,pk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．只要找到最大的 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑞𝑘−1 +𝑡𝑞𝑘 +𝑥 ≤𝑁qk−1+tqk+x≤N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足就好了，亦即 𝑡 =⌊𝑁−𝑞𝑘−1−𝑥𝑞𝑘⌋t=⌊N−qk−1−xqk⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．不用担心 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 越界，因为更大的下渐近分数 (𝑞𝑘+2,𝑝𝑘+2)(qk+2,pk+2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 已经添加完了．而每次确定添加的次数的时候，直接计算 ⌊𝑁−𝑥𝑞⌋⌊N−xq⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即可，不必逐个尝试．
 
-ä¼ååçç®æ³çå¤æåº¦æ¯ ð(ð)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼è½ç¶ä¸ä¸­é´åæ°å¯¹åºçæ´ç¹å¯è½æå¾å¤ï¼ä½æ¯çæ­£æä¸ºå¢éçå¹¶ä¸å¤ï¼ä¸é¢è¦è¯´æï¼ææ 0 â¤ð¡ <ðð0â¤t<ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸­é´åæ° (ð,ð) =(ððâ1,ððâ1) +ð¡(ðð,ðð)(q,p)=(qkâ1,pkâ1)+t(qk,pk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼è³å¤ä¼åºç°ä¸¤ä¸ªå¢éï¼åè®¾è¿äºä¸ä¸­é´åæ°ä¸­ç¡®å®åºç°äºå¢éï¼åæ­¤æ¶å¿ ç¶æ ððâ1 â¤ð âð¥ <ðð+1qkâ1â¤Nâx<qk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸å¦¨è®¾ ð¡ =âðâððâ1âð¥ððât=âNâqkâ1âxqkâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ð¡ =0t=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¢éå°±æ Îð¥ =ððâ1Îx=qkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ èæ·»å å®å¢éåï¼å°±æ ð âð¥â² <ððâ1Nâxâ²<qkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ä¼åå¨è¿äºä¸ä¸­é´åæ°ä¸­åºç°æ°çå¢éï¼å¦æ ð¡ >0t>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹æ·»å å®å¢éåï¼å¿ ç¶æ ð âð¥â² =(ð âððâ1 âð¥)modðð <ððNâxâ²=(Nâqkâ1âx)modqk<qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ä½¿è¿ä¼å¨åä¸æ®µä¸ä¸­é´åæ°ä¸­åºç°æ°çå¢éï¼ä¸æ¬¡ä¹åªè½æ ð¡â² =0tâ²=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼å¨è¿æ ·çä¸æ®µä¸ä¸­é´åæ°ä¸­ï¼è³å¤åªè½åºç°ä¸¤ä¸ªå¢éï¼è¿å°±è¯´æï¼æ»çæ¶é´å¤æåº¦æ¯ ð(ð)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼
+优化后的算法的复杂度是 𝑂(𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．虽然下中间分数对应的整点可能有很多，但是真正成为增量的并不多．下面要说明，所有 0 ≤𝑡 <𝑎𝑘0≤t<ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的下中间分数 (𝑞,𝑝) =(𝑞𝑘−1,𝑝𝑘−1) +𝑡(𝑞𝑘,𝑝𝑘)(q,p)=(qk−1,pk−1)+t(qk,pk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中，至多会出现两个增量．假设这些下中间分数中确实出现了增量，则此时必然有 𝑞𝑘−1 ≤𝑁 −𝑥 <𝑞𝑘+1qk−1≤N−x<qk+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．不妨设 𝑡 =⌊𝑁−𝑞𝑘−1−𝑥𝑞𝑘⌋t=⌊N−qk−1−xqk⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如果 𝑡 =0t=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则增量就有 Δ𝑥 =𝑞𝑘−1Δx=qk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故而添加完增量后，就有 𝑁 −𝑥′ <𝑞𝑘−1N−x′<qk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，不会再在这些下中间分数中出现新的增量；如果 𝑡 >0t>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么添加完增量后，必然有 𝑁 −𝑥′ =(𝑁 −𝑞𝑘−1 −𝑥)mod𝑞𝑘 <𝑞𝑘N−x′=(N−qk−1−x)modqk<qk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即使还会在同一段下中间分数中出现新的增量，下次也只能有 𝑡′ =0t′=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，在这样的一段下中间分数中，至多只能出现两个增量．这就说明，总的时间复杂度是 𝑂(𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
 
 C++Python
 
@@ -1266,27 +1266,27 @@ C++Python
   
 [Timus - Crime and Punishment](https://timus.online/problem.aspx?space=1&num=1430)
 
-ç»å®æ­£æ´æ° ð´,ðµ,ð â¤2 Ã109A,B,Nâ¤2Ã109![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ± ð¥,ð¦ â¥0x,yâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð´ð¥ +ðµð¦ â¤ðAx+Byâ¤N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð´ð¥ +ðµð¦Ax+By![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°½å¯è½å¤§ï¼
+给定正整数 𝐴,𝐵,𝑁 ≤2 ×109A,B,N≤2×109![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求 𝑥,𝑦 ≥0x,y≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝐴𝑥 +𝐵𝑦 ≤𝑁Ax+By≤N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝐴𝑥 +𝐵𝑦Ax+By![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 尽可能大．
 
-è§£ç­
+解答
 
-è¿ä¸ªé®é¢æä¸ä¸ªå¤æåº¦ä¸º ð(âð)O(N)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£æ³ï¼ä¸å¦¨è®¾ ð´ â¥ðµAâ¥B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸º ð´(ðµ +ð¥) +ðµð¦ =ð´ð¥ +ðµ(ð´ +ð¦)A(B+x)+By=Ax+B(A+y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥åªéè¦å¨ ð¥ â¤min{ð/ð´,ðµ}xâ¤min{N/A,B}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­æç´¢ç­æ¡å³å¯ï¼è¿è¶³å¤éè¿æ¬é¢ï¼ä½æ¯ï¼å¦æåºç¨è¿åæ°æ¹æ³ï¼é£ä¹æ¶é´å¤æåº¦å°±å¯ä»¥éä½å° ð(logâ¡ð)O(logâ¡N)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这个问题有一个复杂度为 𝑂(√𝑁)O(N)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解法：不妨设 𝐴 ≥𝐵A≥B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因为 𝐴(𝐵 +𝑥) +𝐵𝑦 =𝐴𝑥 +𝐵(𝐴 +𝑦)A(B+x)+By=Ax+B(A+y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以只需要在 𝑥 ≤min{𝑁/𝐴,𝐵}x≤min{N/A,B}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中搜索答案即可．这足够通过本题．但是，如果应用连分数方法，那么时间复杂度就可以降低到 𝑂(log⁡𝑁)O(log⁡N)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä¸ºäºè®¨è®ºæ¹ä¾¿ï¼é¦å éè¿ä»£æ¢ ð¥ â¦âð/ð´â âð¥xâ¦âN/Aââx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¥æ¹å ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¦å·ï¼ä»¤ ð¶ =ðmodð´C=NmodA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð =âð/ð´âM=âN/Aâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ååé®é¢è½¬åä¸ºå¨ 0 â¤ð¥ â¤ð0â¤xâ¤M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðµð¦ âð´ð¥ â¤ð¶ByâAxâ¤C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¡ä»¶ä¸ï¼æ±æä¼ç (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ðµð¦ âð´ð¥ByâAx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¤§ï¼å¯¹äºæ¯ä¸ªåºå®ç ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä¼ç ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå¼ä¸º âð´ð¥+ð¶ðµââAx+CBâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+为了讨论方便，首先通过代换 𝑥 ↦⌊𝑁/𝐴⌋ −𝑥x↦⌊N/A⌋−x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 来改变 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的符号．令 𝐶 =𝑁mod𝐴C=NmodA![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑀 =⌊𝑁/𝐴⌋M=⌊N/A⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则原问题转化为在 0 ≤𝑥 ≤𝑀0≤x≤M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝐵𝑦 −𝐴𝑥 ≤𝐶By−Ax≤C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的条件下，求最优的 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝐵𝑦 −𝐴𝑥By−Ax![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 最大．对于每个固定的 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，最优的 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的取值为 ⌊𝐴𝑥+𝐶𝐵⌋⌊Ax+CB⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ¥ä¸æ¥è¦è¯´æçæ¯ï¼è¿ä¸ªé®é¢åä¸ä¸ä¸ªä¾é¢å ·æç±»ä¼¼çè§£æ³ï¼ä½æ¯ï¼ä¸ä¸ä¸ä¸ªä¾é¢ä¸­ä½¿ç¨ä¸ä¸­é´åæ°åç¦»ç´çº¿ä¸åï¼æ¬é¢éè¦ä½¿ç¨ä¸ä¸­é´åæ°æ¥æ¥è¿ç´çº¿ï¼å ·ä½æ¥è¯´ï¼ð¶ â(ðµð¦ âð´ð¥)Câ(ByâAx)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼æ­£æ¯äºç¹ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ç´çº¿ ðµð¦ âð´ð¥ =ð¶ByâAx=C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè·ç¦»ï¼è¦æå¤§å ðµð¦ âð´ð¥ByâAx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±ç­ä»·äºæå°åè¿ä¸ªè·ç¦»ï¼ç®æ³çç®æ æ¯è¦æ¾å°ç´çº¿ ðµð¦ âð´ð¥ =ð¶ByâAx=C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¹è·ç¦»å®æè¿çå¯è¡çæ´ç¹ï¼ç®æ³çæè·¯å°±æ¯ä»æå·¦ä¾§çç¹å¼å§ï¼æ²¿çè¿äºæ´ç¹çä¸å¸å£³æç´¢ï¼éæ­¥ç¼©å°ä¸ç´çº¿çè·ç¦»ï¼ç´å°å¾å°æä¼è§£ï¼
+接下来要说明的是，这个问题和上一个例题具有类似的解法．但是，与上一个例题中使用下中间分数偏离直线不同，本题需要使用上中间分数来接近直线．具体来说，𝐶 −(𝐵𝑦 −𝐴𝑥)C−(By−Ax)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值正比于点 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与直线 𝐵𝑦 −𝐴𝑥 =𝐶By−Ax=C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的距离．要最大化 𝐵𝑦 −𝐴𝑥By−Ax![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就等价于最小化这个距离．算法的目标是要找到直线 𝐵𝑦 −𝐴𝑥 =𝐶By−Ax=C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下方距离它最近的可行的整点．算法的思路就是从最左侧的点开始，沿着这些整点的上凸壳搜索，逐步缩小与直线的距离，直到得到最优解．
 
-å¨ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ ç³»å ï¼ç®æ³ä» (0,âð¶/ðµâ)(0,âC/Bâ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åºåï¼éå½å°å¯»æ¾å¹¶æ·»å æä¼çå¢é (Îð¥,Îð¦)(Îx,Îy)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ä¿è¯æ·»å åçç¹æ¯èµ·ä¹åæ´é è¿ç´çº¿ ðµð¦ âð´ð¥ =ð¶ByâAx=C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½æ¯ä¸è½å°è¾¾ç´çº¿çå¦ä¸ä¾§ï¼ä¹ä¸è½è®©æ¨ªåæ å¤§äº ðM![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®¾å·²ç»å¾å°çç¹æ¯ (ð¥,ð¦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹å¢é (Îð¥,Îð¦)(Îx,Îy)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³çæ¡ä»¶å°±æ¯
+在 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的坐标系内，算法从 (0,⌊𝐶/𝐵⌋)(0,⌊C/B⌋)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出发，递归地寻找并添加最优的增量 (Δ𝑥,Δ𝑦)(Δx,Δy)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且保证添加后的点比起之前更靠近直线 𝐵𝑦 −𝐴𝑥 =𝐶By−Ax=C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，但是不能到达直线的另一侧，也不能让横坐标大于 𝑀M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．设已经得到的点是 (𝑥,𝑦)(x,y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么增量 (Δ𝑥,Δ𝑦)(Δx,Δy)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足的条件就是
 
-0<ðµÎð¦âð´Îð¥â¤ð¶â(ðµð¦âð´ð¥),Â 0<Îð¥â¤ðâð¥.0<BÎyâAÎxâ¤Câ(ByâAx),Â 0<Îxâ¤Mâx.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+0<𝐵Δ𝑦−𝐴Δ𝑥≤𝐶−(𝐵𝑦−𝐴𝑥), 0<Δ𝑥≤𝑀−𝑥.0<BΔy−AΔx≤C−(By−Ax), 0<Δx≤M−x.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æç §æ²¿ä¸å¸å£³æç´¢çæè·¯ï¼åªéè¦æ¾å°æ»¡è¶³è¿äºæ¡ä»¶çç¹ä¸­ Îð¥Îx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå°çå³å¯ï¼å°ç¬¬ä¸ä¸ªä¸ç­å¼æ¹åæ
+按照沿下凸壳搜索的思路，只需要找到满足这些条件的点中 Δ𝑥Δx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 最小的即可．将第一个不等式改写成
 
-Îð¦â¤ð´ðµÎð¥+ð¶â(ðµð¦âð´ð¥)ðµ.Îyâ¤ABÎx+Câ(ByâAx)B.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+Δ𝑦≤𝐴𝐵Δ𝑥+𝐶−(𝐵𝑦−𝐴𝑥)𝐵.Δy≤ABΔx+C−(By−Ax)B.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç»ååæç å ä½è§£é å¯ç¥ï¼åªè¦åé¢çå¸¸æ°é¡¹å°äº 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹æ»¡è¶³è¿ä¸ªä¸ç­å¼çæ´ç¹ (Îð¥,Îð¦)(Îx,Îy)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­æ¨ªåæ æå°çï¼ä¸å®å¯¹åºçæä¸ªä¸ä¸­é´åæ°ï¼è¿æ¯å ä¸ºå®æ¯ææåæ¯ä¸è¶ è¿å®çåæ¯çåæ°ä¸­ï¼ä»ä¸æ¹é¼è¿æä¸ªå®æ°æææå¥½çï¼è¿åªè½æ¯ä¸ä¸­é´åæ°ï¼èæ¯æ¬¡æ·»å å¢éåï¼é½ä¼å¯¼è´ Îð¦Îy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸çåå¾æ´ç´§ï¼è¿æå³çå¿ é¡»èå¯åæ¯æ´å¤§çä¸ä¸­é´åæ°ï¼
+结合前文的 几何解释 可知，只要后面的常数项小于 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么满足这个不等式的整点 (Δ𝑥,Δ𝑦)(Δx,Δy)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中横坐标最小的，一定对应着某个上中间分数．这是因为它是所有分母不超过它的分母的分数中，从上方逼近某个实数效果最好的，这只能是上中间分数．而每次添加增量后，都会导致 Δ𝑦Δy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的上界变得更紧，这意味着必须考察分母更大的上中间分数．
 
-ä»¿ç §ä¸ä¸ä¸ªä¾é¢çæè·¯ï¼åæ¯ä»å°å°å¤§èå¯ææä¸ä¸­é´åæ°ï¼å¦æè½å¤æ¾å°æ¨ªåæ åçºµåæ é½ä¸è¶ççä¸ä¸­é´åæ°ï¼å°±æ·»å è¿å»ï¼å¹¶æ´æ°ç¸åºçä¸çï¼å½ææå¯è¡çä¸ä¸­é´åæ°é½æ·»å ç»æåï¼å¾å°çå°±æ¯æä¼è§£ï¼ç¸è¾äºä¹åï¼è¿ä¸ªé¢ç®éè¦åæ¶ä¿è¯æ¨ªçºµåæ é½ä¸è¶çï¼éè¦æ ¼å¤æ³¨æï¼åºäºåä¸ä¸ä¸ªä¾é¢ç±»ä¼¼çè®ºè¿°ï¼ä¸è¿è¿æ¬¡æ¯ä½¿ç¨ ðµÎð¦ âð´Îð¥BÎyâAÎx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»£æ¿ä¹åç Îð¥Îx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥è¯´æè¿ä¸ªç®æ³çå¤æåº¦æ¯ ð(logâ¡min{ð´,ðµ})O(logâ¡min{A,B})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼
+仿照上一个例题的思路．分母从小到大考察所有上中间分数，如果能够找到横坐标和纵坐标都不越界的上中间分数，就添加进去，并更新相应的上界．当所有可行的上中间分数都添加结束后，得到的就是最优解．相较于之前，这个题目需要同时保证横纵坐标都不越界，需要格外注意．基于和上一个例题类似的论述，不过这次是使用 𝐵Δ𝑦 −𝐴Δ𝑥BΔy−AΔx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 代替之前的 Δ𝑥Δx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以说明这个算法的复杂度是 𝑂(log⁡min{𝐴,𝐵})O(log⁡min{A,B})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
 
 C++Python
 
@@ -1298,15 +1298,15 @@ C++Python
   
 [June Challenge 2017 - Euler Sum](https://www.codechef.com/problems/ES)
 
-æ± ðâð¥=1âeð¥ââx=1Nâexâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼å ¶ä¸­ï¼ee![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯èªç¶å¯¹æ°çåºï¼
+求 𝑁∑𝑥=1⌊e𝑥⌋∑x=1N⌊ex⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值，其中，ee![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是自然对数的底．
 
-æç¤ºï¼ð =[2,1,2,1,1,4,1,1,6,1,â¯,1,2ð,1,â¯]e=[2,1,2,1,1,4,1,1,6,1,â¯,1,2n,1,â¯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼8
+提示：𝑒 =[2,1,2,1,1,4,1,1,6,1,⋯,1,2𝑛,1,⋯]e=[2,1,2,1,1,4,1,1,6,1,⋯,1,2n,1,⋯]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．8
 
-è§£ç­
+解答
 
-è¿ä¸ªåç­äºéå {(ð¥,ð¦) :1 â¤ð¥ â¤ð,1 â¤ð¦ â¤eð¥}{(x,y):1â¤xâ¤N,1â¤yâ¤ex}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çæ´ç¹ä¸ªæ°ï¼å¨æå»ºå®ç´çº¿ ð¦ =eð¥y=ex![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çæ´ç¹çå¸å åï¼å¯ä»¥ä½¿ç¨ [Pick å®ç](../../../geometry/pick/) è®¡ç®æ´ç¹ä¸ªæ°ï¼æ¶é´å¤æåº¦ä¸º ð(logâ¡ð)O(logâ¡N)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这个和等于集合 {(𝑥,𝑦) :1 ≤𝑥 ≤𝑁,1 ≤𝑦 ≤e𝑥}{(x,y):1≤x≤N,1≤y≤ex}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的整点个数．在构建完直线 𝑦 =e𝑥y=ex![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下的整点的凸包后，可以使用 [Pick 定理](../../../geometry/pick/) 计算整点个数．时间复杂度为 𝑂(log⁡𝑁)O(log⁡N)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åé®é¢è¦æ± ð â¤104000Nâ¤104000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤å¤ C++ ä»£ç ä» ä½ç¤ºæï¼å¹¶æ²¡æå®ç°é«ç²¾åº¦è®¡ç®ç±»ï¼
+原问题要求 𝑁 ≤104000N≤104000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此处 C++ 代码仅作示意，并没有实现高精度计算类．
 
 C++Python
 
@@ -1318,15 +1318,15 @@ C++Python
   
 [NAIPC 2019 - It's a Mod, Mod, Mod, Mod World](https://open.kattis.com/problems/itsamodmodmodmodworld)
 
-ç»å®æ­£æ´æ° ð,ð,ðp,q,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ± ðâð=1[ððmodð]âi=1n[pimodq]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼
+给定正整数 𝑝,𝑞,𝑛p,q,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求 𝑛∑𝑖=1[𝑝𝑖mod𝑞]∑i=1n[pimodq]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．
 
-è§£ç­
+解答
 
-å ä¸ºåå¼å¯ä»¥åå½¢ä¸º
+因为和式可以变形为
 
-ðâð=1[ððmodð]=ðâð=1(ððâðâðððâ)=ðð(ð+1)2âððâð=1âðððâ,âi=1n[pimodq]=âi=1n(piâqâpiqâ)=pn(n+1)2âqâi=1nâpqiâ,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=1[𝑝𝑖mod𝑞]=𝑛∑𝑖=1(𝑝𝑖−𝑞⌊𝑝𝑖𝑞⌋)=𝑝𝑛(𝑛+1)2−𝑞𝑛∑𝑖=1⌊𝑝𝑞𝑖⌋,∑i=1n[pimodq]=∑i=1n(pi−q⌊piq⌋)=pn(n+1)2−q∑i=1n⌊pqi⌋,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¸ªé®é¢å¯ä»¥è½¬åä¸ºä¸ä¸ä¸ªé®é¢ï¼åªè¦ç¨ ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¿ä»£ ee![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³å¯ï¼åæ¬¡æ¥è¯¢çæ¶é´å¤æåº¦ä¸º ð(logâ¡min{ð,ð})O(logâ¡min{p,q})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这个问题可以转化为上一个问题，只要用 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 替代 ee![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即可．单次查询的时间复杂度为 𝑂(log⁡min{𝑝,𝑞})O(log⁡min{p,q})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
 C++Python
 
@@ -1338,13 +1338,13 @@ C++Python
   
 [Library Checker - Sum of Floor of Linear](https://judge.yosupo.jp/problem/sum_of_floor_of_linear)
 
-ç»å®æ­£æ´æ° ð,ð,ð´,ðµN,M,A,B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ± ðâ1âð=0âð´â ð+ðµðââi=0Nâ1âAâ i+BMâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼
+给定正整数 𝑁,𝑀,𝐴,𝐵N,M,A,B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求 𝑁−1∑𝑖=0⌊𝐴⋅𝑖+𝐵𝑀⌋∑i=0N−1⌊A⋅i+BM⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．
 
-è§£ç­
+解答
 
-è¿æ¯å°ç®åä¸ºæ­¢æä¸ºå¤æçé¢ç®ï¼å®å¯ä»¥éè¿ [ç±»æ¬§å éå¾ç®æ³](../euclidean/) è®¡ç®ï¼æ­¤å¤ç»åºåºäºè¿åæ°çç®æ³ï¼æ¶é´å¤æåº¦æ¯ ð(logâ¡min{ð´,ðµ})O(logâ¡min{A,B})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这是到目前为止最为复杂的题目．它可以通过 [类欧几里得算法](../euclidean/) 计算．此处给出基于连分数的算法，时间复杂度是 𝑂(log⁡min{𝐴,𝐵})O(log⁡min{A,B})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¯ä»¥éè¿æé ç´çº¿ ð¦ =ð´ð¥+ðµðy=Ax+BM![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»¥ä¸ä¸ 0 â¤ð¥ <ð0â¤x<N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ¨é¨æ´ç¹çå¸å ï¼å¹¶ç¨ Pick å®çè®¡ç®æ´ç¹çä¸ªæ°ï¼ä¹åå·²ç»è§£å³ ðµ =0B=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼å¯¹äºä¸è¬çæ å½¢ï¼å¯ä»¥åä¸ºä¸¤æ­¥è¿è¡ï¼é¦å éè¿æ·»å ä¸ä¸­é´åæ°æ¥éæ­¥æ¥è¿ç´çº¿ï¼å³ç¬¬äºä¸ªä¾é¢ï¼ï¼ç´å°æ¾å°ææ¥è¿ç´çº¿çç¹ï¼åéè¿æ·»å ä¸ä¸­é´åæ°æ¥éæ­¥è¿ç¦»ç´çº¿ï¼å³ç¬¬ä¸ä¸ªä¾é¢ï¼ï¼
+可以通过构造直线 𝑦 =𝐴𝑥+𝐵𝑀y=Ax+BM![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 以下且 0 ≤𝑥 <𝑁0≤x<N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的全部整点的凸包，并用 Pick 定理计算整点的个数．之前已经解决 𝐵 =0B=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形．对于一般的情形，可以分为两步进行．首先通过添加上中间分数来逐步接近直线（即第二个例题），直到找到最接近直线的点，再通过添加下中间分数来逐步远离直线（即第一个例题）．
 
 C++Python
 
@@ -1356,19 +1356,19 @@ C++Python
   
 [OKC 2 - From Modular to Rational](https://codeforces.com/gym/102354/problem/I)
 
-æä¸ªæªç¥çæçæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ 1 â¤ð,ð â¤1091â¤p,qâ¤109![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥è¯¢é®å¯¹æä¸ªç´ æ° ð â[109,1012]mâ[109,1012]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¨¡åç ððâ1pqâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼è¯·å¨ä¸è¶ è¿åæ¬¡è¯¢é®å ç¡®å® ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼
+有个未知的有理数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 1 ≤𝑝,𝑞 ≤1091≤p,q≤109![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以询问对某个素数 𝑚 ∈[109,1012]m∈[109,1012]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取模后的 𝑝𝑞−1pq−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．请在不超过十次询问内确定 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．
 
-è¿ä¸ªé®é¢ç­ä»·äºæ¾å° [1,ð][1,N]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ä½¿å¾ ð´ð¥modðAxmodM![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå°ç ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这个问题等价于找到 [1,𝑁][1,N]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中使得 𝐴𝑥mod𝑀AxmodM![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 最小的 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è§£ç­
+解答
 
-æ ¹æ® [ä¸­å½å©ä½å®ç](../crt/)ï¼è¯¢é®å¯¹å¤ä¸ªç´ æ°åæ¨¡åçç»æï¼ç¸å½äºè¯¢é®å¯¹è¿äºç´ æ°çä¹ç§¯åæ¨¡çç»æï¼å æ­¤ï¼æ¬é¢å¯ä»¥çä½æ¯è¯¢é®åæ°å¯¹è¶³å¤å¤§çæ¨¡æ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¨¡åçç»æï¼è¦æ±ç¡®å®åæ°çåå­ååæ¯ï¼
+根据 [中国剩余定理](../crt/)，询问对多个素数取模后的结果，相当于询问对这些素数的乘积取模的结果．因此，本题可以看作是询问分数对足够大的模数 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取模后的结果，要求确定分数的分子和分母．
 
-å¯¹äºæä¸ªæ¨¡æ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ðð â¡ð(modð)qrâ¡p(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«çæ°å¯¹ (ð,ð)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯è½å¹¶ä¸å¯ä¸ï¼åè®¾ (ð1,ð1)(p1,q1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å (ð2,ð2)(p2,q2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½å¯ä»¥ä½¿å¾è¿ä¸ªç­å¼æç«ï¼é£ä¹å¿ ç¶æ (ð1ð2 âð2ð1)ð â¡0(modð)(p1q2âp2q1)râ¡0(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ¹æ® ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæé å¯ç¥ï¼ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç´ ï¼æä»¥ ð1ð2 âð2ð1 â¡0(modð)p1q2âp2q1â¡0(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼äº¦å³ ð â£(ð1ð2 âð2ð1)mâ£(p1q2âp2q1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ð1ð2 âð2ð1p1q2âp2q1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸ºé¶ï¼é£ä¹å®çç»å¯¹å¼è³å°æ¯ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é®é¢ä¸­éå¶äº ð,ð â[1,109]p,qâ[1,109]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æå³çè¿ä¸ªå·®å¼ä¸åºè¯¥è¶ è¿ 10181018![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤åªè¦å ð >1018m>1018![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±å¯ä»¥ä¿è¯æ±åºç (ð,ð)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¯ä¸çï¼
+对于某个模数 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝑞𝑟 ≡𝑝(mod𝑚)qr≡p(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立的数对 (𝑝,𝑞)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可能并不唯一．假设 (𝑝1,𝑞1)(p1,q1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 (𝑝2,𝑞2)(p2,q2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都可以使得这个等式成立，那么必然有 (𝑝1𝑞2 −𝑝2𝑞1)𝑟 ≡0(mod𝑚)(p1q2−p2q1)r≡0(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．根据 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的构造可知，𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互素，所以 𝑝1𝑞2 −𝑝2𝑞1 ≡0(mod𝑚)p1q2−p2q1≡0(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，亦即 𝑚 ∣(𝑝1𝑞2 −𝑝2𝑞1)m∣(p1q2−p2q1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如果 𝑝1𝑞2 −𝑝2𝑞1p1q2−p2q1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不为零，那么它的绝对值至少是 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．问题中限制了 𝑝,𝑞 ∈[1,109]p,q∈[1,109]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这意味着这个差值不应该超过 10181018![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此只要取 𝑚 >1018m>1018![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就可以保证求出的 (𝑝,𝑞)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是唯一的．
 
-ç°å¨çé®é¢å½ç»ä¸ºï¼ç»å®æ¨¡æ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä½æ° ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ±ä¸è¶ è¿ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ­£æ´æ°å¯¹ (ð,ð)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ðð â¡ð(modð)qrâ¡p(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¨å·²ç¥è¿æ ·çè§£æ¯å¯ä¸çæ åµä¸ï¼å ¶å®åªè¦æ¾å° ð â[1,ð]qâ[1,n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ä½¿å¾ ððmodðqrmodm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå°ç ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³å¯ï¼å ä¸ºæ­¤æ¶æä¸ä» æä¸ä¸ª ðq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ä½æ°ä¸è¶ è¿ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ­£æ¯åé¢æå°çç­ä»·è¡¨è¿°ï¼
+现在的问题归结为，给定模数 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和余数 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求不超过 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的正整数对 (𝑝,𝑞)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑞𝑟 ≡𝑝(mod𝑚)qr≡p(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．在已知这样的解是唯一的情况下，其实只要找到 𝑞 ∈[1,𝑛]q∈[1,n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时使得 𝑞𝑟mod𝑚qrmodm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 最小的 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 即可，因为此时有且仅有一个 𝑞q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得余数不超过 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这正是前面提到的等价表述．
 
-å¨ (ð,ð)(q,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨çå¹³é¢åæ ç³»å ï¼è¿ç¸å½äºè¦æ¾å° ð â[1,ð]qâ[1,n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶å¨ç´çº¿ ðð âðð =0qrâkm=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¹ææ¥è¿å®çæ´ç¹ï¼å ä¸ºä½æ° ððmodðqrmodm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ­£æ¯äºæ´ç¹ä¸ç´çº¿çè·ç¦»ï¼ç»ååæç å ä½è§£é å¯ç¥ï¼è¿æ ·çæ´ç¹å¿ ç¶å¯¹åºçæçåæ° ððrm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæä¸ªä¸ä¸­é´åæ°ï¼ç®æ³å¤æåº¦æ¯ ð(logâ¡min{ð,ð})O(logâ¡min{r,m})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+在 (𝑞,𝑘)(q,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在的平面坐标系内，这相当于要找到 𝑞 ∈[1,𝑛]q∈[1,n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时在直线 𝑞𝑟 −𝑘𝑚 =0qr−km=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下方最接近它的整点，因为余数 𝑞𝑟mod𝑚qrmodm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就正比于整点与直线的距离．结合前文的 几何解释 可知，这样的整点必然对应着有理分数 𝑟𝑚rm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的某个下中间分数．算法复杂度是 𝑂(log⁡min{𝑟,𝑚})O(log⁡min{r,m})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
 C++Python
 
@@ -1378,11 +1378,11 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 ``` |  ```text # Find Q that minimizes Q*r mod m for 1 <= k <= n < m. def mod_min ( r , n , m ): a = fraction ( r , m ) p , q = convergents ( a ) for i in range ( 2 , len ( q )): if i % 2 == 1 and ( i \+ 1 == len ( q ) or q [ i \+ 1 ] > n ): t = ( n \- q [ i \- 1 ]) // q [ i ] return q [ i \- 1 ] \+ t * q [ i ] return 0 ```   
 ---|---  
   
-## ä¹ é¢
+## 习题
 
   * [UVa OJ - Continued Fractions](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=775)
   * [ProjectEuler+ #64: Odd period square roots](https://www.hackerrank.com/contests/projecteuler/challenges/euler064/problem)
-  * [ãLibreOJ NOI Round #2ãåæªå¹é©¬](https://loj.ac/p/573)
+  * [「LibreOJ NOI Round #2」单枪匹马](https://loj.ac/p/573)
   * [Codeforces Round #184 (Div. 2) - Continued Fractions](https://codeforces.com/contest/305/problem/B)
   * [Codeforces Round #201 (Div. 1) - Doodle Jump](https://codeforces.com/contest/346/problem/E)
   * [Codeforces Round #325 (Div. 1) - Alice, Bob, Oranges and Apples](https://codeforces.com/contest/585/problem/C)
@@ -1390,43 +1390,43 @@ C++Python
   * [2019 Multi-University Training Contest 5 - fraction](http://acm.hdu.edu.cn/showproblem.php?pid=6624)
   * [SnackDown 2019 Elimination Round - Election Bait](https://www.codechef.com/SNCKEL19/problems/EBAIT)
   * [Luogu P5179. Fraction](https://www.luogu.com.cn/problem/P5179)
-  * [Luogu P7739. [NOI2021] å¯ç ç®±](https://www.luogu.com.cn/problem/P7739)
+  * [Luogu P7739. [NOI2021] 密码箱](https://www.luogu.com.cn/problem/P7739)
 
-## åèæç®ä¸æå±é è¯»
+## 参考文献与拓展阅读
 
   * Hardy, G. H., Wright, E. M., Heath-Brown, R., & Silverman, J. (2008). An Introduction to the Theory of Numbers. Oxford Mathematics.
-  * æ±å°§è¾°ï¼çè¿ç¥¥ãä¸¢çªå¾é¼è¿å¼è®ºã
-  * [FatFish çåå®¢ - è¿åæ°å ¥é¨](https://chaoli.club/index.php/2756)
+  * 朱尧辰，王连祥《丢番图逼近引论》
+  * [FatFish 的博客 - 连分数入门](https://chaoli.club/index.php/2756)
   * [Simple continued fraction - Wikipedia](https://en.wikipedia.org/wiki/Simple_continued_fraction)
   * [Periodic continued fraction - Wikipedia](https://en.wikipedia.org/wiki/Periodic_continued_fraction)
   * [Gosper's original notes on continued fraction arithmetic algorithms](https://perl.plover.com/yak/cftalk/INFO/gosper.txt)
   * [Understanding Bill Gosper's continued fraction arithmetic (implemented in Python)](https://hsinhaoyu.github.io/cont_frac/)
 
-**æ¬é¡µé¢ä¸»è¦å å®¹è¯èªåæ[Continued fractions](https://cp-algorithms.com/algebra/continued-fractions.html)ï¼çæåè®®ä¸º CC-BY-SA 4.0ï¼å å®¹ææ¹å¨ï¼**
+**本页面主要内容译自博文[Continued fractions](https://cp-algorithms.com/algebra/continued-fractions.html)，版权协议为 CC-BY-SA 4.0，内容有改动．**
 
 * * *
 
-  1. èªç¶æ° 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åªæéæ åè¡¨ç¤ºï¼1 =[1] =[0,1]1=[1]=[0,1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼Â â©
+  1. 自然数 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 只有非标准表示：1 =[1] =[0,1]1=[1]=[0,1]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)． ↩
 
-  2. è¯æè§ [ç»´åºç¾ç§é¡µé¢](https://en.wikipedia.org/wiki/Periodic_continued_fraction#Length_of_the_repeating_block) çåèæç®ï¼Â â©
+  2. 证明见 [维基百科页面](https://en.wikipedia.org/wiki/Periodic_continued_fraction#Length_of_the_repeating_block) 的参考文献． ↩
 
-  3. è¯åæ¥èªå¼ æå°§ãå¼ å¡ç¿»è¯çãå ·ä½æ°å­¦ãç¬¬ 6.7 èï¼Â â©
+  3. 译名来自张明尧、张凡翻译的《具体数学》第 6.7 节． ↩
 
-  4. æ­¤æ¶ä¸è½é»è®¤æ¢çº¦åæ° ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®æ¯æ¸è¿åæ°ï¼è½ç¶ Legendre å®çè¡¨æ ððpq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¡®å®åªè½æ¯æä¸ªæ¸è¿åæ°ï¼å¯¹äºæ¸è¿åæ°çæ å½¢ï¼å¯ä»¥éè¿æ¸è¿åæ°é¼è¿å®æ°çè¯¯å·®å ¥æå ä»¥è¯æï¼Â â©
+  4. 此时不能默认既约分数 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一定是渐近分数，虽然 Legendre 定理表明 𝑝𝑞pq![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 确实只能是某个渐近分数．对于渐近分数的情形，可以通过渐近分数逼近实数的误差入手加以证明． ↩
 
-  5. ä¸åæç®å¯è½å¯¹æ­¤å¤ç ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå¼èå´æ¯å¦å æ¬ç«¯ç¹æä¸åçå¤çï¼Â â©
+  5. 不同文献可能对此处的 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的取值范围是否包括端点有不同的处理． ↩
 
-  6. ð¡ =0t=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼åºçè§£ä¸ºå½¢å¼è¿åæ°ï¼ç¸å½äºæªæ­å°è¿åæ°çåæ°ç¬¬äºé¡¹ï¼Â â©
+  6. 𝑡 =0t=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，应理解为形式连分数，相当于截断到连分数的倒数第二项． ↩
 
-  7. è¿äºæ§è´¨è¡¨æï¼å ¨ä½åå¼çº¿æ§åæ¢çç¾¤åæäº [å°å½±çº¿æ§ç¾¤](https://en.wikipedia.org/wiki/Projective_linear_group) ððºð¿2(ð)PGL2(R)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼Â â©
+  7. 这些性质表明，全体分式线性变换的群同构于 [射影线性群](https://en.wikipedia.org/wiki/Projective_linear_group) 𝑃𝐺𝐿2(𝐑)PGL2(R)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)． ↩
 
-  8. å ³äºèªç¶å¯¹æ°çåº ee![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿åæ°å±å¼çè¯æå¯ä»¥åè [æ­¤å¤](https://proofwiki.org/wiki/Continued_Fraction_Expansion_of_Euler%27s_Number)ï¼Â â©
+  8. 关于自然对数的底 ee![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连分数展开的证明可以参考 [此处](https://proofwiki.org/wiki/Continued_Fraction_Expansion_of_Euler%27s_Number)． ↩
 
-  9. æ­¤è¯´æ³å¹¶éä¸ä¸æ¯è¯­ï¼å¯è½è½¬è¯èªä¿ææç® [Ð¦ÐÐÐÐ«Ð ÐÐ ÐÐÐ](https://old.mccme.ru/free-books/mmmf-lectures/book.14-full.pdf)ï¼å¨ ÐÐ»Ð³Ð¾ÑÐ¸ÑÐ¼ Â«Ð²ÑÑÑÐ³Ð¸Ð²Ð°Ð½Ð¸Ñ Ð½Ð¾ÑÐ¾Ð²Â» ä¸èï¼Â â©
+  9. 此说法并非专业术语．可能转译自俄文文献 [ЦЕПНЫЕ ДРОБИ](https://old.mccme.ru/free-books/mmmf-lectures/book.14-full.pdf)，在 Алгоритм «вытягивания носов» 一节． ↩
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/continued-fraction.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/continued-fraction.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[c-forrest](https://github.com/c-forrest), [Great-designer](https://github.com/Great-designer), [Enter-tainer](https://github.com/Enter-tainer), [Tiphereth-A](https://github.com/Tiphereth-A), [StudyingFather](https://github.com/StudyingFather), [383494](https://github.com/383494), [CCXXXI](https://github.com/CCXXXI), [chunibyo-wly](https://github.com/chunibyo-wly), [megakite](https://github.com/megakite), [Menci](https://github.com/Menci), [shawlleyw](https://github.com/shawlleyw), [shuzhouliu](https://github.com/shuzhouliu), [untitledunrevised](https://github.com/untitledunrevised), [Xeonacid](https://github.com/Xeonacid)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/continued-fraction.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/continued-fraction.md "edit.link.title")  
+>  __本页面贡献者：[c-forrest](https://github.com/c-forrest), [Great-designer](https://github.com/Great-designer), [Enter-tainer](https://github.com/Enter-tainer), [Tiphereth-A](https://github.com/Tiphereth-A), [StudyingFather](https://github.com/StudyingFather), [383494](https://github.com/383494), [CCXXXI](https://github.com/CCXXXI), [chunibyo-wly](https://github.com/chunibyo-wly), [megakite](https://github.com/megakite), [Menci](https://github.com/Menci), [shawlleyw](https://github.com/shawlleyw), [shuzhouliu](https://github.com/shuzhouliu), [untitledunrevised](https://github.com/untitledunrevised), [Xeonacid](https://github.com/Xeonacid)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

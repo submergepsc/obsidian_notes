@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/memcached/memcached-clear-data.html
-Title: Memcached flush_all 命令 | 菜鸟教程
-
-Memcached flush_all 命令 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-Memcached 教程

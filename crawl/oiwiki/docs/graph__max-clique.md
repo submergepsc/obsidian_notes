@@ -1,4 +1,4 @@
-# 最大团搜索算法 - OI Wiki
+﻿# 最大团搜索算法 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/max-clique/
 

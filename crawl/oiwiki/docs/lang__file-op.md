@@ -1,137 +1,137 @@
-# æä»¶æä½ - OI Wiki
+﻿# 文件操作 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/file-op/
 
-# æä»¶æä½
+# 文件操作
 
-## æä»¶çæ¦å¿µ
+## 文件的概念
 
-æä»¶æ¯æ ¹æ®ç¹å®çç®çèæ¶éå¨ä¸èµ·çæå ³æ°æ®çéåï¼C/C++ ææ¯ä¸ä¸ªæä»¶é½çææ¯ä¸ä¸ªæåºçå­èæµï¼æ¯ä¸ªæä»¶é½æ¯ä»¥ **æä»¶ç»ææ å¿** ï¼EOFï¼ç»æï¼å¦æè¦æä½æä¸ªæä»¶ï¼ç¨åºåºè¯¥é¦å æå¼è¯¥æä»¶ï¼æ¯å½ä¸ä¸ªæä»¶è¢«æå¼åï¼è¯·è®°å¾å ³é­æå¼çæä»¶ï¼ï¼è¯¥æä»¶å°±åä¸ä¸ªæµå ³èèµ·æ¥ï¼è¿éçæµå®é ä¸æ¯ä¸ä¸ªå­èåºåï¼
+文件是根据特定的目的而收集在一起的有关数据的集合．C/C++ 把每一个文件都看成是一个有序的字节流，每个文件都是以 **文件结束标志** （EOF）结束，如果要操作某个文件，程序应该首先打开该文件，每当一个文件被打开后（请记得关闭打开的文件），该文件就和一个流关联起来，这里的流实际上是一个字节序列．
 
-C/C++ å°æä»¶åä¸ºææ¬æä»¶åäºè¿å¶æä»¶ï¼ææ¬æä»¶å°±æ¯ç®åçææ¬æä»¶ï¼éç¹ï¼ï¼å¦å¤äºè¿å¶æä»¶å°±æ¯ç¹æ®æ ¼å¼çæä»¶æè å¯æ§è¡ä»£ç æä»¶ç­ï¼
+C/C++ 将文件分为文本文件和二进制文件．文本文件就是简单的文本文件（重点），另外二进制文件就是特殊格式的文件或者可执行代码文件等．
 
-## æä»¶çæä½æ­¥éª¤
+## 文件的操作步骤
 
-1ãæå¼æä»¶ï¼å°æä»¶æéæåæä»¶ï¼å³å®æå¼æä»¶ç±»åï¼  
-2ãå¯¹æä»¶è¿è¡è¯»ãåæä½ï¼æ¯èµä¸­ä¸»è¦ç¨å°çæä½ï¼å ¶ä»ä¸äºæä½ææ¶ä¸åï¼ï¼  
-3ãå¨ä½¿ç¨å®æä»¶åï¼å ³é­æä»¶ï¼
+1、打开文件，将文件指针指向文件，决定打开文件类型；  
+2、对文件进行读、写操作（比赛中主要用到的操作，其他一些操作暂时不写）；  
+3、在使用完文件后，关闭文件．
 
-## `freopen` å½æ°
+## `freopen` 函数
 
-### å½æ°ç®ä»
+### 函数简介
 
-å½æ°ç¨äºå°æå®è¾å ¥è¾åºæµä»¥æå®æ¹å¼éå®åå°æä»¶ï¼å å«äºå¤´æä»¶ `stdio.h (cstdio)` ä¸­ï¼è¯¥å½æ°å¯ä»¥å¨ä¸æ¹åä»£ç åè²çæ åµä¸æ¹åè¾å ¥è¾åºç¯å¢ï¼ä½ä½¿ç¨æ¶åºå½ä¿è¯æµæ¯å¯é çï¼
+函数用于将指定输入输出流以指定方式重定向到文件，包含于头文件 `stdio.h (cstdio)` 中，该函数可以在不改变代码原貌的情况下改变输入输出环境，但使用时应当保证流是可靠的．
 
-å½æ°ä¸»è¦æä¸ç§æ¹å¼ï¼è¯»ãååéå ï¼
+函数主要有三种方式：读、写和附加．
 
-### å½ä»¤æ ¼å¼
+### 命令格式
 
 ```text 1 ``` |  ```text FILE * freopen ( const char * filename , const char * mode , FILE * stream ); ```   
 ---|---  
   
-### åæ°è¯´æ
+### 参数说明
 
-  * `filename`: è¦æå¼çæä»¶å
-  * `mode`: æä»¶æå¼çæ¨¡å¼ï¼è¡¨ç¤ºæä»¶è®¿é®çæé
-  * `stream`: æä»¶æéï¼éå¸¸ä½¿ç¨æ åæä»¶æµ (`stdin/stdout`) ææ åéè¯¯è¾åºæµ (`stderr`)
-  * è¿åå¼ï¼æä»¶æéï¼æåè¢«æå¼æä»¶
+  * `filename`: 要打开的文件名
+  * `mode`: 文件打开的模式，表示文件访问的权限
+  * `stream`: 文件指针，通常使用标准文件流 (`stdin/stdout`) 或标准错误输出流 (`stderr`)
+  * 返回值：文件指针，指向被打开文件
 
-### æä»¶æå¼æ ¼å¼ï¼éè¯»ï¼
+### 文件打开格式（选读）
 
-  * `r`ï¼ä»¥åªè¯»æ¹å¼æå¼æä»¶ï¼æä»¶å¿ é¡»å­å¨ï¼åªå è®¸è¯»å ¥æ°æ® **ï¼å¸¸ç¨ï¼**
-  * `r+`ï¼ä»¥è¯»/åæ¹å¼æå¼æä»¶ï¼æä»¶å¿ é¡»å­å¨ï¼å è®¸è¯»/åæ°æ®
-  * `rb`ï¼ä»¥åªè¯»æ¹å¼æå¼äºè¿å¶æä»¶ï¼æä»¶å¿ é¡»å­å¨ï¼åªå è®¸è¯»å ¥æ°æ®
-  * `rb+`ï¼ä»¥è¯»/åæ¹å¼æå¼äºè¿å¶æä»¶ï¼æä»¶å¿ é¡»å­å¨ï¼å è®¸è¯»/åæ°æ®
-  * `rt+`ï¼ä»¥è¯»/åæ¹å¼æå¼ææ¬æä»¶ï¼å è®¸è¯»/åæ°æ®
-  * `w`ï¼ä»¥åªåæ¹å¼æå¼æä»¶ï¼æä»¶ä¸å­å¨ä¼æ°å»ºæä»¶ï¼å¦åæ¸ ç©ºå å®¹ï¼åªå è®¸åå ¥æ°æ® **ï¼å¸¸ç¨ï¼**
-  * `w+`ï¼ä»¥è¯»/åæ¹å¼æå¼æä»¶ï¼æä»¶ä¸å­å¨å°æ°å»ºæä»¶ï¼å¦åæ¸ ç©ºå å®¹ï¼å è®¸è¯»/åæ°æ®
-  * `wb`ï¼ä»¥åªåæ¹å¼æå¼äºè¿å¶æä»¶ï¼æä»¶ä¸å­å¨å°ä¼æ°å»ºæä»¶ï¼å¦åæ¸ ç©ºå å®¹ï¼åªå è®¸åå ¥æ°æ®
-  * `wb+`ï¼ä»¥è¯»/åæ¹å¼æå¼äºè¿å¶æä»¶ï¼æä»¶ä¸å­å¨å°æ°å»ºæä»¶ï¼å¦åæ¸ ç©ºå å®¹ï¼å è®¸è¯»/åæ°æ®
-  * `a`ï¼ä»¥åªåæ¹å¼æå¼æä»¶ï¼æä»¶ä¸å­å¨å°æ°å»ºæä»¶ï¼åå ¥æ°æ®å°è¢«éå å¨æä»¶æ«å°¾ï¼ä¿ç EOF ç¬¦ï¼
-  * `a+`ï¼ä»¥è¯»/åæ¹å¼æå¼æä»¶ï¼æä»¶ä¸å­å¨å°æ°å»ºæä»¶ï¼åå ¥æ°æ®å°è¢«éå å¨æä»¶æ«å°¾ï¼ä¸ä¿ç EOF ç¬¦ï¼
-  * `at+`ï¼ä»¥è¯»/åæ¹å¼æå¼ææ¬æä»¶ï¼åå ¥æ°æ®å°è¢«éå å¨æä»¶æ«å°¾
-  * `ab+`ï¼ä»¥è¯»/åæ¹å¼æå¼äºè¿å¶æä»¶ï¼åå ¥æ°æ®å°è¢«éå å¨æä»¶æ«å°¾
+  * `r`：以只读方式打开文件，文件必须存在，只允许读入数据 **（常用）**
+  * `r+`：以读/写方式打开文件，文件必须存在，允许读/写数据
+  * `rb`：以只读方式打开二进制文件，文件必须存在，只允许读入数据
+  * `rb+`：以读/写方式打开二进制文件，文件必须存在，允许读/写数据
+  * `rt+`：以读/写方式打开文本文件，允许读/写数据
+  * `w`：以只写方式打开文件，文件不存在会新建文件，否则清空内容，只允许写入数据 **（常用）**
+  * `w+`：以读/写方式打开文件，文件不存在将新建文件，否则清空内容，允许读/写数据
+  * `wb`：以只写方式打开二进制文件，文件不存在将会新建文件，否则清空内容，只允许写入数据
+  * `wb+`：以读/写方式打开二进制文件，文件不存在将新建文件，否则清空内容，允许读/写数据
+  * `a`：以只写方式打开文件，文件不存在将新建文件，写入数据将被附加在文件末尾（保留 EOF 符）
+  * `a+`：以读/写方式打开文件，文件不存在将新建文件，写入数据将被附加在文件末尾（不保留 EOF 符）
+  * `at+`：以读/写方式打开文本文件，写入数据将被附加在文件末尾
+  * `ab+`：以读/写方式打开二进制文件，写入数据将被附加在文件末尾
 
-### ä½¿ç¨æ¹æ³
+### 使用方法
 
-è¯»å ¥æä»¶å å®¹ï¼
+读入文件内容：
 
-```text 1 2 ``` |  ```text freopen ( "data.in" , "r" , stdin ); // data.in å°±æ¯è¯»åçæä»¶åï¼è¦åå¯æ§è¡æä»¶æ¾å¨åä¸ç®å½ä¸ ```   
+```text 1 2 ``` |  ```text freopen ( "data.in" , "r" , stdin ); // data.in 就是读取的文件名，要和可执行文件放在同一目录下 ```   
 ---|---  
   
-è¾åºå°æä»¶ï¼
+输出到文件：
 
-```text 1 2 ``` |  ```text freopen ( "data.out" , "w" , stdout ); // data.out å°±æ¯è¾åºæä»¶çæä»¶åï¼åå¯æ§è¡æä»¶å¨åä¸ç®å½ä¸ ```   
+```text 1 2 ``` |  ```text freopen ( "data.out" , "w" , stdout ); // data.out 就是输出文件的文件名，和可执行文件在同一目录下 ```   
 ---|---  
   
-å ³é­æ åè¾å ¥/è¾åºæµ
+关闭标准输入/输出流
 
 ```text 1 2 ``` |  ```text fclose ( stdin ); fclose ( stdout ); ```   
 ---|---  
   
-æ³¨
+注
 
-`printf/scanf/cin/cout` ç­å½æ°é»è®¤ä½¿ç¨ `stdin/stdout`ï¼å° `stdin/stdout` éå®ååï¼è¿äºå½æ°å°è¾å ¥/è¾åºå°è¢«å®åçæä»¶
+`printf/scanf/cin/cout` 等函数默认使用 `stdin/stdout`，将 `stdin/stdout` 重定向后，这些函数将输入/输出到被定向的文件
 
-### æ¨¡æ¿
+### 模板
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 ``` |  ```text #include <cstdio> #include <iostream> int main ( void ) { freopen ( "data.in" , "r" , stdin ); freopen ( "data.out" , "w" , stdout ); /* ä¸­é´çä»£ç ä¸éè¦æ¹åï¼ç´æ¥ä½¿ç¨ cin å cout å³å¯ */ fclose ( stdin ); fclose ( stdout ); return 0 ; } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 ``` |  ```text #include <cstdio> #include <iostream> int main ( void ) { freopen ( "data.in" , "r" , stdin ); freopen ( "data.out" , "w" , stdout ); /* 中间的代码不需要改变，直接使用 cin 和 cout 即可 */ fclose ( stdin ); fclose ( stdout ); return 0 ; } ```   
 ---|---  
   
-## `fopen` å½æ°ï¼éè¯»ï¼
+## `fopen` 函数（选读）
 
-å½æ°å¤§è´ä¸ `freopen` ç¸åï¼å½æ°å°æå¼æå®æä»¶å¹¶è¿åæå¼æä»¶çæé
+函数大致与 `freopen` 相同，函数将打开指定文件并返回打开文件的指针
 
-### å½æ°åå
+### 函数原型
 
 ```text 1 ``` |  ```text FILE * fopen ( const char * path , const char * mode ) ```   
 ---|---  
   
-åé¡¹åæ°å«ä¹å `freopen`
+各项参数含义同 `freopen`
 
-### å¯ç¨è¯»åå½æ°ï¼åºæ¬ï¼
+### 可用读写函数（基本）
 
   * `fread/fwrite`
   * `fgetc/fputc`
   * `fscanf/fprintf`
   * `fgets/fputs`
 
-### ä½¿ç¨æ¹å¼
+### 使用方式
 
-```text 1 2 3 4 5 6 7 8 ``` |  ```text FILE * in , * out ; // å®ä¹æä»¶æé in = fopen ( "data.in" , "r" ); out = fopen ( "data.out" , "w" ); /* do what you want to do */ fclose ( in ); fclose ( out ); ```   
+```text 1 2 3 4 5 6 7 8 ``` |  ```text FILE * in , * out ; // 定义文件指针 in = fopen ( "data.in" , "r" ); out = fopen ( "data.out" , "w" ); /* do what you want to do */ fclose ( in ); fclose ( out ); ```   
 ---|---  
   
-## C++ ç `ifstream/ofstream` æä»¶è¾å ¥è¾åºæµ
+## C++ 的 `ifstream/ofstream` 文件输入输出流
 
-### ä½¿ç¨æ¹æ³
+### 使用方法
 
-è¯»å ¥æä»¶å å®¹ï¼
+读入文件内容：
 
-```text 1 2 ``` |  ```text ifstream fin ( "data.in" ); // data.in å°±æ¯è¯»åæä»¶çç¸å¯¹ä½ç½®æç»å¯¹ä½ç½® ```   
+```text 1 2 ``` |  ```text ifstream fin ( "data.in" ); // data.in 就是读取文件的相对位置或绝对位置 ```   
 ---|---  
   
-è¾åºå°æä»¶ï¼
+输出到文件：
 
-```text 1 2 ``` |  ```text ofstream fout ( "data.out" ); // data.out å°±æ¯è¾åºæä»¶çç¸å¯¹ä½ç½®æç»å¯¹ä½ç½® ```   
+```text 1 2 ``` |  ```text ofstream fout ( "data.out" ); // data.out 就是输出文件的相对位置或绝对位置 ```   
 ---|---  
   
-å ³é­æ åè¾å ¥/è¾åºæµ
+关闭标准输入/输出流
 
 ```text 1 2 ``` |  ```text fin . close (); fout . close (); ```   
 ---|---  
   
-### æ¨¡æ¿
+### 模板
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ``` |  ```text #include <fstream> using namespace std ; // ä¸¤ä¸ªç±»åé½å¨ std å½åç©ºé´é ifstream fin ( "data.in" ); ofstream fout ( "data.out" ); int main ( void ) { /* ä¸­é´çä»£ç æ¹å cin ä¸º fin ï¼cout ä¸º fout å³å¯ */ fin . close (); fout . close (); return 0 ; } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ``` |  ```text #include <fstream> using namespace std ; // 两个类型都在 std 命名空间里 ifstream fin ( "data.in" ); ofstream fout ( "data.out" ); int main ( void ) { /* 中间的代码改变 cin 为 fin ，cout 为 fout 即可 */ fin . close (); fout . close (); return 0 ; } ```   
 ---|---  
   
-## åèèµæ
+## 参考资料
 
-  1. ä¿¡æ¯å­¦å¥¥èµä¸æ¬é
+  1. 信息学奥赛一本通
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/file-op.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/lang/file-op.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Ir1d](https://github.com/Ir1d), [cqnuljs](https://github.com/cqnuljs), [akakw1](https://github.com/akakw1), [StudyingFather](https://github.com/StudyingFather), [Chrogeek](https://github.com/Chrogeek), [henrytbtrue](https://github.com/henrytbtrue), [Planet6174](https://github.com/Planet6174), [Tiphereth-A](https://github.com/Tiphereth-A), [Bardisk](https://github.com/Bardisk), [c-forrest](https://github.com/c-forrest), [Charlie-zzy](https://github.com/Charlie-zzy), [Enter-tainer](https://github.com/Enter-tainer), [GekkaSaori](https://github.com/GekkaSaori), [ksyx](https://github.com/ksyx), [MingqiHuang](mailto:hmq011212@163.com), [MingqiHuang](https://github.com/MingqiHuang), [TianKong-y](https://github.com/TianKong-y), [VaneHsiung](https://github.com/VaneHsiung), [Xeonacid](https://github.com/Xeonacid)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/file-op.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/lang/file-op.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [cqnuljs](https://github.com/cqnuljs), [akakw1](https://github.com/akakw1), [StudyingFather](https://github.com/StudyingFather), [Chrogeek](https://github.com/Chrogeek), [henrytbtrue](https://github.com/henrytbtrue), [Planet6174](https://github.com/Planet6174), [Tiphereth-A](https://github.com/Tiphereth-A), [Bardisk](https://github.com/Bardisk), [c-forrest](https://github.com/c-forrest), [Charlie-zzy](https://github.com/Charlie-zzy), [Enter-tainer](https://github.com/Enter-tainer), [GekkaSaori](https://github.com/GekkaSaori), [ksyx](https://github.com/ksyx), [MingqiHuang](mailto:hmq011212@163.com), [MingqiHuang](https://github.com/MingqiHuang), [TianKong-y](https://github.com/TianKong-y), [VaneHsiung](https://github.com/VaneHsiung), [Xeonacid](https://github.com/Xeonacid)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

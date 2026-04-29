@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/data-structures/2way-quick-sort.html
-Title: 双路快速排序 | 菜鸟教程
-
-双路快速排序 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-数据结构

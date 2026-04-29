@@ -1,4 +1,4 @@
-# 如何参与 - OI Wiki
+﻿# 如何参与 - OI Wiki
 
 - Source: https://oi-wiki.org/intro/htc/
 

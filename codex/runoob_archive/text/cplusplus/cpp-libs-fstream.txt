@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/cplusplus/cpp-libs-fstream.html
-Title: C++ 文件输入输出库 – <fstream> | 菜鸟教程
-
-C++ 文件输入输出库 – <fstream> | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-C++ 教程

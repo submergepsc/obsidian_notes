@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/aspnet/control-htmlinputbutton.html
-Title: ASP.NET HtmlInputButton 控件 | 菜鸟教程
-
-ASP.NET HtmlInputButton 控件 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-ASP.NET 教程

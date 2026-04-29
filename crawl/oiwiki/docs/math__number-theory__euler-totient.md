@@ -1,60 +1,60 @@
-# æ¬§æå½æ° - OI Wiki
+﻿# 欧拉函数 - OI Wiki
 
 - Source: https://oi-wiki.org/math/number-theory/euler-totient/
 
-# æ¬§æå½æ°
+# 欧拉函数
 
-## å®ä¹
+## 定义
 
-æ¬§æå½æ°ï¼Euler's totient functionï¼ï¼å³ ð(ð)Ï(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¡¨ç¤ºçæ¯å°äºç­äº ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºè´¨çæ°çä¸ªæ°ï¼
+欧拉函数（Euler's totient function），即 𝜑(𝑛)φ(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，表示的是小于等于 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互质的数的个数．
 
-æ¯å¦è¯´ ð(1) =1Ï(1)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+比如说 𝜑(1) =1φ(1)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å½ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯è´¨æ°çæ¶åï¼æ¾ç¶æ ð(ð) =ð â1Ï(n)=nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+当 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是质数的时候，显然有 𝜑(𝑛) =𝑛 −1φ(n)=n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## æ§è´¨
+## 性质
 
-  * æ¬§æå½æ°æ¯ [ç§¯æ§å½æ°](../basic/#ç§¯æ§å½æ°)ï¼
+  * 欧拉函数是 [积性函数](../basic/#积性函数)．
 
-å³å¯¹ä»»ææ»¡è¶³ gcd(ð,ð) =1gcd(a,b)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´æ° ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð(ðð) =ð(ð)ð(ð)Ï(ab)=Ï(a)Ï(b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+即对任意满足 gcd(𝑎,𝑏) =1gcd(a,b)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整数 𝑎,𝑏a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝜑(𝑎𝑏) =𝜑(𝑎)𝜑(𝑏)φ(ab)=φ(a)φ(b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç¹å«å°ï¼å½ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¥æ°æ¶ ð(2ð) =ð(ð)Ï(2n)=Ï(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+特别地，当 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是奇数时 𝜑(2𝑛) =𝜑(𝑛)φ(2n)=φ(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æåè§ [å©ä½ç³»çå¤å](../basic/#å©ä½ç³»çå¤å)ï¼
+证明参见 [剩余系的复合](../basic/#剩余系的复合)．
 
-  * ð =âðâ£ðð(ð)n=âdâ£nÏ(d)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 𝑛 =∑𝑑∣𝑛𝜑(𝑑)n=∑d∣nφ(d)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-å©ç¨ [è«æ¯ä¹æ¯åæ¼](../mobius/) ç¸å ³ç¥è¯å¯ä»¥å¾åºï¼
+利用 [莫比乌斯反演](../mobius/) 相关知识可以得出．
 
-ä¹å¯ä»¥è¿æ ·èèï¼å¦æ gcd(ð,ð) =ðgcd(k,n)=d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ gcd(ðð,ðð) =1,(ð <ð)gcd(kd,nd)=1,(k<n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+也可以这样考虑：如果 gcd(𝑘,𝑛) =𝑑gcd(k,n)=d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么 gcd(𝑘𝑑,𝑛𝑑) =1,(𝑘 <𝑛)gcd(kd,nd)=1,(k<n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¦ææä»¬è®¾ ð(ð¥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤º gcd(ð,ð) =ð¥gcd(k,n)=x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ°çä¸ªæ°ï¼é£ä¹ ð =âðð=1ð(ð)n=âi=1nf(i)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+如果我们设 𝑓(𝑥)f(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示 gcd(𝑘,𝑛) =𝑥gcd(k,n)=x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的数的个数，那么 𝑛 =∑𝑛𝑖=1𝑓(𝑖)n=∑i=1nf(i)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ ¹æ®ä¸é¢çè¯æï¼æä»¬åç°ï¼ð(ð¥) =ð(ðð¥)f(x)=Ï(nx)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»è ð =âðâ£ðð(ðð)n=âdâ£nÏ(nd)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ³¨æå°çº¦æ° ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððnd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ·æå¯¹ç§°æ§ï¼æä»¥ä¸å¼åä¸º ð =âðâ£ðð(ð)n=âdâ£nÏ(d)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+根据上面的证明，我们发现，𝑓(𝑥) =𝜑(𝑛𝑥)f(x)=φ(nx)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，从而 𝑛 =∑𝑑∣𝑛𝜑(𝑛𝑑)n=∑d∣nφ(nd)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．注意到约数 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑛𝑑nd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 具有对称性，所以上式化为 𝑛 =∑𝑑∣𝑛𝜑(𝑑)n=∑d∣nφ(d)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * è¥ ð =ððn=pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯è´¨æ°ï¼é£ä¹ ð(ð) =ðð âððâ1Ï(n)=pkâpkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ ï¼æ ¹æ®å®ä¹å¯ç¥ï¼
+  * 若 𝑛 =𝑝𝑘n=pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是质数，那么 𝜑(𝑛) =𝑝𝑘 −𝑝𝑘−1φ(n)=pk−pk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)． （根据定义可知）
 
-  * ç±å¯ä¸åè§£å®çï¼è®¾ ð =âð ð=1ððððn=âi=1spiki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ððpi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯è´¨æ°ï¼æ ð(ð) =ð Ãâð ð=1ððâ1ððÏ(n)=nÃâi=1spiâ1pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 由唯一分解定理，设 𝑛 =∏𝑠𝑖=1𝑝𝑘𝑖𝑖n=∏i=1spiki![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑝𝑖pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是质数，有 𝜑(𝑛) =𝑛 ×∏𝑠𝑖=1𝑝𝑖−1𝑝𝑖φ(n)=n×∏i=1spi−1pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
-    * å¼çï¼è®¾ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºä»»æè´¨æ°ï¼é£ä¹ ð(ðð) =ððâ1 Ã(ð â1)Ï(pk)=pkâ1Ã(pâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+证明
+    * 引理：设 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为任意质数，那么 𝜑(𝑝𝑘) =𝑝𝑘−1 ×(𝑝 −1)φ(pk)=pk−1×(p−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æï¼æ¾ç¶å¯¹äºä» 1 å° ððpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæææ°ä¸­ï¼é¤äº ððâ1pkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°ä»¥å¤å ¶å®æ°é½ä¸ ððpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç´ ï¼æ ð(ðð) =ðð âððâ1 =ððâ1 Ã(ð â1)Ï(pk)=pkâpkâ1=pkâ1Ã(pâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¯æ¯ï¼
+证明：显然对于从 1 到 𝑝𝑘pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的所有数中，除了 𝑝𝑘−1pk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的倍数以外其它数都与 𝑝𝑘pk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互素，故 𝜑(𝑝𝑘) =𝑝𝑘 −𝑝𝑘−1 =𝑝𝑘−1 ×(𝑝 −1)φ(pk)=pk−pk−1=pk−1×(p−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，证毕．
 
-æ¥ä¸æ¥æä»¬è¯æ ð(ð) =ð Ãâð ð=1ððâ1ððÏ(n)=nÃâi=1spiâ1pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±å¯ä¸åè§£å®çä¸ ð(ð¥)Ï(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å½æ°çç§¯æ§
+接下来我们证明 𝜑(𝑛) =𝑛 ×∏𝑠𝑖=1𝑝𝑖−1𝑝𝑖φ(n)=n×∏i=1spi−1pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．由唯一分解定理与 𝜑(𝑥)φ(x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 函数的积性
 
-ð(ð)=ð âð=1ð(ðððð)=ð âð=1(ððâ1)Ãððððâ1=ð âð=1ððððÃ(1â1ðð)=ðÂ ð âð=1(1â1ðð)â»Ï(n)=âi=1sÏ(piki)=âi=1s(piâ1)Ãpikiâ1=âi=1spikiÃ(1â1pi)=nÂ âi=1s(1â1pi)â»![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * å¯¹ä»»æä¸å ¨ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´æ° ð,ðm,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð(ðð)ð(gcd(ð,ð)) =ð(ð)ð(ð)gcd(ð,ð)Ï(mn)Ï(gcd(m,n))=Ï(m)Ï(n)gcd(m,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+𝜑(𝑛)=𝑠∏𝑖=1𝜑(𝑝𝑘𝑖𝑖)=𝑠∏𝑖=1(𝑝𝑖−1)×𝑝𝑖𝑘𝑖−1=𝑠∏𝑖=1𝑝𝑖𝑘𝑖×(1−1𝑝𝑖)=𝑛 𝑠∏𝑖=1(1−1𝑝𝑖)◻φ(n)=∏i=1sφ(piki)=∏i=1s(pi−1)×piki−1=∏i=1spiki×(1−1pi)=n ∏i=1s(1−1pi)◻![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 对任意不全为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整数 𝑚,𝑛m,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝜑(𝑚𝑛)𝜑(gcd(𝑚,𝑛)) =𝜑(𝑚)𝜑(𝑛)gcd(𝑚,𝑛)φ(mn)φ(gcd(m,n))=φ(m)φ(n)gcd(m,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¯ç±ä¸ä¸æ¡ç´æ¥è®¡ç®å¾åºï¼
+可由上一条直接计算得出．
 
-## å®ç°
+## 实现
 
-å¦æåªè¦æ±ä¸ä¸ªæ°çæ¬§æå½æ°å¼ï¼é£ä¹ç´æ¥æ ¹æ®å®ä¹è´¨å æ°åè§£çåæ¶æ±å°±å¥½äºï¼è¿ä¸ªè¿ç¨å¯ä»¥ç¨ [Pollard Rho](../pollard-rho/) ç®æ³ä¼åï¼
+如果只要求一个数的欧拉函数值，那么直接根据定义质因数分解的同时求就好了．这个过程可以用 [Pollard Rho](../pollard-rho/) 算法优化．
 
-åèå®ç°
+参考实现
 
 C++Python
 
@@ -64,76 +64,76 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 ``` |  ```text import math def euler_phi ( n ): ans = n for i in range ( 2 , math . isqrt ( n ) \+ 1 ): if n % i == 0 : ans = ans // i * ( i \- 1 ) while n % i == 0 : n = n // i if n > 1 : ans = ans // n * ( n \- 1 ) return ans ```   
 ---|---  
   
-å¦ææ¯å¤ä¸ªæ°çæ¬§æå½æ°å¼ï¼å¯ä»¥å©ç¨åé¢ä¼æå°ççº¿æ§ç­æ³æ¥æ±å¾ï¼
+如果是多个数的欧拉函数值，可以利用后面会提到的线性筛法来求得．
 
-è¯¦è§ï¼[ç­æ³æ±æ¬§æå½æ°](../sieve/#ç­æ³æ±æ¬§æå½æ°)
+详见：[筛法求欧拉函数](../sieve/#筛法求欧拉函数)
 
-## åºç¨
+## 应用
 
-æ¬§æå½æ°å¸¸å¸¸ç¨äºåç®ä¸åæå¤§å ¬çº¦æ°çåï¼å½å æäºæç« ç§°å®ä¸º **æ¬§æåæ¼**1ï¼
+欧拉函数常常用于化简一列最大公约数的和．国内有些文章称它为 **欧拉反演**1．
 
-å¨ç»è®º
+在结论
 
-ð=âð|ðð(ð)n=âd|nÏ(d)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛=∑𝑑|𝑛𝜑(𝑑)n=∑d|nφ(d)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸­ä»£å ¥ ð =gcd(ð,ð)n=gcd(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ
+中代入 𝑛 =gcd(𝑎,𝑏)n=gcd(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则有
 
-gcd(ð,ð)=âð|gcd(ð,ð)ð(ð)=âð[ð|ð][ð|ð]ð(ð),gcd(a,b)=âd|gcd(a,b)Ï(d)=âd[d|a][d|b]Ï(d),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+gcd(𝑎,𝑏)=∑𝑑|gcd(𝑎,𝑏)𝜑(𝑑)=∑𝑑[𝑑|𝑎][𝑑|𝑏]𝜑(𝑑),gcd(a,b)=∑d|gcd(a,b)φ(d)=∑d[d|a][d|b]φ(d),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ [ â ][â ]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º Iverson æ¬å·ï¼å¯¹ä¸å¼æ±åï¼å°±å¯ä»¥å¾å°
+其中 [ ⋅][⋅]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 Iverson 括号．对上式求和，就可以得到
 
-ðâð=1gcd(ð,ð)=âððâð=1[ð|ð][ð|ð]ð(ð)=âðâððâ[ð|ð]ð(ð)=âð|ðâððâð(ð).âi=1ngcd(i,n)=âdâi=1n[d|i][d|n]Ï(d)=âdândâ[d|n]Ï(d)=âd|nândâÏ(d).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=1gcd(𝑖,𝑛)=∑𝑑𝑛∑𝑖=1[𝑑|𝑖][𝑑|𝑛]𝜑(𝑑)=∑𝑑⌊𝑛𝑑⌋[𝑑|𝑛]𝜑(𝑑)=∑𝑑|𝑛⌊𝑛𝑑⌋𝜑(𝑑).∑i=1ngcd(i,n)=∑d∑i=1n[d|i][d|n]φ(d)=∑d⌊nd⌋[d|n]φ(d)=∑d|n⌊nd⌋φ(d).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éå ³é®çè§å¯æ¯ âðð=1[ð|ð] =âððââi=1n[d|i]=ândâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³å¨ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´è½å¤è¢« ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´é¤ç ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ªæ°æ¯ âððâândâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这里关键的观察是 ∑𝑛𝑖=1[𝑑|𝑖] =⌊𝑛𝑑⌋∑i=1n[d|i]=⌊nd⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即在 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间能够被 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 整除的 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的个数是 ⌊𝑛𝑑⌋⌊nd⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å©ç¨è¿ä¸ªå¼å­ï¼å°±å¯ä»¥éåçº¦æ°æ±åäºï¼éè¦å¤ç»æ¥è¯¢çæ¶åï¼å¯ä»¥é¢å¤çæ¬§æå½æ°çåç¼åï¼å©ç¨æ°è®ºååæ¥è¯¢ï¼
+利用这个式子，就可以遍历约数求和了．需要多组查询的时候，可以预处理欧拉函数的前缀和，利用数论分块查询．
 
 [GCD SUM](https://www.luogu.com.cn/problem/P2398)
 
-ç»å® ð â¤100000nâ¤100000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ±
+给定 𝑛 ≤100000n≤100000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求
 
-ðâð=1ðâð=1gcd(ð,ð).âi=1nâj=1ngcd(i,j).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè·¯
+𝑛∑𝑖=1𝑛∑𝑗=1gcd(𝑖,𝑗).∑i=1n∑j=1ngcd(i,j).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 思路
 
-ä»¿ç §ä¸æçæ¨å¯¼ï¼å¯ä»¥å¾åº
+仿照上文的推导，可以得出
 
-ðâð=1ðâð=1gcd(ð,ð)=ðâð=1âððâ2ð(ð).âi=1nâj=1ngcd(i,j)=âd=1nândâ2Ï(d).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∑𝑖=1𝑛∑𝑗=1gcd(𝑖,𝑗)=𝑛∑𝑑=1⌊𝑛𝑑⌋2𝜑(𝑑).∑i=1n∑j=1ngcd(i,j)=∑d=1n⌊nd⌋2φ(d).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ­¤æ¶éè¦ä» 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éåå° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ±æ¬§æå½æ°ï¼ç¨çº¿æ§ç­åå°±å¯ä»¥ ð(ð)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¾å°ç­æ¡ï¼
+此时需要从 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 遍历到 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 求欧拉函数，用线性筛做就可以 𝑂(𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 得到答案．
 
-## æ¬§æå®ç
+## 欧拉定理
 
-ä¸æ¬§æå½æ°ç´§å¯ç¸å ³çä¸ä¸ªå®çå°±æ¯æ¬§æå®çï¼å ¶æè¿°å¦ä¸ï¼
+与欧拉函数紧密相关的一个定理就是欧拉定理．其描述如下：
 
-è¥ gcd(ð,ð) =1gcd(a,m)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ðð(ð) â¡1(modð)aÏ(m)â¡1(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+若 gcd(𝑎,𝑚) =1gcd(a,m)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝑎𝜑(𝑚) ≡1(mod𝑚)aφ(m)≡1(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### æ©å±æ¬§æå®ç
+### 扩展欧拉定理
 
-å½ç¶ä¹ææ©å±æ¬§æå®çï¼ç¨äºå¤çä¸è¬ç ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼
+当然也有扩展欧拉定理，用于处理一般的 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形．
 
-ððâ¡â§{ {â¨{ {â©ððmodð(ð),gcd(ð,ð)=1ðð,gcd(ð,ð)â 1,ð<ð(ð)ððmodð(ð)+ð(ð),gcd(ð,ð)â 1,ðâ¥ð(ð)(modð)abâ¡{abmodÏ(m),gcd(a,m)=1ab,gcd(a,m)â 1,b<Ï(m)abmodÏ(m)+Ï(m),gcd(a,m)â 1,bâ¥Ï(m)(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑏≡⎧{ {⎨{ {⎩𝑎𝑏mod𝜑(𝑚),gcd(𝑎,𝑚)=1𝑎𝑏,gcd(𝑎,𝑚)≠1,𝑏<𝜑(𝑚)𝑎𝑏mod𝜑(𝑚)+𝜑(𝑚),gcd(𝑎,𝑚)≠1,𝑏≥𝜑(𝑚)(mod𝑚)ab≡{abmodφ(m),gcd(a,m)=1ab,gcd(a,m)≠1,b<φ(m)abmodφ(m)+φ(m),gcd(a,m)≠1,b≥φ(m)(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æåä¹ é¢è¯¦è§ [æ¬§æå®ç](../fermat/)ï¼
+证明和习题详见 [欧拉定理](../fermat/)．
 
-## ä¹ é¢
+## 习题
 
   * [SPOJ ETF. Euler Totient Function](http://www.spoj.com/problems/ETF/)
   * [UVa 10179. Irreducible Basic Fractions](http://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1120)
   * [UVa 10299. Relatives](http://uva.onlinejudge.org/index.php?option=onlinejudge&page=show_problem&problem=1240)
   * [UVa 11327. Enumerating Rational Numbers](http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=2302)
   * [TIMUS 1673. Admission to Exam](http://acm.timus.ru/problem.aspx?space=1&num=1673)
-  * [Luogu P1390 å ¬çº¦æ°çå](https://www.luogu.com.cn/problem/P1390)
-  * [Luogu P2155 [SDOI2008] æ²æå ¬ä¸»çå°æ](https://www.luogu.com.cn/problem/P2155)
+  * [Luogu P1390 公约数的和](https://www.luogu.com.cn/problem/P1390)
+  * [Luogu P2155 [SDOI2008] 沙拉公主的困惑](https://www.luogu.com.cn/problem/P2155)
   * [Luogu P2568 GCD](https://www.luogu.com.cn/problem/P2568)
 
-## åèèµæä¸æ³¨é
+## 参考资料与注释
 
 * * *
 
-  1. è¿ä¸è¯´æ³å¹¶æªè§äºå­¦æ¯æåæå½å¤çè®ºåä¸­ï¼å¨ä½¿ç¨è¯¥è¯´æ³æ¶åºå½æ³¨æï¼Â â©
+  1. 这一说法并未见于学术期刊或国外的论坛中，在使用该说法时应当注意． ↩
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/euler-totient.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/euler-totient.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Ir1d](https://github.com/Ir1d), [guodong2005](https://github.com/guodong2005), [sshwy](https://github.com/sshwy), [Tiphereth-A](https://github.com/Tiphereth-A), [Xeonacid](https://github.com/Xeonacid), [c-forrest](https://github.com/c-forrest), [Enter-tainer](https://github.com/Enter-tainer), [iamtwz](https://github.com/iamtwz), [MegaOwIer](https://github.com/MegaOwIer), [StudyingFather](https://github.com/StudyingFather), [Chrogeek](https://github.com/Chrogeek), [mgt](mailto:i@margatroid.xyz), [shuzhouliu](https://github.com/shuzhouliu), [aofall](https://github.com/aofall), [CCXXXI](https://github.com/CCXXXI), [CoelacanthusHex](https://github.com/CoelacanthusHex), [frank-xjh](https://github.com/frank-xjh), [Great-designer](https://github.com/Great-designer), [greyqz](https://github.com/greyqz), [henrytbtrue](https://github.com/henrytbtrue), [kZime](https://github.com/kZime), [lihaoyu1234](https://github.com/lihaoyu1234), [Marcythm](https://github.com/Marcythm), [Menci](https://github.com/Menci), [nalemy](https://github.com/nalemy), [orzAtalod](https://github.com/orzAtalod), [ouuan](https://github.com/ouuan), [Persdre](https://github.com/Persdre), [segment-tree](https://github.com/segment-tree), [ShaoChenHeng](https://github.com/ShaoChenHeng), [Struggler-q](https://github.com/Struggler-q), [yuhuoji](https://github.com/yuhuoji), [ksyx](https://github.com/ksyx), [Pinghigh](https://github.com/Pinghigh), [shawlleyw](https://github.com/shawlleyw), [TrisolarisHD](mailto:orzcyand1317@gmail.com), [TrisolarisHD](https://github.com/TrisolarisHD)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/euler-totient.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/euler-totient.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [guodong2005](https://github.com/guodong2005), [sshwy](https://github.com/sshwy), [Tiphereth-A](https://github.com/Tiphereth-A), [Xeonacid](https://github.com/Xeonacid), [c-forrest](https://github.com/c-forrest), [Enter-tainer](https://github.com/Enter-tainer), [iamtwz](https://github.com/iamtwz), [MegaOwIer](https://github.com/MegaOwIer), [StudyingFather](https://github.com/StudyingFather), [Chrogeek](https://github.com/Chrogeek), [mgt](mailto:i@margatroid.xyz), [shuzhouliu](https://github.com/shuzhouliu), [aofall](https://github.com/aofall), [CCXXXI](https://github.com/CCXXXI), [CoelacanthusHex](https://github.com/CoelacanthusHex), [frank-xjh](https://github.com/frank-xjh), [Great-designer](https://github.com/Great-designer), [greyqz](https://github.com/greyqz), [henrytbtrue](https://github.com/henrytbtrue), [kZime](https://github.com/kZime), [lihaoyu1234](https://github.com/lihaoyu1234), [Marcythm](https://github.com/Marcythm), [Menci](https://github.com/Menci), [nalemy](https://github.com/nalemy), [orzAtalod](https://github.com/orzAtalod), [ouuan](https://github.com/ouuan), [Persdre](https://github.com/Persdre), [segment-tree](https://github.com/segment-tree), [ShaoChenHeng](https://github.com/ShaoChenHeng), [Struggler-q](https://github.com/Struggler-q), [yuhuoji](https://github.com/yuhuoji), [ksyx](https://github.com/ksyx), [Pinghigh](https://github.com/Pinghigh), [shawlleyw](https://github.com/shawlleyw), [TrisolarisHD](mailto:orzcyand1317@gmail.com), [TrisolarisHD](https://github.com/TrisolarisHD)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

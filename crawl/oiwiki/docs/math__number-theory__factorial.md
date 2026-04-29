@@ -1,336 +1,336 @@
-# é¶ä¹åæ¨¡ - OI Wiki
+﻿# 阶乘取模 - OI Wiki
 
 - Source: https://oi-wiki.org/math/number-theory/factorial/
 
-# é¶ä¹åæ¨¡
+# 阶乘取模
 
-## å¼å ¥
+## 引入
 
-æ¬æè®¨è®ºäºæä¸æ¨¡æ°ä¸é¶ä¹è®¡ç®çç¸å ³ç»è®ºï¼å¹¶æä¾ä¸ç§æ¶é´å¤æåº¦çº¿æ§ç¸å ³äºæ¨¡æ°å¤§å°çè®¡ç®æ¹æ³ï¼å èè¯¥æ¹æ³ä¸»è¦éç¨äºæ¨¡æ°ä¸å¤ªå¤§ï¼â¼106â¼106![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼çæ å½¢ï¼é¤äºæ¬æä»ç»çæ¹æ³å¤ï¼æ ¹æ®åºæ¯ä¸åï¼è¿å¯ä»¥åºç¨ [å¤é¡¹å¼ææ¯](../../poly/shift/#æ¨¡ç´) è¿è¡å¿«éè®¡ç®ï¼
+本文讨论了某一模数下阶乘计算的相关结论，并提供一种时间复杂度线性相关于模数大小的计算方法，因而该方法主要适用于模数不太大（∼106∼106![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）的情形．除了本文介绍的方法外，根据场景不同，还可以应用 [多项式技术](../../poly/shift/#模素数意义下阶乘) 进行快速计算．
 
-æ ¹æ® [ä¸­å½å©ä½å®ç](../crt/)ï¼é¶ä¹åæ¨¡é®é¢å¯ä»¥è½¬åä¸ºæ¨¡æ°ä¸ºç´ æ°å¹ ðð¼pÎ±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼å¨å¤çè¿ç±»é®é¢æ¶ï¼å¸¸å¸¸éè¦å¯¹äºç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ­£æ´æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°é¶ä¹ ð!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çææå å­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æååºæ¥ï¼è¿èå¾å°åè§£ï¼
+根据 [中国剩余定理](../crt/)，阶乘取模问题可以转化为模数为素数幂 𝑝𝛼pα![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形．在处理这类问题时，常常需要对于素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和正整数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，将阶乘 𝑛!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的所有因子 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都提取出来，进而得到分解：
 
-ð!=ððð(ð!)(ð!)ð.n!=pÎ½p(n!)(n!)p.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛!=𝑝𝜈𝑝(𝑛!)(𝑛!)𝑝.n!=pνp(n!)(n!)p.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ðð(ð!)Î½p(n!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºé¶ä¹ ð!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç´ å æ°åè§£ä¸­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡ï¼(ð!)ð(n!)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºå¨é¶ä¹ ð!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç»æä¸­å»é¤ææ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡å¾å°çæ´æ°ï¼æ¬æå°è®¨è®º (ð!)ð(n!)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ç´ æ°ï¼å¹ï¼æ¨¡ä¸çä½æ°ä»¥åå¹æ¬¡ ðð(ð!)Î½p(n!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ·ä½è®¡ç®æ¹æ³ï¼
+其中，𝜈𝑝(𝑛!)νp(n!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示阶乘 𝑛!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的素因数分解中 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次，(𝑛!)𝑝(n!)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示在阶乘 𝑛!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的结果中去除所有 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次得到的整数．本文将讨论 (𝑛!)𝑝(n!)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在素数（幂）模下的余数以及幂次 𝜈𝑝(𝑛!)νp(n!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的具体计算方法．
 
-è¿ç§åè§£å¨è§£å³é¶ä¹åæ¶åºç°å¨ææ±è¡¨è¾¾å¼çåå­ååæ¯çé®é¢æ¶å°¤ä¸ºæç¨ï¼æ¯å¦ [è®¡ç®æä¸æ¨¡æ°ä¸çäºé¡¹å¼ç³»æ°](../lucas/)ï¼å¯¹äºè¿ç±»é®é¢ï¼åå­ååæ¯ä¸­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡å¯ä»¥ç´æ¥ç¸åï¼èä¸ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç´ çé¨å (ð!)ð(n!)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¯ä»¥å©ç¨ [ä¹æ³éå ](../inverse/) è®¡ç®ï¼
+这种分解在解决阶乘同时出现在所求表达式的分子和分母的问题时尤为有用，比如 [计算某一模数下的二项式系数](../lucas/)．对于这类问题，分子和分母中 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次可以直接相减，而与 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互素的部分 (𝑛!)𝑝(n!)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 则可以利用 [乘法逆元](../inverse/) 计算．
 
-æ¬æè¿ä»ç»äºä¸ä¸è¿°é®é¢ç¸å ³ç Wilson å®çåå ¶æ¨å¹¿ãLegendre å ¬å¼å Kummer å®çç­å å®¹ï¼
+本文还介绍了与上述问题相关的 Wilson 定理及其推广、Legendre 公式和 Kummer 定理等内容．
 
-## Wilson å®ç
+## Wilson 定理
 
-Wilson å®çç»åºäºå¤æ­æä¸ªèªç¶æ°æ¯ç´ æ°çä¸ä¸ªå åå¿ è¦æ¡ä»¶ï¼
+Wilson 定理给出了判断某个自然数是素数的一个充分必要条件．
 
-Wilson å®ç
+Wilson 定理
 
-å¯¹äºèªç¶æ° ð >1n>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å½ä¸ä» å½ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç´ æ°æ¶ï¼(ð â1)! â¡ â1(modð)(nâ1)!â¡â1(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对于自然数 𝑛 >1n>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，当且仅当 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是素数时，(𝑛 −1)! ≡ −1(mod𝑛)(n−1)!≡−1(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-é¦å ï¼è¯æå¯¹äºç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ (ð â1)! â¡ â1(modð)(pâ1)!â¡â1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºè¿ä¸ç¹ï¼å¯ä»¥å©ç¨ [åä½æ¹ç¨](../congruence-equation/#æ¨è®º-2) æ [åæ ¹](../primitive-root/) å¾å°ä¸¤ç§ç®æ´çè¯æï¼æ­¤å¤ç¥å»ä¸è¡¨ï¼ä¸é¢æä¾åç½®ç¥è¯è¾å°çä¸ç§è¯ææ¹æ³ï¼
+首先，证明对于素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 (𝑝 −1)! ≡ −1(mod𝑝)(p−1)!≡−1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于这一点，可以利用 [同余方程](../congruence-equation/#推论-2) 或 [原根](../primitive-root/) 得到两种简洁的证明，此处略去不表．下面提供前置知识较少的一种证明方法：
 
-å½ ð =2p=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼å½é¢æ¾ç¶æç«ï¼ä¸é¢è®¾ ð â¥3pâ¥3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç»§èè¦è¯æ ððZp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ææéé¶å ç´ ï¼å³åä½ç±»ï¼çç§¯ä¸º ââââ1â1â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸º ððZp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ææéé¶å ç´ ââðaâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æéå  ââðâ1aââ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼äºæ¯ ððZp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­å½¼æ­¤äºéçå ç´ ä¹ç§¯ä¸º ââ11â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½æ¯è¦æ³¨æ ââðaâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ââðâ1aââ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯è½ç¸ç­ï¼ââð =ââðâ1aâ=aââ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å½ä¸ä» å½ ð2 â¡1(modð)a2â¡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³
+当 𝑝 =2p=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，命题显然成立．下面设 𝑝 ≥3p≥3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，继而要证明 𝐙𝑝Zp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中所有非零元素（即同余类）的积为 ―――−1−1―![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因为 𝐙𝑝Zp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中所有非零元素 ――𝑎a―![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有逆元 ――𝑎−1a―−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，于是 𝐙𝑝Zp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中彼此互逆的元素乘积为 ――11―![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．但是要注意 ――𝑎a―![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 ――𝑎−1a―−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可能相等：――𝑎 =――𝑎−1a―=a―−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，当且仅当 𝑎2 ≡1(mod𝑝)a2≡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即
 
-0â¡ð2â1â¡(ð+1)(ðâ1),(modð)0â¡a2â1â¡(a+1)(aâ1),(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+0≡𝑎2−1≡(𝑎+1)(𝑎−1),(mod𝑝)0≡a2−1≡(a+1)(a−1),(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»èï¼ð â¡1(modð)aâ¡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ð â¡ â1(modð)aâ¡â1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿è¯´æ ðð â{ââ0,ââ1,ââââ1}Zpâ{0â,1â,â1â}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ææå ç´ çä¹ç§¯ä¸º ââ11â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿è ððZp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ææéé¶å ç´ çç§¯ä¸º ââââ1â1â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+从而，𝑎 ≡1(mod𝑝)a≡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 𝑎 ≡ −1(mod𝑝)a≡−1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这说明 𝐙𝑝 ∖{――0,――1,―――−1}Zp∖{0―,1―,−1―}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中所有元素的乘积为 ――11―![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，进而 𝐙𝑝Zp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中所有非零元素的积为 ―――−1−1―![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åè¿æ¥ï¼å¯¹äºåæ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼è¦è¯æ (ð â1)! â¢ â1(modð)(nâ1)!â¢â1(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å©ç¨åè¯æ³ï¼ä¸å¦¨è®¾ (ð â1)! â¡ â1(modð)(nâ1)!â¡â1(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼äº¦å³å­å¨æ´æ° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ (ð â1)! =ðð â1(nâ1)!=knâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼å ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯åæ°ï¼å¿ ç¶å­å¨ç´ æ° ð <ðp<n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð =ððn=pm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ (ð â1)! =ððð â1 â¡ â1(modð)(nâ1)!=kpmâ1â¡â1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½æ¯ï¼ä¹ç§¯ (ð â1)!(nâ1)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­å¿ ç¶å·²ç»åºç° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ èä¸å®æ (ð â1)! â¡0(modð)(nâ1)!â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸çç¾å°±è¯´æäº (ð â1)! â¢ â1(modð)(nâ1)!â¢â1(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+反过来，对于合数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形，要证明 (𝑛 −1)! ≢ −1(mod𝑛)(n−1)!≢−1(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．利用反证法，不妨设 (𝑛 −1)! ≡ −1(mod𝑛)(n−1)!≡−1(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，亦即存在整数 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 (𝑛 −1)! =𝑘𝑛 −1(n−1)!=kn−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．因为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是合数，必然存在素数 𝑝 <𝑛p<n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑛 =𝑝𝑚n=pm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以 (𝑛 −1)! =𝑘𝑝𝑚 −1 ≡ −1(mod𝑝)(n−1)!=kpm−1≡−1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．但是，乘积 (𝑛 −1)!(n−1)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中必然已经出现 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故而一定有 (𝑛 −1)! ≡0(mod𝑝)(n−1)!≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这一矛盾就说明了 (𝑛 −1)! ≢ −1(mod𝑛)(n−1)!≢−1(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å©ç¨æ¬æçè®°å·ï¼Wilson å®çå¯ä»¥åä½ (ð!)ð â¡ â1(modð)(p!)pâ¡â1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+利用本文的记号，Wilson 定理可以写作 (𝑝!)𝑝 ≡ −1(mod𝑝)(p!)p≡−1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### æ¨å¹¿
+### 推广
 
-Wilson å®çå¯ä»¥æ¨å¹¿å°ä¸è¬æ¨¡æ°çæ å½¢ï¼
+Wilson 定理可以推广到一般模数的情形．
 
-å®çï¼Gaussï¼
+定理（Gauss）
 
-å¯¹äºèªç¶æ° ð >1m>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ
+对于自然数 𝑚 >1m>1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
 
-â1â¤ð<ð,Â ðâððâ¡Â±1(modð).â1â¤k<m,Â kâmkâ¡Â±1(modm).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∏1≤𝑘<𝑚, 𝑘⟂𝑚𝑘≡±1(mod𝑚).∏1≤k<m, k⟂mk≡±1(modm).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-èä¸ï¼ä½æ°ä¸­ç Â±1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¼ä¸º â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å½ä¸ä» å½æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç [åæ ¹å­å¨](../primitive-root/#åæ)ï¼å³ ð =2,4,ðð¼,2ðð¼m=2,4,pÎ±,2pÎ±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼å ¶ä¸­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¥ç´ æ°ä¸ ð¼Î±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ­£æ´æ°ï¼
+而且，余数中的 ±1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取值为 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 当且仅当模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 [原根存在](../primitive-root/#原根存在定理)，即 𝑚 =2,4,𝑝𝛼,2𝑝𝛼m=2,4,pα,2pα![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，其中 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是奇素数且 𝛼α![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是正整数．
 
-è¯æ
+证明
 
-è¿ä¸ªå®çå¯ä»¥éè¿ [æ¨¡ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´æ°ä¹æ³ç¾¤](../../algebra/ring-theory/#åºç¨æ´æ°åä½ç±»çä¹æ³ç¾¤) çç»æç®åå°è¯æï¼æ­¤å¤ç»åºæè·¯ç¸ä»¿ï¼ä½æ¯è¾ä¸ºåç­çè¯æï¼
+这个定理可以通过 [模 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 整数乘法群](../../algebra/ring-theory/#应用整数同余类的乘法群) 的结构简单地证明．此处给出思路相仿，但是较为初等的证明．
 
-å¯¹äº ð =2m=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼æ 1! =1 â¡ â1(mod2)1!=1â¡â1(mod2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºå ¶ä»å­å¨åæ ¹çæ å½¢ï¼è®¾åæ ¹ä¸º ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæææ»¡è¶³å°äº ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸å®äºç´ çæ­£æ´æ° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½å¯ä»¥å¯ä¸å°è¡¨ç¤ºä¸º ððmodðgimodm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½¢å¼ï¼å ¶ä¸­ 0 â¤ð <ð(ð)0â¤i<Ï(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð(ð)Ï(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ [Euler å½æ°](../euler-totient/)ï¼ç´æ¥éªè¯å¯ç¥ï¼ð(ð)Ï(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®æ¯å¶æ°ï¼å ä¸º ððgi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðð(ð)âðgÏ(m)âi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºä¸ºä¹æ³éå ï¼æä»¥å¨ä¹ç§¯ä¸­å°å®ä»¬ä¸¤ä¸¤é å¯¹ï¼å°±æ
+对于 𝑚 =2m=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形，有 1! =1 ≡ −1(mod2)1!=1≡−1(mod2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于其他存在原根的情形，设原根为 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则所有满足小于 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且与它互素的正整数 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都可以唯一地表示为 𝑔𝑖mod𝑚gimodm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式，其中 0 ≤𝑖 <𝜑(𝑚)0≤i<φ(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝜑(𝑚)φ(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 [Euler 函数](../euler-totient/)．直接验证可知，𝜑(𝑚)φ(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一定是偶数．因为 𝑔𝑖gi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑔𝜑(𝑚)−𝑖gφ(m)−i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互为乘法逆元，所以在乘积中将它们两两配对，就有
 
-â1â¤ð<ð,Â ðâððâ¡ð(ð)â1âð=0ðð=ðð(ð)/2ð(ð)/2â1âð=1ðððð(ð)âðâ¡ðð(ð)/2(modð).â1â¤k<m,Â kâmkâ¡âi=0Ï(m)â1gi=gÏ(m)/2âi=1Ï(m)/2â1gigÏ(m)âiâ¡gÏ(m)/2(modm).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∏1≤𝑘<𝑚, 𝑘⟂𝑚𝑘≡𝜑(𝑚)−1∏𝑖=0𝑔𝑖=𝑔𝜑(𝑚)/2𝜑(𝑚)/2−1∏𝑖=1𝑔𝑖𝑔𝜑(𝑚)−𝑖≡𝑔𝜑(𝑚)/2(mod𝑚).∏1≤k<m, k⟂mk≡∏i=0φ(m)−1gi=gφ(m)/2∏i=1φ(m)/2−1gigφ(m)−i≡gφ(m)/2(modm).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸º ðð(ð)/2modðgÏ(m)/2modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¯ä¸çä¸ç­äº 1modð1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¹æ³éå å°±æ¯å®èªèº«çå ç´ ï¼æä»¥å®å°±ç­äº â1modðâ1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿å°±è¯´æäºæ­¤æ¶çä½æ°ç­äº â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+因为 𝑔𝜑(𝑚)/2mod𝑚gφ(m)/2modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是唯一的不等于 1mod𝑚1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且乘法逆元就是它自身的元素，所以它就等于 −1mod𝑚−1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这就说明了此时的余数等于 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¯¹äºæ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ ¹ä¸å­å¨çæ å½¢ï¼è¦è¯æä½æ°ç­äº 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ºæ­¤ï¼å¯ä»¥é¦å åè´¨å æ°åè§£ ð =ðð11ðð22â¯ððð ð m=p1e1p2e2â¯pses![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¶ååºç¨ [ä¸­å½å©ä½å®ç](../crt/) å¯ç¥ï¼åªéè¦è¯æ
+对于模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的原根不存在的情形，要证明余数等于 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．为此，可以首先做质因数分解 𝑚 =𝑝𝑒11𝑝𝑒22⋯𝑝𝑒𝑠𝑠m=p1e1p2e2⋯pses![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，然后应用 [中国剩余定理](../crt/) 可知，只需要证明
 
-â1â¤ð<ð,Â ðâððâ¡1(modðððð)â1â¤k<m,Â kâmkâ¡1(modpjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∏1≤𝑘<𝑚, 𝑘⟂𝑚𝑘≡1(mod𝑝𝑒𝑗𝑗)∏1≤k<m, k⟂mk≡1(modpjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹ææå å­ ððððpjej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æç«ï¼ä¸­å½å©ä½å®çè¯´æï¼æ¯ä¸ä¸ªå¯è½çä½æ°ç»å (ð1,ð2,â¯,ðð )(r1,r2,â¯,rs)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ï¼1 â¤ðð <ðððð1â¤rj<pjej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðð âððpjârj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½å¯ä¸å°å¯¹åºçä¸ä¸ª 1 â¤ð <ð1â¤k<m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð âðkâm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð â¡ðð(modðððð)kâ¡rj(modpjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼æä»¥ï¼å¯¹äºæä¸ªä½æ° ððrj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ°å¥½æ ð(ð)/ð(ðððð)Ï(m)/Ï(pjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð â¡ðð(modðððð)kâ¡rj(modpjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼å©ç¨è¿ä¸ç¹ï¼å¯ä»¥å¯¹ä¹ç§¯è¿è¡åç»ï¼å°±æ
+对所有因子 𝑝𝑒𝑗𝑗pjej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都成立．中国剩余定理说明，每一个可能的余数组合 (𝑟1,𝑟2,⋯,𝑟𝑠)(r1,r2,⋯,rs)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中，1 ≤𝑟𝑗 <𝑝𝑒𝑗𝑗1≤rj<pjej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑝𝑗 ⟂𝑟𝑗pj⟂rj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都唯一地对应着一个 1 ≤𝑘 <𝑚1≤k<m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑘 ⟂𝑚k⟂m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑘 ≡𝑟𝑗(mod𝑝𝑒𝑗𝑗)k≡rj(modpjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．所以，对于某个余数 𝑟𝑗rj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都恰好有 𝜑(𝑚)/𝜑(𝑝𝑒𝑗𝑗)φ(m)/φ(pjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑘 ≡𝑟𝑗(mod𝑝𝑒𝑗𝑗)k≡rj(modpjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．利用这一点，可以对乘积进行分组，就有
 
-â1â¤ð<ð,Â ðâððâ¡ââ â â âââ1â¤ðð<ðððð,Â ððâððððââ â â ââ ð(ð)/ð(ðððð)(modðððð).â1â¤k<m,Â kâmkâ¡(â1â¤rj<pjej,Â rjâpjrj)Ï(m)/Ï(pjej)(modpjej).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∏1≤𝑘<𝑚, 𝑘⟂𝑚𝑘≡⎛⎜ ⎜ ⎜ ⎜⎝∏1≤𝑟𝑗<𝑝𝑒𝑗𝑗, 𝑟𝑗⟂𝑝𝑗𝑟𝑗⎞⎟ ⎟ ⎟ ⎟⎠𝜑(𝑚)/𝜑(𝑝𝑒𝑗𝑗)(mod𝑝𝑒𝑗𝑗).∏1≤k<m, k⟂mk≡(∏1≤rj<pjej, rj⟂pjrj)φ(m)/φ(pjej)(modpjej).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ­¤å¤çææ° ð(ð)/ð(ðððð) =ð(ð/ðððð)Ï(m)/Ï(pjej)=Ï(m/pjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¦æä¸ºå¥æ°ï¼å¿ ç¶è¦æ± ð/ðððð =1,2m/pjej=1,2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸ºæ¬§æå½æ° ð(ð)Ï(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹äº ð â¥3nâ¥3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯å¶æ°ï¼å¦æ ððpj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¥ç´ æ°ï¼å ä¸ºæ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ ¹ä¸å­å¨ï¼å¿ ç¶æ ð/ðððð â 1,2m/pjejâ 1,2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ðððð =2,4pjej=2,4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸ºæ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ ¹ä¸å­å¨ï¼å¿ ç¶æ ð/ððððm/pjej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å«ææä¸ªå¥ç´ å å­ï¼æ èå¤§äº 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸¤ç§æ å½¢ææ° ð(ð)/ð(ðððð)Ï(m)/Ï(pjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯å¶æ°ï¼èä¸å¼ä¸­æ¬å·éçé¡¹å·²ç»è¯ææ¯æ¨¡ ððððpjej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼æä»¥è¿ä¸ªå¹æ¨¡ ððððpjej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½æ°ä¸å®æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å©ä½çæ å½¢åªæ ðð =2pj=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðð >2ej>2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼å¯¹äºè¿ä¸ªæ å½¢ï¼å¯ä»¥ç´æ¥è¯æ `
+此处的指数 𝜑(𝑚)/𝜑(𝑝𝑒𝑗𝑗) =𝜑(𝑚/𝑝𝑒𝑗𝑗)φ(m)/φ(pjej)=φ(m/pjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 要成为奇数，必然要求 𝑚/𝑝𝑒𝑗𝑗 =1,2m/pjej=1,2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因为欧拉函数 𝜑(𝑛)φ(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对于 𝑛 ≥3n≥3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是偶数．如果 𝑝𝑗pj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是奇素数，因为模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的原根不存在，必然有 𝑚/𝑝𝑒𝑗𝑗 ≠1,2m/pjej≠1,2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；如果 𝑝𝑒𝑗𝑗 =2,4pjej=2,4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因为模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的原根不存在，必然有 𝑚/𝑝𝑒𝑗𝑗m/pjej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 含有某个奇素因子，故而大于 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：这两种情形指数 𝜑(𝑚)/𝜑(𝑝𝑒𝑗𝑗)φ(m)/φ(pjej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是偶数．而上式中括号里的项已经证明是模 𝑝𝑒𝑗𝑗pjej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 余 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的，所以这个幂模 𝑝𝑒𝑗𝑗pjej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的余数一定是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．剩余的情形只有 𝑝𝑗 =2pj=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑒𝑗 >2ej>2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，对于这个情形，可以直接证明 `
 
-â1â¤ðð<2ðð,Â ððâ2ððâ¡1(mod2ðð).â1â¤rj<2ej,Â rjâ2rjâ¡1(mod2ej).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∏1≤𝑟𝑗<2𝑒𝑗, 𝑟𝑗⟂2𝑟𝑗≡1(mod2𝑒𝑗).∏1≤rj<2ej, rj⟂2rj≡1(mod2ej).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»¿ç §åæçè¯ææè·¯ï¼å¯ä»¥å°ææ 1 â¤ðð <2ðð1â¤rj<2ej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¥æ° ððrj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸¤ä¸¤é å¯¹èæ¶å»ï¼é£äºæ æ³é å¯¹çå¿ ç¶æ¯æ¹ç¨ ð¥2 â¡1(mod2ðð)x2â¡1(mod2ej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼è¯¥æ¹ç¨æå³ç 2ðð â£(ð¥ â1)(ð¥ +1)2ejâ£(xâ1)(x+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»¤ ð¥ =2ð¦ +1x=2y+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±å¿ ç¶æ 2ððâ2 â£ð¦(ð¦ +1)2ejâ2â£y(y+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦ +1y+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¿ ç¶ä¸å¥ä¸å¶ï¼æä»¥ ð¦ =ð¡2ððâ2y=t2ejâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ð¦ =ð¡2ððâ2 â1y=t2ejâ2â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ èï¼æ ð¥ =ð¡2ððâ1 Â±1x=t2ejâ1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ´æ°ï¼æ¨¡ 2ðð2ej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½æ°ä¸­ï¼åªæ Â±1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å 2ððâ1 Â±12ejâ1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ªï¼å æ­¤ï¼æ
+仿照前文的证明思路，可以将所有 1 ≤𝑟𝑗 <2𝑒𝑗1≤rj<2ej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的奇数 𝑟𝑗rj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 两两配对而消去，那些无法配对的必然是方程 𝑥2 ≡1(mod2𝑒𝑗)x2≡1(mod2ej)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解．该方程意味着 2𝑒𝑗 ∣(𝑥 −1)(𝑥 +1)2ej∣(x−1)(x+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．令 𝑥 =2𝑦 +1x=2y+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就必然有 2𝑒𝑗−2 ∣𝑦(𝑦 +1)2ej−2∣y(y+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦 +1y+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 必然一奇一偶，所以 𝑦 =𝑡2𝑒𝑗−2y=t2ej−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 𝑦 =𝑡2𝑒𝑗−2 −1y=t2ej−2−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．故而，有 𝑥 =𝑡2𝑒𝑗−1 ±1x=t2ej−1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是整数．模 2𝑒𝑗2ej![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的余数中，只有 ±1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 2𝑒𝑗−1 ±12ej−1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 四个．因此，有
 
-â1â¤ðð<2ðð,Â ððâ2ððâ¡(â1)(2ððâ1â1)(2ððâ1+1)â¡1(mod2ðð).â1â¤rj<2ej,Â rjâ2rjâ¡(â1)(2ejâ1â1)(2ejâ1+1)â¡1(mod2ej).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∏1≤𝑟𝑗<2𝑒𝑗, 𝑟𝑗⟂2𝑟𝑗≡(−1)(2𝑒𝑗−1−1)(2𝑒𝑗−1+1)≡1(mod2𝑒𝑗).∏1≤rj<2ej, rj⟂2rj≡(−1)(2ej−1−1)(2ej−1+1)≡1(mod2ej).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±å®æäºæææ å½¢çè¯æï¼
+这就完成了所有情形的证明．
 
-å¨è®¡ç®ä¸­ï¼å°¤ä¸ºéè¦çæ¯æ¨¡æ°ä¸ºç´ æ°å¹çæ å½¢ï¼
+在计算中，尤为重要的是模数为素数幂的情形：
 
-æ¨è®º
+推论
 
-å¯¹äºç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ­£æ´æ° ð¼Î±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ
+对于素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和正整数 𝛼α![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
 
-â1â¤ð<ðð¼,Â ðâððâ¡{1,ð=2Â andÂ ð¼â¥3,â1,otherwise(modðð¼).â1â¤k<pÎ±,Â kâpkâ¡{1,p=2Â andÂ Î±â¥3,â1,otherwise(modpÎ±).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∏1≤𝑘<𝑝𝛼, 𝑘⟂𝑝𝑘≡{1,𝑝=2 and 𝛼≥3,−1,otherwise(mod𝑝𝛼).∏1≤k<pα, k⟂pk≡{1,p=2 and α≥3,−1,otherwise(modpα).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ³¨æï¼å·¦ä¾§å¹¶é (ðð¼!)ð(pÎ±!)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸ºåè è¿éè¦ç»è®¡ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°çè´¡ç®ï¼
+注意，左侧并非 (𝑝𝛼!)𝑝(pα!)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因为后者还需要统计 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的倍数的贡献．
 
-## é¶ä¹ä½æ°çè®¡ç®
+## 阶乘余数的计算
 
-æ¬èè®¨è®ºä½æ° (ð!)ðmodðð¼(n!)pmodpÎ±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè®¡ç®ï¼
+本节讨论余数 (𝑛!)𝑝mod𝑝𝛼(n!)pmodpα![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的计算．
 
-### ç´ æ°æ¨¡çæ å½¢
+### 素数模的情形
 
-ç®å¼ (ð!)ð(n!)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æææ¾çéå½ç»æï¼ä¸ºæ³¨æå°è¿ä¸ç¹ï¼é¦å èå¯ä¸ä¸ªå ·ä½çä¾å­ï¼
+算式 (𝑛!)𝑝(n!)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有明显的递归结构．为注意到这一点，首先考察一个具体的例子：
 
-ä¾å­
+例子
 
-è¦è®¡ç® (32!)5mod5(32!)5mod5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥åå¦ä¸éå½è®¡ç®ï¼
+要计算 (32!)5mod5(32!)5mod5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以做如下递归计算：
 
-(32!)5=1Ã2Ã3Ã4Ã1â5Ã6Ã7Ã8Ã9Ã2â10Ã11Ã12Ã13Ã14Ã3â15Ã16Ã17Ã18Ã19Ã4â20Ã21Ã22Ã23Ã24Ã1â25Ã26Ã27Ã28Ã29Ã6â30Ã31Ã32â¡1Ã2Ã3Ã4Ã1â5Ã1Ã2Ã3Ã4Ã2â10Ã1Ã2Ã3Ã4Ã3â15Ã1Ã2Ã3Ã4Ã4â20Ã1Ã2Ã3Ã4Ã1â25Ã1Ã2Ã3Ã4Ã1â30Ã1Ã2=(1Ã2Ã3Ã4)6Ã(1Ã2)Ã(1â5Ã2â10Ã3â15Ã4â20Ã1â25Ã1â30)(mod5)(32!)5=1Ã2Ã3Ã4Ã1â5Ã6Ã7Ã8Ã9Ã2â10Ã11Ã12Ã13Ã14Ã3â15Ã16Ã17Ã18Ã19Ã4â20Ã21Ã22Ã23Ã24Ã1â25Ã26Ã27Ã28Ã29Ã6â30Ã31Ã32â¡1Ã2Ã3Ã4Ã1â5Ã1Ã2Ã3Ã4Ã2â10Ã1Ã2Ã3Ã4Ã3â15Ã1Ã2Ã3Ã4Ã4â20Ã1Ã2Ã3Ã4Ã1â25Ã1Ã2Ã3Ã4Ã1â30Ã1Ã2=(1Ã2Ã3Ã4)6Ã(1Ã2)Ã(1â5Ã2â10Ã3â15Ã4â20Ã1â25Ã1â30)(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(32!)5=1×2×3×4×1⏟5×6×7×8×9×2⏟10×11×12×13×14×3⏟15×16×17×18×19×4⏟20×21×22×23×24×1⏟25×26×27×28×29×6⏟30×31×32≡1×2×3×4×1⏟5×1×2×3×4×2⏟10×1×2×3×4×3⏟15×1×2×3×4×4⏟20×1×2×3×4×1⏟25×1×2×3×4×1⏟30×1×2=(1×2×3×4)6×(1×2)×(1⏟5×2⏟10×3⏟15×4⏟20×1⏟25×1⏟30)(mod5)(32!)5=1×2×3×4×1⏟5×6×7×8×9×2⏟10×11×12×13×14×3⏟15×16×17×18×19×4⏟20×21×22×23×24×1⏟25×26×27×28×29×6⏟30×31×32≡1×2×3×4×1⏟5×1×2×3×4×2⏟10×1×2×3×4×3⏟15×1×2×3×4×4⏟20×1×2×3×4×1⏟25×1×2×3×4×1⏟30×1×2=(1×2×3×4)6×(1×2)×(1⏟5×2⏟10×3⏟15×4⏟20×1⏟25×1⏟30)(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥çåºï¼å©ç¨æ¨¡ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½æ°çå¨ææ§ï¼å¯ä»¥å°è¿ä¸ä¹ç§¯ååä¸ºè¥å¹²ä¸ªé¿åº¦ä¸º 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåï¼æ¯ä¸åçå¯ä¸å·®å¼å°±æ¯æåä¸ä¸ªå ç´ çä½æ°ï¼å ä¸º 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¤ä»¥ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¾å°çåæ¯ 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä½æ°æ¯ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ï¼è¯¥ä¹ç§¯å¯ä»¥ååä¸º 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå®æ´çååæåä¸æ®µé¿åº¦ä¸º 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸å®æ´çåï¼å æ­¤ï¼å¯ä»¥å°å 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªåé¤äºæåä¸ä¸ªå ç´ ä¹å¤çé¨åæååºæ¥ï¼è¿ä¸é¨åæ°å¥½æ¯ Wilson å®çè½å¤è§£å³çï¼ï¼åä¹ä¸æåä¸ä¸ªä¸å®æ´çåçä¹ç§¯ï¼æåä¹ä¸å 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªåçæåä¸ä¸ªå ç´ çè¿ä¹ç§¯ï¼æ¯ä¸ªåçæåä¸ä¸ªå ç´ é½æ¯ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°ï¼å»æ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡åï¼å®ä»¬çè¿ä¹ç§¯æ°å¥½æ¯ (6!)5(mod5)(6!)5(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿å°±å°åæ¥çé®é¢è½¬åä¸ºäºè§æ¨¡æ´å°çé®é¢ï¼
+可以看出，利用模 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 余数的周期性，可以将这一乘积划分为若干个长度为 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的块，每一块的唯一差异就是最后一个元素的余数．因为 3232![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 除以 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 得到的商是 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且余数是 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以，该乘积可以划分为 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个完整的块和最后一段长度为 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的不完整的块．因此，可以将前 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个块除了最后一个元素之外的部分提取出来（这一部分恰好是 Wilson 定理能够解决的），再乘上最后一个不完整的块的乘积，最后乘上前 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个块的最后一个元素的连乘积．每个块的最后一个元素都是 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的倍数，去掉 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次后，它们的连乘积恰好是 (6!)5(mod5)(6!)5(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这就将原来的问题转化为了规模更小的问题．
 
-å°è¯¥ä¾å­ä¸­çéå½çç»æä¸è¬åï¼å°±å¾å°å¦ä¸éæ¨å ¬å¼ï¼
+将该例子中的递归的结构一般化，就得到如下递推公式：
 
-éæ¨å ¬å¼
+递推公式
 
-å¯¹äºç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ­£æ´æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ
+对于素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和正整数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
 
-(ð!)ðâ¡(â1)âð/ðââ (ðmodð)!â (âð/ðâ!)ð(modð).(n!)pâ¡(â1)ân/pââ (nmodp)!â (ân/pâ!)p(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)è¯æ
+(𝑛!)𝑝≡(−1)⌊𝑛/𝑝⌋⋅(𝑛mod𝑝)!⋅(⌊𝑛/𝑝⌋!)𝑝(mod𝑝).(n!)p≡(−1)⌊n/p⌋⋅(nmodp)!⋅(⌊n/p⌋!)p(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)证明
 
-è®° (ð)ð(n)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç´ å æ°åè§£ä¸­å»é¤ææ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡çç»æï¼äºæ¯ï¼æ
+记 (𝑛)𝑝(n)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的素因数分解中去除所有 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次的结果．于是，有
 
-(ð!)ð=ðâð=1(ð)ð=(â1â¤ðâ¤ð,Â ðâð(ð)ð)ââ âââ1â¤ðâ¤âð/ðâ(ðð)ðââ ââ =(âð/ðââ1âð=0ðâ1âð=1(ðð+ð))(ðmodðâð=1(âð/ðâð+ð))ââ âââ1â¤ðâ¤âð/ðâ(ð)ðââ ââ â¡(ðâ1âð=1ð)âð/ðâ(ðmodðâð=1ð)(âð/ðâ!)ðâ¡(â1)âð/ðââ (ðmodð)!â (âð/ðâ!)ð(modð).(n!)p=âk=1n(k)p=(â1â¤kâ¤n,Â kâp(k)p)(â1â¤kâ¤ân/pâ(pk)p)=(âi=0ân/pââ1âj=1pâ1(ip+j))(âj=1nmodp(ân/pâp+j))(â1â¤kâ¤ân/pâ(k)p)â¡(âj=1pâ1j)ân/pâ(âj=1nmodpj)(ân/pâ!)pâ¡(â1)ân/pââ (nmodp)!â (ân/pâ!)p(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛!)𝑝=𝑛∏𝑘=1(𝑘)𝑝=(∏1≤𝑘≤𝑛, 𝑘⟂𝑝(𝑘)𝑝)⎛⎜ ⎜⎝∏1≤𝑘≤⌊𝑛/𝑝⌋(𝑝𝑘)𝑝⎞⎟ ⎟⎠=(⌊𝑛/𝑝⌋−1∏𝑖=0𝑝−1∏𝑗=1(𝑖𝑝+𝑗))(𝑛mod𝑝∏𝑗=1(⌊𝑛/𝑝⌋𝑝+𝑗))⎛⎜ ⎜⎝∏1≤𝑘≤⌊𝑛/𝑝⌋(𝑘)𝑝⎞⎟ ⎟⎠≡(𝑝−1∏𝑗=1𝑗)⌊𝑛/𝑝⌋(𝑛mod𝑝∏𝑗=1𝑗)(⌊𝑛/𝑝⌋!)𝑝≡(−1)⌊𝑛/𝑝⌋⋅(𝑛mod𝑝)!⋅(⌊𝑛/𝑝⌋!)𝑝(mod𝑝).(n!)p=∏k=1n(k)p=(∏1≤k≤n, k⟂p(k)p)(∏1≤k≤⌊n/p⌋(pk)p)=(∏i=0⌊n/p⌋−1∏j=1p−1(ip+j))(∏j=1nmodp(⌊n/p⌋p+j))(∏1≤k≤⌊n/p⌋(k)p)≡(∏j=1p−1j)⌊n/p⌋(∏j=1nmodpj)(⌊n/p⌋!)p≡(−1)⌊n/p⌋⋅(nmodp)!⋅(⌊n/p⌋!)p(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±å®æäºè¯æï¼ä¸é¢å¯¹äºè¯¥å½¢å¼è¯ææä¾å ·ä½çè§£éï¼
+这就完成了证明．下面对于该形式证明提供具体的解释．
 
-è¦è®¡ç® (ð!)ðmodð(n!)pmodp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼ä»¿ç §ä¸é¢çä¾å­ï¼æ
+要计算 (𝑛!)𝑝mod𝑝(n!)pmodp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．仿照上面的例子，有
 
-(ð!)ð=1â 2â 3â â¦â (ðâ2)â (ðâ1)â 1âðâ (ð+1)â (ð+2)â â¦â (2ðâ1)â 2â2ðâ (2ð+1)â â¦â (ð2â1)â 1âð2â (ð2+1)â â¦â ð(modð)=1â 2â 3â â¦â (ðâ2)â (ðâ1)â 1âðâ 1â 2â â¦â (ðâ1)â 2â2ðâ 1â 2â â¦â (ðâ1)â 1âð2â 1â 2â â¦â (ðmodð)(modð).(n!)p=1â 2â 3â â¦â (pâ2)â (pâ1)â 1âpâ (p+1)â (p+2)â â¦â (2pâ1)â 2â2pâ (2p+1)â â¦â (p2â1)â 1âp2â (p2+1)â â¦â n(modp)=1â 2â 3â â¦â (pâ2)â (pâ1)â 1âpâ 1â 2â â¦â (pâ1)â 2â2pâ 1â 2â â¦â (pâ1)â 1âp2â 1â 2â â¦â (nmodp)(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛!)𝑝=1⋅2⋅3⋅…⋅(𝑝−2)⋅(𝑝−1)⋅1⏟𝑝⋅(𝑝+1)⋅(𝑝+2)⋅…⋅(2𝑝−1)⋅2⏟2𝑝⋅(2𝑝+1)⋅…⋅(𝑝2−1)⋅1⏟𝑝2⋅(𝑝2+1)⋅…⋅𝑛(mod𝑝)=1⋅2⋅3⋅…⋅(𝑝−2)⋅(𝑝−1)⋅1⏟𝑝⋅1⋅2⋅…⋅(𝑝−1)⋅2⏟2𝑝⋅1⋅2⋅…⋅(𝑝−1)⋅1⏟𝑝2⋅1⋅2⋅…⋅(𝑛mod𝑝)(mod𝑝).(n!)p=1⋅2⋅3⋅…⋅(p−2)⋅(p−1)⋅1⏟p⋅(p+1)⋅(p+2)⋅…⋅(2p−1)⋅2⏟2p⋅(2p+1)⋅…⋅(p2−1)⋅1⏟p2⋅(p2+1)⋅…⋅n(modp)=1⋅2⋅3⋅…⋅(p−2)⋅(p−1)⋅1⏟p⋅1⋅2⋅…⋅(p−1)⋅2⏟2p⋅1⋅2⋅…⋅(p−1)⋅1⏟p2⋅1⋅2⋅…⋅(nmodp)(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥æ¸ æ¥å°çå°ï¼é¤äºæåä¸ä¸ªåå¤ï¼é¶ä¹è¢«ååä¸ºå ä¸ªé¿åº¦ç¸åçå®æ´çåï¼
+可以清楚地看到，除了最后一个块外，阶乘被划分为几个长度相同的完整的块．
 
-(ð!)ð=1â 2â 3â â¦â (ðâ2)â (ðâ1)â 1â____â____â1stâ 1â 2â 3â â¦â (ðâ2)â (ðâ1)â 2â____â____â2ndâ â¦â 1â 2â 3â â¦â (ðâ2)â (ðâ1)â 1â____â____âðthâ â¦â 1â 2â â â¦â (ðmodð)â___â___âtail(modð).(n!)p=1â 2â 3â â¦â (pâ2)â (pâ1)â 1â1stâ 1â 2â 3â â¦â (pâ2)â (pâ1)â 2â2ndâ â¦â 1â 2â 3â â¦â (pâ2)â (pâ1)â 1âpthâ â¦â 1â 2â â â¦â (nmodp)âtail(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛!)𝑝=1⋅2⋅3⋅…⋅(𝑝−2)⋅(𝑝−1)⋅1⏟____⏟____⏟1st⋅1⋅2⋅3⋅…⋅(𝑝−2)⋅(𝑝−1)⋅2⏟____⏟____⏟2nd⋅…⋅1⋅2⋅3⋅…⋅(𝑝−2)⋅(𝑝−1)⋅1⏟____⏟____⏟𝑝th⋅…⋅1⋅2⋅⋅…⋅(𝑛mod𝑝)⏟___⏟___⏟tail(mod𝑝).(n!)p=1⋅2⋅3⋅…⋅(p−2)⋅(p−1)⋅1⏟1st⋅1⋅2⋅3⋅…⋅(p−2)⋅(p−1)⋅2⏟2nd⋅…⋅1⋅2⋅3⋅…⋅(p−2)⋅(p−1)⋅1⏟pth⋅…⋅1⋅2⋅⋅…⋅(nmodp)⏟tail(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é¤äºåçæåä¸ä¸ªå ç´ å¤ï¼å®æ´çåçä¸»è¦é¨å (ð â1)!Â modÂ ð(pâ1)!Â modÂ p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¾å®¹æè®¡ç®ï¼å¯ä»¥åºç¨ Wilson å®çï¼
+除了块的最后一个元素外，完整的块的主要部分 (𝑝 −1)! mod 𝑝(p−1)! mod p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 很容易计算，可以应用 Wilson 定理：
 
-(ðâ1)!â¡â1(modð).(pâ1)!â¡â1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑝−1)!≡−1(mod𝑝).(p−1)!≡−1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ»å ±æ âððâânpâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå®æ´çåï¼å æ­¤éè¦å° âððâânpâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå° â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çææ°ä¸ï¼
+总共有 ⌊𝑛𝑝⌋⌊np⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个完整的块，因此需要将 ⌊𝑛𝑝⌋⌊np⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 写到 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的指数上．
 
-æåä¸ä¸ªé¨ååçå¼å°±æ¯ (ðmodð)!modð(nmodp)!modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥åç¬è®¡ç®ï¼
+最后一个部分块的值就是 (𝑛mod𝑝)!mod𝑝(nmodp)!modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以单独计算．
 
-å©ä¸çå°±æ¯æ¯ä¸ªåçæåä¸ä¸ªå ç´ ï¼å¦æéèå·²å¤ççå ç´ ï¼å¯ä»¥çå°ä»¥ä¸æ¨¡å¼ï¼
+剩下的就是每个块的最后一个元素．如果隐藏已处理的元素，可以看到以下模式：
 
-(ð!)ð=â¦â 1ââ â¦â 2ââ â¦â â¦â (ðâ1)â__â__ââ â¦â 1ââ â¦â 1ââ â¦â 2ââ¯(n!)p=â¦â 1ââ â¦â 2ââ â¦â â¦â (pâ1)ââ â¦â 1ââ â¦â 1ââ â¦â 2ââ¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛!)𝑝=…⋅1⏟⋅…⋅2⏟⋅…⋅…⋅(𝑝−1)⏟__⏟__⏟⋅…⋅1⏟⋅…⋅1⏟⋅…⋅2⏟⋯(n!)p=…⋅1⏟⋅…⋅2⏟⋅…⋅…⋅(p−1)⏟⋅…⋅1⏟⋅…⋅1⏟⋅…⋅2⏟⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¹æ¯ä¸ä¸ªä¿®æ­£çé¶ä¹ï¼åªæ¯é¿åº¦ç­å¾å¤ï¼å®æ¯ï¼
+这也是一个修正的阶乘，只是长度短得多．它是：
 
-(âððâ!)ð.(ânpâ!)p.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(⌊𝑛𝑝⌋!)𝑝.(⌊np⌋!)p.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°åé¨åä¹èµ·æ¥ï¼å°±å¾å°ä¸é¢çéæ¨å ¬å¼ï¼
+将各部分乘起来，就得到上面的递推公式．
 
-å©ç¨è¯¥éæ¨å¼åè®¡ç®ï¼éå½æ·±åº¦ä¸º ð(logðâ¡ð)O(logpâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦ææ¯æ¬¡é½éæ°è®¡ç®ä¸­é´é£ä¸é¡¹ï¼é£ä¹æ¯å±è®¡ç®çå¤æåº¦é½æ¯ ð(ð)O(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼æ»çæ¶é´å¤æåº¦æ¯ ð(ðlogðâ¡ð)O(plogpâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æå¯¹ææ ð =1,2,â¯,ð â1n=1,2,â¯,pâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½é¢å å¤çäº ð!modðn!modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹é¢å¤ççå¤æåº¦æ¯ ð(ð)O(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼æ¯å±è®¡ç®çå¤æåº¦é½æ¯ ð(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼æ»çæ¶é´å¤æåº¦æ¯ ð(ð +logðâ¡ð)O(p+logpâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼
+利用该递推式做计算，递归深度为 𝑂(log𝑝⁡𝑛)O(logp⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如果每次都重新计算中间那一项，那么每层计算的复杂度都是 𝑂(𝑝)O(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的，总的时间复杂度是 𝑂(𝑝log𝑝⁡𝑛)O(plogp⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；如果对所有 𝑛 =1,2,⋯,𝑝 −1n=1,2,⋯,p−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都预先处理了 𝑛!mod𝑝n!modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么预处理的复杂度是 𝑂(𝑝)O(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的，每层计算的复杂度都是 𝑂(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的，总的时间复杂度是 𝑂(𝑝 +log𝑝⁡𝑛)O(p+logp⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
 
-å¨å®ç°æ¶ï¼å ä¸ºæ¯å°¾éå½ï¼å¯ä»¥ç¨è¿­ä»£å®ç°ï¼ä¸é¢çå®ç°å¯¹å ð â1pâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¶ä¹åäºé¢è®¡ç®ï¼å¦æéè¦å¤æ¬¡è°ç¨ï¼å¯ä»¥å°é¢è®¡ç®æ¾å°å½æ°å¤è¿è¡ï¼
+在实现时，因为是尾递归，可以用迭代实现．下面的实现对前 𝑝 −1p−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个阶乘做了预计算，如果需要多次调用，可以将预计算放到函数外进行．
 
-åèå®ç°
+参考实现
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 ``` |  ```text // Calculate (n!)_p mod p. int factmod ( int n , int p ) { // Pretreatment. std :: vector < int > f ( p ); f [ 0 ] = 1 ; for ( int i = 1 ; i < p ; ++ i ) { f [ i ] = ( long long ) f [ i \- 1 ] * i % p ; } // Recursion. int res = 1 ; while ( n > 1 ) { if (( n / p ) & 1 ) res = p \- res ; res = ( long long ) res * f [ n % p ] % p ; n /= p ; } return res ; } ```   
 ---|---  
   
-å¦æç©ºé´æéï¼æ æ³å­å¨ææé¶ä¹ï¼ä¹å¯ä»¥å°å½æ°è°ç¨ä¸­å®é ç¨å°çé¶ä¹ ð!modðn!modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½è®¡ç®åºæ¥ï¼ç¶åå¯¹å®ä»¬è¿è¡æåºï¼ä»èå¯ä»¥å¨æåä¸æ¬¡æ§è®¡ç®åºæ¥è¿äºé¶ä¹çå¼ï¼æ±æ»å°æç»ç»æä¸­ï¼èé¿å å­å¨ææé¶ä¹çå¼ï¼
+如果空间有限，无法存储所有阶乘，也可以将函数调用中实际用到的阶乘 𝑛!mod𝑝n!modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都计算出来，然后对它们进行排序，从而可以在最后一次性计算出来这些阶乘的值，汇总到最终结果中，而避免存储所有阶乘的值．
 
-### ç´ æ°å¹æ¨¡çæ å½¢
+### 素数幂模的情形
 
-å¯¹äºç´ æ°å¹æ¨¡çæ å½¢ï¼å¯ä»¥ä»¿ç §ç´ æ°æ¨¡çæ å½¢è§£å³ï¼åªéè¦å° Wilson å®çæ¿æ¢æå®çæ¨å¹¿å½¢å¼ï¼æ¬èä¸¤ä¸ªç»è®ºä¸­ç Â±1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç¹æè¿æ ·çå®ä¹ï¼å½æ¨¡æ° ð =2p=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð¼ â¥3Î±â¥3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶å 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä½æ å½¢å â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对于素数幂模的情形，可以仿照素数模的情形解决，只需要将 Wilson 定理替换成它的推广形式．本节两个结论中的 ±1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，均特指这样的定义：当模数 𝑝 =2p=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝛼 ≥3α≥3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时取 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其余情形取 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-éæ¨å ¬å¼
+递推公式
 
-å¯¹äºç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ­£æ´æ° ð¼,ðÎ±,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ
+对于素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和正整数 𝛼,𝑛α,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
 
-(ð!)ðâ¡(Â±1)âð/ðð¼ââ ââ âââ1â¤ðâ¤(ðmodðð¼),Â ðâððââ ââ â (âð/ðâ!)ð(modðð¼).(n!)pâ¡(Â±1)ân/pÎ±ââ (â1â¤jâ¤(nmodpÎ±),Â jâpj)â (ân/pâ!)p(modpÎ±).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛!)𝑝≡(±1)⌊𝑛/𝑝𝛼⌋⋅⎛⎜ ⎜⎝∏1≤𝑗≤(𝑛mod𝑝𝛼), 𝑗⟂𝑝𝑗⎞⎟ ⎟⎠⋅(⌊𝑛/𝑝⌋!)𝑝(mod𝑝𝛼).(n!)p≡(±1)⌊n/pα⌋⋅(∏1≤j≤(nmodpα), j⟂pj)⋅(⌊n/p⌋!)p(modpα).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼Â±1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå¼å¦å Wilson å®ççæ¨å¹¿ ä¸­è§å®çé£æ ·ï¼
+其中，±1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的取值如同 Wilson 定理的推广 中规定的那样．
 
-è¯æ
+证明
 
-è¯ææè·¯åç´ æ°æ¨¡çæ å½¢å®å ¨ä¸è´ï¼è®° (ð)ð(k)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå»é¤ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç´ å æ°åè§£ä¸­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ¨é¨å¹æ¬¡çç»æï¼å
+证明思路和素数模的情形完全一致．记 (𝑘)𝑝(k)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为去除 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的素因数分解中 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的全部幂次的结果，则
 
-(ð!)ð=â1â¤ðâ¤ð(ð)ð=(â1â¤ðâ¤ð,Â ðâð(ð)ð)ââ âââ1â¤ðâ¤âð/ðâ(ðð)ðââ ââ =(âð/ðð¼ââ1âð=0â1â¤ðâ¤ðð¼,Â ðâð(ððð¼+ð)ð)ââ âââ1â¤ðâ¤(ðmodðð¼),Â ðâð(âð/ðð¼âðð¼+ð)ðââ ââ ââ âââ1â¤ðâ¤âð/ðâ(ð)ðââ ââ â¡(â1â¤ðâ¤ðð¼,Â ðâðð)âð/ðð¼ââ ââ âââ1â¤ðâ¤(ðmodðð¼),Â ðâððââ ââ â (âð/ðâ!)ðâ¡(Â±1)âð/ðð¼ââ ââ âââ1â¤ðâ¤(ðmodðð¼),Â ðâððââ ââ â (âð/ðâ!)ð(modðð¼).(n!)p=â1â¤kâ¤n(k)p=(â1â¤kâ¤n,Â kâp(k)p)(â1â¤kâ¤ân/pâ(pk)p)=(âi=0ân/pÎ±ââ1â1â¤jâ¤pÎ±,Â jâp(ipÎ±+j)p)(â1â¤jâ¤(nmodpÎ±),Â jâp(ân/pÎ±âpÎ±+j)p)(â1â¤kâ¤ân/pâ(k)p)â¡(â1â¤jâ¤pÎ±,Â jâpj)ân/pÎ±ââ (â1â¤jâ¤(nmodpÎ±),Â jâpj)â (ân/pâ!)pâ¡(Â±1)ân/pÎ±ââ (â1â¤jâ¤(nmodpÎ±),Â jâpj)â (ân/pâ!)p(modpÎ±).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛!)𝑝=∏1≤𝑘≤𝑛(𝑘)𝑝=(∏1≤𝑘≤𝑛, 𝑘⟂𝑝(𝑘)𝑝)⎛⎜ ⎜⎝∏1≤𝑘≤⌊𝑛/𝑝⌋(𝑝𝑘)𝑝⎞⎟ ⎟⎠=(⌊𝑛/𝑝𝛼⌋−1∏𝑖=0∏1≤𝑗≤𝑝𝛼, 𝑗⟂𝑝(𝑖𝑝𝛼+𝑗)𝑝)⎛⎜ ⎜⎝∏1≤𝑗≤(𝑛mod𝑝𝛼), 𝑗⟂𝑝(⌊𝑛/𝑝𝛼⌋𝑝𝛼+𝑗)𝑝⎞⎟ ⎟⎠⎛⎜ ⎜⎝∏1≤𝑘≤⌊𝑛/𝑝⌋(𝑘)𝑝⎞⎟ ⎟⎠≡(∏1≤𝑗≤𝑝𝛼, 𝑗⟂𝑝𝑗)⌊𝑛/𝑝𝛼⌋⋅⎛⎜ ⎜⎝∏1≤𝑗≤(𝑛mod𝑝𝛼), 𝑗⟂𝑝𝑗⎞⎟ ⎟⎠⋅(⌊𝑛/𝑝⌋!)𝑝≡(±1)⌊𝑛/𝑝𝛼⌋⋅⎛⎜ ⎜⎝∏1≤𝑗≤(𝑛mod𝑝𝛼), 𝑗⟂𝑝𝑗⎞⎟ ⎟⎠⋅(⌊𝑛/𝑝⌋!)𝑝(mod𝑝𝛼).(n!)p=∏1≤k≤n(k)p=(∏1≤k≤n, k⟂p(k)p)(∏1≤k≤⌊n/p⌋(pk)p)=(∏i=0⌊n/pα⌋−1∏1≤j≤pα, j⟂p(ipα+j)p)(∏1≤j≤(nmodpα), j⟂p(⌊n/pα⌋pα+j)p)(∏1≤k≤⌊n/p⌋(k)p)≡(∏1≤j≤pα, j⟂pj)⌊n/pα⌋⋅(∏1≤j≤(nmodpα), j⟂pj)⋅(⌊n/p⌋!)p≡(±1)⌊n/pα⌋⋅(∏1≤j≤(nmodpα), j⟂pj)⋅(⌊n/p⌋!)p(modpα).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸ç´ æ°æ¨¡çæ å½¢ä¸åä¹å¤ï¼é¤äº â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯è½éè¦æ¿æ¢ä¸º Â±1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹å¤ï¼è¿éè¦æ³¨æé¢å¤ççæ°æ®çä¸åï¼å¯¹äºç´ æ°å¹æ¨¡çæ å½¢ï¼éè¦å¯¹ææä¸è¶ è¿ ðð¼pÎ±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ­£æ´æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¢å¤çèª 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è³ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½å¹¶é ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°çæææ´æ°çä¹ç§¯ï¼å³
+与素数模的情形不同之处，除了 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可能需要替换为 ±1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之外，还需要注意预处理的数据的不同．对于素数幂模的情形，需要对所有不超过 𝑝𝛼pα![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的正整数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 预处理自 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 至 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 但并非 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的倍数的所有整数的乘积，即
 
-â1â¤ðâ¤ð,Â ðâððmodðð¼.â1â¤kâ¤n,Â kâpkmodpÎ±.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∏1≤𝑘≤𝑛, 𝑘⟂𝑝𝑘mod𝑝𝛼.∏1≤k≤n, k⟂pkmodpα.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¨ç´ æ°æ¨¡çæ å½¢ï¼å®éåä¸º ð!modðn!modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½æ¯è¯¥è¡¨è¾¾å¼å¨ä¸è¬çç´ æ°å¹çæ å½¢ä¸åéç¨ï¼
+在素数模的情形，它退化为 𝑛!mod𝑝n!modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，但是该表达式在一般的素数幂的情形不再适用．
 
-ä¸é¢æä¾äºå¨ç´ æ°å¹æ¨¡çæ å½¢ä¸è®¡ç®é¶ä¹ä½æ°çä¾å­ï¼ä»¥ä¾¿çè§£ä¸è¿°æ¹æ³ï¼
+下面提供了在素数幂模的情形下计算阶乘余数的例子，以便理解上述方法：
 
-ä¾å­
+例子
 
-è¦è®¡ç® (32!)3mod9(32!)3mod9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥åå¦ä¸éå½è®¡ç®ï¼
+要计算 (32!)3mod9(32!)3mod9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以做如下递归计算：
 
-(32!)3=1Ã2Ã1â3Ã4Ã5Ã2â6Ã7Ã8Ã1â9Ã10Ã11Ã4â12Ã13Ã14Ã5â15Ã16Ã17Ã2â18Ã19Ã20Ã7â21Ã22Ã23Ã8â24Ã25Ã26Ã1â27Ã28Ã29Ã10â30Ã31Ã32â¡1Ã2Ã1â3Ã4Ã5Ã2â6Ã7Ã8Ã1â9Ã1Ã2Ã4â12Ã4Ã5Ã5â15Ã7Ã8Ã2â18Ã1Ã2Ã7â21Ã4Ã5Ã8â24Ã7Ã8Ã1â27Ã1Ã2Ã1â30Ã4Ã5=(1Ã2Ã4Ã5Ã7Ã8)3Ã(1Ã2Ã4Ã5)Ãââ â â ââ1â3Ã2â6Ã1â9Ã4â12Ã5â15Ã2â18Ã7â21Ã8â24Ã1â27Ã1â30ââ â â ââ (mod9).(32!)3=1Ã2Ã1â3Ã4Ã5Ã2â6Ã7Ã8Ã1â9Ã10Ã11Ã4â12Ã13Ã14Ã5â15Ã16Ã17Ã2â18Ã19Ã20Ã7â21Ã22Ã23Ã8â24Ã25Ã26Ã1â27Ã28Ã29Ã10â30Ã31Ã32â¡1Ã2Ã1â3Ã4Ã5Ã2â6Ã7Ã8Ã1â9Ã1Ã2Ã4â12Ã4Ã5Ã5â15Ã7Ã8Ã2â18Ã1Ã2Ã7â21Ã4Ã5Ã8â24Ã7Ã8Ã1â27Ã1Ã2Ã1â30Ã4Ã5=(1Ã2Ã4Ã5Ã7Ã8)3Ã(1Ã2Ã4Ã5)Ã(1â3Ã2â6Ã1â9Ã4â12Ã5â15Ã2â18Ã7â21Ã8â24Ã1â27Ã1â30)(mod9).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(32!)3=1×2×1⏟3×4×5×2⏟6×7×8×1⏟9×10×11×4⏟12×13×14×5⏟15×16×17×2⏟18×19×20×7⏟21×22×23×8⏟24×25×26×1⏟27×28×29×10⏟30×31×32≡1×2×1⏟3×4×5×2⏟6×7×8×1⏟9×1×2×4⏟12×4×5×5⏟15×7×8×2⏟18×1×2×7⏟21×4×5×8⏟24×7×8×1⏟27×1×2×1⏟30×4×5=(1×2×4×5×7×8)3×(1×2×4×5)×⎛⎜ ⎜ ⎜ ⎜⎝1⏟3×2⏟6×1⏟9×4⏟12×5⏟15×2⏟18×7⏟21×8⏟24×1⏟27×1⏟30⎞⎟ ⎟ ⎟ ⎟⎠(mod9).(32!)3=1×2×1⏟3×4×5×2⏟6×7×8×1⏟9×10×11×4⏟12×13×14×5⏟15×16×17×2⏟18×19×20×7⏟21×22×23×8⏟24×25×26×1⏟27×28×29×10⏟30×31×32≡1×2×1⏟3×4×5×2⏟6×7×8×1⏟9×1×2×4⏟12×4×5×5⏟15×7×8×2⏟18×1×2×7⏟21×4×5×8⏟24×7×8×1⏟27×1×2×1⏟30×4×5=(1×2×4×5×7×8)3×(1×2×4×5)×(1⏟3×2⏟6×1⏟9×4⏟12×5⏟15×2⏟18×7⏟21×8⏟24×1⏟27×1⏟30)(mod9).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å° (32!)3mod9(32!)3mod9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç®å¼åè§£çç»æåæ ·å¯ä»¥åä¸ºä¸é¨åï¼
+将 (32!)3mod9(32!)3mod9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的算式分解的结果同样可以分为三部分：
 
-  * å®æ´çåï¼ç± 1 â¼91â¼9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ææä¸è¢« 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´é¤çæ´æ°çä¹ç§¯ï¼å ± â32/9â =3â32/9â=3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åï¼
-  * å°¾é¨ä¸å®æ´çåï¼ææä¸è¢« 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´é¤çæ´æ°ä» 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ç´ä¹å° 32mod932mod9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * ææè¢« 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´é¤çæ´æ°çä¹ç§¯ï¼å¯¹æ¯åæ°ç¬¬äºä¸ªç­å·çç»æå¯ç¥ï¼è¿å°±æ¯å®çå â32/3â =10â32/3â=10![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ï¼äº¦å³ (â32/3â!)3mod9(â32/3â!)3mod9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 完整的块：由 1 ∼91∼9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间所有不被 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 整除的整数的乘积，共 ⌊32/9⌋ =3⌊32/9⌋=3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 块；
+  * 尾部不完整的块：所有不被 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 整除的整数从 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一直乘到 32mod932mod9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 所有被 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 整除的整数的乘积，对比倒数第二个等号的结果可知，这就是它的前 ⌊32/3⌋ =10⌊32/3⌋=10![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项，亦即 (⌊32/3⌋!)3mod9(⌊32/3⌋!)3mod9![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æåä¸ä¸ªæ¬å·éçéå½æ±è§£å³å¯ï¼è¿æ ·å°±å°åé®é¢è½¬åä¸ºäºæ´å°çé®é¢ï¼
+最后一个括号里的递归求解即可，这样就将原问题转化为了更小的问题．
 
-ç±æ­¤ï¼å°±å¯ä»¥å¾å°å¦ä¸éæ¨ç»æï¼
+由此，就可以得到如下递推结果：
 
-éæ¨ç»æ
+递推结果
 
-å¯¹äºç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ­£æ´æ° ð¼,ðÎ±,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ
+对于素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和正整数 𝛼,𝑛α,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
 
-(ð!)ðâ¡(Â±1)âðâ¥ð¼âð/ððââðâ¥0ð¹(âð/ððâmodðð¼),(n!)pâ¡(Â±1)âjâ¥Î±ân/pjââjâ¥0F(ân/pjâmodpÎ±),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛!)𝑝≡(±1)∑𝑗≥𝛼⌊𝑛/𝑝𝑗⌋∏𝑗≥0𝐹(⌊𝑛/𝑝𝑗⌋mod𝑝𝛼),(n!)p≡(±1)∑j≥α⌊n/pj⌋∏j≥0F(⌊n/pj⌋modpα),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ð¹(ð) =â1â¤ðâ¤ð,Â ðâððmodðð¼F(m)=â1â¤kâ¤m,Â kâpkmodpÎ±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ Â±1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå¼ä¸ä¸ææè¿°ç¸åï¼
+其中，𝐹(𝑚) =∏1≤𝑘≤𝑚, 𝑘⟂𝑝𝑘mod𝑝𝛼F(m)=∏1≤k≤m, k⟂pkmodpα![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 ±1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的取值与上文所述相同．
 
-ç´ æ°å¹æ¨¡çæ å½¢çå®ç°åç´ æ°æ¨¡çæ å½¢ç±»ä¼¼ï¼åªæä¸äºç»èä¸çåºå«ï¼ä¸ä¸æç±»ä¼¼ï¼åæ ·å¯ä»¥å°é¢å¤çæ¾å°å½æ°å¤è¿è¡ï¼
+素数幂模的情形的实现和素数模的情形类似，只有一些细节上的区别．与上文类似，同样可以将预处理放到函数外进行．
 
-åèå®ç°
+参考实现
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 ``` |  ```text // Calculate (n!)_p mod pa. int factmod ( int n , int p , int pa ) { // Pretreatment. std :: vector < int > f ( pa ); f [ 0 ] = 1 ; for ( int i = 1 ; i < pa ; ++ i ) { f [ i ] = i % p ? ( long long ) f [ i \- 1 ] * i % pa : f [ i \- 1 ]; } // Recursion. bool neg = p != 2 || pa <= 4 ; int res = 1 ; while ( n > 1 ) { if (( n / pa ) & neg ) res = pa \- res ; res = ( long long ) res * f [ n % pa ] % pa ; n /= p ; } return res ; } ```   
 ---|---  
   
-é¢å¤ççæ¶é´å¤æåº¦ä¸º ð(ðð¼)O(pÎ±)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ¬¡è¯¢é®çæ¶é´å¤æåº¦ä¸º ð(logðâ¡ð)O(logpâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+预处理的时间复杂度为 𝑂(𝑝𝛼)O(pα)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，单次询问的时间复杂度为 𝑂(log𝑝⁡𝑛)O(logp⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## å¹æ¬¡çè®¡ç®
+## 幂次的计算
 
-æ¬èè®¨è®ºé¶ä¹ ð!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡ ðð(ð!)Î½p(n!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè®¡ç®ï¼å®å¯ä»¥ç¨äºè®¡ç®äºé¡¹å¼ç³»æ°çä½æ°ï¼å ä¸ºäºé¡¹å¼ç³»æ°ä¸­ï¼åå­ååæ¯é½ä¼åºç°é¶ä¹ï¼èåå­ååæ¯ä¸­ç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½å¦äºç¸æµæ¶ï¼å°±æä¸ºäºå³å®æåçä½æ°çéè¦å ç´ ï¼
+本节讨论阶乘 𝑛!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次 𝜈𝑝(𝑛!)νp(n!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的计算，它可以用于计算二项式系数的余数．因为二项式系数中，分子和分母都会出现阶乘，而分子和分母中素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 能否互相抵消，就成为了决定最后的余数的重要因素．
 
-### Legendre å ¬å¼
+### Legendre 公式
 
-é¶ä¹ ð!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡å¯ä»¥éè¿ Legendre å ¬å¼è®¡ç®ï¼èä¸ä¸ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿å¶ä¸çè¡¨ç¤ºæå ³ï¼
+阶乘 𝑛!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次可以通过 Legendre 公式计算，而且与 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进制下的表示有关．
 
-Legendre å ¬å¼
+Legendre 公式
 
-å¯¹äºæ­£æ´æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¶ä¹ ð!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­å«æçç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡ ðð(ð!)Î½p(n!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º
+对于正整数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，阶乘 𝑛!n!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中含有的素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次 𝜈𝑝(𝑛!)νp(n!)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为
 
-ðð(ð!)=ââð=1âðððâ=ðâðð(ð)ðâ1,Î½p(n!)=âi=1âânpiâ=nâSp(n)pâ1,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝(𝑛!)=∞∑𝑖=1⌊𝑛𝑝𝑖⌋=𝑛−𝑆𝑝(𝑛)𝑝−1,νp(n!)=∑i=1∞⌊npi⌋=n−Sp(n)p−1,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ðð(ð)Sp(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿å¶ä¸ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåä¸ªæ°ä½çåï¼ç¹å«å°ï¼é¶ä¹ä¸­ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡æ¯ ð2(ð!) =ð âð2(ð)Î½2(n!)=nâS2(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+其中，𝑆𝑝(𝑛)Sp(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进制下 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的各个数位的和．特别地，阶乘中 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次是 𝜈2(𝑛!) =𝑛 −𝑆2(𝑛)ν2(n!)=n−S2(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-å ä¸º
+因为
 
-ð!=1Ã2Ãâ¯ÃðÃâ¯Ã2ðÃâ¯Ãâð/ðâðÃâ¯Ãð.n!=1Ã2Ãâ¯ÃpÃâ¯Ã2pÃâ¯Ãân/pâpÃâ¯Ãn.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛!=1×2×⋯×𝑝×⋯×2𝑝×⋯×⌊𝑛/𝑝⌋𝑝×⋯×𝑛.n!=1×2×⋯×p×⋯×2p×⋯×⌊n/p⌋p×⋯×n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°çä¹ç§¯ä¸º ð Ã2ð Ãâ¯ Ãâð/ðâð =ðâð/ðââð/ðâ!pÃ2pÃâ¯Ãân/pâp=pân/pâân/pâ!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è âð/ðâ!ân/pâ!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯è½ç»§ç»­åºç° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°ï¼æä»¥ï¼å¯¹äºå¹æ¬¡ï¼æéæ¨å ³ç³»ï¼
+其中，𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的倍数的乘积为 𝑝 ×2𝑝 ×⋯ ×⌊𝑛/𝑝⌋𝑝 =𝑝⌊𝑛/𝑝⌋⌊𝑛/𝑝⌋!p×2p×⋯×⌊n/p⌋p=p⌊n/p⌋⌊n/p⌋!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而 ⌊𝑛/𝑝⌋!⌊n/p⌋!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可能继续出现 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的倍数．所以，对于幂次，有递推关系：
 
-ðð(ð!)=âð/ðâ+ðð(âð/ðâ!).Î½p(n!)=ân/pâ+Î½p(ân/pâ!).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝(𝑛!)=⌊𝑛/𝑝⌋+𝜈𝑝(⌊𝑛/𝑝⌋!).νp(n!)=⌊n/p⌋+νp(⌊n/p⌋!).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°å®å±å¼å°±å¾å° Legendre å ¬å¼ï¼
+将它展开就得到 Legendre 公式．
 
-è¦è¯æç¬¬äºä¸ªç­å·ï¼é¦å å° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å±å¼ä¸º ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿å¶ï¼è¿ç¸å½äºå°å®åä½å¦ä¸åå¼ï¼
+要证明第二个等号，首先将 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 展开为 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进制，这相当于将它写作如下和式：
 
-ð=ðâðâ+â¯+ð1ð+ð0=ââð=0ðððð.n=nâpâ+â¯+n1p+n0=âk=0ânkpk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛=𝑛ℓ𝑝ℓ+⋯+𝑛1𝑝+𝑛0=ℓ∑𝑘=0𝑛𝑘𝑝𝑘.n=nℓpℓ+⋯+n1p+n0=∑k=0ℓnkpk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼æ
+因此，有
 
-ðð(ð!)=ââð=1âðððâ=ââð=1ââð=ðððððâð=ââð=1ðððâð=1ððâð=ââð=1ððððâ1ðâ1=ââð=0ððððâââð=0ðððâ1=ðâðð(ð)ðâ1.Î½p(n!)=âi=1âânpiâ=âi=1ââk=iânkpkâi=âk=1ânkâi=1kpkâi=âk=1ânkpkâ1pâ1=âk=0ânkpkââk=0ânkpâ1=nâSp(n)pâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝(𝑛!)=ℓ∑𝑖=1⌊𝑛𝑝𝑖⌋=ℓ∑𝑖=1ℓ∑𝑘=𝑖𝑛𝑘𝑝𝑘−𝑖=ℓ∑𝑘=1𝑛𝑘𝑘∑𝑖=1𝑝𝑘−𝑖=ℓ∑𝑘=1𝑛𝑘𝑝𝑘−1𝑝−1=∑ℓ𝑘=0𝑛𝑘𝑝𝑘−∑ℓ𝑘=0𝑛𝑘𝑝−1=𝑛−𝑆𝑝(𝑛)𝑝−1.νp(n!)=∑i=1ℓ⌊npi⌋=∑i=1ℓ∑k=iℓnkpk−i=∑k=1ℓnk∑i=1kpk−i=∑k=1ℓnkpk−1p−1=∑k=0ℓnkpk−∑k=0ℓnkp−1=n−Sp(n)p−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ±é¶ä¹ä¸­ç´ æ°å¹æ¬¡çåèå®ç°å¦ä¸ï¼
+求阶乘中素数幂次的参考实现如下：
 
-åèå®ç°
+参考实现
 
 ```text 1 2 3 4 5 6 7 8 9 ``` |  ```text // Obtain multiplicity of p in n!. int multiplicity_factorial ( int n , int p ) { int count = 0 ; do { n /= p ; count += n ; } while ( n ); return count ; } ```   
 ---|---  
   
-å®çæ¶é´å¤æåº¦ä¸º ð(logâ¡ð)O(logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+它的时间复杂度为 𝑂(log⁡𝑛)O(log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### Kummer å®ç
+### Kummer 定理
 
-ç»åæ°å¯¹ä¸ä¸ªæ°åæ¨¡çç»æï¼å¾å¾ææåå½¢ç»æï¼ä¾å¦è°¢å°å®¾æ¯åºä¸è§å½¢å°±å¯ä»¥éè¿ç»åæ°æ¨¡ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¾å°ï¼
+组合数对一个数取模的结果，往往构成分形结构，例如谢尔宾斯基三角形就可以通过组合数模 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 得到．
 
-å¦æä»ç»åæï¼ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¦æ´é¤ç»åæ°å ¶å®åä¸ä¸æ å¨ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿å¶ä¸åæ³æ¯å¦éè¦åä½æå ³ï¼è¿å°±æäº **Kummer å®ç** ï¼
+如果仔细分析，𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是否整除组合数其实和上下标在 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进制下减法是否需要借位有关．这就有了 **Kummer 定理** ．
 
-Kummer å®ç
+Kummer 定理
 
-ç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ç»åæ° (ðð)(mn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå¹æ¬¡ï¼æ°å¥½æ¯ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿å¶ä¸ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éè¦åä½çæ¬¡æ°ï¼äº¦å³
+素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在组合数 (𝑚𝑛)(mn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的幂次，恰好是 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进制下 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 减掉 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 需要借位的次数，亦即
 
-ðð((ðð))=ðð(ð)+ðð(ðâð)âðð(ð)ðâ1.Î½p((mn))=Sp(n)+Sp(mân)âSp(m)pâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝((𝑚𝑛))=𝑆𝑝(𝑛)+𝑆𝑝(𝑚−𝑛)−𝑆𝑝(𝑚)𝑝−1.νp((mn))=Sp(n)+Sp(m−n)−Sp(m)p−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç¹å«å°ï¼ç»åæ°ä¸­ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡æ¯ ð2((ðð)) =ð2(ð) +ð2(ð âð) âð2(ð)Î½2((mn))=S2(n)+S2(mân)âS2(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7).
+特别地，组合数中 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次是 𝜈2((𝑚𝑛)) =𝑆2(𝑛) +𝑆2(𝑚 −𝑛) −𝑆2(𝑚)ν2((mn))=S2(n)+S2(m−n)−S2(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7).
 
-è¯æ
+证明
 
-é¦å è¯æä¸é¢çè¡¨è¾¾å¼ï¼ä¸ºæ­¤ï¼å©ç¨ Legendre å ¬å¼ï¼æ
+首先证明下面的表达式．为此，利用 Legendre 公式，有
 
-ðð((ðð))=ðð(ð!)âðð(ð!)âðð((ðâð)!)=ââð=1(âðððâââðððâââðâðððâ)=ðð(ð)+ðð(ðâð)âðð(ð)ðâ1.Î½p((mn))=Î½p(m!)âÎ½p(n!)âÎ½p((mân)!)=âi=1â(âmpiââânpiâââmânpiâ)=Sp(n)+Sp(mân)âSp(m)pâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝((𝑚𝑛))=𝜈𝑝(𝑚!)−𝜈𝑝(𝑛!)−𝜈𝑝((𝑚−𝑛)!)=∞∑𝑖=1(⌊𝑚𝑝𝑖⌋−⌊𝑛𝑝𝑖⌋−⌊𝑚−𝑛𝑝𝑖⌋)=𝑆𝑝(𝑛)+𝑆𝑝(𝑚−𝑛)−𝑆𝑝(𝑚)𝑝−1.νp((mn))=νp(m!)−νp(n!)−νp((m−n)!)=∑i=1∞(⌊mpi⌋−⌊npi⌋−⌊m−npi⌋)=Sp(n)+Sp(m−n)−Sp(m)p−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯¥è¡¨è¾¾å¼å¯ä»¥çè§£ä¸º ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿å¶ä¸ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éè¦åä½çæ¬¡æ°ï¼å ä¸ºå¦æå¨è®¡ç®ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ï¼æä½ä½ä¸æ æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¶å­å¨ä¸å¤åéè¦åä½çæ åµï¼é£ä¹ç¸åçç»æä¸­ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ä¹åçæ°å­ âðâðððââmânpiâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶å®æ¯ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ä¹åçæ°å­ âðððââmpiâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå»ä¸ï¼å³åæçä¸ï¼ï¼ååå» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ä¹åçæ°å­å¾å°çå·®å¼ âðððâânpiâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ï¼å·®å¼
+该表达式可以理解为 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进制下 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 减掉 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 需要借位的次数．因为如果在计算第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位（最低位下标是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）时存在不够减需要借位的情况，那么相减的结果中第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位之前的数字 ⌊𝑚−𝑛𝑝𝑖⌋⌊m−npi⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其实是 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位之前的数字 ⌊𝑚𝑝𝑖⌋⌊mpi⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，减去一（即借掉的一），再减去 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位之前的数字得到的差值 ⌊𝑛𝑝𝑖⌋⌊npi⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以，差值
 
-âðððâââðððâââðâðððâ=1âmpiââânpiâââmânpiâ=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⌊𝑚𝑝𝑖⌋−⌊𝑛𝑝𝑖⌋−⌊𝑚−𝑛𝑝𝑖⌋=1⌊mpi⌋−⌊npi⌋−⌊m−npi⌋=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å½ä¸ä» å½åçäºä¸æ¬¡åä½ï¼å¦åï¼è¯¥å·®å¼ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼ä¸è¿°è¡¨è¾¾å¼ä¸­çæ±åå¼å°±å¯ä»¥çè§£ä¸ºåä½åççæ¬¡æ°ï¼è¿å°±å¾å°äº Kummer å®ççæå­è¡¨è¿°ï¼
+当且仅当发生了一次借位；否则，该差值为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，上述表达式中的求和式就可以理解为借位发生的次数．这就得到了 Kummer 定理的文字表述．
 
-## ä¾é¢
+## 例题
 
-ä¾é¢ [HDU 2973 - YAPTCHA](https://acm.hdu.edu.cn/showproblem.php?pid=2973)
+例题 [HDU 2973 - YAPTCHA](https://acm.hdu.edu.cn/showproblem.php?pid=2973)
 
-ç»å® ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), è®¡ç®
+给定 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 计算
 
-ðâð=1â(3ð+6)!+13ð+7ââ(3ð+6)!3ð+7âââk=1nâ(3k+6)!+13k+7ââ(3k+6)!3k+7ââ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)è§£é¢æè·¯
+𝑛∑𝑘=1⌊(3𝑘+6)!+13𝑘+7−⌊(3𝑘+6)!3𝑘+7⌋⌋∑k=1n⌊(3k+6)!+13k+7−⌊(3k+6)!3k+7⌋⌋![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)解题思路
 
-è¥ 3ð +73k+7![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯è´¨æ°ï¼å
+若 3𝑘 +73k+7![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是质数，则
 
-(3ð+6)!â¡â1(mod3ð+7)(3k+6)!â¡â1(mod3k+7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(3𝑘+6)!≡−1(mod3𝑘+7)(3k+6)!≡−1(mod3k+7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¾ (3ð +6)! +1 =ð(3ð +7)(3k+6)!+1=k(3k+7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+设 (3𝑘 +6)! +1 =𝑘(3𝑘 +7)(3k+6)!+1=k(3k+7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å
+则
 
-â(3ð+6)!+13ð+7ââ(3ð+6)!3ð+7ââ=âðââðâ13ð+7ââ=1â(3k+6)!+13k+7ââ(3k+6)!3k+7ââ=âkââkâ13k+7ââ=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⌊(3𝑘+6)!+13𝑘+7−⌊(3𝑘+6)!3𝑘+7⌋⌋=⌊𝑘−⌊𝑘−13𝑘+7⌋⌋=1⌊(3k+6)!+13k+7−⌊(3k+6)!3k+7⌋⌋=⌊k−⌊k−13k+7⌋⌋=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¥ 3ð +73k+7![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯è´¨æ°ï¼åæ (3ð +7) â£(3ð +6)!(3k+7)â£(3k+6)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³
+若 3𝑘 +73k+7![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是质数，则有 (3𝑘 +7) ∣(3𝑘 +6)!(3k+7)∣(3k+6)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即
 
-(3ð+6)!â¡0(mod3ð+7)(3k+6)!â¡0(mod3k+7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(3𝑘+6)!≡0(mod3𝑘+7)(3k+6)!≡0(mod3k+7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¾ (3ð +6)! =ð(3ð +7)(3k+6)!=k(3k+7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å
+设 (3𝑘 +6)! =𝑘(3𝑘 +7)(3k+6)!=k(3k+7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则
 
-â(3ð+6)!+13ð+7ââ(3ð+6)!3ð+7ââ=âð+13ð+7âðâ=0â(3k+6)!+13k+7ââ(3k+6)!3k+7ââ=âk+13k+7âkâ=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⌊(3𝑘+6)!+13𝑘+7−⌊(3𝑘+6)!3𝑘+7⌋⌋=⌊𝑘+13𝑘+7−𝑘⌋=0⌊(3k+6)!+13k+7−⌊(3k+6)!3k+7⌋⌋=⌊k+13k+7−k⌋=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤
+因此
 
-ðâð=1â(3ð+6)!+13ð+7ââ(3ð+6)!3ð+7ââ=ðâð=1[3ð+7Â is prime]âk=1nâ(3k+6)!+13k+7ââ(3k+6)!3k+7ââ=âk=1n[3k+7Â is prime]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)åèä»£ç 
+𝑛∑𝑘=1⌊(3𝑘+6)!+13𝑘+7−⌊(3𝑘+6)!3𝑘+7⌋⌋=𝑛∑𝑘=1[3𝑘+7 is prime]∑k=1n⌊(3k+6)!+13k+7−⌊(3k+6)!3k+7⌋⌋=∑k=1n[3k+7 is prime]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)参考代码
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 ``` |  ```text #include <iostream> constexpr int M = 1e6 \+ 5 , N = 3 * M \+ 7 ; bool not_prime [ N ]; int sum [ M ]; int main () { for ( int i = 2 ; i < N ; ++ i ) if ( ! not_prime [ i ]) for ( int j = 2 ; j * i < N ; ++ j ) not_prime [ j * i ] = true ; for ( int i = 1 ; i < M ; ++ i ) sum [ i ] = sum [ i \- 1 ] \+ ! not_prime [ 3 * i \+ 7 ]; int t ; std :: cin >> t ; while ( t \-- ) { int n ; std :: cin >> n ; std :: cout << sum [ n ] << std :: endl ; } } ```   
 ---|---  
   
-## åèèµæ
+## 参考资料
 
-  * å¯å å¤ï¼ãåç­æ°è®ºåå ¶åºç¨ãï¼
+  * 冯克勤．《初等数论及其应用》．
   * [Wilson's theorem - Wikipedia](https://en.wikipedia.org/wiki/Wilson%27s_theorem)
   * [Legendre's formula - Wikipedia](https://en.wikipedia.org/wiki/Legendre%27s_formula)
 
-**æ¬é¡µé¢ä¸»è¦è¯èªåæ[ÐÑÑÐ¸ÑÐ»ÐµÐ½Ð¸Ðµ ÑÐ°ÐºÑÐ¾ÑÐ¸Ð°Ð»Ð° Ð¿Ð¾ Ð¼Ð¾Ð´ÑÐ»Ñ](http://e-maxx.ru/algo/modular_factorial) ä¸å ¶è±æç¿»è¯ç [Factorial modulo p](https://cp-algorithms.com/algebra/factorial-modulo.html)ï¼å ¶ä¸­ä¿æççæåè®®ä¸º Public Domain + Leave a Linkï¼è±æççæåè®®ä¸º CC-BY-SA 4.0ï¼å å®¹ææ¹å¨ï¼**
+**本页面主要译自博文[Вычисление факториала по модулю](http://e-maxx.ru/algo/modular_factorial) 与其英文翻译版 [Factorial modulo p](https://cp-algorithms.com/algebra/factorial-modulo.html)．其中俄文版版权协议为 Public Domain + Leave a Link；英文版版权协议为 CC-BY-SA 4.0．内容有改动．**
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/2/11 21:19:06ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/factorial.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/factorial.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[c-forrest](https://github.com/c-forrest), [Tiphereth-A](https://github.com/Tiphereth-A), [aofall](https://github.com/aofall), [CoelacanthusHex](https://github.com/CoelacanthusHex), [DanJoshua](https://github.com/DanJoshua), [Early0v0](https://github.com/Early0v0), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [iamtwz](https://github.com/iamtwz), [Marcythm](https://github.com/Marcythm), [Persdre](https://github.com/Persdre), [shuzhouliu](https://github.com/shuzhouliu), [wsyhb](https://github.com/wsyhb), [Xeonacid](https://github.com/Xeonacid), [yuyang0974](https://github.com/yuyang0974)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/2/11 21:19:06，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/factorial.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/factorial.md "edit.link.title")  
+>  __本页面贡献者：[c-forrest](https://github.com/c-forrest), [Tiphereth-A](https://github.com/Tiphereth-A), [aofall](https://github.com/aofall), [CoelacanthusHex](https://github.com/CoelacanthusHex), [DanJoshua](https://github.com/DanJoshua), [Early0v0](https://github.com/Early0v0), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [iamtwz](https://github.com/iamtwz), [Marcythm](https://github.com/Marcythm), [Persdre](https://github.com/Persdre), [shuzhouliu](https://github.com/shuzhouliu), [wsyhb](https://github.com/wsyhb), [Xeonacid](https://github.com/Xeonacid), [yuyang0974](https://github.com/yuyang0974)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

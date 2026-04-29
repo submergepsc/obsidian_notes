@@ -1,237 +1,237 @@
-# åææ° - OI Wiki
+﻿# 分拆数 - OI Wiki
 
 - Source: https://oi-wiki.org/math/combinatorics/partition/
 
-# åææ°
+# 分拆数
 
-åæï¼å°èªç¶æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæééæ­£æ´æ°åçè¡¨ç¤ºï¼
+分拆：将自然数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 写成递降正整数和的表示．
 
-ð=ð1+ð2+â¦+ððð1â¥ð2â¥â¦â¥ððâ¥1n=r1+r2+â¦+rkr1â¥r2â¥â¦â¥rkâ¥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛=𝑟1+𝑟2+…+𝑟𝑘𝑟1≥𝑟2≥…≥𝑟𝑘≥1n=r1+r2+…+rkr1≥r2≥…≥rk≥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå¼ä¸­æ¯ä¸ªæ­£æ´æ°ç§°ä¸ºä¸ä¸ªé¨åï¼
+和式中每个正整数称为一个部分．
 
-åææ°ï¼ððpn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èªç¶æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåææ¹æ³æ°ï¼
+分拆数：𝑝𝑛pn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．自然数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分拆方法数．
 
-èª 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§çåææ°ï¼
+自 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始的分拆数：
 
 n| 0| 1| 2| 3| 4| 5| 6| 7| 8  
 ---|---|---|---|---|---|---|---|---|---  
-ððpn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1| 1| 2| 3| 5| 7| 11| 15| 22  
+𝑝𝑛pn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1| 1| 2| 3| 5| 7| 11| 15| 22  
   
-## k é¨åææ°
+## k 部分拆数
 
-å° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åææ°æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¨åçåæï¼ç§°ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¨åææ°ï¼è®°ä½ ð(ð,ð)p(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+将 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分成恰有 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个部分的分拆，称为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 部分拆数，记作 𝑝(𝑛,𝑘)p(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ¾ç¶ï¼ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¨åææ° ð(ð,ð)p(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¶ä¹æ¯ä¸é¢æ¹ç¨çè§£æ°ï¼
+显然，𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 部分拆数 𝑝(𝑛,𝑘)p(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同时也是下面方程的解数：
 
-ðâð=ð¦1+ð¦2+â¦+ð¦ðð¦1â¥ð¦2â¥â¦â¥ð¦ðâ¥0nâk=y1+y2+â¦+yky1â¥y2â¥â¦â¥ykâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛−𝑘=𝑦1+𝑦2+…+𝑦𝑘𝑦1≥𝑦2≥…≥𝑦𝑘≥0n−k=y1+y2+…+yky1≥y2≥…≥yk≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦æè¿ä¸ªæ¹ç¨éé¢æ°æ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¨åé 0ï¼åæ°æ ð(ð âð,ð)p(nâk,j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè§£ï¼å æ­¤æåå¼ï¼
+如果这个方程里面恰有 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个部分非 0，则恰有 𝑝(𝑛 −𝑘,𝑗)p(n−k,j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个解．因此有和式：
 
-ð(ð,ð)=ðâð=0ð(ðâð,ð)p(n,k)=âj=0kp(nâk,j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝(𝑛,𝑘)=𝑘∑𝑗=0𝑝(𝑛−𝑘,𝑗)p(n,k)=∑j=0kp(n−k,j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç¸é»ä¸¤ä¸ªåå¼ä½å·®ï¼å¾ï¼
+相邻两个和式作差，得：
 
-ð(ð,ð)=ð(ðâ1,ðâ1)+ð(ðâð,ð)p(n,k)=p(nâ1,kâ1)+p(nâk,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝(𝑛,𝑘)=𝑝(𝑛−1,𝑘−1)+𝑝(𝑛−𝑘,𝑘)p(n,k)=p(n−1,k−1)+p(n−k,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦æååºè¡¨æ ¼ï¼æ¯ä¸ªæ ¼éçæ°ï¼ç­äºå·¦ä¸æ¹çæ°ï¼å ä¸è¯¥æ ¼åä¸æ¹æ°ï¼æå¨åæ°ä¸ªæ ¼å­ä¸­çæ°ï¼
+如果列出表格，每个格里的数，等于左上方的数，加上该格向上方数，所在列数个格子中的数．
 
 k| 0| 1| 2| 3| 4| 5| 6| 7| 8  
 ---|---|---|---|---|---|---|---|---|---  
-ð(0,ð)p(0,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1| 0| 0| 0| 0| 0| 0| 0| 0  
-ð(1,ð)p(1,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 0| 0| 0| 0| 0| 0| 0  
-ð(2,ð)p(2,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 1| 0| 0| 0| 0| 0| 0  
-ð(3,ð)p(3,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 1| 1| 0| 0| 0| 0| 0  
-ð(4,ð)p(4,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 2| 1| 1| 0| 0| 0| 0  
-ð(5,ð)p(5,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 2| 2| 1| 1| 0| 0| 0  
-ð(6,ð)p(6,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 3| 3| 2| 1| 1| 0| 0  
-ð(7,ð)p(7,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 3| 4| 3| 2| 1| 1| 0  
-ð(8,ð)p(8,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 4| 5| 5| 3| 2| 1| 1  
+𝑝(0,𝑘)p(0,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1| 0| 0| 0| 0| 0| 0| 0| 0  
+𝑝(1,𝑘)p(1,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 0| 0| 0| 0| 0| 0| 0  
+𝑝(2,𝑘)p(2,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 1| 0| 0| 0| 0| 0| 0  
+𝑝(3,𝑘)p(3,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 1| 1| 0| 0| 0| 0| 0  
+𝑝(4,𝑘)p(4,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 2| 1| 1| 0| 0| 0| 0  
+𝑝(5,𝑘)p(5,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 2| 2| 1| 1| 0| 0| 0  
+𝑝(6,𝑘)p(6,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 3| 3| 2| 1| 1| 0| 0  
+𝑝(7,𝑘)p(7,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 3| 4| 3| 2| 1| 1| 0  
+𝑝(8,𝑘)p(8,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 4| 5| 5| 3| 2| 1| 1  
   
-### ä¾é¢
+### 例题
 
-è®¡ç® k é¨åææ°
+计算 k 部分拆数
 
-è®¡ç® ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¨åææ° ð(ð,ð)p(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¤ç»è¾å ¥ï¼å ¶ä¸­ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸º 1000010000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸º 10001000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹ 10000071000007![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¨¡ï¼
+计算 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 部分拆数 𝑝(𝑛,𝑘)p(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．多组输入，其中 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上界为 1000010000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上界为 10001000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，对 10000071000007![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取模．
 
-è§å¯è¡¨æ ¼ä¸éæ¨å¼ï¼æåæ´æ°å¯¹äºå­å¨æ´æå©ï¼ä¸é¾ååºç¨åºï¼
+观察表格与递推式，按列更新对于存储更有利．不难写出程序：
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 ``` |  ```text #include <cstdio> #include <cstring> int p [ 10005 ][ 1005 ]; /*å°èªç¶æ°nåæä¸ºkä¸ªé¨åçæ¹æ³æ°*/ int main () { int n , k ; while ( ~ scanf ( "%d%d" , & n , & k )) { memset ( p , 0 , sizeof ( p )); p [ 0 ][ 0 ] = 1 ; int i ; for ( i = 1 ; i <= n ; ++ i ) { int j ; for ( j = 1 ; j <= k ; ++ j ) { if ( i \- j >= 0 ) /*p[i-j][j]ææé¨åå¤§äº1*/ { p [ i ][ j ] = ( p [ i \- j ][ j ] \+ p [ i \- 1 ][ j \- 1 ]) % 1000007 ; /*p[i-1][j-1]è³å°æä¸ä¸ªé¨åä¸º1ï¼*/ } } } printf ( "%d \n " , p [ n ][ k ]); } } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 ``` |  ```text #include <cstdio> #include <cstring> int p [ 10005 ][ 1005 ]; /*将自然数n分拆为k个部分的方法数*/ int main () { int n , k ; while ( ~ scanf ( "%d%d" , & n , & k )) { memset ( p , 0 , sizeof ( p )); p [ 0 ][ 0 ] = 1 ; int i ; for ( i = 1 ; i <= n ; ++ i ) { int j ; for ( j = 1 ; j <= k ; ++ j ) { if ( i \- j >= 0 ) /*p[i-j][j]所有部分大于1*/ { p [ i ][ j ] = ( p [ i \- j ][ j ] \+ p [ i \- 1 ][ j \- 1 ]) % 1000007 ; /*p[i-1][j-1]至少有一个部分为1．*/ } } } printf ( "%d \n " , p [ n ][ k ]); } } ```   
 ---|---  
   
-### çæå½æ°
+### 生成函数
 
-ç±ç­æ¯æ°åæ±åå ¬å¼ï¼æï¼
+由等比数列求和公式，有：
 
-11âð¥ð=1+ð¥ð+ð¥2ð+ð¥3ð+â¦11âxk=1+xk+x2k+x3k+â¦![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)1+ð1ð¥+ð2ð¥2+ð3ð¥3+â¦=11âð¥11âð¥211âð¥3â¦1+p1x+p2x2+p3x3+â¦=11âx11âx211âx3â¦![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+11−𝑥𝑘=1+𝑥𝑘+𝑥2𝑘+𝑥3𝑘+…11−xk=1+xk+x2k+x3k+…![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)1+𝑝1𝑥+𝑝2𝑥2+𝑝3𝑥3+…=11−𝑥11−𝑥211−𝑥3…1+p1x+p2x2+p3x3+…=11−x11−x211−x3…![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹äº ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¨åææ°ï¼çæå½æ°ç¨å¾®å¤æï¼å ·ä½ååºå¦ä¸ï¼
+对于 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 部分拆数，生成函数稍微复杂．具体写出如下：
 
-ââð,ð=0ð(ð,ð)ð¥ðð¦ð=11âð¥ð¦11âð¥2ð¦11âð¥3ð¦â¦ân,k=0âp(n,k)xnyk=11âxy11âx2y11âx3yâ¦![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∞∑𝑛,𝑘=0𝑝(𝑛,𝑘)𝑥𝑛𝑦𝑘=11−𝑥𝑦11−𝑥2𝑦11−𝑥3𝑦…∑n,k=0∞p(n,k)xnyk=11−xy11−x2y11−x3y…![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### Ferrers å¾
+### Ferrers 图
 
-Ferrers å¾ï¼å°åæçæ¯ä¸ªé¨åç¨ç¹ç»æçè¡è¡¨ç¤ºï¼æ¯è¡ç¹çä¸ªæ°ä¸ºè¿ä¸ªé¨åçå¤§å°ï¼
+Ferrers 图：将分拆的每个部分用点组成的行表示．每行点的个数为这个部分的大小．
 
-æ ¹æ®åæçå®ä¹ï¼Ferrers å¾ä¸­ä¸åçè¡æç §éåçæ¬¡åºææ¾ï¼æé¿è¡å¨æä¸é¢ï¼
+根据分拆的定义，Ferrers 图中不同的行按照递减的次序排放．最长行在最上面．
 
-ä¾å¦ï¼åæ 12 =5 +4 +2 +112=5+4+2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Ferrers å¾ï¼
+例如：分拆 12 =5 +4 +2 +112=5+4+2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Ferrers 图．
 
 ![](./images/ferrers.jpg)
 
-å°ä¸ä¸ª Ferrers å¾æ²¿çå¯¹è§çº¿ç¿»è½¬ï¼å¾å°çæ° Ferrers å¾ç§°ä¸ºåå¾çå ±è½­ï¼æ°åæç§°ä¸ºååæçå ±è½­ï¼æ¾ç¶ï¼å ±è½­æ¯å¯¹ç§°çå ³ç³»ï¼
+将一个 Ferrers 图沿着对角线翻转，得到的新 Ferrers 图称为原图的共轭，新分拆称为原分拆的共轭．显然，共轭是对称的关系．
 
-ä¾å¦ä¸è¿°åæ 12 =5 +4 +2 +112=5+4+2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ±è½­æ¯åæ 12 =4 +3 +2 +2 +112=4+3+2+2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+例如上述分拆 12 =5 +4 +2 +112=5+4+2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的共轭是分拆 12 =4 +3 +2 +2 +112=4+3+2+2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æå¤§ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åææ°ï¼èªç¶æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå¤§é¨åä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæä¸ªæ°ï¼
+最大 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分拆数：自然数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最大部分为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分拆个数．
 
-æ ¹æ®å ±è½­çå®ä¹ï¼ææ¾ç¶ç»è®ºï¼
+根据共轭的定义，有显然结论：
 
-æå¤§ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åææ°ä¸ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¨åææ°ç¸åï¼åä¸º ð(ð,ð)p(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+最大 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分拆数与 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 部分拆数相同，均为 𝑝(𝑛,𝑘)p(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## äºå¼åææ°
+## 互异分拆数
 
-äºå¼åææ°ï¼ðððpdn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èªç¶æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåé¨åäºä¸ç¸åçåææ¹æ³æ°ï¼ï¼Differentï¼
+互异分拆数：𝑝𝑑𝑛pdn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．自然数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的各部分互不相同的分拆方法数．（Different）
 
 n| 0| 1| 2| 3| 4| 5| 6| 7| 8  
 ---|---|---|---|---|---|---|---|---|---  
-ðððpdn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1| 1| 1| 2| 2| 3| 4| 5| 6  
+𝑝𝑑𝑛pdn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1| 1| 1| 2| 2| 3| 4| 5| 6  
   
-åæ ·å°ï¼å®ä¹äºå¼ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¨åææ° ðð(ð,ð)pd(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¡¨ç¤ºæå¤§æåº ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¨åçäºå¼åæï¼æ¯è¿ä¸ªæ¹ç¨çè§£æ°ï¼
+同样地，定义互异 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 部分拆数 𝑝𝑑(𝑛,𝑘)pd(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，表示最大拆出 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个部分的互异分拆，是这个方程的解数：
 
-ð=ð1+ð2+â¦+ððð1>ð2>â¦>ððâ¥1n=r1+r2+â¦+rkr1>r2>â¦>rkâ¥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛=𝑟1+𝑟2+…+𝑟𝑘𝑟1>𝑟2>…>𝑟𝑘≥1n=r1+r2+…+rkr1>r2>…>rk≥1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®å ¨åä¸ï¼ä¹æ¯è¿ä¸ªæ¹ç¨çè§£æ°ï¼
+完全同上，也是这个方程的解数：
 
-ðâð=ð¦1+ð¦2+â¦+ð¦ðð¦1>ð¦2>â¦>ð¦ðâ¥0nâk=y1+y2+â¦+yky1>y2>â¦>ykâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛−𝑘=𝑦1+𝑦2+…+𝑦𝑘𝑦1>𝑦2>…>𝑦𝑘≥0n−k=y1+y2+…+yky1>y2>…>yk≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éä¸ä¸é¢ä¸åçæ¯ï¼ç±äºäºå¼ï¼æ°æ¹ç¨ä¸­è³å¤åªæä¸ä¸ªé¨åä¸ºé¶ï¼æä¸åçç»è®ºï¼æ°æ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¨åé 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ°æ ðð(ð âð,ð)pd(nâk,j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè§£ï¼è¿é ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åªå ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ð â1kâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ç´æ¥å¾å°éæ¨ï¼
+这里与上面不同的是，由于互异，新方程中至多只有一个部分为零．有不变的结论：恰有 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个部分非 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则恰有 𝑝𝑑(𝑛 −𝑘,𝑗)pd(n−k,j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个解，这里 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 只取 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 𝑘 −1k−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此直接得到递推：
 
-ðð(ð,ð)=ðð(ðâð,ðâ1)+ðð(ðâð,ð)pd(n,k)=pd(nâk,kâ1)+pd(nâk,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝𝑑(𝑛,𝑘)=𝑝𝑑(𝑛−𝑘,𝑘−1)+𝑝𝑑(𝑛−𝑘,𝑘)pd(n,k)=pd(n−k,k−1)+pd(n−k,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åæ ·åç»åæ°ä¸æ ·ååºè¡¨æ ¼ï¼æ¯ä¸ªæ ¼éçæ°ï¼ç­äºè¯¥æ ¼åä¸åä¸æ°ï¼æå¨åæ°ä¸ªæ ¼å­ä¸­çæ°ï¼å ä¸è¯¥æ ¼åä¸æ¹æ°ï¼æå¨åæ°ä¸ªæ ¼å­ä¸­çæ°ï¼
+同样像组合数一样列出表格，每个格里的数，等于该格前一列上数，所在列数个格子中的数，加上该格向上方数，所在列数个格子中的数．
 
 k| 0| 1| 2| 3| 4| 5| 6| 7| 8  
 ---|---|---|---|---|---|---|---|---|---  
-ðð(0,ð)pd(0,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1| 0| 0| 0| 0| 0| 0| 0| 0  
-ðð(1,ð)pd(1,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 0| 0| 0| 0| 0| 0| 0  
-ðð(2,ð)pd(2,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 0| 0| 0| 0| 0| 0| 0  
-ðð(3,ð)pd(3,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 1| 0| 0| 0| 0| 0| 0  
-ðð(4,ð)pd(4,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 1| 0| 0| 0| 0| 0| 0  
-ðð(5,ð)pd(5,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 2| 0| 0| 0| 0| 0| 0  
-ðð(6,ð)pd(6,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 2| 1| 0| 0| 0| 0| 0  
-ðð(7,ð)pd(7,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 3| 1| 0| 0| 0| 0| 0  
-ðð(8,ð)pd(8,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 3| 2| 0| 0| 0| 0| 0  
+𝑝𝑑(0,𝑘)pd(0,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 1| 0| 0| 0| 0| 0| 0| 0| 0  
+𝑝𝑑(1,𝑘)pd(1,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 0| 0| 0| 0| 0| 0| 0  
+𝑝𝑑(2,𝑘)pd(2,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 0| 0| 0| 0| 0| 0| 0  
+𝑝𝑑(3,𝑘)pd(3,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 1| 0| 0| 0| 0| 0| 0  
+𝑝𝑑(4,𝑘)pd(4,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 1| 0| 0| 0| 0| 0| 0  
+𝑝𝑑(5,𝑘)pd(5,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 2| 0| 0| 0| 0| 0| 0  
+𝑝𝑑(6,𝑘)pd(6,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 2| 1| 0| 0| 0| 0| 0  
+𝑝𝑑(7,𝑘)pd(7,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 3| 1| 0| 0| 0| 0| 0  
+𝑝𝑑(8,𝑘)pd(8,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 0| 1| 3| 2| 0| 0| 0| 0| 0  
   
-### ä¾é¢
+### 例题
 
-è®¡ç®äºå¼åææ°
+计算互异分拆数
 
-è®¡ç®äºå¼åææ° ðððpdn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¤ç»è¾å ¥ï¼å ¶ä¸­ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸º 5000050000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹ 10000071000007![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¨¡ï¼
+计算互异分拆数 𝑝𝑑𝑛pdn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．多组输入，其中 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上界为 5000050000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，对 10000071000007![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取模．
 
-è§å¯è¡¨æ ¼ä¸éæ¨å¼ï¼æåæ´æ°å¯¹äºå­å¨æ´æå©ï¼ä»£ç ä¸­å°åä¸ä½ç¼©åäºç©ºé´ï¼ä» ä¿çç¸é»ä¸¤é¡¹ï¼
+观察表格与递推式，按列更新对于存储更有利．代码中将后一位缩减了空间，仅保留相邻两项．
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 ``` |  ```text #include <cstdio> #include <cstring> int pd [ 50005 ][ 2 ]; /*å°èªç¶æ°nåæä¸ºkä¸ªé¨åçäºå¼æ¹æ³æ°*/ int main () { int n ; while ( ~ scanf ( "%d" , & n )) { memset ( pd , 0 , sizeof ( pd )); pd [ 0 ][ 0 ] = 1 ; int ans = 0 ; int j ; for ( j = 1 ; j < 350 ; ++ j ) { int i ; for ( i = 0 ; i < 350 ; ++ i ) { pd [ i ][ j & 1 ] = 0 ; /*pd[i][j]åªä¸pd[][j]åpd[][j-1]æå ³*/ } for ( i = 0 ; i <= n ; ++ i ) { if ( i \- j >= 0 ) /*pd[i-j][j]ææé¨åå¤§äº1*/ { pd [ i ][ j & 1 ] = ( pd [ i \- j ][ j & 1 ] \+ pd [ i \- j ][( j \- 1 ) & 1 ]) % 1000007 ; /*pd[i-j][j-1]è³å°æä¸ä¸ªé¨åä¸º1ï¼*/ } } ans = ( ans \+ pd [ n ][ j & 1 ]) % 1000007 ; } printf ( "%d \n " , ans ); } } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 ``` |  ```text #include <cstdio> #include <cstring> int pd [ 50005 ][ 2 ]; /*将自然数n分拆为k个部分的互异方法数*/ int main () { int n ; while ( ~ scanf ( "%d" , & n )) { memset ( pd , 0 , sizeof ( pd )); pd [ 0 ][ 0 ] = 1 ; int ans = 0 ; int j ; for ( j = 1 ; j < 350 ; ++ j ) { int i ; for ( i = 0 ; i < 350 ; ++ i ) { pd [ i ][ j & 1 ] = 0 ; /*pd[i][j]只与pd[][j]和pd[][j-1]有关*/ } for ( i = 0 ; i <= n ; ++ i ) { if ( i \- j >= 0 ) /*pd[i-j][j]所有部分大于1*/ { pd [ i ][ j & 1 ] = ( pd [ i \- j ][ j & 1 ] \+ pd [ i \- j ][( j \- 1 ) & 1 ]) % 1000007 ; /*pd[i-j][j-1]至少有一个部分为1．*/ } } ans = ( ans \+ pd [ n ][ j & 1 ]) % 1000007 ; } printf ( "%d \n " , ans ); } } ```   
 ---|---  
   
-### å¥åææ°
+### 奇分拆数
 
-å¥åææ°ï¼ðððpon![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èªç¶æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåé¨åé½æ¯å¥æ°çåææ¹æ³æ°ï¼ï¼Oddï¼
+奇分拆数：𝑝𝑜𝑛pon![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．自然数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的各部分都是奇数的分拆方法数．（Odd）
 
-æä¸ä¸ªæ¾ç¶çç­å¼ï¼
+有一个显然的等式：
 
-ââð=1(1+ð¥ð)=ââð=1(1âð¥2ð)ââð=1(1âð¥ð)=ââð=111âð¥2ðâ1âi=1â(1+xi)=âi=1â(1âx2i)âi=1â(1âxi)=âi=1â11âx2iâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∞∏𝑖=1(1+𝑥𝑖)=∏∞𝑖=1(1−𝑥2𝑖)∏∞𝑖=1(1−𝑥𝑖)=∞∏𝑖=111−𝑥2𝑖−1∏i=1∞(1+xi)=∏i=1∞(1−x2i)∏i=1∞(1−xi)=∏i=1∞11−x2i−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æå·¦è¾¹æ¯äºå¼åææ°ççæå½æ°ï¼æå³è¾¹æ¯å¥åææ°ççæå½æ°ï¼ä¸¤è å¯¹åºç³»æ°ç¸åï¼å æ­¤ï¼å¥åææ°åäºå¼åææ°ç¸åï¼
+最左边是互异分拆数的生成函数，最右边是奇分拆数的生成函数．两者对应系数相同，因此，奇分拆数和互异分拆数相同：
 
-ððð=ðððpon=pdn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝𝑜𝑛=𝑝𝑑𝑛pon=pdn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä½æ¾ç¶ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¨å¥åææ°åäºå¼ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¨åææ°ä¸æ¯ä¸ä¸ªæ¦å¿µï¼è¿éå°±ä¸ååºäºï¼
+但显然 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 部奇分拆数和互异 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 部分拆数不是一个概念，这里就不列出了．
 
-åå¼å ¥ä¸¤ä¸ªæ¦å¿µï¼
+再引入两个概念：
 
-äºå¼å¶åææ°ï¼ððððpden![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èªç¶æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¨åæ°ä¸ºå¶æ°çäºå¼åææ¹æ³æ°ï¼ï¼Evenï¼
+互异偶分拆数：𝑝𝑑𝑒𝑛pden![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．自然数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的部分数为偶数的互异分拆方法数．（Even）
 
-äºå¼å¥åææ°ï¼ððððpdon![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èªç¶æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¨åæ°ä¸ºå¥æ°çäºå¼åææ¹æ³æ°ï¼ï¼Oddï¼
+互异奇分拆数：𝑝𝑑𝑜𝑛pdon![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．自然数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的部分数为奇数的互异分拆方法数．（Odd）
 
-å æ­¤æï¼
+因此有：
 
-ððð=ðððð+ððððpdn=pden+pdon![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝𝑑𝑛=𝑝𝑑𝑒𝑛+𝑝𝑑𝑜𝑛pdn=pden+pdon![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åæ ·ä¹æç¸åºç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¨æ¦å¿µï¼ç±äºè¿äºå¤æï¼ä¸åååºï¼
+同样也有相应的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 部概念．由于过于复杂，不再列出．
 
-## äºè¾¹å½¢æ°å®ç
+## 五边形数定理
 
-åç¬è§å¯åææ°ççæå½æ°çåæ¯é¨åï¼
+单独观察分拆数的生成函数的分母部分：
 
-ââð=1(1âð¥ð)âi=1â(1âxi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∞∏𝑖=1(1−𝑥𝑖)∏i=1∞(1−xi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°è¿é¨åå±å¼ï¼å¯ä»¥æ³å°äºå¼åæï¼ä¸äºå¼åææåºçé¨åæ°å¥å¶æ§æå ³ï¼
+将这部分展开，可以想到互异分拆，与互异分拆拆出的部分数奇偶性有关．
 
-å ·ä½å°ï¼äºå¼å¶é¨åæå¨å±å¼å¼ä¸­è¢«æ­£åè®¡æ°ï¼äºå¼å¥é¨åæå¨å±å¼å¼ä¸­è¢«è´åè®¡æ°ï¼å æ­¤å±å¼å¼ä¸­åé¡¹ç³»æ°ä¸ºä¸¤æ¹æ³æ°ä¹å·®ï¼å³ï¼
+具体地，互异偶部分拆在展开式中被正向计数，互异奇部分拆在展开式中被负向计数．因此展开式中各项系数为两方法数之差．即：
 
-ââð=0(ððððâðððð)ð¥ð=ââð=1(1âð¥ð)âi=0â(pdenâpdon)xn=âi=1â(1âxi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∞∑𝑖=0(𝑝𝑑𝑒𝑛−𝑝𝑑𝑜𝑛)𝑥𝑛=∞∏𝑖=1(1−𝑥𝑖)∑i=0∞(pden−pdon)xn=∏i=1∞(1−xi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¥ä¸æ¥è¯´æï¼å¤æ°æ åµä¸ï¼ä¸è¿°ä¸¤æ¹æ³æ°ç¸ç­ï¼å¨å±å¼å¼ä¸­ç³»æ°ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä» å¨å°æ°ä½ç½®ï¼ä¸¤æ¹æ³æ°ç¸å·® 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+接下来说明，多数情况下，上述两方法数相等，在展开式中系数为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；仅在少数位置，两方法数相差 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¿éå¯ä»¥åå©æé å¯¹åºçåæ³ï¼
+这里可以借助构造对应的办法．
 
-ç»åºæ¯ä¸ªäºå¼åæç Ferrers å¾ï¼æåä¸è¡ç§°ä¸ºè¿ä¸ªå¾çåºï¼åºä¸ç¹çä¸ªæ°è®°ä¸º ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼Bottomï¼ï¼è¿æ¥æä¸é¢ä¸è¡çæåä¸ä¸ªç¹ä¸å¾ä¸­æç¹çæé¿ 4545![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åº¦è§çº¿æ®µï¼ç§°ä¸ºè¿ä¸ªå¾çå¡ï¼å¡ä¸ç¹çä¸ªæ°è®°ä¸º ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼Slideï¼ï¼
+画出每个互异分拆的 Ferrers 图．最后一行称为这个图的底，底上点的个数记为 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（Bottom）；连接最上面一行的最后一个点与图中某点的最长 4545![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 度角线段，称为这个图的坡，坡上点的个数记为 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（Slide）．
 
 ![](./images/bottom_slide.jpg)
 
-è¦æ³å¨äºå¼å¶é¨åæä¸äºå¼å¥é¨åæä¹é´æé å¯¹åºï¼å°±è¦å®ä¹åæ¢ï¼å¨ä¿è¯äºå¼æ¡ä»¶ä¸åçåæä¸ï¼ä½¿å¾è¡æ°æ¹å 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+要想在互异偶部分拆与互异奇部分拆之间构造对应，就要定义变换，在保证互异条件不变的前提下，使得行数改变 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-åæ¢ Aï¼å½ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°äºç­äº ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶åï¼å°±å°åºç§»å°å³è¾¹ï¼æä¸ºä¸ä¸ªæ°å¡ï¼
+变换 A：当 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 小于等于 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时候，就将底移到右边，成为一个新坡．
 
-åæ¢ Bï¼å½ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤§äº ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶åï¼å°±å°å¡ç§»å°ä¸è¾¹ï¼æä¸ºä¸ä¸ªæ°åºï¼
+变换 B：当 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 大于 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时候，就将坡移到下边，成为一个新底．
 
-è¿ä¸¤ä¸ªåæ¢å¯¹äºå¤§å¤æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä»»æäºå¼åæï¼æ°æä¸ä¸ªåæ¢å¯ä»¥è¿è¡ï¼å°±å¨äºå¼å¶é¨åæä¸äºå¼å¥é¨åæä¹é´æé äºä¸ä¸ªä¸ä¸å¯¹åºï¼å·²ç»æé äºä¸ä¸å¯¹åºçä¸¤é¨ååæä¸ªæ°ç¸ç­ï¼å æ­¤è¿æ¶å±å¼å¼ä¸­ç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ç³»æ°ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这两个变换对于大多数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的任意互异分拆，恰有一个变换可以进行，就在互异偶部分拆与互异奇部分拆之间构造了一个一一对应．已经构造了一一对应的两部分分拆个数相等，因此这时展开式中第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项系数为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä½æ¯å¯¹äºæäº ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶å­å¨æ°ä¸ä¸ªäºå¼åææ æ³è¿è¡ä¸è¿°åæ¢ï¼
+但是对于某些 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其存在恰一个互异分拆无法进行上述变换．
 
-  * æ åµä¸ï¼ð =ð b=s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åºä¸å¡æä¸ä¸ªå ¬å ±ç¹æ¶ï¼åæ¢ A ä¸è½è¿è¡ï¼æ­¤æ¶
+  * 情况一：𝑏 =𝑠b=s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且底与坡有一个公共点时，变换 A 不能进行．此时
 
-ð=ð +(ð +1)+â¦+(ð +ð â1)=ð (3ð â1)2n=s+(s+1)+â¦+(s+sâ1)=s(3sâ1)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛=𝑠+(𝑠+1)+…+(𝑠+𝑠−1)=𝑠(3𝑠−1)2n=s+(s+1)+…+(s+s−1)=s(3s−1)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å±å¼å¼çç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ä¸åæé¨åæ°çå¥å¶æ§æå ³ï¼ä¸º ( â1)ð ð¥ð(â1)sxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+展开式的第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项与分拆部分数的奇偶性有关，为 ( −1)𝑠𝑥𝑛(−1)sxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * æ åµäºï¼ð =ð  +1b=s+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åºä¸å¡æä¸ä¸ªå ¬å ±ç¹æ¶ï¼åæ¢ B ä¸è½è¿è¡ï¼æ­¤æ¶
+  * 情况二：𝑏 =𝑠 +1b=s+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且底与坡有一个公共点时，变换 B 不能进行．此时
 
-ð=(ð +1)+(ð +2)+â¦+(ð +ð )=ð (3ð +1)2n=(s+1)+(s+2)+â¦+(s+s)=s(3s+1)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛=(𝑠+1)+(𝑠+2)+…+(𝑠+𝑠)=𝑠(3𝑠+1)2n=(s+1)+(s+2)+…+(s+s)=s(3s+1)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å±å¼å¼çç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ä¸º ( â1)ð ð¥ð(â1)sxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+展开式的第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项为 ( −1)𝑠𝑥𝑛(−1)sxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç¨ âð âs![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¿æ¢ä¸å¼ç ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¾å° ð =ð (3ð â1)2n=s(3sâ1)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºè´æ´æ°ï¼å±å¼å¼çç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ä»ä¸º ( â1)ð ð¥ð(â1)sxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼
+用 −𝑠−s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 替换上式的 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，得到 𝑛 =𝑠(3𝑠−1)2n=s(3s−1)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为负整数，展开式的第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项仍为 ( −1)𝑠𝑥𝑛(−1)sxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．．
 
-ç±äºä¸¤ç§æ åµä¸ä¼å¨åä¸ä¸ª ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¶åºç°ï¼æä»¬å¯ä»¥æä¸¤ä¸ªæ¡ä»¶åèµ·æ¥ï¼å¾å° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éè¦æ»¡è¶³çæ¡ä»¶æ¯
+由于两种情况不会在同一个 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同时出现，我们可以把两个条件合起来，得到 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 需要满足的条件是
 
-âðââ¤,ð=ð(3ðâ1)2âkâZ,n=k(3kâ1)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∃𝑘∈ℤ,𝑛=𝑘(3𝑘−1)2∃k∈Z,n=k(3k−1)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è³æ­¤ï¼æä»¬å°±è¯æäºï¼
+至此，我们就证明了：
 
-(1âð¥)(1âð¥2)(1âð¥3)â¦=+ââð=ââ(â1)ðð¥ð(3ðâ1)2=â¦+ð¥26âð¥15+ð¥7âð¥2+1âð¥+ð¥5âð¥12+ð¥22ââ¦(1âx)(1âx2)(1âx3)â¦=âk=ââ+â(â1)kxk(3kâ1)2=â¦+x26âx15+x7âx2+1âx+x5âx12+x22ââ¦![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(1−𝑥)(1−𝑥2)(1−𝑥3)…=+∞∑𝑘=−∞(−1)𝑘𝑥𝑘(3𝑘−1)2=…+𝑥26−𝑥15+𝑥7−𝑥2+1−𝑥+𝑥5−𝑥12+𝑥22−…(1−x)(1−x2)(1−x3)…=∑k=−∞+∞(−1)kxk(3k−1)2=…+x26−x15+x7−x2+1−x+x5−x12+x22−…![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå¿ä¸ä¸ï¼è¿ä¸ªå¼å­æ¯åææ°ççæå½æ°çåæ°ï¼å æ­¤å ¶ä¸åææ°ççæå½æ°ç¸ä¹çç»ææ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ´çå¹¶å¯¹æ¯ä¸¤è¾¹åé¡¹ç³»æ°ï¼å°±å¾å°åææ°æ°åçéæ¨å¼ï¼
+回忆一下：这个式子是分拆数的生成函数的倒数，因此其与分拆数的生成函数相乘的结果是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．整理并对比两边各项系数，就得到分拆数数列的递推式．
 
-(1+ð1ð¥+ð2ð¥2+ð3ð¥3+â¦)(1âð¥âð¥2+ð¥5+ð¥7âð¥12âð¥15+ð¥22+ð¥26ââ¦)=1(1+p1x+p2x2+p3x3+â¦)(1âxâx2+x5+x7âx12âx15+x22+x26ââ¦)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ðð=ððâ1+ððâ2âððâ5âððâ7+â¦pn=pnâ1+pnâ2âpnâ5âpnâ7+â¦![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(1+𝑝1𝑥+𝑝2𝑥2+𝑝3𝑥3+…)(1−𝑥−𝑥2+𝑥5+𝑥7−𝑥12−𝑥15+𝑥22+𝑥26−…)=1(1+p1x+p2x2+p3x3+…)(1−x−x2+x5+x7−x12−x15+x22+x26−…)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑝𝑛=𝑝𝑛−1+𝑝𝑛−2−𝑝𝑛−5−𝑝𝑛−7+…pn=pn−1+pn−2−pn−5−pn−7+…![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¸ªéæ¨å¼ææ éé¡¹ï¼ä½æ¯å¦æè§å®è´æ°çåææ°æ¯ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåææ°å·²ç»å®ä¹ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼é£ä¹å°±ç®åä¸ºäºæéé¡¹ï¼
+这个递推式有无限项，但是如果规定负数的分拆数是 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的分拆数已经定义为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），那么就简化为了有限项．
 
-### ä¾é¢
+### 例题
 
-è®¡ç®åææ°
+计算分拆数
 
-è®¡ç®åææ° ððpn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¤ç»è¾å ¥ï¼å ¶ä¸­ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸º 5000050000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹ 10000071000007![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¨¡ï¼
+计算分拆数 𝑝𝑛pn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．多组输入，其中 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上界为 5000050000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，对 10000071000007![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取模．
 
-éç¨äºè¾¹å½¢æ°å®ççæ¹æ³ï¼æä»£ç ï¼
+采用五边形数定理的方法．有代码：
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 ``` |  ```text #include <cstdio> long long a [ 100010 ]; long long p [ 50005 ]; int main () { p [ 0 ] = 1 ; p [ 1 ] = 1 ; p [ 2 ] = 2 ; int i ; for ( i = 1 ; i < 50005 ; i ++ ) /*éæ¨å¼ç³»æ°1,2,5,7,12,15,22,26...i*(3*i-1)/2,i*(3*i+1)/2*/ { a [ 2 * i ] = i * ( i * 3 \- 1 ) / 2 ; /*äºè¾¹å½¢æ°ä¸º1,5,12,22...i*(3*i-1)/2*/ a [ 2 * i \+ 1 ] = i * ( i * 3 \+ 1 ) / 2 ; } for ( i = 3 ; i < 50005 ; i ++ ) /*p[n]=p[n-1]+p[n-2]-p[n-5]-p[n-7]+p[12]+p[15]-...+p[n-i*[3i-1]/2]+p[n-i*[3i+1]/2]*/ { p [ i ] = 0 ; int j ; for ( j = 2 ; a [ j ] <= i ; j ++ ) /*æå¯è½ä¸ºè´æ°,å¼ä¸­å 1000007*/ { if ( j & 2 ) { p [ i ] = ( p [ i ] \+ p [ i \- a [ j ]] \+ 1000007 ) % 1000007 ; } else { p [ i ] = ( p [ i ] \- p [ i \- a [ j ]] \+ 1000007 ) % 1000007 ; } } } int n ; while ( ~ scanf ( "%d" , & n )) { printf ( "%lld \n " , p [ n ]); } } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 ``` |  ```text #include <cstdio> long long a [ 100010 ]; long long p [ 50005 ]; int main () { p [ 0 ] = 1 ; p [ 1 ] = 1 ; p [ 2 ] = 2 ; int i ; for ( i = 1 ; i < 50005 ; i ++ ) /*递推式系数1,2,5,7,12,15,22,26...i*(3*i-1)/2,i*(3*i+1)/2*/ { a [ 2 * i ] = i * ( i * 3 \- 1 ) / 2 ; /*五边形数为1,5,12,22...i*(3*i-1)/2*/ a [ 2 * i \+ 1 ] = i * ( i * 3 \+ 1 ) / 2 ; } for ( i = 3 ; i < 50005 ; i ++ ) /*p[n]=p[n-1]+p[n-2]-p[n-5]-p[n-7]+p[12]+p[15]-...+p[n-i*[3i-1]/2]+p[n-i*[3i+1]/2]*/ { p [ i ] = 0 ; int j ; for ( j = 2 ; a [ j ] <= i ; j ++ ) /*有可能为负数,式中加1000007*/ { if ( j & 2 ) { p [ i ] = ( p [ i ] \+ p [ i \- a [ j ]] \+ 1000007 ) % 1000007 ; } else { p [ i ] = ( p [ i ] \- p [ i \- a [ j ]] \+ 1000007 ) % 1000007 ; } } } int n ; while ( ~ scanf ( "%d" , & n )) { printf ( "%lld \n " , p [ n ]); } } ```   
 ---|---  
   
 * * *
 
-> __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/partition.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/partition.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [Ir1d](https://github.com/Ir1d), [2008verser](https://github.com/2008verser), [Early0v0](https://github.com/Early0v0), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [ksyx](https://github.com/ksyx), [myeeye](https://github.com/myeeye), [Xeonacid](https://github.com/Xeonacid), [YOYO-UIAT](https://github.com/YOYO-UIAT)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+> __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/partition.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/partition.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [Ir1d](https://github.com/Ir1d), [2008verser](https://github.com/2008verser), [Early0v0](https://github.com/Early0v0), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [ksyx](https://github.com/ksyx), [myeeye](https://github.com/myeeye), [Xeonacid](https://github.com/Xeonacid), [YOYO-UIAT](https://github.com/YOYO-UIAT)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

@@ -1,4 +1,4 @@
-# 比赛相关简介 - OI Wiki
+﻿# 比赛相关简介 - OI Wiki
 
 - Source: https://oi-wiki.org/contest/
 

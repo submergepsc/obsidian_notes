@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/php/php-mysql-select.html
-Title: PHP MySQL 读取数据 | 菜鸟教程
-
-PHP MySQL 读取数据 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-PHP 教程

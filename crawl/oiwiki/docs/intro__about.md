@@ -1,4 +1,4 @@
-# 关于本项目 - OI Wiki
+﻿# 关于本项目 - OI Wiki
 
 - Source: https://oi-wiki.org/intro/about/
 

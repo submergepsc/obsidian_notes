@@ -1,28 +1,28 @@
-# pb_ds ç®ä» - OI Wiki
+﻿# pb_ds 简介 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/pb-ds/
 
-# pb_ds ç®ä»
+# pb_ds 简介
 
-pb_ds åºå ¨ç§° Policy-Based Data Structuresï¼
+pb_ds 库全称 Policy-Based Data Structures．
 
-pb_ds åºå°è£ äºå¾å¤æ°æ®ç»æï¼æ¯å¦åå¸ï¼Hashï¼è¡¨ï¼å¹³è¡¡äºåæ ï¼å­å ¸æ ï¼Trie æ ï¼ï¼å ï¼ä¼å éåï¼ç­ï¼
+pb_ds 库封装了很多数据结构，比如哈希（Hash）表，平衡二叉树，字典树（Trie 树），堆（优先队列）等．
 
-å°±å `vector`ã`set`ã`map` ä¸æ ·ï¼å ¶ç»ä»¶åç¬¦å STL çç¸å ³æ¥å£è§èï¼é¨åï¼å¦ä¼å éåï¼å å« STL å å¯¹åºç»ä»¶çææåè½ï¼ä½æ¯ STL åè½æ´å¤ï¼
+就像 `vector`、`set`、`map` 一样，其组件均符合 STL 的相关接口规范．部分（如优先队列）包含 STL 内对应组件的所有功能，但比 STL 功能更多．
 
-pb_ds åªå¨ä½¿ç¨ libstdc++ ä¸ºæ ååºçç¼è¯å¨ä¸å¯ä»¥ç¨ï¼
+pb_ds 只在使用 libstdc++ 为标准库的编译器下可以用．
 
-å¯ä»¥ä½¿ç¨ `begin()` å `end()` æ¥è·å `iterator` ä»èéå
+可以使用 `begin()` 和 `end()` 来获取 `iterator` 从而遍历
 
-å¯ä»¥ `increase_key`,`decrease_key` ä»¥åå é¤åä¸ªå ç´ 
+可以 `increase_key`,`decrease_key` 以及删除单个元素
 
-ç±äº pb_ds åºçä¸»è¦å å®¹å¨ä»¥ä¸åçº¿å¼å¤´ç `__gnu_pbds` å½åç©ºé´ä¸­ï¼å¨ NOI ç³»åæ´»å¨ä¸­çåè§æ§ä¸ç´æ²¡æç¡®å®ï¼2021 å¹´ 9 æ 1 æ¥ï¼æ ¹æ® [ãå ³äº NOI ç³»åæ´»å¨ä¸­ç¼ç¨è¯­è¨ä½¿ç¨éå¶çè¡¥å è¯´æã](https://www.noi.cn/xw/2021-09-01/735729.shtml)ï¼å è®¸ä½¿ç¨ä»¥ä¸åçº¿å¼å¤´çåºå½æ°æå®ï¼ä½å ·ææç¡®ç¦æ­¢æä½çåºå½æ°åå®é¤å¤ï¼ï¼å¨ NOI ç³»åæ´»å¨ä¸­ä½¿ç¨ pb_ds åºçåè§æ§æäºæä»¶ä¸çä¾æ®ï¼
+由于 pb_ds 库的主要内容在以下划线开头的 `__gnu_pbds` 命名空间中，在 NOI 系列活动中的合规性一直没有确定．2021 年 9 月 1 日，根据 [《关于 NOI 系列活动中编程语言使用限制的补充说明》](https://www.noi.cn/xw/2021-09-01/735729.shtml)，允许使用以下划线开头的库函数或宏（但具有明确禁止操作的库函数和宏除外），在 NOI 系列活动中使用 pb_ds 库的合规性有了文件上的依据．
 
-**åèèµæï¼[ãC++ ç pb_ds åºå¨ OI ä¸­çåºç¨ã](https://github.com/OI-Wiki/libs/blob/master/lang/pb-ds/C%2B%2Bçpb_dsåºå¨OIä¸­çåºç¨.pdf)**
+**参考资料：[《C++ 的 pb_ds 库在 OI 中的应用》](https://github.com/OI-Wiki/libs/blob/master/lang/pb-ds/C%2B%2B的pb_ds库在OI中的应用.pdf)**
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/pb-ds/index.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/lang/pb-ds/index.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Ir1d](https://github.com/Ir1d), [Xeonacid](https://github.com/Xeonacid), [HeRaNO](https://github.com/HeRaNO), [saffahyjp](https://github.com/saffahyjp), [Tiphereth-A](https://github.com/Tiphereth-A), [Enter-tainer](https://github.com/Enter-tainer), [HarryJam3](https://github.com/HarryJam3), [ouuan](https://github.com/ouuan)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/pb-ds/index.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/lang/pb-ds/index.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [Xeonacid](https://github.com/Xeonacid), [HeRaNO](https://github.com/HeRaNO), [saffahyjp](https://github.com/saffahyjp), [Tiphereth-A](https://github.com/Tiphereth-A), [Enter-tainer](https://github.com/Enter-tainer), [HarryJam3](https://github.com/HarryJam3), [ouuan](https://github.com/ouuan)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

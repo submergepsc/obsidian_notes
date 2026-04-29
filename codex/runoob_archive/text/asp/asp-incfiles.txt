@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/asp/asp-incfiles.html
-Title: ASP 引用文件 | 菜鸟教程
-
-ASP 引用文件 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-ASP 教程

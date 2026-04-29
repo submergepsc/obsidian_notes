@@ -1,86 +1,86 @@
-# å¿«éå¹ - OI Wiki
+﻿# 快速幂 - OI Wiki
 
 - Source: https://oi-wiki.org/math/binary-exponentiation/
 
-# å¿«éå¹
+# 快速幂
 
-## å¼å ¥
+## 引入
 
-**å¿«éå¹** ï¼fast exponentiationï¼ï¼ä¹ç§° **äºè¿å¶åå¹** ï¼binary exponentiationï¼æ **å¹³æ¹åå¹æ³** ï¼exponentiation by squaringï¼ï¼æ¯ä¸ä¸ªå¨ Î(logâ¡ð)Î(logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å è®¡ç® ððan![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå°æå·§ï¼èæ´åçè®¡ç®éè¦ Î(ð)Î(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´ï¼
+**快速幂** （fast exponentiation），也称 **二进制取幂** （binary exponentiation）或 **平方取幂法** （exponentiation by squaring），是一个在 Θ(log⁡𝑛)Θ(log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间内计算 𝑎𝑛an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的小技巧，而暴力的计算需要 Θ(𝑛)Θ(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间．
 
-è¿ä¸ªæå·§å¯ä»¥åºç¨äºä»»ä½ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¹æ³æ»¡è¶³ç»åå¾çåºæ¯ä¸­ï¼ä¾å¦æ¨¡æä¹ä¸åå¹ãç©éµå¹ç­ï¼è¯¦è§åæ åºç¨ ä¸èï¼
+这个技巧可以应用于任何 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的乘法满足结合律的场景中，例如模意义下取幂、矩阵幂等，详见后文 应用 一节．
 
-## è¿ç¨
+## 过程
 
-è®¡ç® ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡æ¹è¡¨ç¤ºå° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹å¨ä¸èµ·ï¼ðð =ðÃðâ¯ÃðâðÂ ä¸ª aan=aÃaâ¯ÃaânÂ ä¸ª a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¶èå½ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤ªå¤§æåæ¬¡ä¹æ³å¼éå¤ªå¤§çæ¶ä¾¯ï¼è¿ç§æ¹æ³å°±ä¸å¤ªéç¨äºï¼äºè¿å¶åå¹çæ³æ³æ¯ï¼å°åå¹çä»»å¡æç §ææ°ç **äºè¿å¶è¡¨ç¤º** æ¥åå²ææ´å°çä»»å¡ï¼
+计算 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次方表示将 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 乘在一起：𝑎𝑛 =𝑎×𝑎⋯×𝑎⏟𝑛 个 aan=a×a⋯×a⏟n 个 a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．然而当 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 太大或单次乘法开销太大的时侯，这种方法就不太适用了．二进制取幂的想法是，将取幂的任务按照指数的 **二进制表示** 来分割成更小的任务．
 
-ä¾å­
+例子
 
-åè®¾è¦è®¡ç® 313313![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æå°å®å±å¼ä¸ºè¿ä¹å¼ï¼éè¦ 13 â1 =1213â1=12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ä¹æ³ï¼ä½æ¯ï¼å ä¸º
+假设要计算 313313![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如果将它展开为连乘式，需要 13 −1 =1213−1=12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次乘法．但是，因为
 
-313=3(1101)2=38Ã34Ã31,313=3(1101)2=38Ã34Ã31,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+313=3(1101)2=38×34×31,313=3(1101)2=38×34×31,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥ï¼åªè¦è½å¿«éè®¡ç®åº 31,32,34,3831,32,34,38![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±è½éè¿ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ä¹æ³è®¡ç®åº 313313![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼äºæ¯ï¼åªéè¦ç¥éä¸ä¸ªå¿«éçæ¹æ³æ¥è®¡ç®ä¸è¿° 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç 2ð2k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å¹çåºåï¼è¿æ¯å®¹æçï¼å ä¸ºå ä¸ºåºåä¸­ï¼é¤ç¬¬ä¸ä¸ªï¼ä»»æä¸ä¸ªå ç´ é½æ¯å ¶åä¸ä¸ªå ç´ çå¹³æ¹ï¼
+所以，只要能快速计算出 31,32,34,3831,32,34,38![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就能通过 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次乘法计算出 313313![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．于是，只需要知道一个快速的方法来计算上述 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 2𝑘2k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次幂的序列．这是容易的，因为因为序列中（除第一个）任意一个元素都是其前一个元素的平方．
 
-æ ¹æ®è¿äºåæï¼å¯ä»¥å¾å° 313313![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè®¡ç®è¿ç¨å¦ä¸ï¼
+根据这些分析，可以得到 313313![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的计算过程如下：
 
-31=3,32=(31)2=32=9,34=(32)2=92=81,38=(34)2=812=6561,313=6561Ã81Ã3=1594323.31=3,32=(31)2=32=9,34=(32)2=92=81,38=(34)2=812=6561,313=6561Ã81Ã3=1594323.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+31=3,32=(31)2=32=9,34=(32)2=92=81,38=(34)2=812=6561,313=6561×81×3=1594323.31=3,32=(31)2=32=9,34=(32)2=92=81,38=(34)2=812=6561,313=6561×81×3=1594323.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ç¨ä¸­ï¼åªè¿è¡äº 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ä¹æ³è¿ç®ï¼
+过程中，只进行了 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次乘法运算．
 
-è¿å°±æ¯å¿«éå¹çåºæ¬æ³æ³ï¼è³äºå ·ä½å®ç°ï¼æä¸¤ç§å¸¸è§ççæ¬ï¼
+这就是快速幂的基本想法．至于具体实现，有两种常见的版本．
 
-### è¿­ä»£çæ¬
+### 迭代版本
 
-è®¾ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºè¿å¶è¡¨ç¤ºä¸º (ðð¡ðð¡â1â¯ð1ð0)2(ntntâ1â¯n1n0)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¹å°±æ¯è¯´ï¼æ
+设 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二进制表示为 (𝑛𝑡𝑛𝑡−1⋯𝑛1𝑛0)2(ntnt−1⋯n1n0)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，也就是说，有
 
-ð=ðð¡2ð¡+ðð¡â12ð¡â1+â¯+ð121+ð020,n=nt2t+ntâ12tâ1+â¯+n121+n020,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛=𝑛𝑡2𝑡+𝑛𝑡−12𝑡−1+⋯+𝑛121+𝑛020,n=nt2t+nt−12t−1+⋯+n121+n020,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ðð â{0,1}niâ{0,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼å°±æ
+其中，𝑛𝑖 ∈{0,1}ni∈{0,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．那么，就有
 
-ðð=ððð¡2ð¡+ðð¡â12ð¡â1+â¯+ð121+ð020=ðð020Ãðð121Ãâ¯Ãððð¡â12ð¡â1Ãððð¡2ð¡.an=ant2t+ntâ12tâ1+â¯+n121+n020=an020Ãan121Ãâ¯Ãantâ12tâ1Ãant2t.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑛=𝑎𝑛𝑡2𝑡+𝑛𝑡−12𝑡−1+⋯+𝑛121+𝑛020=𝑎𝑛020×𝑎𝑛121×⋯×𝑎𝑛𝑡−12𝑡−1×𝑎𝑛𝑡2𝑡.an=ant2t+nt−12t−1+⋯+n121+n020=an020×an121×⋯×ant−12t−1×ant2t.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ³¨æï¼åªæ ðð =1ni=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¡¹æä¼çæ­£åºç°å¨ä¹ç§¯çè®¡ç®ä¸­ï¼
+注意，只有 𝑛𝑖 =1ni=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的项才会真正出现在乘积的计算中．
 
-æ ¹æ®è¿ä¸è¡¨è¾¾å¼ï¼å¯ä»¥é¦å å¨ Î(logâ¡ð)Î(logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶é´å è®¡ç®åº ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Î(logâ¡ð)Î(logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª 2ð2k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å¹çåå¼ï¼ç¶åè±è´¹ Î(logâ¡ð)Î(logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´éæ©ç­äº 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºè¿å¶ä½å¯¹åºçå¹æ¬¡ä¹å°æç»ç»æä¸­ï¼è¿å°±æ¯å¿«éå¹çè¿­ä»£çæ¬å®ç°ï¼
+根据这一表达式，可以首先在 Θ(log⁡𝑛)Θ(log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时间内计算出 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Θ(log⁡𝑛)Θ(log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 2𝑘2k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次幂的取值，然后花费 Θ(log⁡𝑛)Θ(log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间选择等于 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二进制位对应的幂次乘到最终结果中．这就是快速幂的迭代版本实现．
 
-ä¼ªä»£ç å¦ä¸ï¼
+伪代码如下：
 
-ðð¥ð ð¨ð«ð¢ð­ð¡ð¦Â FastPow(ð,ð):ðð§ð©ð®ð­.Â BaseÂ ðÂ and exponentÂ ð.ðð®ð­ð©ð®ð­.Â PowerÂ ðð.ððð­ð¡ð¨ð.1ððð ð¢ðð¡âId2ð°ð¡ð¢ð¥ðÂ ð>0Â ðð¨3ð¢ðÂ ðmod2=1Â ð­ð¡ðð§4ððð ð¢ðð¡âððð ð¢ðð¡â ð5ðð§ð ð¢ð6ðâðâ ð7ðâð/28ðð§ð ð°ð¡ð¢ð¥ð9ð«ðð­ð®ð«ð§Â ððð ð¢ðð¡AlgorithmÂ FastPow(a,n):Input.Â BaseÂ aÂ and exponentÂ n.Output.Â PowerÂ an.Method.1resultâId2whileÂ n>0Â do3ifÂ nmod2=1Â then4resultâresultâ a5end if6aâaâ a7nân/28end while9returnÂ result![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐀𝐥𝐠𝐨𝐫𝐢𝐭𝐡𝐦 FastPow(𝑎,𝑛):𝐈𝐧𝐩𝐮𝐭. Base 𝑎 and exponent 𝑛.𝐎𝐮𝐭𝐩𝐮𝐭. Power 𝑎𝑛.𝐌𝐞𝐭𝐡𝐨𝐝.1𝑟𝑒𝑠𝑢𝑙𝑡←Id2𝐰𝐡𝐢𝐥𝐞 𝑛>0 𝐝𝐨3𝐢𝐟 𝑛mod2=1 𝐭𝐡𝐞𝐧4𝑟𝑒𝑠𝑢𝑙𝑡←𝑟𝑒𝑠𝑢𝑙𝑡⋅𝑎5𝐞𝐧𝐝 𝐢𝐟6𝑎←𝑎⋅𝑎7𝑛←𝑛/28𝐞𝐧𝐝 𝐰𝐡𝐢𝐥𝐞9𝐫𝐞𝐭𝐮𝐫𝐧 𝑟𝑒𝑠𝑢𝑙𝑡Algorithm FastPow(a,n):Input. Base a and exponent n.Output. Power an.Method.1result←Id2while n>0 do3if nmod2=1 then4result←result⋅a5end if6a←a⋅a7n←n/28end while9return result![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å©ç¨è¿ä¸æ¹æ³è®¡ç®å¿«éå¹ï¼éè¦è¿è¡ Î(logâ¡ð)Î(logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ä¹æ³è¿ç®ï¼
+利用这一方法计算快速幂，需要进行 Θ(log⁡𝑛)Θ(log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次乘法运算．
 
-### éå½çæ¬
+### 递归版本
 
-è¿ä¸è¿ç¨åæ ·å¯ä»¥éè¿éå½å½¢å¼å®ç°ï¼æ³¨æå°ï¼ææ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºè¿å¶å±å¼å¯ä»¥éå½å°åä½
+这一过程同样可以通过递归形式实现．注意到，指数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二进制展开可以递归地写作
 
-(ðð¡ðð¡â1â¯ð1ð0)2=2Ã(ðð¡ðð¡â1â¯ð1)2+ð0.(ntntâ1â¯n1n0)2=2Ã(ntntâ1â¯n1)2+n0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑛𝑡𝑛𝑡−1⋯𝑛1𝑛0)2=2×(𝑛𝑡𝑛𝑡−1⋯𝑛1)2+𝑛0.(ntnt−1⋯n1n0)2=2×(ntnt−1⋯n1)2+n0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼å¹æ¬¡ ððan![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥éå½å°è®¡ç®ä¸º
+因此，幂次 𝑎𝑛an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以递归地计算为
 
-ðð=â§{ {â¨{ {â©1,ð=0,(ðâð/2â)2,ð>0Â andÂ ðÂ is even,(ðâð/2â)2â ð,ð>0Â andÂ ðÂ is odd.an={1,n=0,(aân/2â)2,n>0Â andÂ nÂ is even,(aân/2â)2â a,n>0Â andÂ nÂ is odd.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑛=⎧{ {⎨{ {⎩1,𝑛=0,(𝑎⌊𝑛/2⌋)2,𝑛>0 and 𝑛 is even,(𝑎⌊𝑛/2⌋)2⋅𝑎,𝑛>0 and 𝑛 is odd.an={1,n=0,(a⌊n/2⌋)2,n>0 and n is even,(a⌊n/2⌋)2⋅a,n>0 and n is odd.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±æ¯å¿«éå¹çéå½çæ¬å®ç°ï¼
+这就是快速幂的递归版本实现．
 
-ä¼ªä»£ç å¦ä¸ï¼
+伪代码如下：
 
-ðð¥ð ð¨ð«ð¢ð­ð¡ð¦Â FastPow(ð,ð):ðð§ð©ð®ð­.Â BaseÂ ðÂ and exponentÂ ð.ðð®ð­ð©ð®ð­.Â PowerÂ ðð.ððð­ð¡ð¨ð.1ð¢ðÂ ð=0Â ð­ð¡ðð§2ð«ðð­ð®ð«ð§Â Id3ðð§ð ð¢ð4ððð ð¢ðð¡âFastPow(ð,ð/2)5ð¢ðÂ ðmod2=0Â ð­ð¡ðð§6ð«ðð­ð®ð«ð§Â ððð ð¢ðð¡â ððð ð¢ðð¡7ðð¥ð¬ð8ð«ðð­ð®ð«ð§Â ððð ð¢ðð¡â ððð ð¢ðð¡â ð9ðð§ð ð¢ðAlgorithmÂ FastPow(a,n):Input.Â BaseÂ aÂ and exponentÂ n.Output.Â PowerÂ an.Method.1ifÂ n=0Â then2returnÂ Id3end if4resultâFastPow(a,n/2)5ifÂ nmod2=0Â then6returnÂ resultâ result7else8returnÂ resultâ resultâ a9end if![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐀𝐥𝐠𝐨𝐫𝐢𝐭𝐡𝐦 FastPow(𝑎,𝑛):𝐈𝐧𝐩𝐮𝐭. Base 𝑎 and exponent 𝑛.𝐎𝐮𝐭𝐩𝐮𝐭. Power 𝑎𝑛.𝐌𝐞𝐭𝐡𝐨𝐝.1𝐢𝐟 𝑛=0 𝐭𝐡𝐞𝐧2𝐫𝐞𝐭𝐮𝐫𝐧 Id3𝐞𝐧𝐝 𝐢𝐟4𝑟𝑒𝑠𝑢𝑙𝑡←FastPow(𝑎,𝑛/2)5𝐢𝐟 𝑛mod2=0 𝐭𝐡𝐞𝐧6𝐫𝐞𝐭𝐮𝐫𝐧 𝑟𝑒𝑠𝑢𝑙𝑡⋅𝑟𝑒𝑠𝑢𝑙𝑡7𝐞𝐥𝐬𝐞8𝐫𝐞𝐭𝐮𝐫𝐧 𝑟𝑒𝑠𝑢𝑙𝑡⋅𝑟𝑒𝑠𝑢𝑙𝑡⋅𝑎9𝐞𝐧𝐝 𝐢𝐟Algorithm FastPow(a,n):Input. Base a and exponent n.Output. Power an.Method.1if n=0 then2return Id3end if4result←FastPow(a,n/2)5if nmod2=0 then6return result⋅result7else8return result⋅result⋅a9end if![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å©ç¨è¿ä¸æ¹æ³è®¡ç®å¿«éå¹ï¼éè¦éå½ Î(logâ¡ð)Î(logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ï¼åæ ·éè¦ Î(logâ¡ð)Î(logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ä¹æ³è¿ç®ï¼å°½ç®¡å¤æåº¦ç¸åï¼ç±äºéå½æ¬èº«æä¸å®å¼éï¼æä»¥å®è·µä¸­è¿­ä»£çæ¬çéåº¦æ´å¿«ï¼
+利用这一方法计算快速幂，需要递归 Θ(log⁡𝑛)Θ(log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次，同样需要 Θ(log⁡𝑛)Θ(log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次乘法运算．尽管复杂度相同，由于递归本身有一定开销，所以实践中迭代版本的速度更快．
 
-## åºç¨
+## 应用
 
-### æ¨¡æä¹ä¸åå¹
+### 模意义下取幂
 
-[æ´è°· P1226ãæ¨¡æ¿ãå¿«éå¹](https://www.luogu.com.cn/problem/P1226)
+[洛谷 P1226【模板】快速幂](https://www.luogu.com.cn/problem/P1226)
 
-ç»å®ä¸ä¸ªæ´æ° ð,ð,ða,b,p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ± ððmodðabmodp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð â¥2pâ¥2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+给定三个整数 𝑎,𝑏,𝑝a,b,p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，求 𝑎𝑏mod𝑝abmodp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．其中 𝑝 ≥2p≥2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¿æ¯ä¸ä¸ªéå¸¸å¸¸è§çåºç¨ï¼ä¾å¦å®å¯ä»¥ç¨äºè®¡ç®æ¨¡æä¹ä¸çä¹æ³éå ï¼æ¢ç¶æä»¬ç¥éåæ¨¡çè¿ç®ä¸ä¼å¹²æ¶ä¹æ³è¿ç®ï¼å æ­¤æä»¬åªéè¦å¨è®¡ç®çè¿ç¨ä¸­åæ¨¡å³å¯ï¼
+这是一个非常常见的应用，例如它可以用于计算模意义下的乘法逆元．既然我们知道取模的运算不会干涉乘法运算，因此我们只需要在计算的过程中取模即可．
 
-é¦å æä»¬å¯ä»¥ç´æ¥æç §ä¸è¿°éå½æ¹æ³å®ç°ï¼
+首先我们可以直接按照上述递归方法实现：
 
-åèå®ç°
+参考实现
 
 C++Python
 
@@ -90,9 +90,9 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 ``` |  ```text def binpow ( a , b , p ): if b == 0 : return 1 res = binpow ( a , b // 2 , p ) if ( b % 2 ) == 1 : return res * res * a % p else : return res * res % p ```   
 ---|---  
   
-ç¬¬äºç§å®ç°æ¹æ³æ¯ééå½å¼çï¼å®å¨å¾ªç¯çè¿ç¨ä¸­å°äºè¿å¶ä½ä¸º 1 æ¶å¯¹åºçå¹ç´¯ä¹å°ç­æ¡ä¸­ï¼å°½ç®¡ä¸¤è ççè®ºå¤æåº¦æ¯ç¸åçï¼ä½ç¬¬äºç§å¨å®è·µè¿ç¨ä¸­çéåº¦æ¯æ¯ç¬¬ä¸ç§æ´å¿«çï¼å ä¸ºéå½ä¼è±è´¹ä¸å®çå¼éï¼
+第二种实现方法是非递归式的．它在循环的过程中将二进制位为 1 时对应的幂累乘到答案中．尽管两者的理论复杂度是相同的，但第二种在实践过程中的速度是比第一种更快的，因为递归会花费一定的开销．
 
-åèå®ç°
+参考实现
 
 C++Python
 
@@ -102,91 +102,91 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 ``` |  ```text def binpow ( a , b , p ): res = 1 while b > 0 : if b & 1 : res = res * a % p a = a * a % p b >>= 1 return res ```   
 ---|---  
   
-æ³¨æ
+注意
 
-  * æ¨¡æ°éå¸¸æ åµä¸å¤§äº 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¨ååç¹æ®çæ åµä¸ï¼æ¨¡æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯è½ç­äº 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶éè¦ç¹æ®èè ð =0b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ åµï¼
-  * å½ææ°å¾å¤§æ¶ï¼éå©ç¨ [æ©å±æ¬§æå®ç](../number-theory/fermat/#æ©å±æ¬§æå®ç) éå¹åè®¡ç®ï¼
+  * 模数通常情况下大于 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．在十分特殊的情况下，模数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可能等于 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，此时需要特殊考虑 𝑏 =0b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情况．
+  * 当指数很大时，需利用 [扩展欧拉定理](../number-theory/fermat/#扩展欧拉定理) 降幂后计算．
 
-### è®¡ç®ææ³¢é£å¥æ°
+### 计算斐波那契数
 
-æ ¹æ®ææ³¢é£å¥æ°åçéæ¨å¼ ð¹ð =ð¹ðâ1 +ð¹ðâ2Fn=Fnâ1+Fnâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¬å¯ä»¥æå»ºä¸ä¸ª 2 Ã22Ã2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç©éµæ¥è¡¨ç¤ºä» ð¹ð,ð¹ð+1Fi,Fi+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ð¹ð+1,ð¹ð+2Fi+1,Fi+2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ¢ï¼äºæ¯å¨è®¡ç®è¿ä¸ªç©éµç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å¹çæ¶ä¾¯ï¼æä»¬ä½¿ç¨å¿«éå¹çææ³ï¼å¯ä»¥å¨ Î(logâ¡ð)Î(logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å è®¡ç®åºç»æï¼å¯¹äºæ´å¤çç»èåè§ [ææ³¢é£å¥æ°å](../combinatorics/fibonacci/)ï¼ç©éµå¿«éå¹çå®ç°åè§ [ç©éµå ééæ¨](../linear-algebra/matrix/#ç©éµå) ä¸­çå®ç°ï¼
+根据斐波那契数列的递推式 𝐹𝑛 =𝐹𝑛−1 +𝐹𝑛−2Fn=Fn−1+Fn−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，我们可以构建一个 2 ×22×2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的矩阵来表示从 𝐹𝑖,𝐹𝑖+1Fi,Fi+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝐹𝑖+1,𝐹𝑖+2Fi+1,Fi+2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的变换．于是在计算这个矩阵的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次幂的时侯，我们使用快速幂的思想，可以在 Θ(log⁡𝑛)Θ(log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间内计算出结果．对于更多的细节参见 [斐波那契数列](../combinatorics/fibonacci/)，矩阵快速幂的实现参见 [矩阵加速递推](../linear-algebra/matrix/#矩阵加速递推) 中的实现．
 
-### å¤æ¬¡ç½®æ¢
+### 多次置换
 
-é®é¢æè¿°
+问题描述
 
-ç»ä½ ä¸ä¸ªé¿åº¦ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºååä¸ä¸ªç½®æ¢ï¼æè¿ä¸ªåºåç½®æ¢ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ï¼
+给你一个长度为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的序列和一个置换，把这个序列置换 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次．
 
-ç®åå°æè¿ä¸ªç½®æ¢å ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å¹ï¼ç¶åæå®åºç¨å°åºåä¸å³å¯ï¼æ¶é´å¤æåº¦ä¸º ð(ðlogâ¡ð)O(nlogâ¡k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºæ´å¤çç»èåè§ [ç½®æ¢çå¤å](../permutation/#å¤å)ï¼
+简单地把这个置换取 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次幂，然后把它应用到序列上即可．时间复杂度为 𝑂(𝑛log⁡𝑘)O(nlog⁡k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于更多的细节参见 [置换的复合](../permutation/#复合)．
 
-æ³¨æ
+注意
 
-å¯¹è¿ä¸ªç½®æ¢å»ºå¾ï¼ç¶åå¨æ¯ä¸ä¸ªç¯ä¸åå«å ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å¹ï¼äºå®ä¸ç­ä»·äº ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹ç¯é¿åæ¨¡ï¼ï¼å¯ä»¥å¨ ð(ð)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦ä¸è§£å³æ­¤é®é¢ï¼
+对这个置换建图，然后在每一个环上分别做 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次幂（事实上等价于 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对环长取模），可以在 𝑂(𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度下解决此问题．
 
-### å éå ä½ä¸­å¯¹ç¹éçæä½
+### 加速几何中对点集的操作
 
 [HDU 4087 A Letter to Programmers](https://acm.hdu.edu.cn/showproblem.php?pid=4087)
 
-ç»å®ä¸ç»´ç©ºé´ä¸­ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç¹ ððpi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¦æ±å° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæä½é½åºç¨äºè¿äºç¹ï¼å å« 3 ç§æä½ï¼
+给定三维空间中 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个点 𝑝𝑖pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，要求将 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个操作都应用于这些点．包含 3 种操作：
 
-  1. æ²¿æä¸ªåéç§»å¨ç¹çä½ç½®ï¼Shiftï¼ï¼
-  2. ææ¯ä¾ç¼©æ¾è¿ä¸ªç¹çåæ ï¼Scaleï¼ï¼
-  3. ç»ææ¡ç´çº¿æè½¬ï¼Rotateï¼ï¼
+  1. 沿某个向量移动点的位置（Shift）．
+  2. 按比例缩放这个点的坐标（Scale）．
+  3. 绕某条直线旋转（Rotate）．
 
-è¿æä¸ä¸ªç¹æ®çæä½ï¼å°±æ¯å°æä¸ªæä½åºåéå¤ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ï¼Repeatï¼ï¼Repeat æä½å¯ä»¥åµå¥ï¼è¾åºæä½ç»æåæ¯ä¸ªç¹çåæ ï¼
+还有一个特殊的操作，就是将某个操作序列重复 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次（Repeat），Repeat 操作可以嵌套．输出操作结束后每个点的坐标．
 
-åè [åéä¸ç©éµ](../linear-algebra/vector/#åéä¸ç©éµ) ä¸­çå å®¹ï¼æ¯ä¸ç§æä½é½å¯ä»¥ç¨ä¸ä¸ªåæ¢ç©éµè¡¨ç¤ºï¼ä¸ç³»åè¿ç»­çåæ¢å¯ä»¥ç¨ç©éµçä¹ç§¯æ¥è¡¨ç¤ºï¼ä¸ä¸ª Repeat æä½å°±ç¸å½äºåä¸ä¸ªç©éµç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å¹ï¼è¿æ ·å¯ä»¥ç¨ ð(ðlogâ¡ð)O(mlogâ¡k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´è®¡ç®åºæ´ä¸ªåæ¢åºåæç»å½¢æçç©éµï¼æåå°å®åºç¨å° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç¹ä¸ï¼æ»å¤æåº¦ ð(ð +ðlogâ¡ð)O(n+mlogâ¡k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+参考 [向量与矩阵](../linear-algebra/vector/#向量与矩阵) 中的内容，每一种操作都可以用一个变换矩阵表示，一系列连续的变换可以用矩阵的乘积来表示．一个 Repeat 操作就相当于取一个矩阵的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次幂．这样可以用 𝑂(𝑚log⁡𝑘)O(mlog⁡k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间计算出整个变换序列最终形成的矩阵．最后将它应用到 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个点上，总复杂度 𝑂(𝑛 +𝑚log⁡𝑘)O(n+mlog⁡k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### å®é¿è·¯å¾è®¡æ°
+### 定长路径计数
 
-é®é¢æè¿°
+问题描述
 
-ç»ä¸ä¸ªæåå¾ï¼è¾¹æä¸º 1ï¼ï¼æ±ä»»æä¸¤ç¹ ð¢,ð£u,v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é´ä» ð¢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ð£v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¿åº¦ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè·¯å¾çæ¡æ°ï¼
+给一个有向图（边权为 1），求任意两点 𝑢,𝑣u,v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 间从 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，长度为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的路径的条数．
 
-æä»¬æè¯¥å¾çé»æ¥ç©éµ ðM![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å¹ï¼é£ä¹ ðð,ðMi,j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±è¡¨ç¤ºä» ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¿åº¦ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè·¯å¾çæ°ç®ï¼è¯¥ç®æ³çå¤æåº¦æ¯ ð(ð3logâ¡ð)O(n3logâ¡k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æå ³è¯¥ç®æ³çç»èè¯·åè§ [ç©éµ](../linear-algebra/matrix/#å®é¿è·¯å¾ç»è®¡) é¡µé¢ï¼
+我们把该图的邻接矩阵 𝑀M![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次幂，那么 𝑀𝑖,𝑗Mi,j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就表示从 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 长度为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的路径的数目．该算法的复杂度是 𝑂(𝑛3log⁡𝑘)O(n3log⁡k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．有关该算法的细节请参见 [矩阵](../linear-algebra/matrix/#定长路径统计) 页面．
 
-### æ¨¡æä¹ä¸çæ´æ°ä¹æ³
+### 模意义下的整数乘法
 
-é®é¢æè¿°
+问题描述
 
-ç»å®éè´æ´æ° ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ­£æ´æ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®¡ç® ð ÃðmodðaÃbmodm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð,ð â¤ð â¤1018a,bâ¤mâ¤1018![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+给定非负整数 𝑎,𝑏a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和正整数 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，计算 𝑎 ×𝑏mod𝑚a×bmodm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑎,𝑏 ≤𝑚 ≤1018a,b≤m≤1018![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä¸äºè¿å¶åå¹çææ³ä¸æ ·ï¼è¿æ¬¡æä»¬å°å ¶ä¸­çä¸ä¸ªä¹æ°è¡¨ç¤ºä¸ºè¥å¹²ä¸ª 2 çæ´æ°æ¬¡å¹çåçå½¢å¼ï¼å ä¸ºå¨å¯¹ä¸ä¸ªæ°åä¹ 2 å¹¶åæ¨¡çè¿ç®çæ¶ä¾¯ï¼æä»¬å¯ä»¥è½¬åä¸ºå åæä½é²æ­¢æ´åæº¢åºï¼è¿æ ·å¯ä»¥å¨ ð(logâ¡ð)O(logâ¡m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦ä¸è§£å³é®é¢ï¼éå½æ¹æ³å¦ä¸ï¼
+与二进制取幂的思想一样，这次我们将其中的一个乘数表示为若干个 2 的整数次幂的和的形式．因为在对一个数做乘 2 并取模的运算的时侯，我们可以转化为加减操作防止整型溢出．这样可以在 𝑂(log⁡𝑚)O(log⁡m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度下解决问题．递归方法如下：
 
-ðâ ð=â§{ {â¨{ {â©0ifÂ ð=02â ð2â ðifÂ ð>0Â andÂ ðÂ even2â ðâ12â ð+ðifÂ ð>0Â andÂ ðÂ oddaâ b={0ifÂ a=02â a2â bifÂ a>0Â andÂ aÂ even2â aâ12â b+bifÂ a>0Â andÂ aÂ odd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎⋅𝑏=⎧{ {⎨{ {⎩0if 𝑎=02⋅𝑎2⋅𝑏if 𝑎>0 and 𝑎 even2⋅𝑎−12⋅𝑏+𝑏if 𝑎>0 and 𝑎 odda⋅b={0if a=02⋅a2⋅bif a>0 and a even2⋅a−12⋅b+bif a>0 and a odd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä½å¨å®é ä½¿ç¨ä¸­ï¼æ­¤æ¹æ³ç±äºå¼å ¥äºæ´å¤§çè®¡ç®å¤æåº¦å¯¼è´æ¶é´æçä¸ä¼ï¼å®é ç¼ç¨ä¸­éå¸¸å©ç¨ [å¿«éä¹](../number-theory/mod-arithmetic/#å¿«éä¹) æ¥è¿è¡æ¨¡æ°èå´å¨ `long long` æ¶çä¹æ³æä½ï¼
+但在实际使用中，此方法由于引入了更大的计算复杂度导致时间效率不优．实际编程中通常利用 [快速乘](../number-theory/mod-arithmetic/#快速乘) 来进行模数范围在 `long long` 时的乘法操作．
 
-### é«ç²¾åº¦å¿«éå¹
+### 高精度快速幂
 
-åç½®æè½ï¼[å¤§æ´æ°ä¹æ³](../bignum/#ä¹æ³)
+前置技能：[大整数乘法](../bignum/#乘法)
 
-[æ´è°· P1045 [NOIP 2003 æ®åç»] éº¦æ£®æ°](https://www.luogu.com.cn/problem/P1045)
+[洛谷 P1045 [NOIP 2003 普及组] 麦森数](https://www.luogu.com.cn/problem/P1045)
 
-ç»å®æ´æ° ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼1000 <ð <31000001000<P<3100000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼è®¡ç® 2ð â12Pâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½æ°ä¸æå 500500![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½æ°å­ï¼ç¨åè¿å¶æ°è¡¨ç¤ºï¼ï¼ä¸è¶³ 500500![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½æ¶é«ä½è¡¥ 0ï¼
+给定整数 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（1000 <𝑃 <31000001000<P<3100000![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），计算 2𝑃 −12P−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的位数与最后 500500![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位数字（用十进制数表示），不足 500500![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位时高位补 0．
 
-ä»£ç å®ç°
+代码实现
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 ``` |  ```text #include <cmath> #include <cstring> #include <iostream> using namespace std ; const int M = 500 ; int a [ 505 ], b [ 505 ], t [ 505 ]; // å¤§æ´æ°ä¹æ³ void mult ( int x [], int y []) { memset ( t , 0 , sizeof ( t )); for ( int i = 1 ; i <= x [ 0 ]; i ++ ) { for ( int j = 1 ; j <= y [ 0 ]; j ++ ) { if ( i \+ j \- 1 > M ) continue ; t [ i \+ j \- 1 ] += x [ i ] * y [ j ]; t [ i \+ j ] += t [ i \+ j \- 1 ] / 10 ; t [ i \+ j \- 1 ] %= 10 ; t [ 0 ] = i \+ j ; } } memcpy ( b , t , sizeof ( b )); } // å¿«éå¹ void binpow ( int p ) { if ( p == 1 ) { memcpy ( b , a , sizeof ( b )); return ; } binpow ( p / 2 ); // (2^(p/2))^2=2^p mult ( b , b ); // å¯¹ b å¹³æ¹ if ( p % 2 == 1 ) mult ( b , a ); } int main () { cin . tie ( nullptr ) -> sync_with_stdio ( false ); int p ; cin >> p ; a [ 0 ] = 1 ; // è®°å½ a æ°ç»çä½æ° a [ 1 ] = 2 ; // å¯¹ 2 è¿è¡å¹³æ¹ b [ 0 ] = 1 ; // è®°å½ b æ°ç»çä½æ° b [ 1 ] = 1 ; // ç­æ¡æ°ç» binpow ( p ); cout << ( int )( log10 ( 2 ) * p ) \+ 1 << '\n' ; b [ 1 ] -= 1 ; // æåä¸ä½å 1 for ( int i = M ; i >= 1 ; i \-- ) { cout << b [ i ]; if (( i \- 1 ) % 50 == 0 ) { cout << '\n' ; } } } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 ``` |  ```text #include <cmath> #include <cstring> #include <iostream> using namespace std ; const int M = 500 ; int a [ 505 ], b [ 505 ], t [ 505 ]; // 大整数乘法 void mult ( int x [], int y []) { memset ( t , 0 , sizeof ( t )); for ( int i = 1 ; i <= x [ 0 ]; i ++ ) { for ( int j = 1 ; j <= y [ 0 ]; j ++ ) { if ( i \+ j \- 1 > M ) continue ; t [ i \+ j \- 1 ] += x [ i ] * y [ j ]; t [ i \+ j ] += t [ i \+ j \- 1 ] / 10 ; t [ i \+ j \- 1 ] %= 10 ; t [ 0 ] = i \+ j ; } } memcpy ( b , t , sizeof ( b )); } // 快速幂 void binpow ( int p ) { if ( p == 1 ) { memcpy ( b , a , sizeof ( b )); return ; } binpow ( p / 2 ); // (2^(p/2))^2=2^p mult ( b , b ); // 对 b 平方 if ( p % 2 == 1 ) mult ( b , a ); } int main () { cin . tie ( nullptr ) -> sync_with_stdio ( false ); int p ; cin >> p ; a [ 0 ] = 1 ; // 记录 a 数组的位数 a [ 1 ] = 2 ; // 对 2 进行平方 b [ 0 ] = 1 ; // 记录 b 数组的位数 b [ 1 ] = 1 ; // 答案数组 binpow ( p ); cout << ( int )( log10 ( 2 ) * p ) \+ 1 << '\n' ; b [ 1 ] -= 1 ; // 最后一位减 1 for ( int i = M ; i >= 1 ; i \-- ) { cout << b [ i ]; if (( i \- 1 ) % 50 == 0 ) { cout << '\n' ; } } } ```   
 ---|---  
   
-## åºæ°åºå®çé¢å¤çå¿«éå¹
+## 底数固定的预处理快速幂
 
-å½åºæ° ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åºå®æ¶ï¼å¯ä»¥å©ç¨ [ååææ³](../../ds/decompose/)ï¼ç¨ä¸å®çæ¶é´é¢å¤çåç¨ ð(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´åç­ä¸æ¬¡å¹è¯¢é®ï¼è¿ä¸ç®æ³ä¹å¸¸ç§°ä¸ºå éå¹ï¼è¿ç¨å¦ä¸ï¼
+当底数 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 固定时，可以利用 [分块思想](../../ds/decompose/)，用一定的时间预处理后用 𝑂(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间回答一次幂询问．这一算法也常称为光速幂．过程如下：
 
-  1. éå®ä¸ä¸ªæ° ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¢å¤çåº ð0,ð1,â¯,ðð â1a0,a1,â¯,asâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð0,ðð ,â¯,ðâð/ð âð a0,as,â¯,aâp/sâs![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼å¹¶å­å¨ä¸¤ä¸ªæ°ç»éï¼
-  2. å¯¹äºæ¯ä¸æ¬¡è¯¢é® ððab![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å° ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æåæ âð/ð âð  +(ðmodð )âb/sâs+(bmods)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ðð =ðâð/ð âð  â ððmodð ab=aâb/sâsâ abmods![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±å¯ä»¥ ð(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ±åºç­æ¡ï¼
+  1. 选定一个数 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，预处理出 𝑎0,𝑎1,⋯,𝑎𝑠−1a0,a1,⋯,as−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑎0,𝑎𝑠,⋯,𝑎⌊𝑝/𝑠⌋𝑠a0,as,⋯,a⌊p/s⌋s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值并存在两个数组里；
+  2. 对于每一次询问 𝑎𝑏ab![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，将 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 拆分成 ⌊𝑏/𝑠⌋𝑠 +(𝑏mod𝑠)⌊b/s⌋s+(bmods)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝑎𝑏 =𝑎⌊𝑏/𝑠⌋𝑠 ⋅𝑎𝑏mod𝑠ab=a⌊b/s⌋s⋅abmods![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就可以 𝑂(1)O(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 求出答案．
 
-åè®¾ææ° ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çèå´æ¯ [0,ð][0,n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹åé¿ ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»å¸¸éæ©ä¸º âðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè ä¸ä¹ç¸è¿ç 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡ï¼éæ© âðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è·å¾æä¼çé¢å¤çå¤æåº¦ ð(âð)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èéæ© 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡å¯ä»¥ä½¿ç¨ä½æä½ç®åè®¡ç®ï¼
+假设指数 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的范围是 [0,𝑛][0,n]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么块长 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 经常选择为 √𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或者与之相近的 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次．选择 √𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以获得最优的预处理复杂度 𝑂(√𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而选择 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次可以使用位操作简化计算．
 
-ç¹å«å°ï¼å¯¹äºæ¨¡æä¹ä¸å¹çè®¡ç®ï¼åºæ° ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸åéå«çæ¨¡æ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹è¦ç¸åè¿ä¸è¦æ±ï¼ç±äº [æ©å±æ¬§æå®ç](../number-theory/fermat/#æ©å±æ¬§æå®ç)ï¼å¯¹äºä»»ææ¨¡æ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¢å¤ççææ°èå´ä¸çä¸º ð =2ð(ð)n=2Ï(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºç´ æ¨¡æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¢å¤ççèå´ä¸çä¸º ð =ð â1n=pâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸¤ç§æ å½¢é¢å¤ççå¤æåº¦é½æ¯ ð(âð)O(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+特别地，对于模意义下幂的计算，底数 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相同隐含着模数 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也要相同这一要求．由于 [扩展欧拉定理](../number-theory/fermat/#扩展欧拉定理)，对于任意模数 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，预处理的指数范围上界为 𝑛 =2𝜑(𝑚)n=2φ(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；对于素模数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，预处理的范围上界为 𝑛 =𝑝 −1n=p−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这两种情形预处理的复杂度都是 𝑂(√𝑚)O(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åèä»£ç 
+参考代码
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 ``` |  ```text int a , mod , pow1 [ 65536 ], pow2 [ 65536 ]; void preproc () { pow1 [ 0 ] = pow2 [ 0 ] = 1 ; for ( int i = 1 ; i < 65536 ; i ++ ) pow1 [ i ] = 1L L * pow1 [ i \- 1 ] * a % mod ; int pow65536 = 1L L * pow1 [ 65535 ] * a % mod ; for ( int i = 1 ; i < 65536 ; i ++ ) pow2 [ i ] = 1L L * pow2 [ i \- 1 ] * pow65536 % mod ; } int query ( int pows ) { return 1L L * pow1 [ pows & 65535 ] * pow2 [ pows >> 16 ] % mod ; } ```   
 ---|---  
   
-## ä¹ é¢
+## 习题
 
   * [UVa 1230 - MODEX](http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=3671)
   * [UVa 374 - Big Mod](http://uva.onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&category=24&page=show_problem&problem=310)
@@ -196,11 +196,11 @@ C++Python
   * [SPOJ - Locker](http://www.spoj.com/problems/LOCKER/)
   * [SPOJ - Just add it](http://www.spoj.com/problems/ZSUM/)
 
-**æ¬é¡µé¢é¨åå å®¹è¯èªåæ[ÐÐ¸Ð½Ð°ÑÐ½Ð¾Ðµ Ð²Ð¾Ð·Ð²ÐµÐ´ÐµÐ½Ð¸Ðµ Ð² ÑÑÐµÐ¿ÐµÐ½Ñ](http://e-maxx.ru/algo/binary_pow) ä¸å ¶è±æç¿»è¯ç [Binary Exponentiation](https://cp-algorithms.com/algebra/binary-exp.html)ï¼å ¶ä¸­ä¿æççæåè®®ä¸º Public Domain + Leave a Linkï¼è±æççæåè®®ä¸º CC-BY-SA 4.0ï¼**
+**本页面部分内容译自博文[Бинарное возведение в степень](http://e-maxx.ru/algo/binary_pow) 与其英文翻译版 [Binary Exponentiation](https://cp-algorithms.com/algebra/binary-exp.html)．其中俄文版版权协议为 Public Domain + Leave a Link；英文版版权协议为 CC-BY-SA 4.0．**
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/27 12:26:08ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/binary-exponentiation.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/binary-exponentiation.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Ir1d](https://github.com/Ir1d), [sshwy](https://github.com/sshwy), [Tiphereth-A](https://github.com/Tiphereth-A), [cbw2007](https://github.com/cbw2007), [Enter-tainer](https://github.com/Enter-tainer), [Xeonacid](https://github.com/Xeonacid), [HeRaNO](https://github.com/HeRaNO), [ksyx](https://github.com/ksyx), [ouuan](https://github.com/ouuan), [c-forrest](https://github.com/c-forrest), [Henry-ZHR](https://github.com/Henry-ZHR), [iamtwz](https://github.com/iamtwz), [luoguyuntianming](https://github.com/luoguyuntianming), [Marcythm](https://github.com/Marcythm), [Peanut-Tang](https://github.com/Peanut-Tang), [Aquistcev](https://github.com/Aquistcev), [billchenchina](https://github.com/billchenchina), [CCXXXI](https://github.com/CCXXXI), [chinggg](https://github.com/chinggg), [eyedeng](https://github.com/eyedeng), [FFjet](https://github.com/FFjet), [Great-designer](https://github.com/Great-designer), [H-J-Granger](https://github.com/H-J-Granger), [hhc0001](https://github.com/hhc0001), [hsfzLZH1](https://github.com/hsfzLZH1), [Hszzzx](https://github.com/Hszzzx), [JEB-Bem](https://github.com/JEB-Bem), [Jude Gao](mailto:jude.gao@faire.com), [kenlig](https://github.com/kenlig), [kfy666](https://github.com/kfy666), [Konano](https://github.com/Konano), [Menci](https://github.com/Menci), [NachtgeistW](https://github.com/NachtgeistW), [qwqAutomaton](https://github.com/qwqAutomaton), [shawlleyw](https://github.com/shawlleyw), [shenshuaijie](https://github.com/shenshuaijie), [StudyingFather](https://github.com/StudyingFather), [TOMWT-qwq](https://github.com/TOMWT-qwq), [TrisolarisHD](mailto:orzcyand1317@gmail.com), [TRSWNCA](https://github.com/TRSWNCA), [uqzjc](https://github.com/uqzjc), [Zhoier](https://github.com/Zhoier)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/27 12:26:08，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/binary-exponentiation.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/binary-exponentiation.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [sshwy](https://github.com/sshwy), [Tiphereth-A](https://github.com/Tiphereth-A), [cbw2007](https://github.com/cbw2007), [Enter-tainer](https://github.com/Enter-tainer), [Xeonacid](https://github.com/Xeonacid), [HeRaNO](https://github.com/HeRaNO), [ksyx](https://github.com/ksyx), [ouuan](https://github.com/ouuan), [c-forrest](https://github.com/c-forrest), [Henry-ZHR](https://github.com/Henry-ZHR), [iamtwz](https://github.com/iamtwz), [luoguyuntianming](https://github.com/luoguyuntianming), [Marcythm](https://github.com/Marcythm), [Peanut-Tang](https://github.com/Peanut-Tang), [Aquistcev](https://github.com/Aquistcev), [billchenchina](https://github.com/billchenchina), [CCXXXI](https://github.com/CCXXXI), [chinggg](https://github.com/chinggg), [eyedeng](https://github.com/eyedeng), [FFjet](https://github.com/FFjet), [Great-designer](https://github.com/Great-designer), [H-J-Granger](https://github.com/H-J-Granger), [hhc0001](https://github.com/hhc0001), [hsfzLZH1](https://github.com/hsfzLZH1), [Hszzzx](https://github.com/Hszzzx), [JEB-Bem](https://github.com/JEB-Bem), [Jude Gao](mailto:jude.gao@faire.com), [kenlig](https://github.com/kenlig), [kfy666](https://github.com/kfy666), [Konano](https://github.com/Konano), [Menci](https://github.com/Menci), [NachtgeistW](https://github.com/NachtgeistW), [qwqAutomaton](https://github.com/qwqAutomaton), [shawlleyw](https://github.com/shawlleyw), [shenshuaijie](https://github.com/shenshuaijie), [StudyingFather](https://github.com/StudyingFather), [TOMWT-qwq](https://github.com/TOMWT-qwq), [TrisolarisHD](mailto:orzcyand1317@gmail.com), [TRSWNCA](https://github.com/TRSWNCA), [uqzjc](https://github.com/uqzjc), [Zhoier](https://github.com/Zhoier)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

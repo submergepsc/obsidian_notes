@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/pandas/pandas-loc-iloc.html
-Title: Pandas 数据选取（loc / iloc / at） | 菜鸟教程
-
-Pandas 数据选取（loc / iloc / at） | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-Pandas 教程

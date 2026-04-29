@@ -1,4 +1,4 @@
-# 树的重心 - OI Wiki
+﻿# 树的重心 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/tree-centroid/
 

@@ -157,7 +157,7 @@ C++Python
 
 ![bcc-2.png](./images/bcc-2.svg)
 
-如上图所示，黑色边为树边，红色边为非树边，每一条非树边的两个端点都唯一对应了树上由树边构成的的一条简单路径．
+如上图所示，黑色边为树边，红色边为非树边，每一条非树边的两个端点都唯一对应了树上由树边构成的一条简单路径．
 
 考虑一张新图，新图中的每一个点对应原图中的每一条树边（在图中用蓝色点表示）．对于原图中的每一条非树边，将这条非树边对应的树上简单路径中的所有边在新图中对应的蓝点连成一个连通块（在图中用蓝色的边体现出来）．
 
@@ -169,7 +169,7 @@ C++Python
 
 * * *
 
->  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/graph/bcc.md)  
+>  __本页面最近更新： 2026/4/23 03:45:48，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/graph/bcc.md)  
 >  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/graph/bcc.md "edit.link.title")  
->  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [iamtwz](https://github.com/iamtwz), [sshwy](https://github.com/sshwy), [Enter-tainer](https://github.com/Enter-tainer), [HeRaNO](https://github.com/HeRaNO), [ksyx](https://github.com/ksyx), [Menci](https://github.com/Menci), [mgt](mailto:i@margatroid.xyz), [nirobcsilsol](https://github.com/nirobcsilsol), [ouuan](https://github.com/ouuan), [pkwv2012](https://github.com/pkwv2012), [shawlleyw](https://github.com/shawlleyw), [Tiphereth-A](https://github.com/Tiphereth-A), [TrisolarisHD](mailto:orzcyand1317@gmail.com), [Xeonacid](https://github.com/Xeonacid), [xglight](https://github.com/xglight), [ZnPdCo](https://github.com/ZnPdCo)  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [iamtwz](https://github.com/iamtwz), [sshwy](https://github.com/sshwy), [Enter-tainer](https://github.com/Enter-tainer), [HeRaNO](https://github.com/HeRaNO), [ksyx](https://github.com/ksyx), [lailai0916](https://github.com/lailai0916), [Menci](https://github.com/Menci), [mgt](mailto:i@margatroid.xyz), [nirobcsilsol](https://github.com/nirobcsilsol), [ouuan](https://github.com/ouuan), [pkwv2012](https://github.com/pkwv2012), [shawlleyw](https://github.com/shawlleyw), [Tiphereth-A](https://github.com/Tiphereth-A), [TrisolarisHD](mailto:orzcyand1317@gmail.com), [Xeonacid](https://github.com/Xeonacid), [xglight](https://github.com/xglight), [ZnPdCo](https://github.com/ZnPdCo)  
 >  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

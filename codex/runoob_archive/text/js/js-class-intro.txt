@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/js/js-class-intro.html
-Title: JavaScript 类(class) | 菜鸟教程
-
-JavaScript 类(class) | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-Javascript 教程

@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/pandas/pandas-pivot.html
-Title: Pandas 数据重塑（pivot / melt / stack / unstack） | 菜鸟教程
-
-Pandas 数据重塑（pivot / melt / stack / unstack） | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-Pandas 教程

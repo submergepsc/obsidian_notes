@@ -1,4 +1,4 @@
-# 最小环 - OI Wiki
+﻿# 最小环 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/min-cycle/
 

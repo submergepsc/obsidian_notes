@@ -1,4 +1,4 @@
-# 强连通分量 - OI Wiki
+﻿# 强连通分量 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/scc/
 

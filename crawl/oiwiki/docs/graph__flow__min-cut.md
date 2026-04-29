@@ -1,4 +1,4 @@
-# 最小割 - OI Wiki
+﻿# 最小割 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/flow/min-cut/
 

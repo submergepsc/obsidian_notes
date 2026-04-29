@@ -1,485 +1,485 @@
-# PÃ³lya è®¡æ° - OI Wiki
+﻿# Pólya 计数 - OI Wiki
 
 - Source: https://oi-wiki.org/math/combinatorics/polya/
 
-# PÃ³lya è®¡æ°
+# Pólya 计数
 
-åç½®ç¥è¯ï¼[ç½®æ¢åæå](../../permutation/)
+前置知识：[置换和排列](../../permutation/)
 
-## å¼å ¥
+## 引入
 
-PÃ³lya è®¡æ°åçéå¸¸ç¨æ¥è§£å³ä¸äºæ¶åãæ¬è´¨ä¸åãçè®¡æ°é®é¢ï¼
+Pólya 计数原理通常用来解决一些涉及「本质不同」的计数问题．
 
-æ¬æå¯è½æ¶åç¾¤è®ºçç¸å ³å å®¹
+本文可能涉及群论的相关内容
 
-æ¬æå¯è½æ¶åå°ç¾¤è®ºçç¸å ³å å®¹ï¼æ¬æä¼å¯¹æ¶åå°çç¾¤è®ºæ¦å¿µåç®åçè§£éï¼ä»¥ä¾¿äºä¸çæç¸å ³å å®¹çè¯»è çè§£ååºç¨ PÃ³lya è®¡æ°åçï¼å ³äºç¾¤è®ºçå å®¹ï¼ä¸¥æ ¼çè¡¨è¿°åè®¨è®ºè¯·åè [æ½è±¡ä»£æ°åºæ¬æ¦å¿µ](../../algebra/basic/)ã[ç¾¤è®º](../../algebra/group-theory/) ç­ç« èï¼
+本文可能涉及到群论的相关内容．本文会对涉及到的群论概念做简单的解释，以便于不熟悉相关内容的读者理解和应用 Pólya 计数原理．关于群论的内容，严格的表述和讨论请参考 [抽象代数基本概念](../../algebra/basic/)、[群论](../../algebra/group-theory/) 等章节．
 
-ãç©ºé´å¯¹ç§°ç¾¤ãããå¯¹ç§°ç¾¤ãä¸ãç½®æ¢ç¾¤ã
+「空间对称群」、「对称群」与「置换群」
 
-æ¬æä¸­å°ä¸å¯é¿å å°åæ¶ä½¿ç¨è¿ä¸ç±»ç¾¤çåå­ï¼å°½ç®¡å¯è½å¾å®¹æé ææ··æ·ï¼ä½å®ä»¬ç¡®å®ä»£æä¸åçæ¦å¿µï¼ç»å®å ä½ç»æï¼å®ä¸é¢çå¯¹ç§°æä½æçæ¯è½å¤ä½¿å®ä¸å®èªèº«éåçå ä½åæ¢ï¼èç©ºé´å¯¹ç§°ç¾¤ï¼symmetry groupï¼å°±æ¯è¿äºå¯¹ç§°æä½çéåï¼å¯¹ç§°ç¾¤ï¼symmetric groupï¼æ¯ç»å®éåä¸çå ¨ä½ç½®æ¢çéåï¼ç½®æ¢ç¾¤ï¼permutation groupï¼åæ¯å¯¹ç§°ç¾¤çå­ç¾¤ï¼å³ä¸äºï¼æªå¿ æ¯å ¨ä½ï¼ç½®æ¢ææçç¾¤ï¼åæä¼è§£éå¦ä½å°ç»å®å ä½ç»æçç©ºé´å¯¹ç§°ç¾¤è¡¨ç¤ºæç½®æ¢ç¾¤çå½¢å¼ï¼å¹¶ç¨äºè®¡æ°é®é¢ï¼
+本文中将不可避免地同时使用这三类群的名字．尽管可能很容易造成混淆，但它们确实代指不同的概念．给定几何结构，它上面的对称操作指的是能够使它与它自身重合的几何变换，而空间对称群（symmetry group）就是这些对称操作的集合．对称群（symmetric group）是给定集合上的全体置换的集合．置换群（permutation group）则是对称群的子群，即一些（未必是全体）置换构成的群．后文会解释如何将给定几何结构的空间对称群表示成置换群的形式，并用于计数问题．
 
-## Burnside å¼ç
+## Burnside 引理
 
-ç¸å ³é è¯»ï¼[Burnside å¼ç](../../algebra/group-theory/#burnside-å¼ç)
+相关阅读：[Burnside 引理](../../algebra/group-theory/#burnside-引理)
 
-PÃ³lya è®¡æ°åçæ¯ Burnside å¼ççåºç¨åæ¨å¹¿ï¼å¨ä»ç» PÃ³lya è®¡æ°åçä¹åï¼éè¦å ç®åå°åé¡¾ Burnside å¼ççå å®¹ï¼
+Pólya 计数原理是 Burnside 引理的应用和推广．在介绍 Pólya 计数原理之前，需要先简单地回顾 Burnside 引理的内容．
 
-ä¸ºäºæ»ç»åºä¸è¬çè§å¾ï¼é¦å èèç®åçä¾å­ï¼
+为了总结出一般的规律，首先考虑简单的例子．
 
-é¡¹é¾æè²
+项链染色
 
-ç°å¨æä¸ä¸²å ±åä¸ªç å­çé¡¹é¾ï¼æ¯ä¸ªç å­å¯ä»¥æ¯çº¢è²æè èè²ï¼è®¡ç®å ±æå ç§æ¬è´¨ä¸åçç å­ï¼ï¼å¦æä¸¤ç§æè²çç»æå¯ä»¥éè¿æè½¬é¡¹é¾éåï¼å°±è®¤ä¸ºæ¯ç¸åçï¼)
+现在有一串共四个珠子的项链，每个珠子可以是红色或者蓝色，计算共有几种本质不同的珠子．（如果两种染色的结果可以通过旋转项链重合，就认为是相同的．)
 
-è§£ç­ååæ
+解答和分析
 
-è¿ä¸ªé®é¢è¶³å¤ç®åï¼å¯ä»¥éè¿æä¸¾çæ¹å¼å ä»¥è§£ç­ï¼ç å­å ±è®¡ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼æ¯ä¸ªç å­å¯ä»¥æ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§é¢è²ï¼æä»¥ï¼é¡¹é¾ææå¯è½çæè²æ¹æ¡å ±è®¡ 24 =1624=16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ï¼å°å¯ä»¥éè¿æè½¬ç¸äºå¾å°çåå°ä¸ç»ï¼å ±è®¡ 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»ï¼å¦ä¸å¾æç¤ºï¼ï¼å ¶ä¸­ï¼åä¸ªæè²æ¹æ¡çç¼ç è¡¨ç¤ºäºèªå·¦ä¸è§çç å­å¼å§é¡ºæ¶éæçé¢è²ï¼ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºèè²ï¼ð R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºçº¢è²ï¼åå°åä¸ç»çæè²æ¹æ¡çç¼ç æçç¸åçèæ¯é¢è²ï¼ï¼
+这个问题足够简单，可以通过枚举的方式加以解答．珠子共计 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，每个珠子可以染 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种颜色，所以，项链所有可能的染色方案共计 24 =1624=16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种．将可以通过旋转相互得到的分到一组，共计 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 组，如下图所示．（其中，单个染色方案的编码表示了自左下角的珠子开始顺时针染的颜色，𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示蓝色，𝑅R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示红色；分到同一组的染色方案的编码有着相同的背景颜色．）
 
-![é¡¹é¾æè²](./images/necklaces.svg)
+![项链染色](./images/necklaces.svg)
 
-ä»è¿ä¸ªä¾å­ä¸­å¯ä»¥çå°ï¼è¦è®¡ç®æ¬è´¨ä¸åçæè²çç§ç±»æ°ï¼å ³é®å ¶å®æ¯ç¥éæ¯ç§æ¬è´¨ç¸åçæè²å¯¹åºå ç§ä¸åçæè²æ¹æ¡ï¼ä¹å°±æ¯è¯´ï¼è¦ææ¸ æ¥ä¸å¾ä¸­æ¯ä¸ªåç»çå¤§å°ï¼
+从这个例子中可以看到，要计算本质不同的染色的种类数，关键其实是知道每种本质相同的染色对应几种不同的染色方案．也就是说，要搞清楚上图中每个分组的大小．
 
-è½å¤åå°åä¸ä¸ªç»ä¸­çæè²æ¹æ¡ï¼å°±æ¯æå®ä»¬ä¹é´è½å¤éè¿æè½¬æä½äºç¸è½¬åçæè²æ¹æ¡ï¼æ»å ±æ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§æè½¬çæ¹å¼ï¼å³
+能够分到同一个组中的染色方案，就是指它们之间能够通过旋转操作互相转化的染色方案．总共有 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种旋转的方式，即
 
-ðº={ð0,ð1,ð2,ð3},G={r0,r1,r2,r3},![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐺={𝑟0,𝑟1,𝑟2,𝑟3},G={r0,r1,r2,r3},![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå«è¡¨ç¤ºæè½¬ 0,1,2,30,1,2,3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ï¼æè½¬ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å°±æ¯åå°ä¸å¨ï¼
+分别表示旋转 0,1,2,30,1,2,3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次．旋转 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次就是原地不动．
 
-é¦å çæè²æ¹æ¡ ð ð ðµðµRRBB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨çåç»ï¼å¯¹å®æ½å è¿åç§æä½ï¼å°åå«å¾å°
+首先看染色方案 𝑅𝑅𝐵𝐵RRBB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在的分组．对它施加这四种操作，将分别得到
 
-ð ð ðµðµ,ð ðµðµð ,ðµðµð ð ,ðµð ð ðµ.RRBB,RBBR,BBRR,BRRB.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑅𝑅𝐵𝐵,𝑅𝐵𝐵𝑅,𝐵𝐵𝑅𝑅,𝐵𝑅𝑅𝐵.RRBB,RBBR,BBRR,BRRB.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åç§æè²æ¹æ¡äºä¸ç¸åï¼å æ­¤è¿ä¸ªç»å°±æ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ï¼
+四种染色方案互不相同，因此这个组就有 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素．
 
-åçæè²æ¹æ¡ ðµð ðµð BRBR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨çåç»ï¼å¯¹å®åæ ·æ½å è¿åç§æä½ï¼å°åå«å¾å°
+再看染色方案 𝐵𝑅𝐵𝑅BRBR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在的分组．对它同样施加这四种操作，将分别得到
 
-ðµð ðµð ,ð ðµð ðµ,ðµð ðµð ,ð ðµð ðµ.BRBR,RBRB,BRBR,RBRB.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐵𝑅𝐵𝑅,𝑅𝐵𝑅𝐵,𝐵𝑅𝐵𝑅,𝑅𝐵𝑅𝐵.BRBR,RBRB,BRBR,RBRB.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ­¤æ¶ï¼æè½¬ä¸¤æ¬¡çç»æåä¸æè½¬çç»ææ¯ä¸è´çï¼æè½¬ä¸æ¬¡åæè½¬ä¸æ¬¡çç»ææ¯ä¸è´çï¼æä»¥ï¼è¿ä¸ªç»å°±æ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ï¼
+此时，旋转两次的结果和不旋转的结果是一致的，旋转三次和旋转一次的结果是一致的．所以，这个组就有 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素．
 
-å¦æçæè²æ¹æ¡ ðµðµðµðµBBBB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð ð ð ð RRRR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨çåç»ï¼å¯¹å®ä»¬æ½å åç§æä½å¾å°çç»æé½æ¯å®ä»¬èªèº«ï¼å èï¼æ¯ä¸ªç»å°±åªæ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ï¼
+如果看染色方案 𝐵𝐵𝐵𝐵BBBB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑅𝑅𝑅𝑅RRRR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在的分组．对它们施加四种操作得到的结果都是它们自身．因而，每个组就只有 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素．
 
-å¦æç¨ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºæè²æ¹æ¡ï¼ðºð¥Gx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºå¯¹æè²æ¹æ¡ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä½åè½å¤å¾å°çé¢è²ç¼ç çéåï¼é£ä¹ä»ä¸é¢çä¾å­å¯ä»¥æ»ç»åºä¸ä¸ªè§å¾ï¼é£å°±æ¯ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæä½å¯¹äº ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½±åå­å¨æç§ãå¨ææ§ãï¼
+如果用 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示染色方案，𝐺𝑥Gx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示对染色方案 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 操作后能够得到的颜色编码的集合，那么从上面的例子可以总结出一个规律，那就是 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的操作对于 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的影响存在某种「周期性」．
 
-è®¾ |ðº||G|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºæä½çæ»ä¸ªæ°ï¼è¿ç§å½±åçãå¨ææ§ãæå³çï¼å¦ææ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸åç ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çæä½å°æè²æ¹æ¡ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¢å°å®èªèº«ï¼é£ä¹ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨è¿äºæä½ä¸çç»æå°±ä¼éå¤åºç° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ï¼å èï¼æè²æ¹æ¡ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨è¿äºæä½ä¸å ±è®¡æ |ðº|/ð|G|/m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ä¸åçç»æï¼è¿ä¹å°±æ¯ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨åç»çå¤§å°ï¼
+设 |𝐺||G|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示操作的总个数，这种影响的「周期性」意味着，如果有 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不同的 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的操作将染色方案 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变换到它自身，那么 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在这些操作下的结果就会重复出现 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次．因而，染色方案 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在这些操作下共计有 |𝐺|/𝑚|G|/m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种不同的结果，这也就是 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在分组的大小．
 
-è¿ä¸ªä¾å­ä¸­ï¼å ä¸ºåªææè½¬é¶æ¬¡ ð0r0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè½å¤å° ð ð ðµðµRRBB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¢å°å®èªèº«ï¼æä»¥ï¼å®æå¨åç»çå¤§å°ç­äº 4/1 =44/1=4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èæè½¬é¶æ¬¡ ð0r0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸¤æ¬¡ ð2r2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½è½å° ðµð ðµð BRBR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¢å°å®èªèº«ï¼æä»¥ï¼å®æå¨åç»çå¤§å°ç­äº 4/2 =24/2=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ è®ºæè½¬å æ¬¡é½è½å° ðµðµðµðµBBBB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¢å°å®èªèº«ï¼æä»¥ï¼å®æå¨åç»çå¤§å°å°±æ¯ 4/4 =14/4=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这个例子中，因为只有旋转零次 𝑟0r0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 才能够将 𝑅𝑅𝐵𝐵RRBB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变换到它自身，所以，它所在分组的大小等于 4/1 =44/1=4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；而旋转零次 𝑟0r0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和两次 𝑟2r2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都能将 𝐵𝑅𝐵𝑅BRBR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变换到它自身，所以，它所在分组的大小等于 4/2 =24/2=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；无论旋转几次都能将 𝐵𝐵𝐵𝐵BBBB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变换到它自身，所以，它所在分组的大小就是 4/4 =14/4=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¨ä¸é¢çåè¿°ä¸­ï¼ç¨ ðºð¥Gx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºè½å¤å° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¢å°å®èªèº«çæä½çæ°ç®ï¼æä»¥ï¼|ðºð¥||Gx|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯ä¸é¢ç ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶ï¼ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨åç»å¤§å°æ¯ |ðº|/|ðºð¥||G|/|Gx|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¦è®¡ç®æè²æ¹æ¡çåç»çæ°ç®ï¼åªéè¦ç©·ä¸¾ææå¯è½çæè²æ¹æ¡ ð¥ âðxâX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹æå¨åç»å¤§å°ä¸º |ðºð¥||Gx|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæè²æ¹æ¡ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) èµä»¥æé 1/|ðºð¥|1/|Gx|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±è½å¤å°åç»çæ°ç®è¡¨è¾¾ä¸º
+在下面的叙述中，用 𝐺𝑥Gx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示能够将 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变换到它自身的操作的数目，所以，|𝐺𝑥||Gx|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是上面的 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此时，𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在分组大小是 |𝐺|/|𝐺𝑥||G|/|Gx|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．要计算染色方案的分组的数目，只需要穷举所有可能的染色方案 𝑥 ∈𝑋x∈X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，对所在分组大小为 |𝐺𝑥||Gx|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的染色方案 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 赋以权重 1/|𝐺𝑥|1/|Gx|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就能够将分组的数目表达为
 
-|ð/ðº|=âð¥âð1|ðºð¥|=âð¥âð|ðºð¥||ðº|.|X/G|=âxâX1|Gx|=âxâX|Gx||G|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝑋/𝐺|=∑𝑥∈𝑋1|𝐺𝑥|=∑𝑥∈𝑋|𝐺𝑥||𝐺|.|X/G|=∑x∈X1|Gx|=∑x∈X|Gx||G|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç°å¨è¿ä¸ªå¼å­çå½¢å¼å¹¶ä¸ä¾¿äºåºç¨ï¼è®° ðð¥gx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¯¹æè²æ¹æ¡ ð¥ âðxâX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åºç¨æä½ ð âðºgâG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç»æï¼é£ä¹ä¸é¢æè¿°çéå ðºð¥Gx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯ {ð âðº :ðð¥ =ð¥}{gâG:gx=x}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥äº¤æ¢æ±åé¡ºåºå°±æ
+现在这个式子的形式并不便于应用．记 𝑔𝑥gx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是对染色方案 𝑥 ∈𝑋x∈X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 应用操作 𝑔 ∈𝐺g∈G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的结果，那么上面描述的集合 𝐺𝑥Gx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是 {𝑔 ∈𝐺 :𝑔𝑥 =𝑥}{g∈G:gx=x}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以交换求和顺序就有
 
-âð¥âð|ðºð¥|=âð¥âð|{ðâðº:ðð¥=ð¥}|=âð¥âðâðâðº[ðð¥=ð¥]=âðâðºâð¥âð[ðð¥=ð¥]=âðâðº|{ð¥âð:ðð¥=ð¥}|=âðâðº|ðð|.âxâX|Gx|=âxâX|{gâG:gx=x}|=âxâXâgâG[gx=x]=âgâGâxâX[gx=x]=âgâG|{xâX:gx=x}|=âgâG|Xg|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∑𝑥∈𝑋|𝐺𝑥|=∑𝑥∈𝑋|{𝑔∈𝐺:𝑔𝑥=𝑥}|=∑𝑥∈𝑋∑𝑔∈𝐺[𝑔𝑥=𝑥]=∑𝑔∈𝐺∑𝑥∈𝑋[𝑔𝑥=𝑥]=∑𝑔∈𝐺|{𝑥∈𝑋:𝑔𝑥=𝑥}|=∑𝑔∈𝐺|𝑋𝑔|.∑x∈X|Gx|=∑x∈X|{g∈G:gx=x}|=∑x∈X∑g∈G[gx=x]=∑g∈G∑x∈X[gx=x]=∑g∈G|{x∈X:gx=x}|=∑g∈G|Xg|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ [ â ][â ]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º Iverson æ¬å·ï¼äº¤æ¢æ±åè®°å·çç»æä¸­ï¼ðð ={ð¥ âð :ðð¥ =ð¥}Xg={xâX:gx=x}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æå¨æä½ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¿æä¸åçæè²æ¹æ¡ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåï¼ç®è¨ä¹ï¼å®æ¯æä½ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸å¨ç¹ï¼
+其中 [ ⋅][⋅]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 Iverson 括号．交换求和记号的结果中，𝑋𝑔 ={𝑥 ∈𝑋 :𝑔𝑥 =𝑥}Xg={x∈X:gx=x}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是指在操作 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下保持不变的染色方案 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合．简言之，它是操作 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的不动点．
 
-å¨è¿äºè®¨è®ºä¹åï¼ç°å¨å¯ä»¥å°åç»çä¸ªæ°åä½
+在这些讨论之后，现在可以将分组的个数写作
 
-|ð/ðº|=1|ðº|âðâðº|ðð|.|X/G|=1|G|âgâG|Xg|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝑋/𝐺|=1|𝐺|∑𝑔∈𝐺|𝑋𝑔|.|X/G|=1|G|∑g∈G|Xg|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¹å°±æ¯è¯´ï¼åç»çä¸ªæ°æ¯åç§æè½¬æä½çä¸å¨ç¹çå¹³åä¸ªæ°ï¼
+也就是说，分组的个数是各种旋转操作的不动点的平均个数．
 
-ä½ä¸ºè¿ä¸ªç»æçåºç¨ï¼åæ¬¡è®¡ç®é¡¹é¾æè²çä¸ªæ°ï¼è¿äºæè½¬æä½çä¸å¨ç¹å¯ä»¥åä¸¾å¦ä¸ï¼
+作为这个结果的应用，再次计算项链染色的个数．这些旋转操作的不动点可以列举如下．
 
-æä½| ä¸å¨ç¹  
+操作| 不动点  
 ---|---  
-ð0r0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-ð1r1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| {ðµðµðµðµ,ð ð ð ð }{BBBB,RRRR}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-ð2r2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| {ðµðµðµðµ,ðµð ðµð ,ð ðµð ðµ,ð ð ð ð }{BBBB,BRBR,RBRB,RRRR}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-ð3r3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| {ðµðµðµðµ,ð ð ð ð }{BBBB,RRRR}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+𝑟0r0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+𝑟1r1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| {𝐵𝐵𝐵𝐵,𝑅𝑅𝑅𝑅}{BBBB,RRRR}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+𝑟2r2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| {𝐵𝐵𝐵𝐵,𝐵𝑅𝐵𝑅,𝑅𝐵𝑅𝐵,𝑅𝑅𝑅𝑅}{BBBB,BRBR,RBRB,RRRR}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+𝑟3r3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| {𝐵𝐵𝐵𝐵,𝑅𝑅𝑅𝑅}{BBBB,RRRR}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
   
-å èï¼åç»çä¸ªæ°å°±ç­äº
+因而，分组的个数就等于
 
 16+2+4+24=6.16+2+4+24=6.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ ·å°±å¾å°äºåé¢çç»æï¼
+这样就得到了前面的结果．
 
-ä»è¿ä¸ªä¾å­ä¸­ï¼å¯ä»¥å½çº³åºä¸è¬çç»æï¼ç¨äºæ±è§£è¿ç±»è®¡æ°é®é¢ï¼ä¸ºäºæ¹ä¾¿è®¨è®ºï¼æ¬æèèçæ æ¯æ¯æè²é®é¢ï¼å½ç¶ä¹å¯ä»¥åºç¨å°å«çæ æ¯ä¸å»ï¼å¨ææ«ä¼æä¾ç¸åºçä¾å­ï¼
+从这个例子中，可以归纳出一般的结果，用于求解这类计数问题．为了方便讨论，本文考虑的情景是染色问题，当然也可以应用到别的情景上去，在文末会提供相应的例子．
 
-æè²é®é¢æ¯è¯´ï¼ç»å®æä¸ªç»æï¼å¨å®çæ¯ä¸ªé¡¶ç¹ä¸æè²ï¼ä¼å¾å°ä¸åçæè²æ¹æ¡ï¼è¿ä¸ªç»ææ¥ææç§å¯¹ç§°æ§ï¼ä½¿å¾çä¼¼ä¸åçæè²æ¹æ¡å¨ç»è¿ä¸ç³»åå¯¹ç§°æä½åè½å¤äºç¸è½¬åï¼è¿äºè½äºç¸è½¬åçæè²æ¹æ¡å°±ç§°ä¸ºæ¬è´¨ç¸åçï¼é®é¢æ¯è¦æ±è§£æ¬è´¨ä¸åçæè²çæ°ç®ï¼
+染色问题是说，给定某个结构，在它的每个顶点上染色，会得到不同的染色方案．这个结构拥有某种对称性，使得看似不同的染色方案在经过一系列对称操作后能够互相转化．这些能互相转化的染色方案就称为本质相同的．问题是要求解本质不同的染色的数目．
 
-æ ¹æ®ä¾å­ä¸­çåæï¼è¦æ±è§£è¿æ ·çé®é¢ï¼é¦å è¦è®¨è®ºç»å®çç»æé½æåªäºå¯¹ç§°æä½ï¼è¿äºå¯¹ç§°æä½çéå ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºç»å®ç»æçç©ºé´å¯¹ç§°ç¾¤ï¼å®é åºç¨ä¸­ï¼å¤§å¤æ¶åæ éäºè§£ç¾¤çå®ä¹ï¼åªéè¦è½å¤ä¸éä¸æ¼å°è®¨è®ºææçç©ºé´å¯¹ç§°æä½å°±å¯ä»¥äºï¼æ¬æåé¢åæäºå ä¸ªå¸¸è§çç©ºé´å¯¹ç§°ç¾¤çç»æï¼é£éè§£éäºç¾¤çå®ä¹ï¼
+根据例子中的分析，要求解这样的问题，首先要讨论给定的结构都有哪些对称操作．这些对称操作的集合 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为给定结构的空间对称群．实际应用中，大多时候无需了解群的定义，只需要能够不重不漏地讨论所有的空间对称操作就可以了．本文后面分析了几个常见的空间对称群的结构，那里解释了群的定义．
 
-æææè²æ¹æ¡çéåè®°ä½ ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­çåä¸ªæè²æ¹æ¡è®°ä½ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä½ ð âðºgâG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç¨å¨æè²æ¹æ¡ ð¥ âðxâX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç»ææ¯ ðð¥gx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼è½å¤éè¿æä¸ªæä½ä½ç¨å¨æè²æ¹æ¡ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çææç»æå°±æ¯ ðºð¥ ={ðð¥ :ð âðº}Gx={gx:gâG}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ç§°ä¸ºç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç¨ä¸ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½¨éï¼åä¸è½¨éä¸­çä¸åæè²æ¹æ¡å°±æ¯è¿ç±»é®é¢ä¸­æè°ãæ¬è´¨ç¸åãçï¼æ èï¼æææ¬è´¨ä¸åçæè²çæ°ç®ï¼å°±ç­ä»·äºä¸åè½¨éçæ°ç®ï¼
+所有染色方案的集合记作 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中的单个染色方案记作 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．操作 𝑔 ∈𝐺g∈G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作用在染色方案 𝑥 ∈𝑋x∈X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的结果是 𝑔𝑥gx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．那么，能够通过某个操作作用在染色方案 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的所有结果就是 𝐺𝑥 ={𝑔𝑥 :𝑔 ∈𝐺}Gx={gx:g∈G}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，它称为群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作用下 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的轨道．同一轨道中的不同染色方案就是这类问题中所谓「本质相同」的．故而，所有本质不同的染色的数目，就等价于不同轨道的数目．
 
-ä¾å­ä¸­çåæå¯ä»¥æ¨å¹¿å°ä¸è¬çæ å½¢ï¼
+例子中的分析可以推广到一般的情形．
 
-Burnside å¼ç
+Burnside 引理
 
-ç»å®ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨éå ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä½ç¨ï¼åææä¸åçè½¨éçæ°ç®
+给定群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在集合 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的作用，则所有不同的轨道的数目
 
-|ð/ðº|=1|ðº|âðâðº|ðð|.|X/G|=1|G|âgâG|Xg|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝑋/𝐺|=1|𝐺|∑𝑔∈𝐺|𝑋𝑔|.|X/G|=1|G|∑g∈G|Xg|.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éï¼ðð ={ð¥ âð :ðð¥ =ð¥}Xg={xâX:gx=x}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ð âðºgâG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½ç¨ä¸çä¸å¨ç¹éåï¼
+这里，𝑋𝑔 ={𝑥 ∈𝑋 :𝑔𝑥 =𝑥}Xg={x∈X:gx=x}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑔 ∈𝐺g∈G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的作用下的不动点集合．
 
-å®çè¯æå ä¹å°±æ¯ç §æ¬ä¸é¢ä¾å­ä¸­çåæï¼ä½æ¯ï¼ä¾å­ä¸­ç¨å°äºè§å¯ï¼å³ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨åä¸ªå ç´ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä½ç¨ç»æå ·ææç§ãå¨ææ§ãï¼æä»¥ï¼è¿ç§å¨æéå¤çæ°ç®å°±ç­äºè½å° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¢å°å®èªèº«çæä½çæ°ç®ï¼è¿ä¸ªè§å¯å¨ä¸è¬çæ å½¢æ¯æ­£ç¡®çï¼ä½æ¯å ä¸ºç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç»æå¯è½å¾å¤æï¼å®çãå¨ææ§ãæªå¿ æ¯ä¾å­ä¸­åç°çé£ä¹ç´æ¥ï¼ä¸¥æ ¼å°è¡¨è¿°è¿ä¸ªè§å¯ï¼éè¦ç¨å°ç¾¤è®ºä¸­ç [è½¨éç¨³å®å­å®çï¼orbit-stabilizer theoremï¼](../../algebra/group-theory/#ç¨³å®åå­)ï¼
+它的证明几乎就是照搬上面例子中的分析．但是，例子中用到了观察，即群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在单个元素 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的作用结果具有某种「周期性」，所以，这种周期重复的数目就等于能将 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变换到它自身的操作的数目．这个观察在一般的情形是正确的，但是因为群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的结构可能很复杂，它的「周期性」未必是例子中呈现的那么直接．严格地表述这个观察，需要用到群论中的 [轨道稳定子定理（orbit-stabilizer theorem）](../../algebra/group-theory/#稳定化子)．
 
-å¨åºç¨çæ¶åï¼åªè¦è½å¤åä¸¾åºææçå¯¹ç§°æä½ï¼å¹¶ä¸ç»åºæ¯ä¸ªå¯¹ç§°æä½å¯¹åºçä¸å¨ç¹æ°ç®å°±å¯ä»¥è§£å³å¯¹åºçè®¡æ°é®é¢ï¼ä¸é¢æ¯ä¸ä¸ªç¨å¾®å¤æçåºç¨ï¼
+在应用的时候，只要能够列举出所有的对称操作，并且给出每个对称操作对应的不动点数目就可以解决对应的计数问题．下面是一个稍微复杂的应用．
 
-ç«æ¹ä½æè²
+立方体染色
 
-ç¨ä¸ç§é¢è²ç»ä¸ä¸ªç«æ¹ä½æè²ï¼æ±æ¬è´¨ä¸åçæ¹æ¡æ°ï¼ç»è¿ç©ºé´æè½¬åç¸åçä¸¤ç§æ¹æ¡è§ä¸ºåä¸ç§ï¼ï¼
+用三种颜色给一个立方体染色，求本质不同的方案数（经过空间旋转后相同的两种方案视为同一种）．
 
-è§£ç­
+解答
 
-å ä¸ºç«æ¹ä½æ 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¢ï¼æ¯ä¸ªé¢æ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­æè²æ¹æ³ï¼æä»¥ï¼æ»å ±æ 3636![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§æè²æ¹æ¡ï¼å³ |ð| =36|X|=36![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®°ç«æ¹ä½çç©ºé´å¯¹ç§°ç¾¤ä¸º ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+因为立方体有 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个面，每个面有 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中染色方法，所以，总共有 3636![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种染色方案，即 |𝑋| =36|X|=36![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．记立方体的空间对称群为 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
 ![](./images/cube.svg)
 
-æ¥ä¸æ¥æä»¬éè¦å¯¹ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çæææä½è¿è¡åæï¼å®ä»¬å¯ä»¥åä¸ºä»¥ä¸å ç±»ï¼æ¹ä¾¿èµ·è§ï¼å°ç«æ¹ä½çå ­ä¸ªé¢åå«ç§°ä¸ºåãåãä¸ãä¸ãå·¦ãå³ï¼ï¼
+接下来我们需要对 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的所有操作进行分析，它们可以分为以下几类（方便起见，将立方体的六个面分别称为前、后、上、下、左、右）：
 
-  * ä¸å¨ï¼å³æç­åæ¢ï¼å ä¸ºææç´æ¥æè²æ¹æ¡ç»è¿æç­åæ¢é½ä¸åï¼å æ­¤å®å¯¹åºç |ðð| =36|Xg|=36![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * ä»¥ä¸¤ä¸ªç¸å¯¹é¢çä¸­å¿è¿çº¿ä¸ºè½´ç 90â90â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè½¬ï¼ç¸å¯¹é¢æ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§éæ©ï¼æè½¬çæ¹åæ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§éæ©ï¼å æ­¤è¿ç±»å ±æ 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç½®æ¢ï¼åè®¾éæ©äºåãåä¸¤ä¸ªé¢ä¸­å¿çè¿çº¿ä¸ºè½´ï¼åå¿ é¡»è¦æ»¡è¶³ä¸ãä¸ãå·¦ãå³åä¸ªé¢çé¢è²ä¸æ ·ï¼æè½ä½¿æè½¬åä¸åï¼æ­¤æ¶ï¼æ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå¯ä»¥ç¬ç«æè²çåºåï¼å æ­¤å®å¯¹åºç |ðð| =33|Xg|=33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * ä»¥ä¸¤ä¸ªç¸å¯¹é¢çä¸­å¿è¿çº¿ä¸ºè½´ç 180â180â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè½¬ï¼ç¸å¯¹é¢æ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§éæ©ï¼æè½¬æ¹åçéæ©æ²¡æå½±åï¼å æ­¤è¿ç±»å ±æ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç½®æ¢ï¼åè®¾éæ©äºåãåä¸¤ä¸ªé¢ä¸­å¿çè¿çº¿ä¸ºè½´ï¼åå¿ é¡»è¦æ»¡è¶³ä¸ãä¸ä¸¤ä¸ªé¢çé¢è²ä¸æ ·ï¼å·¦ãå³ä¸¤ä¸ªé¢çé¢è²ä¸æ ·ï¼æè½ä½¿æè½¬åä¸åï¼æ­¤æ¶ï¼æ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå¯ä»¥ç¬ç«æè²çåºåï¼å æ­¤å®å¯¹åºç |ðð| =34|Xg|=34![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * ä»¥ä¸¤æ¡ç¸å¯¹æ£±çä¸­ç¹è¿çº¿ä¸ºè½´ç 180â180â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè½¬ï¼ç¸å¯¹æ£±æ 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§éæ©ï¼æè½¬æ¹åå¯¹ç½®æ¢ä¾ç¶æ²¡æå½±åï¼å æ­¤è¿ç±»å ±æ 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç½®æ¢ï¼åè®¾éæ©äºåãä¸ä¸¤ä¸ªé¢çè¾¹çåä¸ãåä¸¤ä¸ªé¢çè¾¹çä½ä¸ºç¸å¯¹æ£±ï¼åå¿ é¡»è¦æ»¡è¶³åãä¸ä¸¤ä¸ªé¢çé¢è²ä¸æ ·ï¼ä¸ãåä¸¤ä¸ªé¢çé¢è²ä¸æ ·ï¼å·¦ãå³ä¸¤ä¸ªé¢çé¢è²ä¸æ ·ï¼æè½ä½¿æè½¬åä¸åï¼æ­¤æ¶ï¼æ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå¯ä»¥ç¬ç«æè²çåºåï¼å æ­¤å®å¯¹åºç |ðð| =33|Xg|=33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * ä»¥ä¸¤ä¸ªç¸å¯¹é¡¶ç¹çè¿çº¿ä¸ºè½´ç 120â120â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè½¬ï¼ç¸å¯¹é¡¶ç¹æ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§éæ©ï¼æè½¬çæ¹åæ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§éæ©ï¼å æ­¤è¿ç±»å ±æ 88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç½®æ¢ï¼åè®¾éæ©äºåé¢çå³ä¸è§ååé¢çå·¦ä¸è§ä½ä¸ºç¸å¯¹é¡¶ç¹ï¼åå¿ é¡»æ»¡è¶³åãä¸ãå³ä¸ä¸ªé¢çé¢è²ä¸æ ·ï¼åãä¸ãå·¦ä¸ä¸ªé¢çé¢è²ä¸æ ·ï¼æè½ä½¿æè½¬åä¸åï¼æ­¤æ¶ï¼æ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå¯ä»¥ç¬ç«æè²çåºåï¼å æ­¤å®å¯¹åºç |ðð| =32|Xg|=32![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 不动：即恒等变换，因为所有直接染色方案经过恒等变换都不变，因此它对应的 |𝑋𝑔| =36|Xg|=36![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 以两个相对面的中心连线为轴的 90∘90∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 旋转：相对面有 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种选择，旋转的方向有 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种选择，因此这类共有 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个置换．假设选择了前、后两个面中心的连线为轴，则必须要满足上、下、左、右四个面的颜色一样，才能使旋转后不变．此时，有 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个可以独立染色的区域，因此它对应的 |𝑋𝑔| =33|Xg|=33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 以两个相对面的中心连线为轴的 180∘180∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 旋转：相对面有 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种选择，旋转方向的选择没有影响，因此这类共有 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个置换．假设选择了前、后两个面中心的连线为轴，则必须要满足上、下两个面的颜色一样，左、右两个面的颜色一样，才能使旋转后不变．此时，有 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个可以独立染色的区域，因此它对应的 |𝑋𝑔| =34|Xg|=34![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 以两条相对棱的中点连线为轴的 180∘180∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 旋转：相对棱有 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种选择，旋转方向对置换依然没有影响，因此这类共有 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个置换．假设选择了前、上两个面的边界和下、后两个面的边界作为相对棱，则必须要满足前、上两个面的颜色一样，下、后两个面的颜色一样，左、右两个面的颜色一样，才能使旋转后不变．此时，有 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个可以独立染色的区域，因此它对应的 |𝑋𝑔| =33|Xg|=33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 以两个相对顶点的连线为轴的 120∘120∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 旋转：相对顶点有 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种选择，旋转的方向有 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种选择，因此这类共有 88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个置换．假设选择了前面的右上角和后面的左下角作为相对顶点，则必须满足前、上、右三个面的颜色一样，后、下、左三个面的颜色一样，才能使旋转后不变．此时，有 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个可以独立染色的区域，因此它对应的 |𝑋𝑔| =32|Xg|=32![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å æ­¤ï¼æææ¬è´¨ä¸åçæè²æ¹æ¡æ°ä¸º
+因此，所有本质不同的染色方案数为
 
-1Ã36+6Ã33+3Ã34+6Ã33+8Ã321+6+3+6+8=57.1Ã36+6Ã33+3Ã34+6Ã33+8Ã321+6+3+6+8=57.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1×36+6×33+3×34+6×33+8×321+6+3+6+8=57.1×36+6×33+3×34+6×33+8×321+6+3+6+8=57.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## PÃ³lya è®¡æ°åç
+## Pólya 计数原理
 
-å¨ Burnside å¼ççåè¿°ä¸­ï¼å¹¶æ²¡æç¨å°éå ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æç»æä¸çå ¨é¨æè²æ¹æ¡è¿ä¸æ§è´¨ï¼å ¶å®ï¼Burnside å¼ççåºç¨èå´å¹¶ä¸å±éäºæè²è®¡æ°é®é¢ï¼å¯¹äºæè²è®¡æ°é®é¢ï¼PÃ³lya è®¡æ°åçåæä¾äºæ´ä¸ºåç¡®çè®¡ç®æ¹æ³ï¼å®å¯ä»¥çä½æ¯ä¸è¬æ§ç Burnside å¼çå¨æè²è®¡æ°é®é¢ä¸çåºç¨ï¼
+在 Burnside 引理的叙述中，并没有用到集合 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是某结构上的全部染色方案这一性质．其实，Burnside 引理的应用范围并不局限于染色计数问题．对于染色计数问题，Pólya 计数原理则提供了更为准确的计算方法．它可以看作是一般性的 Burnside 引理在染色计数问题上的应用．
 
-ç¸è¾äº Burnside å¼çï¼PÃ³lya è®¡æ°åççæ¹è¿å°±æ¯æä¾äºä¸å¨ç¹éåå¤§å° |ðð||Xg|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨æè²è®¡æ°é®é¢ä¸­çå ·ä½è®¡ç®æ¹æ³ï¼
+相较于 Burnside 引理，Pólya 计数原理的改进就是提供了不动点集合大小 |𝑋𝑔||Xg|![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在染色计数问题中的具体计算方法．
 
-è¿ä¸ç¹ä»ä¸é¢çç«æ¹ä½æè²çä¾å­å¯ä»¥ç´è§å°çåºæ¥ï¼å¯¹äºæ­£æ¹ä½çåç§å¯¹ç§°æä½ï¼å®çä¸å¨ç¹éåçå¤§å°é½æ¯ ðð(ð)mc(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½¢å¼ï¼è¿é ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯é¢è²çæ°ç®ï¼ð(ð)c(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¨æä½ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯ä»¥ç¬ç«æè²çåºåæ°ç®ï¼è¿ä¸ªè§å¯å¨ä¸è¬çæ å½¢ä¸ä¹æ¯æç«çï¼ä¸è¿éè¦è¿ä¸æ­¥ææ°å¦ä½å¯¹ç»å®ç ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è®¡ç® ð(ð)c(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå¼ï¼
+这一点从上面的立方体染色的例子可以直观地看出来．对于正方体的各种对称操作，它的不动点集合的大小都是 𝑚𝑐(𝑔)mc(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式，这里 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是颜色的数目，𝑐(𝑔)c(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是在操作 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下可以独立染色的区域数目．这个观察在一般的情形下也是成立的，不过需要进一步明晰如何对给定的 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 计算 𝑐(𝑔)c(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的取值．
 
-ç»æä¸ªç»æéæ©ä¸ç§æè²æ¹æ¡ï¼ç¨æ°å­¦è¯­è¨è¡¨ç¤ºï¼å°±æ¯éæ©ä¸ä¸ªä»è¿ä¸ªç»æçå¯ä»¥æè²çå¯¹è±¡ï¼æ¯å¦é¡¹é¾ä¸­çç å­ãç«æ¹ä½çé¢ç­ï¼çéå ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°é¢è²éå ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å° ð :ð âð¶f:XâC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼æè²æ¹æ¡çéåå°±æ¯ ð¶ðCX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¯¥ç»æçç©ºé´å¯¹ç§°ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç¨å¨ç»æä¸ï¼èªç¶ä¹è¿å¸¦çä½ç¨å¨éå ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ï¼è¿ç§å¯¹ç§°æä½ï¼æ»å¯¹åºçéå ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çåå°ï¼å³ **ç½®æ¢** ï¼permutationï¼ï¼1
+给某个结构选择一种染色方案，用数学语言表示，就是选择一个从这个结构的可以染色的对象（比如项链中的珠子、立方体的面等）的集合 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到颜色集合 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的映射 𝑓 :𝑋 →𝐶f:X→C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，染色方案的集合就是 𝐶𝑋CX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．该结构的空间对称群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作用在结构上，自然也连带着作用在集合 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上．这种对称操作，总对应着集合 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的双射，即 **置换** （permutation）．1
 
-ç°å¨åæä¸å¨ç¹éå (ð¶ð)ð(CX)g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç»æï¼ç»å® ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼çä½ ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çç½®æ¢ï¼æ¯ç §ä¾å­ä¸­çåæå¯ä»¥ç¥éï¼å¦æ ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çä½ç½® ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨æéæ¬¡éå¤æä½ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹åå¯ä»¥ç§»å¨å°ä½ç½® ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼ä½ä¸ºä¸å¨ç¹ ð â(ð¶ð)ðfâ(CX)g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¿ ç¶éè¦æ»¡è¶³ ð(ð¥) =ð(ð¦)f(x)=f(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¨ä¸ä¸èè½¨éçè¯­è¨æ¥è¯´ï¼å ä¸ºä½ç½® ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä½ç½® ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤äºæä½ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç¨2çåä¸ä¸ªè½¨éä¸ï¼æä»¥å®ä»¬éè¦æç¸åçé¢è²ï¼ç¨ç½®æ¢çè¯­è¨æ¥è¯´ï¼å¨ç½®æ¢ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç [è½®æ¢åè§£](../../permutation/#è½®æ¢è¡¨ç¤º) ä¸­ï¼ä½ç½® ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä½ç½® ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤äºåä¸è½®æ¢ï¼æ èéè¦æç¸åçé¢è²ï¼è½®æ¢åè§£ä¸­ä¸åçè½®æ¢çæè²ä¸å¿ ç¸åï¼å¯ä»¥ç¬ç«æè²ï¼æä»¥æ­¤æ¶å¯ä»¥ç¬ç«æè²çåºåæ°ç®å°±æ¯ ð(ð)c(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½®æ¢åè§£ä¸­çè½®æ¢æ°ç®ï¼
+现在分析不动点集合 (𝐶𝑋)𝑔(CX)g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的结构．给定 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，看作 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的置换，比照例子中的分析可以知道，如果 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的位置 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在有限次重复操作 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之后可以移动到位置 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，作为不动点 𝑓 ∈(𝐶𝑋)𝑔f∈(CX)g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，必然需要满足 𝑓(𝑥) =𝑓(𝑦)f(x)=f(y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．用上一节轨道的语言来说，因为位置 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和位置 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处于操作 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作用2的同一个轨道上，所以它们需要染相同的颜色．用置换的语言来说，在置换 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 [轮换分解](../../permutation/#轮换表示) 中，位置 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和位置 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处于同一轮换，故而需要染相同的颜色．轮换分解中不同的轮换的染色不必相同，可以独立染色，所以此时可以独立染色的区域数目就是 𝑐(𝑔)c(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的轮换分解中的轮换数目．
 
-ç±æ­¤ï¼æä½ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸å¨ç¹çæ°ç®å°±æ¯ |ð¶|ð(ð)|C|c(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°è¿ä¸ªç»è®ºä»£å ¥ Burnside å¼çï¼å°±è½å¾å°æ æéçæ¬ç **PÃ³lya è®¡æ°åç** ï¼PÃ³lya enumeration theoremï¼ï¼
+由此，操作 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的不动点的数目就是 |𝐶|𝑐(𝑔)|C|c(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．将这个结论代入 Burnside 引理，就能得到无权重版本的 **Pólya 计数原理** （Pólya enumeration theorem）．
 
-PÃ³lya è®¡æ°åçï¼æ æéçæ¬ï¼
+Pólya 计数原理（无权重版本）
 
-ç»å®ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨éå ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä½ç¨åé¢è²éå ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä¸åçæè²æ¹æ¡çæ°ç®
+给定群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在集合 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的作用和颜色集合 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则不同的染色方案的数目
 
-|ð¶ð/ðº|=1|ðº|âðâðºðð(ð),|CX/G|=1|G|âgâGmc(g),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝐶𝑋/𝐺|=1|𝐺|∑𝑔∈𝐺𝑚𝑐(𝑔),|CX/G|=1|G|∑g∈Gmc(g),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éï¼ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯é¢è²æ°ç®ï¼ð(ð)c(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å ç´ ð âðºgâG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç½®æ¢è¡¨ç¤ºçè½®æ¢åè§£ä¸­çè½®æ¢æ°ç®ï¼
+这里，𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是颜色数目，𝑐(𝑔)c(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是元素 𝑔 ∈𝐺g∈G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的置换表示的轮换分解中的轮换数目．
 
-å ³äºç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå«ä¹
+关于群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的含义
 
-è¿éç¥å¾®æäºæ»¥ç¨è®°å·ï¼å¦æç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç¨å¨ ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ï¼é£ä¹æè²æ¹æ¡éå ð¶ðCX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çç¾¤ä½ç¨æ¯éè¦éæ°å®ä¹çï¼è¿éæ²¡æå ä»¥åºåï¼
+这里略微有些滥用记号．如果群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作用在 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上，那么染色方案集合 𝐶𝑋CX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的群作用是需要重新定义的，这里没有加以区分．
 
-ä½ä¸º PÃ³lya è®¡æ°åççç®ååºç¨ï¼ä¸é¢éæ°ç¨ PÃ³lya è®¡æ°åçè®¡ç®åæçä¾å­ï¼
+作为 Pólya 计数原理的简单应用，下面重新用 Pólya 计数原理计算前文的例子．
 
-é¡¹é¾æè²é®é¢å¦è§£
+项链染色问题另解
 
-å°åä¸ªç å­æ å· 1 â¼41â¼4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä¾å­ä¸­çç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ åå«æç½®æ¢è¡¨ç¤ºå¦ä¸ï¼ï¼ååä½è½®æ¢åè§£çå½¢å¼ï¼
+将四个珠子标号 1 ∼41∼4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则例子中的群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素分别有置换表示如下：（均写作轮换分解的形式）
 
-  * æè½¬é¶æ¬¡ ð0 =(1)r0=(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ±è®¡ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè½®æ¢ï¼æ³¨æçç¥ç 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)âè½®æ¢ï¼ï¼
-  * æè½¬ä¸æ¬¡ ð1 =(1234)r1=(1234)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ±è®¡ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè½®æ¢ï¼
-  * æè½¬äºæ¬¡ ð2 =(13)(24)r2=(13)(24)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ±è®¡ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè½®æ¢ï¼
-  * æè½¬ä¸æ¬¡ ð3 =(1432)r3=(1432)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ±è®¡ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè½®æ¢ï¼
+  * 旋转零次 𝑟0 =(1)r0=(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，共计 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个轮换（注意省略的 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)‑轮换）；
+  * 旋转一次 𝑟1 =(1234)r1=(1234)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，共计 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个轮换；
+  * 旋转二次 𝑟2 =(13)(24)r2=(13)(24)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，共计 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个轮换；
+  * 旋转三次 𝑟3 =(1432)r3=(1432)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，共计 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个轮换．
 
-å æ­¤ï¼æ¬è´¨ä¸åæè²çæ°ç®æ¯
+因此，本质不同染色的数目是
 
-24+21+22+214=6.24+21+22+214=6.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ç«æ¹ä½æè²é®é¢å¦è§£
+24+21+22+214=6.24+21+22+214=6.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)立方体染色问题另解
 
-ç±äºåæçåæå®è´¨ä¸å·²ç»ç»åºäºåç±»ç½®æ¢çè½®æ¢è¡¨ç¤ºï¼åªæ¯æ²¡æç¨æ°å­ç¬¦å·æ¾å¼å°ä¹¦ååºæ¥ï¼è¿éä¸åéå¤åæçåæï¼ä» ä» èèä»¥ç¸å¯¹æ£±çä¸­ç¹è¿çº¿ä¸ºè½´ç 180â180â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè½¬çæ å½¢ï¼å ä»¥ç¤ºä¾ï¼å°åãåãä¸ãä¸ãå·¦ãå³å ­ä¸ªé¢ä¾æ¬¡ç¼å·ä¸º 1 â¼61â¼6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶å¯¹åºçç½®æ¢æ¯ (13)(24)(56)(13)(24)(56)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ ð(ð) =3c(g)=3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶å®ç±»åçç½®æ¢ä¹å¯ä»¥ç±»ä¼¼åæï¼æåçè®¡æ°çè¡¨è¾¾å¼ä¹åä¸æå®å ¨ä¸è´ï¼
+由于前文的分析实质上已经给出了各类置换的轮换表示，只是没有用数字符号显式地书写出来，这里不再重复前文的分析．仅仅考虑以相对棱的中点连线为轴的 180∘180∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 旋转的情形，加以示例．将前、后、上、下、左、右六个面依次编号为 1 ∼61∼6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，此时对应的置换是 (13)(24)(56)(13)(24)(56)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此 𝑐(𝑔) =3c(g)=3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．其它类型的置换也可以类似分析，最后的计数的表达式也和上文完全一致．
 
-## å¸¦æéå½¢å¼çæ¨å¹¿
+## 带权重形式的推广
 
-æ æéçæ¬ç PÃ³lya è®¡æ°åçåªè½å¤ç»åºææçæ¬è´¨ä¸åçæè²é®é¢çè®¡æ°ï¼ä½æ¯å¨å¤çæ´ä¸ºç²¾ç»çé®é¢æ¶å°±æ è½ä¸ºåäºï¼æ¯å¦è¯´ï¼å¦æå¨ä¸è¿°æè²é®é¢ä¸­ï¼ç»å®æ¯ç§å¯ä»¥ä½¿ç¨çé¢è²çæ°ç®ï¼å°±ä¸è½å¥ç¨ä¸é¢ç PÃ³lya è®¡æ°å ¬å¼ï¼å¨å®é æ±è§£è¿ç±»é®é¢æ¶ï¼éè¦åæ¬¡ä½¿ç¨ Burnside å¼çå ä»¥æ¨å¯¼ï¼èå°è¿äºç»ææ»ç»ä¸ºçæå½æ°çå½¢å¼ï¼å°±æ¯å¸¦æéçæ¬ç PÃ³lya è®¡æ°åçï¼
+无权重版本的 Pólya 计数原理只能够给出所有的本质不同的染色问题的计数，但是在处理更为精细的问题时就无能为力了．比如说，如果在上述染色问题中，给定每种可以使用的颜色的数目，就不能套用上面的 Pólya 计数公式．在实际求解这类问题时，需要再次使用 Burnside 引理加以推导；而将这些结果总结为生成函数的形式，就是带权重版本的 Pólya 计数原理．
 
-é¡¹é¾æè²ï¼å¸¦éå¶ï¼
+项链染色（带限制）
 
-ç°å¨æä¸ä¸²å ±åä¸ªç å­çé¡¹é¾ï¼æ¯ä¸ªç å­å¯ä»¥æ¯çº¢è²æè èè²ï¼æ°æä¸¤ä¸ªçº¢è²ç å­ãä¸¤ä¸ªèè²ç å­å¯ä»¥ä½¿ç¨ï¼è®¡ç®å ±æå ç§æ¬è´¨ä¸åçç å­ï¼ï¼å¦æä¸¤ç§æè²çç»æå¯ä»¥éè¿æè½¬é¡¹é¾éåï¼å°±è®¤ä¸ºæ¯ç¸åçï¼)
+现在有一串共四个珠子的项链，每个珠子可以是红色或者蓝色，恰有两个红色珠子、两个蓝色珠子可以使用，计算共有几种本质不同的珠子．（如果两种染色的结果可以通过旋转项链重合，就认为是相同的．)
 
-è§£ç­ååæ
+解答和分析
 
-èèä½¿ç¨ Burnside å¼çï¼çº¢è²ãèè²ç å­åä¸¤ä¸ªï¼å ±è®¡æ (42) =6(42)=6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§æè²æ¹æ¡ï¼ç©ºé´å¯¹ç§°ç¾¤ ðº ={ð0,ð1,ð2,ð3}G={r0,r1,r2,r3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå«å¯¹åºæè½¬ 0 â¼30â¼3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ï¼åå®ä»¬å¯¹åºçä¸å¨ç¹éååæå¦ä¸ï¼
+考虑使用 Burnside 引理．红色、蓝色珠子各两个，共计有 (42) =6(42)=6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种染色方案．空间对称群 𝐺 ={𝑟0,𝑟1,𝑟2,𝑟3}G={r0,r1,r2,r3}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别对应旋转 0 ∼30∼3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次，则它们对应的不动点集合分析如下：
 
-  * æè½¬é¶æ¬¡ ð0 =(1)r0=(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¨é¨ 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæè²æ¹æ¡é½æ¯ä¸å¨ç¹ï¼
-  * æè½¬ä¸æ¬¡ ð1 =(1234)r1=(1234)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸å¨ç¹è¦æ±ææç å­æåæ ·çé¢è²ï¼æ²¡æä¸å¨ç¹ï¼
-  * æè½¬ä¸¤æ¬¡ ð2 =(13)(24)r2=(13)(24)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä¸¤ä¸ªå¯ç¬ç«æè²çåºåï¼å¤§å°é½æ¯ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ä»¬è¦åå«ææçº¢è²åèè²ï¼åä¸å¨ç¹éåçå¤§å°ä¸º 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * æè½¬ä¸æ¬¡ ð3 =(1432)r3=(1432)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸æè½¬ä¸æ¬¡çæ å½¢ç¸åï¼æ²¡æä¸å¨ç¹ï¼
+  * 旋转零次 𝑟0 =(1)r0=(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，全部 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个染色方案都是不动点；
+  * 旋转一次 𝑟1 =(1234)r1=(1234)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，不动点要求所有珠子染同样的颜色，没有不动点；
+  * 旋转两次 𝑟2 =(13)(24)r2=(13)(24)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有两个可独立染色的区域，大小都是 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，它们要分别染成红色和蓝色，则不动点集合的大小为 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 旋转三次 𝑟3 =(1432)r3=(1432)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，与旋转一次的情形相同，没有不动点．
 
-æä»¥ï¼æ ¹æ® Burnside å¼çï¼æ¬è´¨ä¸åçæè²æ°ç®ä¸º
+所以，根据 Burnside 引理，本质不同的染色数目为
 
 6+0+2+04=2.6+0+2+04=2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»è¿ä¸ªä¾å­ä¸­å¯ä»¥æ»ç»åºå¦ä¸è®¡ç®æ¹æ³ï¼å¯¹äºéå¶ä¸åé¢è²ä¸ªæ°çé®é¢ï¼åæ ·æ¯è¦æç©ºé´å¯¹ç§°ç¾¤ä¸­åä¸ªç½®æ¢çè½®æ¢åå«æè²ï¼ä½æ¯éè¦è®©æè²ç¨å°çé¢è²æ°ç®æ°å¥½ç­äºç»å®çé¢è²ä¸ªæ°ï¼è¿æ ·çç»åé®é¢éå¸¸æ²¡ææ¾å¼è§£ï¼é¤äºå¯ä»¥éè¿ [æåç»åæ¹æ³](../combination/) è®¡ç®çç¹æ®æ å½¢å¤ï¼éè¦çå [èå é®é¢](../../../dp/knapsack/) è¿è¡æ±è§£ï¼
+从这个例子中可以总结出如下计算方法．对于限制不同颜色个数的问题，同样是要把空间对称群中各个置换的轮换分别染色，但是需要让染色用到的颜色数目恰好等于给定的颜色个数．这样的组合问题通常没有显式解，除了可以通过 [排列组合方法](../combination/) 计算的特殊情形外，需要看做 [背包问题](../../../dp/knapsack/) 进行求解．
 
-éè¿çæå½æ°å¯ä»¥ç»åºè¿ç±»è®¡æ°é®é¢çç­æ¡ï¼ç»å®ç½®æ¢ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æå®ç [å](../../permutation/#ç½®æ¢çå) æ¯ 1ð¼12ð¼2â¯ðð¼ð1Î±12Î±2â¯nÎ±n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³å®æ ð¼ðÎ±k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¿åº¦ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½®æ¢ï¼ä¸å¯¹äºæ¯ä¸ªè½®æ¢å¯ä»¥ææ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§é¢è²ä¸­çä¸ç§ï¼é£ä¹çæå½æ°
+通过生成函数可以给出这类计数问题的答案．给定置换 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果它的 [型](../../permutation/#置换的型) 是 1𝛼12𝛼2⋯𝑛𝛼𝑛1α12α2⋯nαn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即它有 𝛼𝑘αk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个长度为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的轮换，且对于每个轮换可以染成 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种颜色中的一种，那么生成函数
 
-ðâð=1(ðâð=1ð¥ðð)ð¼ðâk=1n(âi=1mxik)Î±k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛∏𝑘=1(𝑚∑𝑖=1𝑥𝑘𝑖)𝛼𝑘∏k=1n(∑i=1mxik)αk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸­åé¡¹å¼ ð¥ð½11ð¥ð½22â¯ð¥ð½ððx1Î²1x2Î²2â¯xmÎ²m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç³»æ°å°±æ¯ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§é¢è²ç¨äº ð½ðÎ²i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡çè®¡æ°ï¼è¿éåæ¬å·ä¸­çè¡¨è¾¾å¼ âðð=1ð¥ððâi=1mxik![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç»åæä¹æ¯ï¼å¯¹äºé¿åº¦ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½®æ¢ï¼ç¨å° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡é¢è² ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæè²æ¹æ³çè®¡æ°æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºå ¶å®æ å½¢ï¼è®¡æ°æ¯ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ­£æè¿°äºåä¸è½®æ¢ä¸­åä½ç½®æè²ä¸è´çè¦æ±ï¼
+中单项式 𝑥𝛽11𝑥𝛽22⋯𝑥𝛽𝑚𝑚x1β1x2β2⋯xmβm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的系数就是第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种颜色用了 𝛽𝑖βi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次的计数．这里圆括号中的表达式 ∑𝑚𝑖=1𝑥𝑘𝑖∑i=1mxik![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的组合意义是，对于长度为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的轮换，用到 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次颜色 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的染色方法的计数是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，对于其它情形，计数是 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；这正描述了同一轮换中各位置染色一致的要求．
 
-ç»å®ç½®æ¢ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æè²è®¡æ°ççæå½æ°ï¼å¯¹åä¸ªåé¡¹å¼åºç¨ Burnside å¼çï¼å°±å¾å°åç§é¢è²ç»åä¸çæ¬è´¨ä¸åçè®¡æ°ï¼å ä¸ºçæå½æ°å¯¹åä¸ªåé¡¹å¼æ¯çº¿æ§çï¼æä»¥æ¬è´¨ä¸åæè²æ¹æ¡çè®¡æ°ççæå½æ°æ¯
+给定置换 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下染色计数的生成函数，对各个单项式应用 Burnside 引理，就得到各种颜色组合下的本质不同的计数．因为生成函数对各个单项式是线性的，所以本质不同染色方案的计数的生成函数是
 
-1|ðº|âðâðºðâð=1(ðâð=1ð¥ðð)ð¼ð.1|G|âgâGâk=1n(âi=1mxik)Î±k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1|𝐺|∑𝑔∈𝐺𝑛∏𝑘=1(𝑚∑𝑖=1𝑥𝑘𝑖)𝛼𝑘.1|G|∑g∈G∏k=1n(∑i=1mxik)αk.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å±å¼è¿ä¸ªå¼å­ï¼æ¯ä¸ªåé¡¹å¼çç³»æ°å°±ç»åºäºç»å®é¢è²ç»åä¸çæ¬è´¨ä¸åæè²çè®¡æ°ï¼
+展开这个式子，每个单项式的系数就给出了给定颜色组合下的本质不同染色的计数．
 
-å¨ä¸è¿°è¿ç¨ä¸­ï¼å¯¹æ¯ä¸ªè½®æ¢è¿è¡æè²ççæå½æ° âðð=1ð¥ððâi=1mxik![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¹¶æ ç¹æ®ä¹å¤ï¼å¯ä»¥æ¿æ¢æå ¶å®ççæå½æ°ï¼å èï¼æå¦ä¸çä¸è¬çæ¬ç PÃ³lya è®¡æ°åçï¼
+在上述过程中，对每个轮换进行染色的生成函数 ∑𝑚𝑖=1𝑥𝑘𝑖∑i=1mxik![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 并无特殊之处，可以替换成其它的生成函数．因而，有如下的一般版本的 Pólya 计数原理．
 
-ç½®æ¢ç¾¤çè½®æ¢ææ 
+置换群的轮换指标
 
-ç»å®ç½®æ¢ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **è½®æ¢ææ ** ï¼cycle indexï¼ï¼å®ä¹ä¸º
+给定置换群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **轮换指标** （cycle index），定义为
 
-ððº(ð¡1,ð¡2,â¯,ð¡ð)=1|ðº|âðâðºð¡ð1(ð)1ð¡ð2(ð)2â¯ð¡ðð(ð)ð,ZG(t1,t2,â¯,tn)=1|G|âgâGt1c1(g)t2c2(g)â¯tncn(g),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑍𝐺(𝑡1,𝑡2,⋯,𝑡𝑛)=1|𝐺|∑𝑔∈𝐺𝑡𝑐1(𝑔)1𝑡𝑐2(𝑔)2⋯𝑡𝑐𝑛(𝑔)𝑛,ZG(t1,t2,⋯,tn)=1|G|∑g∈Gt1c1(g)t2c2(g)⋯tncn(g),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ðð(ð)ck(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç½®æ¢ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½®æ¢åè§£ä¸­é¿åº¦ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½®æ¢çä¸ªæ°ï¼å³ 1ð1(ð)2ð2(ð)â¯ððð(ð)1c1(g)2c2(g)â¯ncn(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç½®æ¢ ðg![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåï¼
+其中，𝑐𝑘(𝑔)ck(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是置换 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的轮换分解中长度为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的轮换的个数，即 1𝑐1(𝑔)2𝑐2(𝑔)⋯𝑛𝑐𝑛(𝑔)1c1(g)2c2(g)⋯ncn(g)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是置换 𝑔g![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的型．
 
-PÃ³lya è®¡æ°åçï¼å¸¦æéçæ¬ï¼
+Pólya 计数原理（带权重版本）
 
-ç»å®ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨éå ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä½ç¨ï¼å¯¹æ¯ä¸ªç¹çæè²æ¹æ³ç±å®çæè²æ¹æ¡çè®¡æ°ççæå½æ° ð(ð¥1,ð¥2,â¯,ð¥ð)f(x1,x2,â¯,xm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»åºï¼é£ä¹éå ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¬è´¨ä¸åæè²æ¹æ¡çè®¡æ°ççæå½æ°æ¯
+给定群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在集合 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的作用，对每个点的染色方法由它的染色方案的计数的生成函数 𝑓(𝑥1,𝑥2,⋯,𝑥𝑚)f(x1,x2,⋯,xm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 给出，那么集合 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的本质不同染色方案的计数的生成函数是
 
-ððº(ð(ð¥11,ð¥12,â¯,ð¥1ð),ð(ð¥21,ð¥22,â¯,ð¥2ð),â¯,ð(ð¥ð1,ð¥ð2,â¯,ð¥ðð)),ZG(f(x11,x21,â¯,xm1),f(x12,x22,â¯,xm2),â¯,f(x1n,x2n,â¯,xmn)),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑍𝐺(𝑓(𝑥11,𝑥12,⋯,𝑥1𝑚),𝑓(𝑥21,𝑥22,⋯,𝑥2𝑚),⋯,𝑓(𝑥𝑛1,𝑥𝑛2,⋯,𝑥𝑛𝑚)),ZG(f(x11,x21,⋯,xm1),f(x12,x22,⋯,xm2),⋯,f(x1n,x2n,⋯,xmn)),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éï¼ððº(ð¡1,ð¡2,â¯,ð¡ð)ZG(t1,t2,â¯,tn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½®æ¢ææ ï¼
+这里，𝑍𝐺(𝑡1,𝑡2,⋯,𝑡𝑛)ZG(t1,t2,⋯,tn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的轮换指标．
 
-è¿éï¼å¦æåä¸ªä½ç½®çæè²ççæå½æ°æ¯ ð(ð¥1,ð¥2,â¯,ð¥ð)f(x1,x2,â¯,xm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹é¿åº¦ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½®æ¢çæè²ççæå½æ°å°±æ¯ ð(ð¥ð1,ð¥ð2,â¯,ð¥ðð)f(x1k,x2k,â¯,xmk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿åæ äºå¦ææä¸æè²æ¹æ¡æ¯ç»å®ç½®æ¢çä¸å¨ç¹ï¼é£ä¹åä¸è½®æ¢ä¸­çææä½ç½®å¿ é¡»æç¸åçé¢è²ï¼å¦æå°çæå½æ°å¨ ð¥ð =1xi=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤åå¼ï¼å°±å¾å°ä¸æçæ æéçæ¬ç PÃ³lya è®¡æ°åçï¼
+这里，如果单个位置的染色的生成函数是 𝑓(𝑥1,𝑥2,⋯,𝑥𝑚)f(x1,x2,⋯,xm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么长度为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的轮换的染色的生成函数就是 𝑓(𝑥𝑘1,𝑥𝑘2,⋯,𝑥𝑘𝑚)f(x1k,x2k,⋯,xmk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这反映了如果某一染色方案是给定置换的不动点，那么同一轮换中的所有位置必须染相同的颜色．如果将生成函数在 𝑥𝑖 =1xi=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处取值，就得到上文的无权重版本的 Pólya 计数原理．
 
-å®ççåè¿°ç¨å°äºç½®æ¢ç¾¤çè½®æ¢ææ çæ¦å¿µï¼å®åå ·ä½çæè²é®é¢æ å ³ï¼å®æè¿°äºç½®æ¢ç¾¤çç»æï¼
+定理的叙述用到了置换群的轮换指标的概念．它和具体的染色问题无关．它描述了置换群的结构．
 
-å¸¦éå¶çé¡¹é¾æè²é®é¢å¦è§£
+带限制的项链染色问题另解
 
-æè½¬å¯¹ç§°ç¾¤çè½®æ¢ææ æ¯ 14(ð¡41+ð¡22+2ð¡4)14(t14+t22+2t4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç¹æè²ççæå½æ°æ¯ ð +ðr+b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ èå ¨ä½æè²æ¹æ¡ççæå½æ°æ¯
+旋转对称群的轮换指标是 14(𝑡41+𝑡22+2𝑡4)14(t14+t22+2t4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，单点染色的生成函数是 𝑟 +𝑏r+b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故而全体染色方案的生成函数是
 
-ð¹(ð,ð)=14((ð+ð)4+(ð2+ð2)2+2(ð4+ð4))=ð4+ð3ð+2ð2ð2+ðð3+ð4.F(r,b)=14((r+b)4+(r2+b2)2+2(r4+b4))=r4+r3b+2r2b2+rb3+b4.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹(𝑟,𝑏)=14((𝑟+𝑏)4+(𝑟2+𝑏2)2+2(𝑟4+𝑏4))=𝑟4+𝑟3𝑏+2𝑟2𝑏2+𝑟𝑏3+𝑏4.F(r,b)=14((r+b)4+(r2+b2)2+2(r4+b4))=r4+r3b+2r2b2+rb3+b4.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ææ±è®¡æ°å°±æ¯ ð2ð2r2b2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç³»æ°ï¼å³å ± 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§æ¬è´¨ä¸åæè²ï¼é¡ºä¾¿ï¼è¿ä¸ªå¼å­ä¹ç»åºäºå ¶ä»éå¶ä¸çè®¡æ°ï¼
+所求计数就是 𝑟2𝑏2r2b2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的系数，即共 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种本质不同染色．顺便，这个式子也给出了其他限制下的计数．
 
-### åºç¨
+### 应用
 
-å¸¦æéçæ¬ç PÃ³lya è®¡æ°åçå¨ç»åè®¡æ°é®é¢ä¸­èµ·å°éè¦çä½ç¨ï¼è¿éç®åè®¨è®ºå®çåºç¨ï¼èæ´ä¸è¬çè®¨è®ºå¯ä»¥åè [ç»åé®é¢çå½¢å¼åæ¹æ³](../../poly/symbolic-method/#æéå¶çæé)ï¼
+带权重版本的 Pólya 计数原理在组合计数问题中起到重要的作用．这里简单讨论它的应用，而更一般的讨论可以参考 [组合问题的形式化方法](../../poly/symbolic-method/#有限制的构造)．
 
-é»ç³é¡¹é¾
+钻石项链
 
-ç°å¨æä¸ä¸²å ±åä¸ªç¸åç å­çé¡¹é¾ï¼æ¯ä¸ªç å­ä¸å¯ä»¥é¶è¥å¹²é¢é»ç³ï¼å¦ææåæé»ç³ï¼æ»å ±æå¤å°æ¬è´¨ä¸åçé¶é»æ¹å¼ï¼ï¼å¦æä¸¤ç§é¶é»çç»æå¯ä»¥éè¿æè½¬é¡¹é¾éåï¼å°±è®¤ä¸ºæ¯ç¸åçï¼)
+现在有一串共四个相同珠子的项链，每个珠子上可以镶若干颗钻石．如果有四枚钻石，总共有多少本质不同的镶钻方式．（如果两种镶钻的结果可以通过旋转项链重合，就认为是相同的．)
 
-è§£ç­ååæ
+解答和分析
 
-é¡¹é¾çç©ºé´å¯¹ç§°ç¾¤ä»ä¸åææè¿°ç¸åï¼ä¸èèé»ç³æ»æ°çéå¶ï¼ååä¸ªä½ç½®çé¶é»æ¹æ¡ççæå½æ°æ¯
+项链的空间对称群仍与前文所述相同．不考虑钻石总数的限制，则单个位置的镶钻方案的生成函数是
 
-ð(ð¥)=1+ð¥+ð¥2+â¯=ââð=1ð¥ð=11âð¥.f(x)=1+x+x2+â¯=âi=1âxi=11âx.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥)=1+𝑥+𝑥2+⋯=∞∑𝑖=1𝑥𝑖=11−𝑥.f(x)=1+x+x2+⋯=∑i=1∞xi=11−x.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åºç¨å¸¦æéçæ¬ç PÃ³lya è®¡æ°åçå¯ç¥ï¼ææé¶é»æ¹æ¡ççæå½æ°ä¸º
+应用带权重版本的 Pólya 计数原理可知，所有镶钻方案的生成函数为
 
-ð¹(ð¥)=14(ð(ð¥)4+ð(ð¥2)2+2ð(ð¥4))=1+ð¥+3ð¥2+5ð¥3+10ð¥4+â¯.F(x)=14(f(x)4+f(x2)2+2f(x4))=1+x+3x2+5x3+10x4+â¯.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹(𝑥)=14(𝑓(𝑥)4+𝑓(𝑥2)2+2𝑓(𝑥4))=1+𝑥+3𝑥2+5𝑥3+10𝑥4+⋯.F(x)=14(f(x)4+f(x2)2+2f(x4))=1+x+3x2+5x3+10x4+⋯.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ èï¼ææ±é¶é»æ¹æ¡çæ°ç®å°±æ¯ ð¥4x4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç³»æ°ï¼å³å ±è®¡ 1010![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§æ¹æ¡ï¼ä½ä¸ºéªè¯ï¼éè¿æä¸¾å¯ç¥ï¼å®ä»¬åå«æ¯
+故而，所求镶钻方案的数目就是 𝑥4x4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的系数，即共计 1010![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种方案．作为验证，通过枚举可知，它们分别是
 
 4000,3100,3010,3001,2200,2020,2110,2101,2011,1111.4000,3100,3010,3001,2200,2020,2110,2101,2011,1111.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éï¼æ¯ç»åä¸ªæ°å­åå«è¡¨ç¤ºæ¯ä¸ªç å­ä¸çé¶é»æ°ç®ï¼
+这里，每组四个数字分别表示每个珠子上的镶钻数目．
 
-è¿ä¸ªä¾å­è¯´æï¼å¸¦æéçæ¬ç PÃ³lya è®¡æ°åçè½å¤è§£å³çé®é¢è¿æ¯æè²è®¡æ°é®é¢è¦å¹¿æ³ï¼å®æä¾äºä¸ç§å°åç¹çè®¡æ°æ©å±å°æ´ä¸ªç»æä¸æ¬è´¨ä¸åçè®¡æ°çæ¹æ³ï¼æè²é®é¢åªæ¯è¿ç±»é®é¢çç¹ä¾ï¼
+这个例子说明，带权重版本的 Pólya 计数原理能够解决的问题远比染色计数问题要广泛．它提供了一种将单点的计数扩展到整个结构上本质不同的计数的方法．染色问题只是这类问题的特例．
 
-## å¸¸è§ç©ºé´å¯¹ç§°ç¾¤
+## 常见空间对称群
 
-PÃ³lya è®¡æ°ç¸å ³é®é¢çé¾ç¹ä¹ä¸å¨äºåæç½®æ¢ç¾¤çç»æï¼è¿éï¼ç®åè®¨è®ºå¸¸è§çç©ºé´å¯¹ç§°ç¾¤çç»æï¼å¹¶ç¨å®ä»¬çè½®æ¢ææ å ä»¥æè¿°ï¼åºå½æ³¨æï¼å¯¹äºåä¸ä¸ªç»æçç©ºé´å¯¹ç§°ç¾¤ï¼å¦æèèçä½ç¨å¯¹è±¡çéåä¸åï¼ç¸åºç [ç¾¤ä½ç¨](../../algebra/group-theory/#ç¾¤ä½ç¨) ä¹å°±ä¸åï¼å èå®ä»¬çç½®æ¢è¡¨ç¤ºä¹å°±ä¸åï¼æ¯å¦è¯´ï¼æ­£æ¹ä½çç©ºé´å¯¹ç§°ç¾¤å¯¹äºå®çé¡¶ç¹ãæ£±ãé¢çä½ç¨å°±åå«å¯¹åºçæ­£æ¹ä½çé¡¶ç¹ç½®æ¢ç¾¤ãæ£±ç½®æ¢ç¾¤åé¢ç½®æ¢ç¾¤ï¼é¡¶ç¹ãæ£±ãé¢çä¸ªæ°äºä¸ç¸åï¼æ èè¿äºç½®æ¢ç¾¤ä»¥åå¯¹åºçè½®æ¢ææ å½ç¶ä¹åä¸ç¸åï¼æä»¥ï¼å¨å ·ä½é®é¢çæ±è§£ä¸­ï¼ä¸è½å¿½è§ç¾¤ä½ç¨çå¯¹è±¡çæå®ï¼
+Pólya 计数相关问题的难点之一在于分析置换群的结构．这里，简单讨论常见的空间对称群的结构，并用它们的轮换指标加以描述．应当注意，对于同一个结构的空间对称群，如果考虑的作用对象的集合不同，相应的 [群作用](../../algebra/group-theory/#群作用) 也就不同，因而它们的置换表示也就不同．比如说，正方体的空间对称群对于它的顶点、棱、面的作用就分别对应着正方体的顶点置换群、棱置换群和面置换群，顶点、棱、面的个数互不相同，故而这些置换群以及对应的轮换指标当然也各不相同．所以，在具体问题的求解中，不能忽视群作用的对象的指定．
 
-ç©ºé´å¯¹ç§°ç¾¤åç½®æ¢ç¾¤çå ³ç³»
+空间对称群和置换群的关系
 
-è½ç¶ä¸¤è æ¦å¿µä¸ååç¸ä¼¼ï¼ä½æ¯å®ä»¬ç»ä¸æ¯åä¸ä¸ªå¯¹è±¡ï¼ç¨ç¾¤è®ºçè¯­è¨è¯´ï¼ç»å®ç©ºé´å¯¹ç§°ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå®å¨éå ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çç¾¤ä½ç¨ï¼ç¾¤ä½ç¨çç½®æ¢è¡¨ç¤ºå®åæä¾äºä¸ä¸ªä»ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°å¯¹ç§°ç¾¤ ððSX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èä¸è¿ä¸ªç½®æ¢è¡¨ç¤ºå¨ç»åè®¡æ°çè¯­å¢ä¸å¾å¾æ¯å¿ å®çï¼å³ kerâ¡ð ={ð}kerâ¡Ï={e}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ èåæ ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å®åæ¯ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°ç¾¤ ððSX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å çä¸ä¸ªåµå ¥ï¼æä¸­çç½®æ¢ç¾¤åæ¯è¿ä¸ªåµå ¥çåï¼å³ ð(ðº)Ï(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ä¸æ¬èº«çç©ºé´å¯¹ç§°ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæï¼å æ­¤ï¼å¯¹äºåæ ·çç»æä¸çç©ºé´å¯¹ç§°ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æç¾¤ä½ç¨çéåä¸ä¸è´ï¼å°±ä¼åæäºä¸åçç½®æ¢ç¾¤ ð(ðº)Ï(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿èå ·æä¸åçè½®æ¢ææ ï¼åæçç½®æ¢ç¾¤çè½®æ¢ææ æªå¿ ç¸åï¼ï¼
+虽然两者概念上十分相似，但是它们绝不是同一个对象．用群论的语言说，给定空间对称群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和它在集合 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的群作用，群作用的置换表示实则提供了一个从群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到对称群 𝑆𝑋SX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的同态 𝜑φ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而且这个置换表示在组合计数的语境下往往是忠实的，即 ker⁡𝜑 ={𝑒}ker⁡φ={e}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故而同态 𝜑φ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 实则是群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到群 𝑆𝑋SX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 内的一个嵌入．文中的置换群则是这个嵌入的像，即 𝜑(𝐺)φ(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，它与本身的空间对称群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同构．因此，对于同样的结构上的空间对称群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果群作用的选取不一致，就会同构于不同的置换群 𝜑(𝐺)φ(G)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，进而具有不同的轮换指标（同构的置换群的轮换指标未必相同）．
 
-ç»å®ä¸ä¸ªç»æï¼å®çç©ºé´å¯¹ç§°ç¾¤æ¯ææè½å¤å°å®åæ¢å°å®èªèº«çæä½çéåï¼å®å¿ ç¶æ»¡è¶³å¦ä¸æ¡ä»¶ï¼
+给定一个结构，它的空间对称群是所有能够将它变换到它自身的操作的集合．它必然满足如下条件：
 
-  * å¯¹ç»å®ç»æè¿ç»­åºç¨ä¸¤ä¸ªå¯¹ç§°æä½ï¼å¯ä»¥è§ä½åºç¨å¦ä¸ä¸ªå¯¹ç§°æä½ï¼å³å¯¹ç§°æä½çéåå¯¹äºå¤åæ¯æ»¡è¶³å°é­æ§çï¼
-  * å¯¹ç§°æä½çå¤åæ»¡è¶³ç»åå¾ï¼
-  * å­å¨æç­çå¯¹ç§°æä½ï¼å³ç»å®ç»æä¿æä¸åæ¬èº«ä¹è§ä½ä¸ä¸ªæä½ï¼
-  * ä»»ä½æä½é½å­å¨å®çéæä½ï¼å¯ä»¥æµæ¶ç»å®æä½çææï¼
+  * 对给定结构连续应用两个对称操作，可以视作应用另一个对称操作，即对称操作的集合对于复合是满足封闭性的；
+  * 对称操作的复合满足结合律；
+  * 存在恒等的对称操作，即给定结构保持不变本身也视作一个操作；
+  * 任何操作都存在它的逆操作，可以抵消给定操作的效果．
 
-[ç¾¤](../../algebra/basic/#ç¾¤) æ¯å¯¹æææ»¡è¶³è¿äºæ¡ä»¶çæ¦å¿µçæ½è±¡ï¼å¯¹äºç¾¤çç»æçè®¨è®ºï¼å°±æ¯ [ç¾¤è®º](../../algebra/group-theory/) çä¸»è¦ç ç©¶å å®¹ï¼è¿éçåæä¸»è¦éä¸­å¨ç©ºé´å¯¹ç§°ç¾¤ï¼å¯¹å®çç»æçè®¨è®ºä¹ä¸»è¦åºç¨å ä½è§ç¹ï¼è¿éç»åºäºå¸¸è§çä¾å­ï¼è¯»è åºå½ä»ä¸­è·å¾åæè¿ç±»é®é¢çå¸¸è§æè·¯ï¼
+[群](../../algebra/basic/#群) 是对所有满足这些条件的概念的抽象．对于群的结构的讨论，就是 [群论](../../algebra/group-theory/) 的主要研究内容．这里的分析主要集中在空间对称群，对它的结构的讨论也主要应用几何观点．这里给出了常见的例子，读者应当从中获得分析这类问题的常见思路．
 
-### å¾ªç¯ç¾¤
+### 循环群
 
-ç»å®æ­£ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¾¹å½¢ï¼å®çå ¨ä½æè½¬æä½ææçç©ºé´å¯¹ç§°ç¾¤ç§°ä¸ºå¾ªç¯ç¾¤ï¼cyclic groupï¼ï¼è®°ä½ ð¶ðCn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°éæ¶éæè½¬ (360/ð)â(360/n)â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæä½è®°ä½ ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç¾¤ ð¶ðCn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ç´ å¯ä»¥åä½
+给定正 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 边形，它的全体旋转操作构成的空间对称群称为循环群（cyclic group），记作 𝐶𝑛Cn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．将逆时针旋转 (360/𝑛)∘(360/n)∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的操作记作 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则群 𝐶𝑛Cn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的元素可以写作
 
-ð¶ð={ð,ð,ð2,â¯,ððâ1}.Cn={e,r,r2,â¯,rnâ1}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐶𝑛={𝑒,𝑟,𝑟2,⋯,𝑟𝑛−1}.Cn={e,r,r2,⋯,rn−1}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éï¼ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¯¹æä½ ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éå¤ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡çç»æï¼å³éæ¶éæè½¬ (360ð/ð)â(360k/n)â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è ð =ð0e=r0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ææç­åæ¢ï¼
+这里，𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 指对操作 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 重复 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次的结果，即逆时针旋转 (360𝑘/𝑛)∘(360k/n)∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而 𝑒 =𝑟0e=r0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 指恒等变换．
 
-æ è®ºæ¯èèå¾ªç¯ç¾¤å¯¹æ­£ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¾¹å½¢çå ¨ä½é¡¶ç¹è¿æ¯å ¨ä½è¾¹çéåçä½ç¨ï¼å®çç½®æ¢è¡¨ç¤ºé½æ¯ä¸æ ·çï¼ä»¥å ¨ä½é¡¶ç¹çéåä¸ºä¾åæç¾¤ä½ç¨çç½®æ¢è¡¨ç¤ºï¼å®çè½®æ¢ææ æ¯
+无论是考虑循环群对正 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 边形的全体顶点还是全体边的集合的作用，它的置换表示都是一样的．以全体顶点的集合为例分析群作用的置换表示．它的轮换指标是
 
-ð(ð¶ð)=1ðâðâ£ðð(ð)ð¡ð/ðð.Z(Cn)=1nâdâ£nÏ(d)tdn/d.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑍(𝐶𝑛)=1𝑛∑𝑑∣𝑛𝜑(𝑑)𝑡𝑛/𝑑𝑑.Z(Cn)=1n∑d∣nφ(d)tdn/d.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éï¼ð( â )Ï(â )![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ°è®ºä¸­ç [æ¬§æå½æ°](../../number-theory/euler-totient/)ï¼
+这里，𝜑( ⋅)φ(⋅)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是数论中的 [欧拉函数](../../number-theory/euler-totient/)．
 
-åªè®¡æè½¬æä½ï¼é¿åº¦ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¡¹é¾çç©ºé´å¯¹ç§°ç¾¤å°±æ¯ ð¶ðCn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+只计旋转操作，长度为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的项链的空间对称群就是 𝐶𝑛Cn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åæ
+分析
 
-è®¾é¡¶ç¹çéåæç §éæ¶éé¡ºåºè®°ä¸º {0,1,â¯,ð â1}{0,1,â¯,nâ1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ðð(ð) =ð +ðmodðrk(i)=i+kmodn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¡¶ç¹ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨çè½®æ¢ä¸­çé¡¶ç¹éåå°±æ¯
+设顶点的集合按照逆时针顺序记为 {0,1,⋯,𝑛 −1}{0,1,⋯,n−1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝑟𝑘(𝑖) =𝑖 +𝑘mod𝑛rk(i)=i+kmodn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．顶点 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在的轮换中的顶点集合就是
 
-{ð+âðmodð:ââð}.{i+âkmodn:ââZ}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+{𝑖+ℓ𝑘mod𝑛:ℓ∈𝐙}.{i+ℓkmodn:ℓ∈Z}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¾ç¶ï¼ð â¡ð +âð(modð)iâ¡i+âk(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å½ä¸ä» å½
+显然，𝑖 ≡𝑖 +ℓ𝑘(mod𝑛)i≡i+ℓk(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 当且仅当
 
-ðgcd(ð,ð)â£â.ngcd(k,n)â£â.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛gcd(𝑘,𝑛)∣ℓ.ngcd(k,n)∣ℓ.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æå³çï¼ä»»ä½é¡¶ç¹ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨çè½®æ¢é¿åº¦é½æ¯ ðgcd(ð,ð)ngcd(k,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼ç½®æ¢ ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ gcd(ð,ð)gcd(k,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç­é¿çè½®æ¢ï¼èèå¨è½®æ¢ææ çè¡¨è¾¾å¼ä¸­åå¹¶åç±»é¡¹ï¼ç»å® ð â£ðdâ£n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ»¡è¶³ gcd(ð,ð) =ð/ðgcd(k,n)=n/d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ±è®¡ ð(ð)Ï(d)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼å®ä»¬å¯¹åºçåé¡¹å¼é½æ¯ ð¡ð/ððtdn/d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½¢å¼ï¼æä»¥å¯ä»¥å¾å°ä¸é¢çè½®æ¢ææ è¡¨è¾¾å¼ï¼
+这意味着，任何顶点 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在的轮换长度都是 𝑛gcd(𝑘,𝑛)ngcd(k,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，置换 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有 gcd(𝑘,𝑛)gcd(k,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个等长的轮换．考虑在轮换指标的表达式中合并同类项，给定 𝑑 ∣𝑛d∣n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则满足 gcd(𝑘,𝑛) =𝑛/𝑑gcd(k,n)=n/d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 共计 𝜑(𝑑)φ(d)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，它们对应的单项式都是 𝑡𝑛/𝑑𝑑tdn/d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式，所以可以得到上面的轮换指标表达式．
 
-### äºé¢ä½ç¾¤
+### 二面体群
 
-ç»å®æ­£ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¾¹å½¢ï¼å®çå ¨ä½æè½¬åå ³äºå¯¹ç§°è½´ç¿»è½¬çæä½ä¹ææç©ºé´å¯¹ç§°ç¾¤ï¼å®ç§°ä¸ºäºé¢ä½ç¾¤ï¼dihedral groupï¼ï¼è®°ä½ ð·2ðD2n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°éæ¶éæè½¬ (360/ð)â(360/n)â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæä½è®°ä½ ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶å°æ²¿æä¸ªç»å®å¯¹ç§°è½´ï¼æ¯å¦ä¸­å¿ä¸æä¸ªé¡¶ç¹çè¿çº¿ï¼ç¿»è½¬çæä½è®°ä½ ð s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç¾¤ ð·2ðD2n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæä½å¯ä»¥åä½
+给定正 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 边形，它的全体旋转和关于对称轴翻转的操作也构成空间对称群，它称为二面体群（dihedral group），记作 𝐷2𝑛D2n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．将逆时针旋转 (360/𝑛)∘(360/n)∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的操作记作 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并将沿某个给定对称轴（比如中心与某个顶点的连线）翻转的操作记作 𝑠s![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则群 𝐷2𝑛D2n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的操作可以写作
 
-ð·2ð={ð,ð,â¯,ððâ1,ð ,ð ð,â¯,ð ððâ1}.D2n={e,r,â¯,rnâ1,s,sr,â¯,srnâ1}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐷2𝑛={𝑒,𝑟,⋯,𝑟𝑛−1,𝑠,𝑠𝑟,⋯,𝑠𝑟𝑛−1}.D2n={e,r,⋯,rn−1,s,sr,⋯,srn−1}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éï¼ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¾ç¶æ¯æè½¬æä½ï¼è ð ððsrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½ç¶æ¯å è¿è¡ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡æè½¬åæ²¿ç»å®å¯¹ç§°è½´ç¿»è½¬ï¼ä½æ¯å¯ä»¥ç­ä»·å°çä½æ²¿çå¦ä¸ä¸ªå¯¹ç§°è½´ç¿»è½¬ï¼å æ­¤ï¼ç¾¤ ð·2ðD2n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­å ±è®¡ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæç­åæ¢ã(ð â1)(nâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæè½¬æä½å ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç¿»è½¬æä½ï¼å®å¯¹é¡¶ç¹éååè¾¹éåçç¾¤ä½ç¨ä¹æçç¸åçç½®æ¢è¡¨ç¤ºï¼å®çè½®æ¢ææ æ¯
+这里，𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 依然是旋转操作，而 𝑠𝑟𝑘srk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 虽然是先进行 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次旋转再沿给定对称轴翻转，但是可以等价地看作沿着另一个对称轴翻转．因此，群 𝐷2𝑛D2n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中共计 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个恒等变换、(𝑛 −1)(n−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个旋转操作和 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个翻转操作．它对顶点集合和边集合的群作用也有着相同的置换表示．它的轮换指标是
 
-ð(ð·2ð)=12ð(ð¶ð)+â§{ {â¨{ {â©12ð¡1ð¡ð2,ð=2ð+1,14(ð¡21ð¡ðâ12+ð¡ð2),ð=2ð.Z(D2n)=12Z(Cn)+{12t1t2k,n=2k+1,14(t12t2kâ1+t2k),n=2k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)åæ
+𝑍(𝐷2𝑛)=12𝑍(𝐶𝑛)+⎧{ {⎨{ {⎩12𝑡1𝑡𝑘2,𝑛=2𝑘+1,14(𝑡21𝑡𝑘−12+𝑡𝑘2),𝑛=2𝑘.Z(D2n)=12Z(Cn)+{12t1t2k,n=2k+1,14(t12t2k−1+t2k),n=2k.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)分析
 
-ç¾¤ ð·2ðD2n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çæè½¬æä½ ððrk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéåï¼å æ¬æç­åæ¢ï¼çåæåå¾ªç¯ç¾¤ ð¶ðCn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¦åºä¸è¾ï¼å ³é®å¨äºå©ä¸çç¿»è½¬æä½çåæï¼æ­¤æ¶éè¦å¯¹é¡¶ç¹ä¸ªæ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¥å¶æ§åç±»è®¨è®ºï¼
+群 𝐷2𝑛D2n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的旋转操作 𝑟𝑘rk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的集合（包括恒等变换）的分析和循环群 𝐶𝑛Cn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 如出一辙，关键在于剩下的翻转操作的分析．此时需要对顶点个数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的奇偶性分类讨论．
 
-å½ ð =2ð +1n=2k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼ææçç¿»è½¬æä½çå¯¹ç§°è½´é½æ¯è¿ç»é¡¶ç¹åå®å¯¹é¢çè¾¹çä¸­ç¹çï¼å ±è®¡ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¡è¿æ ·çå¯¹ç§°è½´ï¼æ¯ä¸ªç¿»è½¬æä½åï¼å¯¹ç§°è½´ä¸çé¡¶ç¹ä¿æä¸å¨ï¼èå ¶å®é¡¶ç¹æå¯¹å°äº¤æ¢ï¼å æ­¤æ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸å¨ç¹ï¼11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)âè½®æ¢ï¼å ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)âè½®æ¢ï¼
+当 𝑛 =2𝑘 +1n=2k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，所有的翻转操作的对称轴都是连结顶点和它对面的边的中点的，共计 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 条这样的对称轴．每个翻转操作后，对称轴上的顶点保持不动，而其它顶点成对地交换，因此有 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不动点（11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)‑轮换）和 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)‑轮换．
 
-å½ ð =2ðn=2k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æä¸¤ç§å¯¹ç§°è½´ï¼å ¶ä¸­ï¼ä¸åçå¯¹ç§°è½´æ¯è¿æ¥ç¸å¯¹çé¡¶ç¹çï¼æ²¿çè¿æ ·çå¯¹ç§°è½´ç¿»è½¬ï¼å°ä¿æå¯¹ç§°è½´ä¸çä¸¤ä¸ªé¡¶ç¹ä¸å¨ï¼èå°å ¶ä½çé¡¶ç¹æå¯¹å°äº¤æ¢ï¼å æ­¤æ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªä¸å¨ç¹ï¼11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)âè½®æ¢ï¼å (ð â1)(kâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)âè½®æ¢ï¼å¦ä¸åçå¯¹ç§°è½´æ¯è¿æ¥ç¸å¯¹çè¾¹çä¸­ç¹çï¼æ²¿çè¿æ ·çå¯¹ç§°è½´ç¿»è½¬ï¼å°ææé¡¶ç¹é½æå¯¹å°äº¤æ¢ï¼å æ­¤æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ª 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)âè½®æ¢ï¼
+当 𝑛 =2𝑘n=2k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，有两种对称轴．其中，一半的对称轴是连接相对的顶点的；沿着这样的对称轴翻转，将保持对称轴上的两个顶点不动，而将其余的顶点成对地交换，因此有 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个不动点（11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)‑轮换）和 (𝑘 −1)(k−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)‑轮换．另一半的对称轴是连接相对的边的中点的；沿着这样的对称轴翻转，将所有顶点都成对地交换，因此有 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)‑轮换．
 
-æ ¹æ®è¿ä¸åæï¼å¯ä»¥ååºä¸é¢çè½®æ¢ææ è¡¨è¾¾å¼ï¼
+根据这一分析，可以写出上面的轮换指标表达式．
 
-### å¯¹ç§°ç¾¤
+### 对称群
 
-ç»å® ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ï¼å®ä¸é¢çå ¨ä½ç½®æ¢ææç¾¤ï¼ç§°ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å¯¹ç§°ç¾¤ï¼symmetric groupï¼ï¼è®°ä½ ððSn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®æè¿°äºè¿ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¡¶ç¹è½æ¥æçå ¨é¨å¯¹ç§°æ§ï¼å®ä¹æ¯è¿äºå¯¹ç§°æä½å¯¹é¡¶ç¹éåçä½ç¨çç½®æ¢è¡¨ç¤ºï¼
+给定 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素，它上面的全体置换构成群，称为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次对称群（symmetric group），记作 𝑆𝑛Sn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．它描述了这 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个顶点能拥有的全部对称性．它也是这些对称操作对顶点集合的作用的置换表示．
 
-æ ¹æ® [ç½®æ¢ä¸æå](../../permutation/#ç½®æ¢çå) ä¸æçåæï¼å®çè½®æ¢ææ æ¯
+根据 [置换与排列](../../permutation/#置换的型) 一文的分析，它的轮换指标是
 
-ð(ðð)=âð1+2ð¼2+â¯+ðð¼ð=ðð¡ð¼11ð¡ð¼22â¯ð¡ð¼ðð1ð¼12ð¼2â¯ðð¼ðð¼1!ð¼2!â¯ð¼ð!.Z(Sn)=âa1+2Î±2+â¯+nÎ±n=nt1Î±1t2Î±2â¯tnÎ±n1Î±12Î±2â¯nÎ±nÎ±1!Î±2!â¯Î±n!.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑍(𝑆𝑛)=∑𝑎1+2𝛼2+⋯+𝑛𝛼𝑛=𝑛𝑡𝛼11𝑡𝛼22⋯𝑡𝛼𝑛𝑛1𝛼12𝛼2⋯𝑛𝛼𝑛𝛼1!𝛼2!⋯𝛼𝑛!.Z(Sn)=∑a1+2α2+⋯+nαn=nt1α1t2α2⋯tnαn1α12α2⋯nαnα1!α2!⋯αn!.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éç¨å°äºåä¸º 1ð¼12ð¼2â¯ðð¼ð1Î±12Î±2â¯nÎ±n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç½®æ¢çè®¡æ°æ¯
+这里用到了型为 1𝛼12𝛼2⋯𝑛𝛼𝑛1α12α2⋯nαn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的置换的计数是
 
-ð!1ð¼12ð¼2â¯ðð¼ðð¼1!ð¼2!â¯ð¼ð!.n!1Î±12Î±2â¯nÎ±nÎ±1!Î±2!â¯Î±n!.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛!1𝛼12𝛼2⋯𝑛𝛼𝑛𝛼1!𝛼2!⋯𝛼𝑛!.n!1α12α2⋯nαnα1!α2!⋯αn!.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®æ»¡è¶³éæ¨å ³ç³»
+它满足递推关系
 
-ð(ðð)=1ððâð=1ð¡ðð(ððâð),Z(Sn)=1nâk=1ntkZ(Snâk),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑍(𝑆𝑛)=1𝑛𝑛∑𝑘=1𝑡𝑘𝑍(𝑆𝑛−𝑘),Z(Sn)=1n∑k=1ntkZ(Sn−k),![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-èéæ¨èµ·ç¹æ¯ ð(ð0) =1Z(S0)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸éæ¨å ³ç³»çç»åæä¹æ¯ï¼è¦æé é¿åº¦ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç½®æ¢ï¼å¯ä»¥é¦å éåç¹ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨è½®æ¢çé¿åº¦ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¯¹å©ä¸ç (ð âð)(nâk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¡¶ç¹çéåæé ï¼
+而递推起点是 𝑍(𝑆0) =1Z(S0)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这一递推关系的组合意义是，要构造长度为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的置换，可以首先选取点 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在轮换的长度 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，再对剩下的 (𝑛 −𝑘)(n−k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个顶点的集合构造．
 
-ç»å® ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¡¶ç¹çå®å ¨å¾ï¼åå®çç©ºé´å¯¹ç§°ç¾¤æ­£æ¯ ððSn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®å¯¹å ¨ä½é¡¶ç¹çéåçä½ç¨çè½®æ¢ææ å°±ç±ä¸æç ð(ðð)Z(Sn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»åºï¼ä½æ¯ï¼å®å¯¹å ¨ä½è¾¹çéåçä½ç¨çç½®æ¢è¡¨ç¤ºå¹¶ä¸ç¸åï¼æ¯å¦è¯´ï¼éåçå¤§å°å°±ä¸ç¸åï¼å ¨ä½è¾¹çæ°ç®æ¯ ð(ð â1)/2n(nâ1)/2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºè¾¹çæ å½¢ï¼éè¦é¢å¤çåæï¼è¿éç»åºç®åçä¾å­ï¼ä¸è¬çæ å½¢å¯åèä¹ é¢ï¼
+给定 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个顶点的完全图，则它的空间对称群正是 𝑆𝑛Sn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．它对全体顶点的集合的作用的轮换指标就由上文的 𝑍(𝑆𝑛)Z(Sn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 给出．但是，它对全体边的集合的作用的置换表示并不相同．比如说，集合的大小就不相同，全体边的数目是 𝑛(𝑛 −1)/2n(n−1)/2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于边的情形，需要额外的分析．这里给出简单的例子，一般的情形可参考习题．
 
-æ åç®åå¾è®¡æ°
+无向简单图计数
 
-è®¡ç®åææä¹ä¸æ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¡¶ç¹çæ åç®åå¾çæ°ç®ï¼
+计算同构意义下有 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个顶点的无向简单图的数目．
 
-è§£ç­
+解答
 
-è¿ç¸å½äºå¨æ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¡¶ç¹çå®å ¨å¾ä¸æä¸¤ç§é¢è²ï¼è¦æ±æ¬è´¨ä¸åçæè²æ°ç®ï¼ç©ºé´å¯¹ç§°ç¾¤æ¯ ð4S4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç°å¨åæå®çè¾¹ç½®æ¢ç¾¤ ð(2)4S4(2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½®æ¢ææ ï¼
+这相当于在有 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个顶点的完全图上染两种颜色，要求本质不同的染色数目．空间对称群是 𝑆4S4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，现在分析它的边置换群 𝑆(2)4S4(2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的轮换指标．
 
-  * æç­åæ¢ï¼11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ï¼ï¼è¾¹ä¹ä¿æä¸å¨ï¼æ å¯¹åºåé¡¹å¼ä¸º ð¡61t16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * äº¤æ¢ä¸¤é¡¶ç¹ï¼66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ï¼ï¼åè®¾äº¤æ¢ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åè¾¹ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè¾¹ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¿æä¸å¨ï¼åæ¶ï¼è¾¹ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè¾¹ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹æ¢ï¼è¾¹ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè¾¹ 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹æ¢ï¼æ å¯¹åºåé¡¹å¼ä¸º 6ð¡21ð¡226t12t22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * è½®æ¢ä¸é¡¶ç¹ï¼88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ï¼ï¼åè®¾è½®æ¢æ¯ (ððð)(abc)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå®ä»¬ä¹é´çè¿è¾¹ 1,2,51,2,5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹ç¸åºè½®æ¢ï¼å®ä»¬åç¬¬åç¹ ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿è¾¹ 4,6,34,6,3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹ç¸åºè½®æ¢ï¼æ å¯¹åºåé¡¹å¼ä¸º 8ð¡238t32![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * äº¤æ¢ä¸¤å¯¹é¡¶ç¹ï¼33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ï¼ï¼åè®¾ç¹ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åç¹ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹æ¢ï¼ç¹ ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åç¹ ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹æ¢ï¼åè¾¹ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè¾¹ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¿æä¸å¨ï¼åæ¶ï¼è¾¹ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè¾¹ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹æ¢ï¼è¾¹ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè¾¹ 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹æ¢ï¼æ å¯¹åºåé¡¹å¼ä¸º 3ð¡21ð¡223t12t22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * è½®æ¢åé¡¶ç¹ï¼66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§ï¼ï¼åè®¾è½®æ¢æ¯ (ðððð)(abcd)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå ¶ä¸­ç¸é»é¡¶ç¹çè¿è¾¹ 1,2,3,41,2,3,4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹ç¸åºè½®æ¢ï¼ç¸å¯¹é¡¶ç¹çè¿è¾¹ 5,65,6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¶å¯¹æ¢ï¼æ å¯¹åºçåé¡¹å¼ä¸º 6ð¡2ð¡46t2t4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 恒等变换（11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种）：边也保持不动，故对应单项式为 𝑡61t16![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 交换两顶点（66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种）：假设交换 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则边 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和边 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 保持不动，同时，边 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和边 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对换，边 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和边 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对换，故对应单项式为 6𝑡21𝑡226t12t22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 轮换三顶点（88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种）：假设轮换是 (𝑎𝑏𝑐)(abc)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则它们之间的连边 1,2,51,2,5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也相应轮换，它们和第四点 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的连边 4,6,34,6,3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也相应轮换，故对应单项式为 8𝑡238t32![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 交换两对顶点（33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种）：假设点 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和点 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对换，点 𝑐c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和点 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对换，则边 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和边 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 保持不动，同时，边 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和边 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对换，边 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和边 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对换，故对应单项式为 3𝑡21𝑡223t12t22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 轮换四顶点（66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种）：假设轮换是 (𝑎𝑏𝑐𝑑)(abcd)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则其中相邻顶点的连边 1,2,3,41,2,3,4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也相应轮换，相对顶点的连边 5,65,6![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同时对换，故对应的单项式为 6𝑡2𝑡46t2t4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æä»¥ï¼è¾¹ç½®æ¢ç¾¤çè½®æ¢ææ æ¯
+所以，边置换群的轮换指标是
 
-ð(ð(2)4)=124(ð¡61+9ð¡21ð¡22+8ð¡23+6ð¡2ð¡4).Z(S4(2))=124(t16+9t12t22+8t32+6t2t4).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑍(𝑆(2)4)=124(𝑡61+9𝑡21𝑡22+8𝑡23+6𝑡2𝑡4).Z(S4(2))=124(t16+9t12t22+8t32+6t2t4).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ® PÃ³lya è®¡æ°åçï¼åææä¹ä¸æ 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªé¡¶ç¹çæ åç®åå¾çæ°ç®æ¯
+根据 Pólya 计数原理，同构意义下有 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个顶点的无向简单图的数目是
 
-26+9Ã24+8Ã22+6Ã2224=11.26+9Ã24+8Ã22+6Ã2224=11.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+26+9×24+8×22+6×2224=11.26+9×24+8×22+6×2224=11.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### å¤é¢ä½ç¾¤
+### 多面体群
 
-å¤é¢ä½ç¾¤ï¼polyhedral groupï¼æ¯æ­£å¤é¢ä½çç©ºé´å¯¹ç§°ç¾¤ï¼æ­£å¤é¢ä½åªæäºç§ï¼æ­£åé¢ä½ãæ­£æ¹ä½ãæ­£å «é¢ä½ãæ­£åäºé¢ä½åæ­£äºåé¢ä½ï¼å¦æä¿æç¹ãæ£±ãé¢ä¹é´çé»æ¥å ³ç³»ï¼äº¤æ¢ç¹åé¢ï¼å¯ä»¥å¾å°å¯¹å¶çæ­£å¤é¢ä½ï¼å ¶ä¸­ï¼æ­£åé¢ä½åå®èªèº«å¯¹å¶ï¼æ­£æ¹ä½åæ­£å «é¢ä½å¯¹å¶ï¼æ­£åäºé¢ä½åæ­£äºåé¢ä½å¯¹å¶ï¼å©ç¨å¯¹å¶å ³ç³»ï¼å¯ä»¥ç®åå®ä»¬çç©ºé´å¯¹ç§°ç¾¤çè®¨è®ºï¼
+多面体群（polyhedral group）是正多面体的空间对称群．正多面体只有五种：正四面体、正方体、正八面体、正十二面体和正二十面体．如果保持点、棱、面之间的邻接关系，交换点和面，可以得到对偶的正多面体．其中，正四面体和它自身对偶，正方体和正八面体对偶，正十二面体和正二十面体对偶．利用对偶关系，可以简化它们的空间对称群的讨论．
 
-åªè®¡ä¸ç»´ç©ºé´ä¸­å¯ä»¥è¿è¡çæè½¬æä½ï¼å®ä»¬çç©ºé´å¯¹ç§°ç¾¤åªæä¸ç§ï¼
+只计三维空间中可以进行的旋转操作，它们的空间对称群只有三种．
 
-  * åé¢ä½ç¾¤ï¼tetrahedral groupï¼ï¼å³æ­£åé¢ä½çç©ºé´å¯¹ç§°ç¾¤ï¼
+  * 四面体群（tetrahedral group），即正四面体的空间对称群：
 
-    * æç­åæ¢ï¼
-    * ç»é¡¶ç¹åå¯¹é¢ä¸­å¿çè¿çº¿æè½¬ 120â120â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å 240â240â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * ç»å¯¹è¾¹çä¸­ç¹çè¿çº¿æè½¬ 180â180â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+    * 恒等变换；
+    * 绕顶点和对面中心的连线旋转 120∘120∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 240∘240∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+    * 绕对边的中点的连线旋转 180∘180∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å ±è®¡ 1 +2 Ã4 +1 Ã3 =121+2Ã4+1Ã3=12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå¯¹ç§°æä½ï¼
+共计 1 +2 ×4 +1 ×3 =121+2×4+1×3=12![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个对称操作．
 
-å®å¯¹åºçç½®æ¢ç¾¤çè½®æ¢ææ å¦ä¸ï¼
+它对应的置换群的轮换指标如下．
 
-    * é¡¶ç¹ç½®æ¢ç¾¤åé¢ç½®æ¢ç¾¤ï¼112(ð¡41+8ð¡1ð¡3+3ð¡22)112(t14+8t1t3+3t22)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * æ£±ç½®æ¢ç¾¤ï¼112(ð¡61+8ð¡23+3ð¡21ð¡22)112(t16+8t32+3t12t22)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * å «é¢ä½ç¾¤ï¼octahedral groupï¼ï¼å³æ­£æ¹ä½ï¼åæ­£å «é¢ä½ï¼çç©ºé´å¯¹ç§°ç¾¤ï¼
+    * 顶点置换群和面置换群：112(𝑡41+8𝑡1𝑡3+3𝑡22)112(t14+8t1t3+3t22)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+    * 棱置换群：112(𝑡61+8𝑡23+3𝑡21𝑡22)112(t16+8t32+3t12t22)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  * 八面体群（octahedral group），即正方体（和正八面体）的空间对称群：
 
-    * æç­åæ¢ï¼
-    * ç»ç¸å¯¹é¡¶ç¹çè¿çº¿æè½¬ 120â120â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å 240â240â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * ç»ç¸å¯¹çæ£±çä¸­ç¹çè¿çº¿æè½¬ 180â180â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * ç»ç¸å¯¹çé¢çä¸­å¿çè¿çº¿æè½¬ 90â90â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼180â180â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å 270â270â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+    * 恒等变换；
+    * 绕相对顶点的连线旋转 120∘120∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 240∘240∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+    * 绕相对的棱的中点的连线旋转 180∘180∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+    * 绕相对的面的中心的连线旋转 90∘90∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，180∘180∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 270∘270∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å ±è®¡ 1 +2 Ã4 +1 Ã6 +3 Ã3 =241+2Ã4+1Ã6+3Ã3=24![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå¯¹ç§°æä½ï¼
+共计 1 +2 ×4 +1 ×6 +3 ×3 =241+2×4+1×6+3×3=24![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个对称操作．
 
-å®å¯¹åºçæ­£æ¹ä½çç½®æ¢ç¾¤çè½®æ¢ææ å¦ä¸ï¼
+它对应的正方体的置换群的轮换指标如下．
 
-    * é¡¶ç¹ç½®æ¢ç¾¤ï¼124(ð¡81+8ð¡21ð¡23+9ð¡42+6ð¡24)124(t18+8t12t32+9t24+6t42)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * æ£±ç½®æ¢ç¾¤ï¼124(ð¡121+8ð¡43+6ð¡21ð¡52+6ð¡34+3ð¡62)124(t112+8t34+6t12t25+6t43+3t26)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * é¢ç½®æ¢ç¾¤ï¼124(ð¡61+8ð¡23+6ð¡32+6ð¡21ð¡4+3ð¡21ð¡22)124(t16+8t32+6t23+6t12t4+3t12t22)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+    * 顶点置换群：124(𝑡81+8𝑡21𝑡23+9𝑡42+6𝑡24)124(t18+8t12t32+9t24+6t42)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+    * 棱置换群：124(𝑡121+8𝑡43+6𝑡21𝑡52+6𝑡34+3𝑡62)124(t112+8t34+6t12t25+6t43+3t26)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+    * 面置换群：124(𝑡61+8𝑡23+6𝑡32+6𝑡21𝑡4+3𝑡21𝑡22)124(t16+8t32+6t23+6t12t4+3t12t22)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ­£å «é¢ä½çç½®æ¢ç¾¤ç±»ä¼¼ï¼åªæ¯è¦å°é¡¶ç¹åé¢çè§è²å¯¹æ¢ï¼
+正八面体的置换群类似，只是要将顶点和面的角色对换．
 
-  * äºåé¢ä½ç¾¤ï¼icosahedral groupï¼ï¼å³æ­£åäºé¢ä½ï¼åæ­£äºåé¢ä½ï¼çç©ºé´å¯¹ç§°ç¾¤ï¼
+  * 二十面体群（icosahedral group），即正十二面体（和正二十面体）的空间对称群：
 
-    * æç­åæ¢ï¼
-    * ç»ç¸å¯¹é¡¶ç¹çè¿çº¿æè½¬ 120â120â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å 240â240â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * ç»ç¸å¯¹çæ£±çä¸­ç¹çè¿çº¿æè½¬ 180â180â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * ç»ç¸å¯¹çé¢çä¸­å¿çè¿çº¿æè½¬ 72â72â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼144â144â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼216â216â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å 288â288â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+    * 恒等变换；
+    * 绕相对顶点的连线旋转 120∘120∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 240∘240∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+    * 绕相对的棱的中点的连线旋转 180∘180∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+    * 绕相对的面的中心的连线旋转 72∘72∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，144∘144∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，216∘216∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 288∘288∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å ±è®¡ 1 +2 Ã10 +1 Ã15 +6 Ã4 =601+2Ã10+1Ã15+6Ã4=60![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå¯¹ç§°æä½ï¼
+共计 1 +2 ×10 +1 ×15 +6 ×4 =601+2×10+1×15+6×4=60![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个对称操作．
 
-å®å¯¹åºçæ­£åäºé¢ä½çç½®æ¢ç¾¤çè½®æ¢ææ å¦ä¸ï¼
+它对应的正十二面体的置换群的轮换指标如下．
 
-    * é¡¶ç¹ç½®æ¢ç¾¤ï¼160(ð¡201+20ð¡21ð¡63+15ð¡102+24ð¡45)160(t120+20t12t36+15t210+24t54)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * æ£±ç½®æ¢ç¾¤ï¼160(ð¡301+20ð¡103+15ð¡21ð¡142+24ð¡65)160(t130+20t310+15t12t214+24t56)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-    * é¢ç½®æ¢ç¾¤ï¼160(ð¡121+20ð¡43+15ð¡62+24ð¡21ð¡25)160(t112+20t34+15t26+24t12t52)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+    * 顶点置换群：160(𝑡201+20𝑡21𝑡63+15𝑡102+24𝑡45)160(t120+20t12t36+15t210+24t54)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+    * 棱置换群：160(𝑡301+20𝑡103+15𝑡21𝑡142+24𝑡65)160(t130+20t310+15t12t214+24t56)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+    * 面置换群：160(𝑡121+20𝑡43+15𝑡62+24𝑡21𝑡25)160(t112+20t34+15t26+24t12t52)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æ­£äºåé¢ä½çç½®æ¢ç¾¤ç±»ä¼¼ï¼åªæ¯è¦å°é¡¶ç¹åé¢çè§è²å¯¹æ¢ï¼
+正二十面体的置换群类似，只是要将顶点和面的角色对换．
 
-è¿éç»åºçé½æ¯å¯¹é¡¶ç¹ãæ£±ãé¢ç­åç¬çå¯¹è±¡ä½ç¨çç½®æ¢ç¾¤çè½®æ¢ææ ï¼å¦æè¦å¯¹ä¸åçå¯¹è±¡åæ¶æè²ï¼éè¦ååºèåçè½®æ¢ææ ï¼
+这里给出的都是对顶点、棱、面等单独的对象作用的置换群的轮换指标．如果要对不同的对象同时染色，需要写出联合的轮换指标．
 
-## ä¹ é¢
+## 习题
 
-### æè²é®é¢
+### 染色问题
 
-è¿äºé¢ç®åªéè¦åæç½®æ¢ç¾¤çç»æï¼å¹¶åºç¨ PÃ³lya è®¡æ°åçï¼
+这些题目只需要分析置换群的结构，并应用 Pólya 计数原理．
 
-  * [Luogu P4980ãæ¨¡æ¿ãPolya å®ç](https://www.luogu.com.cn/problem/P4980)
-  * [Luogu P2561 [AHOI2002] é»ç½ç·ç ](https://www.luogu.com.cn/problem/P2561)
+  * [Luogu P4980【模板】Polya 定理](https://www.luogu.com.cn/problem/P4980)
+  * [Luogu P2561 [AHOI2002] 黑白瓷砖](https://www.luogu.com.cn/problem/P2561)
   * [TRANSP - Transposing is Fun](https://www.spoj.com/problems/TRANSP/)
   * [TRANSP2 - Transposing is Even More Fun](https://www.spoj.com/problems/TRANSP2/)
-  * [Luogu P3307 [SDOI2013] é¡¹é¾](https://www.luogu.com.cn/problem/P3307)
+  * [Luogu P3307 [SDOI2013] 项链](https://www.luogu.com.cn/problem/P3307)
 
-å½å¯ä»¥ä½¿ç¨çé¢è²ç»ååå°éå¶æ¶ï¼éè¦éè¿èå DP æè ç»åæ¹æ³æ±è§£å¯¹è½®æ¢æè²çæ¹æ³æ°ç®ï¼
+当可以使用的颜色组合受到限制时，需要通过背包 DP 或者组合方法求解对轮换染色的方法数目．
 
   * [Luogu P1446 [HNOI2008] Cards](https://www.luogu.com.cn/problem/P1446)
   * [UVA10601 Cubes](https://onlinejudge.org/index.php?option=com_onlinejudge&Itemid=8&page=show_problem&problem=1542)
-  * [Luogu P4916 [MtOI2018] é­åç¯](https://www.luogu.com.cn/problem/P4916)
+  * [Luogu P4916 [MtOI2018] 魔力环](https://www.luogu.com.cn/problem/P4916)
 
-### å¾è®ºè®¡æ°
+### 图论计数
 
-PÃ³lya è®¡æ°åçå¯ä»¥ç¨äº [å¾è®ºè®¡æ°](../graph-enumeration/) é®é¢ï¼è¿ç±»é®é¢é¾ç¹å¨äºå¾çè¾¹ç½®æ¢ç¾¤çæä¸¾ï¼
+Pólya 计数原理可以用于 [图论计数](../graph-enumeration/) 问题，这类问题难点在于图的边置换群的枚举．
 
   * [SGU 282. Isomorphism](https://codeforces.com/problemsets/acmsguru/problem/99999/282)
-  * [Luogu P4727 [HNOI2009] å¾çåæè®¡æ°](https://www.luogu.com.cn/problem/P4727)
-  * [Luogu P4128 [SHOI2006] æè²å¾](https://www.luogu.com.cn/problem/P4128)
+  * [Luogu P4727 [HNOI2009] 图的同构计数](https://www.luogu.com.cn/problem/P4727)
+  * [Luogu P4128 [SHOI2006] 有色图](https://www.luogu.com.cn/problem/P4128)
 
-å¦ä¸ç±»å¯ä»¥åºç¨ PÃ³lya è®¡æ°åççå¾è®ºè®¡æ°é®é¢éè¦ç´æ¥æçºµçæå½æ°ï¼
+另一类可以应用 Pólya 计数原理的图论计数问题需要直接操纵生成函数．
 
-  * [LOJ 6538 ç·åºè®¡æ° å å¼ºç å å¼ºç](https://loj.ac/p/6538)
-  * [LOJ 6512ãé ç¤¼éè®­ 2018ãç·çè®¡æ°](https://loj.ac/p/6512)
-  * [Luogu P6597 ç¯çè®¡æ°](https://www.luogu.com.cn/problem/P6597)
-  * [Luogu P5818 [JSOI2011] ååå¼æä½è®¡æ°](https://www.luogu.com.cn/problem/P5818)
+  * [LOJ 6538 烷基计数 加强版 加强版](https://loj.ac/p/6538)
+  * [LOJ 6512「雅礼集训 2018」烷烃计数](https://loj.ac/p/6512)
+  * [Luogu P6597 烯烃计数](https://www.luogu.com.cn/problem/P6597)
+  * [Luogu P5818 [JSOI2011] 同分异构体计数](https://www.luogu.com.cn/problem/P5818)
 
-## åèæç®ä¸æ³¨é
+## 参考文献与注释
 
-  * [PÃ³lya enumeration theorem - Wikipedia](https://en.wikipedia.org/wiki/P%C3%B3lya_enumeration_theorem)
-  * [Notes on PÃ³lya's Enumeration Theorem](https://www.diva-portal.org/smash/get/diva2:324594/FULLTEXT01.pdf)
+  * [Pólya enumeration theorem - Wikipedia](https://en.wikipedia.org/wiki/P%C3%B3lya_enumeration_theorem)
+  * [Notes on Pólya's Enumeration Theorem](https://www.diva-portal.org/smash/get/diva2:324594/FULLTEXT01.pdf)
   * [Cycle index - Wikipedia](https://en.wikipedia.org/wiki/Cycle_index)
 
 * * *
 
-  1. å æ­¤ï¼ç©ºé´å¯¹ç§°ç¾¤ ðºG![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è¡¨ç¤ºæ¯éå ðX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çç½®æ¢ç¾¤ï¼å³å¯¹ç§°ç¾¤ ððSX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå­ç¾¤ï¼Â â©
+  1. 因此，空间对称群 𝐺G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以表示是集合 𝑋X![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的置换群，即对称群 𝑆𝑋SX![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的子群． ↩
 
-  2. ä¸¥æ ¼æ¥è¯´ï¼æ¯å­ç¾¤ â¨ðâ© â¤ðºâ¨gâ©â¤G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½ç¨ï¼Â â©
+  2. 严格来说，是子群 ⟨𝑔⟩ ≤𝐺⟨g⟩≤G![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的作用． ↩
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/3/19 16:27:49ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/polya.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/polya.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[c-forrest](https://github.com/c-forrest), [Tiphereth-A](https://github.com/Tiphereth-A), [Early0v0](https://github.com/Early0v0), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [HeRaNO](https://github.com/HeRaNO), [iamtwz](https://github.com/iamtwz), [Ir1d](https://github.com/Ir1d), [MegaOwIer](https://github.com/MegaOwIer), [mgt](https://github.com/mgt), [StableAgOH](https://github.com/StableAgOH), [StudyingFather](https://github.com/StudyingFather), [Wajov](https://github.com/Wajov), [warzone-oier](https://github.com/warzone-oier), [Xeonacid](https://github.com/Xeonacid)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/3/19 16:27:49，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/polya.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/polya.md "edit.link.title")  
+>  __本页面贡献者：[c-forrest](https://github.com/c-forrest), [Tiphereth-A](https://github.com/Tiphereth-A), [Early0v0](https://github.com/Early0v0), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [HeRaNO](https://github.com/HeRaNO), [iamtwz](https://github.com/iamtwz), [Ir1d](https://github.com/Ir1d), [MegaOwIer](https://github.com/MegaOwIer), [mgt](https://github.com/mgt), [StableAgOH](https://github.com/StableAgOH), [StudyingFather](https://github.com/StudyingFather), [Wajov](https://github.com/Wajov), [warzone-oier](https://github.com/warzone-oier), [Xeonacid](https://github.com/Xeonacid)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

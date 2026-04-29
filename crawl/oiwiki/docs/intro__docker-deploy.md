@@ -1,4 +1,4 @@
-# Docker deploy - OI Wiki
+﻿# Docker deploy - OI Wiki
 
 - Source: https://oi-wiki.org/intro/docker-deploy/
 

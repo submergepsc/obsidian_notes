@@ -1,4 +1,4 @@
-# C++ 与其他常用语言的区别 - OI Wiki
+﻿# C++ 与其他常用语言的区别 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/cpp-other-langs/
 

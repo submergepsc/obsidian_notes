@@ -1,4 +1,4 @@
-# 图上随机游走 - OI Wiki
+﻿# 图上随机游走 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/graph-random-walk/
 

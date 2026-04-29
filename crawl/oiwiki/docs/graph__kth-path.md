@@ -1,4 +1,4 @@
-# k 短路 - OI Wiki
+﻿# k 短路 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/kth-path/
 

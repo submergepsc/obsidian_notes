@@ -1,30 +1,30 @@
-# æ¨¡éå - OI Wiki
+﻿# 模逆元 - OI Wiki
 
 - Source: https://oi-wiki.org/math/number-theory/inverse/
 
-# æ¨¡éå 
+# 模逆元
 
-æ¬æä»ç»æ¨¡æä¹ä¸ä¹æ³è¿ç®çéå ï¼å¹¶è®¨è®ºå®çå¸¸è§æ±è§£æ¹æ³ï¼
+本文介绍模意义下乘法运算的逆元，并讨论它的常见求解方法．
 
-## åºæ¬æ¦å¿µ
+## 基本概念
 
-éé¶å®æ° ð âðaâR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¹æ³éå å°±æ¯å®çåæ° ðâ1aâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±»ä¼¼å°ï¼æ°è®ºä¸­ä¹å¯ä»¥å®ä¹ä¸ä¸ªæ´æ° ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¹ä¸çéå  ðâ1modðaâ1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æç®åå°è®°ä½ ðâ1aâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿å°±æ¯ **æ¨¡éå ** ï¼modular multiplicative inverseï¼ï¼ä¹ç§°ä½ **æ°è®ºåæ°** ï¼
+非零实数 𝑎 ∈𝐑a∈R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的乘法逆元就是它的倒数 𝑎−1a−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．类似地，数论中也可以定义一个整数 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 意义下的逆元 𝑎−1mod𝑚a−1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，或简单地记作 𝑎−1a−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这就是 **模逆元** （modular multiplicative inverse），也称作 **数论倒数** ．
 
-éå 
+逆元
 
-å¯¹äºéé¶æ´æ° ð,ða,m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æå­å¨ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ðð â¡1(modð)abâ¡1(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±ç§° ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¹ä¸ç **éå ** ï¼inverseï¼ï¼
+对于非零整数 𝑎,𝑚a,m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，如果存在 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑎𝑏 ≡1(mod𝑚)ab≡1(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就称 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 意义下的 **逆元** （inverse）．
 
-è¿ç¸å½äºè¯´ï¼ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯çº¿æ§åä½æ¹ç¨ ðð¥ â¡1(modð)axâ¡1(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼æ ¹æ® [çº¿æ§åä½æ¹ç¨](../linear-equation/) çæ§è´¨å¯ç¥ï¼å½ä¸ä» å½ gcd(ð,ð) =1gcd(a,m)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ ð,ða,m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç´ æ¶ï¼éå  ðâ1modðaâ1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å­å¨ï¼ä¸å¨æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæä¹ä¸æ¯å¯ä¸çï¼
+这相当于说，𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是线性同余方程 𝑎𝑥 ≡1(mod𝑚)ax≡1(modm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解．根据 [线性同余方程](../linear-equation/) 的性质可知，当且仅当 gcd(𝑎,𝑚) =1gcd(a,m)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即 𝑎,𝑚a,m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互素时，逆元 𝑎−1mod𝑚a−1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 存在，且在模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的意义下是唯一的．
 
-## åä¸ªéå çæ±æ³
+## 单个逆元的求法
 
-å©ç¨æ©å±æ¬§å éå¾ç®æ³æå¿«éå¹æ³ï¼å¯ä»¥å¨ ð(logâ¡ð)O(logâ¡m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶é´å æ±åºåä¸ªæ´æ°çéå ï¼
+利用扩展欧几里得算法或快速幂法，可以在 𝑂(log⁡𝑚)O(log⁡m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时间内求出单个整数的逆元．
 
-### æ©å±æ¬§å éå¾ç®æ³
+### 扩展欧几里得算法
 
-æ±è§£éå ï¼å°±ç¸å½äºæ±è§£çº¿æ§åä½æ¹ç¨ï¼å æ­¤ï¼å¯ä»¥ä½¿ç¨ [æ©å±æ¬§å éå¾ç®æ³](../gcd/#æ©å±æ¬§å) å¨ ð(logâ¡min{ð,ð})O(logâ¡min{a,m})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶é´å æ±è§£éå ï¼åæ¶ï¼ç±äºéå å¯¹åºççº¿æ§æ¹ç¨æ¯è¾ç¹æ®ï¼å¯ä»¥éå½å°ç®åç¸åºçæ­¥éª¤ï¼
+求解逆元，就相当于求解线性同余方程．因此，可以使用 [扩展欧几里得算法](../gcd/#扩展欧几里得算法) 在 𝑂(log⁡min{𝑎,𝑚})O(log⁡min{a,m})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时间内求解逆元．同时，由于逆元对应的线性方程比较特殊，可以适当地简化相应的步骤．
 
-åèå®ç°
+参考实现
 
 C++Python
 
@@ -34,17 +34,17 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ``` |  ```text # Extended Euclidean algorithm. def ex_gcd ( a , b ): if b == 0 : return 1 , 0 else : x1 , y1 = ex_gcd ( b , a % b ) x = y1 y = x1 \- ( a // b ) * y1 return x , y # Returns the modular inverse of a modulo m. # Assumes that gcd(a, m) = 1, so the inverse exists. def inverse ( a , m ): x , y = ex_gcd ( a , m ) return ( x % m \+ m ) % m ```   
 ---|---  
   
-è¿ä¸ç®æ³éç¨äºææéå å­å¨çæ å½¢ï¼
+这一算法适用于所有逆元存在的情形．
 
-### å¿«éå¹æ³
+### 快速幂法
 
-è¿ä¸æ¹æ³ä¸»è¦éç¨äºæ¨¡æ°æ¯ç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼æ­¤æ¶ï¼ç± [è´¹é©¬å°å®ç](../fermat/#è´¹é©¬å°å®ç) å¯ç¥å¯¹äºä»»æ ð âðaâp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ
+这一方法主要适用于模数是素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形．此时，由 [费马小定理](../fermat/#费马小定理) 可知对于任意 𝑎 ⟂𝑝a⟂p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有
 
-ðâ ððâ2=ððâ1â¡1(modð).aâ apâ2=apâ1â¡1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎⋅𝑎𝑝−2=𝑎𝑝−1≡1(mod𝑝).a⋅ap−2=ap−1≡1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®éå çå¯ä¸æ§å¯ç¥ï¼éå  ðâ1modðaâ1modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±ç­äº ððâ2modðapâ2modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤å¯ä»¥ç´æ¥ä½¿ç¨ [å¿«éå¹](../../binary-exponentiation/) å¨ ð(logâ¡ð)O(logâ¡p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶é´å è®¡ç®ï¼
+根据逆元的唯一性可知，逆元 𝑎−1mod𝑝a−1modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就等于 𝑎𝑝−2mod𝑝ap−2modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此可以直接使用 [快速幂](../../binary-exponentiation/) 在 𝑂(log⁡𝑝)O(log⁡p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时间内计算：
 
-åèå®ç°
+参考实现
 
 C++Python
 
@@ -54,27 +54,27 @@ C++Python
 ```text 1 2 3 4 ``` |  ```text # Returns the modular inverse of a prime modulo p. # Use built-in pow function. def inverse ( a , p ): return pow ( a , p \- 2 , p ) ```   
 ---|---  
   
-å½ç¶ï¼çè®ºä¸ï¼è¿ä¸æ¹æ³å¯ä»¥å©ç¨ [æ¬§æå®ç](../fermat/#æ¬§æå®ç) æ¨å¹¿å°ä¸è¬çæ¨¡æ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼å³å©ç¨ ðð(ð)â1modðaÏ(m)â1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è®¡ç®éå ï¼ä½æ¯ï¼åæ¬¡æ±è§£ [æ¬§æå½æ°](../euler-totient/) ð(ð)Ï(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¹¶ä¸å®¹æï¼å æ­¤è¯¥ç®æ³å¨ä¸è¬æ åµä¸æçä¸é«ï¼
+当然，理论上，这一方法可以利用 [欧拉定理](../fermat/#欧拉定理) 推广到一般的模数 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形，即利用 𝑎𝜑(𝑚)−1mod𝑚aφ(m)−1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 计算逆元．但是，单次求解 [欧拉函数](../euler-totient/) 𝜑(𝑚)φ(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 并不容易，因此该算法在一般情况下效率不高．
 
-## å¤ä¸ªéå çæ±æ³
+## 多个逆元的求法
 
-æäºåºæ¯ä¸ï¼éè¦å¿«éå¤çåºå¤ä¸ªæ´æ° ð1,ð2,â¯,ðða1,a2,â¯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¹ä¸çéå ï¼æ­¤æ¶ï¼éä¸ªæ±è§£éå ï¼æ»å ±éè¦ ð(ðlogâ¡ð)O(nlogâ¡m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´ï¼å®é ä¸ï¼å¦æå°å®ä»¬ç»ä¸å¤çï¼å°±å¯ä»¥å¨ ð(ð +logâ¡ð)O(n+logâ¡m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å æ±åºæææ´æ°çéå ï¼
+有些场景下，需要快速处理出多个整数 𝑎1,𝑎2,⋯,𝑎𝑛a1,a2,⋯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 意义下的逆元．此时，逐个求解逆元，总共需要 𝑂(𝑛log⁡𝑚)O(nlog⁡m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间．实际上，如果将它们统一处理，就可以在 𝑂(𝑛 +log⁡𝑚)O(n+log⁡m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间内求出所有整数的逆元．
 
-èèåºå {ðð}{ai}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåç¼ç§¯ï¼
+考虑序列 {𝑎𝑖}{ai}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的前缀积：
 
-ð0=1,Â ðð=ððððâ1,Â ð=1,2,â¯,ð.S0=1,Â Si=aiSiâ1,Â i=1,2,â¯,n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆0=1, 𝑆𝑖=𝑎𝑖𝑆𝑖−1, 𝑖=1,2,⋯,𝑛.S0=1, Si=aiSi−1, i=1,2,⋯,n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åªè¦æ¯ä¸ª ððai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½ä¸ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç´ ï¼å®ä»¬çä¹ç§¯ ððSn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±ä¸ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç´ ï¼å æ­¤ï¼å¯ä»¥éè¿åææè¿°ç®æ³æ±åº ðâ1ðmodðSnâ1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼å ä¸ºä¹ç§¯çéå å°±æ¯éå çä¹ç§¯ï¼æä»¥ï¼ä» ðâ1ðSnâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åºåï¼ååéååºåå°±è½æ±åºæ¯ä¸ª ððSi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéå ï¼
+只要每个 𝑎𝑖ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都与 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互素，它们的乘积 𝑆𝑛Sn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就与 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互素．因此，可以通过前文所述算法求出 𝑆−1𝑛mod𝑚Sn−1modm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．因为乘积的逆元就是逆元的乘积，所以，从 𝑆−1𝑛Sn−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出发，反向遍历序列就能求出每个 𝑆𝑖Si![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逆元：
 
-ðâ1ðâ1=ðððâ1ðmodð,Â ð=ð,ðâ1,â¯,1.Siâ1â1=aiSiâ1modm,Â i=n,nâ1,â¯,1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆−1𝑖−1=𝑎𝑖𝑆−1𝑖mod𝑚, 𝑖=𝑛,𝑛−1,⋯,1.Si−1−1=aiSi−1modm, i=n,n−1,⋯,1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±æ­¤ï¼åä¸ª ððai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéå å¯ä»¥éè¿ä¸å¼è®¡ç®ï¼
+由此，单个 𝑎𝑖ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逆元可以通过下式计算：
 
-ðâ1ð=ððâ1ðâ1ðmodð,Â ð=1,2,â¯,ð.aiâ1=Siâ1Siâ1modm,Â i=1,2,â¯,n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎−1𝑖=𝑆𝑖−1𝑆−1𝑖mod𝑚, 𝑖=1,2,⋯,𝑛.ai−1=Si−1Si−1modm, i=1,2,⋯,n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åèå®ç°å¦ä¸ï¼
+参考实现如下：
 
-åèå®ç°
+参考实现
 
 C++Python
 
@@ -84,29 +84,29 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 ``` |  ```text # Returns the modular inverses for each x in a modulo m. # Assume x mod m exists for each x in a. def batch_inverse ( a , m ): n = len ( a ) prod = [ 0 ] * n s = 1 for i in range ( n ): # prod[i] = product of a[0...i-1]; prod[0] = 1. prod [ i ] = s s = s * a [ i ] % m # s = product of all elements in a. s = inverse ( s , m ) res = [ 0 ] * n for i in reversed ( range ( n )): res [ i ] = s * prod [ i ] % m s = s * a [ i ] % m return res ```   
 ---|---  
   
-ç®æ³ä¸­ï¼åªæ±äºä¸æ¬¡åä¸ªå ç´ çéå ï¼å æ­¤æ»çæ¶é´å¤æåº¦æ¯ ð(ð +logâ¡ð)O(n+logâ¡m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼
+算法中，只求了一次单个元素的逆元，因此总的时间复杂度是 𝑂(𝑛 +log⁡𝑚)O(n+log⁡m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
 
-## çº¿æ§æ¶é´é¢å¤çéå 
+## 线性时间预处理逆元
 
-å¦æè¦é¢å¤çå ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ­£æ´æ°å¨ç´ æ°æ¨¡ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çéå ï¼è¿å¯ä»¥éè¿æ¬èå°è¦è®¨è®ºçéæ¨å ³ç³»å¨ ð(ð)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶é´å è®¡ç®ï¼è¿ä¸æ¹æ³å¸¸ç¨äºç»åæ°è®¡ç®ä¸­å ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ­£æ´æ°çé¶ä¹çåæ°çé¢å¤çï¼
+如果要预处理前 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个正整数在素数模 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下的逆元，还可以通过本节将要讨论的递推关系在 𝑂(𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时间内计算．这一方法常用于组合数计算中前 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个正整数的阶乘的倒数的预处理．
 
-å¯¹äº 1 <ð <ð1<i<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ­£æ´æ° ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èå¯å¸¦ä½é¤æ³ï¼
+对于 1 <𝑖 <𝑝1<i<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的正整数 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，考察带余除法：
 
-ð=âððâð+(ðmodð).p=âpiâi+(pmodi).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝=⌊𝑝𝑖⌋𝑖+(𝑝mod𝑖).p=⌊pi⌋i+(pmodi).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°è¯¥ç­å¼å¯¹ç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¨¡ï¼å°±å¾å°
+将该等式对素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取模，就得到
 
-0â¡âððâð+(ðmodð)(modð).0â¡âpiâi+(pmodi)(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+0≡⌊𝑝𝑖⌋𝑖+(𝑝mod𝑖)(mod𝑝).0≡⌊pi⌋i+(pmodi)(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°ç­å¼ä¸¤è¾¹åæ¶ä¹ä»¥ ðâ1(ðmodð)â1iâ1(pmodi)â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±å¾å°
+将等式两边同时乘以 𝑖−1(𝑝mod𝑖)−1i−1(pmodi)−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就得到
 
-ðâ1â¡ââððâ(ðmodð)â1(modð).iâ1â¡ââpiâ(pmodi)â1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑖−1≡−⌊𝑝𝑖⌋(𝑝mod𝑖)−1(mod𝑝).i−1≡−⌊pi⌋(pmodi)−1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±æ¯ç¨äºçº¿æ§æ¶é´éæ¨æ±éå çå ¬å¼ï¼ç±äº ðmodð <ðpmodi<i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸å ¬å¼å°æ±è§£ ðâ1modðiâ1modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé®é¢è½¬åä¸ºè§æ¨¡æ´å°çé®é¢ (ðmodð)â1modð(pmodi)â1modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼ä» 1â1modð =11â1modp=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§ï¼å¯¹æ¯ä¸ª ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡ºæ¬¡åºç¨è¯¥å ¬å¼ï¼å°±å¯ä»¥å¨ ð(ð)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶é´å è·å¾å ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ´æ°çéå ï¼
+这就是用于线性时间递推求逆元的公式．由于 𝑝mod𝑖 <𝑖pmodi<i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这一公式将求解 𝑖−1mod𝑝i−1modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的问题转化为规模更小的问题 (𝑝mod𝑖)−1mod𝑝(pmodi)−1modp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，从 1−1mod𝑝 =11−1modp=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始，对每个 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 顺次应用该公式，就可以在 𝑂(𝑛)O(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时间内获得前 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个整数的逆元．
 
-åèå®ç°å¦ä¸ï¼
+参考实现如下：
 
-åèå®ç°
+参考实现
 
 C++Python
 
@@ -116,29 +116,29 @@ C++Python
 ```text 1 2 3 4 5 6 7 ``` |  ```text # Precomputes modular inverses of all integers from 1 to n modulo prime p. def precompute_inverses ( n , p ): res = [ 0 ] * ( n \+ 1 ) res [ 1 ] = 1 for i in range ( 2 , n \+ 1 ): res [ i ] = ( p \- p // i ) * res [ p % i ] % p return res ```   
 ---|---  
   
-è¿ä¸ç®æ³åªéç¨äºæ¨¡æ°æ¯ç´ æ°çæ å½¢ï¼å¯¹äºæ¨¡æ° ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯ç´ æ°çæ å½¢ï¼æ æ³ä¿è¯éæ¨å ¬å¼ä¸­å¾å°ç ðmodðmmodi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»ç¶ä¸ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç´ ï¼å èéæ¨æéè¦ç (ðmodð)â1(mmodi)â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯è½å¹¶ä¸å­å¨ï¼ä¸ä¸ªè¿æ ·çä¾å­æ¯ ð =8,ð =3m=8,i=3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶ï¼ðmodð =2mmodi=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸å­å¨æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéå ï¼
+这一算法只适用于模数是素数的情形．对于模数 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是素数的情形，无法保证递推公式中得到的 𝑚mod𝑖mmodi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 仍然与 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互素，因而递推所需要的 (𝑚mod𝑖)−1(mmodi)−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可能并不存在．一个这样的例子是 𝑚 =8,𝑖 =3m=8,i=3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此时，𝑚mod𝑖 =2mmodi=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，不存在模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逆元．
 
-å¦å¤ï¼å¾å°è¯¥éæ¨å ¬å¼åï¼ä¸ç§èªç¶çæ³æ³æ¯ç´æ¥éå½æ±è§£ä»»æä¸ä¸ªæ° ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéå ï¼æ¯æ¬¡éå½æ¶ï¼é½å©ç¨éæ¨å ¬å¼å°å®è½¬åä¸ºæ´å°çä½æ° ðmodðpmoda![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéå ï¼ç´å°ä½æ°åä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶åæ­¢ï¼ç®åå°ä¸æ¸ æ¥è¿æ ·åçå¤æåº¦1ï¼å æ­¤ï¼æ¨èä½¿ç¨åææè¿°çå¸¸è§æ¹æ³æ±è§£ï¼
+另外，得到该递推公式后，一种自然的想法是直接递归求解任意一个数 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逆元．每次递归时，都利用递推公式将它转化为更小的余数 𝑝mod𝑎pmoda![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逆元，直到余数变为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时停止．目前尚不清楚这样做的复杂度1，因此，推荐使用前文所述的常规方法求解．
 
-## ä¹ é¢
+## 习题
 
-  * [LOJ 110 ä¹æ³éå ](https://loj.ac/problem/110)
-  * [LOJ 161 ä¹æ³éå  2](https://loj.ac/problem/161)
-  * [LOJ 2605ãNOIP2012ãåä½æ¹ç¨](https://loj.ac/problem/2605)
-  * [Luogu P2054ãAHOI2005ãæ´ç](https://www.luogu.com.cn/problem/P2054)
-  * [LOJ 2034ãSDOI2016ãæåè®¡æ°](https://loj.ac/problem/2034)
+  * [LOJ 110 乘法逆元](https://loj.ac/problem/110)
+  * [LOJ 161 乘法逆元 2](https://loj.ac/problem/161)
+  * [LOJ 2605「NOIP2012」同余方程](https://loj.ac/problem/2605)
+  * [Luogu P2054「AHOI2005」洗牌](https://www.luogu.com.cn/problem/P2054)
+  * [LOJ 2034「SDOI2016」排列计数](https://loj.ac/problem/2034)
 
-## åèèµæä¸æ³¨é
+## 参考资料与注释
 
   * [Modular multiplicative inverse - Wikipedia](https://en.wikipedia.org/wiki/Modular_multiplicative_inverse)
 
 * * *
 
-  1. [riteme å¨ç¥ä¹ä¸çåç­](https://www.zhihu.com/question/59033693/answer/323292359) ä¸­æåºï¼è¿æ ·åçè®ºä¸å·²ç¥çå¤æåº¦çä¸çæ¯ ð(ð1/3+ð)O(p1/3+Îµ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èå¨å®é éæºæ°æ®ä¸­çè¡¨ç°æ¥è¿äº ð(logâ¡ð)O(logâ¡p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼Â â©
+  1. [riteme 在知乎上的回答](https://www.zhihu.com/question/59033693/answer/323292359) 中指出，这样做理论上已知的复杂度的上界是 𝑂(𝑝1/3+𝜀)O(p1/3+ε)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而在实际随机数据中的表现接近于 𝑂(log⁡𝑝)O(log⁡p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)． ↩
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/inverse.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/inverse.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Ir1d](https://github.com/Ir1d), [Xeonacid](https://github.com/Xeonacid), [Enter-tainer](https://github.com/Enter-tainer), [sshwy](https://github.com/sshwy), [StudyingFather](https://github.com/StudyingFather), [MegaOwIer](https://github.com/MegaOwIer), [PeterlitsZo](https://github.com/PeterlitsZo), [Tiphereth-A](https://github.com/Tiphereth-A), [hsfzLZH1](https://github.com/hsfzLZH1), [iamtwz](https://github.com/iamtwz), [jifbt](https://github.com/jifbt), [Marcythm](https://github.com/Marcythm), [ouuan](https://github.com/ouuan), [stevebraveman](https://github.com/stevebraveman), [abc1763613206](https://github.com/abc1763613206), [buggg-hfc](https://github.com/buggg-hfc), [c-forrest](https://github.com/c-forrest), [Chrogeek](https://github.com/Chrogeek), [Early0v0](https://github.com/Early0v0), [Great-designer](https://github.com/Great-designer), [Henry-ZHR](https://github.com/Henry-ZHR), [hqztrue](https://github.com/hqztrue), [ImpleLee](https://github.com/ImpleLee), [JellyGoat](https://github.com/JellyGoat), [ksyx](https://github.com/ksyx), [lhhxxxxx](https://github.com/lhhxxxxx), [Menci](https://github.com/Menci), [MioChyan](https://github.com/MioChyan), [n-WN](https://github.com/n-WN), [Phemon](mailto:i@phemon.me), [shawlleyw](https://github.com/shawlleyw), [Siyuan](mailto:294873684@qq.com), [skr2005](https://github.com/skr2005), [thredreams](https://github.com/thredreams), [Tiooo111](https://github.com/Tiooo111), [WAAutoMaton](https://github.com/WAAutoMaton), [Zhaoyangzhen](https://github.com/Zhaoyangzhen)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/inverse.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/inverse.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [Xeonacid](https://github.com/Xeonacid), [Enter-tainer](https://github.com/Enter-tainer), [sshwy](https://github.com/sshwy), [StudyingFather](https://github.com/StudyingFather), [MegaOwIer](https://github.com/MegaOwIer), [PeterlitsZo](https://github.com/PeterlitsZo), [Tiphereth-A](https://github.com/Tiphereth-A), [hsfzLZH1](https://github.com/hsfzLZH1), [iamtwz](https://github.com/iamtwz), [jifbt](https://github.com/jifbt), [Marcythm](https://github.com/Marcythm), [ouuan](https://github.com/ouuan), [stevebraveman](https://github.com/stevebraveman), [abc1763613206](https://github.com/abc1763613206), [buggg-hfc](https://github.com/buggg-hfc), [c-forrest](https://github.com/c-forrest), [Chrogeek](https://github.com/Chrogeek), [Early0v0](https://github.com/Early0v0), [Great-designer](https://github.com/Great-designer), [Henry-ZHR](https://github.com/Henry-ZHR), [hqztrue](https://github.com/hqztrue), [ImpleLee](https://github.com/ImpleLee), [JellyGoat](https://github.com/JellyGoat), [ksyx](https://github.com/ksyx), [lhhxxxxx](https://github.com/lhhxxxxx), [Menci](https://github.com/Menci), [MioChyan](https://github.com/MioChyan), [n-WN](https://github.com/n-WN), [Phemon](mailto:i@phemon.me), [shawlleyw](https://github.com/shawlleyw), [Siyuan](mailto:294873684@qq.com), [skr2005](https://github.com/skr2005), [thredreams](https://github.com/thredreams), [Tiooo111](https://github.com/Tiooo111), [WAAutoMaton](https://github.com/WAAutoMaton), [Zhaoyangzhen](https://github.com/Zhaoyangzhen)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

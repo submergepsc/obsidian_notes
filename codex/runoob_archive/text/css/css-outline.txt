@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/css/css-outline.html
-Title: CSS 轮廓（outline）属性 | 菜鸟教程
-
-CSS 轮廓（outline）属性 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-CSS 教程

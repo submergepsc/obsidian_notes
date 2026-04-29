@@ -1,4 +1,4 @@
-# ICPC/CCPC 赛事与赛制 - OI Wiki
+﻿# ICPC/CCPC 赛事与赛制 - OI Wiki
 
 - Source: https://oi-wiki.org/contest/icpc/
 

@@ -1,296 +1,296 @@
-# å¤æ° - OI Wiki
+﻿# 复数 - OI Wiki
 
 - Source: https://oi-wiki.org/math/complex/
 
-# å¤æ°
+# 复数
 
-å¦ææ¨å·²ç»å­¦ä¹ è¿å¤æ°ç¸å ³ç¥è¯ï¼è¯·è·³è¿æ¬é¡µé¢ï¼
+如果您已经学习过复数相关知识，请跳过本页面．
 
-å­¦ä¹ å¤æ°ç¥è¯éè¦ä¸é¨ååéåºç¡ï¼å¦æå¹¶æªå­¦ä¹ è¿åéç¥è¯è¯·ç§»æ­¥ [åéé¡µé¢](../linear-algebra/vector/)ï¼
+学习复数知识需要一部分向量基础，如果并未学习过向量知识请移步 [向量页面](../linear-algebra/vector/)．
 
-## å¤æ°
+## 复数
 
-### å¼å ¥
+### 引入
 
-æ³¨
+注
 
-ä¸é¢çå¼å ¥æ¹æ³æ¥èªäººæçé«ä¸­æ°å­¦ A çå¿ ä¿®äºï¼
+下面的引入方法来自人教版高中数学 A 版必修二．
 
-ä»æ¹ç¨çè§åº¦çï¼è´å®æ°è½ä¸è½å¼å¹³æ¹ï¼å°±æ¯æ¹ç¨ ð¥2 +ð =0(ð >0)x2+a=0(a>0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ææ²¡æè§£ï¼è¿èå¯ä»¥å½ç»ä¸ºæ¹ç¨ ð¥2 +1 =0x2+1=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ææ²¡æè§£ï¼
+从方程的角度看，负实数能不能开平方，就是方程 𝑥2 +𝑎 =0(𝑎 >0)x2+a=0(a>0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有没有解，进而可以归结为方程 𝑥2 +1 =0x2+1=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有没有解．
 
-åé¡¾å·²æçæ°éæ©å è¿ç¨ï¼å¯ä»¥çå°ï¼æ¯æ¬¡æ©å é½ä¸å®é éæ±å¯åç¸å ³ï¼ä¾å¦ï¼ä¸ºäºè§£å³æ­£æ¹å½¢å¯¹è§çº¿çåº¦éï¼ä»¥å ð¥2 â2 =0x2â2=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿æ ·çæ¹ç¨å¨æçæ°éä¸­æ è§£çé®é¢ï¼äººä»¬ææçæ°éæ©å å°äºå®æ°éï¼æ°éæ©å åï¼å¨å®æ°éä¸­è§å®çå æ³è¿ç®ãä¹æ³è¿ç®ï¼ä¸åæ¥å¨æçæ°éä¸­è§å®çå æ³è¿ç®ãä¹æ³è¿ç®åè°ä¸è´ï¼å¹¶ä¸å æ³åä¹æ³é½æ»¡è¶³äº¤æ¢å¾åç»åå¾ï¼ä¹æ³å¯¹å æ³æ»¡è¶³åé å¾ï¼
+回顾已有的数集扩充过程，可以看到，每次扩充都与实际需求密切相关．例如，为了解决正方形对角线的度量，以及 𝑥2 −2 =0x2−2=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这样的方程在有理数集中无解的问题，人们把有理数集扩充到了实数集．数集扩充后，在实数集中规定的加法运算、乘法运算，与原来在有理数集中规定的加法运算、乘法运算协调一致，并且加法和乘法都满足交换律和结合律，乘法对加法满足分配律．
 
-ä¾ç §è¿ç§ææ³ï¼ä¸ºäºè§£å³ ð¥2 +1 =0x2+1=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿æ ·çæ¹ç¨å¨å®æ°ç³»ä¸­æ è§£çé®é¢ï¼æä»¬è®¾æ³å¼å ¥ä¸ä¸ªæ°æ° ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ð¥ =ix=i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¹ç¨ ð¥2 +1 =0x2+1=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ï¼å³ä½¿å¾ i2 = â1i2=â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+依照这种思想，为了解决 𝑥2 +1 =0x2+1=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这样的方程在实数系中无解的问题，我们设想引入一个新数 ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝑥 =ix=i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是方程 𝑥2 +1 =0x2+1=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解，即使得 i2 = −1i2=−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æèï¼ææ°å¼è¿çæ° ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ·»å å°å®æ°éä¸­ï¼æä»¬å¸ææ° ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå®æ°ä¹é´ä»ç¶è½åå®æ°é£æ ·è¿è¡å æ³åä¹æ³è¿ç®ï¼å¹¶å¸æå æ³åä¹æ³é½æ»¡è¶³äº¤æ¢å¾ãç»åå¾ï¼ä»¥åä¹æ³å¯¹å æ³æ»¡è¶³åé å¾ï¼é£ä¹ï¼å®æ°ç³»ç»è¿æ©å åï¼å¾å°çæ°æ°ç³»ç±åªäºæ°ç»æå¢ï¼
+思考：把新引进的数 ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 添加到实数集中，我们希望数 ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和实数之间仍然能像实数那样进行加法和乘法运算，并希望加法和乘法都满足交换律、结合律，以及乘法对加法满足分配律．那么，实数系经过扩充后，得到的新数系由哪些数组成呢？
 
-ä¾ç §ä»¥ä¸è®¾æ³ï¼æå®æ° ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸ä¹ï¼ç»æè®°ä½ ðibi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æå®æ° ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðibi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸å ï¼ç»æè®°ä½ ð +ðia+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ³¨æå°ææå®æ°ä»¥å ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½å¯ä»¥åæ ð +ði(ð,ð âð)a+bi(a,bâR)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½¢å¼ï¼ä»èè¿äºæ°é½å¨æ©å åçæ°æ°éä¸­ï¼
+依照以上设想，把实数 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相乘，结果记作 𝑏ibi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；把实数 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑏ibi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相加，结果记作 𝑎 +𝑏ia+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．注意到所有实数以及 ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都可以写成 𝑎 +𝑏i(𝑎,𝑏 ∈𝐑)a+bi(a,b∈R)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式，从而这些数都在扩充后的新数集中．
 
-### å®ä¹
+### 定义
 
-æä»¬å®ä¹å½¢å¦ ð +ðia+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð,ð âða,bâR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ°å«å **å¤æ°** ï¼å ¶ä¸­ ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¢«ç§°ä¸º **èæ°åä½** ï¼å ¨ä½å¤æ°çéåå«å **å¤æ°é** ï¼è®°ä½ ðC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+我们定义形如 𝑎 +𝑏ia+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑎,𝑏 ∈𝐑a,b∈R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的数叫做 **复数** ，其中 ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 被称为 **虚数单位** ，全体复数的集合叫做 **复数集** ，记作 𝐂C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¤æ°éå¸¸ç¨ ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºï¼å³ ð§ =ð +ðiz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ç§å½¢å¼è¢«ç§°ä¸º **å¤æ°çä»£æ°å½¢å¼** ï¼å ¶ä¸­ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºå¤æ° ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **å®é¨** ï¼è®°ä½ Reâ¡(ð§)Reâ¡(z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºå¤æ° ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **èé¨** ï¼è®°ä½ Imâ¡(ð§)Imâ¡(z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦æ ç¹æ®è¯´æï¼é½æ ð,ð âða,bâR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+复数通常用 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示，即 𝑧 =𝑎 +𝑏iz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这种形式被称为 **复数的代数形式** ．其中 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为复数 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **实部** ，记作 Re⁡(𝑧)Re⁡(z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为复数 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **虚部** ，记作 Im⁡(𝑧)Im⁡(z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．如无特殊说明，都有 𝑎,𝑏 ∈𝐑a,b∈R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¯¹äºä¸ä¸ªå¤æ° ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å½ä¸ä» å½ ð =0b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼å®æ¯å®æ°ï¼å½ ð â 0bâ 0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼å®æ¯èæ°ï¼å½ ð =0a=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð â 0bâ 0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼å®æ¯çº¯èæ°ï¼
+对于一个复数 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，当且仅当 𝑏 =0b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，它是实数，当 𝑏 ≠0b≠0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，它是虚数，当 𝑎 =0a=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑏 ≠0b≠0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，它是纯虚数．
 
-çº¯èæ°ï¼èæ°ï¼å®æ°ï¼å¤æ°çå ³ç³»å¦ä¸å¾æç¤ºï¼
+纯虚数，虚数，实数，复数的关系如下图所示．
 
 ![](./images/complex-relation.svg)
 
-## æ§è´¨ä¸è¿ç®
+## 性质与运算
 
-### å ä½æä¹
+### 几何意义
 
-æä»¬ç¥éäº ð +ðia+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿æ ·ç±»ä¼¼çå½¢å¼çæ°è¢«ç§°ä¸ºå¤æ°ï¼å¹¶ä¸ç»åºäºå®ä¹ååç±»ï¼æä»¬è¿å¯ä»¥ææä¸ä¸æ´æ·±å±çæ§è´¨ï¼
+我们知道了 𝑎 +𝑏ia+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这样类似的形式的数被称为复数，并且给出了定义和分类，我们还可以挖掘一下更深层的性质．
 
-æä»¬æææå®æ°é½æ¾å¨äºæ°è½´ä¸ï¼å¹¶ä¸åç°æ°è½´ä¸çç¹ä¸å®æ°ä¸ä¸å¯¹åºï¼æä»¬èèå¯¹å¤æ°ä¹è¿æ ·å¤çï¼
+我们把所有实数都放在了数轴上，并且发现数轴上的点与实数一一对应．我们考虑对复数也这样处理．
 
-é¦å æä»¬å®ä¹ **å¤æ°ç¸ç­** ï¼ä¸¤ä¸ªå¤æ° ð§1 =ð +ði,ð§2 =ð +ðiz1=a+bi,z2=c+di![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç¸ç­çï¼å½ä¸ä» å½ ð =ða=c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð =ðb=d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+首先我们定义 **复数相等** ：两个复数 𝑧1 =𝑎 +𝑏i,𝑧2 =𝑐 +𝑑iz1=a+bi,z2=c+di![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是相等的，当且仅当 𝑎 =𝑐a=c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑏 =𝑑b=d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¿ä¹å®ä¹æ¯ååèªç¶çï¼å¨æ­¤ä¸åè¿å¤è§£éï¼
+这么定义是十分自然的，在此不做过多解释．
 
-ä¹å°±æ¯è¯´ï¼æä»¬å¯ä»¥ç¨å¯ä¸çæåºå®æ°å¯¹ (ð,ð)(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºä¸ä¸ªå¤æ° ð§ =ð +ðiz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ ·ï¼èæ³å°å¹³é¢ç´è§åæ ç³»ï¼æä»¬å¯ä»¥åç° **å¤æ°éä¸å¹³é¢ç´è§åæ ç³»ä¸­çç¹éä¸ä¸å¯¹åº** ï¼å¥½äºï¼æä»¬æ¾å°äºå¤æ°çä¸ç§å ä½æä¹ï¼
+也就是说，我们可以用唯一的有序实数对 (𝑎,𝑏)(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示一个复数 𝑧 =𝑎 +𝑏iz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这样，联想到平面直角坐标系，我们可以发现 **复数集与平面直角坐标系中的点集一一对应** ．好了，我们找到了复数的一种几何意义．
 
-é£ä¹è¿ä¸ªå¹³é¢ç´è§åæ ç³»å°±ä¸åä¸è¬ï¼å ä¸ºå¹³é¢ç´è§åæ ç³»ä¸­çç¹å ·æäºç¹æ®æä¹ââè¡¨ç¤ºä¸ä¸ªå¤æ°ï¼æä»¥æä»¬æè¿æ ·çå¹³é¢ç´è§åæ ç³»ç§°ä¸º **å¤å¹³é¢** ï¼ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½´ç§°ä¸º **å®è½´** ï¼ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½´ç§°ä¸º **èè½´** ï¼æä»¬è¿ä¸æ­¥å°è¯´ï¼**å¤æ°éä¸å¤å¹³é¢å ææçç¹æææçéåæ¯ä¸ä¸å¯¹åºç** ï¼
+那么这个平面直角坐标系就不再一般，因为平面直角坐标系中的点具有了特殊意义——表示一个复数，所以我们把这样的平面直角坐标系称为 **复平面** ，𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 轴称为 **实轴** ，𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 轴称为 **虚轴** ．我们进一步地说：**复数集与复平面内所有的点所构成的集合是一一对应的** ．
 
-æä»¬èèå°å­¦è¿çå¹³é¢åéçç¥è¯ï¼åç°åéçåæ è¡¨ç¤ºä¹æ¯ä¸ä¸ªæåºå®æ°å¯¹ (ð,ð)(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¾ç¶ï¼å¤æ° ð§ =ð +ðiz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹åºå¤å¹³é¢å çç¹ ð(ð,ð)Z(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹å®è¿å¯¹åºå¹³é¢åé â¶ðð =(ð,ð)OZâ=(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼äºæ¯æä»¬åæ¾å°äºå¤æ°çå¦ä¸ç§å ä½æä¹ï¼**å¤æ°éä¸å¤å¹³é¢å çåéæææçéåæ¯ä¸ä¸å¯¹åºçï¼å®æ° 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸é¶åéå¯¹åºï¼**ï¼
+我们考虑到学过的平面向量的知识，发现向量的坐标表示也是一个有序实数对 (𝑎,𝑏)(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，显然，复数 𝑧 =𝑎 +𝑏iz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对应复平面内的点 𝑍(𝑎,𝑏)Z(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么它还对应平面向量 ⟶𝑂𝑍 =(𝑎,𝑏)OZ→=(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，于是我们又找到了复数的另一种几何意义：**复数集与复平面内的向量所构成的集合是一一对应的（实数 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与零向量对应）**．
 
-äºæ¯ï¼æä»¬ç±åéçç¥è¯è¿ç§»å°å¤æ°ä¸æ¥ï¼å®ä¹ **å¤æ°çæ¨¡** å°±æ¯å¤æ°æå¯¹åºçåéçæ¨¡ï¼å¤æ° ð§ =ð +ðiz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¨¡ |ð§| =âð2+ð2|z|=a2+b2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+于是，我们由向量的知识迁移到复数上来，定义 **复数的模** 就是复数所对应的向量的模．复数 𝑧 =𝑎 +𝑏iz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的模 |𝑧| =√𝑎2+𝑏2|z|=a2+b2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-äºæ¯ä¸ºäºæ¹ä¾¿ï¼æä»¬å¸¸æå¤æ° ð§ =ð +ðiz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºç¹ ðZ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æåé â¶ððOZâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶è§å®ç¸ç­çåéè¡¨ç¤ºåä¸ä¸ªå¤æ°ï¼
+于是为了方便，我们常把复数 𝑧 =𝑎 +𝑏iz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为点 𝑍Z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或向量 ⟶𝑂𝑍OZ→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并规定相等的向量表示同一个复数．
 
-å¹¶ä¸ç±åéçç¥è¯æä»¬åç°ï¼èæ°ä¸å¯ä»¥æ¯è¾å¤§å°ï¼ä½æ¯å®æ°æ¯å¯ä»¥çï¼ï¼
+并且由向量的知识我们发现，虚数不可以比较大小（但是实数是可以的）．
 
-### å æ³ä¸åæ³
+### 加法与减法
 
-å¯¹å¤æ° ð§1 =ð +ði,ð§2 =ð +ðiz1=a+bi,z2=c+di![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ä¹å æ³è§åå¦ä¸ï¼
+对复数 𝑧1 =𝑎 +𝑏i,𝑧2 =𝑐 +𝑑iz1=a+bi,z2=c+di![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，定义加法规则如下：
 
-ð§1+ð§2=(ð+ð)+(ð+ð)iz1+z2=(a+c)+(b+d)i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑧1+𝑧2=(𝑎+𝑐)+(𝑏+𝑑)iz1+z2=(a+c)+(b+d)i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¾ææ¾ï¼ä¸¤ä¸ªå¤æ°çåä»ä¸ºå¤æ°ï¼
+很明显，两个复数的和仍为复数．
 
-èèå°åéçå æ³è¿ç®ï¼æä»¬åç°å¤æ°çå æ³è¿ç®ç¬¦ååéçå æ³è¿ç®æ³åï¼è¿åæ ·è¯æäºå¤æ°çå ä½æä¹çæ­£ç¡®æ§ï¼
+考虑到向量的加法运算，我们发现复数的加法运算符合向量的加法运算法则，这同样证明了复数的几何意义的正确性．
 
-åæ ·å¯ä»¥éªè¯ï¼å¤æ°çå æ³æ»¡è¶³ **äº¤æ¢å¾** å **ç»åå¾** ï¼å³ï¼
+同样可以验证，复数的加法满足 **交换律** 和 **结合律** ．即：
 
-ð§1+ð§2=ð§2+ð§1(ð§1+ð§2)+ð§3=ð§1+(ð§2+ð§3)z1+z2=z2+z1(z1+z2)+z3=z1+(z2+z3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑧1+𝑧2=𝑧2+𝑧1(𝑧1+𝑧2)+𝑧3=𝑧1+(𝑧2+𝑧3)z1+z2=z2+z1(z1+z2)+z3=z1+(z2+z3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åæ³ä½ä¸ºå æ³çéè¿ç®ï¼æä»¬å¯ä»¥éè¿å æ³æ³åä¸å¤æ°ç¸ç­çå®ä¹æ¥æ¨å¯¼åºåæ³æ³åï¼
+减法作为加法的逆运算，我们可以通过加法法则与复数相等的定义来推导出减法法则：
 
-ð§1âð§2=(ðâð)+(ðâð)iz1âz2=(aâc)+(bâd)i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑧1−𝑧2=(𝑎−𝑐)+(𝑏−𝑑)iz1−z2=(a−c)+(b−d)i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿åæ ·ç¬¦ååéçåæ³è¿ç®ï¼
+这同样符合向量的减法运算．
 
-### ä¹æ³ãé¤æ³ä¸å ±è½­
+### 乘法、除法与共轭
 
-å¯¹å¤æ° ð§1 =ð +ði,ð§2 =ð +ðiz1=a+bi,z2=c+di![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ä¹ä¹æ³è§åå¦ä¸ï¼
+对复数 𝑧1 =𝑎 +𝑏i,𝑧2 =𝑐 +𝑑iz1=a+bi,z2=c+di![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，定义乘法规则如下：
 
-ð§1ð§2=(ð+ði)(ð+ði)=ðð+ðði+ðði+ðði2=(ððâðð)+(ðð+ðð)iz1z2=(a+bi)(c+di)=ac+bci+adi+bdi2=(acâbd)+(bc+ad)i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑧1𝑧2=(𝑎+𝑏i)(𝑐+𝑑i)=𝑎𝑐+𝑏𝑐i+𝑎𝑑i+𝑏𝑑i2=(𝑎𝑐−𝑏𝑑)+(𝑏𝑐+𝑎𝑑)iz1z2=(a+bi)(c+di)=ac+bci+adi+bdi2=(ac−bd)+(bc+ad)i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥çåºï¼ä¸¤ä¸ªå¤æ°ç¸ä¹ç±»ä¼¼äºä¸¤ä¸ªå¤é¡¹å¼ç¸ä¹ï¼åªéè¦æ i2i2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¢æ â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶å°å®é¨ä¸èé¨åå«åå¹¶å³å¯ï¼
+可以看出，两个复数相乘类似于两个多项式相乘，只需要把 i2i2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 换成 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并将实部与虚部分别合并即可．
 
-å¤æ°çä¹æ³ä¸åéçåéç§¯å½¢å¼ç±»ä¼¼ï¼
+复数的乘法与向量的向量积形式类似．
 
-æå¾å¤æ°ä¹æ³æ»¡è¶³ **äº¤æ¢å¾** ï¼**ç»åå¾** å **å¯¹å æ³çåé å¾** ï¼å³ï¼
+易得复数乘法满足 **交换律** ，**结合律** 和 **对加法的分配律** ，即：
 
-  * ð§1ð§2 =ð§2ð§1z1z2=z2z1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * (ð§1ð§2)ð§3 =ð§1(ð§2ð§3)(z1z2)z3=z1(z2z3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ð§1(ð§2 +ð§3) =ð§1ð§2 +ð§1ð§3z1(z2+z3)=z1z2+z1z3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑧1𝑧2 =𝑧2𝑧1z1z2=z2z1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * (𝑧1𝑧2)𝑧3 =𝑧1(𝑧2𝑧3)(z1z2)z3=z1(z2z3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑧1(𝑧2 +𝑧3) =𝑧1𝑧2 +𝑧1𝑧3z1(z2+z3)=z1z2+z1z3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±äºæ»¡è¶³è¿ç®å¾ï¼æä»¬å¯ä»¥åç°å®æ°åä¸­ç **ä¹æ³å ¬å¼å¨å¤æ°åä¸­åæ ·éç¨** ï¼
+由于满足运算律，我们可以发现实数域中的 **乘法公式在复数域中同样适用** ．
 
-é¤æ³è¿ç®æ¯ä¹æ³è¿ç®çéè¿ç®ï¼æä»¬å¯ä»¥æ¨å¯¼ä¸ä¸ï¼
+除法运算是乘法运算的逆运算，我们可以推导一下：
 
-ð+ðið+ði=(ð+ði)(ðâði)(ð+ði)(ðâði)=ðð+ððð2+ð2+ððâððð2+ð2i(ð+ðiâ 0)a+bic+di=(a+bi)(câdi)(c+di)(câdi)=ac+bdc2+d2+bcâadc2+d2i(c+diâ 0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎+𝑏i𝑐+𝑑i=(𝑎+𝑏i)(𝑐−𝑑i)(𝑐+𝑑i)(𝑐−𝑑i)=𝑎𝑐+𝑏𝑑𝑐2+𝑑2+𝑏𝑐−𝑎𝑑𝑐2+𝑑2i(𝑐+𝑑i≠0)a+bic+di=(a+bi)(c−di)(c+di)(c−di)=ac+bdc2+d2+bc−adc2+d2i(c+di≠0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±äºåéæ²¡æé¤æ³ï¼è¿éä¸è®¨è®ºä¸åéçå ³ç³»ï¼
+由于向量没有除法，这里不讨论与向量的关系．
 
-ä¸ºäºåæ¯å®æ°åï¼æä»¬ä¹äºä¸ä¸ª ð âðicâdi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸ªå¼å­å¾ææä¹ï¼
+为了分母实数化，我们乘了一个 𝑐 −𝑑ic−di![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这个式子很有意义．
 
-å¯¹å¤æ° ð§ =ð +ðiz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç§° ð âðiaâbi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **å ±è½­å¤æ°** ï¼éå¸¸è®°ä¸º Â¯ð§zÂ¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¬å¯ä»¥åç°ï¼è¥ä¸¤ä¸ªå¤æ°äºä¸ºå ±è½­å¤æ°ï¼é£ä¹å®ä»¬ **å ³äºå®è½´å¯¹ç§°** ï¼
+对复数 𝑧 =𝑎 +𝑏iz=a+bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，称 𝑎 −𝑏ia−bi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **共轭复数** ，通常记为 ¯𝑧z¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．我们可以发现，若两个复数互为共轭复数，那么它们 **关于实轴对称** ．
 
-å¯¹å¤æ° ð§,ð¤z,w![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¤æ°å ±è½­æå¦ä¸æ§è´¨
+对复数 𝑧,𝑤z,w![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，复数共轭有如下性质
 
-  * ð§ â Â¯ð§ =|ð§|2zâ zÂ¯=|z|2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ââââð§ =ð§zââ=z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * Reâ¡(ð§) =ð§+Â¯ð§2Reâ¡(z)=z+zÂ¯2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼Imâ¡(ð§) =ð§âÂ¯ð§2Imâ¡(z)=zâzÂ¯2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ââââð§Â±ð¤ =Â¯ð§ Â±Â¯ð¤zÂ±wâ=zÂ¯Â±wÂ¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * âââð§ð¤ =Â¯ð§Â¯ð¤zwâ=zÂ¯wÂ¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * âââð§/ð¤ =Â¯ð§/Â¯ð¤z/wâ=zÂ¯/wÂ¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑧 ⋅¯𝑧 =|𝑧|2z⋅z¯=|z|2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * ――――𝑧 =𝑧z――=z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * Re⁡(𝑧) =𝑧+¯𝑧2Re⁡(z)=z+z¯2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，Im⁡(𝑧) =𝑧−¯𝑧2Im⁡(z)=z−z¯2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * ――――𝑧±𝑤 =¯𝑧 ±¯𝑤z±w―=z¯±w¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * ―――𝑧𝑤 =¯𝑧¯𝑤zw―=z¯w¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * ―――𝑧/𝑤 =¯𝑧/¯𝑤z/w―=z¯/w¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### è¾è§åè¾è§ä¸»å¼
+### 辐角和辐角主值
 
-å¦æè®¾å®å®æ°åä½ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ä¸ºæ°´å¹³æ­£æ¹åï¼èæ°åä½ ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ä¸ºç«ç´æ­£æ¹åï¼å¾å°çå°±æ¯ç´è§åæ è§è§ä¸çå¤å¹³é¢ï¼
+如果设定实数单位 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作为水平正方向，虚数单位 ii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作为竖直正方向，得到的就是直角坐标视角下的复平面．
 
-è¡¨ç¤ºå¤æ° ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½ç½®ï¼ä¹å¯ä»¥åå©äºæåæ  (ð,ð)(r,Î¸)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¡®å®ï¼åæå·²ç»æå°äº ðr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¤æ° ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¨¡ï¼
+表示复数 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的位置，也可以借助于极坐标 (𝑟,𝜃)(r,θ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 确定．前文已经提到了 𝑟r![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为复数 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的模．
 
-ä»å®è½´æ­£åå° **éé¶** å¤æ° ð§ =ð¥ +ið¦z=x+iy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹åºåéçå¤¹è§ ðÎ¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³å ³ç³»ï¼
+从实轴正向到 **非零** 复数 𝑧 =𝑥 +i𝑦z=x+iy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对应向量的夹角 𝜃θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足关系：
 
-tanâ¡ð=ð¦ð¥tanâ¡Î¸=yx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+tan⁡𝜃=𝑦𝑥tan⁡θ=yx![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç§°ä¸ºå¤æ° ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **è¾è§** ï¼è®°ä¸ºï¼
+称为复数 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **辐角** ，记为：
 
-ð=argâ¡ð§Î¸=argâ¡z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜃=arg⁡𝑧θ=arg⁡z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»»ä¸ä¸ª **éé¶** å¤æ° ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ææ ç©·å¤ä¸ªè¾è§ï¼æ argâ¡ð§argâ¡z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºå®ä¸æ¯ä¸ä¸ªéåï¼åå©å¼å¤´å¤§åç Argâ¡ð§Argâ¡z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤º **å ¶ä¸­ä¸ä¸ªç¹å®å¼** ï¼æ»¡è¶³æ¡ä»¶ï¼
+任一个 **非零** 复数 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有无穷多个辐角，故 arg⁡𝑧arg⁡z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 事实上是一个集合．借助开头大写的 Arg⁡𝑧Arg⁡z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示 **其中一个特定值** ，满足条件：
 
-âð<Argâ¡ð§â¤ðâÏ<Argâ¡zâ¤Ï![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+−𝜋<Arg⁡𝑧≤𝜋−π<Arg⁡z≤π![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç§° Argâ¡ð§Argâ¡z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º **è¾è§ä¸»å¼** æ **ä¸»è¾è§** ï¼è¾è§å°±æ¯è¾è§ä¸»å¼åºç¡ä¸å è¥å¹²æ´æ°ä¸ªï¼å¯ä»¥ä¸ºé¶æè´æ´æ°ï¼2ðð2kÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ argâ¡ð§ ={Argâ¡ð§ +2ðð â£ð âð}argâ¡z={Argâ¡z+2kÏâ£kâZ}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+称 Arg⁡𝑧Arg⁡z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 **辐角主值** 或 **主辐角** ．辐角就是辐角主值基础上加若干整数个（可以为零或负整数）2𝑘𝜋2kπ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即 arg⁡𝑧 ={Arg⁡𝑧 +2𝑘𝜋 ∣𝑘 ∈𝐙}arg⁡z={Arg⁡z+2kπ∣k∈Z}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-éè¦æ³¨æçæ¯ä¸¤ä¸ªè¾è§ä¸»å¼ç¸å åä¸ä¸å®è¿æ¯è¾è§ä¸»å¼ï¼èä¸¤ä¸ªè¾è§ç¸å ä¸å®è¿æ¯åæ³çè¾è§ï¼
+需要注意的是两个辐角主值相加后不一定还是辐角主值，而两个辐角相加一定还是合法的辐角．
 
-ç§°æ¨¡å°äº 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤æ°ï¼å¨å¤å¹³é¢ä¸ææçå¾å½¢ä¸º **åä½å** ï¼ç§°æ¨¡ç­äº 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤æ°ä¸º **åä½å¤æ°** ï¼å ¨ä½åä½å¤æ°å¨å¤å¹³é¢ä¸ææçå¾å½¢ä¸º **åä½åå¨** ï¼å¨ä¸å¼èµ·æ··æ·çæ åµä¸ï¼ææ¶åä½åå¨ä¹ç®ç§°åä½åï¼
+称模小于 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的复数，在复平面上构成的图形为 **单位圆** ．称模等于 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的复数为 **单位复数** ，全体单位复数在复平面上构成的图形为 **单位圆周** ．在不引起混淆的情况下，有时单位圆周也简称单位圆．
 
-å¨æåæ çè§è§ä¸ï¼å¤æ°çä¹é¤æ³åå¾å¾ç®åï¼å¤æ°ä¹æ³ï¼æ¨¡ç¸ä¹ï¼è¾è§ç¸å ï¼å¤æ°é¤æ³ï¼æ¨¡ç¸é¤ï¼è¾è§ç¸åï¼
+在极坐标的视角下，复数的乘除法变得很简单．复数乘法，模相乘，辐角相加．复数除法，模相除，辐角相减．
 
-### æ¬§æå ¬å¼
+### 欧拉公式
 
-æ¬§æå ¬å¼ï¼Euler's formulaï¼1
+欧拉公式（Euler's formula）1
 
-å¯¹ä»»æå®æ° ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ
+对任意实数 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
 
-eið¥=cosâ¡ð¥+isinâ¡ð¥eix=cosâ¡x+isinâ¡x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+ei𝑥=cos⁡𝑥+isin⁡𝑥eix=cos⁡x+isin⁡x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¨è¡¥å å¤ææ°å½æ°ä¸å¤ä¸è§å½æ° çå®ä¹åï¼è¯¥å ¬å¼å¯æ¨å¹¿è³å ¨ä½å¤æ°ï¼
+在补充 复指数函数与复三角函数 的定义后，该公式可推广至全体复数．
 
-### ææ°å½æ°ä¸ä¸è§å½æ°
+### 指数函数与三角函数
 
-å¯¹äºå¤æ° ð§ =ð¥ +ið¦z=x+iy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å½æ° ð(ð§) =eð¥(cosâ¡ð¦ +isinâ¡ð¦)f(z)=ex(cosâ¡y+isinâ¡y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ð(ð§1 +ð§2) =ð(ð§1)ð(ð§2)f(z1+z2)=f(z1)f(z2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±æ­¤ç»åº **å¤ææ°å½æ°** çå®ä¹ï¼
+对于复数 𝑧 =𝑥 +i𝑦z=x+iy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，函数 𝑓(𝑧) =e𝑥(cos⁡𝑦 +isin⁡𝑦)f(z)=ex(cos⁡y+isin⁡y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝑓(𝑧1 +𝑧2) =𝑓(𝑧1)𝑓(𝑧2)f(z1+z2)=f(z1)f(z2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．由此给出 **复指数函数** 的定义：
 
-expâ¡ð§=eð¥(cosâ¡ð¦+isinâ¡ð¦)expâ¡z=ex(cosâ¡y+isinâ¡y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+exp⁡𝑧=e𝑥(cos⁡𝑦+isin⁡𝑦)exp⁡z=ex(cos⁡y+isin⁡y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¤ææ°å½æ°å¨å®æ°éä¸ä¸å®ææ°å½æ°çå®ä¹å®å ¨ä¸è´ï¼å¨å¤å¹³é¢ä¸æ¥ææ§è´¨ï¼
+复指数函数在实数集上与实指数函数的定义完全一致．在复平面上拥有性质：
 
-  * æ¨¡ææ­£ï¼|expâ¡ð§| =expâ¡ð¥ >0|expâ¡z|=expâ¡x>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * è¾è§ï¼argâ¡(expâ¡ð§) ={ð¦ +2ðð â£ð âð}argâ¡(expâ¡z)={y+2kÏâ£kâZ}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * å æ³å®çï¼expâ¡(ð§1+ð§2) =expâ¡(ð§1)expâ¡(ð§2)expâ¡(z1+z2)=expâ¡(z1)expâ¡(z2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * å¨ææ§ï¼expâ¡ð§expâ¡z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä»¥ 2ði2Ïi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºåºæ¬å¨æçå¨æå½æ°ï¼å¦æä¸ä¸ªå½æ° ð(ð§)f(z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¨ææ¯æä¸å¨æçæ´åæ°ï¼ç§°è¯¥å¨æä¸º **åºæ¬å¨æ** ï¼
+  * 模恒正：|exp⁡𝑧| =exp⁡𝑥 >0|exp⁡z|=exp⁡x>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  * 辐角：arg⁡(exp⁡𝑧) ={𝑦 +2𝑘𝜋 ∣𝑘 ∈𝐙}arg⁡(exp⁡z)={y+2kπ∣k∈Z}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  * 加法定理：exp⁡(𝑧1+𝑧2) =exp⁡(𝑧1)exp⁡(𝑧2)exp⁡(z1+z2)=exp⁡(z1)exp⁡(z2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  * 周期性：exp⁡𝑧exp⁡z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是以 2𝜋i2πi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为基本周期的周期函数．如果一个函数 𝑓(𝑧)f(z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的周期是某一周期的整倍数，称该周期为 **基本周期** ．
 
-**å¤ä¸è§å½æ°** ï¼ä¹ç®ç§° **ä¸è§å½æ°** ï¼çå®ä¹å¦ä¸ï¼
+**复三角函数** （也简称 **三角函数** ）的定义如下：
 
-cosâ¡ð§=expâ¡(ið§)+expâ¡(âið§)2cosâ¡z=expâ¡(iz)+expâ¡(âiz)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)sinâ¡ð§=expâ¡(ið§)âexpâ¡(âið§)2isinâ¡z=expâ¡(iz)âexpâ¡(âiz)2i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+cos⁡𝑧=exp⁡(i𝑧)+exp⁡(−i𝑧)2cos⁡z=exp⁡(iz)+exp⁡(−iz)2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)sin⁡𝑧=exp⁡(i𝑧)−exp⁡(−i𝑧)2isin⁡z=exp⁡(iz)−exp⁡(−iz)2i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¥å ð§ âðzâR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç± æ¬§æå ¬å¼ æï¼
+若取 𝑧 ∈𝐑z∈R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则由 欧拉公式 有：
 
-cosâ¡ð§=Reâ¡(eið§)cosâ¡z=Reâ¡(eiz)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)sinâ¡ð§=Imâ¡(eið§)sinâ¡z=Imâ¡(eiz)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+cos⁡𝑧=Re⁡(ei𝑧)cos⁡z=Re⁡(eiz)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)sin⁡𝑧=Im⁡(ei𝑧)sin⁡z=Im⁡(eiz)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¤ä¸è§å½æ°å¨å®æ°éä¸ä¸å®ä¸è§å½æ°çå®ä¹å®å ¨ä¸è´ï¼å¨å¤å¹³é¢ä¸æ¥ææ§è´¨ï¼
+复三角函数在实数集上与实三角函数的定义完全一致．在复平面上拥有性质：
 
-  * å¥å¶æ§ï¼æ­£å¼¦å½æ°æ¯å¥å½æ°ï¼ä½å¼¦å½æ°æ¯å¶å½æ°ï¼
-  * ä¸è§æç­å¼ï¼éå¸¸çä¸è§æç­å¼é½æç«ï¼ä¾å¦å¹³æ¹åä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æè è§çåå·®å ¬å¼ç­ï¼
-  * å¨ææ§ï¼æ­£å¼¦ä¸ä½å¼¦å½æ°ä»¥ 2ð2Ï![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºåºæ¬å¨æï¼
-  * é¶ç¹ï¼å®æ­£å¼¦ä¸å®ä½å¼¦å½æ°çå ¨ä½é¶ç¹ï¼ææäºå¤æ­£å¼¦ä¸å¤ä½å¼¦å½æ°çå ¨ä½é¶ç¹ï¼è¿ä¸ªæ¨å¹¿æ²¡æå¼è¿æ°çé¶ç¹ï¼
-  * æ¨¡çæ çæ§ï¼å¤æ­£å¼¦ä¸å¤ä½å¼¦å½æ°ï¼æ¨¡é¿å¯ä»¥å¤§äºä»»æç»å®çæ­£æ°ï¼ä¸ååå®æ­£å¼¦ä¸å®ä½å¼¦å½æ°ä¸æ ·è¢«éå¶å¨ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çèå´å ï¼
+  * 奇偶性：正弦函数是奇函数，余弦函数是偶函数．
+  * 三角恒等式：通常的三角恒等式都成立，例如平方和为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，或者角的和差公式等．
+  * 周期性：正弦与余弦函数以 2𝜋2π![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为基本周期．
+  * 零点：实正弦与实余弦函数的全体零点，构成了复正弦与复余弦函数的全体零点．这个推广没有引进新的零点．
+  * 模的无界性：复正弦与复余弦函数，模长可以大于任意给定的正数，不再像实正弦与实余弦函数一样被限制在 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的范围内．
 
-## å¤æ°çä¸ç§å½¢å¼
+## 复数的三种形式
 
-åå©ç´è§åæ ç³»çè§è§ä»¥åæåæ ç³»çè§è§ï¼å¯ä»¥ååºå¤æ°çä¸ç§å½¢å¼ï¼
+借助直角坐标系的视角以及极坐标系的视角，可以写出复数的三种形式．
 
-å¤æ°ç **ä»£æ°å½¢å¼** ç¨äºè¡¨ç¤ºä»»æå¤æ°ï¼
+复数的 **代数形式** 用于表示任意复数．
 
-ð§=ð¥+ð¦iz=x+yi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑧=𝑥+𝑦iz=x+yi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»£æ°å½¢å¼ç¨äºè®¡ç®å¤æ°çå åä¹é¤åä¸ªè¿ç®æ¯è¾æ¹ä¾¿ï¼
+代数形式用于计算复数的加减乘除四个运算比较方便．
 
-å¤æ°ç **ä¸è§å½¢å¼** å **ææ°å½¢å¼** ï¼ç¨äºè¡¨ç¤ºéé¶å¤æ°ï¼
+复数的 **三角形式** 和 **指数形式** ，用于表示非零复数．
 
-ð§=ð(cosâ¡ð+isinâ¡ð)=ðexpâ¡(ið)z=r(cosâ¡Î¸+isinâ¡Î¸)=rexpâ¡(iÎ¸)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑧=𝑟(cos⁡𝜃+isin⁡𝜃)=𝑟exp⁡(i𝜃)z=r(cos⁡θ+isin⁡θ)=rexp⁡(iθ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¸¤ç§å½¢å¼ç¨äºè®¡ç®å¤æ°çä¹é¤ä¸¤ä¸ªè¿ç®ä»¥ååé¢çè¿ç®è¾ä¸ºæ¹ä¾¿ï¼å¦æåªç¨é«ä¸­è§è¿çå½æ°ï¼å¯ä»¥ä½¿ç¨ä¸è§å½¢å¼ï¼å¦æå¼å ¥äºå¤ææ°å½æ°ï¼åæç­ä»·çææ°å½¢å¼ä¼æ´å æ¹ä¾¿ï¼
+这两种形式用于计算复数的乘除两个运算以及后面的运算较为方便．如果只用高中见过的函数，可以使用三角形式．如果引入了复指数函数，写成等价的指数形式会更加方便．
 
-## åä½æ ¹
+## 单位根
 
-èå¯æ¹ç¨ ð¥ð =1xn=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨å¤æ°æä¹ä¸çè§£ï¼æ¾ç¶ï¼è¿æ ·çè§£æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼ç§°è¿ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè§£é½æ¯ **ð n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½ï¼å¤ï¼æ ¹**ï¼ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)-th root of unityï¼ï¼æ ¹æ®å¤å¹³é¢çç¥è¯ï¼ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ ¹æåä½å ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­åï¼
+考察方程 𝑥𝑛 =1xn=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在复数意义下的解．显然，这样的解有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，称这 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个解都是 **𝑛 n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位（复）根**（𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)-th root of unity）．根据复平面的知识，𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位根把单位圆 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等分．
 
-è®¾ ðð =expâ¡2ðiðÏn=expâ¡2Ïin![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³å¹ è§ä¸º 2ð/ð2Ï/n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåä½å¤æ°ï¼ï¼å ð¥ð =1xn=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£éè¡¨ç¤ºä¸º {ððð â£ð =0,1â¯,ð â1}{Ïnkâ£k=0,1â¯,nâ1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ï¼
+设 𝜔𝑛 =exp⁡2𝜋i𝑛ωn=exp⁡2πin![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（即幅角为 2𝜋/𝑛2π/n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的单位复数），则 𝑥𝑛 =1xn=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解集表示为 {𝜔𝑘𝑛 ∣𝑘 =0,1⋯,𝑛 −1}{ωnk∣k=0,1⋯,n−1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中，
 
-ð¤ðð=expâ¡2ððið=cosâ¡2ððð+isinâ¡2ððð.wnk=expâ¡2Ïkin=cosâ¡2Ïkn+isinâ¡2Ïkn.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑤𝑘𝑛=exp⁡2𝜋𝑘i𝑛=cos⁡2𝜋𝑘𝑛+isin⁡2𝜋𝑘𝑛.wnk=exp⁡2πkin=cos⁡2πkn+isin⁡2πkn.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦æä¸å è¯´æï¼ä¸è¬åè¿°ä¸­ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ ¹ï¼æ¯æä» 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§éæ¶éæ¹åçç¬¬ä¸ä¸ªè§£ï¼å³ä¸è¿° ððÏn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶å®è§£åå¯ä»¥ç¨ ððÏn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹è¡¨ç¤ºï¼
+如果不加说明，一般叙述中的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位根，是指从 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始逆时针方向的第一个解，即上述 𝜔𝑛ωn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其它解均可以用 𝜔𝑛ωn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂表示．
 
-ä¸ºä»ä¹éå¸¸æå° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ ¹ï¼æ»æ¯ç¹æç¬¬ä¸ä¸ªï¼
+为什么通常提到 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位根，总是特指第一个？
 
-ä¸»è¦æ¯ä¸ºäºåºç¨æ¶æ¹ä¾¿ï¼ææ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ ¹é½å¯ä»¥è¡¨ç¤ºä¸ºç¬¬ä¸ä¸ª ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ ¹ ððÏn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡ï¼èä¸ï¼å¯¹äºä»»æ ð <ðk<n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¤æ° ððÏn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½ä¸æ¯ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ ¹ï¼
+主要是为了应用时方便．所有 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位根都可以表示为第一个 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位根 𝜔𝑛ωn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次；而且，对于任意 𝑘 <𝑛k<n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，复数 𝜔𝑛ωn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都不是 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位根．
 
-### æ¬ååä½æ ¹
+### 本原单位根
 
-äºå®ä¸ï¼ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ ¹ä¸­æ»¡è¶³ç±»ä¼¼æ§è´¨çä¸æ­¢ ððÏn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸ªï¼ç§°éå
+事实上，𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位根中满足类似性质的不止 𝜔𝑛ωn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一个．称集合
 
-{ðððâ£0â¤ð<ð,Â gcd(ð,ð)=1}{Ïnkâ£0â¤k<n,Â gcd(n,k)=1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+{𝜔𝑘𝑛∣0≤𝑘<𝑛, gcd(𝑛,𝑘)=1}{ωnk∣0≤k<n, gcd(n,k)=1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸­çå ç´ ä¸º **ð n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡æ¬ååä½æ ¹**ï¼ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)-th primitive root of unityï¼ï¼æ ¹æ®ä¸è¿°è¡¨è¾¾å¼å¯ç¥ï¼å ¨ä½ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡æ¬ååä½æ ¹å ±æ ð(ð)Ï(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªï¼å ¶ä¸­ï¼ð(ð)Ï(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º [æ¬§æå½æ°](../number-theory/euler-totient/)ï¼
+中的元素为 **𝑛 n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次本原单位根**（𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)-th primitive root of unity）．根据上述表达式可知，全体 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次本原单位根共有 𝜑(𝑛)φ(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个，其中，𝜑(𝑛)φ(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 [欧拉函数](../number-theory/euler-totient/)．
 
-ä»»æä¸ä¸ªæ¬ååä½æ ¹ ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½ä¸ä¸è¿° ððÏn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ·æç¸åçæ§è´¨ï¼å¯¹äºä»»æç 0 <ð <ð0<k<n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡å¹ä¸ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¹å°±æ¯è¯´ï¼ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ ¹ï¼å æ­¤ï¼åå©ä»»æä¸ä¸ªæ¬ååä½æ ¹ï¼é½å¯ä»¥çæå ¨ä½åä½æ ¹ï¼
+任意一个本原单位根 𝜔ω![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都与上述 𝜔𝑛ωn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 具有相同的性质：对于任意的 0 <𝑘 <𝑛0<k<n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝜔ω![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次幂不为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，也就是说，𝜔ω![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位根．因此，借助任意一个本原单位根，都可以生成全体单位根．
 
-ä¸ºäºçè§£ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡æ¬ååä½æ ¹çç»æï¼éè¦èèåä½æ ¹çå¦ä¸æ§è´¨ï¼
+为了理解 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次本原单位根的结构，需要考虑单位根的如下性质：
 
-æ§è´¨
+性质
 
-å¯¹äºæ´æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®¾ ð =gcd(ð,ð)d=gcd(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ððð =ðð/ðð/ðÏnk=Ïn/dk/d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对于整数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，设 𝑑 =gcd(𝑛,𝑘)d=gcd(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝜔𝑘𝑛 =𝜔𝑘/𝑑𝑛/𝑑ωnk=ωn/dk/d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-ç´æ¥è®¡ç®å¯ç¥
+直接计算可知
 
-ð¤ðð=expâ¡2ððið=expâ¡2ð(ð/ð)ið/ð=ðð/ðð/ð.wnk=expâ¡2Ïkin=expâ¡2Ï(k/d)in/d=Ïn/dk/d.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑤𝑘𝑛=exp⁡2𝜋𝑘i𝑛=exp⁡2𝜋(𝑘/𝑑)i𝑛/𝑑=𝜔𝑘/𝑑𝑛/𝑑.wnk=exp⁡2πkin=exp⁡2π(k/d)in/d=ωn/dk/d.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿è¯´æï¼åªè¦ gcd(ð,ð) â 1gcd(n,k)â 1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼ðððÏnk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±ä¸å®æ¯ ðgcd(ð,ð)ngcd(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡ï¼æ¬åï¼åä½æ ¹ï¼å æ­¤ï¼æ»¡è¶³åè¿°æ§è´¨çåä½æ ¹ ðððÏnk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®æ¯æ»¡è¶³ gcd(ð,ð) =1gcd(n,k)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ­£æ¯æ¬ååä½æ ¹å ·æä¸è¿°å®ä¹çåå ï¼
+这说明，只要 gcd(𝑛,𝑘) ≠1gcd(n,k)≠1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，𝜔𝑘𝑛ωnk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就一定是 𝑛gcd(𝑛,𝑘)ngcd(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次（本原）单位根．因此，满足前述性质的单位根 𝜔𝑘𝑛ωnk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一定是满足 gcd(𝑛,𝑘) =1gcd(n,k)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这正是本原单位根具有上述定义的原因．
 
-å¦å¤ï¼ä½ä¸ºè¿äºåæçç®åæ¨è®ºï¼æï¼
+另外，作为这些分析的简单推论，有：
 
-å®ç
+定理
 
-å½ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éå ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå æ°ï¼ææ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡æ¬ååä½æ ¹æ°ææ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ ¹çä¸ä¸ªååï¼èä¸ï¼å¯¹äº â âðâân![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ å° ð¥ â¦ð¥âxâ¦xâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»åº ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡åä½æ ¹ä¹é´çåå°ï¼ä¸ä¿æä¸è¿°ååä¸åï¼å®å° ð â£ðkâ£n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡æ¬ååä½æ ¹ä»ç¶æ å°å° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬¡æ¬ååä½æ ¹ï¼
+当 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 遍历 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的因数，所有 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次本原单位根恰构成 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位根的一个划分．而且，对于 ℓ ⟂𝑛ℓ⟂n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，映射 𝑥 ↦𝑥ℓx↦xℓ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 给出 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次单位根之间的双射，且保持上述划分不变：它将 𝑘 ∣𝑛k∣n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次本原单位根仍然映射到 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 次本原单位根．
 
-å°½ç®¡æ¬ååä½æ ¹æå¾å¤éæ©ï¼ä½æ¯ç±äºç¬¬ä¸ä¸ªæ ¹ ððÏn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å½¢å¼æä¸ºç®åï¼ç®æ³ç«èµä¸­è¿æ¯ ððÏn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¸ºå¸¸ç¨ï¼å¯¹äºé¨ååºæ¯ï¼ä¸ºæé«è®¡ç®æçï¼è¿å¯ä»¥èèç¨æä¸æ¨¡æ°ä¸ç [æ¬ååä½æ ¹](../number-theory/residue/#åä½æ) ä»£æ¿å¤æ°åä¸­ç ððÏn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+尽管本原单位根有很多选择，但是由于第一个根 𝜔𝑛ωn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 形式最为简单，算法竞赛中还是 𝜔𝑛ωn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 最为常用．对于部分场景，为提高计算效率，还可以考虑用某一模数下的 [本原单位根](../number-theory/residue/#单位根) 代替复数域中的 𝜔𝑛ωn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## ç¼ç¨è¯­è¨ä¸­çå¤æ°
+## 编程语言中的复数
 
-### C ä¸­çå¤æ°
+### C 中的复数
 
-å¨ C99 æ åä¸­ï¼æ `<complex.h>` å¤´æä»¶ï¼
+在 C99 标准中，有 `<complex.h>` 头文件．
 
-å¨ `<complex.h>` å¤´æä»¶ä¸­ï¼æä¾äº `double complex`ã`float complex` å `long double complex` ä¸ç§ç±»åï¼
+在 `<complex.h>` 头文件中，提供了 `double complex`、`float complex` 和 `long double complex` 三种类型．
 
-ç®æ¯è¿ç®ç¬¦'+'ã'-'ã'*'å'/'ï¼å¯ä»¥ç¨äºæµ®ç¹æ°åå¤æ°çä»»ææ··åï¼å½è¡¨è¾¾å¼ä¸¤ç«¯æä¸ä¸ªä¸ºå¤æ°æ¶ï¼è®¡ç®ç»æä¸ºå¤æ°ï¼
+算术运算符'+'、'-'、'*'和'/'，可以用于浮点数和复数的任意混合．当表达式两端有一个为复数时，计算结果为复数．
 
-å¤´æä»¶ `<complex.h>` æä¾äºèæ°åä½ `I`ï¼å¼å ¥æ­¤å¤´æä»¶æ¶ï¼å¤§åå­æ¯ `I` ä¸å¯ä»¥ä½ä¸ºåéåä½¿ç¨ï¼
+头文件 `<complex.h>` 提供了虚数单位 `I`，引入此头文件时，大写字母 `I` 不可以作为变量名使用．
 
-å¯¹äºåä¸ªå¤æ°ï¼`<complex.h>` æä¾äºè¥å¹²æä½ï¼`creal` å½æ°ç¨äºæåå®é¨ï¼`cimag` å½æ°ç¨äºæåèé¨ï¼`cabs` å½æ°ç¨äºè®¡ç®æ¨¡ï¼`carg` å½æ°ç¨äºè®¡ç®è¾è§ä¸»å¼ï¼
+对于单个复数，`<complex.h>` 提供了若干操作：`creal` 函数用于提取实部，`cimag` 函数用于提取虚部，`cabs` 函数用于计算模，`carg` 函数用于计算辐角主值．
 
-ææçå½æ°æ ¹æ®ç±»åä¸åï¼é½æä¸ä¸ªï¼ä¾å¦ `creal` å½æ°æ `creal`ã`crealf`ã`creall` ä¸ä¸ªï¼ç¨äºå¤çå¯¹åºç `double`ã`float` å `long double` ä¸ç§ç±»åï¼æ«å°¾ä»ä¹é½ä¸å¸¦çé»è®¤å¤ç `double` ç±»åï¼ä»¥ä¸ææå½æ°åéµä»æ­¤è§å¾ï¼ä¸åç¹å«è¯´æï¼
+所有的函数根据类型不同，都有三个．例如 `creal` 函数有 `creal`、`crealf`、`creall` 三个，用于处理对应的 `double`、`float` 和 `long double` 三种类型．末尾什么都不带的默认处理 `double` 类型．以下所有函数均遵从此规律，不再特别说明．
 
-è¿äºå½æ°è¿åå¼é½æ¯ä¸è¬çæµ®ç¹æ°ï¼å¯ä»¥å°æ®éæµ®ç¹æ°ç´æ¥èµå¼ç»å¤æ°ï¼ä½æ¯ä¸å¯ä»¥å°å¤æ°ç´æ¥èµå¼ç»æµ®ç¹æ°ï¼èæ¯éè¦ä½¿ç¨ä¸è¿°æåæä½ï¼
+这些函数返回值都是一般的浮点数．可以将普通浮点数直接赋值给复数，但是不可以将复数直接赋值给浮点数，而是需要使用上述提取操作．
 
-å½æ° `conj` ç¨äºè®¡ç®å ±è½­å¤æ°ï¼è¿åå¼æ¯å¤æ°ï¼
+函数 `conj` 用于计算共轭复数，返回值是复数．
 
-å½æ° `cexp` è®¡ç®å¤ææ°ï¼`clog` è®¡ç®å¯¹æ°ä¸»å¼ï¼`csin` è®¡ç®æ­£å¼¦ï¼`ccos` è®¡ç®ä½å¼¦ï¼`ctan` è®¡ç®æ­£åï¼
+函数 `cexp` 计算复指数，`clog` 计算对数主值，`csin` 计算正弦，`ccos` 计算余弦，`ctan` 计算正切．
 
-å½æ° `cpow` è®¡ç®å¹å½æ°ï¼`csqrt` è®¡ç®å¹³æ¹æ ¹ï¼`casin` è®¡ç®åæ­£å¼¦ï¼`cacos` è®¡ç®åä½å¼¦ï¼`catan` è®¡ç®åæ­£åï¼è¿é¨åå½æ°è®¡ç®çå ¨é¨é½æ¯å¤å¼å½æ°çä¸»å¼ï¼
+函数 `cpow` 计算幂函数，`csqrt` 计算平方根，`casin` 计算反正弦，`cacos` 计算反余弦，`catan` 计算反正切．这部分函数计算的全部都是多值函数的主值．
 
-### C++ ä¸­çå¤æ°
+### C++ 中的复数
 
-å¨ C éé¢ç `<ctype.h>`ï¼å° C++ ä¼åæ `<cctype>`ï¼å ä¹ææçå¤´æä»¶éµä»è¿ä¸ªå½åè§å¾ï¼
+在 C 里面的 `<ctype.h>`，到 C++ 会变成 `<cctype>`，几乎所有的头文件遵从这个命名规律．
 
-ä½æ¯ï¼`<complex.h>` ä¸éµå®ï¼C++ æ²¡æ `<ccomplex>` å¤´æä»¶ï¼C++ çå¤æ°ç´æ¥æ¯ `<complex>`ï¼å¹¶ä¸è£ çä¸è¥¿å C å®å ¨ä¸ä¸æ ·ï¼
+但是，`<complex.h>` 不遵守，C++ 没有 `<ccomplex>` 头文件．C++ 的复数直接是 `<complex>`，并且装的东西和 C 完全不一样．
 
-å¾æè¶£ï¼è¿æ¯å ä¸ºï¼å¨ C++ çç¬¬ä¸ä¸ªçæ¬ C++98ï¼å³å·²ç»æäº `<complex>`ï¼è C è¯­è¨å¨ C99 ææ·»å ï¼
+很有趣．这是因为，在 C++ 的第一个版本 C++98，即已经有了 `<complex>`，而 C 语言在 C99 才添加．
 
-å¨ C++ ä¸­ï¼å¤æ°ç±»åå®ä¹ä½¿ç¨ `complex<float>`ã`complex<double>` å `complex<long double>`ï¼ç±äºé¢åå¯¹è±¡çå¤ææ§ï¼ä¸é¢å½æ°çåå­é½æ¯å¯ä¸çï¼æ é f æ l çåç¼ï¼
+在 C++ 中，复数类型定义使用 `complex<float>`、`complex<double>` 和 `complex<long double>`．由于面向对象的多态性，下面函数的名字都是唯一的，无需 f 或 l 的后缀．
 
-ä¸ä¸ªå¤æ°å¯¹è±¡æ¥ææåå½æ° `real` å `imag`ï¼å¯ä»¥è®¿é®å®é¨åèé¨ï¼
+一个复数对象拥有成员函数 `real` 和 `imag`，可以访问实部和虚部．
 
-ä¸ä¸ªå¤æ°å¯¹è±¡æ¥æéæåå½æ° `real`ã`imag`ã`abs`ã`arg`ï¼è¿åå®é¨ãèé¨ãæ¨¡åè¾è§ï¼
+一个复数对象拥有非成员函数 `real`、`imag`、`abs`、`arg`，返回实部、虚部、模和辐角．
 
-ä¸ä¸ªå¤æ°å¯¹è±¡è¿æ¥æéæåå½æ°ï¼`norm` ä¸ºæ¨¡çå¹³æ¹ï¼`conj` ä¸ºå ±è½­å¤æ°ï¼
+一个复数对象还拥有非成员函数：`norm` 为模的平方，`conj` 为共轭复数．
 
-ä¸ä¸ªå¤æ°å¯¹è±¡è¿æ¥æéæåå½æ° `exp`ã`log`ï¼åºä¸º ee![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯¹æ°ä¸»å¼ï¼ã`log10`ï¼åºä¸º 10 çå¯¹æ°ä¸»å¼ï¼C ä¸­æ²¡æï¼ã`pow`ã`sqrt`ã`sin`ã`cos`ã`tan`ï¼å«ä¹ä¸ C ä¸­çå«ä¹ç¸åï¼
+一个复数对象还拥有非成员函数 `exp`、`log`（底为 ee![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的对数主值）、`log10`（底为 10 的对数主值，C 中没有）、`pow`、`sqrt`、`sin`、`cos`、`tan`，含义与 C 中的含义相同．
 
-å¨ C++14 åä»¥åççæ¬ä¸­ï¼å®ä¹äº [å­é¢éè¿ç®ç¬¦ `std::literals::complex_literals::""if, ""i, ""il`](https://zh.cppreference.com/w/cpp/numeric/complex/operator%2522%2522i.html)ï¼ä¾å¦è¾å ¥ `100if`ã`100i` å `100il`ï¼ä¸è å°åå«è¿å `std::complex<float>{0.0f, 100.0f}`ã`std::complex<double>{0.0, 100.0}` ä»¥å `std::complex<long double>{0.0l, 100.0l}`ï¼è¿ä½¿å¾æä»¬å¯ä»¥æ¹ä¾¿å°ä¹¦åå½¢å¦ `auto z = 4.0 + 3i` çå¤æ°å£°æï¼
+在 C++14 及以后的版本中，定义了 [字面量运算符 `std::literals::complex_literals::""if, ""i, ""il`](https://zh.cppreference.com/w/cpp/numeric/complex/operator%2522%2522i.html)．例如输入 `100if`、`100i` 和 `100il`，三者将分别返回 `std::complex<float>{0.0f, 100.0f}`、`std::complex<double>{0.0, 100.0}` 以及 `std::complex<long double>{0.0l, 100.0l}`．这使得我们可以方便地书写形如 `auto z = 4.0 + 3i` 的复数声明．
 
-## åèèµæä¸é¾æ¥
+## 参考资料与链接
 
   * [Complex number - Wikipedia](https://en.wikipedia.org/wiki/Complex_number)
   * [Euler's formula - Wikipedia](https://en.wikipedia.org/wiki/Euler's_formula)
@@ -299,11 +299,11 @@ cosâ¡ð§=Reâ¡(eið§)cosâ¡z=Reâ¡(eiz)![](data:image/gif
 
 * * *
 
-  1. æå ³æ¬§æå ¬å¼çæ´å¤ä»ç»ï¼å¯ä»¥åèä¸¤ä¸ªè§é¢ï¼[æ¬§æå ¬å¼ä¸åç­ç¾¤è®º](https://www.bilibili.com/video/BV1fx41187tZ)ã[å¾®åæ¹ç¨æ¦è®º - ç¬¬äºç« ï¼å¨ 3.14 åéå çè§£ eiðeiÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)](https://www.bilibili.com/video/BV1G4411D7kZ)ï¼Â â©
+  1. 有关欧拉公式的更多介绍，可以参考两个视频：[欧拉公式与初等群论](https://www.bilibili.com/video/BV1fx41187tZ)、[微分方程概论 - 第五章：在 3.14 分钟内理解 ei𝜋eiπ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)](https://www.bilibili.com/video/BV1G4411D7kZ)． ↩
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/complex.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/complex.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Ir1d](https://github.com/Ir1d), [Tiphereth-A](https://github.com/Tiphereth-A), [HeRaNO](https://github.com/HeRaNO), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [MegaOwIer](https://github.com/MegaOwIer), [Xeonacid](https://github.com/Xeonacid), [c-forrest](https://github.com/c-forrest), [sshwy](https://github.com/sshwy), [CCXXXI](https://github.com/CCXXXI), [CharlesWuQiushi](https://github.com/CharlesWuQiushi), [chinggg](https://github.com/chinggg), [iamtwz](https://github.com/iamtwz), [mcendu](https://github.com/mcendu), [megakite](https://github.com/megakite), [ouuan](https://github.com/ouuan), [r-value](https://github.com/r-value), [StudyingFather](https://github.com/StudyingFather), [TSStudio](https://github.com/TSStudio)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/complex.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/complex.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [Tiphereth-A](https://github.com/Tiphereth-A), [HeRaNO](https://github.com/HeRaNO), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [MegaOwIer](https://github.com/MegaOwIer), [Xeonacid](https://github.com/Xeonacid), [c-forrest](https://github.com/c-forrest), [sshwy](https://github.com/sshwy), [CCXXXI](https://github.com/CCXXXI), [CharlesWuQiushi](https://github.com/CharlesWuQiushi), [chinggg](https://github.com/chinggg), [iamtwz](https://github.com/iamtwz), [mcendu](https://github.com/mcendu), [megakite](https://github.com/megakite), [ouuan](https://github.com/ouuan), [r-value](https://github.com/r-value), [StudyingFather](https://github.com/StudyingFather), [TSStudio](https://github.com/TSStudio)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

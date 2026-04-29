@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/asp/prop-buffer.html
-Title: ASP Buffer 属性 | 菜鸟教程
-
-ASP Buffer 属性 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-ASP 教程

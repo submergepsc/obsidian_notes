@@ -1,477 +1,477 @@
-# çº¿æ§è§ååºç¡ - OI Wiki
+﻿# 线性规划基础 - OI Wiki
 
 - Source: https://oi-wiki.org/math/linear-programming/
 
-# çº¿æ§è§ååºç¡
+# 线性规划基础
 
-## å¼å ¥
+## 引入
 
-çº¿æ§è§åï¼linear programming, LPï¼æ¯ç ç©¶çº¿æ§çº¦ææ¡ä»¶ä¸çº¿æ§ç®æ å½æ°æå¼é®é¢çæ¹æ³æ»ç§°ï¼æ¯è¿ç­¹å­¦çä¸ä¸ªåæ¯ï¼å¨å¤æ¹é¢åæåºç¨ï¼çº¿æ§è§åçæäºç¹æ®æ åµï¼å¦ç½ç»æµãå¤ååæµéç­é®é¢é½æå¯è½å¨ç®æ³ç«èµé¢ç®ä¸­åºç°ï¼ç®æ³ç«èµå¾å°ä¼åºç°åªè½ç¨çº¿æ§è§åç®æ³è§£å³çé®é¢ï¼ç»å¤§å¤æ°è¿ç±»é®é¢å¯ä»¥éè¿ç½ç»æµå»ºæ¨¡ç­æ¹æ³æ´é«æå°è§£å³ï¼
+线性规划（linear programming, LP）是研究线性约束条件下线性目标函数最值问题的方法总称，是运筹学的一个分支，在多方面均有应用．线性规划的某些特殊情况，如网络流、多商品流量等问题都有可能在算法竞赛题目中出现．算法竞赛很少会出现只能用线性规划算法解决的问题，绝大多数这类问题可以通过网络流建模等方法更高效地解决．
 
-### ä¸ä¸ªç®åçä¾å­
+### 一个简单的例子
 
-ä¸ä¸ªé®é¢è½å¤åæçº¿æ§è§åçå½¢å¼ï¼æ¢è¦æè¥å¹²ä¸ªçº¿æ§çº¦ææ¡ä»¶ï¼åè¦æçº¿æ§çç®æ å½æ°ï¼
+一个问题能够写成线性规划的形式，既要有若干个线性约束条件，又要有线性的目标函数．
 
-èèä¸é¢çä¾å­ï¼
+考虑下面的例子：
 
-ä¾å­
+例子
 
-æ©ç¹å¸å æ¯å¤©å¯ä»¥å¶ä½ä¸å®æ°éçå å­åæ²¹æ¡ï¼è¿ä¸¤ç§æ©é¤æ·±åé¡¾å®¢åç±ï¼ä¸ºäºæå¤§åå©æ¶¦ï¼å¸å å¸æå°½å¯è½å¤å°å¶ä½æ©ç¹ï¼ä½å¨å®é æä½ä¸­åå°é£æãæ¶é´ç­å¤ç§èµæºçéå¶ï¼ä¸ºæ­¤ï¼å¸å ç»è®¡äºå¶ä½æ¯ä»½æ©ç¹æéçé£æç¨éãå¶ä½æ¶é´åå ¶å¯¹åºçå©æ¶¦ï¼å ·ä½å¦ä¸è¡¨æç¤ºï¼
+早点师傅每天可以制作一定数量的包子和油条，这两种早餐深受顾客喜爱．为了最大化利润，师傅希望尽可能多地制作早点，但在实际操作中受到食材、时间等多种资源的限制．为此，师傅统计了制作每份早点所需的食材用量、制作时间及其对应的利润，具体如下表所示：
 
-æ©ç¹| æ¤ç©æ²¹| é¢ç²| æ¶é´| å©æ¶¦  
+早点| 植物油| 面粉| 时间| 利润  
 ---|---|---|---|---  
-å å­| 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 77![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
-æ²¹æ¡| 77![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+包子| 44![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 77![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 88![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
+油条| 77![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)| 66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)  
   
-åè®¾å¸å æ¯å¤©æå¤å¯ä»¥è´­å ¥ 6666![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä½çæ¤ç©æ²¹å 6060![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä½çé¢ç²ï¼å¹¶ä¸æå¤å¯ä»¥æå ¥ 9696![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä½çå¶ä½æ¶é´ï¼é£ä¹ï¼å¸å åºå¦ä½åçå®æå å­åæ²¹æ¡ççäº§æ°éï¼æè½ä½¿æ¯å¤©çå©æ¶¦æå¤§åï¼
+假设师傅每天最多可以购入 6666![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 单位的植物油和 6060![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 单位的面粉，并且最多可以投入 9696![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 单位的制作时间．那么，师傅应如何合理安排包子和油条的生产数量，才能使每天的利润最大化？
 
-ç¨æ°å­¦è¯­è¨æè¿°ï¼å¯ä»¥è®¾ ð¥1x1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¥2x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå«æ¯å¸å å¶ä½å å­åæ²¹æ¡çæ°éï¼é£ä¹ï¼ãæ»å ±éè¦çæ¤ç©æ²¹ä¸è¶ è¿ 6666![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä½ãå°±å¯ä»¥è¡¨ç¤ºä¸º
+用数学语言描述，可以设 𝑥1x1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑥2x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别是师傅制作包子和油条的数量．那么，「总共需要的植物油不超过 6666![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 单位」就可以表示为
 
-4ð¥1+7ð¥2â¤66.4x1+7x2â¤66.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+4𝑥1+7𝑥2≤66.4x1+7x2≤66.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±»ä¼¼å°ï¼ãæ»å ±éè¦çé¢ç²ä¸è¶ è¿ 6060![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä½ãåãæ»å ±éè¦çæ¶é´ä¸è¶ è¿ 9696![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä½ãå¯ä»¥è¡¨ç¤ºä¸º
+类似地，「总共需要的面粉不超过 6060![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 单位」和「总共需要的时间不超过 9696![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 单位」可以表示为
 
-7ð¥1+3ð¥2â¤60,8ð¥1+6ð¥2â¤96.7x1+3x2â¤60,8x1+6x2â¤96.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+7𝑥1+3𝑥2≤60,8𝑥1+6𝑥2≤96.7x1+3x2≤60,8x1+6x2≤96.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦å¤ï¼å¸å ä¸å¯è½çäº§åºè´æ°åä½çæ©ç¹ï¼æä»¥ï¼è¿ææ¡ä»¶
+另外，师傅不可能生产出负数单位的早点，所以，还有条件
 
-ð¥1,ð¥2â¥0.x1,x2â¥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥1,𝑥2≥0.x1,x2≥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¸å å°±æ¯è¦å¨è¿äºéå¶ä¸ï¼æå¤§åå©æ¶¦ï¼
+师傅就是要在这些限制下，最大化利润：
 
-ð§=5ð¥1+6ð¥2.z=5x1+6x2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑧=5𝑥1+6𝑥2.z=5x1+6x2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±æ¯ä¸ä¸ªå ¸åççº¿æ§è§åé®é¢ï¼å®çç®æ å½æ°æ¯å ³äºå³ç­åéççº¿æ§å½æ°ï¼çº¦ææ¡ä»¶åç±å³ç­åéææççº¿æ§ç­å¼æä¸ç­å¼ç»æï¼
+这就是一个典型的线性规划问题．它的目标函数是关于决策变量的线性函数，约束条件则由决策变量构成的线性等式或不等式组成．
 
-### å¾è§£æ³
+### 图解法
 
-å¯¹äºåªæä¸¤ä¸ªå³ç­åéççº¿æ§è§åé®é¢ï¼å¯ä»¥éè¿å¾è§£æ³ç´è§å°è§£å³é®é¢ï¼
+对于只有两个决策变量的线性规划问题，可以通过图解法直观地解决问题．
 
-èèæ¬èçé®é¢
+考虑本节的问题
 
-maxð¥1,ð¥2ð§=5ð¥1+6ð¥2subject toÂ 4ð¥1+7ð¥2â¤66,7ð¥1+3ð¥2â¤60,8ð¥1+6ð¥2â¤96,ð¥1,ð¥2â¥0maxx1,x2z=5x1+6x2subject toÂ 4x1+7x2â¤66,7x1+3x2â¤60,8x1+6x2â¤96,x1,x2â¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max𝑥1,𝑥2𝑧=5𝑥1+6𝑥2subject to 4𝑥1+7𝑥2≤66,7𝑥1+3𝑥2≤60,8𝑥1+6𝑥2≤96,𝑥1,𝑥2≥0maxx1,x2z=5x1+6x2subject to 4x1+7x2≤66,7x1+3x2≤60,8x1+6x2≤96,x1,x2≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹åºçå ä½å¾åï¼æåä¸è¡çº¦æè¡¨ç¤ºå¯éçç¹ (ð¥1,ð¥2)(x1,x2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½åºç°å¨ç¬¬ä¸è±¡éï¼å¦å¤çä¸ä¸ªçº¦æåè¡¨ç¤ºå¯éçç¹ä¸å®å¨ç´çº¿ 4ð¥1 +7ð¥2 =664x1+7x2=66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ãç´çº¿ 7ð¥1 +3ð¥2 =607x1+3x2=60![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åç´çº¿ 8ð¥1 +6ð¥2 =968x1+6x2=96![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸æ¹ï¼è¿äºåºåçäº¤éï¼å¦ä¸å¾ç»¿è²åºåæç¤ºï¼å°±æ¯ææå¯ä¾éæ©çç¹çéåï¼
+对应的几何图像．最后一行约束表示可选的点 (𝑥1,𝑥2)(x1,x2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都出现在第一象限，另外的三个约束则表示可选的点一定在直线 4𝑥1 +7𝑥2 =664x1+7x2=66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、直线 7𝑥1 +3𝑥2 =607x1+3x2=60![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和直线 8𝑥1 +6𝑥2 =968x1+6x2=96![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的下方．这些区域的交集（如下图绿色区域所示）就是所有可供选择的点的集合：
 
 ![](./images/linear-programming.svg)
 
-æ¥ä¸æ¥è¦æå¤§å ð§ =5ð¥1 +6ð¥2z=5x1+6x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåå¼ï¼å¦æå°è¯¥ç­å¼è§ä½ç´çº¿ 5ð¥1 +6ð¥2 =ð§5x1+6x2=z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹ç¨ï¼åéç ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çååï¼å°å¾å°ä¸æå¹³è¡ç´çº¿ï¼ä¸ ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¶å¤§ï¼ç´çº¿å°±è¶é è¿å³ä¸æ¹ï¼å æ­¤ï¼åªéè¦ä¸æ­ç§»å¨ç´çº¿ç´è³è¾¾å°æä¸ä¸´çä½ç½®ï¼ä½¿å¾ååå³ä¸ç§»å¨ä¸ç¹ç¹ï¼ç´çº¿å°±ä¸ååå¾ä¸­æç¤ºåºåç¸äº¤ï¼æ­¤æ¶ç´çº¿å¯¹åºç ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯ææ±çæå¤§å¼ï¼
+接下来要最大化 𝑧 =5𝑥1 +6𝑥2z=5x1+6x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的取值．如果将该等式视作直线 5𝑥1 +6𝑥2 =𝑧5x1+6x2=z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方程，则随着 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的变化，将得到一族平行直线，且 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 越大，直线就越靠近右上方．因此，只需要不断移动直线直至达到某一临界位置，使得再向右上移动一点点，直线就不再和图中所示区域相交，此时直线对应的 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是所求的最大值．
 
-å¦å¾æç¤ºï¼è¿æ ·çæ å½¢åçå¨çº¢ç¹æç¤ºä½ç½®ï¼å®æ¯ç´çº¿ 4ð¥1 +7ð¥2 =664x1+7x2=66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åç´çº¿ 7ð¥1 +3ð¥2 =607x1+3x2=60![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäº¤ç¹ï¼èç«ä¸¤ç´çº¿æ¹ç¨å¯ç¥ï¼å®çåæ æ¯ (6,6)(6,6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æ¯æ¬é®é¢å¯ä¸çæä¼è§£ï¼æ©ç¹å¸å çæå¤§å©æ¶¦æ¯ ð§ =66z=66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+如图所示，这样的情形发生在红点所示位置．它是直线 4𝑥1 +7𝑥2 =664x1+7x2=66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和直线 7𝑥1 +3𝑥2 =607x1+3x2=60![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的交点．联立两直线方程可知，它的坐标是 (6,6)(6,6)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这是本问题唯一的最优解．早点师傅的最大利润是 𝑧 =66z=66![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å½é®é¢æ¶åå¤äºä¸¤ä¸ªå³ç­åéæ¶ï¼å¾è§£æ³ä¸åéç¨ï¼ä½æ¯ï¼æ¬èçä¾å­ä¸­çä¸äºè§å¯ä»ç¶ææï¼çº¿æ§è§åé®é¢ä¸­çæ¯ä¸ªä¸ç­å¼çº¦æé½æè¿°äºä¸ä¸ªãåå¹³é¢ãï¼ææå¯è¡çè§£çéåå°±æ¯è¿äºãåå¹³é¢ãçäº¤éï¼å æ­¤ï¼æ»æ¯ä¸ä¸ªãå¸å¤è¾¹å½¢ãï¼è§åé®é¢çæä¼è§£æ»æ¯å¯ä»¥å¨è¯¥ãå¸å¤è¾¹å½¢ãçæä¸ªãé¡¶ç¹ãå¤åå¾ï¼è¿äºãé¡¶ç¹ãçåæ å¯ä»¥éè¿èç«è¿äºãåå¹³é¢ãçãè¾¹çãçæ¹ç¨æ±å¾ï¼å°è¿äºè§å¯æå±å°é«ç»´ç©ºé´ï¼å°±åå±åºäºä¸ä¸ªé«æçæ±è§£çº¿æ§è§åé®é¢çæ¹æ³ââåçº¯å½¢æ³ï¼è¿ä¹æ¯ç®æ³ç«èµä¸­æå¸¸åºç¨çæ¹æ³ï¼
+当问题涉及多于两个决策变量时，图解法不再适用．但是，本节的例子中的一些观察仍然有效．线性规划问题中的每个不等式约束都描述了一个「半平面」，所有可行的解的集合就是这些「半平面」的交集，因此，总是一个「凸多边形」．规划问题的最优解总是可以在该「凸多边形」的某个「顶点」处取得．这些「顶点」的坐标可以通过联立这些「半平面」的「边界」的方程求得．将这些观察拓展到高维空间，就发展出了一个高效的求解线性规划问题的方法——单纯形法．这也是算法竞赛中最常应用的方法．
 
-å¦å¤ä¸ä¸ªå¼å¾æ³¨æçé®é¢æ¯ï¼ååä¸ï¼æ©ç¹å¸å å¶ä½çå å­åæ²¹æ¡é½ä¸æ¯æ éå¯åçï¼åºå½æ¯æä¸ªæ´æ°ï¼è½ç¶æ¬é¢æ±è§£è¿ç¨ä¸­æ²¡ææç¡®å°éå¶è¿ä¸ç¹ï¼ä½æ¯ç±äºæç»çæä¼è§£çç¡®æ¯æ´æ°ï¼æä»¥ï¼å³ä½¿å ä¸æ´æ°éå¶ï¼æ¬é¢çç­æ¡ä»ç¶æ¯å¯è¡çï¼ä½æ¯å¯¹äºå¾å¤è§åé®é¢ï¼æä¼è§£å¯è½æ æ³åå¾å¨æ´ç¹å¤ï¼è¿äºé®é¢å®é ä¸æ¯ä¸ç±»æ´æ°è§åé®é¢ï¼èéç®åççº¿æ§è§åé®é¢ï¼æ¬æçç»å°¾ç®åå°è®¨è®ºäºè¿ä¸ç±»é®é¢ï¼
+另外一个值得注意的问题是，原则上，早点师傅制作的包子和油条都不是无限可分的，应当是某个整数．虽然本题求解过程中没有明确地限制这一点，但是由于最终的最优解的确是整数，所以，即使加上整数限制，本题的答案仍然是可行的．但是对于很多规划问题，最优解可能无法取得在整点处，这些问题实际上是一类整数规划问题，而非简单的线性规划问题．本文的结尾简单地讨论了这一类问题．
 
-## åºæ¬æ¦å¿µ
+## 基本概念
 
-æ¬èä»ç»çº¿æ§è§åé®é¢çåºæ¬æ¦å¿µï¼
+本节介绍线性规划问题的基本概念．
 
-### çº¿æ§è§åé®é¢
+### 线性规划问题
 
-ä¸ä¸ªçº¿æ§è§åé®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éå¸¸ç±å¦ä¸ä¸¤é¨åç»æï¼
+一个线性规划问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 通常由如下两部分组成：
 
-  * çº¿æ§ç®æ å½æ°ï¼å³å½¢å¦
+  * 线性目标函数，即形如
 
-ð(ð¥1,ð¥2,â¯,ð¥ð)=ð1ð¥1+ð2ð¥2+â¯+ððð¥ðf(x1,x2,â¯,xn)=c1x1+c2x2+â¯+cnxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓(𝑥1,𝑥2,⋯,𝑥𝑛)=𝑐1𝑥1+𝑐2𝑥2+⋯+𝑐𝑛𝑥𝑛f(x1,x2,⋯,xn)=c1x1+c2x2+⋯+cnxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çå½æ°ï¼å ¶ä¸­ï¼ðð âðciâR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¸¸æ°ï¼
+的函数，其中，𝑐𝑖 ∈𝐑ci∈R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是常数；
 
-  * çº¿æ§çº¦æï¼å³å½¢å¦
+  * 线性约束，即形如
 
-ðð(ð¥1,ð¥2,â¯,ð¥ð)=ðð1ð¥1+ðð2ð¥2+â¯+ðððð¥ðâ¤(=,â¥)ððgj(x1,x2,â¯,xn)=aj1x1+aj2x2+â¯+ajnxnâ¤(=,â¥)bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑔𝑗(𝑥1,𝑥2,⋯,𝑥𝑛)=𝑎𝑗1𝑥1+𝑎𝑗2𝑥2+⋯+𝑎𝑗𝑛𝑥𝑛≤(=,≥)𝑏𝑗gj(x1,x2,⋯,xn)=aj1x1+aj2x2+⋯+ajnxn≤(=,≥)bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çä¸ç­å¼æç­å¼çº¦æï¼å ¶ä¸­ï¼ððð,ðð âðaji,bjâR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯å¸¸æ°ï¼
+的不等式或等式约束，其中，𝑎𝑗𝑖,𝑏𝑗 ∈𝐑aji,bj∈R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是常数．
 
-çº¿æ§è§åé®é¢ï¼å°±æ¯è¦å¨æ»¡è¶³æç»çº¦æçåæä¸ï¼æå¤§åæè æå°åç®æ å½æ°ï¼æ»¡è¶³æç»çº¦æçè§£ (ð¥1,ð¥2,â¯,ð¥ð) âðð(x1,x2,â¯,xn)âRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸º **å¯è¡è§£** ï¼feasible solutionï¼ï¼å¨ææå¯è¡è§£ä¸­ï¼ä½¿å¾ç®æ å½æ°åå¾æå¼çè§£ç§°ä¸º **æä¼è§£** ï¼optimal solutionï¼ï¼
+线性规划问题，就是要在满足所给约束的前提下，最大化或者最小化目标函数．满足所给约束的解 (𝑥1,𝑥2,⋯,𝑥𝑛) ∈𝐑𝑛(x1,x2,⋯,xn)∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为 **可行解** （feasible solution）；在所有可行解中，使得目标函数取得最值的解称为 **最优解** （optimal solution）．
 
-### æ åå½¢å¼
+### 标准形式
 
-ä¸ºäºæ¹ä¾¿æè¿°åè¿ä¸æ­¥å¤çï¼éå¸¸éè¦æå®ä¸ä¸ªçº¿æ§è§åé®é¢çæ åå½¢å¼ï¼ä¸åæç®å¯è½æä¸åçè§å®æ¹å¼ï¼æ¬æè§å®çº¿æ§è§åçæ åå½¢å¼å¦ä¸ï¼
+为了方便描述和进一步处理，通常需要指定一个线性规划问题的标准形式．不同文献可能有不同的规定方式，本文规定线性规划的标准形式如下：
 
-min{ð¥ð}ðâð=1ððð¥ðsubject toÂ ðâð=1ðððð¥ð=ððâ¥0,Â ð=1,â¯,ð,ð¥ðâ¥0,Â ð=1,â¯,ð.min{xi}âi=1ncixisubject toÂ âi=1najixi=biâ¥0,Â j=1,â¯,m,xiâ¥0,Â i=1,â¯,n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+min{𝑥𝑖}𝑛∑𝑖=1𝑐𝑖𝑥𝑖subject to 𝑛∑𝑖=1𝑎𝑗𝑖𝑥𝑖=𝑏𝑖≥0, 𝑗=1,⋯,𝑚,𝑥𝑖≥0, 𝑖=1,⋯,𝑛.min{xi}∑i=1ncixisubject to ∑i=1najixi=bi≥0, j=1,⋯,m,xi≥0, i=1,⋯,n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¹å°±æ¯è¯´ï¼çº¿æ§è§åé®é¢æ¯æå°åé®é¢ï¼ææå³ç­åéé½æéè´çº¦æï¼ä¸é¤æ­¤ä¹å¤åªå å«è¥å¹²å³ä¾§å¸¸ééè´çç­å¼çº¦æï¼å©ç¨ [ç©éµ](../linear-algebra/matrix/) å¯ä»¥æ´ä¸ºç®æ´å°è¡¨è¾¾è¿ä¸é®é¢ï¼
+也就是说，线性规划问题是最小化问题，所有决策变量都有非负约束，且除此之外只包含若干右侧常量非负的等式约束．利用 [矩阵](../linear-algebra/matrix/) 可以更为简洁地表达这一问题：
 
-max{ððð¥:ð´ð¥=ðâ¥0,Â ð¥â¥0}.max{cTx:Ax=bâ¥0,Â xâ¥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max{𝑐𝑇𝑥:𝐴𝑥=𝑏≥0, 𝑥≥0}.max{cTx:Ax=b≥0, x≥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ð¥ =(ð¥ð) âððx=(xi)âRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å³ç­åéï¼ð =(ðð) âððb=(bj)âRm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð´ =(ððð) âððÃðA=(aji)âRmÃn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯çº¦æä¸­æ¶åçå¸¸éï¼çº¿æ§è§åé®é¢çè§æ¨¡å°±æ¯æå®çå³ç­åéçæ°ç®åå®ççº¦æçä¸ªæ°ï¼
+其中，𝑥 =(𝑥𝑖) ∈𝐑𝑛x=(xi)∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是决策变量，𝑏 =(𝑏𝑗) ∈𝐑𝑚b=(bj)∈Rm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐴 =(𝑎𝑗𝑖) ∈𝐑𝑚×𝑛A=(aji)∈Rm×n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是约束中涉及的常量．线性规划问题的规模就是指它的决策变量的数目和它的约束的个数．
 
-åéä¸ç­å¼
+向量不等式
 
-æ¬æä¸­ä¼å¤æ¬¡åºç°å ð â¥0bâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿æ ·çåéä¸ç­å¼ï¼ä¸è¬å°ï¼å¯¹äºåé ð¥,ð¦ âððx,yâRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ç­å¼ ð¥ â¤ð¦xâ¤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤º âð(ð¥ð â¤ð¦ð)âi(xiâ¤yi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³éç»´å°è¿è¡å®æ°æä¹ä¸çæ¯è¾ï¼è¿ä¸å ³ç³»æ¯åéç©ºé´ä¸ç [ååºå ³ç³»](../order-theory/#äºå)ï¼ä¹å°±æ¯è¯´ï¼å­å¨ä¸¤ä¸ªåéæ æ³æ¯è¾çæ å½¢ï¼
+本文中会多次出现像 𝑏 ≥0b≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这样的向量不等式．一般地，对于向量 𝑥,𝑦 ∈𝐑𝑛x,y∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，不等式 𝑥 ≤𝑦x≤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示 ∀𝑖(𝑥𝑖 ≤𝑦𝑖)∀i(xi≤yi)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即逐维地进行实数意义上的比较．这一关系是向量空间上的 [偏序关系](../order-theory/#二元关系)，也就是说，存在两个向量无法比较的情形．
 
-æ åå½¢å¼çéååªæ¯ä¸ºäºè¡ææ¹ä¾¿ï¼èå¹¶æ²¡æä»»ä½ç¹å«ä¹å¤ï¼å ä¸ºä»»ä½çº¿æ§è§åé®é¢é½å¯ä»¥ç­ä»·å°åæä¸é¢çå ­ç§å½¢å¼ï¼
+标准形式的选取只是为了行文方便，而并没有任何特别之处，因为任何线性规划问题都可以等价地写成下面的六种形式：
 
-min{ððð¥:ð´ð¥=ð,Â ð¥â¥0},min{ððð¥:ð´ð¥â¥ð},min{ððð¥:ð´ð¥â¥ð,Â ð¥â¥0},max{ððð¥:ð´ð¥=ð,Â ð¥â¥0},max{ððð¥:ð´ð¥â¤ð},max{ððð¥:ð´ð¥â¤ð,Â ð¥â¥0}.min{cTx:Ax=b,Â xâ¥0},min{cTx:Axâ¥b},min{cTx:Axâ¥b,Â xâ¥0},max{cTx:Ax=b,Â xâ¥0},max{cTx:Axâ¤b},max{cTx:Axâ¤b,Â xâ¥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+min{𝑐𝑇𝑥:𝐴𝑥=𝑏, 𝑥≥0},min{𝑐𝑇𝑥:𝐴𝑥≥𝑏},min{𝑐𝑇𝑥:𝐴𝑥≥𝑏, 𝑥≥0},max{𝑐𝑇𝑥:𝐴𝑥=𝑏, 𝑥≥0},max{𝑐𝑇𝑥:𝐴𝑥≤𝑏},max{𝑐𝑇𝑥:𝐴𝑥≤𝑏, 𝑥≥0}.min{cTx:Ax=b, x≥0},min{cTx:Ax≥b},min{cTx:Ax≥b, x≥0},max{cTx:Ax=b, x≥0},max{cTx:Ax≤b},max{cTx:Ax≤b, x≥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸åæä½å¯ä»¥å°ææçº¿æ§è§åé®é¢é½ç­ä»·å°è½¬åä¸ºè¿å ­ç§å½¢å¼ä¹ä¸ï¼
+下列操作可以将所有线性规划问题都等价地转化为这六种形式之一：
 
-  1. éè¿æ·»å è´å·ï¼å³å° ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸º âðâc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±å¯ä»¥å®ææå¤§åé®é¢åæå°åé®é¢çç¸äºè½¬åï¼
-  2. éè¿æ·»å è´å·ï¼å³å° ðððð¥ âªððajTxâªbj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¿æ¢æ âðððð¥ âª âððâajTxâªâbj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±å¯ä»¥å®æä¸ç­å¼çº¦æçä¸¤ç§æ¹åçç¸äºè½¬åï¼æå°ç­å¼çº¦æçå³ä¾§å¸¸éåä¸ºéè´æ°ï¼
-  3. ææçç­å¼çº¦æ ðððð¥ =ððajTx=bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½å¯ä»¥æ¿æ¢æä¸¤ä¸ªç¸åæ¹åçä¸ç­å¼çº¦æ ðððð¥ â¥ððajTxâ¥bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðððð¥ â¤ððajTxâ¤bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  4. ææçä¸ç­å¼çº¦æ ðððð¥ â¤( â¥)ððajTxâ¤(â¥)bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½å¯ä»¥éè¿æ·»å éè´æ¾å¼åé ð ðsj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹å¼ï¼è½¬åä¸ºç­å¼çº¦æ ðððð¥ +( â)ð ð =ððajTx+(â)sj=bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»¥åç¸åºçéè´çº¦æ ð ð â¥0sjâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  5. å¦ææä¸ªå³ç­åé ð¥ðxi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ²¡æéè´çº¦æï¼é£ä¹ï¼å¯ä»¥å°å®æ¿æ¢æä¸¤ä¸ªéè´åéçå·®å¼ï¼å³ ð¥ð =ð¥+ð âð¥âðxj=xj+âxjâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð¥+ð,ð¥âð â¥0xj+,xjââ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. 通过添加负号，即将 𝑐c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 变为 −𝑐−c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就可以完成最大化问题和最小化问题的相互转化．
+  2. 通过添加负号，即将 𝑎𝑇𝑗𝑥 ⪋𝑏𝑗ajTx⪋bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 替换成 −𝑎𝑇𝑗𝑥 ⪌ −𝑏𝑗−ajTx⪌−bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就可以完成不等式约束的两种方向的相互转化，或将等式约束的右侧常量变为非负数．
+  3. 所有的等式约束 𝑎𝑇𝑗𝑥 =𝑏𝑗ajTx=bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都可以替换成两个相反方向的不等式约束 𝑎𝑇𝑗𝑥 ≥𝑏𝑗ajTx≥bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑎𝑇𝑗𝑥 ≤𝑏𝑗ajTx≤bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  4. 所有的不等式约束 𝑎𝑇𝑗𝑥 ≤( ≥)𝑏𝑗ajTx≤(≥)bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都可以通过添加非负松弛变量 𝑠𝑗sj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方式，转化为等式约束 𝑎𝑇𝑗𝑥 +( −)𝑠𝑗 =𝑏𝑗ajTx+(−)sj=bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 以及相应的非负约束 𝑠𝑗 ≥0sj≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  5. 如果某个决策变量 𝑥𝑖xi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 没有非负约束，那么，可以将它替换成两个非负变量的差值，即 𝑥𝑗 =𝑥+𝑗 −𝑥−𝑗xj=xj+−xj−![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑥+𝑗,𝑥−𝑗 ≥0xj+,xj−≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-éè¿è¿äºæä½è½¬åå¾å°ççº¿æ§è§åé®é¢çè§æ¨¡ä¸è¶ è¿åé®é¢çè§æ¨¡çäºåï¼èä¸è¿äºé®é¢çå¯è¡è§£åæä¼è§£é½å¾å®¹æç¸äºè½¬åï¼å æ­¤ï¼å¯¹äºä¸è¬å½¢å¼ççº¿æ§è§åé®é¢ï¼æ»æ¯å¯ä»¥é¦å å°å®è½¬åä¸ºæ åå½¢å¼ï¼æä¸è¿°å ­ç§å½¢å¼ä¹ä¸ï¼åè¿è¡æ±è§£ï¼
+通过这些操作转化得到的线性规划问题的规模不超过原问题的规模的二倍，而且这些问题的可行解和最优解都很容易相互转化．因此，对于一般形式的线性规划问题，总是可以首先将它转化为标准形式（或上述六种形式之一）再进行求解．
 
-ä¾å­
+例子
 
-èèçº¿æ§è§åé®é¢
+考虑线性规划问题
 
-max3ð¥1â2ð¥2+ð¥3subject toÂ 2ð¥1+3ð¥2+4ð¥3â¥1,3ð¥1+4ð¥2â¤5,5ð¥2âð¥3=â1,ð¥1,ð¥2â¥0.max3x1â2x2+x3subject toÂ 2x1+3x2+4x3â¥1,3x1+4x2â¤5,5x2âx3=â1,x1,x2â¥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max3𝑥1−2𝑥2+𝑥3subject to 2𝑥1+3𝑥2+4𝑥3≥1,3𝑥1+4𝑥2≤5,5𝑥2−𝑥3=−1,𝑥1,𝑥2≥0.max3x1−2x2+x3subject to 2x1+3x2+4x3≥1,3x1+4x2≤5,5x2−x3=−1,x1,x2≥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-éè¿æä½ 1ã2 å 3 å¯ä»¥å°å®è½¬åä¸ºå½¢å¼ min{ððð¥ :ð´ð¥ â¥ð}min{cTx:Axâ¥b}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³
+通过操作 1、2 和 3 可以将它转化为形式 min{𝑐𝑇𝑥 :𝐴𝑥 ≥𝑏}min{cTx:Ax≥b}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即
 
-minâ3ð¥1+2ð¥2âð¥3subject toÂ 2ð¥1+3ð¥2+4ð¥3â¥1,â3ð¥1â4ð¥2â¥â5,5ð¥2âð¥3â¥â1,â5ð¥2+ð¥3â¥1,ð¥1â¥0,ð¥2â¥0.minâ3x1+2x2âx3subject toÂ 2x1+3x2+4x3â¥1,â3x1â4x2â¥â5,5x2âx3â¥â1,â5x2+x3â¥1,x1â¥0,x2â¥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+min−3𝑥1+2𝑥2−𝑥3subject to 2𝑥1+3𝑥2+4𝑥3≥1,−3𝑥1−4𝑥2≥−5,5𝑥2−𝑥3≥−1,−5𝑥2+𝑥3≥1,𝑥1≥0,𝑥2≥0.min−3x1+2x2−x3subject to 2x1+3x2+4x3≥1,−3x1−4x2≥−5,5x2−x3≥−1,−5x2+x3≥1,x1≥0,x2≥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-éè¿æä½ 4 å 5 å¯ä»¥å°å®è½¬åä¸ºå½¢å¼ max{ððð¥ :ð´ð¥ =ð,Â ð¥ â¥0}max{cTx:Ax=b,Â xâ¥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³
+通过操作 4 和 5 可以将它转化为形式 max{𝑐𝑇𝑥 :𝐴𝑥 =𝑏, 𝑥 ≥0}max{cTx:Ax=b, x≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即
 
-max3ð¥1â2ð¥2+ð¥+3âð¥â3subject toÂ 2ð¥1+3ð¥2+4ð¥+3â4ð¥â3âð¥4=1,3ð¥1+4ð¥2+ð¥5=5,5ð¥2âð¥+3+ð¥â3=â1,ð¥1,ð¥2,ð¥+3,ð¥â3,ð¥4,ð¥5â¥0.max3x1â2x2+x3+âx3âsubject toÂ 2x1+3x2+4x3+â4x3ââx4=1,3x1+4x2+x5=5,5x2âx3++x3â=â1,x1,x2,x3+,x3â,x4,x5â¥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max3𝑥1−2𝑥2+𝑥+3−𝑥−3subject to 2𝑥1+3𝑥2+4𝑥+3−4𝑥−3−𝑥4=1,3𝑥1+4𝑥2+𝑥5=5,5𝑥2−𝑥+3+𝑥−3=−1,𝑥1,𝑥2,𝑥+3,𝑥−3,𝑥4,𝑥5≥0.max3x1−2x2+x3+−x3−subject to 2x1+3x2+4x3+−4x3−−x4=1,3x1+4x2+x5=5,5x2−x3++x3−=−1,x1,x2,x3+,x3−,x4,x5≥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### å¯è¡åä¸é®é¢çè§£
+### 可行域与问题的解
 
-ææå¯è¡è§£çéå D âððDâRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºçº¿æ§è§åé®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **å¯è¡å** ï¼feasible regionï¼ï¼ä»å ä½è§åº¦çï¼æ¯ä¸ªä¸ç­å¼çº¦æ ðððð¥ â¤ððajTxâ¤bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æè¿°äºä¸ä¸ªåç©ºé´ {ð¥ âðð :ðððð¥ â¤ðð}{xâRn:ajTxâ¤bj}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯ä¸ªç­å¼çº¦æ ðððð¥ =ððajTx=bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æè¿°äºä¸ä¸ªè¶ å¹³é¢ {ð¥ âðð :ðððð¥ =ðð}{xâRn:ajTx=bj}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ï¼å¯è¡åä¸å®æ¯æéå¤ä¸ªåç©ºé´åè¶ å¹³é¢çäº¤éï¼å¨ä¼åé¢å1ï¼è¿æ ·çå ä½ä½éå¸¸ç§°ä¸º ððRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ç **å¤é¢ä½** ï¼polyhedronï¼ï¼å¤é¢ä½ä¸å®æ¯é­å¸éï¼ä½æªå¿ æ¯æççï¼æççå¤é¢ä½ä¹ç§°ä¸º **å¤èå½¢** ï¼polytopeï¼ï¼å¤èå½¢å¯ä»¥çä½æ¯å¹³é¢ä¸çå¤è¾¹å½¢å¨é«ç»´ç©ºé´çæ¨å¹¿ï¼èå¤é¢ä½å°å®è¿ä¸æ­¥æ¨å¹¿å°å¯è½æ ççæ å½¢ï¼
+所有可行解的集合 D ⊆𝐑𝑛D⊆Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为线性规划问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **可行域** （feasible region）．从几何角度看，每个不等式约束 𝑎𝑇𝑗𝑥 ≤𝑏𝑗ajTx≤bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都描述了一个半空间 {𝑥 ∈𝐑𝑛 :𝑎𝑇𝑗𝑥 ≤𝑏𝑗}{x∈Rn:ajTx≤bj}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，每个等式约束 𝑎𝑇𝑗𝑥 =𝑏𝑗ajTx=bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都描述了一个超平面 {𝑥 ∈𝐑𝑛 :𝑎𝑇𝑗𝑥 =𝑏𝑗}{x∈Rn:ajTx=bj}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以，可行域一定是有限多个半空间和超平面的交集．在优化领域1，这样的几何体通常称为 𝐑𝑛Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的 **多面体** （polyhedron）．多面体一定是闭凸集，但未必是有界的．有界的多面体也称为 **多胞形** （polytope）．多胞形可以看作是平面上的多边形在高维空间的推广，而多面体将它进一步推广到可能无界的情形．
 
-å¤é¢ä½çä¾å­
+多面体的例子
 
-æ­¤å¤åä¸¾äºä¸äºå¸¸è§çå¤é¢ä½ï¼
+此处列举了一些常见的多面体：
 
-  1. ç©ºé â â ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç§°ä¸º **é¶èå½¢** ï¼nullitopeï¼ï¼ç»´åº¦è§å®ä¸º â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. **ä»¿å°å­ç©ºé´** ï¼affine subspaceï¼ï¼å³è¥å¹²è¶ å¹³é¢çäº¤é {ð¥ âðð :ð´ð¥ =ð}{xâRn:Ax=b}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ç¸å½äºçº¿æ§æ¹ç¨ç» ð´ð¥ =ðAx=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£éï¼å½æ¹ç¨ç»æ è§£æ¶ï¼å®å°±æ¯ç©ºéï¼å¦åï¼å®æ»æ¯å¯ä»¥åæ ð¥0 +ðx0+V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½¢å¼ï¼å ¶ä¸­ï¼ð¥0 âððx0âRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð âððVâRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ð ârankâ¡(ð´)nârankâ¡(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´çº¿æ§å­ç©ºé´ï¼ç¹å«å°ï¼è¶ å¹³é¢ä¹æ¯ä»¿å°å­ç©ºé´ï¼
-  3. **å¤é¢ä½é¥** ï¼polyhedral coneï¼ï¼å³ç©ºé´ä¸­æéå¤ä¸ªç¹ {ð¥ð}{xi}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ¨ä½éè´çº¿æ§ç»å {âðð¼ðð¥ð :ð¼ð â¥0}{âiÎ±ixi:Î±iâ¥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®æ¯é¡¶ç¹ä½äºåç¹çå¸é¥ä½ï¼ç­ä»·å°ï¼å®å¯ä»¥çä½æ¯ç±è¥å¹²ä¸ªç»è¿åç¹çè¶ å¹³é¢å´æçå¤é¢ä½ï¼å³ {ð¥ âðð :ð´ð¥ â¤0}{xâRn:Axâ¤0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¹å«å°ï¼åç©ºé´ä¹æ¯å¤é¢ä½é¥ï¼
-  4. å¤èå½¢ï¼å³æççå¤é¢ä½ï¼ç¹å«å°ï¼â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´çå¤èå½¢å°±æ¯å¸¸è§çç©ºéãç¹ãçº¿æ®µãå¤è¾¹å½¢åï¼éå¸¸æä¹ä¸çï¼å¤é¢ä½ï¼ä¸ä¸ªéåæ¯å¤èå½¢ï¼å½ä¸ä» å½å®æ¯æéå¤ä¸ªç¹ {ð¥ð}{xi}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¸å {âðð¼ðð¥ð :ð¼ð â¥0,Â âðð¼ð =1}{âiÎ±ixi:Î±iâ¥0,Â âiÎ±i=1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ä¸ª ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´çå¤èå½¢è³å°æ¯ç± ð +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç¹çæçå¸å ï¼
-  5. **åçº¯å½¢** ï¼simplexï¼ï¼å³æ°ç± ð +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªç¹çæç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´å¤èå½¢ï¼å®æ¯æç®åç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´å¤èå½¢ï¼ç¹å«å°ï¼â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ã33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´çå¤èå½¢åå«æ¯ç©ºéãç¹ãçº¿æ®µãä¸è§å½¢ååé¢ä½ï¼æç®åç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´åçº¯å½¢çä¾å­ï¼å°±æ¯ {ð¥ âðð :ð¥ð â¥0,Â âðð¥ð =1}{xâRk:xiâ¥0,Â âixi=1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®é ä¸ï¼ä»»ä½ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´åçº¯å½¢é½å¯ä»¥éè¿ä»¿å°åæ¢ï¼å³å¹³ç§»åä¼¸ç¼©ï¼åä¸ºè¿æ ·ä¸ç§ç¹æ®æ å½¢ï¼å¼å¾æ³¨æçæ¯ï¼åçº¯å½¢æ³å¹¶ä¸æ¯ççå¨åçº¯å½¢ä¸è¿è¡çï¼
+  1. 空集 ∅∅![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，又称为 **零胞形** （nullitope），维度规定为 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  2. **仿射子空间** （affine subspace），即若干超平面的交集 {𝑥 ∈𝐑𝑛 :𝐴𝑥 =𝑏}{x∈Rn:Ax=b}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．它相当于线性方程组 𝐴𝑥 =𝑏Ax=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解集：当方程组无解时，它就是空集；否则，它总是可以写成 𝑥0 +𝑉x0+V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式，其中，𝑥0 ∈𝐑𝑛x0∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑉 ⊆𝐑𝑛V⊆Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑛 −rank⁡(𝐴)n−rank⁡(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维线性子空间．特别地，超平面也是仿射子空间．
+  3. **多面体锥** （polyhedral cone），即空间中有限多个点 {𝑥𝑖}{xi}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的全体非负线性组合 {∑𝑖𝛼𝑖𝑥𝑖 :𝛼𝑖 ≥0}{∑iαixi:αi≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．它是顶点位于原点的凸锥体．等价地，它可以看作是由若干个经过原点的超平面围成的多面体，即 {𝑥 ∈𝐑𝑛 :𝐴𝑥 ≤0}{x∈Rn:Ax≤0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．特别地，半空间也是多面体锥．
+  4. 多胞形，即有界的多面体．特别地，−1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维的多胞形就是常见的空集、点、线段、多边形和（通常意义下的）多面体．一个集合是多胞形，当且仅当它是有限多个点 {𝑥𝑖}{xi}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的凸包 {∑𝑖𝛼𝑖𝑥𝑖 :𝛼𝑖 ≥0, ∑𝑖𝛼𝑖 =1}{∑iαixi:αi≥0, ∑iαi=1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．一个 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维的多胞形至少是由 𝑘 +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个点生成的凸包．
+  5. **单纯形** （simplex），即恰由 𝑘 +1k+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个点生成的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维多胞形．它是最简单的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维多胞形．特别地，−1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维的多胞形分别是空集、点、线段、三角形和四面体．最简单的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维单纯形的例子，就是 {𝑥 ∈𝐑𝑘 :𝑥𝑖 ≥0, ∑𝑖𝑥𝑖 =1}{x∈Rk:xi≥0, ∑ixi=1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．实际上，任何 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维单纯形都可以通过仿射变换（即平移和伸缩）变为这样一种特殊情形．值得注意的是，单纯形法并不是真的在单纯形上进行的．
 
-ä»»ä½å¤é¢ä½ï¼é½å¯ä»¥çä½æ¯ä¸ä¸ªå¤é¢ä½é¥åä¸ä¸ªå¤èå½¢ç [Minkowski å](../../geometry/convex-hull/#éµå¯å¤«æ¯åºå)ï¼åè æè¿°äºå¤é¢ä½æ ççé¨åï¼åè æè¿°äºå¤é¢ä½æçé¨åçå½¢ç¶ï¼è¿ä¸ªå¤é¢ä½é¥æ¯å¯ä¸çï¼å¤é¢ä½ {ð¥ âðð :ð´ð¥ â¤ð}{xâRn:Axâ¤b}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè§£å¾å°çå¤é¢ä½é¥ä¸å®æ¯ {ð¥ âRð :ð´ð¥ â¤0}{xâRn:Axâ¤0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+任何多面体，都可以看作是一个多面体锥和一个多胞形的 [Minkowski 和](../../geometry/convex-hull/#闵可夫斯基和)：前者描述了多面体无界的部分，后者描述了多面体有界部分的形状．这个多面体锥是唯一的：多面体 {𝑥 ∈𝐑𝑛 :𝐴𝑥 ≤𝑏}{x∈Rn:Ax≤b}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分解得到的多面体锥一定是 {𝑥 ∈R𝑛 :𝐴𝑥 ≤0}{x∈Rn:Ax≤0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-çº¿æ§è§åçè§£ä¸å¤é¢ä½çç»æç´§å¯ç¸å ³ï¼å¯¹äºå¤é¢ä½ D âððDâRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ååé ð âðð â{0}câRnâ{0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èèå¦ä¸ççº¿æ§è§åé®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼å¯¹æå°åçæ å½¢ä¹å¯ä»¥ç±»ä¼¼å°è®¨è®ºï¼
+线性规划的解与多面体的结构紧密相关．对于多面体 D ∈𝐑𝑛D∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和向量 𝑐 ∈𝐑𝑛 ∖{0}c∈Rn∖{0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，考虑如下的线性规划问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：（对最小化的情形也可以类似地讨论）
 
-max{ððð¥:ð¥âD}.max{cTx:xâD}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max{𝑐𝑇𝑥:𝑥∈D}.max{cTx:x∈D}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»å ä½è§åº¦çï¼è¿ç¸å½äºå¨è¶ å¹³é¢ ð» :ððð¥ =ð§H:cTx=z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯è¡å DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è³å°æä¸ä¸ªäº¤ç¹çåæä¸ï¼æ²¿çåé ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹åç§»å¨è¶ å¹³é¢ ð»H![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ð§z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°½å¯è½å¤§ï¼è¿å°±å­å¨ä¸ç§å¯è½æ§ï¼
+从几何角度看，这相当于在超平面 𝐻 :𝑐𝑇𝑥 =𝑧H:cTx=z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与可行域 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 至少有一个交点的前提下，沿着向量 𝑐c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方向移动超平面 𝐻H![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝑧z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 尽可能大．这就存在三种可能性：
 
-  * å¯è¡å DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç©ºéï¼è¿è¯´æé®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ²¡æå¯è¡è§£ï¼å®çæäºçº¦ææ¯ç¸äºçç¾çï¼æ­¤æ¶ï¼ç§°é®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ **ä¸å¯è¡ç** ï¼infeasibleï¼ï¼å®çæä¼ä»·å¼è§å®ä¸º ââââ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 可行域 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是空集．这说明问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 没有可行解，它的某些约束是相互矛盾的．此时，称问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 **不可行的** （infeasible），它的最优价值规定为 −∞−∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * å¯è¡å DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éç©ºï¼ä½æ¯å®å å«ä¸æ¡æ¹ååéä¸º ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå°çº¿ï¼å³å­å¨ ð¥0 âððx0âRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð¥0 +ð¡ð âDx0+tcâD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹äºææ ð¡ â¥0tâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æç«ï¼å ä¸ºæ²¿çåé ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¹åå¯ä»¥ä¸æ­å°ç§»å¨è¶ å¹³é¢ ð»H![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èä¸ç§»å¨è¿ç¨ä¸­ï¼éå ð» â©DHâ©D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è³å°å«æè¿æ¡å°çº¿ä¸­çæä¸ªç¹ï¼ä¸å®æ¯éç©ºçï¼æä»¥ï¼ç®æ å½æ° ððð¥ =ððð¥0 +ð¡ðððcTx=cTx0+tcTc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥åå¾ä»»æå¤§çå¼ï¼æ­¤æ¶ï¼ç§°é®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ **æ çç** ï¼unboundedï¼ï¼å®çæä¼ä»·å¼è§å®ä¸º +â+â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 可行域 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 非空，但是它包含一条方向向量为 𝑐c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的射线，即存在 𝑥0 ∈𝐑𝑛x0∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑥0 +𝑡𝑐 ∈Dx0+tc∈D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对于所有 𝑡 ≥0t≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都成立．因为沿着向量 𝑐c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的方向可以不断地移动超平面 𝐻H![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而且移动过程中，集合 𝐻 ∩DH∩D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 至少含有这条射线中的某个点，一定是非空的，所以，目标函数 𝑐𝑇𝑥 =𝑐𝑇𝑥0 +𝑡𝑐𝑇𝑐cTx=cTx0+tcTc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以取得任意大的值．此时，称问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 **无界的** （unbounded），它的最优价值规定为 +∞+∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * å¯è¡å DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éç©ºï¼ä¸ä¸å«æä»»ä½æ¹ååéä¸º ðc![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå°çº¿ï¼æ­¤æ¶ï¼é®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸º **æçç** ï¼boundedï¼ï¼è®° ð§â âðzââR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºé®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæä¼ä»·å¼ï¼è¶ å¹³é¢ ð»â :ððð¥ =ð§âHâ:cTx=zâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤äºä¸ç§ä¸´çä½ç½®ï¼å®ä¸å¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸äº¤ï¼ä¸ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å å«äºåç©ºé´ {ð¥ :ððð¥ â¤ð§â}{x:cTxâ¤zâ}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼è¿æ ·çè¶ å¹³é¢ç§°ä¸ºå¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ª **æ¯æè¶ å¹³é¢** ï¼supporting hyperlaneï¼ï¼é®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæä¼è§£éå°±æ¯ ð»â â©DHââ©D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½ä¸ºæ¯æè¶ å¹³é¢åå¤é¢ä½çäº¤éï¼éå ð»â â©DHââ©D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®æ¯å¤é¢ä½ï¼ä¸å å«å¨ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¾¹çä¸­ï¼å®ç§°ä¸ºå¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ª **é¢** ï¼faceï¼ï¼å½¢è±¡å°è¯´ï¼å¤é¢ä½å°±æ¯ç±è¿äºé¢å´æçï¼é¤äºè¿äºç±æ¯æè¶ å¹³é¢åå¤é¢ä½ç¸äº¤å½¢æçé¢ä¹å¤ï¼ä¸è¬æ¥è¯´ï¼å¤é¢ä½è¿æä¸¤ä¸ªé¢ï¼ç©ºéåå¤é¢ä½æ¬èº«ï¼å¤é¢ä½çææé¢å¨éåçå å«å ³ç³»ä¸ï¼å½¢æäº [æ ¼](../order-theory/#æåéä¸æ) çç»æï¼
+  * 可行域 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 非空，且不含有任何方向向量为 𝑐c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的射线．此时，问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为 **有界的** （bounded）．记 𝑧∗ ∈𝐑z∗∈R![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最优价值．超平面 𝐻∗ :𝑐𝑇𝑥 =𝑧∗H∗:cTx=z∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处于一种临界位置：它与多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相交，且 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 包含于半空间 {𝑥 :𝑐𝑇𝑥 ≤𝑧∗}{x:cTx≤z∗}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中．这样的超平面称为多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个 **支撑超平面** （supporting hyperlane）．问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最优解集就是 𝐻∗ ∩DH∗∩D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．作为支撑超平面和多面体的交集，集合 𝐻∗ ∩DH∗∩D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一定是多面体，且包含在 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的边界中．它称为多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个 **面** （face）．形象地说，多面体就是由这些面围成的．除了这些由支撑超平面和多面体相交形成的面之外，一般来说，多面体还有两个面：空集和多面体本身．多面体的所有面在集合的包含关系下，形成了 [格](../order-theory/#有向集与格) 的结构．
 
-ä¸ä¸ª ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´çå¤é¢ä½çé¢çç»´åº¦ä¸å®æ¯ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´çæ´æ°ï¼ç»´åº¦ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¢ï¼å³ä¸ä¸ªç¹ï¼ç§°ä¸ºå¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **é¡¶ç¹** ï¼vertexï¼æ **è§ç¹** ï¼corner pointï¼ï¼ç»´åº¦ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¢ç§°ä¸ºå¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **è¾¹** ï¼edgeï¼ï¼ç»´åº¦ä¸º ð â1dâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¢åç§°ä¸ºå¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **ç»´é¢** ï¼facetï¼ï¼ä½æ¯ï¼å¹¶éææå¤é¢ä½é½æé¡¶ç¹ï¼å ä¸ºå¤é¢ä½çé¢çé¢ä»ç¶æ¯å¤é¢ä½çé¢ï¼èåªæä»¿å°å­ç©ºé´ææ²¡æä¸¥æ ¼æ´å°çéç©ºé¢ï¼æä»¥ï¼å¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæææå°é¢é½æ¯ä»¿å°å­ç©ºé´ï¼èä¸ï¼åä¸ä¸ªå¤é¢ä½çæå°é¢çç»´åº¦æ¯ç¸åçï¼ç¹å«å°ï¼å¤é¢ä½ D ={ð¥ âðð :ð´ð¥ â¤ð}D={xâRn:Axâ¤b}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå°é¢çç»´åº¦æ¯ ð ârankâ¡ð´nârankâ¡A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+一个 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维的多面体的面的维度一定是 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间的整数．维度为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的面（即一个点）称为多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **顶点** （vertex）或 **角点** （corner point），维度为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的面称为多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **边** （edge），维度为 𝑑 −1d−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的面则称为多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **维面** （facet）．但是，并非所有多面体都有顶点．因为多面体的面的面仍然是多面体的面，而只有仿射子空间才没有严格更小的非空面，所以，多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的所有极小面都是仿射子空间．而且，同一个多面体的极小面的维度是相同的；特别地，多面体 D ={𝑥 ∈𝐑𝑛 :𝐴𝑥 ≤𝑏}D={x∈Rn:Ax≤b}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的极小面的维度是 𝑛 −rank⁡𝐴n−rank⁡A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å ä¸ºå¤é¢ä½çé¢å°±æ¯æççº¿æ§è§åé®é¢çè§£éï¼æä»¥ï¼éè¦ææ¸ æ¥å¦ä½ç¡®å®å¤é¢ä½çé¢çæ¹ç¨ï¼è®¾å¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç±è¥å¹²ä¸ªçº¦æ ðððð¥ âªððajTxâªbj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè¿°ï¼ä¸ ð¹F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªé¢ï¼å¦ææä¸ªçº¦æå¨ææ ð¥ âð¹xâF![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤é½åå¾ç­å·ï¼å°±ç§°è¯¥çº¦æå¨é¢ ð¹F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯ **ç´§ç** ï¼tightï¼ï¼é¢ ð¹F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çç¹æ¾ç¶æ»¡è¶³è¿äºç´§çº¦æåç­å·å¾å°çæ¹ç¨ç»ï¼èè¿ä¸ªæ¹ç¨ç»ç¡®å®çä»¿å°å­ç©ºé´åå¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäº¤éï¼å°±æ¯é¢ ð¹F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åè¿æ¥ï¼ä»»æéåå¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ççº¦æçä¸ä¸ªå­éï¼å°è¿äºçº¦æåç­ãèç«ãæ±è§£å¾å°çä»¿å°å­ç©ºé´åå¤é¢ä½çäº¤éï¼å°±æ¯ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªé¢ï¼èä¸ï¼éåçç´§çº¦æè¶å¤ï¼å¾å°çé¢ï¼å¨å å«æä¹ä¸ï¼å°±è¶å°ï¼
+因为多面体的面就是有界线性规划问题的解集，所以，需要搞清楚如何确定多面体的面的方程．设多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 由若干个约束 𝑎𝑇𝑗𝑥 ⪋𝑏𝑗ajTx⪋bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 描述，且 𝐹F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个面．如果某个约束在所有 𝑥 ∈𝐹x∈F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处都取得等号，就称该约束在面 𝐹F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上是 **紧的** （tight）．面 𝐹F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的点显然满足这些紧约束取等号得到的方程组，而这个方程组确定的仿射子空间和多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的交集，就是面 𝐹F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．反过来，任意选取多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的约束的一个子集，将这些约束取等、联立、求解得到的仿射子空间和多面体的交集，就是 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个面．而且，选取的紧约束越多，得到的面（在包含意义下）就越小．
 
-ç¹å«å°ï¼æ åå½¢å¼ççº¿æ§è§åçå¯è¡å D ={ð¥ âðð :ð´ð¥ =ð,Â ð¥ â¥0}D={xâRn:Ax=b,Â xâ¥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç³»æ°ç©éµ (ð´ð¼)(AI)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç§©æ¯ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼å®çæå°é¢å°±æ¯å®çé¡¶ç¹ï¼ä¹å°±æ¯è¯´ï¼å¦æé®é¢æçï¼é£ä¹å®çæä¼è§£ä¸å®å¯ä»¥éåä¸ºæä¸ªé¡¶ç¹ï¼èä¸ï¼è¿ä¸ªé¡¶ç¹å¯ä»¥éè¿éå ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªçº¿æ§ç¬ç«çç´§çº¦æèç«å¾å°ï¼è¿æ­£æ¯çº¿æ§è§åçæ åå½¢å¼çæ¹ä¾¿ä¹å¤ï¼
+特别地，标准形式的线性规划的可行域 D ={𝑥 ∈𝐑𝑛 :𝐴𝑥 =𝑏, 𝑥 ≥0}D={x∈Rn:Ax=b, x≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的系数矩阵 (𝐴𝐼)(AI)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的秩是 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，因此，它的极小面就是它的顶点．也就是说，如果问题有界，那么它的最优解一定可以选取为某个顶点．而且，这个顶点可以通过选取 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个线性独立的紧约束联立得到．这正是线性规划的标准形式的方便之处．
 
-ä¾å­
+例子
 
-ä¸å¾ä¸­ï¼DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¯è¡åï¼ç®æ å½æ°ä¸­çç³»æ°æ¯ ð1,ð2,ð3c1,c2,c3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼åå«å¯¹åºçå¯ä¸æä¼è§£ãå¤ç»æä¼è§£åæ çä¸ç§æ å½¢ï¼å¯¹äºåä¸¤ç§æ å½¢ï¼ç¸åºççº¢è²ç²å®çº¿å°±æ¯è§£éå¯¹åºçæ¯æè¶ å¹³é¢ï¼ä¹ä¸ï¼ï¼æä¼è§£éåå«æ¯å¤é¢ä½ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¡¶ç¹ ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè¾¹ âââð¶ð·CDâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºç¬¬ä¸ç§æ å½¢ï¼å ä¸ºå¯è¡å DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­å å«æ¹åä¸º ð3c3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå°çº¿ï¼æä»¥ï¼ä»¥ ð3c3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ³åéçè¶ å¹³é¢å¯ä»¥ä¸æ­æ²¿ç ð3c3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¹åç§»å¨ï¼è¿èé®é¢æ¯æ ççï¼
+下图中，DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为可行域．目标函数中的系数是 𝑐1,𝑐2,𝑐3c1,c2,c3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，分别对应着唯一最优解、多组最优解和无界三种情形．对于前两种情形，相应的红色粗实线就是解集对应的支撑超平面（之一），最优解集分别是多面体 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的顶点 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和边 ―――𝐶𝐷CD―![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于第三种情形，因为可行域 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中包含方向为 𝑐3c3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的射线，所以，以 𝑐3c3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为法向量的超平面可以不断沿着 𝑐3c3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 方向移动，进而问题是无界的．
 
 ![](./images/lp-feasible.svg)
 
-è¿äºè®¨è®ºå¿½ç¥äº ð =0c=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼æ­¤æ¶ï¼çº¿æ§è§åé®é¢æ¾ç¶ä¸è½æ¯æ ççï¼æä»¥è¦ä¹é®é¢æ¬èº«æ¯ä¸å¯è¡çï¼è¦ä¹æä¼ä»·å¼ç­äº 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸æä¼è§£éå°±æ¯ DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬èº«ï¼è¿ç±»ç¹æ®ççº¿æ§è§åä¹ç§°ä¸º **å¯è¡æ§çº¿æ§è§å** ï¼feasibility linear programmingï¼ï¼
+这些讨论忽略了 𝑐 =0c=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形．此时，线性规划问题显然不能是无界的，所以要么问题本身是不可行的，要么最优价值等于 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且最优解集就是 DD![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 本身．这类特殊的线性规划也称为 **可行性线性规划** （feasibility linear programming）．
 
-å¼å¾æåºçæ¯ï¼å¤å®çº¿æ§è§åé®é¢æ¯å¦å¯è¡ãæ¯å¦æçï¼ä»¥åæ±åºä¸ç­å¼ç»çå¯è¡è§£ç­é®é¢ï¼é½åè§£çº¿æ§è§åé®é¢æ¬èº«åæ ·å°é¾2ï¼æ¯å¦è¯´ï¼ä¸æä¸­å¼ºå¯¹å¶å®ççè¯æå°±è¯´æï¼è§£ä¸ä¸ªæçççº¿æ§è§åé®é¢ï¼å°±ç¸å½äºå¯»æ¾ä¸ç»ä¸ç­å¼çå¯è¡è§£ï¼å æ­¤ï¼å¯¹äºå¤æ­ä¸ç­å¼ç»æ¯å¦æè§£åå¤æ­æ¹ç¨ç»æ¯å¦æéè´è§£ç­ä»»å¡ï¼æææçæ¹å¼å°±æ¯æ±è§£ç¸åºçå¯è¡æ§çº¿æ§è§å3ï¼
+值得指出的是，判定线性规划问题是否可行、是否有界，以及求出不等式组的可行解等问题，都和解线性规划问题本身同样困难2．比如说，下文中强对偶定理的证明就说明，解一个有界的线性规划问题，就相当于寻找一组不等式的可行解．因此，对于判断不等式组是否有解和判断方程组是否有非负解等任务，最有效的方式就是求解相应的可行性线性规划3．
 
-å¦å¤ï¼å¦æçº¿æ§è§åé®é¢çä¸ä¸ªçº¦æï¼å¨å¯è¡åçææé¢ä¸é½ä¸æ¯ç´§çï¼é£ä¹è¿ä¸ªçº¦æå°±æ¯ **åä½ç** ï¼redundantï¼ï¼æ¬æå¼å¤´æ©ç¹å¸å çä¾å­ä¸­ï¼å·¥ä½æ¶é´ççº¦æå°±æ¯ä¸ä¸ªåä½çº¦æï¼å¨ç»å®çä¸ç­å¼ç»ä¸­å¤å®æä¸ªä¸ç­å¼ ðððð¥ â¤ððajTxâ¤bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¦åä½è¿ä¸é®é¢ï¼å¯ä»¥éè¿æ±è§£çº¿æ§è§åé®é¢ max{ðððð¥ :ð¥ âD}max{ajTx:xâD}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶å°å®ä¸ ððbj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸æ¯è¾æ¥è§£å³ï¼
+另外，如果线性规划问题的一个约束，在可行域的所有面上都不是紧的，那么这个约束就是 **冗余的** （redundant）．本文开头早点师傅的例子中，工作时间的约束就是一个冗余约束．在给定的不等式组中判定某个不等式 𝑎𝑇𝑗𝑥 ≤𝑏𝑗ajTx≤bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是否冗余这一问题，可以通过求解线性规划问题 max{𝑎𝑇𝑗𝑥 :𝑥 ∈D}max{ajTx:x∈D}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并将它与 𝑏𝑗bj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相比较来解决．
 
-## å¸¸è§ç®æ³
+## 常见算法
 
-ç®æ³ç«èµä¸­ï¼å¾å°æé®é¢åªè½éè¿çº¿æ§è§åçç®æ³è§£å³ï¼å¤§å¤æ°å¯ä»¥ç¨çº¿æ§è§åæ¹æ³æ±è§£çé¢ç®ï¼éå¸¸ä¹å¯ä»¥éè¿ç½ç»æµç­æ´ä¸ºä¸é¨ä¹æ´ä¸ºé«æçç®æ³æ¥è§£å³ï¼
+算法竞赛中，很少有问题只能通过线性规划的算法解决．大多数可以用线性规划方法求解的题目，通常也可以通过网络流等更为专门也更为高效的算法来解决．
 
-è§£å³çº¿æ§è§åé®é¢çå¸¸è§ç®æ³å¦ä¸ï¼
+解决线性规划问题的常见算法如下：
 
-  * [åçº¯å½¢æ³](../simplex/)
-  * æ¤­çæ³
-  * å ç¹æ³
+  * [单纯形法](../simplex/)
+  * 椭球法
+  * 内点法
 
-å°½ç®¡åçº¯å½¢æ³çæå·®æ å½¢å¤æåº¦æ¯ææ°çº§çï¼èå ç¹æ³çå¤æåº¦æ¯å¤é¡¹å¼çï¼ä½è¿ä¸¤ç±»ç®æ³å¨å¤§å¤æ°å®é é®é¢ä¸­çè¡¨ç°é½éå¸¸åºè²ï¼ç¸æ¯ä¹ä¸ï¼è½ç¶æ¤­çæ³ççè®ºå¤æåº¦æ¯å¤é¡¹å¼çº§å«çï¼ä½æ¯éå¸¸è¿è¡ç¼æ ¢ï¼å¹¶ä¸å®ç¨ï¼
+尽管单纯形法的最差情形复杂度是指数级的，而内点法的复杂度是多项式的，但这两类算法在大多数实际问题中的表现都非常出色．相比之下，虽然椭球法的理论复杂度是多项式级别的，但是通常运行缓慢，并不实用．
 
-ç®åå°ä¸æ¸ æ¥çº¿æ§è§åé®é¢æ¯å¦å­å¨å¼ºå¤é¡¹å¼å¤æåº¦çç®æ³ï¼
+目前尚不清楚线性规划问题是否存在强多项式复杂度的算法．
 
-## å¯¹å¶é®é¢
+## 对偶问题
 
-æ¯ä¸ªçº¿æ§è§åé®é¢é½å¯¹åºçä¸ä¸ªå¯¹å¶é®é¢ï¼åé®é¢åå¯¹å¶é®é¢çè§£æçç´§å¯çèç³»ï¼éè¿å¯¹å¶é®é¢ï¼ä¸ä» æå©äºæ´æ·±å ¥å°çè§£é®é¢çç»æï¼è¿å¸¸å¸¸å¯ä»¥æååé®é¢çæ±è§£æçï¼
+每个线性规划问题都对应着一个对偶问题．原问题和对偶问题的解有着紧密的联系．通过对偶问题，不仅有助于更深入地理解问题的结构，还常常可以提升原问题的求解效率．
 
-å¯¹äºçº¿æ§è§åé®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ææ¶å°åå­æ¯åéåä¸ºåéï¼
+对于线性规划问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（所涉小写字母变量均为向量）
 
-minð¥1,ð¥2,ð¥3ðð1ð¥1+ðð2ð¥2+ðð3ð¥3subject toÂ ð´11ð¥1+ð´12ð¥2+ð´13ð¥3â¥ð1,ð´21ð¥1+ð´22ð¥2+ð´23ð¥3=ð2,ð´31ð¥1+ð´32ð¥2+ð´33ð¥3â¤ð3,ð¥1â¥0,Â ð¥3â¤0,minx1,x2,x3c1Tx1+c2Tx2+c3Tx3subject toÂ A11x1+A12x2+A13x3â¥b1,A21x1+A22x2+A23x3=b2,A31x1+A32x2+A33x3â¤b3,x1â¥0,Â x3â¤0,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+min𝑥1,𝑥2,𝑥3𝑐𝑇1𝑥1+𝑐𝑇2𝑥2+𝑐𝑇3𝑥3subject to 𝐴11𝑥1+𝐴12𝑥2+𝐴13𝑥3≥𝑏1,𝐴21𝑥1+𝐴22𝑥2+𝐴23𝑥3=𝑏2,𝐴31𝑥1+𝐴32𝑥2+𝐴33𝑥3≤𝑏3,𝑥1≥0, 𝑥3≤0,minx1,x2,x3c1Tx1+c2Tx2+c3Tx3subject to A11x1+A12x2+A13x3≥b1,A21x1+A22x2+A23x3=b2,A31x1+A32x2+A33x3≤b3,x1≥0, x3≤0,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®çå¯¹å¶é®é¢ ð·D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æçº¿æ§è§åé®é¢
+它的对偶问题 𝐷D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是指线性规划问题
 
-maxð¦1,ð¦2,ð¦3ðð1ð¦1+ðð2ð¦2+ðð3ð¦3subject toÂ ð´ð11ð¦1+ð´ð21ð¦2+ð´ð31ð¦3â¤ð1,ð´ð12ð¦1+ð´ð22ð¦2+ð´ð32ð¦3=ð2,ð´ð13ð¦1+ð´ð23ð¦2+ð´ð33ð¦3â¥ð3,ð¦1â¥0,Â ð¦3â¤0.maxy1,y2,y3b1Ty1+b2Ty2+b3Ty3subject toÂ A11Ty1+A21Ty2+A31Ty3â¤c1,A12Ty1+A22Ty2+A32Ty3=c2,A13Ty1+A23Ty2+A33Ty3â¥c3,y1â¥0,Â y3â¤0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max𝑦1,𝑦2,𝑦3𝑏𝑇1𝑦1+𝑏𝑇2𝑦2+𝑏𝑇3𝑦3subject to 𝐴𝑇11𝑦1+𝐴𝑇21𝑦2+𝐴𝑇31𝑦3≤𝑐1,𝐴𝑇12𝑦1+𝐴𝑇22𝑦2+𝐴𝑇32𝑦3=𝑐2,𝐴𝑇13𝑦1+𝐴𝑇23𝑦2+𝐴𝑇33𝑦3≥𝑐3,𝑦1≥0, 𝑦3≤0.maxy1,y2,y3b1Ty1+b2Ty2+b3Ty3subject to A11Ty1+A21Ty2+A31Ty3≤c1,A12Ty1+A22Ty2+A32Ty3=c2,A13Ty1+A23Ty2+A33Ty3≥c3,y1≥0, y3≤0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼å¯¹å¶é®é¢çå³ç­åé ð¦1,ð¦2,ð¦3y1,y2,y3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå«æ¯åé®é¢çä¸ç±»çº¦æç Lagrange ä¹å­ï¼åè¿æ¥ï¼åé®é¢çå³ç­åé ð¥1,ð¥2,ð¥3x1,x2,x3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹åå«æ¯å¯¹å¶é®é¢çä¸ç±»çº¦æç Lagrange ä¹å­ï¼å®¹æéªè¯ï¼å¯¹å¶é®é¢çå¯¹å¶é®é¢å°±æ¯åé®é¢ï¼
+其中，对偶问题的决策变量 𝑦1,𝑦2,𝑦3y1,y2,y3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别是原问题的三类约束的 Lagrange 乘子；反过来，原问题的决策变量 𝑥1,𝑥2,𝑥3x1,x2,x3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也分别是对偶问题的三类约束的 Lagrange 乘子．容易验证，对偶问题的对偶问题就是原问题．
 
-åé®é¢ ðP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¯¹å¶é®é¢ ð·D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯¹åºå ³ç³»å¦ä¸ï¼
+原问题 𝑃P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和对偶问题 𝐷D![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的对应关系如下：
 
-æå°åé®é¢| æå¤§åé®é¢  
+最小化问题| 最大化问题  
 ---|---  
-å¤§äºç­äºçº¦æ| éè´åé  
-å°äºç­äºçº¦æ| éæ­£åé  
-ç­å¼çº¦æ| æ çº¦æåé  
-éè´åé| å°äºç­äºçº¦æ  
-éæ­£åé| å¤§äºç­äºçº¦æ  
-æ çº¦æåé| ç­å¼çº¦æ  
-ç®æ å½æ°ç³»æ°| çº¦æå³ä¾§å¸¸é  
-çº¦æå³ä¾§å¸¸é| ç®æ å½æ°ç³»æ°  
+大于等于约束| 非负变量  
+小于等于约束| 非正变量  
+等式约束| 无约束变量  
+非负变量| 小于等于约束  
+非正变量| 大于等于约束  
+无约束变量| 等式约束  
+目标函数系数| 约束右侧常量  
+约束右侧常量| 目标函数系数  
   
-ç¹å«å°ï¼æ åå½¢å¼ççº¿æ§è§åé®é¢
+特别地，标准形式的线性规划问题
 
-min{ððð¥:ð´ð¥=ð,Â ð¥â¥0}min{cTx:Ax=b,Â xâ¥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+min{𝑐𝑇𝑥:𝐴𝑥=𝑏, 𝑥≥0}min{cTx:Ax=b, x≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çå¯¹å¶é®é¢æ¯
+的对偶问题是
 
-max{ððð¦:ð´ðð¦â¤ð}.max{bTy:ATyâ¤c}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max{𝑏𝑇𝑦:𝐴𝑇𝑦≤𝑐}.max{bTy:ATy≤c}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### å¯¹å¶åç
+### 对偶原理
 
-åé®é¢åå¯¹å¶é®é¢ä¸ä» å¨å½¢å¼ä¸äºä¸ºéåï¼èä¸ä¸¤è çè§£ä¹ç´§å¯ç¸å ³ï¼è¿ç§°ä¸º **å¯¹å¶åç** ï¼duality principalï¼ï¼ä¸ºè¡¨è¿°æ¹ä¾¿ï¼æ¬èå¨åè¿°åè¯æå®çæ¶ï¼å°éç¨æ åå½¢å¼çåé®é¢ï¼
+原问题和对偶问题不仅在形式上互为镜像，而且两者的解也紧密相关．这称为 **对偶原理** （duality principal）．为表述方便，本节在叙述和证明定理时，将采用标准形式的原问题．
 
-é¦å ï¼**å¼±å¯¹å¶å®ç** ï¼weak duality theoremï¼è¯´æï¼å¯¹å¶é®é¢çæå¤§å¼ä¸è¶ è¿åé®é¢çæå°å¼ï¼
+首先，**弱对偶定理** （weak duality theorem）说明，对偶问题的最大值不超过原问题的最小值．
 
-å¼±å¯¹å¶å®ç
+弱对偶定理
 
-å¯¹äºææ ð´ âððÃðAâRmÃn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð âððbâRm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð âððcâRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ»æ
+对于所有 𝐴 ∈𝐑𝑚×𝑛A∈Rm×n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑏 ∈𝐑𝑚b∈Rm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑐 ∈𝐑𝑛c∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，总有
 
-max{ððð¦:ð´ðð¦â¤ð}â¤min{ððð¥:ð´ð¥=ð,Â ð¥â¥0}.max{bTy:ATyâ¤c}â¤min{cTx:Ax=b,Â xâ¥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)è¯æ
+max{𝑏𝑇𝑦:𝐴𝑇𝑦≤𝑐}≤min{𝑐𝑇𝑥:𝐴𝑥=𝑏, 𝑥≥0}.max{bTy:ATy≤c}≤min{cTx:Ax=b, x≥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)证明
 
-å¦æåé®é¢åå¯¹å¶é®é¢ä¸­çä»»ä½ä¸ä¸ªä¸å¯è¡ï¼é£ä¹è¯¥ä¸ç­å¼å°±æ¯å¹³å¡çï¼åè®¾ä¸¤ä¸ªé®é¢é½æ¯å¯è¡çï¼é£ä¹ï¼å¯¹äºææå¯è¡ç ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ
+如果原问题和对偶问题中的任何一个不可行，那么该不等式就是平凡的．假设两个问题都是可行的．那么，对于所有可行的 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有
 
-ððð¦=ð¥ðð´ðð¦â¤ð¥ðð.bTy=xTATyâ¤xTc.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑏𝑇𝑦=𝑥𝑇𝐴𝑇𝑦≤𝑥𝑇𝑐.bTy=xTATy≤xTc.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼å°ä¸¤ä¾§åæå¼ï¼å°±å¾å°å¼±å¯¹å¶å®çæç«ï¼
+因此，将两侧取最值，就得到弱对偶定理成立．
 
-åºäºå¼±å¯¹å¶å®çï¼åé®é¢åå¯¹å¶é®é¢çè§£çæ åµåªè½æä¸é¢åç§æ å½¢ï¼
+基于弱对偶定理，原问题和对偶问题的解的情况只能有下面四种情形：
 
-  1. åé®é¢åå¯¹å¶é®é¢åä¸å¯è¡ï¼å³ ââ â¤ +ââââ¤+â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. åé®é¢ä¸å¯è¡ï¼å¯¹å¶é®é¢æ çï¼å³ +â â¤ +â+ââ¤+â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  3. åé®é¢æ çï¼å¯¹å¶é®é¢ä¸å¯è¡ï¼å³ ââ â¤ âââââ¤ââ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  4. åé®é¢åå¯¹å¶é®é¢åæçï¼
+  1. 原问题和对偶问题均不可行，即 −∞ ≤ +∞−∞≤+∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  2. 原问题不可行，对偶问题无界，即 +∞ ≤ +∞+∞≤+∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  3. 原问题无界，对偶问题不可行，即 −∞ ≤ −∞−∞≤−∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  4. 原问题和对偶问题均有界．
 
-å¼±å¯¹å¶å®çæå¾å¤æ¨è®ºï¼ä¾å¦ï¼å®å®é ä¸ç»åºäºå©ç¨åé®é¢åå¯¹å¶é®é¢çå¯è¡æ§å¤å®åé®é¢æ ççæ¹æ³ï¼
+弱对偶定理有很多推论．例如，它实际上给出了利用原问题和对偶问题的可行性判定原问题无界的方法．
 
-æ¨è®º
+推论
 
-çº¿æ§è§åé®é¢æ çï¼å½ä¸ä» å½å®å¯è¡ï¼ä¸å®çå¯¹å¶é®é¢ä¸å¯è¡ï¼
+线性规划问题无界，当且仅当它可行，且它的对偶问题不可行．
 
-å°å¼±å¯¹å¶å®çåºç¨äºå¯è¡æ§çº¿æ§è§åé®é¢ï¼å°±å¾å° Farkas å¼çï¼åå®çåç§åä½ï¼ï¼
+将弱对偶定理应用于可行性线性规划问题，就得到 Farkas 引理（和它的各种变体）．
 
-Farkas å¼ç
+Farkas 引理
 
-å¯¹äº ð´ âððÃðAâRmÃn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð âððbâRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸åæ å½¢ä¸­æ°æä¸ç§æç«ï¼
+对于 𝐴 ∈𝐑𝑚×𝑛A∈Rm×n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑏 ∈𝐑𝑛b∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，下列情形中恰有一种成立：
 
-  1. å­å¨ ð¥ âððxâRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ð´ð¥ =ðAx=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð¥ â¥0xâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. å­å¨ ð¦ âððyâRm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ð´ðð¦ â¥0ATyâ¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ððð¦ <0bTy<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. 存在 𝑥 ∈𝐑𝑛x∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝐴𝑥 =𝑏Ax=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑥 ≥0x≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  2. 存在 𝑦 ∈𝐑𝑚y∈Rm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝐴𝑇𝑦 ≥0ATy≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑏𝑇𝑦 <0bTy<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯æ
+证明
 
-èèçº¿æ§è§åé®é¢ max{0 :ð´ð¥ =ð,Â ð¥ â¥0}max{0:Ax=b,Â xâ¥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®çå¯¹å¶é®é¢æ¯ min{ððð¦ :ð´ðð¦ â¥0}min{bTy:ATyâ¥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹å¶é®é¢æ¾ç¶æ¯å¯è¡çï¼å ä¸ºè³å° 0 âðð0âRm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ç»å¯è¡è§£ï¼å æ­¤ï¼æ ¹æ®å¼±å¯¹å¶å®çï¼è¦ä¹åé®é¢å¯è¡ï¼è¦ä¹å¯¹å¶é®é¢æ çï¼äºè å¿ æ©å ¶ä¸ï¼åé®é¢å¯è¡å°±æ¯ Farkas å¼çä¸­çæ å½¢ 1ï¼èå¯¹å¶é®é¢æ çå°±ç­ä»·äº Farkas å¼çä¸­çæ å½¢ 2ï¼è¿å°±è¯æäº Farkas å¼çï¼
+考虑线性规划问题 max{0 :𝐴𝑥 =𝑏, 𝑥 ≥0}max{0:Ax=b, x≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，它的对偶问题是 min{𝑏𝑇𝑦 :𝐴𝑇𝑦 ≥0}min{bTy:ATy≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对偶问题显然是可行的，因为至少 0 ∈𝐑𝑚0∈Rm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一组可行解．因此，根据弱对偶定理，要么原问题可行，要么对偶问题无界，二者必择其一．原问题可行就是 Farkas 引理中的情形 1，而对偶问题无界就等价于 Farkas 引理中的情形 2．这就证明了 Farkas 引理．
 
-Farkas å®é ä¸æ¯ä¸ç§ [è¶ å¹³é¢åç¦»å®ç](https://en.wikipedia.org/wiki/Hyperplane_separation_theorem)ï¼æ å½¢ 1 æ¯å¨è¯´ï¼ç¹ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½äº ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çååéçæçå¤é¢ä½é¥ ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éï¼å æ­¤ï¼Farkas å¼çè¯´æï¼å½ä¸ä» å½ç¹ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¨è¿ä¸å¸é¥ ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­æ¶ï¼å­å¨ç»è¿åç¹ä¸æ³åéä¸º ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¶ å¹³é¢ ð» :ð¦ðð¥ =0H:yTx=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼ºåç¦»äºç¹ ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¤é¢ä½é¥ ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+Farkas 实际上是一种 [超平面分离定理](https://en.wikipedia.org/wiki/Hyperplane_separation_theorem)．情形 1 是在说，点 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位于 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的列向量生成的多面体锥 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 里；因此，Farkas 引理说明，当且仅当点 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不在这一凸锥 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中时，存在经过原点且法向量为 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的超平面 𝐻 :𝑦𝑇𝑥 =0H:yTx=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 强分离了点 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和多面体锥 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-äºå®ä¸ï¼å¯¹äºå¼±å¯¹å¶å®çå è®¸çç¬¬åç§æ å½¢ï¼ææ´å¼ºçç»è®ºæç«ï¼åé®é¢åå¯¹å¶é®é¢çæä¼å¼æ¯ç¸ç­çï¼å°åä¸ç§æ å½¢åå¨ä¸èµ·ï¼å°±å¾å° **å¼ºå¯¹å¶å®ç** ï¼strong duality theoremï¼ï¼åªè¦åé®é¢æå¯¹å¶é®é¢ä¹ä¸æ¯å¯è¡çï¼å®ä»¬çæä¼å¼å°±å¿ ç¶ç¸ç­ï¼
+事实上，对于弱对偶定理允许的第四种情形，有更强的结论成立：原问题和对偶问题的最优值是相等的．将后三种情形合在一起，就得到 **强对偶定理** （strong duality theorem）：只要原问题或对偶问题之一是可行的，它们的最优值就必然相等．
 
-å¼ºå¯¹å¶å®ç
+强对偶定理
 
-å¯¹äºææ ð´ âððÃðAâRmÃn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð âððbâRm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð âððcâRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ
+对于所有 𝐴 ∈𝐑𝑚×𝑛A∈Rm×n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑏 ∈𝐑𝑚b∈Rm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑐 ∈𝐑𝑛c∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有
 
-max{ððð¦:ð´ðð¦â¤ð}=min{ððð¥:ð´ð¥=ð,Â ð¥â¥0}.max{bTy:ATyâ¤c}=min{cTx:Ax=b,Â xâ¥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max{𝑏𝑇𝑦:𝐴𝑇𝑦≤𝑐}=min{𝑐𝑇𝑥:𝐴𝑥=𝑏, 𝑥≥0}.max{bTy:ATy≤c}=min{cTx:Ax=b, x≥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åªè¦ä¸¤ä¸ªéåä¹ä¸éç©ºï¼
+只要两个集合之一非空．
 
-è¯æ
+证明
 
-å¼±å¯¹å¶å®çå¯ä¸æ²¡æå å«çæ å½¢ï¼å°±æ¯åé®é¢åå¯¹å¶é®é¢é½å¯è¡çæ å½¢ï¼æ­¤æ¶ï¼èèå¦ä¸å¯è¡æ§çº¿æ§è§åé®é¢ ðQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+弱对偶定理唯一没有包含的情形，就是原问题和对偶问题都可行的情形．此时，考虑如下可行性线性规划问题 𝑄Q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-max{0:ððð¥â¤ððð¦,Â ð´ð¥=ð,Â ð¥â¥0,Â ð´ðð¦â¤ð}.max{0:cTxâ¤bTy,Â Ax=b,Â xâ¥0,Â ATyâ¤c}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max{0:𝑐𝑇𝑥≤𝑏𝑇𝑦, 𝐴𝑥=𝑏, 𝑥≥0, 𝐴𝑇𝑦≤𝑐}.max{0:cTx≤bTy, Ax=b, x≥0, ATy≤c}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦æé®é¢ ðQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¯è¡è§£ (ð¥â,ð¦â) âðð Ãðð(xâ,yâ)âRnÃRm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼ç±å¼±å¯¹å¶å®çåæä¼æ§å¯ç¥
+如果问题 𝑄Q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有可行解 (𝑥∗,𝑦∗) ∈𝐑𝑛 ×𝐑𝑚(x∗,y∗)∈Rn×Rm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，由弱对偶定理和最优性可知
 
-ððð¦ââ¤max{ððð¦:ð´ðð¦â¤ð}â¤min{ððð¥:ð´ð¥=ð,Â ð¥â¥0}â¤ððð¥â,bTyââ¤max{bTy:ATyâ¤c}â¤min{cTx:Ax=b,Â xâ¥0}â¤cTxâ,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑏𝑇𝑦∗≤max{𝑏𝑇𝑦:𝐴𝑇𝑦≤𝑐}≤min{𝑐𝑇𝑥:𝐴𝑥=𝑏, 𝑥≥0}≤𝑐𝑇𝑥∗,bTy∗≤max{bTy:ATy≤c}≤min{cTx:Ax=b, x≥0}≤cTx∗,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä½æ¯ ððð¥â â¤ððð¦âcTxââ¤bTyâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ èææè¿äºä¸ç­å¼é½å¯ä»¥åå¾ç­å·ï¼ä¹å°±æ¯è¯´ï¼ä¸ä» å¼ºå¯¹å¶æç«ï¼èä¸ ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦âyâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå«æ¯åé®é¢åå¯¹å¶é®é¢çæä¼è§£ï¼
+但是 𝑐𝑇𝑥∗ ≤𝑏𝑇𝑦∗cTx∗≤bTy∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故而所有这些不等式都可以取得等号，也就是说，不仅强对偶成立，而且 𝑥∗x∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦∗y∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别是原问题和对偶问题的最优解．
 
-å æ­¤ï¼åªéè¦è¯æé®é¢ ðQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¯è¡çï¼åè®¾ä¸ç¶ï¼ä»¿ç § Farkas å¼ççè¯æï¼å¯ä»¥èèé®é¢ ðQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯¹å¶é®é¢ ð·ðDQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+因此，只需要证明问题 𝑄Q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是可行的．假设不然．仿照 Farkas 引理的证明，可以考虑问题 𝑄Q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的对偶问题 𝐷𝑄DQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-min{ðððâððð:ðð¡âð´ððâ¥0,Â âðð¡+ð´ð=0,Â ð¡â¥0,Â ðâ¥0}.min{cTÎ¼âbTÎ»:ctâATÎ»â¥0,Â âbt+AÎ¼=0,Â tâ¥0,Â Î¼â¥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+min{𝑐𝑇𝜇−𝑏𝑇𝜆:𝑐𝑡−𝐴𝑇𝜆≥0, −𝑏𝑡+𝐴𝜇=0, 𝑡≥0, 𝜇≥0}.min{cTμ−bTλ:ct−ATλ≥0, −bt+Aμ=0, t≥0, μ≥0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸º (ð¡,ð,ð) =(0,0,0)(t,Î»,Î¼)=(0,0,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¯¹å¶é®é¢ ð·ðDQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ç»å¯è¡è§£ï¼æä»¥ç±å¼±å¯¹å¶å®çå¯ç¥ï¼é®é¢ ðQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯è¡ï¼å°±æå³çå¯¹å¶é®é¢ ð·ðDQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ çï¼å³å­å¨ä¸ç» (ð¡â,ðâ,ðâ)(tâ,Î»â,Î¼â)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾
+因为 (𝑡,𝜆,𝜇) =(0,0,0)(t,λ,μ)=(0,0,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是对偶问题 𝐷𝑄DQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一组可行解，所以由弱对偶定理可知，问题 𝑄Q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不可行，就意味着对偶问题 𝐷𝑄DQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 无界，即存在一组 (𝑡∗,𝜆∗,𝜇∗)(t∗,λ∗,μ∗)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得
 
-ðððââðððâ<0,Â ðð¡ââð´ððââ¥0,Â âðð¡â+ð´ðâ=0,Â ð¡ââ¥0,Â ðââ¥0.cTÎ¼ââbTÎ»â<0,Â ctââATÎ»ââ¥0,Â âbtâ+AÎ¼â=0,Â tââ¥0,Â Î¼ââ¥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑐𝑇𝜇∗−𝑏𝑇𝜆∗<0, 𝑐𝑡∗−𝐴𝑇𝜆∗≥0, −𝑏𝑡∗+𝐴𝜇∗=0, 𝑡∗≥0, 𝜇∗≥0.cTμ∗−bTλ∗<0, ct∗−ATλ∗≥0, −bt∗+Aμ∗=0, t∗≥0, μ∗≥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ­¤æ¶ï¼å¦æ ð¡â >0tâ>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹è¿äºä¸ç­å¼å®é è¯´æ (ð¥,ð¦) =(ðâ/ð¡â,ðâ/ð¡â)(x,y)=(Î¼â/tâ,Î»â/tâ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯åè¿°é®é¢çä¸ç»å¯è¡è§£ï¼ä¸åè®¾çç¾ï¼æä»¥ï¼åªè½æ ð¡â =0tâ=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿è¯´æ
+此时，如果 𝑡∗ >0t∗>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么这些不等式实际说明 (𝑥,𝑦) =(𝜇∗/𝑡∗,𝜆∗/𝑡∗)(x,y)=(μ∗/t∗,λ∗/t∗)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是前述问题的一组可行解，与假设矛盾．所以，只能有 𝑡∗ =0t∗=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这说明
 
-ðððâ<ðððâ,Â ð´ððââ¤0,Â ð´ðâ=0,Â ðââ¥0.cTÎ¼â<bTÎ»â,Â ATÎ»ââ¤0,Â AÎ¼â=0,Â Î¼ââ¥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑐𝑇𝜇∗<𝑏𝑇𝜆∗, 𝐴𝑇𝜆∗≤0, 𝐴𝜇∗=0, 𝜇∗≥0.cTμ∗<bTλ∗, ATλ∗≤0, Aμ∗=0, μ∗≥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä½æ¯ï¼å ä¸ºå·²ç»åè®¾å®çä¸­çåé®é¢åå¯¹å¶é®é¢é½å¯è¡ï¼ä¹å°±æ¯è¯´ï¼å­å¨ (ð¥0,ð¦0)(x0,y0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾
+但是，因为已经假设定理中的原问题和对偶问题都可行，也就是说，存在 (𝑥0,𝑦0)(x0,y0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得
 
-ð´ð¥0=ð,Â ð¥0â¥0,Â ð´ðð¦0â¤ðAx0=b,Â x0â¥0,Â ATy0â¤c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴𝑥0=𝑏, 𝑥0≥0, 𝐴𝑇𝑦0≤𝑐Ax0=b, x0≥0, ATy0≤c![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æç«ï¼æä»¥ï¼æ
+成立，所以，有
 
-0=(ð´ðâ)ðð¦0=(ð´ðð¦0)ððââ¤ðððâ<ðððâ=ð¥ð0ð´ððââ¤0.0=(AÎ¼â)Ty0=(ATy0)TÎ¼ââ¤cTÎ¼â<bTÎ»â=x0TATÎ»ââ¤0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+0=(𝐴𝜇∗)𝑇𝑦0=(𝐴𝑇𝑦0)𝑇𝜇∗≤𝑐𝑇𝜇∗<𝑏𝑇𝜆∗=𝑥𝑇0𝐴𝑇𝜆∗≤0.0=(Aμ∗)Ty0=(ATy0)Tμ∗≤cTμ∗<bTλ∗=x0TATλ∗≤0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¾ç¶çç¾ï¼è¿ä¸çç¾è¯´æé®é¢ ðQ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¯è¡çï¼è¿èè¯´æå¼ºå¯¹å¶æç«ï¼
+这显然矛盾．这一矛盾说明问题 𝑄Q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是可行的，进而说明强对偶成立．
 
-ä»å¼ºå¯¹å¶å®ççè¯æè¿ç¨è¿è½å¾å°å¦ä¸æ¨è®ºï¼
+从强对偶定理的证明过程还能得到如下推论：
 
-æ¨è®º
+推论
 
-è®¾åé®é¢åå¯¹å¶é®é¢çä¸ç»å¯è¡è§£ ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦âyâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³å¼ºå¯¹å¶æ§ï¼å³ ððð¥â =ððð¦âcTxâ=bTyâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼å®ä»¬åæ ·åå«æ¯åé®é¢åå¯¹å¶é®é¢çæä¼è§£ï¼
+设原问题和对偶问题的一组可行解 𝑥∗x∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦∗y∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足强对偶性，即 𝑐𝑇𝑥∗ =𝑏𝑇𝑦∗cTx∗=bTy∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．那么，它们同样分别是原问题和对偶问题的最优解．
 
-å¼ºå¯¹å¶å®çè¯´æï¼å¯¹äºå¯è¡ççº¿æ§è§åé®é¢ï¼åªéè¦æ±è§£å®çå¯¹å¶é®é¢ï¼å°±è½å¤å¾å°åé®é¢çæä¼ä»·å¼ï¼
+强对偶定理说明，对于可行的线性规划问题，只需要求解它的对偶问题，就能够得到原问题的最优价值．
 
-### äºè¡¥æ¾å¼æ¡ä»¶
+### 互补松弛条件
 
-åå ¶å®çä¼åé®é¢ä¸æ ·ï¼äºè¡¥æ¾å¼æ¡ä»¶æ¯çº¿æ§è§åé®é¢çæä¼æ§æ¡ä»¶çä¸é¨åï¼èä¸ï¼å ä¸ºç®æ å½æ°æ¯çº¿æ§çï¼æä»¥å¯¹äºçº¿æ§è§åé®é¢æ¥è¯´ï¼äºè¡¥æ¾å¼æ¡ä»¶æ¯å¯è¡è§£æä¸ºæä¼è§£çå åå¿ è¦æ¡ä»¶ï¼
+和其它的优化问题一样，互补松弛条件是线性规划问题的最优性条件的一部分．而且，因为目标函数是线性的，所以对于线性规划问题来说，互补松弛条件是可行解成为最优解的充分必要条件．
 
-æè° **äºè¡¥æ¾å¼** ï¼complementary slacknessï¼æ¡ä»¶ï¼å°±æ¯æåªæå¨åé®é¢ï¼å¯¹å¶é®é¢ï¼ä¸­ççº¦æåå¾ç­å·ï¼å³çº¦ææ¯ç´§çï¼çæ¶åï¼å¯¹å¶é®é¢ï¼åé®é¢ï¼ä¸­ä¸ä¹å¯¹åºçåéæè½åéé¶å¼ï¼å¦æå°åéåéé¶å¼ä¹å½æä¸æ¡æ¾å¼ççº¦æï¼é£ä¹è¿å°±ç¸å½äºè¯´ï¼åé®é¢åå¯¹å¶é®é¢ä¸­ç¸å¯¹åºçåéåçº¦æä¸è½åæ¶æ¯æ¾å¼çï¼å æ­¤ï¼è¿ä¸æ¡ä»¶ç§°ä¸ºäºè¡¥æ¾å¼æ¡ä»¶ï¼
+所谓 **互补松弛** （complementary slackness）条件，就是指只有在原问题（对偶问题）中的约束取得等号（即约束是紧的）的时候，对偶问题（原问题）中与之对应的变量才能取非零值．如果将变量取非零值也当成一条松弛的约束，那么这就相当于说，原问题和对偶问题中相对应的变量和约束不能同时是松弛的．因此，这一条件称为互补松弛条件．
 
-ä»¥æ åå½¢å¼ççº¿æ§è§åé®é¢ä¸ºä¾ï¼å¦ä¸ç»è®ºæç«ï¼
+以标准形式的线性规划问题为例，如下结论成立：
 
-å®ç
+定理
 
-åè®¾ ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦âyâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå«æ¯åé®é¢ min{ððð¥ :ð´ð¥ =ð,Â ð¥ â¥0}min{cTx:Ax=b,Â xâ¥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¯¹å¶é®é¢ max{ððð¦ :ð´ðð¦ â¤ð}max{bTy:ATyâ¤c}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯è¡è§£ï¼é£ä¹ï¼å½ä¸ä» å½äºè¡¥æ¾å¼æ¡ä»¶æç«ï¼å³
+假设 𝑥∗x∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦∗y∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别是原问题 min{𝑐𝑇𝑥 :𝐴𝑥 =𝑏, 𝑥 ≥0}min{cTx:Ax=b, x≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和对偶问题 max{𝑏𝑇𝑦 :𝐴𝑇𝑦 ≤𝑐}max{bTy:ATy≤c}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的可行解．那么，当且仅当互补松弛条件成立，即
 
-ð¥ð(ð´ðð¦âð)=0xT(ATyâc)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑇(𝐴𝑇𝑦−𝑐)=0xT(ATy−c)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¶ï¼ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦âyâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹åå«æ¯åé®é¢åå¯¹å¶é®é¢çæä¼è§£ï¼
+时，𝑥∗x∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦∗y∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也分别是原问题和对偶问题的最优解．
 
-è¯æ
+证明
 
-å ä¸º ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦âyâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯å¯è¡è§£ï¼æä»¥ï¼æ
+因为 𝑥∗x∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦∗y∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是可行解，所以，有
 
-ððð¦ââððð¥â=(ð¥â)ð(ð´ðð¦ââð).bTyââcTxâ=(xâ)T(ATyââc).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑏𝑇𝑦∗−𝑐𝑇𝑥∗=(𝑥∗)𝑇(𝐴𝑇𝑦∗−𝑐).bTy∗−cTx∗=(x∗)T(ATy∗−c).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼äºè¡¥æ¾å¼æ¡ä»¶æç«ï¼å½ä¸ä» å½ ððð¦â =ððð¥âbTyâ=cTxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ¹æ®å¼ºå¯¹å¶å®ççæ¨è®ºï¼è¿ä¸æ¡ä»¶æç«ï¼å½ä¸ä» å½ ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦âyâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå«æ¯åé®é¢çæä¼è§£ï¼
+因此，互补松弛条件成立，当且仅当 𝑏𝑇𝑦∗ =𝑐𝑇𝑥∗bTy∗=cTx∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．根据强对偶定理的推论，这一条件成立，当且仅当 𝑥∗x∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦∗y∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别是原问题的最优解．
 
-æ åå½¢å¼å¯è½å¤ªè¿ç¹æ®ï¼è¯¥å®ççç¨å¾®ä¸è¬çå½¢å¼å¦ä¸ï¼
+标准形式可能太过特殊．该定理的稍微一般的形式如下：
 
-å®ç
+定理
 
-åè®¾ ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦âyâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå«æ¯åé®é¢ min{ððð¥ :ð´ð¥ â¥ð,Â ð¥ â¥0}min{cTx:Axâ¥b,Â xâ¥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¯¹å¶é®é¢ max{ððð¦ :ð´ðð¦ â¤ð,Â ð¦ â¥0}max{bTy:ATyâ¤c,Â yâ¥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯è¡è§£ï¼é£ä¹ï¼å½ä¸ä» å½äºè¡¥æ¾å¼æ¡ä»¶æç«ï¼å³
+假设 𝑥∗x∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦∗y∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 分别是原问题 min{𝑐𝑇𝑥 :𝐴𝑥 ≥𝑏, 𝑥 ≥0}min{cTx:Ax≥b, x≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和对偶问题 max{𝑏𝑇𝑦 :𝐴𝑇𝑦 ≤𝑐, 𝑦 ≥0}max{bTy:ATy≤c, y≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的可行解．那么，当且仅当互补松弛条件成立，即
 
-ð¥ð(ð´ðð¦âð)=ð¦ð(ð´ð¥âð)=0xT(ATyâc)=yT(Axâb)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑇(𝐴𝑇𝑦−𝑐)=𝑦𝑇(𝐴𝑥−𝑏)=0xT(ATy−c)=yT(Ax−b)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¶ï¼ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦âyâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹åå«æ¯åé®é¢åå¯¹å¶é®é¢çæä¼è§£ï¼
+时，𝑥∗x∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦∗y∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也分别是原问题和对偶问题的最优解．
 
-è¯æ
+证明
 
-è¯æåºæ¬åä¸ï¼åªæ¯è¿æ¬¡è¦å°å·®å¼åæ
+证明基本同上，只是这次要将差值写成
 
-ððð¦ââððð¥â=(ð¥â)ð(ð´ðð¦ââð)â(ð¦â)ð(ð´ð¥ââð).bTyââcTxâ=(xâ)T(ATyââc)â(yâ)T(Axââb).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑏𝑇𝑦∗−𝑐𝑇𝑥∗=(𝑥∗)𝑇(𝐴𝑇𝑦∗−𝑐)−(𝑦∗)𝑇(𝐴𝑥∗−𝑏).bTy∗−cTx∗=(x∗)T(ATy∗−c)−(y∗)T(Ax∗−b).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-äºè¡¥æ¾å¼æ¡ä»¶æä¾äºå¤æ­çº¿æ§è§åé®é¢çå¯è¡è§£çæä¼æ§çç®åæ¡ä»¶ï¼
+互补松弛条件提供了判断线性规划问题的可行解的最优性的简单条件．
 
-### åå§âå¯¹å¶æ¹æ³
+### 原始‑对偶方法
 
-å¯¹å¶é®é¢å¯ä»¥è¾ å©åé®é¢çæ±è§£ï¼å¨è§£å³çº¿æ§è§åé®é¢æ¶ï¼å¸¸å¸¸ä¼ç¨å°çä¸ç§æ¹æ³æ¯ **åå§âå¯¹å¶æ¹æ³** ï¼primal-dual methodï¼ï¼å®éè¿æ±è§£ä¸ç³»åç¸å¯¹ç®åçè¾ å©é®é¢ï¼éæ­¥æ¹è¿å¯¹å¶é®é¢çè§£ï¼è¿èè·å¾åå§é®é¢çæä¼è§£ï¼
+对偶问题可以辅助原问题的求解．在解决线性规划问题时，常常会用到的一种方法是 **原始‑对偶方法** （primal-dual method）．它通过求解一系列相对简单的辅助问题，逐步改进对偶问题的解，进而获得原始问题的最优解．
 
-å¯¹äºæ åå½¢å¼çåé®é¢
+对于标准形式的原问题
 
-(ð)min{ððð¥:ð´ð¥=ðâ¥0,Â ð¥â¥0}(P)min{cTx:Ax=bâ¥0,Â xâ¥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑃)min{𝑐𝑇𝑥:𝐴𝑥=𝑏≥0, 𝑥≥0}(P)min{cTx:Ax=b≥0, x≥0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå®çå¯¹å¶é®é¢
+和它的对偶问题
 
-(ð·)max{ððð¦:ð´ðð¦â¤ð},(D)max{bTy:ATyâ¤c},![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝐷)max{𝑏𝑇𝑦:𝐴𝑇𝑦≤𝑐},(D)max{bTy:ATy≤c},![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸ä¸èå·²ç»è¯´æï¼è¦æ¾å°å®ä»¬çæä¼è§£ï¼åªéè¦æ¾å°é®é¢ (ð)(P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å (ð·)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ç»å¯è¡è§£ï¼ä½¿å¾å®ä»¬æ»¡è¶³äºè¡¥æ¾å¼æ¡ä»¶ ð¥ð(ð´ðð¦ âð) =0xT(ATyâc)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¸å¦¨èèå¦ä¸æµç¨ï¼
+上一节已经说明，要找到它们的最优解，只需要找到问题 (𝑃)(P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 (𝐷)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一组可行解，使得它们满足互补松弛条件 𝑥𝑇(𝐴𝑇𝑦 −𝑐) =0xT(ATy−c)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．那不妨考虑如下流程：
 
-  1. ä»å¯¹å¶é®é¢ (ð·)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªå¯è¡è§£ ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åºåï¼è®¡ç®å¯¹å¶é®é¢çç´§çº¦æçéå
+  1. 从对偶问题 (𝐷)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个可行解 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出发，计算对偶问题的紧约束的集合
 
-ð¼={ð:(ð´ðð¦âð)ð=0}.I={i:(ATyâc)i=0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. æ ¹æ®äºè¡¥æ¾å¼æ¡ä»¶ï¼å¦æå­å¨é®é¢ (ð)(P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯è¡è§£ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð¥ð >0xi>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä» å¨ ð âð¼iâI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æç«ï¼å°±æå³çå·²ç»æ¾å°ä¸ç»æä¼è§£ï¼å æ­¤ï¼èèçº¿æ§è§åé®é¢
+𝐼={𝑖:(𝐴𝑇𝑦−𝑐)𝑖=0}.I={i:(ATy−c)i=0}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. 根据互补松弛条件，如果存在问题 (𝑃)(P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的可行解 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑥𝑖 >0xi>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 仅在 𝑖 ∈𝐼i∈I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上成立，就意味着已经找到一组最优解．因此，考虑线性规划问题
 
-(ð ð)minð¥,ð ððð subject toÂ ð´ð¥+ð =ð,ð¥ðâ¥0,Â âðâð¼,ð¥ð=0,Â âðâð¼,ð â¥0.(RP)minx,s1Tssubject toÂ Ax+s=b,xiâ¥0,Â âiâI,xi=0,Â âiâI,sâ¥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  3. å¦æé®é¢ (ð ð)(RP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå°å¼æ¯ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹æä¼è§£ (ð¥â,0)(xâ,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ç ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯åé®é¢ (ð)(P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæä¼è§£ï¼å¦åï¼å¯ä»¥æ±åºå®çå¯¹å¶é®é¢ (ð·ð ð)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£ Â¯ð¦yÂ¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+(𝑅𝑃)min𝑥,𝑠𝟏𝑇𝑠subject to 𝐴𝑥+𝑠=𝑏,𝑥𝑖≥0, ∀𝑖∈𝐼,𝑥𝑖=0, ∀𝑖∉𝐼,𝑠≥0.(RP)minx,s1Tssubject to Ax+s=b,xi≥0, ∀i∈I,xi=0, ∀i∉I,s≥0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  3. 如果问题 (𝑅𝑃)(RP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最小值是 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么最优解 (𝑥∗,0)(x∗,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的 𝑥∗x∗![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是原问题 (𝑃)(P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最优解．否则，可以求出它的对偶问题 (𝐷𝑅𝑃)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解 ¯𝑦y¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-(ð·ð ð)maxð¦ððð¦subject toÂ âððððð¦ðâ¤0,Â âðâð¼,ð¦â¤1.(DRP)maxybTysubject toÂ âjajiyjâ¤0,Â âiâI,yâ¤1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝐷𝑅𝑃)max𝑦𝑏𝑇𝑦subject to ∑𝑗𝑎𝑗𝑖𝑦𝑗≤0, ∀𝑖∈𝐼,𝑦≤1.(DRP)maxybTysubject to ∑jajiyj≤0, ∀i∈I,y≤1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®å¼ºå¯¹å¶å®çå¯ç¥ï¼ððÂ¯ð¦ =1ðð â >0bTyÂ¯=1Tsâ>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+根据强对偶定理可知，𝑏𝑇¯𝑦 =1𝑇𝑠∗ >0bTy¯=1Ts∗>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  4. æ ¹æ®é®é¢ (ð·ð ð)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè§£æ¹è¿å¯¹å¶é®é¢ (ð·)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯è¡è§£ï¼è®¾ ð¦â² =ð¦ +ðÂ¯ð¦yâ²=y+ÎµyÂ¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ï¼ð >0Îµ>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä¸å®æ ððð¦â² =ððð¦ +ðððÂ¯ð¦ >ððð¦bTyâ²=bTy+ÎµbTyÂ¯>bTy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼åªè¦ä¿è¯ ð¦â²yâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»ç¶æ¯å¯¹å¶é®é¢çå¯è¡è§£ (ð·)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±è¦å°½å¯è½å¤§å°éå ðÎµ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼
+  4. 根据问题 (𝐷𝑅𝑃)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的解改进对偶问题 (𝐷)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的可行解．设 𝑦′ =𝑦 +𝜀¯𝑦y′=y+εy¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中，𝜀 >0ε>0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则一定有 𝑏𝑇𝑦′ =𝑏𝑇𝑦 +𝜀𝑏𝑇¯𝑦 >𝑏𝑇𝑦bTy′=bTy+εbTy¯>bTy![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，只要保证 𝑦′y′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 仍然是对偶问题的可行解 (𝐷)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就要尽可能大地选取 𝜀ε![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．
 
-å¯¹äº ð âð¼iâI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ
+对于 𝑖 ∈𝐼i∈I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
 
-âððððð¦â²ð=âððððð¦ð+ðâððððÂ¯ð¦ðâ¤ðð,âjajiyjâ²=âjajiyj+ÎµâjajiyÂ¯jâ¤ci,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∑𝑗𝑎𝑗𝑖𝑦′𝑗=∑𝑗𝑎𝑗𝑖𝑦𝑗+𝜀∑𝑗𝑎𝑗𝑖¯𝑦𝑗≤𝑐𝑖,∑jajiyj′=∑jajiyj+ε∑jajiy¯j≤ci,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥ï¼é®é¢ (ð·)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¿äºçº¦ææ»æ¯å¯ä»¥æ»¡è¶³çï¼
+所以，问题 (𝐷)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的这些约束总是可以满足的．
 
-å¯¹äºå©ä¸ççº¦æï¼å³ ð âð¼iâI![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼åªéè¦å
+对于剩下的约束，即 𝑖 ∉𝐼i∉I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，只需要取
 
-ð=min{ððââððððð¦ðâððððÂ¯ð¦ð:ðâð¼,Â âððððÂ¯ð¦ð>0}Îµ=min{ciââjajiyjâjajiyÂ¯j:iâI,Â âjajiyÂ¯j>0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜀=min{𝑐𝑖−∑𝑗𝑎𝑗𝑖𝑦𝑗∑𝑗𝑎𝑗𝑖¯𝑦𝑗:𝑖∉𝐼, ∑𝑗𝑎𝑗𝑖¯𝑦𝑗>0}ε=min{ci−∑jajiyj∑jajiy¯j:i∉I, ∑jajiy¯j>0}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°±å¯ä»¥å¨ä¿è¯å¯è¡æ§çåæä¸ï¼å°½å¯è½å¤§å°æ¹è¿å¯¹å¶é®é¢çè§£ï¼ç¶ååå°æ­¥éª¤ 1 ç»§ç»­è¿­ä»£ï¼ç¹å«å°ï¼å¦æä¸å¼ä¸­çéåä¸ºç©ºéï¼å³ ð = +âÎµ=+â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼å¯¹å¶é®é¢ (ð·)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ çï¼åé®é¢ (ð)(P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯è¡ï¼
+就可以在保证可行性的前提下，尽可能大地改进对偶问题的解，然后回到步骤 1 继续迭代．特别地，如果上式中的集合为空集，即 𝜀 = +∞ε=+∞![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，对偶问题 (𝐷)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 无界，原问题 (𝑃)(P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不可行．
 
-è¿ä¸ªè¿ç¨ä¸­å ¶å®åªæé®é¢ (ð·ð ð)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç¡®å®éè¦æ±è§£çï¼å®ä¸é®é¢ (ð ð)(RP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éè¿å¼ºå¯¹å¶å®çç¸äºèç³»ï¼é®é¢ (ð·ð ð)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¾äºä¸ä¸ªæ¹è¿å¯¹å¶é®é¢è§£çæ¹åï¼èä¸ç¸å¯¹äºå¯¹å¶é®é¢ (ð·)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬èº«ï¼é®é¢ (ð·ð ð)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½¢å¼æ´å ç®åï¼é®é¢ (ð·ð ð)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯è¡æ§ç± Farkas å¼çä¿è¯ï¼èçº¦æ ð¦ â¤1yâ¤1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åªæ¯ä¸ç»è§èåæ¡ä»¶ï¼ä¿è¯äºé®é¢ (ð·ð ð)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æçï¼
+这个过程中其实只有问题 (𝐷𝑅𝑃)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是确实需要求解的，它与问题 (𝑅𝑃)(RP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 通过强对偶定理相互联系．问题 (𝐷𝑅𝑃)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 提供了一个改进对偶问题解的方向，而且相对于对偶问题 (𝐷)(D)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 本身，问题 (𝐷𝑅𝑃)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式更加简单．问题 (𝐷𝑅𝑃)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的可行性由 Farkas 引理保证，而约束 𝑦 ≤1y≤1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 只是一组规范化条件，保证了问题 (𝐷𝑅𝑃)(DRP)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有界．
 
-ç®æ³ç«èµä¸­ï¼åå§âå¯¹å¶æ¹æ³å¹¿æ³å°åºç¨äºåç±»ç»åä¼åé®é¢ï¼ä¾å¦äºåå¾æå¤§æå¹é ç [åçå©ç®æ³](../../graph/graph-matching/bigraph-weight-match/#hungarian-algorithmkuhnmunkres-algorithm)ãæå°è´¹ç¨æµç [æ¶åç®æ³](../../graph/flow/min-cost/) å [SSP ç®æ³ï¼åå§âå¯¹å¶ç®æ³ï¼](../../graph/flow/min-cost/#ssp-ç®æ³)ãæç­è·¯ç [Dijkstra ç®æ³](../../graph/shortest-path/#dijkstra-ç®æ³)ãæå¤§æµç [FordâFulkerson å¢å¹¿ç®æ³](../../graph/flow/max-flow/#fordfulkerson-å¢å¹¿) ç­ï¼é½å¯ä»¥çä½æ¯åå§âå¯¹å¶æ¹æ³çç´æ¥åºç¨ï¼
+算法竞赛中，原始‑对偶方法广泛地应用于各类组合优化问题．例如二分图最大权匹配的 [匈牙利算法](../../graph/graph-matching/bigraph-weight-match/#hungarian-algorithmkuhnmunkres-algorithm)、最小费用流的 [消圈算法](../../graph/flow/min-cost/) 和 [SSP 算法（原始‑对偶算法）](../../graph/flow/min-cost/#ssp-算法)、最短路的 [Dijkstra 算法](../../graph/shortest-path/#dijkstra-算法)、最大流的 [Ford–Fulkerson 增广算法](../../graph/flow/max-flow/#fordfulkerson-增广) 等，都可以看作是原始‑对偶方法的直接应用．
 
-## æ´æ°è§å
+## 整数规划
 
-**æ´æ°è§å** ï¼integer programmingï¼éå¸¸æ **æ´æ°çº¿æ§è§å** ï¼integer linear programming, ILPï¼ï¼æ åå½¢å¼çæ´æ°çº¿æ§è§åå¦ä¸ï¼
+**整数规划** （integer programming）通常指 **整数线性规划** （integer linear programming, ILP）．标准形式的整数线性规划如下：
 
-minð¥ððð¥subject toÂ ð´ð¥=ðâ¥0,ð¥â¥0,ð¥âðð,minxcTxsubject toÂ Ax=bâ¥0,xâ¥0,xâZn,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+min𝑥𝑐𝑇𝑥subject to 𝐴𝑥=𝑏≥0,𝑥≥0,𝑥∈𝐙𝑛,minxcTxsubject to Ax=b≥0,x≥0,x∈Zn,![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼ð´ âððÃðAâRmÃn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð âððbâRm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð âððcâRn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¹å°±æ¯è¯´ï¼æ´æ°çº¿æ§è§åæ¯å¨çº¿æ§è§åé®é¢ä¸æ·»å å³ç­åéå¿ é¡»ä¸ºæ´æ°è¿ä¸çº¦ææ¡ä»¶æå¾å°çé®é¢ï¼
+其中，𝐴 ∈𝐑𝑚×𝑛A∈Rm×n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑏 ∈𝐑𝑚b∈Rm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑐 ∈𝐑𝑛c∈Rn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．也就是说，整数线性规划是在线性规划问题上添加决策变量必须为整数这一约束条件所得到的问题．
 
-æ´æ°çº¦ææ¾èå¢å äºæ´æ°è§åé®é¢çå¤ææ§ï¼è®¸å¤ç»åä¼åé®é¢ï¼ä¾å¦èå é®é¢ãéå®æ§é®é¢ä»¥åä¼å¤å¾è®ºä¸­çä¼åé®é¢ï¼é½å¯ä»¥è¡¨ç¤ºä¸ºæ´æ°è§åæ¨¡åï¼èè¿äºé®é¢ä¸­çå¤æ°è¢«è¯ææ¯ NP å°é¾çï¼
+整数约束显著增加了整数规划问题的复杂性．许多组合优化问题，例如背包问题、适定性问题以及众多图论中的优化问题，都可以表示为整数规划模型，而这些问题中的多数被证明是 NP 困难的．
 
-### å ¨å¹ºæ¨¡ç©éµ
+### 全幺模矩阵
 
-æ­£å å¦æ­¤ï¼å¯¹äºå¾å¤å¤§è§æ¨¡çæ´æ°ä¼åé®é¢ï¼ææ¶åä¼èèå°å®çæ´æ°çº¦ææ¾å¼æï¼è½¬èæ±è§£ä¸ä¸ªçº¿æ§è§åé®é¢ï¼éå¸¸æ¥è¯´ï¼æ¾å¼åççº¿æ§è§åé®é¢çæä¼ä»·å¼åªæ¯åæ¥çæ´æ°è§åé®é¢çä¸ä¸ªä¸çä¼°è®¡ï¼åè®¾é®é¢æ¯æå°åé®é¢ï¼ï¼ä½æ¯ï¼å¦ææ¾å¼åççº¿æ§è§åé®é¢çæä¼è§£æ°å¥½æ¯æ´æ°è§£ï¼é£ä¹ï¼å®ä¹ä¸å®æ¯åæ¥çæ´æ°è§åé®é¢çæä¼è§£ï¼
+正因如此，对于很多大规模的整数优化问题，有时候会考虑将它的整数约束松弛掉，转而求解一个线性规划问题．通常来说，松弛后的线性规划问题的最优价值只是原来的整数规划问题的一个下界估计（假设问题是最小化问题）．但是，如果松弛后的线性规划问题的最优解恰好是整数解，那么，它也一定是原来的整数规划问题的最优解．
 
-ä¸ä¸ªèªç¶çé®é¢æ¯ï¼æ¯å¦å­å¨æ¡ä»¶ï¼è½å¤ä¿è¯çº¿æ§è§åé®é¢çæä¼è§£é½æ¯æ´æ°è§£ï¼å ¨å¹ºæ¨¡ç©éµçæ¦å¿µå°±æä¾äºè¿æ ·çä¸ä¸ªæ¡ä»¶ï¼
+一个自然的问题是，是否存在条件，能够保证线性规划问题的最优解都是整数解？全幺模矩阵的概念就提供了这样的一个条件．
 
-å ¨å¹ºæ¨¡ç©éµ
+全幺模矩阵
 
-å¦æç©éµ ð´ âððÃðAâRmÃn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çææå­æ¹éµçè¡åå¼é½æ¯ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ Â±1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±ç§°ä¸ºä¸ä¸ª **å ¨å¹ºæ¨¡ç©éµ** ï¼totally unimodular matrixï¼ï¼
+如果矩阵 𝐴 ∈𝐑𝑚×𝑛A∈Rm×n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的所有子方阵的行列式都是 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 ±1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就称为一个 **全幺模矩阵** （totally unimodular matrix）．
 
-ç¹å«å°ï¼å ¨å¹ºæ¨¡ç©éµçææå ç´ é½æ¯ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ Â±1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å©ç¨å ¨å¹ºæ¨¡ç©éµçæ¦å¿µï¼å¯ä»¥åè¿°å¦ä¸ç»è®ºï¼
+特别地，全幺模矩阵的所有元素都是 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 ±1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．利用全幺模矩阵的概念，可以叙述如下结论：
 
-å®ç
+定理
 
-å¯¹äºå ¨å¹ºæ¨¡ç©éµ ð´ âððÃðAâZmÃn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð âððbâZm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð âððcâZn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼çº¿æ§è§åé®é¢åå ¶å¯¹å¶é®é¢
+对于全幺模矩阵 𝐴 ∈𝐙𝑚×𝑛A∈Zm×n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑏 ∈𝐙𝑚b∈Zm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑐 ∈𝐙𝑛c∈Zn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，线性规划问题及其对偶问题
 
-min{ððð¥:ð´ð¥=ð,ð¥â¥0}=max{ððð¦:ð´ðð¦â¤ð}min{cTx:Ax=b,xâ¥0}=max{bTy:ATyâ¤c}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+min{𝑐𝑇𝑥:𝐴𝑥=𝑏,𝑥≥0}=max{𝑏𝑇𝑦:𝐴𝑇𝑦≤𝑐}min{cTx:Ax=b,x≥0}=max{bTy:ATy≤c}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é½ææ´æ°æä¼è§£ï¼åªè¦å®ä»¬é½æçï¼
+都有整数最优解，只要它们都有界．
 
-è¯æ
+证明
 
-åæå·²ç»è¯´æï¼çº¿æ§è§åé®é¢çæä¼è§£éå¯ä»¥åä½å®çä¸ä¸ªæå°é¢ï¼èåè æ¯ç±è¥å¹²çº¿æ§ç¬ç«çç´§çº¦æä½ä¸ºç­å¼èç«å¾å°çæ¹ç¨ç»çè§£ï¼
+前文已经说明，线性规划问题的最优解集可以取作它的一个极小面，而后者是由若干线性独立的紧约束作为等式联立得到的方程组的解：
 
-{ð¥âðð:ðððð¥=ðð,Â âðâð½}.{xâRn:ajTx=bj,Â âjâJ}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+{𝑥∈𝐑𝑛:𝑎𝑇𝑗𝑥=𝑏𝑗, ∀𝑗∈𝐽}.{x∈Rn:ajTx=bj, ∀j∈J}.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®°è¿ä¸ªæ¹ç¨ç»ä¸º ð´ð½ð¥ =ðð½AJx=bJ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ ð´ð½ =(ð´1,ð´2)AJ=(A1,A2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ï¼ð´1A1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ»¡ç§©çæ¹éµï¼è¡åå¼ä¸º Â±1Â±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼ç± Cramer æ³åï¼è§£
+记这个方程组为 𝐴𝐽𝑥 =𝑏𝐽AJx=bJ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且 𝐴𝐽 =(𝐴1,𝐴2)AJ=(A1,A2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中，𝐴1A1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是满秩的方阵，行列式为 ±1±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．那么，由 Cramer 法则，解
 
-ð¥=(ð´â11ðð½0)x=(A1â1bJ0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥=(𝐴−11𝑏𝐽0)x=(A1−1bJ0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°±æ¯æå°é¢ä¸çä¸ä¸ªæ´æ°è§£ï¼
+就是极小面上的一个整数解．
 
-å¸¸è§çå¾è®ºæ¨¡åä¸­ï¼ç½ç»æµãæç­è·¯ãäºåå¾ç­å¯¹åºççº¿æ§è§åé®é¢çç³»æ°ç©éµé½æ¯å ¨å¹ºæ¨¡ç©éµï¼å æ­¤ï¼åªéè¦è¿äºé®é¢ä» æ¶åæ´æ°åæ°ï¼å®ä»¬çæä¼è§£å°±å¯ä»¥åä½æ´æ°ï¼èä¸ç¨æ å¿çº¿æ§è§åé®é¢çè§£å¯¹åºçåæ°æµãåæ°å¹é ç­æ å½¢ï¼æä»¥ï¼[æå¤§æµ](../../graph/flow/max-flow/)ã[æå°å²](../../graph/flow/min-cut/)ã[æå°è´¹ç¨æµ](../../graph/flow/min-cost/)ã[æç­è·¯](../../graph/shortest-path/)ã[å·®åçº¦æ](../../graph/diff-constraints/)ã[äºåå¾æå¤§ï¼æï¼å¹é åæå°ç¹è¦ç](../../graph/graph-matching/bigraph-match/#çº¿æ§è§åå½¢å¼) ç­é®é¢ï¼é½å¯ä»¥è½¬åä¸ºçº¿æ§è§åé®é¢æ±è§£ï¼èä¸ï¼æå¤§æµä¸æå°å²ãæç­è·¯ä¸å·®åçº¦æãäºåå¾æå¤§å¹é åæå°ç¹è¦çï¼ä¸¤ä¸¤äºä¸ºå¯¹å¶é®é¢ï¼
+常见的图论模型中，网络流、最短路、二分图等对应的线性规划问题的系数矩阵都是全幺模矩阵．因此，只需要这些问题仅涉及整数参数，它们的最优解就可以取作整数，而不用担心线性规划问题的解对应着分数流、分数匹配等情形．所以，[最大流](../../graph/flow/max-flow/)、[最小割](../../graph/flow/min-cut/)、[最小费用流](../../graph/flow/min-cost/)、[最短路](../../graph/shortest-path/)、[差分约束](../../graph/diff-constraints/)、[二分图最大（权）匹配和最小点覆盖](../../graph/graph-matching/bigraph-match/#线性规划形式) 等问题，都可以转化为线性规划问题求解．而且，最大流与最小割、最短路与差分约束、二分图最大匹配和最小点覆盖，两两互为对偶问题．
 
-é¤æ­¤ä¹å¤ï¼è¿æä¸äºå¸¸è§çå¾è®ºæ¨¡åï¼å®ææçå¯è¡è§£æ°å·§æ¯æä¸ªé¡¶ç¹åä¸ºæ´ç¹çå¤èå½¢çå ¨ä½é¡¶ç¹ï¼å æ­¤ï¼å¯ä»¥éè¿å·§å¦å°éåçº¦æï¼ä½¿å¾ç¸åºçç»åä¼åé®é¢çè§£ï¼æ°ä¸ºæä¸ªçº¿æ§è§åé®é¢çæä¼è§£ï¼ä¾å¦ï¼ä¸è¬å¾å¹é åçææ ç­å¾è®ºæ¨¡åé½å±äºè¿ç§æ åµï¼å æ­¤ [ä¸è¬å¾æå¤§ï¼æï¼å¹é ](../../graph/graph-matching/general-weight-match/) å [æå°çææ ](../../graph/mst/) ç­é®é¢åæ ·å¯ä»¥è½¬åä¸ºçº¿æ§è§åé®é¢ï¼
+除此之外，还有一些常见的图论模型，它所有的可行解恰巧是某个顶点均为整点的多胞形的全体顶点．因此，可以通过巧妙地选取约束，使得相应的组合优化问题的解，恰为某个线性规划问题的最优解．例如，一般图匹配和生成树等图论模型都属于这种情况，因此 [一般图最大（权）匹配](../../graph/graph-matching/general-weight-match/) 和 [最小生成树](../../graph/mst/) 等问题同样可以转化为线性规划问题．
 
-## åèæç®ä¸æ³¨é
+## 参考文献与注释
 
   * Schrijver, Alexander. Theory of linear and integer programming. John Wiley & Sons, 1998.
   * Papadimitriou, Christos H., and Kenneth Steiglitz. Combinatorial optimization: algorithms and complexity. Courier Corporation, 1998.
-  * [Duality in linear programming. Part 1âdefinition and construction. by adamant - Codeforces blog](https://codeforces.com/blog/entry/105049)
-  * [Duality in linear programming. Part 2âin competitive programming. by adamant - Codeforces blog](https://codeforces.com/blog/entry/105789)
+  * [Duality in linear programming. Part 1—definition and construction. by adamant - Codeforces blog](https://codeforces.com/blog/entry/105049)
+  * [Duality in linear programming. Part 2—in competitive programming. by adamant - Codeforces blog](https://codeforces.com/blog/entry/105789)
 
 * * *
 
-  1. ä¸åæç®å¯è½å¯¹è¿ä¸¤ä¸ªåè¯çå®ä¹æçä¸åçå®ä¹ï¼æäºæç®ä¼å°æççæ å½¢ç§°ä½ãå¤é¢ä½ãï¼èå°æ ççæ å½¢ç§°ä½ãå¤èå½¢ãï¼æäºæç®ä¸ä¼åå®å®ä»¬ä¸å®æ¯å¸éï¼æäºæç®ä¼ç¨ãå¤é¢ä½ãç§°å¼ä¸ç»´ç©ºé´ä¸­çå¤èå½¢ï¼æ¬æéåäºä¸ Schrijver (1998) å Boyd and Vandenberghe (2004) ç­æç®ä¸è´çå®ä¹ï¼Â â©
+  1. 不同文献可能对这两个名词的定义有着不同的定义：有些文献会将有界的情形称作「多面体」，而将无界的情形称作「多胞形」；有些文献不会假定它们一定是凸集；有些文献会用「多面体」称呼三维空间中的多胞形．本文采取了与 Schrijver (1998) 和 Boyd and Vandenberghe (2004) 等文献一致的定义． ↩
 
-  2. æ´ä¸¥æ ¼çè¡¨è¿°æ¯ï¼å®ä»¬ä¹é´å¯ä»¥å¨å¤é¡¹å¼æ¶é´å ç¸äºå½çº¦ï¼Â â©
+  2. 更严格的表述是，它们之间可以在多项式时间内相互归约． ↩
 
-  3. å ¶å®ç¨äºè§£å³ä¸ç­å¼ç»çæ¹æ³è¿å æ¬ FourierâMotzkin æ¶å æ³å AgmonâMotzkinâSchoenberg æ¾å¼æ³ç­ï¼å®ä»¬æ´ä¸ºç´æ¥ï¼ä½æ¯æçå¾å¾ä¸é«ï¼Â â©
+  3. 其它用于解决不等式组的方法还包括 Fourier–Motzkin 消元法和 Agmon–Motzkin–Schoenberg 松弛法等．它们更为直接，但是效率往往不高． ↩
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/3/9 02:30:31ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-programming.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/linear-programming.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Ir1d](https://github.com/Ir1d), [H-J-Granger](https://github.com/H-J-Granger), [zryi2003](https://github.com/zryi2003), [sshwy](https://github.com/sshwy), [StudyingFather](https://github.com/StudyingFather), [countercurrent-time](https://github.com/countercurrent-time), [Enter-tainer](https://github.com/Enter-tainer), [huhaoo](https://github.com/huhaoo), [Konano](https://github.com/Konano), [NachtgeistW](https://github.com/NachtgeistW), [CCXXXI](https://github.com/CCXXXI), [ksyx](https://github.com/ksyx), [Marcythm](https://github.com/Marcythm), [MegaOwIer](https://github.com/MegaOwIer), [partychicken](https://github.com/partychicken), [Suyun514](mailto:suyun514@qq.com), [AngelKitty](https://github.com/AngelKitty), [baker221](https://github.com/baker221), [cjsoft](https://github.com/cjsoft), [diauweb](https://github.com/diauweb), [Early0v0](https://github.com/Early0v0), [ezoixx130](https://github.com/ezoixx130), [GekkaSaori](https://github.com/GekkaSaori), [isdanni](https://github.com/isdanni), [LovelyBuggies](https://github.com/LovelyBuggies), [Makkiy](https://github.com/Makkiy), [mgt](mailto:i@margatroid.xyz), [minghu6](https://github.com/minghu6), [P-Y-Y](https://github.com/P-Y-Y), [PotassiumWings](https://github.com/PotassiumWings), [QAQAutoMaton](https://github.com/QAQAutoMaton), [SamZhangQingChuan](https://github.com/SamZhangQingChuan), [Tiphereth-A](https://github.com/Tiphereth-A), [weiyong1024](https://github.com/weiyong1024), [c-forrest](https://github.com/c-forrest), [eleven-mile](https://github.com/eleven-mile), [GavinZhengOI](https://github.com/GavinZhengOI), [Gesrua](https://github.com/Gesrua), [kxccc](https://github.com/kxccc), [lychees](https://github.com/lychees), [Peanut-Tang](https://github.com/Peanut-Tang), [SukkaW](https://github.com/SukkaW), [xiaodong2077](https://github.com/xiaodong2077), [yusancky](https://github.com/yusancky), [YZircon](https://github.com/YZircon), [ZnPdCo](https://github.com/ZnPdCo)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/3/9 02:30:31，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-programming.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/linear-programming.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [H-J-Granger](https://github.com/H-J-Granger), [zryi2003](https://github.com/zryi2003), [sshwy](https://github.com/sshwy), [StudyingFather](https://github.com/StudyingFather), [countercurrent-time](https://github.com/countercurrent-time), [Enter-tainer](https://github.com/Enter-tainer), [huhaoo](https://github.com/huhaoo), [Konano](https://github.com/Konano), [NachtgeistW](https://github.com/NachtgeistW), [CCXXXI](https://github.com/CCXXXI), [ksyx](https://github.com/ksyx), [Marcythm](https://github.com/Marcythm), [MegaOwIer](https://github.com/MegaOwIer), [partychicken](https://github.com/partychicken), [Suyun514](mailto:suyun514@qq.com), [AngelKitty](https://github.com/AngelKitty), [baker221](https://github.com/baker221), [cjsoft](https://github.com/cjsoft), [diauweb](https://github.com/diauweb), [Early0v0](https://github.com/Early0v0), [ezoixx130](https://github.com/ezoixx130), [GekkaSaori](https://github.com/GekkaSaori), [isdanni](https://github.com/isdanni), [LovelyBuggies](https://github.com/LovelyBuggies), [Makkiy](https://github.com/Makkiy), [mgt](mailto:i@margatroid.xyz), [minghu6](https://github.com/minghu6), [P-Y-Y](https://github.com/P-Y-Y), [PotassiumWings](https://github.com/PotassiumWings), [QAQAutoMaton](https://github.com/QAQAutoMaton), [SamZhangQingChuan](https://github.com/SamZhangQingChuan), [Tiphereth-A](https://github.com/Tiphereth-A), [weiyong1024](https://github.com/weiyong1024), [c-forrest](https://github.com/c-forrest), [eleven-mile](https://github.com/eleven-mile), [GavinZhengOI](https://github.com/GavinZhengOI), [Gesrua](https://github.com/Gesrua), [kxccc](https://github.com/kxccc), [lychees](https://github.com/lychees), [Peanut-Tang](https://github.com/Peanut-Tang), [SukkaW](https://github.com/SukkaW), [xiaodong2077](https://github.com/xiaodong2077), [yusancky](https://github.com/yusancky), [YZircon](https://github.com/YZircon), [ZnPdCo](https://github.com/ZnPdCo)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

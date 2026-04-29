@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/jquery/jquery-tutorial.html
-Title: jQuery 教程 | 菜鸟教程
-
-jQuery 教程 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-jQuery 教程

@@ -1,33 +1,33 @@
-# èåä½ - OI Wiki
+﻿# 联合体 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/union/
 
-# èåä½
+# 联合体
 
-**èåä½** ï¼unionï¼æ¯ç¹æ®çç±»ç±»åï¼å®å¨ä¸ä¸ªæ¶å»åªè½ä¿æå ¶ä¸ä¸ªééææ°æ®æåï¼
+**联合体** （union）是特殊的类类型，它在一个时刻只能保有其一个非静态数据成员．
 
-èåä½å¨ 2023 å¹´æ­£å¼è¢«å å ¥ NOI å¤§çº²å ¥é¨çº§ä¸­ï¼
+联合体在 2023 年正式被加入 NOI 大纲入门级中．
 
-## å®ä¹èåä½
+## 定义联合体
 
-èåä½å£°æçç±»è¯´æç¬¦ä¸ç±»æ [ç»æä½](../struct/) çå£°æç¸ä¼¼ï¼
+联合体声明的类说明符与类或 [结构体](../struct/) 的声明相似：
 
 ```text 1 2 3 4 ``` |  ```text union MyUnion { int x ; long long y ; } x ; ```   
 ---|---  
   
-èåä½çå®ä¹ä¸ç»æä½ç±»ä¼¼ï¼æç §ä¸è¿°å®ä¹ï¼`MyUnion` åæ ·å¯ä»¥å½ä½ä¸ç§èªå®ä¹ç±»åä½¿ç¨ï¼åç§° `MyUnion` å¯ä»¥çç¥ï¼
+联合体的定义与结构体类似．按照上述定义，`MyUnion` 同样可以当作一种自定义类型使用．名称 `MyUnion` 可以省略．
 
-## è®¿é®/ä¿®æ¹æåå ç´ 
+## 访问/修改成员元素
 
-ä¸ç»æä½ç±»ä¼¼ï¼åæ ·å¯ä»¥ä½¿ç¨ `åéå.æåå` è¿è¡è®¿é®ï¼
+与结构体类似，同样可以使用 `变量名.成员名` 进行访问．
 
-èåä½æå ç¨çå å­ç©ºé´å¤§å° **ä¸å°äº** å ¶æå¤§çæåçå¤§å°ï¼æææå **å ±ç¨å å­ç©ºé´ä¸å°å** ï¼å½ä¸ä¸ªæåè¢«èµå¼ï¼ç±äºå å­å ±äº«ï¼è¯¥èåä½ä¸­çå ¶ä»æåé½ä¼è¢«è¦çï¼å³åä¸æ¶å»èåä½ä¸­åªè½ä¿å­ä¸ä¸ªæåçå¼ï¼
+联合体所占用的内存空间大小 **不小于** 其最大的成员的大小，所有成员 **共用内存空间与地址** ．当一个成员被赋值，由于内存共享，该联合体中的其他成员都会被覆盖．即同一时刻联合体中只能保存一个成员的值．
 
-èåä½çæ´å¤ç¨æ³å¯ä»¥åè§ [cppreferenceï¼èåä½å£°æ](https://zh.cppreference.com/w/cpp/language/union)ï¼
+联合体的更多用法可以参见 [cppreference：联合体声明](https://zh.cppreference.com/w/cpp/language/union)．
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/union.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/lang/union.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Molmin](https://github.com/Molmin), [r-value](https://github.com/r-value), [Tiphereth-A](https://github.com/Tiphereth-A)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/union.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/lang/union.md "edit.link.title")  
+>  __本页面贡献者：[Molmin](https://github.com/Molmin), [r-value](https://github.com/r-value), [Tiphereth-A](https://github.com/Tiphereth-A)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

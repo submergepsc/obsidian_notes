@@ -8,11 +8,11 @@
 [[notes_ubuntu/deb文件如何安装]]
 
 
-[[notes_ubuntu/磁盘管理]]
 
 
 [[notes_ubuntu/ubuntu应用_开机自启动]]
 
+ 
 # 鼠标争夺层次,shift可以让鼠标接管回到gnometerminal
 
 

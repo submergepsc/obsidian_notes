@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/charsets/ref-utf-cyrillic.html
-Title: UTF-8 Cyrillic（西里尔字母） | 菜鸟教程
-
-UTF-8 Cyrillic（西里尔字母） | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-HTML 字符集

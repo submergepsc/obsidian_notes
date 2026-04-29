@@ -1,159 +1,159 @@
-# Entringer Number - OI Wiki
+﻿# Entringer Number - OI Wiki
 
 - Source: https://oi-wiki.org/math/combinatorics/entringer/
 
 # Entringer Number
 
-## æ©ç¹ææ ¼æ°
+## 恩特林格数
 
-æ©ç¹ææ ¼æ°ï¼Entringer numberï¼[OEIS A008281](http://oeis.org/A008281)ï¼ð¸(ð,ð)E(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ»¡è¶³ä¸è¿°æ¡ä»¶ç 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ± ð +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ°çç½®æ¢æ°ç®ï¼
+恩特林格数（Entringer number，[OEIS A008281](http://oeis.org/A008281)）𝐸(𝑛,𝑘)E(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是满足下述条件的 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 共 𝑛 +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数的置换数目：
 
-  * é¦å ç´ æ¯ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * é¦å ç´ çä¸ä¸ä¸ªå ç´ æ¯é¦å ç´ å°ï¼åä¸ä¸ä¸ªå ç´ æ¯åä¸ä¸ªå ç´ å¤§ï¼åä¸ä¸ä¸ªå ç´ æ¯åä¸ä¸ªå ç´ å°â¦â¦åé¢ç¸é»å ç´ çå¤§å°å ³ç³»åæ»¡è¶³è¿æ ·çè§åï¼
+  * 首元素是 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  * 首元素的下一个元素比首元素小，再下一个元素比前一个元素大，再下一个元素比前一个元素小……后面相邻元素的大小关系均满足这样的规则．
 
-æ©ç¹ææ ¼æ°çåå¼æï¼
+恩特林格数的初值有：
 
-ð¸(0,0)=1E(0,0)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð¸(ð,0)=0E(n,0)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐸(0,0)=1E(0,0)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝐸(𝑛,0)=0E(n,0)=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æéæ¨å ³ç³»ï¼
+有递推关系：
 
-ð¸(ð,ð)=ð¸(ð,ðâ1)+ð¸(ðâ1,ðâð)E(n,k)=E(n,kâ1)+E(nâ1,nâk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐸(𝑛,𝑘)=𝐸(𝑛,𝑘−1)+𝐸(𝑛−1,𝑛−𝑘)E(n,k)=E(n,k−1)+E(n−1,n−k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## SeidelâEntringerâArnold ä¸è§
+## Seidel–Entringer–Arnold 三角
 
-æ©ç¹ææ ¼æ°çä¸ä¸ªéå½æåçæ°å­ä¸è§ï¼ç§°ä¸º SeidelâEntringerâArnold ä¸è§ï¼SeidelâEntringerâArnold triangleï¼[OEIS A008280](http://oeis.org/A008280)ï¼ï¼è¯¥ä¸è§æ¯æç §ãçèãé¡ºåºï¼ox-plowing orderï¼æåçæ©ç¹ææ ¼æ° ð¸(ð,ð)E(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+恩特林格数的一个适当排列的数字三角，称为 Seidel–Entringer–Arnold 三角（Seidel–Entringer–Arnold triangle，[OEIS A008280](http://oeis.org/A008280)）．该三角是按照「牛耕」顺序（ox-plowing order）排列的恩特林格数 𝐸(𝑛,𝑘)E(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-ð¸(0,0)ð¸(1,0)âð¸(1,1)ð¸(2,2)âð¸(2,1)âð¸(2,0)ð¸(3,0)âð¸(3,1)âð¸(3,2)âð¸(3,3)ð¸(4,4)âð¸(4,3)âð¸(4,2)âð¸(4,1)âð¸(4,0)E(0,0)E(1,0)âE(1,1)E(2,2)âE(2,1)âE(2,0)E(3,0)âE(3,1)âE(3,2)âE(3,3)E(4,4)âE(4,3)âE(4,2)âE(4,1)âE(4,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐸(0,0)𝐸(1,0)→𝐸(1,1)𝐸(2,2)←𝐸(2,1)←𝐸(2,0)𝐸(3,0)→𝐸(3,1)→𝐸(3,2)→𝐸(3,3)𝐸(4,4)←𝐸(4,3)←𝐸(4,2)←𝐸(4,1)←𝐸(4,0)E(0,0)E(1,0)→E(1,1)E(2,2)←E(2,1)←E(2,0)E(3,0)→E(3,1)→E(3,2)→E(3,3)E(4,4)←E(4,3)←E(4,2)←E(4,1)←E(4,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å³ï¼
+即：
 
-10â11â1â00â1â2â25â5â4â2â010â11â1â00â1â2â25â5â4â2â0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+10→11←1←00→1→2→25←5←4←2←010→11←1←00→1→2→25←5←4←2←0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æç §è¿ç§æ¹å¼æåçæ©ç¹ææ ¼æ°çä¼å¿æ¯ï¼ä¸å®çéæ¨å ³ç³» ð¸(ð,ð) =ð¸(ð,ð â1) +ð¸(ð â1,ð âð)E(n,k)=E(n,kâ1)+E(nâ1,nâk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è´ï¼å¯ä»¥æ¹ä¾¿è®°å¿åçè§£ï¼
+按照这种方式排列的恩特林格数的优势是，与它的递推关系 𝐸(𝑛,𝑘) =𝐸(𝑛,𝑘 −1) +𝐸(𝑛 −1,𝑛 −𝑘)E(n,k)=E(n,k−1)+E(n−1,n−k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一致，可以方便记忆和理解．
 
-æ©ç¹ææ ¼æ°æä¸ä¸ªææ°åçæå½æ°ï¼
+恩特林格数有一个指数型生成函数：
 
-ââð=0ââð=0ð¸(ð+ð,12(ð+ð+(â1)ð+ð(ðâð)))ð¥ðð!ð¥ðð!=cosâ¡ð¥+sinâ¡ð¥cosâ¡(ð¥+ð¦)âm=0âân=0âE(m+n,12(m+n+(â1)m+n(nâm)))xmm!xnn!=cosâ¡x+sinâ¡xcosâ¡(x+y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∞∑𝑚=0∞∑𝑛=0𝐸(𝑚+𝑛,12(𝑚+𝑛+(−1)𝑚+𝑛(𝑛−𝑚)))𝑥𝑚𝑚!𝑥𝑛𝑛!=cos⁡𝑥+sin⁡𝑥cos⁡(𝑥+𝑦)∑m=0∞∑n=0∞E(m+n,12(m+n+(−1)m+n(n−m)))xmm!xnn!=cos⁡x+sin⁡xcos⁡(x+y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¸ªçæå½æ°çç³»æ°åå¸äºå®ä¸æ¯ä¸é¢ç SeidelâEntringerâArnold ä¸è§çç®åæä¼¸åå½¢ï¼
+这个生成函数的系数分布事实上是上面的 Seidel–Entringer–Arnold 三角的简单拉伸变形：
 
-ð¸(0,0)ð¸(1,1)ð¸(2,0)ð¸(3,3)ð¸(4,0)ð¸(1,0)ð¸(2,1)ð¸(3,2)ð¸(4,1)ð¸(2,2)ð¸(3,1)ð¸(4,2)ð¸(3,0)ð¸(4,3)ð¸(4,4)E(0,0)E(1,1)E(2,0)E(3,3)E(4,0)E(1,0)E(2,1)E(3,2)E(4,1)E(2,2)E(3,1)E(4,2)E(3,0)E(4,3)E(4,4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐸(0,0)𝐸(1,1)𝐸(2,0)𝐸(3,3)𝐸(4,0)𝐸(1,0)𝐸(2,1)𝐸(3,2)𝐸(4,1)𝐸(2,2)𝐸(3,1)𝐸(4,2)𝐸(3,0)𝐸(4,3)𝐸(4,4)E(0,0)E(1,1)E(2,0)E(3,3)E(4,0)E(1,0)E(2,1)E(3,2)E(4,1)E(2,2)E(3,1)E(4,2)E(3,0)E(4,3)E(4,4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å³ï¼
+即：
 
 110200122114055110200122114055![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## zigzag ç½®æ¢
+## zigzag 置换
 
-ä¸ä¸ª zigzag ç½®æ¢ï¼zigzag permutationï¼æ¯ä¸ä¸ª 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå ð1c1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ððci![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ä»»æä¸ä¸ªå ç´ ððci![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¤§å°é½ä¸ä»äº ððâ1ciâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðð+1ci+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼
+一个 zigzag 置换（zigzag permutation）是一个 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的排列 𝑐1c1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑐𝑖ci![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得任意一个元素 𝑐𝑖ci![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的大小都不介于 𝑐𝑖−1ci−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑐𝑖+1ci+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间．
 
-å¯¹äº zigzag ç½®æ¢çä¸ªæ° ððZn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼[OEIS A001250](http://oeis.org/A001250)ï¼ï¼ä» ð =0n=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§æï¼
+对于 zigzag 置换的个数 𝑍𝑛Zn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（[OEIS A001250](http://oeis.org/A001250)），从 𝑛 =0n=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始有：
 
-1,1,2,4,10,32,122,544,â¯1,1,2,4,10,32,122,544,â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1,1,2,4,10,32,122,544,⋯1,1,2,4,10,32,122,544,⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¾å¦ï¼åå ä¸ª ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäº¤æ¿ç½®æ¢æï¼
+例如，前几个 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的交替置换有：
 
-ð=1:{1}ð=2:{1,2},{2,1}ð=3:{1,3,2},{2,1,3},{2,3,1},{3,1,2}ð=4:{1,3,2,4},{1,4,2,3},{2,1,4,3},{2,3,1,4},{2,4,1,3},{3,1,4,2},{3,2,4,1},{3,4,1,2},{4,1,3,2},{4,2,3,1}n=1:{1}n=2:{1,2},{2,1}n=3:{1,3,2},{2,1,3},{2,3,1},{3,1,2}n=4:{1,3,2,4},{1,4,2,3},{2,1,4,3},{2,3,1,4},{2,4,1,3},{3,1,4,2},{3,2,4,1},{3,4,1,2},{4,1,3,2},{4,2,3,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛=1:{1}𝑛=2:{1,2},{2,1}𝑛=3:{1,3,2},{2,1,3},{2,3,1},{3,1,2}𝑛=4:{1,3,2,4},{1,4,2,3},{2,1,4,3},{2,3,1,4},{2,4,1,3},{3,1,4,2},{3,2,4,1},{3,4,1,2},{4,1,3,2},{4,2,3,1}n=1:{1}n=2:{1,2},{2,1}n=3:{1,3,2},{2,1,3},{2,3,1},{3,1,2}n=4:{1,3,2,4},{1,4,2,3},{2,1,4,3},{2,3,1,4},{2,4,1,3},{3,1,4,2},{3,2,4,1},{3,4,1,2},{4,1,3,2},{4,2,3,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## äº¤æ¿ç½®æ¢ä¸ zigzag æ°
+## 交替置换与 zigzag 数
 
-ï¼æ³¨æåãéä½æåãè¿è¡æ¦å¿µä¸çåºåï¼ï¼
+（注意和「错位排列」进行概念上的区分．）
 
-å¯¹äºå¤§äº 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯ä¸ª zigzag ç½®æ¢ç¿»è½¬è¿æ¥ä»æ§ä¸º zigzag ç½®æ¢ï¼å¯ä»¥ä¸¤ä¸¤é å¯¹ï¼æä»¥å¿ ç¶ä¸ºå¶æ°ï¼
+对于大于 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，每个 zigzag 置换翻转过来仍旧为 zigzag 置换，可以两两配对，所以必然为偶数．
 
-è¿éåç»åºä¸ç§é å¯¹çæ¹æ³ï¼å° zigzag ç½®æ¢åä¸ºäº¤æ¿ç½®æ¢ï¼alternating permutationï¼ååäº¤æ¿ç½®æ¢ï¼reverse alternating permutationï¼ï¼
+这里再给出一种配对的方法：将 zigzag 置换分为交替置换（alternating permutation）和反交替置换（reverse alternating permutation）．
 
-äº¤æ¿ç½®æ¢çé¦å ç´ å¤§äºç¬¬äºä¸ªå ç´ ï¼å¤§å°å ³ç³»ä¸ºï¼
+交替置换的首元素大于第二个元素，大小关系为：
 
-ð1>ð2<ð3>â¯c1>c2<c3>â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑐1>𝑐2<𝑐3>⋯c1>c2<c3>⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åäº¤æ¿ç½®æ¢çé¦å ç´ å°äºç¬¬äºä¸ªå ç´ ï¼å¤§å°å ³ç³»ä¸ºï¼
+反交替置换的首元素小于第二个元素，大小关系为：
 
-ð1<ð2>ð3<â¯c1<c2>c3<â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑐1<𝑐2>𝑐3<⋯c1<c2>c3<⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦æå° 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç½®äºæ¢ï¼22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð â1nâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç½®äºæ¢ï¼ä»¥æ­¤ç±»æ¨ï¼å³å¯å°äº¤æ¿ç½®æ¢ä¸åäº¤æ¿ç½®æ¢ä¸¤ä¸ªéåäºæ¢ï¼å æ­¤ï¼äº¤æ¿ç½®æ¢ä¸åäº¤æ¿ç½®æ¢çä¸ªæ°ç¸ç­ï¼æ°å¥½ä¸º zigzag ç½®æ¢çä¸åï¼
+如果将 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位置互换，22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑛 −1n−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位置互换，以此类推，即可将交替置换与反交替置换两个集合互换．因此，交替置换与反交替置换的个数相等，恰好为 zigzag 置换的一半．
 
-å¯¹äºå¤§äº 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®°ï¼
+对于大于 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，记：
 
-ð´ð=ðð2An=Zn2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴𝑛=𝑍𝑛2An=Zn2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å®ä¹åå¼ï¼
+定义初值：
 
-ð´0=ð´1=1A0=A1=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴0=𝐴1=1A0=A1=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éç ð´ðAn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸º zigzag æ°ï¼Euler zigzag numberï¼[OEIS A000111](http://oeis.org/A000111)ï¼ï¼ä» ð =0n=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§æï¼
+这里的 𝐴𝑛An![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为 zigzag 数（Euler zigzag number，[OEIS A000111](http://oeis.org/A000111)），从 𝑛 =0n=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始有：
 
-1,1,1,2,5,16,61,272,â¯1,1,1,2,5,16,61,272,â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1,1,1,2,5,16,61,272,⋯1,1,1,2,5,16,61,272,⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¥ä¸æ¥è¯çæ±è§£ ð´ðAn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+接下来试着求解 𝐴𝑛An![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä» 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹ä¸­ï¼éå ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ°ææå­éï¼æ (ðð)(nk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§éæ³ï¼
+从 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之中，选取 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数构成子集，有 (𝑛𝑘)(nk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种选法．
 
-å¨è¿ä¸ª ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å å­éä¸­ï¼éåäº¤æ¿ç½®æ¢ ð¢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð´ðAk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§éæ³ï¼ç¨å ¨éåæè¿ä¸ª ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å å­éï¼å©ä½ç ð âðnâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å å­éä¸­ï¼éåäº¤æ¿ç½®æ¢ ð£v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð´ðâðAnâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§éæ³ï¼
+在这个 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 元子集中，选反交替置换 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝐴𝑘Ak![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种选法；用全集减掉这个 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 元子集，剩余的 𝑛 −𝑘n−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 元子集中，选反交替置换 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝐴𝑛−𝑘An−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种选法．
 
-èè ð +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å æå ð¤w![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å° ð¢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åç½®ä½ä¸ºå¼å¤´ï¼æ¥ä¸ ð +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ¥ä¸ ð£v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼ð¤w![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®æ¯ zigzag ç½®æ¢ï¼å¹¶ä¸ä»»æä¸ä¸ª ð +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å  zigzag ç½®æ¢ï¼é½å¯ä»¥å¨ ð +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤æªæ­å¾å°å¯¹åºçåäº¤æ¿ç½®æ¢ ð¢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð£v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶ä¸ä¸åç ð +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å  zigzag ç½®æ¢å¯¹åºç ð¢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð£v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åï¼
+考虑 𝑛 +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 元排列 𝑤w![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，将 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 倒置作为开头，接上 𝑛 +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，再接上 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．那么，𝑤w![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一定是 zigzag 置换，并且任意一个 𝑛 +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 元 zigzag 置换，都可以在 𝑛 +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处截断得到对应的反交替置换 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并且不同的 𝑛 +1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 元 zigzag 置换对应的 𝑢u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不同．
 
-å æ­¤æéæ¨å ³ç³»ï¼
+因此有递推关系：
 
-2ð´ð+1=ðâð=0(ðð)ð´ðð´ðâð2An+1=âk=0n(nk)AkAnâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)2(ð+1)ð´ð+1(ð+1)!=ðâð=0ð´ðð!ð´ðâð(ðâð)!2(n+1)An+1(n+1)!=âk=0nAkk!Anâk(nâk)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+2𝐴𝑛+1=𝑛∑𝑘=0(𝑛𝑘)𝐴𝑘𝐴𝑛−𝑘2An+1=∑k=0n(nk)AkAn−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)2(𝑛+1)𝐴𝑛+1(𝑛+1)!=𝑛∑𝑘=0𝐴𝑘𝑘!𝐴𝑛−𝑘(𝑛−𝑘)!2(n+1)An+1(n+1)!=∑k=0nAkk!An−k(n−k)!![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å½ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶å¹¶ä¸æ»¡è¶³è¿ä¸ªéæ¨å¼ï¼åå¼ ð´0A0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð´1A1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+当 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时并不满足这个递推式，初值 𝐴0A0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐴1A1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¯è§ï¼è¿æ¯ä¸ä¸ªææ°åçæå½æ°çå·ç§¯ï¼åè®¾ ð´ðAn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çææ°åçæå½æ°ä¸º ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±æå¾®åæ¹ç¨ï¼
+可见，这是一个指数型生成函数的卷积．假设 𝐴𝑛An![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的指数型生成函数为 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就有微分方程：
 
-2dð¦dð¥=ð¦2+12dydx=y2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+2d𝑦d𝑥=𝑦2+12dydx=y2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç­å¼å³é¢å 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ºäºå¤ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶çç¹æ®æ åµï¼è¯¥æ¹ç¨çéè§£ä¸ºï¼
+等式右面加 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是为了处理 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时的特殊情况．该方程的通解为：
 
-ð¦=tanâ¡(12ð¥+ð¶)y=tanâ¡(12x+C)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑦=tan⁡(12𝑥+𝐶)y=tan⁡(12x+C)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»£å ¥ç¬¬ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹åï¼å¯ä»¥å¾å°ç¹è§£ï¼
+代入第 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之后，可以得到特解：
 
-ð¦=tanâ¡ð¥+secâ¡ð¥y=tanâ¡x+secâ¡x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑦=tan⁡𝑥+sec⁡𝑥y=tan⁡x+sec⁡x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ­£åå½æ°æ¯å¥å½æ°ï¼æ­£å²å½æ°æ¯å¶å½æ°ï¼ä¸¤è ä¹åææ zigzag æ°ççæå½æ°ï¼
+正切函数是奇函数，正割函数是偶函数，两者之和构成 zigzag 数的生成函数．
 
-## æ©ç¹ææ ¼æ°ä¸ zigzag æ°çå ³ç³»
+## 恩特林格数与 zigzag 数的关系
 
-æ ¹æ®æ©ç¹ææ ¼æ°çå®ä¹ï¼æ©ç¹ææ ¼æ° ð¸(ð,ð)E(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯é¦å ç´ ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäº¤æ¿ç½®æ¢ä¸ªæ°ï¼å æ­¤æ©ç¹ææ ¼æ°ä¸ zigzag æ°äºå®ä¸æå ³ç³»ï¼
+根据恩特林格数的定义，恩特林格数 𝐸(𝑛,𝑘)E(n,k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是首元素为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的交替置换个数．因此恩特林格数与 zigzag 数事实上有关系：
 
-ð´ð=ð¸(ð,ð)An=E(n,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴𝑛=𝐸(𝑛,𝑛)An=E(n,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å° ð´ðAn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§°ä¸ºãzigzag æ°ãä¹æåå ï¼è®° ð¸ðEn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¬§ææ°ï¼Euler numberï¼ï¼ðµðBn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¼¯åªå©æ°ï¼
+将 𝐴𝑛An![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 称为「zigzag 数」也有原因：记 𝐸𝑛En![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是欧拉数（Euler number），𝐵𝑛Bn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是伯努利数．
 
-å½ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¶æ°æ¶ï¼å¶æ°é¡¹ä¸æ ç zigzag æ°ä¹ç§°ãæ­£å²æ°ãððSn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè ãzig æ°ãï¼æå ³ç³»ï¼
+当 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为偶数时，偶数项下标的 zigzag 数也称「正割数」𝑆𝑛Sn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或者「zig 数」．有关系：
 
-ð´ð=(â1)ð/2ð¸ðAn=(â1)n/2En![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴𝑛=(−1)𝑛/2𝐸𝑛An=(−1)n/2En![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå é¡¹ä¸ºï¼[OEIS A000364](http://oeis.org/A000364)ï¼ï¼
+前几项为（[OEIS A000364](http://oeis.org/A000364)）：
 
-1,1,5,61,1385,â¯1,1,5,61,1385,â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1,1,5,61,1385,⋯1,1,5,61,1385,⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å½ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¥æ°æ¶ï¼å¥æ°é¡¹ä¸æ ç zigzag æ°ä¹ç§°ãæ­£åæ°ãððTn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æè ãzag æ°ãï¼æå ³ç³»ï¼
+当 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为奇数时，奇数项下标的 zigzag 数也称「正切数」𝑇𝑛Tn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或者「zag 数」．有关系：
 
-ð´ð=(â1)(ðâ1)/22ð+1(2ð+1â1)ðµð+1ð+1An=(â1)(nâ1)/22n+1(2n+1â1)Bn+1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴𝑛=(−1)(𝑛−1)/22𝑛+1(2𝑛+1−1)𝐵𝑛+1𝑛+1An=(−1)(n−1)/22n+1(2n+1−1)Bn+1n+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå é¡¹ä¸ºï¼[OEIS A000182](http://oeis.org/A000182)ï¼ï¼
+前几项为（[OEIS A000182](http://oeis.org/A000182)）：
 
-1,2,16,272,7936,â¯1,2,16,272,7936,â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1,2,16,272,7936,⋯1,2,16,272,7936,⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-äºæ¯å¯¹äºå¨ ð¥ =0x=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤çæ³°åå±å¼ï¼å¯ä»¥ç»åºæ­£å²æ°åæ­£åæ°ï¼
+于是对于在 𝑥 =0x=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处的泰勒展开，可以给出正割数和正切数：
 
-secâ¡ð¥=ð´0+ð´2ð¥22!+ð´4ð¥44!+â¯secâ¡x=A0+A2x22!+A4x44!+â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)tanâ¡ð¥=ð´1ð¥+ð´3ð¥33!+ð´5ð¥55!+â¯tanâ¡x=A1x+A3x33!+A5x55!+â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+sec⁡𝑥=𝐴0+𝐴2𝑥22!+𝐴4𝑥44!+⋯sec⁡x=A0+A2x22!+A4x44!+⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)tan⁡𝑥=𝐴1𝑥+𝐴3𝑥33!+𝐴5𝑥55!+⋯tan⁡x=A1x+A3x33!+A5x55!+⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æè åå°ä¸èµ·ï¼
+或者写到一起：
 
-secâ¡ð¥+tanâ¡ð¥=ð´0+ð´1ð¥+ð´2ð¥22!+ð´3ð¥33!+ð´4ð¥44!+ð´5ð¥55!+â¯secâ¡x+tanâ¡x=A0+A1x+A2x22!+A3x33!+A4x44!+A5x55!+â¯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+sec⁡𝑥+tan⁡𝑥=𝐴0+𝐴1𝑥+𝐴2𝑥22!+𝐴3𝑥33!+𝐴4𝑥44!+𝐴5𝑥55!+⋯sec⁡x+tan⁡x=A0+A1x+A2x22!+A3x33!+A4x44!+A5x55!+⋯![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ææ zigzag æ°ççæå½æ°ï¼
+构成 zigzag 数的生成函数．
 
-## åèèµæä¸é¾æ¥
+## 参考资料与链接
 
   1. [Alternating permutation - Wikipedia](https://en.wikipedia.org/wiki/Alternating_permutation)
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/entringer.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/entringer.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [Great-designer](https://github.com/Great-designer), [CCXXXI](https://github.com/CCXXXI), [ChungZH](https://github.com/ChungZH), [jifbt](https://github.com/jifbt)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/entringer.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/entringer.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [Great-designer](https://github.com/Great-designer), [CCXXXI](https://github.com/CCXXXI), [ChungZH](https://github.com/ChungZH), [jifbt](https://github.com/jifbt)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

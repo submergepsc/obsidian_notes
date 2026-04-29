@@ -1,109 +1,109 @@
-# åå¹å¼ç - OI Wiki
+﻿# 升幂引理 - OI Wiki
 
 - Source: https://oi-wiki.org/math/number-theory/lift-the-exponent/
 
-# åå¹å¼ç
+# 升幂引理
 
-## å å®¹
+## 内容
 
-åå¹ï¼Lift the Exponentï¼LTEï¼å¼çæ¯åç­æ°è®ºä¸­æ¯è¾å¸¸ç¨çä¸ä¸ªå®çï¼
+升幂（Lift the Exponent，LTE）引理是初等数论中比较常用的一个定理．
 
-å®ä¹ ðð(ð)Î½p(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ´æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ ååè§£ä¸­ç´ å å­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¹æ¬¡ï¼å³ ðð(ð)Î½p(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ððð(ð) â£ðpÎ½p(n)â£n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ððð(ð)+1 â¤ðpÎ½p(n)+1â¤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7).
+定义 𝜈𝑝(𝑛)νp(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为整数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的标准分解中素因子 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的幂次，即 𝜈𝑝(𝑛)νp(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝑝𝜈𝑝(𝑛) ∣𝑛pνp(n)∣n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑝𝜈𝑝(𝑛)+1 ∤𝑛pνp(n)+1∤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7).
 
-ç±äºåå¹å¼çå å®¹è¾é¿ï¼æä»¬å°å ¶åä¸ºä¸é¨åä»ç»ï¼
+由于升幂引理内容较长，我们将其分为三部分介绍：
 
-ä»¥ä¸å å®¹è®¾ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºç´ æ°ï¼ð¥,ð¦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ»¡è¶³ ð â¤ð¥pâ¤x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð â¤ð¦pâ¤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´æ°ï¼ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ­£æ´æ°ï¼
+以下内容设 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为素数，𝑥,𝑦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为满足 𝑝 ∤𝑥p∤x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑝 ∤𝑦p∤y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整数，𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为正整数．
 
-### ç¬¬ä¸é¨å
+### 第一部分
 
-å¯¹ææçç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ»¡è¶³ (ð,ð) =1(n,p)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对所有的素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和满足 (𝑛,𝑝) =1(n,p)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，
 
-  1. è¥ ð â£ð¥ âð¦pâ£xây![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åï¼
+  1. 若 𝑝 ∣𝑥 −𝑦p∣x−y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则：
 
-ðð(ð¥ðâð¦ð)=ðð(ð¥âð¦)Î½p(xnâyn)=Î½p(xây)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. è¥ ð â£ð¥ +ð¦pâ£x+y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¯¹å¥æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æï¼
+𝜈𝑝(𝑥𝑛−𝑦𝑛)=𝜈𝑝(𝑥−𝑦)νp(xn−yn)=νp(x−y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. 若 𝑝 ∣𝑥 +𝑦p∣x+y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则对奇数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有：
 
-ðð(ð¥ð+ð¦ð)=ðð(ð¥+ð¦)Î½p(xn+yn)=Î½p(x+y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝(𝑥𝑛+𝑦𝑛)=𝜈𝑝(𝑥+𝑦)νp(xn+yn)=νp(x+y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æ
+证明
 
-è¥ ð â£ð¥ âð¦pâ£xây![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä¸é¾åç° ð â£ð¥ âð¦ âº ð¥ â¡ð¦(modð)pâ£xâyâºxâ¡y(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ¾ç¶æï¼
+若 𝑝 ∣𝑥 −𝑦p∣x−y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则不难发现 𝑝 ∣𝑥 −𝑦 ⟺ 𝑥 ≡𝑦(mod𝑝)p∣x−y⟺x≡y(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则显然有：
 
-ðâ1âð=0ð¥ðð¦ðâ1âðâ¡ðð¥ðâ1â¢0(modð)âi=0nâ1xiynâ1âiâ¡nxnâ1â¢0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑛−1∑𝑖=0𝑥𝑖𝑦𝑛−1−𝑖≡𝑛𝑥𝑛−1≢0(mod𝑝)∑i=0n−1xiyn−1−i≡nxn−1≢0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿èç± ð¥ð âð¦ð =(ð¥ âð¦)âðâ1ð=0ð¥ðð¦ðâ1âðxnâyn=(xây)âi=0nâ1xiynâ1âi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ç¥å½é¢å¾è¯ï¼
+进而由 𝑥𝑛 −𝑦𝑛 =(𝑥 −𝑦)∑𝑛−1𝑖=0𝑥𝑖𝑦𝑛−1−𝑖xn−yn=(x−y)∑i=0n−1xiyn−1−i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可知命题得证．
 
-å¯¹ ð â£ð¥ +ð¦pâ£x+y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ åµè¯ææ¹æ³ç±»ä¼¼ï¼
+对 𝑝 ∣𝑥 +𝑦p∣x+y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情况证明方法类似．
 
-### ç¬¬äºé¨å
+### 第二部分
 
-è¥ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¥ç´ æ°ï¼
+若 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是奇素数，
 
-  1. è¥ ð â£ð¥ âð¦pâ£xây![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åï¼
+  1. 若 𝑝 ∣𝑥 −𝑦p∣x−y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则：
 
-ðð(ð¥ðâð¦ð)=ðð(ð¥âð¦)+ðð(ð)Î½p(xnâyn)=Î½p(xây)+Î½p(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. è¥ ð â£ð¥ +ð¦pâ£x+y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¯¹å¥æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æï¼
+𝜈𝑝(𝑥𝑛−𝑦𝑛)=𝜈𝑝(𝑥−𝑦)+𝜈𝑝(𝑛)νp(xn−yn)=νp(x−y)+νp(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. 若 𝑝 ∣𝑥 +𝑦p∣x+y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则对奇数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有：
 
-ðð(ð¥ð+ð¦ð)=ðð(ð¥+ð¦)+ðð(ð)Î½p(xn+yn)=Î½p(x+y)+Î½p(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝(𝑥𝑛+𝑦𝑛)=𝜈𝑝(𝑥+𝑦)+𝜈𝑝(𝑛)νp(xn+yn)=νp(x+y)+νp(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æ
+证明
 
-è¥ ð â£ð¥ âð¦pâ£xây![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»¤ ð¦ =ð¥ +ððy=x+kp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¬åªéè¯æ ð â£ðpâ£n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ åµï¼
+若 𝑝 ∣𝑥 −𝑦p∣x−y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，令 𝑦 =𝑥 +𝑘𝑝y=x+kp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，我们只需证明 𝑝 ∣𝑛p∣n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情况．
 
-  * è¥ ð =ðn=p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç±äºé¡¹å¼å®çï¼
+  * 若 𝑛 =𝑝n=p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则由二项式定理：
 
-ðâ1âð=0ð¥ðâ1âðð¦ð=ðâ1âð=0ð¥ðâ1âððâð=0(ðð)ð¥ð(ðð)ðâðâ¡ðð¥ðâ1(modð2)âi=0pâ1xpâ1âiyi=âi=0pâ1xpâ1âiâj=0i(ij)xj(kp)iâjâ¡pxpâ1(modp2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝−1∑𝑖=0𝑥𝑝−1−𝑖𝑦𝑖=𝑝−1∑𝑖=0𝑥𝑝−1−𝑖𝑖∑𝑗=0(𝑖𝑗)𝑥𝑗(𝑘𝑝)𝑖−𝑗≡𝑝𝑥𝑝−1(mod𝑝2)∑i=0p−1xp−1−iyi=∑i=0p−1xp−1−i∑j=0i(ij)xj(kp)i−j≡pxp−1(modp2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»è
+从而
 
-ðð(ð¥ðâð¦ð)=ðð(ð¥âð¦)+1Î½p(xnâyn)=Î½p(xây)+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * è¥ ð =ððn=pa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç±æ°å­¦å½çº³æ³å¯å¾
+𝜈𝑝(𝑥𝑛−𝑦𝑛)=𝜈𝑝(𝑥−𝑦)+1νp(xn−yn)=νp(x−y)+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 若 𝑛 =𝑝𝑎n=pa![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则由数学归纳法可得
 
-ðð(ð¥ðâð¦ð)=ðð(ð¥âð¦)+ðÎ½p(xnâyn)=Î½p(xây)+a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝(𝑥𝑛−𝑦𝑛)=𝜈𝑝(𝑥−𝑦)+𝑎νp(xn−yn)=νp(x−y)+a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤å½é¢å¾è¯ï¼
+因此命题得证．
 
-å¯¹ ð â£ð¥ +ð¦pâ£x+y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ åµè¯ææ¹æ³ç±»ä¼¼ï¼
+对 𝑝 ∣𝑥 +𝑦p∣x+y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情况证明方法类似．
 
-### ç¬¬ä¸é¨å
+### 第三部分
 
-è¥ ð =2p=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð â£ð¥ âð¦pâ£xây![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+若 𝑝 =2p=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑝 ∣𝑥 −𝑦p∣x−y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，
 
-  1. å¯¹å¥æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æï¼ä¸ç¬¬ä¸é¨åç 1 ç¸åï¼ï¼
+  1. 对奇数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有（与第一部分的 1 相同）：
 
-ðð(ð¥ðâð¦ð)=ðð(ð¥âð¦)Î½p(xnâyn)=Î½p(xây)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. å¯¹å¶æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æï¼
+𝜈𝑝(𝑥𝑛−𝑦𝑛)=𝜈𝑝(𝑥−𝑦)νp(xn−yn)=νp(x−y)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. 对偶数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有：
 
-ðð(ð¥ðâð¦ð)=ðð(ð¥âð¦)+ðð(ð¥+ð¦)+ðð(ð)â1Î½p(xnâyn)=Î½p(xây)+Î½p(x+y)+Î½p(n)â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝(𝑥𝑛−𝑦𝑛)=𝜈𝑝(𝑥−𝑦)+𝜈𝑝(𝑥+𝑦)+𝜈𝑝(𝑛)−1νp(xn−yn)=νp(x−y)+νp(x+y)+νp(n)−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¦å¤å¯¹ä¸è¿°ç ð¥,ð¦,ðx,y,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¬æï¼
+另外对上述的 𝑥,𝑦,𝑛x,y,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，我们有：
 
-è¥ 4 â£ð¥ âð¦4â£xây![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åï¼
+若 4 ∣𝑥 −𝑦4∣x−y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则：
 
-  * ð2(ð¥ +ð¦) =1Î½2(x+y)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ð2(ð¥ðâð¦ð) =ð2(ð¥ âð¦) +ð2(ð)Î½2(xnâyn)=Î½2(xây)+Î½2(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝜈2(𝑥 +𝑦) =1ν2(x+y)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝜈2(𝑥𝑛−𝑦𝑛) =𝜈2(𝑥 −𝑦) +𝜈2(𝑛)ν2(xn−yn)=ν2(x−y)+ν2(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯æ
+证明
 
-æä»¬åªéè¯æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¶æ°çæ åµï¼ç±äºæ­¤æ¶ ð â¤(ð2)pâ¤(p2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ æä»¬ä¸è½ç¨ç¬¬äºé¨åçæ¹æ³è¯æï¼
+我们只需证明 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为偶数的情况．由于此时 𝑝 ∤(𝑝2)p∤(p2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故我们不能用第二部分的方法证明．
 
-ä»¤ ð =2ððn=2ab![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð =ðð(ð)a=Î½p(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼2 â¤ð2â¤b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»è
+令 𝑛 =2𝑎𝑏n=2ab![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑎 =𝜈𝑝(𝑛)a=νp(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，2 ∤𝑏2∤b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，从而
 
-ðð(ð¥ðâð¦ð)=ðð(ð¥2ðâð¦2ð)=ðð((ð¥âð¦)(ð¥+ð¦)ðâ1âð=1(ð¥2ð+ð¦2ð))Î½p(xnâyn)=Î½p(x2aây2a)=Î½p((xây)(x+y)âi=1aâ1(x2i+y2i))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝(𝑥𝑛−𝑦𝑛)=𝜈𝑝(𝑥2𝑎−𝑦2𝑎)=𝜈𝑝((𝑥−𝑦)(𝑥+𝑦)𝑎−1∏𝑖=1(𝑥2𝑖+𝑦2𝑖))νp(xn−yn)=νp(x2a−y2a)=νp((x−y)(x+y)∏i=1a−1(x2i+y2i))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ³¨æå° 2 â£ð¥ âð¦ â¹ 4 â£ð¥2 âð¦22â£xâyâ¹4â£x2ây2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»è (âð â¥1),Â Â ð¥2ð +ð¦2ð â¡2(mod4)(âiâ¥1),Â Â x2i+y2iâ¡2(mod4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿èä¸å¼å¯åä¸ºï¼
+注意到 2 ∣𝑥 −𝑦 ⟹ 4 ∣𝑥2 −𝑦22∣x−y⟹4∣x2−y2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，从而 (∀𝑖 ≥1), 𝑥2𝑖 +𝑦2𝑖 ≡2(mod4)(∀i≥1), x2i+y2i≡2(mod4)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，进而上式可变为：
 
-ðð(ð¥ðâð¦ð)=ðð(ð¥âð¦)+ðð(ð¥+ð¦)+ðð(ð)â1Î½p(xnâyn)=Î½p(xây)+Î½p(x+y)+Î½p(n)â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜈𝑝(𝑥𝑛−𝑦𝑛)=𝜈𝑝(𝑥−𝑦)+𝜈𝑝(𝑥+𝑦)+𝜈𝑝(𝑛)−1νp(xn−yn)=νp(x−y)+νp(x+y)+νp(n)−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤å½é¢å¾è¯ï¼
+因此命题得证．
 
-## åèèµæ
+## 参考资料
 
   1. [Lifting-the-exponent lemma - Wikipedia](https://en.wikipedia.org/wiki/Lifting-the-exponent_lemma)
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/lift-the-exponent.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/lift-the-exponent.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [c-forrest](https://github.com/c-forrest), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [iamtwz](https://github.com/iamtwz), [Xeonacid](https://github.com/Xeonacid)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/lift-the-exponent.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/lift-the-exponent.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [c-forrest](https://github.com/c-forrest), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [iamtwz](https://github.com/iamtwz), [Xeonacid](https://github.com/Xeonacid)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

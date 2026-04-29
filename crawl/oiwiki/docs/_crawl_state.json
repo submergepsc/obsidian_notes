@@ -1,140 +1,6 @@
-{
+﻿{
   "start_url": "https://oi-wiki.org/",
-  "queue": [
-    "https://oi-wiki.org/math/number-theory/quadratic/",
-    "https://oi-wiki.org/math/number-theory/residue/",
-    "https://oi-wiki.org/math/number-theory/sieve/",
-    "https://oi-wiki.org/math/number-theory/sqrt-decomposition/",
-    "https://oi-wiki.org/math/number-theory/stern-brocot/",
-    "https://oi-wiki.org/math/number-theory/zhou/",
-    "https://oi-wiki.org/math/numeral-sys/balanced-ternary/",
-    "https://oi-wiki.org/math/numeral-sys/base/",
-    "https://oi-wiki.org/math/numeral-sys/gray-code/",
-    "https://oi-wiki.org/math/numeral-sys/intro/",
-    "https://oi-wiki.org/math/numerical/gauss/",
-    "https://oi-wiki.org/math/numerical/integral/",
-    "https://oi-wiki.org/math/numerical/interp/",
-    "https://oi-wiki.org/math/numerical/newton/",
-    "https://oi-wiki.org/math/order-theory/",
-    "https://oi-wiki.org/math/permutation/",
-    "https://oi-wiki.org/math/poly/comp-rev/",
-    "https://oi-wiki.org/math/poly/czt/",
-    "https://oi-wiki.org/math/poly/egf/",
-    "https://oi-wiki.org/math/poly/elementary-func/",
-    "https://oi-wiki.org/math/poly/fft/",
-    "https://oi-wiki.org/math/poly/fundamental/",
-    "https://oi-wiki.org/math/poly/fwt/",
-    "https://oi-wiki.org/math/poly/intro/",
-    "https://oi-wiki.org/math/poly/lagrange-inversion/",
-    "https://oi-wiki.org/math/poly/linear-recurrence/",
-    "https://oi-wiki.org/math/poly/multipoint-eval-interpolation/",
-    "https://oi-wiki.org/math/poly/newton/",
-    "https://oi-wiki.org/math/poly/ntt/",
-    "https://oi-wiki.org/math/poly/ogf/",
-    "https://oi-wiki.org/math/poly/shift/",
-    "https://oi-wiki.org/math/poly/symbolic-method/",
-    "https://oi-wiki.org/math/probability/basic-conception/",
-    "https://oi-wiki.org/math/probability/concentration-inequality/",
-    "https://oi-wiki.org/math/probability/conditional-probability/",
-    "https://oi-wiki.org/math/probability/exp-var/",
-    "https://oi-wiki.org/math/probability/random-variable/",
-    "https://oi-wiki.org/math/simplex/",
-    "https://oi-wiki.org/math/young-tableau/",
-    "https://oi-wiki.org/misc/",
-    "https://oi-wiki.org/misc/15-puzzle/",
-    "https://oi-wiki.org/misc/cc-basic/",
-    "https://oi-wiki.org/misc/cdq-divide/",
-    "https://oi-wiki.org/misc/discrete/",
-    "https://oi-wiki.org/misc/endianness/",
-    "https://oi-wiki.org/misc/expression/",
-    "https://oi-wiki.org/misc/frac-programming/",
-    "https://oi-wiki.org/misc/fsm/",
-    "https://oi-wiki.org/misc/garsia-wachs/",
-    "https://oi-wiki.org/misc/hill-climbing/",
-    "https://oi-wiki.org/misc/hoverline/",
-    "https://oi-wiki.org/misc/job-order/",
-    "https://oi-wiki.org/misc/josephus/",
-    "https://oi-wiki.org/misc/kahan-summation/",
-    "https://oi-wiki.org/misc/main-element/",
-    "https://oi-wiki.org/misc/mo-algo-2dimen/",
-    "https://oi-wiki.org/misc/mo-algo-intro/",
-    "https://oi-wiki.org/misc/mo-algo-on-tree/",
-    "https://oi-wiki.org/misc/mo-algo-secondary-offline/",
-    "https://oi-wiki.org/misc/mo-algo-with-bitset/",
-    "https://oi-wiki.org/misc/mo-algo/",
-    "https://oi-wiki.org/misc/modifiable-mo-algo/",
-    "https://oi-wiki.org/misc/odt/",
-    "https://oi-wiki.org/misc/offline/",
-    "https://oi-wiki.org/misc/parallel-binsearch/",
-    "https://oi-wiki.org/misc/rand-technique/",
-    "https://oi-wiki.org/misc/random/",
-    "https://oi-wiki.org/misc/rollback-mo-algo/",
-    "https://oi-wiki.org/misc/simulated-annealing/",
-    "https://oi-wiki.org/misc/space-optimization/",
-    "https://oi-wiki.org/misc/two-pointer/",
-    "https://oi-wiki.org/string/",
-    "https://oi-wiki.org/string/ac-automaton/",
-    "https://oi-wiki.org/string/basic/",
-    "https://oi-wiki.org/string/bm/",
-    "https://oi-wiki.org/string/general-sam/",
-    "https://oi-wiki.org/string/hash/",
-    "https://oi-wiki.org/string/kmp/",
-    "https://oi-wiki.org/string/lib-func/",
-    "https://oi-wiki.org/string/lyndon/",
-    "https://oi-wiki.org/string/main-lorentz/",
-    "https://oi-wiki.org/string/manacher/",
-    "https://oi-wiki.org/string/match/",
-    "https://oi-wiki.org/string/minimal-string/",
-    "https://oi-wiki.org/string/pam/",
-    "https://oi-wiki.org/string/sa-optimal-inplace/",
-    "https://oi-wiki.org/string/sa/",
-    "https://oi-wiki.org/string/sam/",
-    "https://oi-wiki.org/string/seq-automaton/",
-    "https://oi-wiki.org/string/suffix-bst/",
-    "https://oi-wiki.org/string/suffix-tree/",
-    "https://oi-wiki.org/string/trie/",
-    "https://oi-wiki.org/string/z-func/",
-    "https://oi-wiki.org/tools/",
-    "https://oi-wiki.org/tools/cmd/",
-    "https://oi-wiki.org/tools/compile-debug/",
-    "https://oi-wiki.org/tools/compiler/",
-    "https://oi-wiki.org/tools/editor/atom/",
-    "https://oi-wiki.org/tools/editor/clion/",
-    "https://oi-wiki.org/tools/editor/codeblocks/",
-    "https://oi-wiki.org/tools/editor/cpeditor/",
-    "https://oi-wiki.org/tools/editor/devcpp/",
-    "https://oi-wiki.org/tools/editor/eclipse/",
-    "https://oi-wiki.org/tools/editor/emacs/",
-    "https://oi-wiki.org/tools/editor/geany/",
-    "https://oi-wiki.org/tools/editor/guide/",
-    "https://oi-wiki.org/tools/editor/kate/",
-    "https://oi-wiki.org/tools/editor/npp/",
-    "https://oi-wiki.org/tools/editor/sublime/",
-    "https://oi-wiki.org/tools/editor/vim/",
-    "https://oi-wiki.org/tools/editor/vscode/",
-    "https://oi-wiki.org/tools/editor/xcode/",
-    "https://oi-wiki.org/tools/git/",
-    "https://oi-wiki.org/tools/judger/",
-    "https://oi-wiki.org/tools/judger/arbiter/",
-    "https://oi-wiki.org/tools/judger/ccr-plus/",
-    "https://oi-wiki.org/tools/judger/cena/",
-    "https://oi-wiki.org/tools/judger/lemon/",
-    "https://oi-wiki.org/tools/latex/",
-    "https://oi-wiki.org/tools/oj-tool/",
-    "https://oi-wiki.org/tools/polygon/",
-    "https://oi-wiki.org/tools/special-judge/",
-    "https://oi-wiki.org/tools/testlib/",
-    "https://oi-wiki.org/tools/testlib/checker/",
-    "https://oi-wiki.org/tools/testlib/general/",
-    "https://oi-wiki.org/tools/testlib/generator/",
-    "https://oi-wiki.org/tools/testlib/interactor/",
-    "https://oi-wiki.org/tools/testlib/validator/",
-    "https://oi-wiki.org/tools/wsl/",
-    "https://oi-wiki.org/topic/bracket/",
-    "https://oi-wiki.org/topic/dsu-app/",
-    "https://oi-wiki.org/topic/rmq/",
-    "https://oi-wiki.org/topic/segment-tree-offline/"
-  ],
+  "queue": [],
   "visited": [
     "https://oi-wiki.org/",
     "https://oi-wiki.org/basic/",
@@ -455,1039 +321,2015 @@
     "https://oi-wiki.org/math/number-theory/powerful-number/",
     "https://oi-wiki.org/math/number-theory/prime/",
     "https://oi-wiki.org/math/number-theory/primitive-root/",
-    "https://oi-wiki.org/math/number-theory/quad-residue/"
+    "https://oi-wiki.org/math/number-theory/quad-residue/",
+    "https://oi-wiki.org/math/number-theory/quadratic/",
+    "https://oi-wiki.org/math/number-theory/residue/",
+    "https://oi-wiki.org/math/number-theory/sieve/",
+    "https://oi-wiki.org/math/number-theory/sqrt-decomposition/",
+    "https://oi-wiki.org/math/number-theory/stern-brocot/",
+    "https://oi-wiki.org/math/number-theory/zhou/",
+    "https://oi-wiki.org/math/numeral-sys/balanced-ternary/",
+    "https://oi-wiki.org/math/numeral-sys/base/",
+    "https://oi-wiki.org/math/numeral-sys/gray-code/",
+    "https://oi-wiki.org/math/numeral-sys/intro/",
+    "https://oi-wiki.org/math/numerical/gauss/",
+    "https://oi-wiki.org/math/numerical/integral/",
+    "https://oi-wiki.org/math/numerical/interp/",
+    "https://oi-wiki.org/math/numerical/newton/",
+    "https://oi-wiki.org/math/order-theory/",
+    "https://oi-wiki.org/math/permutation/",
+    "https://oi-wiki.org/math/poly/comp-rev/",
+    "https://oi-wiki.org/math/poly/czt/",
+    "https://oi-wiki.org/math/poly/egf/",
+    "https://oi-wiki.org/math/poly/elementary-func/",
+    "https://oi-wiki.org/math/poly/fft/",
+    "https://oi-wiki.org/math/poly/fundamental/",
+    "https://oi-wiki.org/math/poly/fwt/",
+    "https://oi-wiki.org/math/poly/intro/",
+    "https://oi-wiki.org/math/poly/lagrange-inversion/",
+    "https://oi-wiki.org/math/poly/linear-recurrence/",
+    "https://oi-wiki.org/math/poly/multipoint-eval-interpolation/",
+    "https://oi-wiki.org/math/poly/newton/",
+    "https://oi-wiki.org/math/poly/ntt/",
+    "https://oi-wiki.org/math/poly/ogf/",
+    "https://oi-wiki.org/math/poly/shift/",
+    "https://oi-wiki.org/math/poly/symbolic-method/",
+    "https://oi-wiki.org/math/probability/basic-conception/",
+    "https://oi-wiki.org/math/probability/concentration-inequality/",
+    "https://oi-wiki.org/math/probability/conditional-probability/",
+    "https://oi-wiki.org/math/probability/exp-var/",
+    "https://oi-wiki.org/math/probability/random-variable/",
+    "https://oi-wiki.org/math/simplex/",
+    "https://oi-wiki.org/math/young-tableau/",
+    "https://oi-wiki.org/misc/",
+    "https://oi-wiki.org/misc/15-puzzle/",
+    "https://oi-wiki.org/misc/cc-basic/",
+    "https://oi-wiki.org/misc/cdq-divide/",
+    "https://oi-wiki.org/misc/discrete/",
+    "https://oi-wiki.org/misc/endianness/",
+    "https://oi-wiki.org/misc/expression/",
+    "https://oi-wiki.org/misc/frac-programming/",
+    "https://oi-wiki.org/misc/fsm/",
+    "https://oi-wiki.org/misc/garsia-wachs/",
+    "https://oi-wiki.org/misc/hill-climbing/",
+    "https://oi-wiki.org/misc/hoverline/",
+    "https://oi-wiki.org/misc/job-order/",
+    "https://oi-wiki.org/misc/josephus/",
+    "https://oi-wiki.org/misc/kahan-summation/",
+    "https://oi-wiki.org/misc/main-element/",
+    "https://oi-wiki.org/misc/mo-algo-2dimen/",
+    "https://oi-wiki.org/misc/mo-algo-intro/",
+    "https://oi-wiki.org/misc/mo-algo-on-tree/",
+    "https://oi-wiki.org/misc/mo-algo-secondary-offline/",
+    "https://oi-wiki.org/misc/mo-algo-with-bitset/",
+    "https://oi-wiki.org/misc/mo-algo/",
+    "https://oi-wiki.org/misc/modifiable-mo-algo/",
+    "https://oi-wiki.org/misc/odt/",
+    "https://oi-wiki.org/misc/offline/",
+    "https://oi-wiki.org/misc/parallel-binsearch/",
+    "https://oi-wiki.org/misc/rand-technique/",
+    "https://oi-wiki.org/misc/random/",
+    "https://oi-wiki.org/misc/rollback-mo-algo/",
+    "https://oi-wiki.org/misc/simulated-annealing/",
+    "https://oi-wiki.org/misc/space-optimization/",
+    "https://oi-wiki.org/misc/two-pointer/",
+    "https://oi-wiki.org/search/",
+    "https://oi-wiki.org/search/alpha-beta/",
+    "https://oi-wiki.org/search/astar/",
+    "https://oi-wiki.org/search/backtracking/",
+    "https://oi-wiki.org/search/bfs/",
+    "https://oi-wiki.org/search/bidirectional/",
+    "https://oi-wiki.org/search/dfs/",
+    "https://oi-wiki.org/search/dlx/",
+    "https://oi-wiki.org/search/heuristic/",
+    "https://oi-wiki.org/search/idastar/",
+    "https://oi-wiki.org/search/iterative/",
+    "https://oi-wiki.org/search/opt/",
+    "https://oi-wiki.org/string/",
+    "https://oi-wiki.org/string/ac-automaton/",
+    "https://oi-wiki.org/string/basic/",
+    "https://oi-wiki.org/string/bm/",
+    "https://oi-wiki.org/string/general-sam/",
+    "https://oi-wiki.org/string/hash/",
+    "https://oi-wiki.org/string/kmp/",
+    "https://oi-wiki.org/string/lib-func/",
+    "https://oi-wiki.org/string/lyndon/",
+    "https://oi-wiki.org/string/main-lorentz/",
+    "https://oi-wiki.org/string/manacher/",
+    "https://oi-wiki.org/string/match/",
+    "https://oi-wiki.org/string/minimal-string/",
+    "https://oi-wiki.org/string/pam/",
+    "https://oi-wiki.org/string/sa-optimal-inplace/",
+    "https://oi-wiki.org/string/sa/",
+    "https://oi-wiki.org/string/sam/",
+    "https://oi-wiki.org/string/seq-automaton/",
+    "https://oi-wiki.org/string/suffix-bst/",
+    "https://oi-wiki.org/string/suffix-tree/",
+    "https://oi-wiki.org/string/trie/",
+    "https://oi-wiki.org/string/z-func/",
+    "https://oi-wiki.org/tools/",
+    "https://oi-wiki.org/tools/cmd/",
+    "https://oi-wiki.org/tools/compile-debug/",
+    "https://oi-wiki.org/tools/compiler/",
+    "https://oi-wiki.org/tools/editor/atom/",
+    "https://oi-wiki.org/tools/editor/clion/",
+    "https://oi-wiki.org/tools/editor/codeblocks/",
+    "https://oi-wiki.org/tools/editor/cpeditor/",
+    "https://oi-wiki.org/tools/editor/devcpp/",
+    "https://oi-wiki.org/tools/editor/eclipse/",
+    "https://oi-wiki.org/tools/editor/emacs/",
+    "https://oi-wiki.org/tools/editor/geany/",
+    "https://oi-wiki.org/tools/editor/guide/",
+    "https://oi-wiki.org/tools/editor/kate/",
+    "https://oi-wiki.org/tools/editor/npp/",
+    "https://oi-wiki.org/tools/editor/sublime/",
+    "https://oi-wiki.org/tools/editor/vim/",
+    "https://oi-wiki.org/tools/editor/vscode/",
+    "https://oi-wiki.org/tools/editor/xcode/",
+    "https://oi-wiki.org/tools/git/",
+    "https://oi-wiki.org/tools/judger/",
+    "https://oi-wiki.org/tools/judger/arbiter/",
+    "https://oi-wiki.org/tools/judger/ccr-plus/",
+    "https://oi-wiki.org/tools/judger/cena/",
+    "https://oi-wiki.org/tools/judger/lemon/",
+    "https://oi-wiki.org/tools/latex/",
+    "https://oi-wiki.org/tools/oj-tool/",
+    "https://oi-wiki.org/tools/polygon/",
+    "https://oi-wiki.org/tools/special-judge/",
+    "https://oi-wiki.org/tools/testlib/",
+    "https://oi-wiki.org/tools/testlib/checker/",
+    "https://oi-wiki.org/tools/testlib/general/",
+    "https://oi-wiki.org/tools/testlib/generator/",
+    "https://oi-wiki.org/tools/testlib/interactor/",
+    "https://oi-wiki.org/tools/testlib/validator/",
+    "https://oi-wiki.org/tools/wsl/",
+    "https://oi-wiki.org/topic/bracket/",
+    "https://oi-wiki.org/topic/dsu-app/",
+    "https://oi-wiki.org/topic/rmq/",
+    "https://oi-wiki.org/topic/segment-tree-offline/"
   ],
   "saved_files": [
     {
       "url": "https://oi-wiki.org/",
-      "file": "docs\\index.md"
+      "file": "docs/index.md"
     },
     {
       "url": "https://oi-wiki.org/basic/",
-      "file": "docs\\basic.md"
+      "file": "docs/basic.md"
     },
     {
       "url": "https://oi-wiki.org/basic/construction/",
-      "file": "docs\\basic__construction.md"
+      "file": "docs/basic__construction.md"
     },
     {
       "url": "https://oi-wiki.org/basic/sort-intro/",
-      "file": "docs\\basic__sort-intro.md"
+      "file": "docs/basic__sort-intro.md"
     },
     {
       "url": "https://oi-wiki.org/basic/tim-sort/",
-      "file": "docs\\basic__tim-sort.md"
+      "file": "docs/basic__tim-sort.md"
     },
     {
       "url": "https://oi-wiki.org/basic/use-of-sort/",
-      "file": "docs\\basic__use-of-sort.md"
+      "file": "docs/basic__use-of-sort.md"
     },
     {
       "url": "https://oi-wiki.org/contest/",
-      "file": "docs\\contest.md"
+      "file": "docs/contest.md"
     },
     {
       "url": "https://oi-wiki.org/contest/dictionary/",
-      "file": "docs\\contest__dictionary.md"
+      "file": "docs/contest__dictionary.md"
     },
     {
       "url": "https://oi-wiki.org/contest/icpc/",
-      "file": "docs\\contest__icpc.md"
+      "file": "docs/contest__icpc.md"
     },
     {
       "url": "https://oi-wiki.org/contest/oi/",
-      "file": "docs\\contest__oi.md"
+      "file": "docs/contest__oi.md"
     },
     {
       "url": "https://oi-wiki.org/contest/resources/",
-      "file": "docs\\contest__resources.md"
+      "file": "docs/contest__resources.md"
     },
     {
       "url": "https://oi-wiki.org/contest/roadmap/",
-      "file": "docs\\contest__roadmap.md"
+      "file": "docs/contest__roadmap.md"
     },
     {
       "url": "https://oi-wiki.org/dp/",
-      "file": "docs\\dp.md"
+      "file": "docs/dp.md"
     },
     {
       "url": "https://oi-wiki.org/dp/count/",
-      "file": "docs\\dp__count.md"
+      "file": "docs/dp__count.md"
     },
     {
       "url": "https://oi-wiki.org/dp/misc/",
-      "file": "docs\\dp__misc.md"
+      "file": "docs/dp__misc.md"
     },
     {
       "url": "https://oi-wiki.org/dp/opt/dp-opt/",
-      "file": "docs\\dp__opt__dp-opt.md"
+      "file": "docs/dp__opt__dp-opt.md"
     },
     {
       "url": "https://oi-wiki.org/dp/opt/slope/",
-      "file": "docs\\dp__opt__slope.md"
+      "file": "docs/dp__opt__slope.md"
     },
     {
       "url": "https://oi-wiki.org/dp/opt/state/",
-      "file": "docs\\dp__opt__state.md"
+      "file": "docs/dp__opt__state.md"
     },
     {
       "url": "https://oi-wiki.org/ds/",
-      "file": "docs\\ds.md"
+      "file": "docs/ds.md"
     },
     {
       "url": "https://oi-wiki.org/ds/aa-tree/",
-      "file": "docs\\ds__aa-tree.md"
+      "file": "docs/ds__aa-tree.md"
     },
     {
       "url": "https://oi-wiki.org/ds/cat-tree/",
-      "file": "docs\\ds__cat-tree.md"
+      "file": "docs/ds__cat-tree.md"
     },
     {
       "url": "https://oi-wiki.org/ds/dsu-complexity/",
-      "file": "docs\\ds__dsu-complexity.md"
+      "file": "docs/ds__dsu-complexity.md"
     },
     {
       "url": "https://oi-wiki.org/ds/heap/",
-      "file": "docs\\ds__heap.md"
+      "file": "docs/ds__heap.md"
     },
     {
       "url": "https://oi-wiki.org/ds/persistent-block-array/",
-      "file": "docs\\ds__persistent-block-array.md"
+      "file": "docs/ds__persistent-block-array.md"
     },
     {
       "url": "https://oi-wiki.org/ds/persistent/",
-      "file": "docs\\ds__persistent.md"
+      "file": "docs/ds__persistent.md"
     },
     {
       "url": "https://oi-wiki.org/ds/seg-in-balanced/",
-      "file": "docs\\ds__seg-in-balanced.md"
+      "file": "docs/ds__seg-in-balanced.md"
     },
     {
       "url": "https://oi-wiki.org/ds/sgt/",
-      "file": "docs\\ds__sgt.md"
+      "file": "docs/ds__sgt.md"
     },
     {
       "url": "https://oi-wiki.org/ds/skiplist/",
-      "file": "docs\\ds__skiplist.md"
+      "file": "docs/ds__skiplist.md"
     },
     {
       "url": "https://oi-wiki.org/ds/sparse-table/",
-      "file": "docs\\ds__sparse-table.md"
+      "file": "docs/ds__sparse-table.md"
     },
     {
       "url": "https://oi-wiki.org/ds/splay/",
-      "file": "docs\\ds__splay.md"
+      "file": "docs/ds__splay.md"
     },
     {
       "url": "https://oi-wiki.org/ds/sqrt-tree/",
-      "file": "docs\\ds__sqrt-tree.md"
+      "file": "docs/ds__sqrt-tree.md"
     },
     {
       "url": "https://oi-wiki.org/ds/stack/",
-      "file": "docs\\ds__stack.md"
+      "file": "docs/ds__stack.md"
     },
     {
       "url": "https://oi-wiki.org/ds/top-tree/",
-      "file": "docs\\ds__top-tree.md"
+      "file": "docs/ds__top-tree.md"
     },
     {
       "url": "https://oi-wiki.org/ds/treap/",
-      "file": "docs\\ds__treap.md"
+      "file": "docs/ds__treap.md"
     },
     {
       "url": "https://oi-wiki.org/ds/tree-decompose/",
-      "file": "docs\\ds__tree-decompose.md"
+      "file": "docs/ds__tree-decompose.md"
     },
     {
       "url": "https://oi-wiki.org/ds/wblt/",
-      "file": "docs\\ds__wblt.md"
+      "file": "docs/ds__wblt.md"
     },
     {
       "url": "https://oi-wiki.org/edit-landing/",
-      "file": "docs\\edit-landing.md"
+      "file": "docs/edit-landing.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/",
-      "file": "docs\\geometry.md"
+      "file": "docs/geometry.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/2d/",
-      "file": "docs\\geometry__2d.md"
+      "file": "docs/geometry__2d.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/3d/",
-      "file": "docs\\geometry__3d.md"
+      "file": "docs/geometry__3d.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/convex-hull/",
-      "file": "docs\\geometry__convex-hull.md"
+      "file": "docs/geometry__convex-hull.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/distance/",
-      "file": "docs\\geometry__distance.md"
+      "file": "docs/geometry__distance.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/half-plane/",
-      "file": "docs\\geometry__half-plane.md"
+      "file": "docs/geometry__half-plane.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/inverse/",
-      "file": "docs\\geometry__inverse.md"
+      "file": "docs/geometry__inverse.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/misc/",
-      "file": "docs\\geometry__misc.md"
+      "file": "docs/geometry__misc.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/nearest-points/",
-      "file": "docs\\geometry__nearest-points.md"
+      "file": "docs/geometry__nearest-points.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/pick/",
-      "file": "docs\\geometry__pick.md"
+      "file": "docs/geometry__pick.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/random-incremental/",
-      "file": "docs\\geometry__random-incremental.md"
+      "file": "docs/geometry__random-incremental.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/rotating-calipers/",
-      "file": "docs\\geometry__rotating-calipers.md"
+      "file": "docs/geometry__rotating-calipers.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/scanning/",
-      "file": "docs\\geometry__scanning.md"
+      "file": "docs/geometry__scanning.md"
     },
     {
       "url": "https://oi-wiki.org/geometry/triangulation/",
-      "file": "docs\\geometry__triangulation.md"
+      "file": "docs/geometry__triangulation.md"
     },
     {
       "url": "https://oi-wiki.org/graph/",
-      "file": "docs\\graph.md"
+      "file": "docs/graph.md"
     },
     {
       "url": "https://oi-wiki.org/graph/2-sat/",
-      "file": "docs\\graph__2-sat.md"
+      "file": "docs/graph__2-sat.md"
     },
     {
       "url": "https://oi-wiki.org/graph/bcc/",
-      "file": "docs\\graph__bcc.md"
+      "file": "docs/graph__bcc.md"
     },
     {
       "url": "https://oi-wiki.org/graph/bfs/",
-      "file": "docs\\graph__bfs.md"
+      "file": "docs/graph__bfs.md"
     },
     {
       "url": "https://oi-wiki.org/graph/bi-graph/",
-      "file": "docs\\graph__bi-graph.md"
+      "file": "docs/graph__bi-graph.md"
     },
     {
       "url": "https://oi-wiki.org/graph/block-forest/",
-      "file": "docs\\graph__block-forest.md"
+      "file": "docs/graph__block-forest.md"
     },
     {
       "url": "https://oi-wiki.org/graph/chord/",
-      "file": "docs\\graph__chord.md"
+      "file": "docs/graph__chord.md"
     },
     {
       "url": "https://oi-wiki.org/graph/color/",
-      "file": "docs\\graph__color.md"
+      "file": "docs/graph__color.md"
     },
     {
       "url": "https://oi-wiki.org/graph/concept/",
-      "file": "docs\\graph__concept.md"
+      "file": "docs/graph__concept.md"
     },
     {
       "url": "https://oi-wiki.org/graph/connectivity/",
-      "file": "docs\\graph__connectivity.md"
+      "file": "docs/graph__connectivity.md"
     },
     {
       "url": "https://oi-wiki.org/graph/cut/",
-      "file": "docs\\graph__cut.md"
+      "file": "docs/graph__cut.md"
     },
     {
       "url": "https://oi-wiki.org/graph/dag/",
-      "file": "docs\\graph__dag.md"
+      "file": "docs/graph__dag.md"
     },
     {
       "url": "https://oi-wiki.org/graph/dfs/",
-      "file": "docs\\graph__dfs.md"
+      "file": "docs/graph__dfs.md"
     },
     {
       "url": "https://oi-wiki.org/graph/diff-constraints/",
-      "file": "docs\\graph__diff-constraints.md"
+      "file": "docs/graph__diff-constraints.md"
     },
     {
       "url": "https://oi-wiki.org/graph/dmst/",
-      "file": "docs\\graph__dmst.md"
+      "file": "docs/graph__dmst.md"
     },
     {
       "url": "https://oi-wiki.org/graph/dominator-tree/",
-      "file": "docs\\graph__dominator-tree.md"
+      "file": "docs/graph__dominator-tree.md"
     },
     {
       "url": "https://oi-wiki.org/graph/dsu-on-tree/",
-      "file": "docs\\graph__dsu-on-tree.md"
+      "file": "docs/graph__dsu-on-tree.md"
     },
     {
       "url": "https://oi-wiki.org/graph/dynamic-tree-divide/",
-      "file": "docs\\graph__dynamic-tree-divide.md"
+      "file": "docs/graph__dynamic-tree-divide.md"
     },
     {
       "url": "https://oi-wiki.org/graph/euler/",
-      "file": "docs\\graph__euler.md"
+      "file": "docs/graph__euler.md"
     },
     {
       "url": "https://oi-wiki.org/graph/flow/",
-      "file": "docs\\graph__flow.md"
+      "file": "docs/graph__flow.md"
     },
     {
       "url": "https://oi-wiki.org/graph/flow/bound/",
-      "file": "docs\\graph__flow__bound.md"
+      "file": "docs/graph__flow__bound.md"
     },
     {
       "url": "https://oi-wiki.org/graph/flow/max-flow/",
-      "file": "docs\\graph__flow__max-flow.md"
+      "file": "docs/graph__flow__max-flow.md"
     },
     {
       "url": "https://oi-wiki.org/graph/flow/min-cost/",
-      "file": "docs\\graph__flow__min-cost.md"
+      "file": "docs/graph__flow__min-cost.md"
     },
     {
       "url": "https://oi-wiki.org/graph/flow/min-cut/",
-      "file": "docs\\graph__flow__min-cut.md"
+      "file": "docs/graph__flow__min-cut.md"
     },
     {
       "url": "https://oi-wiki.org/graph/graph-matching/bigraph-match/",
-      "file": "docs\\graph__graph-matching__bigraph-match.md"
+      "file": "docs/graph__graph-matching__bigraph-match.md"
     },
     {
       "url": "https://oi-wiki.org/graph/graph-matching/bigraph-weight-match/",
-      "file": "docs\\graph__graph-matching__bigraph-weight-match.md"
+      "file": "docs/graph__graph-matching__bigraph-weight-match.md"
     },
     {
       "url": "https://oi-wiki.org/graph/graph-matching/general-match/",
-      "file": "docs\\graph__graph-matching__general-match.md"
+      "file": "docs/graph__graph-matching__general-match.md"
     },
     {
       "url": "https://oi-wiki.org/graph/graph-matching/general-weight-match/",
-      "file": "docs\\graph__graph-matching__general-weight-match.md"
+      "file": "docs/graph__graph-matching__general-weight-match.md"
     },
     {
       "url": "https://oi-wiki.org/graph/graph-matching/graph-match/",
-      "file": "docs\\graph__graph-matching__graph-match.md"
+      "file": "docs/graph__graph-matching__graph-match.md"
     },
     {
       "url": "https://oi-wiki.org/graph/graph-matching/stable-match/",
-      "file": "docs\\graph__graph-matching__stable-match.md"
+      "file": "docs/graph__graph-matching__stable-match.md"
     },
     {
       "url": "https://oi-wiki.org/graph/graph-random-walk/",
-      "file": "docs\\graph__graph-random-walk.md"
+      "file": "docs/graph__graph-random-walk.md"
     },
     {
       "url": "https://oi-wiki.org/graph/hamilton/",
-      "file": "docs\\graph__hamilton.md"
+      "file": "docs/graph__hamilton.md"
     },
     {
       "url": "https://oi-wiki.org/graph/hld/",
-      "file": "docs\\graph__hld.md"
+      "file": "docs/graph__hld.md"
     },
     {
       "url": "https://oi-wiki.org/graph/kth-path/",
-      "file": "docs\\graph__kth-path.md"
+      "file": "docs/graph__kth-path.md"
     },
     {
       "url": "https://oi-wiki.org/graph/lca/",
-      "file": "docs\\graph__lca.md"
+      "file": "docs/graph__lca.md"
     },
     {
       "url": "https://oi-wiki.org/graph/lgv/",
-      "file": "docs\\graph__lgv.md"
+      "file": "docs/graph__lgv.md"
     },
     {
       "url": "https://oi-wiki.org/graph/matrix-tree/",
-      "file": "docs\\graph__matrix-tree.md"
+      "file": "docs/graph__matrix-tree.md"
     },
     {
       "url": "https://oi-wiki.org/graph/max-clique/",
-      "file": "docs\\graph__max-clique.md"
+      "file": "docs/graph__max-clique.md"
     },
     {
       "url": "https://oi-wiki.org/graph/mdst/",
-      "file": "docs\\graph__mdst.md"
+      "file": "docs/graph__mdst.md"
     },
     {
       "url": "https://oi-wiki.org/graph/min-cycle/",
-      "file": "docs\\graph__min-cycle.md"
+      "file": "docs/graph__min-cycle.md"
     },
     {
       "url": "https://oi-wiki.org/graph/mod-shortest-path/",
-      "file": "docs\\graph__mod-shortest-path.md"
+      "file": "docs/graph__mod-shortest-path.md"
     },
     {
       "url": "https://oi-wiki.org/graph/mst/",
-      "file": "docs\\graph__mst.md"
+      "file": "docs/graph__mst.md"
     },
     {
       "url": "https://oi-wiki.org/graph/node/",
-      "file": "docs\\graph__node.md"
+      "file": "docs/graph__node.md"
     },
     {
       "url": "https://oi-wiki.org/graph/planar/",
-      "file": "docs\\graph__planar.md"
+      "file": "docs/graph__planar.md"
     },
     {
       "url": "https://oi-wiki.org/graph/prufer/",
-      "file": "docs\\graph__prufer.md"
+      "file": "docs/graph__prufer.md"
     },
     {
       "url": "https://oi-wiki.org/graph/rings-count/",
-      "file": "docs\\graph__rings-count.md"
+      "file": "docs/graph__rings-count.md"
     },
     {
       "url": "https://oi-wiki.org/graph/save/",
-      "file": "docs\\graph__save.md"
+      "file": "docs/graph__save.md"
     },
     {
       "url": "https://oi-wiki.org/graph/scc/",
-      "file": "docs\\graph__scc.md"
+      "file": "docs/graph__scc.md"
     },
     {
       "url": "https://oi-wiki.org/graph/shortest-path/",
-      "file": "docs\\graph__shortest-path.md"
+      "file": "docs/graph__shortest-path.md"
     },
     {
       "url": "https://oi-wiki.org/graph/steiner-tree/",
-      "file": "docs\\graph__steiner-tree.md"
+      "file": "docs/graph__steiner-tree.md"
     },
     {
       "url": "https://oi-wiki.org/graph/stoer-wagner/",
-      "file": "docs\\graph__stoer-wagner.md"
+      "file": "docs/graph__stoer-wagner.md"
     },
     {
       "url": "https://oi-wiki.org/graph/topo/",
-      "file": "docs\\graph__topo.md"
+      "file": "docs/graph__topo.md"
     },
     {
       "url": "https://oi-wiki.org/graph/tree-ahu/",
-      "file": "docs\\graph__tree-ahu.md"
+      "file": "docs/graph__tree-ahu.md"
     },
     {
       "url": "https://oi-wiki.org/graph/tree-basic/",
-      "file": "docs\\graph__tree-basic.md"
+      "file": "docs/graph__tree-basic.md"
     },
     {
       "url": "https://oi-wiki.org/graph/tree-center/",
-      "file": "docs\\graph__tree-center.md"
+      "file": "docs/graph__tree-center.md"
     },
     {
       "url": "https://oi-wiki.org/graph/tree-centroid/",
-      "file": "docs\\graph__tree-centroid.md"
+      "file": "docs/graph__tree-centroid.md"
     },
     {
       "url": "https://oi-wiki.org/graph/tree-diameter/",
-      "file": "docs\\graph__tree-diameter.md"
+      "file": "docs/graph__tree-diameter.md"
     },
     {
       "url": "https://oi-wiki.org/graph/tree-divide/",
-      "file": "docs\\graph__tree-divide.md"
+      "file": "docs/graph__tree-divide.md"
     },
     {
       "url": "https://oi-wiki.org/graph/tree-hash/",
-      "file": "docs\\graph__tree-hash.md"
+      "file": "docs/graph__tree-hash.md"
     },
     {
       "url": "https://oi-wiki.org/graph/tree-random-walk/",
-      "file": "docs\\graph__tree-random-walk.md"
+      "file": "docs/graph__tree-random-walk.md"
     },
     {
       "url": "https://oi-wiki.org/graph/virtual-tree/",
-      "file": "docs\\graph__virtual-tree.md"
+      "file": "docs/graph__virtual-tree.md"
     },
     {
       "url": "https://oi-wiki.org/intro/about/",
-      "file": "docs\\intro__about.md"
+      "file": "docs/intro__about.md"
     },
     {
       "url": "https://oi-wiki.org/intro/docker-deploy/",
-      "file": "docs\\intro__docker-deploy.md"
+      "file": "docs/intro__docker-deploy.md"
     },
     {
       "url": "https://oi-wiki.org/intro/faq/",
-      "file": "docs\\intro__faq.md"
+      "file": "docs/intro__faq.md"
     },
     {
       "url": "https://oi-wiki.org/intro/format/",
-      "file": "docs\\intro__format.md"
+      "file": "docs/intro__format.md"
     },
     {
       "url": "https://oi-wiki.org/intro/htc/",
-      "file": "docs\\intro__htc.md"
+      "file": "docs/intro__htc.md"
     },
     {
       "url": "https://oi-wiki.org/intro/mirrors/",
-      "file": "docs\\intro__mirrors.md"
+      "file": "docs/intro__mirrors.md"
     },
     {
       "url": "https://oi-wiki.org/intro/symbol/",
-      "file": "docs\\intro__symbol.md"
+      "file": "docs/intro__symbol.md"
     },
     {
       "url": "https://oi-wiki.org/intro/thanks/",
-      "file": "docs\\intro__thanks.md"
+      "file": "docs/intro__thanks.md"
     },
     {
       "url": "https://oi-wiki.org/intro/what-oi-wiki-is-not/",
-      "file": "docs\\intro__what-oi-wiki-is-not.md"
+      "file": "docs/intro__what-oi-wiki-is-not.md"
     },
     {
       "url": "https://oi-wiki.org/lang/",
-      "file": "docs\\lang.md"
+      "file": "docs/lang.md"
     },
     {
       "url": "https://oi-wiki.org/lang/array/",
-      "file": "docs\\lang__array.md"
+      "file": "docs/lang__array.md"
     },
     {
       "url": "https://oi-wiki.org/lang/basic/",
-      "file": "docs\\lang__basic.md"
+      "file": "docs/lang__basic.md"
     },
     {
       "url": "https://oi-wiki.org/lang/branch/",
-      "file": "docs\\lang__branch.md"
+      "file": "docs/lang__branch.md"
     },
     {
       "url": "https://oi-wiki.org/lang/class/",
-      "file": "docs\\lang__class.md"
+      "file": "docs/lang__class.md"
     },
     {
       "url": "https://oi-wiki.org/lang/const/",
-      "file": "docs\\lang__const.md"
+      "file": "docs/lang__const.md"
     },
     {
       "url": "https://oi-wiki.org/lang/cpp-other-langs/",
-      "file": "docs\\lang__cpp-other-langs.md"
+      "file": "docs/lang__cpp-other-langs.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/",
-      "file": "docs\\lang__csl.md"
+      "file": "docs/lang__csl.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/algorithm/",
-      "file": "docs\\lang__csl__algorithm.md"
+      "file": "docs/lang__csl__algorithm.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/associative-container/",
-      "file": "docs\\lang__csl__associative-container.md"
+      "file": "docs/lang__csl__associative-container.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/bitset/",
-      "file": "docs\\lang__csl__bitset.md"
+      "file": "docs/lang__csl__bitset.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/container-adapter/",
-      "file": "docs\\lang__csl__container-adapter.md"
+      "file": "docs/lang__csl__container-adapter.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/container/",
-      "file": "docs\\lang__csl__container.md"
+      "file": "docs/lang__csl__container.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/iterator/",
-      "file": "docs\\lang__csl__iterator.md"
+      "file": "docs/lang__csl__iterator.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/pair/",
-      "file": "docs\\lang__csl__pair.md"
+      "file": "docs/lang__csl__pair.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/sequence-container/",
-      "file": "docs\\lang__csl__sequence-container.md"
+      "file": "docs/lang__csl__sequence-container.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/string/",
-      "file": "docs\\lang__csl__string.md"
+      "file": "docs/lang__csl__string.md"
     },
     {
       "url": "https://oi-wiki.org/lang/csl/unordered-container/",
-      "file": "docs\\lang__csl__unordered-container.md"
+      "file": "docs/lang__csl__unordered-container.md"
     },
     {
       "url": "https://oi-wiki.org/lang/file-op/",
-      "file": "docs\\lang__file-op.md"
+      "file": "docs/lang__file-op.md"
     },
     {
       "url": "https://oi-wiki.org/lang/func/",
-      "file": "docs\\lang__func.md"
+      "file": "docs/lang__func.md"
     },
     {
       "url": "https://oi-wiki.org/lang/helloworld/",
-      "file": "docs\\lang__helloworld.md"
+      "file": "docs/lang__helloworld.md"
     },
     {
       "url": "https://oi-wiki.org/lang/java-pro/",
-      "file": "docs\\lang__java-pro.md"
+      "file": "docs/lang__java-pro.md"
     },
     {
       "url": "https://oi-wiki.org/lang/java/",
-      "file": "docs\\lang__java.md"
+      "file": "docs/lang__java.md"
     },
     {
       "url": "https://oi-wiki.org/lang/lambda/",
-      "file": "docs\\lang__lambda.md"
+      "file": "docs/lang__lambda.md"
     },
     {
       "url": "https://oi-wiki.org/lang/loop/",
-      "file": "docs\\lang__loop.md"
+      "file": "docs/lang__loop.md"
     },
     {
       "url": "https://oi-wiki.org/lang/namespace/",
-      "file": "docs\\lang__namespace.md"
+      "file": "docs/lang__namespace.md"
     },
     {
       "url": "https://oi-wiki.org/lang/new/",
-      "file": "docs\\lang__new.md"
+      "file": "docs/lang__new.md"
     },
     {
       "url": "https://oi-wiki.org/lang/op-overload/",
-      "file": "docs\\lang__op-overload.md"
+      "file": "docs/lang__op-overload.md"
     },
     {
       "url": "https://oi-wiki.org/lang/op/",
-      "file": "docs\\lang__op.md"
+      "file": "docs/lang__op.md"
     },
     {
       "url": "https://oi-wiki.org/lang/optimizations/",
-      "file": "docs\\lang__optimizations.md"
+      "file": "docs/lang__optimizations.md"
     },
     {
       "url": "https://oi-wiki.org/lang/pas-cpp/",
-      "file": "docs\\lang__pas-cpp.md"
+      "file": "docs/lang__pas-cpp.md"
     },
     {
       "url": "https://oi-wiki.org/lang/pb-ds/",
-      "file": "docs\\lang__pb-ds.md"
+      "file": "docs/lang__pb-ds.md"
     },
     {
       "url": "https://oi-wiki.org/lang/pb-ds/pq/",
-      "file": "docs\\lang__pb-ds__pq.md"
+      "file": "docs/lang__pb-ds__pq.md"
     },
     {
       "url": "https://oi-wiki.org/lang/pb-ds/tree/",
-      "file": "docs\\lang__pb-ds__tree.md"
+      "file": "docs/lang__pb-ds__tree.md"
     },
     {
       "url": "https://oi-wiki.org/lang/pointer/",
-      "file": "docs\\lang__pointer.md"
+      "file": "docs/lang__pointer.md"
     },
     {
       "url": "https://oi-wiki.org/lang/python/",
-      "file": "docs\\lang__python.md"
+      "file": "docs/lang__python.md"
     },
     {
       "url": "https://oi-wiki.org/lang/reference/",
-      "file": "docs\\lang__reference.md"
+      "file": "docs/lang__reference.md"
     },
     {
       "url": "https://oi-wiki.org/lang/struct/",
-      "file": "docs\\lang__struct.md"
+      "file": "docs/lang__struct.md"
     },
     {
       "url": "https://oi-wiki.org/lang/union/",
-      "file": "docs\\lang__union.md"
+      "file": "docs/lang__union.md"
     },
     {
       "url": "https://oi-wiki.org/lang/value-category/",
-      "file": "docs\\lang__value-category.md"
+      "file": "docs/lang__value-category.md"
     },
     {
       "url": "https://oi-wiki.org/lang/var/",
-      "file": "docs\\lang__var.md"
+      "file": "docs/lang__var.md"
     },
     {
       "url": "https://oi-wiki.org/math/",
-      "file": "docs\\math.md"
+      "file": "docs/math.md"
     },
     {
       "url": "https://oi-wiki.org/math/algebra/basic/",
-      "file": "docs\\math__algebra__basic.md"
+      "file": "docs/math__algebra__basic.md"
     },
     {
       "url": "https://oi-wiki.org/math/algebra/field-theory/",
-      "file": "docs\\math__algebra__field-theory.md"
+      "file": "docs/math__algebra__field-theory.md"
     },
     {
       "url": "https://oi-wiki.org/math/algebra/group-theory/",
-      "file": "docs\\math__algebra__group-theory.md"
+      "file": "docs/math__algebra__group-theory.md"
     },
     {
       "url": "https://oi-wiki.org/math/algebra/ring-theory/",
-      "file": "docs\\math__algebra__ring-theory.md"
+      "file": "docs/math__algebra__ring-theory.md"
     },
     {
       "url": "https://oi-wiki.org/math/algebra/schreier-sims/",
-      "file": "docs\\math__algebra__schreier-sims.md"
+      "file": "docs/math__algebra__schreier-sims.md"
     },
     {
       "url": "https://oi-wiki.org/math/berlekamp-massey/",
-      "file": "docs\\math__berlekamp-massey.md"
+      "file": "docs/math__berlekamp-massey.md"
     },
     {
       "url": "https://oi-wiki.org/math/bignum/",
-      "file": "docs\\math__bignum.md"
+      "file": "docs/math__bignum.md"
     },
     {
       "url": "https://oi-wiki.org/math/binary-exponentiation/",
-      "file": "docs\\math__binary-exponentiation.md"
+      "file": "docs/math__binary-exponentiation.md"
     },
     {
       "url": "https://oi-wiki.org/math/binary-set/",
-      "file": "docs\\math__binary-set.md"
+      "file": "docs/math__binary-set.md"
     },
     {
       "url": "https://oi-wiki.org/math/bit/",
-      "file": "docs\\math__bit.md"
+      "file": "docs/math__bit.md"
     },
     {
       "url": "https://oi-wiki.org/math/boolean-algebra/",
-      "file": "docs\\math__boolean-algebra.md"
+      "file": "docs/math__boolean-algebra.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/bell/",
-      "file": "docs\\math__combinatorics__bell.md"
+      "file": "docs/math__combinatorics__bell.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/bernoulli/",
-      "file": "docs\\math__combinatorics__bernoulli.md"
+      "file": "docs/math__combinatorics__bernoulli.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/catalan/",
-      "file": "docs\\math__combinatorics__catalan.md"
+      "file": "docs/math__combinatorics__catalan.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/combination/",
-      "file": "docs\\math__combinatorics__combination.md"
+      "file": "docs/math__combinatorics__combination.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/derangement/",
-      "file": "docs\\math__combinatorics__derangement.md"
+      "file": "docs/math__combinatorics__derangement.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/drawer-principle/",
-      "file": "docs\\math__combinatorics__drawer-principle.md"
+      "file": "docs/math__combinatorics__drawer-principle.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/entringer/",
-      "file": "docs\\math__combinatorics__entringer.md"
+      "file": "docs/math__combinatorics__entringer.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/eulerian/",
-      "file": "docs\\math__combinatorics__eulerian.md"
+      "file": "docs/math__combinatorics__eulerian.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/fibonacci/",
-      "file": "docs\\math__combinatorics__fibonacci.md"
+      "file": "docs/math__combinatorics__fibonacci.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/graph-enumeration/",
-      "file": "docs\\math__combinatorics__graph-enumeration.md"
+      "file": "docs/math__combinatorics__graph-enumeration.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/inclusion-exclusion-principle/",
-      "file": "docs\\math__combinatorics__inclusion-exclusion-principle.md"
+      "file": "docs/math__combinatorics__inclusion-exclusion-principle.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/partition/",
-      "file": "docs\\math__combinatorics__partition.md"
+      "file": "docs/math__combinatorics__partition.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/polya/",
-      "file": "docs\\math__combinatorics__polya.md"
+      "file": "docs/math__combinatorics__polya.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/stirling/",
-      "file": "docs\\math__combinatorics__stirling.md"
+      "file": "docs/math__combinatorics__stirling.md"
     },
     {
       "url": "https://oi-wiki.org/math/combinatorics/vandermonde-convolution/",
-      "file": "docs\\math__combinatorics__vandermonde-convolution.md"
+      "file": "docs/math__combinatorics__vandermonde-convolution.md"
     },
     {
       "url": "https://oi-wiki.org/math/complex/",
-      "file": "docs\\math__complex.md"
+      "file": "docs/math__complex.md"
     },
     {
       "url": "https://oi-wiki.org/math/coordinate/",
-      "file": "docs\\math__coordinate.md"
+      "file": "docs/math__coordinate.md"
     },
     {
       "url": "https://oi-wiki.org/math/game-theory/impartial-game/",
-      "file": "docs\\math__game-theory__impartial-game.md"
+      "file": "docs/math__game-theory__impartial-game.md"
     },
     {
       "url": "https://oi-wiki.org/math/game-theory/intro/",
-      "file": "docs\\math__game-theory__intro.md"
+      "file": "docs/math__game-theory__intro.md"
     },
     {
       "url": "https://oi-wiki.org/math/game-theory/partizan-game/",
-      "file": "docs\\math__game-theory__partizan-game.md"
+      "file": "docs/math__game-theory__partizan-game.md"
     },
     {
       "url": "https://oi-wiki.org/math/game-theory/zero-sum-game/",
-      "file": "docs\\math__game-theory__zero-sum-game.md"
+      "file": "docs/math__game-theory__zero-sum-game.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/",
-      "file": "docs\\math__linear-algebra.md"
+      "file": "docs/math__linear-algebra.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/basis/",
-      "file": "docs\\math__linear-algebra__basis.md"
+      "file": "docs/math__linear-algebra__basis.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/char-poly/",
-      "file": "docs\\math__linear-algebra__char-poly.md"
+      "file": "docs/math__linear-algebra__char-poly.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/determinant/",
-      "file": "docs\\math__linear-algebra__determinant.md"
+      "file": "docs/math__linear-algebra__determinant.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/diagonalization/",
-      "file": "docs\\math__linear-algebra__diagonalization.md"
+      "file": "docs/math__linear-algebra__diagonalization.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/elementary-operations/",
-      "file": "docs\\math__linear-algebra__elementary-operations.md"
+      "file": "docs/math__linear-algebra__elementary-operations.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/jordan/",
-      "file": "docs\\math__linear-algebra__jordan.md"
+      "file": "docs/math__linear-algebra__jordan.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/linear-mapping/",
-      "file": "docs\\math__linear-algebra__linear-mapping.md"
+      "file": "docs/math__linear-algebra__linear-mapping.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/matrix/",
-      "file": "docs\\math__linear-algebra__matrix.md"
+      "file": "docs/math__linear-algebra__matrix.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/product/",
-      "file": "docs\\math__linear-algebra__product.md"
+      "file": "docs/math__linear-algebra__product.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/vector-space/",
-      "file": "docs\\math__linear-algebra__vector-space.md"
+      "file": "docs/math__linear-algebra__vector-space.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-algebra/vector/",
-      "file": "docs\\math__linear-algebra__vector.md"
+      "file": "docs/math__linear-algebra__vector.md"
     },
     {
       "url": "https://oi-wiki.org/math/linear-programming/",
-      "file": "docs\\math__linear-programming.md"
+      "file": "docs/math__linear-programming.md"
     },
     {
       "url": "https://oi-wiki.org/math/matroid/",
-      "file": "docs\\math__matroid.md"
+      "file": "docs/math__matroid.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/basic/",
-      "file": "docs\\math__number-theory__basic.md"
+      "file": "docs/math__number-theory__basic.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/bezouts/",
-      "file": "docs\\math__number-theory__bezouts.md"
+      "file": "docs/math__number-theory__bezouts.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/congruence-equation/",
-      "file": "docs\\math__number-theory__congruence-equation.md"
+      "file": "docs/math__number-theory__congruence-equation.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/continued-fraction/",
-      "file": "docs\\math__number-theory__continued-fraction.md"
+      "file": "docs/math__number-theory__continued-fraction.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/crt/",
-      "file": "docs\\math__number-theory__crt.md"
+      "file": "docs/math__number-theory__crt.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/dirichlet/",
-      "file": "docs\\math__number-theory__dirichlet.md"
+      "file": "docs/math__number-theory__dirichlet.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/discrete-logarithm/",
-      "file": "docs\\math__number-theory__discrete-logarithm.md"
+      "file": "docs/math__number-theory__discrete-logarithm.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/du/",
-      "file": "docs\\math__number-theory__du.md"
+      "file": "docs/math__number-theory__du.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/euclidean/",
-      "file": "docs\\math__number-theory__euclidean.md"
+      "file": "docs/math__number-theory__euclidean.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/euler-totient/",
-      "file": "docs\\math__number-theory__euler-totient.md"
+      "file": "docs/math__number-theory__euler-totient.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/factorial/",
-      "file": "docs\\math__number-theory__factorial.md"
+      "file": "docs/math__number-theory__factorial.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/fermat/",
-      "file": "docs\\math__number-theory__fermat.md"
+      "file": "docs/math__number-theory__fermat.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/gcd/",
-      "file": "docs\\math__number-theory__gcd.md"
+      "file": "docs/math__number-theory__gcd.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/inverse/",
-      "file": "docs\\math__number-theory__inverse.md"
+      "file": "docs/math__number-theory__inverse.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/lift-the-exponent/",
-      "file": "docs\\math__number-theory__lift-the-exponent.md"
+      "file": "docs/math__number-theory__lift-the-exponent.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/linear-equation/",
-      "file": "docs\\math__number-theory__linear-equation.md"
+      "file": "docs/math__number-theory__linear-equation.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/lucas/",
-      "file": "docs\\math__number-theory__lucas.md"
+      "file": "docs/math__number-theory__lucas.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/meissel-lehmer/",
-      "file": "docs\\math__number-theory__meissel-lehmer.md"
+      "file": "docs/math__number-theory__meissel-lehmer.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/min-25/",
-      "file": "docs\\math__number-theory__min-25.md"
+      "file": "docs/math__number-theory__min-25.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/mobius/",
-      "file": "docs\\math__number-theory__mobius.md"
+      "file": "docs/math__number-theory__mobius.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/mod-arithmetic/",
-      "file": "docs\\math__number-theory__mod-arithmetic.md"
+      "file": "docs/math__number-theory__mod-arithmetic.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/pell-equation/",
-      "file": "docs\\math__number-theory__pell-equation.md"
+      "file": "docs/math__number-theory__pell-equation.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/pollard-rho/",
-      "file": "docs\\math__number-theory__pollard-rho.md"
+      "file": "docs/math__number-theory__pollard-rho.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/powerful-number/",
-      "file": "docs\\math__number-theory__powerful-number.md"
+      "file": "docs/math__number-theory__powerful-number.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/prime/",
-      "file": "docs\\math__number-theory__prime.md"
+      "file": "docs/math__number-theory__prime.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/primitive-root/",
-      "file": "docs\\math__number-theory__primitive-root.md"
+      "file": "docs/math__number-theory__primitive-root.md"
     },
     {
       "url": "https://oi-wiki.org/math/number-theory/quad-residue/",
-      "file": "docs\\math__number-theory__quad-residue.md"
+      "file": "docs/math__number-theory__quad-residue.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/number-theory/quadratic/",
+      "file": "docs/math__number-theory__quadratic.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/number-theory/residue/",
+      "file": "docs/math__number-theory__residue.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/number-theory/sieve/",
+      "file": "docs/math__number-theory__sieve.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/number-theory/sqrt-decomposition/",
+      "file": "docs/math__number-theory__sqrt-decomposition.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/number-theory/stern-brocot/",
+      "file": "docs/math__number-theory__stern-brocot.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/number-theory/zhou/",
+      "file": "docs/math__number-theory__zhou.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/numeral-sys/balanced-ternary/",
+      "file": "docs/math__numeral-sys__balanced-ternary.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/numeral-sys/base/",
+      "file": "docs/math__numeral-sys__base.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/numeral-sys/gray-code/",
+      "file": "docs/math__numeral-sys__gray-code.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/numeral-sys/intro/",
+      "file": "docs/math__numeral-sys__intro.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/numerical/gauss/",
+      "file": "docs/math__numerical__gauss.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/numerical/integral/",
+      "file": "docs/math__numerical__integral.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/numerical/interp/",
+      "file": "docs/math__numerical__interp.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/numerical/newton/",
+      "file": "docs/math__numerical__newton.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/order-theory/",
+      "file": "docs/math__order-theory.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/permutation/",
+      "file": "docs/math__permutation.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/comp-rev/",
+      "file": "docs/math__poly__comp-rev.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/czt/",
+      "file": "docs/math__poly__czt.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/egf/",
+      "file": "docs/math__poly__egf.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/elementary-func/",
+      "file": "docs/math__poly__elementary-func.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/fft/",
+      "file": "docs/math__poly__fft.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/fundamental/",
+      "file": "docs/math__poly__fundamental.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/fwt/",
+      "file": "docs/math__poly__fwt.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/intro/",
+      "file": "docs/math__poly__intro.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/lagrange-inversion/",
+      "file": "docs/math__poly__lagrange-inversion.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/linear-recurrence/",
+      "file": "docs/math__poly__linear-recurrence.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/multipoint-eval-interpolation/",
+      "file": "docs/math__poly__multipoint-eval-interpolation.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/newton/",
+      "file": "docs/math__poly__newton.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/ntt/",
+      "file": "docs/math__poly__ntt.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/ogf/",
+      "file": "docs/math__poly__ogf.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/shift/",
+      "file": "docs/math__poly__shift.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/poly/symbolic-method/",
+      "file": "docs/math__poly__symbolic-method.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/probability/basic-conception/",
+      "file": "docs/math__probability__basic-conception.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/probability/concentration-inequality/",
+      "file": "docs/math__probability__concentration-inequality.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/probability/conditional-probability/",
+      "file": "docs/math__probability__conditional-probability.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/probability/exp-var/",
+      "file": "docs/math__probability__exp-var.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/probability/random-variable/",
+      "file": "docs/math__probability__random-variable.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/simplex/",
+      "file": "docs/math__simplex.md"
+    },
+    {
+      "url": "https://oi-wiki.org/math/young-tableau/",
+      "file": "docs/math__young-tableau.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/",
+      "file": "docs/misc.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/15-puzzle/",
+      "file": "docs/misc__15-puzzle.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/cc-basic/",
+      "file": "docs/misc__cc-basic.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/cdq-divide/",
+      "file": "docs/misc__cdq-divide.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/discrete/",
+      "file": "docs/misc__discrete.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/endianness/",
+      "file": "docs/misc__endianness.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/expression/",
+      "file": "docs/misc__expression.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/frac-programming/",
+      "file": "docs/misc__frac-programming.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/fsm/",
+      "file": "docs/misc__fsm.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/garsia-wachs/",
+      "file": "docs/misc__garsia-wachs.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/hill-climbing/",
+      "file": "docs/misc__hill-climbing.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/hoverline/",
+      "file": "docs/misc__hoverline.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/job-order/",
+      "file": "docs/misc__job-order.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/josephus/",
+      "file": "docs/misc__josephus.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/kahan-summation/",
+      "file": "docs/misc__kahan-summation.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/main-element/",
+      "file": "docs/misc__main-element.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/mo-algo-2dimen/",
+      "file": "docs/misc__mo-algo-2dimen.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/mo-algo-intro/",
+      "file": "docs/misc__mo-algo-intro.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/mo-algo-on-tree/",
+      "file": "docs/misc__mo-algo-on-tree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/mo-algo-secondary-offline/",
+      "file": "docs/misc__mo-algo-secondary-offline.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/mo-algo-with-bitset/",
+      "file": "docs/misc__mo-algo-with-bitset.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/mo-algo/",
+      "file": "docs/misc__mo-algo.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/modifiable-mo-algo/",
+      "file": "docs/misc__modifiable-mo-algo.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/odt/",
+      "file": "docs/misc__odt.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/offline/",
+      "file": "docs/misc__offline.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/parallel-binsearch/",
+      "file": "docs/misc__parallel-binsearch.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/rand-technique/",
+      "file": "docs/misc__rand-technique.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/random/",
+      "file": "docs/misc__random.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/rollback-mo-algo/",
+      "file": "docs/misc__rollback-mo-algo.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/simulated-annealing/",
+      "file": "docs/misc__simulated-annealing.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/space-optimization/",
+      "file": "docs/misc__space-optimization.md"
+    },
+    {
+      "url": "https://oi-wiki.org/misc/two-pointer/",
+      "file": "docs/misc__two-pointer.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/",
+      "file": "docs/string.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/ac-automaton/",
+      "file": "docs/string__ac-automaton.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/basic/",
+      "file": "docs/string__basic.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/bm/",
+      "file": "docs/string__bm.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/general-sam/",
+      "file": "docs/string__general-sam.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/hash/",
+      "file": "docs/string__hash.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/kmp/",
+      "file": "docs/string__kmp.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/lib-func/",
+      "file": "docs/string__lib-func.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/lyndon/",
+      "file": "docs/string__lyndon.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/main-lorentz/",
+      "file": "docs/string__main-lorentz.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/manacher/",
+      "file": "docs/string__manacher.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/match/",
+      "file": "docs/string__match.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/minimal-string/",
+      "file": "docs/string__minimal-string.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/pam/",
+      "file": "docs/string__pam.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/sa-optimal-inplace/",
+      "file": "docs/string__sa-optimal-inplace.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/sa/",
+      "file": "docs/string__sa.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/sam/",
+      "file": "docs/string__sam.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/seq-automaton/",
+      "file": "docs/string__seq-automaton.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/suffix-bst/",
+      "file": "docs/string__suffix-bst.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/suffix-tree/",
+      "file": "docs/string__suffix-tree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/trie/",
+      "file": "docs/string__trie.md"
+    },
+    {
+      "url": "https://oi-wiki.org/string/z-func/",
+      "file": "docs/string__z-func.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/",
+      "file": "docs/tools.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/cmd/",
+      "file": "docs/tools__cmd.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/compile-debug/",
+      "file": "docs/tools__compile-debug.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/compiler/",
+      "file": "docs/tools__compiler.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/atom/",
+      "file": "docs/tools__editor__atom.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/clion/",
+      "file": "docs/tools__editor__clion.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/codeblocks/",
+      "file": "docs/tools__editor__codeblocks.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/cpeditor/",
+      "file": "docs/tools__editor__cpeditor.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/devcpp/",
+      "file": "docs/tools__editor__devcpp.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/eclipse/",
+      "file": "docs/tools__editor__eclipse.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/emacs/",
+      "file": "docs/tools__editor__emacs.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/geany/",
+      "file": "docs/tools__editor__geany.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/guide/",
+      "file": "docs/tools__editor__guide.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/kate/",
+      "file": "docs/tools__editor__kate.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/npp/",
+      "file": "docs/tools__editor__npp.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/sublime/",
+      "file": "docs/tools__editor__sublime.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/vim/",
+      "file": "docs/tools__editor__vim.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/vscode/",
+      "file": "docs/tools__editor__vscode.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/editor/xcode/",
+      "file": "docs/tools__editor__xcode.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/git/",
+      "file": "docs/tools__git.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/judger/",
+      "file": "docs/tools__judger.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/judger/arbiter/",
+      "file": "docs/tools__judger__arbiter.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/judger/ccr-plus/",
+      "file": "docs/tools__judger__ccr-plus.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/judger/cena/",
+      "file": "docs/tools__judger__cena.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/judger/lemon/",
+      "file": "docs/tools__judger__lemon.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/latex/",
+      "file": "docs/tools__latex.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/oj-tool/",
+      "file": "docs/tools__oj-tool.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/polygon/",
+      "file": "docs/tools__polygon.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/special-judge/",
+      "file": "docs/tools__special-judge.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/testlib/",
+      "file": "docs/tools__testlib.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/testlib/checker/",
+      "file": "docs/tools__testlib__checker.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/testlib/general/",
+      "file": "docs/tools__testlib__general.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/testlib/generator/",
+      "file": "docs/tools__testlib__generator.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/testlib/interactor/",
+      "file": "docs/tools__testlib__interactor.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/testlib/validator/",
+      "file": "docs/tools__testlib__validator.md"
+    },
+    {
+      "url": "https://oi-wiki.org/tools/wsl/",
+      "file": "docs/tools__wsl.md"
+    },
+    {
+      "url": "https://oi-wiki.org/topic/bracket/",
+      "file": "docs/topic__bracket.md"
+    },
+    {
+      "url": "https://oi-wiki.org/topic/dsu-app/",
+      "file": "docs/topic__dsu-app.md"
+    },
+    {
+      "url": "https://oi-wiki.org/topic/rmq/",
+      "file": "docs/topic__rmq.md"
+    },
+    {
+      "url": "https://oi-wiki.org/topic/segment-tree-offline/",
+      "file": "docs/topic__segment-tree-offline.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/amortized-analysis/",
+      "file": "docs/basic__amortized-analysis.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/binary-lifting/",
+      "file": "docs/basic__binary-lifting.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/binary/",
+      "file": "docs/basic__binary.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/bubble-sort/",
+      "file": "docs/basic__bubble-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/bucket-sort/",
+      "file": "docs/basic__bucket-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/complexity/",
+      "file": "docs/basic__complexity.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/counting-sort/",
+      "file": "docs/basic__counting-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/divide-and-conquer/",
+      "file": "docs/basic__divide-and-conquer.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/enumerate/",
+      "file": "docs/basic__enumerate.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/greedy/",
+      "file": "docs/basic__greedy.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/heap-sort/",
+      "file": "docs/basic__heap-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/insertion-sort/",
+      "file": "docs/basic__insertion-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/merge-sort/",
+      "file": "docs/basic__merge-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/prefix-sum/",
+      "file": "docs/basic__prefix-sum.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/quick-sort/",
+      "file": "docs/basic__quick-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/radix-sort/",
+      "file": "docs/basic__radix-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/selection-sort/",
+      "file": "docs/basic__selection-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/shell-sort/",
+      "file": "docs/basic__shell-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/simulate/",
+      "file": "docs/basic__simulate.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/stl-sort/",
+      "file": "docs/basic__stl-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/basic/tournament-sort/",
+      "file": "docs/basic__tournament-sort.md"
+    },
+    {
+      "url": "https://oi-wiki.org/contest/common-mistakes/",
+      "file": "docs/contest__common-mistakes.md"
+    },
+    {
+      "url": "https://oi-wiki.org/contest/common-tricks/",
+      "file": "docs/contest__common-tricks.md"
+    },
+    {
+      "url": "https://oi-wiki.org/contest/interaction/",
+      "file": "docs/contest__interaction.md"
+    },
+    {
+      "url": "https://oi-wiki.org/contest/io/",
+      "file": "docs/contest__io.md"
+    },
+    {
+      "url": "https://oi-wiki.org/contest/problems/",
+      "file": "docs/contest__problems.md"
+    },
+    {
+      "url": "https://oi-wiki.org/contest/problemsetting/",
+      "file": "docs/contest__problemsetting.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/basic/",
+      "file": "docs/dp__basic.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/dag/",
+      "file": "docs/dp__dag.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/dp-of-dp/",
+      "file": "docs/dp__dp-of-dp.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/dynamic/",
+      "file": "docs/dp__dynamic.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/interval/",
+      "file": "docs/dp__interval.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/knapsack/",
+      "file": "docs/dp__knapsack.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/memo/",
+      "file": "docs/dp__memo.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/number/",
+      "file": "docs/dp__number.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/opt/monotonous-queue-stack/",
+      "file": "docs/dp__opt__monotonous-queue-stack.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/opt/quadrangle/",
+      "file": "docs/dp__opt__quadrangle.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/opt/slope-trick/",
+      "file": "docs/dp__opt__slope-trick.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/opt/wqs-binary-search/",
+      "file": "docs/dp__opt__wqs-binary-search.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/plug/",
+      "file": "docs/dp__plug.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/probability/",
+      "file": "docs/dp__probability.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/state/",
+      "file": "docs/dp__state.md"
+    },
+    {
+      "url": "https://oi-wiki.org/dp/tree/",
+      "file": "docs/dp__tree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/avl/",
+      "file": "docs/ds__avl.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/balanced-in-seg/",
+      "file": "docs/ds__balanced-in-seg.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/binary-heap/",
+      "file": "docs/ds__binary-heap.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/bit-in-block-array/",
+      "file": "docs/ds__bit-in-block-array.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/block-array/",
+      "file": "docs/ds__block-array.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/block-list/",
+      "file": "docs/ds__block-list.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/bst/",
+      "file": "docs/ds__bst.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/cartesian-tree/",
+      "file": "docs/ds__cartesian-tree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/decompose/",
+      "file": "docs/ds__decompose.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/divide-combine/",
+      "file": "docs/ds__divide-combine.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/dividing/",
+      "file": "docs/ds__dividing.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/dsu/",
+      "file": "docs/ds__dsu.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/ett/",
+      "file": "docs/ds__ett.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/fenwick/",
+      "file": "docs/ds__fenwick.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/finger-tree/",
+      "file": "docs/ds__finger-tree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/global-bst/",
+      "file": "docs/ds__global-bst.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/hash/",
+      "file": "docs/ds__hash.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/huffman-tree/",
+      "file": "docs/ds__huffman-tree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/kdt/",
+      "file": "docs/ds__kdt.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/kinetic-tournament-tree/",
+      "file": "docs/ds__kinetic-tournament-tree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/lct/",
+      "file": "docs/ds__lct.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/leftist-tree/",
+      "file": "docs/ds__leftist-tree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/li-chao-tree/",
+      "file": "docs/ds__li-chao-tree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/linked-list/",
+      "file": "docs/ds__linked-list.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/llrbt/",
+      "file": "docs/ds__llrbt.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/monotonous-queue/",
+      "file": "docs/ds__monotonous-queue.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/monotonous-stack/",
+      "file": "docs/ds__monotonous-stack.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/pairing-heap/",
+      "file": "docs/ds__pairing-heap.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/persistent-balanced/",
+      "file": "docs/ds__persistent-balanced.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/persistent-heap/",
+      "file": "docs/ds__persistent-heap.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/persistent-seg/",
+      "file": "docs/ds__persistent-seg.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/persistent-trie/",
+      "file": "docs/ds__persistent-trie.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/pq-tree/",
+      "file": "docs/ds__pq-tree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/queue/",
+      "file": "docs/ds__queue.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/rbtree/",
+      "file": "docs/ds__rbtree.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/sbt/",
+      "file": "docs/ds__sbt.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/seg-beats/",
+      "file": "docs/ds__seg-beats.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/seg-in-bit/",
+      "file": "docs/ds__seg-in-bit.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/seg-in-seg/",
+      "file": "docs/ds__seg-in-seg.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/seg-merge-split/",
+      "file": "docs/ds__seg-merge-split.md"
+    },
+    {
+      "url": "https://oi-wiki.org/ds/seg/",
+      "file": "docs/ds__seg.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/",
+      "file": "docs/search.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/alpha-beta/",
+      "file": "docs/search__alpha-beta.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/astar/",
+      "file": "docs/search__astar.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/backtracking/",
+      "file": "docs/search__backtracking.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/bfs/",
+      "file": "docs/search__bfs.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/bidirectional/",
+      "file": "docs/search__bidirectional.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/dfs/",
+      "file": "docs/search__dfs.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/dlx/",
+      "file": "docs/search__dlx.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/heuristic/",
+      "file": "docs/search__heuristic.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/idastar/",
+      "file": "docs/search__idastar.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/iterative/",
+      "file": "docs/search__iterative.md"
+    },
+    {
+      "url": "https://oi-wiki.org/search/opt/",
+      "file": "docs/search__opt.md"
     }
   ],
-  "skipped_urls": [
-    "https://oi-wiki.org/basic/amortized-analysis/",
-    "https://oi-wiki.org/basic/binary-lifting/",
-    "https://oi-wiki.org/basic/binary/",
-    "https://oi-wiki.org/basic/bubble-sort/",
-    "https://oi-wiki.org/basic/bucket-sort/",
-    "https://oi-wiki.org/basic/complexity/",
-    "https://oi-wiki.org/basic/counting-sort/",
-    "https://oi-wiki.org/basic/divide-and-conquer/",
-    "https://oi-wiki.org/basic/enumerate/",
-    "https://oi-wiki.org/basic/greedy/",
-    "https://oi-wiki.org/basic/heap-sort/",
-    "https://oi-wiki.org/basic/insertion-sort/",
-    "https://oi-wiki.org/basic/merge-sort/",
-    "https://oi-wiki.org/basic/prefix-sum/",
-    "https://oi-wiki.org/basic/quick-sort/",
-    "https://oi-wiki.org/basic/radix-sort/",
-    "https://oi-wiki.org/basic/selection-sort/",
-    "https://oi-wiki.org/basic/shell-sort/",
-    "https://oi-wiki.org/basic/simulate/",
-    "https://oi-wiki.org/basic/stl-sort/",
-    "https://oi-wiki.org/basic/tournament-sort/",
-    "https://oi-wiki.org/contest/common-mistakes/",
-    "https://oi-wiki.org/contest/common-tricks/",
-    "https://oi-wiki.org/contest/interaction/",
-    "https://oi-wiki.org/contest/io/",
-    "https://oi-wiki.org/contest/problems/",
-    "https://oi-wiki.org/contest/problemsetting/",
-    "https://oi-wiki.org/dp/basic/",
-    "https://oi-wiki.org/dp/dag/",
-    "https://oi-wiki.org/dp/dp-of-dp/",
-    "https://oi-wiki.org/dp/dynamic/",
-    "https://oi-wiki.org/dp/interval/",
-    "https://oi-wiki.org/dp/knapsack/",
-    "https://oi-wiki.org/dp/memo/",
-    "https://oi-wiki.org/dp/number/",
-    "https://oi-wiki.org/dp/opt/monotonous-queue-stack/",
-    "https://oi-wiki.org/dp/opt/quadrangle/",
-    "https://oi-wiki.org/dp/opt/slope-trick/",
-    "https://oi-wiki.org/dp/opt/wqs-binary-search/",
-    "https://oi-wiki.org/dp/plug/",
-    "https://oi-wiki.org/dp/probability/",
-    "https://oi-wiki.org/dp/state/",
-    "https://oi-wiki.org/dp/tree/",
-    "https://oi-wiki.org/ds/avl/",
-    "https://oi-wiki.org/ds/balanced-in-seg/",
-    "https://oi-wiki.org/ds/binary-heap/",
-    "https://oi-wiki.org/ds/bit-in-block-array/",
-    "https://oi-wiki.org/ds/block-array/",
-    "https://oi-wiki.org/ds/block-list/",
-    "https://oi-wiki.org/ds/bst/",
-    "https://oi-wiki.org/ds/cartesian-tree/",
-    "https://oi-wiki.org/ds/decompose/",
-    "https://oi-wiki.org/ds/divide-combine/",
-    "https://oi-wiki.org/ds/dividing/",
-    "https://oi-wiki.org/ds/dsu/",
-    "https://oi-wiki.org/ds/ett/",
-    "https://oi-wiki.org/ds/fenwick/",
-    "https://oi-wiki.org/ds/finger-tree/",
-    "https://oi-wiki.org/ds/global-bst/",
-    "https://oi-wiki.org/ds/hash/",
-    "https://oi-wiki.org/ds/huffman-tree/",
-    "https://oi-wiki.org/ds/kdt/",
-    "https://oi-wiki.org/ds/kinetic-tournament-tree/",
-    "https://oi-wiki.org/ds/lct/",
-    "https://oi-wiki.org/ds/leftist-tree/",
-    "https://oi-wiki.org/ds/li-chao-tree/",
-    "https://oi-wiki.org/ds/linked-list/",
-    "https://oi-wiki.org/ds/llrbt/",
-    "https://oi-wiki.org/ds/monotonous-queue/",
-    "https://oi-wiki.org/ds/monotonous-stack/",
-    "https://oi-wiki.org/ds/pairing-heap/",
-    "https://oi-wiki.org/ds/persistent-balanced/",
-    "https://oi-wiki.org/ds/persistent-heap/",
-    "https://oi-wiki.org/ds/persistent-seg/",
-    "https://oi-wiki.org/ds/persistent-trie/",
-    "https://oi-wiki.org/ds/pq-tree/",
-    "https://oi-wiki.org/ds/queue/",
-    "https://oi-wiki.org/ds/rbtree/",
-    "https://oi-wiki.org/ds/sbt/",
-    "https://oi-wiki.org/ds/seg-beats/",
-    "https://oi-wiki.org/ds/seg-in-bit/",
-    "https://oi-wiki.org/ds/seg-in-seg/",
-    "https://oi-wiki.org/ds/seg-merge-split/",
-    "https://oi-wiki.org/ds/seg/"
-  ],
-  "updated_at": 1776410744
+  "skipped_urls": [],
+  "updated_at": 1777383455
 }

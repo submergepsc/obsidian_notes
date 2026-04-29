@@ -18,5 +18,6 @@
   "wewrite",
   "image-upload-toolkit",
   "execute-code",
-  "shiki-highlighter"
+  "shiki-highlighter",
+  "editing-toolbar"
 ]

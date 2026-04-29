@@ -1,335 +1,335 @@
-# æ°ç C++ ç¹æ§ - OI Wiki
+﻿# 新版 C++ 特性 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/new/
 
-# æ°ç C++ ç¹æ§
+# 新版 C++ 特性
 
-**æ³¨æ** ï¼èèå°ç®æ³ç«èµçå®é æ åµï¼æ¬æå°ä¸ä¼å ¨é¢ç ç©¶è¯­æ³ï¼åªä¼è®²è¿°å¨ç®æ³ç«èµä¸­å¯è½ä¼åºç¨å°çé¨åï¼
+**注意** ：考虑到算法竞赛的实际情况，本文将不会全面研究语法，只会讲述在算法竞赛中可能会应用到的部分．
 
-æ¬æè¯­æ³åç § **C++11** æ åï¼è¯­ä¹ä¸åçå°ä»¥ **C++11** ä½ä¸ºæ åï¼C++14ãC++17 ç­è¯­æ³è§æ åµæåå¹¶ä¼ç¹å«æ æ³¨ï¼
+本文语法参照 **C++11** 标准．语义不同的将以 **C++11** 作为标准，C++14、C++17 等语法视情况提及并会特别标注．
 
-## `auto` ç±»åè¯´æç¬¦
+## `auto` 类型说明符
 
-`auto` ç±»åè¯´æç¬¦ç¨äºèªå¨æ¨å¯¼åéç­çç±»åï¼ä¾å¦ï¼
+`auto` 类型说明符用于自动推导变量等的类型．例如：
 
-```text 1 2 ``` |  ```text auto a = 1 ; // a æ¯ int ç±»å auto b = a \+ 0.1 ; // b æ¯ double ç±»å ```   
+```text 1 2 ``` |  ```text auto a = 1 ; // a 是 int 类型 auto b = a \+ 0.1 ; // b 是 double 类型 ```   
 ---|---  
   
-æ³¨æ `auto` ä¼å»é¤å¼ç¨ï¼å¦æä¸å¸æåºç°æ·è´å¼éï¼éè¦æå¨æå®ï¼
+注意 `auto` 会去除引用，如果不希望出现拷贝开销，需要手动指定：
 
-```text 1 2 3 4 ``` |  ```text int a = 1 ; int & b = a ; auto c = b ; // c æ¯ int ç±»åï¼ææ·è´å¼é auto & e = a ; // e æ¯ int& ç±»åï¼æ²¡ææ·è´å¼é ```   
+```text 1 2 3 4 ``` |  ```text int a = 1 ; int & b = a ; auto c = b ; // c 是 int 类型，有拷贝开销 auto & e = a ; // e 是 int& 类型，没有拷贝开销 ```   
 ---|---  
   
-## decltype è¯´æç¬¦
+## decltype 说明符
 
-`decltype` å¯ä»¥æ ¹æ® **å®ä½** æ **è¡¨è¾¾å¼** æ¨æ­ç±»åï¼æ³¨æäºè æ¨å¯¼ç±»åçæ¹å¼ä¸åï¼éè¯¯ä½¿ç¨å¯è½é ææ¬åå¼ç¨ï¼ç«èµä¸­ä¸å¸¸ç¨ï¼æ­¤å¤ä» ç²ç¥ä»ç»ï¼
+`decltype` 可以根据 **实体** 或 **表达式** 推断类型，注意二者推导类型的方式不同，错误使用可能造成悬垂引用．竞赛中不常用，此处仅粗略介绍．
 
-```text 1 2 3 4 5 6 7 8 9 10 11 ``` |  ```text #include <iostream> #include <vector> int main () { int a = 1926 ; decltype ( a ) b ; // æ ¹æ®å®ä½æ¨æ­ï¼ b æ¯ int ç±»å decltype ( 1 \+ 1 ) c ; // æ ¹æ®è¡¨è¾¾å¼æ¨æ­ï¼c æ¯ int ç±»å decltype (( a )) d = a ; // æ ¹æ®è¡¨è¾¾å¼æ¨æ­ï¼d æ¯ int& ç±»åï¼ std :: vector < decltype ( b ) > vec ; // æ ¹æ®å®ä½æ¨æ­ï¼vec æ¯ std::vector <int> ç±»å return 0 ; } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 ``` |  ```text #include <iostream> #include <vector> int main () { int a = 1926 ; decltype ( a ) b ; // 根据实体推断， b 是 int 类型 decltype ( 1 \+ 1 ) c ; // 根据表达式推断，c 是 int 类型 decltype (( a )) d = a ; // 根据表达式推断，d 是 int& 类型！ std :: vector < decltype ( b ) > vec ; // 根据实体推断，vec 是 std::vector <int> 类型 return 0 ; } ```   
 ---|---  
   
 ## constexpr
 
-> å¦è¯·åé [å¸¸éè¡¨è¾¾å¼ constexprï¼C++11ï¼](../const/#å¸¸éè¡¨è¾¾å¼-constexprc11)
+> 另请参阅 [常量表达式 constexpr（C++11）](../const/#常量表达式-constexprc11)
 
-## åºäºèå´ç `for` å¾ªç¯
+## 基于范围的 `for` 循环
 
-ä½¿ç¨èå´ for éåå¯è¿­ä»£å¯¹è±¡ï¼ä¸ä½¿ç¨è¿­ä»£å¨éåçæçç¸åï¼ä¸è¿°äºè çæçä¸è¬ä¼äºç´¢å¼éåï¼å ä¸ºä¸éè¦æ ¹æ®ç´¢å¼å¯»åï¼
+使用范围 for 遍历可迭代对象，与使用迭代器遍历的效率相同．上述二者的效率一般优于索引遍历，因为不需要根据索引寻址．
 
-ä¸é¢æ¯ä¸ç§ç®åçåºäºèå´ç `for` å¾ªç¯çè¯­æ³ï¼
+下面是一种简单的基于范围的 `for` 循环的语法：
 
 ```text 1 ``` |  ```text for ( item_declaration : range_initializer ) statement ```   
 ---|---  
   
-æ¯å¦ï¼
+比如：
 
 ```text 1 2 3 4 ``` |  ```text std :: array < int , 4 > arr = { 1 , 2 , 3 , 4 }; for ( int x : arr ) { std :: cout << x << std :: endl ; } ```   
 ---|---  
   
-ä¸è¿°è¯­æ³äº§ççä»£ç ææç­ä»·äºä¸åä»£ç ï¼
+上述语法产生的代码效果等价于下列代码：
 
 ```text 1 2 3 4 ``` |  ```text std :: array < int , 4 > arr = { 1 , 2 , 3 , 4 }; for ( auto px = arr . begin (), ed = arr . end (); px != ed ; ++ px ) { std :: cout << * px << std :: endl ; } ```   
 ---|---  
   
-### item-declaration é¡¹å£°æ
+### item-declaration 项声明
 
-å£°æä¸ä¸ªåéç¨äºæ¥åå³ä¾§å®¹å¨ä¸­çå ç´ ï¼åéç±»åè¦ä¸å®¹å¨å å­å ç´ ç±»åä¸è´ï¼å¯ä»¥ç¨ `auto` èªå¨æ¨å¯¼ç±»åï¼å¤æç±»åå¸¸ç¨ `auto&` é²æ­¢æ·è´å¼éï¼
+声明一个变量用于接受右侧容器中的元素，变量类型要与容器内子元素类型一致．可以用 `auto` 自动推导类型，复杂类型常用 `auto&` 防止拷贝开销．
 
-### range-initializer èå´åå§åå¨
+### range-initializer 范围初始化器
 
-èå´åå§åå¨å¯ä»¥æ¯ä»»ä½ä¸ç§å¯è¿­ä»£çå¯¹è±¡ï¼æ¯å¦æ°ç»ï¼æå®ä¹äº `begin` å `end` æåå½æ°çç±»å¯¹è±¡ï¼ï¼å¦ææ¾å ¥è¡¨è¾¾å¼ï¼è¡¨è¾¾å¼ä¹åªä¼è®¡ç®ä¸æ¬¡ï¼
+范围初始化器可以是任何一种可迭代的对象（比如数组，或定义了 `begin` 和 `end` 成员函数的类对象）．如果放入表达式，表达式也只会计算一次．
 
-ä¾å­ï¼
+例子：
 
-```text 1 2 3 4 5 6 7 8 ``` |  ```text int a [] = { 1 , 1 , 4 , 5 , 1 , 4 }; std :: vector < int > b { 1 , 1 , 4 , 5 , 1 , 4 }; std :: map < std :: string , int > c {{ "114" , 114 }, { "514" , 514 }}; for ( int i : a ) std :: cout << i ; for ( auto i : b ) std :: cout << i ; // ä¸æ¹ i çç±»åæ¯ std::pair<const std::string, int>& for ( auto & i : c ) std :: cout << i . first << i . second ; for ( auto i : { 1 , 1 , 4 , 5 , 1 , 4 }) std :: cout << i ; ```   
+```text 1 2 3 4 5 6 7 8 ``` |  ```text int a [] = { 1 , 1 , 4 , 5 , 1 , 4 }; std :: vector < int > b { 1 , 1 , 4 , 5 , 1 , 4 }; std :: map < std :: string , int > c {{ "114" , 114 }, { "514" , 514 }}; for ( int i : a ) std :: cout << i ; for ( auto i : b ) std :: cout << i ; // 下方 i 的类型是 std::pair<const std::string, int>& for ( auto & i : c ) std :: cout << i . first << i . second ; for ( auto i : { 1 , 1 , 4 , 5 , 1 , 4 }) std :: cout << i ; ```   
 ---|---  
   
-### èªå®ä¹ç±»åæ¯æèå´ for
+### 自定义类型支持范围 for
 
-åªéæä¾ `begin` å `end` æåå½æ°ï¼è¿åç±»åéè¦æ¯ææ¯è¾ãèªå¢åè§£å¼ç¨ï¼`*` è¿ç®ç¬¦ï¼ï¼
+只需提供 `begin` 和 `end` 成员函数，返回类型需要支持比较、自增和解引用（`*` 运算符）．
 
-è¿éæä¸ä¸ªä¾å­ï¼
+这里有一个例子：
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 ``` |  ```text #include <iostream> struct C { int a [ 4 ]; int * begin () { return a ; } int * end () { return a \+ 4 ; } }; int main () { C c = { 1 , 9 , 2 , 6 }; for ( auto i : c ) std :: cout << i << " " ; std :: cout << std :: endl ; // output: 1 9 2 6 return 0 ; } ```   
 ---|---  
   
-### åå§åè¯­å¥ï¼C++20ï¼
+### 初始化语句（C++20）
 
-å¨ C++20 ä¸­è¿å¯ä»¥ä½¿ç¨åå§åè¯­å¥å®ç°ä¸äºåè½ï¼ä¾å¦å¾ªç¯è®¡æ°å¨ï¼
+在 C++20 中还可以使用初始化语句实现一些功能，例如循环计数器：
 
 ```text 1 2 3 4 5 6 7 8 9 ``` |  ```text #include <iostream> #include <vector> int main () { std :: vector < int > v = { 0 , 1 , 2 , 3 , 4 , 5 }; for ( int counter = 0 ; auto i : v ) // the init-statement (C++20) std :: cout << counter ++ << ' ' << i << std :: endl ; } ```   
 ---|---  
   
-## ç»æåç»å®ï¼C++17ï¼
+## 结构化绑定（C++17）
 
-ç»æåç»å®ï¼Structured bindingï¼æ¯ C++17 æä¾çä¸ç§è¯­æ³ç³ï¼å¯ä»¥æ¹ä¾¿çæåå­å ç´ æå­å ç´ çå¼ç¨ï¼åè¿æ ·ï¼
+结构化绑定（Structured binding）是 C++17 提供的一种语法糖，可以方便的提取子元素或子元素的引用，像这样：
 
-```text 1 2 3 4 5 6 7 8 ``` |  ```text struct C { int x { 1 }, y { 2 }; }; int arr []{ 4 , 5 , 6 }; auto [ c1 , c2 ] = C {}; // c1=1,c2=2; int ç±»å auto & [ a1 , a2 , a3 ] = arr ; // a1=arr[0],a2=arr[1],a3=arr[2]; int& ç±»å ```   
+```text 1 2 3 4 5 6 7 8 ``` |  ```text struct C { int x { 1 }, y { 2 }; }; int arr []{ 4 , 5 , 6 }; auto [ c1 , c2 ] = C {}; // c1=1,c2=2; int 类型 auto & [ a1 , a2 , a3 ] = arr ; // a1=arr[0],a2=arr[1],a3=arr[2]; int& 类型 ```   
 ---|---  
   
-æ³¨æä»¥ä¸å ç¹ï¼
+注意以下几点：
 
-  * å·¦ä¾§å£°æçåéæ°åå³ä¾§å¯¹è±¡çå­å ç´ æ°å¿ é¡»ä¸è´
-  * ç±»åå£°æéè¦ä½¿ç¨ `auto`
-  * å¯ä»¥ä½¿ç¨ `&` ä¿®é¥°è·åå¼ç¨
+  * 左侧声明的变量数和右侧对象的子元素数必须一致
+  * 类型声明需要使用 `auto`
+  * 可以使用 `&` 修饰获取引用
 
-ä½ å¯ä»¥å¨éå `map` å®¹å¨æ¶è¿æ ·åï¼
+你可以在遍历 `map` 容器时这样写：
 
-```text 1 2 3 4 5 6 7 8 ``` |  ```text std :: map < std :: string , int > m = {{ "k1" , 1 }, { "k2" , 2 }}; // ä½¿ç¨ "auto&" ï¼æ²¡ææ·è´å¼é for ( auto & [ k , v ] : m ) { // k çç±»åæ¯ const std::string& ï¼å ä¸ºé®èªå¸¦ const ä¿®é¥° // v çç±»åæ¯ int& std :: cout << k << ' ' << v << std :: endl ; } ```   
+```text 1 2 3 4 5 6 7 8 ``` |  ```text std :: map < std :: string , int > m = {{ "k1" , 1 }, { "k2" , 2 }}; // 使用 "auto&" ，没有拷贝开销 for ( auto & [ k , v ] : m ) { // k 的类型是 const std::string& ，因为键自带 const 修饰 // v 的类型是 int& std :: cout << k << ' ' << v << std :: endl ; } ```   
 ---|---  
   
-## std::tuple å ç»
+## std::tuple 元组
 
-[å ç»](https://zh.cppreference.com/w/cpp/utility/tuple) å®ä¹äºå¤´æä»¶ `<tuple>`ï¼æ¯ `std::pair` çæ¨å¹¿ï¼å¯ä»¥å­å¨å¤ä¸ªä¸åç±»åçå¼ï¼ä¸é¢æ¥çä¸ä¸ªä¾å­ï¼
+[元组](https://zh.cppreference.com/w/cpp/utility/tuple) 定义于头文件 `<tuple>`，是 `std::pair` 的推广，可以存储多个不同类型的值．下面来看一个例子：
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ``` |  ```text #include <iostream> #include <tuple> #include <vector> constexpr auto expr = 4 \- 1 ; // expr = 3 int main () { std :: vector < int > vec = { 1 , 9 , 2 , 6 , 0 }; std :: tuple < int , int , std :: string , std :: vector < int >> tup = std :: make_tuple ( 817 , 114 , "514" , vec ); // ä½¿ç¨ get<> è·åå­å ç´ ï¼å°æ¬å·å å¿ é¡»æ¯æ´åå¸¸éè¡¨è¾¾å¼ for ( auto i : std :: get < expr > ( tup )) std :: cout << i << " " ; // é¦å ç´ ç¼å·ä¸º 0ï¼æ æä»¬ std::get<3> å¾å°äºä¸ä¸ª std::vector<int> return 0 ; } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ``` |  ```text #include <iostream> #include <tuple> #include <vector> constexpr auto expr = 4 \- 1 ; // expr = 3 int main () { std :: vector < int > vec = { 1 , 9 , 2 , 6 , 0 }; std :: tuple < int , int , std :: string , std :: vector < int >> tup = std :: make_tuple ( 817 , 114 , "514" , vec ); // 使用 get<> 获取子元素，尖括号内必须是整型常量表达式 for ( auto i : std :: get < expr > ( tup )) std :: cout << i << " " ; // 首元素编号为 0，故我们 std::get<3> 得到了一个 std::vector<int> return 0 ; } ```   
 ---|---  
   
-å¨ C++17 ä¹åå¯ä»¥ä½¿ç¨ç»æåç»å®æåå¼ï¼åè¿æ ·ï¼
+在 C++17 之后可以使用结构化绑定提取值，像这样：
 
 ```text 1 2 3 4 5 6 7 ``` |  ```text std :: vector < int > vec = { 1 , 9 , 2 , 6 , 0 }; std :: tuple < int , int , std :: string , std :: vector < int >> tup = std :: make_tuple ( 817 , 114 , "514" , vec ); auto & [ a , b , c , d ] = tup ; // C++17 Structured binding std :: cout << a << ' ' << b << c << std :: endl ; std :: cout << d . size () << ' ' << d [ 2 ] << std :: endl ; ```   
 ---|---  
   
-### æåå½æ°
+### 成员函数
 
-å½æ°| ä½ç¨  
+函数| 作用  
 ---|---  
-`operator=`| èµå¼ä¸ä¸ª `tuple` çå å®¹ç»å¦ä¸ä¸ª  
-`swap`| äº¤æ¢ä¸¤ä¸ª `tuple` çå å®¹  
+`operator=`| 赋值一个 `tuple` 的内容给另一个  
+`swap`| 交换两个 `tuple` 的内容  
   
-ä¾å­ï¼
+例子：
 
 ```text 1 2 3 4 ``` |  ```text constexpr std :: tuple < int , int > tup = { 1 , 2 }; std :: tuple < int , int > tupA = { 2 , 3 }, tupB ; tupB = tup ; tupB . swap ( tupA ); ```   
 ---|---  
   
-### éæåå½æ°
+### 非成员函数
 
-å½æ°| ä½ç¨  
+函数| 作用  
 ---|---  
-`make_tuple`| åå»ºä¸ä¸ª `tuple` å¯¹è±¡ï¼å ¶ç±»åæ ¹æ®åå®åç±»åå®ä¹  
-`std::get`| å ç»å¼è®¿é®æå®çå ç´   
-`std::tie`| å°å ç»ä¸­çå¼èµå¼å°å·²æåé  
-`operator==` ç­| æå­å ¸é¡ºåºæ¯è¾ `tuple` ä¸­çå¼  
-`std::swap`| ç¹åç `std::swap` ç®æ³  
+`make_tuple`| 创建一个 `tuple` 对象，其类型根据各实参类型定义  
+`std::get`| 元组式访问指定的元素  
+`std::tie`| 将元组中的值赋值到已有变量  
+`operator==` 等| 按字典顺序比较 `tuple` 中的值  
+`std::swap`| 特化的 `std::swap` 算法  
   
-ä¾å­ï¼
+例子：
 
 ```text 1 2 3 4 5 6 7 ``` |  ```text std :: tuple < int , int > tupA = { 2 , 3 }, tupB ; tupB = std :: make_tuple ( 1 , 2 ); std :: swap ( tupA , tupB ); std :: cout << std :: get < 1 > ( tupA ) << std :: endl ; int x ; std :: tie ( x , std :: ignore ) = tupB ; std :: cout << x << std :: endl ; ```   
 ---|---  
   
-`std::tie` å°å ç»å ç´ èµå¼ç»å·²æåéï¼å¯ä»¥ä½¿ç¨ `std::ignore` è·³è¿ä¸éè¦çå ç´ ï¼ç»æåç»å®ç´æ¥å£°ææ°åéï¼æ¯æå¼/å¼ç¨ç»å®ï¼ï¼å¿ é¡»æ¥åææå ç´ ï¼
+`std::tie` 将元组元素赋值给已有变量，可以使用 `std::ignore` 跳过不需要的元素．结构化绑定直接声明新变量（支持值/引用绑定），必须接受所有元素．
 
-## å½æ°å¯¹è±¡
+## 函数对象
 
-å¯ä»¥ä½¿ç¨å½æ°è°ç¨è¿ç®ç¬¦ `operator()` çå¯¹è±¡ï¼ç§°ä¸ºå½æ°å¯¹è±¡ï¼FunctionObjectï¼ï¼
+可以使用函数调用运算符 `operator()` 的对象，称为函数对象（FunctionObject）．
 
-å®ä¸æ¯ä¸ç§è¯­è¨ç¹æ§ï¼èæ¯ä¸ç§ [æ¦å¿µæè è¦æ±](https://zh.cppreference.com/w/cpp/named_req/FunctionObject)ï¼å¨æ ååºä¸­å¹¿æ³åºç¨ï¼
+它不是一种语言特性，而是一种 [概念或者要求](https://zh.cppreference.com/w/cpp/named_req/FunctionObject)，在标准库中广泛应用．
 
-å½æ°å¯¹è±¡å¤§è´å¯ä»¥åæä¸¤ç±»ï¼
+函数对象大致可以分成两类：
 
-  1. å½æ°æé
-  2. éè½½äº `operator()` è¿ç®ç¬¦çç±»å¯¹è±¡
+  1. 函数指针
+  2. 重载了 `operator()` 运算符的类对象
 
-[lambda](../lambda/) å°±æ¯å ¸åçç¬¬äºç±»å½æ°å¯¹è±¡ï¼å®å°æè·çå å®¹å­æ¾å¨æååéä¸­ï¼å¹¶éè½½äºå½æ°è°ç¨è¿ç®ç¬¦ï¼
+[lambda](../lambda/) 就是典型的第二类函数对象，它将捕获的内容存放在成员变量中，并重载了函数调用运算符．
 
-## Lambda è¡¨è¾¾å¼
+## Lambda 表达式
 
-> è¯·åè [Lambda è¡¨è¾¾å¼](../lambda/) é¡µé¢ï¼
+> 请参考 [Lambda 表达式](../lambda/) 页面．
 
 ## std::function
 
-è¯·æ³¨ææ§è½å¼é
+请注意性能开销
 
-`std::function` ä¼å¼å ¥ä¸å®çæ§è½å¼éï¼ç» [Benchmark](../lambda/#lambda-ä¸­çéå½) æµè¯ï¼éå¸¸ä¼é æ 2 å° 3 åä»¥ä¸çæ§è½æå¤±ï¼
+`std::function` 会引入一定的性能开销，经 [Benchmark](../lambda/#lambda-中的递归) 测试，通常会造成 2 到 3 倍以上的性能损失．
 
-å ä¸ºå®ä½¿ç¨äºç±»åæ¦é¤çææ¯ï¼èè¿éå¸¸åç±èå½æ°æºå¶å®ç°ï¼è°ç¨èå½æ°ä¼å¼å ¥é¢å¤ç [å¼é](https://stackoverflow.com/questions/5057382/what-is-the-performance-overhead-of-stdfunction)ï¼
+因为它使用了类型擦除的技术，而这通常借由虚函数机制实现，调用虚函数会引入额外的 [开销](https://stackoverflow.com/questions/5057382/what-is-the-performance-overhead-of-stdfunction)．
 
-è¯·èèä½¿ç¨ [**Lambda è¡¨è¾¾å¼**](../lambda/) æè **å½æ°å¯¹è±¡** ä»£æ¿ï¼
+请考虑使用 [**Lambda 表达式**](../lambda/) 或者 **函数对象** 代替．
 
-`std::function` æ¯éç¨å½æ°å°è£ å¨ï¼å®ä¹äºå¤´æä»¶ `<functional>`ï¼
+`std::function` 是通用函数封装器，定义于头文件 `<functional>`．
 
-`std::function` çå®ä¾è½å­å¨ãå¤å¶åè°ç¨ä»»ä½ [**å¯è°ç¨**](https://zh.cppreference.com/w/cpp/named_req/Callable) å¯¹è±¡ï¼è¿å æ¬ [**Lambda è¡¨è¾¾å¼**](../lambda/)ãæåå½æ°æéæå ¶ä» **å½æ°å¯¹è±¡**ï¼
+`std::function` 的实例能存储、复制及调用任何 [**可调用**](https://zh.cppreference.com/w/cpp/named_req/Callable) 对象，这包括 [**Lambda 表达式**](../lambda/)、成员函数指针或其他 **函数对象**．
 
-è¥ `std::function` ä¸å«ä»»ä½å¯è°ç¨å¯¹è±¡ï¼æ¯å¦é»è®¤æé ï¼ï¼è°ç¨æ¶å°æåº [`std::bad_function_call`](https://zh.cppreference.com/w/cpp/utility/functional/bad_function_call) å¼å¸¸ï¼
+若 `std::function` 不含任何可调用对象（比如默认构造），调用时将抛出 [`std::bad_function_call`](https://zh.cppreference.com/w/cpp/utility/functional/bad_function_call) 异常．
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 ``` |  ```text #include <functional> #include <iostream> struct Foo { Foo ( int num ) : num_ ( num ) {} void print_add ( int i ) const { std :: cout << num_ \+ i << '\n' ; } int num_ ; }; void print_num ( int i ) { std :: cout << i << '\n' ; } struct PrintNum { void operator ()( int i ) const { std :: cout << i << '\n' ; } }; int main () { // å­å¨èªç±å½æ° std :: function < void ( int ) > f_display = print_num ; f_display ( -9 ); // å­å¨ Lambda std :: function < void () > f_display_42 = []() { print_num ( 42 ); }; f_display_42 (); // å­å¨å°æåå½æ°çè°ç¨ std :: function < void ( const Foo & , int ) > f_add_display = & Foo :: print_add ; const Foo foo ( 314159 ); f_add_display ( foo , 1 ); f_add_display ( 314159 , 1 ); // å­å¨å°æ°æ®æåè®¿é®å¨çè°ç¨ std :: function < int ( Foo const & ) > f_num = & Foo :: num_ ; std :: cout << "num_: " << f_num ( foo ) << '\n' ; // å­å¨å°å½æ°å¯¹è±¡çè°ç¨ std :: function < void ( int ) > f_display_obj = PrintNum (); f_display_obj ( 18 ); } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 ``` |  ```text #include <functional> #include <iostream> struct Foo { Foo ( int num ) : num_ ( num ) {} void print_add ( int i ) const { std :: cout << num_ \+ i << '\n' ; } int num_ ; }; void print_num ( int i ) { std :: cout << i << '\n' ; } struct PrintNum { void operator ()( int i ) const { std :: cout << i << '\n' ; } }; int main () { // 存储自由函数 std :: function < void ( int ) > f_display = print_num ; f_display ( -9 ); // 存储 Lambda std :: function < void () > f_display_42 = []() { print_num ( 42 ); }; f_display_42 (); // 存储到成员函数的调用 std :: function < void ( const Foo & , int ) > f_add_display = & Foo :: print_add ; const Foo foo ( 314159 ); f_add_display ( foo , 1 ); f_add_display ( 314159 , 1 ); // 存储到数据成员访问器的调用 std :: function < int ( Foo const & ) > f_num = & Foo :: num_ ; std :: cout << "num_: " << f_num ( foo ) << '\n' ; // 存储到函数对象的调用 std :: function < void ( int ) > f_display_obj = PrintNum (); f_display_obj ( 18 ); } ```   
 ---|---  
   
-## å¯ååæ°å½æ°æ¨¡æ¿
+## 可变参数函数模板
 
-å¨ C++11 ä¹åï¼ç±»æ¨¡æ¿åå½æ°æ¨¡æ¿é½åªè½æ¥ååºå®æ°ç®çæ¨¡æ¿åæ°ï¼C++11 å è®¸ **ä»»æä¸ªæ°ãä»»æç±»å** çæ¨¡æ¿åæ°ï¼
+在 C++11 之前，类模板和函数模板都只能接受固定数目的模板参数．C++11 允许 **任意个数、任意类型** 的模板参数．
 
-è¿éä» ç®è¦ä»ç»å¯ååæ° **å½æ°** æ¨¡æ¿ï¼
+这里仅简要介绍可变参数 **函数** 模板．
 
-ä¸åä»£ç å£°æçå½æ°æ¨¡æ¿ `fun` å¯ä»¥æ¥åä»»æä¸ªæ°ãä»»æç±»åçæ¨¡æ¿åæ°ä½ä¸ºå®çæ¨¡æ¿å½¢åï¼
+下列代码声明的函数模板 `fun` 可以接受任意个数、任意类型的模板参数作为它的模板形参．
 
 ```text 1 2 ``` |  ```text template < typename ... Clazz > void fun ( Clazz ... paras ) {} ```   
 ---|---  
   
-`paras` æ¯ä¸ä¸ªå½æ°åæ°å ï¼function parameter packï¼ï¼æ¥å 0 ä¸ªæå¤ä¸ªå½æ°å®åï¼`Clazz` æ¯ä¸ä¸ªæ¨¡æ¿åæ°å ï¼template parameter packï¼ï¼æ¥å 0 ä¸ªæå¤ä¸ªæ¨¡æ¿å®åï¼éç±»åãç±»åææ¨¡æ¿ï¼ï¼ä»¥ `typename` æ è®°æ¶åªæ¥åç±»åï¼
+`paras` 是一个函数参数包（function parameter pack），接受 0 个或多个函数实参．`Clazz` 是一个模板参数包（template parameter pack），接受 0 个或多个模板实参（非类型、类型或模板），以 `typename` 标记时只接受类型．
 
-å¯ä»¥ç®åçè§£å¦ä¸ï¼
+可以简单理解如下：
 
-  * æ¨¡æ¿åæ°å éå¸¸æ¯ä¸äºç±»ååï¼ä½ä¹å¯ä»¥ä½¿ç¨ç¼è¯æå¸¸éææ¨¡æ¿åï¼
-  * å½æ°åæ°å éå¸¸æ¯ä¸äºåéå
+  * 模板参数包通常是一些类型名（但也可以使用编译期常量或模板名）
+  * 函数参数包通常是一些变量名
 
-ç°å¨å¯ä»¥è¿ä¹è°ç¨ `fun` å½æ°ï¼
+现在可以这么调用 `fun` 函数：
 
 ```text 1 2 3 4 ``` |  ```text fun (); fun ( 1 ); fun ( 1 , 2 , 3 ); fun ( 1 , 0.0 , "abc" ); ```   
 ---|---  
   
-### åæ°å å±å¼
+### 参数包展开
 
-#### åæ°å å±å¼è¯­æ³
+#### 参数包展开语法
 
-åæ°å å±å¼éå¸¸ç®åï¼ä½¿ç¨ `...` å³å¯ï¼å°èªå¨ä½¿ç¨ `,` åéï¼æ¯å¦ï¼
+参数包展开非常简单，使用 `...` 即可，将自动使用 `,` 分隔．比如：
 
-```text 1 2 3 4 5 6 7 8 9 10 ``` |  ```text template < class A , class ... C > void func ( A arg1 , C ... arg2 ) { // C æ¯ æ¨¡æ¿åæ°å tuple < A , C ... > (); // å±å¼æ tuple<int, int, double, bool>(); // arg2 æ¯å½æ°åæ°å func ( arg2 ...); // å±å¼æ func( 2, 1.1, true ); } func ( 1 , 2 , 1.1 , true ); ```   
+```text 1 2 3 4 5 6 7 8 9 10 ``` |  ```text template < class A , class ... C > void func ( A arg1 , C ... arg2 ) { // C 是 模板参数包 tuple < A , C ... > (); // 展开成 tuple<int, int, double, bool>(); // arg2 是函数参数包 func ( arg2 ...); // 展开成 func( 2, 1.1, true ); } func ( 1 , 2 , 1.1 , true ); ```   
 ---|---  
   
-åæ°å å±å¼æ¶è¿å¯ä»¥éå¸¦éè¦çè¿ç®ï¼æ¯å¦ï¼
+参数包展开时还可以附带需要的运算，比如：
 
-```text 1 2 3 4 5 6 7 ``` |  ```text template < class A , class ... C > void func ( A arg1 , C ... arg2 ) { func (( arg2 \+ 1 )...); // å±å¼æ func( (2+1) , (1.1+1), (2.1f+1) ); } func ( 1 , 2 , 1.1 , 2.1f ); ```   
+```text 1 2 3 4 5 6 7 ``` |  ```text template < class A , class ... C > void func ( A arg1 , C ... arg2 ) { func (( arg2 \+ 1 )...); // 展开成 func( (2+1) , (1.1+1), (2.1f+1) ); } func ( 1 , 2 , 1.1 , 2.1f ); ```   
 ---|---  
   
-#### ç»æ­¢å½æ°
+#### 终止函数
 
-ä¸é¢çå½æ°æ æ³è¿è¡ï¼å ä¸ºåæ°æ°éä¸æ­åå°ï¼æååä¸ºç©ºåå¹¶æ¥éï¼
+上面的函数无法运行，因为参数数量不断减少，最后变为空参并报错．
 
-æä»¬éè¦æå®ç»æ­¢æ¡ä»¶ï¼å¯ä»¥æä¾ä¸ä¸ªæ®éå½æ°ï¼åè¿æ ·ï¼
+我们需要指定终止条件，可以提供一个普通函数，像这样：
 
 ```text 1 2 3 4 5 6 7 8 9 ``` |  ```text void func () {} template < class A , class ... C > void func ( A arg1 , C ... arg2 ) { std :: cout << arg1 << std :: endl ; func (( arg2 \+ 1 )...); } func ( 1 , 2 , 1.1 , 2.1f ); ```   
 ---|---  
   
-è¿æ ·ï¼åæ°æ°éä¸ä¸º 0 æ¶ä¼è°ç¨æ¨¡æ¿ï¼ç©ºåæ¶ä¼è°ç¨æ®éå½æ°ï¼å°±è½æ­£å¸¸è¿è¡äºï¼
+这样，参数数量不为 0 时会调用模板，空参时会调用普通函数，就能正常运行了．
 
-### æå è¡¨è¾¾å¼ï¼C++17ï¼
+### 折叠表达式（C++17）
 
-C++17 æä¾äºä¸ç§ç®ä¾¿çè¯­æ³å¤ç **å½æ°åæ°å** ï¼ä»çè¯­æ³æ¯è¿æ ·çï¼å¿ é¡»ç¨å°æ¬å·å è£¹ï¼ï¼
+C++17 提供了一种简便的语法处理 **函数参数包** ，他的语法是这样的（必须用小括号包裹）：
 
-  1. `( pack op ... )`ï¼ä¼åæ `(E1 op (... op (EN-1 op EN)))`
-  2. `( ... op pack )`ï¼ä¼åæ `(((E1 op E2) op ...) op EN)`
-  3. `( pack op ... op init )`ï¼ä¼åæ `(E1 op (... op (ENâ1 op (EN op I))))`
-  4. `( init op ... op pack )`ï¼ä¼åæ `((((I op E1) op E2) op ...) op EN)`
+  1. `( pack op ... )`，会变成 `(E1 op (... op (EN-1 op EN)))`
+  2. `( ... op pack )`，会变成 `(((E1 op E2) op ...) op EN)`
+  3. `( pack op ... op init )`，会变成 `(E1 op (... op (EN−1 op (EN op I))))`
+  4. `( init op ... op pack )`，会变成 `((((I op E1) op E2) op ...) op EN)`
 
-ç®åæ¼ç¤ºä¸ä¸å°±å¥½çè§£äºï¼
+简单演示一下就好理解了：
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ``` |  ```text template < class ... C > void func ( C ... args ) { ( std :: cout << ... << args ) << std :: endl ; // è¯­æ³ 4, ç­ä»·äº â // ( ( ( std::cout << 1 ) << 2.1 ) << true ) << std::endl; // è¾åº: 12.11 æ³¨ætrueè¾åºæäº1ï¼å ä¸ºè¿éæ²¡ææå®boolalpha std :: cout << ( args && ...) << std :: endl ; // è¯­æ³ 1, ç­ä»·äº â // std::cout << ( 1 && ( 2.1 && true ) ) ) << std::endl; // è¾åº: 1 } func ( 1 , 2.1 , true ); ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 ``` |  ```text template < class ... C > void func ( C ... args ) { ( std :: cout << ... << args ) << std :: endl ; // 语法 4, 等价于 ↓ // ( ( ( std::cout << 1 ) << 2.1 ) << true ) << std::endl; // 输出: 12.11 注意true输出成了1，因为这里没有指定boolalpha std :: cout << ( args && ...) << std :: endl ; // 语法 1, 等价于 ↓ // std::cout << ( 1 && ( 2.1 && true ) ) ) << std::endl; // 输出: 1 } func ( 1 , 2.1 , true ); ```   
 ---|---  
   
-### ç¼©åå½æ°æ¨¡æ¿ï¼C++20ï¼
+### 缩写函数模板（C++20）
 
-C++20 èµ·å¯ä»¥ç´æ¥ä½¿ç¨ `auto ...` ä½ä¸ºåæ°ç±»åï¼å®ç°å½æ°æ¨¡æ¿çç¼©åï¼
+C++20 起可以直接使用 `auto ...` 作为参数类型，实现函数模板的缩写：
 
 ```text 1 ``` |  ```text void func ( auto ... args ) { ( std :: cout << ... << args ) << std :: endl ; } ```   
 ---|---  
   
-æ³¨æå®æ¬è´¨ä¸ä»ç¶æ¯å½æ°æ¨¡æ¿ï¼ä¸ä¸é¢çåæ³ç­ä»·ï¼
+注意它本质上仍然是函数模板，与下面的写法等价：
 
 ```text 1 2 3 4 ``` |  ```text template < class ... T > void func ( T ... args ) { ( std :: cout << ... << args ) << std :: endl ; } ```   
 ---|---  
   
-## èå´åºï¼C++20ï¼
+## 范围库（C++20）
 
-> èå´åºæ¯å¯¹è¿­ä»£å¨åæ³åç®æ³åºçä¸ä¸ªæ©å±ï¼ä½¿å¾è¿­ä»£å¨åç®æ³å¯ä»¥éè¿ç»ååå¾æ´å¼ºå¤§ï¼å¹¶ä¸åå°éè¯¯ï¼
+> 范围库是对迭代器和泛型算法库的一个扩展，使得迭代器和算法可以通过组合变得更强大，并且减少错误．
 
-èå´å³å¯éåçåºåï¼å æ¬æ°ç»ãå®¹å¨ãè§å¾ç­ï¼
+范围即可遍历的序列，包括数组、容器、视图等．
 
-å¨éè¦å¯¹å®¹å¨ç­èå´è¿è¡å¤ææä½æ¶ï¼[èå´åº](https://zh.cppreference.com/w/cpp/ranges) å¯ä»¥ä½¿å¾ç®æ³ç¼åæ´å å®¹æåæ¸ æ°ï¼
+在需要对容器等范围进行复杂操作时，[范围库](https://zh.cppreference.com/w/cpp/ranges) 可以使得算法编写更加容易和清晰．
 
-### View è§å¾
+### View 视图
 
-è§å¾æ¯ä¸ç§è½»éå¯¹è±¡ï¼éè¿ç¹å®æºå¶ï¼å¦èªå®ä¹è¿­ä»£å¨ï¼æ¥å®ç°ä¸äºç®æ³ï¼ç»èå´æä¾äºæ´å¤çéåæ¹å¼ä»¥æ»¡è¶³éæ±ï¼
+视图是一种轻量对象，通过特定机制（如自定义迭代器）来实现一些算法，给范围提供了更多的遍历方式以满足需求．
 
-èå´åºä¸­å·²å®ç°äºä¸äºå¸¸ç¨çè§å¾ï¼å¤§è´åä¸ºä¸¤ç§ï¼
+范围库中已实现了一些常用的视图，大致分为两种：
 
-  1. **èå´å·¥å** ï¼ç¨äºæé ä¸äºç¹æ®çèå´ï¼ä½¿ç¨è¿ç±»å·¥åå¯ä»¥çå»æå¨æé å®¹å¨çæ­¥éª¤ï¼éä½å¼éï¼ç´æ¥çæä¸ä¸ªèå´ï¼
-  2. **èå´éé å¨** ï¼æä¾å¤ç§å¤æ ·çéåæ¯æï¼æ¢è½åå½æ°ä¸æ ·è°ç¨ï¼ä¹å¯ä»¥éè¿ç®¡éè¿ç®ç¬¦ `|` è¿æ¥ï¼å®ç°é¾å¼è°ç¨ï¼
+  1. **范围工厂** ，用于构造一些特殊的范围，使用这类工厂可以省去手动构造容器的步骤，降低开销，直接生成一个范围．
+  2. **范围适配器** ，提供多种多样的遍历支持，既能像函数一样调用，也可以通过管道运算符 `|` 连接，实现链式调用．
 
-**èå´éé å¨** ä½ä¸º [**èå´éé å¨é­å å¯¹è±¡**](https://zh.cppreference.com/w/cpp/named_req/RangeAdaptorClosureObject)ï¼ä¹å±äº **å½æ°å¯¹è±¡**ï¼å®ä»¬éè½½äº `operator|`ï¼ä½¿å¾å®ä»¬è½å¤åç®¡éä¸æ ·æ¼è£ èµ·æ¥ï¼
+**范围适配器** 作为 [**范围适配器闭包对象**](https://zh.cppreference.com/w/cpp/named_req/RangeAdaptorClosureObject)，也属于 **函数对象**，它们重载了 `operator|`，使得它们能够像管道一样拼装起来．
 
-ç®¡éè¿ç®ç¬¦
+管道运算符
 
-æ­¤å¤ç `|` åºè¯¥çè§£æç®¡éè¿ç®ç¬¦ï¼èéæä½æè¿ç®ç¬¦ï¼è¿ä¸ªç¨æ³æ¥èªäº Linux ä¸­ç [ç®¡é](https://zh.wikipedia.org/wiki/%E7%AE%A1%E9%81%93_%28Unix%29)ï¼
+此处的 `|` 应该理解成管道运算符，而非按位或运算符，这个用法来自于 Linux 中的 [管道](https://zh.wikipedia.org/wiki/%E7%AE%A1%E9%81%93_%28Unix%29)．
 
-å¨å¤ææä½ä¸ï¼ä¹è½ä¿æè¯å¥½å¯è¯»æ§ï¼æä»¥ä¸ç¹æ§ï¼
+在复杂操作下，也能保持良好可读性，有以下特性：
 
-è¥ AãBãC ä¸ºä¸äºèå´éé å¨é­å å¯¹è±¡ï¼R ä¸ºæä¸ªèå´ï¼å ¶ä»å­æ¯ä¸ºå¯è½çææåæ°ï¼è¡¨è¾¾å¼
+若 A、B、C 为一些范围适配器闭包对象，R 为某个范围，其他字母为可能的有效参数，表达式
 
 ```text 1 ``` |  ```text R | A(a) | B(b) | C(c, d) ```   
 ---|---  
   
-ç­ä»·äº
+等价于
 
 ```text 1 ``` |  ```text C(B(A(R, a), b), c, d) ```   
 ---|---  
   
-ä¸é¢ä»¥ `ranges::take_view` ä¸ `ranges::iota_view` ä¸ºä¾ï¼
+下面以 `ranges::take_view` 与 `ranges::iota_view` 为例：
 
 ```text 1 2 3 4 5 6 7 8 9 ``` |  ```text #include <iostream> #include <ranges> int main () { const auto even = []( int i ) { return 0 == i % 2 ; }; for ( int i : std :: views :: iota ( 0 , 6 ) | std :: views :: filter ( even )) std :: cout << i << ' ' ; } ```   
 ---|---  
   
-  1. èå´å·¥å `std::views::iota(0, 6)` çæäºä» 0 å° 5 çæ´æ°åºåçèå´
-  2. èå´éé å¨ `std::views::filter(even)` è¿æ»¤åä¸ä¸ªèå´ï¼çæäºä¸ä¸ªåªå©ä¸å¶æ°çèå´
-  3. ä¸¤ä¸ªæä½ä½¿ç¨ç®¡éè¿ç®ç¬¦é¾æ¥
+  1. 范围工厂 `std::views::iota(0, 6)` 生成了从 0 到 5 的整数序列的范围
+  2. 范围适配器 `std::views::filter(even)` 过滤前一个范围，生成了一个只剩下偶数的范围
+  3. 两个操作使用管道运算符链接
 
-ä¸è¿°ä»£ç ä¸éè¦é¢å¤åé å ç©ºé´å­å¨æ¯æ­¥çæçèå´ï¼å®é ççæåè¿æ»¤è¿ç®åçå¨éåæä½ä¸­ï¼æ´å ·ä½èè¨ï¼å é¨çè¿­ä»£å¨æé ãèªå¢åè§£å¼ç¨ï¼ï¼ä¹å°±æ¯é¶å¼éï¼Zero Overheadï¼ï¼
+上述代码不需要额外分配堆空间存储每步生成的范围，实际的生成和过滤运算发生在遍历操作中（更具体而言，内部的迭代器构造、自增和解引用），也就是零开销（Zero Overhead）．
 
-åæ¶ï¼å¤é¨è¾å ¥çèå´çå½å¨æï¼ç­åäº **èå´éé å¨** çå é¨å ç´ ççå½å¨æï¼å¦æå¤é¨èå´ï¼æ¯å¦å®¹å¨ãèå´å·¥åï¼å·²ç»éæ¯ï¼é£ä¹åå¯¹è¿äºçè§å¾éåï¼å ¶ææä¸è§£å¼ç¨æ¬åæéä¸è´ï¼å±äºæªå®ä¹è¡ä¸ºï¼
+同时，外部输入的范围生命周期，等同于 **范围适配器** 的内部元素的生命周期．如果外部范围（比如容器、范围工厂）已经销毁，那么再对这些的视图遍历，其效果与解引用悬垂指针一致，属于未定义行为．
 
-ä¸ºäºé¿å ä¸è¿°æ åµï¼åºè¯¥ä¸¥æ ¼è¦æ±éé å¨ççå½å¨æä½äºå ¶ä½¿ç¨çä»»ä½èå´ççå½å¨æå ï¼
+为了避免上述情况，应该严格要求适配器的生命周期位于其使用的任何范围的生命周期内．
 
-èå´è¢«éæ¯æ¶ï¼è§å¾å å ç´ åæ¬å
+范围被销毁时，视图内元素均悬垂
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 ``` |  ```text #include <iostream> #include <ranges> #include <vector> using namespace std ; int main () { auto view = [] { vector < int > vec { 1 , 2 , 3 , 4 , 5 }; return vec | std :: views :: filter ([]( int i ) { return 0 == i % 2 ; }); }(); for ( int i : view ) cout << i << ' ' ; // runtime undefined behavior return 0 ; } ```   
 ---|---  
   
-### Constrained Algorithm åçº¦æçç®æ³
+### Constrained Algorithm 受约束的算法
 
-> C++20 å¨å½åç©ºé´ std::ranges ä¸­æä¾å¤§å¤æ°ç®æ³çåçº¦æçæ¬ï¼å¯ä»¥ç¨è¿­ä»£å¨ - å¨ä½å¯¹æåä¸ª range ä½ä¸ºå®åæ¥æå®èå´ï¼å¹¶ä¸æ¯ææå½±åæåæåæéå¯è°ç¨å¯¹è±¡ï¼å¦å¤è¿æ´æ¹äºå¤§å¤æ°ç®æ³çè¿åç±»åï¼ä»¥è¿åç®æ³æ§è¡è¿ç¨ä¸­è®¡ç®çæææ½å¨æç¨ä¿¡æ¯ï¼
+> C++20 在命名空间 std::ranges 中提供大多数算法的受约束版本，可以用迭代器 - 哨位对或单个 range 作为实参来指定范围，并且支持投影和指向成员指针可调用对象．另外还更改了大多数算法的返回类型，以返回算法执行过程中计算的所有潜在有用信息．
 
-è¿äºç®æ³å¯ä»¥çè§£ææ§æ ååºç®æ³çæ¹è¯çæ¬ï¼åä¸ºå½æ°å¯¹è±¡ï¼æä¾æ´åå¥½çéè½½åå ¥åç±»åæ£æ¥ï¼åºäº [`concept`](https://zh.cppreference.com/w/cpp/language/constraints)ï¼ï¼è®©æä»¬å ä»¥ `std::sort` å `ranges::sort` çå¯¹æ¯ä½ä¸ºä¾å­
+这些算法可以理解成旧标准库算法的改良版本，均为函数对象，提供更友好的重载和入参类型检查（基于 [`concept`](https://zh.cppreference.com/w/cpp/language/constraints)），让我们先以 `std::sort` 和 `ranges::sort` 的对比作为例子
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 ``` |  ```text #include <algorithm> #include <iostream> #include <vector> using namespace std ; int main () { vector < int > vec { 4 , 2 , 5 , 3 , 1 }; sort ( vec . begin (), vec . end ()); // {1, 2, 3, 4, 5} for ( const int i : vec ) cout << i << ", " ; cout << '\n' ; ranges :: sort ( vec , ranges :: greater {}); // {5, 4, 3, 2, 1} for ( const int i : vec ) cout << i << ", " ; return 0 ; } ```   
 ---|---  
   
-`ranges::sort` å `sort` çç®æ³å®ç°ç¸åï¼ä½æä¾äºåºäºèå´çéè½½ï¼ä½¿å¾ä¼ åæ´ä¸ºç®æ´ï¼å ¶ä»ç `std` å½åç©ºé´ä¸çç®æ³ï¼å¤æ°ä¹æå¯¹åºçèå´éè½½çæ¬ä½äº `ranges` å½åç©ºé´ä¸­ï¼
+`ranges::sort` 和 `sort` 的算法实现相同，但提供了基于范围的重载，使得传参更为简洁．其他的 `std` 命名空间下的算法，多数也有对应的范围重载版本位于 `ranges` 命名空间中．
 
-ä½¿ç¨è¿äºèå´å ¥åï¼åç»åä½¿ç¨ä¸èè§å¾ï¼è½å è®¸æä»¬å¨è¿è¡å¤ææä½çåæ¶ï¼ä¿æä»£ç å¯è¯»æ§ï¼è®©æä»¬çä¸ä¸ªä¾å­ï¼
+使用这些范围入参，再结合使用上节视图，能允许我们在进行复杂操作的同时，保持代码可读性，让我们看一个例子：
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 ``` |  ```text #include <algorithm> #include <array> #include <iostream> #include <ranges> using namespace std ; int main () { const auto & inputs = views :: iota ( 0u , 9u ); // çäº§ 0 å° 8 çæ´æ°åºå const auto & chunks = inputs | views :: chunk ( 3 ); // å°åºåååï¼æ¯å 3 ä¸ªå ç´ const auto & cartesian_product = views :: cartesian_product ( chunks , chunks ); // è®¡ç®å¯¹åèªèº«è¿è¡ç¬å¡å°ç§¯ for ( const auto [ l_chunk , r_chunk ] : cartesian_product ) // è®¡ç®ç¬å¡å°ç§¯ä¸çä¸¤ä¸ªåæ´æ°çå cout << ranges :: fold_left ( l_chunk , 0u , plus {}) \+ ranges :: fold_left ( r_chunk , 0u , plus {}) << ' ' ; } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 ``` |  ```text #include <algorithm> #include <array> #include <iostream> #include <ranges> using namespace std ; int main () { const auto & inputs = views :: iota ( 0u , 9u ); // 生产 0 到 8 的整数序列 const auto & chunks = inputs | views :: chunk ( 3 ); // 将序列分块，每块 3 个元素 const auto & cartesian_product = views :: cartesian_product ( chunks , chunks ); // 计算对块自身进行笛卡尔积 for ( const auto [ l_chunk , r_chunk ] : cartesian_product ) // 计算笛卡尔积下的两个块整数的和 cout << ranges :: fold_left ( l_chunk , 0u , plus {}) \+ ranges :: fold_left ( r_chunk , 0u , plus {}) << ' ' ; } ```   
 ---|---  
   
-è¾åºï¼
+输出：
 
 6 15 24 15 24 33 24 33 42
 
-## åè
+## 参考
 
-  1. [C++ åèæå](https://zh.cppreference.com/)
+  1. [C++ 参考手册](https://zh.cppreference.com/)
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/new.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/lang/new.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Backl1ght](https://github.com/Backl1ght), [Ir1d](https://github.com/Ir1d), [Tiphereth-A](https://github.com/Tiphereth-A), [ChenZ01](https://github.com/ChenZ01), [Enter-tainer](https://github.com/Enter-tainer), [c0nstexpr](https://github.com/c0nstexpr), [cmpute](https://github.com/cmpute), [zhb2000](https://github.com/zhb2000), [alphagocc](https://github.com/alphagocc), [CCXXXI](https://github.com/CCXXXI), [CoderOJ](https://github.com/CoderOJ), [FinParker](https://github.com/FinParker), [gi-b716](https://github.com/gi-b716), [huanhuanonly](https://github.com/huanhuanonly), [jyeric](https://github.com/jyeric), [ksyx](https://github.com/ksyx), [Mysvac](https://github.com/Mysvac), [StudyingFather](https://github.com/StudyingFather), [Xeonacid](https://github.com/Xeonacid)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/new.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/lang/new.md "edit.link.title")  
+>  __本页面贡献者：[Backl1ght](https://github.com/Backl1ght), [Ir1d](https://github.com/Ir1d), [Tiphereth-A](https://github.com/Tiphereth-A), [ChenZ01](https://github.com/ChenZ01), [Enter-tainer](https://github.com/Enter-tainer), [c0nstexpr](https://github.com/c0nstexpr), [cmpute](https://github.com/cmpute), [zhb2000](https://github.com/zhb2000), [alphagocc](https://github.com/alphagocc), [CCXXXI](https://github.com/CCXXXI), [CoderOJ](https://github.com/CoderOJ), [FinParker](https://github.com/FinParker), [gi-b716](https://github.com/gi-b716), [huanhuanonly](https://github.com/huanhuanonly), [jyeric](https://github.com/jyeric), [ksyx](https://github.com/ksyx), [Mysvac](https://github.com/Mysvac), [StudyingFather](https://github.com/StudyingFather), [Xeonacid](https://github.com/Xeonacid)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

@@ -1,4 +1,4 @@
-# 常量 - OI Wiki
+﻿# 常量 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/const/
 

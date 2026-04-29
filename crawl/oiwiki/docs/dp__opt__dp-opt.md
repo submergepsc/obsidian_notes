@@ -1,4 +1,4 @@
-# DP 优化简介 - OI Wiki
+﻿# DP 优化简介 - OI Wiki
 
 - Source: https://oi-wiki.org/dp/opt/dp-opt/
 

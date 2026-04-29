@@ -1,206 +1,206 @@
-# åç­åæ¢ - OI Wiki
+﻿# 初等变换 - OI Wiki
 
 - Source: https://oi-wiki.org/math/linear-algebra/elementary-operations/
 
-# åç­åæ¢
+# 初等变换
 
-## åç­ç©éµ
+## 初等矩阵
 
-ä»¥ä¸ä¸ç±»æ¹éµç§°ä¸ºåç­ç©éµï¼
+以下三类方阵称为初等矩阵．
 
-### åä¹ç©éµ
+### 倍乘矩阵
 
-åä¹ç©éµæ¯ä¸ç§ç¹æ®çå¯¹è§ç©éµï¼
+倍乘矩阵是一种特殊的对角矩阵．
 
-ð·ð(ð)=diagâ¡{1,â¯,1,ð,1,â¯,1}Di(k)=diagâ¡{1,â¯,1,k,1,â¯,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐷𝑖(𝑘)=diag⁡{1,⋯,1,𝑘,1,⋯,1}Di(k)=diag⁡{1,⋯,1,k,1,⋯,1}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¡¨ç¤ºä¸ä¸ªå¯¹è§éµï¼ä¸»å¯¹è§çº¿ä¸ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶ä¸è§å® ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è½ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä½çå ç´ å ¨é¨ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+表示一个对角阵，主对角线上第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并且规定 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不能为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其余的元素全部为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç¹å«å°ï¼å½ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶åï¼ð·ð(1)Di(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯åä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+特别地，当 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时候，𝐷𝑖(1)Di(1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### å¯¹æ¢ç©éµ
+### 对换矩阵
 
-å¯¹æ¢ç©éµæ¯ä¸ç§ç¹æ®çå¯¹ç§°ç©éµï¼
+对换矩阵是一种特殊的对称矩阵．
 
-ððð=ââ â â â â â â â â ââð¼ðâ101ð¼ðâðâ110ð¼ðâðââ â â â â â â â â ââ Pij=(Iiâ101Ijâiâ110Inâj)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑃𝑖𝑗=⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝐼𝑖−101𝐼𝑗−𝑖−110𝐼𝑛−𝑗⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠Pij=(Ii−101Ij−i−110In−j)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹æ¢ç©éµçå ç´ å ¨æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸»å¯¹è§çº¿ä¸å ¶ä½å ç´ åä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä» æç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ åç¬¬ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå ç´ ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èå¨ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ç¬¬ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åãç¬¬ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸çä¸¤ä¸ªå ç´ ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+对换矩阵的元素全是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，主对角线上其余元素均为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，仅有第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素和第 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个元素为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而在第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行第 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 列、第 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 列上的两个元素为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¯¹æ¢ç©éµè¦æ± ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è½ç¸ç­ï¼
+对换矩阵要求 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不能相等．
 
-### åå ç©éµ
+### 倍加矩阵
 
-åå ç©éµæ¯å¨åä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåºç¡ä¸ï¼ä»¤ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ç¬¬ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+倍加矩阵是在单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的基础上，令第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行第 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 列为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ððð(ð)=ââ â â â â â â â â â â â â â â ââ1â±1â¯ðâ±â®1â±1ââ â â â â â â â â â â â â â â ââ Tij(k)=(1â±1â¯kâ±â®1â±1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑇𝑖𝑗(𝑘)=⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝1⋱1⋯𝑘⋱⋮1⋱1⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠Tij(k)=(1⋱1⋯k⋱⋮1⋱1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åå ç©éµè¦æ± ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è½ç¸ç­ï¼å¦æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ððð(0)Tij(0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éåä¸ºåä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+倍加矩阵要求 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不能相等．如果 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则 𝑇𝑖𝑗(0)Tij(0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 退化为单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åå ç©éµæ¯ä¸ç§ä¸ä¸è§ç©éµæè ä¸ä¸è§ç©éµï¼
+倍加矩阵是一种上三角矩阵或者下三角矩阵．
 
-### åç­ç©éµçè¡åå¼
+### 初等矩阵的行列式
 
-ä¸ç§åç­ç©éµå ·æè¡åå¼ï¼
+三种初等矩阵具有行列式：
 
-|ð·ð(ð)|=ð|Di(k)|=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)|ððð|=â1|Pij|=â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)|ððð(ð)|=1|Tij(k)|=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+|𝐷𝑖(𝑘)|=𝑘|Di(k)|=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)|𝑃𝑖𝑗|=−1|Pij|=−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)|𝑇𝑖𝑗(𝑘)|=1|Tij(k)|=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±äºæ¹éµä¹æ³çè¡åå¼ç­äºè¡åå¼çä¹æ³ï¼åå©ä¸æåç­åæ¢ä¸ç©éµä¹æ³çç­ä»·æ§ï¼åç­ç©éµçè¿ä¸ªæ§è´¨å¯ä»¥ç¨äºè¡åå¼çè®¡ç®ï¼
+由于方阵乘法的行列式等于行列式的乘法，借助下文初等变换与矩阵乘法的等价性，初等矩阵的这个性质可以用于行列式的计算．
 
-## åç­åæ¢
+## 初等变换
 
-ä¸ä» éäºæ¹éµï¼å¯¹äºä¸è¬çç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥è¿è¡åç­è¡åæ¢ååç­ååæ¢ï¼ç»ç§°ä¸ºåç­åæ¢ï¼
+不仅限于方阵，对于一般的矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以进行初等行变换和初等列变换，统称为初等变换．
 
-åç­è¡åæ¢ä¸åç­ååæ¢ä¸æ ·ï¼é½æ 3 ç§ï¼åä¹ï¼multiplicationï¼ãå¯¹æ¢ï¼switchingï¼ãåå ï¼additionï¼ï¼è¿éå ä»ç»åç­è¡åæ¢ï¼
+初等行变换与初等列变换一样，都有 3 种：倍乘（multiplication）、对换（switching）、倍加（addition）．这里先介绍初等行变换：
 
-  * ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ä¹éé¶æ° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðµ â¦ð·ð(ð)ðµBâ¦Di(k)B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡äºæ¢ï¼ðµ â¦ððððµBâ¦PijB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * ç¬¬ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ä¹ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å å°ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ï¼ðµ â¦ððð(ð)ðµBâ¦Tij(k)B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行乘非零数 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：𝐵 ↦𝐷𝑖(𝑘)𝐵B↦Di(k)B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  * 第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行互换：𝐵 ↦𝑃𝑖𝑗𝐵B↦PijB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  * 第 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行乘 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 加到第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行：𝐵 ↦𝑇𝑖𝑗(𝑘)𝐵B↦Tij(k)B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å°ä¸è¿°æä½çè¡æ¹ä¸ºåï¼å³å¾å°åç­ååæ¢ï¼
+将上述操作的行改为列，即得到初等列变换．
 
-å¨åç­åæ¢ä¸­ï¼å¯¹æ¢å¯ä»¥éè¿åä¹ååå å®ç°ï¼æ¾ç¶ï¼åå ä¸è½éè¿åä¹åå¯¹æ¢å®ç°ï¼åå©è¡åå¼çç¥è¯ï¼ä»¥åä¸æçåç­åæ¢ä¸ç©éµä¹æ³çç­ä»·æ§ï¼ä¹è½è¯´æåä¹ä¸è½éè¿åå åå¯¹æ¢å®ç°ï¼
+在初等变换中，对换可以通过倍乘和倍加实现．显然，倍加不能通过倍乘和对换实现．借助行列式的知识，以及下文的初等变换与矩阵乘法的等价性，也能说明倍乘不能通过倍加和对换实现．
 
-å æ­¤ï¼ç¸è¾å¯¹æ¢èè¨ï¼åä¹ååå æ¯æ´ä¸ºæ¬è´¨çæä½ï¼å¯¹æ¢æä½æ¯ä¸ºäºå¨æ¶å æ³ä¸­ï¼ä¿è¯æ¶å çæåºï¼èå¼å ¥çè¾ å©æä½ï¼
+因此，相较对换而言，倍乘和倍加是更为本质的操作．对换操作是为了在消元法中，保证消元的有序，而引入的辅助操作．
 
-## åç­åæ¢ä¸ç©éµä¹æ³
+## 初等变换与矩阵乘法
 
-å¯ä»¥åç°ï¼ä¸ç±»åç­ç©éµé½æ¯å¨åä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è¿è¡ä¸æ¬¡ç¸åºçåæ¢å¾å°çç»æï¼å¨åæççº¿æ§åæ¢ä¸­æåºï¼çº¿æ§åæ¢ä¸ç©éµä¹é´æå¯¹åºå ³ç³»ï¼ä¸è¿éçå ³ç³»ç±»ä¼¼ï¼
+可以发现，三类初等矩阵都是在单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上进行一次相应的变换得到的结果．在后文的线性变换中指出，线性变换与矩阵之间有对应关系，与这里的关系类似．
 
-æ è®ºç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¦æ¹éµï¼å¯¹ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿è¡åç­è¡åæ¢ï¼ç­ä»·äºå¯¹ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å·¦ä¹åç­ç©éµï¼å¯¹ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿è¡åç­ååæ¢ï¼ç­ä»·äºå¯¹ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å³ä¹åç­ç©éµï¼
+无论矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是否方阵，对矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进行初等行变换，等价于对矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 左乘初等矩阵．对矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进行初等列变换，等价于对矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 右乘初等矩阵．
 
-### åä¹æä½
+### 倍乘操作
 
-å·¦ä¹ä¸ä¸ªåä¹ç©éµ ð·ð(ð)Di(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç­ä»·äºå°ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡åä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åï¼å³ä¹ä¸ä¸ªåä¹ç©éµ ð·ð(ð)Di(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç­ä»·äºå°ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ååä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åï¼
+左乘一个倍乘矩阵 𝐷𝑖(𝑘)Di(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，等价于将第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行变为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 倍．右乘一个倍乘矩阵 𝐷𝑖(𝑘)Di(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，等价于将第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 列变为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 倍．
 
-å¯¹è§éµä¹å¯¹è§éµè¿æ¯å¯¹è§éµï¼å¯¹äºå¯¹è§éµçä¹æ³ï¼å°ä¸»å¯¹è§çº¿ä¸å¯¹åºçå ç´ ç¸ä¹ï¼ç±äºåä½éµæ¯ç¹æ®çåä¹éµï¼èåä¹éµè¦æ± ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥çåºï¼åªè¦å¯¹è§éµä¸»å¯¹è§çº¿ä¸çå ç´ åé 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±å¯ä»¥æåä¸ºåä¹éµçä¹ç§¯ï¼
+对角阵乘对角阵还是对角阵，对于对角阵的乘法，将主对角线上对应的元素相乘．由于单位阵是特殊的倍乘阵，而倍乘阵要求 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以看出，只要对角阵主对角线上的元素均非 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就可以拆分为倍乘阵的乘积．
 
-å¯¹äºä¸è¬çå¯¹è§éµï¼æ è®ºå ç´ æ¯å¦ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¹æç¸åºçç»è®ºï¼å·¦ä¹å¯¹è§éµï¼ç­ä»·äºå°å¯¹åºçè¡åä¸ºåæ¥çè¥å¹²åï¼åæ°æ°ä¸ºå¯¹è§éµä¸»å¯¹è§çº¿ä¸çç¸åºå ç´ ï¼å³ä¹å¯¹è§éµï¼æ¯å¯¹ç¸åºçåè¿è¡åæ ·æä½ï¼
+对于一般的对角阵，无论元素是否为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，也有相应的结论．左乘对角阵，等价于将对应的行变为原来的若干倍，倍数恰为对角阵主对角线上的相应元素．右乘对角阵，是对相应的列进行同样操作．
 
-ç±äºåä¹ç©éµ ð·ð(ð)Di(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¡åå¼ä¸º ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºæ¹éµçè¡æåè¿è¡åä¹æä½ä¹åï¼æ¹éµå¯¹åºçè¡åå¼åä¸ºåæ¥ç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åï¼å¯¹è§éµçè¡åå¼ä¸ºä¸»å¯¹è§çº¿å ç´ çä¹ç§¯ï¼
+由于倍乘矩阵 𝐷𝑖(𝑘)Di(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的行列式为 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，对于方阵的行或列进行倍乘操作之后，方阵对应的行列式变为原来的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 倍．对角阵的行列式为主对角线元素的乘积．
 
-åä¹ç©éµçä¹æ³å¯ä»¥äº¤æ¢ï¼å¯¹è§éµçä¹æ³ä¹å¯ä»¥äº¤æ¢ï¼å¨ä¹æ³åªæå¯¹è§éµæ¶ï¼é¡ºåºå¯ä»¥ä»»ææåï¼
+倍乘矩阵的乘法可以交换，对角阵的乘法也可以交换，在乘法只有对角阵时，顺序可以任意排列．
 
-åä½éµå¯¹åºçåä¹æä½ä¸ºä¿æç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åï¼å¨å®é åºç¨ä¸­ä¸è¿è¡è¿æ ·çæä½ï¼
+单位阵对应的倍乘操作为保持矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不变，在实际应用中不进行这样的操作．
 
-### å¯¹æ¢æä½
+### 对换操作
 
-å·¦ä¹ä¸ä¸ªå¯¹æ¢ç©éµ ðððPij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç­ä»·äºå°ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ä¸ç¬¬ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡äº¤æ¢ï¼å³ä¹ä¸ä¸ªå¯¹æ¢ç©éµ ðððPij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç­ä»·äºå°ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ç¬¬ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åäº¤æ¢ï¼
+左乘一个对换矩阵 𝑃𝑖𝑗Pij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，等价于将第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行与第 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行交换．右乘一个对换矩阵 𝑃𝑖𝑗Pij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，等价于将第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 列与第 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 列交换．
 
-ä¸åä¹éµåå¯¹è§éµçå ³ç³»ç±»ä¼¼ï¼è¿éå¼å ¥ç½®æ¢ç©éµçæ¦å¿µï¼ç½®æ¢ç©éµæ¯ä¸ä¸ªæ¹éµï¼æ¯è¡æ¯ååæ°æä¸ä¸ª 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä½ä½ç½®åä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹æ¯ç¹æ®çç½®æ¢ç©éµï¼
+与倍乘阵和对角阵的关系类似，这里引入置换矩阵的概念．置换矩阵是一个方阵，每行每列均恰有一个 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其余位置均为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也是特殊的置换矩阵．
 
-ç½®æ¢éµåå¯¹äºåä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¡è¿è¡ç½®æ¢æä½ä¸è´ï¼ä¹åå¯¹äºåä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåè¿è¡ç½®æ¢æä½ä¸è´ï¼åä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬èº«å¯¹åºäºæç­åæ¢ï¼
+置换阵和对于单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的行进行置换操作一致，也和对于单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的列进行置换操作一致．单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 本身对应于恒等变换．
 
-å·¦ä¹ä¸ä¸ªç½®æ¢ç©éµç­ä»·äºå¯¹åç©éµçè¡è¿è¡ç½®æ¢ï¼å³ä¹ä¸ä¸ªç½®æ¢ç©éµç­ä»·äºå¯¹åç©éµçåè¿è¡ç½®æ¢ï¼ç¸åºç½®æ¢çæ¹æ³åå¯¹äºåä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¡æåè¿è¡ç½®æ¢æä½ä¸è´ï¼
+左乘一个置换矩阵等价于对原矩阵的行进行置换，右乘一个置换矩阵等价于对原矩阵的列进行置换，相应置换的方法和对于单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的行或列进行置换操作一致．
 
-ç½®æ¢ç©éµä¸ç½®æ¢å®å ¨å¯¹åºï¼ç½®æ¢ç©éµææçä¹æ³ç¾¤ä¸ç½®æ¢ç¾¤åæï¼ç±äºæå®çï¼å¨æç­åæ¢è§ä¸ºé¶ä¸ªå¯¹æ¢çä¹ç§¯çæ å½¢ä¸ï¼ä»»ä½ç½®æ¢é½å¯ä»¥æä¸ºå¯¹æ¢çä¹ç§¯ï¼å æ­¤ä»»ä½ç½®æ¢ç©éµä¹å¯ä»¥æåä¸ºå¯¹æ¢ç©éµçä¹ç§¯ï¼
+置换矩阵与置换完全对应，置换矩阵构成的乘法群与置换群同构．由于有定理，在恒等变换视为零个对换的乘积的情形下，任何置换都可以拆为对换的乘积，因此任何置换矩阵也可以拆分为对换矩阵的乘积．
 
-ç±äºå¯¹æ¢ç©éµçè¡åå¼ä¸º â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºæ¹éµçè¡æåè¿è¡å¯¹æ¢æä½ä¹åï¼æ¹éµå¯¹åºçè¡åå¼åä¸ºåæ¥ç â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åï¼
+由于对换矩阵的行列式为 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，对于方阵的行或列进行对换操作之后，方阵对应的行列式变为原来的 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 倍．
 
-å¯¹æ¢éµçä¹æ³ä¸å¯äº¤æ¢ï¼ç½®æ¢éµçä¹æ³ä¹ä¸å¯äº¤æ¢ï¼
+对换阵的乘法不可交换，置换阵的乘法也不可交换．
 
-ç½®æ¢ç©éµçè¡åå¼ä¸º (â1)ð(â1)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºç½®æ¢ç©éµå¯¹åºç½®æ¢çéåºæ°ï¼å³ç½®æ¢æåä¸ºå¯¹æ¢ä¹ç§¯çä¸ªæ°ï¼
+置换矩阵的行列式为 (−1)𝑝(−1)p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为置换矩阵对应置换的逆序数，即置换拆分为对换乘积的个数．
 
-### åå æä½
+### 倍加操作
 
-å·¦ä¹åå ç©éµ ððð(ð)Tij(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­ä»·äºæç¬¬ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå å°ç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ä¸ï¼å³ä¹åå ç©éµ ððð(ð)Tij(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­ä»·äºæç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åç ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå å°ç¬¬ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ï¼
+左乘倍加矩阵 𝑇𝑖𝑗(𝑘)Tij(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等价于把第 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 倍加到第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行上．右乘倍加矩阵 𝑇𝑖𝑗(𝑘)Tij(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等价于把第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 列的 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 倍加到第 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 列上．
 
-å¦æé¾ä»¥è®°å¿ï¼å¯ä»¥è§å¯åå éµ ððð(ð)Tij(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¯¹åä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿è¡äºææ ·çæä½ï¼ä¸¤è æ¯å¯¹åºçï¼å·¦ä¹æ¯å¯¹è¡çæä½ï¼å³ä¹æ¯å¯¹åçæä½ï¼ç¬¦åå£è¯å·¦è¡å³åï¼
+如果难以记忆，可以观察倍加阵 𝑇𝑖𝑗(𝑘)Tij(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是对单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进行了怎样的操作，两者是对应的，左乘是对行的操作，右乘是对列的操作，符合口诀左行右列．
 
-ç±äºåå ç©éµçè¡åå¼ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºæ¹éµè¿è¡åå æä½ä¹åï¼æ¹éµå¯¹åºçè¡åå¼ä¸åï¼
+由于倍加矩阵的行列式为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，对于方阵进行倍加操作之后，方阵对应的行列式不变．
 
-åå ç©éµçä¹æ³ä¸å¯äº¤æ¢ï¼
+倍加矩阵的乘法不可交换．
 
-åä½éµå¯¹åºçåå æä½ä¸ºä¿æç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸åï¼å¨å®é åºç¨ä¸­ä¸è¿è¡è¿æ ·çæä½ï¼
+单位阵对应的倍加操作为保持矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不变，在实际应用中不进行这样的操作．
 
-#### ä¸ä¸è§ç©éµ
+#### 上三角矩阵
 
-åå ç©éµæ¯ä¸ç§ä¸ä¸è§ç©éµæè ä¸ä¸è§ç©éµï¼ç±äºä¸¤ç§ç©éµå ³äºä¸»å¯¹è§çº¿å¯¹ç§°ï¼è¿éè®¨è®ºä¸ä¸è§ç©éµï¼äºå®ä¸å¨è¿ä¸ªä¾å­ä¸­ï¼åªéè¦è¿è¡åç­è¡åæ¢ï¼èä¸éè¦ååæ¢ï¼
+倍加矩阵是一种上三角矩阵或者下三角矩阵．由于两种矩阵关于主对角线对称，这里讨论上三角矩阵．事实上在这个例子中，只需要进行初等行变换，而不需要列变换．
 
-å¦æä¸ä¸ªä¸ä¸è§ç©éµçä¸»å¯¹è§çº¿åä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¯æåä¸ºä¸è¿ä¸²åå ç©éµçä¹ç§¯ï¼æåçé¡ºåºä¸ºï¼å å¯¹åä½ç©éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬ä¸è¡è¿è¡åå æä½ï¼åå¯¹åä½ç©éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¬¬äºè¡è¿è¡åå æä½ï¼ä»¥æ­¤ç±»æ¨ï¼ç´å°æ¯ä¸è¡åè¢«æä½å®æ¯ä¸ºæ­¢ï¼
+如果一个上三角矩阵的主对角线均为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则可拆分为一连串倍加矩阵的乘积．拆分的顺序为，先对单位矩阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第一行进行倍加操作，再对单位矩阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的第二行进行倍加操作，以此类推，直到每一行均被操作完毕为止．
 
-ç±äºåå ç©éµçä¹æ³ä¸å¯äº¤æ¢ï¼ä¸è¿°æä½ä¸å¯è°æ¢é¡ºåºï¼
+由于倍加矩阵的乘法不可交换，上述操作不可调换顺序．
 
-å¦æä¸ä¸ªä¸ä¸è§ç©éµçä¸»å¯¹è§çº¿åé 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå¯æåä¸ºä¸è¿ä¸²åå ç©éµååä¹ç©éµçä¹ç§¯ï¼å¯ä»¥å¨æä½åä½ç©éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¯ä¸è¡æ¶ï¼å å°è¯¥è¡è¿è¡åä¹æä½ï¼ææä¸ºä¸»å¯¹è§çº¿å ç´ åä¸ºæå®éé¶å¼ï¼
+如果一个上三角矩阵的主对角线均非 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则可拆分为一连串倍加矩阵和倍乘矩阵的乘积．可以在操作单位矩阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的每一行时，先将该行进行倍乘操作，效果为主对角线元素变为指定非零值．
 
-å¦æä¸ä¸ªä¸ä¸è§ç©éµçä¸»å¯¹è§çº¿å­å¨ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åä¸å¯æåä¸ºä¸è¿ä¸²åç­ç©éµçä¹ç§¯ï¼
+如果一个上三角矩阵的主对角线存在 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则不可拆分为一连串初等矩阵的乘积．
 
-æ è®ºä¸ä¸è§ç©éµçä¸»å¯¹è§çº¿ä¸æ¯å¦æ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ä¸è§ç©éµçè¡åå¼ç­äºä¸»å¯¹è§çº¿å ç´ ä¹ç§¯ï¼ä¸å¯¹è§éµä¸è´ï¼
+无论上三角矩阵的主对角线上是否有 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，上三角矩阵的行列式等于主对角线元素乘积，与对角阵一致．
 
-#### åå æä½å°æ¹éµè½¬åä¸ºå¯¹è§éµ
+#### 倍加操作将方阵转化为对角阵
 
-åªä½¿ç¨åå æä½å¯ä»¥ä½¿ä»»æä¸ä¸ªæ¹éµåä¸ºå¯¹è§éµï¼è¿ä¸ªä¾å­æ¢éè¦åç­è¡åæ¢ä¹éè¦åç­ååæ¢ï¼
+只使用倍加操作可以使任意一个方阵变为对角阵，这个例子既需要初等行变换也需要初等列变换．
 
-å¦ææ¹éµçç¬¬ä¸è¡åç¬¬ä¸åå­å¨éé¶å ç´ ï¼åå¯ä»¥éè¿åå åæ³å°å·¦ä¸è§å ç´ åä¸ºéé¶ï¼è¿èåå©åç­è¡åæ¢ååç­ååæ¢ï¼å°ç¬¬ä¸è¡åç¬¬ä¸åé¤äºå·¦ä¸è§å ç´ ä»¥å¤ï¼ååä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+如果方阵的第一行和第一列存在非零元素，则可以通过倍加办法将左上角元素变为非零，进而借助初等行变换和初等列变换，将第一行和第一列除了左上角元素以外，均变为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¦ææ¹éµçç¬¬ä¸è¡åç¬¬ä¸åå·²ç»åä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åç´æ¥çç¬¬äºè¡åç¬¬äºåå³å¯ï¼
+如果方阵的第一行和第一列已经均为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则直接看第二行和第二列即可．
 
-åå©è¿ä¸ªåæ³ï¼çè³å¯ä»¥è§å®å¯¹è§éµçéé¶å ç´ åå¨å·¦ä¸è§ï¼
+借助这个办法，甚至可以规定对角阵的非零元素均在左上角．
 
-å¦ææ¹éµçç¬¬ä¸è¡åç¬¬ä¸åå·²ç»åä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åçå©ä½çè¡åæ¯å¦æéé¶å ç´ ï¼åªè¦æéé¶å ç´ ï¼åå¯ä»¥éè¿åå æä½å°ç¬¬ä¸è¡åç¬¬ä¸åä¸­æä¸ªå ç´ åä¸ºé 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿èåå½ä¸ºä¸å¼å§çæ åµï¼ä½¿å¾å·¦ä¸è§å ç´ é 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+如果方阵的第一行和第一列已经均为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则看剩余的行列是否有非零元素，只要有非零元素，则可以通过倍加操作将第一行和第一列中某个元素变为非 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，进而化归为一开始的情况，使得左上角元素非 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä» å½å©ä½çè¡åä¹åæ²¡æéé¶å ç´ æ¶ï¼å·¦ä¸è§æ æ³åä¸ºéé¶å ç´ ï¼æ­¤æ¶å©ä½çæ¹éµå·²ç»ä¸ºé¶ç©éµï¼
+仅当剩余的行列也均没有非零元素时，左上角无法变为非零元素，此时剩余的方阵已经为零矩阵．
 
-#### æ åå½¢ç©éµ
+#### 标准形矩阵
 
-åå©åç­åæ¢å¯ä»¥å°ä»»æçç©éµï¼æ è®ºå½¢ç¶ï¼åå½ä¸ºæ åå½¢ç©éµï¼
+借助初等变换可以将任意的矩阵，无论形状，化归为标准形矩阵．
 
-æ åå½¢ç©éµæ¥æä¸ä¸ªåä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ä¸ºå­ç©éµä½äºå·¦ä¸è§ï¼å ¶ä½é¨ååä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå½çåæ³ä¸å°æ¹éµè½¬åä¸ºå¯¹è§éµçæä½ç±»ä¼¼ï¼å¹¶éè¦åå©åä¹æä½ä½¿å·¦ä¸è§éé¶å ç´ åä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+标准形矩阵拥有一个单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作为子矩阵位于左上角，其余部分均为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．化归的办法与将方阵转化为对角阵的操作类似，并需要借助倍乘操作使左上角非零元素变为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç©éµè½¬åä¸ºæ åå½¢ç©éµåï¼å«æå ç´ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ªæ°æ°å¥½ä¸ºç©éµçç§©ï¼
+矩阵转化为标准形矩阵后，含有元素 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的个数恰好为矩阵的秩．
 
-## å¯éç©éµ
+## 可逆矩阵
 
-è®¾ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ª ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¶ç©éµï¼å¦æå­å¨ä¸ä¸ª ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¶ç©éµ ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ð´ðµ =ðµð´ =ð¼AB=BA=I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å«åä¸ä¸ªå¯éç©éµæéå¥å¼ç©éµï¼ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å«å ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéç©éµï¼å¹¶è®°ä¸º ð´â1Aâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+设 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 阶矩阵．如果存在一个 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 阶矩阵 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝐴𝐵 =𝐵𝐴 =𝐼AB=BA=I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 叫做一个可逆矩阵或非奇异矩阵，𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 叫做 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逆矩阵，并记为 𝐴−1A−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¦æç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯éï¼é£ä¹ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéç©éµç± ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä¸ç¡®å®ï¼
+如果矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可逆，那么 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逆矩阵由 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 唯一确定．
 
-å¯éç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé ð´â1Aâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹å¯éï¼å¹¶ä¸ ð´â1Aâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéå°±æ¯ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+可逆矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逆 𝐴−1A−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也可逆，并且 𝐴−1A−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的逆就是 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä¸¤ä¸ªå¯éç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ðµB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¹ç§¯ ð´ðµAB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹å¯éï¼å¹¶ä¸éä¸º ðµâ1ð´â1Bâ1Aâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+两个可逆矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐵B![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的乘积 𝐴𝐵AB![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也可逆，并且逆为 𝐵−1𝐴−1B−1A−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¯éç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½¬ç½® ð´ðAT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹å¯éï¼å¹¶ä¸è½¬ç½®çéç­äºéçè½¬ç½®ï¼
+可逆矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的转置 𝐴𝑇AT![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也可逆，并且转置的逆等于逆的转置．
 
-### åç­ç©éµçé
+### 初等矩阵的逆
 
-åç­ç©éµåå¯éï¼å¹¶ä¸éä¸ºåç±»çåç­ç©éµï¼
+初等矩阵均可逆，并且逆为同类的初等矩阵：
 
-ð·ð(ð)â1=ð·ð(1ð)Di(k)â1=Di(1k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ðâ1ðð=ðððPijâ1=Pij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ððð(ð)â1=ððð(âð)Tij(k)â1=Tij(âk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐷𝑖(𝑘)−1=𝐷𝑖(1𝑘)Di(k)−1=Di(1k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑃−1𝑖𝑗=𝑃𝑖𝑗Pij−1=Pij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝑇𝑖𝑗(𝑘)−1=𝑇𝑖𝑗(−𝑘)Tij(k)−1=Tij(−k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¾ç¶åä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯éï¼éç©éµä»ä¸º ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+显然单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可逆，逆矩阵仍为 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åç­åæ¢ä¿æç©éµçå¯éæ§ï¼åæ¢ååç©éµè¦ä¹åæ¶å¯éï¼è¦ä¹åæ¶ä¸å¯éï¼
+初等变换保持矩阵的可逆性，变换前后矩阵要么同时可逆，要么同时不可逆．
 
-ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯éï¼å½ä¸ä» å½ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥åæåç­ç©éµçä¹ç§¯ï¼å³å¯ä»¥éè¿åç­åæ¢åä¸ºåä½éµ ð¼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可逆，当且仅当矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以写成初等矩阵的乘积，即可以通过初等变换变为单位阵 𝐼I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç­å°å¼å ¥è¡åå¼ä¹åå¯ä»¥ç¥éï¼
+等到引入行列式之后可以知道：
 
-ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯éï¼å½ä¸ä» å½ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç§©ä¸º ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å½ä¸ä» å½ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¡åå¼é 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可逆，当且仅当矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的秩为 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，当且仅当矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的行列式非 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä¸ç§ç®åçè®°æ³ä¸ºï¼è®° ð¸ððEij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡ç¬¬ ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åçå ç´ ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ãå ¶ä½ä¸ºé¶ç ð ÃðnÃn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµï¼é£ä¹
+一种简单的记法为：记 𝐸𝑖𝑗Eij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 行第 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 列的元素为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、其余为零的 𝑛 ×𝑛n×n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵，那么
 
-  * ð·ð(ð) =ð¼ð +(ð â1)ð¸ððDi(k)=In+(kâ1)Eii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ððð =ð¼ð âð¸ðð âð¸ðð +ð¸ðð +ð¸ððPij=InâEiiâEjj+Eij+Eji![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ððð(ð) =ð¼ð +ðð¸ððTij(k)=In+kEij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝐷𝑖(𝑘) =𝐼𝑛 +(𝑘 −1)𝐸𝑖𝑖Di(k)=In+(k−1)Eii![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑃𝑖𝑗 =𝐼𝑛 −𝐸𝑖𝑖 −𝐸𝑗𝑗 +𝐸𝑖𝑗 +𝐸𝑗𝑖Pij=In−Eii−Ejj+Eij+Eji![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑇𝑖𝑗(𝑘) =𝐼𝑛 +𝑘𝐸𝑖𝑗Tij(k)=In+kEij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ç§è®°æ³ä¹å¯ä»¥åºç¨äºå®ä»¬çéç©éµï¼
+这种记法也可以应用于它们的逆矩阵．
 
-## åºç¨
+## 应用
 
-### çº¿æ§æ¹ç¨ç»æ±è§£
+### 线性方程组求解
 
-å¯¹äºä¸ä¸ªçº¿æ§æ¹ç¨ç»ï¼æªç¥æ°åçç³»æ°ææç³»æ°ç©éµï¼å¦æå¨ç³»æ°ç©éµå³ç«¯è¡¥ä¸çº¿æ§æ¹ç¨ç»çå¸¸æ°é¡¹åææå¢å¹¿ç©éµï¼
+对于一个线性方程组，未知数前的系数构成系数矩阵，如果在系数矩阵右端补上线性方程组的常数项则构成增广矩阵．
 
-åºç¨åç­è¡åæ¢ï¼å¯ä»¥å°çº¿æ§æ¹ç¨ç»å¯¹åºçå¢å¹¿ç©éµå è½¬åä¸ºè¡é¶æ¢¯å½¢ç©éµï¼åè½¬åä¸ºè¡æç®å½¢ç©éµï¼è¿èå®æçº¿æ§æ¹ç¨ç»çæ±è§£ï¼è¿ä¸ªæ¹æ³å«åæ¶å æ³è§£çº¿æ§æ¹ç¨ç»ï¼åæç GaussâJordan æ¶å ï¼æ¯æç §ä¸å®çé¡ºåºè¿è¡çæ¶å ç®æ³ï¼
+应用初等行变换，可以将线性方程组对应的增广矩阵先转化为行阶梯形矩阵，再转化为行最简形矩阵，进而完成线性方程组的求解．这个方法叫做消元法解线性方程组，后文的 Gauss–Jordan 消元，是按照一定的顺序进行的消元算法．
 
-### è¡åå¼è®¡ç®
+### 行列式计算
 
-ç±äºæ¹éµä¹ç§¯çè¡åå¼ç­äºæ¹éµè¡åå¼çä¹ç§¯ï¼åç­ç©éµçè¡åå¼ä¾¿äºè®¡ç®ï¼ä»¥ååç­åæ¢ç­ä»·äºåç­ç©éµçä¹æ³ï¼å¨è¡åå¼è®¡ç®ä¸­ä¹ä¼ä½¿ç¨åç­åæ¢ï¼
+由于方阵乘积的行列式等于方阵行列式的乘积，初等矩阵的行列式便于计算，以及初等变换等价于初等矩阵的乘法，在行列式计算中也会使用初等变换．
 
-ç±äºæç §ä¸å®çé¡ºåºè¿è¡åç­åæ¢æ´å ä¾¿äºç¨åºä¹¦åï¼è¡åå¼è®¡ç®ä¹å¯ä»¥ä½¿ç¨åæç GaussâJordan æ¶å ç®æ³ï¼
+由于按照一定的顺序进行初等变换更加便于程序书写，行列式计算也可以使用后文的 Gauss–Jordan 消元算法．
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-algebra/elementary-operations.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/linear-algebra/elementary-operations.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [Great-designer](https://github.com/Great-designer)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-algebra/elementary-operations.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/linear-algebra/elementary-operations.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [Great-designer](https://github.com/Great-designer)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

@@ -1,4 +1,4 @@
-# 树哈希 - OI Wiki
+﻿# 树哈希 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/tree-hash/
 

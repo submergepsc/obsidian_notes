@@ -1,148 +1,148 @@
-# éè½½è¿ç®ç¬¦ - OI Wiki
+﻿# 重载运算符 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/op-overload/
 
-# éè½½è¿ç®ç¬¦
+# 重载运算符
 
-éè½½è¿ç®ç¬¦æ¯éè¿å¯¹è¿ç®ç¬¦çéæ°å®ä¹ï¼ä½¿å¾å ¶æ¯æç¹å®æ°æ®ç±»åçè¿ç®æä½ï¼éè½½è¿ç®ç¬¦æ¯éè½½å½æ°çç¹æ®æ åµï¼
+重载运算符是通过对运算符的重新定义，使得其支持特定数据类型的运算操作．重载运算符是重载函数的特殊情况．
 
-> å½ä¸ä¸ªè¿ç®ç¬¦åºç°å¨ä¸ä¸ªè¡¨è¾¾å¼ä¸­ï¼å¹¶ä¸è¿ç®ç¬¦çè³å°ä¸ä¸ªæä½æ°å ·æä¸ä¸ªç±»ææä¸¾çç±»åæ¶ï¼åä½¿ç¨éè½½å³è®®ï¼overload resolutionï¼ç¡®å®åºè¯¥è°ç¨åªä¸ªæ»¡è¶³ç¸åºå£°æçç¨æ·å®ä¹å½æ°ï¼1
+> 当一个运算符出现在一个表达式中，并且运算符的至少一个操作数具有一个类或枚举的类型时，则使用重载决议（overload resolution）确定应该调用哪个满足相应声明的用户定义函数．1
 
-éä¿çè®²ï¼å¦ææä½¿ç¨ãè¿ç®ç¬¦ãçä½ä¸ä¸ªè°ç¨ç¹æ®çå½æ°ï¼å¦å° `1+2` è§ä½è°ç¨ `add(1, 2)`ï¼ï¼å¹¶ä¸è¿ä¸ªå½æ°çåæ°ï¼æä½æ°ï¼è³å°æä¸ä¸ªæ¯ `class`ã`struct` æ `enum` çç±»åï¼ç¼è¯å¨å°±éè¦æ ¹æ®æä½æ°çç±»åå³å®åºå½è°ç¨åªä¸ªèªå®ä¹å½æ°ï¼
+通俗的讲，如果把使用「运算符」看作一个调用特殊的函数（如将 `1+2` 视作调用 `add(1, 2)`），并且这个函数的参数（操作数）至少有一个是 `class`、`struct` 或 `enum` 的类型，编译器就需要根据操作数的类型决定应当调用哪个自定义函数．
 
-å¨ C++ ä¸­ï¼æä»¬å¯ä»¥éè½½å ä¹ææå¯ç¨çè¿ç®ç¬¦ï¼
+在 C++ 中，我们可以重载几乎所有可用的运算符．
 
-ä¸äºå¯éè½½è¿ç®ç¬¦çåä¸¾
+一些可重载运算符的列举
 
-ä¸å è¿ç®ï¼`+`ï¼æ­£å·ï¼ï¼`-`ï¼è´å·ï¼ï¼`~`ï¼æä½ååï¼ï¼`++`ï¼`--`ï¼`!`ï¼é»è¾éï¼ï¼`*`ï¼åæéå¯¹åºå¼ï¼ï¼`&`ï¼åå°åï¼ï¼`->`ï¼ç±»æåè®¿é®è¿ç®ç¬¦ï¼ç­ï¼
+一元运算：`+`（正号）；`-`（负号）；`~`（按位取反）；`++`；`--`；`!`（逻辑非）；`*`（取指针对应值）；`&`（取地址）；`->`（类成员访问运算符）等．
 
-äºå è¿ç®ï¼`+`ï¼`-`ï¼`&`ï¼æä½ä¸ï¼ï¼`[]`ï¼åä¸æ ï¼ï¼`==`ï¼`=`ï¼èµå¼ï¼ç­ï¼
+二元运算：`+`；`-`；`&`（按位与）；`[]`（取下标）；`==`；`=`（赋值）等．
 
-å ¶å®ï¼`()`ï¼å½æ°è°ç¨ï¼ï¼`""`ï¼åç¼æ è¯ç¬¦1ï¼C++11 èµ·ï¼ï¼`new`ï¼å å­åé ï¼ï¼`,`ï¼éå·è¿ç®ç¬¦ï¼ï¼`<=>`ï¼ä¸è·¯æ¯è¾2ï¼C++20 èµ·ï¼ç­ï¼
+其它：`()`（函数调用）；`""`（后缀标识符1，C++11 起）；`new`（内存分配）；`,`（逗号运算符）；`<=>`（三路比较2，C++20 起）等．
 
-## éå¶
+## 限制
 
-éè½½è¿ç®ç¬¦å­å¨å¦ä¸éå¶ï¼
+重载运算符存在如下限制：
 
-  * åªè½å¯¹ç°æçè¿ç®ç¬¦è¿è¡éè½½ï¼ä¸è½èªè¡å®ä¹æ°çè¿ç®ç¬¦ï¼
-  * ä»¥ä¸è¿ç®ç¬¦ä¸è½è¢«éè½½ï¼`::`ï¼ä½ç¨åè§£æï¼ï¼`.`ï¼æåè®¿é®ï¼ï¼`.*`ï¼éè¿æåæéçæåè®¿é®ï¼ï¼`?:`ï¼ä¸ç®è¿ç®ç¬¦ï¼ï¼
-  * éè½½åçè¿ç®ç¬¦ï¼å ¶è¿ç®ä¼å çº§ï¼è¿ç®æä½æ°ï¼ç»åæ¹åä¸å¾æ¹åï¼
-  * å¯¹ `&&`ï¼é»è¾ä¸ï¼å `||`ï¼é»è¾æï¼çéè½½å¤±å»ç­è·¯æ±å¼ï¼
+  * 只能对现有的运算符进行重载，不能自行定义新的运算符．
+  * 以下运算符不能被重载：`::`（作用域解析），`.`（成员访问），`.*`（通过成员指针的成员访问），`?:`（三目运算符）．
+  * 重载后的运算符，其运算优先级，运算操作数，结合方向不得改变．
+  * 对 `&&`（逻辑与）和 `||`（逻辑或）的重载失去短路求值．
 
-## å®ç°
+## 实现
 
-éè½½è¿ç®ç¬¦åä¸ºä¸¤ç§æ åµï¼éè½½ä¸ºæåå½æ°æéæåå½æ°ï¼
+重载运算符分为两种情况，重载为成员函数或非成员函数．
 
-å½éè½½ä¸ºæåå½æ°æ¶ï¼å ä¸ºéå«ä¸ä¸ªæåå½åæåç `this` æéä½ä¸ºåæ°ï¼æ­¤æ¶å½æ°çåæ°ä¸ªæ°ä¸è¿ç®æä½æ°ç¸æ¯å°ä¸ä¸ªï¼
+当重载为成员函数时，因为隐含一个指向当前成员的 `this` 指针作为参数，此时函数的参数个数与运算操作数相比少一个．
 
-èå½éè½½ä¸ºéæåå½æ°æ¶ï¼å½æ°çåæ°ä¸ªæ°ä¸è¿ç®æä½æ°ç¸åï¼
+而当重载为非成员函数时，函数的参数个数与运算操作数相同．
 
-å ¶åºæ¬æ ¼å¼ä¸ºï¼åè®¾éè¦è¢«éè½½çè¿ç®ç¬¦ä¸º `@`ï¼ï¼
+其基本格式为（假设需要被重载的运算符为 `@`）：
 
-```text 1 2 3 4 5 6 7 ``` |  ```text class Example { // æåå½æ°çä¾å­ è¿åå¼ operator @ ( é¤æ¬èº«å¤çåæ° ) { /* ... */ } }; // éæåå½æ°çä¾å­ è¿åå¼ operator @ ( ææåä¸è¿ç®çåæ° ) { /* ... */ } ```   
+```text 1 2 3 4 5 6 7 ``` |  ```text class Example { // 成员函数的例子 返回值 operator @ ( 除本身外的参数 ) { /* ... */ } }; // 非成员函数的例子 返回值 operator @ ( 所有参与运算的参数 ) { /* ... */ } ```   
 ---|---  
   
-ä¸é¢å°ç»åºå ä¸ªéè½½è¿ç®ç¬¦çç¤ºä¾ï¼
+下面将给出几个重载运算符的示例．
 
-### åºæ¬ç®æ°è¿ç®ç¬¦
+### 基本算数运算符
 
-ä¸é¢å®ä¹äºä¸ä¸ªäºç»´åéç»æä½ `Vector2D` å¹¶å®ç°äºç¸åºçå æ³åå ç§¯çéè½½ï¼
+下面定义了一个二维向量结构体 `Vector2D` 并实现了相应的加法和内积的重载．
 
-éè½½ç®æ°è¿ç®ç¬¦çä¾å­
+重载算数运算符的例子
 
-```text 1 2 3 4 5 6 7 8 9 10 ``` |  ```text struct Vector2D { double x , y ; Vector2D ( double a = 0 , double b = 0 ) : x ( a ), y ( b ) {} Vector2D operator \+ ( Vector2D v ) const { return Vector2D ( x \+ v . x , y \+ v . y ); } // æ³¨æè¿åå¼çç±»åå¯ä»¥ä¸æ¯è¿ä¸ªç±» double operator * ( Vector2D v ) const { return x * v . x \+ y * v . y ; } }; ```   
+```text 1 2 3 4 5 6 7 8 9 10 ``` |  ```text struct Vector2D { double x , y ; Vector2D ( double a = 0 , double b = 0 ) : x ( a ), y ( b ) {} Vector2D operator \+ ( Vector2D v ) const { return Vector2D ( x \+ v . x , y \+ v . y ); } // 注意返回值的类型可以不是这个类 double operator * ( Vector2D v ) const { return x * v . x \+ y * v . y ; } }; ```   
 ---|---  
   
-### èªå¢èªåè¿ç®ç¬¦
+### 自增自减运算符
 
-èªå¢èªåè¿ç®ç¬¦åä¸ºä¸¤ç±»ï¼åç½®ï¼`++a`ï¼ååç½®ï¼`a++`ï¼ï¼ä¸ºäºåºåååç½®è¿ç®ç¬¦ï¼éè½½åç½®è¿ç®æ¶éè¦æ·»å ä¸ä¸ªç±»åä¸º `int` çç©ºç½®å½¢åï¼
+自增自减运算符分为两类，前置（`++a`）和后置（`a++`）．为了区分前后置运算符，重载后置运算时需要添加一个类型为 `int` 的空置形参．
 
-å¯ä»¥å°åç½®èªå¢çè§£ä¸ºè°ç¨ `operator++(a)` æ `a.operator++()`ï¼åç½®èªå¢çè§£ä¸ºè°ç¨ `operator++(a, 0)` æ `a.operator++(0)`ï¼
+可以将前置自增理解为调用 `operator++(a)` 或 `a.operator++()`，后置自增理解为调用 `operator++(a, 0)` 或 `a.operator++(0)`．
 
-åå«éè½½ååç½®èªå¢è¿ç®ç¬¦çä¾å­
+分别重载前后置自增运算符的例子
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 ``` |  ```text struct MyInt { int x ; // åç½®ï¼å¯¹åº ++a MyInt & operator ++ () { x ++ ; return * this ; } // åç½®ï¼å¯¹åº a++ MyInt operator ++ ( int ) { MyInt tmp ; tmp . x = x ; x ++ ; return tmp ; } }; ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 ``` |  ```text struct MyInt { int x ; // 前置，对应 ++a MyInt & operator ++ () { x ++ ; return * this ; } // 后置，对应 a++ MyInt operator ++ ( int ) { MyInt tmp ; tmp . x = x ; x ++ ; return tmp ; } }; ```   
 ---|---  
   
-å¦å¤ä¸ç¹æ¯ï¼å ç½®çèªå¢èªåè¿ç®ç¬¦ä¸­ï¼åç½®çè¿ç®ç¬¦è¿åçæ¯å¼ç¨ï¼èåç½®çè¿ç®ç¬¦è¿åçæ¯å¼ï¼è½ç¶éè½½åçè¿ç®ç¬¦ä¸å¿ éµå¾ªè¿ä¸éå¶ï¼ä¸è¿å¨è¯­ä¹ä¸ï¼ä»ç¶ææéè½½çè¿ç®ç¬¦ä¸å ç½®çè¿ç®ç¬¦å¨è¿åå¼çç±»åä¸ä¿æä¸è´ï¼
+另外一点是，内置的自增自减运算符中，前置的运算符返回的是引用，而后置的运算符返回的是值．虽然重载后的运算符不必遵循这一限制，不过在语义上，仍然期望重载的运算符与内置的运算符在返回值的类型上保持一致．
 
-å¯¹äºç±»å Tï¼å ¸åçéè½½èªå¢è¿ç®ç¬¦çå®ä¹å¦ä¸ï¼
+对于类型 T，典型的重载自增运算符的定义如下：
 
-éè½½å®ä¹ï¼ä»¥ `++` ä¸ºä¾ï¼| æåå½æ°| éæåå½æ°  
+重载定义（以 `++` 为例）| 成员函数| 非成员函数  
 ---|---|---  
-åç½®| `T& T::operator++();`| `T& operator++(T& a);`  
-åç½®| `T T::operator++(int);`| `T operator++(T& a, int);`  
+前置| `T& T::operator++();`| `T& operator++(T& a);`  
+后置| `T T::operator++(int);`| `T operator++(T& a, int);`  
   
-### å½æ°è°ç¨è¿ç®ç¬¦
+### 函数调用运算符
 
-å½æ°è°ç¨è¿ç®ç¬¦ `()` åªè½éè½½ä¸ºæåå½æ°ï¼éè¿å¯¹ä¸ä¸ªç±»éè½½ `()` è¿ç®ç¬¦ï¼å¯ä»¥ä½¿è¯¥ç±»çå¯¹è±¡è½åå½æ°ä¸æ ·è°ç¨ï¼
+函数调用运算符 `()` 只能重载为成员函数．通过对一个类重载 `()` 运算符，可以使该类的对象能像函数一样调用．
 
-éè½½ `()` è¿ç®ç¬¦çä¸ä¸ªå¸¸è§åºç¨æ¯ï¼å°éè½½äº `()` è¿ç®ç¬¦çç»æä½ä½ä¸ºèªå®ä¹æ¯è¾å½æ°ä¼ å ¥ä¼å éåç­ STL å®¹å¨ä¸­ï¼
+重载 `()` 运算符的一个常见应用是，将重载了 `()` 运算符的结构体作为自定义比较函数传入优先队列等 STL 容器中．
 
-ä¸é¢å°±æ¯ä¸ä¸ªä¾å­ï¼ç»åº ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªå­¦ççå§åååæ°ï¼æåæ°éåºæåºï¼åæ°ç¸åè æå§åå­å ¸åºååºæåºï¼è¾åºæåæé åçäººçå§åååæ°ï¼
+下面就是一个例子：给出 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个学生的姓名和分数，按分数降序排序，分数相同者按姓名字典序升序排序，输出排名最靠前的人的姓名和分数．
 
-ä¸é¢å®ä¹äºä¸ä¸ªæ¯è¾ç»æä½ï¼å®ç°èªå®ä¹ä¼å éåçæåºæ¹å¼ï¼
+下面定义了一个比较结构体，实现自定义优先队列的排序方式．
 
-éè½½å½æ°è°ç¨è¿ç®ç¬¦çä¾å­
+重载函数调用运算符的例子
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 ``` |  ```text struct student { string name ; int score ; }; struct cmp { bool operator ()( const student & a , const student & b ) const { return a . score < b . score || ( a . score == b . score && a . name > b . name ); } }; // æ³¨æä¼ å ¥çæ¨¡æ¿åæ°ä¸ºç»æä½åç§°èéå®ä¾ priority_queue < student , vector < student > , cmp > pq ; ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 ``` |  ```text struct student { string name ; int score ; }; struct cmp { bool operator ()( const student & a , const student & b ) const { return a . score < b . score || ( a . score == b . score && a . name > b . name ); } }; // 注意传入的模板参数为结构体名称而非实例 priority_queue < student , vector < student > , cmp > pq ; ```   
 ---|---  
   
-### æ¯è¾è¿ç®ç¬¦
+### 比较运算符
 
-å¨ `std::sort` åä¸äº STL å®¹å¨ä¸­ï¼éè¦ç¨å° `<` è¿ç®ç¬¦ï¼å¨ä½¿ç¨èªå®ä¹ç±»åæ¶ï¼æä»¬éè¦æå¨éè½½ï¼
+在 `std::sort` 和一些 STL 容器中，需要用到 `<` 运算符．在使用自定义类型时，我们需要手动重载．
 
-ä¸é¢æ¯ä¸ä¸ªä¾å­ï¼å®ç°äºåä¸ä¸èç¸åçåè½
+下面是一个例子，实现了和上一节相同的功能
 
-éè½½æ¯è¾è¿ç®ç¬¦çä¾å­
+重载比较运算符的例子
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 ``` |  ```text struct student { string name ; int score ; // éè½½ < å·è¿ç®ç¬¦ bool operator < ( const student & a ) const { return score < a . score || ( score == a . score && name > a . name ); // ä¸é¢çç¥äº this æéï¼å®æ´è¡¨è¾¾å¼å¦ä¸ï¼ // this->score<a.score||(this->score==a.score&&this->name>a.name); } }; priority_queue < student > pq ; ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 ``` |  ```text struct student { string name ; int score ; // 重载 < 号运算符 bool operator < ( const student & a ) const { return score < a . score || ( score == a . score && name > a . name ); // 上面省略了 this 指针，完整表达式如下： // this->score<a.score||(this->score==a.score&&this->name>a.name); } }; priority_queue < student > pq ; ```   
 ---|---  
   
-ä¸é¢çä»£ç å°å°äºå·éè½½ä¸ºäºæåå½æ°ï¼å½ç¶éè½½ä¸ºéæåå½æ°ä¹æ¯å¯ä»¥çï¼
+上面的代码将小于号重载为了成员函数，当然重载为非成员函数也是可以的．
 
-éè½½ä¸ºéæåå½æ°
+重载为非成员函数
 
 ```text 1 2 3 4 5 6 7 8 9 10 ``` |  ```text struct student { string name ; int score ; }; bool operator < ( const student & a , const student & b ) { return a . score < b . score || ( a . score == b . score && a . name > b . name ); } priority_queue < student > pq ; ```   
 ---|---  
   
-äºå®ä¸ï¼åªè¦æäº `<` è¿ç®ç¬¦ï¼åå ¶ä»äºä¸ªæ¯è¾è¿ç®ç¬¦çéè½½ä¹å¯ä»¥å¾å®¹æå®ç°ï¼
+事实上，只要有了 `<` 运算符，则其他五个比较运算符的重载也可以很容易实现．
 
-```text 1 2 3 4 5 6 7 8 9 10 ``` |  ```text /* clang-format off */ // ä¸é¢çå ç§å®ç°åå°å°äºå·éè½½ä¸ºéæåå½æ° bool operator < ( const T & lhs , const T & rhs ) { /* è¿ééè½½å°äºè¿ç®ç¬¦ */ } bool operator > ( const T & lhs , const T & rhs ) { return rhs < lhs ; } bool operator <= ( const T & lhs , const T & rhs ) { return ! ( lhs > rhs ); } bool operator >= ( const T & lhs , const T & rhs ) { return ! ( lhs < rhs ); } bool operator == ( const T & lhs , const T & rhs ) { return ! ( lhs < rhs ) && ! ( lhs > rhs ); } bool operator != ( const T & lhs , const T & rhs ) { return ! ( lhs == rhs ); } ```   
+```text 1 2 3 4 5 6 7 8 9 10 ``` |  ```text /* clang-format off */ // 下面的几种实现均将小于号重载为非成员函数 bool operator < ( const T & lhs , const T & rhs ) { /* 这里重载小于运算符 */ } bool operator > ( const T & lhs , const T & rhs ) { return rhs < lhs ; } bool operator <= ( const T & lhs , const T & rhs ) { return ! ( lhs > rhs ); } bool operator >= ( const T & lhs , const T & rhs ) { return ! ( lhs < rhs ); } bool operator == ( const T & lhs , const T & rhs ) { return ! ( lhs < rhs ) && ! ( lhs > rhs ); } bool operator != ( const T & lhs , const T & rhs ) { return ! ( lhs == rhs ); } ```   
 ---|---  
   
-å ³äº C++20 ä¸çä¸è·¯æ¯è¾è¿ç®ç¬¦
+关于 C++20 下的三路比较运算符
 
-å¦æä½¿ç¨ C++20 ææ´é«çæ¬ï¼æä»¬å¯ä»¥ç´æ¥ä½¿ç¨é»è®¤ä¸è·¯æ¯è¾è¿ç®ç¬¦ç®åä»£ç ï¼3
+如果使用 C++20 或更高版本，我们可以直接使用默认三路比较运算符简化代码．3
 
 ```text 1 ``` |  ```text auto operator <=> ( const T & lhs , const T & rhs ) = default ; ```   
 ---|---  
   
-é»è®¤æ¯è¾çé¡ºåºæç §æååéå£°æçé¡ºåºéä¸ªæ¯è¾ï¼4
+默认比较的顺序按照成员变量声明的顺序逐个比较．4
 
-ä¹å¯ä»¥ä½¿ç¨èªå®ä¹ä¸è·¯æ¯è¾ï¼æ­¤æ¶è¦æ±éæ©æ¯è¾å å«çåºå ³ç³»ï¼`std::strong_ordering`ã`std::weak_ordering` æ `std::partial_ordering`ï¼ï¼æè è¿åä¸ä¸ªå¯¹è±¡ï¼ä½¿å¾ï¼
+也可以使用自定义三路比较．此时要求选择比较内含的序关系（`std::strong_ordering`、`std::weak_ordering` 或 `std::partial_ordering`），或者返回一个对象，使得：
 
-  * è¥ `a < b`ï¼å `(a <=> b) < 0`ï¼
-  * è¥ `a > b`ï¼å `(a <=> b) > 0`ï¼
-  * è¥ `a` å `b` ç¸ç­æç­ä»·ï¼å `(a <=> b) == 0`ï¼
+  * 若 `a < b`，则 `(a <=> b) < 0`；
+  * 若 `a > b`，则 `(a <=> b) > 0`；
+  * 若 `a` 和 `b` 相等或等价，则 `(a <=> b) == 0`．
 
-å ·ä½å®ç°ç»èè¯·åè [æ¯è¾è¿ç®ç¬¦ #ä¸è·¯æ¯è¾ - cppreference](https://zh.cppreference.com/w/cpp/language/operator_comparison#Three-way_comparison)ï¼
+具体实现细节请参考 [比较运算符 #三路比较 - cppreference](https://zh.cppreference.com/w/cpp/language/operator_comparison#Three-way_comparison)．
 
-åèèµæä¸æ³¨éï¼
-
-* * *
-
-  1. [è¿ç®ç¬¦éè½½ - cppreference](https://zh.cppreference.com/w/cpp/language/operators)Â â©â©
-
-  2. [ç¨æ·å®ä¹å­é¢é - cppreference](https://zh.cppreference.com/w/cpp/language/user_literal)Â â©
-
-  3. [æ¯è¾è¿ç®ç¬¦ #ä¸è·¯æ¯è¾ - cppreference](https://zh.cppreference.com/w/cpp/language/operator_comparison#.E4.B8.89.E8.B7.AF.E6.AF.94.E8.BE.83)Â â©
-
-  4. [é»è®¤æ¯è¾ - cppreference](https://zh.cppreference.com/w/cpp/language/default_comparisons)Â â©
+参考资料与注释：
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/op-overload.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/lang/op-overload.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[StudyingFather](https://github.com/StudyingFather), [Tiphereth-A](https://github.com/Tiphereth-A), [Enter-tainer](https://github.com/Enter-tainer), [Ir1d](https://github.com/Ir1d), [ksyx](https://github.com/ksyx), [qwqAutomaton](https://github.com/qwqAutomaton), [shuzhouliu](https://github.com/shuzhouliu), [ZnPdCo](https://github.com/ZnPdCo)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+  1. [运算符重载 - cppreference](https://zh.cppreference.com/w/cpp/language/operators) ↩↩
+
+  2. [用户定义字面量 - cppreference](https://zh.cppreference.com/w/cpp/language/user_literal) ↩
+
+  3. [比较运算符 #三路比较 - cppreference](https://zh.cppreference.com/w/cpp/language/operator_comparison#.E4.B8.89.E8.B7.AF.E6.AF.94.E8.BE.83) ↩
+
+  4. [默认比较 - cppreference](https://zh.cppreference.com/w/cpp/language/default_comparisons) ↩
+
+* * *
+
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/op-overload.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/lang/op-overload.md "edit.link.title")  
+>  __本页面贡献者：[StudyingFather](https://github.com/StudyingFather), [Tiphereth-A](https://github.com/Tiphereth-A), [Enter-tainer](https://github.com/Enter-tainer), [Ir1d](https://github.com/Ir1d), [ksyx](https://github.com/ksyx), [qwqAutomaton](https://github.com/qwqAutomaton), [shuzhouliu](https://github.com/shuzhouliu), [ZnPdCo](https://github.com/ZnPdCo)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

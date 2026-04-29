@@ -1,66 +1,66 @@
-# å¹³è¡¡æ  - OI Wiki
+﻿# 平衡树 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/pb-ds/tree/
 
-# å¹³è¡¡æ 
+# 平衡树
 
 ## `__gnu_pbds::tree`
 
-éï¼[å®æ¹ææ¡£å°å](https://gcc.gnu.org/onlinedocs/libstdc++/ext/pb_ds/tree_based_containers.html)
+附：[官方文档地址](https://gcc.gnu.org/onlinedocs/libstdc++/ext/pb_ds/tree_based_containers.html)
 
-```text 1 2 3 4 5 6 ``` |  ```text #include <ext/pb_ds/assoc_container.hpp> // å ä¸º tree å®ä¹å¨è¿é æä»¥éè¦å å«è¿ä¸ªå¤´æä»¶ #include <ext/pb_ds/tree_policy.hpp> using namespace __gnu_pbds ; __gnu_pbds :: tree < Key , Mapped , Cmp_Fn = std :: less < Key > , Tag = rb_tree_tag , Node_Update = null_tree_node_update , Allocator = std :: allocator < char >> ```   
+```text 1 2 3 4 5 6 ``` |  ```text #include <ext/pb_ds/assoc_container.hpp> // 因为 tree 定义在这里 所以需要包含这个头文件 #include <ext/pb_ds/tree_policy.hpp> using namespace __gnu_pbds ; __gnu_pbds :: tree < Key , Mapped , Cmp_Fn = std :: less < Key > , Tag = rb_tree_tag , Node_Update = null_tree_node_update , Allocator = std :: allocator < char >> ```   
 ---|---  
   
-## æ¨¡æ¿å½¢å
+## 模板形参
 
-  * `Key`: å¨å­çå ç´ ç±»åï¼å¦ææ³è¦å­å¨å¤ä¸ªç¸åç `Key` å ç´ ï¼åéè¦ä½¿ç¨ç±»ä¼¼äº `std::pair` å `struct` çæ¹æ³ï¼å¹¶é åä½¿ç¨ `lower_bound` å `upper_bound` æåå½æ°è¿è¡æ¥æ¾
-  * `Mapped`: æ å°è§åï¼Mapped-Policyï¼ç±»åï¼å¦æè¦æç¤ºå ³èå®¹å¨æ¯ **éå** ï¼ç±»ä¼¼äºå­å¨å ç´ å¨ `std::set` ä¸­ï¼æ­¤å¤å¡«å ¥ `null_type`ï¼ä½çæ¬ `g++` æ­¤å¤ä¸º `null_mapped_type`ï¼å¦æè¦æç¤ºå ³èå®¹å¨æ¯ **å¸¦å¼çéå** ï¼ç±»ä¼¼äºå­å¨å ç´ å¨ `std::map` ä¸­ï¼æ­¤å¤å¡«å ¥ç±»ä¼¼äº `std::map<Key, Value>` ç `Value` ç±»å
-  * `Cmp_Fn`: å ³é®å­æ¯è¾å½å­ï¼ä¾å¦ `std::less<Key>`
-  * `Tag`: éæ©ä½¿ç¨ä½ç§åºå±æ°æ®ç»æç±»åï¼é»è®¤æ¯ `rb_tree_tag`ï¼`__gnu_pbds` æä¾ä¸åçä¸ç§å¹³è¡¡æ ï¼åå«æ¯ï¼
-    * `rb_tree_tag`ï¼çº¢é»æ ï¼ä¸è¬ä½¿ç¨è¿ä¸ªï¼åä¸¤è çæ§è½ä¸è¬ä¸å¦çº¢é»æ 
-    * `splay_tree_tag`ï¼splay æ 
-    * `ov_tree_tag`ï¼æåºåéæ ï¼åªæ¯ä¸ä¸ªç± `vector` å®ç°çæåºç»æï¼ç±»ä¼¼äºæåºç `vector` æ¥å®ç°å¹³è¡¡æ ï¼æ§è½åå³äºæ°æ®æ³ä¸æ³å¡ä½ 
-  * `Node_Update`ï¼ç¨äºæ´æ°èç¹çç­ç¥ï¼é»è®¤ä½¿ç¨ `null_node_update`ï¼è¥è¦ä½¿ç¨ `order_of_key` å `find_by_order` æ¹æ³ï¼éè¦ä½¿ç¨ `tree_order_statistics_node_update`
-  * `Allocator`ï¼ç©ºé´åé å¨ç±»å
+  * `Key`: 储存的元素类型，如果想要存储多个相同的 `Key` 元素，则需要使用类似于 `std::pair` 和 `struct` 的方法，并配合使用 `lower_bound` 和 `upper_bound` 成员函数进行查找
+  * `Mapped`: 映射规则（Mapped-Policy）类型，如果要指示关联容器是 **集合** ，类似于存储元素在 `std::set` 中，此处填入 `null_type`，低版本 `g++` 此处为 `null_mapped_type`；如果要指示关联容器是 **带值的集合** ，类似于存储元素在 `std::map` 中，此处填入类似于 `std::map<Key, Value>` 的 `Value` 类型
+  * `Cmp_Fn`: 关键字比较函子，例如 `std::less<Key>`
+  * `Tag`: 选择使用何种底层数据结构类型，默认是 `rb_tree_tag`．`__gnu_pbds` 提供不同的三种平衡树，分别是：
+    * `rb_tree_tag`：红黑树，一般使用这个，后两者的性能一般不如红黑树
+    * `splay_tree_tag`：splay 树
+    * `ov_tree_tag`：有序向量树，只是一个由 `vector` 实现的有序结构，类似于排序的 `vector` 来实现平衡树，性能取决于数据想不想卡你
+  * `Node_Update`：用于更新节点的策略，默认使用 `null_node_update`，若要使用 `order_of_key` 和 `find_by_order` 方法，需要使用 `tree_order_statistics_node_update`
+  * `Allocator`：空间分配器类型
 
-## æé æ¹å¼
+## 构造方式
 
 ```text 1 2 3 4 ``` |  ```text __gnu_pbds :: tree < std :: pair < int , int > , __gnu_pbds :: null_type , std :: less < std :: pair < int , int >> , __gnu_pbds :: rb_tree_tag , __gnu_pbds :: tree_order_statistics_node_update > trr ; ```   
 ---|---  
   
-## æåå½æ°
+## 成员函数
 
-  * `insert(x)`ï¼åæ ä¸­æå ¥ä¸ä¸ªå ç´ `x`ï¼è¿å `std::pair<point_iterator, bool>`ï¼å ¶ä¸­ç¬¬ä¸ä¸ªå ç´ ä»£è¡¨æå ¥ä½ç½®çè¿­ä»£å¨ï¼ç¬¬äºä¸ªå ç´ ä»£è¡¨æ¯å¦æå ¥æåï¼
-  * `erase(x)`ï¼ä»æ ä¸­å é¤ä¸ä¸ªå ç´ /è¿­ä»£å¨ `x`ï¼å¦æ `x` æ¯è¿­ä»£å¨ï¼åè¿åæå `x` ä¸ä¸ä¸ªçè¿­ä»£å¨ï¼å¦æ `x` æ¯ `end()` åè¿å `end()`ï¼ï¼å¦æ `x` æ¯ `Key`ï¼åè¿åæ¯å¦å é¤æåï¼å¦æä¸å­å¨åå é¤å¤±è´¥ï¼ï¼
-  * `order_of_key(x)`ï¼è¿åä¸¥æ ¼å°äº `x` çå ç´ ä¸ªæ°ï¼ä»¥ `Cmp_Fn` ä½ä¸ºæ¯è¾é»è¾ï¼ï¼å³ä» 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼å§çæåï¼
-  * `find_by_order(x)`ï¼è¿å `Cmp_Fn` æ¯è¾çæåæå¯¹åºå ç´ çè¿­ä»£å¨ï¼
-  * `lower_bound(x)`ï¼è¿åç¬¬ä¸ä¸ªä¸å°äº `x` çå ç´ æå¯¹åºçè¿­ä»£å¨ï¼ä»¥ `Cmp_Fn` ä½ä¸ºæ¯è¾é»è¾ï¼ï¼
-  * `upper_bound(x)`ï¼è¿åç¬¬ä¸ä¸ªä¸¥æ ¼å¤§äº `x` çå ç´ æå¯¹åºçè¿­ä»£å¨ï¼ä»¥ `Cmp_Fn` ä½ä¸ºæ¯è¾é»è¾ï¼ï¼
-  * `join(x)`ï¼å° `x` æ å¹¶å ¥å½åæ ï¼`x` æ è¢«æ¸ ç©ºï¼å¿ é¡»ç¡®ä¿ä¸¤æ ç **æ¯è¾å½æ°** å **å ç´ ç±»å** ç¸åï¼ï¼
-  * `split(x,b)`ï¼ä»¥ `Cmp_Fn` æ¯è¾ï¼å°äºç­äº `x` çå±äºå½åæ ï¼å ¶ä½çå±äº `b` æ ï¼
-  * `empty()`ï¼è¿åæ¯å¦ä¸ºç©ºï¼
-  * `size()`ï¼è¿åå¤§å°ï¼
+  * `insert(x)`：向树中插入一个元素 `x`，返回 `std::pair<point_iterator, bool>`，其中第一个元素代表插入位置的迭代器，第二个元素代表是否插入成功．
+  * `erase(x)`：从树中删除一个元素/迭代器 `x`．如果 `x` 是迭代器，则返回指向 `x` 下一个的迭代器（如果 `x` 是 `end()` 则返回 `end()`）；如果 `x` 是 `Key`，则返回是否删除成功（如果不存在则删除失败）．
+  * `order_of_key(x)`：返回严格小于 `x` 的元素个数（以 `Cmp_Fn` 作为比较逻辑），即从 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 开始的排名．
+  * `find_by_order(x)`：返回 `Cmp_Fn` 比较的排名所对应元素的迭代器．
+  * `lower_bound(x)`：返回第一个不小于 `x` 的元素所对应的迭代器（以 `Cmp_Fn` 作为比较逻辑）．
+  * `upper_bound(x)`：返回第一个严格大于 `x` 的元素所对应的迭代器（以 `Cmp_Fn` 作为比较逻辑）．
+  * `join(x)`：将 `x` 树并入当前树，`x` 树被清空（必须确保两树的 **比较函数** 和 **元素类型** 相同）．
+  * `split(x,b)`：以 `Cmp_Fn` 比较，小于等于 `x` 的属于当前树，其余的属于 `b` 树．
+  * `empty()`：返回是否为空．
+  * `size()`：返回大小．
 
-æ³¨æ
+注意
 
-`join(x)` å½æ°éè¦ä¿è¯å¹¶å ¥æ çé®çå¼åä¸è¢«å¹¶å ¥æ çé®çå¼å **ä¸ç¸äº¤** ï¼ä¹å°±æ¯è¯´å¹¶å ¥æ å ææå¼å¿ é¡»å ¨é¨å¤§äº/å°äºå½åæ å çææå¼ï¼ï¼å¦åä¼æåº `join_error` å¼å¸¸ï¼
+`join(x)` 函数需要保证并入树的键的值域与被并入树的键的值域 **不相交** （也就是说并入树内所有值必须全部大于/小于当前树内的所有值），否则会抛出 `join_error` 异常．
 
-å¦æè¦åå¹¶ä¸¤æ£µå¼åæäº¤éçæ ï¼éè¦å°ä¸æ£µæ çå ç´ ä¸ä¸æå ¥å°å¦ä¸æ£µæ ä¸­ï¼
+如果要合并两棵值域有交集的树，需要将一棵树的元素一一插入到另一棵树中．
 
-## ç¤ºä¾
+## 示例
 
-```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 ``` |  ```text // Common Header Simple over C++11 #include <iostream> using namespace std ; using ll = long long ; using ull = unsigned long long ; using ld = long double ; using pii = pair < int , int > ; #include <ext/pb_ds/assoc_container.hpp> #include <ext/pb_ds/tree_policy.hpp> __gnu_pbds :: tree < pair < int , int > , __gnu_pbds :: null_type , less < pair < int , int >> , __gnu_pbds :: rb_tree_tag , __gnu_pbds :: tree_order_statistics_node_update > trr ; int main () { int cnt = 0 ; trr . insert ( make_pair ( 1 , cnt ++ )); trr . insert ( make_pair ( 5 , cnt ++ )); trr . insert ( make_pair ( 4 , cnt ++ )); trr . insert ( make_pair ( 3 , cnt ++ )); trr . insert ( make_pair ( 2 , cnt ++ )); // æ ä¸å ç´ {(1,0), (2,4), (3,3), (4,2), (5,1)} auto it = trr . lower_bound ( make_pair ( 2 , 0 )); trr . erase ( it ); // æ ä¸å ç´ {(1,0), (3,3), (4,2), (5,1)} // è¾åºæå 0 1 2 3 ä¸­çæå 1 çå ç´ ç first auto it2 = trr . find_by_order ( 1 ); cout << ( * it2 ). first << endl ; // è¾åºï¼3 // è¾åºå ¶æå int pos = trr . order_of_key ( * it2 ); cout << pos << endl ; // è¾åºï¼1 // æç § it2 åè£ trr decltype ( trr ) newtr ; trr . split ( * it2 , newtr ); for ( auto i = newtr . begin (); i != newtr . end (); ++ i ) { cout << ( * i ). first << ' ' ; // è¾åºï¼4 5 } cout << endl ; // å° newtr æ å¹¶å ¥ trr æ ï¼newtr æ è¢«æ¸ ç©ºï¼ trr . join ( newtr ); for ( auto i = trr . begin (); i != trr . end (); ++ i ) { cout << ( * i ). first << ' ' ; // è¾åºï¼1 3 4 5 } cout << endl ; cout << newtr . size () << endl ; // è¾åºï¼0 return 0 ; } ```   
+```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 ``` |  ```text // Common Header Simple over C++11 #include <iostream> using namespace std ; using ll = long long ; using ull = unsigned long long ; using ld = long double ; using pii = pair < int , int > ; #include <ext/pb_ds/assoc_container.hpp> #include <ext/pb_ds/tree_policy.hpp> __gnu_pbds :: tree < pair < int , int > , __gnu_pbds :: null_type , less < pair < int , int >> , __gnu_pbds :: rb_tree_tag , __gnu_pbds :: tree_order_statistics_node_update > trr ; int main () { int cnt = 0 ; trr . insert ( make_pair ( 1 , cnt ++ )); trr . insert ( make_pair ( 5 , cnt ++ )); trr . insert ( make_pair ( 4 , cnt ++ )); trr . insert ( make_pair ( 3 , cnt ++ )); trr . insert ( make_pair ( 2 , cnt ++ )); // 树上元素 {(1,0), (2,4), (3,3), (4,2), (5,1)} auto it = trr . lower_bound ( make_pair ( 2 , 0 )); trr . erase ( it ); // 树上元素 {(1,0), (3,3), (4,2), (5,1)} // 输出排名 0 1 2 3 中的排名 1 的元素的 first auto it2 = trr . find_by_order ( 1 ); cout << ( * it2 ). first << endl ; // 输出：3 // 输出其排名 int pos = trr . order_of_key ( * it2 ); cout << pos << endl ; // 输出：1 // 按照 it2 分裂 trr decltype ( trr ) newtr ; trr . split ( * it2 , newtr ); for ( auto i = newtr . begin (); i != newtr . end (); ++ i ) { cout << ( * i ). first << ' ' ; // 输出：4 5 } cout << endl ; // 将 newtr 树并入 trr 树，newtr 树被清空． trr . join ( newtr ); for ( auto i = trr . begin (); i != trr . end (); ++ i ) { cout << ( * i ). first << ' ' ; // 输出：1 3 4 5 } cout << endl ; cout << newtr . size () << endl ; // 输出：0 return 0 ; } ```   
 ---|---  
   
-## åèèµæ
+## 参考资料
 
   * [Tree-Based Containers](https://gcc.gnu.org/onlinedocs/libstdc++/ext/pb_ds/tree_based_containers.html)
-  * [`join` å½æ°å¨ GCC 14.1.0 ä¸­çå®ç°](https://gcc.gnu.org/onlinedocs/gcc-14.1.0/libstdc++/api/a18391_source.html#l00043)
-  * [`erase` å½æ°å¨ GCC 14.1.0 ä¸­çå®ç°](https://gcc.gnu.org/onlinedocs/gcc-14.1.0/libstdc++/api/a18211_source.html#l00043)
+  * [`join` 函数在 GCC 14.1.0 中的实现](https://gcc.gnu.org/onlinedocs/gcc-14.1.0/libstdc++/api/a18391_source.html#l00043)
+  * [`erase` 函数在 GCC 14.1.0 中的实现](https://gcc.gnu.org/onlinedocs/gcc-14.1.0/libstdc++/api/a18211_source.html#l00043)
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/pb-ds/tree.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/lang/pb-ds/tree.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[opsiff](https://github.com/opsiff), [Ir1d](https://github.com/Ir1d), [Xeonacid](https://github.com/Xeonacid), [Tiphereth-A](https://github.com/Tiphereth-A), [ksyx](https://github.com/ksyx), [c-forrest](https://github.com/c-forrest), [ChungZH](https://github.com/ChungZH), [HeRaNO](https://github.com/HeRaNO), [isdanni](https://github.com/isdanni), [Konano](https://github.com/Konano), [llleixx](https://github.com/llleixx), [sshwy](https://github.com/sshwy), [StableAgOH](https://github.com/StableAgOH), [zyzzyh](https://github.com/zyzzyh)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/pb-ds/tree.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/lang/pb-ds/tree.md "edit.link.title")  
+>  __本页面贡献者：[opsiff](https://github.com/opsiff), [Ir1d](https://github.com/Ir1d), [Xeonacid](https://github.com/Xeonacid), [Tiphereth-A](https://github.com/Tiphereth-A), [ksyx](https://github.com/ksyx), [c-forrest](https://github.com/c-forrest), [ChungZH](https://github.com/ChungZH), [HeRaNO](https://github.com/HeRaNO), [isdanni](https://github.com/isdanni), [Konano](https://github.com/Konano), [llleixx](https://github.com/llleixx), [sshwy](https://github.com/sshwy), [StableAgOH](https://github.com/StableAgOH), [zyzzyh](https://github.com/zyzzyh)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

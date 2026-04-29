@@ -1,4 +1,4 @@
-# 凸包 - OI Wiki
+﻿# 凸包 - OI Wiki
 
 - Source: https://oi-wiki.org/geometry/convex-hull/
 

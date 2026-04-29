@@ -1,4 +1,4 @@
-# Tim 排序 - OI Wiki
+﻿# Tim 排序 - OI Wiki
 
 - Source: https://oi-wiki.org/basic/tim-sort/
 

@@ -1,4 +1,4 @@
-# 差分约束 - OI Wiki
+﻿# 差分约束 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/diff-constraints/
 

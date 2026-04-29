@@ -1,279 +1,279 @@
-# ææ³¢é£å¥æ°å - OI Wiki
+﻿# 斐波那契数列 - OI Wiki
 
 - Source: https://oi-wiki.org/math/combinatorics/fibonacci/
 
-# ææ³¢é£å¥æ°å
+# 斐波那契数列
 
-ææ³¢é£å¥æ°åï¼The Fibonacci sequenceï¼[OEIS A000045](http://oeis.org/A000045)ï¼çå®ä¹å¦ä¸ï¼
+斐波那契数列（The Fibonacci sequence，[OEIS A000045](http://oeis.org/A000045)）的定义如下：
 
-ð¹0=0,ð¹1=1,ð¹ð=ð¹ðâ1+ð¹ðâ2F0=0,F1=1,Fn=Fnâ1+Fnâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹0=0,𝐹1=1,𝐹𝑛=𝐹𝑛−1+𝐹𝑛−2F0=0,F1=1,Fn=Fn−1+Fn−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯¥æ°åçåå é¡¹å¦ä¸ï¼
+该数列的前几项如下：
 
-0,1,1,2,3,5,8,13,21,34,55,89,â¦0,1,1,2,3,5,8,13,21,34,55,89,â¦![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+0,1,1,2,3,5,8,13,21,34,55,89,…0,1,1,2,3,5,8,13,21,34,55,89,…![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## å¢å¡æ¯æ°å
+## 卢卡斯数列
 
-å¢å¡æ¯æ°åï¼The Lucas sequenceï¼[OEIS A000032](http://oeis.org/A000032)ï¼çå®ä¹å¦ä¸ï¼
+卢卡斯数列（The Lucas sequence，[OEIS A000032](http://oeis.org/A000032)）的定义如下：
 
-ð¿0=2,ð¿1=1,ð¿ð=ð¿ðâ1+ð¿ðâ2L0=2,L1=1,Ln=Lnâ1+Lnâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿0=2,𝐿1=1,𝐿𝑛=𝐿𝑛−1+𝐿𝑛−2L0=2,L1=1,Ln=Ln−1+Ln−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¯¥æ°åçåå é¡¹å¦ä¸ï¼
+该数列的前几项如下：
 
-2,1,3,4,7,11,18,29,47,76,123,199,â¦2,1,3,4,7,11,18,29,47,76,123,199,â¦![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+2,1,3,4,7,11,18,29,47,76,123,199,…2,1,3,4,7,11,18,29,47,76,123,199,…![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç ç©¶ææ³¢é£å¥æ°åï¼å¾å¤æ¶åéè¦åå©å¢å¡æ¯æ°åä¸ºå·¥å ·ï¼
+研究斐波那契数列，很多时候需要借助卢卡斯数列为工具．
 
-## ææ³¢é£å¥æ°åéé¡¹å ¬å¼
+## 斐波那契数列通项公式
 
-ç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªææ³¢é£å¥æ°å¯ä»¥å¨ Î(ð)Î(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å ä½¿ç¨éæ¨å ¬å¼è®¡ç®ï¼ä½æä»¬ä»ææ´å¿«éçæ¹æ³è®¡ç®ï¼
+第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个斐波那契数可以在 Θ(𝑛)Θ(n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间内使用递推公式计算．但我们仍有更快速的方法计算．
 
-### è§£æè§£
+### 解析解
 
-è§£æè§£å³å ¬å¼è§£ï¼æä»¬æææ³¢é£å¥æ°åçéé¡¹å ¬å¼ï¼Binet's Formulaï¼ï¼
+解析解即公式解．我们有斐波那契数列的通项公式（Binet's Formula）：
 
-ð¹ð=(1+â52)ðâ(1ââ52)ðâ5Fn=(1+52)nâ(1â52)n5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹𝑛=(1+√52)𝑛−(1−√52)𝑛√5Fn=(1+52)n−(1−52)n5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¸ªå ¬å¼å¯ä»¥å¾å®¹æå°ç¨å½çº³æ³è¯æï¼å½ç¶ä¹å¯ä»¥éè¿çæå½æ°çæ¦å¿µæ¨å¯¼ï¼æè è§£ä¸ä¸ªæ¹ç¨å¾å°ï¼
+这个公式可以很容易地用归纳法证明，当然也可以通过生成函数的概念推导，或者解一个方程得到．
 
-å½ç¶ä½ å¯è½åç°ï¼è¿ä¸ªå ¬å¼åå­çç¬¬äºé¡¹æ»æ¯å°äº 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¹¶ä¸å®ä»¥ææ°çº§çéåº¦åå°ï¼å æ­¤æä»¬å¯ä»¥æè¿ä¸ªå ¬å¼åæ
+当然你可能发现，这个公式分子的第二项总是小于 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，并且它以指数级的速度减小．因此我们可以把这个公式写成
 
-ð¹ð=â¡â¢ â¢ â¢â£(1+â52)ðâ5â¤â¥ â¥ â¥â¦Fn=[(1+52)n5]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹𝑛=⎡⎢ ⎢ ⎢⎣(1+√52)𝑛√5⎤⎥ ⎥ ⎥⎦Fn=[(1+52)n5]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿éçä¸­æ¬å·è¡¨ç¤ºåç¦»å®æè¿çæ´æ°ï¼
+这里的中括号表示取离它最近的整数．
 
-è¿ä¸¤ä¸ªå ¬å¼å¨è®¡ç®çæ¶åè¦æ±æé«çç²¾ç¡®åº¦ï¼å æ­¤å¨å®è·µä¸­å¾å°ç¨å°ï¼ä½æ¯è¯·ä¸è¦å¿½è§ï¼ç»åæ¨¡æä¹ä¸äºæ¬¡å©ä½åéå çæ¦å¿µï¼å¨ OI ä¸­ä½¿ç¨è¿ä¸ªå ¬å¼ä»æ¯æç¨çï¼
+这两个公式在计算的时候要求极高的精确度，因此在实践中很少用到．但是请不要忽视！结合模意义下二次剩余和逆元的概念，在 OI 中使用这个公式仍是有用的．
 
-### å¢å¡æ¯æ°åéé¡¹å ¬å¼
+### 卢卡斯数列通项公式
 
-æä»¬æå¢å¡æ¯æ°åçéé¡¹å ¬å¼ï¼
+我们有卢卡斯数列的通项公式：
 
-ð¿ð=(1+â52)ð+(1ââ52)ðLn=(1+52)n+(1â52)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿𝑛=(1+√52)𝑛+(1−√52)𝑛Ln=(1+52)n+(1−52)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸ææ³¢é£å¥æ°åéå¸¸ç¸ä¼¼ï¼äºå®ä¸æï¼
+与斐波那契数列非常相似．事实上有：
 
-ð¿ð+ð¹ðâ52=(1+â52)ðLn+Fn52=(1+52)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿𝑛+𝐹𝑛√52=(1+√52)𝑛Ln+Fn52=(1+52)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¹å°±æ¯è¯´ï¼ð¿ðLn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¹ðFn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ°å¥½ææ (1+â52)ð(1+52)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºé¡¹å¼å±å¼ååå¹¶åç±»é¡¹åçåå­ç³»æ°ï¼ä¹å°±æ¯è¯´ï¼Pell æ¹ç¨
+也就是说，𝐿𝑛Ln![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐹𝑛Fn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 恰好构成 (1+√52)𝑛(1+52)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 二项式展开再合并同类项后的分子系数．也就是说，Pell 方程
 
-ð¥2â5ð¦2=â4x2â5y2=â4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥2−5𝑦2=−4x2−5y2=−4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çå ¨ä½è§£ï¼æ°å¥½æ¯
+的全体解，恰好是
 
-ð¥ð+ð¦ðâ52=ð¿ð+ð¹ðâ52xn+yn52=Ln+Fn52![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥𝑛+𝑦𝑛√52=𝐿𝑛+𝐹𝑛√52xn+yn52=Ln+Fn52![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ°å¥½æ¯å¢å¡æ¯æ°ååææ³¢é£å¥æ°åï¼å æ­¤æ
+恰好是卢卡斯数列和斐波那契数列．因此有
 
-ð¿ð2â5ð¹ð2=â4Ln2â5Fn2=â4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿𝑛2−5𝐹𝑛2=−4Ln2−5Fn2=−4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### ç©éµå½¢å¼
+### 矩阵形式
 
-ææ³¢é£å¥æ°åçéæ¨å¯ä»¥ç¨ç©éµä¹æ³çå½¢å¼è¡¨è¾¾ï¼
+斐波那契数列的递推可以用矩阵乘法的形式表达：
 
-[ð¹ðâ1ð¹ð]=[ð¹ðâ2ð¹ðâ1][0111][Fnâ1Fn]=[Fnâ2Fnâ1][0111]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+[𝐹𝑛−1𝐹𝑛]=[𝐹𝑛−2𝐹𝑛−1][0111][Fn−1Fn]=[Fn−2Fn−1][0111]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¾ ð =[0111]P=[0111]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¬å¾å°
+设 𝑃 =[0111]P=[0111]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，我们得到
 
-[ð¹ðð¹ð+1]=[ð¹0ð¹1]ðð[FnFn+1]=[F0F1]Pn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+[𝐹𝑛𝐹𝑛+1]=[𝐹0𝐹1]𝑃𝑛[FnFn+1]=[F0F1]Pn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-äºæ¯æä»¬å¯ä»¥ç¨ç©éµä¹æ³å¨ Î(logâ¡ð)Î(logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å è®¡ç®ææ³¢é£å¥æ°åï¼æ­¤å¤ï¼åä¸èè®²è¿°çå ¬å¼ä¹å¯éè¿ç©éµå¯¹è§åçæå·§æ¥å¾å°ï¼
+于是我们可以用矩阵乘法在 Θ(log⁡𝑛)Θ(log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间内计算斐波那契数列．此外，前一节讲述的公式也可通过矩阵对角化的技巧来得到．
 
-### å¿«éåå¢æ³
+### 快速倍增法
 
-ä½¿ç¨ä¸é¢çæ¹æ³æä»¬å¯ä»¥å¾å°ä»¥ä¸ç­å¼ï¼
+使用上面的方法我们可以得到以下等式：
 
-ð¹2ð=ð¹ð(2ð¹ð+1âð¹ð)ð¹2ð+1=ð¹2ð+1+ð¹2ðF2k=Fk(2Fk+1âFk)F2k+1=Fk+12+Fk2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹2𝑘=𝐹𝑘(2𝐹𝑘+1−𝐹𝑘)𝐹2𝑘+1=𝐹2𝑘+1+𝐹2𝑘F2k=Fk(2Fk+1−Fk)F2k+1=Fk+12+Fk2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-äºæ¯å¯ä»¥éè¿è¿æ ·çæ¹æ³å¿«éè®¡ç®ä¸¤ä¸ªç¸é»çææ³¢é£å¥æ°ï¼å¸¸æ°æ¯ç©ä¹å°ï¼ï¼ä»£ç å¦ä¸ï¼è¿åå¼æ¯ä¸ä¸ªäºå ç» (ð¹ð,ð¹ð+1)(Fn,Fn+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+于是可以通过这样的方法快速计算两个相邻的斐波那契数（常数比矩乘小）．代码如下，返回值是一个二元组 (𝐹𝑛,𝐹𝑛+1)(Fn,Fn+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
 ```text 1 2 3 4 5 6 7 8 9 10 ``` |  ```text pair < int , int > fib ( int n ) { if ( n == 0 ) return { 0 , 1 }; auto p = fib ( n >> 1 ); int c = p . first * ( 2 * p . second \- p . first ); int d = p . first * p . first \+ p . second * p . second ; if ( n & 1 ) return { d , c \+ d }; else return { c , d }; } ```   
 ---|---  
   
-## æ§è´¨
+## 性质
 
-ææ³¢é£å¥æ°åæ¥æè®¸å¤æè¶£çæ§è´¨ï¼è¿éåä¸¾åºä¸é¨åç®åçæ§è´¨ï¼
+斐波那契数列拥有许多有趣的性质，这里列举出一部分简单的性质：
 
-  1. å¡è¥¿å°¼æ§è´¨ï¼Cassini's identityï¼ï¼ð¹ðâ1ð¹ð+1 âð¹2ð =( â1)ðFnâ1Fn+1âFn2=(â1)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. éå æ§è´¨ï¼ð¹ð+ð =ð¹ðð¹ð+1 +ð¹ðâ1ð¹ðFn+k=FkFn+1+Fkâ1Fn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  3. åä¸ä¸æ¡æ§è´¨ä¸­ ð =ðk=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¬å¾å° ð¹2ð =ð¹ð(ð¹ð+1 +ð¹ðâ1)F2n=Fn(Fn+1+Fnâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  4. ç±ä¸ä¸æ¡æ§è´¨å¯ä»¥å½çº³è¯æï¼âð ââ,ð¹ð|ð¹ððâkâN,Fn|Fnk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  5. ä¸è¿°æ§è´¨å¯éï¼å³ âð¹ð|ð¹ð,ð|ðâFa|Fb,a|b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  6. GCD æ§è´¨ï¼(ð¹ð,ð¹ð) =ð¹(ð,ð)(Fm,Fn)=F(m,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  7. ä»¥ææ³¢é£å¥æ°åç¸é»ä¸¤é¡¹ä½ä¸ºè¾å ¥ä¼ä½¿æ¬§å éå¾·ç®æ³è¾¾å°æåå¤æåº¦ï¼å ·ä½åè§ [ç»´åº - ææ¢ ](https://en.wikipedia.org/wiki/Gabriel_Lam%C3%A9)ï¼ï¼
+  1. 卡西尼性质（Cassini's identity）：𝐹𝑛−1𝐹𝑛+1 −𝐹2𝑛 =( −1)𝑛Fn−1Fn+1−Fn2=(−1)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  2. 附加性质：𝐹𝑛+𝑘 =𝐹𝑘𝐹𝑛+1 +𝐹𝑘−1𝐹𝑛Fn+k=FkFn+1+Fk−1Fn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  3. 取上一条性质中 𝑘 =𝑛k=n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，我们得到 𝐹2𝑛 =𝐹𝑛(𝐹𝑛+1 +𝐹𝑛−1)F2n=Fn(Fn+1+Fn−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  4. 由上一条性质可以归纳证明，∀𝑘 ∈ℕ,𝐹𝑛|𝐹𝑛𝑘∀k∈N,Fn|Fnk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  5. 上述性质可逆，即 ∀𝐹𝑎|𝐹𝑏,𝑎|𝑏∀Fa|Fb,a|b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  6. GCD 性质：(𝐹𝑚,𝐹𝑛) =𝐹(𝑚,𝑛)(Fm,Fn)=F(m,n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  7. 以斐波那契数列相邻两项作为输入会使欧几里德算法达到最坏复杂度（具体参见 [维基 - 拉梅](https://en.wikipedia.org/wiki/Gabriel_Lam%C3%A9)）．
 
-### ææ³¢é£å¥æ°åä¸å¢å¡æ¯æ°åçå ³ç³»
+### 斐波那契数列与卢卡斯数列的关系
 
-ä¸é¾åç°ï¼å ³äºå¢å¡æ¯æ°åä¸ææ³¢é£å¥æ°åçç­å¼ï¼ä¸ä¸è§å½æ°å ¬å¼å ·æå¾é«çç¸ä¼¼æ§ï¼æ¯å¦ï¼
+不难发现，关于卢卡斯数列与斐波那契数列的等式，与三角函数公式具有很高的相似性．比如：
 
-ð¿ð+ð¹ðâ52=(1+â52)ðLn+Fn52=(1+52)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿𝑛+𝐹𝑛√52=(1+√52)𝑛Ln+Fn52=(1+52)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸
+与
 
-cosâ¡ðð¥+ðsinâ¡ðð¥=(cosâ¡ð¥+ðsinâ¡ð¥)ðcosâ¡nx+isinâ¡nx=(cosâ¡x+isinâ¡x)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+cos⁡𝑛𝑥+𝑖sin⁡𝑛𝑥=(cos⁡𝑥+𝑖sin⁡𝑥)𝑛cos⁡nx+isin⁡nx=(cos⁡x+isin⁡x)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¾åï¼ä»¥å
+很像．以及
 
-ð¿ð2â5ð¹ð2=â4Ln2â5Fn2=â4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿𝑛2−5𝐹𝑛2=−4Ln2−5Fn2=−4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸
+与
 
-cos2â¡ð¥+sin2â¡ð¥=1cos2â¡x+sin2â¡x=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+cos2⁡𝑥+sin2⁡𝑥=1cos2⁡x+sin2⁡x=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¾åï¼å æ­¤ï¼å¢å¡æ¯æ°åä¸ä½å¼¦å½æ°å¾åï¼èææ³¢é£å¥æ°åä¸æ­£å¼¦å½æ°å¾åï¼æ¯å¦ï¼æ ¹æ®
+很像．因此，卢卡斯数列与余弦函数很像，而斐波那契数列与正弦函数很像．比如，根据
 
-(1+â52)ð(1+â52)ð=(1+â52)ð+ð(1+52)m(1+52)n=(1+52)m+n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(1+√52)𝑚(1+√52)𝑛=(1+√52)𝑚+𝑛(1+52)m(1+52)n=(1+52)m+n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥å¾å°ä¸¤ä¸æ ä¹åçç­å¼ï¼
+可以得到两下标之和的等式：
 
-2ð¿ð+ð=5ð¹ðð¹ð+ð¿ðð¿ð2Lm+n=5FmFn+LmLn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)2ð¹ð+ð=ð¹ðð¿ð+ð¿ðð¹ð2Fm+n=FmLn+LmFn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+2𝐿𝑚+𝑛=5𝐹𝑚𝐹𝑛+𝐿𝑚𝐿𝑛2Lm+n=5FmFn+LmLn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)2𝐹𝑚+𝑛=𝐹𝑚𝐿𝑛+𝐿𝑚𝐹𝑛2Fm+n=FmLn+LmFn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-äºæ¯æ¨è®ºå°±æäºåä¸æ çç­å¼ï¼
+于是推论就有二倍下标的等式：
 
-ð¿2ð=ð¿ð2â2(â1)ðL2n=Ln2â2(â1)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ð¹2ð=ð¹ðð¿ðF2n=FnLn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐿2𝑛=𝐿𝑛2−2(−1)𝑛L2n=Ln2−2(−1)n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)𝐹2𝑛=𝐹𝑛𝐿𝑛F2n=FnLn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿ä¹æ¯ä¸ç§å¿«éåå¢ä¸æ çåæ³ï¼åæ ·å°ï¼ä¹å¯ä»¥ä»¿ç §ä¸è§å½æ°çå ¬å¼ï¼æ¯å¦å¥å¶æ§ãåå·®åç§¯ãç§¯ååå·®ãåè§ãä¸è½ä»£æ¢ç­ç­ï¼æ¨çåºæ´å¤æå ³å¢å¡æ¯æ°åä¸ææ³¢é£å¥æ°åçç¸åºç­å¼ï¼
+这也是一种快速倍增下标的办法．同样地，也可以仿照三角函数的公式，比如奇偶性、和差化积、积化和差、半角、万能代换等等，推理出更多有关卢卡斯数列与斐波那契数列的相应等式．
 
-## ææ³¢é£å¥ç¼ç 
+## 斐波那契编码
 
-æä»¬å¯ä»¥å©ç¨ææ³¢é£å¥æ°åä¸ºæ­£æ´æ°ç¼ç ï¼æ ¹æ® [é½è¯å¤å¤«å®ç](https://zh.wikipedia.org/wiki/%E9%BD%8A%E8%82%AF%E5%A4%9A%E5%A4%AB%E5%AE%9A%E7%90%86)ï¼ä»»ä½èªç¶æ° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è¢«å¯ä¸å°è¡¨ç¤ºæä¸äºææ³¢é£å¥æ°çåï¼
+我们可以利用斐波那契数列为正整数编码．根据 [齐肯多夫定理](https://zh.wikipedia.org/wiki/%E9%BD%8A%E8%82%AF%E5%A4%9A%E5%A4%AB%E5%AE%9A%E7%90%86)，任何自然数 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以被唯一地表示成一些斐波那契数的和：
 
-ð=ð¹ð1+ð¹ð2+â¦+ð¹ððN=Fk1+Fk2+â¦+Fkr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑁=𝐹𝑘1+𝐹𝑘2+…+𝐹𝑘𝑟N=Fk1+Fk2+…+Fkr![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¹¶ä¸ ð1 â¥ð2 +2,Â ð2 â¥ð3 +2,Â â¦,Â ðð â¥2k1â¥k2+2,Â k2â¥k3+2,Â â¦,Â krâ¥2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³ä¸è½ä½¿ç¨ä¸¤ä¸ªç¸é»çææ³¢é£å¥æ°ï¼
+并且 𝑘1 ≥𝑘2 +2, 𝑘2 ≥𝑘3 +2, …, 𝑘𝑟 ≥2k1≥k2+2, k2≥k3+2, …, kr≥2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（即不能使用两个相邻的斐波那契数）
 
-äºæ¯æä»¬å¯ä»¥ç¨ ð0ð1ð2â¦ðð 1d0d1d2â¦ds1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç¼ç è¡¨ç¤ºä¸ä¸ªæ­£æ´æ°ï¼å ¶ä¸­ ðð =1di=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åè¡¨ç¤º ð¹ð+2Fi+2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¢«ä½¿ç¨ï¼ç¼ç æ«ä½æä»¬å¼ºå¶ç»å®å ä¸ä¸ª 1ï¼è¿æ ·ä¼åºç°ä¸¤ä¸ªç¸é»ç 1ï¼ï¼è¡¨ç¤ºè¿ä¸ä¸²ç¼ç ç»æï¼ä¸¾å ä¸ªä¾å­ï¼
+于是我们可以用 𝑑0𝑑1𝑑2…𝑑𝑠1d0d1d2…ds1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的编码表示一个正整数，其中 𝑑𝑖 =1di=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 则表示 𝐹𝑖+2Fi+2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 被使用．编码末位我们强制给它加一个 1（这样会出现两个相邻的 1），表示这一串编码结束．举几个例子：
 
-1=1=ð¹2=(11)ð¹2=2=ð¹3=(011)ð¹6=5+1=ð¹5+ð¹2=(10011)ð¹8=8=ð¹6=(000011)ð¹9=8+1=ð¹6+ð¹2=(100011)ð¹19=13+5+1=ð¹7+ð¹5+ð¹2=(1001011)ð¹1=1=F2=(11)F2=2=F3=(011)F6=5+1=F5+F2=(10011)F8=8=F6=(000011)F9=8+1=F6+F2=(100011)F19=13+5+1=F7+F5+F2=(1001011)F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+1=1=𝐹2=(11)𝐹2=2=𝐹3=(011)𝐹6=5+1=𝐹5+𝐹2=(10011)𝐹8=8=𝐹6=(000011)𝐹9=8+1=𝐹6+𝐹2=(100011)𝐹19=13+5+1=𝐹7+𝐹5+𝐹2=(1001011)𝐹1=1=F2=(11)F2=2=F3=(011)F6=5+1=F5+F2=(10011)F8=8=F6=(000011)F9=8+1=F6+F2=(100011)F19=13+5+1=F7+F5+F2=(1001011)F![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç» ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¼ç çè¿ç¨å¯ä»¥ä½¿ç¨è´ªå¿ç®æ³è§£å³ï¼
+给 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 编码的过程可以使用贪心算法解决：
 
-  1. ä»å¤§å°å°æä¸¾ææ³¢é£å¥æ° ð¹ðFi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç´å° ð¹ð â¤ðFiâ¤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ ð¹ðFi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¨ç¼ç ç ð â2iâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½ç½®ä¸æ¾ä¸ä¸ª 1ï¼ç¼ç ä»å·¦å°å³ä»¥ 0 ä¸ºèµ·ç¹ï¼ï¼
-  3. å¦æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ­£ï¼åå°æ­¥éª¤ 1ï¼
-  4. æåå¨ç¼ç æ«ä½æ·»å ä¸ä¸ª 1ï¼è¡¨ç¤ºç¼ç çç»æä½ç½®ï¼
+  1. 从大到小枚举斐波那契数 𝐹𝑖Fi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，直到 𝐹𝑖 ≤𝑛Fi≤n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  2. 把 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 减掉 𝐹𝑖Fi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，在编码的 𝑖 −2i−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的位置上放一个 1（编码从左到右以 0 为起点）．
+  3. 如果 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为正，回到步骤 1．
+  4. 最后在编码末位添加一个 1，表示编码的结束位置．
 
-è§£ç è¿ç¨åçï¼å å ææ«ä½ç 1ï¼å¯¹äºç¼ç ä¸º 1 çä½ç½® ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¼ç ä»å·¦å°å³ä»¥ 0 ä¸ºèµ·ç¹ï¼ï¼ç´¯å ä¸ä¸ª ð¹ð+2Fi+2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°ç­æ¡ï¼æåçç­æ¡å°±æ¯åæ°å­ï¼
+解码过程同理，先删掉末位的 1，对于编码为 1 的位置 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（编码从左到右以 0 为起点），累加一个 𝐹𝑖+2Fi+2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到答案．最后的答案就是原数字．
 
-## æ¨¡æä¹ä¸å¨ææ§
+## 模意义下周期性
 
-å¯¹äºæ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¹ä¸çææ³¢é£å¥æ°åï¼å¯ä»¥å®¹æå°ä½¿ç¨æ½å±åçè¯æï¼è¯¥æ°åæ¯æå¨ææ§çï¼ç±äºææ³¢é£å¥æ°æ¯ä¸é¡¹çè®¡ç®é½ä¾èµäºåä¸¤é¡¹çåå¼ï¼æä»¥éè¦ç¨ç¸é»ææ³¢é£å¥æ°ç»æçæ°å¯¹æè¿°æ°åå½ä¸æå¤çç¶æï¼èèæ¨¡æä¹ä¸å ð2 +1m2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªææ³¢é£å¥æ°å¯¹ï¼
+对于模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 意义下的斐波那契数列，可以容易地使用抽屉原理证明，该数列是有周期性的．由于斐波那契数每一项的计算都依赖于前两项的取值，所以需要用相邻斐波那契数组成的数对描述数列当且所处的状态．考虑模意义下前 𝑚2 +1m2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个斐波那契数对：
 
-(ð¹0,Â ð¹1),Â (ð¹1,Â ð¹2),Â â¦,Â (ð¹ð2,Â ð¹ð2+1)(F0,Â F1),Â (F1,Â F2),Â â¦,Â (Fm2,Â Fm2+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝐹0, 𝐹1), (𝐹1, 𝐹2), …, (𝐹𝑚2, 𝐹𝑚2+1)(F0, F1), (F1, F2), …, (Fm2, Fm2+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå©ä½ç³»å¤§å°ä¸º ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿æå³çè³å¤åªå¯è½æ ð2m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç§äºä¸ç¸åçæ°å¯¹ï¼å æ­¤ï¼å¨å ð2 +1m2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ°å¯¹ä¸­å¿ æä¸¤ä¸ªç¸åçæ°å¯¹ï¼äºæ¯ä»è¿ä¸¤ä¸ªæ°å¯¹å¯ä»¥å¾åçæç¸åçææ³¢é£å¥æ°åï¼é£ä¹ï¼ææ³¢é£å¥æ°åå°±æ¯å¨ææ§çï¼ä¸ï¼æå°æ­£ï¼å¨æä¸ä¼è¶ è¿ ð2m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的剩余系大小为 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这意味着至多只可能有 𝑚2m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 种互不相同的数对．因此，在前 𝑚2 +1m2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数对中必有两个相同的数对，于是从这两个数对可以往后生成相同的斐波那契数列．那么，斐波那契数列就是周期性的，且（最小正）周期不会超过 𝑚2m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### Pisano å¨æ
+### Pisano 周期
 
-æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¹ä¸ææ³¢é£å¥æ°åçæå°æ­£å¨æè¢«ç§°ä¸º **Pisano å¨æ** ï¼Pisano periodï¼ç®è¨è¯ºå¨æï¼[OEIS A001175](http://oeis.org/A001175)ï¼ï¼æ¬æä¸­ç¨ ð(ð)Ï(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºæ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Pisano å¨æï¼
+模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 意义下斐波那契数列的最小正周期被称为 **Pisano 周期** （Pisano period，皮萨诺周期，[OEIS A001175](http://oeis.org/A001175)）．本文中用 𝜋(𝑚)π(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Pisano 周期．
 
-è¿ä¸è§å¯å¯ä»¥ç¨äºè®¡ç®ç¬¬ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¡¹ææ³¢é£å¥æ°æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¼ï¼å¦æ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éå¸¸å¤§ï¼å°±éè¦è®¡ç®ææ³¢é£å¥æ°æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¨æï¼å½ç¶ï¼åªéè¦è®¡ç®å¨æï¼ä¸ä¸å®æ¯æå°æ­£å¨æï¼
+这一观察可以用于计算第 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 项斐波那契数模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的值．如果 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 非常大，就需要计算斐波那契数模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的周期．当然，只需要计算周期，不一定是最小正周期．
 
-ä¸ºæ­¤ï¼æå¦ä¸ç»è®ºï¼
+为此，有如下结论：
 
-  1. å¯¹äºäºç´ çæ¨¡æ° ð1,ð2m1,m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð(ð1ð2) =lcmâ¡(ð(ð1),ð(ð2))Ï(m1m2)=lcmâ¡(Ï(m1),Ï(m2))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. å¯¹äºç´ æ° ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ­£æ´æ° ðe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð(ðð) â£ððâ1ð(ð)Ï(pe)â£peâ1Ï(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  3. å¯¹äº ð =2ðÂ (ð âð+)m=2eÂ (eâN+)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð(ð) =3 â 2ðâ1Ï(m)=3â 2eâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  4. å¯¹äº ð =5ðÂ (ð âð+)m=5eÂ (eâN+)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð(ð) =4 â 5ðÏ(m)=4â 5e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  5. æåï¼å¯¹äºç´ æ° ð â¡ Â±1(mod10)pâ¡Â±1(mod10)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð(ð) â£(ð â1)Ï(p)â£(pâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºç´ æ° ð â¡ Â±3(mod10)pâ¡Â±3(mod10)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð(ð) â£2(ð +1)Ï(p)â£2(p+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. 对于互素的模数 𝑚1,𝑚2m1,m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝜋(𝑚1𝑚2) =lcm⁡(𝜋(𝑚1),𝜋(𝑚2))π(m1m2)=lcm⁡(π(m1),π(m2))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  2. 对于素数 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和正整数 𝑒e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝜋(𝑝𝑒) ∣𝑝𝑒−1𝜋(𝑝)π(pe)∣pe−1π(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  3. 对于 𝑚 =2𝑒 (𝑒 ∈𝐍+)m=2e (e∈N+)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝜋(𝑚) =3 ⋅2𝑒−1π(m)=3⋅2e−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  4. 对于 𝑚 =5𝑒 (𝑒 ∈𝐍+)m=5e (e∈N+)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝜋(𝑚) =4 ⋅5𝑒π(m)=4⋅5e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  5. 最后，对于素数 𝑝 ≡ ±1(mod10)p≡±1(mod10)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝜋(𝑝) ∣(𝑝 −1)π(p)∣(p−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；对于素数 𝑝 ≡ ±3(mod10)p≡±3(mod10)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝜋(𝑝) ∣2(𝑝 +1)π(p)∣2(p+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç»¼åè¿äºæ å½¢ï¼å¯ä»¥è¯´æï¼æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Pisano å¨æä¸ä¼è¶ è¿ 6ð6m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç­å·å½ä¸ä» å½ ð =2 Ã5ðÂ (ð âð+)m=2Ã5eÂ (eâN+)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶åå¾ï¼
+综合这些情形，可以说明：模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Pisano 周期不会超过 6𝑚6m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，等号当且仅当 𝑚 =2 ×5𝑒 (𝑒 ∈𝐍+)m=2×5e (e∈N+)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时取得．
 
-å©ç¨ä¸è¿°ç»è®ºï¼å¯ä»¥åºäºç´ å æ°åè§£ç®æ³ï¼å¾å°å¦ä¸å¿«éè®¡ç® Pisano å¨æçæ¹æ³ï¼
+利用上述结论，可以基于素因数分解算法，得到如下快速计算 Pisano 周期的方法：
 
-åèä»£ç 
+参考代码
 
 ```text 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 ``` |  ```text // Get a period of Fibonacci sequence mod m. // Not necessarily be the exact Pisano period. uint32_t calc_cycle_from_mod ( uint32_t m ) { uint32_t res = 1 ; for ( auto pe : factorize ( m )) { auto p = pe . first ; auto e = pe . second ; uint64_t cur = pow ( p , e \- 1 ); if ( p == 2 ) { cur *= 3 ; } else if ( p == 5 ) { cur *= 20 ; } else if ( p % 5 == 1 || p % 5 == 4 ) { cur *= p \- 1 ; } else { cur *= 2 * ( p \+ 1 ); } res = lcm ( res , cur ); } return res ; } ```   
 ---|---  
   
-è¿æ ·å¾å°çå¨æå¯è½åªæ¯ Pisano å¨æçä¸ä¸ªåæ°ï¼è¦å¾å°ç²¾ç¡®ç Pisano å¨æï¼å¯ä»¥è¿ä¸æ­¥èå¯è¯¥å¨æçå æ°ï¼æè ï¼å¯ä»¥ç´æ¥éè¿ [BSGS ç®æ³](../../number-theory/discrete-logarithm/#å¤§æ­¥å°æ­¥ç®æ³) ä»¥ ð(âð)O(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ¶é´å¤æåº¦è®¡ç®ï¼
+这样得到的周期可能只是 Pisano 周期的一个倍数．要得到精确的 Pisano 周期，可以进一步考察该周期的因数；或者，可以直接通过 [BSGS 算法](../../number-theory/discrete-logarithm/#大步小步算法) 以 𝑂(√𝑚)O(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的时间复杂度计算．
 
-### è¯æ
+### 证明
 
-æåï¼æ¬æç®è¦è¯æä¸è¿°å ³äº Pisano å¨æçç»è®ºï¼å¼å¾è¯´æçæ¯ï¼å©ç¨ä¸æè¯´æçæ¹æ³ï¼ç±»ä¼¼çç»è®ºå¯ä»¥æ¨å¹¿å°ä¸è¬çäºé¶å¸¸ç³»æ°çº¿æ§é½æ¬¡éæ¨æ°åï¼å°½ç®¡å ·ä½çå¸¸æ°ææå·®å¼ï¼è¿äºæ°åæ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Pisano å¨æé½æ¯ ð(ð)O(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çï¼
+最后，本文简要证明上述关于 Pisano 周期的结论．值得说明的是，利用下文说明的方法，类似的结论可以推广到一般的二阶常系数线性齐次递推数列．尽管具体的常数有所差异，这些数列模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Pisano 周期都是 𝑂(𝑚)O(m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的．
 
-ç¬¬ä¸ä¸ªè§å¯æ¯ï¼å©ç¨ [ä¸­å½å©ä½å®ç](../../number-theory/crt/)ï¼å¯ä»¥å°è®¨è®ºéå¶å¨ç´ æ°å¹æ¨¡çæ å½¢ï¼è®¾ ð1,ð2m1,m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸¤ä¸ªäºç´ çæ¨¡æ°ï¼ææ³¢é£å¥æ°åå¨æ¨¡ ð1m1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çå¨ææ¯ ð(ð1)Ï(m1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå ¶åæ°ï¼å¨æ¨¡ ð2m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çå¨ææ¯ ð(ð2)Ï(m2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå ¶åæ°ï¼æä»¥å®å¨æ¨¡ ð1ð2m1m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çæå°æ­£å¨æåæ°ä¸º ð(ð1)Ï(m1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð(ð2)Ï(m2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå°å ¬åæ°ï¼è¿å°±æ¯åæçç»è®º 1ï¼
+第一个观察是：利用 [中国剩余定理](../../number-theory/crt/)，可以将讨论限制在素数幂模的情形．设 𝑚1,𝑚2m1,m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是两个互素的模数．斐波那契数列在模 𝑚1m1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下的周期是 𝜋(𝑚1)π(m1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 及其倍数，在模 𝑚2m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下的周期是 𝜋(𝑚2)π(m2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 及其倍数，所以它在模 𝑚1𝑚2m1m2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下的最小正周期则恰为 𝜋(𝑚1)π(m1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝜋(𝑚2)π(m2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最小公倍数．这就是前文的结论 1．
 
-å¦ä¸ä¸ªè§å¯æ¯ï¼æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ç Pisano å¨æï¼å ¶å®æ¯æå°çæ­£æ´æ° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾
+另一个观察是：模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下的 Pisano 周期，其实是最小的正整数 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得
 
-ð´ð=(1110)ðâ¡ð¼(modð).Ak=(1110)kâ¡I(modm).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴𝑘=(1110)𝑘≡𝐼(mod𝑚).Ak=(1110)k≡I(modm).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¹å°±æ¯è¯´ï¼å®å ¶å®æ¯ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨æ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸1ç [é¶](../../algebra/group-theory/#é¶)ï¼
+也就是说，它其实是矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下1的 [阶](../../algebra/group-theory/#阶)．
 
-å¯¹äºç´ æ°å¹æ¨¡ ð =ððm=pe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼å¯ä»¥éè¿ç»å ¸çåå¹è®ºè¯èç³»å°ç¸åºçç´ æ°æ¨¡çæ å½¢ï¼è®¾ ð =ð(ðð)k=Ï(pe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±å­å¨äºé¶æ¹éµ ÎÎ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾
+对于素数幂模 𝑚 =𝑝𝑒m=pe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形，可以通过经典的升幂论证联系到相应的素数模的情形．设 𝑘 =𝜋(𝑝𝑒)k=π(pe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就存在二阶方阵 ΛΛ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得
 
-ð´ð=ððÎ+ð¼Ak=peÎ+I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴𝑘=𝑝𝑒Λ+𝐼Ak=peΛ+I![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æç«ï¼æ èï¼ç± [äºé¡¹å¼å®ç](../combination/#äºé¡¹å¼å®ç) å¯ç¥
+成立．故而，由 [二项式定理](../combination/#二项式定理) 可知
 
-ð´ðð=(ððÎ+ð¼)ð=ð¼+ðâð=1(ðð)(ððÎ)ðâ¡ð¼(modðð+1).Akp=(peÎ+I)p=I+âi=1p(pi)(peÎ)iâ¡I(modpe+1).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐴𝑘𝑝=(𝑝𝑒Λ+𝐼)𝑝=𝐼+𝑝∑𝑖=1(𝑝𝑖)(𝑝𝑒Λ)𝑖≡𝐼(mod𝑝𝑒+1).Akp=(peΛ+I)p=I+∑i=1p(pi)(peΛ)i≡I(modpe+1).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼ç± [é¶çæ§è´¨](../../number-theory/primitive-root/#å¹çå¾ªç¯ç»æ)ï¼æ ð(ðð+1) â£ðð =ðð(ðð)Ï(pe+1)â£kp=pÏ(pe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹ ðe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å½çº³å¯ç¥ï¼ð(ðð) â£ððâ1ð(ð)Ï(pe)â£peâ1Ï(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»æ¯æç«ï¼
+因此，由 [阶的性质](../../number-theory/primitive-root/#幂的循环结构)，有 𝜋(𝑝𝑒+1) ∣𝑘𝑝 =𝑝𝜋(𝑝𝑒)π(pe+1)∣kp=pπ(pe)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对 𝑒e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 归纳可知，𝜋(𝑝𝑒) ∣𝑝𝑒−1𝜋(𝑝)π(pe)∣pe−1π(p)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 总是成立．
 
-å¯¹äºç´ æ°æ¨¡ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼æ¬æè®¨è®ºä¸¤ç§è¯ææ¹å¼ï¼
+对于素数模 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形，本文讨论两种证明方式．
 
-å©ç¨éé¡¹å ¬å¼å©ç¨æ©å
+利用通项公式利用扩域
 
-ä¸ç§æ¯å©ç¨ææ³¢é£å¥æ°åçéé¡¹å ¬å¼ï¼
+一种是利用斐波那契数列的通项公式：
 
-ð¹ð=1â5(1+â52)ðâ1â5(1ââ52)ð.Fn=15(1+52)nâ15(1â52)n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹𝑛=1√5(1+√52)𝑛−1√5(1−√52)𝑛.Fn=15(1+52)n−15(1−52)n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å°å®ç¨äºé¡¹å¼å®çå±å¼ï¼å¹¶æ¶å»æ ¹å¼é¡¹ï¼
+将它用二项式定理展开，并消去根式项：
 
-ð¹ð=12ðâ1â(ðâ1)/2ââð=0(ð2ð+1)5ð.Fn=12nâ1âi=0â(nâ1)/2â(n2i+1)5i.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹𝑛=12𝑛−1⌊(𝑛−1)/2⌋∑𝑖=0(𝑛2𝑖+1)5𝑖.Fn=12n−1∑i=0⌊(n−1)/2⌋(n2i+1)5i.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯¹äº ð =2p=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸è¡¨è¾¾å¼æ æ³ç´æ¥åæ¨¡ï¼ä½å¯ä»¥éªè¯å¯¹åºç Pisano å¨æä¸º ð(2) =3Ï(2)=3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äº ð =5p=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð¹ð â¡ð â 3ðâ1(modð)Fnâ¡nâ 3nâ1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯ä»¥ç´æ¥éªè¯å¯¹åºç Pisano å¨æä¸º ð(5) =20Ï(5)=20![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºå©ä½çå¥ç´ æ¨¡æ°ï¼å¯ä»¥åä¸ºä¸¤ç§æ å½¢ï¼
+对于 𝑝 =2p=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，这一表达式无法直接取模，但可以验证对应的 Pisano 周期为 𝜋(2) =3π(2)=3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于 𝑝 =5p=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 𝐹𝑛 ≡𝑛 ⋅3𝑛−1(mod𝑝)Fn≡n⋅3n−1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，可以直接验证对应的 Pisano 周期为 𝜋(5) =20π(5)=20![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于剩余的奇素模数，可以分为两种情形：
 
-  * å¦æ ð â¡1,4(mod5)pâ¡1,4(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±æ
+  * 如果 𝑝 ≡1,4(mod5)p≡1,4(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就有
 
-ð¹ðâ¡12ðâ1(ðð)5(ðâ1)/2â¡1(modð),ð¹ð+1â¡12ð((ð+11)+(ð+1ð)5(ðâ1)/2)â¡1(modð).Fpâ¡12pâ1(pp)5(pâ1)/2â¡1(modp),Fp+1â¡12p((p+11)+(p+1p)5(pâ1)/2)â¡1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹𝑝≡12𝑝−1(𝑝𝑝)5(𝑝−1)/2≡1(mod𝑝),𝐹𝑝+1≡12𝑝((𝑝+11)+(𝑝+1𝑝)5(𝑝−1)/2)≡1(mod𝑝).Fp≡12p−1(pp)5(p−1)/2≡1(modp),Fp+1≡12p((p+11)+(p+1p)5(p−1)/2)≡1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åç®è¿ç¨ä¸­ï¼å©ç¨äºå¦ä¸ç»è®ºï¼ç± [Lucas å®ç](../../number-theory/lucas/)ï¼å¯¹äº 0 <ð <ð0<k<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ (ðð) â¡0(modð)(pk)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èå¯¹äº 1 <ð <ð1<k<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ (ð+1ð) â¡0(modð)(p+1k)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç± [Fermat å°å®ç](../../number-theory/fermat/#è´¹é©¬å°å®ç)ï¼æ 2ðâ1 â¡5ðâ1 â¡1(modð)2pâ1â¡5pâ1â¡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äº ð â¡1,4(mod5)pâ¡1,4(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¨¡ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºæ¬¡å©ä½ï¼å©ç¨ [äºæ¬¡äºåå¾](../../number-theory/quad-residue/#äºæ¬¡äºåå¾)ï¼ä¹æ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¨¡ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºæ¬¡å©ä½ï¼æ è 5(ðâ1)/2 â¡1(modð)5(pâ1)/2â¡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±æ­¤ï¼æ (ð¹ð,ð¹ð+1) â¡(ð¹1,ð¹2)(modð)(Fp,Fp+1)â¡(F1,F2)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ (ð â1)(pâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¨¡ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªå¨æï¼æä»¥ï¼ð(ð) â£(ð â1)Ï(p)â£(pâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+化简过程中，利用了如下结论：由 [Lucas 定理](../../number-theory/lucas/)，对于 0 <𝑘 <𝑝0<k<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有 (𝑝𝑘) ≡0(mod𝑝)(pk)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而对于 1 <𝑘 <𝑝1<k<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有 (𝑝+1𝑘) ≡0(mod𝑝)(p+1k)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；由 [Fermat 小定理](../../number-theory/fermat/#费马小定理)，有 2𝑝−1 ≡5𝑝−1 ≡1(mod𝑝)2p−1≡5p−1≡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；对于 𝑝 ≡1,4(mod5)p≡1,4(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是模 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二次剩余，利用 [二次互反律](../../number-theory/quad-residue/#二次互反律)，也有 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是模 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二次剩余，故而 5(𝑝−1)/2 ≡1(mod𝑝)5(p−1)/2≡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．由此，有 (𝐹𝑝,𝐹𝑝+1) ≡(𝐹1,𝐹2)(mod𝑝)(Fp,Fp+1)≡(F1,F2)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以 (𝑝 −1)(p−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是模 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个周期．所以，𝜋(𝑝) ∣(𝑝 −1)π(p)∣(p−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-  * å¦æ ð â¡2,3(mod5)pâ¡2,3(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å°±æ
+  * 如果 𝑝 ≡2,3(mod5)p≡2,3(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，就有
 
-ð¹2ðâ¡122ðâ1(2ðð)5(ðâ1)/2â¡â1(modð),ð¹2ð+1â¡122ð((2ð+11)+(2ð+1ð)5(ðâ1)/2+(2ð+12ð+1)5ð)â¡â1(modð).F2pâ¡122pâ1(2pp)5(pâ1)/2â¡â1(modp),F2p+1â¡122p((2p+11)+(2p+1p)5(pâ1)/2+(2p+12p+1)5p)â¡â1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐹2𝑝≡122𝑝−1(2𝑝𝑝)5(𝑝−1)/2≡−1(mod𝑝),𝐹2𝑝+1≡122𝑝((2𝑝+11)+(2𝑝+1𝑝)5(𝑝−1)/2+(2𝑝+12𝑝+1)5𝑝)≡−1(mod𝑝).F2p≡122p−1(2pp)5(p−1)/2≡−1(modp),F2p+1≡122p((2p+11)+(2p+1p)5(p−1)/2+(2p+12p+1)5p)≡−1(modp).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åç®è¿ç¨ä¸­ï¼å©ç¨äºå¦ä¸ç»è®ºï¼ç± Lucas å®çï¼å¯¹äº 0 <ð <ð0<k<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð <ð <2ðp<k<2p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ (ðð) â¡0(modð)(pk)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»¥å (2ðð) â¡2(modð)(2pp)â¡2(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èå¯¹äº 1 <ð <ð1<k<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð +1 <ð <2ðp+1<k<2p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ (ðð) â¡0(modð)(pk)â¡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»¥å (2ð+1ð) â¡2(modð)(2p+1p)â¡2(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç± Fermat å°å®çï¼æ 2ðâ1 â¡5ðâ1 â¡1(modð)2pâ1â¡5pâ1â¡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äº ð â¡2,3(mod5)pâ¡2,3(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¨¡ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºæ¬¡éå©ä½ï¼å©ç¨äºæ¬¡äºåå¾ï¼ä¹æ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¨¡ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºæ¬¡éå©ä½ï¼æ è 5(ðâ1)/2 â¡ â1(modð)5(pâ1)/2â¡â1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±æ­¤ï¼æ (ð¹2ð,ð¹2ð+1) â¡(ð¹â2,ð¹â1)(modð)(F2p,F2p+1)â¡(Fâ2,Fâ1)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ 2(ð +1)2(p+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¨¡ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªå¨æï¼æä»¥ï¼ð(ð) â£2(ð +1)Ï(p)â£2(p+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+化简过程中，利用了如下结论：由 Lucas 定理，对于 0 <𝑘 <𝑝0<k<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑝 <𝑘 <2𝑝p<k<2p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有 (𝑝𝑘) ≡0(mod𝑝)(pk)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，以及 (2𝑝𝑝) ≡2(mod𝑝)(2pp)≡2(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而对于 1 <𝑘 <𝑝1<k<p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑝 +1 <𝑘 <2𝑝p+1<k<2p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有 (𝑝𝑘) ≡0(mod𝑝)(pk)≡0(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，以及 (2𝑝+1𝑝) ≡2(mod𝑝)(2p+1p)≡2(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；由 Fermat 小定理，有 2𝑝−1 ≡5𝑝−1 ≡1(mod𝑝)2p−1≡5p−1≡1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；对于 𝑝 ≡2,3(mod5)p≡2,3(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是模 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二次非剩余，利用二次互反律，也有 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是模 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二次非剩余，故而 5(𝑝−1)/2 ≡ −1(mod𝑝)5(p−1)/2≡−1(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．由此，有 (𝐹2𝑝,𝐹2𝑝+1) ≡(𝐹−2,𝐹−1)(mod𝑝)(F2p,F2p+1)≡(F−2,F−1)(modp)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以 2(𝑝 +1)2(p+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是模 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个周期．所以，𝜋(𝑝) ∣2(𝑝 +1)π(p)∣2(p+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¿å°±å®æäºè¯æï¼è¿ä¸æ¹æ³çå±éæ§å¨äºå®é«åº¦ä¾èµäºææ³¢é£å¥æ°åçéé¡¹å ¬å¼ï¼æä»¥è¾é¾ç´æ¥æ¨å¹¿å°ä¸è¬çæ å½¢ï¼
+这就完成了证明．这一方法的局限性在于它高度依赖于斐波那契数列的通项公式，所以较难直接推广到一般的情形．
 
-å¦ä¸ç§è¯ææ¹å¼åæ¯è¯å¾ç´æ¥è®¡ç®ç©éµ ð´ =(1110)A=(1110)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¶ï¼å®ç [ç¹å¾å¤é¡¹å¼](../../linear-algebra/char-poly/) æ¯ ð(ð¥) =ð¥2 âð¥ â1f(x)=x2âxâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹åºçå¤å«å¼ä¸º Î =5Î=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºæ¨¡ ð =5p=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ Î â¡0(mod5)Îâ¡0(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¸¤ä¸ªç¸åç¹å¾å¼ ð =3Î»=3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ä¸è½å¯¹è§åï¼éè¦åç¬è®¡ç®ï¼å¯¹äºæ¨¡ ð â¡1,4(mod5)pâ¡1,4(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±äºæ¬¡äºåå¾å¯ç¥ï¼å¤å«å¼ Î =5Î=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¨¡ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºæ¬¡å©ä½ï¼ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨å ð ðFp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å æä¸¤ä¸ªç¸å¼ç¹å¾å¼ ð1 â ð2Î»1â Î»2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¶å°±æ¯ lcmâ¡(ordâ¡(ð1),ordâ¡(ð2))lcmâ¡(ordâ¡(Î»1),ordâ¡(Î»2))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¿ ç¶æ´é¤ |ð Ãð| =ð â1|FpÃ|=pâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¯¹äºæ¨¡ ð â¡2,3(mod5)pâ¡2,3(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±äºæ¬¡äºåå¾å¯ç¥ï¼å¤å«å¼ Î =5Î=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ¨¡ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºæ¬¡éå©ä½ï¼ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨å ð ðFp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å æ²¡æç¹å¾å¼ï¼èåªæå¨ [æ©å](../../algebra/field-theory/#åçæ©å¼) ð ð[â5]Fp[5]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ææä¸¤ä¸ªç¸å¼ç¹å¾å¼ ð1 â ð2Î»1â Î»2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±äº Frobenius èªåæ ð¥ â¦ð¥ðxâ¦xp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°ä¸¤æ ¹äº¤æ¢ï¼æ ð2 =ðð1Î»2=Î»1p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ è ðð+11 =ðð+12 =ð1ð2 = â1Î»1p+1=Î»2p+1=Î»1Î»2=â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼äº¦å³ ð2(ð+1)1 =ð2(ð+1)2 =1Î»12(p+1)=Î»22(p+1)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±æ­¤ï¼ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé¶å°±æ¯ lcmâ¡(ordâ¡(ð1),ordâ¡(ð2))lcmâ¡(ordâ¡(Î»1),ordâ¡(Î»2))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¿ ç¶æ´é¤ 2(ð +1)2(p+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿å°±å¾å°äºä¸åç§æ¹æ³ä¸è´çç»è®ºï¼
+另一种证明方式则是试图直接计算矩阵 𝐴 =(1110)A=(1110)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的阶．它的 [特征多项式](../../linear-algebra/char-poly/) 是 𝑓(𝑥) =𝑥2 −𝑥 −1f(x)=x2−x−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，对应的判别式为 Δ =5Δ=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于模 𝑝 =5p=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有 Δ ≡0(mod5)Δ≡0(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 有两个相同特征值 𝜆 =3λ=3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且不能对角化，需要单独计算．对于模 𝑝 ≡1,4(mod5)p≡1,4(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，由二次互反律可知，判别式 Δ =5Δ=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是模 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二次剩余，矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在域 𝐅𝑝Fp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 内有两个相异特征值 𝜆1 ≠𝜆2λ1≠λ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的阶就是 lcm⁡(ord⁡(𝜆1),ord⁡(𝜆2))lcm⁡(ord⁡(λ1),ord⁡(λ2))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，必然整除 |𝐅×𝑝| =𝑝 −1|Fp×|=p−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．对于模 𝑝 ≡2,3(mod5)p≡2,3(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，由二次互反律可知，判别式 Δ =5Δ=5![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是模 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二次非剩余，矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在域 𝐅𝑝Fp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 内没有特征值，而只有在 [扩域](../../algebra/field-theory/#域的扩张) 𝐅𝑝[√5]Fp[5]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 内才有两个相异特征值 𝜆1 ≠𝜆2λ1≠λ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，由于 Frobenius 自同态 𝑥 ↦𝑥𝑝x↦xp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 将两根交换，有 𝜆2 =𝜆𝑝1λ2=λ1p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故而 𝜆𝑝+11 =𝜆𝑝+12 =𝜆1𝜆2 = −1λ1p+1=λ2p+1=λ1λ2=−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，亦即 𝜆2(𝑝+1)1 =𝜆2(𝑝+1)2 =1λ12(p+1)=λ22(p+1)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，由此，矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的阶就是 lcm⁡(ord⁡(𝜆1),ord⁡(𝜆2))lcm⁡(ord⁡(λ1),ord⁡(λ2))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，必然整除 2(𝑝 +1)2(p+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这就得到了与前种方法一致的结论．
 
-ç»¼ä¸ï¼å¯¹äºä¸åçæ å½¢ï¼ç¸åºå°æï¼
+综上，对于不同的情形，相应地有：
 
-  * ð(2ð) =32 â 2ð,Â 14ð(5ð) =5ðÏ(2e)=32â 2e,Â 14Ï(5e)=5e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * å½ ð â¡ Â±1(mod10)pâ¡Â±1(mod10)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼ð(ðð) â£(ð â1)ððâ1Ï(pe)â£(pâ1)peâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ ð(ðð) â¤ððÏ(pe)â¤pe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  * å½ ð â¡ Â±3(mod10)pâ¡Â±3(mod10)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼14ð(ðð) â£ð+12ððâ114Ï(pe)â£p+12peâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ 14ð(ðð) â¤ðð14Ï(pe)â¤pe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  * 𝜋(2𝑒) =32 ⋅2𝑒, 14𝜋(5𝑒) =5𝑒π(2e)=32⋅2e, 14π(5e)=5e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  * 当 𝑝 ≡ ±1(mod10)p≡±1(mod10)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，𝜋(𝑝𝑒) ∣(𝑝 −1)𝑝𝑒−1π(pe)∣(p−1)pe−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以 𝜋(𝑝𝑒) ≤𝑝𝑒π(pe)≤pe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  * 当 𝑝 ≡ ±3(mod10)p≡±3(mod10)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，14𝜋(𝑝𝑒) ∣𝑝+12𝑝𝑒−114π(pe)∣p+12pe−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以 14𝜋(𝑝𝑒) ≤𝑝𝑒14π(pe)≤pe![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-æä»¥ï¼å©ç¨ç»è®º 1ï¼å¯¹äºä¸è¬çæ¨¡æ° ð =âðððððm=âipiei![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ
+所以，利用结论 1，对于一般的模数 𝑚 =∏𝑖𝑝𝑒𝑖𝑖m=∏ipiei![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，有
 
-ð(ð)=lcmâ¡{ð(ðððð):ððâð}â¤lcmâ¡{ð(ðððð):ðð=2Â orÂ ððâ¡Â±1Â (modâ¡10)}â 4â lcmâ¡{ð(ðððð)/4:ðð=5Â orÂ ððâ¡Â±3Â (modâ¡10)}â¤â{ð(ðððð):ðð=2Â orÂ ððâ¡Â±1Â (modâ¡10)}â 4â â{ð(ðððð)/4:ðð=5Â orÂ ððâ¡Â±3Â (modâ¡10)}â¤32â â{ðððð:ðð=2Â orÂ ððâ¡Â±1Â (modâ¡10)}â 4â â{ðððð:ðð=5Â orÂ ððâ¡Â±3Â (modâ¡10)}=6ð.Ï(m)=lcmâ¡{Ï(piei):piâP}â¤lcmâ¡{Ï(piei):pi=2Â orÂ piâ¡Â±1Â (modâ¡10)}â 4â lcmâ¡{Ï(piei)/4:pi=5Â orÂ piâ¡Â±3Â (modâ¡10)}â¤â{Ï(piei):pi=2Â orÂ piâ¡Â±1Â (modâ¡10)}â 4â â{Ï(piei)/4:pi=5Â orÂ piâ¡Â±3Â (modâ¡10)}â¤32â â{piei:pi=2Â orÂ piâ¡Â±1Â (modâ¡10)}â 4â â{piei:pi=5Â orÂ piâ¡Â±3Â (modâ¡10)}=6m.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝜋(𝑚)=lcm⁡{𝜋(𝑝𝑒𝑖𝑖):𝑝𝑖∈𝐏}≤lcm⁡{𝜋(𝑝𝑒𝑖𝑖):𝑝𝑖=2 or 𝑝𝑖≡±1 (mod⁡10)}⋅4⋅lcm⁡{𝜋(𝑝𝑒𝑖𝑖)/4:𝑝𝑖=5 or 𝑝𝑖≡±3 (mod⁡10)}≤∏{𝜋(𝑝𝑒𝑖𝑖):𝑝𝑖=2 or 𝑝𝑖≡±1 (mod⁡10)}⋅4⋅∏{𝜋(𝑝𝑒𝑖𝑖)/4:𝑝𝑖=5 or 𝑝𝑖≡±3 (mod⁡10)}≤32⋅∏{𝑝𝑒𝑖𝑖:𝑝𝑖=2 or 𝑝𝑖≡±1 (mod⁡10)}⋅4⋅∏{𝑝𝑒𝑖𝑖:𝑝𝑖=5 or 𝑝𝑖≡±3 (mod⁡10)}=6𝑚.π(m)=lcm⁡{π(piei):pi∈P}≤lcm⁡{π(piei):pi=2 or pi≡±1 (mod⁡10)}⋅4⋅lcm⁡{π(piei)/4:pi=5 or pi≡±3 (mod⁡10)}≤∏{π(piei):pi=2 or pi≡±1 (mod⁡10)}⋅4⋅∏{π(piei)/4:pi=5 or pi≡±3 (mod⁡10)}≤32⋅∏{piei:pi=2 or pi≡±1 (mod⁡10)}⋅4⋅∏{piei:pi=5 or pi≡±3 (mod⁡10)}=6m.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±è¯´æäºææ³¢é£å¥æ°åæ¨¡ ðm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç Pisano å¨ææ»æ¯ä¸è¶ è¿ 6ð6m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èä¸ç­å·å½ä¸ä» å½å¨ ð =2 â 5ðm=2â 5e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¤åå¾ï¼
+这就说明了斐波那契数列模 𝑚m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 Pisano 周期总是不超过 6𝑚6m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，而且等号当且仅当在 𝑚 =2 ⋅5𝑒m=2⋅5e![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 处取得．
 
-## ä¹ é¢
+## 习题
 
   * [SPOJ - Euclid Algorithm Revisited](http://www.spoj.com/problems/MAIN74/)
   * [SPOJ - Fibonacci Sum](http://www.spoj.com/problems/FIBOSUM/)
   * [HackerRank - Is Fibo](https://www.hackerrank.com/challenges/is-fibo/problem)
   * [Project Euler - Even Fibonacci numbers](https://www.hackerrank.com/contests/projecteuler/challenges/euler002/problem)
-  * [æ´è°· P4000 ææ³¢é£å¥æ°å](https://www.luogu.com.cn/problem/P4000)
+  * [洛谷 P4000 斐波那契数列](https://www.luogu.com.cn/problem/P4000)
 
-## åèæç®ä¸æ³¨é
+## 参考文献与注释
 
   * [Fibonacci sequence - Wikipedia](https://en.wikipedia.org/wiki/Fibonacci_sequence)
   * [Zeckendorf's theorem - Wikipedia](https://en.wikipedia.org/wiki/Zeckendorf%27s_theorem)
   * [Pisano period - Wikipedia](https://en.wikipedia.org/wiki/Pisano_period)
 
-**æ¬é¡µé¢ä¸»è¦è¯èªåæ[Ð§Ð¸ÑÐ»Ð° Ð¤Ð¸Ð±Ð¾Ð½Ð°ÑÑÐ¸](http://e-maxx.ru/algo/fibonacci_numbers) ä¸å ¶è±æç¿»è¯ç [Fibonacci Numbers](https://cp-algorithms.com/algebra/fibonacci-numbers.html)ï¼å ¶ä¸­ä¿æççæåè®®ä¸º Public Domain + Leave a Linkï¼è±æççæåè®®ä¸º CC-BY-SA 4.0ï¼å å®¹ææ¹å¨ï¼**
+**本页面主要译自博文[Числа Фибоначчи](http://e-maxx.ru/algo/fibonacci_numbers) 与其英文翻译版 [Fibonacci Numbers](https://cp-algorithms.com/algebra/fibonacci-numbers.html)．其中俄文版版权协议为 Public Domain + Leave a Link；英文版版权协议为 CC-BY-SA 4.0．内容有改动．**
 
 * * *
 
-  1. ä¸¥æ ¼æ¥è¯´ï¼å®æ¯ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ä¸è¬çº¿æ§ç¾¤ ðºð¿2(ðð)GL2(Zm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çé¶ï¼Â â©
+  1. 严格来说，它是矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在一般线性群 𝐺𝐿2(𝐙𝑚)GL2(Zm)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的阶． ↩
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/2/1 11:46:32ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/fibonacci.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/fibonacci.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Great-designer](https://github.com/Great-designer), [sshwy](https://github.com/sshwy), [Tiphereth-A](https://github.com/Tiphereth-A), [c-forrest](https://github.com/c-forrest), [jifbt](https://github.com/jifbt), [Chrogeek](https://github.com/Chrogeek), [Enter-tainer](https://github.com/Enter-tainer), [EntropyIncreaser](https://github.com/EntropyIncreaser), [FFjet](https://github.com/FFjet), [gsjz](https://github.com/gsjz), [HeRaNO](https://github.com/HeRaNO), [ImpleLee](https://github.com/ImpleLee), [Junyan721113](https://github.com/Junyan721113), [ouuan](https://github.com/ouuan), [untitledunrevised](https://github.com/untitledunrevised), [Xeonacid](https://github.com/Xeonacid)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/2/1 11:46:32，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/combinatorics/fibonacci.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/combinatorics/fibonacci.md "edit.link.title")  
+>  __本页面贡献者：[Great-designer](https://github.com/Great-designer), [sshwy](https://github.com/sshwy), [Tiphereth-A](https://github.com/Tiphereth-A), [c-forrest](https://github.com/c-forrest), [jifbt](https://github.com/jifbt), [Chrogeek](https://github.com/Chrogeek), [Enter-tainer](https://github.com/Enter-tainer), [EntropyIncreaser](https://github.com/EntropyIncreaser), [FFjet](https://github.com/FFjet), [gsjz](https://github.com/gsjz), [HeRaNO](https://github.com/HeRaNO), [ImpleLee](https://github.com/ImpleLee), [Junyan721113](https://github.com/Junyan721113), [ouuan](https://github.com/ouuan), [untitledunrevised](https://github.com/untitledunrevised), [Xeonacid](https://github.com/Xeonacid)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

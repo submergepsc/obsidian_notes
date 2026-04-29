@@ -1,22 +1,22 @@
-# æ°å­¦é¨åç®ä» - OI Wiki
+﻿# 数学部分简介 - OI Wiki
 
 - Source: https://oi-wiki.org/math/
 
-# æ°å­¦é¨åç®ä»
+# 数学部分简介
 
-æ¬ç« ä»ç» OI ä¸­å¯è½ä¼ç¨å°çæ°å­¦ç¥è¯ï¼è®¡ç®æºç§å­¦ä¸æ°å­¦ç´§å¯ç¸å ³ï¼èå¨ç®æ³ç«èµä¸­å°¤å ¶å¼ºè°ä»¥æ°è®ºãæåç»åãæ¦çææãå¤é¡¹å¼ä¸ºä»£è¡¨ç¦»æ£ãå ·ä½çæ°å­¦ï¼å ¶æ³¨éç¨åºå®ç°åç°å®é®é¢ï¼å¯ä»¥åºç°å¨å ä¹ä»»ä½ç±»å«çé¢ç®ä¸­ï¼
+本章介绍 OI 中可能会用到的数学知识．计算机科学与数学紧密相关，而在算法竞赛中尤其强调以数论、排列组合、概率期望、多项式为代表离散、具体的数学：其注重程序实现和现实问题，可以出现在几乎任何类别的题目中．
 
-å®é ä¸ï¼ç®æ³ç«èµä¸­æ¶åå°çç®æ³åæ°æ®ç»æä»¥åèªå¨æºç­ä¹å¯ä»¥è¢«è®¤ä¸ºå±äºæ°å­¦èç´ï¼ä½æ¯è¿äºå å®¹è¢«ç»åå°è¯¸å¦å­ç¬¦ä¸²ç­çå ·ä½ç« èå ä»¥åºç¨èæ¯ä»¥æ´å¥½çè§£ï¼æ¬ç« ä¸»è¦ä»ç»æ°å­¦ä¸­ä¸äºåºç¡æ¦å¿µãä»£æ°ãæ°è®ºãåå¼è®ºåæ¦çè®ºç­ç¥è¯ï¼è¿ç¨è¿äºç¥è¯å¯ä»¥å¸®å©ä¼åå ¶ä»ç®æ³åæ°æ®ç»æï¼ä¾å¦ï¼
+实际上，算法竞赛中涉及到的算法和数据结构以及自动机等也可以被认为属于数学范畴，但是这些内容被细分到诸如字符串等的具体章节加以应用背景以更好理解．本章主要介绍数学中一些基础概念、代数、数论、博弈论及概率论等知识．运用这些知识可以帮助优化其他算法和数据结构，例如：
 
-  * ç¨å¤é¡¹å¼ä¼åå·ç§¯å½¢å¼çèå ï¼æ¥åä¸äºå­ç¬¦ä¸²é¢ï¼
-  * å¾å¤éæ¨ç±»åçé¢èæ¯é½æ¯æåç»åææ¦çææï¼å¯ä»¥æ´è¿ä¸æ­¥ç¨çæå½æ°æ¨å¯¼åè§£å³ï¼ä»¥åä½¿ç¨åºäº FFT çåæ²»ä¼åç®æ³æçï¼
-  * å©ç¨åä½åç¯åæå¾ä¸éç®åè·¯å¾å¨æ¨¡æä¹ä¸å¯è½çæå¼åï¼å¹¶ç¨å¸¦æå¹¶æ¥éç»´æ¤ï¼
+  * 用多项式优化卷积形式的背包，来做一些字符串题．
+  * 很多递推类型的题背景都是排列组合或概率期望，可以更进一步用生成函数推导和解决，以及使用基于 FFT 的分治优化算法效率．
+  * 利用同余和环分析图上非简单路径在模意义下可能的权值和，并用带权并查集维护．
 
-æ­¤å¤ï¼é«ä¸­æ°å­¦æ¯ä¿¡æ¯å­¦ç«èµæ°å­¦çåºç¡ï¼å­¦å¥½è¯¾æ¬ä¸çåºæ¬æ¦å¿µåæ§è´¨è½æ´å¥½å°å¸®å©å­¦ä¹ æ¬ç« å å®¹ï¼
+此外，高中数学是信息学竞赛数学的基础，学好课本上的基本概念和性质能更好地帮助学习本章内容．
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/index.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/index.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[hsfzLZH1](https://github.com/hsfzLZH1), [Ir1d](https://github.com/Ir1d), [sshwy](https://github.com/sshwy), [Xeonacid](https://github.com/Xeonacid), [i-yyi](https://github.com/i-yyi), [MegaOwIer](https://github.com/MegaOwIer), [Catreap](https://github.com/Catreap), [Chrogeek](https://github.com/Chrogeek), [CommonAnts](https://github.com/CommonAnts), [DCDCBigBig](https://github.com/DCDCBigBig), [Enter-tainer](https://github.com/Enter-tainer), [greyqz](https://github.com/greyqz), [ksyx](https://github.com/ksyx), [luoguyuntianming](https://github.com/luoguyuntianming), [mgt](mailto:i@margatroid.xyz), [ouuan](https://github.com/ouuan), [StudyingFather](https://github.com/StudyingFather), [Tiphereth-A](https://github.com/Tiphereth-A), [zmxqs](https://github.com/zmxqs)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/index.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/index.md "edit.link.title")  
+>  __本页面贡献者：[hsfzLZH1](https://github.com/hsfzLZH1), [Ir1d](https://github.com/Ir1d), [sshwy](https://github.com/sshwy), [Xeonacid](https://github.com/Xeonacid), [i-yyi](https://github.com/i-yyi), [MegaOwIer](https://github.com/MegaOwIer), [Catreap](https://github.com/Catreap), [Chrogeek](https://github.com/Chrogeek), [CommonAnts](https://github.com/CommonAnts), [DCDCBigBig](https://github.com/DCDCBigBig), [Enter-tainer](https://github.com/Enter-tainer), [greyqz](https://github.com/greyqz), [ksyx](https://github.com/ksyx), [luoguyuntianming](https://github.com/luoguyuntianming), [mgt](mailto:i@margatroid.xyz), [ouuan](https://github.com/ouuan), [StudyingFather](https://github.com/StudyingFather), [Tiphereth-A](https://github.com/Tiphereth-A), [zmxqs](https://github.com/zmxqs)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

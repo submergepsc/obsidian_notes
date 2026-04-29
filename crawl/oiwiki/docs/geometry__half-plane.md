@@ -1,4 +1,4 @@
-# 半平面交 - OI Wiki
+﻿# 半平面交 - OI Wiki
 
 - Source: https://oi-wiki.org/geometry/half-plane/
 

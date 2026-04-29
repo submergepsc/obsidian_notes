@@ -1,388 +1,388 @@
-# çº¿æ§ç©ºé´ - OI Wiki
+﻿# 线性空间 - OI Wiki
 
 - Source: https://oi-wiki.org/math/linear-algebra/vector-space/
 
-# çº¿æ§ç©ºé´
+# 线性空间
 
-çº¿æ§ç©ºé´æ¯ ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´æ¬§æ°ç©ºé´ï¼0 â¤ð â¤30â¤dâ¤3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç­çæ¨å¹¿ï¼ç¸å ³æ¦å¿µçå ³ç³»å¯åç § æ¬§æ°ç©ºé´ä¸çº¿æ§ç©ºé´çå ³ç³»ï¼
+线性空间是 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维欧氏空间（0 ≤𝑑 ≤30≤d≤3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）等的推广，相关概念的关系可参照 欧氏空间与线性空间的关系．
 
-åç½®ç¥è¯ï¼é¿è´å°ç¾¤ãåï¼
+前置知识：阿贝尔群、域．
 
-éä¿å°è®²ï¼ä¸ä¸ªéåå ³äºæè¿ç®å°é­ï¼æ»¡è¶³ç»åå¾ãåä½å ä¸éå åææç¾¤ï¼å¦æè¿æ»¡è¶³äº¤æ¢å¾ï¼åææé¿è´å°ç¾¤ï¼
+通俗地讲，一个集合关于某运算封闭，满足结合律、单位元与逆元则构成群．如果还满足交换律，则构成阿贝尔群．
 
-å¦æä¸ä¸ªéåå ³äºååè¿ç®å°é­ï¼åææåï¼ç¸å ³å®ä¹è¯¦è§ [æ½è±¡ä»£æ°åºæ¬æ¦å¿µ](../../algebra/basic/#å)ï¼
+如果一个集合关于四则运算封闭，则构成域．相关定义详见 [抽象代数基本概念](../../algebra/basic/#域)．
 
-## å®ä¹
+## 定义
 
-çº¿æ§ç©ºé´ï¼åéç©ºé´ï¼æ¯çº¿æ§ä»£æ°çåºæ¬æ¦å¿µä¸éè¦ç ç©¶å¯¹è±¡ï¼çº¿æ§ç©ºé´æ¯ç±åééå ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ãå âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ãå æ³è¿ç® ++![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ éä¹æ³ï¼æ°ä¹ï¼ç»æçæ¨¡ç±»ä»£æ°ç»æï¼
+线性空间（向量空间）是线性代数的基本概念与重要研究对象．线性空间是由向量集合 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、加法运算 ++![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和标量乘法（数乘）组成的模类代数结构．
 
-å ·ä½æ¥è¯´ï¼è®¾ (ð, +)(V,+)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ªé¿è´å°ç¾¤ï¼âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ªåï¼
+具体来说，设 (𝑉, +)(V,+)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个阿贝尔群，ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个域．
 
-å®ä¹ âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çæ°ä¸ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­å ç´ çä¸ç§ä»£æ°è¿ç®ï¼ç§°ä¸º **æ°ä¹** ï¼â  :â Ãð â¦ðâ :PÃVâ¦V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®°ä¸º ð â ð£pâ v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ðð£pv![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨å âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼ð£v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨é¿è´å°ç¾¤ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼è¦æ±è¯¥æ°ä¹è¿ç®æ¯å°é­çï¼è¿ç®ç»æå§ç»ææä¹ï¼ä¹å¨ç¾¤ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼
+定义 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的数与 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中元素的一种代数运算，称为 **数乘** ：⋅ :ℙ ×𝑉 ↦𝑉⋅:P×V↦V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，记为 𝑝 ⋅𝑣p⋅v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 𝑝𝑣pv![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中，𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在阿贝尔群 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中．要求该数乘运算是封闭的，运算结果始终有意义，也在群 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中．
 
-ä¸æ»¡è¶³ä»¥ä¸æ¡ä»¶ï¼
+且满足以下条件：
 
-  1. **æ°ä¹å¯¹åéå æ³åé å¾** ï¼å¯¹äº ð®,ð¯ âð,ð ââu,vâV,aâP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð(ð® +ð¯) =ðð® +ðð¯a(u+v)=au+av![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. **æ°ä¹å¯¹æ éå æ³åé å¾** ï¼å¯¹äº ð,ð ââ,ð® âða,bâP,uâV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼(ð +ð)ð® =ðð® +ðð®(a+b)u=au+bu![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  3. **æ°ä¹ç»åå¾ï¼ä¸è´äºåä¹æ³ï¼** ï¼å¯¹äº ð,ð ââ,ð® âða,bâP,uâV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð(ðð®) =(ðð)ð®a(bu)=(ab)u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  4. **æ éä¹æ³åä½å ** ï¼ä»¤ 1 ââ1âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¹æ³åä½å ï¼åå¯¹äº ð¢ âðuâV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼1ð® =ð®1u=u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  1. **数乘对向量加法分配律** ：对于 𝐮,𝐯 ∈𝑉,𝑎 ∈ℙu,v∈V,a∈P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑎(𝐮 +𝐯) =𝑎𝐮 +𝑎𝐯a(u+v)=au+av![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. **数乘对标量加法分配律** ：对于 𝑎,𝑏 ∈ℙ,𝐮 ∈𝑉a,b∈P,u∈V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，(𝑎 +𝑏)𝐮 =𝑎𝐮 +𝑏𝐮(a+b)u=au+bu![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  3. **数乘结合律（一致于域乘法）** ：对于 𝑎,𝑏 ∈ℙ,𝐮 ∈𝑉a,b∈P,u∈V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑎(𝑏𝐮) =(𝑎𝑏)𝐮a(bu)=(ab)u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  4. **标量乘法单位元** ：令 1 ∈ℙ1∈P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的乘法单位元，则对于 𝑢 ∈𝑉u∈V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，1𝐮 =𝐮1u=u![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åç§°ä»£æ°ç³»ç» (ð, +, â ,â)(V,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ³äº +, â +,â ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ææ âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸ä¸ª **çº¿æ§ç©ºé´** ï¼âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºçº¿æ§ç©ºé´ç **åºå** ï¼ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­å ç´ ç§°ä¸º **åé** ï¼âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­å ç´ ç§°ä¸º **æ é** ï¼å½å âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå®æ°åæ¶ï¼ç§°ä¸ºå®çº¿æ§ç©ºé´ï¼å½å âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºå¤æ°åæ¶ï¼ç§°ä¸ºå¤çº¿æ§ç©ºé´ï¼
+则称代数系统 (𝑉, +, ⋅,ℙ)(V,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 关于 +, ⋅+,⋅![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 构成 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的一个 **线性空间** ，ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为线性空间的 **基域** ，𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中元素称为 **向量** ，ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中元素称为 **标量** ．当域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为实数域时，称为实线性空间．当域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为复数域时，称为复线性空间．
 
-ä¸ç®¡æ¯ä¸åæ°è¿æ¯ç®­å¤´ï¼ææ¯å«çä»ä¹ä¸è¥¿ï¼åªè¦æ»¡è¶³ä¸è¿°å ¬çï¼é½å¯ä»¥è®¤ä¸ºæ¯åéï¼ä¹å°±é½å¯ä»¥å©ç¨çº¿æ§ä»£æ°ççè®ºæ¥ç ç©¶ï¼
+不管是一列数还是箭头，或是别的什么东西，只要满足上述公理，都可以认为是向量，也就都可以利用线性代数的理论来研究．
 
-ç§°å æ³ç¾¤ä¸­çé¶å ä¸ºé¶åéï¼è®°ä½ ð0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ ðÎ¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+称加法群中的零元为零向量，记作 𝟎0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 或 𝜃θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åé¿è´å°ç¾¤ä¸­åéçå åæ³ï¼ä¸çº¿æ§ç©ºé´æ°å®ä¹çæ°ä¹ï¼ç»ç§°ä¸º **çº¿æ§è¿ç®** ï¼
-
-Note
-
-ä¸ºè¡ææ¹ä¾¿ï¼ä¸æä¸­ï¼
-
-  1. å¯¹ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ ä¸åå ç²å¤çï¼
-  2. å°æ»¡è¶³çº¿æ§ç©ºé´å®ä¹çä»£æ°ç³»ç» (ð, +, â ,â)(V,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹ç§°ä¸ºçº¿æ§ç©ºé´ï¼
-
-è¯·æ³¨æåºåï¼
-
-### ç´è§çè§£
-
-ä¸æ¯å¾ä¸¥è°¨å°è¯´ï¼æ éä¹æ³å¯¹åºçä¸ç§ã**ç¼©æ¾** ãï¼åºå âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ å°±ä»£è¡¨çç¼©æ¾çã**æ¯ä¾** ãï¼åéå æ³å¯¹åºã**å å** ãï¼åæ¶ï¼âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çå ç´ è¿ä»£è¡¨çåéçã**åæ ** ãçåå¼èå´ï¼
-
-æ¡ä»¶ 1-4 æè¿°çæ¯ãç¼©æ¾ãä¸ãå å ãçå ³èï¼å¯ä»¥ç»åäºç»´å¹³é¢ä¸çç®­å¤´æ¥çè§£ï¼
-
-### ç®åæ§è´¨
+原阿贝尔群中向量的加减法，与线性空间新定义的数乘，统称为 **线性运算** ．
 
 Note
 
-ä»¥ä¸æ§è´¨å¯å¨ç¾¤è®ºç­ä¸­æ¾å°ï¼
+为行文方便，下文中：
 
-å¯¹çº¿æ§ç©ºé´ (ð, +, â ,â)(V,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),
+  1. 对 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素不做加粗处理．
+  2. 将满足线性空间定义的代数系统 (𝑉, +, ⋅,ℙ)(V,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也称为线性空间．
 
-  1. ðÎ¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä¸
-  2. âð¼ âðâÎ±âV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),âð¼âÎ±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä¸
-  3. â0 âââ0âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),âð¼ âðâÎ±âV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), æ 0ð¼ =ð0Î±=Î¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  4. âð âââkâP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), æ ðð =ðkÎ¸=Î¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  5. ( â1)ð¼ = âð¼,Â âð¼ âð(â1)Î±=âÎ±,Â âÎ±âV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  6. æ é¶å å­ï¼âð¼ âð,ð âââÎ±âV,kâP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), æ ðð¼ =ð â¹ ð =0 â¨ð¼ =ðkÎ±=Î¸â¹k=0â¨Î±=Î¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  7. å æ³çæ¶å»å¾ï¼âð¼,ð½,ð¾ âðâÎ±,Î²,Î³âV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), æ ð¼ +ð½ =ð¼ +ð¾ â¹ ð½ =ð¾Î±+Î²=Î±+Î³â¹Î²=Î³![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+请注意区分．
 
-> å®é ä¸ï¼å æ³çæ¶å»å¾æ¯é¿è´å°ç¾¤çæ§è´¨ï¼
+### 直观理解
 
-### ä¾å­
+不是很严谨地说，标量乘法对应着一种「**缩放** 」，基域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素就代表着缩放的「**比例** 」，向量加法对应「**叠加** 」．同时，ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的元素还代表着向量的「**坐标** 」的取值范围．
 
-  1. âðPn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ³äºæ°å âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çå æ³åä¹æ³ææ âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸ä¸ªçº¿æ§ç©ºé´ï¼ä¾å¦ âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥æ¯ âR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),âC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),âðNp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ðp![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºç´ æ°ï¼ç­ï¼
-  2. æ°å âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ç ð ÃðnÃm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é¶ç©éµ âðÃðPnÃm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ³äºç©éµçå æ³åæ°ä¹ææ âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸ä¸ªçº¿æ§ç©ºé´ï¼
-  3. æ°å âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸å å¤é¡¹å¼ç¯ â[ð¥]P[x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ³äºå¤é¡¹å¼çå æ³åæ°ä¹ææ âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸ä¸ªçº¿æ§ç©ºé´ï¼
-  4. åºé´ [ð,ð][a,b]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çå ¨ä½è¿ç»­å½æ°ï¼è®°ä½ ð¶[ð,ð]C[a,b]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ³äºãå½æ°å æ³ãåãå¼ä¸è¿ç»­å½æ°çæ°ä¹ãææå¼åä¸çä¸ä¸ªçº¿æ§ç©ºé´ï¼
+条件 1-4 描述的是「缩放」与「叠加」的关联．可以结合二维平面上的箭头来理解．
 
-## ç¸å ³æ¦å¿µ
-
-### çº¿æ§ç¸å ³ãçº¿æ§æ å ³
-
-å¯¹çº¿æ§ç©ºé´ (ð, +, â ,â)(V,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-  1. ç§° ð1,ð2,â¦,ðð âða1,a2,â¦,anâV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ª **åéç»** ï¼
-  2. å¯¹äº ð1,ð2,â¦,ðð ââk1,k2,â¦,knâP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), ç§° âðð=1ððððâi=1nkiai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºåéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ª **çº¿æ§ç»å** ï¼
-  3. è¥åé ð½ âðÎ²âV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è¡¨ç¤ºä¸ºåéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ä¸ªçº¿æ§ç»åï¼åç§° ð½Î²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½è¢«åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) **çº¿æ§è¡¨åº** ï¼
-  4. å¯¹äº ð1,ð2,â¦,ðð ââk1,k2,â¦,knâP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), è¥åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ âðð=1ðððð =ð âº ðð =0,ð =1,2,â¦,ðâi=1nkiai=Î¸âºki=0,i=1,2,â¦,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), åç§°åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) **çº¿æ§æ å ³** ï¼å¦åç§°åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) **çº¿æ§ç¸å ³** ï¼
-
-è§å®é¶åéä¸ä»»æåéçº¿æ§ç¸å ³ï¼
-
-çº¿æ§è¡¨ç¤ºæçº¿æ§ç¸å ³çå¼å­ï¼å¯ä»¥åæç©éµä¹æ³çå½¢å¼ï¼
-
-ð½=ð1ð1+ð2ð2+â¯+ðððð=(ð1,ð2,â¯,ðð)ââ â â â â ââð1ð2â®ððââ â â â â ââ Î²=k1a1+k2a2+â¯+krar=(a1,a2,â¯,ar)(k1k2â®kr)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-
-æ ¹æ®ä¹ æ¯ï¼æåé ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æé¡ºåºå¹¶æåå¨å·¦è¾¹ï¼ææ é ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æé¡ºåºç«çåå¨å³è¾¹ï¼ææä¸ä¸ªãååéãï¼
-
-æ³¨æï¼è¿éæ éææçãååéãåªæ¯æ¹ä¾¿çå½¢å¼è®°å·ï¼ä¸å¨ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­ï¼ä¸å·¦è¾¹çåéæçæ¬è´¨çåºå«ï¼å·¦è¾¹çåéå¦ææ°å¥½æ¯ååéï¼å¹¶ææ¼èµ·æ¥å°±å¯ä»¥å½¢å¼ä¸ææä¸ä¸ªãç©éµãï¼ä¸è¿°ä¹ç§¯æ°å¥½æ¯ç©éµä¸­å¸¸è§çãç©éµå·¦ä¹ååéãçå½¢å¼ï¼
-
-ä¸ææåºï¼è¿éççº¿æ§è¡¨ç¤ºä¹ç­ä»·äºï¼åé ð½Î²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½å¨ç©éµ (ð1,ð2â¯,ðð)(a1,a2â¯,ar)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåç©ºé´éï¼
-
-æ ¹æ®ä¸æä¸­çå®ä¹ï¼é¶åéä¸å®ä¼è½å¨åç©ºé´éï¼å¦æç¨çº¿æ§åæ¢çè§ç¹çï¼çº¿æ§ç¸å ³ç­ä»·äºåæ¢åå¤ä¸ªåéåæ¢å°é¶åéï¼èçº¿æ§æ å ³ç­ä»·äºåªæé¶åéæ¬èº«åæ¢å°é¶åéï¼
-
-#### æ§è´¨
-
-å¯¹çº¿æ§ç©ºé´ (ð, +, â ,â)(V,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),
-
-  1. è¥åéç»çä¸é¨åçº¿æ§ç¸å ³ï¼ååéç»çº¿æ§ç¸å ³ï¼è¥åéç»çº¿æ§æ å ³ï¼åå ¶ä»»æéç©ºé¨ååçº¿æ§æ å ³ï¼ç®è®°ä¸ºï¼**ãå¤§æ å ³ãå°æ å ³ãï¼ãå°ç¸å ³ãå¤§ç¸å ³ã** ï¼
-  2. å« ðÎ¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåéç»çº¿æ§ç¸å ³ï¼
-  3. åéç»çº¿æ§ç¸å ³å½ä¸ä» å½åéç»çæä¸ªåéå¯ä»¥ç±å ¶ä½åéçº¿æ§è¡¨åºï¼
-  4. è¥åé ð½Î²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯è¢«åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§è¡¨åºï¼åè¡¨åºæ¹å¼å¯ä¸å½ä¸ä» å½åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§æ å ³ï¼
-  5. è¥åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§æ å ³ï¼ååé ð½Î²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯è¢«åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§è¡¨åºå½ä¸ä» å½åéç» ð1,ð2,â¦,ðð,ð½a1,a2,â¦,an,Î²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§ç¸å ³ï¼
-
-### æå¤§çº¿æ§æ å ³ç»ãç§©
-
-çº¿æ§ç¸å ³å¯ä»¥çè§£ä¸ºãå¤ä½ãï¼è¯´æåéç»å é¨æçåéå¯ä»¥è¢«å ¶ä»åéè¡¨åºï¼å¯ä»¥å å»ï¼å å®äºä¹åï¼å°å©ä¸æå¤§çº¿æ§æ å ³ç»ï¼
-
-å¯¹çº¿æ§ç©ºé´ (ð, +, â ,â)(V,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-  1. å¯¹äºåéç» ð1,ð2,â¦,ððb1,b2,â¦,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), ä»¤ {ð1,ð2,â¦,ðð} â{ð1,ð2,â¦,ðð}{a1,a2,â¦,an}â{b1,b2,â¦,bm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), è¥æï¼
-
-     * åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§æ å ³ï¼
-     * âð½ â{ð1,ð2,â¦,ðð} â{ð1,ð2,â¦,ðð}âÎ²â{b1,b2,â¦,bm}â{a1,a2,â¦,an}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), åéç» ð1,ð2,â¦,ðð,ð½a1,a2,â¦,an,Î²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§ç¸å ³ï¼
-
-åç§°åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºåéç» ð1,ð2,â¦,ððb1,b2,â¦,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çä¸ä¸ª **æå¤§çº¿æ§æ å ³ç»** ï¼ç±»ä¼¼å°ï¼å¯å®ä¹çº¿æ§ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå¤§çº¿æ§æ å ³ç»ï¼
-
-è§å®åéç» ð,ð,â¦,ðÎ¸,Î¸,â¦,Î¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå¤§çº¿æ§æ å ³ç»ä¸ºç©ºéï¼äºæ¯å ¨ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç©éµå¯¹åºçåéç»æ²¡ææå¤§çº¿æ§æ å ³ç»ï¼
-
-ä»åéç»å åéçå æ³ä¸å¯ä¸ï¼å æ­¤æå¤§çº¿æ§æ å ³ç»ä¹ä¸å¯ä¸ï¼ä¹ æ¯ä¸ä»å·¦å°å³æé¡ºåºå ï¼
-
-å¾å·§çæ¯ï¼æé¡ºåºå ï¼çä¸çåéï¼æ°å¥½å°±æ¯ãæè¡çãè§ç¹éé¢ï¼é«æ¯æ¶å æ³å©ä¸çè¡æç®å½¢ç©éµä¸­ï¼å ç´ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æå¨çåï¼
-
-ç§°åéç» ð1,ð2,â¦,ððb1,b2,â¦,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå¤§çº¿æ§æ å ³ç»çå¤§å°ä¸ºåéç»ç **ç§©** ï¼è®°ä½ rankâ¡{ð1,ð2,â¦,ðð}rankâ¡{b1,b2,â¦,bm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), è§å® rankâ¡{ð,ð,â¦,ð} =0rankâ¡{Î¸,Î¸,â¦,Î¸}=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-äºæ¯ï¼åéç»çç§©çå®ä¹ä¸ç©éµçç§©çå®ä¹å®å ¨ä¸è´ï¼
-
-  2. è¥åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½çº¿æ§è¡¨åºåéç» ð1,ð2,â¦,ððb1,b2,â¦,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çææåéï¼ç§°åéç» ð1,ð2,â¦,ððb1,b2,â¦,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½è¢«åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§è¡¨åºï¼
-
-  3. è¥åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½è¢«åéç» ð1,ð2,â¦,ððb1,b2,â¦,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§è¡¨åºï¼ä¸åéç» ð1,ð2,â¦,ððb1,b2,â¦,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½è¢«åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§è¡¨åºï¼åç§°ä¸¤åéç» **ç­ä»·** ï¼è®°ä½ {ð1,ð2,â¦,ðð} â {ð1,ð2,â¦,ðð}{a1,a2,â¦,an}â {b1,b2,â¦,bm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-åéç»ç **ç­ä»·** å°±æ¯åéç»å¼ æçç©ºé´ç¸åï¼å¼ æç©ºé´ç¸åçåéç»ç¸äºç­ä»·ï¼å¼ æç©ºé´ä¸åçåéç»ä¸ç­ä»·ï¼
-
-åéç»ç­ä»·æ¯ç©éµç­ä»·æ¡ä»¶æ´å¼ºï¼ä¸ä» è¦æ±ç§©ç¸åï¼è¿è¦æ±ç©ºé´å®å ¨ä¸æ ·ï¼å æ­¤ï¼æä¸¤ä¸ªç©éµ **æ¨ªå** æ¼å¨ä¸èµ·ï¼ç§©ä¸è½åçååï¼
-
-ç©éµç­ä»·ä» è¦æ±ç§©ç¸åï¼å æ­¤ç©éµç­ä»·è¡¨ç¤ºåä¸ä¸ªç©éµæç©ºé´ï¼å¯ä»¥éè¿å¯éåæ¢ï¼å°è¾¾åä¸ä¸ªç©éµæç©ºé´ï¼
-
-#### æ§è´¨
-
-å¯¹çº¿æ§ç©ºé´ (ð, +, â ,â)(V,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),
-
-  1. è®¾åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½è¢«çº¿æ§è¡¨åºåéç» ð1,ð2,â¦,ððb1,b2,â¦,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§è¡¨åºï¼
-
-     * è¥ ð >ðn>m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), ååéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§ç¸å ³ï¼
-     * è¥åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§æ å ³ï¼å ð â¤ðnâ¤m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. ç­ä»·ççº¿æ§æ å ³åéç»çå¤§å°ç¸ç­ï¼
-
-åéç»çä»»ææå¤§çº¿æ§æ å ³ç»çå¤§å°åç¸ç­ï¼
-
-  3. åéç»çº¿æ§æ å ³å½ä¸ä» å½å ¶ç§©ç­äºå ¶å¤§å°ï¼
-
-  4. è¥åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è½è¢«çº¿æ§è¡¨åºåéç» ð1,ð2,â¦,ððb1,b2,â¦,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çº¿æ§è¡¨åºï¼å rankâ¡{ð1,ð2,â¦,ðð} â¤rankâ¡{ð1,ð2,â¦,ðð}rankâ¡{a1,a2,â¦,an}â¤rankâ¡{b1,b2,â¦,bm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-  5. ç­ä»·çåéç»çç§©ç¸ç­ï¼
-
-### çº¿æ§å 
-
-å¯¹äºçº¿æ§ç©ºé´ (ð, +, â ,â)(V,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼{ð£=âðð=1ðððð:ððâð,ððââ,ð=1,2,â¦,ð}{v=âi=1nkiai:aiâV,kiâP,i=1,2,â¦,n}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹ææä¸ä¸ªçº¿æ§ç©ºé´ï¼ç§°ä¸ºç±åéç» ð1,ð2,â¦,ðða1,a2,â¦,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) **å¼ æ** ççº¿æ§ç©ºé´ï¼æ **çº¿æ§å** ï¼ï¼è®°ä½ spanâ¡{ð1,ð2,â¦,ðð}spanâ¡{a1,a2,â¦,an}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-è¿éç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªåé ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸å®çº¿æ§æ å ³ï¼
-
-### çº¿æ§å­ç©ºé´
-
-å¯¹çº¿æ§ç©ºé´ (ð, +, â ,â)(V,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), è¥ä»£æ°ç³»ç» (ð1, +, â ,â)(V1,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ï¼
-
-  1. â  â ð1â â V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. ð1 âðV1âV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  3. ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ³äº +, â +,â ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ææ âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ççº¿æ§ç©ºé´
-
-åç§° ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ççº¿æ§å­ç©ºé´ï¼ç®ç§°å­ç©ºé´ï¼è®°ä½ ð1 â¤ðV1â¤V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-ä»»ä½ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æä¸¤ä¸ª **å¹³å¡å­ç©ºé´** ï¼å®æ¬èº« ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸é¶å­ç©ºé´ï¼é¶å­ç©ºé´åªå«é¶åéï¼ä¸å«æçº¿æ§æ å ³çåéï¼
-
-è¥ç¬¬ 2 æ¡ä¸­ç ââ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¢ä¸º ââ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), åç§° ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ççº¿æ§çå­ç©ºé´ï¼è®°ä½ ð1 <ðV1<V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-ä¸é¾è¯æï¼çº¿æ§ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéç©ºå­é ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å ¶çº¿æ§å­ç©ºé´å½ä¸ä» å½çº¿æ§è¿ç®å¨ ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å°é­ï¼å³ï¼
-
-  1. âð¢,ð£ âð1âu,vâV1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),ð¢ +ð£ âð1u+vâV1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. âð£ âð1âvâV1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),âð âââkâP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),ðð£ âð1kvâV1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-
-### äº¤ãåä¸ç´åãç´ç§¯
-
-å¯¹çº¿æ§ç©ºé´ (ð1, +, â ,â)(V1,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ (ð2, +, â ,â)(V2,+,â ,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-  1. ä¸é¾éªè¯ï¼å æ³åæ°ä¹å¨ ð1 â©ð2V1â©V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å°é­ï¼æ å¯ç§° ð1 â©ð2V1â©V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºçº¿æ§ç©ºé´ ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **äº¤** ï¼
-
-ç±»ä¼¼å°ï¼å¯å®ä¹å¤ä¸ªçº¿æ§ç©ºé´çäº¤ âðð=1ððâi=1mVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-  2. è¥çº¿æ§ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ð ={ð¢ +ð£|ð¢ âð1,ð£ âð2}V={u+v|uâV1,vâV2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), åç§° ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºçº¿æ§ç©ºé´ ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **å** ï¼è®°ä¸º ð =ð1 +ð2V=V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-å¯ä»¥éªè¯ï¼ð1 +ð2V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å å« ð1 âªð2V1âªV2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå°å­ç©ºé´ï¼
-
-ç±»ä¼¼å°ï¼å¯å®ä¹å¤ä¸ªçº¿æ§ç©ºé´çå âðð=1ððâi=1mVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-  3. è®¾ ð =ð1 +ð2V=V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), è¥çº¿æ§ç©ºé´ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çä»»æå ç´ ð£v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), ååªè½æ¾å°å¯ä¸ä¸ç»åé ð£1,ð£2v1,v2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ð£ =ð£1 +ð£2v=v1+v2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), åç§° ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºçº¿æ§ç©ºé´ ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **ç´å**(direct sum)ï¼è®°ä¸º ð1 âð2V1âV2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-ç±»ä¼¼å°ï¼å¯å®ä¹å¤ä¸ªçº¿æ§ç©ºé´çç´å â¨ðð=1ððâ¨i=1mVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-  4. ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **ç´ç§¯** ð1 Ãð2V1ÃV2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å®ä¹ä¸ºäºè çç¬å¡å¿ç§¯å ³äºå¦ä¸çå æ³åæ°ä¹ææ âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ççº¿æ§ç©ºé´ï¼
-
-     1. + :(ð1 Ãð2) Ã(ð1 Ãð2) â¦ð1 Ãð2;((ð¢1,ð£1),(ð¢2,ð£2)) â(ð¢1 +ð¢2,ð£1 +ð£2)+:(V1ÃV2)Ã(V1ÃV2)â¦V1ÃV2;((u1,v1),(u2,v2))â(u1+u2,v1+v2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-     2. â  :â Ã(ð1 Ãð2) â¦ð1 Ãð2;(ð,(ð¢,ð£)) â(ðð¢,ðð£)â :PÃ(V1ÃV2)â¦V1ÃV2;(k,(u,v))â(ku,kv)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-
-ç±»ä¼¼å°ï¼å¯å®ä¹å¤ä¸ªçº¿æ§ç©ºé´çç´ç§¯ âðð=1ððâi=1mVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-#### ä¾å­
-
-å¯¹äºçº¿æ§ç©ºé´ ð =â3V=R3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è®¾çº¿æ§ç©ºé´ï¼
-
-  * ð1 :={(ð¥,0,0)|ð¥ ââ}V1:={(x,0,0)|xâR}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ð2 :={(ð¥,ð¦,0)|ð¥,ð¦ ââ}V2:={(x,y,0)|x,yâR}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ð3 :={(0,ð¦,ð§)|ð¦,ð§ ââ}V3:={(0,y,z)|y,zâR}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  * ð4 :={(ð¥,0,ð§)|ð¥,ð§ ââ}V4:={(x,0,z)|x,zâR}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-
-å
-
-  1. ð1 <ð2 <ðV1<V2<V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),ð3 <ðV3<V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. ð2 =ð1 +ð2V2=V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  3. ð =ð1 âð3 =ð2 +ð3V=V1âV3=V2+V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  4. ð2 âð3 =ð4V2âV3=V4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),ð2 âð4 =ð3V2âV4=V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),ð3 âð4 =ð2V3âV4=V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  5. ð2 +ð3 â¤ðV2+V3â¤V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-
-#### æ§è´¨
-
-  1. ä»¤ ð1,ð2,ð3V1,V2,V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å ³äº âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ççº¿æ§ç©ºé´ï¼åéåçäº¤ä¸æ ·ï¼çº¿æ§ç©ºé´çäº¤éç¨å¦ä¸æ³åï¼
-     1. äº¤æ¢å¾ï¼ð1 â©ð2 =ð2 â©ð1V1â©V2=V2â©V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-     2. ç»åå¾ï¼ð1 â©(ð2 â©ð3) =(ð1 â©ð2) â©ð3V1â©(V2â©V3)=(V1â©V2)â©V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. ä»¤ ð1,ð2,ð3V1,V2,V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å ³äº âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ççº¿æ§ç©ºé´ï¼ç±»ä¼¼äºéåçå¹¶ï¼çº¿æ§ç©ºé´çåéç¨å¦ä¸æ³åï¼
-     1. äº¤æ¢å¾ï¼ð1 +ð2 =ð2 +ð1V1+V2=V2+V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-     2. ç»åå¾ï¼ð1 +(ð2 +ð3) =(ð1 +ð2) +ð3V1+(V2+V3)=(V1+V2)+V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  3. ä»¤ ð1,ð2,ð3V1,V2,V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å ³äº âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ççº¿æ§ç©ºé´ï¼çº¿æ§ç©ºé´çäº¤ä¸å¹¶æå¦ä¸å ³ç³»ï¼
-     1. ð1 â©(ð2 +ð3) â(ð1 â©ð2) +(ð1 â©ð3)V1â©(V2+V3)â(V1â©V2)+(V1â©V3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-     2. ð1 +(ð2 â©ð3) â(ð1 +ð2) â©(ð1 +ð3)V1+(V2â©V3)â(V1+V2)â©(V1+V3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  4. spanâ¡{ð1,ð2,â¦,ðð} +spanâ¡{ð1,ð2,â¦,ðð} =spanâ¡{ð1,ð2,â¦,ðð,ð1,ð2,â¦,ðð}spanâ¡{a1,a2,â¦,an}+spanâ¡{b1,b2,â¦,bm}=spanâ¡{a1,a2,â¦,an,b1,b2,â¦,bm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  5. ä»¤ ð1,ð2V1,V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å ³äº âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ççº¿æ§ç©ºé´ï¼åä¸åè¯¸æ¬¾ç­ä»·ï¼
-
-     1. ð1 +ð2 =ð1 âð2V1+V2=V1âV2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-
-     2. âð½ âð1 +ð2âÎ²âV1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), ä½¿å¾æåä¸º ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çåéåçæ¹å¼å¯ä¸ï¼ä»»æ ââ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å­å¨ï¼
-
-     3. ðÎ¸![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æåä¸º ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­åéçåçæ¹å¼å¯ä¸
-
-     4. ð1 â©ð2 ={ð}V1â©V2={Î¸}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-
-è¯æ
-
-1 â¹ 21â¹2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±å®ä¹ç«å¾ï¼
-
-2 â¹ 32â¹3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-ä»¤ ð½ =ð½1 +ð½2Î²=Î²1+Î²2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), å ¶ä¸­ ð½1 âð1,ð½2 âð2Î²1âV1,Î²2âV2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), è¥ ð =ð¼1 +ð¼2Î¸=Î±1+Î±2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),ð â ð¼1 âð1,ð¼2 âð2Î¸â Î±1âV1,Î±2âV2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), å ð½ =ð½ +ð =(ð½1 +ð¼1) +(ð½2 +ð¼2)Î²=Î²+Î¸=(Î²1+Î±1)+(Î²2+Î±2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-è ð½1 â ð½1 +ð¼1Î²1â Î²1+Î±1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), ä¸æ¡ä»¶çç¾ï¼
-
-3 â¹ 43â¹4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-å¨ ð1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­åä¸éé¶åé ð¼Î±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), å ð =ð¼ +( âð¼) =( âð¼) +ð¼Î¸=Î±+(âÎ±)=(âÎ±)+Î±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), è¿ä¸æ¡ä»¶çç¾ï¼
-
-4 â¹ 14â¹1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-
-è¥ ð1 +ð2V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯ç´åï¼åå­å¨ ð½ âð1 +ð2Î²âV1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð½ =ð½1 +ð½2 =ð¾1 +ð¾2Î²=Î²1+Î²2=Î³1+Î³2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), å ¶ä¸­ ð½1,ð¾1 âð1,ð½2,ð¾2 âð2Î²1,Î³1âV1,Î²2,Î³2âV2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð½1,ð½2,ð¾1,ð¾2Î²1,Î²2,Î³1,Î³2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºä¸ç¸åï¼
-
-è¿è ð â ð½1 âð¾1 =ð¾2 âð½2 âð1 â©ð2Î¸â Î²1âÎ³1=Î³2âÎ²2âV1â©V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), ä¸æ¡ä»¶çç¾ï¼
-
-### åæ
-
-è®¾ ð,ðâ²V,Vâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ºå âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ççº¿æ§ç©ºé´ï¼è¥å­å¨åå° ð :ð â¦ðâ²Ï:Vâ¦Vâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¿æå æ³ä¸æ°ä¹ï¼å³ âð¢,ð£ âðâu,vâV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),âð âââkâP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ï¼
-
-  1. ð(ð¢ +ð£) =ð(ð¢) +ð(ð£)Ï(u+v)=Ï(u)+Ï(v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-  2. ð(ðð¢) =ðð(ð¢)Ï(ku)=kÏ(u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
-
-åç§° ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å° ðâ²Vâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **åææ å°** ï¼æ­¤æ¶ç§° ðV![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ðâ²Vâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) **åæ** ï¼è®°ä¸º ð â ðâ²Vâ Vâ²![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+### 简单性质
 
 Note
 
-è¥ ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯åå°ï¼åå¯å®ä¹ **ååæ** ï¼è¥ ðÏ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ»¡å°ï¼åå¯å®ä¹ **æ»¡åæ** ï¼
+以下性质可在群论等中找到．
 
-#### æ§è´¨
+对线性空间 (𝑉, +, ⋅,ℙ)(V,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),
 
-  1. å âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çä¸¤çº¿æ§ç©ºé´åæå½ä¸ä» å½å ¶ç»´æ°ç¸ç­ï¼ï¼ç»´æ°çå®ä¹åè§ [çº¿æ§åº](../basis/)ï¼ï¼
-  2. ï¼1 çæ¨è®ºï¼å âP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç»´çº¿æ§ç©ºé´ä¸çº¿æ§ç©ºé´ âðPn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæï¼
+  1. 𝜃θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 唯一
+  2. ∀𝛼 ∈𝑉∀α∈V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),−𝛼−α![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 唯一
+  3. ∃0 ∈ℙ∃0∈P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),∀𝛼 ∈𝑉∀α∈V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 有 0𝛼 =𝜃0α=θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  4. ∀𝑘 ∈ℙ∀k∈P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 有 𝑘𝜃 =𝜃kθ=θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  5. ( −1)𝛼 = −𝛼, ∀𝛼 ∈𝑉(−1)α=−α, ∀α∈V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  6. 无零因子：∀𝛼 ∈𝑉,𝑘 ∈ℙ∀α∈V,k∈P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 有 𝑘𝛼 =𝜃 ⟹ 𝑘 =0 ∨𝛼 =𝜃kα=θ⟹k=0∨α=θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  7. 加法的消去律：∀𝛼,𝛽,𝛾 ∈𝑉∀α,β,γ∈V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 有 𝛼 +𝛽 =𝛼 +𝛾 ⟹ 𝛽 =𝛾α+β=α+γ⟹β=γ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+> 实际上，加法的消去律是阿贝尔群的性质．
+
+### 例子
+
+  1. ℙ𝑛Pn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 关于数域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的加法和乘法构成 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的一个线性空间．例如 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以是 ℝR![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),ℂC![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),ℕ𝑝Np![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（𝑝p![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为素数）等．
+  2. 数域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的 𝑛 ×𝑚n×m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 阶矩阵 ℙ𝑛×𝑚Pn×m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 关于矩阵的加法和数乘构成 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的一个线性空间．
+  3. 数域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的一元多项式环 ℙ[𝑥]P[x]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 关于多项式的加法和数乘构成 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的一个线性空间．
+  4. 区间 [𝑎,𝑏][a,b]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的全体连续函数（记作 𝐶[𝑎,𝑏]C[a,b]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）关于「函数加法」和「值与连续函数的数乘」构成值域上的一个线性空间．
+
+## 相关概念
+
+### 线性相关、线性无关
+
+对线性空间 (𝑉, +, ⋅,ℙ)(V,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
+
+  1. 称 𝑎1,𝑎2,…,𝑎𝑛 ∈𝑉a1,a2,…,an∈V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个 **向量组** ．
+  2. 对于 𝑘1,𝑘2,…,𝑘𝑛 ∈ℙk1,k2,…,kn∈P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 称 ∑𝑛𝑖=1𝑘𝑖𝑎𝑖∑i=1nkiai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个 **线性组合** ．
+  3. 若向量 𝛽 ∈𝑉β∈V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以表示为向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一个线性组合，则称 𝛽β![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 能被向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) **线性表出** ．
+  4. 对于 𝑘1,𝑘2,…,𝑘𝑛 ∈ℙk1,k2,…,kn∈P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 若向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 ∑𝑛𝑖=1𝑘𝑖𝑎𝑖 =𝜃 ⟺ 𝑘𝑖 =0,𝑖 =1,2,…,𝑛∑i=1nkiai=θ⟺ki=0,i=1,2,…,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 则称向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) **线性无关** ，否则称向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) **线性相关** ．
+
+规定零向量与任意向量线性相关．
+
+线性表示或线性相关的式子，可以写成矩阵乘法的形式：
+
+𝛽=𝑘1𝑎1+𝑘2𝑎2+⋯+𝑘𝑟𝑎𝑟=(𝑎1,𝑎2,⋯,𝑎𝑟)⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝑘1𝑘2⋮𝑘𝑟⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠β=k1a1+k2a2+⋯+krar=(a1,a2,⋯,ar)(k1k2⋮kr)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+根据习惯，把向量 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 按顺序并排写在左边；把标量 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 按顺序竖着写在右边，构成一个「列向量」．
+
+注意：这里标量构成的「列向量」只是方便的形式记号，不在空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中，与左边的向量有着本质的区别．左边的向量如果恰好是列向量，并排拼起来就可以形式上构成一个「矩阵」，上述乘积恰好是矩阵中常见的「矩阵左乘列向量」的形式．
+
+下文指出，这里的线性表示也等价于，向量 𝛽β![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 落在矩阵 (𝑎1,𝑎2⋯,𝑎𝑟)(a1,a2⋯,ar)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的像空间里．
+
+根据下文中的定义，零向量一定会落在像空间里．如果用线性变换的观点看，线性相关等价于变换后多个向量变换到零向量，而线性无关等价于只有零向量本身变换到零向量．
+
+#### 性质
+
+对线性空间 (𝑉, +, ⋅,ℙ)(V,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),
+
+  1. 若向量组的一部分线性相关，则向量组线性相关．若向量组线性无关，则其任意非空部分均线性无关．简记为：**「大无关、小无关」；「小相关、大相关」** ．
+  2. 含 𝜃θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的向量组线性相关．
+  3. 向量组线性相关当且仅当向量组的某个向量可以由其余向量线性表出．
+  4. 若向量 𝛽β![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可被向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性表出，则表出方式唯一当且仅当向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性无关．
+  5. 若向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性无关，则向量 𝛽β![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可被向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性表出当且仅当向量组 𝑎1,𝑎2,…,𝑎𝑛,𝛽a1,a2,…,an,β![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性相关．
+
+### 极大线性无关组、秩
+
+线性相关可以理解为「多余」，说明向量组内部有的向量可以被其他向量表出，可以删去．删完了之后，将剩下极大线性无关组．
+
+对线性空间 (𝑉, +, ⋅,ℙ)(V,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
+
+  1. 对于向量组 𝑏1,𝑏2,…,𝑏𝑚b1,b2,…,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 令 {𝑎1,𝑎2,…,𝑎𝑛} ⊆{𝑏1,𝑏2,…,𝑏𝑚}{a1,a2,…,an}⊆{b1,b2,…,bm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 若有：
+
+     * 向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性无关．
+     * ∀𝛽 ∈{𝑏1,𝑏2,…,𝑏𝑚} ∖{𝑎1,𝑎2,…,𝑎𝑛}∀β∈{b1,b2,…,bm}∖{a1,a2,…,an}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 向量组 𝑎1,𝑎2,…,𝑎𝑛,𝛽a1,a2,…,an,β![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性相关．
+
+则称向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为向量组 𝑏1,𝑏2,…,𝑏𝑚b1,b2,…,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的一个 **极大线性无关组** ．类似地，可定义线性空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的极大线性无关组．
+
+规定向量组 𝜃,𝜃,…,𝜃θ,θ,…,θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的极大线性无关组为空集，于是全 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 矩阵对应的向量组没有极大线性无关组．
+
+从向量组删向量的删法不唯一，因此极大线性无关组也不唯一．习惯上从左到右按顺序删．
+
+很巧的是，按顺序删，留下的向量，恰好就是「按行看」观点里面，高斯消元法剩下的行最简形矩阵中，元素 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 所在的列．
+
+称向量组 𝑏1,𝑏2,…,𝑏𝑚b1,b2,…,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的极大线性无关组的大小为向量组的 **秩** ，记作 rank⁡{𝑏1,𝑏2,…,𝑏𝑚}rank⁡{b1,b2,…,bm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 规定 rank⁡{𝜃,𝜃,…,𝜃} =0rank⁡{θ,θ,…,θ}=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+于是，向量组的秩的定义与矩阵的秩的定义完全一致．
+
+  2. 若向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 能线性表出向量组 𝑏1,𝑏2,…,𝑏𝑚b1,b2,…,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的所有向量，称向量组 𝑏1,𝑏2,…,𝑏𝑚b1,b2,…,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 能被向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性表出．
+
+  3. 若向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 能被向量组 𝑏1,𝑏2,…,𝑏𝑚b1,b2,…,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性表出，且向量组 𝑏1,𝑏2,…,𝑏𝑚b1,b2,…,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 能被向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性表出，则称两向量组 **等价** ，记作 {𝑎1,𝑎2,…,𝑎𝑛} ≅{𝑏1,𝑏2,…,𝑏𝑚}{a1,a2,…,an}≅{b1,b2,…,bm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+向量组的 **等价** 就是向量组张成的空间相同．张成空间相同的向量组相互等价，张成空间不同的向量组不等价．
+
+向量组等价比矩阵等价条件更强，不仅要求秩相同，还要求空间完全一样．因此，把两个矩阵 **横向** 拼在一起，秩不能发生变化．
+
+矩阵等价仅要求秩相同，因此矩阵等价表示前一个矩阵或空间，可以通过可逆变换，到达后一个矩阵或空间．
+
+#### 性质
+
+对线性空间 (𝑉, +, ⋅,ℙ)(V,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),
+
+  1. 设向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 能被线性表出向量组 𝑏1,𝑏2,…,𝑏𝑚b1,b2,…,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性表出．
+
+     * 若 𝑛 >𝑚n>m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 则向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性相关．
+     * 若向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性无关，则 𝑛 ≤𝑚n≤m![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+  2. 等价的线性无关向量组的大小相等．
+
+向量组的任意极大线性无关组的大小均相等．
+
+  3. 向量组线性无关当且仅当其秩等于其大小．
+
+  4. 若向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 能被线性表出向量组 𝑏1,𝑏2,…,𝑏𝑚b1,b2,…,bm![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 线性表出，则 rank⁡{𝑎1,𝑎2,…,𝑎𝑛} ≤rank⁡{𝑏1,𝑏2,…,𝑏𝑚}rank⁡{a1,a2,…,an}≤rank⁡{b1,b2,…,bm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+  5. 等价的向量组的秩相等．
+
+### 线性包
+
+对于线性空间 (𝑉, +, ⋅,ℙ)(V,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，{𝑣=∑𝑛𝑖=1𝑘𝑖𝑎𝑖:𝑎𝑖∈𝑉,𝑘𝑖∈ℙ,𝑖=1,2,…,𝑛}{v=∑i=1nkiai:ai∈V,ki∈P,i=1,2,…,n}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 也构成一个线性空间，称为由向量组 𝑎1,𝑎2,…,𝑎𝑛a1,a2,…,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) **张成** 的线性空间（或 **线性包** ），记作 span⁡{𝑎1,𝑎2,…,𝑎𝑛}span⁡{a1,a2,…,an}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+这里的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个向量 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不一定线性无关．
+
+### 线性子空间
+
+对线性空间 (𝑉, +, ⋅,ℙ)(V,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 若代数系统 (𝑉1, +, ⋅,ℙ)(V1,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足：
+
+  1. ∅ ≠𝑉1∅≠V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. 𝑉1 ⊆𝑉V1⊆V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  3. 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 关于 +, ⋅+,⋅![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 构成 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的线性空间
+
+则称 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的线性子空间，简称子空间，记作 𝑉1 ≤𝑉V1≤V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+任何空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有两个 **平凡子空间** ：它本身 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与零子空间．零子空间只含零向量，不含有线性无关的向量．
+
+若第 2 条中的 ⊆⊆![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 换为 ⊂⊂![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 则称 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的线性真子空间，记作 𝑉1 <𝑉V1<V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+不难证明：线性空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的非空子集 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是其线性子空间当且仅当线性运算在 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上封闭，即：
+
+  1. ∀𝑢,𝑣 ∈𝑉1∀u,v∈V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),𝑢 +𝑣 ∈𝑉1u+v∈V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. ∀𝑣 ∈𝑉1∀v∈V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),∀𝑘 ∈ℙ∀k∈P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),𝑘𝑣 ∈𝑉1kv∈V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+### 交、和与直和、直积
+
+对线性空间 (𝑉1, +, ⋅,ℙ)(V1,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 (𝑉2, +, ⋅,ℙ)(V2,+,⋅,P)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
+
+  1. 不难验证：加法和数乘在 𝑉1 ∩𝑉2V1∩V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上封闭，故可称 𝑉1 ∩𝑉2V1∩V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为线性空间 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑉2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **交** ．
+
+类似地，可定义多个线性空间的交 ⋂𝑚𝑖=1𝑉𝑖⋂i=1mVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+  2. 若线性空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝑉 ={𝑢 +𝑣|𝑢 ∈𝑉1,𝑣 ∈𝑉2}V={u+v|u∈V1,v∈V2}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 则称 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为线性空间 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑉2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **和** ，记为 𝑉 =𝑉1 +𝑉2V=V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+可以验证：𝑉1 +𝑉2V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是包含 𝑉1 ∪𝑉2V1∪V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最小子空间．
+
+类似地，可定义多个线性空间的和 ∑𝑚𝑖=1𝑉𝑖∑i=1mVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+  3. 设 𝑉 =𝑉1 +𝑉2V=V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 若线性空间 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的任意元素 𝑣v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 均只能找到唯一一组向量 𝑣1,𝑣2v1,v2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝑣 =𝑣1 +𝑣2v=v1+v2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 则称 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为线性空间 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑉2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **直和**(direct sum)，记为 𝑉1 ⊕𝑉2V1⊕V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+类似地，可定义多个线性空间的直和 ⨁𝑚𝑖=1𝑉𝑖⨁i=1mVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+  4. 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑉2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **直积** 𝑉1 ×𝑉2V1×V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 定义为二者的笛卡儿积关于如下的加法和数乘构成 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的线性空间：
+
+     1. + :(𝑉1 ×𝑉2) ×(𝑉1 ×𝑉2) ↦𝑉1 ×𝑉2;((𝑢1,𝑣1),(𝑢2,𝑣2)) →(𝑢1 +𝑢2,𝑣1 +𝑣2)+:(V1×V2)×(V1×V2)↦V1×V2;((u1,v1),(u2,v2))→(u1+u2,v1+v2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+     2. ⋅ :ℙ ×(𝑉1 ×𝑉2) ↦𝑉1 ×𝑉2;(𝑘,(𝑢,𝑣)) →(𝑘𝑢,𝑘𝑣)⋅:P×(V1×V2)↦V1×V2;(k,(u,v))→(ku,kv)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+类似地，可定义多个线性空间的直积 ∏𝑚𝑖=1𝑉𝑖∏i=1mVi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+#### 例子
+
+对于线性空间 𝑉 =ℝ3V=R3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，设线性空间：
+
+  * 𝑉1 :={(𝑥,0,0)|𝑥 ∈ℝ}V1:={(x,0,0)|x∈R}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑉2 :={(𝑥,𝑦,0)|𝑥,𝑦 ∈ℝ}V2:={(x,y,0)|x,y∈R}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑉3 :={(0,𝑦,𝑧)|𝑦,𝑧 ∈ℝ}V3:={(0,y,z)|y,z∈R}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  * 𝑉4 :={(𝑥,0,𝑧)|𝑥,𝑧 ∈ℝ}V4:={(x,0,z)|x,z∈R}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+则
+
+  1. 𝑉1 <𝑉2 <𝑉V1<V2<V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),𝑉3 <𝑉V3<V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. 𝑉2 =𝑉1 +𝑉2V2=V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  3. 𝑉 =𝑉1 ⊕𝑉3 =𝑉2 +𝑉3V=V1⊕V3=V2+V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  4. 𝑉2 ⊕𝑉3 =𝑉4V2⊕V3=V4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),𝑉2 ⊕𝑉4 =𝑉3V2⊕V4=V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),𝑉3 ⊕𝑉4 =𝑉2V3⊕V4=V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  5. 𝑉2 +𝑉3 ≤𝑉V2+V3≤V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+#### 性质
+
+  1. 令 𝑉1,𝑉2,𝑉3V1,V2,V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是关于 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的线性空间，和集合的交一样，线性空间的交适用如下法则：
+     1. 交换律：𝑉1 ∩𝑉2 =𝑉2 ∩𝑉1V1∩V2=V2∩V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+     2. 结合律：𝑉1 ∩(𝑉2 ∩𝑉3) =(𝑉1 ∩𝑉2) ∩𝑉3V1∩(V2∩V3)=(V1∩V2)∩V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. 令 𝑉1,𝑉2,𝑉3V1,V2,V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是关于 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的线性空间，类似于集合的并，线性空间的和适用如下法则：
+     1. 交换律：𝑉1 +𝑉2 =𝑉2 +𝑉1V1+V2=V2+V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+     2. 结合律：𝑉1 +(𝑉2 +𝑉3) =(𝑉1 +𝑉2) +𝑉3V1+(V2+V3)=(V1+V2)+V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  3. 令 𝑉1,𝑉2,𝑉3V1,V2,V3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是关于 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的线性空间，线性空间的交与并有如下关系：
+     1. 𝑉1 ∩(𝑉2 +𝑉3) ⊇(𝑉1 ∩𝑉2) +(𝑉1 ∩𝑉3)V1∩(V2+V3)⊇(V1∩V2)+(V1∩V3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+     2. 𝑉1 +(𝑉2 ∩𝑉3) ⊆(𝑉1 +𝑉2) ∩(𝑉1 +𝑉3)V1+(V2∩V3)⊆(V1+V2)∩(V1+V3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  4. span⁡{𝑎1,𝑎2,…,𝑎𝑛} +span⁡{𝑏1,𝑏2,…,𝑏𝑚} =span⁡{𝑎1,𝑎2,…,𝑎𝑛,𝑏1,𝑏2,…,𝑏𝑚}span⁡{a1,a2,…,an}+span⁡{b1,b2,…,bm}=span⁡{a1,a2,…,an,b1,b2,…,bm}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  5. 令 𝑉1,𝑉2V1,V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是关于 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的线性空间，则下列诸款等价：
+
+     1. 𝑉1 +𝑉2 =𝑉1 ⊕𝑉2V1+V2=V1⊕V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+     2. ∃𝛽 ∈𝑉1 +𝑉2∃β∈V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 使得拆分为 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑉2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的向量和的方式唯一（任意 →→![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 存在）
+
+     3. 𝜃θ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 拆分为 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑉2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中向量的和的方式唯一
+
+     4. 𝑉1 ∩𝑉2 ={𝜃}V1∩V2={θ}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+证明
+
+1 ⟹ 21⟹2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：由定义立得．
+
+2 ⟹ 32⟹3![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
+
+令 𝛽 =𝛽1 +𝛽2β=β1+β2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 其中 𝛽1 ∈𝑉1,𝛽2 ∈𝑉2β1∈V1,β2∈V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 若 𝜃 =𝛼1 +𝛼2θ=α1+α2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),𝜃 ≠𝛼1 ∈𝑉1,𝛼2 ∈𝑉2θ≠α1∈V1,α2∈V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 则 𝛽 =𝛽 +𝜃 =(𝛽1 +𝛼1) +(𝛽2 +𝛼2)β=β+θ=(β1+α1)+(β2+α2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
+
+而 𝛽1 ≠𝛽1 +𝛼1β1≠β1+α1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 与条件矛盾．
+
+3 ⟹ 43⟹4![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
+
+在 𝑉1V1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑉2V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中取一非零向量 𝛼α![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 则 𝜃 =𝛼 +( −𝛼) =( −𝛼) +𝛼θ=α+(−α)=(−α)+α![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 这与条件矛盾．
+
+4 ⟹ 14⟹1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
+
+若 𝑉1 +𝑉2V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是直和，则存在 𝛽 ∈𝑉1 +𝑉2β∈V1+V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝛽 =𝛽1 +𝛽2 =𝛾1 +𝛾2β=β1+β2=γ1+γ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 其中 𝛽1,𝛾1 ∈𝑉1,𝛽2,𝛾2 ∈𝑉2β1,γ1∈V1,β2,γ2∈V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝛽1,𝛽2,𝛾1,𝛾2β1,β2,γ1,γ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互不相同．
+
+进而 𝜃 ≠𝛽1 −𝛾1 =𝛾2 −𝛽2 ∈𝑉1 ∩𝑉2θ≠β1−γ1=γ2−β2∈V1∩V2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7), 与条件矛盾．
+
+### 同构
+
+设 𝑉,𝑉′V,V′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 均为域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的线性空间，若存在双射 𝜎 :𝑉 ↦𝑉′σ:V↦V′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且保持加法与数乘，即 ∀𝑢,𝑣 ∈𝑉∀u,v∈V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7),∀𝑘 ∈ℙ∀k∈P![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足：
+
+  1. 𝜎(𝑢 +𝑣) =𝜎(𝑢) +𝜎(𝑣)σ(u+v)=σ(u)+σ(v)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+  2. 𝜎(𝑘𝑢) =𝑘𝜎(𝑢)σ(ku)=kσ(u)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+
+则称 𝜎σ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 到 𝑉′V′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **同构映射** ，此时称 𝑉V![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与 𝑉′V′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) **同构** ，记为 𝑉 ≅𝑉′V≅V′![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
 Note
 
-æ¬æ§è´¨è¯´ææä»¬åºæ¬ä¸å¯ä»¥å°åæ ååéç­åçå¾ ï¼
+若 𝜎σ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是单射，则可定义 **单同态** ；若 𝜎σ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是满射，则可定义 **满同态** ．
 
-## æ¬§æ°ç©ºé´ä¸çº¿æ§ç©ºé´çå ³ç³»
+#### 性质
 
-ä»¥æä»¬æçæçä¸ç»´æ¬§æ°ç©ºé´ä¸ºä¾ï¼å ¶é¨åç¸å ³æ¦å¿µå¨çº¿æ§ç©ºé´ä¸­çå¯¹åºå ³ç³»å¦ä¸è¡¨ï¼
+  1. 域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的两线性空间同构当且仅当其维数相等．（维数的定义参见 [线性基](../basis/)．）
+  2. （1 的推论）域 ℙP![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 维线性空间与线性空间 ℙ𝑛Pn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 同构．
 
-ä¸ç»´æ¬§æ°ç©ºé´| çº¿æ§ç©ºé´  
+Note
+
+本性质说明我们基本上可以将坐标和向量等同看待．
+
+## 欧氏空间与线性空间的关系
+
+以我们最熟悉的三维欧氏空间为例，其部分相关概念在线性空间中的对应关系如下表：
+
+三维欧氏空间| 线性空间  
 ---|---  
-åé| åé  
-åç´| æ­£äº¤ï¼å³å ç§¯ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼  
-ä¸åéå ±çº¿/å ±é¢| ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªåéçº¿æ§ç¸å ³  
-ä¸åéä¸å ±é¢| ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªåéçº¿æ§æ å ³  
-åºåé| [çº¿æ§åº](../basis/)  
-ç©ºé´çç»´æ°| ç©ºé´çç»´æ°  
+向量| 向量  
+垂直| 正交（即内积为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)）  
+三向量共线/共面| 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个向量线性相关  
+三向量不共面| 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个向量线性无关  
+基向量| [线性基](../basis/)  
+空间的维数| 空间的维数  
   
-## åºç¨
+## 应用
 
-ä»æ¬èå¼å§ä¸»è¦è®²è¿°å¯¹äºçº¿æ§æ¹ç¨ç»ãæåçãçè§ç¹ï¼
+从本节开始主要讲述对于线性方程组「按列看」的观点．
 
-ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬èº«ä¹æ¯ç±ååéææçï¼æ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¬èº«çæäºååéç»ï¼è ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æªç¥æ°ç³»æ°ï¼æè ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å½ä¸­çè¿ç»ååéè½ä¸è½é ä¸æªç¥æ°ï¼ååºååé ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ­¤æ¶ååé ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å®å ¨æªç¥çï¼
+矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 本身也是由列向量构成的．把 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 本身看成了列向量组，而 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是未知数系数，思考 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 当中的这组列向量能不能配上未知数，凑出列向量 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．此时列向量 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是完全未知的．
 
-æ­¤æ¶ç ç©¶çç­å¼ ð´ð¥ =ðAx=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´çä¸ºï¼
+此时研究的等式 𝐴𝑥 =𝑏Ax=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 整理为：
 
-ð¼1ð¥1+ð¼2ð¥2+â¯+ð¼ðð¥ð=ðÎ±1x1+Î±2x2+â¯+Î±nxn=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝛼1𝑥1+𝛼2𝑥2+⋯+𝛼𝑛𝑥𝑛=𝑏α1x1+α2x2+⋯+αnxn=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¶ï¼ç©éµä¹æ³ä¸­ï¼ä½äºå·¦è¾¹çç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥çä½åéç»ï¼å³ä¸ç»ååéï¼è¿ç»ååéä½ä¸ºä¸ç»åºï¼å¼ æä¸ä¸ªç©ºé´ï¼æ¢è®¨ååé ðb![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¦è½å¨è¿ä¸ªç©ºé´éï¼
+这时，矩阵乘法中，位于左边的矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以看作向量组，即一组列向量．这组列向量作为一组基，张成一个空间，探讨列向量 𝑏b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是否落在这个空间里．
 
-### æåçå¾ çº¿æ§æ¹ç¨ç»çè§£
+### 按列看待线性方程组的解
 
-ç§©æ¯æå¤§çº¿æ§æ å ³ç»ä¸­åéçä¸ªæ°ï¼ä»£è¡¨äºãçº¦æãï¼é£ä¹å ¶ä½çåéå°èµäºè§£çèªç±åº¦ï¼å³å è®¸å¨å ¶ä»æ¹åèµäºåä½çåéï¼
+秩是极大线性无关组中向量的个数，代表了「约束」．那么其余的向量将赋予解的自由度，即允许在其他方向赋予冗余的向量．
 
-å¦æè®° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°ï¼å³å«æçååéä¸ªæ°ï¼è®° ð(ð´)r(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºç©éµ A çç§©ï¼åæèªç±åº¦ ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+如果记 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的列数，即含有的列向量个数，记 𝑟(𝐴)r(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为矩阵 A 的秩，则有自由度 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-ð=ðâð(ð´)S=nâr(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑆=𝑛−𝑟(𝐴)S=n−r(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¹ç¨ç»çå ¨ä½è§£ä¹ææåéç»ï¼èªç±åº¦ ðS![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯ ð´ð¥ =0Ax=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è§£åéç»çç§©ï¼å³ä¸ææ ¸ç©ºé´çç»´æ°ï¼
+方程组的全体解也构成向量组，自由度 𝑆S![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是 𝐴𝑥 =0Ax=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 解向量组的秩，即下文核空间的维数．
 
-### æ¹ç¨ç»çåè§£
+### 方程组的同解
 
-ä¸¤ä¸ªæ¹ç¨ç»çå ¬å ±è§£å®ä¹ä¸ºä¸¤ç»è§£çäº¤éï¼
+两个方程组的公共解定义为两组解的交集．
 
-æ¹ç¨ç»ç **åè§£** å°±æ¯æ¹ç¨ç»çè§£çéåç¸ç­ï¼è§£çéåç¸ç­çæ¹ç¨ç»åè§£ï¼è§£çéåä¸ç¸ç­çæ¹ç¨ç»ä¸åè§£ï¼
+方程组的 **同解** 就是方程组的解的集合相等．解的集合相等的方程组同解，解的集合不相等的方程组不同解．
 
-æ¹ç¨ç»åè§£ä¹æ¯ç©éµç­ä»·æ¡ä»¶å¼ºï¼ä¸ä» è¦æ±ç§©ç¸ç­ï¼è¿è¦æ±æä¸¤ä¸ªç©éµ **çºµå** æ¼å¨ä¸èµ·ä¹åï¼ç§©ä»ç¶ä¸æ¹åï¼
+方程组同解也比矩阵等价条件强，不仅要求秩相等，还要求把两个矩阵 **纵向** 拼在一起之后，秩仍然不改变．
 
-è¿éä¸åéç»ç­ä»·å¯¹æ¯ï¼åéç»ç­ä»·è¦æ±ç©éµæ¨ªåæ¼æ¥ï¼ç§©ä¸æ¹åï¼å æ­¤ï¼æå¦ä¸å ³ç³»ï¼
+这里与向量组等价对比，向量组等价要求矩阵横向拼接，秩不改变．因此，有如下关系：
 
-ç©éµç­ä»·ï¼ä¸ä¸å®æå¯¹åºçåéç»ç­ä»·æè æ¹ç¨ç»åè§£ï¼ä½æ¯è¥æåéç»ç­ä»·æè æ¹ç¨ç»åè§£ï¼å¿ ç¶æå¯¹åºçç©éµç­ä»·ï¼ç§©ç¸åï¼ï¼
+矩阵等价，不一定有对应的向量组等价或者方程组同解，但是若有向量组等价或者方程组同解，必然有对应的矩阵等价（秩相同）．
 
-å¦æç©éµå¯¹åºçåéç»ç­ä»·ï¼é£ä¹å°ç©éµè½¬ç½®åï¼å¯¹åºçæ¹ç¨ç»åè§£ï¼åä¹äº¦ç¶ï¼
+如果矩阵对应的向量组等价，那么将矩阵转置后，对应的方程组同解，反之亦然．
 
-### ç©éµçæ ¸ç©ºé´ä¸åç©ºé´
+### 矩阵的核空间与像空间
 
-è¿é¨åçæ ¸ç©ºé´ä¸åç©ºé´æ¯ç«å¨çº¿æ§ç©ºé´çè§åº¦ä¸åè¿°çï¼
+这部分的核空间与像空间是站在线性空间的角度上叙述的．
 
-å¯¹äºç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»¤ ðW![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºæ¹ç¨ ð´ð¥ =0Ax=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ¨ä½è§£ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ææçéåï¼å ðW![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ä¸ªçº¿æ§ç©ºé´ï¼ðW![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ éåä¸ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ç´ æå¨çåç¸åï¼
+对于矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，令 𝑊W![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为方程 𝐴𝑥 =0Ax=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的全体解 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 构成的集合，则 𝑊W![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一个线性空间，𝑊W![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的标量域与 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的元素所在的域相同．
 
-ç§°æ­¤æ¶ç ðW![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **æ ¸ç©ºé´** ï¼è®°ä½ ð(ð´)N(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+称此时的 𝑊W![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **核空间** ，记作 𝑁(𝐴)N(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ ¸ç©ºé´ ð(ð´)N(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯æ¹ç¨ ð´ð¥ =0Ax=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **è§£ç©ºé´** ï¼æ ¹æ®åæåºçå®ä¹ï¼è¯¥æ¹ç¨ç **åºç¡è§£ç³»** å°±æ¯æ ¸ç©ºé´çåºï¼
+矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的核空间 𝑁(𝐴)N(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是方程 𝐴𝑥 =0Ax=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **解空间** ．根据后文基的定义，该方程的 **基础解系** 就是核空间的基．
 
-å¦æç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¯éç©éµï¼å ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ ¸ç©ºé´ ð(ð´)N(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åªå«é¶åéï¼
+如果矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是可逆矩阵，则 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的核空间 𝑁(𝐴)N(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 只含零向量．
 
-å¯¹äºç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®ç ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªåä¸ºåé ð¼Î±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç§° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªååé ð¼Î±![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼ æçç©ºé´ä¸º ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **åç©ºé´** ï¼æè è®°ä½ **åç©ºé´** ï¼è®°ä½ï¼
+对于矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，它的 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个列为向量 𝛼α![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，称 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个列向量 𝛼α![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 张成的空间为 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **像空间** ，或者记作 **列空间** ，记作：
 
-ð (ð´)=spanâ¡{ð¼1,ð¼2,â¯,ð¼ð}R(A)=spanâ¡{Î±1,Î±2,â¯,Î±n}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑅(𝐴)=span⁡{𝛼1,𝛼2,⋯,𝛼𝑛}R(A)=span⁡{α1,α2,⋯,αn}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ¹æ®åæç»´æ°çå®ä¹ï¼åç©ºé´çç»´æ°ç­äºç©éµ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çç§©ï¼
+根据后文维数的定义，像空间的维数等于矩阵 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的秩．
 
-ç±å®ä¹ï¼å¯¹äºåç©ºé´ ð (ð´)R(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­çæ¯ä¸ä¸ªå ç´ ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæç¸åºçè¡¨ç¤ºï¼
+由定义，对于像空间 𝑅(𝐴)R(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中的每一个元素 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，均有相应的表示：
 
-ð¦=ð1ð¼1+ð2ð¼2+â¯+ððð¼ð=(ð¼1,ð¼2,â¯,ð¼ð)ââ â â â â ââð1ð2â®ððââ â â â â ââ =ð´ââ â â â â ââð1ð2â®ððââ â â â â ââ y=k1Î±1+k2Î±2+â¯+knÎ±n=(Î±1,Î±2,â¯,Î±n)(k1k2â®kn)=A(k1k2â®kn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑦=𝑘1𝛼1+𝑘2𝛼2+⋯+𝑘𝑛𝛼𝑛=(𝛼1,𝛼2,⋯,𝛼𝑛)⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝑘1𝑘2⋮𝑘𝑛⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠=𝐴⎛⎜ ⎜ ⎜ ⎜ ⎜ ⎜⎝𝑘1𝑘2⋮𝑘𝑛⎞⎟ ⎟ ⎟ ⎟ ⎟ ⎟⎠y=k1α1+k2α2+⋯+knαn=(α1,α2,⋯,αn)(k1k2⋮kn)=A(k1k2⋮kn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤åç©ºé´ ð (ð´)R(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å°±æ¯å¯¹äºä»»æåé ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð´ð¥Ax![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **å¼å** ï¼
+因此像空间 𝑅(𝐴)R(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 就是对于任意向量 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝐴𝑥Ax![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **值域** ．
 
-åçå¯ä»¥å®ä¹ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç **è¡ç©ºé´** ï¼å³ ð´A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè½¬ç½®çå¼å ð (ð´ð)R(AT)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+同理可以定义 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的 **行空间** ，即 𝐴A![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的转置的值域 𝑅(𝐴𝑇)R(AT)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç±äºç©éµçè¡ç§©ç­äºåç§©ï¼è¡ç©ºé´çç»´æ°ä¹ä¸ºç©éµçç§©ï¼å æ­¤è½¬ç½®æ¹ååç©ºé´ï¼èä¸æ¹ååç©ºé´çç»´æ°ï¼
+由于矩阵的行秩等于列秩，行空间的维数也为矩阵的秩，因此转置改变像空间，而不改变像空间的维数．
 
-å¨è¿éå¯ä»¥ä¸åæå»ºç«å¯¹åºå ³ç³»ï¼
+在这里可以与前文建立对应关系：
 
-åéç»ç­ä»·ï¼ç­ä»·äºå¯¹åºç©éµçåç©ºé´ ð (ð´)R(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸åï¼
+向量组等价，等价于对应矩阵的像空间 𝑅(𝐴)R(A)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相同．
 
-æ¹ç¨ç»åè§£ï¼ç­ä»·äºå¯¹åºç©éµçè¡ç©ºé´ ð (ð´ð)R(AT)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸åï¼
+方程组同解，等价于对应矩阵的行空间 𝑅(𝐴𝑇)R(AT)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相同．
 
-## åèèµæä¸æ³¨é
+## 参考资料与注释
 
-  1. ä¸ç»´å£°ï¼é«ç­ä»£æ°ï¼ä¸ï¼ï¼æ¸ åå¤§å­¦åºçç¤¾ï¼
+  1. 丘维声，高等代数（下）．清华大学出版社．
   2. [Vector space](https://en.wikipedia.org/w/index.php?title=Vector_space&oldid=1108546097)._Wikipedia, The Free Encyclopedia_.
 
 * * *
 
-> __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-algebra/vector-space.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/linear-algebra/vector-space.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Tiphereth-A](https://github.com/Tiphereth-A), [c-forrest](https://github.com/c-forrest), [Great-designer](https://github.com/Great-designer), [aofall](https://github.com/aofall), [CCXXXI](https://github.com/CCXXXI), [codewasp942](https://github.com/codewasp942), [CoelacanthusHex](https://github.com/CoelacanthusHex), [Marcythm](https://github.com/Marcythm), [Persdre](https://github.com/Persdre), [shuzhouliu](https://github.com/shuzhouliu)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+> __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/linear-algebra/vector-space.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/linear-algebra/vector-space.md "edit.link.title")  
+>  __本页面贡献者：[Tiphereth-A](https://github.com/Tiphereth-A), [c-forrest](https://github.com/c-forrest), [Great-designer](https://github.com/Great-designer), [aofall](https://github.com/aofall), [CCXXXI](https://github.com/CCXXXI), [codewasp942](https://github.com/codewasp942), [CoelacanthusHex](https://github.com/CoelacanthusHex), [Marcythm](https://github.com/Marcythm), [Persdre](https://github.com/Persdre), [shuzhouliu](https://github.com/shuzhouliu)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

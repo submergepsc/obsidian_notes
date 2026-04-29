@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/data-structures/union-find-compress.html
-Title: 并查集路径压缩 | 菜鸟教程
-
-并查集路径压缩 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-数据结构

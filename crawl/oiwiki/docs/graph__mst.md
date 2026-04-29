@@ -1,4 +1,4 @@
-# 最小生成树 - OI Wiki
+﻿# 最小生成树 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/mst/
 

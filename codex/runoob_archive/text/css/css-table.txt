@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/css/css-table.html
-Title: CSS Table(表格) | 菜鸟教程
-
-CSS Table(表格) | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-CSS 教程

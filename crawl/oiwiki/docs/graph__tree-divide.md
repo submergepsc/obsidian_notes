@@ -1,4 +1,4 @@
-# 树分治 - OI Wiki
+﻿# 树分治 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/tree-divide/
 

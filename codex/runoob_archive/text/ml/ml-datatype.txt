@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/ml/ml-datatype.html
-Title: 常用数据类型 | 菜鸟教程
-
-常用数据类型 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-机器学习

@@ -1,4 +1,4 @@
-# 分支 - OI Wiki
+﻿# 分支 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/branch/
 

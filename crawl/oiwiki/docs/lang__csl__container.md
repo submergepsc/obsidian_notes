@@ -1,4 +1,4 @@
-# STL 容器简介 - OI Wiki
+﻿# STL 容器简介 - OI Wiki
 
 - Source: https://oi-wiki.org/lang/csl/container/
 
@@ -40,7 +40,7 @@
 
   * **栈**(`stack`) 后进先出 (LIFO) 的容器，默认是对双端队列（`deque`）的包装．
   * **队列**(`queue`) 先进先出 (FIFO) 的容器，默认是对双端队列（`deque`）的包装．
-  * **优先队列**(`priority_queue`) 元素的次序是由作用于所存储的值对上的某种谓词决定的的一种队列，默认是对向量（`vector`）的包装．
+  * **优先队列**(`priority_queue`) 元素的次序是由作用于所存储的值对上的某种谓词决定的一种队列，默认是对向量（`vector`）的包装．
 
 ## 共同点
 
@@ -76,7 +76,7 @@
 
 * * *
 
->  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/csl/container.md)  
+>  __本页面最近更新： 2026/4/23 03:45:48，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/lang/csl/container.md)  
 >  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/lang/csl/container.md "edit.link.title")  
->  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [ouuan](https://github.com/ouuan), [cmpute](https://github.com/cmpute), [Tiphereth-A](https://github.com/Tiphereth-A), [akakw1](https://github.com/akakw1), [c-forrest](https://github.com/c-forrest), [CCXXXI](https://github.com/CCXXXI), [ChungZH](https://github.com/ChungZH), [dong628](https://github.com/dong628), [Enter-tainer](https://github.com/Enter-tainer), [Haohu Shen](mailto:haohu.shen@ucalgary.ca), [lihaoyu1234](https://github.com/lihaoyu1234), [mgt](mailto:i@margatroid.xyz), [ouuan](mailto:1609483441@qq.com), [shuzhouliu](https://github.com/shuzhouliu), [Xeonacid](https://github.com/Xeonacid)  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [ouuan](https://github.com/ouuan), [cmpute](https://github.com/cmpute), [Tiphereth-A](https://github.com/Tiphereth-A), [akakw1](https://github.com/akakw1), [c-forrest](https://github.com/c-forrest), [CCXXXI](https://github.com/CCXXXI), [ChungZH](https://github.com/ChungZH), [dong628](https://github.com/dong628), [Enter-tainer](https://github.com/Enter-tainer), [Haohu Shen](mailto:haohu.shen@ucalgary.ca), [lailai0916](https://github.com/lailai0916), [lihaoyu1234](https://github.com/lihaoyu1234), [mgt](mailto:i@margatroid.xyz), [ouuan](mailto:1609483441@qq.com), [shuzhouliu](https://github.com/shuzhouliu), [Xeonacid](https://github.com/Xeonacid)  
 >  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

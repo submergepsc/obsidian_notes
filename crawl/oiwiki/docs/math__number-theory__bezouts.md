@@ -1,250 +1,250 @@
-# è£´èå®ç & ä¸æ¬¡ä¸å®æ¹ç¨ - OI Wiki
+﻿# 裴蜀定理 & 一次不定方程 - OI Wiki
 
 - Source: https://oi-wiki.org/math/number-theory/bezouts/
 
-# è£´èå®ç & ä¸æ¬¡ä¸å®æ¹ç¨
+# 裴蜀定理 & 一次不定方程
 
-è£´èå®çæ­ç¤ºäºæå¤§å ¬çº¦æ°ä¸æ´æ°çº¿æ§ç»åä¹é´çæ·±å»èç³»ï¼æ¯æ°è®ºä¸­æåºç¡ä¹æéè¦çç»è®ºä¹ä¸ï¼åºäºæ­¤ï¼æ¬æè¿ä¸æ­¥è®¨è®ºäºä¸æ¬¡ä¸å®æ¹ç¨çæ±è§£æ¹æ³ï¼
+裴蜀定理揭示了最大公约数与整数线性组合之间的深刻联系，是数论中最基础也最重要的结论之一．基于此，本文进一步讨论了一次不定方程的求解方法．
 
-## è£´èå®ç
+## 裴蜀定理
 
-**è£´èå®ç** ï¼BÃ©zout's lemmaï¼ï¼ä¹è¯ä½è´ç¥å®çï¼æç§°ä½è´ç¥ç­å¼ï¼BÃ©zout's identityï¼ï¼ç»åºäºä¸ä¸ªæ´æ°è½å¤è¡¨ç¤ºä¸ºä¸¤ä¸ªæ´æ°çæ´ç³»æ°çº¿æ§ç»åçå åå¿ è¦æ¡ä»¶ï¼
+**裴蜀定理** （Bézout's lemma），也译作贝祖定理，或称作贝祖等式（Bézout's identity），给出了一个整数能够表示为两个整数的整系数线性组合的充分必要条件．
 
-è£´èå®ç
+裴蜀定理
 
-è®¾ ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸å ¨ä¸ºé¶çæ´æ°ï¼é£ä¹ï¼å¯¹äºä»»ææ´æ° ð¥,ð¦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ gcd(ð,ð) â£ðð¥ +ðð¦gcd(a,b)â£ax+by![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼èä¸ï¼å­å¨æ´æ° ð¥,ð¦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ðð¥ +ðð¦ =gcd(ð,ð)ax+by=gcd(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼
+设 𝑎,𝑏a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是不全为零的整数．那么，对于任意整数 𝑥,𝑦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有 gcd(𝑎,𝑏) ∣𝑎𝑥 +𝑏𝑦gcd(a,b)∣ax+by![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立；而且，存在整数 𝑥,𝑦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝑎𝑥 +𝑏𝑦 =gcd(𝑎,𝑏)ax+by=gcd(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．
 
-è¯æ
+证明
 
-è®° ð =gcd(ð,ð)d=gcd(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸º ð â£ð,ðdâ£a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ï¼å­å¨æ´æ° ð¢,ð£u,v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð =ðð¢,Â ð =ðð£a=du,Â b=dv![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼å æ­¤ï¼æ»æ
+记 𝑑 =gcd(𝑎,𝑏)d=gcd(a,b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因为 𝑑 ∣𝑎,𝑏d∣a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以，存在整数 𝑢,𝑣u,v![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑎 =𝑑𝑢, 𝑏 =𝑑𝑣a=du, b=dv![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．因此，总有
 
-ðð¥+ðð¦=ð(ð¢ð¥+ð£ð¦).ax+by=d(ux+vy).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎𝑥+𝑏𝑦=𝑑(𝑢𝑥+𝑣𝑦).ax+by=d(ux+vy).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±è¯´æ ð â£ðð¥ +ðð¦dâ£ax+by![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+这就说明 𝑑 ∣𝑎𝑥 +𝑏𝑦d∣ax+by![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-åè¿æ¥ï¼éè¦è¯´æå­å¨ ð¥,ð¦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ç­å¼æç«ï¼å¦æ ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹ä¸æ¯ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸å¦¨è®¾ ð =0b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹å®ä»¬çæå¤§å ¬çº¦æ°ä¸º ð =ðd=a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¾ç¶æ (ð¥,ð¦) =(1,0)(x,y)=(1,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ç­å¼æç«ï¼æ¥ä¸æ¥ï¼èè ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åä¸ä¸ºé¶çæ å½¢ï¼ç±äº gcd(ð,ð) =gcd( âð,ð) =gcd(ð, âð)gcd(a,b)=gcd(âa,b)=gcd(a,âb)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ä¸å¦¨è®¾ ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æ­£æ°ï¼
+反过来，需要说明存在 𝑥,𝑦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得等式成立．如果 𝑎,𝑏a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之一是 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，不妨设 𝑏 =0b=0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么它们的最大公约数为 𝑑 =𝑎d=a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，显然有 (𝑥,𝑦) =(1,0)(x,y)=(1,0)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得等式成立．接下来，考虑 𝑎,𝑏a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 均不为零的情形．由于 gcd(𝑎,𝑏) =gcd( −𝑎,𝑏) =gcd(𝑎, −𝑏)gcd(a,b)=gcd(−a,b)=gcd(a,−b)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以不妨设 𝑎,𝑏a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是正数．
 
-èèè¾è½¬ç¸é¤æ³çè¿ç¨ï¼æ
+考虑辗转相除法的过程，有
 
-ð=ð1ð+ð1,0â¤ð1<ð,ð=ð2ð1+ð2,0â¤ð2<ð1,ð1=ð3ð2+ð3,0â¤ð3<ð2,â¯ððâ3=ððâ1ððâ2+ððâ1,0â¤ððâ1<ððâ2,ððâ2=ððððâ1+ðð,0â¤ðð<ððâ1,ððâ1=ðð+1ðð.a=q1b+r1,0â¤r1<b,b=q2r1+r2,0â¤r2<r1,r1=q3r2+r3,0â¤r3<r2,â¯rnâ3=qnâ1rnâ2+rnâ1,0â¤rnâ1<rnâ2,rnâ2=qnrnâ1+rn,0â¤rn<rnâ1,rnâ1=qn+1rn.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎=𝑞1𝑏+𝑟1,0≤𝑟1<𝑏,𝑏=𝑞2𝑟1+𝑟2,0≤𝑟2<𝑟1,𝑟1=𝑞3𝑟2+𝑟3,0≤𝑟3<𝑟2,⋯𝑟𝑛−3=𝑞𝑛−1𝑟𝑛−2+𝑟𝑛−1,0≤𝑟𝑛−1<𝑟𝑛−2,𝑟𝑛−2=𝑞𝑛𝑟𝑛−1+𝑟𝑛,0≤𝑟𝑛<𝑟𝑛−1,𝑟𝑛−1=𝑞𝑛+1𝑟𝑛.a=q1b+r1,0≤r1<b,b=q2r1+r2,0≤r2<r1,r1=q3r2+r3,0≤r3<r2,⋯rn−3=qn−1rn−2+rn−1,0≤rn−1<rn−2,rn−2=qnrn−1+rn,0≤rn<rn−1,rn−1=qn+1rn.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±äºæå¤§å ¬çº¦æ°æ¯ ðd![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æåä¸æ­¥è¾è½¬ç¸é¤æ¶ï¼ä¸å®æ ðð =ðrn=d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥ï¼åæ°ç¬¬äºä¸ªç­å¼å¯ä»¥åä½
+由于最大公约数是 𝑑d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，最后一步辗转相除时，一定有 𝑟𝑛 =𝑑rn=d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．所以，倒数第二个等式可以写作
 
-ð=ðð=ððâ2âððððâ1.d=rn=rnâ2âqnrnâ1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑑=𝑟𝑛=𝑟𝑛−2−𝑞𝑛𝑟𝑛−1.d=rn=rn−2−qnrn−1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»åæ°ç¬¬ä¸ä¸ªç­å¼ä¸­è§£åº
+从倒数第三个等式中解出
 
-ððâ1=ððâ3âððâ1ððâ2rnâ1=rnâ3âqnâ1rnâ2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑟𝑛−1=𝑟𝑛−3−𝑞𝑛−1𝑟𝑛−2rn−1=rn−3−qn−1rn−2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åä»£å ¥ä¸å¼ï¼å°±å¯ä»¥æ¶å» ððâ1rnâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+再代入上式，就可以消去 𝑟𝑛−1rn−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-ð=ððâ2âðð(ððâ3âððâ1ððâ2)=(1+ððððâ1)ððâ2âððððâ3.d=rnâ2âqn(rnâ3âqnâ1rnâ2)=(1+qnqnâ1)rnâ2âqnrnâ3.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑑=𝑟𝑛−2−𝑞𝑛(𝑟𝑛−3−𝑞𝑛−1𝑟𝑛−2)=(1+𝑞𝑛𝑞𝑛−1)𝑟𝑛−2−𝑞𝑛𝑟𝑛−3.d=rn−2−qn(rn−3−qn−1rn−2)=(1+qnqn−1)rn−2−qnrn−3.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±»ä¼¼å°ï¼å¯ä»¥éæ­¥å°æ¶å»ææ ððâ2,ððâ3,â¯,ð2,ð1rnâ2,rnâ3,â¯,r2,r1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æç»å¾å°
+类似地，可以逐步地消去所有 𝑟𝑛−2,𝑟𝑛−3,⋯,𝑟2,𝑟1rn−2,rn−3,⋯,r2,r1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，最终得到
 
-ð=ð¥ð+ð¦ð.d=xa+yb.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑑=𝑥𝑎+𝑦𝑏.d=xa+yb.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿å°±è¯æäºå­å¨ ð¥,ð¦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ðð¥ +ðð¦ =ðax+by=d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼ç±åæåæå¯ç¥ï¼è¿ä¹è¯æäºåå½é¢ï¼
+这就证明了存在 𝑥,𝑦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑎𝑥 +𝑏𝑦 =𝑑ax+by=d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．由前文分析可知，这也证明了原命题．
 
-æ­¤å¤ï¼å ³äºå­å¨æ§çè¯ææ¯æé æ§çï¼å®åæ¶ç»åºäºè¯¥ç³»æ°çä¸ç§è®¡ç®æ¹æ³ï¼è¿ä¸è®¡ç®æ¹æ³å°±æ¯ [æ©å±æ¬§å éå¾ç®æ³](../gcd/#æ©å±æ¬§å)ï¼
+此处，关于存在性的证明是构造性的，它同时给出了该系数的一种计算方法．这一计算方法就是 [扩展欧几里得算法](../gcd/#扩展欧几里得算法)．
 
-èèè£´èå®çå¨ gcd(ð,ð) =1gcd(a,b)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶çç¹æ®æ å½¢ï¼å¯ä»¥å¾å°å¦ä¸æ¨è®ºï¼
+考虑裴蜀定理在 gcd(𝑎,𝑏) =1gcd(a,b)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时的特殊情形，可以得到如下推论：
 
-æ¨è®º
+推论
 
-æ´æ° ð,ða,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç´ ï¼å½ä¸ä» å½å­å¨æ´æ° ð¥,ð¦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ ðð¥ +ðð¦ =1ax+by=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼
+整数 𝑎,𝑏a,b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互素，当且仅当存在整数 𝑥,𝑦x,y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 𝑎𝑥 +𝑏𝑦 =1ax+by=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．
 
-### å¤ä¸ªæ´æ°çæ å½¢
+### 多个整数的情形
 
-è£´èå®çå¯ä»¥æ¨å¹¿å°å¤ä¸ªæ´æ°çæ å½¢ï¼
+裴蜀定理可以推广到多个整数的情形．
 
-å®ç
+定理
 
-è®¾ ð1,ð2,â¯,ðða1,a2,â¯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸å ¨ä¸ºé¶çæ´æ°ï¼é£ä¹ï¼å¯¹äºä»»ææ´æ° ð¥1,ð¥2,â¯,ð¥ðx1,x2,â¯,xn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é½æ gcd(ð1,ð2,â¯,ðð) â£ð1ð¥1 +ð2ð¥2 +â¯ +ððð¥ðgcd(a1,a2,â¯,an)â£a1x1+a2x2+â¯+anxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼èä¸ï¼å­å¨æ´æ° ð¥1,ð¥2,â¯,ð¥ðx1,x2,â¯,xn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä½¿å¾ gcd(ð1,ð2,â¯,ðð) =ð1ð¥1 +ð2ð¥2 +â¯ +ððð¥ðgcd(a1,a2,â¯,an)=a1x1+a2x2+â¯+anxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼
+设 𝑎1,𝑎2,⋯,𝑎𝑛a1,a2,⋯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是不全为零的整数．那么，对于任意整数 𝑥1,𝑥2,⋯,𝑥𝑛x1,x2,⋯,xn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，都有 gcd(𝑎1,𝑎2,⋯,𝑎𝑛) ∣𝑎1𝑥1 +𝑎2𝑥2 +⋯ +𝑎𝑛𝑥𝑛gcd(a1,a2,⋯,an)∣a1x1+a2x2+⋯+anxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立；而且，存在整数 𝑥1,𝑥2,⋯,𝑥𝑛x1,x2,⋯,xn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，使得 gcd(𝑎1,𝑎2,⋯,𝑎𝑛) =𝑎1𝑥1 +𝑎2𝑥2 +⋯ +𝑎𝑛𝑥𝑛gcd(a1,a2,⋯,an)=a1x1+a2x2+⋯+anxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．
 
-è¯æ
+证明
 
-å©ç¨ gcd(ð1,ð2,â¯,ðð) =gcd(gcd(ð1,ð2,â¯,ððâ1),ðð)gcd(a1,a2,â¯,an)=gcd(gcd(a1,a2,â¯,anâ1),an)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿ä¸ç¹ï¼å¯¹ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿è¡å½çº³å³å¯ï¼
+利用 gcd(𝑎1,𝑎2,⋯,𝑎𝑛) =gcd(gcd(𝑎1,𝑎2,⋯,𝑎𝑛−1),𝑎𝑛)gcd(a1,a2,⋯,an)=gcd(gcd(a1,a2,⋯,an−1),an)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这一点，对 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 进行归纳即可．
 
-### ä¾é¢
+### 例题
 
 [Codeforces 510 D. Fox And Jumping](https://codeforces.com/problemset/problem/510/D)
 
-ç»åº ð â¤300nâ¤300![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¼ å¡çï¼åå«æ ððli![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ððci![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¨ä¸æ¡æ éé¿ççº¸å¸¦ä¸ï¼ä½ å¯ä»¥éæ©è± ððci![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé±æ¥è´­ä¹°å¡ç ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä»æ­¤ä»¥åå¯ä»¥åå·¦æåå³è·³ ððli![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªåä½ä»»ææ¬¡ï¼é®ä½ è³å°è±å¤å°å é±æè½å¤è·³å°çº¸å¸¦ä¸å ¨é¨ä½ç½®ï¼è¥ä¸è¡ï¼è¾åº â1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+给出 𝑛 ≤300n≤300![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 张卡片，分别有 𝑙𝑖li![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑐𝑖ci![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．在一条无限长的纸带上，你可以选择花 𝑐𝑖ci![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的钱来购买卡片 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，从此以后可以向左或向右跳 𝑙𝑖li![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个单位任意次．问你至少花多少元钱才能够跳到纸带上全部位置．若不行，输出 −1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è§£ç­
+解答
 
-åæè¯¥é®é¢ï¼åç°æ³è¦è·³å°æ¯ä¸ä¸ªæ ¼å­ä¸ï¼å¿ é¡»ä½¿å¾æéæ° ðð1,â¯,ðððli1,â¯,lik![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éè¿æ°æ¬¡ç¸å æç¸åå¾åºçç»å¯¹å¼ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¹å°±æ¯è¯´ï¼å­å¨æ´æ° ð¥1,â¯,ð¥ðx1,â¯,xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ðð1ð¥1 +â¯ +ðððð¥ð =1li1x1+â¯+likxk=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±å¤ä¸ªæ´æ°çè£´èå®çï¼è¿ç¸å½äºä»æ°ç» ð1,â¯,ððl1,â¯,ln![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­éæ©è¥å¹²ä¸ªæ°ï¼æ»¡è¶³å®ä»¬çæå¤§å ¬çº¦æ°ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ¶è¦æ±ä»£ä»·åæå°ï¼
+分析该问题，发现想要跳到每一个格子上，必须使得所选数 𝑙𝑖1,⋯,𝑙𝑖𝑘li1,⋯,lik![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 通过数次相加或相减得出的绝对值为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．也就是说，存在整数 𝑥1,⋯,𝑥𝑘x1,⋯,xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑙𝑖1𝑥1 +⋯ +𝑙𝑖𝑘𝑥𝑘 =1li1x1+⋯+likxk=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．由多个整数的裴蜀定理，这相当于从数组 𝑙1,⋯,𝑙𝑛l1,⋯,ln![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中选择若干个数，满足它们的最大公约数为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，同时要求代价和最小．
 
-**è§£æ³ 1** ï¼å°æå°ä»£ä»·åçä½æ¯æç­è·¯å¾é®é¢ï¼å¯ä»¥ç¨ Dijkstra ç®æ³æ±è§£ï¼å¾çé¡¶ç¹å¤å­å¨äºå½åçæå¤§å ¬çº¦æ°çåå¼ï¼å¾çèµ·ç¹æ¯ 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¦å°è¾¾çç®æ ç¹æ¯ 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¯èµ°ä¸æ­¥ï¼å°±ä»å½åé¡¶ç¹ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åºåï¼æ²¿çé¿åº¦ä¸º ððci![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¾¹èµ°å°é¡¶ç¹ gcd(ð¥,ðð)gcd(x,li)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿ä¸ç®æ³çæ¶é´å¤æåº¦ä¸º ð(ð2logâ¡ð)O(n2logâ¡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+**解法 1** ：将最小代价和看作是最短路径问题，可以用 Dijkstra 算法求解．图的顶点处存储了当前的最大公约数的取值．图的起点是 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，要到达的目标点是 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．每走一步，就从当前顶点 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 出发，沿着长度为 𝑐𝑖ci![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的边走到顶点 gcd(𝑥,𝑙𝑖)gcd(x,li)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这一算法的时间复杂度为 𝑂(𝑛2log⁡𝑛)O(n2log⁡n)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-**è§£æ³ 2** ï¼ä»æ°ç» ð1,â¯,ððl1,â¯,ln![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) éæ©è¥å¹²ä¸ªæ°ï¼æ»¡è¶³å®ä»¬çæå¤§å ¬å æ°ä¸º 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸ä»£ä»·åæå°ï¼ç±æ­¤å¯ä»¥æ³å° 0-1 èå é®é¢ï¼
+**解法 2** ：从数组 𝑙1,⋯,𝑙𝑛l1,⋯,ln![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 选择若干个数，满足它们的最大公因数为 11![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，且代价和最小，由此可以想到 0-1 背包问题．
 
-è®¾ ðð,ðfi,j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¡¨ç¤ºèèå ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ°ä¸æå¤§å ¬å æ°ä¸º ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå°ä»£ä»·ï¼åæè½¬ç§»æ¹ç¨ï¼
+设 𝑓𝑖,𝑗fi,j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 表示考虑前 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个数且最大公因数为 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最小代价，则有转移方程：
 
-ðð,ð=mingcd(ð,ðð)=ðððâ1,ð+ðð.fi,j=mingcd(k,li)=jfiâ1,k+ci.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑓𝑖,𝑗=mingcd(𝑘,𝑙𝑖)=𝑗𝑓𝑖−1,𝑘+𝑐𝑖.fi,j=mingcd(k,li)=jfi−1,k+ci.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-DP åæç»çæ»ä»£ä»·å³ä¸º ðð,1fn,1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+DP 后最终的总代价即为 𝑓𝑛,1fn,1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¦åä¸è¬ç 0-1 èå é®é¢ï¼å¯ä»¥ç¨æ»å¨æ°ç»ä¼åï¼å»æç¬¬ä¸ç»´ï¼èè¿é 300 ä¸ªæ°å¯ä»¥ç»æçæå¤§å ¬çº¦æ° ðj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å¾ç¨ççï¼å¯ä»¥ç¨åå¸è¡¨å¨å­ï¼
+如同一般的 0-1 背包问题，可以用滚动数组优化，去掉第一维．而这里 300 个数可以组成的最大公约数 𝑗j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是很稀疏的，可以用哈希表储存．
 
-å®é ä¸ï¼è¿éè§£æ³ 1 å»ºåºçå¾ä¾¿æ¯è§£æ³ 2 ä¸­å¨æè§åçç¶æè½¬ç§»å¾ï¼è§£æ³ 2 ç¸å½äºç¨å¨æè§åæ±æåæ ç¯å¾çæç­è·¯ï¼å æ­¤è§£æ³ 1 åè§£æ³ 2 æ¯ç­ä»·çï¼ä½è§£æ³ 2 æ éå¨å­å ¨å¾ï¼åæ¶ DP çæ¶é´å¤æåº¦ä¸º ð(ð +ð)O(n+m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç¸æ¯ Dijkstra ç®æ³æ´ä½ï¼å æ­¤è§£æ³ 2 å¨æ¶é´åç©ºé´ä¸æ´ä¼ï¼
+实际上，这里解法 1 建出的图便是解法 2 中动态规划的状态转移图，解法 2 相当于用动态规划求有向无环图的最短路，因此解法 1 和解法 2 是等价的．但解法 2 无需储存全图，同时 DP 的时间复杂度为 𝑂(𝑛 +𝑚)O(n+m)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，相比 Dijkstra 算法更低，因此解法 2 在时间和空间上更优．
 
-## ä¸æ¬¡ä¸å®æ¹ç¨
+## 一次不定方程
 
-**ä¸æ¬¡ä¸å®æ¹ç¨** ï¼linear Diophantine equationï¼æ¯å½¢å¦
+**一次不定方程** （linear Diophantine equation）是形如
 
-ð1ð¥1+ð2ð¥2+â¯+ððð¥ð=ða1x1+a2x2+â¯+anxn=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎1𝑥1+𝑎2𝑥2+⋯+𝑎𝑛𝑥𝑛=𝑏a1x1+a2x2+⋯+anxn=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çä¸å®æ¹ç¨ï¼å ¶ä¸­ï¼ð1,ð2,â¯,ðða1,a2,â¯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æ´æ°ï¼æ¬èçç®æ æ¯å¯»æ¾å®çå ¨ä½æ´æ°è§£ï¼
+的不定方程，其中，𝑎1,𝑎2,⋯,𝑎𝑛a1,a2,⋯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是整数．本节的目标是寻找它的全体整数解．
 
-### ä¸¤ä¸ªåéçæ å½¢
+### 两个变量的情形
 
-é¦å èèäºå ä¸æ¬¡ä¸å®æ¹ç¨ï¼
+首先考虑二元一次不定方程：
 
-ð1ð¥1+ð2ð¥2=ð.a1x1+a2x2=b.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎1𝑥1+𝑎2𝑥2=𝑏.a1x1+a2x2=b.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è£´èå®çæåºï¼è¯¥æ¹ç¨æè§£ï¼å½ä¸ä» å½
+裴蜀定理指出，该方程有解，当且仅当
 
-ð=gcd(ð1,ð2)â£ð.d=gcd(a1,a2)â£b.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑑=gcd(𝑎1,𝑎2)∣𝑏.d=gcd(a1,a2)∣b.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¥ä¸æ¥ï¼åè®¾è¿ä¸æ¡ä»¶æç«ï¼å©ç¨æ©å±æ¬§å éå¾ç®æ³å¯ä»¥æ±åºæ¹ç¨ ð1ð¥1 +ð2ð¥2 =ða1x1+a2x2=d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ç»æ´æ°è§£ (ð¥â1,ð¥â2)(x1â,x2â)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ç±æ­¤ï¼å¯ä»¥å¾å°åæ¹ç¨çä¸ç»ç¹è§£
+接下来，假设这一条件成立．利用扩展欧几里得算法可以求出方程 𝑎1𝑥1 +𝑎2𝑥2 =𝑑a1x1+a2x2=d![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一组整数解 (𝑥∗1,𝑥∗2)(x1∗,x2∗)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．由此，可以得到原方程的一组特解
 
-(ð¥â1,ð¥â2)=(ððð¥â1,ððð¥â2).(x1â,x2â)=(bdx1â,bdx2â).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑥∘1,𝑥∘2)=(𝑏𝑑𝑥∗1,𝑏𝑑𝑥∗2).(x1∘,x2∘)=(bdx1∗,bdx2∗).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¦å¾å°å ¨é¨è§£ï¼å¯ä»¥èèå°åæ¹ç¨ä¸æç­å¼ ð1ð¥â1 +ð2ð¥â2 =ða1x1â+a2x2â=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç¸åï¼å°±æ
+要得到全部解，可以考虑将原方程与恒等式 𝑎1𝑥∘1 +𝑎2𝑥∘2 =𝑏a1x1∘+a2x2∘=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 相减，就有
 
-ð1(ð¥1âð¥â1)+ð2(ð¥2âð¥â2)=0.a1(x1âx1â)+a2(x2âx2â)=0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎1(𝑥1−𝑥∘1)+𝑎2(𝑥2−𝑥∘2)=0.a1(x1−x1∘)+a2(x2−x2∘)=0.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¯ä¸ä¸ªå ³äº (ð¥1 âð¥â1,ð¥2 âð¥â2)(x1âx1â,x2âx2â)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çé½æ¬¡ä¸æ¬¡ä¸å®æ¹ç¨ï¼å®æéè§£
+这是一个关于 (𝑥1 −𝑥∘1,𝑥2 −𝑥∘2)(x1−x1∘,x2−x2∘)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的齐次一次不定方程，它有通解
 
-(ð¥1âð¥â1,ð¥2âð¥â2)=(ð¡ð2ð,âð¡ð1ð).(ð¡âð)(x1âx1â,x2âx2â)=(ta2d,âta1d).(tâZ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑥1−𝑥∘1,𝑥2−𝑥∘2)=(𝑡𝑎2𝑑,−𝑡𝑎1𝑑).(𝑡∈𝐙)(x1−x1∘,x2−x2∘)=(ta2d,−ta1d).(t∈Z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼åæ¹ç¨çéè§£å°±æ¯
+因此，原方程的通解就是
 
-(ð¥1,ð¥2)=(ð¥â1+ð¡ð2ð,ð¥â2âð¡ð1ð).(ð¡âð)(x1,x2)=(x1â+ta2d,x2ââta1d).(tâZ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑥1,𝑥2)=(𝑥∘1+𝑡𝑎2𝑑,𝑥∘2−𝑡𝑎1𝑑).(𝑡∈𝐙)(x1,x2)=(x1∘+ta2d,x2∘−ta1d).(t∈Z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¯ç´çº¿ ð1ð¥1 +ð2ð¥2 =ða1x1+a2x2=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸ç³»åç­é´éåå¸çæ´ç¹ï¼
+这是直线 𝑎1𝑥1 +𝑎2𝑥2 =𝑏a1x1+a2x2=b![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 上一系列等间隔分布的整点．
 
-### å¤ä¸ªåéçæ å½¢
+### 多个变量的情形
 
-è§£å³äºäºå çæ å½¢ï¼å¤å çæ å½¢ä¹å°±å®¹æè§£å³äºï¼å¯¹äº ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ä¸æ¬¡ä¸å®æ¹ç¨
+解决了二元的情形，多元的情形也就容易解决了．对于 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 元一次不定方程
 
-ð1ð¥1+ð2ð¥2+â¯+ððð¥ð=ð,(ð>3)a1x1+a2x2+â¯+anxn=b,(n>3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎1𝑥1+𝑎2𝑥2+⋯+𝑎𝑛𝑥𝑛=𝑏,(𝑛>3)a1x1+a2x2+⋯+anxn=b,(n>3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±è£´èå®çå¯ç¥ï¼æ¹ç¨æè§£å½ä¸ä» å½
+由裴蜀定理可知，方程有解当且仅当
 
-gcd(ð1,ð2,â¯,ðð)â£ð.gcd(a1,a2,â¯,an)â£b.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+gcd(𝑎1,𝑎2,⋯,𝑎𝑛)∣𝑏.gcd(a1,a2,⋯,an)∣b.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-åäºå çæ å½¢ç±»ä¼¼ï¼å¤å ä¸æ¬¡ä¸å®æ¹ç¨çéè§£åæ ·å¯ä»¥åä½
+和二元的情形类似，多元一次不定方程的通解同样可以写作
 
-(ð¥â1,ð¥â2,â¯,ð¥âð)+ðâ1âð=1ð¡ð(ð¥(ð)1,ð¥(ð)2,â¯,ð¥(ð)ð)(x1â,x2â,â¯,xnâ)+âk=1nâ1tk(x1(k),x2(k),â¯,xn(k))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑥∘1,𝑥∘2,⋯,𝑥∘𝑛)+𝑛−1∑𝑘=1𝑡𝑘(𝑥(𝑘)1,𝑥(𝑘)2,⋯,𝑥(𝑘)𝑛)(x1∘,x2∘,⋯,xn∘)+∑k=1n−1tk(x1(k),x2(k),⋯,xn(k))![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çå½¢å¼ï¼å ¶ä¸­ï¼ð¥âxâ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºä¸ä¸ªç¹è§£ï¼ð¥(ð)x(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºç¸åºçé½æ¬¡æ¹ç¨ç (ð â1)(nâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªè§£ï¼
+的形式，其中，𝑥∘x∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为一个特解，𝑥(𝑘)x(k)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为相应的齐次方程的 (𝑛 −1)(n−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个解．
 
-è¦æ±åºéè§£çå ·ä½å½¢å¼ï¼å¯ä»¥éè¿å° ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å æ¹ç¨è½¬åä¸º (ð â1)(nâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å æ¹ç¨æ¥å®æï¼ä¸å¦¨è®¾ ð1 =gcd(ð1,ð2)d1=gcd(a1,a2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼æ ¹æ®è£´èå®çï¼ð1ð¥1 +ð2ð¥2a1x1+a2x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå ¨ä½æ°ä¸º ð1d1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çææåæ°ï¼å æ­¤ï¼å¯ä»¥é¦å æ±è§£ (ð â1)(nâ1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ä¸æ¬¡ä¸å®æ¹ç¨ï¼
+要求出通解的具体形式，可以通过将 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 元方程转化为 (𝑛 −1)(n−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 元方程来完成．不妨设 𝑑1 =gcd(𝑎1,𝑎2)d1=gcd(a1,a2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，根据裴蜀定理，𝑎1𝑥1 +𝑎2𝑥2a1x1+a2x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的全体恰为 𝑑1d1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的所有倍数．因此，可以首先求解 (𝑛 −1)(n−1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 元一次不定方程：
 
-ð1ð¦1+ð3ð¥3+ð4ð¥4+â¯+ððð¥ð=ð.d1y1+a3x3+a4x4+â¯+anxn=b.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑑1𝑦1+𝑎3𝑥3+𝑎4𝑥4+⋯+𝑎𝑛𝑥𝑛=𝑏.d1y1+a3x3+a4x4+⋯+anxn=b.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¾å¾å°çå®çéè§£ä¸º
+设得到的它的通解为
 
-ð¦1=ð¦â1+ðâ1âð=2ð¡ðð¦(ð)1,ð¥ð=ð¥âð+ðâ1âð=2ð¡ðð¥(ð)ð,ð=3,â¯,ð.y1=y1â+âk=2nâ1tky1(k),xi=xiâ+âk=2nâ1tkxi(k),i=3,â¯,n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑦1=𝑦∘1+𝑛−1∑𝑘=2𝑡𝑘𝑦(𝑘)1,𝑥𝑖=𝑥∘𝑖+𝑛−1∑𝑘=2𝑡𝑘𝑥(𝑘)𝑖,𝑖=3,⋯,𝑛.y1=y1∘+∑k=2n−1tky1(k),xi=xi∘+∑k=2n−1tkxi(k),i=3,⋯,n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è®¾ ð1ð¥1 +ð2ð¥2 =ð1a1x1+a2x2=d1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä¸ç»ç¹è§£ä¸º (ð¥â1,ð¥â2)(x1â,x2â)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼æ ¹æ®åä¸èçè®¨è®ºå¯ç¥ï¼å ³äº ð¥1,ð¥2x1,x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çäºå ä¸æ¬¡ä¸å®æ¹ç¨ ð1ð¥1 +ð2ð¥2 =ð1ð¦1a1x1+a2x2=d1y1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çéè§£å°±æ¯
+设 𝑎1𝑥1 +𝑎2𝑥2 =𝑑1a1x1+a2x2=d1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的一组特解为 (𝑥∗1,𝑥∗2)(x1∗,x2∗)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，根据前一节的讨论可知，关于 𝑥1,𝑥2x1,x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的二元一次不定方程 𝑎1𝑥1 +𝑎2𝑥2 =𝑑1𝑦1a1x1+a2x2=d1y1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的通解就是
 
-ð¥1=ð¥â1ð¦1+ð¡1ð2ð1,Â ð¥2=ð¥â2ð¦1âð¡1ð1ð1.x1=x1ây1+t1a2d1,Â x2=x2ây1ât1a1d1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥1=𝑥∗1𝑦1+𝑡1𝑎2𝑑1, 𝑥2=𝑥∗2𝑦1−𝑡1𝑎1𝑑1.x1=x1∗y1+t1a2d1, x2=x2∗y1−t1a1d1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»£å ¥ ð¦1y1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¡¨è¾¾å¼ï¼å°±å¾å°åæ¹ç¨çéè§£
+代入 𝑦1y1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的表达式，就得到原方程的通解
 
-ð¥1=ð¥â1ð¦â1+ð¡1ð2ð1+ðâ1âð=2ð¡ðð¥â1ð¦(ð)1,ð¥2=ð¥â2ð¦â1âð¡1ð1ð1+ðâ1âð=2ð¡ðð¥â2ð¦(ð)1,ð¥ð=ð¥âð+ðâ1âð=2ð¡ðð¥(ð)ð,ð=3,â¯,ð.x1=x1ây1â+t1a2d1+âk=2nâ1tkx1ây1(k),x2=x2ây1âât1a1d1+âk=2nâ1tkx2ây1(k),xi=xiâ+âk=2nâ1tkxi(k),i=3,â¯,n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥1=𝑥∗1𝑦∘1+𝑡1𝑎2𝑑1+𝑛−1∑𝑘=2𝑡𝑘𝑥∗1𝑦(𝑘)1,𝑥2=𝑥∗2𝑦∘1−𝑡1𝑎1𝑑1+𝑛−1∑𝑘=2𝑡𝑘𝑥∗2𝑦(𝑘)1,𝑥𝑖=𝑥∘𝑖+𝑛−1∑𝑘=2𝑡𝑘𝑥(𝑘)𝑖,𝑖=3,⋯,𝑛.x1=x1∗y1∘+t1a2d1+∑k=2n−1tkx1∗y1(k),x2=x2∗y1∘−t1a1d1+∑k=2n−1tkx2∗y1(k),xi=xi∘+∑k=2n−1tkxi(k),i=3,⋯,n.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-## Frobenius ç¡¬å¸é®é¢
+## Frobenius 硬币问题
 
-è£´èå®çç»åºäºä¸ä¸ªæ´æ°å¯ä»¥ç±è¥å¹²ä¸ªæ´æ°çº¿æ§è¡¨åºçå åå¿ è¦æ¡ä»¶ï¼ä¸æ­¤ç´§å¯ç¸å ³çæ¯ **Frobenius ç¡¬å¸é®é¢** ï¼Frobenius coin problemï¼ï¼
+裴蜀定理给出了一个整数可以由若干个整数线性表出的充分必要条件．与此紧密相关的是 **Frobenius 硬币问题** （Frobenius coin problem）：
 
-  * å¦æç¡¬å¸å ±æ ð1,ð2,â¯,ðða1,a2,â¯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ç­è¥å¹²ç§æ´æ°é¢å¼ï¼ä¸ gcd(ð1,ð2,â¯,ðð) =1gcd(a1,a2,â¯,an)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é£ä¹ï¼ä¸è½å¤ç±è¿äºç¡¬å¸ç»æçæå¤§æ´æ°æ¯å¤å°ï¼
+  * 如果硬币共有 𝑎1,𝑎2,⋯,𝑎𝑛a1,a2,⋯,an![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 等若干种整数面值，且 gcd(𝑎1,𝑎2,⋯,𝑎𝑛) =1gcd(a1,a2,⋯,an)=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，那么，不能够由这些硬币组成的最大整数是多少？
 
-åæ ·æ¯å¨èå¯æ´æ° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»ä¹æ¶åå¯ä»¥è¡¨ç¤ºä¸º ð1ð¥1 +ð2ð¥2 +â¯ +ððð¥ða1x1+a2x2+â¯+anxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå½¢å¼ï¼è£´èå®çä¸­ ð¥ðxi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥æ¯ä»»ææ´æ°ï¼è Frobenius ç¡¬å¸é®é¢ä¸­ ð¥ðxi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åªè½æ¯èªç¶æ°ï¼
+同样是在考察整数 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 什么时候可以表示为 𝑎1𝑥1 +𝑎2𝑥2 +⋯ +𝑎𝑛𝑥𝑛a1x1+a2x2+⋯+anxn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的形式，裴蜀定理中 𝑥𝑖xi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以是任意整数，而 Frobenius 硬币问题中 𝑥𝑖xi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 只能是自然数．
 
-åªæä¸ç§ç¡¬å¸çæ å½¢æ¯å¹³å¡çï¼å ä¸ºåªè½æ ð1 =1a1=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ææèªç¶æ°é½å¯ä»¥ç±å®è¡¨ç¤ºï¼è ð >2n>2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢åå¤ªè¿å¤æï¼æä»¥ï¼æ¬èä» è®¨è®º ð =2n=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ å½¢ï¼
+只有一种硬币的情形是平凡的，因为只能有 𝑎1 =1a1=1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所有自然数都可以由它表示．而 𝑛 >2n>2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形又太过复杂，所以，本节仅讨论 𝑛 =2n=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的情形．
 
-### Sylvester å®ç
+### Sylvester 定理
 
-å¨ 1882 å¹´ï¼Sylvester å®å ¨è§£å³äº ð =2n=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ç Frobenius ç¡¬å¸é®é¢ï¼
+在 1882 年，Sylvester 完全解决了 𝑛 =2n=2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时的 Frobenius 硬币问题：
 
-å®çï¼Sylvesterï¼
+定理（Sylvester）
 
-å¯¹äºäºç´ çæ­£æ´æ° ð1,ð2a1,a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸è½å¤åä½ ð1ð¥1 +ð2ð¥2Â (ð¥1,ð¥2 âð)a1x1+a2x2Â (x1,x2âN)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæå¤§æ´æ°æ¯ ð¶ =ð1ð2 âð1 âð2C=a1a2âa1âa2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼èä¸ï¼å¯¹äºææ ð âðkâZ![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ´æ° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¶ âðCâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸­æä¸åªæä¸ä¸ªå¯ä»¥åä½è¯¥å½¢å¼ï¼
+对于互素的正整数 𝑎1,𝑎2a1,a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，不能够写作 𝑎1𝑥1 +𝑎2𝑥2 (𝑥1,𝑥2 ∈𝐍)a1x1+a2x2 (x1,x2∈N)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的最大整数是 𝐶 =𝑎1𝑎2 −𝑎1 −𝑎2C=a1a2−a1−a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．而且，对于所有 𝑘 ∈𝐙k∈Z![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，整数 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐶 −𝑘C−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 中有且只有一个可以写作该形式．
 
-ä¸ºè¡¨è¿°æ¹ä¾¿ï¼ç§°å¯ä»¥åä½ ð1ð¥1 +ð2ð¥2Â (ð¥1,ð¥2 âð)a1x1+a2x2Â (x1,x2âN)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å½¢å¼çæ´æ°ä¸º **å¯è¡¨ç¤ºç** ï¼
+为表述方便，称可以写作 𝑎1𝑥1 +𝑎2𝑥2 (𝑥1,𝑥2 ∈𝐍)a1x1+a2x2 (x1,x2∈N)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 形式的整数为 **可表示的** ．
 
-è¯æä¸
+证明一
 
-ç±äº ð1,ð2a1,a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç´ ï¼å¯¹äºä»»ææ´æ° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ¹ç¨ ð1ð¥1 +ð2ð¥2 =ða1x1+a2x2=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®æè§£ï¼ä¸éè§£ä¸º
+由于 𝑎1,𝑎2a1,a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互素，对于任意整数 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，方程 𝑎1𝑥1 +𝑎2𝑥2 =𝑘a1x1+a2x2=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一定有解，且通解为
 
-(ð¥1,ð¥2)=(ð¥â1+ð¡ð2,ð¥â2âð¡ð1).(ð¡âð)(x1,x2)=(x1â+ta2,x2ââta1).(tâZ)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+(𝑥1,𝑥2)=(𝑥∘1+𝑡𝑎2,𝑥∘2−𝑡𝑎1).(𝑡∈𝐙)(x1,x2)=(x1∘+ta2,x2∘−ta1).(t∈Z)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ð¡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ð¥â2x2â![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹ ð1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½å¸¦ä½é¤æ³å¾å°çåï¼é£ä¹ï¼ä½æ° ð¥2 =ð¥â2 âð¡ð1x2=x2ââta1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½äº 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð1 â1a1â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´ï¼èå¯æ­¤æ¶å¾å°çä¸ç»è§£ (ð¥1,ð¥2)(x1,x2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ä¸º ð¥2x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯å®è½å¤åå°çæå°éè´æ´æ°å¼ï¼æä»¥ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯è¡¨ç¤ºå½ä¸ä» å½ ð¥1 â¥0x1â¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+取 𝑡t![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑥∘2x2∘![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对 𝑎1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作带余除法得到的商，那么，余数 𝑥2 =𝑥∘2 −𝑡𝑎1x2=x2∘−ta1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 位于 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑎1 −1a1−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间．考察此时得到的一组解 (𝑥1,𝑥2)(x1,x2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因为 𝑥2x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是它能够取到的最小非负整数值，所以 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可表示当且仅当 𝑥1 ≥0x1≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-**ç¬¬ä¸æ­¥** ï¼è¯æå¤§äº ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´æ°é½æ¯å¯è¡¨ç¤ºçï¼
+**第一步** ：证明大于 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整数都是可表示的．
 
-å½ ð >ð¶k>C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æ
+当 𝑘 >𝐶k>C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，有
 
-ð1ð¥1=ðâð2ð¥2>ð¶âð2(ð1â1)=âð1.a1x1=kâa2x2>Câa2(a1â1)=âa1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎1𝑥1=𝑘−𝑎2𝑥2>𝐶−𝑎2(𝑎1−1)=−𝑎1.a1x1=k−a2x2>C−a2(a1−1)=−a1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¥ï¼ð¥1 > â1x1>â1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¹å°±æ¯è¯´ï¼ð¥1 â¥0x1â¥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼è¿è¯´æï¼(ð¥1,ð¥2)(x1,x2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯ä¸ç»èªç¶æ°è§£ï¼æ­¤æ¶ï¼ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥åä½ææ±å½¢å¼ï¼
+所以，𝑥1 > −1x1>−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，也就是说，𝑥1 ≥0x1≥0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．这说明，(𝑥1,𝑥2)(x1,x2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是一组自然数解．此时，𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以写作所求形式．
 
-**ç¬¬äºæ­¥** ï¼è¯æ ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯è¡¨ç¤ºï¼è¿èï¼ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æå¤§çä¸å¯è¡¨ç¤ºçæ´æ°ï¼ä¸ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¶ âðCâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¹¶éé½å¯è¡¨ç¤ºçï¼
+**第二步** ：证明 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不可表示．进而，𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是最大的不可表示的整数，且 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐶 −𝑘C−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 并非都可表示的．
 
-åè¯æ³ï¼åè®¾ ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è¡¨ç¤ºï¼å³å­å¨ ð¥1,ð¥2 âðx1,x2âN![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð1ð¥1 +ð2ð¥2 =ð¶a1x1+a2x2=C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æç«ï¼ä»£å ¥ ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¡¨è¾¾å¼ï¼å¯ç¥
+反证法．假设 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以表示，即存在 𝑥1,𝑥2 ∈𝐍x1,x2∈N![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑎1𝑥1 +𝑎2𝑥2 =𝐶a1x1+a2x2=C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 成立．代入 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的表达式，可知
 
-ð1ð2=ð1(ð¥1+1)+ð2(ð¥2+1).a1a2=a1(x1+1)+a2(x2+1).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎1𝑎2=𝑎1(𝑥1+1)+𝑎2(𝑥2+1).a1a2=a1(x1+1)+a2(x2+1).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼ð2 â£(ð¥1 +1)a2â£(x1+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ ð1 â£(ð¥2 +1)a1â£(x2+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åå ä¸º ð¥1 +1,ð¥2 +1x1+1,x2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯æ­£æ°ï¼æä»¥ï¼æ
+因此，𝑎2 ∣(𝑥1 +1)a2∣(x1+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且 𝑎1 ∣(𝑥2 +1)a1∣(x2+1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．又因为 𝑥1 +1,𝑥2 +1x1+1,x2+1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是正数，所以，有
 
-ð1ð2â¥ð1ð2+ð2ð1=2ð1ð2.a1a2â¥a1a2+a2a1=2a1a2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎1𝑎2≥𝑎1𝑎2+𝑎2𝑎1=2𝑎1𝑎2.a1a2≥a1a2+a2a1=2a1a2.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-çç¾ï¼è¿å°±è¯´æ ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯è¡¨ç¤ºï¼ç»åç¬¬ä¸æ­¥ï¼å®ä¹å°±æ¯ä¸å¯è¡¨ç¤ºçæå¤§æ´æ°ï¼
+矛盾．这就说明 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不可表示．结合第一步，它也就是不可表示的最大整数．
 
-å¦æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¶ âðCâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½å¯ä»¥è¡¨ç¤ºï¼é£ä¹ï¼å° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¶ âðCâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¡¨ç¤ºä¸­çç³»æ°ç¸å å°±å¾å° ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çè¡¨ç¤ºä¸­çç³»æ°ï¼è¿ä¸ ð¶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯è¡¨ç¤ºçç¾ï¼æ è ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¶ âðCâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è³å¤åªæä¸ä¸ªå¯ä»¥è¡¨ç¤ºï¼
+如果 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐶 −𝑘C−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都可以表示，那么，将 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐶 −𝑘C−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的表示中的系数相加就得到 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的表示中的系数，这与 𝐶C![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不可表示矛盾，故而 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝐶 −𝑘C−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 至多只有一个可以表示．
 
-**ç¬¬ä¸æ­¥** ï¼è¯æå¦æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯è¡¨ç¤ºï¼é£ä¹ ð¶ âðCâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å®æ¯å¯è¡¨ç¤ºçï¼
+**第三步** ：证明如果 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不可表示，那么 𝐶 −𝑘C−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 一定是可表示的．
 
-è®¾ (ð¥1,ð¥2)(x1,x2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯åææè®¾çæ¹ç¨ ð1ð¥1 +ð2ð¥2 =ða1x1+a2x2=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ´æ°è§£ï¼é£ä¹ï¼åæå·²ç»è¯´æ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯è¡¨ç¤ºï¼å°±ç­ä»·äº ð¥1 <0x1<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å æ­¤ï¼æ
+设 (𝑥1,𝑥2)(x1,x2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是前文所设的方程 𝑎1𝑥1 +𝑎2𝑥2 =𝑘a1x1+a2x2=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的整数解．那么，前文已经说明 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不可表示，就等价于 𝑥1 <0x1<0![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．因此，有
 
-ð¶âð=ð1ð2âð1âð2âð1ð¥1âð2ð¥2=ð1(â1âð¥1)+ð2(ð1â1âð¥2).Câk=a1a2âa1âa2âa1x1âa2x2=a1(â1âx1)+a2(a1â1âx2).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐶−𝑘=𝑎1𝑎2−𝑎1−𝑎2−𝑎1𝑥1−𝑎2𝑥2=𝑎1(−1−𝑥1)+𝑎2(𝑎1−1−𝑥2).C−k=a1a2−a1−a2−a1x1−a2x2=a1(−1−x1)+a2(a1−1−x2).![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ¶ä¸­ï¼â1 âð¥1â1âx1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð1 â1 âð¥2a1â1âx2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æ¯éè´æ´æ°ï¼æä»¥ï¼ð¶ âðCâk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è¡¨ç¤ºï¼
+其中，−1 −𝑥1−1−x1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑎1 −1 −𝑥2a1−1−x2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都是非负整数，所以，𝐶 −𝑘C−k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以表示．
 
-è¯æäº
+证明二
 
-æ­¤å¤ä» è¯æ ð¶ =ð1ð2 âð1 âð2C=a1a2âa1âa2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æå¤§çä¸å¯è¡¨ç¤ºçèªç¶æ°ï¼å ¶ä½é¨åçè¯æç±»ä¼¼è¯æä¸ï¼
+此处仅证明 𝐶 =𝑎1𝑎2 −𝑎1 −𝑎2C=a1a2−a1−a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是最大的不可表示的自然数，其余部分的证明类似证明一．
 
-èèæ¨¡ ð2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¹ä¸ï¼æ¯ä¸ªå©ä½ç³»ä¸­æå°çå¯è¡¨ç¤ºçèªç¶æ°ï¼å ä¸ºåä¸ä¸ªå©ä½ç³»ä¸­çä¸åèªç¶æ°å¯ä»¥éè¿å åè¥å¹²ä¸ª ð2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç¸è½¬åï¼æä»¥ï¼å¨è®¨è®ºæå°å¯è¡¨ç¤ºæ°æ¶ï¼åªéè¦èèå å ð1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çå¯è½æ§å°±å¯ä»¥äºï¼ç±äº ð1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) äºç´ ï¼æä»¥ï¼æ¯ä¸ªå©ä½ç³»ä¸­æå°çå¯è¡¨ç¤ºçèªç¶æ°æ°å¥½å°±æ¯ ð1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çåæ°
+考虑模 𝑎2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 意义下，每个剩余系中最小的可表示的自然数．因为同一个剩余系中的不同自然数可以通过加减若干个 𝑎2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互相转化，所以，在讨论最小可表示数时，只需要考虑加减 𝑎1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的可能性就可以了．由于 𝑎1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑎2a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 互素，所以，每个剩余系中最小的可表示的自然数恰好就是 𝑎1a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的倍数
 
-0,Â ð1,Â 2ð1,Â â¯,Â (ð2â1)ð1.0,Â a1,Â 2a1,Â â¯,Â (a2â1)a1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+0, 𝑎1, 2𝑎1, ⋯, (𝑎2−1)𝑎1.0, a1, 2a1, ⋯, (a2−1)a1.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å æ­¤ï¼æå¤§çä¸å¯è¡¨ç¤ºæ°ä¸º
+因此，最大的不可表示数为
 
-max0â¤ð<ð2ðð1âð2=(ð2â1)ð1âð2=ð¶.max0â¤i<a2ia1âa2=(a2â1)a1âa2=C.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+max0≤𝑖<𝑎2𝑖𝑎1−𝑎2=(𝑎2−1)𝑎1−𝑎2=𝐶.max0≤i<a2ia1−a2=(a2−1)a1−a2=C.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-### å ä½æä¹
+### 几何意义
 
-å°æ¹ç¨ ð1ð¥1 +ð2ð¥2 =ða1x1+a2x2=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çä½æ¯ä¸æ¡ç´çº¿ï¼é£ä¹ï¼ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯è¡¨ç¤ºï¼å½ä¸ä» å½è¿æ¡ç´çº¿å¨ç¬¬ä¸è±¡éï¼å æ¬åæ è½´ï¼å éè¿ä¸ä¸ªæ´ç¹ï¼å½ ð <ððk<ab![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼è¿æ¡ç´çº¿å¨ç¬¬ä¸è±¡éè³å¤åªè½éè¿ä¸ä¸ªæ´ç¹ï¼å æ­¤ï¼å¯¹äº 0 â¤ð <ðð0â¤k<ab![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ´æ° ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯ä»¥è¡¨ç¤ºï¼å½ä¸ä» å½ ðk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨ç¬¬ä¸è±¡ééè¿æ°å¥½ä¸ä¸ªæ´ç¹ï¼
+将方程 𝑎1𝑥1 +𝑎2𝑥2 =𝑘a1x1+a2x2=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 看作是一条直线．那么，𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可表示，当且仅当这条直线在第一象限（包括坐标轴）内通过一个整点．当 𝑘 <𝑎𝑏k<ab![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，这条直线在第一象限至多只能通过一个整点．因此，对于 0 ≤𝑘 <𝑎𝑏0≤k<ab![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，整数 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 可以表示，当且仅当 𝑘k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在第一象限通过恰好一个整点．
 
-å æ­¤ï¼å°äºç­äº ð <ððk<ab![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸å¯ä»¥è¡¨ç¤ºçèªç¶æ°çæ°éï¼æ°å¥½ç­äºç¬¬ä¸è±¡éå ç´çº¿ ð1ð¥1 +ð2ð¥2 =ða1x1+a2x2=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸çæ´ç¹ä¸ªæ°ï¼å å«è¾¹çä¸çç¹ï¼ï¼è¿ä¸æ°éå°±ç­äº
+因此，小于等于 𝑘 <𝑎𝑏k<ab![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 且可以表示的自然数的数量，恰好等于第一象限内直线 𝑎1𝑥1 +𝑎2𝑥2 =𝑘a1x1+a2x2=k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下的整点个数（包含边界上的点）．这一数量就等于
 
-âð/ð1ââð=0âðâðð1ð2â.âi=0âk/a1ââkâia1a2â.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⌊𝑘/𝑎1⌋∑𝑖=0⌊𝑘−𝑖𝑎1𝑎2⌋.∑i=0⌊k/a1⌋⌊k−ia1a2⌋.![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-è¿æ¯ç»å ¸çç´çº¿ä¸æ´ç¹é®é¢ï¼å¯ä»¥ç¨ [ç±»æ¬§å éå¾ç®æ³](../euclidean/#ç±»æ¬§å) å¨ ð(logâ¡min{ð1,ð2,ð})O(logâ¡min{a1,a2,k})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶é´æ±è§£ï¼
+这是经典的直线下整点问题，可以用 [类欧几里得算法](../euclidean/#类欧几里得算法) 在 𝑂(log⁡min{𝑎1,𝑎2,𝑘})O(log⁡min{a1,a2,k})![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时间求解．
 
-### ä¹ é¢
+### 习题
 
-  * [Luogu P3951 NOIP2017 æé«ç» å°å¯ççæ/èæ¡¥æ¯ 2013 ç ä¹°ä¸å°çæ°ç®](https://www.luogu.com.cn/problem/P3951)
+  * [Luogu P3951 NOIP2017 提高组 小凯的疑惑/蓝桥杯 2013 省 买不到的数目](https://www.luogu.com.cn/problem/P3951)
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/bezouts.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/bezouts.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Xeonacid](https://github.com/Xeonacid), [Ir1d](https://github.com/Ir1d), [Tiphereth-A](https://github.com/Tiphereth-A), [c-forrest](https://github.com/c-forrest), [greyqz](https://github.com/greyqz), [MegaOwIer](https://github.com/MegaOwIer), [sshwy](https://github.com/sshwy), [ylxmf2005](https://github.com/ylxmf2005), [buggg-hfc](https://github.com/buggg-hfc), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [iamtwz](https://github.com/iamtwz), [ImpleLee](https://github.com/ImpleLee), [monkeysui](https://github.com/monkeysui), [ShizuhaAki](https://github.com/ShizuhaAki), [StudyingFather](https://github.com/StudyingFather), [Sunlight-zero](https://github.com/Sunlight-zero), [TianKong-y](https://github.com/TianKong-y)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/bezouts.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/bezouts.md "edit.link.title")  
+>  __本页面贡献者：[Xeonacid](https://github.com/Xeonacid), [Ir1d](https://github.com/Ir1d), [Tiphereth-A](https://github.com/Tiphereth-A), [c-forrest](https://github.com/c-forrest), [greyqz](https://github.com/greyqz), [MegaOwIer](https://github.com/MegaOwIer), [sshwy](https://github.com/sshwy), [ylxmf2005](https://github.com/ylxmf2005), [buggg-hfc](https://github.com/buggg-hfc), [Enter-tainer](https://github.com/Enter-tainer), [Great-designer](https://github.com/Great-designer), [iamtwz](https://github.com/iamtwz), [ImpleLee](https://github.com/ImpleLee), [monkeysui](https://github.com/monkeysui), [ShizuhaAki](https://github.com/ShizuhaAki), [StudyingFather](https://github.com/StudyingFather), [Sunlight-zero](https://github.com/Sunlight-zero), [TianKong-y](https://github.com/TianKong-y)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用

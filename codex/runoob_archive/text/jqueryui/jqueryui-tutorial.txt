@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/jqueryui/jqueryui-tutorial.html
-Title: jQuery UI 教程 | 菜鸟教程
-
-jQuery UI 教程 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-jQuery UI 教程

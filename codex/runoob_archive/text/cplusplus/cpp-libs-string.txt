@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/cplusplus/cpp-libs-string.html
-Title: C++ 标准库 <string> | 菜鸟教程
-
-C++ 标准库 <string> | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-C++ 教程

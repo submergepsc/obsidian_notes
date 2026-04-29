@@ -1,4 +1,4 @@
-# Stoer–Wagner 算法 - OI Wiki
+﻿# Stoer–Wagner 算法 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/stoer-wagner/
 

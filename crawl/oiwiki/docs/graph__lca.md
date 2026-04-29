@@ -1,4 +1,4 @@
-# 最近公共祖先 - OI Wiki
+﻿# 最近公共祖先 - OI Wiki
 
 - Source: https://oi-wiki.org/graph/lca/
 

@@ -1,8 +1,0 @@
-URL: https://www.runoob.com/php/php-ref-filesystem.html
-Title: PHP 5 Filesystem 函数 | 菜鸟教程
-
-PHP 5 Filesystem 函数 | 菜鸟教程 
-
-菜鸟教程 -- 学的不仅是技术，更是梦想！ 
-
-PHP 教程

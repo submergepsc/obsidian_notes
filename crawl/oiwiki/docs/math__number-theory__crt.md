@@ -1,39 +1,39 @@
-# ä¸­å½å©ä½å®ç - OI Wiki
+﻿# 中国剩余定理 - OI Wiki
 
 - Source: https://oi-wiki.org/math/number-theory/crt/
 
-# ä¸­å½å©ä½å®ç
+# 中国剩余定理
 
-## å¼å ¥
+## 引入
 
-> ãç©ä¸ç¥æ°ãé®é¢ï¼æç©ä¸ç¥å ¶æ°ï¼ä¸ä¸æ°ä¹å©äºï¼äºäºæ°ä¹å©ä¸ï¼ä¸ä¸æ°ä¹å©äºï¼é®ç©å ä½ï¼
+> 「物不知数」问题：有物不知其数，三三数之剩二，五五数之剩三，七七数之剩二．问物几何？
 
-å³æ±æ»¡è¶³ä»¥ä¸æ¡ä»¶çæ´æ°ï¼é¤ä»¥ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¤ä»¥ 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¤ä»¥ 77![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+即求满足以下条件的整数：除以 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 余 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，除以 55![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 余 33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，除以 77![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 余 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-è¯¥é®é¢ææ©è§äºãå­å­ç®ç»ãä¸­ï¼å¹¶æè¯¥é®é¢çå ·ä½è§£æ³ï¼å®ææ°å­¦å®¶ç§¦ä¹é¶äº 1247 å¹´ãæ°ä¹¦ä¹ç« ãå·ä¸ãäºãå¤§è¡ç±»ãå¯¹ãç©ä¸ç¥æ°ãé®é¢ååºäºå®æ´ç³»ç»çè§£ç­ï¼ä¸é¢å ·ä½é®é¢çè§£ç­å£è¯ç±æææ°å­¦å®¶ç¨å¤§ä½å¨ãç®æ³ç»å®ãä¸­ç»åºï¼
+该问题最早见于《孙子算经》中，并有该问题的具体解法．宋朝数学家秦九韶于 1247 年《数书九章》卷一、二《大衍类》对「物不知数」问题做出了完整系统的解答．上面具体问题的解答口诀由明朝数学家程大位在《算法统宗》中给出：
 
-> ä¸äººåè¡ä¸åå¸ï¼äºæ æ¢ è±å»¿ä¸æ¯ï¼ä¸å­å¢åæ­£åæï¼é¤ç¾é¶äºä¾¿å¾ç¥ï¼
+> 三人同行七十希，五树梅花廿一支，七子团圆正半月，除百零五便得知．
 
-2 Ã70 +3 Ã21 +2 Ã15 =233 =2 Ã105 +232Ã70+3Ã21+2Ã15=233=2Ã105+23![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ç­æ¡ä¸º 2323![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+2 ×70 +3 ×21 +2 ×15 =233 =2 ×105 +232×70+3×21+2×15=233=2×105+23![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故答案为 2323![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## å®ä¹
+## 定义
 
-ä¸­å½å©ä½å®ç (Chinese Remainder Theorem, CRT) å¯æ±è§£å¦ä¸å½¢å¼çä¸å çº¿æ§åä½æ¹ç¨ç»ï¼å ¶ä¸­ ð1,ð2,â¯,ððn1,n2,â¯,nk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸¤ä¸¤äºè´¨ï¼ï¼
+中国剩余定理 (Chinese Remainder Theorem, CRT) 可求解如下形式的一元线性同余方程组（其中 𝑛1,𝑛2,⋯,𝑛𝑘n1,n2,⋯,nk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 两两互质）：
 
-â§{ { {â¨{ { {â©ð¥â¡ð1(modð1)ð¥â¡ð2(modð2)â®ð¥â¡ðð(modðð){xâ¡a1(modn1)xâ¡a2(modn2)â®xâ¡ak(modnk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⎧{ { {⎨{ { {⎩𝑥≡𝑎1(mod𝑛1)𝑥≡𝑎2(mod𝑛2)⋮𝑥≡𝑎𝑘(mod𝑛𝑘){x≡a1(modn1)x≡a2(modn2)⋮x≡ak(modnk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä¸é¢çãç©ä¸ç¥æ°ãé®é¢å°±æ¯ä¸å çº¿æ§åä½æ¹ç¨ç»çä¸ä¸ªå®ä¾ï¼
+上面的「物不知数」问题就是一元线性同余方程组的一个实例．
 
-## è¿ç¨
+## 过程
 
-  1. è®¡ç®æææ¨¡æ°çç§¯ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. å¯¹äºç¬¬ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ªæ¹ç¨ï¼
-     1. è®¡ç® ðð =ðððmi=nni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-     2. è®¡ç® ððmi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨æ¨¡ ððni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¹ä¸ç [éå ](../inverse/) ðâ1ðmiâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-     3. è®¡ç® ðð =ðððâ1ðci=mimiâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼**ä¸è¦å¯¹ ððni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åæ¨¡**ï¼ï¼
-  3. æ¹ç¨ç»å¨æ¨¡ ðn![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¹ä¸çå¯ä¸è§£ä¸ºï¼ð¥ =âðð=1ðððð(modð)x=âi=1kaici(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+  1. 计算所有模数的积 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  2. 对于第 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 个方程：
+     1. 计算 𝑚𝑖 =𝑛𝑛𝑖mi=nni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+     2. 计算 𝑚𝑖mi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在模 𝑛𝑖ni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 意义下的 [逆元](../inverse/) 𝑚−1𝑖mi−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+     3. 计算 𝑐𝑖 =𝑚𝑖𝑚−1𝑖ci=mimi−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（**不要对 𝑛𝑖ni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 取模**）．
+  3. 方程组在模 𝑛n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 意义下的唯一解为：𝑥 =∑𝑘𝑖=1𝑎𝑖𝑐𝑖(mod𝑛)x=∑i=1kaici(modn)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-## å®ç°
+## 实现
 
 C++Python
 
@@ -43,61 +43,61 @@ C++Python
 ```text 1 2 3 4 5 6 7 8 9 10 11 ``` |  ```text def CRT ( k , a , r ): n = 1 ans = 0 for i in range ( 1 , k \+ 1 ): n = n * r [ i ] for i in range ( 1 , k \+ 1 ): m = n // r [ i ] b = y = 0 exgcd ( m , r [ i ], b , y ) # b * m mod r[i] = 1 ans = ( ans \+ a [ i ] * m * b % n ) % n return ( ans % n \+ n ) % n ```   
 ---|---  
   
-## è¯æ
+## 证明
 
-æä»¬éè¦è¯æä¸é¢ç®æ³è®¡ç®æå¾ç ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¯¹äºä»»æ ð =1,2,â¯,ði=1,2,â¯,k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³ ð¥ â¡ðð(modðð)xâ¡ai(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+我们需要证明上面算法计算所得的 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 对于任意 𝑖 =1,2,⋯,𝑘i=1,2,⋯,k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足 𝑥 ≡𝑎𝑖(mod𝑛𝑖)x≡ai(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å½ ð â ðiâ j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼æ ðð â¡0(modðð)mjâ¡0(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ðð â¡ðð â¡0(modðð)cjâ¡mjâ¡0(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ ðð â¡ðð â (ðâ1ðmodðð) â¡1(modðð)ciâ¡miâ (miâ1modni)â¡1(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æä»¥æä»¬æï¼
+当 𝑖 ≠𝑗i≠j![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，有 𝑚𝑗 ≡0(mod𝑛𝑖)mj≡0(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故 𝑐𝑗 ≡𝑚𝑗 ≡0(mod𝑛𝑖)cj≡mj≡0(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．又有 𝑐𝑖 ≡𝑚𝑖 ⋅(𝑚−1𝑖mod𝑛𝑖) ≡1(mod𝑛𝑖)ci≡mi⋅(mi−1modni)≡1(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，所以我们有：
 
-ð¥â¡ðâð=1ðððð(modðð)â¡ðððð(modðð)â¡ððâ ððâ (ðâ1ðmodðð)(modðð)â¡ðð(modðð)xâ¡âj=1kajcj(modni)â¡aici(modni)â¡aiâ miâ (miâ1modni)(modni)â¡ai(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑥≡𝑘∑𝑗=1𝑎𝑗𝑐𝑗(mod𝑛𝑖)≡𝑎𝑖𝑐𝑖(mod𝑛𝑖)≡𝑎𝑖⋅𝑚𝑖⋅(𝑚−1𝑖mod𝑛𝑖)(mod𝑛𝑖)≡𝑎𝑖(mod𝑛𝑖)x≡∑j=1kajcj(modni)≡aici(modni)≡ai⋅mi⋅(mi−1modni)(modni)≡ai(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å³å¯¹äºä»»æ ð =1,2,â¯,ði=1,2,â¯,k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ä¸é¢ç®æ³å¾å°ç ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»æ¯æ»¡è¶³ ð¥ â¡ðð(modðð)xâ¡ai(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å³è¯æäºè§£åä½æ¹ç¨ç»çç®æ³çæ­£ç¡®æ§ï¼
+即对于任意 𝑖 =1,2,⋯,𝑘i=1,2,⋯,k![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，上面算法得到的 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 总是满足 𝑥 ≡𝑎𝑖(mod𝑛𝑖)x≡ai(modni)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，即证明了解同余方程组的算法的正确性．
 
-å ä¸ºæä»¬æ²¡æå¯¹è¾å ¥ç ððai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½ç¹æ®éå¶ï¼æä»¥ä»»ä½ä¸ç»è¾å ¥ {ðð}{ai}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½å¯¹åºä¸ä¸ªè§£ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å¦å¤ï¼è¥ ð¥ â ð¦xâ y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼åæ»å­å¨ ði![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä½¿å¾ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å ð¦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨æ¨¡ ððni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ä¸åä½ï¼æ ç³»æ°åè¡¨ {ðð}{ai}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è§£ ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¹é´æ¯ä¸ä¸æ å°å ³ç³»ï¼æ¹ç¨ç»æ»æ¯æå¯ä¸è§£ï¼
+因为我们没有对输入的 𝑎𝑖ai![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 作特殊限制，所以任何一组输入 {𝑎𝑖}{ai}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都对应一个解 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．另外，若 𝑥 ≠𝑦x≠y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，则总存在 𝑖i![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 使得 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 和 𝑦y![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在模 𝑛𝑖ni![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 下不同余．故系数列表 {𝑎𝑖}{ai}![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 与解 𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 之间是一一映射关系，方程组总是有唯一解．
 
-## è§£é
+## 解释
 
-ä¸é¢æ¼ç¤º CRT å¦ä½è§£ãç©ä¸ç¥æ°ãé®é¢ï¼
+下面演示 CRT 如何解「物不知数」问题．
 
-  1. ð =3 Ã5 Ã7 =105n=3Ã5Ã7=105![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  2. ä¸äººåè¡ **ä¸å** å¸ï¼ð1 =3,ð1 =ð/ð1 =35,ðâ11 â¡2(mod3)n1=3,m1=n/n1=35,m1â1â¡2(mod3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð1 =35 Ã2 =70c1=35Ã2=70![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  3. äºæ æ¢ è± **å»¿ä¸** æ¯ï¼ð2 =5,ð2 =ð/ð2 =21,ðâ12 â¡1(mod5)n2=5,m2=n/n2=21,m2â1â¡1(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð2 =21 Ã1 =21c2=21Ã1=21![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  4. ä¸å­å¢åæ­£ **åæ** ï¼ð3 =7,ð3 =ð/ð3 =15,ðâ13 â¡1(mod7)n3=7,m3=n/n3=15,m3â1â¡1(mod7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼æ ð3 =15 Ã1 =15c3=15Ã1=15![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
-  5. æä»¥æ¹ç¨ç»çå¯ä¸è§£ä¸º ð¥ â¡2 Ã70 +3 Ã21 +2 Ã15 â¡233 â¡23(mod105)xâ¡2Ã70+3Ã21+2Ã15â¡233â¡23(mod105)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼é¤ **ç¾é¶äº** ä¾¿å¾ç¥ï¼
+  1. 𝑛 =3 ×5 ×7 =105n=3×5×7=105![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  2. 三人同行 **七十** 希：𝑛1 =3,𝑚1 =𝑛/𝑛1 =35,𝑚−11 ≡2(mod3)n1=3,m1=n/n1=35,m1−1≡2(mod3)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故 𝑐1 =35 ×2 =70c1=35×2=70![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  3. 五树梅花 **廿一** 支：𝑛2 =5,𝑚2 =𝑛/𝑛2 =21,𝑚−12 ≡1(mod5)n2=5,m2=n/n2=21,m2−1≡1(mod5)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故 𝑐2 =21 ×1 =21c2=21×1=21![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  4. 七子团圆正 **半月** ：𝑛3 =7,𝑚3 =𝑛/𝑛3 =15,𝑚−13 ≡1(mod7)n3=7,m3=n/n3=15,m3−1≡1(mod7)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，故 𝑐3 =15 ×1 =15c3=15×1=15![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
+  5. 所以方程组的唯一解为 𝑥 ≡2 ×70 +3 ×21 +2 ×15 ≡233 ≡23(mod105)x≡2×70+3×21+2×15≡233≡23(mod105)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．（除 **百零五** 便得知）
 
-## Garner ç®æ³
+## Garner 算法
 
-CRT çå¦ä¸ä¸ªç¨éæ¯ç¨ä¸ç»æ¯è¾å°çè´¨æ°è¡¨ç¤ºä¸ä¸ªå¤§çæ´æ°ï¼
+CRT 的另一个用途是用一组比较小的质数表示一个大的整数．
 
-ä¾å¦ï¼è¥ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ»¡è¶³å¦ä¸çº¿æ§æ¹ç¨ç»ï¼ä¸ ð <âðð=1ðða<âi=1kpi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ððpi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸ºè´¨æ°ï¼ï¼
+例如，若 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 满足如下线性方程组，且 𝑎 <∏𝑘𝑖=1𝑝𝑖a<∏i=1kpi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（其中 𝑝𝑖pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为质数）：
 
-â§{ { {â¨{ { {â©ðâ¡ð1(modð1)ðâ¡ð2(modð2)â®ðâ¡ðð(modðð){aâ¡a1(modp1)aâ¡a2(modp2)â®aâ¡ak(modpk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⎧{ { {⎨{ { {⎩𝑎≡𝑎1(mod𝑝1)𝑎≡𝑎2(mod𝑝2)⋮𝑎≡𝑎𝑘(mod𝑝𝑘){a≡a1(modp1)a≡a2(modp2)⋮a≡ak(modpk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æä»¬å¯ä»¥ç¨ä»¥ä¸å½¢å¼çå¼å­ï¼ç§°ä½ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) çæ··ååºæ°è¡¨ç¤ºï¼è¡¨ç¤º ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+我们可以用以下形式的式子（称作 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 的混合基数表示）表示 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)：
 
-ð=ð¥1+ð¥2ð1+ð¥3ð1ð2+â¦+ð¥ðð1â¦ððâ1a=x1+x2p1+x3p1p2+â¦+xkp1â¦pkâ1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎=𝑥1+𝑥2𝑝1+𝑥3𝑝1𝑝2+…+𝑥𝑘𝑝1…𝑝𝑘−1a=x1+x2p1+x3p1p2+…+xkp1…pk−1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-**Garner ç®æ³** å°ç¨æ¥è®¡ç®ç³»æ° ð¥1,â¦,ð¥ðx1,â¦,xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+**Garner 算法** 将用来计算系数 𝑥1,…,𝑥𝑘x1,…,xk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ä»¤ ðððrij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸º ððpi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨æ¨¡ ððpj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æä¹ä¸ç [é](../inverse/)ï¼
+令 𝑟𝑖𝑗rij![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 为 𝑝𝑖pi![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在模 𝑝𝑗pj![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 意义下的 [逆](../inverse/)：
 
-ððâ ðð,ðâ¡1(modðð)piâ ri,jâ¡1(modpj)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑝𝑖⋅𝑟𝑖,𝑗≡1(mod𝑝𝑗)pi⋅ri,j≡1(modpj)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ ða![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä»£å ¥æä»¬å¾å°çç¬¬ä¸ä¸ªæ¹ç¨ï¼
+把 𝑎a![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 代入我们得到的第一个方程：
 
-ð1â¡ð¥1(modð1)a1â¡x1(modp1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎1≡𝑥1(mod𝑝1)a1≡x1(modp1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ä»£å ¥ç¬¬äºä¸ªæ¹ç¨å¾åºï¼
+代入第二个方程得出：
 
-ð2â¡ð¥1+ð¥2ð1(modð2)a2â¡x1+x2p1(modp2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎2≡𝑥1+𝑥2𝑝1(mod𝑝2)a2≡x1+x2p1(modp2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-æ¹ç¨ä¸¤è¾¹å ð¥1x1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼é¤ ð1p1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) åå¾
+方程两边减 𝑥1x1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，除 𝑝1p1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 后得
 
-ð2âð¥1â¡ð¥2ð1(modð2)(ð2âð¥1)ð1,2â¡ð¥2(modð2)ð¥2â¡(ð2âð¥1)ð1,2(modð2)a2âx1â¡x2p1(modp2)(a2âx1)r1,2â¡x2(modp2)x2â¡(a2âx1)r1,2(modp2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝑎2−𝑥1≡𝑥2𝑝1(mod𝑝2)(𝑎2−𝑥1)𝑟1,2≡𝑥2(mod𝑝2)𝑥2≡(𝑎2−𝑥1)𝑟1,2(mod𝑝2)a2−x1≡x2p1(modp2)(a2−x1)r1,2≡x2(modp2)x2≡(a2−x1)r1,2(modp2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç±»ä¼¼å°ï¼æä»¬å¯ä»¥å¾å°ï¼
+类似地，我们可以得到：
 
-ð¥ð=(â¦((ððâð¥1)ð1,ðâð¥2)ð2,ð)ââ¦)ððâ1,ðmodððxk=(â¦((akâx1)r1,kâx2)r2,k)ââ¦)rkâ1,kmodpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)å®ç°
+𝑥𝑘=(…((𝑎𝑘−𝑥1)𝑟1,𝑘−𝑥2)𝑟2,𝑘)−…)𝑟𝑘−1,𝑘mod𝑝𝑘xk=(…((ak−x1)r1,k−x2)r2,k)−…)rk−1,kmodpk![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)实现
 
 C++Python
 
@@ -107,78 +107,78 @@ C++Python
 ```text 1 2 3 4 5 6 7 ``` |  ```text for i in range ( 0 , k ): x [ i ] = a [ i ] for j in range ( 0 , i ): x [ i ] = r [ j ][ i ] * ( x [ i ] \- x [ j ]) x [ i ] = x [ i ] % p [ i ] if x [ i ] < 0 : x [ i ] = x [ i ] \+ p [ i ] ```   
 ---|---  
   
-è¯¥ç®æ³çæ¶é´å¤æåº¦ä¸º ð(ð2)O(k2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å®é ä¸ Garner ç®æ³å¹¶ä¸è¦æ±æ¨¡æ°ä¸ºè´¨æ°ï¼åªè¦æ±æ¨¡æ°ä¸¤ä¸¤äºè´¨ï¼æä»¬æå¦ä¸ä¼ªä»£ç ï¼
+该算法的时间复杂度为 𝑂(𝑘2)O(k2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．实际上 Garner 算法并不要求模数为质数，只要求模数两两互质，我们有如下伪代码：
 
-ðð¡ð¢ð§ðð¬ð ððð¦ðð¢ð§ððð« ðð¥ð ð¨ð«ð¢ð­ð¡ð¦Â craâ¡(ð¯,ð¦):ðð§ð©ð®ð­:Â ð¦=(ð0,ð1,â¦,ððâ1),Â ððââ¤+â§gcd(ðð,ðð)=1Â for allÂ ðâ ð,ð¯=(ð£0,â¦,ð£ðâ1)Â whereÂ ð£ð=ð¥modðð.ðð®ð­ð©ð®ð­:Â ð¥modâðâ1ð=0ðð.1ðð¨ð«Â ðÂ fromÂ 1Â toÂ (ðâ1)Â ðð¨2ð¶ðâ(âðâ1ð=0ðð)â1modðð3ð¥âð£04ðð¨ð«Â ðÂ fromÂ 1Â toÂ (ðâ1)Â ðð¨5ð¢â(ð£ðâð¥)â ð¶ðmodðð6ð¥âð¥+ð¢âðâ1ð=0ðð7ð«ðð­ð®ð«ð§Â (ð¥)Chinese Remainder AlgorithmÂ craâ¡(v,m):Input:Â m=(m0,m1,â¦,mnâ1),Â miâZ+â§gcd(mi,mj)=1Â for allÂ iâ j,v=(v0,â¦,vnâ1)Â whereÂ vi=xmodmi.Output:Â xmodâi=0nâ1mi.1forÂ iÂ fromÂ 1Â toÂ (nâ1)Â do2Ciâ(âj=0iâ1mj)â1modmi3xâv04forÂ iÂ fromÂ 1Â toÂ (nâ1)Â do5uâ(viâx)â Cimodmi6xâx+uâj=0iâ1mj7returnÂ (x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐂𝐡𝐢𝐧𝐞𝐬𝐞 𝐑𝐞𝐦𝐚𝐢𝐧𝐝𝐞𝐫 𝐀𝐥𝐠𝐨𝐫𝐢𝐭𝐡𝐦 cra⁡(𝐯,𝐦):𝐈𝐧𝐩𝐮𝐭: 𝐦=(𝑚0,𝑚1,…,𝑚𝑛−1), 𝑚𝑖∈ℤ+∧gcd(𝑚𝑖,𝑚𝑗)=1 for all 𝑖≠𝑗,𝐯=(𝑣0,…,𝑣𝑛−1) where 𝑣𝑖=𝑥mod𝑚𝑖.𝐎𝐮𝐭𝐩𝐮𝐭: 𝑥mod∏𝑛−1𝑖=0𝑚𝑖.1𝐟𝐨𝐫 𝑖 from 1 to (𝑛−1) 𝐝𝐨2𝐶𝑖←(∏𝑖−1𝑗=0𝑚𝑗)−1mod𝑚𝑖3𝑥←𝑣04𝐟𝐨𝐫 𝑖 from 1 to (𝑛−1) 𝐝𝐨5𝑢←(𝑣𝑖−𝑥)⋅𝐶𝑖mod𝑚𝑖6𝑥←𝑥+𝑢∏𝑖−1𝑗=0𝑚𝑗7𝐫𝐞𝐭𝐮𝐫𝐧 (𝑥)Chinese Remainder Algorithm cra⁡(v,m):Input: m=(m0,m1,…,mn−1), mi∈Z+∧gcd(mi,mj)=1 for all i≠j,v=(v0,…,vn−1) where vi=xmodmi.Output: xmod∏i=0n−1mi.1for i from 1 to (n−1) do2Ci←(∏j=0i−1mj)−1modmi3x←v04for i from 1 to (n−1) do5u←(vi−x)⋅Cimodmi6x←x+u∏j=0i−1mj7return (x)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å¯ä»¥åç°å¨ç¬¬å ­è¡ä¸­çè®¡ç®è¿ç¨å¯¹åºä¸è¿°æ··ååºæ°çè¡¨ç¤ºï¼
+可以发现在第六行中的计算过程对应上述混合基数的表示．
 
-## åºç¨
+## 应用
 
-æäºè®¡æ°é®é¢ææ°è®ºé®é¢åºäºå é¿ä»£ç ãå¢å é¾åº¦ãæè æ¯ä¸äºå ¶ä»åå ï¼ç»åºçæ¨¡æ°ï¼**ä¸æ¯è´¨æ°** ï¼
+某些计数问题或数论问题出于加长代码、增加难度、或者是一些其他原因，给出的模数：**不是质数** ！
 
-ä½æ¯å¯¹å ¶è´¨å æ°åè§£ä¼åç°å®æ²¡æå¹³æ¹å å­ï¼ä¹å°±æ¯è¯¥æ¨¡æ°æ¯ç±ä¸äºä¸éå¤çè´¨æ°ç¸ä¹å¾å°ï¼
+但是对其质因数分解会发现它没有平方因子，也就是该模数是由一些不重复的质数相乘得到．
 
-é£ä¹æä»¬å¯ä»¥åå«å¯¹è¿äºæ¨¡æ°è¿è¡è®¡ç®ï¼æåç¨ CRT åå¹¶ç­æ¡ï¼
+那么我们可以分别对这些模数进行计算，最后用 CRT 合并答案．
 
-ä¸é¢è¿éé¢å°±æ¯ä¸ä¸ªä¸éçä¾å­ï¼
+下面这道题就是一个不错的例子．
 
-[æ´è°· P2480 [SDOI2010] å¤ä»£çªæ](https://www.luogu.com.cn/problem/P2480)
+[洛谷 P2480 [SDOI2010] 古代猪文](https://www.luogu.com.cn/problem/P2480)
 
-ç»åº ðº,ðG,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼1 â¤ðº,ð â¤1091â¤G,nâ¤109![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ï¼æ±ï¼
+给出 𝐺,𝑛G,n![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)（1 ≤𝐺,𝑛 ≤1091≤G,n≤109![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)），求：
 
-ðºâðâ£ð(ðð)mod999Â 911Â 659Gâkâ£n(nk)mod999Â 911Â 659![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐺∑𝑘∣𝑛(𝑛𝑘)mod999 911 659G∑k∣n(nk)mod999 911 659![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-é¦å ï¼å½ ðº =999Â 911Â 659G=999Â 911Â 659![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¶ï¼ææ±æ¾ç¶ä¸º 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+首先，当 𝐺 =999 911 659G=999 911 659![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 时，所求显然为 00![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-å¦åï¼æ ¹æ® [æ¬§æå®ç](../fermat/)ï¼å¯ç¥ææ±ä¸ºï¼
+否则，根据 [欧拉定理](../fermat/)，可知所求为：
 
-ðºâðâ£ð(ðð)mod999Â 911Â 658mod999Â 911Â 659Gâkâ£n(nk)mod999Â 911Â 658mod999Â 911Â 659![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+𝐺∑𝑘∣𝑛(𝑛𝑘)mod999 911 658mod999 911 659G∑k∣n(nk)mod999 911 658mod999 911 659![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-ç°å¨èèå¦ä½è®¡ç®ï¼
+现在考虑如何计算：
 
-âðâ£ð(ðð)mod999Â 911Â 658âkâ£n(nk)mod999Â 911Â 658![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+∑𝑘∣𝑛(𝑛𝑘)mod999 911 658∑k∣n(nk)mod999 911 658![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-å ä¸º 999Â 911Â 658999Â 911Â 658![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸æ¯è´¨æ°ï¼æ æ³ä¿è¯ âð¥ â[1,999Â 911Â 657]âxâ[1,999Â 911Â 657]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð¥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) é½æéå å­å¨ï¼ä¸é¢è¿ä¸ªå¼å­æä»¬æ æ³ç´æ¥è®¡ç®ï¼
+因为 999 911 658999 911 658![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不是质数，无法保证 ∀𝑥 ∈[1,999 911 657]∀x∈[1,999 911 657]![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑥x![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 都有逆元存在，上面这个式子我们无法直接计算．
 
-æ³¨æå° 999Â 911Â 658 =2 Ã3 Ã4679 Ã35617999Â 911Â 658=2Ã3Ã4679Ã35617![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­æ¯ä¸ªè´¨å å­çæé«æ¬¡æ°åä¸ºä¸ï¼æä»¬å¯ä»¥èèåå«æ±åº âðâ£ð(ðð)âkâ£n(nk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) å¨æ¨¡ 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼46794679![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼3561735617![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) è¿å ä¸ªè´¨æ°ä¸çç»æï¼æåç¨ä¸­å½å©ä½å®çæ¥åå¹¶ç­æ¡ï¼
+注意到 999 911 658 =2 ×3 ×4679 ×35617999 911 658=2×3×4679×35617![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中每个质因子的最高次数均为一，我们可以考虑分别求出 ∑𝑘∣𝑛(𝑛𝑘)∑k∣n(nk)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 在模 22![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，33![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，46794679![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，3561735617![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 这几个质数下的结果，最后用中国剩余定理来合并答案．
 
-ä¹å°±æ¯è¯´ï¼æä»¬å®é ä¸è¦æ±ä¸é¢ä¸ä¸ªçº¿æ§æ¹ç¨ç»çè§£ï¼
+也就是说，我们实际上要求下面一个线性方程组的解：
 
-â§{ { {â¨{ { {â©ð¥â¡ð1(mod2)ð¥â¡ð2(mod3)ð¥â¡ð3(mod4679)ð¥â¡ð4(mod35617){xâ¡a1(mod2)xâ¡a2(mod3)xâ¡a3(mod4679)xâ¡a4(mod35617)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
+⎧{ { {⎨{ { {⎩𝑥≡𝑎1(mod2)𝑥≡𝑎2(mod3)𝑥≡𝑎3(mod4679)𝑥≡𝑎4(mod35617){x≡a1(mod2)x≡a2(mod3)x≡a3(mod4679)x≡a4(mod35617)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)
 
-èè®¡ç®ä¸ä¸ªç»åæ°å¯¹è¾å°çè´¨æ°åæ¨¡åçç»æï¼å¯ä»¥å©ç¨ [å¢å¡æ¯å®ç](../lucas/)ï¼
+而计算一个组合数对较小的质数取模后的结果，可以利用 [卢卡斯定理](../lucas/)．
 
-## æ©å±ï¼æ¨¡æ°ä¸äºè´¨çæ åµ
+## 扩展：模数不互质的情况
 
-### ä¸¤ä¸ªæ¹ç¨
+### 两个方程
 
-è®¾ä¸¤ä¸ªæ¹ç¨åå«æ¯ ð¥ â¡ð1(modð1)xâ¡a1(modm1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ãð¥ â¡ð2(modð2)xâ¡a2(modm2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+设两个方程分别是 𝑥 ≡𝑎1(mod𝑚1)x≡a1(modm1)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)、𝑥 ≡𝑎2(mod𝑚2)x≡a2(modm2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
 
-å°å®ä»¬è½¬åä¸ºä¸å®æ¹ç¨ï¼ð¥ =ð1ð +ð1 =ð2ð +ð2x=m1p+a1=m2q+a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð,ðp,q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ¯æ´æ°ï¼åæ ð1ð âð2ð =ð2 âð1m1pâm2q=a2âa1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+将它们转化为不定方程：𝑥 =𝑚1𝑝 +𝑎1 =𝑚2𝑞 +𝑎2x=m1p+a1=m2q+a2![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑝,𝑞p,q![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 是整数，则有 𝑚1𝑝 −𝑚2𝑞 =𝑎2 −𝑎1m1p−m2q=a2−a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-ç± [è£´èå®ç](../bezouts/)ï¼å½ ð2 âð1a2âa1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) ä¸è½è¢« gcd(ð1,ð2)gcd(m1,m2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) æ´é¤æ¶ï¼æ è§£ï¼
+由 [裴蜀定理](../bezouts/)，当 𝑎2 −𝑎1a2−a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 不能被 gcd(𝑚1,𝑚2)gcd(m1,m2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7) 整除时，无解；
 
-å ¶ä»æ åµä¸ï¼å¯ä»¥éè¿ [æ©å±æ¬§å éå¾ç®æ³](../gcd/) è§£åºæ¥ä¸ç»å¯è¡è§£ (ð,ð)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+其他情况下，可以通过 [扩展欧几里得算法](../gcd/) 解出来一组可行解 (𝑝,𝑞)(p,q)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)；
 
-ååæ¥çä¸¤æ¹ç¨ç»æçæ¨¡æ¹ç¨ç»çè§£ä¸º ð¥ â¡ð(modð)xâ¡b(modM)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼å ¶ä¸­ ð =ð1ð +ð1b=m1p+a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼ð =lcm(ð1,ð2)M=lcm(m1,m2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)ï¼
+则原来的两方程组成的模方程组的解为 𝑥 ≡𝑏(mod𝑀)x≡b(modM)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，其中 𝑏 =𝑚1𝑝 +𝑎1b=m1p+a1![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)，𝑀 =lcm(𝑚1,𝑚2)M=lcm(m1,m2)![](data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7)．
 
-### å¤ä¸ªæ¹ç¨
+### 多个方程
 
-ç¨ä¸é¢çæ¹æ³ä¸¤ä¸¤åå¹¶å³å¯ï¼
+用上面的方法两两合并即可．
 
-## ä¹ é¢
+## 习题
 
-  * [ãæ¨¡æ¿ãä¸­å½å©ä½å®çï¼CRTï¼/æ¹å²å »çª](https://www.luogu.com.cn/problem/P1495)
-  * [ãæ¨¡æ¿ãæ©å±ä¸­å½å©ä½å®ç](https://www.luogu.com.cn/problem/P4777)
-  * [ãNOI2018ãå± é¾åå£«](https://uoj.ac/problem/396)
-  * [ãTJOI2009ãçæ°å­](https://www.luogu.com.cn/problem/P3868)
+  * [【模板】中国剩余定理（CRT）/曹冲养猪](https://www.luogu.com.cn/problem/P1495)
+  * [【模板】扩展中国剩余定理](https://www.luogu.com.cn/problem/P4777)
+  * [「NOI2018」屠龙勇士](https://uoj.ac/problem/396)
+  * [「TJOI2009」猜数字](https://www.luogu.com.cn/problem/P3868)
 
-**æ¬é¡µé¢é¨åå å®¹è¯èªåæ[ÐÐ¸ÑÐ°Ð¹ÑÐºÐ°Ñ ÑÐµÐ¾ÑÐµÐ¼Ð° Ð¾Ð± Ð¾ÑÑÐ°ÑÐºÐ°Ñ ](http://e-maxx.ru/algo/chinese_theorem) ä¸å ¶è±æç¿»è¯ç [Chinese Remainder Theorem](https://cp-algorithms.com/algebra/chinese-remainder-theorem.html)ï¼å ¶ä¸­ä¿æççæåè®®ä¸º Public Domain + Leave a Linkï¼è±æççæåè®®ä¸º CC-BY-SA 4.0ï¼**
+**本页面部分内容译自博文[Китайская теорема об остатках](http://e-maxx.ru/algo/chinese_theorem) 与其英文翻译版 [Chinese Remainder Theorem](https://cp-algorithms.com/algebra/chinese-remainder-theorem.html)．其中俄文版版权协议为 Public Domain + Leave a Link；英文版版权协议为 CC-BY-SA 4.0．**
 
 * * *
 
->  __æ¬é¡µé¢æè¿æ´æ°ï¼ 2026/1/7 08:56:54ï¼[æ´æ°åå²](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/crt.md)  
->  __åç°éè¯¯ï¼æ³ä¸èµ·å®åï¼[å¨ GitHub ä¸ç¼è¾æ­¤é¡µï¼](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/crt.md "edit.link.title")  
->  __æ¬é¡µé¢è´¡ç®è ï¼[Ir1d](https://github.com/Ir1d), [StudyingFather](https://github.com/StudyingFather), [Yanjun-Zhao](https://github.com/Yanjun-Zhao), [Enter-tainer](https://github.com/Enter-tainer), [H-J-Granger](https://github.com/H-J-Granger), [sshwy](https://github.com/sshwy), [Chrogeek](https://github.com/Chrogeek), [countercurrent-time](https://github.com/countercurrent-time), [NachtgeistW](https://github.com/NachtgeistW), [Xeonacid](https://github.com/Xeonacid), [Early0v0](https://github.com/Early0v0), [Great-designer](https://github.com/Great-designer), [MegaOwIer](https://github.com/MegaOwIer), [Tiphereth-A](https://github.com/Tiphereth-A), [383494](https://github.com/383494), [AngelKitty](https://github.com/AngelKitty), [CCXXXI](https://github.com/CCXXXI), [cjsoft](https://github.com/cjsoft), [diauweb](https://github.com/diauweb), [ezoixx130](https://github.com/ezoixx130), [GekkaSaori](https://github.com/GekkaSaori), [Henry-ZHR](https://github.com/Henry-ZHR), [iamtwz](https://github.com/iamtwz), [Konano](https://github.com/Konano), [kzoacn](https://github.com/kzoacn), [LovelyBuggies](https://github.com/LovelyBuggies), [Makkiy](https://github.com/Makkiy), [mgt](mailto:i@margatroid.xyz), [minghu6](https://github.com/minghu6), [P-Y-Y](https://github.com/P-Y-Y), [PotassiumWings](https://github.com/PotassiumWings), [SamZhangQingChuan](https://github.com/SamZhangQingChuan), [stevebraveman](https://github.com/stevebraveman), [Suyun514](mailto:suyun514@qq.com), [Unnamed2964](https://github.com/Unnamed2964), [weiyong1024](https://github.com/weiyong1024), [ChungZH](https://github.com/ChungZH), [GavinZhengOI](https://github.com/GavinZhengOI), [Gesrua](https://github.com/Gesrua), [Haohu Shen](mailto:haohu.shen@ucalgary.ca), [HeRaNO](https://github.com/HeRaNO), [hly1204](https://github.com/hly1204), [ImpleLee](https://github.com/ImpleLee), [ksyx](https://github.com/ksyx), [kxccc](https://github.com/kxccc), [little-cindy](https://github.com/little-cindy), [lychees](https://github.com/lychees), [Menci](https://github.com/Menci), [namasikanam](https://github.com/namasikanam), [ouuan](https://github.com/ouuan), [Peanut-Tang](https://github.com/Peanut-Tang), [Phemon](mailto:i@phemon.me), [renbaoshuo](https://github.com/renbaoshuo), [shawlleyw](https://github.com/shawlleyw), [SukkaW](https://github.com/SukkaW), [xyf007](https://github.com/xyf007)  
->  __æ¬é¡µé¢çå ¨é¨å å®¹å¨**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) å [SATA](https://github.com/zTrix/sata-license)** åè®®ä¹æ¡æ¬¾ä¸æä¾ï¼éå æ¡æ¬¾äº¦å¯è½åºç¨
+>  __本页面最近更新： 2026/1/7 08:56:54，[更新历史](https://github.com/OI-wiki/OI-wiki/commits/master/docs/math/number-theory/crt.md)  
+>  __发现错误？想一起完善？[在 GitHub 上编辑此页！](https://oi-wiki.org/edit-landing/?ref=/math/number-theory/crt.md "edit.link.title")  
+>  __本页面贡献者：[Ir1d](https://github.com/Ir1d), [StudyingFather](https://github.com/StudyingFather), [Yanjun-Zhao](https://github.com/Yanjun-Zhao), [Enter-tainer](https://github.com/Enter-tainer), [H-J-Granger](https://github.com/H-J-Granger), [sshwy](https://github.com/sshwy), [Chrogeek](https://github.com/Chrogeek), [countercurrent-time](https://github.com/countercurrent-time), [NachtgeistW](https://github.com/NachtgeistW), [Xeonacid](https://github.com/Xeonacid), [Early0v0](https://github.com/Early0v0), [Great-designer](https://github.com/Great-designer), [MegaOwIer](https://github.com/MegaOwIer), [Tiphereth-A](https://github.com/Tiphereth-A), [383494](https://github.com/383494), [AngelKitty](https://github.com/AngelKitty), [CCXXXI](https://github.com/CCXXXI), [cjsoft](https://github.com/cjsoft), [diauweb](https://github.com/diauweb), [ezoixx130](https://github.com/ezoixx130), [GekkaSaori](https://github.com/GekkaSaori), [Henry-ZHR](https://github.com/Henry-ZHR), [iamtwz](https://github.com/iamtwz), [Konano](https://github.com/Konano), [kzoacn](https://github.com/kzoacn), [LovelyBuggies](https://github.com/LovelyBuggies), [Makkiy](https://github.com/Makkiy), [mgt](mailto:i@margatroid.xyz), [minghu6](https://github.com/minghu6), [P-Y-Y](https://github.com/P-Y-Y), [PotassiumWings](https://github.com/PotassiumWings), [SamZhangQingChuan](https://github.com/SamZhangQingChuan), [stevebraveman](https://github.com/stevebraveman), [Suyun514](mailto:suyun514@qq.com), [Unnamed2964](https://github.com/Unnamed2964), [weiyong1024](https://github.com/weiyong1024), [ChungZH](https://github.com/ChungZH), [GavinZhengOI](https://github.com/GavinZhengOI), [Gesrua](https://github.com/Gesrua), [Haohu Shen](mailto:haohu.shen@ucalgary.ca), [HeRaNO](https://github.com/HeRaNO), [hly1204](https://github.com/hly1204), [ImpleLee](https://github.com/ImpleLee), [ksyx](https://github.com/ksyx), [kxccc](https://github.com/kxccc), [little-cindy](https://github.com/little-cindy), [lychees](https://github.com/lychees), [Menci](https://github.com/Menci), [namasikanam](https://github.com/namasikanam), [ouuan](https://github.com/ouuan), [Peanut-Tang](https://github.com/Peanut-Tang), [Phemon](mailto:i@phemon.me), [renbaoshuo](https://github.com/renbaoshuo), [shawlleyw](https://github.com/shawlleyw), [SukkaW](https://github.com/SukkaW), [xyf007](https://github.com/xyf007)  
+>  __本页面的全部内容在**[CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/deed.zh) 和 [SATA](https://github.com/zTrix/sata-license)** 协议之条款下提供，附加条款亦可能应用
