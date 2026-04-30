@@ -1,0 +1,28 @@
+# Worklog Index
+
+- generated_at: 2026-04-30 18:45:54 +0800
+- workday_boundary: 04:00 -> next day 03:59
+- auto_shelve_after_days: 3
+
+| Workday | Workflow ID | Workflow | Status | Priority | Updated | CWD | Next Step | File |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-04-30 | 20260430-handle-gpt-separator-blank-lines | handle-gpt-separator-blank-lines | 已完成 | normal | 2026-04-30 17:56:04 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-handle-gpt-separator-blank-lines.md) |
+| 2026-04-30 | 20260430-ctrl-r-history-search | ctrl-r-history-search | 已完成 | normal | 2026-04-30 14:47:00 | /home/loviya | 新开 shell 或在现有 shell 执行 `source ~/.bashrc` 后生效。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-ctrl-r-history-search.md) |
+| 2026-04-29 | 20260429-mima-md-search | mima-md-search | 已完成 | high | 2026-04-30 17:18:00 | /home/loviya | `.codex/.obsidian` 与 `SecureVault/.obsidian` 现在都指向 `~/obnotes/.obsidian`；如需独立配置，恢复对应 backup 目录。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-mima-md-search.md) |
+| 2026-04-30 | 20260430-typora-linux-legal-alternatives | typora-linux-legal-alternatives | 已完成 | normal | 2026-04-30 14:24:38 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-typora-linux-legal-alternatives.md) |
+| 2026-04-30 | 20260430-tmux-pane-history-browser | tmux-pane-history-browser | 已完成 | normal | 2026-04-30 13:26:53 | /home/loviya | 在任意 tmux pane 中按 Prefix+u 进入历史浏览。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-tmux-pane-history-browser.md) |
+| 2026-04-30 | 20260430-terminal-layout-restore | terminal-layout-restore | 已完成 | normal | 2026-04-30 13:13:24 | /home/loviya | 在真实终端里执行 `tmux source-file ~/.tmux.conf` 后使用 Prefix+S 保存、Prefix+R 恢复；或直接运行脚本命令。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-terminal-layout-restore.md) |
+| 2026-04-29 | 20260429-codex-api-deepseek-config | codex-api-deepseek-config | 待继续 | normal | 2026-04-29 22:11:20 | /home/loviya | 稍后重新运行 `codex-api`；若仍高需求，检查 relay 服务状态或更换可用 Responses API provider。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-codex-api-deepseek-config.md) |
+| 2026-04-29 | 20260429-linux-wechat-keeper | linux-wechat-keeper | 已完成 | medium | 2026-04-30 13:08:00 | /home/loviya | 正常重启后观察是否自动启动并保留登录；不要用 `pkill -f /usr/bin/wechat` 作为免登录验证标准。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-linux-wechat-keeper.md) |
+| 2026-04-29 | 20260429-linux-mail-client-recommendation | linux-mail-client-recommendation | 已完成 | normal | 2026-04-29 18:49:00 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-linux-mail-client-recommendation.md) |
+| 2026-04-29 | 20260429-windows-system-organization | windows-system-organization | 待继续 | normal | 2026-04-29 18:40:00 | /home/loviya | 若用户需要科学计算、CUDA/深度学习或跨平台复现实验环境，再考虑安装 micromamba/miniforge；否则优先用 `python3 -m venv` 和后续补装 `uv`。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-windows-system-organization.md) |
+| 2026-04-29 | 20260429-tmux-startup-error-recovery | tmux-startup-error-recovery | 已完成 | normal | 2026-04-29 14:45:48 | /home/loviya | 用户在 pane 内直接鼠标拖选文本并松开，检查 CopyQ 历史和系统剪贴板是否都更新。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-tmux-startup-error-recovery.md) |
+| 2026-04-29 | 20260429-tmux-history-browsing-explain | tmux-history-browsing-explain | 已完成 | normal | 2026-04-30 13:06:35 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-tmux-history-browsing-explain.md) |
+| 2026-04-29 | 20260429-obnotes-github-batch-upload | obnotes-github-batch-upload | 已完成 | medium | 2026-04-29 14:45:04 | /home/loviya/notes/obsidian_notes | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-obnotes-github-batch-upload.md) |
+| 2026-04-28 | 20260428-opencli-setup | opencli setup | 已完成 | medium | 2026-04-28 14:43:09 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-28/20260428-opencli-setup.md) |
+| 2026-04-28 | 20260428-oiwiki-crawl | oiwiki crawl | 已完成 | medium | 2026-04-28 21:52:00 | /home/loviya/notes/obsidian_notes/crawl/oiwiki | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-28/20260428-oiwiki-crawl.md) |
+| 2026-04-28 | 20260428-efi-bios-note-explain | obsidian_notes-efi-bios-note-explain | 已完成 | normal | 2026-04-28 22:24:01 | /home/loviya/notes/obsidian_notes/ubuntu使用/bash，terminal,脚本有关 | 无 | [link](/home/loviya/.codex/worklogs/2026-04-28/20260428-efi-bios-note-explain.md) |
+| 2026-04-27 | log-management | log-management | 已完成 | medium | 2026-04-30 18:01:44 | /home/loviya | 后续结构/流程规则变更必须先改 AGENTS.md 并确认，再在 final 中报告。 | [link](/home/loviya/.codex/worklogs/2026-04-27/log-management.md) |
+| 2026-04-27 | openclaw | openclaw | 待继续 | medium | 2026-04-28 12:18:47 | /home/loviya/openclaw | 从 QQ 开放平台取得 AppID/AppSecret 后，设置 `QQBOT_APP_ID` 和 `QQBOT_CLIENT_SECRET`，再重启 `openclaw-gateway.service` 并运行 `node dist/entry.js channels status --channel qqbot --json` 做 live/config probe。 | [link](/home/loviya/.codex/worklogs/2026-04-27/openclaw.md) |
+| 2026-04-27 | obsidian_notes-codex-worklog-system | obsidian_notes-codex-worklog-system | 待继续 | medium | 2026-04-27 22:39:49 | /home/loviya/notes/obsidian_notes | 如果继续维护归档，请使用新路径 `/home/loviya/notes/obsidian_notes/runoob_tutorial_archive`。 | [link](/home/loviya/.codex/worklogs/2026-04-27/obsidian_notes-codex-worklog-system.md) |
+| 2026-04-27 | codex-cli-dashboard-investigation | codex-cli-dashboard-investigation | 待继续 | medium | 2026-04-30 18:45:54 | /home/loviya | 用户明确任务后，根据任务内容决定是否继续当前 workflow 或切换到更匹配的 workflow。 | [link](/home/loviya/.codex/worklogs/2026-04-27/codex-cli-dashboard-investigation.md) |

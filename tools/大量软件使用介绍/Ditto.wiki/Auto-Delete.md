@@ -1,4 +1,4 @@
-﻿**Two ways to auto delete clips, Options - General**
+**Two ways to auto delete clips, Options - General**
 1. Maximum number of saved copies
 2. Paste entries expire after X days
 **Clips will not auto delete when any of the following are set**

@@ -1,4 +1,4 @@
-﻿Some applications to not accept the default key stroke to paste a clip, ctrl-v.  Starting in 3.15.1 custom key strokes can be set per application can be set to send the appropriate key stroke to paste the clip. 
+Some applications to not accept the default key stroke to paste a clip, ctrl-v.  Starting in 3.15.1 custom key strokes can be set per application can be set to send the appropriate key stroke to paste the clip. 
 <br>
 Default key strokes for paste, copy and cut, these can be customized in Options - General - Advanced, "Default paste/copy/cut string:
 ~~~

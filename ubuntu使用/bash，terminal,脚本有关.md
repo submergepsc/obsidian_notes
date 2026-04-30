@@ -106,8 +106,33 @@ sudo pkill -9 mihomo; ps -ef | grep -i clash ; resolvectl status  # 检查dns情
 ```
 
 
+# vim简单使用
+```shell
+
+  q / Esc      退出历史浏览
+  鼠标滚轮     上下翻历史
+  PageUp/Down  整页翻
+  /            向下搜索
+  ?            向上搜索
+  n / N        下一个/上一个搜索结果
+  g / G        到历史顶部/底部
+  v            开始选择
+  y            复制
 
 
+```
+
+```shell
+
+  Ctrl-u    向上翻半页
+  Ctrl-d    向下翻半页
+  Ctrl-b    向上翻一整页
+  Ctrl-f    向下翻一整页
+  Ctrl-y    向上滚一行
+  Ctrl-e    向下滚一行
+
+
+```
 
 
 
