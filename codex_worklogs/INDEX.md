@@ -1,11 +1,19 @@
 # Worklog Index
 
-- generated_at: 2026-04-30 18:45:54 +0800
+- generated_at: 2026-05-02 22:32:33 +0800
 - workday_boundary: 04:00 -> next day 03:59
 - auto_shelve_after_days: 3
 
 | Workday | Workflow ID | Workflow | Status | Priority | Updated | CWD | Next Step | File |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-05-02 | 20260502-4a9f-wine-tool-lookup | wine-tool-lookup | 已完成 | normal | 2026-05-02 22:32:33 | /home/loviya | 无；从应用菜单启动 Lutris，或在图形终端运行 `/usr/games/lutris`。 | [link](/home/loviya/.codex/worklogs/2026-05-02/20260502-4a9f-wine-tool-lookup.md) |
+| 2026-05-02 | 20260502-hextechrunes-sts2-mod-install | hextechrunes-sts2-mod-install | 已完成 | normal | 2026-05-02 21:07:38 | /home/loviya | 无；从 Steam 启动游戏检查 modded 状态。 | [link](/home/loviya/.codex/worklogs/2026-05-02/20260502-hextechrunes-sts2-mod-install.md) |
+| 2026-05-02 | 20260502-a1b2-status-greeting | status-greeting | 已完成 | normal | 2026-05-02 20:29:50 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-02/20260502-a1b2-status-greeting.md) |
+| 2026-05-01 | 20260501-8f7c-install-lutris | install-lutris | 已完成 | normal | 2026-05-02 03:29:06 | /home/loviya | 无；launch Lutris from the application menu or run `/usr/games/lutris` in a normal graphical session. | [link](/home/loviya/.codex/worklogs/2026-05-01/20260501-8f7c-install-lutris.md) |
+| 2026-05-01 | 20260501-moekoe-music-download | moekoe-music-download | 已完成 | normal | 2026-05-02 04:00:12 | /home/loviya | 无；`music` works in new shells, and stale shells pointing at `/home/loviya/下载/...` are covered by a compatibility symlink. | [link](/home/loviya/.codex/worklogs/2026-05-01/20260501-moekoe-music-download.md) |
+| 2026-05-01 | 20260501-gu-clarification | gu-clarification | 已完成 | normal | 2026-05-02 03:04:04 | /home/loviya | 无；the next concrete task was handled in `20260501-moekoe-music-download`. | [link](/home/loviya/.codex/worklogs/2026-05-01/20260501-gu-clarification.md) |
+| 2026-05-01 | 20260501-watt-toolkit-cleanup | watt-toolkit-cleanup | 已完成 | normal | 2026-05-01 19:05:00 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-01/20260501-watt-toolkit-cleanup.md) |
+| 2026-04-30 | 20260430-local-music-software-inventory | local-music-software-inventory | 已完成 | normal | 2026-04-30 21:22:00 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-local-music-software-inventory.md) |
 | 2026-04-30 | 20260430-handle-gpt-separator-blank-lines | handle-gpt-separator-blank-lines | 已完成 | normal | 2026-04-30 17:56:04 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-handle-gpt-separator-blank-lines.md) |
 | 2026-04-30 | 20260430-ctrl-r-history-search | ctrl-r-history-search | 已完成 | normal | 2026-04-30 14:47:00 | /home/loviya | 新开 shell 或在现有 shell 执行 `source ~/.bashrc` 后生效。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-ctrl-r-history-search.md) |
 | 2026-04-29 | 20260429-mima-md-search | mima-md-search | 已完成 | high | 2026-04-30 17:18:00 | /home/loviya | `.codex/.obsidian` 与 `SecureVault/.obsidian` 现在都指向 `~/obnotes/.obsidian`；如需独立配置，恢复对应 backup 目录。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-mima-md-search.md) |
@@ -13,7 +21,7 @@
 | 2026-04-30 | 20260430-tmux-pane-history-browser | tmux-pane-history-browser | 已完成 | normal | 2026-04-30 13:26:53 | /home/loviya | 在任意 tmux pane 中按 Prefix+u 进入历史浏览。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-tmux-pane-history-browser.md) |
 | 2026-04-30 | 20260430-terminal-layout-restore | terminal-layout-restore | 已完成 | normal | 2026-04-30 13:13:24 | /home/loviya | 在真实终端里执行 `tmux source-file ~/.tmux.conf` 后使用 Prefix+S 保存、Prefix+R 恢复；或直接运行脚本命令。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-terminal-layout-restore.md) |
 | 2026-04-29 | 20260429-codex-api-deepseek-config | codex-api-deepseek-config | 待继续 | normal | 2026-04-29 22:11:20 | /home/loviya | 稍后重新运行 `codex-api`；若仍高需求，检查 relay 服务状态或更换可用 Responses API provider。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-codex-api-deepseek-config.md) |
-| 2026-04-29 | 20260429-linux-wechat-keeper | linux-wechat-keeper | 已完成 | medium | 2026-04-30 13:08:00 | /home/loviya | 正常重启后观察是否自动启动并保留登录；不要用 `pkill -f /usr/bin/wechat` 作为免登录验证标准。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-linux-wechat-keeper.md) |
+| 2026-04-29 | 20260429-linux-wechat-keeper | linux-wechat-keeper | 已完成 | medium | 2026-05-01 00:04:50 | /home/loviya | 如需临时停止，先 `systemctl --user stop linux-wechat-keeper.service`，再杀微信；如需永久关闭，`disable --now` 并禁用桌面自启动入口。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-linux-wechat-keeper.md) |
 | 2026-04-29 | 20260429-linux-mail-client-recommendation | linux-mail-client-recommendation | 已完成 | normal | 2026-04-29 18:49:00 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-linux-mail-client-recommendation.md) |
 | 2026-04-29 | 20260429-windows-system-organization | windows-system-organization | 待继续 | normal | 2026-04-29 18:40:00 | /home/loviya | 若用户需要科学计算、CUDA/深度学习或跨平台复现实验环境，再考虑安装 micromamba/miniforge；否则优先用 `python3 -m venv` 和后续补装 `uv`。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-windows-system-organization.md) |
 | 2026-04-29 | 20260429-tmux-startup-error-recovery | tmux-startup-error-recovery | 已完成 | normal | 2026-04-29 14:45:48 | /home/loviya | 用户在 pane 内直接鼠标拖选文本并松开，检查 CopyQ 历史和系统剪贴板是否都更新。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-tmux-startup-error-recovery.md) |

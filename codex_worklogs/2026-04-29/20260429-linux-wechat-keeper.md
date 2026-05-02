@@ -24,7 +24,25 @@ priority: medium
 - goal: 让 Linux 微信在桌面会话中自动启动和保活，降低每次打开都要求重新登录的概率。
 - blocker: 电脑关机/断电期间进程无法后台常驻；微信是否保留登录态最终由微信客户端和服务端校验决定。
 - next: 正常关机重启后登录桌面，观察微信是否自动启动并保留登录；不要用 `pkill` 强杀结果判断登录态。
-- updated: 2026-04-30 13:08:00 +0800
+- updated: 2026-05-01 00:04:50 +0800
+
+## 解释 lw 为什么杀掉后会自动回来
+- updated: 2026-05-01 00:04:50 +0800
+- cwd: `/home/loviya`
+- source instruction: `现在lw这个后台是怎么管理的,怎么杀都杀不死`
+- context: 用户询问 `lw` 后台管理方式和为什么 kill 后仍会恢复。
+- status: 已完成
+- problem:
+  - goal: 说明当前 Linux 微信后台保活机制，以及正确停止方式。
+  - blocker: 无。
+- result:
+  - `lw` 是 `~/.bashrc` 中的别名链：`lw -> linux_wechat -> /usr/bin/wechat`。
+  - 真正的保活由用户级 `systemd` 服务 `linux-wechat-keeper.service` 管理，服务当前 `enabled` 且 `active`，主进程是 `bash /home/loviya/.local/bin/linux-wechat-keeper`。
+  - `linux-wechat-keeper` 脚本每 20 秒扫描 `/proc`，如果没有发现 `wechat`、`linux_wechat` 或 `/opt/wechat/wechat`，就执行 `/usr/bin/wechat` 重新拉起。
+  - 服务文件设置了 `Restart=always` 和 `RestartSec=10`，所以单独 kill keeper 脚本也会被 systemd 重新启动。
+  - 桌面自启动文件和应用菜单入口都指向 `linux-wechat-keeper-start`；该启动器会导入图形会话环境并 `systemctl --user restart linux-wechat-keeper.service`。
+- next: 如需临时停止，先执行 `systemctl --user stop linux-wechat-keeper.service`，再杀微信；如需永久关闭保活，执行 `systemctl --user disable --now linux-wechat-keeper.service` 并移除或禁用桌面自启动入口。
+- tags: linux, wechat, systemd, autostart
 
 ## 让 Linux 微信进程尽量持续运行，避免因进程退出导致下次打开需要重新登录
 - updated: 2026-04-29 12:52:58 +0800
