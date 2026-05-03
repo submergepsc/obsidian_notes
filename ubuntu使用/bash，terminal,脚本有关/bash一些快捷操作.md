@@ -144,6 +144,7 @@ Categories=Utility;
 StartupNotify=true
 Terminal=false
   ```
+
 ## 🔑 赋权限
 ```bash
 chmod +x ~/Desktop/obsidian-myvault.desktop
