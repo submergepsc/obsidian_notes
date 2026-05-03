@@ -44,7 +44,9 @@ priority: normal
   - `/home/loviya/.steam/debian-installation/steamapps/common/Slay the Spire 2/mods/HextechRunes/HextechRunes.pck`
   - `/home/loviya/.steam/debian-installation/steamapps/common/Slay the Spire 2/mods/HextechRunes/HextechRunes.dll`
 
-## Local Mod Package Was Identified Safely
+## Local Mod Package Was Identified S
+
+afely
 
 - updated: 2026-05-02 20:45:49 +0800
 - cwd: `/home/loviya`

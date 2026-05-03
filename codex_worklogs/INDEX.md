@@ -1,11 +1,13 @@
 # Worklog Index
 
-- generated_at: 2026-05-02 22:32:33 +0800
+- generated_at: 2026-05-03 12:27:00 +0800
 - workday_boundary: 04:00 -> next day 03:59
 - auto_shelve_after_days: 3
 
 | Workday | Workflow ID | Workflow | Status | Priority | Updated | CWD | Next Step | File |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-05-03 | 20260503-hs01-install-hearthstone-lutris | install-hearthstone-lutris | 进行中 | normal | 2026-05-03 12:27:00 | /home/loviya | 通过 `xdg-open lutris:install/hearthstone-standard` 启动 Lutris 安装器，并在图形窗口中完成 Battle.net/炉石安装。 | [link](/home/loviya/.codex/worklogs/2026-05-03/20260503-hs01-install-hearthstone-lutris.md) |
+| 2026-05-03 | 20260503-7a9c2f-nvidia-driver-check | nvidia-driver-check | 已完成 | normal | 2026-05-03 04:05:41 | /home/loviya/.local/share | 重启后运行 `nvidia-smi` 确认 595.58.03 模块生效。 | [link](/home/loviya/.codex/worklogs/2026-05-03/20260503-7a9c2f-nvidia-driver-check.md) |
 | 2026-05-02 | 20260502-4a9f-wine-tool-lookup | wine-tool-lookup | 已完成 | normal | 2026-05-02 22:32:33 | /home/loviya | 无；从应用菜单启动 Lutris，或在图形终端运行 `/usr/games/lutris`。 | [link](/home/loviya/.codex/worklogs/2026-05-02/20260502-4a9f-wine-tool-lookup.md) |
 | 2026-05-02 | 20260502-hextechrunes-sts2-mod-install | hextechrunes-sts2-mod-install | 已完成 | normal | 2026-05-02 21:07:38 | /home/loviya | 无；从 Steam 启动游戏检查 modded 状态。 | [link](/home/loviya/.codex/worklogs/2026-05-02/20260502-hextechrunes-sts2-mod-install.md) |
 | 2026-05-02 | 20260502-a1b2-status-greeting | status-greeting | 已完成 | normal | 2026-05-02 20:29:50 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-02/20260502-a1b2-status-greeting.md) |
