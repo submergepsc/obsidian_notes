@@ -1,12 +1,16 @@
 # Worklog Index
 
-- generated_at: 2026-05-03 12:27:00 +0800
+- generated_at: 2026-05-05 20:31:06 +0800
 - workday_boundary: 04:00 -> next day 03:59
 - auto_shelve_after_days: 3
 
 | Workday | Workflow ID | Workflow | Status | Priority | Updated | CWD | Next Step | File |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-03 | 20260503-hs01-install-hearthstone-lutris | install-hearthstone-lutris | 进行中 | normal | 2026-05-03 12:27:00 | /home/loviya | 通过 `xdg-open lutris:install/hearthstone-standard` 启动 Lutris 安装器，并在图形窗口中完成 Battle.net/炉石安装。 | [link](/home/loviya/.codex/worklogs/2026-05-03/20260503-hs01-install-hearthstone-lutris.md) |
+| 2026-05-05 | 20260505-wechat-bills-check | wechat-bills-check | 已完成 | normal | 2026-05-05 20:31:06 | /home/loviya/文档/WPS Cloud Files/1667390343/团队文档/我的设备/小米手机 | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-05/20260505-wechat-bills-check.md) |
+| 2026-05-05 | 20260505-3f6a-greeting | greeting | 已完成 | normal | 2026-05-05 20:31:06 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-05/20260505-3f6a-greeting.md) |
+| 2026-05-04 | 20260504-rm01-open-resource-monitor | open-resource-monitor | 已完成 | normal | 2026-05-04 04:17:41 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-04/20260504-rm01-open-resource-monitor.md) |
+| 2026-05-03 | 20260503-wp01-wallpaper-question | wallpaper-question | 已完成 | normal | 2026-05-04 01:14:40 | /home/loviya | 若用户选择 Hidamari，先配置 Flathub，再安装 `io.github.jeffshee.Hidamari`。 | [link](/home/loviya/.codex/worklogs/2026-05-03/20260503-wp01-wallpaper-question.md) |
+| 2026-05-03 | 20260503-hs01-install-hearthstone-lutris | install-hearthstone-lutris | 进行中 | normal | 2026-05-04 05:03:32 | /home/loviya | 运行 `/home/loviya/bin/hearthstone-cn-direct-exe` 验证直启行为；如缺少 Battle.net token，回到 Battle.net 启动链路或改用 Windows/双系统。 | [link](/home/loviya/.codex/worklogs/2026-05-03/20260503-hs01-install-hearthstone-lutris.md) |
 | 2026-05-03 | 20260503-7a9c2f-nvidia-driver-check | nvidia-driver-check | 已完成 | normal | 2026-05-03 04:05:41 | /home/loviya/.local/share | 重启后运行 `nvidia-smi` 确认 595.58.03 模块生效。 | [link](/home/loviya/.codex/worklogs/2026-05-03/20260503-7a9c2f-nvidia-driver-check.md) |
 | 2026-05-02 | 20260502-4a9f-wine-tool-lookup | wine-tool-lookup | 已完成 | normal | 2026-05-02 22:32:33 | /home/loviya | 无；从应用菜单启动 Lutris，或在图形终端运行 `/usr/games/lutris`。 | [link](/home/loviya/.codex/worklogs/2026-05-02/20260502-4a9f-wine-tool-lookup.md) |
 | 2026-05-02 | 20260502-hextechrunes-sts2-mod-install | hextechrunes-sts2-mod-install | 已完成 | normal | 2026-05-02 21:07:38 | /home/loviya | 无；从 Steam 启动游戏检查 modded 状态。 | [link](/home/loviya/.codex/worklogs/2026-05-02/20260502-hextechrunes-sts2-mod-install.md) |
