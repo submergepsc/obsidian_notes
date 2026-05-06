@@ -16,10 +16,10 @@ priority: high
 ## Current Snapshot
 
 - status: 已完成
-- goal: 为 `mima.md` 选择比普通 Obsidian vault 更合适的安全存放位置。
+- goal: 记住并确认 `mima.md` 当前安全存放位置。
 - blocker: 无。
-- next: 如需恢复刚解决 `ob ~/SecureVault` 的会话，运行 `codex resume 019ddd1f-7e02-7443-a7f3-ba594b178fbd`。
-- updated: 2026-04-30 17:09:00 +0800
+- next: 无；如需打开文件，在终端使用 `ob ~/SecureVault/mima.md`。
+- updated: 2026-05-06 23:21:15 +0800
 - note: 2026-04-30 17:18 已将 `/home/loviya/.codex/.obsidian` 和 `/home/loviya/SecureVault/.obsidian` 改为指向 `/home/loviya/obnotes/.obsidian` 的软链接；原目录已备份。
 
 ## 定位 mima.md 及可能的同名/相近命名备份文件，只汇报路径和元数据，避免直接暴露账...
@@ -234,3 +234,18 @@ priority: high
 - next:
   - 若某个 vault 需要独立 workspace 或插件配置，可删除该 vault 的软链接并恢复对应 backup 目录。
 - tags: credentials, notes, obsidian, symlink
+
+## 确认 mima.md 当前位置
+
+- updated: 2026-05-06 23:21:15 +0800
+- cwd: `/home/loviya`
+- source instruction: `还记得mima.md这个文件吗`
+- context: 用户询问是否还记得 `mima.md`，先从 worklog 和文件名搜索确认位置，不读取敏感正文。
+- status: 已完成
+- result:
+  - 原 workflow 为 `20260429-mima-md-search`。
+  - 当前主文件位置仍为 `/home/loviya/SecureVault/mima.md`。
+  - `rg --files /home/loviya | rg '(^|/)mima\.md$|mima\.md'` 找到该主文件；较慢的全量 `find /home/loviya -name 'mima.md'` 已中止，避免长时间遍历。
+- next:
+  - 无；如需打开文件，在终端使用 `ob ~/SecureVault/mima.md`。
+- tags: credentials, notes, recall

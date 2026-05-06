@@ -1,11 +1,16 @@
 # Worklog Index
 
-- generated_at: 2026-05-06 15:10:56 +0800
+- generated_at: 2026-05-06 23:21:15 +0800
 - workday_boundary: 04:00 -> next day 03:59
 - auto_shelve_after_days: 3
 
 | Workday | Workflow ID | Workflow | Status | Priority | Updated | CWD | Next Step | File |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-05-06 | 20260506-windows-c-remount-rw | windows-c-remount-rw | 已完成 | normal | 2026-05-06 23:20:00 | /media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-windows-c-remount-rw.md) |
+| 2026-05-06 | 20260506-read-folder-images | read-folder-images | 已完成 | normal | 2026-05-06 23:14:30 | /media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-read-folder-images.md) |
+| 2026-05-06 | 20260506-b4f2-greeting | greeting | 已完成 | normal | 2026-05-06 23:08:46 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-b4f2-greeting.md) |
+| 2026-04-29 | 20260429-mima-md-search | mima-md-search | 已完成 | high | 2026-05-06 23:21:15 | /home/loviya | 无；如需打开文件，在终端使用 `ob ~/SecureVault/mima.md`。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-mima-md-search.md) |
+| 2026-05-06 | 20260506-handle-gpt-table-cleanup | handle-gpt-table-cleanup | 已完成 | normal | 2026-05-06 22:43:39 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-handle-gpt-table-cleanup.md) |
 | 2026-05-06 | 20260506-ecs-mbti-web-deployment | ECS MBTI Web Deployment | 阻塞 | normal | 2026-05-06 18:42:19 | /home/loviya/qoder | Simplified the reflection answers in `docs/实验内容.md`; screenshots still need actual image files if required. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-ecs-mbti-web-deployment.md) |
 | 2026-05-06 | 20260506-a7d3-project-help-qorder-provenance | Project Help With Honest Tool Provenance | 已完成 | normal | 2026-05-06 12:27:26 | /home/loviya/qoder | 无；with ECS credentials, deploy by running `./deploy/deploy-ecs.sh user@host`. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-a7d3-project-help-qorder-provenance.md) |
 | 2026-05-06 | 20260506-ubuntu-input-experience-tools | Ubuntu Input Experience Tools | 已完成 | normal | 2026-05-06 10:25:54 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-ubuntu-input-experience-tools.md) |
@@ -25,7 +30,6 @@
 | 2026-04-30 | 20260430-local-music-software-inventory | local-music-software-inventory | 已完成 | normal | 2026-04-30 21:22:00 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-local-music-software-inventory.md) |
 | 2026-04-30 | 20260430-handle-gpt-separator-blank-lines | handle-gpt-separator-blank-lines | 已完成 | normal | 2026-04-30 17:56:04 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-handle-gpt-separator-blank-lines.md) |
 | 2026-04-30 | 20260430-ctrl-r-history-search | ctrl-r-history-search | 已完成 | normal | 2026-04-30 14:47:00 | /home/loviya | 新开 shell 或在现有 shell 执行 `source ~/.bashrc` 后生效。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-ctrl-r-history-search.md) |
-| 2026-04-29 | 20260429-mima-md-search | mima-md-search | 已完成 | high | 2026-04-30 17:18:00 | /home/loviya | `.codex/.obsidian` 与 `SecureVault/.obsidian` 现在都指向 `~/obnotes/.obsidian`；如需独立配置，恢复对应 backup 目录。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-mima-md-search.md) |
 | 2026-04-30 | 20260430-typora-linux-legal-alternatives | typora-linux-legal-alternatives | 已完成 | normal | 2026-04-30 14:24:38 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-typora-linux-legal-alternatives.md) |
 | 2026-04-30 | 20260430-tmux-pane-history-browser | tmux-pane-history-browser | 已完成 | normal | 2026-04-30 13:26:53 | /home/loviya | 在任意 tmux pane 中按 Prefix+u 进入历史浏览。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-tmux-pane-history-browser.md) |
 | 2026-04-30 | 20260430-terminal-layout-restore | terminal-layout-restore | 已完成 | normal | 2026-04-30 13:13:24 | /home/loviya | 在真实终端里执行 `tmux source-file ~/.tmux.conf` 后使用 Prefix+S 保存、Prefix+R 恢复；或直接运行脚本命令。 | [link](/home/loviya/.codex/worklogs/2026-04-30/20260430-terminal-layout-restore.md) |
