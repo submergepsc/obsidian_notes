@@ -1,11 +1,13 @@
 # Worklog Index
 
-- generated_at: 2026-05-05 20:31:06 +0800
+- generated_at: 2026-05-06 12:27:26 +0800
 - workday_boundary: 04:00 -> next day 03:59
 - auto_shelve_after_days: 3
 
 | Workday | Workflow ID | Workflow | Status | Priority | Updated | CWD | Next Step | File |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-05-06 | 20260506-a7d3-project-help-qorder-provenance | Project Help With Honest Tool Provenance | 已完成 | normal | 2026-05-06 12:27:26 | /home/loviya/qoder | 无；with ECS credentials, deploy by running `./deploy/deploy-ecs.sh user@host`. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-a7d3-project-help-qorder-provenance.md) |
+| 2026-05-06 | 20260506-ubuntu-input-experience-tools | Ubuntu Input Experience Tools | 已完成 | normal | 2026-05-06 10:25:54 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-ubuntu-input-experience-tools.md) |
 | 2026-05-05 | 20260505-wechat-bills-check | wechat-bills-check | 已完成 | normal | 2026-05-05 20:31:06 | /home/loviya/文档/WPS Cloud Files/1667390343/团队文档/我的设备/小米手机 | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-05/20260505-wechat-bills-check.md) |
 | 2026-05-05 | 20260505-3f6a-greeting | greeting | 已完成 | normal | 2026-05-05 20:31:06 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-05/20260505-3f6a-greeting.md) |
 | 2026-05-04 | 20260504-rm01-open-resource-monitor | open-resource-monitor | 已完成 | normal | 2026-05-04 04:17:41 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-04/20260504-rm01-open-resource-monitor.md) |
