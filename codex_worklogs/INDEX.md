@@ -1,15 +1,16 @@
 # Worklog Index
 
-- generated_at: 2026-05-06 23:21:15 +0800
+- generated_at: 2026-05-06 23:30:43 +0800
 - workday_boundary: 04:00 -> next day 03:59
 - auto_shelve_after_days: 3
 
 | Workday | Workflow ID | Workflow | Status | Priority | Updated | CWD | Next Step | File |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-05-06 | 20260506-move-windows-code-home | move-windows-code-home | 待继续 | normal | 2026-05-06 23:30:43 | /media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults | Close old-path VS Code/Nautilus/tmux/Codex sessions, reopen `/home/loviya/code/RWAExpResults`, then delete the remaining Windows-side source directory. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-move-windows-code-home.md) |
 | 2026-05-06 | 20260506-windows-c-remount-rw | windows-c-remount-rw | 已完成 | normal | 2026-05-06 23:20:00 | /media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-windows-c-remount-rw.md) |
 | 2026-05-06 | 20260506-read-folder-images | read-folder-images | 已完成 | normal | 2026-05-06 23:14:30 | /media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-read-folder-images.md) |
 | 2026-05-06 | 20260506-b4f2-greeting | greeting | 已完成 | normal | 2026-05-06 23:08:46 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-b4f2-greeting.md) |
-| 2026-04-29 | 20260429-mima-md-search | mima-md-search | 已完成 | high | 2026-05-06 23:21:15 | /home/loviya | 无；如需打开文件，在终端使用 `ob ~/SecureVault/mima.md`。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-mima-md-search.md) |
+| 2026-04-29 | 20260429-mima-md-search | mima-md-search | 已完成 | high | 2026-05-06 23:35:08 | /home/loviya | 新开终端后直接运行 `mima`；当前终端可先执行 `source ~/.bashrc`。 | [link](/home/loviya/.codex/worklogs/2026-04-29/20260429-mima-md-search.md) |
 | 2026-05-06 | 20260506-handle-gpt-table-cleanup | handle-gpt-table-cleanup | 已完成 | normal | 2026-05-06 22:43:39 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-handle-gpt-table-cleanup.md) |
 | 2026-05-06 | 20260506-ecs-mbti-web-deployment | ECS MBTI Web Deployment | 阻塞 | normal | 2026-05-06 18:42:19 | /home/loviya/qoder | Simplified the reflection answers in `docs/实验内容.md`; screenshots still need actual image files if required. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-ecs-mbti-web-deployment.md) |
 | 2026-05-06 | 20260506-a7d3-project-help-qorder-provenance | Project Help With Honest Tool Provenance | 已完成 | normal | 2026-05-06 12:27:26 | /home/loviya/qoder | 无；with ECS credentials, deploy by running `./deploy/deploy-ecs.sh user@host`. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-a7d3-project-help-qorder-provenance.md) |

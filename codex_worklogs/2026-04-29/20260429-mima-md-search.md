@@ -16,10 +16,10 @@ priority: high
 ## Current Snapshot
 
 - status: 已完成
-- goal: 记住并确认 `mima.md` 当前安全存放位置。
+- goal: 让 `mima` 命令直接打开 SecureVault vault 中的 `mima.md`。
 - blocker: 无。
-- next: 无；如需打开文件，在终端使用 `ob ~/SecureVault/mima.md`。
-- updated: 2026-05-06 23:21:15 +0800
+- next: 新开终端后直接运行 `mima`；当前终端可先执行 `source ~/.bashrc`。
+- updated: 2026-05-06 23:35:08 +0800
 - note: 2026-04-30 17:18 已将 `/home/loviya/.codex/.obsidian` 和 `/home/loviya/SecureVault/.obsidian` 改为指向 `/home/loviya/obnotes/.obsidian` 的软链接；原目录已备份。
 
 ## 定位 mima.md 及可能的同名/相近命名备份文件，只汇报路径和元数据，避免直接暴露账...
@@ -249,3 +249,19 @@ priority: high
 - next:
   - 无；如需打开文件，在终端使用 `ob ~/SecureVault/mima.md`。
 - tags: credentials, notes, recall
+
+## 添加 mima 打开别名
+
+- updated: 2026-05-06 23:35:08 +0800
+- cwd: `/home/loviya`
+- source instruction: `把mima设置成使用ob打开SecureVault这个Vault并且打开mima.md这个文件的alias`
+- context: 继续 `mima.md` 凭据文件 workflow；只修改 shell alias，不读取敏感正文。
+- status: 已完成
+- improvement:
+  - 在 `/home/loviya/.bashrc` 的 `ob()` 函数后添加 `alias mima='ob "obsidian://open?vault=SecureVault&file=mima.md"'`。
+- result:
+  - `mima` 会通过现有 `ob` 函数调用 Obsidian URI，打开 `SecureVault` vault 并定位 `mima.md`。
+  - 已用 `bash -ic 'type mima'` 和 `bash -ic 'alias mima'` 验证新交互 shell 可加载该 alias，且 `&file=...` 没有被 shell 拆成后台任务。
+- next:
+  - 新开终端后直接运行 `mima`；当前终端可先执行 `source ~/.bashrc`。
+- tags: credentials, notes, shell, obsidian
