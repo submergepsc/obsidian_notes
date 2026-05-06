@@ -17,9 +17,9 @@ priority: normal
 
 - status: 待继续
 - goal: Move `C:/Users/15056/Desktop/code` to `~/code`.
-- blocker: Old Windows path is still held open by Nautilus, VS Code, tmux/bash, and the current Codex process; NTFS/FUSE reports delete/rename success inconsistently but leaves entries visible.
-- next: Close VS Code/Nautilus/old tmux shells that are rooted under `/media/loviya/Windows-C/Users/15056/Desktop/code`, restart Codex from `/home/loviya/code/RWAExpResults`, then remove `/media/loviya/Windows-C/Users/15056/Desktop/code` or delete it from Windows Explorer.
-- updated: 2026-05-06 23:30:43 +0800
+- blocker: Current Codex is now running from `/home/loviya/code/RWAExpResults` on ext4, but the old Windows-side source path still exists and VS Code PID 24043 is still launched with `/media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults`.
+- next: Close or reopen the old-path VS Code window against `/home/loviya/code/RWAExpResults`, then remove `/media/loviya/Windows-C/Users/15056/Desktop/code` or delete it from Windows Explorer once no process is rooted there.
+- updated: 2026-05-07 00:17:35 +0800
 
 ## Key Results
 
@@ -49,3 +49,17 @@ priority: normal
   - Use `/home/loviya/code/RWAExpResults` as the project path going forward.
 - next:
   - Close old-path processes and remove the remaining Windows-side source directory once no process is holding it open.
+
+## Status Check From New Linux Path
+
+- updated: 2026-05-07 00:17:35 +0800
+- cwd: `/home/loviya/code/RWAExpResults`
+- source instruction: `status`
+- problem:
+  - The workflow needed a current-state check after restarting from the Linux-side project path.
+- result:
+  - `/home/loviya/code/RWAExpResults` is on writable ext4.
+  - `/media/loviya/Windows-C/Users/15056/Desktop/code` still exists.
+  - The real user process list still shows VS Code PID 24043 opened with `/media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults`.
+- next:
+  - Close or reopen that VS Code window on `/home/loviya/code/RWAExpResults`, then retry deleting the old Windows-side `code` directory.

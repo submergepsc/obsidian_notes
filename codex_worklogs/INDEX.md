@@ -6,7 +6,7 @@
 
 | Workday | Workflow ID | Workflow | Status | Priority | Updated | CWD | Next Step | File |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-06 | 20260506-move-windows-code-home | move-windows-code-home | 待继续 | normal | 2026-05-06 23:30:43 | /media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults | Close old-path VS Code/Nautilus/tmux/Codex sessions, reopen `/home/loviya/code/RWAExpResults`, then delete the remaining Windows-side source directory. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-move-windows-code-home.md) |
+| 2026-05-06 | 20260506-move-windows-code-home | move-windows-code-home | 待继续 | normal | 2026-05-07 00:17:35 | /home/loviya/code/RWAExpResults | Close or reopen the old-path VS Code window against `/home/loviya/code/RWAExpResults`, then remove `/media/loviya/Windows-C/Users/15056/Desktop/code`. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-move-windows-code-home.md) |
 | 2026-05-06 | 20260506-windows-c-remount-rw | windows-c-remount-rw | 已完成 | normal | 2026-05-06 23:20:00 | /media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-windows-c-remount-rw.md) |
 | 2026-05-06 | 20260506-read-folder-images | read-folder-images | 已完成 | normal | 2026-05-06 23:14:30 | /media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-read-folder-images.md) |
 | 2026-05-06 | 20260506-b4f2-greeting | greeting | 已完成 | normal | 2026-05-06 23:08:46 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-b4f2-greeting.md) |
