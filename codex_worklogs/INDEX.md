@@ -6,7 +6,7 @@
 
 | Workday | Workflow ID | Workflow | Status | Priority | Updated | CWD | Next Step | File |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| 2026-05-06 | 20260506-ecs-mbti-web-deployment | ECS MBTI Web Deployment | 阻塞 | normal | 2026-05-06 15:10:56 | /home/loviya/qoder | Upload `/home/loviya/qoder/dist/mbti-test-ecs.tar.gz`, extract to `/var/www/mbti-test`, then reload Nginx. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-ecs-mbti-web-deployment.md) |
+| 2026-05-06 | 20260506-ecs-mbti-web-deployment | ECS MBTI Web Deployment | 阻塞 | normal | 2026-05-06 18:42:19 | /home/loviya/qoder | Simplified the reflection answers in `docs/实验内容.md`; screenshots still need actual image files if required. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-ecs-mbti-web-deployment.md) |
 | 2026-05-06 | 20260506-a7d3-project-help-qorder-provenance | Project Help With Honest Tool Provenance | 已完成 | normal | 2026-05-06 12:27:26 | /home/loviya/qoder | 无；with ECS credentials, deploy by running `./deploy/deploy-ecs.sh user@host`. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-a7d3-project-help-qorder-provenance.md) |
 | 2026-05-06 | 20260506-ubuntu-input-experience-tools | Ubuntu Input Experience Tools | 已完成 | normal | 2026-05-06 10:25:54 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-ubuntu-input-experience-tools.md) |
 | 2026-05-05 | 20260505-wechat-bills-check | wechat-bills-check | 已完成 | normal | 2026-05-05 20:31:06 | /home/loviya/文档/WPS Cloud Files/1667390343/团队文档/我的设备/小米手机 | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-05/20260505-wechat-bills-check.md) |
