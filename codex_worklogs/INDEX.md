@@ -1,11 +1,23 @@
 # Worklog Index
 
-- generated_at: 2026-05-06 23:30:43 +0800
+- generated_at: 2026-05-08 00:07:19 +0800
 - workday_boundary: 04:00 -> next day 03:59
 - auto_shelve_after_days: 3
 
 | Workday | Workflow ID | Workflow | Status | Priority | Updated | CWD | Next Step | File |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-05-07 | 20260507-dingtalk-fcitx-input | DingTalk Fcitx Chinese Input | 待继续 | normal | 2026-05-08 00:07:19 +0800 | /home/loviya | 用户在当前钉钉窗口测试中文输入；若仍失败，将 `GTK_IM_MODULE` 改为 `xim` 兼容模式。 | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-dingtalk-fcitx-input.md) |
+| 2026-05-07 | 20260507-plot3-pow-throughput-timeseries | Plot 3 POW Throughput Time Series | 已完成 | normal | 2026-05-07 23:12:22 +0800 | /home/loviya/code/RWAExpResults | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-plot3-pow-throughput-timeseries.md) |
+| 2026-05-07 | 20260507-queue-legend-single-column | Queue Legend Single Column | 已完成 | normal | 2026-05-07 22:56:20 +0800 | /home/loviya/code/RWAExpResults | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-queue-legend-single-column.md) |
+| 2026-05-07 | 20260507-codex-desktop-pet-spritesheet | Codex Desktop Pet Spritesheet | 已完成 | normal | 2026-05-07 16:02:42 +0800 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-codex-desktop-pet-spritesheet.md) |
+| 2026-05-07 | 20260507-run-all-plots-continue | Continue run_all_plots.py Workflow | 已完成 | normal | 2026-05-08 00:00:08 +0800 | /home/loviya/code/RWAExpResults | Decide whether Plot 2 should become cumulative workload/progress or remain queue length dynamics. | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-run-all-plots-continue.md) |
+| 2026-05-07 | 20260507-anthropic-download | Anthropic Download Clarification | 进行中 | normal | 2026-05-07 13:14:39 +0800 | /home/loviya/sub2api/deploy | Confirm whether the target is Claude Code, an Anthropic SDK/package, a Docker image, or another file. | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-anthropic-download.md) |
+| 2026-05-07 | 20260507-local-postgres-redis-removal | Local PostgreSQL And Redis Removal | 已完成 | normal | 2026-05-07 13:15:00 +0800 | /home/loviya/sub2api/deploy | Add balance to the owning user in the Admin UI, or switch the deployment to simple mode if billing should be bypassed for private use. | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-local-postgres-redis-removal.md) |
+| 2026-05-07 | 20260507-sub2api-env-config | Sub2API Deploy Env Configuration | 已完成 | normal | 2026-05-07 12:44:05 +0800 | /home/loviya/sub2api/deploy | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-sub2api-env-config.md) |
+| 2026-05-07 | 20260507-7d9a2f-postgresql-config | PostgreSQL Local Configuration | 已完成 | normal | 2026-05-07 12:40:10 +0800 | /home/loviya | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-7d9a2f-postgresql-config.md) |
+| 2026-05-07 | 20260507-claude-py-interpretation | Claude Python File Interpretation | 已完成 | normal | 2026-05-07 12:10:44 +0800 | /home/loviya/claude | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-claude-py-interpretation.md) |
+| 2026-05-07 | 20260507-python-env-check-claude | Python Env Check In Claude Directory | 已完成 | normal | 2026-05-07 12:11:01 | /home/loviya/claude | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-07/20260507-python-env-check-claude.md) |
+| 2026-05-06 | 20260506-plot5-text-size | Plot 5 Text Size Adjustment | 已完成 | normal | 2026-05-07 01:01:44 | /home/loviya/code/RWAExpResults | Review the updated Plot 5 PDFs in the paper layout and fine-tune again if needed. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-plot5-text-size.md) |
 | 2026-05-06 | 20260506-move-windows-code-home | move-windows-code-home | 待继续 | normal | 2026-05-07 00:17:35 | /home/loviya/code/RWAExpResults | Close or reopen the old-path VS Code window against `/home/loviya/code/RWAExpResults`, then remove `/media/loviya/Windows-C/Users/15056/Desktop/code`. | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-move-windows-code-home.md) |
 | 2026-05-06 | 20260506-windows-c-remount-rw | windows-c-remount-rw | 已完成 | normal | 2026-05-06 23:20:00 | /media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-windows-c-remount-rw.md) |
 | 2026-05-06 | 20260506-read-folder-images | read-folder-images | 已完成 | normal | 2026-05-06 23:14:30 | /media/loviya/Windows-C/Users/15056/Desktop/code/RWAExpResults | 无。 | [link](/home/loviya/.codex/worklogs/2026-05-06/20260506-read-folder-images.md) |
