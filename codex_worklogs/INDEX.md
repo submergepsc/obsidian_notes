@@ -1,5 +1,6 @@
 | workday | workflow id | workflow | status | priority | updated | cwd | next step | file |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| 2026-05-12 | 20260512-find-os-alias-location | Find OS Alias Location | 已完成 | normal | 2026-05-12 11:30:00 +0800 | `/home/loviya/notes/obsidian_notes/25_2/os` | none | `2026-05-12/20260512-find-os-alias-location.md` |
 | 2026-05-11 | 20260511-rwaexpresults-image-edits-continue | RWAExpResults Image Edits Continue | 已完成 | normal | 2026-05-12 00:20:43 +0800 | `/home/loviya/code/RWAExpResults` | none | `2026-05-11/20260511-rwaexpresults-image-edits-continue.md` |
 | 2026-05-11 | 20260511-pyall-project-python-alias | Pyall Project Python Alias | 已完成 | normal | 2026-05-11 23:08:57 +0800 | `/home/loviya/code/RWAExpResults` | none | `2026-05-11/20260511-pyall-project-python-alias.md` |
 | 2026-05-11 | 20260511-c9f2-plot3-font32 | Plot3 Font Size 32 | 已完成 | normal | 2026-05-11 23:35:53 +0800 | `/home/loviya/code/RWAExpResults` | none | `2026-05-11/20260511-c9f2-plot3-font32.md` |
