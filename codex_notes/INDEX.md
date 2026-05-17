@@ -1,9 +1,14 @@
 # Codex Notes Index
 
-| Date | Area | Importance | Problem | Note | Source |
-| --- | --- | --- | --- | --- | --- |
-| 2026-05-11 | codex | normal | Establish API work interval verification for API-invoked sessions | [API Work Interval Runtime Home](codex/2026-05-11-api-work-interval.md) | `20260511-f2a6-api-work-interval` |
-| 2026-05-11 | codex | normal | Add a dedicated Codex runtime home for API-management work | [Codex API Runtime Home](codex/2026-05-11-codex-api-runtime-home.md) | `20260511-codex-api-runtime-home` |
-| 2026-05-07 | system | normal | Configure local PostgreSQL for development | [PostgreSQL Local Setup](system/2026-05-07-postgresql-local-setup.md) | `20260507-7d9a2f-postgresql-config` |
-| 2026-04-30 | requested | user-requested/high | Document the current Codex and Obsidian file layout | [Current Codex File Layout](requested/2026-04-30-codex-file-layout.md) | `log-management` |
-| 2026-04-30 | system | normal | Create a condensed knowledge layer synced from solved worklog outcomes | [Codex Notes Workflow](system/2026-04-30-codex-notes-workflow.md) | `20260429-mima-md-search` |
+| Date       | Area      | Importance          | Problem                                                                | Note                                                                    | Source                              |
+| ---------- | --------- | ------------------- | ---------------------------------------------------------------------- | ----------------------------------------------------------------------- | ----------------------------------- |
+| 2026-05-17 | system    | normal              | Route all future notes requests into codex_notes instead of the legacy result archive | [Codex Notes Routing Policy](system/2026-05-17-codex-notes-routing-policy.md) | `20260517-codex-notes-routing-policy` |
+| 2026-05-17 | requested | user-requested/high | Speed up zsh startup after nvm made configured shell startup slow      | [Zsh 启动变慢的原因和优化结果](requested/2026-05-17-zsh-nvm-startup-optimization.md) | `20260517-zsh-startup-performance` |
+| 2026-05-16 | requested | user-requested/high | Document Logitech G304 xinput and imwheel commands for wheel and side-button fixes | [Logitech G304 Xinput And Imwheel Fix](requested/2026-05-16-logitech-g304-xinput-imwheel.md) | `20260515-g304-button-wheel-fix` |
+| 2026-05-16 | requested | user-requested/high | Decrypt and encrypt Linux.do-style CryptoJS RabbitLegacy secret tokens | [CryptoJS RabbitLegacy Secret Decrypt And Encrypt](requested/2026-05-16-cryptojs-rabbitlegacy-secret-decrypt-encrypt.md) | `20260514-mimo-api-runtime-home` |
+| 2026-05-15 | codex     | normal              | Stop DeepSeek Codex sessions from showing raw DSML pseudo tool calls   | [DeepSeek Tool Call Proxy Fix](codex/2026-05-15-deepseek-tool-call-proxy-fix.md) | `20260515-deepseek-tool-call-proxy-fix` |
+| 2026-05-11 | codex     | normal              | Establish API work interval verification for API-invoked sessions      | [API Work Interval Runtime Home](codex/2026-05-11-api-work-interval.md) | `20260511-f2a6-api-work-interval`   |
+| 2026-05-11 | codex     | normal              | Add a dedicated Codex runtime home for API-management work             | [Codex API Runtime Home](codex/2026-05-11-codex-api-runtime-home.md)    | `20260511-codex-api-runtime-home`   |
+| 2026-05-07 | system    | normal              | Configure local PostgreSQL for development                             | [PostgreSQL Local Setup](system/2026-05-07-postgresql-local-setup.md)   | `20260507-7d9a2f-postgresql-config` |
+| 2026-04-30 | requested | user-requested/high | Document the current Codex and Obsidian file layout                    | [Current Codex File Layout](requested/2026-04-30-codex-file-layout.md)  | `log-management`                    |
+| 2026-04-30 | system    | normal              | Create a condensed knowledge layer synced from solved worklog outcomes | [Codex Notes Workflow](system/2026-04-30-codex-notes-workflow.md)       | `20260429-mima-md-search`           |

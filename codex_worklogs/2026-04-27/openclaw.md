@@ -7,7 +7,7 @@ cwd: /home/loviya/openclaw
 host: nibaba
 status: 待继续
 priority: medium
-summary: OpenClaw 已启用 QQBot channel 的 env-backed 配置并重启 Gateway；下一步需补齐 `QQBOT_APP_ID` / `QQBOT_CLIENT_SECRET` 后再做 live probe。
+summary: 当前 CLI 已可直接运行 `openclaw`；OpenClaw QQBot channel 已启用但仍需补齐 `QQBOT_APP_ID` / `QQBOT_CLIENT_SECRET` 后再做 live probe。
 tags: openclaw, workflow, codex, qqbot
 ---
 
@@ -131,3 +131,17 @@ tags: openclaw, workflow, codex, qqbot
   - 已阅读 `docs/channels/qqbot.md`、`docs/cli/channels.md` 和 QQBot 插件 schema；执行 `node dist/entry.js channels add --channel qqbot --use-env` 写入 `/home/loviya/.openclaw/openclaw.json` 的 `channels.qqbot.enabled=true` 与 `allowFrom=["*"]`。配置变更触发 Gateway 自动重启，`systemctl --user status openclaw-gateway.service` 显示服务运行中，Gateway ready 日志列出 7 个插件并包含 `qqbot`。`node dist/entry.js channels status --channel qqbot --json` 因 Gateway WebSocket 1006 退回 config-only，但 `configuredChannels` 已包含 `qqbot`。
 - next: 从 QQ 开放平台取得 AppID/AppSecret 后，设置 `QQBOT_APP_ID` 和 `QQBOT_CLIENT_SECRET`，再重启 `openclaw-gateway.service` 并运行 `node dist/entry.js channels status --channel qqbot --json` 做 live/config probe。
 - tags: openclaw, qqbot, channel
+## 确认当前 CLI 中 OpenClaw 的使用入口
+- updated: 2026-05-15 19:27:57 +0800
+- cwd: `/home/loviya`
+- source instruction: `怎么在当前cli中使用openclaw`
+- context: 用户询问当前 CLI 如何使用 `openclaw`，接续已有 OpenClaw workflow。
+- status: 待继续
+- problem:
+  - goal: 确认当前 shell 中是否已经有 `openclaw` 可执行文件，并给出可直接使用的命令入口。
+  - blocker: 无。
+- result:
+  - `command -v openclaw` 返回 `/home/loviya/.local/bin/openclaw`，说明当前 CLI 已经可以直接调用。
+  - `openclaw --help` 正常输出 OpenClaw 2026.4.26 的帮助，入口包括 `chat`、`tui`、`agent`、`models`、`channels`、`gateway`、`doctor`、`status` 等。
+- next: 若只是本地交互，直接运行 `openclaw chat` 或 `openclaw tui`；若要排查健康状态，运行 `openclaw doctor`、`openclaw status` 或 `openclaw health`。
+- tags: openclaw, cli
