@@ -1,0 +1,321 @@
+{
+  "meta": {
+    "title": "第二周实验：Linux常用命令与ARM汇编语言",
+    "description": "飞书文档 - 多人实时在线编辑，促进团队深度协作与互动",
+    "token": "UM9bd2YvZoUAqtxS3u6cLRlQnxh",
+    "iconInfo": {
+      "type": 0,
+      "key": ""
+    },
+    "isPermitted": true,
+    "isDeleted": false,
+    "tenantId": "7394699534809890818",
+    "source": "17"
+  },
+  "ccmCommonSetting": {
+    "doc_ai_summary_hidden": "visible",
+    "width_mode": "NONE",
+    "reading_mode_preference": "NONE",
+    "catalogue_status": "NONE",
+    "reading_mode": "NONE",
+    "has_unfinished_comment": true
+  },
+  "unitInfo": {
+    "userUnit": "eu_nc",
+    "userTenantUnit": "eu_nc",
+    "docUnit": "eu_nc",
+    "docTenantUnit": "eu_nc",
+    "wikiUnit": "eu_nc",
+    "wikiTenantUnit": "eu_nc"
+  },
+  "versionInfo": {},
+  "bitableUserLayout": "",
+  "fineScheduleDynamicData": {
+    "ccm_static_cdn_domain": {
+      "cdn_host": "//lf-package-cn.feishucdn.com/obj/feishu-static",
+      "cdn_host_backup": [
+        "lf-package-cn.feishucdn.com/obj/feishu-static",
+        "lf-package-cn.feishucdn.com/obj/feishu-static",
+        "lf-package-cn-bk.feishucdn.com/obj/feishu-static"
+      ]
+    }
+  },
+  "grayBranchList": [],
+  "timestamp": 1778762226869,
+  "branch": "master",
+  "anonymousLoginCheckInfo": {
+    "isFreeForDocsTenant": true,
+    "exempt": false,
+    "exemptPageOpenLoginPopup": true,
+    "exemptCopyLoginPopup": true,
+    "exemptScrollLoginPopup": true
+  },
+  "benefitSettings": {
+    "from": "res",
+    "data": {
+      "withOwner": {
+        "ownerUserId": "7394699602328829980",
+        "benefits": {
+          "unbundle_doc_benefit": {
+            "common_make_doc_copy": {
+              "status": "enabled"
+            },
+            "ccm_import_to_doc": {
+              "status": "enabled"
+            },
+            "common_convert_doc_to_template": {
+              "status": "enabled"
+            },
+            "common_base_rename": {
+              "status": "enabled"
+            },
+            "ccm_make_base_block_to_standalone": {
+              "status": "enabled"
+            },
+            "common_save_doc_as_my_template": {
+              "status": "enabled"
+            },
+            "common_make_base_copy": {
+              "status": "enabled"
+            },
+            "ccm_dict_entry_underline": {
+              "status": "enabled"
+            },
+            "ccm_doc_relationship": {
+              "status": "enabled"
+            },
+            "common_create_to_my_doc_library": {
+              "status": "enabled"
+            },
+            "ccm_create_doc": {
+              "status": "enabled"
+            },
+            "ccm_convert_to_doc": {
+              "status": "enabled"
+            },
+            "common_save_doc_as_version": {
+              "status": "enabled"
+            },
+            "common_doc_rename": {
+              "status": "enabled"
+            },
+            "common_revert_base_history": {
+              "status": "enabled"
+            },
+            "ccm_sheet_create_base": {
+              "status": "enabled"
+            },
+            "ccm_ask_ai": {
+              "status": "enabled"
+            },
+            "ccm_create_base": {
+              "status": "enabled"
+            },
+            "common_save_base_as_my_template": {
+              "status": "enabled"
+            },
+            "common_apply_base_edit_permission": {
+              "status": "enabled"
+            },
+            "ccm_page_settings_edit": {
+              "status": "enabled"
+            },
+            "common_revert_doc_history": {
+              "status": "enabled"
+            },
+            "ccm_import_as_base": {
+              "status": "enabled"
+            },
+            "ccm_sheet_sync_to_base": {
+              "status": "enabled"
+            },
+            "ccm_convert_to_base": {
+              "status": "enabled"
+            },
+            "ccm_sheet_sync_from_base": {
+              "status": "enabled"
+            },
+            "ccm_doc_setting": {
+              "status": "enabled"
+            },
+            "ccm_create_base_block": {
+              "status": "enabled"
+            },
+            "ccm_ai_entrance": {
+              "status": "enabled"
+            },
+            "common_apply_doc_edit_permission": {
+              "status": "enabled"
+            },
+            "admin_security_retention": {
+              "status": "disabled"
+            },
+            "common_wiki_node_management": {
+              "status": "enabled"
+            },
+            "common_convert_base_to_template": {
+              "status": "enabled"
+            },
+            "common_create_to_wiki": {
+              "status": "enabled"
+            }
+          },
+          "unbundle_wiki_benefit": {
+            "common_make_doc_copy": {
+              "status": "enabled"
+            },
+            "ccm_workspace_wiki_entrance": {
+              "status": "enabled"
+            },
+            "admin_security_retention": {
+              "status": "disabled"
+            },
+            "common_apply_doc_edit_permission": {
+              "status": "enabled"
+            },
+            "common_apply_base_edit_permission": {
+              "status": "enabled"
+            },
+            "common_base_rename": {
+              "status": "enabled"
+            },
+            "common_create_to_my_doc_library": {
+              "status": "enabled"
+            },
+            "common_save_doc_as_version": {
+              "status": "enabled"
+            },
+            "ccm_wiki_setting": {
+              "status": "enabled"
+            },
+            "common_convert_base_to_template": {
+              "status": "enabled"
+            },
+            "common_doc_rename": {
+              "status": "enabled"
+            },
+            "common_revert_base_history": {
+              "status": "enabled"
+            },
+            "common_save_base_as_my_template": {
+              "status": "enabled"
+            },
+            "common_make_base_copy": {
+              "status": "enabled"
+            },
+            "common_create_to_wiki": {
+              "status": "enabled"
+            },
+            "ccm_create_subpage_list": {
+              "status": "enabled"
+            },
+            "ccm_create_wiki": {
+              "status": "enabled"
+            },
+            "ccm_navi_wiki_entrance": {
+              "status": "enabled"
+            },
+            "ccm_my_doc_library_entrance": {
+              "status": "enabled"
+            },
+            "common_revert_doc_history": {
+              "status": "enabled"
+            },
+            "common_save_doc_as_my_template": {
+              "status": "enabled"
+            },
+            "common_wiki_node_management": {
+              "status": "enabled"
+            },
+            "common_convert_doc_to_template": {
+              "status": "enabled"
+            }
+          },
+          "unbundle_base_benefit": {
+            "base_calendar_enabled": {
+              "status": "enabled"
+            },
+            "base_import_to_base": {
+              "status": "enabled"
+            },
+            "admin_security_retention": {
+              "status": "disabled"
+            },
+            "common_wiki_node_management": {
+              "status": "enabled"
+            },
+            "base_create_wenjuan": {
+              "status": "enabled"
+            },
+            "base_add_calendar_action": {
+              "status": "enabled"
+            },
+            "common_base_rename": {
+              "status": "enabled"
+            },
+            "common_apply_base_edit_permission": {
+              "status": "enabled"
+            },
+            "common_make_doc_copy": {
+              "status": "enabled"
+            },
+            "base_create_base": {
+              "status": "enabled"
+            },
+            "base_create_doc": {
+              "status": "enabled"
+            },
+            "common_save_doc_as_my_template": {
+              "status": "enabled"
+            },
+            "base_email_enabled": {
+              "status": "enabled"
+            },
+            "common_apply_doc_edit_permission": {
+              "status": "enabled"
+            },
+            "common_revert_base_history": {
+              "status": "enabled"
+            },
+            "common_save_base_as_my_template": {
+              "status": "enabled"
+            },
+            "common_convert_doc_to_template": {
+              "status": "enabled"
+            },
+            "common_create_to_wiki": {
+              "status": "enabled"
+            },
+            "common_revert_doc_history": {
+              "status": "enabled"
+            },
+            "common_make_base_copy": {
+              "status": "enabled"
+            },
+            "common_doc_rename": {
+              "status": "enabled"
+            },
+            "base_ai_entrance": {
+              "status": "enabled"
+            },
+            "common_convert_base_to_template": {
+              "status": "enabled"
+            },
+            "common_save_doc_as_version": {
+              "status": "enabled"
+            },
+            "base_add_email_action": {
+              "status": "enabled"
+            },
+            "base_import_as_table": {
+              "status": "enabled"
+            },
+            "common_create_to_my_doc_library": {
+              "status": "enabled"
+            }
+          }
+        }
+      }
+    }
+  }
+}

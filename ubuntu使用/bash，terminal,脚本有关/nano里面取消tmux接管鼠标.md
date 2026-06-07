@@ -91,6 +91,7 @@ grep
 |tmux 语法|set-hook / if-shell / #{变量}|
 |bash 命令|ps / grep / 管道|
 |tmux 命令|tmux set -g mouse off|
+
 # 🚀 总结一句话
 ```text
 这是 tmux 配置语法 + 调用 bash 命令的组合

@@ -144,7 +144,6 @@ Categories=Utility;
 StartupNotify=true
 Terminal=false
   ```
-
 ## 🔑 赋权限
 ```bash
 chmod +x ~/Desktop/obsidian-myvault.desktop
@@ -159,6 +158,7 @@ chmod +x ~/Desktop/obsidian-myvault.desktop
 | 脚本       | ⭐⭐⭐⭐⭐ | 最通用    |
 | 函数       | ⭐⭐⭐⭐⭐ | 最灵活    |
 | .desktop | ⭐⭐⭐   | GUI 使用 |
+
 # 🧠 Bash 引号规则（关键知识）
 ## 单引号 `'...'`
 * 完全原样输出

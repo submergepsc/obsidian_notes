@@ -3,6 +3,7 @@
 使用/+number,自动生成标题
 	并且还有很多其他的命令
 ```
+使用双链的时候:比如一个文件有[[a.py]], 有连接,需要修改文件名称,这时候,需要去笔记的标题修改,不能直接修改这个链接
 
 
 `ctrl+T`:新标签页
@@ -44,3 +45,7 @@ Advanced new file: Create note in a new pane      在新的面板
 
 
 [[obsidian支持文件类型]]
+
+
+# 插件
+![](assets/Pasted%20image%2020260529020455.png)跟execute code冲突

@@ -1,0 +1,238 @@
+﻿# XPath 教程
+
+- Source: https://www.runoob.com/xpath/xpath-tutorial.html
+
+**
+
+XPath 是一门在 XML 文档中查找信息的语言。
+
+
+XPath 是 XSLT 中的主要元素。
+
+
+XQuery 和 XPointer 均构建于 XPath 表达式之上
+
+
+[现在开始学习 XPath !](https://www.runoob.com/xpath-intro.html)**
+
+
+## XPath 参考手册
+
+
+在菜鸟教程，我们提供完整的 XPath 2.0、XQuery 1.0 和 XSLT 2.0 的内置函数参考手册。
+
+
+[XPath 函数](https://www.runoob.com/xpath-functions.html)
+
+
+## 内容列表
+
+
+XPath 介绍** 本章讲解 XPath 的概念。
+
+
+[XPath 节点](https://www.runoob.com/xpath-nodes.html) 本章详细介绍 XPath 中不同类型的节点，以及节点之间的关系。
+
+
+[XPath 语法](https://www.runoob.com/xpath-syntax.html) 本章讲解 XPath 的语法。
+
+
+[XPath 轴（Axes）](https://www.runoob.com/xpath-axes.html) 本章讲解 XPath axes（轴）。
+
+
+[XPath 运算符](https://www.runoob.com/xpath-operators.html) 本章列出了可以用于 XPath 表达式的运算符。
+
+
+[XPath 实例](https://www.runoob.com/xpath-examples.html) 本章使用 "books.xml" 文档来演示一些 XPath 实例。
+
+
+[XPath 总结](https://www.runoob.com/xpath-summary.html) 本文内容包括在本教程所学知识的一个总结，以及我们向你推荐的下一步应该学习的内容。
+
+
+
+
+
+
+
+
+	  AI 思考中...
+
+
+
+
+
+
+			[XPath 简介](https://www.runoob.com/xpath-intro.html) **
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 点我分享笔记
+
+
+
+
+
+
+
+				**
+取消
+
+
+
+
+
+
+					*
+
+
+					* 分享笔记
+
+
+
+
+
+
+- 昵称昵称 (必填)
+- 邮箱邮箱 (必填)
+- 引用地址引用地址
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**在线实例**
+
+      : ·[HTML 实例](https://www.runoob.com/../html/html-examples.html)
+
+      : ·[CSS 实例](https://www.runoob.com/../css/css-examples.html)
+
+      : ·[JavaScript 实例](https://www.runoob.com/../js/js-examples.html)
+
+      : ·[Ajax 实例](https://www.runoob.com/../ajx/ajax-examples.html)
+
+       : ·[jQuery 实例](https://www.runoob.com/../jquery/jquery-examples.html)
+
+      : ·[XML 实例](https://www.runoob.com/../xml/xml-examples.html)
+
+      : ·[Java 实例](https://www.runoob.com/../java/java-examples.html)
+
+
+
+
+
+**字符集&工具**
+
+      : · [HTML 字符集设置](https://www.runoob.com/../charsets/html-charsets.html)
+
+      : · [HTML ASCII 字符集](https://www.runoob.com/../tags/html-ascii.html)
+
+     : · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)
+
+      : · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)
+
+      : · [HTML 拾色器](https://www.runoob.com/../tags/html-colorpicker.html)
+
+      : · [JSON 格式化工具](https://www.jyshare.com/front-end/53)
+
+      : · [随机数生成器](https://www.jyshare.com/front-end/6680/)
+
+
+
+
+**最新更新**
+
+                  : · [VS Code 创建与...](https://www.runoob.com/../skills/vs-code-skill.html)
+
+                      : · [Skills 脚本扩展](https://www.runoob.com/../skills/skills-scripts.html)
+
+                      : · [Skills 描述](https://www.runoob.com/../skills/skills-description.html)
+
+                      : · [SKILL.md 文件](https://www.runoob.com/../skills/skill-md-file.html)
+
+                      : · [使用现有 Skills](https://www.runoob.com/../skills/use-existing-skills.html)
+
+                      : · [Skills 工作原理](https://www.runoob.com/../skills/how-skills-work.html)
+
+                      : · [第一个 Skill](https://www.runoob.com/../skills/skills-first.html)
+
+
+
+
+**站点信息**
+
+      : · [意见反馈](https://www.runoob.com/../cdn-cgi/l/email-protection/index.html)
+
+      : · [免责声明](https://www.runoob.com/../disclaimer/index.html)
+
+      : · [关于我们](https://www.runoob.com/../aboutus/index.html)
+
+      : · [文章归档](https://www.runoob.com/../archives/index.html)
+
+
+
+
+
+
+
+         关注微信**
+
+
+
+      ![](https://www.runoob.com/wp-content/themes/runoob/assets/images/qrcode.png)
+
+
+
+
+
+
+     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com/../index/index.html)**
+    **[runoob.com](https://www.runoob.com/../index/index.html)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)
+
+
+
+    **
+    **
+    **

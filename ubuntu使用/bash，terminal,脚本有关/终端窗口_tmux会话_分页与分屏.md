@@ -64,6 +64,7 @@ Ctrl + b  方向键   切 pane
 | 内部新窗口          | tmux window（标签页）       |
 | 分页             | 👉 其实你说的就是 tmux window |
 | 分屏             | tmux pane              |
+
 # 🧠 用一个生活类比（最清晰）
 ```text
 电脑桌面 = 操作系统

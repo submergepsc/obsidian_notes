@@ -1,0 +1,60 @@
+﻿# C# 判断
+
+- Source: https://www.runoob.com/csharp/csharp-decision.html
+
+判断结构要求程序员指定一个或多个要评估或测试的条件，以及条件为真时要执行的语句（必需的）和条件为假时要执行的语句（可选的）。
+
+
+下面是大多数编程语言中典型的判断结构的一般形式：
+
+![C# 中的判断语句](https://www.runoob.com/wp-content/uploads/2015/12/if.png)
+
+
+## 判断语句
+
+
+C# 提供了以下类型的判断语句。点击链接查看每个语句的细节。
+
+
+| 语句 | 描述 |
+| --- | --- |
+| if 语句 | 一个 if 语句 由一个布尔表达式后跟一个或多个语句组成。 |
+| if...else 语句 | 一个 if 语句 后可跟一个可选的 else 语句，else 语句在布尔表达式为假时执行。 |
+| 嵌套 if 语句 | 您可以在一个 if 或 else if 语句内使用另一个 if 或 else if 语句。 |
+| switch 语句 | 一个 switch 语句允许测试一个变量等于多个值时的情况。 |
+| 嵌套 switch 语句 | 您可以在一个 switch 语句内使用另一个 switch 语句。 |
+| C# Null 条件运算符 | C# 6.0 引入了 Null 条件运算符 ?.，用于安全地访问属性或方法，而不必写一堆 if 判断。 |
+
+**
+
+## ? : 运算符
+
+
+我们已经在前面的章节中讲解了 条件运算符 ? :**，可以用来替代 **if...else** 语句。它的一般形式如下：
+
+
+```
+Exp1 ? Exp2 : Exp3;
+```
+
+
+其中，Exp1、Exp2 和 Exp3 是表达式。请注意，冒号的使用和位置。
+
+
+? 表达式的值是由 Exp1 决定的。如果 Exp1 为真，则计算 Exp2 的值，结果即为整个 ? 表达式的值。如果 Exp1 为假，则计算 Exp3 的值，结果即为整个 ? 表达式的值。
+
+
+
+
+
+
+
+
+	  AI 思考中...
+
+
+
+
+
+			** [C# 运算符](https://www.runoob.com/csharp-operators.html)
+			[C# if 语句](https://www.runoob.com/csharp-if.html) **

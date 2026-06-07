@@ -33,9 +33,9 @@ ctrl +o:
 
 # 图片
 
-##### defined witdth and height
-- 等比例缩放： `![[Pasted image 20260320210042.png | 400]]`
-- 强制自定义： `![[Pasted image 20260320210042.png | 400x300]]`(w * h)
+	##### defined witdth and height
+	- 等比例缩放： `![[Pasted image 20260320210042.png | 400]]`
+	- 强制自定义： `![[Pasted image 20260320210042.png | 400x300]]`(w * h)
 - 外接外部图床：·`[|400](Pasted image 20260320210042.png)
 - ![500x50 ](assets/Pasted%20image%2020260320211209.png)
 

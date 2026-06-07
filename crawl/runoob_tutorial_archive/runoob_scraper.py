@@ -27,7 +27,7 @@ DEFAULT_USER_AGENT = (
     "Chrome/124.0 Safari/537.36 runoob-archiver/1.0"
 )
 NON_HTML_SUFFIXES = {
-    ".7z",
+    ".7z",  
     ".apk",
     ".avi",
     ".bmp",

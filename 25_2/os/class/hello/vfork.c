@@ -1,0 +1,1 @@
+#include <stdio.h>#include <stdlib.h>#include <unistd.h>int tmp = 3;int main() {pid_t res = vfork();if (res < 0) {printf("vfork failed");exit(-1);} else if (res == 0) {tmp = 10;printf("Child process: res = % %d\n", tmp);} else {printf("Parent process: res = % %d\n", tmp);}return 0;}

@@ -1,0 +1,99 @@
+﻿# Python3 sqrt() 函数
+
+- Source: https://www.runoob.com/python3/python3-func-number-sqrt.html
+
+[![Python3 数字](https://www.runoob.com/images/up.gif) Python3 数字](https://www.runoob.com/python3-number.html)
+
+
+---
+
+
+## 描述
+
+
+**sqrt()** 方法返回数字x的平方根。
+
+---
+
+
+## 语法
+
+
+以下是 sqrt() 方法的语法:
+
+
+```
+import math
+
+math.sqrt( x )
+```
+
+
+**注意：**sqrt()是不能直接访问的，需要导入 math 模块，通过静态对象调用该方法。
+
+
+---
+
+
+## 参数
+
+
+- x -- 数值表达式。
+
+
+---
+
+
+## 返回值
+
+返回数字x的平方根。
+
+---
+
+
+## 实例
+
+
+以下展示了使用 sqrt() 方法的实例：
+
+
+## 实例
+
+
+```python
+#!/usr/bin/python3
+import math   # 导入 math 模块
+
+print ("math.sqrt(100) : ", math.sqrt(100))
+print ("math.sqrt(7) : ", math.sqrt(7))
+print ("math.sqrt(math.pi) : ", math.sqrt(math.pi))
+```
+
+
+以上实例运行后输出结果为：
+
+
+```
+math.sqrt(100) :  10.0
+math.sqrt(7) :  2.6457513110645907
+math.sqrt(math.pi) :  1.7724538509055159
+```
+
+
+[![Python3 数字](https://www.runoob.com/images/up.gif) Python3 数字](https://www.runoob.com/python3-number.html)
+
+
+
+
+
+
+
+
+	  AI 思考中...
+
+
+
+
+
+			** [Python3 round() 函数](https://www.runoob.com/python3-func-number-round.html)
+			[Python3 choice() 函数](https://www.runoob.com/python3-func-number-choice.html) **

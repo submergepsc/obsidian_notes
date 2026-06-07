@@ -1,0 +1,572 @@
+﻿# SQL 注入
+
+- Source: https://www.runoob.com/sql/sql-injection.html
+
+SQL 注入（SQL Injection）是一种常见的网络攻击手段，攻击者通过在输入字段或请求中注入恶意的 SQL 语句，操控数据库执行意图之外的操作。
+
+
+其目标通常是：
+
+
+- 窃取敏感数据
+- 绕过身份验证
+- 修改、删除数据库内容
+- 执行系统命令等
+
+
+## SQL 注入的工作原理
+
+
+- **输入验证不足**：当Web应用程序没有正确验证用户输入时，攻击者可以在输入字段中插入SQL代码。
+- **拼接SQL语句**：应用程序后端通常将用户输入与SQL查询拼接在一起，形成完整的数据库查询语句。
+- **执行恶意SQL**：如果应用程序没有对输入进行适当的清理或转义，恶意SQL代码将被数据库服务器执行。
+- **数据泄露或破坏**：攻击者可以利用SQL注入来查询、修改或删除数据库中的数据，或者执行数据库管理系统的系统命令。
+
+
+### 正常查询
+
+当用户登录网站时，通常会输入用户名和密码。
+
+以下是一段正常的 SQL 查询代码：
+
+
+```
+SELECT * FROM users WHERE username = 'user1' AND password = 'password1';
+```
+
+
+### 注入攻击
+
+
+如果攻击者输入：
+
+
+```
+用户名： admin' --
+密码： anything
+```
+
+
+SQL 查询变成：
+
+
+```
+SELECT * FROM users WHERE username = 'admin' --' AND password = 'anything';
+```
+
+
+其中 **--** 是 SQL 的注释符号，忽略了密码条件，直接绕过了身份验证。
+
+---
+
+
+## 常见 SQL 注入
+
+
+### 1、基础型 SQL 注入
+
+
+直接将恶意 SQL 代码嵌入用户输入中，并影响查询逻辑。
+
+
+```
+输入用户名：admin' OR '1'='1
+输入密码：anything
+```
+
+
+执行的 SQL 查询：
+
+
+```
+SELECT * FROM users WHERE username = 'admin' OR '1'='1' AND password = 'anything';
+```
+
+
+结果：
+
+OR '1'='1' 总为 true，可以绕过验证。
+
+
+### 2、UNION 查询注入
+
+
+通过 UNION 将攻击者构造的查询结果与合法查询结果合并，从而获取敏感数据。
+
+
+输入：
+
+
+```
+' UNION SELECT null, username, password FROM users --
+```
+
+
+执行的 SQL 查询：
+
+
+```
+SELECT id, name FROM products WHERE id = '' UNION SELECT null, username, password FROM users --';
+```
+
+
+结果：
+
+将 users 表的 username 和 password 数据作为结果返回。
+
+
+### 3、错误型 SQL 注入
+
+
+通过故意触发数据库错误，利用错误信息推测表名、列名或数据。
+
+
+输入：
+
+
+```
+' AND 1=CONVERT(int, (SELECT @@version)) --
+```
+
+
+执行的 SQL 查询：
+
+
+```
+SELECT * FROM users WHERE username = '' AND 1=CONVERT(int, (SELECT @@version)) --';
+```
+
+
+结果：
+
+错误信息可能暴露数据库版本或其他信息。
+
+
+### 4、盲注
+
+
+无法直接获取查询结果，攻击者通过判断返回页面的响应（如布尔值或时间延迟）来逐步推测数据。
+
+
+布尔型盲注，输入：
+
+
+```
+' AND (SELECT 1 WHERE SUBSTRING((SELECT database()), 1, 1)='t') --
+```
+
+
+执行的 SQL 查询：
+
+
+```
+SELECT * FROM users WHERE username = '' AND (SELECT 1 WHERE SUBSTRING((SELECT database()), 1, 1)='t') --';
+```
+
+
+结果：
+
+根据返回结果判断数据库名首字母是否为 t。
+
+
+时间盲注，输入：
+
+
+```
+' AND IF(1=1, SLEEP(5), 0) --
+```
+
+
+执行的 SQL 查询：
+
+
+```
+SELECT * FROM users WHERE username = '' AND IF(1=1, SLEEP(5), 0) --';
+```
+
+
+结果：
+
+如果条件成立，服务器会延迟 5 秒响应，从而泄露信息。
+
+
+### 5、堆叠查询注入
+
+
+允许多条 SQL 语句同时执行。
+
+
+输入：
+
+
+```
+'; DROP TABLE users; --
+```
+
+
+执行的 SQL 查询：
+
+
+```
+SELECT * FROM users WHERE username = ''; DROP TABLE users; --';
+```
+
+
+结果：
+
+users 表被删除。
+
+
+某些数据库（如 MySQL）默认不支持多语句执行。
+
+
+### 6、存储过程注入
+
+
+利用存储过程的输入参数注入恶意 SQL。
+
+
+输入：
+
+
+```
+'; EXEC xp_cmdshell('dir'); --
+```
+
+
+执行的 SQL：
+
+
+```
+EXEC LoginProcedure 'username', ''; EXEC xp_cmdshell('dir'); --'
+```
+
+
+结果：
+
+执行系统命令（如列出目录）。
+
+
+### 7、Cookie 注入
+
+
+利用修改浏览器存储的 Cookie 值进行注入。
+
+
+```
+Cookie: session_id=' OR '1'='1;
+```
+
+
+服务器在解析 Cookie 时执行了恶意 SQL。
+
+
+---
+
+
+## SQL 注入的危害
+
+
+- **数据泄露：** 攻击者获取数据库中的用户名、密码、银行卡号等敏感信息。
+- **权限提升：** 攻击者可能通过注入命令获得更高的访问权限。
+- **数据篡改：** 数据库内容被修改或删除。
+- **服务中断：** 恶意 SQL 代码可能导致数据库崩溃，影响系统可用性。
+- **执行系统命令：** 通过数据库扩展功能，攻击者可能直接操作操作系统。
+
+
+---
+
+## 防范措施
+
+
+### 1、参数化查询和预编译语句
+
+
+使用参数化查询或预编译语句，将用户输入与 SQL 语句分离，避免用户输入被直接解析为 SQL 代码。
+
+
+Java 代码：
+
+
+## 实例
+
+
+```sql
+String sql = "SELECT * FROM users WHERE username = ? AND password = ?";
+PreparedStatement pstmt = connection.prepareStatement(sql);
+pstmt.setString(1, username);
+pstmt.setString(2, password);
+ResultSet rs = pstmt.executeQuery();
+```
+
+
+Node.js (MySQL 模块)：
+
+
+## 实例
+
+
+```sql
+const query = "SELECT * FROM users WHERE username = ? AND password = ?";
+connection.query(query, [username, password], (err, results) => {
+    if (err) throw err;
+    // Handle results
+});
+```
+
+
+### 2、使用 ORM 框架
+
+核心思路 ORM（如 Hibernate、Sequelize 等）通过自动生成 SQL 查询，大幅减少手动拼接 SQL 的机会，从而避免注入。
+
+
+```
+// 使用 Sequelize
+const user = await User.findOne({
+    where: { username: 'admin', password: 'password123' }
+});
+```
+
+
+### 3、输入验证
+
+
+严格检查用户输入是否符合预期，拒绝不符合规则的输入。
+
+
+对用户名、邮箱等使用正则表达式，数值类型字段只允许数字输入。
+
+
+对特殊字符进行转义（如 " 转为 \"）。
+
+
+```
+const username = req.body.username.replace(/[^a-zA-Z0-9]/g, ''); // 清理特殊字符
+```
+
+
+### 4、限制数据库权限
+
+
+为数据库用户分配最小权限，只允许执行必要的操作。
+
+
+
+- **限制写入权限：**只允许插入、更新的用户操作对应的表，不允许 DROP、ALTER 等高危操作。
+- **分离读写权限：**使用只读账号访问数据库。
+
+
+创建一个只读用户：
+
+
+```
+CREATE USER 'readonly_user'@'%' IDENTIFIED BY 'secure_password';
+GRANT SELECT ON database_name.* TO 'readonly_user'@'%';
+```
+
+
+### 5、定期安全测试
+
+通过安全扫描工具或手动测试，定期检查代码中的潜在 SQL 注入漏洞。
+
+
+我们可以使用开源工具 SQLMap 来测试。
+
+SQLMap 是一个专门用于自动化进行 SQL 注入检测和利用的渗透测试工具。
+
+SQLMap 广泛应用于网络安全评估和渗透测试中，帮助发现和修复SQL注入漏洞。
+
+
+- SQL 官方地址：[https://sqlmap.org/](https://sqlmap.org/)
+- SQLMap 开源地址：[https://github.com/sqlmapproject/sqlmap](https://github.com/sqlmapproject/sqlmap)
+
+
+
+
+
+
+
+
+
+
+	  AI 思考中...
+
+
+
+
+
+			** [SQL EXISTS 运算符](https://www.runoob.com/sql-exists.html)
+			[SQL 测验](https://www.runoob.com/sql-quiz2.html) **
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 点我分享笔记
+
+
+
+
+
+
+
+				**
+取消
+
+
+
+
+
+
+					*
+
+
+					* 分享笔记
+
+
+
+
+
+
+- 昵称昵称 (必填)
+- 邮箱邮箱 (必填)
+- 引用地址引用地址
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**在线实例**
+
+      : ·[HTML 实例](https://www.runoob.com/../html/html-examples.html)
+
+      : ·[CSS 实例](https://www.runoob.com/../css/css-examples.html)
+
+      : ·[JavaScript 实例](https://www.runoob.com/../js/js-examples.html)
+
+      : ·[Ajax 实例](https://www.runoob.com/../ajx/ajax-examples.html)
+
+       : ·[jQuery 实例](https://www.runoob.com/../jquery/jquery-examples.html)
+
+      : ·[XML 实例](https://www.runoob.com/../xml/xml-examples.html)
+
+      : ·[Java 实例](https://www.runoob.com/../java/java-examples.html)
+
+
+
+
+
+**字符集&工具**
+
+      : · [HTML 字符集设置](https://www.runoob.com/../charsets/html-charsets.html)
+
+      : · [HTML ASCII 字符集](https://www.runoob.com/../tags/html-ascii.html)
+
+     : · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)
+
+      : · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)
+
+      : · [HTML 拾色器](https://www.runoob.com/../tags/html-colorpicker.html)
+
+      : · [JSON 格式化工具](https://www.jyshare.com/front-end/53)
+
+      : · [随机数生成器](https://www.jyshare.com/front-end/6680/)
+
+
+
+
+**最新更新**
+
+                  : · [VS Code 创建与...](https://www.runoob.com/../skills/vs-code-skill.html)
+
+                      : · [Skills 脚本扩展](https://www.runoob.com/../skills/skills-scripts.html)
+
+                      : · [Skills 描述](https://www.runoob.com/../skills/skills-description.html)
+
+                      : · [SKILL.md 文件](https://www.runoob.com/../skills/skill-md-file.html)
+
+                      : · [使用现有 Skills](https://www.runoob.com/../skills/use-existing-skills.html)
+
+                      : · [Skills 工作原理](https://www.runoob.com/../skills/how-skills-work.html)
+
+                      : · [第一个 Skill](https://www.runoob.com/../skills/skills-first.html)
+
+
+
+
+**站点信息**
+
+      : · [意见反馈](https://www.runoob.com/../cdn-cgi/l/email-protection/index.html)
+
+      : · [免责声明](https://www.runoob.com/../disclaimer/index.html)
+
+      : · [关于我们](https://www.runoob.com/../aboutus/index.html)
+
+      : · [文章归档](https://www.runoob.com/../archives/index.html)
+
+
+
+
+
+
+
+         关注微信**
+
+
+
+      ![](https://www.runoob.com/wp-content/themes/runoob/assets/images/qrcode.png)
+
+
+
+
+
+
+     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com/../index/index.html)**
+    **[runoob.com](https://www.runoob.com/../index/index.html)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)
+
+
+
+    **
+    **
+    **

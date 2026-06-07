@@ -1,0 +1,185 @@
+﻿# Python3 len()方法
+
+- Source: https://www.runoob.com/python3/python3-string-len.html
+
+[![Python3 字符串](https://www.runoob.com/images/up.gif) Python3 字符串](https://www.runoob.com/python3-string.html)
+
+
+---
+
+
+## 描述
+
+Python len() 是 Python 内置函数，用于返回对象的长度或元素个数，适用于字符串、列表、元组等具有长度信息的数据类型。
+
+
+len() 也适用于其他可迭代对象，如集合等。
+
+
+## 语法
+
+
+len()方法语法：
+
+
+```
+len( s )
+```
+
+
+## 参数
+
+
+- s -- 对象。
+
+
+## 返回值
+
+
+返回对象长度。
+
+
+## 实例
+
+
+以下实例展示了 len() 的使用方法：
+
+
+**字符串的长度：**
+
+
+## 实例
+
+
+```python
+text = "Hello, World!"
+length = len(text)
+print(length)  # 输出：13
+```
+
+
+以上实例中，len(text) 返回字符串 text 的字符数，包括空格和标点符号，输出结果为:
+
+
+```
+13
+```
+
+
+**列表的长度：**
+
+
+## 实例
+
+
+```python
+my_list = [1, 2, 3, 4, 5]
+length = len(my_list)
+print(length)  # 输出：5
+```
+
+
+以上实例中，len(my_list) 返回列表 my_list 中的元素数量，输出结果为:
+
+
+```
+5
+```
+
+
+**元组的长度：**
+
+
+## 实例
+
+
+```python
+my_tuple = (10, 20, 30)
+length = len(my_tuple)
+print(length)  # 输出：3
+```
+
+
+以上实例中，len(my_tuple) 返回元组 my_tuple 中的元素数量，输出结果为:
+
+
+```
+3
+```
+
+
+**集合的长度：**
+
+
+## 实例
+
+
+```python
+my_set = {5, 10, 15, 20}
+length = len(my_set)
+print(length)  # 输出：4
+```
+
+
+以上实例中，len(my_set) 返回集合 my_set 中的唯一元素数量，输出结果为:
+
+
+```
+4
+```
+
+
+**字典的长度：**
+
+
+## 实例
+
+
+```python
+my_dict = {"apple": 3, "banana": 2, "cherry": 4}
+length = len(my_dict)
+print(length)  # 输出：3
+```
+
+
+以上实例中，len(my_dict) 返回字典 my_dict 中键-值对的数量，输出结果为:
+
+
+```
+3
+```
+
+
+总之，len() 函数是一个非常实用的工具，用于确定各种类型的序列的长度，这对于编写各种 Python 程序非常有用。
+
+
+---
+
+
+** 注意事项**
+
+
+- 对于字符串，`len()` 返回字符的个数。
+- 对于列表、元组，`len()` 返回元素的个数。
+- 对于字典，`len()` 返回键值对的个数。
+- 对于集合，`len()` 返回集合元素的个数。
+
+
+[![Python3 字符串](https://www.runoob.com/images/up.gif) Python3 字符串](https://www.runoob.com/python3-string.html)
+
+
+
+
+
+
+
+
+
+	  AI 思考中...
+
+
+
+
+
+			** [Python3 ljust()方法](https://www.runoob.com/python3-string-ljust.html)
+			[Python3 lower()方法](https://www.runoob.com/python3-string-lower.html) **

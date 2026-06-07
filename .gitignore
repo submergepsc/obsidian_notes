@@ -24,8 +24,47 @@ __pycache__/
 *.gz
 *.zip
 *.tar
+*.rar
+*.7z
+*.iso
+*.dmg
+*.exe
+*.msi
+*.pkg
+*.deb
+*.AppImage
+*.pkl
+*.onnx
+*.pt
+*.pth
+*.safetensors
+
+# 本地环境和构建产物
+.conda/
+node_modules/
+dist/
+build/
+target/
+*.o
+*.obj
+*.so
+*.dll
+*.dylib
+*.a
+*.lib
+*.class
 
 # 大附件/图片（可选，如果你不想同步附件文件夹）
 # attachments/
 # assets/
 25_1/
+
+# 已发现的大型课程/安装包资源，避免再次误上传
+25_2/cn/组网实验预备-软件安装与注册/Packet_Tracer821_*.*
+25_2/cn/组网实验预备-软件安装与注册/*.exe
+25_2/cn/组网实验预备-软件安装与注册/*.dmg
+25_2/cn/计算机网络：自顶向下方法*.pdf
+25_2/cn/课件/小林coding-图解网络/*.pdf
+
+# 嵌套仓库，本地保留，不作为 vault 内容上传
+25_2/rust/rust-by-practice/

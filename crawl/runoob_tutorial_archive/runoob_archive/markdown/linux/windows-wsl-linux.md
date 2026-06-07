@@ -1,0 +1,361 @@
+﻿# Windows WSL 安装 Linux
+
+- Source: https://www.runoob.com/linux/windows-wsl-linux.html
+
+**WSL（Windows Subsystem for Linux）** 是微软为 Windows 用户提供的一个子系统，它允许你在 Windows 上原生运行 Linux（不是虚拟机，不是双系统），直接使用 Bash、apt、gcc、Python、Node.js 等 Linux 工具。
+
+
+![](https://www.runoob.com/wp-content/uploads/2025/08/1728405989image-1024x576-1.webp)
+
+
+### WSL 的版本区别
+
+
+| 特性 | WSL1 | WSL2 |
+| --- | --- | --- |
+| 内核架构 | 翻译系统调用（兼容层） | 真正的 Linux 内核（轻量虚拟机） |
+| 性能（文件访问） | Windows ↔ Linux 访问更快 | Linux ↔ Linux 内部访问更快 |
+| 启动速度 | 更快 | 略慢 |
+| Docker 支持 | 不支持 | ✅ 完全支持 |
+| 系统资源占用 | 较少 | 稍高 |
+
+
+推荐使用 **WSL2**，兼容性更强，功能更完整。
+
+
+---
+
+
+## 安装步骤（以 WSL2 为例）
+
+
+### 前提条件
+
+
+- Windows 10 2004（或更高版本） / Windows 11
+- 启用虚拟化（BIOS 中 VT-x 或 AMD-V 开启）
+
+
+### 方法一：一键安装（推荐）
+
+
+```
+wsl --install
+```
+
+
+该命令会自动：
+
+
+- 启用 WSL 功能
+- 安装 WSL2 内核
+- 安装默认的 Ubuntu
+- 设置为 WSL2
+
+
+安装完后，重启一次系统即可。
+
+
+### 方法二：手动安装（适合定制需求）
+
+
+**1、启用 WSL 功能和虚拟机平台**
+
+
+```
+dism.exe /online /enable-feature /featurename:Microsoft-Windows-Subsystem-Linux /all /norestart
+dism.exe /online /enable-feature /featurename:VirtualMachinePlatform /all /norestart
+```
+
+
+**2、下载并安装 Linux 内核更新包**
+
+
+👉 下载地址：[https://aka.ms/wsl2kernel](https://aka.ms/wsl2kernel)
+
+
+**3、设置默认 WSL 版本为 WSL2**
+
+
+```
+wsl --set-default-version 2
+```
+
+
+**4、从 Microsoft Store 安装 Linux 发行版（如 Ubuntu）**
+
+
+![](https://www.runoob.com/wp-content/uploads/2025/08/Instalar-Ubuntu-18.04-desde-la-Microsoft-Store.png.webp)
+
+
+也可命令行方式安装：
+
+
+```
+wsl --install -d Ubuntu
+```
+
+
+---
+
+
+## 常用命令速查表
+
+
+| 命令 | 说明 |
+| --- | --- |
+| wsl | 启动默认 Linux |
+| wsl --list --verbose | 查看已安装的发行版和版本 |
+| wsl --set-version Ubuntu 2 | 设置 Ubuntu 使用 WSL2 |
+| wsl --install -d Debian | 安装指定发行版 |
+| wsl --shutdown | 关闭所有 WSL 实例 |
+| wsl -e bash | 以 Bash 启动 Linux Shell |
+
+
+---
+
+
+## 日常使用指南
+
+**如何访问 Windows 文件？**
+
+在 WSL 中，Windows 文件挂载在 /mnt/c、/mnt/d 等目录：
+
+
+```
+cd /mnt/c/Users/你的用户名/Desktop
+```
+
+
+**如何访问 WSL 文件？**
+
+
+在 Windows 中访问：
+
+
+```
+\\wsl$\Ubuntu\home\your_username
+```
+
+
+或者在资源管理器地址栏输入：**\\wsl$**
+
+
+---
+
+
+## 配套推荐工具
+
+
+| 工具 | 说明 |
+| --- | --- |
+| Windows Terminal | 多标签终端，支持彩色和自定义配置 |
+| VS Code + Remote WSL | 在 VS Code 中直接编辑 Linux 文件 |
+| oh-my-zsh / fish | 美化终端，提升操作体验 |
+| tmux / screen | 多终端管理工具 |
+
+
+---
+
+
+## 如何卸载或重置？
+
+
+```
+# 卸载某个 Linux 发行版
+wsl --unregister Ubuntu
+
+# 重置 WSL 所有数据（危险操作）
+wsl --unregister <发行版名>
+```
+
+
+
+
+
+
+
+
+
+
+	  AI 思考中...
+
+
+
+
+
+			** [Linux sestatus 命令](https://www.runoob.com/linux-comm-sestatus.html)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 点我分享笔记
+
+
+
+
+
+
+
+				**
+取消
+
+
+
+
+
+
+					*
+
+
+					* 分享笔记
+
+
+
+
+
+
+- 昵称昵称 (必填)
+- 邮箱邮箱 (必填)
+- 引用地址引用地址
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**在线实例**
+
+      : ·[HTML 实例](https://www.runoob.com/../html/html-examples.html)
+
+      : ·[CSS 实例](https://www.runoob.com/../css/css-examples.html)
+
+      : ·[JavaScript 实例](https://www.runoob.com/../js/js-examples.html)
+
+      : ·[Ajax 实例](https://www.runoob.com/../ajx/ajax-examples.html)
+
+       : ·[jQuery 实例](https://www.runoob.com/../jquery/jquery-examples.html)
+
+      : ·[XML 实例](https://www.runoob.com/../xml/xml-examples.html)
+
+      : ·[Java 实例](https://www.runoob.com/../java/java-examples.html)
+
+
+
+
+
+**字符集&工具**
+
+      : · [HTML 字符集设置](https://www.runoob.com/../charsets/html-charsets.html)
+
+      : · [HTML ASCII 字符集](https://www.runoob.com/../tags/html-ascii.html)
+
+     : · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)
+
+      : · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)
+
+      : · [HTML 拾色器](https://www.runoob.com/../tags/html-colorpicker.html)
+
+      : · [JSON 格式化工具](https://www.jyshare.com/front-end/53)
+
+      : · [随机数生成器](https://www.jyshare.com/front-end/6680/)
+
+
+
+
+**最新更新**
+
+                  : · [VS Code 创建与...](https://www.runoob.com/../skills/vs-code-skill.html)
+
+                      : · [Skills 脚本扩展](https://www.runoob.com/../skills/skills-scripts.html)
+
+                      : · [Skills 描述](https://www.runoob.com/../skills/skills-description.html)
+
+                      : · [SKILL.md 文件](https://www.runoob.com/../skills/skill-md-file.html)
+
+                      : · [使用现有 Skills](https://www.runoob.com/../skills/use-existing-skills.html)
+
+                      : · [Skills 工作原理](https://www.runoob.com/../skills/how-skills-work.html)
+
+                      : · [第一个 Skill](https://www.runoob.com/../skills/skills-first.html)
+
+
+
+
+**站点信息**
+
+      : · [意见反馈](https://www.runoob.com/../cdn-cgi/l/email-protection/index.html)
+
+      : · [免责声明](https://www.runoob.com/../disclaimer/index.html)
+
+      : · [关于我们](https://www.runoob.com/../aboutus/index.html)
+
+      : · [文章归档](https://www.runoob.com/../archives/index.html)
+
+
+
+
+
+
+
+         关注微信**
+
+
+
+      ![](https://www.runoob.com/wp-content/themes/runoob/assets/images/qrcode.png)
+
+
+
+
+
+
+     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com/../index/index.html)**
+    **[runoob.com](https://www.runoob.com/../index/index.html)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)
+
+
+
+    **
+    **
+    **

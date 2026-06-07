@@ -1,0 +1,286 @@
+﻿# HTML 标签
+
+- Source: https://www.runoob.com/tags/tag-details.html
+
+**
+
+
+## 实例
+
+
+使用  元素：
+
+
+```
+<details>
+<summary>Copyright 1999-2011.</summary>
+<p> - by Refsnes Data. All Rights Reserved.</p>
+<p>All content and graphics on this web site are the property of the company Refsnes Data.</p>
+</details>
+```
+
+
+[尝试一下 »](https://www.runoob.com/try/try.php?filename=tryhtml5_details)
+
+
+---
+
+
+## 浏览器支持
+
+
+![Internet Explorer](https://www.runoob.com/images/incompatible_ie.gif) ![Firefox](https://www.runoob.com/images/incompatible_firefox.gif) ![Opera](https://www.runoob.com/images/incompatible_opera.gif) ![Google Chrome](https://www.runoob.com/images/compatible_chrome.gif) ![Safari](https://www.runoob.com/images/compatible_safari.gif)
+
+
+目前，只有 Chrome 和 Safari 6 支持  标签。
+
+
+---
+
+
+## 标签定义及使用说明
+
+
+ 标签规定了用户可见的或者隐藏的需求的补充细节。
+
+
+ 标签用来供用户开启关闭的交互式控件。任何形式的内容都能被放在  标签里边。
+
+
+ 元素的内容对用户是不可见的，除非设置了 open 属性。
+
+
+---
+
+
+## HTML 4.01 与 HTML5之间的差异
+
+
+ 标签是 HTML5 中的新标签。
+
+
+---
+
+
+## 提示和注释
+
+
+提示：**与 [](https://www.runoob.com/tag-summary.html) 标签配合使用可以为 details 定义标题。标题是可见的，用户点击标题时，会显示出 details。
+
+
+---
+
+
+## 属性
+
+
+New ：HTML5 中的新属性。
+
+
+| 属性 | 值 | 描述 |
+| --- | --- | --- |
+| openNew | open | 规定 details 是否可见。 |
+
+
+## 全局属性
+
+
+ 标签支持 [HTML 的全局属性](https://www.runoob.com/ref-standardattributes.html)。
+
+
+---
+
+
+## 事件属性
+
+
+ 标签支持 [HTML 的事件属性](https://www.runoob.com/ref-eventattributes.html)。
+
+
+
+
+
+
+
+
+	  AI 思考中...
+
+
+
+
+
+			** [HTML  标签](https://www.runoob.com/tag-del.html)
+			[HTML  标签](https://www.runoob.com/tag-dfn.html) **
+
+
+
+
+
+
+
+
+
+
+
+
+
+### 点我分享笔记
+
+
+
+
+
+
+
+				**
+取消
+
+
+
+
+
+
+					*
+
+
+					* 分享笔记
+
+
+
+
+
+
+- 昵称昵称 (必填)
+- 邮箱邮箱 (必填)
+- 引用地址引用地址
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**在线实例**
+
+      : ·[HTML 实例](https://www.runoob.com/../html/html-examples.html)
+
+      : ·[CSS 实例](https://www.runoob.com/../css/css-examples.html)
+
+      : ·[JavaScript 实例](https://www.runoob.com/../js/js-examples.html)
+
+      : ·[Ajax 实例](https://www.runoob.com/../ajx/ajax-examples.html)
+
+       : ·[jQuery 实例](https://www.runoob.com/../jquery/jquery-examples.html)
+
+      : ·[XML 实例](https://www.runoob.com/../xml/xml-examples.html)
+
+      : ·[Java 实例](https://www.runoob.com/../java/java-examples.html)
+
+
+
+
+
+**字符集&工具**
+
+      : · [HTML 字符集设置](https://www.runoob.com/../charsets/html-charsets.html)
+
+      : · [HTML ASCII 字符集](https://www.runoob.com/html-ascii.html)
+
+     : · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)
+
+      : · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)
+
+      : · [HTML 拾色器](https://www.runoob.com/html-colorpicker.html)
+
+      : · [JSON 格式化工具](https://www.jyshare.com/front-end/53)
+
+      : · [随机数生成器](https://www.jyshare.com/front-end/6680/)
+
+
+
+
+**最新更新**
+
+                  : · [VS Code 创建与...](https://www.runoob.com/../skills/vs-code-skill.html)
+
+                      : · [Skills 脚本扩展](https://www.runoob.com/../skills/skills-scripts.html)
+
+                      : · [Skills 描述](https://www.runoob.com/../skills/skills-description.html)
+
+                      : · [SKILL.md 文件](https://www.runoob.com/../skills/skill-md-file.html)
+
+                      : · [使用现有 Skills](https://www.runoob.com/../skills/use-existing-skills.html)
+
+                      : · [Skills 工作原理](https://www.runoob.com/../skills/how-skills-work.html)
+
+                      : · [第一个 Skill](https://www.runoob.com/../skills/skills-first.html)
+
+
+
+
+**站点信息**
+
+      : · [意见反馈](https://www.runoob.com/../cdn-cgi/l/email-protection/index.html)
+
+      : · [免责声明](https://www.runoob.com/../disclaimer/index.html)
+
+      : · [关于我们](https://www.runoob.com/../aboutus/index.html)
+
+      : · [文章归档](https://www.runoob.com/../archives/index.html)
+
+
+
+
+
+
+
+         关注微信**
+
+
+
+      ![](https://www.runoob.com/wp-content/themes/runoob/assets/images/qrcode.png)
+
+
+
+
+
+
+     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com/../index/index.html)**
+    **[runoob.com](https://www.runoob.com/../index/index.html)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)
+
+
+
+    **
+    **
+    **

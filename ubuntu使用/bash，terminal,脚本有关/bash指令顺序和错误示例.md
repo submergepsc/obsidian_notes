@@ -5,7 +5,6 @@ testcmd(){
 echo function;}
 ```
 上面的内容根本无法测试,因为**alias是在读取代码的时候就替换的!**
-
 bash运行:
 ```bash
 	echo -e '#!/bin/bash\necho binary' > ~/textcmd
@@ -24,4 +23,3 @@ testcmd
 unset -f testcmd 
 testcmd
 ```
-	

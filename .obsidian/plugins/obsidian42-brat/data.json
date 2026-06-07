@@ -14,8 +14,8 @@
     }
   ],
   "themesList": [],
-  "updateAtStartup": true,
-  "updateThemesAtStartup": true,
+  "updateAtStartup": false,
+  "updateThemesAtStartup": false,
   "enableAfterInstall": true,
   "loggingEnabled": false,
   "loggingPath": "BRAT-log",

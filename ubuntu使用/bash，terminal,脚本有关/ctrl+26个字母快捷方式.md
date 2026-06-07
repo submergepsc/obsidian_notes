@@ -16,6 +16,7 @@ bash 只是“用它”。
 | Ctrl + e | 到行尾（e = end）    |
 | Ctrl + f | 前进一个字符（forward） |
 | Ctrl + b | 后退一个字符（back）    |
+
 # 🧱 二、删除 / 剪切
 | 快捷键      | 含义                    |
 | -------- | --------------------- |
@@ -24,10 +25,12 @@ bash 只是“用它”。
 | Ctrl + w | 删除前一个单词               |
 | Ctrl + u | 删除光标前所有内容             |
 | Ctrl + k | 删除光标后所有内容             |
+
 # 📋 三、粘贴（kill-ring）
 | 快捷键      | 含义             |
 | -------- | -------------- |
 | Ctrl + y | 粘贴刚删除的内容（yank） |
+
 👉 这是 bash 自带“剪贴板”
 # 🔄 四、历史 & 搜索（你很该用）
 | 快捷键      | 含义            |
@@ -36,22 +39,26 @@ bash 只是“用它”。
 | Ctrl + s | 向前搜索（有时被终端拦截） |
 | Ctrl + p | 上一条命令         |
 | Ctrl + n | 下一条命令         |
+
 # ⚙️ 五、控制命令执行
 | 快捷键      | 含义       |
 | -------- | -------- |
 | Ctrl + c | 中断当前程序   |
 | Ctrl + z | 挂起（后台暂停） |
 | Ctrl + d | 退出 shell |
+
 # 🧩 六、屏幕控制
 | 快捷键      | 含义           |
 | -------- | ------------ |
 | Ctrl + l | 清屏（类似 clear） |
+
 # 🧠 七、冷门但有用
 | 快捷键      | 含义            |
 | -------- | ------------- |
 | Ctrl + t | 交换两个字符        |
 | Ctrl + o | 执行当前命令并取下一条历史 |
 | Ctrl + _ | 撤销（undo）      |
+
 # ⚠️ 八、一些你会疑惑的键
 ## ❓ Ctrl + b 为什么在 tmux 不冲突？
 👉 因为：
@@ -82,6 +89,7 @@ stty -ixon
 | b | back    |
 | k | kill    |
 | y | yank    |
+
 👉 全是“英文缩写逻辑”
 # 🎯 总结一句话
 👉 Ctrl+字母 =
@@ -104,9 +112,6 @@ Ctrl+r  搜历史（最重要）
 如果你愿意，我可以给你做一个👇
 👉 **“shell 快捷键进阶图谱”（包括 tmux + bash + zsh 一整套不冲突的键位体系）**
 你用起来会非常丝滑，不会再混乱。
-
-
-
 # 历史由来
 可以讲，而且这事儿确实有一条比较“完整的来龙去脉”，不是零散规则。
 但我先把话说直一点：
@@ -129,6 +134,7 @@ Ctrl + 字母 = 字母 ASCII - 64
 | Ctrl+C | 3     | ETX |
 | Ctrl+D | 4     | EOT |
 | Ctrl+Z | 26    | SUB |
+
 👉 所以：
 这些键**最早只是“控制信号”**，没有“删除单词”这种高级意义
 # 🧠 二、第二层：Unix 终端（tty line discipline）
@@ -141,6 +147,7 @@ Unix 出现后，这些控制字符被赋予“终端行为”
 | Ctrl+D (EOT) | EOF（输入结束）   |
 | Ctrl+Z (SUB) | 挂起进程        |
 | Ctrl+S / Q   | 流控（暂停/恢复输出） |
+
 👉 这些是**内核级终端行为**（不是 bash 决定的）
 # 🧠 三、第三层：Emacs 键位体系（关键转折）
 1970年代，Emacs 出现了
@@ -157,6 +164,7 @@ Unix 出现后，这些控制字符被赋予“终端行为”
 | Ctrl+E | end（行尾）     |
 | Ctrl+K | kill（删除到行尾） |
 | Ctrl+Y | yank（粘贴）    |
+
 👉 这就是你现在看到的绝大多数“编辑快捷键来源”
 # 🧠 四、第四层：Readline 继承 Emacs
 后来 GNU 做了一个库：
@@ -180,10 +188,9 @@ Ctrl+a Ctrl+e Ctrl+k Ctrl+y Ctrl+w Ctrl+r
 | Ctrl+D   | tty | EOF          |
 | Ctrl+Z   | tty | suspend      |
 | Ctrl+S/Q | tty | flow control |
+
 👉 这些是“硬规则”
 ## 🟡 2️⃣ Emacs 语义键（readline）
-
-
 | 键      | 含义             | 来源逻辑  |
 | ------ | -------------- | ----- |
 | Ctrl+F | forward        | 向前    |
@@ -194,6 +201,7 @@ Ctrl+a Ctrl+e Ctrl+k Ctrl+y Ctrl+w Ctrl+r
 | Ctrl+Y | yank           | 粘贴    |
 | Ctrl+W | word delete    | 单词    |
 | Ctrl+R | reverse search | 历史搜索  |
+
 👉 全是“英文首字母”
 ## 🔴 3️⃣ 剩下那些（没被用 or 冷门）
 有些键：
@@ -205,6 +213,7 @@ Ctrl+a Ctrl+e Ctrl+k Ctrl+y Ctrl+w Ctrl+r
 | Ctrl+O | 执行+下一条历史   |
 | Ctrl+X | 前缀键        |
 | Ctrl+_ | undo       |
+
 👉 没有统一设计，只是“后来加的”
 # 🧠 六、为什么不是完全统一设计？
 因为：

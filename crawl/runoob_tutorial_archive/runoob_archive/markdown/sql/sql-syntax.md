@@ -1,0 +1,509 @@
+﻿# SQL 语法
+
+- Source: https://www.runoob.com/sql/sql-syntax.html
+
+SQL（Structured Query Language）是一种用于管理和操作关系数据库的标准语言，包括数据查询、数据插入、数据更新、数据删除、数据库结构创建和修改等功能。。
+
+
+![](https://www.runoob.com/wp-content/uploads/2013/09/SQL.png)
+
+
+---
+
+
+## 数据库表
+
+
+一个数据库通常包含一个或多个表，每个表有一个名字标识（例如:"Websites"），表包含带有数据的记录（行）。
+
+
+在本教程中，我们在 MySQL 的 RUNOOB 数据库中创建了 Websites 表，用于存储网站记录。
+
+
+我们可以通过以下命令查看 "Websites" 表的数据：
+
+
+```
+mysql> use RUNOOB;
+Database changed
+
+mysql> set names utf8;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> SELECT * FROM Websites;
++----+--------------+---------------------------+-------+---------+
+| id | name         | url                       | alexa | country |
++----+--------------+---------------------------+-------+---------+
+| 1  | Google       | https://www.google.cm/    | 1     | USA     |
+| 2  | 淘宝          | https://www.taobao.com/   | 13    | CN      |
+| 3  | 菜鸟教程      | http://www.runoob.com/    | 4689  | CN      |
+| 4  | 微博          | http://weibo.com/         | 20    | CN      |
+| 5  | Facebook     | https://www.facebook.com/ | 3     | USA     |
++----+--------------+---------------------------+-------+---------+
+5 rows in set (0.01 sec)
+```
+
+
+### 解析
+
+
+- **use RUNOOB;** 命令用于选择数据库。
+- **set names utf8;** 命令用于设置使用的字符集。
+- **SELECT * FROM Websites;** 读取数据表的信息。
+- 上面的表包含五条记录（每一条对应一个网站信息）和5个列（id、name、url、alexa 和country）。
+
+
+---
+
+
+## SQL 语句
+
+
+您需要在数据库上执行的大部分工作都由 SQL 语句完成。
+
+
+下面的 SQL 语句从 "Websites" 表中选取所有记录：
+
+
+## 实例
+
+
+```sql
+SELECT * FROM Websites;
+```
+
+
+在本教程中，我们将为您讲解各种不同的 SQL 语句。
+
+
+---
+
+
+## 请记住...
+
+
+- SQL 对大小写不敏感：SELECT 与 select 是相同的。
+
+
+---
+
+
+## SQL 语句后面的分号？
+
+
+某些数据库系统要求在每条 SQL 语句的末端使用分号。
+
+
+分号是在数据库系统中分隔每条 SQL 语句的标准方法，这样就可以在对服务器的相同请求中执行一条以上的 SQL 语句。
+
+
+在本教程中，我们将在每条 SQL 语句的末端使用分号。
+
+
+---
+
+
+## 一些最重要的 SQL 命令
+
+
+- **SELECT** - 从数据库中提取数据
+- **UPDATE** - 更新数据库中的数据
+- **DELETE** - 从数据库中删除数据
+- **INSERT INTO** - 向数据库中插入新数据
+- **CREATE DATABASE** - 创建新数据库
+- **ALTER DATABASE** - 修改数据库
+- **CREATE TABLE** - 创建新表
+- **ALTER TABLE** - 变更（改变）数据库表
+- **DROP TABLE** - 删除表
+- **CREATE INDEX** - 创建索引（搜索键）
+- **DROP INDEX** - 删除索引
+
+以下是一些常用的 SQL 语句和语法：
+
+
+**SELECT**：用于从数据库中查询数据。
+
+
+```
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+ORDER BY column_name [ASC|DESC]
+```
+
+
+- `column_name(s)`: 要查询的列。
+- `table_name`: 要查询的表。
+- `condition`: 查询条件（可选）。
+- `ORDER BY`: 排序方式，`ASC` 表示升序，`DESC` 表示降序（可选）。
+
+
+**INSERT INTO**：用于向数据库表中插入新数据。
+
+
+```
+INSERT INTO table_name (column1, column2, ...)
+VALUES (value1, value2, ...)
+```
+
+
+- `table_name`: 要插入数据的表。
+- `column1, column2, ...`: 要插入数据的列。
+- `value1, value2, ...`: 对应列的值。
+
+**UPDATE**：用于更新数据库表中的现有数据。
+
+
+```
+UPDATE table_name
+SET column1 = value1, column2 = value2, ...
+WHERE condition
+```
+
+
+- `table_name`: 要更新数据的表。
+- `column1 = value1, column2 = value2, ...`: 要更新的列及其新值。
+- `condition`: 更新条件。
+
+**DELETE**：用于从数据库表中删除数据。
+
+
+```
+DELETE FROM table_name
+WHERE condition
+```
+
+
+- `table_name`: 要删除数据的表。
+- `condition`: 删除条件。
+
+
+**CREATE TABLE**：用于创建新的数据库表。
+
+
+```
+CREATE TABLE table_name (
+    column1 data_type constraint,
+    column2 data_type constraint,
+    ...
+)
+```
+
+
+- `table_name`: 要创建的表名。
+- `column1, column2, ...`: 表的列。
+- `data_type`: 列的数据类型（如 `INT`、`VARCHAR` 等）。
+- `constraint`: 列的约束（如 `PRIMARY KEY`、`NOT NULL` 等）。
+
+
+**ALTER TABLE**：用于修改现有数据库表的结构。
+
+
+```
+ALTER TABLE table_name
+ADD column_name data_type
+```
+
+
+- `table_name`: 要修改的表。
+- `column_name`: 要添加的列。
+- `data_type`: 列的数据类型。
+
+
+或：
+
+
+```
+ALTER TABLE table_name
+DROP COLUMN column_name
+```
+
+
+- `column_name`: 要删除的列。
+
+**DROP TABLE**：用于删除数据库表。
+
+
+```
+DROP TABLE table_name
+```
+
+
+- `table_name`: 要删除的表。
+
+**CREATE INDEX**：用于创建索引，以加快查询速度。
+
+
+```
+CREATE INDEX index_name
+ON table_name (column_name)
+```
+
+
+- `index_name`: 索引的名称。
+- `column_name`: 要索引的列。
+
+
+**DROP INDEX**：用于删除索引。
+
+
+```
+DROP INDEX index_name
+ON table_name
+```
+
+
+- `index_name`: 要删除的索引名称。
+- `table_name`: 索引所在的表。
+
+
+**WHERE**：用于指定筛选条件。
+
+
+```
+SELECT column_name(s)
+FROM table_name
+WHERE condition
+```
+
+
+- `condition`: 筛选条件。
+
+**ORDER BY**：用于对结果集进行排序。
+
+
+```
+SELECT column_name(s)
+FROM table_name
+ORDER BY column_name [ASC|DESC]
+```
+
+
+- `column_name`: 用于排序的列。
+- `ASC`: 升序（默认）。
+- `DESC`: 降序。
+
+
+**GROUP BY**：用于将结果集按一列或多列进行分组。
+
+
+```
+SELECT column_name(s), aggregate_function(column_name)
+FROM table_name
+WHERE condition
+GROUP BY column_name(s)
+```
+
+
+- `aggregate_function`: 聚合函数（如 COUNT、SUM、AVG 等）。
+
+
+**HAVING**：用于对分组后的结果集进行筛选。
+
+
+```
+SELECT column_name(s), aggregate_function(column_name)
+FROM table_name
+GROUP BY column_name(s)
+HAVING condition
+```
+
+
+- `condition`: 筛选条件。
+
+**JOIN**：用于将两个或多个表的记录结合起来。
+
+
+```
+SELECT column_name(s)
+FROM table_name1
+JOIN table_name2
+ON table_name1.column_name = table_name2.column_name
+```
+
+
+- `JOIN`: 可以是 INNER JOIN、LEFT JOIN、RIGHT JOIN 或 FULL JOIN。
+
+
+**DISTINCT**：用于返回唯一不同的值。
+
+
+```
+SELECT DISTINCT column_name(s)
+FROM table_name
+```
+
+
+- `column_name(s)`: 要查询的列。
+
+AI 思考中... ** [SQL 简介](https://www.runoob.com/sql-intro.html) [SQL SELECT 语句](https://www.runoob.com/sql-select.html) ** ### 点我分享笔记 笔记需要是本篇文章的内容扩展！
+**
+
+[文章投稿，可点击这里](https://www.runoob.com/tougao)
+
+
+[注册邀请码获取方式](https://www.runoob.com/w3cnote/runoob-user-test-intro.html#invite)
+
+
+### 分享笔记前必须登录！
+
+
+[注册邀请码获取方式](https://www.runoob.com/w3cnote/runoob-user-test-intro.html#invite)
+-->
+
+
+
+
+
+				**
+取消
+
+
+
+
+
+
+					*
+
+
+					* 分享笔记
+
+
+
+
+
+
+- 昵称昵称 (必填)
+- 邮箱邮箱 (必填)
+- 引用地址引用地址
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+**在线实例**
+
+      : ·[HTML 实例](https://www.runoob.com/../html/html-examples.html)
+
+      : ·[CSS 实例](https://www.runoob.com/../css/css-examples.html)
+
+      : ·[JavaScript 实例](https://www.runoob.com/../js/js-examples.html)
+
+      : ·[Ajax 实例](https://www.runoob.com/../ajx/ajax-examples.html)
+
+       : ·[jQuery 实例](https://www.runoob.com/../jquery/jquery-examples.html)
+
+      : ·[XML 实例](https://www.runoob.com/../xml/xml-examples.html)
+
+      : ·[Java 实例](https://www.runoob.com/../java/java-examples.html)
+
+
+
+
+
+**字符集&工具**
+
+      : · [HTML 字符集设置](https://www.runoob.com/../charsets/html-charsets.html)
+
+      : · [HTML ASCII 字符集](https://www.runoob.com/../tags/html-ascii.html)
+
+     : · [JS 混淆/加密](https://www.jyshare.com/front-end/6939/)
+
+      : · [PNG/JPEG 图片压缩](https://www.jyshare.com/front-end/6232/)
+
+      : · [HTML 拾色器](https://www.runoob.com/../tags/html-colorpicker.html)
+
+      : · [JSON 格式化工具](https://www.jyshare.com/front-end/53)
+
+      : · [随机数生成器](https://www.jyshare.com/front-end/6680/)
+
+
+
+
+**最新更新**
+
+                  : · [VS Code 创建与...](https://www.runoob.com/../skills/vs-code-skill.html)
+
+                      : · [Skills 脚本扩展](https://www.runoob.com/../skills/skills-scripts.html)
+
+                      : · [Skills 描述](https://www.runoob.com/../skills/skills-description.html)
+
+                      : · [SKILL.md 文件](https://www.runoob.com/../skills/skill-md-file.html)
+
+                      : · [使用现有 Skills](https://www.runoob.com/../skills/use-existing-skills.html)
+
+                      : · [Skills 工作原理](https://www.runoob.com/../skills/how-skills-work.html)
+
+                      : · [第一个 Skill](https://www.runoob.com/../skills/skills-first.html)
+
+
+
+
+**站点信息**
+
+      : · [意见反馈](https://www.runoob.com/../cdn-cgi/l/email-protection/index.html)
+
+      : · [免责声明](https://www.runoob.com/../disclaimer/index.html)
+
+      : · [关于我们](https://www.runoob.com/../aboutus/index.html)
+
+      : · [文章归档](https://www.runoob.com/../archives/index.html)
+
+
+
+
+
+
+
+         关注微信**
+
+
+
+      ![](https://www.runoob.com/wp-content/themes/runoob/assets/images/qrcode.png)
+
+
+
+
+
+
+     Copyright © 2013-2026    **[菜鸟教程](https://www.runoob.com/../index/index.html)**
+    **[runoob.com](https://www.runoob.com/../index/index.html)** All Rights Reserved. 备案号：[闽ICP备15012807号-1](https://beian.miit.gov.cn/)
+
+
+
+    **
+    **
+    **
