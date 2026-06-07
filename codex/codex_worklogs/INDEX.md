@@ -1,4 +1,6 @@
 # Codex 工作日志索引
+- 2026-06-07 | 20260607-g304-browser-backforward-fix | G304 浏览器后退前进修复 | 进行中 | cwd=/home/loviya | next=用户重新登录后测试侧键 | [worklog](2026-06-H1/20260607-g304-browser-backforward-fix.md)
+- 2026-06-07 | 20260607-cpa-cliproxyapi-rebind | cpa 指向 CLIProxyAPI | 进行中 | cwd=/home/loviya | next=重新加载 `~/.zshrc` 后测试 `cpa` | [worklog](cpa/20260607-cpa-cliproxyapi-rebind.md)
 - 2026-06-07 | 20260607-obnotes-sync-diagnosis | obnotes 远程同步问题诊断 | 已完成 | cwd=/home/loviya/notes/obsidian_notes | next=用户确认后可修复 remote/upstream，并单独处理坏掉的 rust-by-practice gitlink | [worklog](obsidian_notes-sync/20260607-obnotes-sync-diagnosis.md)
 - 2026-06-06 | 20260606-cliproxyapi-run-check | CLIProxyAPI 本机运行检查 | 已完成 | cwd=/home/loviya/cpa | next=none | [worklog](cpa/20260606-cliproxyapi-run-check.md)
 - 2026-06-05 | 20260605-dust-download-install | dust 下载与用户级安装 | 已完成 | cwd=/home/loviya | next=none | [worklog](2026-06-H1/20260605-dust-download-install.md)
