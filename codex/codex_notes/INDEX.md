@@ -1,6 +1,7 @@
 # Codex 笔记 索引
 | 日期       | 区域      | 重要性              | 问题                                                                                  | Note                                                                                                                     | 来源                                    |
 | ---------- | --------- | ------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------- |
+| 2026-06-07 | requested | user-requested/high | `obnotes` push 失败根因 | [obnotes push 失败根因](requested/2026-06-07-obnotes-push-failure-root-cause.md) | `obnotes` 同步排查 |
 | 2026-05-24 | tips | user-requested/high | 零散小命令、短技巧和系统操作 tips 统一收集入口 | [小技巧 Tips](tips/tips.md) | `tips` |
 | 2026-05-22 | requested | user-requested/high | `fileclip` 命令把文件内容复制到系统剪贴板和 CopyQ 历史 | [fileclip 文件内容复制到剪贴板](requested/2026-05-22-fileclip-file-to-clipboard.md) | `20260522-fileclip-command` |
 | 2026-05-21 | requested | user-requested/high | `create-codex-home` 脚本用于创建 `.codex*` Codex 账户 home | [create-codex-home 脚本说明](requested/2026-05-21-create-codex-home-script.md) | `20260521-create-codex-home-script` |

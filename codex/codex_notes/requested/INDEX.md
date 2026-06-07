@@ -4,6 +4,7 @@
 
 | 日期         | 问题                                                         | Note                                                                                             | 来源                                          | 状态  |
 | ---------- | ---------------------------------------------------------- | ------------------------------------------------------------------------------------------------ | ------------------------------------------- | --- |
+| 2026-06-07 | `obnotes` push 失败根因 | [obnotes push 失败根因](2026-06-07-obnotes-push-failure-root-cause.md) | `obnotes` 同步排查 | 稳定 |
 | 2026-05-22 | `fileclip` 命令把文件内容复制到系统剪贴板和 CopyQ 历史 | [fileclip 文件内容复制到剪贴板](2026-05-22-fileclip-file-to-clipboard.md) | `20260522-fileclip-command` | 稳定 |
 | 2026-05-21 | `create-codex-home` 脚本用于创建 `.codex*` Codex 账户 home | [create-codex-home 脚本说明](2026-05-21-create-codex-home-script.md) | `20260521-create-codex-home-script` | 稳定 |
 | 2026-05-20 | codex-api-mimo-pay-self 与 codex-api-ds 的 Responses 代理配置链路比较 | [codex-api-mimo-pay-self 与 codex-api-ds 配置链路比较](2026-05-20-codex-api-mimo-pay-self-vs-ds-config.md) | `20260520-codex-api-mimo-pay-self-ds-notes` | 稳定 |
