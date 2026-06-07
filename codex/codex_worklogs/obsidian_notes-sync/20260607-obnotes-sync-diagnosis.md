@@ -89,6 +89,18 @@ tags: [obnotes, obsidian_notes, git, sync, github]
 - 其中大于 `10MiB` 的 blob 有 `7` 个，总计约 `1099.0MiB`，包括 Packet Tracer 安装包、网络教材 PDF、小林 coding PDF 和大 pptx/docx。
 - `.gitignore` 只阻止未来未跟踪文件被添加；已经进入这 9 个本地提交的 blob 仍会被 push。
 
+## 2026-06-07 Clean Local-Over-Remote Push
+
+- 用户确认“直接用本地覆盖远程”。
+- 直接 force push 原 9 个本地提交会被 GitHub 的 `100MB` 单文件限制拦住，因此改为保留工作区内容、重做一个干净同步提交。
+- 保护措施：先创建本地备份分支 `backup/obnotes-before-clean-push-20260607-1528`，指向原 `main` 的 `ddf59bb5`。
+- 执行 `git reset --mixed origin/main`，保留工作区文件，把本地 ahead 9 的提交拆回未暂存状态。
+- 执行 `git add -A` 后发现 `25_2/rust/rust-by-practice` 是嵌套 Git 仓库；已在 `.gitignore` 追加 `25_2/rust/rust-by-practice/`，并用 `git restore --staged -- 25_2/rust/rust-by-practice` 避免提交坏 gitlink。
+- Pre-commit 检查暂存区没有 `>100MB` 文件；最大暂存文件为 `25_2/cn/组网实验预备-软件安装与注册/SSE208-组网课程软件安装.pptx`，约 `44MiB`。
+- 创建提交 `30edb5fe Sync local vault without oversized artifacts`，统计为 `4848 files changed, 1819328 insertions(+), 8648 deletions(-)`。
+- `git push origin main` 成功：远端 `main` 从 `f4defade` 更新到 `30edb5fe`。
+- 最终 `git status --short --branch --untracked-files=all` 输出 `## main...origin/main`，本地和远端分支同步；备份分支仍保留。
+
 ## Commands
 
 - `ls -ld /home/loviya/obnotes /home/loviya/notes /home/loviya/notes/obsidian_notes`
@@ -104,3 +116,9 @@ tags: [obnotes, obsidian_notes, git, sync, github]
 - `git ls-tree -r -l HEAD | awk ...`
 - `git rev-list --objects --all | git cat-file --batch-check=...`
 - `git check-ignore --no-index -v ...`
+- `git branch backup/obnotes-before-clean-push-20260607-1528 main`
+- `git reset --mixed origin/main`
+- `git add -A`
+- `git restore --staged -- 25_2/rust/rust-by-practice`
+- `git commit -m "Sync local vault without oversized artifacts"`
+- `git push origin main`
